@@ -10,6 +10,7 @@ namespace EventTracing
             public const uint FacilityWin32 = 0x80070000;
 
             public static readonly Hresult ErrorMoreData = new(0x800700EA);
+            public static readonly Hresult ErrorWmiInstanceNotFound = new(0x80071069);
 
             public uint Value { get; }
 
@@ -43,43 +44,13 @@ namespace EventTracing
             public int Value { get; }
         }
 
-        public enum ClockResolution : uint
+        public enum TraceControl
         {
-            QueryPerformanceCounter = 1,
-            SystemTime = 2,
-            CpuCycleCounter = 3
-        }
-
-        [Flags]
-        public enum LogFileMode : uint
-        {
-            FileModeNone = 0x00000000,
-            FileModeSequential = 0x00000001,
-            FileModeCircular = 0x00000002,
-            FileModeAppend = 0x00000004,
-            FileModeNewFile = 0x00000008,
-            FileModePreAllocate = 0x00000020,
-            NonStoppableMode = 0x00000040,
-            SecureMode = 0x00000080,
-            RealTimeMode = 0x00000100,
-            DelayOpenFileMode = 0x00000200,
-            BufferingMode = 0x00000400,
-            PrivateLoggerMode = 0x00000800,
-            AddHeaderMode = 0x00001000,
-            UseKbytesForSize = 0x00002000,
-            UseGlobalSequence = 0x00004000,
-            UseLocalSequence = 0x00008000,
-            RelogMode = 0x00010000,
-            PrivateInProc = 0x00020000,
-            ModeReserved = 0x00100000,
-            StopOnHybridShutdown = 0x00400000,
-            PersistOnHybridShutdown = 0x0080000,
-            UsePagedMemory = 0x01000000,
-            SystemLoggerMode = 0x02000000,
-            IndependentSessionMode = 0x08000000,
-            NoPerProcessorBuffering = 0x10000000,
-            AddToTriageDump = 0x80000000
-        }
+            Query,
+            Stop,
+            Update,
+            Flush
+        };
 
 #pragma warning disable IDE1006
         [StructLayout(LayoutKind.Sequential)]
@@ -87,7 +58,7 @@ namespace EventTracing
         {
             public uint BufferSize;
             public uint ProviderId;
-            public long HistoricalContext;
+            public ulong HistoricalContext;
             public long TimeStamp;
             public Guid Guid;
             public ClockResolution ClientContext;
@@ -104,7 +75,7 @@ namespace EventTracing
             public uint MaximumFileSize;
             public LogFileMode LogFileMode;
             public uint FlushTimer;
-            public uint EnableFlags;
+            public SystemTraceProvider EnableFlags;
             public int AgeLimit;
             public uint NumberOfBuffers;
             public uint FreeBuffers;
@@ -120,5 +91,8 @@ namespace EventTracing
 
         [DllImport("advapi32.dll", CharSet = CharSet.Unicode)]
         public static extern ErrorCode QueryAllTraces(EventTraceProperties** propertyArray, int propertyArrayCount, out int sessionCount);
+
+        [DllImport("advapi32.dll", CharSet = CharSet.Unicode)]
+        public static extern ErrorCode ControlTrace(ulong sessionHandle, string sessionName, EventTraceProperties* properties, TraceControl controlCode);
     }
 }

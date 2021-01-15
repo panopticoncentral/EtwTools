@@ -1,0 +1,441 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>EventTracing</name>
+    </assembly>
+    <members>
+        <member name="T:EventTracing.ClockResolution">
+            <summary>
+            The clock resolution used during tracing.
+            </summary>
+        </member>
+        <member name="F:EventTracing.ClockResolution.QueryPerformanceCounter">
+            <summary>
+            Query performance counter (QPC). The QPC counter provides a high-resolution time stamp that 
+            is not affected by adjustments to the system clock.
+            </summary>
+        </member>
+        <member name="F:EventTracing.ClockResolution.SystemTime">
+            <summary>
+            System time. The system time provides a time stamp that tracks changes to the system’s clock.
+            </summary>
+        </member>
+        <member name="F:EventTracing.ClockResolution.CpuCycleCounter">
+            <summary>
+            CPU cycle counter. The CPU counter provides the highest resolution time stamp and is the least 
+            resource-intensive to retrieve. However, the CPU counter is unreliable and should not be used in 
+            production.
+            </summary>
+        </member>
+        <member name="T:EventTracing.EtwSession">
+            <summary>
+            Represents an ETW session.
+            </summary>
+        </member>
+        <member name="P:EventTracing.EtwSession.Id">
+            <summary>
+            The GUID of the session.
+            </summary>
+        </member>
+        <member name="P:EventTracing.EtwSession.Name">
+            <summary>
+            The name of the session.
+            </summary>
+        </member>
+        <member name="P:EventTracing.EtwSession.ClockResolution">
+            <summary>
+            The clock resolution used by the session.
+            </summary>
+        </member>
+        <member name="M:EventTracing.EtwSession.GetProperties">
+            <summary>
+            Gets properties of the session.
+            </summary>
+            <returns>Properties of the session.</returns>
+        </member>
+        <member name="M:EventTracing.EtwSession.GetStatistics">
+            <summary>
+            Gets statistics of the session.
+            </summary>
+            <returns>Statistics of the session.</returns>
+        </member>
+        <member name="M:EventTracing.EtwSession.GetAllSessions">
+            <summary>
+            Gets all ETW sessions the user has access to.
+            </summary>
+            <returns>A list of sessions.</returns>
+        </member>
+        <member name="M:EventTracing.EtwSession.GetSession(System.String)">
+            <summary>
+            Finds the session with the given name.
+            </summary>
+            <param name="name">The name to look for.</param>
+            <returns>The session, if found, null otherwise.</returns>
+        </member>
+        <member name="T:EventTracing.EtwSession.Properties">
+            <summary>
+            Properties of the session.
+            </summary>
+        </member>
+        <member name="P:EventTracing.EtwSession.Properties.BufferSize">
+            <summary>
+            Amount of memory allocated for each event tracing session buffer, in kilobytes.
+            </summary>
+        </member>
+        <member name="P:EventTracing.EtwSession.Properties.MinimumBuffers">
+            <summary>
+            Minimum number of buffers allocated for the event tracing session's buffer pool.
+            </summary>
+        </member>
+        <member name="P:EventTracing.EtwSession.Properties.MaximumBuffers">
+            <summary>
+            Maximum number of buffers allocated for the event tracing session's buffer pool.
+            </summary>
+        </member>
+        <member name="P:EventTracing.EtwSession.Properties.MaximumFileSize">
+            <summary>
+            Maximum size of the file used to log events, in megabytes.
+            </summary>
+        </member>
+        <member name="P:EventTracing.EtwSession.Properties.LogFileMode">
+            <summary>
+            Logging modes for the event tracing session.
+            </summary>
+        </member>
+        <member name="P:EventTracing.EtwSession.Properties.FlushTimer">
+            <summary>
+            How often, in seconds, the trace buffers are forcibly flushed.
+            </summary>
+        </member>
+        <member name="P:EventTracing.EtwSession.Properties.SystemTraceProvidersEnabled">
+            <summary>
+            Which kernel events should be included in the trace.
+            </summary>
+        </member>
+        <member name="P:EventTracing.EtwSession.Properties.LogFileName">
+            <summary>
+            The name of the log file.
+            </summary>
+        </member>
+        <member name="T:EventTracing.EtwSession.Statistics">
+            <summary>
+            Statistics about the session.
+            </summary>
+        </member>
+        <member name="P:EventTracing.EtwSession.Statistics.NumberOfBuffers">
+            <summary>
+            The number of buffers allocated for the event tracing session's buffer pool.
+            </summary>
+        </member>
+        <member name="P:EventTracing.EtwSession.Statistics.FreeBuffers">
+            <summary>
+            The number of buffers that are allocated but unused in the event tracing session's buffer pool.
+            </summary>
+        </member>
+        <member name="P:EventTracing.EtwSession.Statistics.EventsLost">
+            <summary>
+            The number of events that were not recorded.
+            </summary>
+        </member>
+        <member name="P:EventTracing.EtwSession.Statistics.BuffersWritten">
+            <summary>
+            The number of buffers written.
+            </summary>
+        </member>
+        <member name="P:EventTracing.EtwSession.Statistics.LogBuffersLost">
+            <summary>
+            The number of buffers that could not be written to the log file.
+            </summary>
+        </member>
+        <member name="P:EventTracing.EtwSession.Statistics.RealTimeBuffersLost">
+            <summary>
+            The number of buffers that could not be delivered in real-time to the consumer.
+            </summary>
+        </member>
+        <member name="T:EventTracing.LogFileMode">
+            <summary>
+            Flags for how events are logged.
+            </summary>
+        </member>
+        <member name="F:EventTracing.LogFileMode.FileModeNone">
+            <summary>
+            No flags.
+            </summary>
+        </member>
+        <member name="F:EventTracing.LogFileMode.FileModeSequential">
+            <summary>
+            Writes events to a log file sequentially; stops when the file reaches its maximum size.
+            </summary>
+        </member>
+        <member name="F:EventTracing.LogFileMode.FileModeCircular">
+            <summary>
+            Writes events to a log file. After the file reaches the maximum size, the oldest events are replaced with incoming events.
+            </summary>
+        </member>
+        <member name="F:EventTracing.LogFileMode.FileModeAppend">
+            <summary>
+            Appends events to an existing sequential log file. If the file does not exist, it is created.
+            </summary>
+        </member>
+        <member name="F:EventTracing.LogFileMode.FileModeNewFile">
+            <summary>
+            Automatically switches to a new log file when the file reaches the maximum size.
+            </summary>
+        </member>
+        <member name="F:EventTracing.LogFileMode.FileModePreAllocate">
+            <summary>
+            Reserves the maximum file size of disk space for the log file in advance.
+            </summary>
+        </member>
+        <member name="F:EventTracing.LogFileMode.NonStoppableMode">
+            <summary>
+            The logging session cannot be stopped.
+            </summary>
+        </member>
+        <member name="F:EventTracing.LogFileMode.SecureMode">
+            <summary>
+            Restricts who can log events to the session.
+            </summary>
+        </member>
+        <member name="F:EventTracing.LogFileMode.RealTimeMode">
+            <summary>
+            Delivers the events to consumers in real-time. Events are delivered when the buffers are flushed, not at the time the provider writes the event.
+            </summary>
+        </member>
+        <member name="F:EventTracing.LogFileMode.DelayOpenFileMode">
+            <summary>
+            Delay opening the log file until an event occurs.
+            </summary>
+        </member>
+        <member name="F:EventTracing.LogFileMode.BufferingMode">
+            <summary>
+            This mode writes events to a circular memory buffer. Events written beyond the total size of the buffer evict the oldest events still remaining in the buffer.
+            </summary>
+        </member>
+        <member name="F:EventTracing.LogFileMode.PrivateLoggerMode">
+            <summary>
+            Creates a user-mode event tracing session that runs in the same process as its event trace provider.
+            </summary>
+        </member>
+        <member name="F:EventTracing.LogFileMode.AddHeaderMode">
+            <summary>
+            Adds a header to the log file.
+            </summary>
+        </member>
+        <member name="F:EventTracing.LogFileMode.UseKbytesForSize">
+            <summary>
+            Use kilobytes as the unit of measure for specifying the size of a file. The default unit of measure is megabytes.
+            </summary>
+        </member>
+        <member name="F:EventTracing.LogFileMode.UseGlobalSequence">
+            <summary>
+            Uses sequence numbers that are unique across event tracing sessions.
+            </summary>
+        </member>
+        <member name="F:EventTracing.LogFileMode.UseLocalSequence">
+            <summary>
+            Uses sequence numbers that are unique only for an individual event tracing session.
+            </summary>
+        </member>
+        <member name="F:EventTracing.LogFileMode.PrivateInProc">
+            <summary>
+            Enforces that only the process that registered the provider GUID can start the logger session with that GUID.
+            </summary>
+        </member>
+        <member name="F:EventTracing.LogFileMode.ModeReserved">
+            <summary>
+            Signal heap and critical section tracing.
+            </summary>
+        </member>
+        <member name="F:EventTracing.LogFileMode.StopOnHybridShutdown">
+            <summary>
+            Stops logging on hybrid shutdown.
+            </summary>
+        </member>
+        <member name="F:EventTracing.LogFileMode.PersistOnHybridShutdown">
+            <summary>
+            Continues logging on hybrid shutdown.
+            </summary>
+        </member>
+        <member name="F:EventTracing.LogFileMode.UsePagedMemory">
+            <summary>
+            Uses paged memory.
+            </summary>
+        </member>
+        <member name="F:EventTracing.LogFileMode.SystemLoggerMode">
+            <summary>
+            Receive events from SystemTraceProvider.
+            </summary>
+        </member>
+        <member name="F:EventTracing.LogFileMode.IndependentSessionMode">
+            <summary>
+            A logging session should not be affected by EventWrite failures in other sessions.
+            </summary>
+        </member>
+        <member name="F:EventTracing.LogFileMode.NoPerProcessorBuffering">
+            <summary>
+            Writes events that were logged on different processors to a common buffer.
+            </summary>
+        </member>
+        <member name="F:EventTracing.LogFileMode.AddToTriageDump">
+            <summary>
+            Adds ETW buffers to triage dumps.
+            </summary>
+        </member>
+        <member name="T:EventTracing.SystemTraceProvider">
+            <summary>
+            System event providers.
+            </summary>
+        </member>
+        <member name="F:EventTracing.SystemTraceProvider.Process">
+            <summary>
+            Process start and end.
+            </summary>
+        </member>
+        <member name="F:EventTracing.SystemTraceProvider.Thread">
+            <summary>
+            Thread start and end.
+            </summary>
+        </member>
+        <member name="F:EventTracing.SystemTraceProvider.ImageLoad">
+            <summary>
+            Image load.
+            </summary>
+        </member>
+        <member name="F:EventTracing.SystemTraceProvider.ProcessCounters">
+            <summary>
+            Process performance counters.
+            </summary>
+        </member>
+        <member name="F:EventTracing.SystemTraceProvider.Cswitch">
+            <summary>
+            Context switches.
+            </summary>
+        </member>
+        <member name="F:EventTracing.SystemTraceProvider.Dpc">
+            <summary>
+            Deferred procedure calls.
+            </summary>
+        </member>
+        <member name="F:EventTracing.SystemTraceProvider.Interrupt">
+            <summary>
+            Interrupts.
+            </summary>
+        </member>
+        <member name="F:EventTracing.SystemTraceProvider.SystemCall">
+            <summary>
+            System calls.
+            </summary>
+        </member>
+        <member name="F:EventTracing.SystemTraceProvider.DiskIo">
+            <summary>
+            Physical disk I/O.
+            </summary>
+        </member>
+        <member name="F:EventTracing.SystemTraceProvider.DiskFileIo">
+            <summary>
+            File disk I/O.
+            </summary>
+        </member>
+        <member name="F:EventTracing.SystemTraceProvider.DiskIoInit">
+            <summary>
+            Physical disk I/O initialization.
+            </summary>
+        </member>
+        <member name="F:EventTracing.SystemTraceProvider.Dispatcher">
+            <summary>
+            Scheduler/ReadyThread events.
+            </summary>
+        </member>
+        <member name="F:EventTracing.SystemTraceProvider.MemoryPageFaults">
+            <summary>
+            All page faults.
+            </summary>
+        </member>
+        <member name="F:EventTracing.SystemTraceProvider.MemoryHardFaults">
+            <summary>
+            Hard faults only.
+            </summary>
+        </member>
+        <member name="F:EventTracing.SystemTraceProvider.VirtualAlloc">
+            <summary>
+            Virtual memory operations.
+            </summary>
+        </member>
+        <member name="F:EventTracing.SystemTraceProvider.Vamap">
+            <summary>
+            Map/unmap (excluding images).
+            </summary>
+        </member>
+        <member name="F:EventTracing.SystemTraceProvider.NetworkTcpip">
+            <summary>
+            TCP/IP send and receieve.
+            </summary>
+        </member>
+        <member name="F:EventTracing.SystemTraceProvider.Registry">
+            <summary>
+            Registry calls.
+            </summary>
+        </member>
+        <member name="F:EventTracing.SystemTraceProvider.DbgPrint">
+            <summary>
+            DbgPrint calls.
+            </summary>
+        </member>
+        <member name="F:EventTracing.SystemTraceProvider.Job">
+            <summary>
+            Job start and end.
+            </summary>
+        </member>
+        <member name="F:EventTracing.SystemTraceProvider.Alpc">
+            <summary>
+            ALPC traces.
+            </summary>
+        </member>
+        <member name="F:EventTracing.SystemTraceProvider.SplitIo">
+            <summary>
+            Split I/O traces.
+            </summary>
+        </member>
+        <member name="F:EventTracing.SystemTraceProvider.DebugEvents">
+            <summary>
+            Debugger events.
+            </summary>
+        </member>
+        <member name="F:EventTracing.SystemTraceProvider.Driver">
+            <summary>
+            Driver delays.
+            </summary>
+        </member>
+        <member name="F:EventTracing.SystemTraceProvider.Profile">
+            <summary>
+            Sample-based profiling.
+            </summary>
+        </member>
+        <member name="F:EventTracing.SystemTraceProvider.FileIo">
+            <summary>
+            File I/O.
+            </summary>
+        </member>
+        <member name="F:EventTracing.SystemTraceProvider.FileIoInit">
+            <summary>
+            File I/O initialization.
+            </summary>
+        </member>
+        <member name="F:EventTracing.SystemTraceProvider.NoSysConfig">
+            <summary>
+            Do not do system configuration rundown.
+            </summary>
+        </member>
+        <member name="F:EventTracing.SystemTraceProvider.ForwardWmi">
+            <summary>
+            Can forward to WMI.
+            </summary>
+        </member>
+        <member name="F:EventTracing.SystemTraceProvider.Extension">
+            <summary>
+            Indicates more flags.
+            </summary>
+        </member>
+    </members>
+</doc>
