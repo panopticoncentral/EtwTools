@@ -1,7 +1,9 @@
 ﻿
+using System;
 using System.CommandLine;
 using System.CommandLine.Invocation;
 using System.Linq;
+using System.Threading.Tasks;
 
 using EventTracing;
 
@@ -26,6 +28,13 @@ var statisticsCommand = new Command("statistics", "Statistics of an ETW session.
 };
 statisticsCommand.Handler = CommandHandler.Create<string>(GetSessionStatistics);
 rootCommand.Add(statisticsCommand);
+
+var watchCommand = new Command("watch", "Watch an ETW session.")
+{
+    new Option<string>(new[] { "--name", "-n" }, "Name of session to fetch statistics of.") { IsRequired = true }
+};
+watchCommand.Handler = CommandHandler.Create<string>(WatchSession);
+rootCommand.Add(watchCommand);
 
 static void ListSessions()
 {
@@ -95,6 +104,45 @@ static void GetSessionStatistics(string name)
     AnsiConsole.WriteLine($"Buffers written = {statistics.BuffersWritten}");
     AnsiConsole.WriteLine($"Log buffers lost = {statistics.LogBuffersLost}");
     AnsiConsole.WriteLine($"Real time buffers lost = {statistics.RealTimeBuffersLost}");
+    AnsiConsole.WriteLine();
+}
+
+static async Task WatchSession(string name)
+{
+    EtwSession session = default;
+
+    var waiting = false;
+    var stop = false;
+    Console.CancelKeyPress += (s, e) => stop = true;
+
+    while (!stop)
+    {
+        session = EtwSession.GetSession(name);
+
+        if (session == null)
+        {
+            if (!waiting)
+            {
+                AnsiConsole.WriteLine();
+                AnsiConsole.WriteLine("No session found by that name, waiting...");
+                AnsiConsole.WriteLine();
+            }
+            waiting = true;
+        }
+        else
+        {
+            if (waiting)
+            {
+                AnsiConsole.WriteLine();
+                AnsiConsole.WriteLine("Total Buffers\tFree Buffers\tEvents Lost\tBuffers Written\tBuffers Lost\tReal-time Lost");
+            }
+            waiting = false;
+            var statistics = session.GetStatistics();
+            AnsiConsole.WriteLine($"{statistics.NumberOfBuffers}\t\t{statistics.FreeBuffers}\t\t{statistics.EventsLost}\t\t{statistics.BuffersWritten}\t\t{statistics.LogBuffersLost}\t\t{statistics.RealTimeBuffersLost}");
+        }
+        await Task.Delay(1000);
+    }
+
     AnsiConsole.WriteLine();
 }
 
