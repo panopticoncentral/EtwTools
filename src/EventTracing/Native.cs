@@ -9,6 +9,7 @@ namespace EventTracing
         {
             public const uint FacilityWin32 = 0x80070000;
 
+            public static readonly Hresult ErrorInsufficientBuffer = new(0x8007007A);
             public static readonly Hresult ErrorMoreData = new(0x800700EA);
             public static readonly Hresult ErrorWmiInstanceNotFound = new(0x80071069);
 
@@ -52,6 +53,34 @@ namespace EventTracing
             Flush
         };
 
+        public enum TraceQueryInfoClass
+        {
+            TraceGuidQueryList,
+            TraceGuidQueryInfo,
+            TraceGuidQueryProcess,
+            TraceStackTracingInfo,
+            TraceSystemTraceEnableFlagsInfo,
+            TraceSampledProfileIntervalInfo,
+            TraceProfileSourceConfigInfo,
+            TraceProfileSourceListInfo,
+            TracePmcEventListInfo,
+            TracePmcCounterListInfo,
+            TraceSetDisallowList,
+            TraceVersionInfo,
+            TraceGroupQueryList,
+            TraceGroupQueryInfo,
+            TraceDisallowListQuery,
+            TraceInfoReserved15,
+            TracePeriodicCaptureStateListInfo,
+            TracePeriodicCaptureStateInfo,
+            TraceProviderBinaryTracking,
+            TraceMaxLoggersQuery,
+            TraceLbrConfigurationInfo,
+            TraceLbrEventListInfo,
+            TraceMaxPmcCounterQuery,
+            MaxTraceSetInfoClass
+        };
+
 #pragma warning disable IDE1006
         [StructLayout(LayoutKind.Sequential)]
         public struct WnodeHeader
@@ -87,6 +116,37 @@ namespace EventTracing
             public uint LogFileNameOffset;
             public uint LoggerNameOffset;
         }
+
+        [StructLayout(LayoutKind.Sequential)]
+        public struct TraceProviderInfo
+        {
+            public Guid ProviderGuid;
+            public int SchemaSource;
+            public int ProviderNameOffset;
+        }
+
+        [StructLayout(LayoutKind.Sequential)]
+        public struct TraceEnableInfo
+        {
+            public bool IsEnabled;
+            public TraceLevel Level;
+            public byte Reserved1;
+            public ushort LoggerId;
+            public TraceProperties EnableProperty;
+            public uint Reserved2;
+            public ulong MatchAnyKeyword;
+            public ulong MatchAllKeyword;
+        };
+
+        [StructLayout(LayoutKind.Sequential)]
+        public struct TraceProviderInstanceInfo
+        {
+            public uint NextOffset;
+            public uint EnableCount;
+            public uint Pid;
+            public TraceInstanceProperties Flags;
+        };
+
 #pragma warning restore IDE1006
 
         [DllImport("advapi32.dll", CharSet = CharSet.Unicode)]
@@ -94,5 +154,11 @@ namespace EventTracing
 
         [DllImport("advapi32.dll", CharSet = CharSet.Unicode)]
         public static extern ErrorCode ControlTrace(ulong sessionHandle, string sessionName, EventTraceProperties* properties, TraceControl controlCode);
+
+        [DllImport("advapi32.dll")]
+        public static extern ErrorCode EnumerateTraceGuidsEx(TraceQueryInfoClass infoClass, void* inBuffer, int inBufferSize, void* outBuffer, int outBufferSize, out int returnLength);
+
+        [DllImport("tdh.dll")]
+        public static extern ErrorCode TdhEnumerateProviders(byte* buffer, ref int bufferSize);
     }
 }

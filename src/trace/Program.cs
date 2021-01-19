@@ -1,5 +1,6 @@
 ﻿
 using System;
+using System.Collections.Generic;
 using System.CommandLine;
 using System.CommandLine.Invocation;
 using System.Linq;
@@ -11,9 +12,13 @@ using Spectre.Console;
 
 var rootCommand = new RootCommand("Controls Event Tracing for Windows (ETW).");
 
+// List
+
 var listCommand = new Command("list", "List all active ETW sessions.");
 listCommand.Handler = CommandHandler.Create(ListSessions);
 rootCommand.Add(listCommand);
+
+// Properties
 
 var propertiesCommand = new Command("properties", "List properties of an ETW session.")
 {
@@ -22,12 +27,16 @@ var propertiesCommand = new Command("properties", "List properties of an ETW ses
 propertiesCommand.Handler = CommandHandler.Create<string>(GetSessionProperties);
 rootCommand.Add(propertiesCommand);
 
+// Statistics
+
 var statisticsCommand = new Command("statistics", "Statistics of an ETW session.")
 {
     new Option<string>(new[] { "--name", "-n" }, "Name of session to fetch statistics of.") { IsRequired = true }
 };
 statisticsCommand.Handler = CommandHandler.Create<string>(GetSessionStatistics);
 rootCommand.Add(statisticsCommand);
+
+// Watch
 
 var watchCommand = new Command("watch", "Watch an ETW session.")
 {
@@ -36,11 +45,38 @@ var watchCommand = new Command("watch", "Watch an ETW session.")
 watchCommand.Handler = CommandHandler.Create<string>(WatchSession);
 rootCommand.Add(watchCommand);
 
+// Providers
+
+var providersCommand = new Command("providers", "Commands that work on event providers.");
+rootCommand.Add(providersCommand);
+
+var publishedCommand = new Command("published", "List all providers published on the system.")
+{
+    new Option<PublishedSort>(new[] { "--sort", "-s" }, () => PublishedSort.Name, "Sort providers.")
+};
+publishedCommand.Handler = CommandHandler.Create<PublishedSort>(PublishedProviders);
+providersCommand.AddCommand(publishedCommand);
+
+var registeredCommand = new Command("registered", "List all providers registered across all processes.")
+{
+    new Option<RegisteredSort>(new[] { "--sort", "-s" }, () => RegisteredSort.Name, "Sort providers.")
+};
+registeredCommand.Handler = CommandHandler.Create<RegisteredSort>(RegisteredProviders);
+providersCommand.AddCommand(registeredCommand);
+
+var processCommand = new Command("process", "List all providers registered in a process.")
+{
+    new Option<uint>(new[] { "--pid", "-p" }, "Process to list.") { IsRequired = true },
+    new Option<ProcessRegisteredSort>(new[] { "--sort", "-s" }, () => ProcessRegisteredSort.Name, "Sort providers.")
+};
+processCommand.Handler = CommandHandler.Create<uint, ProcessRegisteredSort>(ProcessRegisteredProviders);
+providersCommand.AddCommand(processCommand);
+
 static void ListSessions()
 {
     var sessions = EtwSession.GetAllSessions();
 
-    var table = new Table().AddColumn("Name").AddColumn("Id");
+    var table = new Table().AddColumn("Name").AddColumn("ID");
 
     foreach (var session in sessions.OrderBy(s => s.Name))
     {
@@ -146,4 +182,120 @@ static async Task WatchSession(string name)
     AnsiConsole.WriteLine();
 }
 
+static void PublishedProviders(PublishedSort sort)
+{
+    var providers = EtwProvider.GetPublishedProviders();
+
+    var table = new Table().AddColumn("Name").AddColumn("ID");
+
+    IEnumerable<EtwProvider> sortedProviders = sort switch
+    {
+        PublishedSort.Name => providers.OrderBy(s => s.Name).ThenBy(s => s.Id),
+        PublishedSort.Id => providers.OrderBy(s => s.Id).ThenBy(s => s.Name),
+        _ => providers,
+    };
+
+    foreach (var provider in sortedProviders)
+    {
+        _ = table.AddRow(provider.Name, provider.Id.ToString());
+    }
+
+    AnsiConsole.WriteLine();
+    AnsiConsole.Render(table);
+    AnsiConsole.WriteLine();
+}
+
+static void RegisteredProviders(RegisteredSort sort)
+{
+    var providers = EtwProvider.GetRegisteredProviders().Select(p => (p.Name, p.Id, p.GetInstanceInfos().Count));
+
+    var table = new Table().AddColumn("Name").AddColumn("ID").AddColumn("Count");
+
+    var sortedProviders = sort switch
+    {
+        RegisteredSort.Name => providers.OrderBy(s => s.Name).ThenBy(s => s.Id),
+        RegisteredSort.Id => providers.OrderBy(s => s.Id).ThenBy(s => s.Name),
+        RegisteredSort.Count => providers.OrderByDescending(s => s.Count).ThenBy(s => s.Id).ThenBy(s => s.Name),
+        _ => providers,
+    };
+
+    foreach (var (name, id, count) in sortedProviders)
+    {
+        _ = table.AddRow(name ?? string.Empty, id.ToString(), count.ToString());
+    }
+
+    AnsiConsole.WriteLine();
+    AnsiConsole.Render(table);
+    AnsiConsole.WriteLine();
+}
+
+static void ProcessRegisteredProviders(uint pid, ProcessRegisteredSort sort)
+{
+    var providers = EtwProvider.GetRegisteredProviders();
+
+    var sortedProviders = sort switch
+    {
+        ProcessRegisteredSort.Name => providers.OrderBy(s => s.Name).ThenBy(s => s.Id),
+        ProcessRegisteredSort.Id => providers.OrderBy(s => s.Id).ThenBy(s => s.Name),
+        _ => (IEnumerable<EtwProvider>)providers,
+    };
+
+    foreach (var provider in sortedProviders)
+    {
+        Tree providerNode = default;
+
+        foreach (var instance in provider.GetInstanceInfos().Where(i => i.ProcessId == pid))
+        {
+            TreeNode instanceNode = default;
+            TreeNode enabledNode = default;
+
+            foreach (var enable in instance.EnableInfos)
+            {
+                if (instanceNode == null)
+                {
+                    if (providerNode == null)
+                    {
+                        providerNode = new Tree($"{provider.Name ?? provider.Id.ToString()} ({provider.Id})");
+                    }
+
+                    instanceNode = providerNode.AddNode($"Properties: {instance.Properties}");
+                }
+
+                enabledNode = instanceNode.AddNode("Enable parameters");
+                _ = enabledNode.AddNode($"Level: {enable.Level}");
+                _ = enabledNode.AddNode($"Properties: {enable.EnableProperty & TraceProperties.All}");
+                _ = enabledNode.AddNode($"Match any: 0x{enable.MatchAnyKeyword:X16}");
+                _ = enabledNode.AddNode($"Match all: 0x{enable.MatchAllKeyword:X16}");
+            }
+        }
+
+        if (providerNode != null)
+        {
+            AnsiConsole.WriteLine();
+            AnsiConsole.Render(providerNode);
+        }
+    }
+
+    AnsiConsole.WriteLine();
+}
+
 return await rootCommand.InvokeAsync(args);
+
+internal enum PublishedSort
+{
+    Name,
+    Id
+}
+
+internal enum RegisteredSort
+{
+    Name,
+    Id,
+    Count
+}
+
+internal enum ProcessRegisteredSort
+{
+    Name,
+    Id
+}

@@ -27,6 +27,104 @@
             production.
             </summary>
         </member>
+        <member name="T:EventTracing.EtwProvider">
+            <summary>
+            Represents an ETW event provider.
+            </summary>
+        </member>
+        <member name="P:EventTracing.EtwProvider.Name">
+            <summary>
+            The name of the provider (may be null).
+            </summary>
+        </member>
+        <member name="P:EventTracing.EtwProvider.Id">
+            <summary>
+            The ID of the provider.
+            </summary>
+        </member>
+        <member name="M:EventTracing.EtwProvider.#ctor(System.Guid)">
+            <summary>
+            Creates a provider with the specified ID and no name.
+            </summary>
+            <param name="id">The ID of the provider.</param>
+        </member>
+        <member name="M:EventTracing.EtwProvider.#ctor(System.String,System.Guid)">
+            <summary>
+            Creates a provider with a specified name and ID.
+            </summary>
+            <param name="name">The name of the provider.</param>
+            <param name="id">The ID of the provider.</param>
+        </member>
+        <member name="M:EventTracing.EtwProvider.GetProviderForEventSource(System.String)">
+            <summary>
+            Gets the provider that corresponds to an EventSource.
+            </summary>
+            <param name="eventSource">The name of the event source.</param>
+            <returns>The provider.</returns>
+        </member>
+        <member name="M:EventTracing.EtwProvider.GetInstanceInfos">
+            <summary>
+            Returns information about instance of the provider.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:EventTracing.EtwProvider.GetPublishedProviders">
+            <summary>
+            Returns a list of all published providers on the system.
+            </summary>
+            <returns>The published providers on the system.</returns>
+        </member>
+        <member name="M:EventTracing.EtwProvider.GetRegisteredProviders">
+            <summary>
+            Returns a list of all providers registered on the system.
+            </summary>
+            <returns>The registered providers on the system.</returns>
+        </member>
+        <member name="T:EventTracing.EtwProvider.InstanceInfo">
+            <summary>
+            Information about an instance of this provider.
+            </summary>
+        </member>
+        <member name="P:EventTracing.EtwProvider.InstanceInfo.ProcessId">
+            <summary>
+            The process ID of the instance.
+            </summary>
+        </member>
+        <member name="P:EventTracing.EtwProvider.InstanceInfo.Properties">
+            <summary>
+            Properties of the instance.
+            </summary>
+        </member>
+        <member name="P:EventTracing.EtwProvider.InstanceInfo.EnableInfos">
+            <summary>
+            Information about each way the provider was enabled.
+            </summary>
+        </member>
+        <member name="T:EventTracing.EtwProvider.EnableInfo">
+            <summary>
+            Information about an instance of a provider being enabled.
+            </summary>
+        </member>
+        <member name="P:EventTracing.EtwProvider.EnableInfo.Level">
+            <summary>
+            The information level enabled.
+            </summary>
+        </member>
+        <member name="P:EventTracing.EtwProvider.EnableInfo.EnableProperty">
+            <summary>
+            Optional properties that are enabled.
+            </summary>
+        </member>
+        <member name="P:EventTracing.EtwProvider.EnableInfo.MatchAnyKeyword">
+            <summary>
+            Bitmask of keywords that determine the category of events the provider should write.
+            </summary>
+        </member>
+        <member name="P:EventTracing.EtwProvider.EnableInfo.MatchAllKeyword">
+            <summary>
+            Restricts the category of events that the provider should write.
+            </summary>
+        </member>
         <member name="T:EventTracing.EtwSession">
             <summary>
             Represents an ETW session.
@@ -435,6 +533,111 @@
         <member name="F:EventTracing.SystemTraceProvider.Extension">
             <summary>
             Indicates more flags.
+            </summary>
+        </member>
+        <member name="T:EventTracing.TraceInstanceProperties">
+            <summary>
+            Properties of an instance of a trace provider.
+            </summary>
+        </member>
+        <member name="F:EventTracing.TraceInstanceProperties.None">
+            <summary>
+            None.
+            </summary>
+        </member>
+        <member name="F:EventTracing.TraceInstanceProperties.Legacy">
+            <summary>
+            This provider was registered using <c>RegisterTraceGuids</c> instead of <c>EventRegister</c>.
+            </summary>
+        </member>
+        <member name="F:EventTracing.TraceInstanceProperties.PreEnabled">
+            <summary>
+            This provider was enabled without being registered.
+            </summary>
+        </member>
+        <member name="T:EventTracing.TraceLevel">
+            <summary>
+            The level of detail provided by an event provider.
+            </summary>
+        </member>
+        <member name="F:EventTracing.TraceLevel.Critical">
+            <summary>
+            Abnormal exit or termination events.
+            </summary>
+        </member>
+        <member name="F:EventTracing.TraceLevel.Error">
+            <summary>
+            Severe error events.
+            </summary>
+        </member>
+        <member name="F:EventTracing.TraceLevel.Warning">
+            <summary>
+            Warning events such as allocation failures.
+            </summary>
+        </member>
+        <member name="F:EventTracing.TraceLevel.Information">
+            <summary>
+            Non-error events such as entry or exit events.
+            </summary>
+        </member>
+        <member name="F:EventTracing.TraceLevel.Verbose">
+            <summary>
+            Detailed trace events.
+            </summary>
+        </member>
+        <member name="T:EventTracing.TraceProperties">
+            <summary>
+            Additional properties that can be enabled for a provider.
+            </summary>
+        </member>
+        <member name="F:EventTracing.TraceProperties.None">
+            <summary>
+            None.
+            </summary>
+        </member>
+        <member name="F:EventTracing.TraceProperties.SecurityIdentifier">
+            <summary>
+            Include in the extended data the security identifier (SID) of the user.
+            </summary>
+        </member>
+        <member name="F:EventTracing.TraceProperties.TerminalSessionIdentifier">
+            <summary>
+            Include in the extended data the terminal session identifier.
+            </summary>
+        </member>
+        <member name="F:EventTracing.TraceProperties.StackTrace">
+            <summary>
+            Include in the extended data a call stack trace for events written using <c>EventWrite</c>.
+            </summary>
+        </member>
+        <member name="F:EventTracing.TraceProperties.IgnoreKeyword0">
+            <summary>
+            Filters out all events that do not have a non-zero keyword specified.
+            </summary>
+        </member>
+        <member name="F:EventTracing.TraceProperties.ProviderGroup">
+            <summary>
+            Indicates that this should enable a Provider Group rather than an individual Event Provider.
+            </summary>
+        </member>
+        <member name="F:EventTracing.TraceProperties.ProcessStartKey">
+            <summary>
+            Include the Process Start Key in the extended data.
+            </summary>
+        </member>
+        <member name="F:EventTracing.TraceProperties.EventKey">
+            <summary>
+            Include the Event Key in the extended data.
+            </summary>
+        </member>
+        <member name="F:EventTracing.TraceProperties.ExcludeInPrivate">
+            <summary>
+            Filters out all events that are either marked as an InPrivate event or come from a process that is marked as InPrivate.
+            </summary>
+        </member>
+        <member name="F:EventTracing.TraceProperties.All">
+            <summary>
+            All known properties.
             </summary>
         </member>
     </members>

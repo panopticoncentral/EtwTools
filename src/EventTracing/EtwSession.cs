@@ -156,18 +156,6 @@ namespace EventTracing
         /// </summary>
         public readonly struct Properties
         {
-            internal Properties(uint bufferSize, uint minimumBuffers, uint maximumBuffers, uint maximumFileSize, LogFileMode logFileMode, uint flushTimer, SystemTraceProvider systemTraceProvidersEnabled, string logFileName)
-            {
-                BufferSize = bufferSize;
-                MinimumBuffers = minimumBuffers;
-                MaximumBuffers = maximumBuffers;
-                MaximumFileSize = maximumFileSize;
-                LogFileMode = logFileMode;
-                FlushTimer = flushTimer;
-                SystemTraceProvidersEnabled = systemTraceProvidersEnabled;
-                LogFileName = logFileName;
-            }
-
             /// <summary>
             /// Amount of memory allocated for each event tracing session buffer, in kilobytes.
             /// </summary>
@@ -207,12 +195,24 @@ namespace EventTracing
             /// The name of the log file.
             /// </summary>
             public string LogFileName { get; }
+
+            internal Properties(uint bufferSize, uint minimumBuffers, uint maximumBuffers, uint maximumFileSize, LogFileMode logFileMode, uint flushTimer, SystemTraceProvider systemTraceProvidersEnabled, string logFileName)
+            {
+                BufferSize = bufferSize;
+                MinimumBuffers = minimumBuffers;
+                MaximumBuffers = maximumBuffers;
+                MaximumFileSize = maximumFileSize;
+                LogFileMode = logFileMode;
+                FlushTimer = flushTimer;
+                SystemTraceProvidersEnabled = systemTraceProvidersEnabled;
+                LogFileName = logFileName;
+            }
         }
 
         /// <summary>
         /// Statistics about the session.
         /// </summary>
-        public struct Statistics
+        public readonly struct Statistics
         {
             /// <summary>
             /// The number of buffers allocated for the event tracing session's buffer pool.
