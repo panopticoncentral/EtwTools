@@ -7,13 +7,11 @@ using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 
-using EventTracing;
-
 using Newtonsoft.Json;
 
 using Spectre.Console;
 
-using Trace;
+using EtwTools;
 
 var rootCommand = new RootCommand("Controls Event Tracing for Windows (ETW).");
 

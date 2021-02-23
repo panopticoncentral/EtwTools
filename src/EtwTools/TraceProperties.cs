@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace EventTracing
+namespace EtwTools
 {
     /// <summary>
     /// Additional properties that can be enabled for a provider.

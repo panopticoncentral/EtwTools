@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace EventTracing
+namespace EtwTools
 {
     /// <summary>
     /// Properties of an instance of a trace provider.

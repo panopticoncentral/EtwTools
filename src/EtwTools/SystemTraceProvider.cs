@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace EventTracing
+namespace EtwTools
 {
     /// <summary>
     /// System event providers.

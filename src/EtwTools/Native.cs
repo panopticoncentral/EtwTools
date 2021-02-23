@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Runtime.InteropServices;
 
-namespace EventTracing
+namespace EtwTools
 {
     internal static unsafe class Native
     {

@@ -3,7 +3,7 @@ using System.Runtime.InteropServices;
 
 using Microsoft.Win32.SafeHandles;
 
-namespace Trace
+namespace EtwTools
 {
     internal static unsafe class Native
     {

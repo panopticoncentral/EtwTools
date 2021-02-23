@@ -1,4 +1,4 @@
-﻿namespace EventTracing
+﻿namespace EtwTools
 {
     /// <summary>
     /// The clock resolution used during tracing.

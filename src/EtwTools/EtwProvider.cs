@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Security.Cryptography;
 
-namespace EventTracing
+namespace EtwTools
 {
     /// <summary>
     /// Represents an ETW event provider.

@@ -1,181 +1,181 @@
 <?xml version="1.0"?>
 <doc>
     <assembly>
-        <name>EventTracing</name>
+        <name>EtwTools</name>
     </assembly>
     <members>
-        <member name="T:EventTracing.ClockResolution">
+        <member name="T:EtwTools.ClockResolution">
             <summary>
             The clock resolution used during tracing.
             </summary>
         </member>
-        <member name="F:EventTracing.ClockResolution.QueryPerformanceCounter">
+        <member name="F:EtwTools.ClockResolution.QueryPerformanceCounter">
             <summary>
             Query performance counter (QPC). The QPC counter provides a high-resolution time stamp that 
             is not affected by adjustments to the system clock.
             </summary>
         </member>
-        <member name="F:EventTracing.ClockResolution.SystemTime">
+        <member name="F:EtwTools.ClockResolution.SystemTime">
             <summary>
             System time. The system time provides a time stamp that tracks changes to the system’s clock.
             </summary>
         </member>
-        <member name="F:EventTracing.ClockResolution.CpuCycleCounter">
+        <member name="F:EtwTools.ClockResolution.CpuCycleCounter">
             <summary>
             CPU cycle counter. The CPU counter provides the highest resolution time stamp and is the least 
             resource-intensive to retrieve. However, the CPU counter is unreliable and should not be used in 
             production.
             </summary>
         </member>
-        <member name="T:EventTracing.EtwProvider">
+        <member name="T:EtwTools.EtwProvider">
             <summary>
             Represents an ETW event provider.
             </summary>
         </member>
-        <member name="P:EventTracing.EtwProvider.Name">
+        <member name="P:EtwTools.EtwProvider.Name">
             <summary>
             The name of the provider (may be null).
             </summary>
         </member>
-        <member name="P:EventTracing.EtwProvider.Id">
+        <member name="P:EtwTools.EtwProvider.Id">
             <summary>
             The ID of the provider.
             </summary>
         </member>
-        <member name="M:EventTracing.EtwProvider.#ctor(System.Guid)">
+        <member name="M:EtwTools.EtwProvider.#ctor(System.Guid)">
             <summary>
             Creates a provider with the specified ID and no name.
             </summary>
             <param name="id">The ID of the provider.</param>
         </member>
-        <member name="M:EventTracing.EtwProvider.#ctor(System.String,System.Guid)">
+        <member name="M:EtwTools.EtwProvider.#ctor(System.String,System.Guid)">
             <summary>
             Creates a provider with a specified name and ID.
             </summary>
             <param name="name">The name of the provider.</param>
             <param name="id">The ID of the provider.</param>
         </member>
-        <member name="M:EventTracing.EtwProvider.GetProviderForEventSource(System.String)">
+        <member name="M:EtwTools.EtwProvider.GetProviderForEventSource(System.String)">
             <summary>
             Gets the provider that corresponds to an EventSource.
             </summary>
             <param name="eventSource">The name of the event source.</param>
             <returns>The provider.</returns>
         </member>
-        <member name="M:EventTracing.EtwProvider.GetInstanceInfos">
+        <member name="M:EtwTools.EtwProvider.GetInstanceInfos">
             <summary>
             Returns information about instance of the provider.
             </summary>
             <returns></returns>
         </member>
-        <member name="M:EventTracing.EtwProvider.GetPublishedProviders">
+        <member name="M:EtwTools.EtwProvider.GetPublishedProviders">
             <summary>
             Returns a list of all published providers on the system.
             </summary>
             <returns>The published providers on the system.</returns>
         </member>
-        <member name="M:EventTracing.EtwProvider.GetRegisteredProviders">
+        <member name="M:EtwTools.EtwProvider.GetRegisteredProviders">
             <summary>
             Returns a list of all providers registered on the system.
             </summary>
             <returns>The registered providers on the system.</returns>
         </member>
-        <member name="T:EventTracing.EtwProvider.InstanceInfo">
+        <member name="T:EtwTools.EtwProvider.InstanceInfo">
             <summary>
             Information about an instance of this provider.
             </summary>
         </member>
-        <member name="P:EventTracing.EtwProvider.InstanceInfo.ProcessId">
+        <member name="P:EtwTools.EtwProvider.InstanceInfo.ProcessId">
             <summary>
             The process ID of the instance.
             </summary>
         </member>
-        <member name="P:EventTracing.EtwProvider.InstanceInfo.Properties">
+        <member name="P:EtwTools.EtwProvider.InstanceInfo.Properties">
             <summary>
             Properties of the instance.
             </summary>
         </member>
-        <member name="P:EventTracing.EtwProvider.InstanceInfo.EnableInfos">
+        <member name="P:EtwTools.EtwProvider.InstanceInfo.EnableInfos">
             <summary>
             Information about each way the provider was enabled.
             </summary>
         </member>
-        <member name="T:EventTracing.EtwProvider.EnableInfo">
+        <member name="T:EtwTools.EtwProvider.EnableInfo">
             <summary>
             Information about an instance of a provider being enabled.
             </summary>
         </member>
-        <member name="P:EventTracing.EtwProvider.EnableInfo.Level">
+        <member name="P:EtwTools.EtwProvider.EnableInfo.Level">
             <summary>
             The information level enabled.
             </summary>
         </member>
-        <member name="P:EventTracing.EtwProvider.EnableInfo.EnableProperty">
+        <member name="P:EtwTools.EtwProvider.EnableInfo.EnableProperty">
             <summary>
             Optional properties that are enabled.
             </summary>
         </member>
-        <member name="P:EventTracing.EtwProvider.EnableInfo.MatchAnyKeyword">
+        <member name="P:EtwTools.EtwProvider.EnableInfo.MatchAnyKeyword">
             <summary>
             Bitmask of keywords that determine the category of events the provider should write.
             </summary>
         </member>
-        <member name="P:EventTracing.EtwProvider.EnableInfo.MatchAllKeyword">
+        <member name="P:EtwTools.EtwProvider.EnableInfo.MatchAllKeyword">
             <summary>
             Restricts the category of events that the provider should write.
             </summary>
         </member>
-        <member name="T:EventTracing.EtwSession">
+        <member name="T:EtwTools.EtwSession">
             <summary>
             Represents an ETW session.
             </summary>
         </member>
-        <member name="P:EventTracing.EtwSession.Id">
+        <member name="P:EtwTools.EtwSession.Id">
             <summary>
             The GUID of the session.
             </summary>
         </member>
-        <member name="P:EventTracing.EtwSession.Name">
+        <member name="P:EtwTools.EtwSession.Name">
             <summary>
             The name of the session.
             </summary>
         </member>
-        <member name="P:EventTracing.EtwSession.ClockResolution">
+        <member name="P:EtwTools.EtwSession.ClockResolution">
             <summary>
             The clock resolution used by the session.
             </summary>
         </member>
-        <member name="M:EventTracing.EtwSession.GetProperties">
+        <member name="M:EtwTools.EtwSession.GetProperties">
             <summary>
             Gets properties of the session.
             </summary>
             <returns>Properties of the session.</returns>
         </member>
-        <member name="M:EventTracing.EtwSession.GetStatistics">
+        <member name="M:EtwTools.EtwSession.GetStatistics">
             <summary>
             Gets statistics of the session.
             </summary>
             <returns>Statistics of the session.</returns>
         </member>
-        <member name="M:EventTracing.EtwSession.Stop">
+        <member name="M:EtwTools.EtwSession.Stop">
             <summary>
             Stops the session.
             </summary>
         </member>
-        <member name="M:EventTracing.EtwSession.GetAllSessions">
+        <member name="M:EtwTools.EtwSession.GetAllSessions">
             <summary>
             Gets all ETW sessions the user has access to.
             </summary>
             <returns>A list of sessions.</returns>
         </member>
-        <member name="M:EventTracing.EtwSession.GetSession(System.String)">
+        <member name="M:EtwTools.EtwSession.GetSession(System.String)">
             <summary>
             Finds the session with the given name.
             </summary>
             <param name="name">The name to look for.</param>
             <returns>The session, if found, null otherwise.</returns>
         </member>
-        <member name="M:EventTracing.EtwSession.CreateSession(System.String,EventTracing.EtwSession.Properties)">
+        <member name="M:EtwTools.EtwSession.CreateSession(System.String,EtwTools.EtwSession.Properties)">
             <summary>
             Creates a new ETW session and returns an object that represents the session.
             </summary>
@@ -183,477 +183,477 @@
             <param name="properties">The properties of the new session.</param>
             <returns>The session.</returns>
         </member>
-        <member name="T:EventTracing.EtwSession.Properties">
+        <member name="T:EtwTools.EtwSession.Properties">
             <summary>
             Properties of the session.
             </summary>
         </member>
-        <member name="P:EventTracing.EtwSession.Properties.BufferSize">
+        <member name="P:EtwTools.EtwSession.Properties.BufferSize">
             <summary>
             Amount of memory allocated for each event tracing session buffer, in kilobytes.
             </summary>
         </member>
-        <member name="P:EventTracing.EtwSession.Properties.MinimumBuffers">
+        <member name="P:EtwTools.EtwSession.Properties.MinimumBuffers">
             <summary>
             Minimum number of buffers allocated for the event tracing session's buffer pool.
             </summary>
         </member>
-        <member name="P:EventTracing.EtwSession.Properties.MaximumBuffers">
+        <member name="P:EtwTools.EtwSession.Properties.MaximumBuffers">
             <summary>
             Maximum number of buffers allocated for the event tracing session's buffer pool.
             </summary>
         </member>
-        <member name="P:EventTracing.EtwSession.Properties.MaximumFileSize">
+        <member name="P:EtwTools.EtwSession.Properties.MaximumFileSize">
             <summary>
             Maximum size of the file used to log events, in megabytes.
             </summary>
         </member>
-        <member name="P:EventTracing.EtwSession.Properties.LogFileMode">
+        <member name="P:EtwTools.EtwSession.Properties.LogFileMode">
             <summary>
             Logging modes for the event tracing session.
             </summary>
         </member>
-        <member name="P:EventTracing.EtwSession.Properties.FlushTimer">
+        <member name="P:EtwTools.EtwSession.Properties.FlushTimer">
             <summary>
             How often, in seconds, the trace buffers are forcibly flushed.
             </summary>
         </member>
-        <member name="P:EventTracing.EtwSession.Properties.SystemTraceProvidersEnabled">
+        <member name="P:EtwTools.EtwSession.Properties.SystemTraceProvidersEnabled">
             <summary>
             Which kernel events should be included in the trace.
             </summary>
         </member>
-        <member name="P:EventTracing.EtwSession.Properties.LogFileName">
+        <member name="P:EtwTools.EtwSession.Properties.LogFileName">
             <summary>
             The name of the log file.
             </summary>
         </member>
-        <member name="T:EventTracing.EtwSession.Statistics">
+        <member name="T:EtwTools.EtwSession.Statistics">
             <summary>
             Statistics about the session.
             </summary>
         </member>
-        <member name="P:EventTracing.EtwSession.Statistics.NumberOfBuffers">
+        <member name="P:EtwTools.EtwSession.Statistics.NumberOfBuffers">
             <summary>
             The number of buffers allocated for the event tracing session's buffer pool.
             </summary>
         </member>
-        <member name="P:EventTracing.EtwSession.Statistics.FreeBuffers">
+        <member name="P:EtwTools.EtwSession.Statistics.FreeBuffers">
             <summary>
             The number of buffers that are allocated but unused in the event tracing session's buffer pool.
             </summary>
         </member>
-        <member name="P:EventTracing.EtwSession.Statistics.EventsLost">
+        <member name="P:EtwTools.EtwSession.Statistics.EventsLost">
             <summary>
             The number of events that were not recorded.
             </summary>
         </member>
-        <member name="P:EventTracing.EtwSession.Statistics.BuffersWritten">
+        <member name="P:EtwTools.EtwSession.Statistics.BuffersWritten">
             <summary>
             The number of buffers written.
             </summary>
         </member>
-        <member name="P:EventTracing.EtwSession.Statistics.LogBuffersLost">
+        <member name="P:EtwTools.EtwSession.Statistics.LogBuffersLost">
             <summary>
             The number of buffers that could not be written to the log file.
             </summary>
         </member>
-        <member name="P:EventTracing.EtwSession.Statistics.RealTimeBuffersLost">
+        <member name="P:EtwTools.EtwSession.Statistics.RealTimeBuffersLost">
             <summary>
             The number of buffers that could not be delivered in real-time to the consumer.
             </summary>
         </member>
-        <member name="T:EventTracing.LogFileMode">
+        <member name="T:EtwTools.LogFileMode">
             <summary>
             Flags for how events are logged.
             </summary>
         </member>
-        <member name="F:EventTracing.LogFileMode.FileModeNone">
+        <member name="F:EtwTools.LogFileMode.FileModeNone">
             <summary>
             No flags.
             </summary>
         </member>
-        <member name="F:EventTracing.LogFileMode.FileModeSequential">
+        <member name="F:EtwTools.LogFileMode.FileModeSequential">
             <summary>
             Writes events to a log file sequentially; stops when the file reaches its maximum size.
             </summary>
         </member>
-        <member name="F:EventTracing.LogFileMode.FileModeCircular">
+        <member name="F:EtwTools.LogFileMode.FileModeCircular">
             <summary>
             Writes events to a log file. After the file reaches the maximum size, the oldest events are replaced with incoming events.
             </summary>
         </member>
-        <member name="F:EventTracing.LogFileMode.FileModeAppend">
+        <member name="F:EtwTools.LogFileMode.FileModeAppend">
             <summary>
             Appends events to an existing sequential log file. If the file does not exist, it is created.
             </summary>
         </member>
-        <member name="F:EventTracing.LogFileMode.FileModeNewFile">
+        <member name="F:EtwTools.LogFileMode.FileModeNewFile">
             <summary>
             Automatically switches to a new log file when the file reaches the maximum size.
             </summary>
         </member>
-        <member name="F:EventTracing.LogFileMode.FileModePreAllocate">
+        <member name="F:EtwTools.LogFileMode.FileModePreAllocate">
             <summary>
             Reserves the maximum file size of disk space for the log file in advance.
             </summary>
         </member>
-        <member name="F:EventTracing.LogFileMode.NonStoppableMode">
+        <member name="F:EtwTools.LogFileMode.NonStoppableMode">
             <summary>
             The logging session cannot be stopped.
             </summary>
         </member>
-        <member name="F:EventTracing.LogFileMode.SecureMode">
+        <member name="F:EtwTools.LogFileMode.SecureMode">
             <summary>
             Restricts who can log events to the session.
             </summary>
         </member>
-        <member name="F:EventTracing.LogFileMode.RealTimeMode">
+        <member name="F:EtwTools.LogFileMode.RealTimeMode">
             <summary>
             Delivers the events to consumers in real-time. Events are delivered when the buffers are flushed, not at the time the provider writes the event.
             </summary>
         </member>
-        <member name="F:EventTracing.LogFileMode.DelayOpenFileMode">
+        <member name="F:EtwTools.LogFileMode.DelayOpenFileMode">
             <summary>
             Delay opening the log file until an event occurs.
             </summary>
         </member>
-        <member name="F:EventTracing.LogFileMode.BufferingMode">
+        <member name="F:EtwTools.LogFileMode.BufferingMode">
             <summary>
             This mode writes events to a circular memory buffer. Events written beyond the total size of the buffer evict the oldest events still remaining in the buffer.
             </summary>
         </member>
-        <member name="F:EventTracing.LogFileMode.PrivateLoggerMode">
+        <member name="F:EtwTools.LogFileMode.PrivateLoggerMode">
             <summary>
             Creates a user-mode event tracing session that runs in the same process as its event trace provider.
             </summary>
         </member>
-        <member name="F:EventTracing.LogFileMode.AddHeaderMode">
+        <member name="F:EtwTools.LogFileMode.AddHeaderMode">
             <summary>
             Adds a header to the log file.
             </summary>
         </member>
-        <member name="F:EventTracing.LogFileMode.UseKbytesForSize">
+        <member name="F:EtwTools.LogFileMode.UseKbytesForSize">
             <summary>
             Use kilobytes as the unit of measure for specifying the size of a file. The default unit of measure is megabytes.
             </summary>
         </member>
-        <member name="F:EventTracing.LogFileMode.UseGlobalSequence">
+        <member name="F:EtwTools.LogFileMode.UseGlobalSequence">
             <summary>
             Uses sequence numbers that are unique across event tracing sessions.
             </summary>
         </member>
-        <member name="F:EventTracing.LogFileMode.UseLocalSequence">
+        <member name="F:EtwTools.LogFileMode.UseLocalSequence">
             <summary>
             Uses sequence numbers that are unique only for an individual event tracing session.
             </summary>
         </member>
-        <member name="F:EventTracing.LogFileMode.PrivateInProc">
+        <member name="F:EtwTools.LogFileMode.PrivateInProc">
             <summary>
             Enforces that only the process that registered the provider GUID can start the logger session with that GUID.
             </summary>
         </member>
-        <member name="F:EventTracing.LogFileMode.ModeReserved">
+        <member name="F:EtwTools.LogFileMode.ModeReserved">
             <summary>
             Signal heap and critical section tracing.
             </summary>
         </member>
-        <member name="F:EventTracing.LogFileMode.StopOnHybridShutdown">
+        <member name="F:EtwTools.LogFileMode.StopOnHybridShutdown">
             <summary>
             Stops logging on hybrid shutdown.
             </summary>
         </member>
-        <member name="F:EventTracing.LogFileMode.PersistOnHybridShutdown">
+        <member name="F:EtwTools.LogFileMode.PersistOnHybridShutdown">
             <summary>
             Continues logging on hybrid shutdown.
             </summary>
         </member>
-        <member name="F:EventTracing.LogFileMode.UsePagedMemory">
+        <member name="F:EtwTools.LogFileMode.UsePagedMemory">
             <summary>
             Uses paged memory.
             </summary>
         </member>
-        <member name="F:EventTracing.LogFileMode.SystemLoggerMode">
+        <member name="F:EtwTools.LogFileMode.SystemLoggerMode">
             <summary>
             Receive events from SystemTraceProvider.
             </summary>
         </member>
-        <member name="F:EventTracing.LogFileMode.IndependentSessionMode">
+        <member name="F:EtwTools.LogFileMode.IndependentSessionMode">
             <summary>
             A logging session should not be affected by EventWrite failures in other sessions.
             </summary>
         </member>
-        <member name="F:EventTracing.LogFileMode.NoPerProcessorBuffering">
+        <member name="F:EtwTools.LogFileMode.NoPerProcessorBuffering">
             <summary>
             Writes events that were logged on different processors to a common buffer.
             </summary>
         </member>
-        <member name="F:EventTracing.LogFileMode.AddToTriageDump">
+        <member name="F:EtwTools.LogFileMode.AddToTriageDump">
             <summary>
             Adds ETW buffers to triage dumps.
             </summary>
         </member>
-        <member name="T:EventTracing.SystemTraceProvider">
+        <member name="T:EtwTools.SystemTraceProvider">
             <summary>
             System event providers.
             </summary>
         </member>
-        <member name="F:EventTracing.SystemTraceProvider.None">
+        <member name="F:EtwTools.SystemTraceProvider.None">
             <summary>
             None.
             </summary>
         </member>
-        <member name="F:EventTracing.SystemTraceProvider.Process">
+        <member name="F:EtwTools.SystemTraceProvider.Process">
             <summary>
             Process start and end.
             </summary>
         </member>
-        <member name="F:EventTracing.SystemTraceProvider.Thread">
+        <member name="F:EtwTools.SystemTraceProvider.Thread">
             <summary>
             Thread start and end.
             </summary>
         </member>
-        <member name="F:EventTracing.SystemTraceProvider.ImageLoad">
+        <member name="F:EtwTools.SystemTraceProvider.ImageLoad">
             <summary>
             Image load.
             </summary>
         </member>
-        <member name="F:EventTracing.SystemTraceProvider.ProcessCounters">
+        <member name="F:EtwTools.SystemTraceProvider.ProcessCounters">
             <summary>
             Process performance counters.
             </summary>
         </member>
-        <member name="F:EventTracing.SystemTraceProvider.Cswitch">
+        <member name="F:EtwTools.SystemTraceProvider.Cswitch">
             <summary>
             Context switches.
             </summary>
         </member>
-        <member name="F:EventTracing.SystemTraceProvider.Dpc">
+        <member name="F:EtwTools.SystemTraceProvider.Dpc">
             <summary>
             Deferred procedure calls.
             </summary>
         </member>
-        <member name="F:EventTracing.SystemTraceProvider.Interrupt">
+        <member name="F:EtwTools.SystemTraceProvider.Interrupt">
             <summary>
             Interrupts.
             </summary>
         </member>
-        <member name="F:EventTracing.SystemTraceProvider.SystemCall">
+        <member name="F:EtwTools.SystemTraceProvider.SystemCall">
             <summary>
             System calls.
             </summary>
         </member>
-        <member name="F:EventTracing.SystemTraceProvider.DiskIo">
+        <member name="F:EtwTools.SystemTraceProvider.DiskIo">
             <summary>
             Physical disk I/O.
             </summary>
         </member>
-        <member name="F:EventTracing.SystemTraceProvider.DiskFileIo">
+        <member name="F:EtwTools.SystemTraceProvider.DiskFileIo">
             <summary>
             File disk I/O.
             </summary>
         </member>
-        <member name="F:EventTracing.SystemTraceProvider.DiskIoInit">
+        <member name="F:EtwTools.SystemTraceProvider.DiskIoInit">
             <summary>
             Physical disk I/O initialization.
             </summary>
         </member>
-        <member name="F:EventTracing.SystemTraceProvider.Dispatcher">
+        <member name="F:EtwTools.SystemTraceProvider.Dispatcher">
             <summary>
             Scheduler/ReadyThread events.
             </summary>
         </member>
-        <member name="F:EventTracing.SystemTraceProvider.MemoryPageFaults">
+        <member name="F:EtwTools.SystemTraceProvider.MemoryPageFaults">
             <summary>
             All page faults.
             </summary>
         </member>
-        <member name="F:EventTracing.SystemTraceProvider.MemoryHardFaults">
+        <member name="F:EtwTools.SystemTraceProvider.MemoryHardFaults">
             <summary>
             Hard faults only.
             </summary>
         </member>
-        <member name="F:EventTracing.SystemTraceProvider.VirtualAlloc">
+        <member name="F:EtwTools.SystemTraceProvider.VirtualAlloc">
             <summary>
             Virtual memory operations.
             </summary>
         </member>
-        <member name="F:EventTracing.SystemTraceProvider.Vamap">
+        <member name="F:EtwTools.SystemTraceProvider.Vamap">
             <summary>
             Map/unmap (excluding images).
             </summary>
         </member>
-        <member name="F:EventTracing.SystemTraceProvider.NetworkTcpip">
+        <member name="F:EtwTools.SystemTraceProvider.NetworkTcpip">
             <summary>
             TCP/IP send and receieve.
             </summary>
         </member>
-        <member name="F:EventTracing.SystemTraceProvider.Registry">
+        <member name="F:EtwTools.SystemTraceProvider.Registry">
             <summary>
             Registry calls.
             </summary>
         </member>
-        <member name="F:EventTracing.SystemTraceProvider.DbgPrint">
+        <member name="F:EtwTools.SystemTraceProvider.DbgPrint">
             <summary>
             DbgPrint calls.
             </summary>
         </member>
-        <member name="F:EventTracing.SystemTraceProvider.Job">
+        <member name="F:EtwTools.SystemTraceProvider.Job">
             <summary>
             Job start and end.
             </summary>
         </member>
-        <member name="F:EventTracing.SystemTraceProvider.Alpc">
+        <member name="F:EtwTools.SystemTraceProvider.Alpc">
             <summary>
             ALPC traces.
             </summary>
         </member>
-        <member name="F:EventTracing.SystemTraceProvider.SplitIo">
+        <member name="F:EtwTools.SystemTraceProvider.SplitIo">
             <summary>
             Split I/O traces.
             </summary>
         </member>
-        <member name="F:EventTracing.SystemTraceProvider.DebugEvents">
+        <member name="F:EtwTools.SystemTraceProvider.DebugEvents">
             <summary>
             Debugger events.
             </summary>
         </member>
-        <member name="F:EventTracing.SystemTraceProvider.Driver">
+        <member name="F:EtwTools.SystemTraceProvider.Driver">
             <summary>
             Driver delays.
             </summary>
         </member>
-        <member name="F:EventTracing.SystemTraceProvider.Profile">
+        <member name="F:EtwTools.SystemTraceProvider.Profile">
             <summary>
             Sample-based profiling.
             </summary>
         </member>
-        <member name="F:EventTracing.SystemTraceProvider.FileIo">
+        <member name="F:EtwTools.SystemTraceProvider.FileIo">
             <summary>
             File I/O.
             </summary>
         </member>
-        <member name="F:EventTracing.SystemTraceProvider.FileIoInit">
+        <member name="F:EtwTools.SystemTraceProvider.FileIoInit">
             <summary>
             File I/O initialization.
             </summary>
         </member>
-        <member name="F:EventTracing.SystemTraceProvider.NoSysConfig">
+        <member name="F:EtwTools.SystemTraceProvider.NoSysConfig">
             <summary>
             Do not do system configuration rundown.
             </summary>
         </member>
-        <member name="F:EventTracing.SystemTraceProvider.ForwardWmi">
+        <member name="F:EtwTools.SystemTraceProvider.ForwardWmi">
             <summary>
             Can forward to WMI.
             </summary>
         </member>
-        <member name="F:EventTracing.SystemTraceProvider.Extension">
+        <member name="F:EtwTools.SystemTraceProvider.Extension">
             <summary>
             Indicates more flags.
             </summary>
         </member>
-        <member name="T:EventTracing.TraceInstanceProperties">
+        <member name="T:EtwTools.TraceInstanceProperties">
             <summary>
             Properties of an instance of a trace provider.
             </summary>
         </member>
-        <member name="F:EventTracing.TraceInstanceProperties.None">
+        <member name="F:EtwTools.TraceInstanceProperties.None">
             <summary>
             None.
             </summary>
         </member>
-        <member name="F:EventTracing.TraceInstanceProperties.Legacy">
+        <member name="F:EtwTools.TraceInstanceProperties.Legacy">
             <summary>
             This provider was registered using <c>RegisterTraceGuids</c> instead of <c>EventRegister</c>.
             </summary>
         </member>
-        <member name="F:EventTracing.TraceInstanceProperties.PreEnabled">
+        <member name="F:EtwTools.TraceInstanceProperties.PreEnabled">
             <summary>
             This provider was enabled without being registered.
             </summary>
         </member>
-        <member name="T:EventTracing.TraceLevel">
+        <member name="T:EtwTools.TraceLevel">
             <summary>
             The level of detail provided by an event provider.
             </summary>
         </member>
-        <member name="F:EventTracing.TraceLevel.Critical">
+        <member name="F:EtwTools.TraceLevel.Critical">
             <summary>
             Abnormal exit or termination events.
             </summary>
         </member>
-        <member name="F:EventTracing.TraceLevel.Error">
+        <member name="F:EtwTools.TraceLevel.Error">
             <summary>
             Severe error events.
             </summary>
         </member>
-        <member name="F:EventTracing.TraceLevel.Warning">
+        <member name="F:EtwTools.TraceLevel.Warning">
             <summary>
             Warning events such as allocation failures.
             </summary>
         </member>
-        <member name="F:EventTracing.TraceLevel.Information">
+        <member name="F:EtwTools.TraceLevel.Information">
             <summary>
             Non-error events such as entry or exit events.
             </summary>
         </member>
-        <member name="F:EventTracing.TraceLevel.Verbose">
+        <member name="F:EtwTools.TraceLevel.Verbose">
             <summary>
             Detailed trace events.
             </summary>
         </member>
-        <member name="T:EventTracing.TraceProperties">
+        <member name="T:EtwTools.TraceProperties">
             <summary>
             Additional properties that can be enabled for a provider.
             </summary>
         </member>
-        <member name="F:EventTracing.TraceProperties.None">
+        <member name="F:EtwTools.TraceProperties.None">
             <summary>
             None.
             </summary>
         </member>
-        <member name="F:EventTracing.TraceProperties.SecurityIdentifier">
+        <member name="F:EtwTools.TraceProperties.SecurityIdentifier">
             <summary>
             Include in the extended data the security identifier (SID) of the user.
             </summary>
         </member>
-        <member name="F:EventTracing.TraceProperties.TerminalSessionIdentifier">
+        <member name="F:EtwTools.TraceProperties.TerminalSessionIdentifier">
             <summary>
             Include in the extended data the terminal session identifier.
             </summary>
         </member>
-        <member name="F:EventTracing.TraceProperties.StackTrace">
+        <member name="F:EtwTools.TraceProperties.StackTrace">
             <summary>
             Include in the extended data a call stack trace for events written using <c>EventWrite</c>.
             </summary>
         </member>
-        <member name="F:EventTracing.TraceProperties.IgnoreKeyword0">
+        <member name="F:EtwTools.TraceProperties.IgnoreKeyword0">
             <summary>
             Filters out all events that do not have a non-zero keyword specified.
             </summary>
         </member>
-        <member name="F:EventTracing.TraceProperties.ProviderGroup">
+        <member name="F:EtwTools.TraceProperties.ProviderGroup">
             <summary>
             Indicates that this should enable a Provider Group rather than an individual Event Provider.
             </summary>
         </member>
-        <member name="F:EventTracing.TraceProperties.ProcessStartKey">
+        <member name="F:EtwTools.TraceProperties.ProcessStartKey">
             <summary>
             Include the Process Start Key in the extended data.
             </summary>
         </member>
-        <member name="F:EventTracing.TraceProperties.EventKey">
+        <member name="F:EtwTools.TraceProperties.EventKey">
             <summary>
             Include the Event Key in the extended data.
             </summary>
         </member>
-        <member name="F:EventTracing.TraceProperties.ExcludeInPrivate">
+        <member name="F:EtwTools.TraceProperties.ExcludeInPrivate">
             <summary>
             Filters out all events that are either marked as an InPrivate event or come from a process that is marked as InPrivate.
             </summary>
         </member>
-        <member name="F:EventTracing.TraceProperties.All">
+        <member name="F:EtwTools.TraceProperties.All">
             <summary>
             All known properties.
             </summary>

@@ -1,4 +1,4 @@
-﻿namespace Trace
+﻿namespace EtwTools
 {
     internal enum TraceState
     {

@@ -1,4 +1,4 @@
-﻿namespace EventTracing
+﻿namespace EtwTools
 {
     /// <summary>
     /// The level of detail provided by an event provider.

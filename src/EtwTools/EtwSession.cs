@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace EventTracing
+namespace EtwTools
 {
     /// <summary>
     /// Represents an ETW session.

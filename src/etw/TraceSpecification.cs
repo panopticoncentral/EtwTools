@@ -1,8 +1,6 @@
 ﻿using System.Collections.Generic;
 
-using EventTracing;
-
-namespace Trace
+namespace EtwTools
 {
     internal sealed class TraceSpecification
     {
