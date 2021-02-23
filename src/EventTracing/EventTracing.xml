@@ -157,6 +157,11 @@
             </summary>
             <returns>Statistics of the session.</returns>
         </member>
+        <member name="M:EventTracing.EtwSession.Stop">
+            <summary>
+            Stops the session.
+            </summary>
+        </member>
         <member name="M:EventTracing.EtwSession.GetAllSessions">
             <summary>
             Gets all ETW sessions the user has access to.
@@ -169,6 +174,14 @@
             </summary>
             <param name="name">The name to look for.</param>
             <returns>The session, if found, null otherwise.</returns>
+        </member>
+        <member name="M:EventTracing.EtwSession.CreateSession(System.String,EventTracing.EtwSession.Properties)">
+            <summary>
+            Creates a new ETW session and returns an object that represents the session.
+            </summary>
+            <param name="name">The name of the session.</param>
+            <param name="properties">The properties of the new session.</param>
+            <returns>The session.</returns>
         </member>
         <member name="T:EventTracing.EtwSession.Properties">
             <summary>
@@ -383,6 +396,11 @@
         <member name="T:EventTracing.SystemTraceProvider">
             <summary>
             System event providers.
+            </summary>
+        </member>
+        <member name="F:EventTracing.SystemTraceProvider.None">
+            <summary>
+            None.
             </summary>
         </member>
         <member name="F:EventTracing.SystemTraceProvider.Process">

@@ -50,15 +50,17 @@ namespace EventTracing
             nativeProperties->LogFileNameOffset = (uint)sizeof(Native.EventTraceProperties) + (sizeof(char) * MaxNameSize);
 
             ((Native.Hresult)Native.ControlTrace(_handle, null, nativeProperties, Native.TraceControl.Query)).ThrowException();
-            return new Properties(
-                nativeProperties->BufferSize,
-                nativeProperties->MinimumBuffers,
-                nativeProperties->MaximumBuffers,
-                nativeProperties->MaximumFileSize,
-                nativeProperties->LogFileMode,
-                nativeProperties->FlushTimer,
-                nativeProperties->EnableFlags,
-                new string((char*)&((byte*)nativeProperties)[nativeProperties->LogFileNameOffset]));
+            return new Properties
+            {
+                BufferSize = nativeProperties->BufferSize,
+                MinimumBuffers = nativeProperties->MinimumBuffers,
+                MaximumBuffers = nativeProperties->MaximumBuffers,
+                MaximumFileSize = nativeProperties->MaximumFileSize,
+                LogFileMode = nativeProperties->LogFileMode,
+                FlushTimer = nativeProperties->FlushTimer,
+                SystemTraceProvidersEnabled = nativeProperties->EnableFlags,
+                LogFileName = new string((char*)&((byte*)nativeProperties)[nativeProperties->LogFileNameOffset])
+            };
         }
 
         /// <summary>
@@ -74,13 +76,31 @@ namespace EventTracing
             nativeProperties->LogFileNameOffset = (uint)sizeof(Native.EventTraceProperties) + (sizeof(char) * MaxNameSize);
 
             ((Native.Hresult)Native.ControlTrace(_handle, null, nativeProperties, Native.TraceControl.Query)).ThrowException();
-            return new Statistics(
-                nativeProperties->NumberOfBuffers,
-                nativeProperties->FreeBuffers,
-                nativeProperties->EventsLost,
-                nativeProperties->BuffersWritten,
-                nativeProperties->LogBuffersLost,
-                nativeProperties->RealTimeBuffersLost);
+            return new Statistics
+            {
+                NumberOfBuffers = nativeProperties->NumberOfBuffers,
+                FreeBuffers = nativeProperties->FreeBuffers,
+                EventsLost = nativeProperties->EventsLost,
+                BuffersWritten = nativeProperties->BuffersWritten,
+                LogBuffersLost = nativeProperties->LogBuffersLost,
+                RealTimeBuffersLost = nativeProperties->RealTimeBuffersLost
+            };
+        }
+
+        /// <summary>
+        /// Stops the session.
+        /// </summary>
+        public void Stop()
+        {
+            var buffer = stackalloc byte[SizeOfProperties];
+            var nativeProperties = (Native.EventTraceProperties*)buffer;
+            nativeProperties->Wnode.BufferSize = (uint)SizeOfProperties;
+            nativeProperties->Wnode.Guid = Id;
+            nativeProperties->Wnode.Flags = Native.WnodeFlags.TracedGuid;
+            nativeProperties->LoggerNameOffset = (uint)sizeof(Native.EventTraceProperties);
+            nativeProperties->LogFileNameOffset = (uint)sizeof(Native.EventTraceProperties) + (sizeof(char) * MaxNameSize);
+
+            ((Native.Hresult)Native.ControlTrace(_handle, Name, nativeProperties, Native.TraceControl.Stop)).ThrowException();
         }
 
         /// <summary>
@@ -152,107 +172,135 @@ namespace EventTracing
         }
 
         /// <summary>
+        /// Creates a new ETW session and returns an object that represents the session.
+        /// </summary>
+        /// <param name="name">The name of the session.</param>
+        /// <param name="properties">The properties of the new session.</param>
+        /// <returns>The session.</returns>
+        public static EtwSession CreateSession(string name, Properties properties)
+        {
+            var buffer = stackalloc byte[SizeOfProperties];
+            var nativeProperties = (Native.EventTraceProperties*)buffer;
+
+            nativeProperties->Wnode.BufferSize = (uint)SizeOfProperties;
+            nativeProperties->Wnode.Guid = Guid.NewGuid();
+            nativeProperties->Wnode.ClientContext = ClockResolution.QueryPerformanceCounter;
+            nativeProperties->Wnode.Flags = Native.WnodeFlags.TracedGuid;
+
+            nativeProperties->BufferSize = properties.BufferSize;
+            nativeProperties->MinimumBuffers = properties.MinimumBuffers;
+            nativeProperties->MaximumBuffers = properties.MaximumBuffers;
+            nativeProperties->MaximumFileSize = properties.MaximumFileSize;
+            nativeProperties->LogFileMode = properties.LogFileMode;
+            nativeProperties->FlushTimer = properties.FlushTimer;
+            nativeProperties->EnableFlags = properties.SystemTraceProvidersEnabled;
+
+            static void CopyStringToPtr(string source, char* dest)
+            {
+                fixed (char* sourcePtr = source)
+                {
+                    for (var index = 0; index < source.Length; index++)
+                    {
+                        dest[index] = sourcePtr[index];
+                    }
+                    dest[source.Length] = '\0';
+                }
+            }
+
+            nativeProperties->LoggerNameOffset = (uint)sizeof(Native.EventTraceProperties);
+            CopyStringToPtr(name, (char*)(buffer + nativeProperties->LoggerNameOffset));
+
+            if (properties.LogFileName != null)
+            {
+                nativeProperties->LogFileNameOffset = (uint)sizeof(Native.EventTraceProperties) + (sizeof(char) * MaxNameSize);
+                CopyStringToPtr(properties.LogFileName, (char*)(buffer + nativeProperties->LogFileNameOffset));
+            }
+
+            ((Native.Hresult)Native.StartTrace(out var handle, name, nativeProperties)).ThrowException();
+
+            return new EtwSession(nativeProperties->Wnode.Guid, name, handle, nativeProperties->Wnode.ClientContext);
+        }
+
+        /// <summary>
         /// Properties of the session.
         /// </summary>
-        public readonly struct Properties
+        public record Properties
         {
             /// <summary>
             /// Amount of memory allocated for each event tracing session buffer, in kilobytes.
             /// </summary>
-            public uint BufferSize { get; }
+            public uint BufferSize { get; init; }
 
             /// <summary>
             /// Minimum number of buffers allocated for the event tracing session's buffer pool.
             /// </summary>
-            public uint MinimumBuffers { get; }
+            public uint MinimumBuffers { get; init; }
 
             /// <summary>
             /// Maximum number of buffers allocated for the event tracing session's buffer pool.
             /// </summary>
-            public uint MaximumBuffers { get; }
+            public uint MaximumBuffers { get; init; }
 
             /// <summary>
             /// Maximum size of the file used to log events, in megabytes.
             /// </summary>
-            public uint MaximumFileSize { get; }
+            public uint MaximumFileSize { get; init; }
 
             /// <summary>
             /// Logging modes for the event tracing session.
             /// </summary>
-            public LogFileMode LogFileMode { get; }
+            public LogFileMode LogFileMode { get; init; }
 
             /// <summary>
             /// How often, in seconds, the trace buffers are forcibly flushed.
             /// </summary>
-            public uint FlushTimer { get; }
+            public uint FlushTimer { get; init; }
 
             /// <summary>
             /// Which kernel events should be included in the trace.
             /// </summary>
-            public SystemTraceProvider SystemTraceProvidersEnabled { get; }
+            public SystemTraceProvider SystemTraceProvidersEnabled { get; init; }
 
             /// <summary>
             /// The name of the log file.
             /// </summary>
-            public string LogFileName { get; }
-
-            internal Properties(uint bufferSize, uint minimumBuffers, uint maximumBuffers, uint maximumFileSize, LogFileMode logFileMode, uint flushTimer, SystemTraceProvider systemTraceProvidersEnabled, string logFileName)
-            {
-                BufferSize = bufferSize;
-                MinimumBuffers = minimumBuffers;
-                MaximumBuffers = maximumBuffers;
-                MaximumFileSize = maximumFileSize;
-                LogFileMode = logFileMode;
-                FlushTimer = flushTimer;
-                SystemTraceProvidersEnabled = systemTraceProvidersEnabled;
-                LogFileName = logFileName;
-            }
+            public string LogFileName { get; init; }
         }
 
         /// <summary>
         /// Statistics about the session.
         /// </summary>
-        public readonly struct Statistics
+        public record Statistics
         {
             /// <summary>
             /// The number of buffers allocated for the event tracing session's buffer pool.
             /// </summary>
-            public uint NumberOfBuffers { get; }
+            public uint NumberOfBuffers { get; init; }
 
             /// <summary>
             /// The number of buffers that are allocated but unused in the event tracing session's buffer pool.
             /// </summary>
-            public uint FreeBuffers { get; }
+            public uint FreeBuffers { get; init; }
 
             /// <summary>
             /// The number of events that were not recorded.
             /// </summary>
-            public uint EventsLost { get; }
+            public uint EventsLost { get; init; }
 
             /// <summary>
             /// The number of buffers written.
             /// </summary>
-            public uint BuffersWritten { get; }
+            public uint BuffersWritten { get; init; }
 
             /// <summary>
             /// The number of buffers that could not be written to the log file.
             /// </summary>
-            public uint LogBuffersLost { get; }
+            public uint LogBuffersLost { get; init; }
 
             /// <summary>
             /// The number of buffers that could not be delivered in real-time to the consumer.
             /// </summary>
-            public uint RealTimeBuffersLost { get; }
-
-            internal Statistics(uint numberOfBuffers, uint freeBuffers, uint eventsLost, uint buffersWritten, uint logBuffersLost, uint realTimeBuffersLost)
-            {
-                NumberOfBuffers = numberOfBuffers;
-                FreeBuffers = freeBuffers;
-                EventsLost = eventsLost;
-                BuffersWritten = buffersWritten;
-                LogBuffersLost = logBuffersLost;
-                RealTimeBuffersLost = realTimeBuffersLost;
-            }
+            public uint RealTimeBuffersLost { get; init; }
         }
     }
 }

@@ -2,7 +2,8 @@
   "profiles": {
     "trace": {
       "commandName": "Project",
-      "commandLineArgs": "properties --name SocketHeciServer"
+      "commandLineArgs": "session start --name Test --spec sample.trace.json --watch",
+      "nativeDebugging": true
     }
   }
 }

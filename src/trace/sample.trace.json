@@ -1,0 +1,35 @@
+{
+  "kernel": {
+    "providers": {
+      "process": "stack",         // Process start and end.
+      "thread": "stack",          // Thread start and end.
+      "imageLoad": "stack",       // Image load.
+      "processCounters": "off",   // Process performance counters.
+      "cswitch": "off",           // Context switches.
+      "dpc": "off",               // Deferred procedure calls.
+      "interrupt": "off",         // Interrupts.
+      "systemCall": "off",        // System calls.
+      "diskIo": "off",            // Physical disk I/O.
+      "diskFileIo": "off",        // File disk I/O.
+      "diskIoInit": "off",        // Physical disk I/O initialization.
+      "dispatcher": "off",        // Scheduler/ReadyThread events.
+      "memoryPageFaults": "off",  // All page faults.
+      "memoryHardFaults": "off",  // Hard faults only.
+      "virtualAlloc": "off",      // Virtual memory operations.
+      "vamap": "off",             // Map/unmap (excluding images).
+      "networkTcpip": "off",      // TCP/IP send and receieve.
+      "registry": "off",          // Registry calls.
+      "dbgPrint": "off",          // DbgPrint calls.
+      "job": "off",               // Job start and end.
+      "alpc": "off",              // ALPC traces.
+      "splitIo": "off",           // Split I/O traces.
+      "debugEvents": "off",       // Debugger events.
+      "driver": "off",            // Driver delays.
+      "profile": "off",           // Sample-based profiling.
+      "fileIo": "off",            // File I/O.
+      "fileIoInit": "off"         // File I/O initialization.
+    }
+  },
+  "user": {
+  }
+}

@@ -81,6 +81,12 @@ namespace EventTracing
             MaxTraceSetInfoClass
         };
 
+        [Flags]
+        public enum WnodeFlags : uint
+        {
+            TracedGuid = 0x00020000
+        }
+
 #pragma warning disable IDE1006
         [StructLayout(LayoutKind.Sequential)]
         public struct WnodeHeader
@@ -91,7 +97,7 @@ namespace EventTracing
             public long TimeStamp;
             public Guid Guid;
             public ClockResolution ClientContext;
-            public uint Flags;
+            public WnodeFlags Flags;
         }
 
         [StructLayout(LayoutKind.Sequential)]
@@ -128,6 +134,7 @@ namespace EventTracing
         [StructLayout(LayoutKind.Sequential)]
         public struct TraceEnableInfo
         {
+            [MarshalAs(UnmanagedType.Bool)]
             public bool IsEnabled;
             public TraceLevel Level;
             public byte Reserved1;
@@ -157,6 +164,9 @@ namespace EventTracing
 
         [DllImport("advapi32.dll")]
         public static extern ErrorCode EnumerateTraceGuidsEx(TraceQueryInfoClass infoClass, void* inBuffer, int inBufferSize, void* outBuffer, int outBufferSize, out int returnLength);
+
+        [DllImport("advapi32.dll", CharSet = CharSet.Unicode)]
+        internal static extern ErrorCode StartTrace(out ulong sessionHandle, string sessionName, EventTraceProperties* properties);
 
         [DllImport("tdh.dll")]
         public static extern ErrorCode TdhEnumerateProviders(byte* buffer, ref int bufferSize);

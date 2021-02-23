@@ -9,6 +9,10 @@ namespace EventTracing
     public enum SystemTraceProvider : uint
     {
         /// <summary>
+        /// None.
+        /// </summary>
+        None = 0x00000000,
+        /// <summary>
         /// Process start and end.
         /// </summary>
         Process = 0x00000001,

@@ -1,76 +1,103 @@
-﻿
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.CommandLine;
 using System.CommandLine.Invocation;
+using System.Globalization;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 
 using EventTracing;
 
+using Newtonsoft.Json;
+
 using Spectre.Console;
+
+using Trace;
 
 var rootCommand = new RootCommand("Controls Event Tracing for Windows (ETW).");
 
-// List
-
-var listCommand = new Command("list", "List all active ETW sessions.");
-listCommand.Handler = CommandHandler.Create(ListSessions);
-rootCommand.Add(listCommand);
-
-// Properties
-
-var propertiesCommand = new Command("properties", "List properties of an ETW session.")
+static void AddSessionCommands(Command sessionCommand)
 {
-    new Option<string>(new[] { "--name", "-n" }, "Name of session to fetch properties of.") { IsRequired = true }
-};
-propertiesCommand.Handler = CommandHandler.Create<string>(GetSessionProperties);
-rootCommand.Add(propertiesCommand);
+    var listCommand = new Command("list", "List all active ETW sessions.")
+    {
+        Handler = CommandHandler.Create(ListSessions)
+    };
+    sessionCommand.Add(listCommand);
 
-// Statistics
+    var propertiesCommand = new Command("properties", "List properties of an ETW session.")
+    {
+        new Option<string>(new[] { "--name", "-n" }, "Name of session to fetch properties of.") { IsRequired = true }
+    };
+    propertiesCommand.Handler = CommandHandler.Create<string>(GetSessionProperties);
+    sessionCommand.Add(propertiesCommand);
 
-var statisticsCommand = new Command("statistics", "Statistics of an ETW session.")
+    var statisticsCommand = new Command("statistics", "Statistics of an ETW session.")
+    {
+        new Option<string>(new[] { "--name", "-n" }, "Name of session to fetch statistics of.") { IsRequired = true }
+    };
+    statisticsCommand.Handler = CommandHandler.Create<string>(GetSessionStatistics);
+    sessionCommand.Add(statisticsCommand);
+
+
+    var watchCommand = new Command("watch", "Watch an ETW session.")
+    {
+        new Option<string>(new[] { "--name", "-n" }, "Name of session to fetch statistics of.") { IsRequired = true }
+    };
+    watchCommand.Handler = CommandHandler.Create<string>(WatchSessionAsync);
+    sessionCommand.Add(watchCommand);
+
+    var startCommand = new Command("start", "Start a tracing session.")
+    {
+        new Option<string>(new[] { "--name", "-n" }, "The session name.") { IsRequired = true },
+        new Option<string>(new[] { "--spec", "-s" }, "The trace specification.") { IsRequired = true },
+        new Option<string>(new[] { "--output", "-o" }, "The output path and file name."),
+        new Option<bool>(new[] { "--wait", "-w" }, "Wait while trace runs and end trace when program ends."),
+        new Option<bool>(new[] { "--watch" }, "Wait and watch trace while it runs (implies --wait).")
+    };
+    startCommand.Handler = CommandHandler.Create<string, string, string, bool, bool>(StartSessionAsync);
+    sessionCommand.Add(startCommand);
+
+    var stopCommand = new Command("stop", "Stop a tracing session.")
+    {
+        new Option<string>(new[] { "--name", "-n" }, "The session name to stop.") { IsRequired = true },
+    };
+    stopCommand.Handler = CommandHandler.Create<string>(StopSession);
+    sessionCommand.Add(stopCommand);
+}
+
+var sessionCommand = new Command("session", "Commands that work on individual sessions.");
+rootCommand.Add(sessionCommand);
+AddSessionCommands(sessionCommand);
+
+static void AddProvidersCommands(Command providersCommand)
 {
-    new Option<string>(new[] { "--name", "-n" }, "Name of session to fetch statistics of.") { IsRequired = true }
-};
-statisticsCommand.Handler = CommandHandler.Create<string>(GetSessionStatistics);
-rootCommand.Add(statisticsCommand);
+    var publishedCommand = new Command("published", "List all providers published on the system.")
+    {
+        new Option<PublishedSort>(new[] { "--sort", "-s" }, () => PublishedSort.Name, "Sort providers.")
+    };
+    publishedCommand.Handler = CommandHandler.Create<PublishedSort>(ListPublishedProviders);
+    providersCommand.AddCommand(publishedCommand);
 
-// Watch
+    var registeredCommand = new Command("registered", "List all providers registered across all processes.")
+    {
+        new Option<RegisteredSort>(new[] { "--sort", "-s" }, () => RegisteredSort.Name, "Sort providers.")
+    };
+    registeredCommand.Handler = CommandHandler.Create<RegisteredSort>(ListRegisteredProviders);
+    providersCommand.AddCommand(registeredCommand);
 
-var watchCommand = new Command("watch", "Watch an ETW session.")
-{
-    new Option<string>(new[] { "--name", "-n" }, "Name of session to fetch statistics of.") { IsRequired = true }
-};
-watchCommand.Handler = CommandHandler.Create<string>(WatchSession);
-rootCommand.Add(watchCommand);
-
-// Providers
+    var processCommand = new Command("process", "List all providers registered in a process.")
+    {
+        new Option<uint>(new[] { "--pid", "-p" }, "Process to list.") { IsRequired = true },
+        new Option<ProcessRegisteredSort>(new[] { "--sort", "-s" }, () => ProcessRegisteredSort.Name, "Sort providers.")
+    };
+    processCommand.Handler = CommandHandler.Create<uint, ProcessRegisteredSort>(ListRegisteredProvidersInProcess);
+    providersCommand.AddCommand(processCommand);
+}
 
 var providersCommand = new Command("providers", "Commands that work on event providers.");
 rootCommand.Add(providersCommand);
-
-var publishedCommand = new Command("published", "List all providers published on the system.")
-{
-    new Option<PublishedSort>(new[] { "--sort", "-s" }, () => PublishedSort.Name, "Sort providers.")
-};
-publishedCommand.Handler = CommandHandler.Create<PublishedSort>(PublishedProviders);
-providersCommand.AddCommand(publishedCommand);
-
-var registeredCommand = new Command("registered", "List all providers registered across all processes.")
-{
-    new Option<RegisteredSort>(new[] { "--sort", "-s" }, () => RegisteredSort.Name, "Sort providers.")
-};
-registeredCommand.Handler = CommandHandler.Create<RegisteredSort>(RegisteredProviders);
-providersCommand.AddCommand(registeredCommand);
-
-var processCommand = new Command("process", "List all providers registered in a process.")
-{
-    new Option<uint>(new[] { "--pid", "-p" }, "Process to list.") { IsRequired = true },
-    new Option<ProcessRegisteredSort>(new[] { "--sort", "-s" }, () => ProcessRegisteredSort.Name, "Sort providers.")
-};
-processCommand.Handler = CommandHandler.Create<uint, ProcessRegisteredSort>(ProcessRegisteredProviders);
-providersCommand.AddCommand(processCommand);
+AddProvidersCommands(providersCommand);
 
 static void ListSessions()
 {
@@ -143,7 +170,7 @@ static void GetSessionStatistics(string name)
     AnsiConsole.WriteLine();
 }
 
-static async Task WatchSession(string name)
+static async Task WatchSessionAsync(string name)
 {
     EtwSession session = default;
 
@@ -182,7 +209,7 @@ static async Task WatchSession(string name)
     AnsiConsole.WriteLine();
 }
 
-static void PublishedProviders(PublishedSort sort)
+static void ListPublishedProviders(PublishedSort sort)
 {
     var providers = EtwProvider.GetPublishedProviders();
 
@@ -205,7 +232,7 @@ static void PublishedProviders(PublishedSort sort)
     AnsiConsole.WriteLine();
 }
 
-static void RegisteredProviders(RegisteredSort sort)
+static void ListRegisteredProviders(RegisteredSort sort)
 {
     var providers = EtwProvider.GetRegisteredProviders().Select(p => (p.Name, p.Id, p.GetInstanceInfos().Count));
 
@@ -221,7 +248,7 @@ static void RegisteredProviders(RegisteredSort sort)
 
     foreach (var (name, id, count) in sortedProviders)
     {
-        _ = table.AddRow(name ?? string.Empty, id.ToString(), count.ToString());
+        _ = table.AddRow(name ?? string.Empty, id.ToString(), count.ToString(CultureInfo.InvariantCulture));
     }
 
     AnsiConsole.WriteLine();
@@ -229,7 +256,7 @@ static void RegisteredProviders(RegisteredSort sort)
     AnsiConsole.WriteLine();
 }
 
-static void ProcessRegisteredProviders(uint pid, ProcessRegisteredSort sort)
+static void ListRegisteredProvidersInProcess(uint pid, ProcessRegisteredSort sort)
 {
     var providers = EtwProvider.GetRegisteredProviders();
 
@@ -277,6 +304,92 @@ static void ProcessRegisteredProviders(uint pid, ProcessRegisteredSort sort)
     }
 
     AnsiConsole.WriteLine();
+}
+
+static unsafe bool IsElevated()
+{
+    var process = System.Diagnostics.Process.GetCurrentProcess();
+    if (!Native.OpenProcessToken(process.SafeHandle, Native.AccessRights.Query, out var tokenHandle))
+    {
+        return false;
+    }
+
+    bool isElevated;
+    var success = Native.GetTokenInformation(tokenHandle, Native.TokenInformationClass.Elevation, &isElevated, sizeof(int), out var retSize);
+    tokenHandle.Dispose();
+
+    return success && isElevated;
+}
+
+static async Task StartSessionAsync(string name, string spec, string output, bool wait, bool watch)
+{
+    if (!IsElevated())
+    {
+        AnsiConsole.WriteLine();
+        AnsiConsole.WriteLine("Tracing commands require elevation.");
+        AnsiConsole.WriteLine();
+        return;
+    }
+
+    if (!File.Exists(spec))
+    {
+        AnsiConsole.WriteLine();
+        AnsiConsole.WriteLine("Cannot find trace specification.");
+        AnsiConsole.WriteLine();
+        return;
+    }
+
+    var specObject = JsonConvert.DeserializeObject<TraceSpecification>(File.ReadAllText(spec));
+    var systemTraceProvidersEnabled = specObject.Kernel == null || specObject.Kernel.Providers == null
+        ? SystemTraceProvider.None
+        : specObject.Kernel.Providers.Where(kvp => kvp.Value != TraceState.Off).Aggregate(SystemTraceProvider.None, (v, kvp) => v | kvp.Key);
+
+    var properties = new EtwSession.Properties
+    {
+        LogFileMode =
+            LogFileMode.IndependentSessionMode
+            | (systemTraceProvidersEnabled != SystemTraceProvider.None ? LogFileMode.SystemLoggerMode : LogFileMode.FileModeNone),
+        SystemTraceProvidersEnabled = systemTraceProvidersEnabled,
+        LogFileName = $"{(string.IsNullOrEmpty(output) ? name : output)}.etl"
+    };
+
+    var session = EtwSession.CreateSession(name, properties);
+
+    if (!wait && !watch)
+    {
+        return;
+    }
+
+    await WatchSessionAsync(name);
+
+    AnsiConsole.WriteLine();
+    AnsiConsole.WriteLine("Stopping session.");
+    AnsiConsole.WriteLine();
+    session.Stop();
+}
+
+static void StopSession(string name)
+{
+    if (!IsElevated())
+    {
+        AnsiConsole.WriteLine();
+        AnsiConsole.WriteLine("Tracing commands require elevation.");
+        AnsiConsole.WriteLine();
+        return;
+    }
+
+    var session = EtwSession.GetSession(name);
+
+    if (session == null)
+    {
+        AnsiConsole.WriteLine();
+        AnsiConsole.WriteLine("Unable to find session.");
+        AnsiConsole.WriteLine();
+        return;
+    }
+
+    // TODO
+    session.Stop();
 }
 
 return await rootCommand.InvokeAsync(args);
