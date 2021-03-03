@@ -6,6 +6,11 @@
     public enum TraceLevel : byte
     {
         /// <summary>
+        /// No trace level.
+        /// </summary>
+        None = 0,
+
+        /// <summary>
         /// Abnormal exit or termination events.
         /// </summary>
         Critical = 1,

@@ -2,7 +2,7 @@
   "profiles": {
     "trace": {
       "commandName": "Project",
-      "commandLineArgs": "session start --name Test --spec sample.trace.json --watch",
+      "commandLineArgs": "trace info --file Test.etl",
       "nativeDebugging": true
     }
   }

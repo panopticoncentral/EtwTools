@@ -263,6 +263,118 @@
             The number of buffers that could not be delivered in real-time to the consumer.
             </summary>
         </member>
+        <member name="T:EtwTools.EtwTrace">
+            <summary>
+            An ETW trace.
+            </summary>
+        </member>
+        <member name="P:EtwTools.EtwTrace.Path">
+            <summary>
+            The path of the trace.
+            </summary>
+        </member>
+        <member name="M:EtwTools.EtwTrace.#ctor(System.String)">
+            <summary>
+            Constructs a trace from a log file.
+            </summary>
+            <param name="path">The path of the log file.</param>
+        </member>
+        <member name="M:EtwTools.EtwTrace.Open">
+            <summary>
+            Open the ETW trace.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:EtwTools.EtwTrace.Dispose">
+            <summary>
+            Disposes the trace.
+            </summary>
+        </member>
+        <member name="T:EtwTools.EtwTrace.Statistics">
+            <summary>
+            Statistics about the trace;
+            </summary>
+        </member>
+        <member name="P:EtwTools.EtwTrace.Statistics.OsVersion">
+            <summary>
+            The version of the OS the trace was captured on.
+            </summary>
+        </member>
+        <member name="P:EtwTools.EtwTrace.Statistics.PointerSize">
+            <summary>
+            Pointer size, in bytes.
+            </summary>
+        </member>
+        <member name="P:EtwTools.EtwTrace.Statistics.ProcessorCount">
+            <summary>
+            The processor count on the machine.
+            </summary>
+        </member>
+        <member name="P:EtwTools.EtwTrace.Statistics.CpuSpeed">
+            <summary>
+            The CPU speed.
+            </summary>
+        </member>
+        <member name="P:EtwTools.EtwTrace.Statistics.BootTime">
+            <summary>
+            Time when the machine was booted.
+            </summary>
+        </member>
+        <member name="P:EtwTools.EtwTrace.Statistics.StartTime">
+            <summary>
+            Start time of the trace.
+            </summary>
+        </member>
+        <member name="P:EtwTools.EtwTrace.Statistics.EndTime">
+            <summary>
+            End time of the trace, if any.
+            </summary>
+        </member>
+        <member name="P:EtwTools.EtwTrace.Statistics.MaximumFileSize">
+            <summary>
+            Maximum size of the log file.
+            </summary>
+        </member>
+        <member name="P:EtwTools.EtwTrace.Statistics.LogFileMode">
+            <summary>
+            The log file mode.
+            </summary>
+        </member>
+        <member name="P:EtwTools.EtwTrace.Statistics.BufferSize">
+            <summary>
+            The size of the trace's buffers;
+            </summary>
+        </member>
+        <member name="P:EtwTools.EtwTrace.Statistics.BuffersWritten">
+            <summary>
+            The number of buffers written.
+            </summary>
+        </member>
+        <member name="P:EtwTools.EtwTrace.Statistics.EventsLost">
+            <summary>
+            The number of events lost.
+            </summary>
+        </member>
+        <member name="P:EtwTools.EtwTrace.Statistics.BuffersLost">
+            <summary>
+            The number of buffers lost.
+            </summary>
+        </member>
+        <member name="P:EtwTools.EtwTrace.Statistics.TimerResolution">
+            <summary>
+            The timer resolution of the hardware timer, in 100 nanoseconds.
+            </summary>
+        </member>
+        <member name="P:EtwTools.EtwTrace.Statistics.PerfFrequency">
+            <summary>
+            The frequency of the high-performance counter, if any.
+            </summary>
+        </member>
+        <member name="P:EtwTools.EtwTrace.Statistics.ClockResolution">
+            <summary>
+            The clock resolution.
+            </summary>
+        </member>
         <member name="T:EtwTools.LogFileMode">
             <summary>
             Flags for how events are logged.
@@ -576,6 +688,11 @@
         <member name="T:EtwTools.TraceLevel">
             <summary>
             The level of detail provided by an event provider.
+            </summary>
+        </member>
+        <member name="F:EtwTools.TraceLevel.None">
+            <summary>
+            No trace level.
             </summary>
         </member>
         <member name="F:EtwTools.TraceLevel.Critical">

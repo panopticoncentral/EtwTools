@@ -97,6 +97,20 @@ var providersCommand = new Command("providers", "Commands that work on event pro
 rootCommand.Add(providersCommand);
 AddProvidersCommands(providersCommand);
 
+static void AddTraceCommands(Command traceCommand)
+{
+    var infoCommand = new Command("info", "List information about a trace.")
+    {
+        new Option<string>(new[] { "--file", "-f" }, "The trace file.")
+    };
+    infoCommand.Handler = CommandHandler.Create<string>(GetTraceInfo);
+    traceCommand.AddCommand(infoCommand);
+}
+
+var traceCommand = new Command("trace", "Commands that work on traces.");
+rootCommand.Add(traceCommand);
+AddTraceCommands(traceCommand);
+
 static void ListSessions()
 {
     var sessions = EtwSession.GetAllSessions();
@@ -172,9 +186,14 @@ static async Task WatchSessionAsync(string name)
 {
     EtwSession session = default;
 
+    var printedHeader = false;
     var waiting = false;
     var stop = false;
-    Console.CancelKeyPress += (s, e) => stop = true;
+    Console.CancelKeyPress += (s, e) =>
+    {
+        e.Cancel = true;
+        stop = true;
+    };
 
     while (!stop)
     {
@@ -186,16 +205,16 @@ static async Task WatchSessionAsync(string name)
             {
                 AnsiConsole.WriteLine();
                 AnsiConsole.WriteLine("No session found by that name, waiting...");
-                AnsiConsole.WriteLine();
             }
             waiting = true;
         }
         else
         {
-            if (waiting)
+            if (!printedHeader)
             {
                 AnsiConsole.WriteLine();
                 AnsiConsole.WriteLine("Total Buffers\tFree Buffers\tEvents Lost\tBuffers Written\tBuffers Lost\tReal-time Lost");
+                printedHeader = true;
             }
             waiting = false;
             var statistics = session.GetStatistics();
@@ -203,8 +222,6 @@ static async Task WatchSessionAsync(string name)
         }
         await Task.Delay(1000);
     }
-
-    AnsiConsole.WriteLine();
 }
 
 static void ListPublishedProviders(PublishedSort sort)
@@ -362,7 +379,6 @@ static async Task StartSessionAsync(string name, string spec, string output, boo
 
     AnsiConsole.WriteLine();
     AnsiConsole.WriteLine("Stopping session.");
-    AnsiConsole.WriteLine();
     session.Stop();
 }
 
@@ -388,6 +404,31 @@ static void StopSession(string name)
 
     // TODO
     session.Stop();
+}
+
+static void GetTraceInfo(string file)
+{
+    using var logFile = new EtwTrace(file);
+    var stats = logFile.Open();
+
+    AnsiConsole.WriteLine();
+    AnsiConsole.WriteLine($"OS Version: {stats.OsVersion}");
+    AnsiConsole.WriteLine($"Architecture: {(stats.PointerSize == 4 ? "x86" : "x64")}");
+    AnsiConsole.WriteLine($"Processor Count: {stats.ProcessorCount}");
+    AnsiConsole.WriteLine($"CPU Speed: {stats.CpuSpeed}");
+    AnsiConsole.WriteLine($"Boot Time: {stats.BootTime}");
+    AnsiConsole.WriteLine($"Start Time: {stats.StartTime}");
+    AnsiConsole.WriteLine($"End Time: {stats.EndTime}");
+    AnsiConsole.WriteLine($"Maximum File Size: {stats.MaximumFileSize}");
+    AnsiConsole.WriteLine($"Log File Mode: {stats.LogFileMode}");
+    AnsiConsole.WriteLine($"Buffer Size: {stats.BufferSize}");
+    AnsiConsole.WriteLine($"Buffers Written: {stats.BuffersWritten}");
+    AnsiConsole.WriteLine($"Events Lost: {stats.EventsLost}");
+    AnsiConsole.WriteLine($"Buffers Lost: {stats.BuffersLost}");
+    AnsiConsole.WriteLine($"Timer Resolution: 0x{stats.TimerResolution:X8}");
+    AnsiConsole.WriteLine($"Performance Counter Frequency: 0x{stats.PerfFrequency:X16}");
+    AnsiConsole.WriteLine($"Clock Resolution: {stats.ClockResolution}");
+    AnsiConsole.WriteLine();
 }
 
 return await rootCommand.InvokeAsync(args);
