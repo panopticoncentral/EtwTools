@@ -1,4 +1,7 @@
 ﻿using System;
+using System.Collections.Concurrent;
+using System.Runtime.InteropServices;
+using System.Threading;
 
 namespace EtwTools
 {
@@ -7,7 +10,26 @@ namespace EtwTools
     /// </summary>
     public sealed unsafe class EtwTrace : IDisposable
     {
+        private static int s_nextId;
+        private static readonly ConcurrentDictionary<int, WeakReference<EtwTrace>> s_instances = new();
+
+        private readonly int _id;
         private Native.TraceHandle _traceHandle = Native.TraceHandle.Invalid;
+        private BufferCallback _bufferCallback;
+        private EventCallback _eventCallback;
+
+        /// <summary>
+        /// A callback for event processing.
+        /// </summary>
+        /// <param name="e">The event to process.</param>
+        public delegate void EventCallback(EtwEvent e);
+
+        /// <summary>
+        /// A callback for buffer processing.
+        /// </summary>
+        /// <param name="statistics">Information about the buffer processed.</param>
+        /// <returns>Whether to continue processing buffers.</returns>
+        public delegate bool BufferCallback(BufferStatistics statistics);
 
         /// <summary>
         /// The path of the trace.
@@ -20,18 +42,83 @@ namespace EtwTools
         /// <param name="path">The path of the log file.</param>
         public EtwTrace(string path)
         {
+            _id = Interlocked.Increment(ref s_nextId);
+            _ = s_instances.TryAdd(_id, new(this));
             Path = path;
         }
 
         /// <summary>
-        /// Open the ETW trace.
+        /// Finalizes the trace.
         /// </summary>
-        /// <returns></returns>
-        public Statistics Open()
+        ~EtwTrace()
         {
+            Dispose();
+        }
+
+        [UnmanagedCallersOnly]
+        private static uint NativeBufferCallback(Native.EventTraceLogFile* logFile)
+        {
+            var shouldContinue = true;
+            if (s_instances.TryGetValue((int)logFile->Context, out var weakReference) &&
+                weakReference.TryGetTarget(out var instance))
+            {
+                shouldContinue = instance._bufferCallback?.Invoke(new BufferStatistics
+                {
+                    ProcessedTime = logFile->CurrentTime,
+                    BuffersRead = logFile->BuffersRead,
+                    BufferSize = logFile->BufferSize,
+                    BufferUsed = logFile->Filled
+                }) ?? true;
+            }
+            return shouldContinue ? 1u : 0u;
+        }
+
+        [UnmanagedCallersOnly]
+        private static void NativeEventCallback(Native.EventRecord* record)
+        {
+            if (s_instances.TryGetValue((int)record->UserContext, out var weakReference) &&
+                weakReference.TryGetTarget(out var instance))
+            {
+                instance._eventCallback?.Invoke(new EtwEvent
+                {
+                    ProcessId = record->EventHeader.ProcessId,
+                    ThreadId = record->EventHeader.ThreadId,
+                    Timestamp = record->EventHeader.TimeStamp,
+                    Provider = record->EventHeader.ProviderId,
+                    Id = record->EventHeader.EventDescriptor.Id,
+                    Version = record->EventHeader.EventDescriptor.Version,
+                    Channel = record->EventHeader.EventDescriptor.Channel,
+                    Level = record->EventHeader.EventDescriptor.Level,
+                    Opcode = record->EventHeader.EventDescriptor.Opcode,
+                    Task = record->EventHeader.EventDescriptor.Task,
+                    Keyword = record->EventHeader.EventDescriptor.Keyword,
+                    Time = (
+                        (record->EventHeader.Flags & (Native.EventHeaderFlags.PrivateSession | Native.EventHeaderFlags.NoCpuTime)) == 0 ? record->EventHeader.KernelTime : null,
+                        (record->EventHeader.Flags & (Native.EventHeaderFlags.PrivateSession | Native.EventHeaderFlags.NoCpuTime)) == 0 ? record->EventHeader.UserTime : null,
+                        (record->EventHeader.Flags & (Native.EventHeaderFlags.PrivateSession | Native.EventHeaderFlags.NoCpuTime)) != 0 ? (record->EventHeader.KernelTime & (record->EventHeader.UserTime << sizeof(uint))) : null
+                    )
+                });
+            }
+        }
+
+        /// <summary>
+        /// Opens the trace.
+        /// </summary>
+        /// <param name="bufferCallback">A callback when buffers are processed.</param>
+        /// <param name="eventCallback">A callback when events are processed.</param>
+        /// <returns>Information about the trace.</returns>
+        public Statistics Open(BufferCallback bufferCallback, EventCallback eventCallback)
+        {
+            if (!_traceHandle.IsInvalid)
+            {
+                throw new InvalidOperationException();
+            }
+
+            _bufferCallback = bufferCallback;
+            _eventCallback = eventCallback;
             fixed (char* pathPointer = Path)
             {
-                Native.EventTraceLogFile logFile = new(pathPointer, null, Native.ProcessTraceMode.EventRecord, null, null, 0);
+                Native.EventTraceLogFile logFile = new(pathPointer, null, Native.ProcessTraceMode.EventRecord, &NativeBufferCallback, &NativeEventCallback, _id);
                 _traceHandle = Native.OpenTrace(&logFile);
                 return _traceHandle.IsInvalid
                     ? throw new InvalidOperationException()
@@ -52,9 +139,19 @@ namespace EtwTools
                         EventsLost = logFile.LogFileHeader.EventsLost,
                         BuffersLost = logFile.LogFileHeader.BuffersLost,
                         PerfFrequency = logFile.LogFileHeader.PerfFreq,
-                        ClockResolution = logFile.LogFileHeader.ReservedFlags
+                        ClockResolution = logFile.LogFileHeader.ReservedFlags,
+                        IsKernelTrace = logFile.IsKernelTrace
                     };
             }
+        }
+
+        /// <summary>
+        /// Processes the trace.
+        /// </summary>
+        public void Process()
+        {
+            var handle = _traceHandle;
+            ((Native.Hresult)Native.ProcessTrace(&handle, 1, null, null)).ThrowException();
         }
 
         /// <summary>
@@ -67,10 +164,13 @@ namespace EtwTools
                 ((Native.Hresult)Native.CloseTrace(_traceHandle)).ThrowException();
                 _traceHandle = Native.TraceHandle.Invalid;
             }
+
+            _ = s_instances.TryRemove(_id, out var _);
+            GC.SuppressFinalize(this);
         }
 
         /// <summary>
-        /// Statistics about the trace;
+        /// Statistics about the trace.
         /// </summary>
         public record Statistics
         {
@@ -82,42 +182,42 @@ namespace EtwTools
             /// <summary>
             /// Pointer size, in bytes.
             /// </summary>
-            public uint PointerSize { get; internal set; }
+            public uint PointerSize { get; init; }
 
             /// <summary>
             /// The processor count on the machine.
             /// </summary>
-            public uint ProcessorCount { get; internal set; }
+            public uint ProcessorCount { get; init; }
 
             /// <summary>
             /// The CPU speed.
             /// </summary>
-            public uint CpuSpeed { get; internal set; }
+            public uint CpuSpeed { get; init; }
 
             /// <summary>
             /// Time when the machine was booted.
             /// </summary>
-            public DateTime BootTime { get; internal set; }
+            public DateTime BootTime { get; init; }
 
             /// <summary>
             /// Start time of the trace.
             /// </summary>
-            public DateTime StartTime { get; internal set; }
+            public DateTime StartTime { get; init; }
 
             /// <summary>
             /// End time of the trace, if any.
             /// </summary>
-            public DateTime EndTime { get; internal set; }
+            public DateTime EndTime { get; init; }
 
             /// <summary>
             /// Maximum size of the log file.
             /// </summary>
-            public uint MaximumFileSize { get; internal set; }
+            public uint MaximumFileSize { get; init; }
 
             /// <summary>
             /// The log file mode.
             /// </summary>
-            public LogFileMode LogFileMode { get; internal set; }
+            public LogFileMode LogFileMode { get; init; }
 
             /// <summary>
             /// The size of the trace's buffers;
@@ -127,32 +227,63 @@ namespace EtwTools
             /// <summary>
             /// The number of buffers written.
             /// </summary>
-            public uint BuffersWritten { get; internal set; }
+            public uint BuffersWritten { get; init; }
 
             /// <summary>
             /// The number of events lost.
             /// </summary>
-            public uint EventsLost { get; internal set; }
+            public uint EventsLost { get; init; }
 
             /// <summary>
             /// The number of buffers lost.
             /// </summary>
-            public uint BuffersLost { get; internal set; }
+            public uint BuffersLost { get; init; }
 
             /// <summary>
             /// The timer resolution of the hardware timer, in 100 nanoseconds.
             /// </summary>
-            public uint TimerResolution { get; internal set; }
+            public uint TimerResolution { get; init; }
 
             /// <summary>
             /// The frequency of the high-performance counter, if any.
             /// </summary>
-            public long PerfFrequency { get; internal set; }
+            public long PerfFrequency { get; init; }
 
             /// <summary>
             /// The clock resolution.
             /// </summary>
-            public ClockResolution ClockResolution { get; internal set; }
+            public ClockResolution ClockResolution { get; init; }
+
+            /// <summary>
+            /// Whether the trace is from the NT Kernel Logger.
+            /// </summary>
+            public bool IsKernelTrace { get; init; }
+        }
+
+        /// <summary>
+        /// Statistics about a buffer that was processed.
+        /// </summary>
+        public record BufferStatistics
+        {
+            /// <summary>
+            /// The time the buffer was processed.
+            /// </summary>
+            public DateTime ProcessedTime { get; init; }
+
+            /// <summary>
+            /// The number of buffers read so far.
+            /// </summary>
+            public uint BuffersRead { get; init; }
+
+            /// <summary>
+            /// The overall size of the buffer.
+            /// </summary>
+            public uint BufferSize { get; init; }
+
+            /// <summary>
+            /// The number of bytes used in the buffer.
+            /// </summary>
+            public uint BufferUsed { get; init; }
         }
     }
 }

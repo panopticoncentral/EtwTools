@@ -154,24 +154,6 @@ namespace EtwTools
             EventRecord = 0x10000000,
         }
 
-        public enum EventType : byte
-        {
-            Info,
-            Start,
-            End,
-            Stop = End,
-            DataCollectionStart,
-            DataCollectionEnd,
-            Extension,
-            Reply,
-            Dequeue,
-            Resume = Dequeue,
-            Checkpoint,
-            Suspend = Checkpoint,
-            Send,
-            Recieve = 0xF0
-        }
-
         [Flags]
         public enum EventHeaderFlags : ushort
         {
@@ -321,13 +303,13 @@ namespace EtwTools
             private readonly ushort _headerType;
             public EventHeaderFlags Flags { get; }
             public EventPropertySource EventProperty { get; }
-            public int ThreadId { get; }
-            public int ProcessId { get; }
+            public uint ThreadId { get; }
+            public uint ProcessId { get; }
             public long TimeStamp { get; }
             public Guid ProviderId { get; }
             public EventDescriptor EventDescriptor { get; }
-            public int KernelTime { get; }
-            public int UserTime { get; }
+            public uint KernelTime { get; }
+            public uint UserTime { get; }
             public Guid ActivityId { get; }
         }
 
@@ -396,25 +378,26 @@ namespace EtwTools
             public string LogFileName => _logFileName == null ? null : new(_logFileName);
             private readonly char* _loggerName;
             public string LoggerName => _loggerName == null ? null : new(_loggerName);
-            public long CurrentTime { get; }
+            public readonly long _currentTime { get; }
+            public DateTime CurrentTime => DateTime.FromFileTime(_currentTime);
             public uint BuffersRead { get; }
             public ProcessTraceMode ProcessTraceMode { get; }
             public EventTrace CurrentEvent { get; }
             public TraceLogFileHeader LogFileHeader { get; }
-            private readonly delegate* unmanaged<EventTraceLogFile*> _bufferCallback;
+            private readonly delegate* unmanaged<EventTraceLogFile*, uint> _bufferCallback;
             public uint BufferSize { get; }
             public uint Filled { get; }
             private readonly uint _eventsLost;
-            private readonly delegate* unmanaged<EventRecord*> _eventRecordCallback;
+            private readonly delegate* unmanaged<EventRecord*, void> _eventRecordCallback;
             private readonly uint _isKernelTrace;
             public bool IsKernelTrace => _isKernelTrace != 0;
             public nint Context { get; }
 
-            public EventTraceLogFile(char* logFileName, char* loggerName, ProcessTraceMode processTraceMode, delegate* unmanaged<EventTraceLogFile*> bufferCallback, delegate* unmanaged<EventRecord*> eventRecordCallback, nint context)
+            public EventTraceLogFile(char* logFileName, char* loggerName, ProcessTraceMode processTraceMode, delegate* unmanaged<EventTraceLogFile*, uint> bufferCallback, delegate* unmanaged<EventRecord*, void> eventRecordCallback, nint context)
             {
                 _logFileName = logFileName;
                 _loggerName = loggerName;
-                CurrentTime = default;
+                _currentTime = default;
                 BuffersRead = default;
                 ProcessTraceMode = processTraceMode | ProcessTraceMode.EventRecord;
                 CurrentEvent = default;
@@ -442,6 +425,9 @@ namespace EtwTools
 
         [DllImport("advapi32.dll", CharSet = CharSet.Unicode, SetLastError = true)]
         public static extern TraceHandle OpenTrace(EventTraceLogFile* logfile);
+
+        [DllImport("advapi32.dll", CharSet = CharSet.Unicode)]
+        public static extern ErrorCode ProcessTrace(TraceHandle* handleArray, uint handleCount, long* startTime, long* endTime);
 
         [DllImport("advapi32.dll", CharSet = CharSet.Unicode)]
         public static extern ErrorCode QueryAllTraces(EventTraceProperties** propertyArray, int propertyArrayCount, out int sessionCount);

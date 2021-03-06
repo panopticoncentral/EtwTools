@@ -107,7 +107,35 @@ namespace EtwTools
         /// <summary>
         /// Adds ETW buffers to triage dumps.
         /// </summary>
-        AddToTriageDump = 0x80000000
+        AddToTriageDump = 0x80000000,
+        /// <summary>
+        /// All known values
+        /// </summary>
+        All = FileModeNone
+            | FileModeSequential
+            | FileModeCircular
+            | FileModeAppend
+            | FileModeNewFile
+            | FileModePreAllocate
+            | NonStoppableMode
+            | SecureMode
+            | RealTimeMode
+            | DelayOpenFileMode
+            | BufferingMode
+            | PrivateLoggerMode
+            | AddHeaderMode
+            | UseKbytesForSize
+            | UseGlobalSequence
+            | UseLocalSequence
+            | PrivateInProc
+            | ModeReserved
+            | StopOnHybridShutdown
+            | PersistOnHybridShutdown
+            | UsePagedMemory
+            | SystemLoggerMode
+            | IndependentSessionMode
+            | NoPerProcessorBuffering
+            | AddToTriageDump
     }
 
 }

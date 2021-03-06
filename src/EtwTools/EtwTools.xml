@@ -4,6 +4,51 @@
         <name>EtwTools</name>
     </assembly>
     <members>
+        <member name="T:EtwTools.BufferProcessedEventArgs">
+            <summary>
+            Event arguments for buffer processing event.
+            </summary>
+        </member>
+        <member name="P:EtwTools.BufferProcessedEventArgs.ProcessedTime">
+            <summary>
+            The time the buffer was processed.
+            </summary>
+        </member>
+        <member name="P:EtwTools.BufferProcessedEventArgs.BuffersRead">
+            <summary>
+            The number of buffers read so far.
+            </summary>
+        </member>
+        <member name="P:EtwTools.BufferProcessedEventArgs.BufferSize">
+            <summary>
+            The overall size of the buffer.
+            </summary>
+        </member>
+        <member name="P:EtwTools.BufferProcessedEventArgs.BufferUsed">
+            <summary>
+            The number of bytes used in the buffer.
+            </summary>
+        </member>
+        <member name="P:EtwTools.BufferProcessedEventArgs.Context">
+            <summary>
+            The context provided when the trace was opened.
+            </summary>
+        </member>
+        <member name="P:EtwTools.BufferProcessedEventArgs.Continue">
+            <summary>
+            Whether processing should continue.
+            </summary>
+        </member>
+        <member name="M:EtwTools.BufferProcessedEventArgs.#ctor(System.DateTime,System.UInt32,System.UInt32,System.UInt32,System.IntPtr)">
+            <summary>
+            Creates event arguments for the buffer processed event.
+            </summary>
+            <param name="processedTime">The time the buffer was processed.</param>
+            <param name="buffersRead">The number of buffers read so far.</param>
+            <param name="bufferSize">The overall size of the buffer.</param>
+            <param name="bufferUsed">The number of bytes used in the buffer.</param>
+            <param name="context">The context provided when the trace was opened.</param>
+        </member>
         <member name="T:EtwTools.ClockResolution">
             <summary>
             The clock resolution used during tracing.
@@ -25,6 +70,71 @@
             CPU cycle counter. The CPU counter provides the highest resolution time stamp and is the least 
             resource-intensive to retrieve. However, the CPU counter is unreliable and should not be used in 
             production.
+            </summary>
+        </member>
+        <member name="T:EtwTools.EtwEvent">
+            <summary>
+            An ETW event.
+            </summary>
+        </member>
+        <member name="P:EtwTools.EtwEvent.ProcessId">
+            <summary>
+            The process the event was recorded in.
+            </summary>
+        </member>
+        <member name="P:EtwTools.EtwEvent.ThreadId">
+            <summary>
+            The thread the event was recorded on.
+            </summary>
+        </member>
+        <member name="P:EtwTools.EtwEvent.Timestamp">
+            <summary>
+            The timestamp of the event.
+            </summary>
+        </member>
+        <member name="P:EtwTools.EtwEvent.Provider">
+            <summary>
+            The event provider.
+            </summary>
+        </member>
+        <member name="P:EtwTools.EtwEvent.Id">
+            <summary>
+            The event ID;
+            </summary>
+        </member>
+        <member name="P:EtwTools.EtwEvent.Version">
+            <summary>
+            The event version.
+            </summary>
+        </member>
+        <member name="P:EtwTools.EtwEvent.Channel">
+            <summary>
+            The event channel.
+            </summary>
+        </member>
+        <member name="P:EtwTools.EtwEvent.Level">
+            <summary>
+            The trace level of the event.
+            </summary>
+        </member>
+        <member name="P:EtwTools.EtwEvent.Opcode">
+            <summary>
+            The event opcode.
+            </summary>
+        </member>
+        <member name="P:EtwTools.EtwEvent.Task">
+            <summary>
+            The event task.
+            </summary>
+        </member>
+        <member name="P:EtwTools.EtwEvent.Keyword">
+            <summary>
+            The event's keywords.
+            </summary>
+        </member>
+        <member name="P:EtwTools.EtwEvent.Time">
+            <summary>
+            Timing information for the event.
             </summary>
         </member>
         <member name="T:EtwTools.EtwProvider">
@@ -268,6 +378,19 @@
             An ETW trace.
             </summary>
         </member>
+        <member name="T:EtwTools.EtwTrace.EventCallback">
+            <summary>
+            A callback for event processing.
+            </summary>
+            <param name="e">The event to process.</param>
+        </member>
+        <member name="T:EtwTools.EtwTrace.BufferCallback">
+            <summary>
+            A callback for buffer processing.
+            </summary>
+            <param name="statistics">Information about the buffer processed.</param>
+            <returns>Whether to continue processing buffers.</returns>
+        </member>
         <member name="P:EtwTools.EtwTrace.Path">
             <summary>
             The path of the trace.
@@ -279,11 +402,23 @@
             </summary>
             <param name="path">The path of the log file.</param>
         </member>
-        <member name="M:EtwTools.EtwTrace.Open">
+        <member name="M:EtwTools.EtwTrace.Finalize">
             <summary>
-            Open the ETW trace.
+            Finalizes the trace.
             </summary>
-            <returns></returns>
+        </member>
+        <member name="M:EtwTools.EtwTrace.Open(EtwTools.EtwTrace.BufferCallback,EtwTools.EtwTrace.EventCallback)">
+            <summary>
+            Opens the trace.
+            </summary>
+            <param name="bufferCallback">A callback when buffers are processed.</param>
+            <param name="eventCallback">A callback when events are processed.</param>
+            <returns>Information about the trace.</returns>
+        </member>
+        <member name="M:EtwTools.EtwTrace.Process">
+            <summary>
+            Processes the trace.
+            </summary>
         </member>
         <member name="M:EtwTools.EtwTrace.Dispose">
             <summary>
@@ -292,7 +427,7 @@
         </member>
         <member name="T:EtwTools.EtwTrace.Statistics">
             <summary>
-            Statistics about the trace;
+            Statistics about the trace.
             </summary>
         </member>
         <member name="P:EtwTools.EtwTrace.Statistics.OsVersion">
@@ -373,6 +508,36 @@
         <member name="P:EtwTools.EtwTrace.Statistics.ClockResolution">
             <summary>
             The clock resolution.
+            </summary>
+        </member>
+        <member name="P:EtwTools.EtwTrace.Statistics.IsKernelTrace">
+            <summary>
+            Whether the trace is from the NT Kernel Logger.
+            </summary>
+        </member>
+        <member name="T:EtwTools.EtwTrace.BufferStatistics">
+            <summary>
+            Statistics about a buffer that was processed.
+            </summary>
+        </member>
+        <member name="P:EtwTools.EtwTrace.BufferStatistics.ProcessedTime">
+            <summary>
+            The time the buffer was processed.
+            </summary>
+        </member>
+        <member name="P:EtwTools.EtwTrace.BufferStatistics.BuffersRead">
+            <summary>
+            The number of buffers read so far.
+            </summary>
+        </member>
+        <member name="P:EtwTools.EtwTrace.BufferStatistics.BufferSize">
+            <summary>
+            The overall size of the buffer.
+            </summary>
+        </member>
+        <member name="P:EtwTools.EtwTrace.BufferStatistics.BufferUsed">
+            <summary>
+            The number of bytes used in the buffer.
             </summary>
         </member>
         <member name="T:EtwTools.LogFileMode">
@@ -503,6 +668,11 @@
         <member name="F:EtwTools.LogFileMode.AddToTriageDump">
             <summary>
             Adds ETW buffers to triage dumps.
+            </summary>
+        </member>
+        <member name="F:EtwTools.LogFileMode.All">
+            <summary>
+            All known values
             </summary>
         </member>
         <member name="T:EtwTools.SystemTraceProvider">

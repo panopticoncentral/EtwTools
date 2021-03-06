@@ -409,7 +409,17 @@ static void StopSession(string name)
 static void GetTraceInfo(string file)
 {
     using var logFile = new EtwTrace(file);
-    var stats = logFile.Open();
+
+    var eventCount = 0;
+    Dictionary<Guid, int> providerCount = new();
+    var stats = logFile.Open(null, e => 
+    {
+        eventCount++;
+        _ = providerCount.TryGetValue(e.Provider, out var count);
+        providerCount[e.Provider] = count + 1;
+    });
+
+    logFile.Process();
 
     AnsiConsole.WriteLine();
     AnsiConsole.WriteLine($"OS Version: {stats.OsVersion}");
@@ -420,15 +430,26 @@ static void GetTraceInfo(string file)
     AnsiConsole.WriteLine($"Start Time: {stats.StartTime}");
     AnsiConsole.WriteLine($"End Time: {stats.EndTime}");
     AnsiConsole.WriteLine($"Maximum File Size: {stats.MaximumFileSize}");
-    AnsiConsole.WriteLine($"Log File Mode: {stats.LogFileMode}");
-    AnsiConsole.WriteLine($"Buffer Size: {stats.BufferSize}");
+    AnsiConsole.WriteLine($"Log File Mode: {stats.LogFileMode & LogFileMode.All}{((stats.LogFileMode & ~LogFileMode.All) != 0 ? $" | 0x{stats.LogFileMode & ~LogFileMode.All}" : string.Empty)}");
+    AnsiConsole.WriteLine($"Buffer Size: 0x{stats.BufferSize:X8}");
     AnsiConsole.WriteLine($"Buffers Written: {stats.BuffersWritten}");
     AnsiConsole.WriteLine($"Events Lost: {stats.EventsLost}");
     AnsiConsole.WriteLine($"Buffers Lost: {stats.BuffersLost}");
     AnsiConsole.WriteLine($"Timer Resolution: 0x{stats.TimerResolution:X8}");
     AnsiConsole.WriteLine($"Performance Counter Frequency: 0x{stats.PerfFrequency:X16}");
     AnsiConsole.WriteLine($"Clock Resolution: {stats.ClockResolution}");
+    AnsiConsole.WriteLine($"Kernel Trace: {(stats.IsKernelTrace ? "yes" : "no")}");
     AnsiConsole.WriteLine();
+    AnsiConsole.WriteLine($"Event Count: {eventCount}");
+
+    var table = new Table().AddColumn("ID").AddColumn("Count");
+
+    foreach (var kvp in providerCount.OrderByDescending(kvp => kvp.Value))
+    {
+        _ = table.AddRow(kvp.Key.ToString(), kvp.Value.ToString(CultureInfo.InvariantCulture));
+    }
+
+    AnsiConsole.Render(table);
 }
 
 return await rootCommand.InvokeAsync(args);

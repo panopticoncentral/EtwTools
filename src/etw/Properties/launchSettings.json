@@ -2,7 +2,7 @@
   "profiles": {
     "trace": {
       "commandName": "Project",
-      "commandLineArgs": "trace info --file Test.etl",
+      "commandLineArgs": "trace info --file \"SolutionClose.etl\\SolutionClose.etl\"",
       "nativeDebugging": true
     }
   }
