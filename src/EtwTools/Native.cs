@@ -180,6 +180,30 @@ namespace EtwTools
             TracedGuid = 0x00020000
         }
 
+        public enum EventHeaderExtendedType : ushort
+        {
+            None,
+            RelatedActivityId,
+            Sid,
+            TsId,
+            InstanceInfo,
+            StackTrace32,
+            StackTrace64,
+            PebsIndex,
+            PmcCounters,
+            PsmKey,
+            EventKey,
+            EventSchemaTl,
+            ProvTraits,
+            ProcessStartKey,
+            ControlGuid,
+            QpcDelta,
+            ContainerId,
+            StackKey32,
+            StackKey64,
+            Max
+        }
+
 #pragma warning disable IDE1006
         [StructLayout(LayoutKind.Sequential)]
         public struct WnodeHeader
@@ -260,7 +284,7 @@ namespace EtwTools
         {
             public ushort Size { get; }
             public ushort FieldTypeFlags { get; }
-            public EventType Type { get; }
+            public EtwEventType Type { get; }
             public TraceLevel Level { get; }
             public ushort Version { get; }
             public uint ThreadId { get; }
@@ -291,7 +315,7 @@ namespace EtwTools
             public byte Version { get; }
             public byte Channel { get; }
             public TraceLevel Level { get; }
-            public EventType Opcode { get; }
+            public EtwEventType Opcode { get; }
             public ushort Task { get; }
             public ulong Keyword { get; }
         }
@@ -317,7 +341,7 @@ namespace EtwTools
         public readonly struct EventHeaderExtendedDataItem
         {
             private readonly ushort _reserved1;
-            public readonly ushort ExtType;
+            public readonly EventHeaderExtendedType ExtType;
             private readonly ushort _reserved2;
             public readonly ushort DataSize;
             public readonly ulong DataPtr;

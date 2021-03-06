@@ -137,6 +137,221 @@
             Timing information for the event.
             </summary>
         </member>
+        <member name="P:EtwTools.EtwEvent.ProcessorNumber">
+            <summary>
+            The processor number the event was recorded on.
+            </summary>
+        </member>
+        <member name="P:EtwTools.EtwEvent.Data">
+            <summary>
+            The event data.
+            </summary>
+        </member>
+        <member name="M:EtwTools.EtwEvent.TryGetRelatedActivityId(System.Guid@)">
+            <summary>
+            Gets the ID of the related activity, if any.
+            </summary>
+            <param name="relatedActivityId">The related activity ID.</param>
+            <returns>Whether a value was returned.</returns>
+        </member>
+        <member name="M:EtwTools.EtwEvent.TryGetSecurityIdentifier(System.Security.Principal.SecurityIdentifier@)">
+            <summary>
+            Gets the SID of the user emitting the event, if any.
+            </summary>
+            <param name="securityIdentifier">The SID.</param>
+            <returns>Whether a value was returned.</returns>
+        </member>
+        <member name="M:EtwTools.EtwEvent.TryGetTsId(System.UInt32@)">
+            <summary>
+            Gets the terminal service ID the event occurred in, if any.
+            </summary>
+            <param name="tsId">The terminal service ID.</param>
+            <returns>Whether a value was returned.</returns>
+        </member>
+        <member name="M:EtwTools.EtwEvent.TryGetInstanceInformation(EtwTools.EtwEvent.InstanceInformation@)">
+            <summary>
+            Gets the instance information for the event, if any.
+            </summary>
+            <param name="instanceInformation">The instance information.</param>
+            <returns>Whether a value was returned.</returns>
+        </member>
+        <member name="M:EtwTools.EtwEvent.TryGetStackTrace``1(EtwTools.EtwEvent.StackTrace{``0}@)">
+            <summary>
+            Gets the stack trace for the event, if any.
+            </summary>
+            <typeparam name="T">The size of the addresses on the stack.</typeparam>
+            <param name="stackTrace">The stack trace.</param>
+            <returns>Whether a value was returned.</returns>
+        </member>
+        <member name="M:EtwTools.EtwEvent.TryGetPebsIndex(System.UInt64@)">
+            <summary>
+            Gets the PEBS index.
+            </summary>
+            <param name="pebsIndex">The PEBS index.</param>
+            <returns>Whether a value was returned.</returns>
+        </member>
+        <member name="M:EtwTools.EtwEvent.TryGetPmcCounters(System.Span{System.UInt64}@)">
+            <summary>
+            Gets the PMC counters.
+            </summary>
+            <param name="pmcCounters">The PMC counters.</param>
+            <returns>Whether a value was returned.</returns>
+        </member>
+        <member name="M:EtwTools.EtwEvent.TryGetEventKey(System.UInt64@)">
+            <summary>
+            Gets the event key index.
+            </summary>
+            <param name="eventKey">The event key index.</param>
+            <returns>Whether a value was returned.</returns>
+        </member>
+        <member name="M:EtwTools.EtwEvent.HasTraceLoggingEventSchema">
+            <summary>
+            Whether the event has TraceLogging event schema.
+            </summary>
+            <returns>Whether the event has TraceLogging event schema.</returns>
+        </member>
+        <member name="M:EtwTools.EtwEvent.TryGetProcessStartKey(System.UInt64@)">
+            <summary>
+            Gets the process start key.
+            </summary>
+            <param name="processStartKey">The process start key.</param>
+            <returns>Whether a value was returned.</returns>
+        </member>
+        <member name="M:EtwTools.EtwEvent.TryGetStackKey``1(EtwTools.EtwEvent.StackKey{``0}@)">
+            <summary>
+            Gets the stack key for the event, if any.
+            </summary>
+            <typeparam name="T">The size of the stack key.</typeparam>
+            <param name="stackKey">The stack key.</param>
+            <returns>Whether a value was returned.</returns>
+        </member>
+        <member name="T:EtwTools.EtwEvent.InstanceInformation">
+            <summary>
+            Relationship information for an event.
+            </summary>
+        </member>
+        <member name="P:EtwTools.EtwEvent.InstanceInformation.InstanceId">
+            <summary>
+            The unique transaction identifier of the event.
+            </summary>
+        </member>
+        <member name="P:EtwTools.EtwEvent.InstanceInformation.ParentInstanceId">
+            <summary>
+            The unique transaction identifier of the parent event, if any.
+            </summary>
+        </member>
+        <member name="P:EtwTools.EtwEvent.InstanceInformation.ParentGuid">
+            <summary>
+            The provider GUID of the parent event.
+            </summary>
+        </member>
+        <member name="T:EtwTools.EtwEvent.StackTrace`1">
+            <summary>
+            A stack trace.
+            </summary>
+            <typeparam name="T">The size of stack addresses.</typeparam>
+        </member>
+        <member name="P:EtwTools.EtwEvent.StackTrace`1.MatchId">
+            <summary>
+            Unique stack identifier.
+            </summary>
+        </member>
+        <member name="P:EtwTools.EtwEvent.StackTrace`1.Addresses">
+            <summary>
+            Stack addresses.
+            </summary>
+        </member>
+        <member name="T:EtwTools.EtwEvent.StackKey`1">
+            <summary>
+            A stack key.
+            </summary>
+            <typeparam name="T">The size of stack key.</typeparam>
+        </member>
+        <member name="P:EtwTools.EtwEvent.StackKey`1.MatchId">
+            <summary>
+            Unique stack identifier.
+            </summary>
+        </member>
+        <member name="P:EtwTools.EtwEvent.StackKey`1.Key">
+            <summary>
+            Stack key.
+            </summary>
+        </member>
+        <member name="T:EtwTools.EtwEventType">
+            <summary>
+            Common ETW event types.
+            </summary>
+        </member>
+        <member name="F:EtwTools.EtwEventType.Info">
+            <summary>
+            Informational event.
+            </summary>
+        </member>
+        <member name="F:EtwTools.EtwEventType.Start">
+            <summary>
+            Start operation.
+            </summary>
+        </member>
+        <member name="F:EtwTools.EtwEventType.End">
+            <summary>
+            End operation.
+            </summary>
+        </member>
+        <member name="F:EtwTools.EtwEventType.Stop">
+            <summary>
+            Stop operation.
+            </summary>
+        </member>
+        <member name="F:EtwTools.EtwEventType.DataCollectionStart">
+            <summary>
+            Data collection start.
+            </summary>
+        </member>
+        <member name="F:EtwTools.EtwEventType.DataCollectionEnd">
+            <summary>
+            Data collection end.
+            </summary>
+        </member>
+        <member name="F:EtwTools.EtwEventType.Extension">
+            <summary>
+            Extension event.
+            </summary>
+        </member>
+        <member name="F:EtwTools.EtwEventType.Reply">
+            <summary>
+            Reply event.
+            </summary>
+        </member>
+        <member name="F:EtwTools.EtwEventType.Dequeue">
+            <summary>
+            Dequeue event.
+            </summary>
+        </member>
+        <member name="F:EtwTools.EtwEventType.Resume">
+            <summary>
+            Resume event.
+            </summary>
+        </member>
+        <member name="F:EtwTools.EtwEventType.Checkpoint">
+            <summary>
+            Checkpoint event.
+            </summary>
+        </member>
+        <member name="F:EtwTools.EtwEventType.Suspend">
+            <summary>
+            Suspend event.
+            </summary>
+        </member>
+        <member name="F:EtwTools.EtwEventType.Send">
+            <summary>
+            Send event.
+            </summary>
+        </member>
+        <member name="F:EtwTools.EtwEventType.Recieve">
+            <summary>
+            Receieve event.
+            </summary>
+        </member>
         <member name="T:EtwTools.EtwProvider">
             <summary>
             Represents an ETW event provider.

@@ -412,7 +412,7 @@ static void GetTraceInfo(string file)
 
     var eventCount = 0;
     Dictionary<Guid, int> providerCount = new();
-    var stats = logFile.Open(null, e => 
+    var stats = logFile.Open(null, e =>
     {
         eventCount++;
         _ = providerCount.TryGetValue(e.Provider, out var count);

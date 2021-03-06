@@ -79,7 +79,7 @@ namespace EtwTools
             if (s_instances.TryGetValue((int)record->UserContext, out var weakReference) &&
                 weakReference.TryGetTarget(out var instance))
             {
-                instance._eventCallback?.Invoke(new EtwEvent
+                instance._eventCallback?.Invoke(new EtwEvent(record->ExtendedData)
                 {
                     ProcessId = record->EventHeader.ProcessId,
                     ThreadId = record->EventHeader.ThreadId,
@@ -96,7 +96,9 @@ namespace EtwTools
                         (record->EventHeader.Flags & (Native.EventHeaderFlags.PrivateSession | Native.EventHeaderFlags.NoCpuTime)) == 0 ? record->EventHeader.KernelTime : null,
                         (record->EventHeader.Flags & (Native.EventHeaderFlags.PrivateSession | Native.EventHeaderFlags.NoCpuTime)) == 0 ? record->EventHeader.UserTime : null,
                         (record->EventHeader.Flags & (Native.EventHeaderFlags.PrivateSession | Native.EventHeaderFlags.NoCpuTime)) != 0 ? (record->EventHeader.KernelTime & (record->EventHeader.UserTime << sizeof(uint))) : null
-                    )
+                    ),
+                    ProcessorNumber = record->BufferContext.ProcessorNumber,
+                    Data = record->UserData
                 });
             }
         }
