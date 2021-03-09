@@ -91,6 +91,13 @@ static void AddProvidersCommands(Command providersCommand)
     };
     processCommand.Handler = CommandHandler.Create<uint, ProcessRegisteredSort>(ListRegisteredProvidersInProcess);
     providersCommand.AddCommand(processCommand);
+
+    var infoCommand = new Command("info", "Information about a provider.")
+    {
+        new Option<string>(new[] { "--provider", "-p" }, "Provider.") { IsRequired = true }
+    };
+    infoCommand.Handler = CommandHandler.Create<string>(GetProviderInfo);
+    providersCommand.AddCommand(infoCommand);
 }
 
 var providersCommand = new Command("providers", "Commands that work on event providers.");
@@ -228,7 +235,7 @@ static void ListPublishedProviders(PublishedSort sort)
 {
     var providers = EtwProvider.GetPublishedProviders();
 
-    var table = new Table().AddColumn("Name").AddColumn("ID");
+    var table = new Table().AddColumn("Name").AddColumn("ID").AddColumn("Manifest");
 
     IEnumerable<EtwProvider> sortedProviders = sort switch
     {
@@ -239,7 +246,7 @@ static void ListPublishedProviders(PublishedSort sort)
 
     foreach (var provider in sortedProviders)
     {
-        _ = table.AddRow(provider.Name, provider.Id.ToString());
+        _ = table.AddRow(provider.Name, provider.Id.ToString(), provider.GetEventDescriptors() != null ? "Yes" : "No");
     }
 
     AnsiConsole.WriteLine();
@@ -315,6 +322,40 @@ static void ListRegisteredProvidersInProcess(uint pid, ProcessRegisteredSort sor
         {
             AnsiConsole.WriteLine();
             AnsiConsole.Render(providerNode);
+        }
+    }
+
+    AnsiConsole.WriteLine();
+}
+
+static void GetProviderInfo(string provider)
+{
+    var providerGuid = Guid.Parse(provider);
+    var etwProvider = EtwProvider.GetPublishedProviders().SingleOrDefault(p => p.Id == providerGuid);
+
+    AnsiConsole.WriteLine();
+
+    if (etwProvider == null)
+    {
+        AnsiConsole.WriteLine("Cannot find provider.");
+        AnsiConsole.WriteLine();
+        return;
+    }
+
+    AnsiConsole.WriteLine($"Name: {etwProvider.Name}");
+
+    var eventDescriptors = etwProvider.GetEventDescriptors();
+
+    if (eventDescriptors == null)
+    {
+        AnsiConsole.WriteLine("No event manifest found.");
+    }
+    else
+    {
+        AnsiConsole.WriteLine("Events:");
+        foreach (var e in eventDescriptors)
+        {
+            AnsiConsole.WriteLine($"ID = {e.Id}, Version = {e.Version}, Channel = {e.Channel}, Level = {e.Level}, Opcode = {e.Opcode}, Task = {e.Task}, Keyword = {e.Keyword:X16}");
         }
     }
 

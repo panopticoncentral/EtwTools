@@ -11,9 +11,15 @@ namespace EtwTools
         {
             public const uint FacilityWin32 = 0x80070000;
 
+            public static readonly Hresult ErrorFileNotFound = new(0x80070002);
+            public static readonly Hresult ErrorInvalidData = new(0x8007000D);
             public static readonly Hresult ErrorInsufficientBuffer = new(0x8007007A);
             public static readonly Hresult ErrorMoreData = new(0x800700EA);
+            public static readonly Hresult ErrorNotFound = new(0x80070490);
+            public static readonly Hresult ErrorResourceTypeNotFound = new(0x80070715);
             public static readonly Hresult ErrorWmiInstanceNotFound = new(0x80071069);
+            public static readonly Hresult ErrorEmpty = new(0x800710D2);
+            public static readonly Hresult ErrorResourceNotPresent = new(0x800710DC);
 
             public uint Value { get; }
 
@@ -309,18 +315,6 @@ namespace EtwTools
         }
 
         [StructLayout(LayoutKind.Sequential)]
-        public readonly struct EventDescriptor
-        {
-            public ushort Id { get; }
-            public byte Version { get; }
-            public byte Channel { get; }
-            public TraceLevel Level { get; }
-            public EtwEventType Opcode { get; }
-            public ushort Task { get; }
-            public ulong Keyword { get; }
-        }
-
-        [StructLayout(LayoutKind.Sequential)]
         public readonly struct EventHeader
         {
             public ushort Size { get; }
@@ -331,7 +325,7 @@ namespace EtwTools
             public uint ProcessId { get; }
             public long TimeStamp { get; }
             public Guid ProviderId { get; }
-            public EventDescriptor EventDescriptor { get; }
+            public EtwEventDescriptor EventDescriptor { get; }
             public uint KernelTime { get; }
             public uint UserTime { get; }
             public Guid ActivityId { get; }
@@ -436,6 +430,13 @@ namespace EtwTools
             }
         }
 
+        [StructLayout(LayoutKind.Sequential)]
+        public readonly struct ProviderEventInfo
+        {
+            public uint NumberOfEvents { get; }
+            private readonly uint _reserved;
+        }
+
 #pragma warning restore IDE1006
 
         [DllImport("advapi32.dll", CharSet = CharSet.Unicode)]
@@ -460,6 +461,12 @@ namespace EtwTools
         public static extern ErrorCode StartTrace(out ulong sessionHandle, string sessionName, EventTraceProperties* properties);
 
         [DllImport("tdh.dll")]
-        public static extern ErrorCode TdhEnumerateProviders(byte* buffer, ref int bufferSize);
+        public static extern ErrorCode TdhEnumerateManifestProviderEvents(Guid* providerGuid, ProviderEventInfo* buffer, out int bufferSize);
+
+        [DllImport("tdh.dll")]
+        public static extern ErrorCode TdhEnumerateProviders(byte* buffer, out int bufferSize);
+
+        [DllImport("tdh.dll")]
+        public static extern ErrorCode TdhGetEventInformation(EventRecord* eventRecord, uint contextCount, void* context, byte* buffer, int* bufferSize);
     }
 }

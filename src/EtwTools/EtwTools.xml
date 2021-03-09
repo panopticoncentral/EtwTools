@@ -277,6 +277,46 @@
             Stack key.
             </summary>
         </member>
+        <member name="T:EtwTools.EtwEventDescriptor">
+            <summary>
+            Description of an ETW event.
+            </summary>
+        </member>
+        <member name="P:EtwTools.EtwEventDescriptor.Id">
+            <summary>
+            The ID of the event.
+            </summary>
+        </member>
+        <member name="P:EtwTools.EtwEventDescriptor.Version">
+            <summary>
+            The version of the event.
+            </summary>
+        </member>
+        <member name="P:EtwTools.EtwEventDescriptor.Channel">
+            <summary>
+            The channel of the event.
+            </summary>
+        </member>
+        <member name="P:EtwTools.EtwEventDescriptor.Level">
+            <summary>
+            The level of the event.
+            </summary>
+        </member>
+        <member name="P:EtwTools.EtwEventDescriptor.Opcode">
+            <summary>
+            The opcode of the event.
+            </summary>
+        </member>
+        <member name="P:EtwTools.EtwEventDescriptor.Task">
+            <summary>
+            The task of the event.
+            </summary>
+        </member>
+        <member name="P:EtwTools.EtwEventDescriptor.Keyword">
+            <summary>
+            The keyword of the event.
+            </summary>
+        </member>
         <member name="T:EtwTools.EtwEventType">
             <summary>
             Common ETW event types.
@@ -367,12 +407,6 @@
             The ID of the provider.
             </summary>
         </member>
-        <member name="M:EtwTools.EtwProvider.#ctor(System.Guid)">
-            <summary>
-            Creates a provider with the specified ID and no name.
-            </summary>
-            <param name="id">The ID of the provider.</param>
-        </member>
         <member name="M:EtwTools.EtwProvider.#ctor(System.String,System.Guid)">
             <summary>
             Creates a provider with a specified name and ID.
@@ -404,6 +438,12 @@
             Returns a list of all providers registered on the system.
             </summary>
             <returns>The registered providers on the system.</returns>
+        </member>
+        <member name="M:EtwTools.EtwProvider.GetEventDescriptors">
+            <summary>
+            Gets descriptions of events supported by this provider.
+            </summary>
+            <returns>A list of event descriptors.</returns>
         </member>
         <member name="T:EtwTools.EtwProvider.InstanceInfo">
             <summary>

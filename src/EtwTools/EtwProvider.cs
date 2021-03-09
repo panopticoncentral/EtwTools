@@ -21,16 +21,6 @@ namespace EtwTools
         public Guid Id { get; }
 
         /// <summary>
-        /// Creates a provider with the specified ID and no name.
-        /// </summary>
-        /// <param name="id">The ID of the provider.</param>
-        public EtwProvider(Guid id)
-        {
-            Name = null;
-            Id = id;
-        }
-
-        /// <summary>
         /// Creates a provider with a specified name and ID.
         /// </summary>
         /// <param name="name">The name of the provider.</param>
@@ -153,8 +143,7 @@ namespace EtwTools
         /// <returns>The published providers on the system.</returns>
         public static IReadOnlyList<EtwProvider> GetPublishedProviders()
         {
-            var bufferSize = 0;
-            var hr = (Native.Hresult)Native.TdhEnumerateProviders(null, ref bufferSize);
+            var hr = (Native.Hresult)Native.TdhEnumerateProviders(null, out var bufferSize);
 
             if (hr != Native.Hresult.ErrorInsufficientBuffer)
             {
@@ -163,7 +152,7 @@ namespace EtwTools
 
             var buffer = stackalloc byte[bufferSize];
 
-            ((Native.Hresult)Native.TdhEnumerateProviders(buffer, ref bufferSize)).ThrowException();
+            ((Native.Hresult)Native.TdhEnumerateProviders(buffer, out bufferSize)).ThrowException();
 
             var providerCount = *(uint*)buffer;
             var providers = (Native.TraceProviderInfo*)(buffer + (sizeof(uint) * 2));
@@ -212,6 +201,33 @@ namespace EtwTools
             }
 
             return result;
+        }
+
+        /// <summary>
+        /// Gets descriptions of events supported by this provider.
+        /// </summary>
+        /// <returns>A list of event descriptors.</returns>
+        public IReadOnlyList<EtwEventDescriptor> GetEventDescriptors()
+        {
+            var providerGuid = Id;
+            var hr = (Native.Hresult)Native.TdhEnumerateManifestProviderEvents(&providerGuid, null, out var bufferSize);
+            if (hr != Native.Hresult.ErrorInsufficientBuffer)
+            {
+                // There are lots of error codes possible here, so just fail.
+                return null;
+            }
+
+            var buffer = stackalloc byte[bufferSize];
+            var providerEventInfo = (Native.ProviderEventInfo*)buffer;
+            ((Native.Hresult)Native.TdhEnumerateManifestProviderEvents(&providerGuid, providerEventInfo, out bufferSize)).ThrowException();
+
+            var infos = new EtwEventDescriptor[providerEventInfo->NumberOfEvents];
+            for (var i = 0; i < providerEventInfo->NumberOfEvents; i++)
+            {
+                infos[i] = *(EtwEventDescriptor*)(buffer + sizeof(Native.ProviderEventInfo) + (i * sizeof(EtwEventDescriptor)));
+            }
+
+            return infos;
         }
 
         /// <summary>
