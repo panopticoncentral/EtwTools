@@ -210,6 +210,15 @@ namespace EtwTools
             Max
         }
 
+        public enum DecodingSource
+        {
+            XmlFile,
+            Wbem,
+            Wpp,
+            Tlg,
+            Max
+        }
+
 #pragma warning disable IDE1006
         [StructLayout(LayoutKind.Sequential)]
         public struct WnodeHeader
@@ -245,6 +254,42 @@ namespace EtwTools
             public uint LogFileNameOffset;
             public uint LoggerNameOffset;
         }
+
+        [StructLayout(LayoutKind.Sequential)]
+        public readonly struct EventDescriptor
+        {
+            public ushort Id { get; }
+            public byte Version { get; }
+            public byte Channel { get; }
+            public TraceLevel Level { get; }
+            public EtwEventType Opcode { get; }
+            public ushort Task { get; }
+            public ulong Keyword { get; }
+        }
+
+        [StructLayout(LayoutKind.Sequential)]
+        public readonly struct TraceEventInfo
+        {
+            public Guid ProviderGuid { get; }
+            public Guid EventGuid { get; }
+            public EventDescriptor EventDescriptor { get; }
+            public DecodingSource DecodingSource { get; }
+            public uint ProviderNameOffset { get; }
+            public uint LevelNameOffset { get; }
+            public uint ChannelNameOffset { get; }
+            public uint KeywordsNameOffset { get; }
+            public uint TaskNameOffset { get; }
+            public uint OpcodeNameOffset { get; }
+            public uint EventMessageOffset { get; }
+            public uint ProviderMessageOffset { get; }
+            private readonly uint _binaryXmlOffset;
+            private readonly uint _binaryXmlSize;
+            public uint EventNameOffset { get; }
+            public uint EventAttributesOffset { get; }
+            public uint PropertyCount { get; }
+            public uint TopLevelPropertyCount { get; }
+            public uint Flags { get; }
+        };
 
         [StructLayout(LayoutKind.Sequential)]
         public struct TraceProviderInfo
@@ -325,7 +370,7 @@ namespace EtwTools
             public uint ProcessId { get; }
             public long TimeStamp { get; }
             public Guid ProviderId { get; }
-            public EtwEventDescriptor EventDescriptor { get; }
+            public EventDescriptor EventDescriptor { get; }
             public uint KernelTime { get; }
             public uint UserTime { get; }
             public Guid ActivityId { get; }
@@ -461,7 +506,10 @@ namespace EtwTools
         public static extern ErrorCode StartTrace(out ulong sessionHandle, string sessionName, EventTraceProperties* properties);
 
         [DllImport("tdh.dll")]
-        public static extern ErrorCode TdhEnumerateManifestProviderEvents(Guid* providerGuid, ProviderEventInfo* buffer, out int bufferSize);
+        public static extern ErrorCode TdhGetManifestEventInformation(Guid* providerGuid, EventDescriptor* eventDescriptor, TraceEventInfo* buffer, uint* bufferSize);
+
+        [DllImport("tdh.dll")]
+        public static extern ErrorCode TdhEnumerateManifestProviderEvents(Guid* providerGuid, ProviderEventInfo* buffer, out uint bufferSize);
 
         [DllImport("tdh.dll")]
         public static extern ErrorCode TdhEnumerateProviders(byte* buffer, out int bufferSize);

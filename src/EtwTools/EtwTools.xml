@@ -287,6 +287,11 @@
             The ID of the event.
             </summary>
         </member>
+        <member name="P:EtwTools.EtwEventDescriptor.Name">
+            <summary>
+            The name of the event, if any.
+            </summary>
+        </member>
         <member name="P:EtwTools.EtwEventDescriptor.Version">
             <summary>
             The version of the event.
@@ -297,9 +302,19 @@
             The channel of the event.
             </summary>
         </member>
+        <member name="P:EtwTools.EtwEventDescriptor.ChannelName">
+            <summary>
+            The name of the channel, if any.
+            </summary>
+        </member>
         <member name="P:EtwTools.EtwEventDescriptor.Level">
             <summary>
             The level of the event.
+            </summary>
+        </member>
+        <member name="P:EtwTools.EtwEventDescriptor.LevelName">
+            <summary>
+            The name of the level, if any.
             </summary>
         </member>
         <member name="P:EtwTools.EtwEventDescriptor.Opcode">
@@ -307,14 +322,49 @@
             The opcode of the event.
             </summary>
         </member>
+        <member name="P:EtwTools.EtwEventDescriptor.OpcodeName">
+            <summary>
+            The name of the opcode, if any.
+            </summary>
+        </member>
         <member name="P:EtwTools.EtwEventDescriptor.Task">
             <summary>
             The task of the event.
             </summary>
         </member>
+        <member name="P:EtwTools.EtwEventDescriptor.TaskName">
+            <summary>
+            The name of the task, if any.
+            </summary>
+        </member>
         <member name="P:EtwTools.EtwEventDescriptor.Keyword">
             <summary>
             The keyword of the event.
+            </summary>
+        </member>
+        <member name="P:EtwTools.EtwEventDescriptor.KeywordName">
+            <summary>
+            The keyword name of the task, if any.
+            </summary>
+        </member>
+        <member name="P:EtwTools.EtwEventDescriptor.Message">
+            <summary>
+            Event message, if any.
+            </summary>
+        </member>
+        <member name="P:EtwTools.EtwEventDescriptor.EventAttributes">
+            <summary>
+            Event attributes, if any.
+            </summary>
+        </member>
+        <member name="P:EtwTools.EtwEventDescriptor.ActivityIdName">
+            <summary>
+            Activity ID name, if any.
+            </summary>
+        </member>
+        <member name="P:EtwTools.EtwEventDescriptor.RelatedActivityIdName">
+            <summary>
+            Related activity ID name, if any.
             </summary>
         </member>
         <member name="T:EtwTools.EtwEventType">

@@ -353,9 +353,72 @@ static void GetProviderInfo(string provider)
     else
     {
         AnsiConsole.WriteLine("Events:");
+
         foreach (var e in eventDescriptors)
         {
-            AnsiConsole.WriteLine($"ID = {e.Id}, Version = {e.Version}, Channel = {e.Channel}, Level = {e.Level}, Opcode = {e.Opcode}, Task = {e.Task}, Keyword = {e.Keyword:X16}");
+            AnsiConsole.WriteLine();
+            if (!string.IsNullOrEmpty(e.Name))
+            {
+                AnsiConsole.WriteLine($"Event Name: {e.Name.Trim()}");
+            }
+            AnsiConsole.WriteLine($"ID: {e.Id}");
+            AnsiConsole.WriteLine($"Version: {e.Version}");
+            if (!string.IsNullOrEmpty(e.ChannelName))
+            {
+                AnsiConsole.WriteLine($"Channel: {e.ChannelName.Trim()} ({e.Channel})");
+            }
+            else
+            {
+                AnsiConsole.WriteLine($"Channel: {e.Channel}");
+            }
+            if (!string.IsNullOrEmpty(e.LevelName))
+            {
+                AnsiConsole.WriteLine($"Level: {e.LevelName.Trim()} ({e.Level})");
+            }
+            else
+            {
+                AnsiConsole.WriteLine($"Level: {e.Level}");
+            }
+            if (!string.IsNullOrEmpty(e.OpcodeName))
+            {
+                AnsiConsole.WriteLine($"Opcode: {e.OpcodeName.Trim()} ({e.Opcode})");
+            }
+            else
+            {
+                AnsiConsole.WriteLine($"Opcode: {e.Opcode}");
+            }
+            if (!string.IsNullOrEmpty(e.TaskName))
+            {
+                AnsiConsole.WriteLine($"Task: {e.TaskName.Trim()} ({e.Task})");
+            }
+            else
+            {
+                AnsiConsole.WriteLine($"Task: {e.Task}");
+            }
+            if (!string.IsNullOrEmpty(e.KeywordName))
+            {
+                AnsiConsole.WriteLine($"Keyword: {e.KeywordName.Trim()} (0x{e.Keyword:X16})");
+            }
+            else
+            {
+                AnsiConsole.WriteLine($"Keyword: 0x{e.Keyword:X16}");
+            }
+            if (!string.IsNullOrEmpty(e.Message))
+            {
+                AnsiConsole.WriteLine($"Message: \"{e.Message.Trim().Replace("\r", "\\r").Replace("\n", "\\n")}\"");
+            }
+            if (!string.IsNullOrEmpty(e.EventAttributes))
+            {
+                AnsiConsole.WriteLine($"Event attributes: {e.EventAttributes.Trim()}");
+            }
+            if (!string.IsNullOrEmpty(e.ActivityIdName))
+            {
+                AnsiConsole.WriteLine($"Activity ID: {e.ActivityIdName.Trim()}");
+            }
+            if (!string.IsNullOrEmpty(e.RelatedActivityIdName))
+            {
+                AnsiConsole.WriteLine($"Related activity ID: {e.RelatedActivityIdName.Trim()}");
+            }
         }
     }
 
