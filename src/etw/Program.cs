@@ -312,7 +312,7 @@ static void ListRegisteredProvidersInProcess(uint pid, ProcessRegisteredSort sor
 
                 enabledNode = instanceNode.AddNode("Enable parameters");
                 _ = enabledNode.AddNode($"Level: {enable.Level}");
-                _ = enabledNode.AddNode($"Properties: {enable.EnableProperty & TraceProperties.All}");
+                _ = enabledNode.AddNode($"Properties: {enable.EnableProperty & EtwTraceProperties.All}");
                 _ = enabledNode.AddNode($"Match any: 0x{enable.MatchAnyKeyword:X16}");
                 _ = enabledNode.AddNode($"Match all: 0x{enable.MatchAllKeyword:X16}");
             }
@@ -460,14 +460,14 @@ static async Task StartSessionAsync(string name, string spec, string output, boo
 
     var specObject = JsonConvert.DeserializeObject<TraceSpecification>(File.ReadAllText(spec));
     var systemTraceProvidersEnabled = specObject.Kernel == null || specObject.Kernel.Providers == null
-        ? SystemTraceProvider.None
-        : specObject.Kernel.Providers.Where(kvp => kvp.Value != TraceState.Off).Aggregate(SystemTraceProvider.None, (v, kvp) => v | kvp.Key);
+        ? EtwSystemTraceProvider.None
+        : specObject.Kernel.Providers.Where(kvp => kvp.Value != TraceState.Off).Aggregate(EtwSystemTraceProvider.None, (v, kvp) => v | kvp.Key);
 
     var properties = new EtwSession.Properties
     {
         LogFileMode =
-            LogFileMode.IndependentSessionMode
-            | (systemTraceProvidersEnabled != SystemTraceProvider.None ? LogFileMode.SystemLoggerMode : LogFileMode.FileModeNone),
+            EtwLogFileMode.IndependentSession
+            | (systemTraceProvidersEnabled != EtwSystemTraceProvider.None ? EtwLogFileMode.SystemLogger : EtwLogFileMode.None),
         SystemTraceProvidersEnabled = systemTraceProvidersEnabled,
         LogFileName = $"{(string.IsNullOrEmpty(output) ? name : output)}.etl"
     };
@@ -534,7 +534,7 @@ static void GetTraceInfo(string file)
     AnsiConsole.WriteLine($"Start Time: {stats.StartTime}");
     AnsiConsole.WriteLine($"End Time: {stats.EndTime}");
     AnsiConsole.WriteLine($"Maximum File Size: {stats.MaximumFileSize}");
-    AnsiConsole.WriteLine($"Log File Mode: {stats.LogFileMode & LogFileMode.All}{((stats.LogFileMode & ~LogFileMode.All) != 0 ? $" | 0x{stats.LogFileMode & ~LogFileMode.All}" : string.Empty)}");
+    AnsiConsole.WriteLine($"Log File Mode: {stats.LogFileMode & EtwLogFileMode.All}{((stats.LogFileMode & ~EtwLogFileMode.All) != 0 ? $" | 0x{stats.LogFileMode & ~EtwLogFileMode.All}" : string.Empty)}");
     AnsiConsole.WriteLine($"Buffer Size: 0x{stats.BufferSize:X8}");
     AnsiConsole.WriteLine($"Buffers Written: {stats.BuffersWritten}");
     AnsiConsole.WriteLine($"Events Lost: {stats.EventsLost}");

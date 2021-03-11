@@ -3,7 +3,7 @@
     /// <summary>
     /// The clock resolution used during tracing.
     /// </summary>
-    public enum ClockResolution : uint
+    public enum EtwClockResolution : uint
     {
         /// <summary>
         /// Query performance counter (QPC). The QPC counter provides a high-resolution time stamp that 

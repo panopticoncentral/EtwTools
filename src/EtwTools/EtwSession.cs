@@ -27,9 +27,9 @@ namespace EtwTools
         /// <summary>
         /// The clock resolution used by the session.
         /// </summary>
-        public ClockResolution ClockResolution { get; }
+        public EtwClockResolution ClockResolution { get; }
 
-        private EtwSession(Guid id, string name, ulong handle, ClockResolution clockResolution)
+        private EtwSession(Guid id, string name, ulong handle, EtwClockResolution clockResolution)
         {
             Id = id;
             Name = name;
@@ -45,7 +45,7 @@ namespace EtwTools
         {
             var buffer = stackalloc byte[SizeOfProperties];
             var nativeProperties = (Native.EventTraceProperties*)buffer;
-            nativeProperties->Wnode.BufferSize = (uint)SizeOfProperties;
+            nativeProperties->Wnode = new Native.WnodeHeader { BufferSize = (uint)SizeOfProperties };
             nativeProperties->LoggerNameOffset = (uint)sizeof(Native.EventTraceProperties);
             nativeProperties->LogFileNameOffset = (uint)sizeof(Native.EventTraceProperties) + (sizeof(char) * MaxNameSize);
 
@@ -71,7 +71,7 @@ namespace EtwTools
         {
             var buffer = stackalloc byte[SizeOfProperties];
             var nativeProperties = (Native.EventTraceProperties*)buffer;
-            nativeProperties->Wnode.BufferSize = (uint)SizeOfProperties;
+            nativeProperties->Wnode = new Native.WnodeHeader { BufferSize = (uint)SizeOfProperties };
             nativeProperties->LoggerNameOffset = (uint)sizeof(Native.EventTraceProperties);
             nativeProperties->LogFileNameOffset = (uint)sizeof(Native.EventTraceProperties) + (sizeof(char) * MaxNameSize);
 
@@ -94,9 +94,12 @@ namespace EtwTools
         {
             var buffer = stackalloc byte[SizeOfProperties];
             var nativeProperties = (Native.EventTraceProperties*)buffer;
-            nativeProperties->Wnode.BufferSize = (uint)SizeOfProperties;
-            nativeProperties->Wnode.Guid = Id;
-            nativeProperties->Wnode.Flags = Native.WnodeFlags.TracedGuid;
+            nativeProperties->Wnode = new Native.WnodeHeader
+            {
+                BufferSize = (uint)SizeOfProperties,
+                Guid = Id,
+                Flags = Native.WnodeFlags.TracedGuid
+            };
             nativeProperties->LoggerNameOffset = (uint)sizeof(Native.EventTraceProperties);
             nativeProperties->LogFileNameOffset = (uint)sizeof(Native.EventTraceProperties) + (sizeof(char) * MaxNameSize);
 
@@ -121,7 +124,7 @@ namespace EtwTools
             for (var i = 0; i < sessionCount; i++)
             {
                 var properties = (Native.EventTraceProperties*)&sessionsArray[SizeOfProperties * i];
-                properties->Wnode.BufferSize = (uint)SizeOfProperties;
+                properties->Wnode = new Native.WnodeHeader { BufferSize = (uint)SizeOfProperties };
                 properties->LoggerNameOffset = (uint)sizeof(Native.EventTraceProperties);
                 properties->LogFileNameOffset = (uint)sizeof(Native.EventTraceProperties) + (sizeof(char) * MaxNameSize);
                 propertiesArray[i] = properties;
@@ -151,7 +154,7 @@ namespace EtwTools
         {
             var buffer = stackalloc byte[SizeOfProperties];
             var nativeProperties = (Native.EventTraceProperties*)buffer;
-            nativeProperties->Wnode.BufferSize = (uint)SizeOfProperties;
+            nativeProperties->Wnode = new Native.WnodeHeader { BufferSize = (uint)SizeOfProperties };
             nativeProperties->LoggerNameOffset = (uint)sizeof(Native.EventTraceProperties);
             nativeProperties->LogFileNameOffset = (uint)sizeof(Native.EventTraceProperties) + (sizeof(char) * MaxNameSize);
 
@@ -182,11 +185,13 @@ namespace EtwTools
             var buffer = stackalloc byte[SizeOfProperties];
             var nativeProperties = (Native.EventTraceProperties*)buffer;
 
-            nativeProperties->Wnode.BufferSize = (uint)SizeOfProperties;
-            nativeProperties->Wnode.Guid = Guid.NewGuid();
-            nativeProperties->Wnode.ClientContext = ClockResolution.QueryPerformanceCounter;
-            nativeProperties->Wnode.Flags = Native.WnodeFlags.TracedGuid;
-
+            nativeProperties->Wnode = new Native.WnodeHeader
+            {
+                BufferSize = (uint)SizeOfProperties,
+                Guid = Guid.NewGuid(),
+                ClientContext = EtwClockResolution.QueryPerformanceCounter,
+                Flags = Native.WnodeFlags.TracedGuid
+            };
             nativeProperties->BufferSize = properties.BufferSize;
             nativeProperties->MinimumBuffers = properties.MinimumBuffers;
             nativeProperties->MaximumBuffers = properties.MaximumBuffers;
@@ -249,7 +254,7 @@ namespace EtwTools
             /// <summary>
             /// Logging modes for the event tracing session.
             /// </summary>
-            public LogFileMode LogFileMode { get; init; }
+            public EtwLogFileMode LogFileMode { get; init; }
 
             /// <summary>
             /// How often, in seconds, the trace buffers are forcibly flushed.
@@ -259,7 +264,7 @@ namespace EtwTools
             /// <summary>
             /// Which kernel events should be included in the trace.
             /// </summary>
-            public SystemTraceProvider SystemTraceProvidersEnabled { get; init; }
+            public EtwSystemTraceProvider SystemTraceProvidersEnabled { get; init; }
 
             /// <summary>
             /// The name of the log file.

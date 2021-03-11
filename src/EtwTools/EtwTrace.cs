@@ -219,7 +219,7 @@ namespace EtwTools
             /// <summary>
             /// The log file mode.
             /// </summary>
-            public LogFileMode LogFileMode { get; init; }
+            public EtwLogFileMode LogFileMode { get; init; }
 
             /// <summary>
             /// The size of the trace's buffers;
@@ -254,7 +254,7 @@ namespace EtwTools
             /// <summary>
             /// The clock resolution.
             /// </summary>
-            public ClockResolution ClockResolution { get; init; }
+            public EtwClockResolution ClockResolution { get; init; }
 
             /// <summary>
             /// Whether the trace is from the NT Kernel Logger.

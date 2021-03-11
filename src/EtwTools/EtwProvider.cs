@@ -309,14 +309,14 @@ namespace EtwTools
             /// <summary>
             /// Properties of the instance.
             /// </summary>
-            public TraceInstanceProperties Properties { get; }
+            public EtwTraceInstanceProperties Properties { get; }
 
             /// <summary>
             /// Information about each way the provider was enabled.
             /// </summary>
             public IReadOnlyList<EnableInfo> EnableInfos { get; }
 
-            internal InstanceInfo(uint processId, TraceInstanceProperties properties, IReadOnlyList<EnableInfo> enableInfos)
+            internal InstanceInfo(uint processId, EtwTraceInstanceProperties properties, IReadOnlyList<EnableInfo> enableInfos)
             {
                 ProcessId = processId;
                 Properties = properties;
@@ -332,12 +332,12 @@ namespace EtwTools
             /// <summary>
             /// The information level enabled.
             /// </summary>
-            public TraceLevel Level { get; }
+            public EtwTraceLevel Level { get; }
 
             /// <summary>
             /// Optional properties that are enabled.
             /// </summary>
-            public TraceProperties EnableProperty { get; }
+            public EtwTraceProperties EnableProperty { get; }
 
             /// <summary>
             /// Bitmask of keywords that determine the category of events the provider should write.
@@ -349,7 +349,7 @@ namespace EtwTools
             /// </summary>
             public ulong MatchAllKeyword { get; }
 
-            internal EnableInfo(TraceLevel level, TraceProperties enableProperty, ulong matchAnyKeyword, ulong matchAllKeyword)
+            internal EnableInfo(EtwTraceLevel level, EtwTraceProperties enableProperty, ulong matchAnyKeyword, ulong matchAllKeyword)
             {
                 Level = level;
                 EnableProperty = enableProperty;

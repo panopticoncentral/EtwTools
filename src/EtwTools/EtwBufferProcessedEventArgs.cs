@@ -5,7 +5,7 @@ namespace EtwTools
     /// <summary>
     /// Event arguments for buffer processing event.
     /// </summary>
-    public sealed class BufferProcessedEventArgs : EventArgs
+    public sealed class EtwBufferProcessedEventArgs : EventArgs
     {
         /// <summary>
         /// The time the buffer was processed.
@@ -45,7 +45,7 @@ namespace EtwTools
         /// <param name="bufferSize">The overall size of the buffer.</param>
         /// <param name="bufferUsed">The number of bytes used in the buffer.</param>
         /// <param name="context">The context provided when the trace was opened.</param>
-        public BufferProcessedEventArgs(DateTime processedTime, uint buffersRead, uint bufferSize, uint bufferUsed, nint context)
+        public EtwBufferProcessedEventArgs(DateTime processedTime, uint buffersRead, uint bufferSize, uint bufferUsed, nint context)
         {
             ProcessedTime = processedTime;
             BuffersRead = buffersRead;

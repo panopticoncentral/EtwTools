@@ -36,7 +36,7 @@ namespace EtwTools
         /// <summary>
         /// The level of the event.
         /// </summary>
-        public TraceLevel Level { get; init; }
+        public EtwTraceLevel Level { get; init; }
 
         /// <summary>
         /// The name of the level, if any.

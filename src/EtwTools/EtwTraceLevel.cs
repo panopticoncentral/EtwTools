@@ -3,7 +3,7 @@
     /// <summary>
     /// The level of detail provided by an event provider.
     /// </summary>
-    public enum TraceLevel : byte
+    public enum EtwTraceLevel : byte
     {
         /// <summary>
         /// No trace level.

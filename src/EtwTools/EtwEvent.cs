@@ -50,7 +50,7 @@ namespace EtwTools
         /// <summary>
         /// The trace level of the event.
         /// </summary>
-        public TraceLevel Level { get; init; }
+        public EtwTraceLevel Level { get; init; }
 
         /// <summary>
         /// The event opcode.

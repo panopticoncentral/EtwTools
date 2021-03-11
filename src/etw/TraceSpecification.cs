@@ -8,7 +8,7 @@ namespace EtwTools
 
         public sealed class KernelSpecification
         {
-            public IReadOnlyDictionary<SystemTraceProvider, TraceState> Providers { get; set; }
+            public IReadOnlyDictionary<EtwSystemTraceProvider, TraceState> Providers { get; set; }
         }
     }
 }

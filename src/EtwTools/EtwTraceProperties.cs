@@ -6,7 +6,7 @@ namespace EtwTools
     /// Additional properties that can be enabled for a provider.
     /// </summary>
     [Flags]
-    public enum TraceProperties : uint
+    public enum EtwTraceProperties : uint
     {
         /// <summary>
         /// None.

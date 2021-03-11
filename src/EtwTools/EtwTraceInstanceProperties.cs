@@ -6,7 +6,7 @@ namespace EtwTools
     /// Properties of an instance of a trace provider.
     /// </summary>
     [Flags]
-    public enum TraceInstanceProperties : uint
+    public enum EtwTraceInstanceProperties : uint
     {
         /// <summary>
         /// None.

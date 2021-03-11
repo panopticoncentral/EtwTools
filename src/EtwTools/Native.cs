@@ -223,36 +223,36 @@ namespace EtwTools
         [StructLayout(LayoutKind.Sequential)]
         public struct WnodeHeader
         {
-            public uint BufferSize;
-            public uint ProviderId;
-            public ulong HistoricalContext;
-            public long TimeStamp;
-            public Guid Guid;
-            public ClockResolution ClientContext;
-            public WnodeFlags Flags;
+            public uint BufferSize { get; set; }
+            public uint ProviderId { get; set; }
+            public ulong HistoricalContext { get; set; }
+            public long TimeStamp { get; set; }
+            public Guid Guid { get; set; }
+            public EtwClockResolution ClientContext { get; set; }
+            public WnodeFlags Flags { get; set; }
         }
 
         [StructLayout(LayoutKind.Sequential)]
         public struct EventTraceProperties
         {
-            public WnodeHeader Wnode;
-            public uint BufferSize;
-            public uint MinimumBuffers;
-            public uint MaximumBuffers;
-            public uint MaximumFileSize;
-            public LogFileMode LogFileMode;
-            public uint FlushTimer;
-            public SystemTraceProvider EnableFlags;
-            public int AgeLimit;
-            public uint NumberOfBuffers;
-            public uint FreeBuffers;
-            public uint EventsLost;
-            public uint BuffersWritten;
-            public uint LogBuffersLost;
-            public uint RealTimeBuffersLost;
-            public nint LoggerThreadId;
-            public uint LogFileNameOffset;
-            public uint LoggerNameOffset;
+            public WnodeHeader Wnode { get; set; }
+            public uint BufferSize { get; set; }
+            public uint MinimumBuffers { get; set; }
+            public uint MaximumBuffers { get; set; }
+            public uint MaximumFileSize { get; set; }
+            public EtwLogFileMode LogFileMode { get; set; }
+            public uint FlushTimer { get; set; }
+            public EtwSystemTraceProvider EnableFlags { get; set; }
+            public int AgeLimit { get; set; }
+            public uint NumberOfBuffers { get; set; }
+            public uint FreeBuffers { get; set; }
+            public uint EventsLost { get; set; }
+            public uint BuffersWritten { get; set; }
+            public uint LogBuffersLost { get; set; }
+            public uint RealTimeBuffersLost { get; set; }
+            public nint LoggerThreadId { get; set; }
+            public uint LogFileNameOffset { get; set; }
+            public uint LoggerNameOffset { get; set; }
         }
 
         [StructLayout(LayoutKind.Sequential)]
@@ -261,7 +261,7 @@ namespace EtwTools
             public ushort Id { get; }
             public byte Version { get; }
             public byte Channel { get; }
-            public TraceLevel Level { get; }
+            public EtwTraceLevel Level { get; }
             public EtwEventType Opcode { get; }
             public ushort Task { get; }
             public ulong Keyword { get; }
@@ -292,42 +292,42 @@ namespace EtwTools
         };
 
         [StructLayout(LayoutKind.Sequential)]
-        public struct TraceProviderInfo
+        public readonly struct TraceProviderInfo
         {
-            public Guid ProviderGuid;
-            public int SchemaSource;
-            public int ProviderNameOffset;
+            public Guid ProviderGuid { get; }
+            public int SchemaSource { get; }
+            public int ProviderNameOffset { get; }
         }
 
         [StructLayout(LayoutKind.Sequential)]
-        public struct TraceEnableInfo
+        public readonly struct TraceEnableInfo
         {
-            [MarshalAs(UnmanagedType.Bool)]
-            public bool IsEnabled;
-            public TraceLevel Level;
-            public byte Reserved1;
-            public ushort LoggerId;
-            public TraceProperties EnableProperty;
-            public uint Reserved2;
-            public ulong MatchAnyKeyword;
-            public ulong MatchAllKeyword;
+            [field: MarshalAs(UnmanagedType.Bool)]
+            public bool IsEnabled { get; }
+            public EtwTraceLevel Level { get; }
+            private readonly byte _reserved1;
+            public ushort LoggerId { get; }
+            public EtwTraceProperties EnableProperty { get; }
+            private readonly uint _reserved2;
+            public ulong MatchAnyKeyword { get; }
+            public ulong MatchAllKeyword { get; }
         };
 
         [StructLayout(LayoutKind.Sequential)]
-        public struct TraceProviderInstanceInfo
+        public readonly struct TraceProviderInstanceInfo
         {
-            public uint NextOffset;
-            public uint EnableCount;
-            public uint Pid;
-            public TraceInstanceProperties Flags;
+            public uint NextOffset { get; }
+            public uint EnableCount { get; }
+            public uint Pid { get; }
+            public EtwTraceInstanceProperties Flags { get; }
         };
 
         [StructLayout(LayoutKind.Sequential)]
         public readonly struct EtwBufferContext
         {
-            public readonly byte ProcessorNumber;
-            public readonly byte Alignment;
-            public readonly ushort LoggerId;
+            public byte ProcessorNumber { get; }
+            public byte Alignment { get; }
+            public ushort LoggerId { get; }
         }
 
         [StructLayout(LayoutKind.Sequential)]
@@ -336,7 +336,7 @@ namespace EtwTools
             public ushort Size { get; }
             public ushort FieldTypeFlags { get; }
             public EtwEventType Type { get; }
-            public TraceLevel Level { get; }
+            public EtwTraceLevel Level { get; }
             public ushort Version { get; }
             public uint ThreadId { get; }
             public uint ProcessId { get; }
@@ -416,7 +416,7 @@ namespace EtwTools
             public DateTime EndTime => DateTime.FromFileTime(_endTime);
             public uint TimerResolution { get; }
             public uint MaximumFileSize { get; }
-            public LogFileMode LogFileMode { get; }
+            public EtwLogFileMode LogFileMode { get; }
             public uint BuffersWritten { get; }
             private readonly uint _startBuffers;
             public uint PointerSize { get; }
@@ -430,7 +430,7 @@ namespace EtwTools
             public long PerfFreq { get; }
             private readonly long _startTime;
             public DateTime StartTime => DateTime.FromFileTime(_startTime);
-            public ClockResolution ReservedFlags { get; }
+            public EtwClockResolution ReservedFlags { get; }
             public uint BuffersLost { get; }
         }
 

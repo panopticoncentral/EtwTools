@@ -6,7 +6,7 @@ namespace EtwTools
     /// System event providers.
     /// </summary>
     [Flags]
-    public enum SystemTraceProvider : uint
+    public enum EtwSystemTraceProvider : uint
     {
         /// <summary>
         /// None.
