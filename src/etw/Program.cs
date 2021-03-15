@@ -419,6 +419,10 @@ static void GetProviderInfo(string provider)
             {
                 AnsiConsole.WriteLine($"Related activity ID: {e.RelatedActivityIdName.Trim()}");
             }
+            if (e.Flags.HasValue)
+            {
+                AnsiConsole.WriteLine($"Flags: {e.Flags.Value}");
+            }
         }
     }
 

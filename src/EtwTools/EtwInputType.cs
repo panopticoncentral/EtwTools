@@ -1,0 +1,39 @@
+﻿namespace EtwTools
+{
+    public enum EtwInputType
+    {
+        Null,
+        UnicodeString,
+        AnsiString,
+        Int8,
+        Uint8,
+        Int16,
+        Uint16,
+        Int32,
+        Uint32,
+        Int64,
+        Uint64,
+        Float,
+        Double,
+        Boolean,
+        Binary,
+        Guid,
+        Pointer,
+        Filetime,
+        Systemtime,
+        Sid,
+        HexInt32,
+        HexInt64,
+        CountedString = 300,
+        CountedAnsiString,
+        ReverseCountedString,
+        ReverseCountedAnsiString,
+        NonNullTerminatedString,
+        NonNullTerminatedAnsiString,
+        UnicodeChar,
+        AnsiChar,
+        SizeT,
+        HexDump,
+        WbemSid
+    };
+}

@@ -228,68 +228,17 @@ namespace EtwTools
 
                 uint eventBufferSize = 0;
                 hr = (Native.Hresult)Native.TdhGetManifestEventInformation(&providerGuid, eventDescriptor, null, &eventBufferSize);
-                if (hr == Native.Hresult.ErrorInsufficientBuffer)
+                if (hr != Native.Hresult.ErrorInsufficientBuffer)
                 {
-                    fixed (byte* eventBuffer = new byte[(int)eventBufferSize])
-                    {
-                        var eventInfo = (Native.TraceEventInfo*)eventBuffer;
-                        ((Native.Hresult)Native.TdhGetManifestEventInformation(&providerGuid, eventDescriptor, eventInfo, &eventBufferSize)).ThrowException();
-
-                        infos[i] = new EtwEventDescriptor
-                        {
-                            Name = eventInfo->DecodingSource switch
-                            {
-                                Native.DecodingSource.XmlFile or Native.DecodingSource.Tlg => eventInfo->EventNameOffset != 0 ? new string((char*)(eventBuffer + eventInfo->EventNameOffset)) : string.Empty,
-                                Native.DecodingSource.Wbem => eventInfo->TaskNameOffset != 0 ? new string((char*)(eventBuffer + eventInfo->TaskNameOffset)) : string.Empty,
-                                _ => string.Empty
-                            },
-                            Id = eventDescriptor->Id,
-                            Version = eventDescriptor->Version,
-                            Channel = eventDescriptor->Channel,
-                            ChannelName = eventInfo->ChannelNameOffset != 0 ? new string((char*)(eventBuffer + eventInfo->ChannelNameOffset)) : string.Empty,
-                            Level = eventDescriptor->Level,
-                            LevelName = eventInfo->LevelNameOffset != 0 ? new string((char*)(eventBuffer + eventInfo->LevelNameOffset)) : string.Empty,
-                            Opcode = eventDescriptor->Opcode,
-                            OpcodeName = eventInfo->OpcodeNameOffset != 0 ? new string((char*)(eventBuffer + eventInfo->OpcodeNameOffset)) : string.Empty,
-                            Task = eventDescriptor->Task,
-                            TaskName = eventInfo->DecodingSource switch
-                            {
-                                Native.DecodingSource.XmlFile => eventInfo->TaskNameOffset != 0  ? new string((char*)(eventBuffer + eventInfo->TaskNameOffset)) : string.Empty,
-                                _ => string.Empty
-                            },
-                            Keyword = eventDescriptor->Keyword,
-                            KeywordName = eventInfo->KeywordsNameOffset != 0 ? new string((char*)(eventBuffer + eventInfo->KeywordsNameOffset)) : string.Empty,
-                            Message = eventInfo->EventMessageOffset != 0 ? new string((char*)(eventBuffer + eventInfo->EventMessageOffset)) : string.Empty,
-                            ActivityIdName = eventInfo->DecodingSource switch
-                            {
-                                Native.DecodingSource.Wbem => eventInfo->EventNameOffset != 0 ? new string((char*)(eventBuffer + eventInfo->EventNameOffset)) : string.Empty,
-                                _ => string.Empty
-                            },
-                            EventAttributes = eventInfo->DecodingSource switch
-                            {
-                                Native.DecodingSource.XmlFile => eventInfo->EventAttributesOffset != 0 ? new string((char*)(eventBuffer + eventInfo->EventAttributesOffset)) : string.Empty,
-                                _ => string.Empty
-                            },
-                            RelatedActivityIdName = eventInfo->DecodingSource switch
-                            {
-                                Native.DecodingSource.Wbem => eventInfo->EventAttributesOffset != 0 ? new string((char*)(eventBuffer + eventInfo->EventAttributesOffset)) : string.Empty,
-                                _ => string.Empty
-                            },
-                        };
-                    }
+                    infos[i] = new EtwEventDescriptor(eventDescriptor, null);
+                    continue;
                 }
-                else
+
+                fixed (byte* eventBuffer = new byte[(int)eventBufferSize])
                 {
-                    infos[i] = new EtwEventDescriptor
-                    {
-                        Id = eventDescriptor->Id,
-                        Version = eventDescriptor->Version,
-                        Channel = eventDescriptor->Channel,
-                        Level = eventDescriptor->Level,
-                        Opcode = eventDescriptor->Opcode,
-                        Task = eventDescriptor->Task,
-                        Keyword = eventDescriptor->Keyword
-                    };
+                    var eventInfo = (Native.TraceEventInfo*)eventBuffer;
+                    ((Native.Hresult)Native.TdhGetManifestEventInformation(&providerGuid, eventDescriptor, eventInfo, &eventBufferSize)).ThrowException();
+                    infos[i] = new EtwEventDescriptor(eventDescriptor, eventInfo);
                 }
             }
 

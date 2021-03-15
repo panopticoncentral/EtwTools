@@ -219,6 +219,19 @@ namespace EtwTools
             Max
         }
 
+        [Flags]
+        public enum PropertyFlags
+        {
+            Struct = 0x1,
+            ParamLength = 0x2,
+            ParamCount = 0x4,
+            WbemXmlFragment = 0x8,
+            ParamFixedLength = 0x10,
+            ParamFixedCount = 0x20,
+            HasTags = 0x40,
+            HasCustomSchema = 0x80
+        }
+
 #pragma warning disable IDE1006
         [StructLayout(LayoutKind.Sequential)]
         public struct WnodeHeader
@@ -385,6 +398,19 @@ namespace EtwTools
             public readonly ushort DataSize;
             public readonly ulong DataPtr;
         };
+
+        [StructLayout(LayoutKind.Sequential)]
+        public readonly struct EventPropertyInfo
+        {
+            public PropertyFlags PropertyFlags { get; }
+            public uint NameOffset { get; }
+            public ushort Union1 { get; }
+            public ushort Union2 { get; }
+            public uint Union3 { get; }
+            public ushort Count { get; }
+            public ushort Length { get; }
+            public uint Tags { get; }
+        }
 
         [StructLayout(LayoutKind.Sequential)]
         public readonly struct EventRecord

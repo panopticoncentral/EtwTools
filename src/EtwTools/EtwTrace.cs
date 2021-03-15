@@ -174,7 +174,7 @@ namespace EtwTools
         /// <summary>
         /// Statistics about the trace.
         /// </summary>
-        public record Statistics
+        public sealed record Statistics
         {
             /// <summary>
             /// The version of the OS the trace was captured on.
@@ -265,7 +265,7 @@ namespace EtwTools
         /// <summary>
         /// Statistics about a buffer that was processed.
         /// </summary>
-        public record BufferStatistics
+        public sealed record BufferStatistics
         {
             /// <summary>
             /// The time the buffer was processed.

@@ -229,7 +229,7 @@ namespace EtwTools
         /// <summary>
         /// Properties of the session.
         /// </summary>
-        public record Properties
+        public sealed record Properties
         {
             /// <summary>
             /// Amount of memory allocated for each event tracing session buffer, in kilobytes.
@@ -275,7 +275,7 @@ namespace EtwTools
         /// <summary>
         /// Statistics about the session.
         /// </summary>
-        public record Statistics
+        public sealed record Statistics
         {
             /// <summary>
             /// The number of buffers allocated for the event tracing session's buffer pool.
