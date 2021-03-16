@@ -12,6 +12,8 @@ using Newtonsoft.Json;
 using Spectre.Console;
 
 using EtwTools;
+using Newtonsoft.Json.Converters;
+using Newtonsoft.Json.Serialization;
 
 var rootCommand = new RootCommand("Controls Event Tracing for Windows (ETW).");
 
@@ -92,12 +94,12 @@ static void AddProvidersCommands(Command providersCommand)
     processCommand.Handler = CommandHandler.Create<uint, ProcessRegisteredSort>(ListRegisteredProvidersInProcess);
     providersCommand.AddCommand(processCommand);
 
-    var infoCommand = new Command("info", "Information about a provider.")
+    var eventsCommand = new Command("events", "Events raised by a provider.")
     {
         new Option<string>(new[] { "--provider", "-p" }, "Provider.") { IsRequired = true }
     };
-    infoCommand.Handler = CommandHandler.Create<string>(GetProviderInfo);
-    providersCommand.AddCommand(infoCommand);
+    eventsCommand.Handler = CommandHandler.Create<string>(GetEvents);
+    providersCommand.AddCommand(eventsCommand);
 }
 
 var providersCommand = new Command("providers", "Commands that work on event providers.");
@@ -328,11 +330,11 @@ static void ListRegisteredProvidersInProcess(uint pid, ProcessRegisteredSort sor
     AnsiConsole.WriteLine();
 }
 
-static void GetProviderInfo(string provider)
+static void GetEvents(string provider)
 {
-    var providerGuid = Guid.Parse(provider);
-    var etwProvider = EtwProvider.GetPublishedProviders().SingleOrDefault(p => p.Id == providerGuid);
-
+    var etwProvider = Guid.TryParse(provider, out var providerGuid)
+        ? EtwProvider.GetPublishedProviders().SingleOrDefault(p => p.Id == providerGuid)
+        : EtwProvider.GetPublishedProviders().SingleOrDefault(p => p.Name == provider);
     AnsiConsole.WriteLine();
 
     if (etwProvider == null)
@@ -342,90 +344,25 @@ static void GetProviderInfo(string provider)
         return;
     }
 
-    AnsiConsole.WriteLine($"Name: {etwProvider.Name}");
-
     var eventDescriptors = etwProvider.GetEventDescriptors();
 
     if (eventDescriptors == null)
     {
         AnsiConsole.WriteLine("No event manifest found.");
+        AnsiConsole.WriteLine();
+
+        return;
     }
-    else
+
+    AnsiConsole.WriteLine(JsonConvert.SerializeObject(eventDescriptors, new JsonSerializerSettings
     {
-        AnsiConsole.WriteLine("Events:");
-
-        foreach (var e in eventDescriptors)
+        Formatting = Formatting.Indented,
+        Converters = new[] { new StringEnumConverter() },
+        ContractResolver = new DefaultContractResolver
         {
-            AnsiConsole.WriteLine();
-            if (!string.IsNullOrEmpty(e.Name))
-            {
-                AnsiConsole.WriteLine($"Event Name: {e.Name.Trim()}");
-            }
-            AnsiConsole.WriteLine($"ID: {e.Id}");
-            AnsiConsole.WriteLine($"Version: {e.Version}");
-            if (!string.IsNullOrEmpty(e.ChannelName))
-            {
-                AnsiConsole.WriteLine($"Channel: {e.ChannelName.Trim()} ({e.Channel})");
-            }
-            else
-            {
-                AnsiConsole.WriteLine($"Channel: {e.Channel}");
-            }
-            if (!string.IsNullOrEmpty(e.LevelName))
-            {
-                AnsiConsole.WriteLine($"Level: {e.LevelName.Trim()} ({e.Level})");
-            }
-            else
-            {
-                AnsiConsole.WriteLine($"Level: {e.Level}");
-            }
-            if (!string.IsNullOrEmpty(e.OpcodeName))
-            {
-                AnsiConsole.WriteLine($"Opcode: {e.OpcodeName.Trim()} ({e.Opcode})");
-            }
-            else
-            {
-                AnsiConsole.WriteLine($"Opcode: {e.Opcode}");
-            }
-            if (!string.IsNullOrEmpty(e.TaskName))
-            {
-                AnsiConsole.WriteLine($"Task: {e.TaskName.Trim()} ({e.Task})");
-            }
-            else
-            {
-                AnsiConsole.WriteLine($"Task: {e.Task}");
-            }
-            if (!string.IsNullOrEmpty(e.KeywordName))
-            {
-                AnsiConsole.WriteLine($"Keyword: {e.KeywordName.Trim()} (0x{e.Keyword:X16})");
-            }
-            else
-            {
-                AnsiConsole.WriteLine($"Keyword: 0x{e.Keyword:X16}");
-            }
-            if (!string.IsNullOrEmpty(e.Message))
-            {
-                AnsiConsole.WriteLine($"Message: \"{e.Message.Trim().Replace("\r", "\\r").Replace("\n", "\\n")}\"");
-            }
-            if (!string.IsNullOrEmpty(e.EventAttributes))
-            {
-                AnsiConsole.WriteLine($"Event attributes: {e.EventAttributes.Trim()}");
-            }
-            if (!string.IsNullOrEmpty(e.ActivityIdName))
-            {
-                AnsiConsole.WriteLine($"Activity ID: {e.ActivityIdName.Trim()}");
-            }
-            if (!string.IsNullOrEmpty(e.RelatedActivityIdName))
-            {
-                AnsiConsole.WriteLine($"Related activity ID: {e.RelatedActivityIdName.Trim()}");
-            }
-            if (e.Flags.HasValue)
-            {
-                AnsiConsole.WriteLine($"Flags: {e.Flags.Value}");
-            }
+            NamingStrategy = new CamelCaseNamingStrategy()
         }
-    }
-
+    }));
     AnsiConsole.WriteLine();
 }
 
