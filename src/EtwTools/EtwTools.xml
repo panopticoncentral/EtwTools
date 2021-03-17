@@ -72,6 +72,16 @@
             production.
             </summary>
         </member>
+        <member name="T:EtwTools.EtwCustomSchemaPropertyDescriptor">
+            <summary>
+            A property with a custom schema.
+            </summary>
+        </member>
+        <member name="P:EtwTools.EtwCustomSchemaPropertyDescriptor.Kind">
+            <summary>
+            The kind of the property.
+            </summary>
+        </member>
         <member name="T:EtwTools.EtwEvent">
             <summary>
             An ETW event.
@@ -302,19 +312,9 @@
             The channel of the event.
             </summary>
         </member>
-        <member name="P:EtwTools.EtwEventDescriptor.ChannelName">
-            <summary>
-            The name of the channel, if any.
-            </summary>
-        </member>
         <member name="P:EtwTools.EtwEventDescriptor.Level">
             <summary>
             The level of the event.
-            </summary>
-        </member>
-        <member name="P:EtwTools.EtwEventDescriptor.LevelName">
-            <summary>
-            The name of the level, if any.
             </summary>
         </member>
         <member name="P:EtwTools.EtwEventDescriptor.Opcode">
@@ -322,29 +322,14 @@
             The opcode of the event.
             </summary>
         </member>
-        <member name="P:EtwTools.EtwEventDescriptor.OpcodeName">
-            <summary>
-            The name of the opcode, if any.
-            </summary>
-        </member>
         <member name="P:EtwTools.EtwEventDescriptor.Task">
             <summary>
             The task of the event.
             </summary>
         </member>
-        <member name="P:EtwTools.EtwEventDescriptor.TaskName">
-            <summary>
-            The name of the task, if any.
-            </summary>
-        </member>
         <member name="P:EtwTools.EtwEventDescriptor.Keyword">
             <summary>
             The keyword of the event.
-            </summary>
-        </member>
-        <member name="P:EtwTools.EtwEventDescriptor.KeywordName">
-            <summary>
-            The keyword name of the task, if any.
             </summary>
         </member>
         <member name="P:EtwTools.EtwEventDescriptor.Message">
@@ -370,6 +355,27 @@
         <member name="P:EtwTools.EtwEventDescriptor.Flags">
             <summary>
             Event flags.
+            </summary>
+        </member>
+        <member name="P:EtwTools.EtwEventDescriptor.Properties">
+            <summary>
+            The properties of the event.
+            </summary>
+        </member>
+        <member name="T:EtwTools.EtwEventDescriptor.NamedValue`1">
+            <summary>
+            A value that has an optional name.
+            </summary>
+            <typeparam name="T"></typeparam>
+        </member>
+        <member name="P:EtwTools.EtwEventDescriptor.NamedValue`1.Value">
+            <summary>
+            The value.
+            </summary>
+        </member>
+        <member name="P:EtwTools.EtwEventDescriptor.NamedValue`1.Name">
+            <summary>
+            The optional name.
             </summary>
         </member>
         <member name="T:EtwTools.EtwEventType">
@@ -445,6 +451,176 @@
         <member name="F:EtwTools.EtwEventType.Recieve">
             <summary>
             Receieve event.
+            </summary>
+        </member>
+        <member name="T:EtwTools.EtwInputType">
+            <summary>
+            The input type of a property.
+            </summary>
+        </member>
+        <member name="F:EtwTools.EtwInputType.Null">
+            <summary>
+            Null.
+            </summary>
+        </member>
+        <member name="F:EtwTools.EtwInputType.UnicodeString">
+            <summary>
+            Unicode string.
+            </summary>
+        </member>
+        <member name="F:EtwTools.EtwInputType.AnsiString">
+            <summary>
+            ANSI string.
+            </summary>
+        </member>
+        <member name="F:EtwTools.EtwInputType.Int8">
+            <summary>
+            Signed byte.
+            </summary>
+        </member>
+        <member name="F:EtwTools.EtwInputType.Uint8">
+            <summary>
+            Unsigned byte.
+            </summary>
+        </member>
+        <member name="F:EtwTools.EtwInputType.Int16">
+            <summary>
+            Signed short.
+            </summary>
+        </member>
+        <member name="F:EtwTools.EtwInputType.Uint16">
+            <summary>
+            Unsigned short.
+            </summary>
+        </member>
+        <member name="F:EtwTools.EtwInputType.Int32">
+            <summary>
+            Signed integer.
+            </summary>
+        </member>
+        <member name="F:EtwTools.EtwInputType.Uint32">
+            <summary>
+            Unsigned integer.
+            </summary>
+        </member>
+        <member name="F:EtwTools.EtwInputType.Int64">
+            <summary>
+            Signed long.
+            </summary>
+        </member>
+        <member name="F:EtwTools.EtwInputType.Uint64">
+            <summary>
+            Unsigned long.
+            </summary>
+        </member>
+        <member name="F:EtwTools.EtwInputType.Float">
+            <summary>
+            Single.
+            </summary>
+        </member>
+        <member name="F:EtwTools.EtwInputType.Double">
+            <summary>
+            Double.
+            </summary>
+        </member>
+        <member name="F:EtwTools.EtwInputType.Boolean">
+            <summary>
+            Boolean.
+            </summary>
+        </member>
+        <member name="F:EtwTools.EtwInputType.Binary">
+            <summary>
+            Binary.
+            </summary>
+        </member>
+        <member name="F:EtwTools.EtwInputType.Guid">
+            <summary>
+            GUID.
+            </summary>
+        </member>
+        <member name="F:EtwTools.EtwInputType.Pointer">
+            <summary>
+            Pointer.
+            </summary>
+        </member>
+        <member name="F:EtwTools.EtwInputType.Filetime">
+            <summary>
+            File time.
+            </summary>
+        </member>
+        <member name="F:EtwTools.EtwInputType.Systemtime">
+            <summary>
+            System time.
+            </summary>
+        </member>
+        <member name="F:EtwTools.EtwInputType.Sid">
+            <summary>
+            SID.
+            </summary>
+        </member>
+        <member name="F:EtwTools.EtwInputType.HexInt32">
+            <summary>
+            Hex signed integer.
+            </summary>
+        </member>
+        <member name="F:EtwTools.EtwInputType.HexInt64">
+            <summary>
+            Hex signed long.
+            </summary>
+        </member>
+        <member name="F:EtwTools.EtwInputType.CountedString">
+            <summary>
+            Counted Unicode string.
+            </summary>
+        </member>
+        <member name="F:EtwTools.EtwInputType.CountedAnsiString">
+            <summary>
+            Counted ANSI string.
+            </summary>
+        </member>
+        <member name="F:EtwTools.EtwInputType.ReverseCountedString">
+            <summary>
+            Reverse counted Unicode string.
+            </summary>
+        </member>
+        <member name="F:EtwTools.EtwInputType.ReverseCountedAnsiString">
+            <summary>
+            Reverse counted ANSI string.
+            </summary>
+        </member>
+        <member name="F:EtwTools.EtwInputType.NonNullTerminatedString">
+            <summary>
+            Non-NULL terminated Unicode string.
+            </summary>
+        </member>
+        <member name="F:EtwTools.EtwInputType.NonNullTerminatedAnsiString">
+            <summary>
+            Non-NULL terminated ANSI string.
+            </summary>
+        </member>
+        <member name="F:EtwTools.EtwInputType.UnicodeChar">
+            <summary>
+            Unicode character.
+            </summary>
+        </member>
+        <member name="F:EtwTools.EtwInputType.AnsiChar">
+            <summary>
+            ANSI character.
+            </summary>
+        </member>
+        <member name="F:EtwTools.EtwInputType.SizeT">
+            <summary>
+            Size.
+            </summary>
+        </member>
+        <member name="F:EtwTools.EtwInputType.HexDump">
+            <summary>
+            Hex dump.
+            </summary>
+        </member>
+        <member name="F:EtwTools.EtwInputType.WbemSid">
+            <summary>
+            WBEM SID.
             </summary>
         </member>
         <member name="T:EtwTools.EtwLogFileMode">
@@ -577,6 +753,171 @@
             All known values
             </summary>
         </member>
+        <member name="T:EtwTools.EtwOutputType">
+            <summary>
+            The output type of a property.
+            </summary>
+        </member>
+        <member name="F:EtwTools.EtwOutputType.Null">
+            <summary>
+            Null.
+            </summary>
+        </member>
+        <member name="F:EtwTools.EtwOutputType.String">
+            <summary>
+            String.
+            </summary>
+        </member>
+        <member name="F:EtwTools.EtwOutputType.DateTime">
+            <summary>
+            Date/time.
+            </summary>
+        </member>
+        <member name="F:EtwTools.EtwOutputType.Byte">
+            <summary>
+            Byte.
+            </summary>
+        </member>
+        <member name="F:EtwTools.EtwOutputType.UnsignedByte">
+            <summary>
+            Unsigned byte.
+            </summary>
+        </member>
+        <member name="F:EtwTools.EtwOutputType.Short">
+            <summary>
+            Signed short.
+            </summary>
+        </member>
+        <member name="F:EtwTools.EtwOutputType.UnsignedShort">
+            <summary>
+            Unsigned short.
+            </summary>
+        </member>
+        <member name="F:EtwTools.EtwOutputType.Int">
+            <summary>
+            Signed integer.
+            </summary>
+        </member>
+        <member name="F:EtwTools.EtwOutputType.UnsignedInt">
+            <summary>
+            Unsigned integer.
+            </summary>
+        </member>
+        <member name="F:EtwTools.EtwOutputType.Long">
+            <summary>
+            Signed long.
+            </summary>
+        </member>
+        <member name="F:EtwTools.EtwOutputType.UnsignedLong">
+            <summary>
+            Unsigned long.
+            </summary>
+        </member>
+        <member name="F:EtwTools.EtwOutputType.Float">
+            <summary>
+            Single floating-point.
+            </summary>
+        </member>
+        <member name="F:EtwTools.EtwOutputType.Double">
+            <summary>
+            Double floating-point.
+            </summary>
+        </member>
+        <member name="F:EtwTools.EtwOutputType.Boolean">
+            <summary>
+            Boolean.
+            </summary>
+        </member>
+        <member name="F:EtwTools.EtwOutputType.Guid">
+            <summary>
+            GUID.
+            </summary>
+        </member>
+        <member name="F:EtwTools.EtwOutputType.HexBinary">
+            <summary>
+            Hexadecimal binary.
+            </summary>
+        </member>
+        <member name="F:EtwTools.EtwOutputType.HexInt8">
+            <summary>
+            Hexadecimal signed byte.
+            </summary>
+        </member>
+        <member name="F:EtwTools.EtwOutputType.HexInt16">
+            <summary>
+            Hexadecimal signed short.
+            </summary>
+        </member>
+        <member name="F:EtwTools.EtwOutputType.HexInt32">
+            <summary>
+            Hexadecimal signed integer.
+            </summary>
+        </member>
+        <member name="F:EtwTools.EtwOutputType.HexInt64">
+            <summary>
+            Hexadecimal signed long.
+            </summary>
+        </member>
+        <member name="F:EtwTools.EtwOutputType.Pid">
+            <summary>
+            Process ID.
+            </summary>
+        </member>
+        <member name="F:EtwTools.EtwOutputType.Tid">
+            <summary>
+            Thread ID.
+            </summary>
+        </member>
+        <member name="F:EtwTools.EtwOutputType.Port">
+            <summary>
+            Port.
+            </summary>
+        </member>
+        <member name="F:EtwTools.EtwOutputType.Ipv4">
+            <summary>
+            IPV4 address.
+            </summary>
+        </member>
+        <member name="F:EtwTools.EtwOutputType.Ipv6">
+            <summary>
+            IPV6 address.
+            </summary>
+        </member>
+        <member name="F:EtwTools.EtwOutputType.SocketAddress">
+            <summary>
+            Socket address.
+            </summary>
+        </member>
+        <member name="F:EtwTools.EtwOutputType.CimDateTime">
+            <summary>
+            CIM date/time.
+            </summary>
+        </member>
+        <member name="F:EtwTools.EtwOutputType.EtwTime">
+            <summary>
+            ETW time.
+            </summary>
+        </member>
+        <member name="F:EtwTools.EtwOutputType.Xml">
+            <summary>
+            XML.
+            </summary>
+        </member>
+        <member name="F:EtwTools.EtwOutputType.ErrorCode">
+            <summary>
+            Error code.
+            </summary>
+        </member>
+        <member name="F:EtwTools.EtwOutputType.ReducedString">
+            <summary>
+            Reduced string.
+            </summary>
+        </member>
+        <member name="F:EtwTools.EtwOutputType.NoPrint">
+            <summary>
+            No printing.
+            </summary>
+        </member>
         <member name="T:EtwTools.EtwPropertyDescriptor">
             <summary>
             Description of an ETW event's property.
@@ -585,6 +926,81 @@
         <member name="P:EtwTools.EtwPropertyDescriptor.Name">
             <summary>
             The name of the property.
+            </summary>
+        </member>
+        <member name="P:EtwTools.EtwPropertyDescriptor.Kind">
+            <summary>
+            The kind of property it is.
+            </summary>
+        </member>
+        <member name="P:EtwTools.EtwPropertyDescriptor.Length">
+            <summary>
+            The length of the property.
+            </summary>
+        </member>
+        <member name="P:EtwTools.EtwPropertyDescriptor.Count">
+            <summary>
+            The count of the property.
+            </summary>
+        </member>
+        <member name="P:EtwTools.EtwPropertyDescriptor.Tags">
+            <summary>
+            Property tags.
+            </summary>
+        </member>
+        <member name="T:EtwTools.EtwPropertyDescriptor.PropertyKind">
+            <summary>
+            The kinds of properties.
+            </summary>
+        </member>
+        <member name="F:EtwTools.EtwPropertyDescriptor.PropertyKind.Simple">
+            <summary>
+            A simple value.
+            </summary>
+        </member>
+        <member name="F:EtwTools.EtwPropertyDescriptor.PropertyKind.CustomSchema">
+            <summary>
+            A custom schema value.
+            </summary>
+        </member>
+        <member name="F:EtwTools.EtwPropertyDescriptor.PropertyKind.Struct">
+            <summary>
+            A structured value.
+            </summary>
+        </member>
+        <member name="T:EtwTools.EtwPropertyDescriptor.PropertySizeKind">
+            <summary>
+            The kind of a size (length, count) property.
+            </summary>
+        </member>
+        <member name="F:EtwTools.EtwPropertyDescriptor.PropertySizeKind.Regular">
+            <summary>
+            Regular size.
+            </summary>
+        </member>
+        <member name="F:EtwTools.EtwPropertyDescriptor.PropertySizeKind.Property">
+            <summary>
+            Size is specified by property at offset.
+            </summary>
+        </member>
+        <member name="F:EtwTools.EtwPropertyDescriptor.PropertySizeKind.Fixed">
+            <summary>
+            Fixed size.
+            </summary>
+        </member>
+        <member name="T:EtwTools.EtwPropertyDescriptor.PropertySize">
+            <summary>
+            A size (length, count) property.
+            </summary>
+        </member>
+        <member name="P:EtwTools.EtwPropertyDescriptor.PropertySize.Size">
+            <summary>
+            The size value.
+            </summary>
+        </member>
+        <member name="P:EtwTools.EtwPropertyDescriptor.PropertySize.Kind">
+            <summary>
+            The size kind.
             </summary>
         </member>
         <member name="T:EtwTools.EtwProvider">
@@ -821,6 +1237,46 @@
         <member name="P:EtwTools.EtwSession.Statistics.RealTimeBuffersLost">
             <summary>
             The number of buffers that could not be delivered in real-time to the consumer.
+            </summary>
+        </member>
+        <member name="T:EtwTools.EtwSimplePropertyDescriptor">
+            <summary>
+            Descriptor for a simple property.
+            </summary>
+        </member>
+        <member name="P:EtwTools.EtwSimplePropertyDescriptor.Kind">
+            <summary>
+            The property kind.
+            </summary>
+        </member>
+        <member name="P:EtwTools.EtwSimplePropertyDescriptor.InputType">
+            <summary>
+            The input type of the property.
+            </summary>
+        </member>
+        <member name="P:EtwTools.EtwSimplePropertyDescriptor.OutputType">
+            <summary>
+            The desired output type of the property.
+            </summary>
+        </member>
+        <member name="P:EtwTools.EtwSimplePropertyDescriptor.MapName">
+            <summary>
+            The name of the map type of the property.
+            </summary>
+        </member>
+        <member name="T:EtwTools.EtwStructPropertyDescriptor">
+            <summary>
+            Property descriptor for a structure property.
+            </summary>
+        </member>
+        <member name="P:EtwTools.EtwStructPropertyDescriptor.Kind">
+            <summary>
+            The kind of the property.
+            </summary>
+        </member>
+        <member name="P:EtwTools.EtwStructPropertyDescriptor.Properties">
+            <summary>
+            The structure properties.
             </summary>
         </member>
         <member name="T:EtwTools.EtwSystemTraceProvider">

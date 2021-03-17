@@ -26,52 +26,27 @@ namespace EtwTools
         /// <summary>
         /// The channel of the event.
         /// </summary>
-        public byte Channel { get; init; }
-
-        /// <summary>
-        /// The name of the channel, if any.
-        /// </summary>
-        public string ChannelName { get; init; }
+        public NamedValue<byte> Channel { get; init; }
 
         /// <summary>
         /// The level of the event.
         /// </summary>
-        public EtwTraceLevel Level { get; init; }
-
-        /// <summary>
-        /// The name of the level, if any.
-        /// </summary>
-        public string LevelName { get; init; }
+        public NamedValue<EtwTraceLevel> Level { get; init; }
 
         /// <summary>
         /// The opcode of the event.
         /// </summary>
-        public EtwEventType Opcode { get; init; }
-
-        /// <summary>
-        /// The name of the opcode, if any.
-        /// </summary>
-        public string OpcodeName { get; init; }
+        public NamedValue<EtwEventType> Opcode { get; init; }
 
         /// <summary>
         /// The task of the event.
         /// </summary>
-        public ushort Task { get; init; }
-
-        /// <summary>
-        /// The name of the task, if any.
-        /// </summary>
-        public string TaskName { get; init; }
+        public NamedValue<ushort> Task { get; init; }
 
         /// <summary>
         /// The keyword of the event.
         /// </summary>
-        public ulong Keyword { get; init; }
-
-        /// <summary>
-        /// The keyword name of the task, if any.
-        /// </summary>
-        public string KeywordName { get; init; }
+        public NamedValue<ulong> Keyword { get; init; }
 
         /// <summary>
         /// Event message, if any.
@@ -98,58 +73,56 @@ namespace EtwTools
         /// </summary>
         public uint? Flags { get; init; }
 
+        /// <summary>
+        /// The properties of the event.
+        /// </summary>
         public IReadOnlyList<EtwPropertyDescriptor> Properties { get; init; }
 
         internal unsafe EtwEventDescriptor(Native.EventDescriptor* eventDescriptor, Native.TraceEventInfo* eventInfo)
         {
+            var eventBuffer = (byte*)eventInfo;
+
             Id = eventDescriptor->Id;
             Version = eventDescriptor->Version;
-            Channel = eventDescriptor->Channel;
-            Level = eventDescriptor->Level;
-            Opcode = eventDescriptor->Opcode;
-            Task = eventDescriptor->Task;
-            Keyword = eventDescriptor->Keyword;
-
-            if (eventInfo == null)
+            Channel = new NamedValue<byte> { Value = eventDescriptor->Channel, Name = eventInfo == null ? null : eventInfo->ChannelNameOffset != 0 ? new string((char*)(eventBuffer + eventInfo->ChannelNameOffset)).Trim() : null };
+            Level = new NamedValue<EtwTraceLevel> { Value = eventDescriptor->Level, Name = eventInfo == null ? null : eventInfo->LevelNameOffset != 0 ? new string((char*)(eventBuffer + eventInfo->LevelNameOffset)).Trim() : null };
+            Opcode = new NamedValue<EtwEventType> { Value = eventDescriptor->Opcode, Name = eventInfo == null ? null : eventInfo->OpcodeNameOffset != 0 ? new string((char*)(eventBuffer + eventInfo->OpcodeNameOffset)).Trim() : null };
+            Task = new NamedValue<ushort>
             {
-                return;
-            }
+                Value = eventDescriptor->Task,
+                Name = eventInfo == null ? null : eventInfo->DecodingSource switch
+                {
+                    Native.DecodingSource.XmlFile => eventInfo->TaskNameOffset != 0 ? new string((char*)(eventBuffer + eventInfo->TaskNameOffset)).Trim() : null,
+                    _ => null
+                }
+            };
+            Keyword = new NamedValue<ulong> { Value = eventDescriptor->Keyword, Name = eventInfo == null ? null : eventInfo->KeywordsNameOffset != 0 ? new string((char*)(eventBuffer + eventInfo->KeywordsNameOffset)).Trim() : null };
 
-            var eventBuffer = (byte*)eventInfo;
-            Name = eventInfo->DecodingSource switch
+            Name = eventInfo == null ? null : eventInfo->DecodingSource switch
             {
                 Native.DecodingSource.XmlFile or Native.DecodingSource.Tlg => eventInfo->EventNameOffset != 0 ? new string((char*)(eventBuffer + eventInfo->EventNameOffset)).Trim() : null,
                 Native.DecodingSource.Wbem => eventInfo->TaskNameOffset != 0 ? new string((char*)(eventBuffer + eventInfo->TaskNameOffset)).Trim() : null,
                 _ => null
             };
-            ChannelName = eventInfo->ChannelNameOffset != 0 ? new string((char*)(eventBuffer + eventInfo->ChannelNameOffset)).Trim() : null;
-            LevelName = eventInfo->LevelNameOffset != 0 ? new string((char*)(eventBuffer + eventInfo->LevelNameOffset)).Trim() : null;
-            OpcodeName = eventInfo->OpcodeNameOffset != 0 ? new string((char*)(eventBuffer + eventInfo->OpcodeNameOffset)).Trim() : null;
-            TaskName = eventInfo->DecodingSource switch
-            {
-                Native.DecodingSource.XmlFile => eventInfo->TaskNameOffset != 0 ? new string((char*)(eventBuffer + eventInfo->TaskNameOffset)).Trim() : null,
-                _ => null
-            };
-            KeywordName = eventInfo->KeywordsNameOffset != 0 ? new string((char*)(eventBuffer + eventInfo->KeywordsNameOffset)).Trim() : null;
-            Message = eventInfo->EventMessageOffset != 0 ? new string((char*)(eventBuffer + eventInfo->EventMessageOffset)).Trim() : null;
-            ActivityIdName = eventInfo->DecodingSource switch
+            Message = eventInfo == null ? null : eventInfo->EventMessageOffset != 0 ? new string((char*)(eventBuffer + eventInfo->EventMessageOffset)).Trim() : null;
+            ActivityIdName = eventInfo == null ? null : eventInfo->DecodingSource switch
             {
                 Native.DecodingSource.Wbem => eventInfo->EventNameOffset != 0 ? new string((char*)(eventBuffer + eventInfo->EventNameOffset)).Trim() : null,
                 _ => null
             };
-            EventAttributes = eventInfo->DecodingSource switch
+            EventAttributes = eventInfo == null ? null : eventInfo->DecodingSource switch
             {
                 Native.DecodingSource.XmlFile => eventInfo->EventAttributesOffset != 0 ? new string((char*)(eventBuffer + eventInfo->EventAttributesOffset)).Trim() : null,
                 _ => null
             };
-            RelatedActivityIdName = eventInfo->DecodingSource switch
+            RelatedActivityIdName = eventInfo == null ? null : eventInfo->DecodingSource switch
             {
                 Native.DecodingSource.Wbem => eventInfo->EventAttributesOffset != 0 ? new string((char*)(eventBuffer + eventInfo->EventAttributesOffset)).Trim() : null,
                 _ => null
             };
-            Flags = eventInfo->Flags;
+            Flags = eventInfo == null ? 0 : eventInfo->Flags;
 
-            if (eventInfo->PropertyCount == 0)
+            if (eventInfo == null || eventInfo->PropertyCount == 0)
             {
                 Properties = Array.Empty<EtwPropertyDescriptor>();
                 return;
@@ -162,6 +135,23 @@ namespace EtwTools
                 properties[i] = EtwPropertyDescriptor.Create(eventInfo, currentProperty);
             }
             Properties = properties;
+        }
+
+        /// <summary>
+        /// A value that has an optional name.
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        public struct NamedValue<T>
+        {
+            /// <summary>
+            /// The value.
+            /// </summary>
+            public T Value { get; init; }
+
+            /// <summary>
+            /// The optional name.
+            /// </summary>
+            public string Name { get; init; }
         }
     }
 }
