@@ -210,7 +210,8 @@ namespace EtwTools
         public IReadOnlyList<EtwEventDescriptor> GetEventDescriptors()
         {
             var providerGuid = Id;
-            var hr = (Native.Hresult)Native.TdhEnumerateManifestProviderEvents(&providerGuid, null, out var bufferSize);
+            uint bufferSize = 0;
+            var hr = (Native.Hresult)Native.TdhEnumerateManifestProviderEvents(&providerGuid, null, &bufferSize);
             if (hr != Native.Hresult.ErrorInsufficientBuffer)
             {
                 // There are lots of error codes possible here, so just fail.
@@ -219,7 +220,7 @@ namespace EtwTools
 
             var buffer = stackalloc byte[(int)bufferSize];
             var providerEventInfo = (Native.ProviderEventInfo*)buffer;
-            ((Native.Hresult)Native.TdhEnumerateManifestProviderEvents(&providerGuid, providerEventInfo, out bufferSize)).ThrowException();
+            ((Native.Hresult)Native.TdhEnumerateManifestProviderEvents(&providerGuid, providerEventInfo, &bufferSize)).ThrowException();
 
             var infos = new EtwEventDescriptor[providerEventInfo->NumberOfEvents];
             for (var i = 0; i < providerEventInfo->NumberOfEvents; i++)
@@ -243,6 +244,45 @@ namespace EtwTools
             }
 
             return infos;
+        }
+
+        /// <summary>
+        /// Returns a map for an event property.
+        /// </summary>
+        /// <param name="name">The name of the map.</param>
+        /// <param name="version">The version of the map to retrieve.</param>
+        /// <returns>The map.</returns>
+        public EtwPropertyMapDescriptor GetPropertyMap(string name, byte version)
+        {
+            Dictionary<uint, string> map = new();
+
+            Native.EventRecord eventRecord = new() { EventHeader = new() { ProviderId = Id, EventDescriptor = new() { Version = version } } };
+            uint bufferSize = 0;
+            var hr = (Native.Hresult)Native.TdhGetEventMapInformation(&eventRecord, name, null, &bufferSize);
+
+            if (hr != Native.Hresult.ErrorInsufficientBuffer)
+            {
+                return null;
+            }
+
+            var buffer = stackalloc byte[(int)bufferSize];
+            var eventMapInfo = (Native.EventMapInfo*)buffer;
+            ((Native.Hresult)Native.TdhGetEventMapInformation(&eventRecord, name, eventMapInfo, &bufferSize)).ThrowException();
+
+            if (((eventMapInfo->Flag & (Native.MapFlags.ManifestValuemap | Native.MapFlags.ManifestBitmap)) == 0) ||
+                eventMapInfo->MapEntryValueType != Native.MapValueType.UnsignedLong)
+            {
+                // Unsupported map type
+                return null;
+            }
+
+            for (var i = 0; i < eventMapInfo->EntryCount; i++)
+            {
+                var mapEntry = (Native.EventMapEntry*)(buffer + sizeof(Native.EventMapInfo) + (i * sizeof(Native.EventMapEntry)));
+                map[mapEntry->Value] = new string((char*)&buffer[mapEntry->OutputOffset]).Trim();
+            }
+
+            return new EtwPropertyMapDescriptor { Flags = (eventMapInfo->Flag & Native.MapFlags.ManifestBitmap) != 0, Values = map };
         }
 
         /// <summary>

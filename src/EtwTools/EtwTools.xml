@@ -1003,6 +1003,21 @@
             The size kind.
             </summary>
         </member>
+        <member name="T:EtwTools.EtwPropertyMapDescriptor">
+            <summary>
+            Describes a property map.
+            </summary>
+        </member>
+        <member name="P:EtwTools.EtwPropertyMapDescriptor.Flags">
+            <summary>
+            The values are bitflags.
+            </summary>
+        </member>
+        <member name="P:EtwTools.EtwPropertyMapDescriptor.Values">
+            <summary>
+            The values.
+            </summary>
+        </member>
         <member name="T:EtwTools.EtwProvider">
             <summary>
             Represents an ETW event provider.
@@ -1055,6 +1070,14 @@
             Gets descriptions of events supported by this provider.
             </summary>
             <returns>A list of event descriptors.</returns>
+        </member>
+        <member name="M:EtwTools.EtwProvider.GetPropertyMap(System.String,System.Byte)">
+            <summary>
+            Returns a map for an event property.
+            </summary>
+            <param name="name">The name of the map.</param>
+            <param name="version">The version of the map to retrieve.</param>
+            <returns>The map.</returns>
         </member>
         <member name="T:EtwTools.EtwProvider.InstanceInfo">
             <summary>

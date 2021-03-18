@@ -2,7 +2,7 @@
   "profiles": {
     "trace": {
       "commandName": "Project",
-      "commandLineArgs": "providers info --provider 9f7b5df4-b902-48bc-bc94-95068c6c7d26",
+      "commandLineArgs": "providers events --provider \".NET Common Language Runtime\"",
       "nativeDebugging": true
     }
   }

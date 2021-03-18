@@ -354,15 +354,34 @@ static void GetEvents(string provider)
         return;
     }
 
-    AnsiConsole.WriteLine(JsonConvert.SerializeObject(eventDescriptors, new JsonSerializerSettings
+    Dictionary<string, EtwPropertyMapDescriptor> maps = new();
+
+    foreach (var e in eventDescriptors)
     {
-        Formatting = Formatting.Indented,
-        Converters = new[] { new StringEnumConverter() },
-        ContractResolver = new DefaultContractResolver
+        foreach (var p in e.Properties)
         {
-            NamingStrategy = new CamelCaseNamingStrategy()
+            void GatherMaps(Dictionary<string, EtwPropertyMapDescriptor> maps, EtwPropertyDescriptor property)
+            {
+                if (property is EtwSimplePropertyDescriptor simpleProperty && simpleProperty.MapName != null && !maps.TryGetValue(simpleProperty.MapName, out var _))
+                {
+                    maps[simpleProperty.Name] = etwProvider.GetPropertyMap(simpleProperty.MapName, e.Version);
+                }
+            }
+
+            GatherMaps(maps, p);
         }
-    }));
+    }
+
+    AnsiConsole.WriteLine(JsonConvert.SerializeObject(new EventInformation { Events = eventDescriptors, Maps = maps },
+        new JsonSerializerSettings
+        {
+            Formatting = Formatting.Indented,
+            Converters = new[] { new StringEnumConverter() },
+            ContractResolver = new DefaultContractResolver
+            {
+                NamingStrategy = new CamelCaseNamingStrategy()
+            }
+        }));
     AnsiConsole.WriteLine();
 }
 
@@ -517,3 +536,10 @@ internal enum ProcessRegisteredSort
     Name,
     Id
 }
+
+internal readonly struct EventInformation
+{
+    public IReadOnlyList<EtwEventDescriptor> Events { get; init; }
+    public IReadOnlyDictionary<string, EtwPropertyMapDescriptor> Maps { get; init; }
+}
+

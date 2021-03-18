@@ -232,17 +232,35 @@ namespace EtwTools
             HasCustomSchema = 0x80
         }
 
+        [Flags]
+        public enum MapFlags
+        {
+            ManifestValuemap = 0x1,
+            ManifestBitmap = 0x2,
+            ManifestPatternmap = 0x4,
+            WbemValuemap = 0x8,
+            WbemBitmap = 0x10,
+            WbemFlags = 0x20,
+            WbemNoMap = 0x30
+        };
+
+        public enum MapValueType
+        {
+            UnsignedLong,
+            String
+        }
+
 #pragma warning disable IDE1006
         [StructLayout(LayoutKind.Sequential)]
-        public struct WnodeHeader
+        public readonly struct WnodeHeader
         {
-            public uint BufferSize { get; set; }
-            public uint ProviderId { get; set; }
-            public ulong HistoricalContext { get; set; }
-            public long TimeStamp { get; set; }
-            public Guid Guid { get; set; }
-            public EtwClockResolution ClientContext { get; set; }
-            public WnodeFlags Flags { get; set; }
+            public uint BufferSize { get; init; }
+            public uint ProviderId { get; init; }
+            public ulong HistoricalContext { get; init; }
+            public long TimeStamp { get; init; }
+            public Guid Guid { get; init; }
+            public EtwClockResolution ClientContext { get; init; }
+            public WnodeFlags Flags { get; init; }
         }
 
         [StructLayout(LayoutKind.Sequential)]
@@ -271,13 +289,29 @@ namespace EtwTools
         [StructLayout(LayoutKind.Sequential)]
         public readonly struct EventDescriptor
         {
-            public ushort Id { get; }
-            public byte Version { get; }
-            public byte Channel { get; }
-            public EtwTraceLevel Level { get; }
-            public EtwEventType Opcode { get; }
-            public ushort Task { get; }
-            public ulong Keyword { get; }
+            public ushort Id { get; init; }
+            public byte Version { get; init; }
+            public byte Channel { get; init; }
+            public EtwTraceLevel Level { get; init; }
+            public EtwEventType Opcode { get; init; }
+            public ushort Task { get; init; }
+            public ulong Keyword { get; init; }
+        }
+
+        [StructLayout(LayoutKind.Sequential)]
+        public readonly struct EventMapEntry
+        {
+            public uint OutputOffset { get; }
+            public uint Value { get; }
+        }
+
+        [StructLayout(LayoutKind.Sequential)]
+        public readonly struct EventMapInfo
+        {
+            public uint NameOffset { get; }
+            public MapFlags Flag { get; }
+            public uint EntryCount { get; }
+            public MapValueType MapEntryValueType { get; }
         }
 
         [StructLayout(LayoutKind.Sequential)]
@@ -375,18 +409,18 @@ namespace EtwTools
         [StructLayout(LayoutKind.Sequential)]
         public readonly struct EventHeader
         {
-            public ushort Size { get; }
+            public ushort Size { get; init; }
             private readonly ushort _headerType;
-            public EventHeaderFlags Flags { get; }
-            public EventPropertySource EventProperty { get; }
-            public uint ThreadId { get; }
-            public uint ProcessId { get; }
-            public long TimeStamp { get; }
-            public Guid ProviderId { get; }
-            public EventDescriptor EventDescriptor { get; }
-            public uint KernelTime { get; }
-            public uint UserTime { get; }
-            public Guid ActivityId { get; }
+            public EventHeaderFlags Flags { get; init; }
+            public EventPropertySource EventProperty { get; init; }
+            public uint ThreadId { get; init; }
+            public uint ProcessId { get; init; }
+            public long TimeStamp { get; init; }
+            public Guid ProviderId { get; init; }
+            public EventDescriptor EventDescriptor { get; init; }
+            public uint KernelTime { get; init; }
+            public uint UserTime { get; init; }
+            public Guid ActivityId { get; init; }
         }
 
         [StructLayout(LayoutKind.Sequential)]
@@ -415,13 +449,13 @@ namespace EtwTools
         [StructLayout(LayoutKind.Sequential)]
         public readonly struct EventRecord
         {
-            public EventHeader EventHeader { get; }
-            public EtwBufferContext BufferContext { get; }
+            public EventHeader EventHeader { get; init; }
+            public EtwBufferContext BufferContext { get; init; }
             private readonly ushort _extendedDataCount;
             private readonly ushort _userDataLength;
             private readonly EventHeaderExtendedDataItem* _extendedData;
             private readonly byte* _userData;
-            public nint UserContext { get; }
+            public nint UserContext { get; init; }
 
             public Span<EventHeaderExtendedDataItem> ExtendedData => new(_extendedData, _extendedDataCount);
             public Span<byte> UserData => new(_userData, _userDataLength);
@@ -531,11 +565,14 @@ namespace EtwTools
         [DllImport("advapi32.dll", CharSet = CharSet.Unicode)]
         public static extern ErrorCode StartTrace(out ulong sessionHandle, string sessionName, EventTraceProperties* properties);
 
+        [DllImport("tdh.dll", CharSet = CharSet.Unicode)]
+        public static extern ErrorCode TdhGetEventMapInformation(EventRecord* eventRecord, string mapName, EventMapInfo* buffer, uint* bufferSize);
+
         [DllImport("tdh.dll")]
         public static extern ErrorCode TdhGetManifestEventInformation(Guid* providerGuid, EventDescriptor* eventDescriptor, TraceEventInfo* buffer, uint* bufferSize);
 
         [DllImport("tdh.dll")]
-        public static extern ErrorCode TdhEnumerateManifestProviderEvents(Guid* providerGuid, ProviderEventInfo* buffer, out uint bufferSize);
+        public static extern ErrorCode TdhEnumerateManifestProviderEvents(Guid* providerGuid, ProviderEventInfo* buffer, uint* bufferSize);
 
         [DllImport("tdh.dll")]
         public static extern ErrorCode TdhEnumerateProviders(byte* buffer, out int bufferSize);
