@@ -182,11 +182,11 @@ namespace EtwTools
             var buffer = stackalloc byte[bufferSizeNeeded];
             ((Native.Hresult)Native.EnumerateTraceGuidsEx(Native.TraceQueryInfoClass.TraceGuidQueryList, null, 0, buffer, bufferSizeNeeded, out bufferSizeNeeded)).ThrowException();
 
-            var registeredProviders = GetPublishedProviders();
+            var publishedProviders = GetPublishedProviders();
             Dictionary<Guid, string> providerIdMap = new();
 
             // There may be duplicates, but this is just a best guess...
-            foreach (var registeredProvider in registeredProviders.Where(p => !string.IsNullOrEmpty(p.Name)))
+            foreach (var registeredProvider in publishedProviders.Where(p => !string.IsNullOrEmpty(p.Name)))
             {
                 providerIdMap[registeredProvider.Id] = registeredProvider.Name;
             }
@@ -207,7 +207,7 @@ namespace EtwTools
         /// Gets descriptions of events supported by this provider.
         /// </summary>
         /// <returns>A list of event descriptors.</returns>
-        public IReadOnlyList<EtwEventDescriptor> GetEventDescriptors()
+        public IReadOnlyList<EtwEventInfo> GetEventDescriptors()
         {
             var providerGuid = Id;
             uint bufferSize = 0;
@@ -222,16 +222,16 @@ namespace EtwTools
             var providerEventInfo = (Native.ProviderEventInfo*)buffer;
             ((Native.Hresult)Native.TdhEnumerateManifestProviderEvents(&providerGuid, providerEventInfo, &bufferSize)).ThrowException();
 
-            var infos = new EtwEventDescriptor[providerEventInfo->NumberOfEvents];
+            var infos = new EtwEventInfo[providerEventInfo->NumberOfEvents];
             for (var i = 0; i < providerEventInfo->NumberOfEvents; i++)
             {
-                var eventDescriptor = (Native.EventDescriptor*)(buffer + sizeof(Native.ProviderEventInfo) + (i * sizeof(Native.EventDescriptor)));
+                var eventDescriptor = (EtwEventDescriptor*)(buffer + sizeof(Native.ProviderEventInfo) + (i * sizeof(EtwEventDescriptor)));
 
                 uint eventBufferSize = 0;
                 hr = (Native.Hresult)Native.TdhGetManifestEventInformation(&providerGuid, eventDescriptor, null, &eventBufferSize);
                 if (hr != Native.Hresult.ErrorInsufficientBuffer)
                 {
-                    infos[i] = new EtwEventDescriptor(eventDescriptor, null);
+                    infos[i] = new EtwEventInfo(*eventDescriptor, null);
                     continue;
                 }
 
@@ -239,7 +239,7 @@ namespace EtwTools
                 {
                     var eventInfo = (Native.TraceEventInfo*)eventBuffer;
                     ((Native.Hresult)Native.TdhGetManifestEventInformation(&providerGuid, eventDescriptor, eventInfo, &eventBufferSize)).ThrowException();
-                    infos[i] = new EtwEventDescriptor(eventDescriptor, eventInfo);
+                    infos[i] = new EtwEventInfo(*eventDescriptor, eventInfo);
                 }
             }
 
@@ -252,7 +252,7 @@ namespace EtwTools
         /// <param name="name">The name of the map.</param>
         /// <param name="version">The version of the map to retrieve.</param>
         /// <returns>The map.</returns>
-        public EtwPropertyMapDescriptor GetPropertyMap(string name, byte version)
+        public EtwPropertyMapInfo GetPropertyMap(string name, byte version)
         {
             Dictionary<uint, string> map = new();
 
@@ -282,7 +282,7 @@ namespace EtwTools
                 map[mapEntry->Value] = new string((char*)&buffer[mapEntry->OutputOffset]).Trim();
             }
 
-            return new EtwPropertyMapDescriptor { Flags = (eventMapInfo->Flag & Native.MapFlags.ManifestBitmap) != 0, Values = map };
+            return new EtwPropertyMapInfo { Flags = (eventMapInfo->Flag & Native.MapFlags.ManifestBitmap) != 0, Values = map };
         }
 
         /// <summary>

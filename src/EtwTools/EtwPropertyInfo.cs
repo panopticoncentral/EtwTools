@@ -3,7 +3,7 @@
     /// <summary>
     /// Description of an ETW event's property.
     /// </summary>
-    public abstract record EtwPropertyDescriptor
+    public abstract record EtwPropertyInfo
     {
         /// <summary>
         /// The name of the property.
@@ -30,11 +30,11 @@
         /// </summary>
         public uint Tags { get; init; }
 
-        internal static unsafe EtwPropertyDescriptor Create(Native.TraceEventInfo* traceEventInfo, Native.EventPropertyInfo* propertyInfo)
+        internal static unsafe EtwPropertyInfo Create(Native.TraceEventInfo* traceEventInfo, Native.EventPropertyInfo* propertyInfo)
         {
             if ((propertyInfo->PropertyFlags & Native.PropertyFlags.Struct) != 0)
             {
-                var properties = new EtwPropertyDescriptor[propertyInfo->Union2];
+                var properties = new EtwPropertyInfo[propertyInfo->Union2];
                 for (var i = 0; i < propertyInfo->Union2; i++)
                 {
                     var eventBuffer = (byte*)traceEventInfo;
@@ -42,7 +42,7 @@
                     properties[i] = Create(traceEventInfo, currentProperty);
                 }
 
-                return new EtwStructPropertyDescriptor
+                return new EtwStructPropertyInfo
                 {
                     Name = new string((char*)(((byte*)traceEventInfo) + propertyInfo->NameOffset)),
                     Length = new PropertySize
@@ -70,7 +70,7 @@
             else
             {
                 return (propertyInfo->PropertyFlags & Native.PropertyFlags.HasCustomSchema) != 0
-                    ? new EtwCustomSchemaPropertyDescriptor
+                    ? new EtwCustomSchemaPropertyInfo
                     {
                         Name = new string((char*)(((byte*)traceEventInfo) + propertyInfo->NameOffset)),
                         Length = new PropertySize
@@ -93,7 +93,7 @@
                         },
                         Tags = propertyInfo->Tags
                     }
-                    : new EtwSimplePropertyDescriptor
+                    : new EtwSimplePropertyInfo
                     {
                         Name = new string((char*)(((byte*)traceEventInfo) + propertyInfo->NameOffset)),
                         InputType = (EtwInputType)propertyInfo->Union1,

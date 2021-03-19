@@ -5,7 +5,7 @@ namespace EtwTools
     /// <summary>
     /// Describes a property map.
     /// </summary>
-    public sealed record EtwPropertyMapDescriptor
+    public sealed record EtwPropertyMapInfo
     {
         /// <summary>
         /// The values are bitflags.

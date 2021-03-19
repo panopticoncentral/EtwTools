@@ -5,7 +5,7 @@ namespace EtwTools
     /// <summary>
     /// Property descriptor for a structure property.
     /// </summary>
-    public sealed record EtwStructPropertyDescriptor : EtwPropertyDescriptor
+    public sealed record EtwStructPropertyInfo : EtwPropertyInfo
     {
         /// <summary>
         /// The kind of the property.
@@ -15,6 +15,6 @@ namespace EtwTools
         /// <summary>
         /// The structure properties.
         /// </summary>
-        public IReadOnlyList<EtwPropertyDescriptor> Properties { get; init; }
+        public IReadOnlyList<EtwPropertyInfo> Properties { get; init; }
     }
 }

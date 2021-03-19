@@ -72,12 +72,12 @@
             production.
             </summary>
         </member>
-        <member name="T:EtwTools.EtwCustomSchemaPropertyDescriptor">
+        <member name="T:EtwTools.EtwCustomSchemaPropertyInfo">
             <summary>
             A property with a custom schema.
             </summary>
         </member>
-        <member name="P:EtwTools.EtwCustomSchemaPropertyDescriptor.Kind">
+        <member name="P:EtwTools.EtwCustomSchemaPropertyInfo.Kind">
             <summary>
             The kind of the property.
             </summary>
@@ -289,17 +289,12 @@
         </member>
         <member name="T:EtwTools.EtwEventDescriptor">
             <summary>
-            Description of an ETW event.
+            An identifier for an event.
             </summary>
         </member>
         <member name="P:EtwTools.EtwEventDescriptor.Id">
             <summary>
             The ID of the event.
-            </summary>
-        </member>
-        <member name="P:EtwTools.EtwEventDescriptor.Name">
-            <summary>
-            The name of the event, if any.
             </summary>
         </member>
         <member name="P:EtwTools.EtwEventDescriptor.Version">
@@ -332,50 +327,74 @@
             The keyword of the event.
             </summary>
         </member>
-        <member name="P:EtwTools.EtwEventDescriptor.Message">
+        <member name="T:EtwTools.EtwEventInfo">
+            <summary>
+            Description of an ETW event.
+            </summary>
+        </member>
+        <member name="P:EtwTools.EtwEventInfo.Descriptor">
+            <summary>
+            The event descriptor.
+            </summary>
+        </member>
+        <member name="P:EtwTools.EtwEventInfo.Name">
+            <summary>
+            The name of the event, if any.
+            </summary>
+        </member>
+        <member name="P:EtwTools.EtwEventInfo.ChannelName">
+            <summary>
+            The channel of the event.
+            </summary>
+        </member>
+        <member name="P:EtwTools.EtwEventInfo.LevelName">
+            <summary>
+            The level of the event.
+            </summary>
+        </member>
+        <member name="P:EtwTools.EtwEventInfo.OpcodeName">
+            <summary>
+            The opcode of the event.
+            </summary>
+        </member>
+        <member name="P:EtwTools.EtwEventInfo.TaskName">
+            <summary>
+            The task of the event.
+            </summary>
+        </member>
+        <member name="P:EtwTools.EtwEventInfo.KeywordName">
+            <summary>
+            The keyword of the event.
+            </summary>
+        </member>
+        <member name="P:EtwTools.EtwEventInfo.Message">
             <summary>
             Event message, if any.
             </summary>
         </member>
-        <member name="P:EtwTools.EtwEventDescriptor.EventAttributes">
+        <member name="P:EtwTools.EtwEventInfo.EventAttributes">
             <summary>
             Event attributes, if any.
             </summary>
         </member>
-        <member name="P:EtwTools.EtwEventDescriptor.ActivityIdName">
+        <member name="P:EtwTools.EtwEventInfo.ActivityIdName">
             <summary>
             Activity ID name, if any.
             </summary>
         </member>
-        <member name="P:EtwTools.EtwEventDescriptor.RelatedActivityIdName">
+        <member name="P:EtwTools.EtwEventInfo.RelatedActivityIdName">
             <summary>
             Related activity ID name, if any.
             </summary>
         </member>
-        <member name="P:EtwTools.EtwEventDescriptor.Flags">
+        <member name="P:EtwTools.EtwEventInfo.Flags">
             <summary>
             Event flags.
             </summary>
         </member>
-        <member name="P:EtwTools.EtwEventDescriptor.Properties">
+        <member name="P:EtwTools.EtwEventInfo.Properties">
             <summary>
             The properties of the event.
-            </summary>
-        </member>
-        <member name="T:EtwTools.EtwEventDescriptor.NamedValue`1">
-            <summary>
-            A value that has an optional name.
-            </summary>
-            <typeparam name="T"></typeparam>
-        </member>
-        <member name="P:EtwTools.EtwEventDescriptor.NamedValue`1.Value">
-            <summary>
-            The value.
-            </summary>
-        </member>
-        <member name="P:EtwTools.EtwEventDescriptor.NamedValue`1.Name">
-            <summary>
-            The optional name.
             </summary>
         </member>
         <member name="T:EtwTools.EtwEventType">
@@ -918,102 +937,102 @@
             No printing.
             </summary>
         </member>
-        <member name="T:EtwTools.EtwPropertyDescriptor">
+        <member name="T:EtwTools.EtwPropertyInfo">
             <summary>
             Description of an ETW event's property.
             </summary>
         </member>
-        <member name="P:EtwTools.EtwPropertyDescriptor.Name">
+        <member name="P:EtwTools.EtwPropertyInfo.Name">
             <summary>
             The name of the property.
             </summary>
         </member>
-        <member name="P:EtwTools.EtwPropertyDescriptor.Kind">
+        <member name="P:EtwTools.EtwPropertyInfo.Kind">
             <summary>
             The kind of property it is.
             </summary>
         </member>
-        <member name="P:EtwTools.EtwPropertyDescriptor.Length">
+        <member name="P:EtwTools.EtwPropertyInfo.Length">
             <summary>
             The length of the property.
             </summary>
         </member>
-        <member name="P:EtwTools.EtwPropertyDescriptor.Count">
+        <member name="P:EtwTools.EtwPropertyInfo.Count">
             <summary>
             The count of the property.
             </summary>
         </member>
-        <member name="P:EtwTools.EtwPropertyDescriptor.Tags">
+        <member name="P:EtwTools.EtwPropertyInfo.Tags">
             <summary>
             Property tags.
             </summary>
         </member>
-        <member name="T:EtwTools.EtwPropertyDescriptor.PropertyKind">
+        <member name="T:EtwTools.EtwPropertyInfo.PropertyKind">
             <summary>
             The kinds of properties.
             </summary>
         </member>
-        <member name="F:EtwTools.EtwPropertyDescriptor.PropertyKind.Simple">
+        <member name="F:EtwTools.EtwPropertyInfo.PropertyKind.Simple">
             <summary>
             A simple value.
             </summary>
         </member>
-        <member name="F:EtwTools.EtwPropertyDescriptor.PropertyKind.CustomSchema">
+        <member name="F:EtwTools.EtwPropertyInfo.PropertyKind.CustomSchema">
             <summary>
             A custom schema value.
             </summary>
         </member>
-        <member name="F:EtwTools.EtwPropertyDescriptor.PropertyKind.Struct">
+        <member name="F:EtwTools.EtwPropertyInfo.PropertyKind.Struct">
             <summary>
             A structured value.
             </summary>
         </member>
-        <member name="T:EtwTools.EtwPropertyDescriptor.PropertySizeKind">
+        <member name="T:EtwTools.EtwPropertyInfo.PropertySizeKind">
             <summary>
             The kind of a size (length, count) property.
             </summary>
         </member>
-        <member name="F:EtwTools.EtwPropertyDescriptor.PropertySizeKind.Regular">
+        <member name="F:EtwTools.EtwPropertyInfo.PropertySizeKind.Regular">
             <summary>
             Regular size.
             </summary>
         </member>
-        <member name="F:EtwTools.EtwPropertyDescriptor.PropertySizeKind.Property">
+        <member name="F:EtwTools.EtwPropertyInfo.PropertySizeKind.Property">
             <summary>
             Size is specified by property at offset.
             </summary>
         </member>
-        <member name="F:EtwTools.EtwPropertyDescriptor.PropertySizeKind.Fixed">
+        <member name="F:EtwTools.EtwPropertyInfo.PropertySizeKind.Fixed">
             <summary>
             Fixed size.
             </summary>
         </member>
-        <member name="T:EtwTools.EtwPropertyDescriptor.PropertySize">
+        <member name="T:EtwTools.EtwPropertyInfo.PropertySize">
             <summary>
             A size (length, count) property.
             </summary>
         </member>
-        <member name="P:EtwTools.EtwPropertyDescriptor.PropertySize.Size">
+        <member name="P:EtwTools.EtwPropertyInfo.PropertySize.Size">
             <summary>
             The size value.
             </summary>
         </member>
-        <member name="P:EtwTools.EtwPropertyDescriptor.PropertySize.Kind">
+        <member name="P:EtwTools.EtwPropertyInfo.PropertySize.Kind">
             <summary>
             The size kind.
             </summary>
         </member>
-        <member name="T:EtwTools.EtwPropertyMapDescriptor">
+        <member name="T:EtwTools.EtwPropertyMapInfo">
             <summary>
             Describes a property map.
             </summary>
         </member>
-        <member name="P:EtwTools.EtwPropertyMapDescriptor.Flags">
+        <member name="P:EtwTools.EtwPropertyMapInfo.Flags">
             <summary>
             The values are bitflags.
             </summary>
         </member>
-        <member name="P:EtwTools.EtwPropertyMapDescriptor.Values">
+        <member name="P:EtwTools.EtwPropertyMapInfo.Values">
             <summary>
             The values.
             </summary>
@@ -1262,42 +1281,42 @@
             The number of buffers that could not be delivered in real-time to the consumer.
             </summary>
         </member>
-        <member name="T:EtwTools.EtwSimplePropertyDescriptor">
+        <member name="T:EtwTools.EtwSimplePropertyInfo">
             <summary>
             Descriptor for a simple property.
             </summary>
         </member>
-        <member name="P:EtwTools.EtwSimplePropertyDescriptor.Kind">
+        <member name="P:EtwTools.EtwSimplePropertyInfo.Kind">
             <summary>
             The property kind.
             </summary>
         </member>
-        <member name="P:EtwTools.EtwSimplePropertyDescriptor.InputType">
+        <member name="P:EtwTools.EtwSimplePropertyInfo.InputType">
             <summary>
             The input type of the property.
             </summary>
         </member>
-        <member name="P:EtwTools.EtwSimplePropertyDescriptor.OutputType">
+        <member name="P:EtwTools.EtwSimplePropertyInfo.OutputType">
             <summary>
             The desired output type of the property.
             </summary>
         </member>
-        <member name="P:EtwTools.EtwSimplePropertyDescriptor.MapName">
+        <member name="P:EtwTools.EtwSimplePropertyInfo.MapName">
             <summary>
             The name of the map type of the property.
             </summary>
         </member>
-        <member name="T:EtwTools.EtwStructPropertyDescriptor">
+        <member name="T:EtwTools.EtwStructPropertyInfo">
             <summary>
             Property descriptor for a structure property.
             </summary>
         </member>
-        <member name="P:EtwTools.EtwStructPropertyDescriptor.Kind">
+        <member name="P:EtwTools.EtwStructPropertyInfo.Kind">
             <summary>
             The kind of the property.
             </summary>
         </member>
-        <member name="P:EtwTools.EtwStructPropertyDescriptor.Properties">
+        <member name="P:EtwTools.EtwStructPropertyInfo.Properties">
             <summary>
             The structure properties.
             </summary>

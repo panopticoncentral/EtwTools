@@ -354,17 +354,17 @@ static void GetEvents(string provider)
         return;
     }
 
-    Dictionary<string, EtwPropertyMapDescriptor> maps = new();
+    Dictionary<string, EtwPropertyMapInfo> maps = new();
 
     foreach (var e in eventDescriptors)
     {
         foreach (var p in e.Properties)
         {
-            void GatherMaps(Dictionary<string, EtwPropertyMapDescriptor> maps, EtwPropertyDescriptor property)
+            void GatherMaps(Dictionary<string, EtwPropertyMapInfo> maps, EtwPropertyInfo property)
             {
-                if (property is EtwSimplePropertyDescriptor simpleProperty && simpleProperty.MapName != null && !maps.TryGetValue(simpleProperty.MapName, out var _))
+                if (property is EtwSimplePropertyInfo simpleProperty && simpleProperty.MapName != null && !maps.TryGetValue(simpleProperty.MapName, out var _))
                 {
-                    maps[simpleProperty.Name] = etwProvider.GetPropertyMap(simpleProperty.MapName, e.Version);
+                    maps[simpleProperty.Name] = etwProvider.GetPropertyMap(simpleProperty.MapName, e.Descriptor.Version);
                 }
             }
 
@@ -474,13 +474,13 @@ static void GetTraceInfo(string file)
 {
     using var logFile = new EtwTrace(file);
 
-    var eventCount = 0;
-    Dictionary<Guid, int> providerCount = new();
+    var totalEventCount = 0;
+    Dictionary<(Guid, ushort), int> eventCount = new();
     var stats = logFile.Open(null, e =>
     {
-        eventCount++;
-        _ = providerCount.TryGetValue(e.Provider, out var count);
-        providerCount[e.Provider] = count + 1;
+        totalEventCount++;
+        _ = eventCount.TryGetValue((e.Provider, e.Id), out var count);
+        eventCount[(e.Provider, e.Id)] = count + 1;
     });
 
     logFile.Process();
@@ -504,13 +504,26 @@ static void GetTraceInfo(string file)
     AnsiConsole.WriteLine($"Clock Resolution: {stats.ClockResolution}");
     AnsiConsole.WriteLine($"Kernel Trace: {(stats.IsKernelTrace ? "yes" : "no")}");
     AnsiConsole.WriteLine();
-    AnsiConsole.WriteLine($"Event Count: {eventCount}");
+    AnsiConsole.WriteLine($"Event Count: {totalEventCount}");
 
-    var table = new Table().AddColumn("ID").AddColumn("Count");
+    var publishedProviders = EtwProvider.GetPublishedProviders();
+    Dictionary<Guid, string> providerIdMap = new();
 
-    foreach (var kvp in providerCount.OrderByDescending(kvp => kvp.Value))
+    // There may be duplicates, but this is just a best guess...
+    foreach (var registeredProvider in publishedProviders.Where(p => !string.IsNullOrEmpty(p.Name)))
     {
-        _ = table.AddRow(kvp.Key.ToString(), kvp.Value.ToString(CultureInfo.InvariantCulture));
+        providerIdMap[registeredProvider.Id] = registeredProvider.Name;
+    }
+
+    var table = new Table().AddColumn("Name").AddColumn("ID").AddColumn("Event").AddColumn("Count");
+
+    foreach (var kvp in eventCount.OrderByDescending(kvp => kvp.Value))
+    {
+        _ = table.AddRow(
+            providerIdMap.TryGetValue(kvp.Key.Item1, out var provider) ? provider : string.Empty,
+            kvp.Key.Item1.ToString(),
+            kvp.Key.Item2.ToString(CultureInfo.InvariantCulture),
+            kvp.Value.ToString(CultureInfo.InvariantCulture));
     }
 
     AnsiConsole.Render(table);
@@ -539,7 +552,7 @@ internal enum ProcessRegisteredSort
 
 internal readonly struct EventInformation
 {
-    public IReadOnlyList<EtwEventDescriptor> Events { get; init; }
-    public IReadOnlyDictionary<string, EtwPropertyMapDescriptor> Maps { get; init; }
+    public IReadOnlyList<EtwEventInfo> Events { get; init; }
+    public IReadOnlyDictionary<string, EtwPropertyMapInfo> Maps { get; init; }
 }
 

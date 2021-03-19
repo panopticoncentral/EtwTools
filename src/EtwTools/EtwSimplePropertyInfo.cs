@@ -3,7 +3,7 @@
     /// <summary>
     /// Descriptor for a simple property.
     /// </summary>
-    public sealed record EtwSimplePropertyDescriptor : EtwPropertyDescriptor
+    public sealed record EtwSimplePropertyInfo : EtwPropertyInfo
     {
         /// <summary>
         /// The property kind.

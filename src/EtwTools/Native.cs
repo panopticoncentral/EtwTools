@@ -287,18 +287,6 @@ namespace EtwTools
         }
 
         [StructLayout(LayoutKind.Sequential)]
-        public readonly struct EventDescriptor
-        {
-            public ushort Id { get; init; }
-            public byte Version { get; init; }
-            public byte Channel { get; init; }
-            public EtwTraceLevel Level { get; init; }
-            public EtwEventType Opcode { get; init; }
-            public ushort Task { get; init; }
-            public ulong Keyword { get; init; }
-        }
-
-        [StructLayout(LayoutKind.Sequential)]
         public readonly struct EventMapEntry
         {
             public uint OutputOffset { get; }
@@ -319,7 +307,7 @@ namespace EtwTools
         {
             public Guid ProviderGuid { get; }
             public Guid EventGuid { get; }
-            public EventDescriptor EventDescriptor { get; }
+            public EtwEventDescriptor EventDescriptor { get; }
             public DecodingSource DecodingSource { get; }
             public uint ProviderNameOffset { get; }
             public uint LevelNameOffset { get; }
@@ -417,7 +405,7 @@ namespace EtwTools
             public uint ProcessId { get; init; }
             public long TimeStamp { get; init; }
             public Guid ProviderId { get; init; }
-            public EventDescriptor EventDescriptor { get; init; }
+            public EtwEventDescriptor EventDescriptor { get; init; }
             public uint KernelTime { get; init; }
             public uint UserTime { get; init; }
             public Guid ActivityId { get; init; }
@@ -569,7 +557,7 @@ namespace EtwTools
         public static extern ErrorCode TdhGetEventMapInformation(EventRecord* eventRecord, string mapName, EventMapInfo* buffer, uint* bufferSize);
 
         [DllImport("tdh.dll")]
-        public static extern ErrorCode TdhGetManifestEventInformation(Guid* providerGuid, EventDescriptor* eventDescriptor, TraceEventInfo* buffer, uint* bufferSize);
+        public static extern ErrorCode TdhGetManifestEventInformation(Guid* providerGuid, EtwEventDescriptor* eventDescriptor, TraceEventInfo* buffer, uint* bufferSize);
 
         [DllImport("tdh.dll")]
         public static extern ErrorCode TdhEnumerateManifestProviderEvents(Guid* providerGuid, ProviderEventInfo* buffer, uint* bufferSize);
