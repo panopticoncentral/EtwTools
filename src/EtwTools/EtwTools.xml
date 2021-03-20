@@ -107,39 +107,9 @@
             The event provider.
             </summary>
         </member>
-        <member name="P:EtwTools.EtwEvent.Id">
+        <member name="P:EtwTools.EtwEvent.Descriptor">
             <summary>
-            The event ID;
-            </summary>
-        </member>
-        <member name="P:EtwTools.EtwEvent.Version">
-            <summary>
-            The event version.
-            </summary>
-        </member>
-        <member name="P:EtwTools.EtwEvent.Channel">
-            <summary>
-            The event channel.
-            </summary>
-        </member>
-        <member name="P:EtwTools.EtwEvent.Level">
-            <summary>
-            The trace level of the event.
-            </summary>
-        </member>
-        <member name="P:EtwTools.EtwEvent.Opcode">
-            <summary>
-            The event opcode.
-            </summary>
-        </member>
-        <member name="P:EtwTools.EtwEvent.Task">
-            <summary>
-            The event task.
-            </summary>
-        </member>
-        <member name="P:EtwTools.EtwEvent.Keyword">
-            <summary>
-            The event's keywords.
+            Event descriptor.
             </summary>
         </member>
         <member name="P:EtwTools.EtwEvent.Time">
@@ -326,6 +296,48 @@
             <summary>
             The keyword of the event.
             </summary>
+        </member>
+        <member name="M:EtwTools.EtwEventDescriptor.ToString">
+            <summary>
+            Converts descriptor to a string.
+            </summary>
+            <returns>The string.</returns>
+        </member>
+        <member name="M:EtwTools.EtwEventDescriptor.Equals(EtwTools.EtwEventDescriptor)">
+            <summary>
+            Compares two descriptors.
+            </summary>
+            <param name="other">The other descriptor.</param>
+            <returns>Whether they are equal.</returns>
+        </member>
+        <member name="M:EtwTools.EtwEventDescriptor.Equals(System.Object)">
+            <summary>
+            Determines if a descriptor is equal to anoher object.
+            </summary>
+            <param name="obj">The object.</param>
+            <returns>Whether they are equal.</returns>
+        </member>
+        <member name="M:EtwTools.EtwEventDescriptor.GetHashCode">
+            <summary>
+            Calculates a hash code for the descriptor.
+            </summary>
+            <returns>The hash value.</returns>
+        </member>
+        <member name="M:EtwTools.EtwEventDescriptor.op_Equality(EtwTools.EtwEventDescriptor,EtwTools.EtwEventDescriptor)">
+            <summary>
+            Determines if two descriptors are equal.
+            </summary>
+            <param name="left">The left descriptor.</param>
+            <param name="right">The right descriptor.</param>
+            <returns>Whether they are equal.</returns>
+        </member>
+        <member name="M:EtwTools.EtwEventDescriptor.op_Inequality(EtwTools.EtwEventDescriptor,EtwTools.EtwEventDescriptor)">
+            <summary>
+            Determines if two descriptors are not equal.
+            </summary>
+            <param name="left">The left descriptor.</param>
+            <param name="right">The right descriptor.</param>
+            <returns>Whether they are not equal.</returns>
         </member>
         <member name="T:EtwTools.EtwEventInfo">
             <summary>

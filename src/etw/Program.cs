@@ -110,7 +110,7 @@ static void AddTraceCommands(Command traceCommand)
 {
     var infoCommand = new Command("info", "List information about a trace.")
     {
-        new Option<string>(new[] { "--file", "-f" }, "The trace file.")
+        new Option<string>(new[] { "--file", "-f" }, "The trace file.") { IsRequired = true }
     };
     infoCommand.Handler = CommandHandler.Create<string>(GetTraceInfo);
     traceCommand.AddCommand(infoCommand);
@@ -475,12 +475,12 @@ static void GetTraceInfo(string file)
     using var logFile = new EtwTrace(file);
 
     var totalEventCount = 0;
-    Dictionary<(Guid, ushort), int> eventCount = new();
+    Dictionary<(Guid, EtwEventDescriptor), int> eventCount = new();
     var stats = logFile.Open(null, e =>
     {
         totalEventCount++;
-        _ = eventCount.TryGetValue((e.Provider, e.Id), out var count);
-        eventCount[(e.Provider, e.Id)] = count + 1;
+        _ = eventCount.TryGetValue((e.Provider, e.Descriptor), out var count);
+        eventCount[(e.Provider, e.Descriptor)] = count + 1;
     });
 
     logFile.Process();
@@ -522,7 +522,7 @@ static void GetTraceInfo(string file)
         _ = table.AddRow(
             providerIdMap.TryGetValue(kvp.Key.Item1, out var provider) ? provider : string.Empty,
             kvp.Key.Item1.ToString(),
-            kvp.Key.Item2.ToString(CultureInfo.InvariantCulture),
+            kvp.Key.Item2.ToString(),
             kvp.Value.ToString(CultureInfo.InvariantCulture));
     }
 

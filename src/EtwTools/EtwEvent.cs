@@ -33,39 +33,9 @@ namespace EtwTools
         public Guid Provider { get; init; }
 
         /// <summary>
-        /// The event ID;
+        /// Event descriptor.
         /// </summary>
-        public ushort Id { get; init; }
-
-        /// <summary>
-        /// The event version.
-        /// </summary>
-        public byte Version { get; init; }
-
-        /// <summary>
-        /// The event channel.
-        /// </summary>
-        public byte Channel { get; init; }
-
-        /// <summary>
-        /// The trace level of the event.
-        /// </summary>
-        public EtwTraceLevel Level { get; init; }
-
-        /// <summary>
-        /// The event opcode.
-        /// </summary>
-        public EtwEventType Opcode { get; init; }
-
-        /// <summary>
-        /// The event task.
-        /// </summary>
-        public ushort Task { get; init; }
-
-        /// <summary>
-        /// The event's keywords.
-        /// </summary>
-        public ulong Keyword { get; init; }
+        public EtwEventDescriptor Descriptor { get; init; }
 
         /// <summary>
         /// Timing information for the event.
