@@ -1054,21 +1054,15 @@
             Represents an ETW event provider.
             </summary>
         </member>
-        <member name="P:EtwTools.EtwProvider.Name">
-            <summary>
-            The name of the provider (may be null).
-            </summary>
-        </member>
         <member name="P:EtwTools.EtwProvider.Id">
             <summary>
             The ID of the provider.
             </summary>
         </member>
-        <member name="M:EtwTools.EtwProvider.#ctor(System.String,System.Guid)">
+        <member name="M:EtwTools.EtwProvider.#ctor(System.Guid)">
             <summary>
-            Creates a provider with a specified name and ID.
+            Creates a provider.
             </summary>
-            <param name="name">The name of the provider.</param>
             <param name="id">The ID of the provider.</param>
         </member>
         <member name="M:EtwTools.EtwProvider.GetProviderForEventSource(System.String)">

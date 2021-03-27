@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Security.Cryptography;
 
 namespace EtwTools
@@ -11,23 +10,16 @@ namespace EtwTools
     public sealed unsafe class EtwProvider
     {
         /// <summary>
-        /// The name of the provider (may be null).
-        /// </summary>
-        public string Name { get; }
-
-        /// <summary>
         /// The ID of the provider.
         /// </summary>
         public Guid Id { get; }
 
         /// <summary>
-        /// Creates a provider with a specified name and ID.
+        /// Creates a provider.
         /// </summary>
-        /// <param name="name">The name of the provider.</param>
         /// <param name="id">The ID of the provider.</param>
-        public EtwProvider(string name, Guid id)
+        public EtwProvider(Guid id)
         {
-            Name = name;
             Id = id;
         }
 
@@ -84,7 +76,7 @@ namespace EtwTools
             c = (short)((c & 0x0FFF) | 0x5000);
             var guid = new Guid(a, b, c, hash[8], hash[9], hash[10], hash[11], hash[12], hash[13], hash[14], hash[15]);
 
-            return new EtwProvider(eventSource, guid);
+            return new EtwProvider(guid);
         }
 
         /// <summary>
@@ -97,7 +89,7 @@ namespace EtwTools
             var hr = (Native.Hresult)Native.EnumerateTraceGuidsEx(Native.TraceQueryInfoClass.TraceGuidQueryInfo, &providerGuid, sizeof(Guid), null, 0, out var bufferSize);
             if (hr != Native.Hresult.ErrorInsufficientBuffer)
             {
-                hr.ThrowException();
+                return Array.Empty<InstanceInfo>();
             }
 
             var buffer = stackalloc byte[bufferSize];
@@ -141,7 +133,7 @@ namespace EtwTools
         /// Returns a list of all published providers on the system.
         /// </summary>
         /// <returns>The published providers on the system.</returns>
-        public static IReadOnlyList<EtwProvider> GetPublishedProviders()
+        public static IReadOnlyList<(string Name, EtwProvider Provider)> GetPublishedProviders()
         {
             var hr = (Native.Hresult)Native.TdhEnumerateProviders(null, out var bufferSize);
 
@@ -156,12 +148,12 @@ namespace EtwTools
 
             var providerCount = *(uint*)buffer;
             var providers = (Native.TraceProviderInfo*)(buffer + (sizeof(uint) * 2));
-            var result = new List<EtwProvider>((int)providerCount);
+            var result = new List<(string Name, EtwProvider Provider)>((int)providerCount);
 
             for (var index = 0; index < providerCount; index++)
             {
                 var name = new string((char*)&buffer[providers[index].ProviderNameOffset]);
-                result.Add(new(name, providers[index].ProviderGuid));
+                result.Add((name, new EtwProvider(providers[index].ProviderGuid)));
             }
 
             return result;
@@ -182,22 +174,12 @@ namespace EtwTools
             var buffer = stackalloc byte[bufferSizeNeeded];
             ((Native.Hresult)Native.EnumerateTraceGuidsEx(Native.TraceQueryInfoClass.TraceGuidQueryList, null, 0, buffer, bufferSizeNeeded, out bufferSizeNeeded)).ThrowException();
 
-            var publishedProviders = GetPublishedProviders();
-            Dictionary<Guid, string> providerIdMap = new();
-
-            // There may be duplicates, but this is just a best guess...
-            foreach (var registeredProvider in publishedProviders.Where(p => !string.IsNullOrEmpty(p.Name)))
-            {
-                providerIdMap[registeredProvider.Id] = registeredProvider.Name;
-            }
-
             var guids = (Guid*)buffer;
             var count = bufferSizeNeeded / sizeof(Guid);
             var result = new List<EtwProvider>(count);
             for (var index = 0; index < count; index++)
             {
-                _ = providerIdMap.TryGetValue(guids[index], out var name);
-                result.Add(new EtwProvider(name, guids[index]));
+                result.Add(new EtwProvider(guids[index]));
             }
 
             return result;
