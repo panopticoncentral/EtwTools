@@ -1064,6 +1064,11 @@
             The name of the provider, if known.
             </summary>
         </member>
+        <member name="P:EtwTools.EtwProvider.IsKnown">
+            <summary>
+            Whether the provider is well-known.
+            </summary>
+        </member>
         <member name="M:EtwTools.EtwProvider.#ctor(System.Guid)">
             <summary>
             Creates a provider.

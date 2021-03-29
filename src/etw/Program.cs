@@ -88,9 +88,10 @@ void AddProvidersCommands(Command providersCommand)
     var publishedCommand = new Command("published", "List all providers published on the system.")
     {
         new Option<PublishedSort>(new[] { "--sort", "-s" }, () => PublishedSort.Name, "Sort providers."),
-        new Option<bool>(new[] { "--json" }, "Output in JSON format.")
+        new Option<bool>(new[] { "--json" }, "Output in JSON format."),
+        new Option<bool>(new[] { "--unknown", "-u" }, "Only list unknown providers..")
     };
-    publishedCommand.Handler = CommandHandler.Create<PublishedSort, bool>(ListPublishedProviders);
+    publishedCommand.Handler = CommandHandler.Create<PublishedSort, bool, bool>(ListPublishedProviders);
     providersCommand.AddCommand(publishedCommand);
 
     var processCommand = new Command("process", "List all providers registered in a process.")
@@ -354,11 +355,16 @@ static void StopSession(string name)
     session.Stop();
 }
 
-void ListPublishedProviders(PublishedSort sort, bool json)
+void ListPublishedProviders(PublishedSort sort, bool json, bool unknown)
 {
-    var providers = EtwProvider.GetPublishedProviders();
+    var providers = (IEnumerable<(string Name, EtwProvider Provider)>)EtwProvider.GetPublishedProviders();
 
-    IEnumerable<(string Name, EtwProvider Provider)> sortedProviders = sort switch
+    if (unknown)
+    {
+        providers = providers.Where(p => !p.Provider.IsKnown);
+    }
+
+    var sortedProviders = sort switch
     {
         PublishedSort.Name => providers.OrderBy(s => s.Name).ThenBy(s => s.Provider.Id),
         PublishedSort.Id => providers.OrderBy(s => s.Provider.Id).ThenBy(s => s.Name),
@@ -411,9 +417,7 @@ void ListRegisteredProvidersInProcess(uint pid, bool json)
                         if (providerNode == null)
                         {
                             var provider = new EtwProvider(providerId);
-                            providerNode = new Tree(provider.Name != null
-                                ? $"{provider.Name} ({provider.Id})"
-                                : provider.Id.ToString());
+                            providerNode = new Tree(provider.Name ?? provider.Id.ToString());
                         }
 
                         instanceNode = providerNode.AddNode($"Properties: {instance.Properties}");
@@ -538,10 +542,12 @@ static void GetTraceInfo(string trace)
 
     foreach (var kvp in eventCount.OrderByDescending(kvp => kvp.Value))
     {
+        var provider = new EtwProvider(kvp.Key.Item1);
+
         _ = table.AddRow(
-            kvp.Key.Item1.ToString(),
+            provider.Name ?? provider.Id.ToString(),
             kvp.Key.Item2.ToString(),
-            kvp.Value.ToString(CultureInfo.InvariantCulture));
+            kvp.Value.ToString(CultureInfo.InvariantCulture)); ;
     }
 
     AnsiConsole.Render(table);

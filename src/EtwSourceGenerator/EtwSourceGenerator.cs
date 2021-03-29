@@ -42,6 +42,17 @@ foreach (var kvp in idToProvider)
 }
 
 _ = builder.Append(@"        };
+
+        private static readonly Dictionary<Guid, EtwProvider> s_providers = new()
+        {
+");
+
+foreach (var provider in providers)
+{
+    _ = builder.AppendLine($"            {{ Guid.Parse(\"{provider.Id}\"), new EtwProvider(Guid.Parse(\"{provider.Id}\")) }},");
+}
+
+_ = builder.Append(@"        };
     }
 }");
 

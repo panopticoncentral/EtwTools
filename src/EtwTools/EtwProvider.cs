@@ -20,6 +20,11 @@ namespace EtwTools
         public string Name { get; }
 
         /// <summary>
+        /// Whether the provider is well-known.
+        /// </summary>
+        public bool IsKnown => s_providers.ContainsKey(Id);
+
+        /// <summary>
         /// Creates a provider.
         /// </summary>
         /// <param name="id">The ID of the provider.</param>
