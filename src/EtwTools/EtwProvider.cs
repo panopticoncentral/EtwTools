@@ -7,12 +7,17 @@ namespace EtwTools
     /// <summary>
     /// Represents an ETW event provider.
     /// </summary>
-    public sealed unsafe class EtwProvider
+    public sealed unsafe partial class EtwProvider
     {
         /// <summary>
         /// The ID of the provider.
         /// </summary>
         public Guid Id { get; }
+
+        /// <summary>
+        /// The name of the provider, if known.
+        /// </summary>
+        public string Name { get; }
 
         /// <summary>
         /// Creates a provider.
@@ -21,6 +26,10 @@ namespace EtwTools
         public EtwProvider(Guid id)
         {
             Id = id;
+            if (s_providerNames.TryGetValue(id, out var name))
+            {
+                Name = name;
+            }
         }
 
         /// <summary>

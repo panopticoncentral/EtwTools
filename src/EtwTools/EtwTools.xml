@@ -1059,6 +1059,11 @@
             The ID of the provider.
             </summary>
         </member>
+        <member name="P:EtwTools.EtwProvider.Name">
+            <summary>
+            The name of the provider, if known.
+            </summary>
+        </member>
         <member name="M:EtwTools.EtwProvider.#ctor(System.Guid)">
             <summary>
             Creates a provider.

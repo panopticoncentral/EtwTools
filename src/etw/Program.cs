@@ -103,7 +103,7 @@ void AddProvidersCommands(Command providersCommand)
 
     var eventsCommand = new Command("events", "Events raised by a provider.")
     {
-        new Option<string>(new[] { "--id" }, "Provider ID.") { IsRequired = true }
+        new Argument<string>("provider", "The provider ID.")
     };
     eventsCommand.Handler = CommandHandler.Create<string>(GetEvents);
     providersCommand.AddCommand(eventsCommand);
@@ -117,7 +117,7 @@ static void AddTraceCommands(Command traceCommand)
 {
     var infoCommand = new Command("info", "List information about a trace.")
     {
-        new Option<string>(new[] { "--file", "-f" }, "The trace file.") { IsRequired = true }
+        new Argument<string>("trace", "The trace file.")
     };
     infoCommand.Handler = CommandHandler.Create<string>(GetTraceInfo);
     traceCommand.AddCommand(infoCommand);
@@ -367,11 +367,11 @@ void ListPublishedProviders(PublishedSort sort, bool json)
 
     if (!json)
     {
-        var table = new Table().AddColumn("Name").AddColumn("ID").AddColumn("Manifest");
+        var table = new Table().AddColumn("Name").AddColumn("ID");
 
         foreach (var (name, provider) in sortedProviders)
         {
-            _ = table.AddRow(name, provider.Id.ToString(), provider.GetEventDescriptors() != null ? "Yes" : "No");
+            _ = table.AddRow(name, provider.Id.ToString());
         }
 
         AnsiConsole.WriteLine();
@@ -380,7 +380,7 @@ void ListPublishedProviders(PublishedSort sort, bool json)
     }
     else
     {
-        AnsiConsole.WriteLine(JsonConvert.SerializeObject(providers, defaultJsonSettings));
+        AnsiConsole.WriteLine(JsonConvert.SerializeObject(sortedProviders.Select(t => new { t.Name, t.Provider.Id }), defaultJsonSettings));
         AnsiConsole.WriteLine();
     }
 }
@@ -410,7 +410,10 @@ void ListRegisteredProvidersInProcess(uint pid, bool json)
                     {
                         if (providerNode == null)
                         {
-                            providerNode = new Tree(providerId.ToString());
+                            var provider = new EtwProvider(providerId);
+                            providerNode = new Tree(provider.Name != null
+                                ? $"{provider.Name} ({provider.Id})"
+                                : provider.Id.ToString());
                         }
 
                         instanceNode = providerNode.AddNode($"Properties: {instance.Properties}");
@@ -440,21 +443,21 @@ void ListRegisteredProvidersInProcess(uint pid, bool json)
     }
 }
 
-static void GetEvents(string id)
+static void GetEvents(string provider)
 {
-    var (name, provider) = Guid.TryParse(id, out var providerGuid)
+    var (name, etwProvider) = Guid.TryParse(provider, out var providerGuid)
         ? EtwProvider.GetPublishedProviders().SingleOrDefault(p => p.Provider.Id == providerGuid)
-        : EtwProvider.GetPublishedProviders().SingleOrDefault(p => p.Name == id);
+        : EtwProvider.GetPublishedProviders().SingleOrDefault(p => p.Name == provider);
     AnsiConsole.WriteLine();
 
-    if (provider == null)
+    if (etwProvider == null)
     {
         AnsiConsole.WriteLine("Cannot find provider.");
         AnsiConsole.WriteLine();
         return;
     }
 
-    var eventDescriptors = provider.GetEventDescriptors();
+    var eventDescriptors = etwProvider.GetEventDescriptors();
 
     if (eventDescriptors == null)
     {
@@ -474,7 +477,7 @@ static void GetEvents(string id)
             {
                 if (property is EtwSimplePropertyInfo simpleProperty && simpleProperty.MapName != null && !maps.TryGetValue(simpleProperty.MapName, out var _))
                 {
-                    maps[simpleProperty.Name] = provider.GetPropertyMap(simpleProperty.MapName, e.Descriptor.Version);
+                    maps[simpleProperty.Name] = etwProvider.GetPropertyMap(simpleProperty.MapName, e.Descriptor.Version);
                 }
             }
 
@@ -495,9 +498,9 @@ static void GetEvents(string id)
     AnsiConsole.WriteLine();
 }
 
-static void GetTraceInfo(string file)
+static void GetTraceInfo(string trace)
 {
-    using var logFile = new EtwTrace(file);
+    using var logFile = new EtwTrace(trace);
 
     var totalEventCount = 0;
     Dictionary<(Guid, EtwEventDescriptor), int> eventCount = new();
@@ -531,21 +534,11 @@ static void GetTraceInfo(string file)
     AnsiConsole.WriteLine();
     AnsiConsole.WriteLine($"Event Count: {totalEventCount}");
 
-    var publishedProviders = EtwProvider.GetPublishedProviders();
-    Dictionary<Guid, string> providerIdMap = new();
-
-    // There may be duplicates, but this is just a best guess...
-    foreach (var (name, provider) in publishedProviders.Where(p => !string.IsNullOrEmpty(p.Name)))
-    {
-        providerIdMap[provider.Id] = name;
-    }
-
-    var table = new Table().AddColumn("Name").AddColumn("ID").AddColumn("Event").AddColumn("Count");
+    var table = new Table().AddColumn("ID").AddColumn("Event").AddColumn("Count");
 
     foreach (var kvp in eventCount.OrderByDescending(kvp => kvp.Value))
     {
         _ = table.AddRow(
-            providerIdMap.TryGetValue(kvp.Key.Item1, out var provider) ? provider : string.Empty,
             kvp.Key.Item1.ToString(),
             kvp.Key.Item2.ToString(),
             kvp.Value.ToString(CultureInfo.InvariantCulture));
