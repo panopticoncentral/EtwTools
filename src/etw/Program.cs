@@ -106,7 +106,7 @@ void AddProvidersCommands(Command providersCommand)
     {
         new Argument<string>("provider", "The provider ID.")
     };
-    eventsCommand.Handler = CommandHandler.Create<string>(GetEvents);
+    eventsCommand.Handler = CommandHandler.Create<string>(GetProviderEvents);
     providersCommand.AddCommand(eventsCommand);
 }
 
@@ -114,14 +114,29 @@ var providersCommand = new Command("providers", "Commands that work on event pro
 rootCommand.Add(providersCommand);
 AddProvidersCommands(providersCommand);
 
-static void AddTraceCommands(Command traceCommand)
+void AddTraceCommands(Command traceCommand)
 {
     var infoCommand = new Command("info", "List information about a trace.")
     {
+        new Argument<string>("trace", "The trace file."),
+        new Option<bool>(new[] { "--json" }, "Output in JSON format.")
+    };
+    infoCommand.Handler = CommandHandler.Create<string, bool>(GetTraceInfo);
+    traceCommand.AddCommand(infoCommand);
+
+    var eventsCommand = new Command("events", "List self-describing events in a trace.")
+    {
         new Argument<string>("trace", "The trace file.")
     };
-    infoCommand.Handler = CommandHandler.Create<string>(GetTraceInfo);
-    traceCommand.AddCommand(infoCommand);
+    eventsCommand.Handler = CommandHandler.Create<string>(GetTraceEvents);
+    traceCommand.AddCommand(eventsCommand);
+
+    var manifestsCommand = new Command("manifests", "Saves self-describing manifests in a trace.")
+    {
+        new Argument<string>("trace", "The trace file.")
+    };
+    manifestsCommand.Handler = CommandHandler.Create<string>(SaveTraceManifests);
+    traceCommand.AddCommand(manifestsCommand);
 }
 
 var traceCommand = new Command("trace", "Commands that work on traces.");
@@ -447,11 +462,11 @@ void ListRegisteredProvidersInProcess(uint pid, bool json)
     }
 }
 
-static void GetEvents(string provider)
+static void GetProviderEvents(string provider)
 {
-    var (name, etwProvider) = Guid.TryParse(provider, out var providerGuid)
-        ? EtwProvider.GetPublishedProviders().SingleOrDefault(p => p.Provider.Id == providerGuid)
-        : EtwProvider.GetPublishedProviders().SingleOrDefault(p => p.Name == provider);
+    var etwProvider = Guid.TryParse(provider, out var providerGuid)
+        ? new EtwProvider(providerGuid)
+        : EtwProvider.GetPublishedProviders().SingleOrDefault(p => p.Name == provider).Provider;
     AnsiConsole.WriteLine();
 
     if (etwProvider == null)
@@ -461,9 +476,9 @@ static void GetEvents(string provider)
         return;
     }
 
-    var eventDescriptors = etwProvider.GetEventDescriptors();
+    var eventInfos = etwProvider.GetEventInfos();
 
-    if (eventDescriptors == null)
+    if (eventInfos == null)
     {
         AnsiConsole.WriteLine("No event manifest found.");
         AnsiConsole.WriteLine();
@@ -473,7 +488,7 @@ static void GetEvents(string provider)
 
     Dictionary<string, EtwPropertyMapInfo> maps = new();
 
-    foreach (var e in eventDescriptors)
+    foreach (var e in eventInfos)
     {
         foreach (var p in e.Properties)
         {
@@ -489,7 +504,7 @@ static void GetEvents(string provider)
         }
     }
 
-    AnsiConsole.WriteLine(JsonConvert.SerializeObject(new EventInformation { Events = eventDescriptors, Maps = maps },
+    AnsiConsole.WriteLine(JsonConvert.SerializeObject(new { etwProvider.Id, etwProvider.Name, Events = eventInfos, Maps = maps },
         new JsonSerializerSettings
         {
             Formatting = Formatting.Indented,
@@ -502,55 +517,156 @@ static void GetEvents(string provider)
     AnsiConsole.WriteLine();
 }
 
-static void GetTraceInfo(string trace)
+void GetTraceInfo(string trace, bool json)
 {
     using var logFile = new EtwTrace(trace);
 
     var totalEventCount = 0;
-    Dictionary<(Guid, EtwEventDescriptor), int> eventCount = new();
+    Dictionary<(Guid, EtwEventDescriptor), (int Count, int Size)> eventCount = new();
     var stats = logFile.Open(null, e =>
     {
         totalEventCount++;
-        _ = eventCount.TryGetValue((e.Provider, e.Descriptor), out var count);
-        eventCount[(e.Provider, e.Descriptor)] = count + 1;
+        _ = eventCount.TryGetValue((e.Provider, e.Descriptor), out var countSize);
+        eventCount[(e.Provider, e.Descriptor)] = (countSize.Count + 1, countSize.Size + e.Data.Length);
     });
 
     logFile.Process();
 
-    AnsiConsole.WriteLine();
-    AnsiConsole.WriteLine($"OS Version: {stats.OsVersion}");
-    AnsiConsole.WriteLine($"Architecture: {(stats.PointerSize == 4 ? "x86" : "x64")}");
-    AnsiConsole.WriteLine($"Processor Count: {stats.ProcessorCount}");
-    AnsiConsole.WriteLine($"CPU Speed: {stats.CpuSpeed}");
-    AnsiConsole.WriteLine($"Boot Time: {stats.BootTime}");
-    AnsiConsole.WriteLine($"Start Time: {stats.StartTime}");
-    AnsiConsole.WriteLine($"End Time: {stats.EndTime}");
-    AnsiConsole.WriteLine($"Maximum File Size: {stats.MaximumFileSize}");
-    AnsiConsole.WriteLine($"Log File Mode: {stats.LogFileMode & EtwLogFileMode.All}{((stats.LogFileMode & ~EtwLogFileMode.All) != 0 ? $" | 0x{stats.LogFileMode & ~EtwLogFileMode.All}" : string.Empty)}");
-    AnsiConsole.WriteLine($"Buffer Size: 0x{stats.BufferSize:X8}");
-    AnsiConsole.WriteLine($"Buffers Written: {stats.BuffersWritten}");
-    AnsiConsole.WriteLine($"Events Lost: {stats.EventsLost}");
-    AnsiConsole.WriteLine($"Buffers Lost: {stats.BuffersLost}");
-    AnsiConsole.WriteLine($"Timer Resolution: 0x{stats.TimerResolution:X8}");
-    AnsiConsole.WriteLine($"Performance Counter Frequency: 0x{stats.PerfFrequency:X16}");
-    AnsiConsole.WriteLine($"Clock Resolution: {stats.ClockResolution}");
-    AnsiConsole.WriteLine($"Kernel Trace: {(stats.IsKernelTrace ? "yes" : "no")}");
-    AnsiConsole.WriteLine();
-    AnsiConsole.WriteLine($"Event Count: {totalEventCount}");
-
-    var table = new Table().AddColumn("ID").AddColumn("Event").AddColumn("Count");
-
-    foreach (var kvp in eventCount.OrderByDescending(kvp => kvp.Value))
+    if (!json)
     {
-        var provider = new EtwProvider(kvp.Key.Item1);
+        AnsiConsole.WriteLine();
+        AnsiConsole.WriteLine($"OS Version: {stats.OsVersion}");
+        AnsiConsole.WriteLine($"Architecture: {(stats.PointerSize == 4 ? "x86" : "x64")}");
+        AnsiConsole.WriteLine($"Processor Count: {stats.ProcessorCount}");
+        AnsiConsole.WriteLine($"CPU Speed: {stats.CpuSpeed}");
+        AnsiConsole.WriteLine($"Boot Time: {stats.BootTime}");
+        AnsiConsole.WriteLine($"Start Time: {stats.StartTime}");
+        AnsiConsole.WriteLine($"End Time: {stats.EndTime}");
+        AnsiConsole.WriteLine($"Maximum File Size: {stats.MaximumFileSize}");
+        AnsiConsole.WriteLine($"Log File Mode: {stats.LogFileMode & EtwLogFileMode.All}{((stats.LogFileMode & ~EtwLogFileMode.All) != 0 ? $" | 0x{stats.LogFileMode & ~EtwLogFileMode.All}" : string.Empty)}");
+        AnsiConsole.WriteLine($"Buffer Size: 0x{stats.BufferSize:X8}");
+        AnsiConsole.WriteLine($"Buffers Written: {stats.BuffersWritten}");
+        AnsiConsole.WriteLine($"Events Lost: {stats.EventsLost}");
+        AnsiConsole.WriteLine($"Buffers Lost: {stats.BuffersLost}");
+        AnsiConsole.WriteLine($"Timer Resolution: 0x{stats.TimerResolution:X8}");
+        AnsiConsole.WriteLine($"Performance Counter Frequency: 0x{stats.PerfFrequency:X16}");
+        AnsiConsole.WriteLine($"Clock Resolution: {stats.ClockResolution}");
+        AnsiConsole.WriteLine($"Kernel Trace: {(stats.IsKernelTrace ? "yes" : "no")}");
+        AnsiConsole.WriteLine();
+        AnsiConsole.WriteLine($"Event Count: {totalEventCount}");
 
-        _ = table.AddRow(
-            provider.Name ?? provider.Id.ToString(),
-            kvp.Key.Item2.ToString(),
-            kvp.Value.ToString(CultureInfo.InvariantCulture)); ;
+        var table = new Table().AddColumn("ID").AddColumn("Event").AddColumn("Count").AddColumn("Size");
+
+        foreach (var kvp in eventCount.OrderByDescending(kvp => kvp.Value))
+        {
+            var provider = new EtwProvider(kvp.Key.Item1);
+
+            _ = table.AddRow(
+                provider.Name ?? provider.Id.ToString(),
+                EtwEvent.GetKnownEventName(kvp.Key.Item1, kvp.Key.Item2) ?? kvp.Key.Item2.ToString(),
+                kvp.Value.Count.ToString(CultureInfo.InvariantCulture),
+                kvp.Value.Size.ToString(CultureInfo.InvariantCulture));
+        }
+
+        AnsiConsole.Render(table);
     }
+    else
+    {
+        AnsiConsole.WriteLine(JsonConvert.SerializeObject(new
+        {
+            Stats = stats,
+            EventCount = totalEventCount,
+            Events = eventCount.OrderByDescending(kvp => kvp.Value).Select(kvp =>
+            {
+                var provider = new EtwProvider(kvp.Key.Item1);
+                return new { provider.Name, provider.Id, Event = kvp.Key.Item2, Count = kvp.Value };
+            })
+        }, defaultJsonSettings));
+        AnsiConsole.WriteLine();
 
-    AnsiConsole.Render(table);
+    }
+}
+
+static void GetTraceEvents(string trace)
+{
+    using var logFile = new EtwTrace(trace);
+
+    Dictionary<Guid, Dictionary<EtwEventDescriptor, EtwEventInfo>> events = new();
+    var stats = logFile.Open(null, e =>
+    {
+        if (!e.HasTraceLoggingEventSchema())
+        {
+            return;
+        }
+
+        if (!events.TryGetValue(e.Provider, out var providerEvents))
+        {
+            events[e.Provider] = providerEvents = new();
+        }
+
+        if (providerEvents.TryGetValue(e.Descriptor, out var eventInfo))
+        {
+            return;
+        }
+
+        if (!e.TryGetEventInfo(out eventInfo))
+        {
+            return;
+        }
+
+        providerEvents[e.Descriptor] = eventInfo;
+    });
+
+    logFile.Process();
+
+    AnsiConsole.WriteLine(JsonConvert.SerializeObject(events.Select(kvp =>
+    {
+        var etwProvider = new EtwProvider(kvp.Key);
+
+        Dictionary<string, EtwPropertyMapInfo> maps = new();
+
+        foreach (var e in kvp.Value.Values)
+        {
+            foreach (var p in e.Properties)
+            {
+                void GatherMaps(Dictionary<string, EtwPropertyMapInfo> maps, EtwPropertyInfo property)
+                {
+                    if (property is EtwSimplePropertyInfo simpleProperty && simpleProperty.MapName != null && !maps.TryGetValue(simpleProperty.MapName, out var _))
+                    {
+                        maps[simpleProperty.Name] = etwProvider.GetPropertyMap(simpleProperty.MapName, e.Descriptor.Version);
+                    }
+                }
+
+                GatherMaps(maps, p);
+            }
+        }
+
+        return new { etwProvider.Id, Events = kvp.Value.Values, Maps = maps };
+    }),
+    new JsonSerializerSettings
+    {
+        Formatting = Formatting.Indented,
+        Converters = new[] { new StringEnumConverter() },
+        ContractResolver = new DefaultContractResolver
+        {
+            NamingStrategy = new CamelCaseNamingStrategy()
+        }
+    }));
+    AnsiConsole.WriteLine();
+}
+
+static void SaveTraceManifests(string trace)
+{
+    using var logFile = new EtwTrace(trace);
+
+    EtwEventSourceManifestCollector collector = new();
+    var stats = logFile.Open(null, e => collector.ProcessEventSourceManifestEvent(ref e));
+    logFile.Process();
+
+    foreach (var (provider, pid, tid, manifest) in collector.GetCompletedManifests())
+    {
+        File.WriteAllText($"{provider}.{pid}.{tid}.xml", manifest);
+    }
 }
 
 return await rootCommand.InvokeAsync(args);

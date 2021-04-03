@@ -127,6 +127,24 @@
             The event data.
             </summary>
         </member>
+        <member name="M:EtwTools.EtwEvent.GetKnownEventId">
+            <summary>
+            Returns the known event ID of the event.
+            </summary>
+            <returns>The known event ID, or 0 otherwise.</returns>
+        </member>
+        <member name="M:EtwTools.EtwEvent.GetKnownEventName">
+            <summary>
+            Returns the known name of the event.
+            </summary>
+            <returns>The known name, or null otherwise.</returns>
+        </member>
+        <member name="M:EtwTools.EtwEvent.GetKnownEventName(System.Guid,EtwTools.EtwEventDescriptor)">
+            <summary>
+            Returns the known name of the event.
+            </summary>
+            <returns>The known name, or null otherwise.</returns>
+        </member>
         <member name="M:EtwTools.EtwEvent.TryGetRelatedActivityId(System.Guid@)">
             <summary>
             Gets the ID of the related activity, if any.
@@ -204,6 +222,13 @@
             <typeparam name="T">The size of the stack key.</typeparam>
             <param name="stackKey">The stack key.</param>
             <returns>Whether a value was returned.</returns>
+        </member>
+        <member name="M:EtwTools.EtwEvent.TryGetEventInfo(EtwTools.EtwEventInfo@)">
+            <summary>
+            Gets the description of the event, if it is self-describing.
+            </summary>
+            <param name="eventInfo">The event description, if there is one.</param>
+            <returns>True if event is self-describing, false otherwise.</returns>
         </member>
         <member name="T:EtwTools.EtwEvent.InstanceInformation">
             <summary>
@@ -344,6 +369,21 @@
             Description of an ETW event.
             </summary>
         </member>
+        <member name="P:EtwTools.EtwEventInfo.ProviderId">
+            <summary>
+            The event's provider ID.
+            </summary>
+        </member>
+        <member name="P:EtwTools.EtwEventInfo.ProviderName">
+            <summary>
+            The event's provider's name.
+            </summary>
+        </member>
+        <member name="P:EtwTools.EtwEventInfo.EventId">
+            <summary>
+            The event's ID.
+            </summary>
+        </member>
         <member name="P:EtwTools.EtwEventInfo.Descriptor">
             <summary>
             The event descriptor.
@@ -408,6 +448,30 @@
             <summary>
             The properties of the event.
             </summary>
+        </member>
+        <member name="T:EtwTools.EtwEventSourceManifestCollector">
+            <summary>
+            Manages the manifests that EventSource source emit into events.
+            </summary>
+        </member>
+        <member name="M:EtwTools.EtwEventSourceManifestCollector.IsEventSourceManifestEvent(EtwTools.EtwEvent@)">
+            <summary>
+            Returns whether an event is an EventSource manifest event.
+            </summary>
+            <param name="e">The event.</param>
+            <returns>Whether it is an EventSource manifest event.</returns>
+        </member>
+        <member name="M:EtwTools.EtwEventSourceManifestCollector.ProcessEventSourceManifestEvent(EtwTools.EtwEvent@)">
+            <summary>
+            Processes an EventSource manifest event.
+            </summary>
+            <param name="e">The event.</param>
+        </member>
+        <member name="M:EtwTools.EtwEventSourceManifestCollector.GetCompletedManifests">
+            <summary>
+            Gets all completed manifests.
+            </summary>
+            <returns>Completed manifests.</returns>
         </member>
         <member name="T:EtwTools.EtwEventType">
             <summary>
@@ -1100,7 +1164,7 @@
             </summary>
             <returns>The registered providers on the system.</returns>
         </member>
-        <member name="M:EtwTools.EtwProvider.GetEventDescriptors">
+        <member name="M:EtwTools.EtwProvider.GetEventInfos">
             <summary>
             Gets descriptions of events supported by this provider.
             </summary>
@@ -1772,6 +1836,3384 @@
         <member name="F:EtwTools.EtwTraceProperties.All">
             <summary>
             All known properties.
+            </summary>
+        </member>
+        <member name="T:EtwTools.Providers.CodeMarkersProvider">
+            <summary>
+            Provider for CodeMarkers (641d7f6c-481c-42e8-ab7e-d18dc5e5cb9e)
+            </summary>
+        </member>
+        <member name="F:EtwTools.Providers.CodeMarkersProvider.Id">
+            <summary>
+            Provider ID.
+            </summary>
+        </member>
+        <member name="F:EtwTools.Providers.CodeMarkersProvider.Name">
+            <summary>
+            Provider name.
+            </summary>
+        </member>
+        <member name="T:EtwTools.Providers.DotNetProvider">
+            <summary>
+            Provider for DotNet (319dc449-ada5-50f7-428e-957db6791668)
+            </summary>
+        </member>
+        <member name="F:EtwTools.Providers.DotNetProvider.Id">
+            <summary>
+            Provider ID.
+            </summary>
+        </member>
+        <member name="F:EtwTools.Providers.DotNetProvider.Name">
+            <summary>
+            Provider name.
+            </summary>
+        </member>
+        <member name="T:EtwTools.Providers.Kernel.DiskIOProvider">
+            <summary>
+            Provider for Kernel-DiskIO (3d6fa8d4-fe05-11d0-9dda-00c04fd7ba7c)
+            </summary>
+        </member>
+        <member name="F:EtwTools.Providers.Kernel.DiskIOProvider.Id">
+            <summary>
+            Provider ID.
+            </summary>
+        </member>
+        <member name="F:EtwTools.Providers.Kernel.DiskIOProvider.Name">
+            <summary>
+            Provider name.
+            </summary>
+        </member>
+        <member name="T:EtwTools.Providers.Kernel.EventMetadataProvider">
+            <summary>
+            Provider for Kernel-EventMetadata (bbccf6c1-6cd1-48c4-80ff-839482e37671)
+            </summary>
+        </member>
+        <member name="F:EtwTools.Providers.Kernel.EventMetadataProvider.Id">
+            <summary>
+            Provider ID.
+            </summary>
+        </member>
+        <member name="F:EtwTools.Providers.Kernel.EventMetadataProvider.Name">
+            <summary>
+            Provider name.
+            </summary>
+        </member>
+        <member name="T:EtwTools.Providers.Kernel.EventTraceEventProvider">
+            <summary>
+            Provider for Kernel-EventTraceEvent (68fdd900-4a3e-11d1-84f4-0000f80464e3)
+            </summary>
+        </member>
+        <member name="F:EtwTools.Providers.Kernel.EventTraceEventProvider.Id">
+            <summary>
+            Provider ID.
+            </summary>
+        </member>
+        <member name="F:EtwTools.Providers.Kernel.EventTraceEventProvider.Name">
+            <summary>
+            Provider name.
+            </summary>
+        </member>
+        <member name="T:EtwTools.Providers.Kernel.FileIOProvider">
+            <summary>
+            Provider for Kernel-FileIO (90cbdc39-4a3e-11d1-84f4-0000f80464e3)
+            </summary>
+        </member>
+        <member name="F:EtwTools.Providers.Kernel.FileIOProvider.Id">
+            <summary>
+            Provider ID.
+            </summary>
+        </member>
+        <member name="F:EtwTools.Providers.Kernel.FileIOProvider.Name">
+            <summary>
+            Provider name.
+            </summary>
+        </member>
+        <member name="T:EtwTools.Providers.Kernel.FileSystemProvider">
+            <summary>
+            Provider for Kernel-FileSystem (9b79ee91-b5fd-41c0-a243-4248e266e9d0)
+            </summary>
+        </member>
+        <member name="F:EtwTools.Providers.Kernel.FileSystemProvider.Id">
+            <summary>
+            Provider ID.
+            </summary>
+        </member>
+        <member name="F:EtwTools.Providers.Kernel.FileSystemProvider.Name">
+            <summary>
+            Provider name.
+            </summary>
+        </member>
+        <member name="T:EtwTools.Providers.Kernel.ImageProvider">
+            <summary>
+            Provider for Kernel-Image (2cb15d1d-5fc1-11d2-abe1-00a0c911f518)
+            </summary>
+        </member>
+        <member name="F:EtwTools.Providers.Kernel.ImageProvider.Id">
+            <summary>
+            Provider ID.
+            </summary>
+        </member>
+        <member name="F:EtwTools.Providers.Kernel.ImageProvider.Name">
+            <summary>
+            Provider name.
+            </summary>
+        </member>
+        <member name="T:EtwTools.Providers.Kernel.ImageIDProvider">
+            <summary>
+            Provider for Kernel-ImageID (b3e675d7-2554-4f18-830b-2762732560de)
+            </summary>
+        </member>
+        <member name="F:EtwTools.Providers.Kernel.ImageIDProvider.Id">
+            <summary>
+            Provider ID.
+            </summary>
+        </member>
+        <member name="F:EtwTools.Providers.Kernel.ImageIDProvider.Name">
+            <summary>
+            Provider name.
+            </summary>
+        </member>
+        <member name="T:EtwTools.Providers.Kernel.PageFaultProvider">
+            <summary>
+            Provider for Kernel-PageFault (3d6fa8d3-fe05-11d0-9dda-00c04fd7ba7c)
+            </summary>
+        </member>
+        <member name="F:EtwTools.Providers.Kernel.PageFaultProvider.Id">
+            <summary>
+            Provider ID.
+            </summary>
+        </member>
+        <member name="F:EtwTools.Providers.Kernel.PageFaultProvider.Name">
+            <summary>
+            Provider name.
+            </summary>
+        </member>
+        <member name="T:EtwTools.Providers.Kernel.PerfInfoProvider">
+            <summary>
+            Provider for Kernel-PerfInfo (ce1dbfb4-137e-4da6-87b0-3f59aa102cbc)
+            </summary>
+        </member>
+        <member name="F:EtwTools.Providers.Kernel.PerfInfoProvider.Id">
+            <summary>
+            Provider ID.
+            </summary>
+        </member>
+        <member name="F:EtwTools.Providers.Kernel.PerfInfoProvider.Name">
+            <summary>
+            Provider name.
+            </summary>
+        </member>
+        <member name="T:EtwTools.Providers.Kernel.PerfInfoProvider.SampleProfileEvent">
+            <summary>
+            An event wrapper for a SampleProfile event.
+            </summary>
+        </member>
+        <member name="F:EtwTools.Providers.Kernel.PerfInfoProvider.SampleProfileEvent.Id">
+            <summary>
+            Event ID.
+            </summary>
+        </member>
+        <member name="F:EtwTools.Providers.Kernel.PerfInfoProvider.SampleProfileEvent.Name">
+            <summary>
+            Event name.
+            </summary>
+        </member>
+        <member name="F:EtwTools.Providers.Kernel.PerfInfoProvider.SampleProfileEvent.Provider">
+            <summary>
+            The event provider.
+            </summary>
+        </member>
+        <member name="P:EtwTools.Providers.Kernel.PerfInfoProvider.SampleProfileEvent.Descriptor">
+            <summary>
+            Event descriptor.
+            </summary>
+        </member>
+        <member name="P:EtwTools.Providers.Kernel.PerfInfoProvider.SampleProfileEvent.ProcessId">
+            <summary>
+            The process the event was recorded in.
+            </summary>
+        </member>
+        <member name="P:EtwTools.Providers.Kernel.PerfInfoProvider.SampleProfileEvent.Timestamp">
+            <summary>
+            The timestamp of the event.
+            </summary>
+        </member>
+        <member name="P:EtwTools.Providers.Kernel.PerfInfoProvider.SampleProfileEvent.Time">
+            <summary>
+            Timing information for the event.
+            </summary>
+        </member>
+        <member name="P:EtwTools.Providers.Kernel.PerfInfoProvider.SampleProfileEvent.ProcessorNumber">
+            <summary>
+            The processor number the event was recorded on.
+            </summary>
+        </member>
+        <member name="M:EtwTools.Providers.Kernel.PerfInfoProvider.SampleProfileEvent.InstructionPointer">
+            <summary>
+            Retrieves the InstructionPointer field.
+            </summary>
+        </member>
+        <member name="M:EtwTools.Providers.Kernel.PerfInfoProvider.SampleProfileEvent.ThreadId">
+            <summary>
+            Retrieves the ThreadId field.
+            </summary>
+        </member>
+        <member name="M:EtwTools.Providers.Kernel.PerfInfoProvider.SampleProfileEvent.Count">
+            <summary>
+            Retrieves the Count field.
+            </summary>
+        </member>
+        <member name="M:EtwTools.Providers.Kernel.PerfInfoProvider.SampleProfileEvent.#ctor(EtwTools.EtwEvent)">
+            <summary>
+            Creates a new SampleProfileEvent.
+            </summary>
+            <param name="etwEvent">The event.</param>
+        </member>
+        <member name="T:EtwTools.Providers.Kernel.PerfInfoProvider.PmcCounterProfileEvent">
+            <summary>
+            An event wrapper for a PmcCounterProfile event.
+            </summary>
+        </member>
+        <member name="F:EtwTools.Providers.Kernel.PerfInfoProvider.PmcCounterProfileEvent.Id">
+            <summary>
+            Event ID.
+            </summary>
+        </member>
+        <member name="F:EtwTools.Providers.Kernel.PerfInfoProvider.PmcCounterProfileEvent.Name">
+            <summary>
+            Event name.
+            </summary>
+        </member>
+        <member name="F:EtwTools.Providers.Kernel.PerfInfoProvider.PmcCounterProfileEvent.Provider">
+            <summary>
+            The event provider.
+            </summary>
+        </member>
+        <member name="P:EtwTools.Providers.Kernel.PerfInfoProvider.PmcCounterProfileEvent.Descriptor">
+            <summary>
+            Event descriptor.
+            </summary>
+        </member>
+        <member name="P:EtwTools.Providers.Kernel.PerfInfoProvider.PmcCounterProfileEvent.ProcessId">
+            <summary>
+            The process the event was recorded in.
+            </summary>
+        </member>
+        <member name="P:EtwTools.Providers.Kernel.PerfInfoProvider.PmcCounterProfileEvent.Timestamp">
+            <summary>
+            The timestamp of the event.
+            </summary>
+        </member>
+        <member name="P:EtwTools.Providers.Kernel.PerfInfoProvider.PmcCounterProfileEvent.Time">
+            <summary>
+            Timing information for the event.
+            </summary>
+        </member>
+        <member name="P:EtwTools.Providers.Kernel.PerfInfoProvider.PmcCounterProfileEvent.ProcessorNumber">
+            <summary>
+            The processor number the event was recorded on.
+            </summary>
+        </member>
+        <member name="M:EtwTools.Providers.Kernel.PerfInfoProvider.PmcCounterProfileEvent.InstructionPointer">
+            <summary>
+            Retrieves the InstructionPointer field.
+            </summary>
+        </member>
+        <member name="M:EtwTools.Providers.Kernel.PerfInfoProvider.PmcCounterProfileEvent.ThreadId">
+            <summary>
+            Retrieves the ThreadId field.
+            </summary>
+        </member>
+        <member name="M:EtwTools.Providers.Kernel.PerfInfoProvider.PmcCounterProfileEvent.ProfileSource">
+            <summary>
+            Retrieves the ProfileSource field.
+            </summary>
+        </member>
+        <member name="M:EtwTools.Providers.Kernel.PerfInfoProvider.PmcCounterProfileEvent.#ctor(EtwTools.EtwEvent)">
+            <summary>
+            Creates a new PmcCounterProfileEvent.
+            </summary>
+            <param name="etwEvent">The event.</param>
+        </member>
+        <member name="T:EtwTools.Providers.Kernel.PerfInfoProvider.SampledProfileSetIntervalEvent">
+            <summary>
+            An event wrapper for a SampledProfileSetInterval event.
+            </summary>
+        </member>
+        <member name="F:EtwTools.Providers.Kernel.PerfInfoProvider.SampledProfileSetIntervalEvent.Id">
+            <summary>
+            Event ID.
+            </summary>
+        </member>
+        <member name="F:EtwTools.Providers.Kernel.PerfInfoProvider.SampledProfileSetIntervalEvent.Name">
+            <summary>
+            Event name.
+            </summary>
+        </member>
+        <member name="F:EtwTools.Providers.Kernel.PerfInfoProvider.SampledProfileSetIntervalEvent.Provider">
+            <summary>
+            The event provider.
+            </summary>
+        </member>
+        <member name="P:EtwTools.Providers.Kernel.PerfInfoProvider.SampledProfileSetIntervalEvent.Descriptor">
+            <summary>
+            Event descriptor.
+            </summary>
+        </member>
+        <member name="P:EtwTools.Providers.Kernel.PerfInfoProvider.SampledProfileSetIntervalEvent.ProcessId">
+            <summary>
+            The process the event was recorded in.
+            </summary>
+        </member>
+        <member name="P:EtwTools.Providers.Kernel.PerfInfoProvider.SampledProfileSetIntervalEvent.ThreadId">
+            <summary>
+            The thread the event was recorded on.
+            </summary>
+        </member>
+        <member name="P:EtwTools.Providers.Kernel.PerfInfoProvider.SampledProfileSetIntervalEvent.Timestamp">
+            <summary>
+            The timestamp of the event.
+            </summary>
+        </member>
+        <member name="P:EtwTools.Providers.Kernel.PerfInfoProvider.SampledProfileSetIntervalEvent.Time">
+            <summary>
+            Timing information for the event.
+            </summary>
+        </member>
+        <member name="P:EtwTools.Providers.Kernel.PerfInfoProvider.SampledProfileSetIntervalEvent.ProcessorNumber">
+            <summary>
+            The processor number the event was recorded on.
+            </summary>
+        </member>
+        <member name="M:EtwTools.Providers.Kernel.PerfInfoProvider.SampledProfileSetIntervalEvent.Source">
+            <summary>
+            Retrieves the Source field.
+            </summary>
+        </member>
+        <member name="M:EtwTools.Providers.Kernel.PerfInfoProvider.SampledProfileSetIntervalEvent.NewInterval">
+            <summary>
+            Retrieves the NewInterval field.
+            </summary>
+        </member>
+        <member name="M:EtwTools.Providers.Kernel.PerfInfoProvider.SampledProfileSetIntervalEvent.OldInterval">
+            <summary>
+            Retrieves the OldInterval field.
+            </summary>
+        </member>
+        <member name="M:EtwTools.Providers.Kernel.PerfInfoProvider.SampledProfileSetIntervalEvent.#ctor(EtwTools.EtwEvent)">
+            <summary>
+            Creates a new SampledProfileSetIntervalEvent.
+            </summary>
+            <param name="etwEvent">The event.</param>
+        </member>
+        <member name="T:EtwTools.Providers.Kernel.PerfInfoProvider.SampledProfileIntervalStartEvent">
+            <summary>
+            An event wrapper for a SampledProfileIntervalStart event.
+            </summary>
+        </member>
+        <member name="F:EtwTools.Providers.Kernel.PerfInfoProvider.SampledProfileIntervalStartEvent.Id">
+            <summary>
+            Event ID.
+            </summary>
+        </member>
+        <member name="F:EtwTools.Providers.Kernel.PerfInfoProvider.SampledProfileIntervalStartEvent.Name">
+            <summary>
+            Event name.
+            </summary>
+        </member>
+        <member name="F:EtwTools.Providers.Kernel.PerfInfoProvider.SampledProfileIntervalStartEvent.Provider">
+            <summary>
+            The event provider.
+            </summary>
+        </member>
+        <member name="P:EtwTools.Providers.Kernel.PerfInfoProvider.SampledProfileIntervalStartEvent.Descriptor">
+            <summary>
+            Event descriptor.
+            </summary>
+        </member>
+        <member name="P:EtwTools.Providers.Kernel.PerfInfoProvider.SampledProfileIntervalStartEvent.ProcessId">
+            <summary>
+            The process the event was recorded in.
+            </summary>
+        </member>
+        <member name="P:EtwTools.Providers.Kernel.PerfInfoProvider.SampledProfileIntervalStartEvent.ThreadId">
+            <summary>
+            The thread the event was recorded on.
+            </summary>
+        </member>
+        <member name="P:EtwTools.Providers.Kernel.PerfInfoProvider.SampledProfileIntervalStartEvent.Timestamp">
+            <summary>
+            The timestamp of the event.
+            </summary>
+        </member>
+        <member name="P:EtwTools.Providers.Kernel.PerfInfoProvider.SampledProfileIntervalStartEvent.Time">
+            <summary>
+            Timing information for the event.
+            </summary>
+        </member>
+        <member name="P:EtwTools.Providers.Kernel.PerfInfoProvider.SampledProfileIntervalStartEvent.ProcessorNumber">
+            <summary>
+            The processor number the event was recorded on.
+            </summary>
+        </member>
+        <member name="M:EtwTools.Providers.Kernel.PerfInfoProvider.SampledProfileIntervalStartEvent.Source">
+            <summary>
+            Retrieves the Source field.
+            </summary>
+        </member>
+        <member name="M:EtwTools.Providers.Kernel.PerfInfoProvider.SampledProfileIntervalStartEvent.NewInterval">
+            <summary>
+            Retrieves the NewInterval field.
+            </summary>
+        </member>
+        <member name="M:EtwTools.Providers.Kernel.PerfInfoProvider.SampledProfileIntervalStartEvent.OldInterval">
+            <summary>
+            Retrieves the OldInterval field.
+            </summary>
+        </member>
+        <member name="M:EtwTools.Providers.Kernel.PerfInfoProvider.SampledProfileIntervalStartEvent.SourceName">
+            <summary>
+            Retrieves the SourceName field.
+            </summary>
+        </member>
+        <member name="M:EtwTools.Providers.Kernel.PerfInfoProvider.SampledProfileIntervalStartEvent.#ctor(EtwTools.EtwEvent)">
+            <summary>
+            Creates a new SampledProfileIntervalStartEvent.
+            </summary>
+            <param name="etwEvent">The event.</param>
+        </member>
+        <member name="T:EtwTools.Providers.Kernel.PerfInfoProvider.SampledProfileIntervalEndEvent">
+            <summary>
+            An event wrapper for a SampledProfileIntervalEnd event.
+            </summary>
+        </member>
+        <member name="F:EtwTools.Providers.Kernel.PerfInfoProvider.SampledProfileIntervalEndEvent.Id">
+            <summary>
+            Event ID.
+            </summary>
+        </member>
+        <member name="F:EtwTools.Providers.Kernel.PerfInfoProvider.SampledProfileIntervalEndEvent.Name">
+            <summary>
+            Event name.
+            </summary>
+        </member>
+        <member name="F:EtwTools.Providers.Kernel.PerfInfoProvider.SampledProfileIntervalEndEvent.Provider">
+            <summary>
+            The event provider.
+            </summary>
+        </member>
+        <member name="P:EtwTools.Providers.Kernel.PerfInfoProvider.SampledProfileIntervalEndEvent.Descriptor">
+            <summary>
+            Event descriptor.
+            </summary>
+        </member>
+        <member name="P:EtwTools.Providers.Kernel.PerfInfoProvider.SampledProfileIntervalEndEvent.ProcessId">
+            <summary>
+            The process the event was recorded in.
+            </summary>
+        </member>
+        <member name="P:EtwTools.Providers.Kernel.PerfInfoProvider.SampledProfileIntervalEndEvent.ThreadId">
+            <summary>
+            The thread the event was recorded on.
+            </summary>
+        </member>
+        <member name="P:EtwTools.Providers.Kernel.PerfInfoProvider.SampledProfileIntervalEndEvent.Timestamp">
+            <summary>
+            The timestamp of the event.
+            </summary>
+        </member>
+        <member name="P:EtwTools.Providers.Kernel.PerfInfoProvider.SampledProfileIntervalEndEvent.Time">
+            <summary>
+            Timing information for the event.
+            </summary>
+        </member>
+        <member name="P:EtwTools.Providers.Kernel.PerfInfoProvider.SampledProfileIntervalEndEvent.ProcessorNumber">
+            <summary>
+            The processor number the event was recorded on.
+            </summary>
+        </member>
+        <member name="M:EtwTools.Providers.Kernel.PerfInfoProvider.SampledProfileIntervalEndEvent.Source">
+            <summary>
+            Retrieves the Source field.
+            </summary>
+        </member>
+        <member name="M:EtwTools.Providers.Kernel.PerfInfoProvider.SampledProfileIntervalEndEvent.NewInterval">
+            <summary>
+            Retrieves the NewInterval field.
+            </summary>
+        </member>
+        <member name="M:EtwTools.Providers.Kernel.PerfInfoProvider.SampledProfileIntervalEndEvent.OldInterval">
+            <summary>
+            Retrieves the OldInterval field.
+            </summary>
+        </member>
+        <member name="M:EtwTools.Providers.Kernel.PerfInfoProvider.SampledProfileIntervalEndEvent.SourceName">
+            <summary>
+            Retrieves the SourceName field.
+            </summary>
+        </member>
+        <member name="M:EtwTools.Providers.Kernel.PerfInfoProvider.SampledProfileIntervalEndEvent.#ctor(EtwTools.EtwEvent)">
+            <summary>
+            Creates a new SampledProfileIntervalEndEvent.
+            </summary>
+            <param name="etwEvent">The event.</param>
+        </member>
+        <member name="T:EtwTools.Providers.Kernel.PerfInfoProvider.SpinlockConfigureStartEvent">
+            <summary>
+            An event wrapper for a SpinlockConfigureStart event.
+            </summary>
+        </member>
+        <member name="F:EtwTools.Providers.Kernel.PerfInfoProvider.SpinlockConfigureStartEvent.Id">
+            <summary>
+            Event ID.
+            </summary>
+        </member>
+        <member name="F:EtwTools.Providers.Kernel.PerfInfoProvider.SpinlockConfigureStartEvent.Name">
+            <summary>
+            Event name.
+            </summary>
+        </member>
+        <member name="F:EtwTools.Providers.Kernel.PerfInfoProvider.SpinlockConfigureStartEvent.Provider">
+            <summary>
+            The event provider.
+            </summary>
+        </member>
+        <member name="P:EtwTools.Providers.Kernel.PerfInfoProvider.SpinlockConfigureStartEvent.Descriptor">
+            <summary>
+            Event descriptor.
+            </summary>
+        </member>
+        <member name="P:EtwTools.Providers.Kernel.PerfInfoProvider.SpinlockConfigureStartEvent.ProcessId">
+            <summary>
+            The process the event was recorded in.
+            </summary>
+        </member>
+        <member name="P:EtwTools.Providers.Kernel.PerfInfoProvider.SpinlockConfigureStartEvent.ThreadId">
+            <summary>
+            The thread the event was recorded on.
+            </summary>
+        </member>
+        <member name="P:EtwTools.Providers.Kernel.PerfInfoProvider.SpinlockConfigureStartEvent.Timestamp">
+            <summary>
+            The timestamp of the event.
+            </summary>
+        </member>
+        <member name="P:EtwTools.Providers.Kernel.PerfInfoProvider.SpinlockConfigureStartEvent.Time">
+            <summary>
+            Timing information for the event.
+            </summary>
+        </member>
+        <member name="P:EtwTools.Providers.Kernel.PerfInfoProvider.SpinlockConfigureStartEvent.ProcessorNumber">
+            <summary>
+            The processor number the event was recorded on.
+            </summary>
+        </member>
+        <member name="M:EtwTools.Providers.Kernel.PerfInfoProvider.SpinlockConfigureStartEvent.SpinLockSpinThreshold">
+            <summary>
+            Retrieves the SpinLockSpinThreshold field.
+            </summary>
+        </member>
+        <member name="M:EtwTools.Providers.Kernel.PerfInfoProvider.SpinlockConfigureStartEvent.SpinLockContentionSampleRate">
+            <summary>
+            Retrieves the SpinLockContentionSampleRate field.
+            </summary>
+        </member>
+        <member name="M:EtwTools.Providers.Kernel.PerfInfoProvider.SpinlockConfigureStartEvent.SpinLockAcquireSampleRate">
+            <summary>
+            Retrieves the SpinLockAcquireSampleRate field.
+            </summary>
+        </member>
+        <member name="M:EtwTools.Providers.Kernel.PerfInfoProvider.SpinlockConfigureStartEvent.SpinLockHoldThreshold">
+            <summary>
+            Retrieves the SpinLockHoldThreshold field.
+            </summary>
+        </member>
+        <member name="M:EtwTools.Providers.Kernel.PerfInfoProvider.SpinlockConfigureStartEvent.#ctor(EtwTools.EtwEvent)">
+            <summary>
+            Creates a new SpinlockConfigureStartEvent.
+            </summary>
+            <param name="etwEvent">The event.</param>
+        </member>
+        <member name="T:EtwTools.Providers.Kernel.PerfInfoProvider.SpinlockConfigureEndEvent">
+            <summary>
+            An event wrapper for a SpinlockConfigureEnd event.
+            </summary>
+        </member>
+        <member name="F:EtwTools.Providers.Kernel.PerfInfoProvider.SpinlockConfigureEndEvent.Id">
+            <summary>
+            Event ID.
+            </summary>
+        </member>
+        <member name="F:EtwTools.Providers.Kernel.PerfInfoProvider.SpinlockConfigureEndEvent.Name">
+            <summary>
+            Event name.
+            </summary>
+        </member>
+        <member name="F:EtwTools.Providers.Kernel.PerfInfoProvider.SpinlockConfigureEndEvent.Provider">
+            <summary>
+            The event provider.
+            </summary>
+        </member>
+        <member name="P:EtwTools.Providers.Kernel.PerfInfoProvider.SpinlockConfigureEndEvent.Descriptor">
+            <summary>
+            Event descriptor.
+            </summary>
+        </member>
+        <member name="P:EtwTools.Providers.Kernel.PerfInfoProvider.SpinlockConfigureEndEvent.ProcessId">
+            <summary>
+            The process the event was recorded in.
+            </summary>
+        </member>
+        <member name="P:EtwTools.Providers.Kernel.PerfInfoProvider.SpinlockConfigureEndEvent.ThreadId">
+            <summary>
+            The thread the event was recorded on.
+            </summary>
+        </member>
+        <member name="P:EtwTools.Providers.Kernel.PerfInfoProvider.SpinlockConfigureEndEvent.Timestamp">
+            <summary>
+            The timestamp of the event.
+            </summary>
+        </member>
+        <member name="P:EtwTools.Providers.Kernel.PerfInfoProvider.SpinlockConfigureEndEvent.Time">
+            <summary>
+            Timing information for the event.
+            </summary>
+        </member>
+        <member name="P:EtwTools.Providers.Kernel.PerfInfoProvider.SpinlockConfigureEndEvent.ProcessorNumber">
+            <summary>
+            The processor number the event was recorded on.
+            </summary>
+        </member>
+        <member name="M:EtwTools.Providers.Kernel.PerfInfoProvider.SpinlockConfigureEndEvent.SpinLockSpinThreshold">
+            <summary>
+            Retrieves the SpinLockSpinThreshold field.
+            </summary>
+        </member>
+        <member name="M:EtwTools.Providers.Kernel.PerfInfoProvider.SpinlockConfigureEndEvent.SpinLockContentionSampleRate">
+            <summary>
+            Retrieves the SpinLockContentionSampleRate field.
+            </summary>
+        </member>
+        <member name="M:EtwTools.Providers.Kernel.PerfInfoProvider.SpinlockConfigureEndEvent.SpinLockAcquireSampleRate">
+            <summary>
+            Retrieves the SpinLockAcquireSampleRate field.
+            </summary>
+        </member>
+        <member name="M:EtwTools.Providers.Kernel.PerfInfoProvider.SpinlockConfigureEndEvent.SpinLockHoldThreshold">
+            <summary>
+            Retrieves the SpinLockHoldThreshold field.
+            </summary>
+        </member>
+        <member name="M:EtwTools.Providers.Kernel.PerfInfoProvider.SpinlockConfigureEndEvent.#ctor(EtwTools.EtwEvent)">
+            <summary>
+            Creates a new SpinlockConfigureEndEvent.
+            </summary>
+            <param name="etwEvent">The event.</param>
+        </member>
+        <member name="T:EtwTools.Providers.Kernel.ProcessProvider">
+            <summary>
+            Provider for Kernel-Process (3d6fa8d0-fe05-11d0-9dda-00c04fd7ba7c)
+            </summary>
+        </member>
+        <member name="F:EtwTools.Providers.Kernel.ProcessProvider.Id">
+            <summary>
+            Provider ID.
+            </summary>
+        </member>
+        <member name="F:EtwTools.Providers.Kernel.ProcessProvider.Name">
+            <summary>
+            Provider name.
+            </summary>
+        </member>
+        <member name="T:EtwTools.Providers.Kernel.StackWalkProvider">
+            <summary>
+            Provider for Kernel-StackWalk (def2fe46-7bd6-4b80-bd94-f57fe20d0ce3)
+            </summary>
+        </member>
+        <member name="F:EtwTools.Providers.Kernel.StackWalkProvider.Id">
+            <summary>
+            Provider ID.
+            </summary>
+        </member>
+        <member name="F:EtwTools.Providers.Kernel.StackWalkProvider.Name">
+            <summary>
+            Provider name.
+            </summary>
+        </member>
+        <member name="T:EtwTools.Providers.Kernel.StackWalkProvider.StackEvent">
+            <summary>
+            An event wrapper for a Stack event.
+            </summary>
+        </member>
+        <member name="F:EtwTools.Providers.Kernel.StackWalkProvider.StackEvent.Id">
+            <summary>
+            Event ID.
+            </summary>
+        </member>
+        <member name="F:EtwTools.Providers.Kernel.StackWalkProvider.StackEvent.Name">
+            <summary>
+            Event name.
+            </summary>
+        </member>
+        <member name="F:EtwTools.Providers.Kernel.StackWalkProvider.StackEvent.Provider">
+            <summary>
+            The event provider.
+            </summary>
+        </member>
+        <member name="P:EtwTools.Providers.Kernel.StackWalkProvider.StackEvent.Descriptor">
+            <summary>
+            Event descriptor.
+            </summary>
+        </member>
+        <member name="P:EtwTools.Providers.Kernel.StackWalkProvider.StackEvent.Time">
+            <summary>
+            Timing information for the event.
+            </summary>
+        </member>
+        <member name="P:EtwTools.Providers.Kernel.StackWalkProvider.StackEvent.ProcessorNumber">
+            <summary>
+            The processor number the event was recorded on.
+            </summary>
+        </member>
+        <member name="M:EtwTools.Providers.Kernel.StackWalkProvider.StackEvent.Timestamp">
+            <summary>
+            Retrieves the Timestamp field.
+            </summary>
+        </member>
+        <member name="M:EtwTools.Providers.Kernel.StackWalkProvider.StackEvent.ProcessId">
+            <summary>
+            Retrieves the ProcessId field.
+            </summary>
+        </member>
+        <member name="M:EtwTools.Providers.Kernel.StackWalkProvider.StackEvent.ThreadId">
+            <summary>
+            Retrieves the ThreadId field.
+            </summary>
+        </member>
+        <member name="M:EtwTools.Providers.Kernel.StackWalkProvider.StackEvent.GetStack(System.Int32)">
+            <summary>
+            Retrieves the Stack field.
+            </summary>
+        </member>
+        <member name="M:EtwTools.Providers.Kernel.StackWalkProvider.StackEvent.#ctor(EtwTools.EtwEvent)">
+            <summary>
+            Creates a new StackEvent.
+            </summary>
+            <param name="etwEvent">The event.</param>
+        </member>
+        <member name="T:EtwTools.Providers.Kernel.StackWalkProvider.StackKeyCreateEvent">
+            <summary>
+            An event wrapper for a StackKeyCreate event.
+            </summary>
+        </member>
+        <member name="F:EtwTools.Providers.Kernel.StackWalkProvider.StackKeyCreateEvent.Id">
+            <summary>
+            Event ID.
+            </summary>
+        </member>
+        <member name="F:EtwTools.Providers.Kernel.StackWalkProvider.StackKeyCreateEvent.Name">
+            <summary>
+            Event name.
+            </summary>
+        </member>
+        <member name="F:EtwTools.Providers.Kernel.StackWalkProvider.StackKeyCreateEvent.Provider">
+            <summary>
+            The event provider.
+            </summary>
+        </member>
+        <member name="P:EtwTools.Providers.Kernel.StackWalkProvider.StackKeyCreateEvent.Descriptor">
+            <summary>
+            Event descriptor.
+            </summary>
+        </member>
+        <member name="P:EtwTools.Providers.Kernel.StackWalkProvider.StackKeyCreateEvent.ProcessId">
+            <summary>
+            The process the event was recorded in.
+            </summary>
+        </member>
+        <member name="P:EtwTools.Providers.Kernel.StackWalkProvider.StackKeyCreateEvent.ThreadId">
+            <summary>
+            The thread the event was recorded on.
+            </summary>
+        </member>
+        <member name="P:EtwTools.Providers.Kernel.StackWalkProvider.StackKeyCreateEvent.Timestamp">
+            <summary>
+            The timestamp of the event.
+            </summary>
+        </member>
+        <member name="P:EtwTools.Providers.Kernel.StackWalkProvider.StackKeyCreateEvent.Time">
+            <summary>
+            Timing information for the event.
+            </summary>
+        </member>
+        <member name="P:EtwTools.Providers.Kernel.StackWalkProvider.StackKeyCreateEvent.ProcessorNumber">
+            <summary>
+            The processor number the event was recorded on.
+            </summary>
+        </member>
+        <member name="M:EtwTools.Providers.Kernel.StackWalkProvider.StackKeyCreateEvent.StackKey">
+            <summary>
+            Retrieves the StackKey field.
+            </summary>
+        </member>
+        <member name="M:EtwTools.Providers.Kernel.StackWalkProvider.StackKeyCreateEvent.GetStackFrames(System.Int32)">
+            <summary>
+            Retrieves the StackFrames field.
+            </summary>
+        </member>
+        <member name="M:EtwTools.Providers.Kernel.StackWalkProvider.StackKeyCreateEvent.#ctor(EtwTools.EtwEvent)">
+            <summary>
+            Creates a new StackKeyCreateEvent.
+            </summary>
+            <param name="etwEvent">The event.</param>
+        </member>
+        <member name="T:EtwTools.Providers.Kernel.StackWalkProvider.StackKeyDeleteEvent">
+            <summary>
+            An event wrapper for a StackKeyDelete event.
+            </summary>
+        </member>
+        <member name="F:EtwTools.Providers.Kernel.StackWalkProvider.StackKeyDeleteEvent.Id">
+            <summary>
+            Event ID.
+            </summary>
+        </member>
+        <member name="F:EtwTools.Providers.Kernel.StackWalkProvider.StackKeyDeleteEvent.Name">
+            <summary>
+            Event name.
+            </summary>
+        </member>
+        <member name="F:EtwTools.Providers.Kernel.StackWalkProvider.StackKeyDeleteEvent.Provider">
+            <summary>
+            The event provider.
+            </summary>
+        </member>
+        <member name="P:EtwTools.Providers.Kernel.StackWalkProvider.StackKeyDeleteEvent.Descriptor">
+            <summary>
+            Event descriptor.
+            </summary>
+        </member>
+        <member name="P:EtwTools.Providers.Kernel.StackWalkProvider.StackKeyDeleteEvent.ProcessId">
+            <summary>
+            The process the event was recorded in.
+            </summary>
+        </member>
+        <member name="P:EtwTools.Providers.Kernel.StackWalkProvider.StackKeyDeleteEvent.ThreadId">
+            <summary>
+            The thread the event was recorded on.
+            </summary>
+        </member>
+        <member name="P:EtwTools.Providers.Kernel.StackWalkProvider.StackKeyDeleteEvent.Timestamp">
+            <summary>
+            The timestamp of the event.
+            </summary>
+        </member>
+        <member name="P:EtwTools.Providers.Kernel.StackWalkProvider.StackKeyDeleteEvent.Time">
+            <summary>
+            Timing information for the event.
+            </summary>
+        </member>
+        <member name="P:EtwTools.Providers.Kernel.StackWalkProvider.StackKeyDeleteEvent.ProcessorNumber">
+            <summary>
+            The processor number the event was recorded on.
+            </summary>
+        </member>
+        <member name="M:EtwTools.Providers.Kernel.StackWalkProvider.StackKeyDeleteEvent.StackKey">
+            <summary>
+            Retrieves the StackKey field.
+            </summary>
+        </member>
+        <member name="M:EtwTools.Providers.Kernel.StackWalkProvider.StackKeyDeleteEvent.GetStackFrames(System.Int32)">
+            <summary>
+            Retrieves the StackFrames field.
+            </summary>
+        </member>
+        <member name="M:EtwTools.Providers.Kernel.StackWalkProvider.StackKeyDeleteEvent.#ctor(EtwTools.EtwEvent)">
+            <summary>
+            Creates a new StackKeyDeleteEvent.
+            </summary>
+            <param name="etwEvent">The event.</param>
+        </member>
+        <member name="T:EtwTools.Providers.Kernel.StackWalkProvider.StackKeyRundownEvent">
+            <summary>
+            An event wrapper for a StackKeyRundown event.
+            </summary>
+        </member>
+        <member name="F:EtwTools.Providers.Kernel.StackWalkProvider.StackKeyRundownEvent.Id">
+            <summary>
+            Event ID.
+            </summary>
+        </member>
+        <member name="F:EtwTools.Providers.Kernel.StackWalkProvider.StackKeyRundownEvent.Name">
+            <summary>
+            Event name.
+            </summary>
+        </member>
+        <member name="F:EtwTools.Providers.Kernel.StackWalkProvider.StackKeyRundownEvent.Provider">
+            <summary>
+            The event provider.
+            </summary>
+        </member>
+        <member name="P:EtwTools.Providers.Kernel.StackWalkProvider.StackKeyRundownEvent.Descriptor">
+            <summary>
+            Event descriptor.
+            </summary>
+        </member>
+        <member name="P:EtwTools.Providers.Kernel.StackWalkProvider.StackKeyRundownEvent.ProcessId">
+            <summary>
+            The process the event was recorded in.
+            </summary>
+        </member>
+        <member name="P:EtwTools.Providers.Kernel.StackWalkProvider.StackKeyRundownEvent.ThreadId">
+            <summary>
+            The thread the event was recorded on.
+            </summary>
+        </member>
+        <member name="P:EtwTools.Providers.Kernel.StackWalkProvider.StackKeyRundownEvent.Timestamp">
+            <summary>
+            The timestamp of the event.
+            </summary>
+        </member>
+        <member name="P:EtwTools.Providers.Kernel.StackWalkProvider.StackKeyRundownEvent.Time">
+            <summary>
+            Timing information for the event.
+            </summary>
+        </member>
+        <member name="P:EtwTools.Providers.Kernel.StackWalkProvider.StackKeyRundownEvent.ProcessorNumber">
+            <summary>
+            The processor number the event was recorded on.
+            </summary>
+        </member>
+        <member name="M:EtwTools.Providers.Kernel.StackWalkProvider.StackKeyRundownEvent.StackKey">
+            <summary>
+            Retrieves the StackKey field.
+            </summary>
+        </member>
+        <member name="M:EtwTools.Providers.Kernel.StackWalkProvider.StackKeyRundownEvent.GetStackFrames(System.Int32)">
+            <summary>
+            Retrieves the StackFrames field.
+            </summary>
+        </member>
+        <member name="M:EtwTools.Providers.Kernel.StackWalkProvider.StackKeyRundownEvent.#ctor(EtwTools.EtwEvent)">
+            <summary>
+            Creates a new StackKeyRundownEvent.
+            </summary>
+            <param name="etwEvent">The event.</param>
+        </member>
+        <member name="T:EtwTools.Providers.Kernel.StackWalkProvider.StackKeyKernelEvent">
+            <summary>
+            An event wrapper for a StackKeyKernel event.
+            </summary>
+        </member>
+        <member name="F:EtwTools.Providers.Kernel.StackWalkProvider.StackKeyKernelEvent.Id">
+            <summary>
+            Event ID.
+            </summary>
+        </member>
+        <member name="F:EtwTools.Providers.Kernel.StackWalkProvider.StackKeyKernelEvent.Name">
+            <summary>
+            Event name.
+            </summary>
+        </member>
+        <member name="F:EtwTools.Providers.Kernel.StackWalkProvider.StackKeyKernelEvent.Provider">
+            <summary>
+            The event provider.
+            </summary>
+        </member>
+        <member name="P:EtwTools.Providers.Kernel.StackWalkProvider.StackKeyKernelEvent.Descriptor">
+            <summary>
+            Event descriptor.
+            </summary>
+        </member>
+        <member name="P:EtwTools.Providers.Kernel.StackWalkProvider.StackKeyKernelEvent.Time">
+            <summary>
+            Timing information for the event.
+            </summary>
+        </member>
+        <member name="P:EtwTools.Providers.Kernel.StackWalkProvider.StackKeyKernelEvent.ProcessorNumber">
+            <summary>
+            The processor number the event was recorded on.
+            </summary>
+        </member>
+        <member name="M:EtwTools.Providers.Kernel.StackWalkProvider.StackKeyKernelEvent.Timestamp">
+            <summary>
+            Retrieves the Timestamp field.
+            </summary>
+        </member>
+        <member name="M:EtwTools.Providers.Kernel.StackWalkProvider.StackKeyKernelEvent.ProcessId">
+            <summary>
+            Retrieves the ProcessId field.
+            </summary>
+        </member>
+        <member name="M:EtwTools.Providers.Kernel.StackWalkProvider.StackKeyKernelEvent.ThreadId">
+            <summary>
+            Retrieves the ThreadId field.
+            </summary>
+        </member>
+        <member name="M:EtwTools.Providers.Kernel.StackWalkProvider.StackKeyKernelEvent.StackKey">
+            <summary>
+            Retrieves the StackKey field.
+            </summary>
+        </member>
+        <member name="M:EtwTools.Providers.Kernel.StackWalkProvider.StackKeyKernelEvent.#ctor(EtwTools.EtwEvent)">
+            <summary>
+            Creates a new StackKeyKernelEvent.
+            </summary>
+            <param name="etwEvent">The event.</param>
+        </member>
+        <member name="T:EtwTools.Providers.Kernel.StackWalkProvider.StackKeyUserEvent">
+            <summary>
+            An event wrapper for a StackKeyUser event.
+            </summary>
+        </member>
+        <member name="F:EtwTools.Providers.Kernel.StackWalkProvider.StackKeyUserEvent.Id">
+            <summary>
+            Event ID.
+            </summary>
+        </member>
+        <member name="F:EtwTools.Providers.Kernel.StackWalkProvider.StackKeyUserEvent.Name">
+            <summary>
+            Event name.
+            </summary>
+        </member>
+        <member name="F:EtwTools.Providers.Kernel.StackWalkProvider.StackKeyUserEvent.Provider">
+            <summary>
+            The event provider.
+            </summary>
+        </member>
+        <member name="P:EtwTools.Providers.Kernel.StackWalkProvider.StackKeyUserEvent.Descriptor">
+            <summary>
+            Event descriptor.
+            </summary>
+        </member>
+        <member name="P:EtwTools.Providers.Kernel.StackWalkProvider.StackKeyUserEvent.Time">
+            <summary>
+            Timing information for the event.
+            </summary>
+        </member>
+        <member name="P:EtwTools.Providers.Kernel.StackWalkProvider.StackKeyUserEvent.ProcessorNumber">
+            <summary>
+            The processor number the event was recorded on.
+            </summary>
+        </member>
+        <member name="M:EtwTools.Providers.Kernel.StackWalkProvider.StackKeyUserEvent.Timestamp">
+            <summary>
+            Retrieves the Timestamp field.
+            </summary>
+        </member>
+        <member name="M:EtwTools.Providers.Kernel.StackWalkProvider.StackKeyUserEvent.ProcessId">
+            <summary>
+            Retrieves the ProcessId field.
+            </summary>
+        </member>
+        <member name="M:EtwTools.Providers.Kernel.StackWalkProvider.StackKeyUserEvent.ThreadId">
+            <summary>
+            Retrieves the ThreadId field.
+            </summary>
+        </member>
+        <member name="M:EtwTools.Providers.Kernel.StackWalkProvider.StackKeyUserEvent.StackKey">
+            <summary>
+            Retrieves the StackKey field.
+            </summary>
+        </member>
+        <member name="M:EtwTools.Providers.Kernel.StackWalkProvider.StackKeyUserEvent.#ctor(EtwTools.EtwEvent)">
+            <summary>
+            Creates a new StackKeyUserEvent.
+            </summary>
+            <param name="etwEvent">The event.</param>
+        </member>
+        <member name="T:EtwTools.Providers.Kernel.TcpipProvider">
+            <summary>
+            Provider for Kernel-Tcpip (9a280ac0-c8e0-11d1-84e2-00c04fb998a2)
+            </summary>
+        </member>
+        <member name="F:EtwTools.Providers.Kernel.TcpipProvider.Id">
+            <summary>
+            Provider ID.
+            </summary>
+        </member>
+        <member name="F:EtwTools.Providers.Kernel.TcpipProvider.Name">
+            <summary>
+            Provider name.
+            </summary>
+        </member>
+        <member name="T:EtwTools.Providers.Kernel.ThreadProvider">
+            <summary>
+            Provider for Kernel-Thread (3d6fa8d1-fe05-11d0-9dda-00c04fd7ba7c)
+            </summary>
+        </member>
+        <member name="F:EtwTools.Providers.Kernel.ThreadProvider.Id">
+            <summary>
+            Provider ID.
+            </summary>
+        </member>
+        <member name="F:EtwTools.Providers.Kernel.ThreadProvider.Name">
+            <summary>
+            Provider name.
+            </summary>
+        </member>
+        <member name="T:EtwTools.Providers.Kernel.ThreadProvider.StartEvent">
+            <summary>
+            An event wrapper for a Start event.
+            </summary>
+        </member>
+        <member name="F:EtwTools.Providers.Kernel.ThreadProvider.StartEvent.Id">
+            <summary>
+            Event ID.
+            </summary>
+        </member>
+        <member name="F:EtwTools.Providers.Kernel.ThreadProvider.StartEvent.Name">
+            <summary>
+            Event name.
+            </summary>
+        </member>
+        <member name="F:EtwTools.Providers.Kernel.ThreadProvider.StartEvent.Provider">
+            <summary>
+            The event provider.
+            </summary>
+        </member>
+        <member name="P:EtwTools.Providers.Kernel.ThreadProvider.StartEvent.Descriptor">
+            <summary>
+            Event descriptor.
+            </summary>
+        </member>
+        <member name="P:EtwTools.Providers.Kernel.ThreadProvider.StartEvent.Timestamp">
+            <summary>
+            The timestamp of the event.
+            </summary>
+        </member>
+        <member name="P:EtwTools.Providers.Kernel.ThreadProvider.StartEvent.Time">
+            <summary>
+            Timing information for the event.
+            </summary>
+        </member>
+        <member name="P:EtwTools.Providers.Kernel.ThreadProvider.StartEvent.ProcessorNumber">
+            <summary>
+            The processor number the event was recorded on.
+            </summary>
+        </member>
+        <member name="M:EtwTools.Providers.Kernel.ThreadProvider.StartEvent.ProcessId">
+            <summary>
+            Retrieves the ProcessId field.
+            </summary>
+        </member>
+        <member name="M:EtwTools.Providers.Kernel.ThreadProvider.StartEvent.ThreadId">
+            <summary>
+            Retrieves the ThreadId field.
+            </summary>
+        </member>
+        <member name="M:EtwTools.Providers.Kernel.ThreadProvider.StartEvent.StackBase">
+            <summary>
+            Retrieves the StackBase field.
+            </summary>
+        </member>
+        <member name="M:EtwTools.Providers.Kernel.ThreadProvider.StartEvent.StackLimit">
+            <summary>
+            Retrieves the StackLimit field.
+            </summary>
+        </member>
+        <member name="M:EtwTools.Providers.Kernel.ThreadProvider.StartEvent.UserStackBase">
+            <summary>
+            Retrieves the UserStackBase field.
+            </summary>
+        </member>
+        <member name="M:EtwTools.Providers.Kernel.ThreadProvider.StartEvent.UserStackLimit">
+            <summary>
+            Retrieves the UserStackLimit field.
+            </summary>
+        </member>
+        <member name="M:EtwTools.Providers.Kernel.ThreadProvider.StartEvent.Affinity">
+            <summary>
+            Retrieves the Affinity field.
+            </summary>
+        </member>
+        <member name="M:EtwTools.Providers.Kernel.ThreadProvider.StartEvent.Win32StartAddr">
+            <summary>
+            Retrieves the Win32StartAddr field.
+            </summary>
+        </member>
+        <member name="M:EtwTools.Providers.Kernel.ThreadProvider.StartEvent.TebBase">
+            <summary>
+            Retrieves the TebBase field.
+            </summary>
+        </member>
+        <member name="M:EtwTools.Providers.Kernel.ThreadProvider.StartEvent.SubProcessTag">
+            <summary>
+            Retrieves the SubProcessTag field.
+            </summary>
+        </member>
+        <member name="M:EtwTools.Providers.Kernel.ThreadProvider.StartEvent.BasePriority">
+            <summary>
+            Retrieves the BasePriority field.
+            </summary>
+        </member>
+        <member name="M:EtwTools.Providers.Kernel.ThreadProvider.StartEvent.PagePriority">
+            <summary>
+            Retrieves the PagePriority field.
+            </summary>
+        </member>
+        <member name="M:EtwTools.Providers.Kernel.ThreadProvider.StartEvent.IoPriority">
+            <summary>
+            Retrieves the IoPriority field.
+            </summary>
+        </member>
+        <member name="M:EtwTools.Providers.Kernel.ThreadProvider.StartEvent.ThreadFlags">
+            <summary>
+            Retrieves the ThreadFlags field.
+            </summary>
+        </member>
+        <member name="M:EtwTools.Providers.Kernel.ThreadProvider.StartEvent.ThreadName">
+            <summary>
+            Retrieves the ThreadName field.
+            </summary>
+        </member>
+        <member name="M:EtwTools.Providers.Kernel.ThreadProvider.StartEvent.#ctor(EtwTools.EtwEvent)">
+            <summary>
+            Creates a new StartEvent.
+            </summary>
+            <param name="etwEvent">The event.</param>
+        </member>
+        <member name="T:EtwTools.Providers.Kernel.ThreadProvider.EndEvent">
+            <summary>
+            An event wrapper for a End event.
+            </summary>
+        </member>
+        <member name="F:EtwTools.Providers.Kernel.ThreadProvider.EndEvent.Id">
+            <summary>
+            Event ID.
+            </summary>
+        </member>
+        <member name="F:EtwTools.Providers.Kernel.ThreadProvider.EndEvent.Name">
+            <summary>
+            Event name.
+            </summary>
+        </member>
+        <member name="F:EtwTools.Providers.Kernel.ThreadProvider.EndEvent.Provider">
+            <summary>
+            The event provider.
+            </summary>
+        </member>
+        <member name="P:EtwTools.Providers.Kernel.ThreadProvider.EndEvent.Descriptor">
+            <summary>
+            Event descriptor.
+            </summary>
+        </member>
+        <member name="P:EtwTools.Providers.Kernel.ThreadProvider.EndEvent.Timestamp">
+            <summary>
+            The timestamp of the event.
+            </summary>
+        </member>
+        <member name="P:EtwTools.Providers.Kernel.ThreadProvider.EndEvent.Time">
+            <summary>
+            Timing information for the event.
+            </summary>
+        </member>
+        <member name="P:EtwTools.Providers.Kernel.ThreadProvider.EndEvent.ProcessorNumber">
+            <summary>
+            The processor number the event was recorded on.
+            </summary>
+        </member>
+        <member name="M:EtwTools.Providers.Kernel.ThreadProvider.EndEvent.ProcessId">
+            <summary>
+            Retrieves the ProcessId field.
+            </summary>
+        </member>
+        <member name="M:EtwTools.Providers.Kernel.ThreadProvider.EndEvent.ThreadId">
+            <summary>
+            Retrieves the ThreadId field.
+            </summary>
+        </member>
+        <member name="M:EtwTools.Providers.Kernel.ThreadProvider.EndEvent.StackBase">
+            <summary>
+            Retrieves the StackBase field.
+            </summary>
+        </member>
+        <member name="M:EtwTools.Providers.Kernel.ThreadProvider.EndEvent.StackLimit">
+            <summary>
+            Retrieves the StackLimit field.
+            </summary>
+        </member>
+        <member name="M:EtwTools.Providers.Kernel.ThreadProvider.EndEvent.UserStackBase">
+            <summary>
+            Retrieves the UserStackBase field.
+            </summary>
+        </member>
+        <member name="M:EtwTools.Providers.Kernel.ThreadProvider.EndEvent.UserStackLimit">
+            <summary>
+            Retrieves the UserStackLimit field.
+            </summary>
+        </member>
+        <member name="M:EtwTools.Providers.Kernel.ThreadProvider.EndEvent.Affinity">
+            <summary>
+            Retrieves the Affinity field.
+            </summary>
+        </member>
+        <member name="M:EtwTools.Providers.Kernel.ThreadProvider.EndEvent.Win32StartAddr">
+            <summary>
+            Retrieves the Win32StartAddr field.
+            </summary>
+        </member>
+        <member name="M:EtwTools.Providers.Kernel.ThreadProvider.EndEvent.TebBase">
+            <summary>
+            Retrieves the TebBase field.
+            </summary>
+        </member>
+        <member name="M:EtwTools.Providers.Kernel.ThreadProvider.EndEvent.SubProcessTag">
+            <summary>
+            Retrieves the SubProcessTag field.
+            </summary>
+        </member>
+        <member name="M:EtwTools.Providers.Kernel.ThreadProvider.EndEvent.BasePriority">
+            <summary>
+            Retrieves the BasePriority field.
+            </summary>
+        </member>
+        <member name="M:EtwTools.Providers.Kernel.ThreadProvider.EndEvent.PagePriority">
+            <summary>
+            Retrieves the PagePriority field.
+            </summary>
+        </member>
+        <member name="M:EtwTools.Providers.Kernel.ThreadProvider.EndEvent.IoPriority">
+            <summary>
+            Retrieves the IoPriority field.
+            </summary>
+        </member>
+        <member name="M:EtwTools.Providers.Kernel.ThreadProvider.EndEvent.ThreadFlags">
+            <summary>
+            Retrieves the ThreadFlags field.
+            </summary>
+        </member>
+        <member name="M:EtwTools.Providers.Kernel.ThreadProvider.EndEvent.ThreadName">
+            <summary>
+            Retrieves the ThreadName field.
+            </summary>
+        </member>
+        <member name="M:EtwTools.Providers.Kernel.ThreadProvider.EndEvent.#ctor(EtwTools.EtwEvent)">
+            <summary>
+            Creates a new EndEvent.
+            </summary>
+            <param name="etwEvent">The event.</param>
+        </member>
+        <member name="T:EtwTools.Providers.Kernel.ThreadProvider.DCStartEvent">
+            <summary>
+            An event wrapper for a DCStart event.
+            </summary>
+        </member>
+        <member name="F:EtwTools.Providers.Kernel.ThreadProvider.DCStartEvent.Id">
+            <summary>
+            Event ID.
+            </summary>
+        </member>
+        <member name="F:EtwTools.Providers.Kernel.ThreadProvider.DCStartEvent.Name">
+            <summary>
+            Event name.
+            </summary>
+        </member>
+        <member name="F:EtwTools.Providers.Kernel.ThreadProvider.DCStartEvent.Provider">
+            <summary>
+            The event provider.
+            </summary>
+        </member>
+        <member name="P:EtwTools.Providers.Kernel.ThreadProvider.DCStartEvent.Descriptor">
+            <summary>
+            Event descriptor.
+            </summary>
+        </member>
+        <member name="P:EtwTools.Providers.Kernel.ThreadProvider.DCStartEvent.Timestamp">
+            <summary>
+            The timestamp of the event.
+            </summary>
+        </member>
+        <member name="P:EtwTools.Providers.Kernel.ThreadProvider.DCStartEvent.Time">
+            <summary>
+            Timing information for the event.
+            </summary>
+        </member>
+        <member name="P:EtwTools.Providers.Kernel.ThreadProvider.DCStartEvent.ProcessorNumber">
+            <summary>
+            The processor number the event was recorded on.
+            </summary>
+        </member>
+        <member name="M:EtwTools.Providers.Kernel.ThreadProvider.DCStartEvent.ProcessId">
+            <summary>
+            Retrieves the ProcessId field.
+            </summary>
+        </member>
+        <member name="M:EtwTools.Providers.Kernel.ThreadProvider.DCStartEvent.ThreadId">
+            <summary>
+            Retrieves the ThreadId field.
+            </summary>
+        </member>
+        <member name="M:EtwTools.Providers.Kernel.ThreadProvider.DCStartEvent.StackBase">
+            <summary>
+            Retrieves the StackBase field.
+            </summary>
+        </member>
+        <member name="M:EtwTools.Providers.Kernel.ThreadProvider.DCStartEvent.StackLimit">
+            <summary>
+            Retrieves the StackLimit field.
+            </summary>
+        </member>
+        <member name="M:EtwTools.Providers.Kernel.ThreadProvider.DCStartEvent.UserStackBase">
+            <summary>
+            Retrieves the UserStackBase field.
+            </summary>
+        </member>
+        <member name="M:EtwTools.Providers.Kernel.ThreadProvider.DCStartEvent.UserStackLimit">
+            <summary>
+            Retrieves the UserStackLimit field.
+            </summary>
+        </member>
+        <member name="M:EtwTools.Providers.Kernel.ThreadProvider.DCStartEvent.Affinity">
+            <summary>
+            Retrieves the Affinity field.
+            </summary>
+        </member>
+        <member name="M:EtwTools.Providers.Kernel.ThreadProvider.DCStartEvent.Win32StartAddr">
+            <summary>
+            Retrieves the Win32StartAddr field.
+            </summary>
+        </member>
+        <member name="M:EtwTools.Providers.Kernel.ThreadProvider.DCStartEvent.TebBase">
+            <summary>
+            Retrieves the TebBase field.
+            </summary>
+        </member>
+        <member name="M:EtwTools.Providers.Kernel.ThreadProvider.DCStartEvent.SubProcessTag">
+            <summary>
+            Retrieves the SubProcessTag field.
+            </summary>
+        </member>
+        <member name="M:EtwTools.Providers.Kernel.ThreadProvider.DCStartEvent.BasePriority">
+            <summary>
+            Retrieves the BasePriority field.
+            </summary>
+        </member>
+        <member name="M:EtwTools.Providers.Kernel.ThreadProvider.DCStartEvent.PagePriority">
+            <summary>
+            Retrieves the PagePriority field.
+            </summary>
+        </member>
+        <member name="M:EtwTools.Providers.Kernel.ThreadProvider.DCStartEvent.IoPriority">
+            <summary>
+            Retrieves the IoPriority field.
+            </summary>
+        </member>
+        <member name="M:EtwTools.Providers.Kernel.ThreadProvider.DCStartEvent.ThreadFlags">
+            <summary>
+            Retrieves the ThreadFlags field.
+            </summary>
+        </member>
+        <member name="M:EtwTools.Providers.Kernel.ThreadProvider.DCStartEvent.ThreadName">
+            <summary>
+            Retrieves the ThreadName field.
+            </summary>
+        </member>
+        <member name="M:EtwTools.Providers.Kernel.ThreadProvider.DCStartEvent.#ctor(EtwTools.EtwEvent)">
+            <summary>
+            Creates a new DCStartEvent.
+            </summary>
+            <param name="etwEvent">The event.</param>
+        </member>
+        <member name="T:EtwTools.Providers.Kernel.ThreadProvider.DCEndEvent">
+            <summary>
+            An event wrapper for a DCEnd event.
+            </summary>
+        </member>
+        <member name="F:EtwTools.Providers.Kernel.ThreadProvider.DCEndEvent.Id">
+            <summary>
+            Event ID.
+            </summary>
+        </member>
+        <member name="F:EtwTools.Providers.Kernel.ThreadProvider.DCEndEvent.Name">
+            <summary>
+            Event name.
+            </summary>
+        </member>
+        <member name="F:EtwTools.Providers.Kernel.ThreadProvider.DCEndEvent.Provider">
+            <summary>
+            The event provider.
+            </summary>
+        </member>
+        <member name="P:EtwTools.Providers.Kernel.ThreadProvider.DCEndEvent.Descriptor">
+            <summary>
+            Event descriptor.
+            </summary>
+        </member>
+        <member name="P:EtwTools.Providers.Kernel.ThreadProvider.DCEndEvent.Timestamp">
+            <summary>
+            The timestamp of the event.
+            </summary>
+        </member>
+        <member name="P:EtwTools.Providers.Kernel.ThreadProvider.DCEndEvent.Time">
+            <summary>
+            Timing information for the event.
+            </summary>
+        </member>
+        <member name="P:EtwTools.Providers.Kernel.ThreadProvider.DCEndEvent.ProcessorNumber">
+            <summary>
+            The processor number the event was recorded on.
+            </summary>
+        </member>
+        <member name="M:EtwTools.Providers.Kernel.ThreadProvider.DCEndEvent.ProcessId">
+            <summary>
+            Retrieves the ProcessId field.
+            </summary>
+        </member>
+        <member name="M:EtwTools.Providers.Kernel.ThreadProvider.DCEndEvent.ThreadId">
+            <summary>
+            Retrieves the ThreadId field.
+            </summary>
+        </member>
+        <member name="M:EtwTools.Providers.Kernel.ThreadProvider.DCEndEvent.StackBase">
+            <summary>
+            Retrieves the StackBase field.
+            </summary>
+        </member>
+        <member name="M:EtwTools.Providers.Kernel.ThreadProvider.DCEndEvent.StackLimit">
+            <summary>
+            Retrieves the StackLimit field.
+            </summary>
+        </member>
+        <member name="M:EtwTools.Providers.Kernel.ThreadProvider.DCEndEvent.UserStackBase">
+            <summary>
+            Retrieves the UserStackBase field.
+            </summary>
+        </member>
+        <member name="M:EtwTools.Providers.Kernel.ThreadProvider.DCEndEvent.UserStackLimit">
+            <summary>
+            Retrieves the UserStackLimit field.
+            </summary>
+        </member>
+        <member name="M:EtwTools.Providers.Kernel.ThreadProvider.DCEndEvent.Affinity">
+            <summary>
+            Retrieves the Affinity field.
+            </summary>
+        </member>
+        <member name="M:EtwTools.Providers.Kernel.ThreadProvider.DCEndEvent.Win32StartAddr">
+            <summary>
+            Retrieves the Win32StartAddr field.
+            </summary>
+        </member>
+        <member name="M:EtwTools.Providers.Kernel.ThreadProvider.DCEndEvent.TebBase">
+            <summary>
+            Retrieves the TebBase field.
+            </summary>
+        </member>
+        <member name="M:EtwTools.Providers.Kernel.ThreadProvider.DCEndEvent.SubProcessTag">
+            <summary>
+            Retrieves the SubProcessTag field.
+            </summary>
+        </member>
+        <member name="M:EtwTools.Providers.Kernel.ThreadProvider.DCEndEvent.BasePriority">
+            <summary>
+            Retrieves the BasePriority field.
+            </summary>
+        </member>
+        <member name="M:EtwTools.Providers.Kernel.ThreadProvider.DCEndEvent.PagePriority">
+            <summary>
+            Retrieves the PagePriority field.
+            </summary>
+        </member>
+        <member name="M:EtwTools.Providers.Kernel.ThreadProvider.DCEndEvent.IoPriority">
+            <summary>
+            Retrieves the IoPriority field.
+            </summary>
+        </member>
+        <member name="M:EtwTools.Providers.Kernel.ThreadProvider.DCEndEvent.ThreadFlags">
+            <summary>
+            Retrieves the ThreadFlags field.
+            </summary>
+        </member>
+        <member name="M:EtwTools.Providers.Kernel.ThreadProvider.DCEndEvent.ThreadName">
+            <summary>
+            Retrieves the ThreadName field.
+            </summary>
+        </member>
+        <member name="M:EtwTools.Providers.Kernel.ThreadProvider.DCEndEvent.#ctor(EtwTools.EtwEvent)">
+            <summary>
+            Creates a new DCEndEvent.
+            </summary>
+            <param name="etwEvent">The event.</param>
+        </member>
+        <member name="T:EtwTools.Providers.Kernel.ThreadProvider.CSwitchEvent">
+            <summary>
+            An event wrapper for a CSwitch event.
+            </summary>
+        </member>
+        <member name="F:EtwTools.Providers.Kernel.ThreadProvider.CSwitchEvent.Id">
+            <summary>
+            Event ID.
+            </summary>
+        </member>
+        <member name="F:EtwTools.Providers.Kernel.ThreadProvider.CSwitchEvent.Name">
+            <summary>
+            Event name.
+            </summary>
+        </member>
+        <member name="F:EtwTools.Providers.Kernel.ThreadProvider.CSwitchEvent.Provider">
+            <summary>
+            The event provider.
+            </summary>
+        </member>
+        <member name="P:EtwTools.Providers.Kernel.ThreadProvider.CSwitchEvent.Descriptor">
+            <summary>
+            Event descriptor.
+            </summary>
+        </member>
+        <member name="P:EtwTools.Providers.Kernel.ThreadProvider.CSwitchEvent.ProcessId">
+            <summary>
+            The process the event was recorded in.
+            </summary>
+        </member>
+        <member name="P:EtwTools.Providers.Kernel.ThreadProvider.CSwitchEvent.ThreadId">
+            <summary>
+            The thread the event was recorded on.
+            </summary>
+        </member>
+        <member name="P:EtwTools.Providers.Kernel.ThreadProvider.CSwitchEvent.Timestamp">
+            <summary>
+            The timestamp of the event.
+            </summary>
+        </member>
+        <member name="P:EtwTools.Providers.Kernel.ThreadProvider.CSwitchEvent.Time">
+            <summary>
+            Timing information for the event.
+            </summary>
+        </member>
+        <member name="P:EtwTools.Providers.Kernel.ThreadProvider.CSwitchEvent.ProcessorNumber">
+            <summary>
+            The processor number the event was recorded on.
+            </summary>
+        </member>
+        <member name="M:EtwTools.Providers.Kernel.ThreadProvider.CSwitchEvent.NewThreadId">
+            <summary>
+            Retrieves the NewThreadId field.
+            </summary>
+        </member>
+        <member name="M:EtwTools.Providers.Kernel.ThreadProvider.CSwitchEvent.OldThreadId">
+            <summary>
+            Retrieves the OldThreadId field.
+            </summary>
+        </member>
+        <member name="M:EtwTools.Providers.Kernel.ThreadProvider.CSwitchEvent.NewThreadPriority">
+            <summary>
+            Retrieves the NewThreadPriority field.
+            </summary>
+        </member>
+        <member name="M:EtwTools.Providers.Kernel.ThreadProvider.CSwitchEvent.OldThreadPriority">
+            <summary>
+            Retrieves the OldThreadPriority field.
+            </summary>
+        </member>
+        <member name="M:EtwTools.Providers.Kernel.ThreadProvider.CSwitchEvent.PreviousCState">
+            <summary>
+            Retrieves the PreviousCState field.
+            </summary>
+        </member>
+        <member name="M:EtwTools.Providers.Kernel.ThreadProvider.CSwitchEvent.OldThreadWaitReason">
+            <summary>
+            Retrieves the OldThreadWaitReason field.
+            </summary>
+        </member>
+        <member name="M:EtwTools.Providers.Kernel.ThreadProvider.CSwitchEvent.ThreadFlags">
+            <summary>
+            Retrieves the ThreadFlags field.
+            </summary>
+        </member>
+        <member name="M:EtwTools.Providers.Kernel.ThreadProvider.CSwitchEvent.OldThreadState">
+            <summary>
+            Retrieves the OldThreadState field.
+            </summary>
+        </member>
+        <member name="M:EtwTools.Providers.Kernel.ThreadProvider.CSwitchEvent.OldThreadWaitIdealProcessor">
+            <summary>
+            Retrieves the OldThreadWaitIdealProcessor field.
+            </summary>
+        </member>
+        <member name="M:EtwTools.Providers.Kernel.ThreadProvider.CSwitchEvent.NewThreadWaitTime">
+            <summary>
+            Retrieves the NewThreadWaitTime field.
+            </summary>
+        </member>
+        <member name="M:EtwTools.Providers.Kernel.ThreadProvider.CSwitchEvent.#ctor(EtwTools.EtwEvent)">
+            <summary>
+            Creates a new CSwitchEvent.
+            </summary>
+            <param name="etwEvent">The event.</param>
+        </member>
+        <member name="T:EtwTools.Providers.Kernel.ThreadProvider.CompCSEvent">
+            <summary>
+            An event wrapper for a CompCS event.
+            </summary>
+        </member>
+        <member name="F:EtwTools.Providers.Kernel.ThreadProvider.CompCSEvent.Id">
+            <summary>
+            Event ID.
+            </summary>
+        </member>
+        <member name="F:EtwTools.Providers.Kernel.ThreadProvider.CompCSEvent.Name">
+            <summary>
+            Event name.
+            </summary>
+        </member>
+        <member name="F:EtwTools.Providers.Kernel.ThreadProvider.CompCSEvent.Provider">
+            <summary>
+            The event provider.
+            </summary>
+        </member>
+        <member name="P:EtwTools.Providers.Kernel.ThreadProvider.CompCSEvent.Descriptor">
+            <summary>
+            Event descriptor.
+            </summary>
+        </member>
+        <member name="P:EtwTools.Providers.Kernel.ThreadProvider.CompCSEvent.ProcessId">
+            <summary>
+            The process the event was recorded in.
+            </summary>
+        </member>
+        <member name="P:EtwTools.Providers.Kernel.ThreadProvider.CompCSEvent.ThreadId">
+            <summary>
+            The thread the event was recorded on.
+            </summary>
+        </member>
+        <member name="P:EtwTools.Providers.Kernel.ThreadProvider.CompCSEvent.Timestamp">
+            <summary>
+            The timestamp of the event.
+            </summary>
+        </member>
+        <member name="P:EtwTools.Providers.Kernel.ThreadProvider.CompCSEvent.Time">
+            <summary>
+            Timing information for the event.
+            </summary>
+        </member>
+        <member name="P:EtwTools.Providers.Kernel.ThreadProvider.CompCSEvent.ProcessorNumber">
+            <summary>
+            The processor number the event was recorded on.
+            </summary>
+        </member>
+        <member name="M:EtwTools.Providers.Kernel.ThreadProvider.CompCSEvent.#ctor(EtwTools.EtwEvent)">
+            <summary>
+            Creates a new CompCSEvent.
+            </summary>
+            <param name="etwEvent">The event.</param>
+        </member>
+        <member name="T:EtwTools.Providers.Kernel.ThreadProvider.SpinLockEvent">
+            <summary>
+            An event wrapper for a SpinLock event.
+            </summary>
+        </member>
+        <member name="F:EtwTools.Providers.Kernel.ThreadProvider.SpinLockEvent.Id">
+            <summary>
+            Event ID.
+            </summary>
+        </member>
+        <member name="F:EtwTools.Providers.Kernel.ThreadProvider.SpinLockEvent.Name">
+            <summary>
+            Event name.
+            </summary>
+        </member>
+        <member name="F:EtwTools.Providers.Kernel.ThreadProvider.SpinLockEvent.Provider">
+            <summary>
+            The event provider.
+            </summary>
+        </member>
+        <member name="P:EtwTools.Providers.Kernel.ThreadProvider.SpinLockEvent.Descriptor">
+            <summary>
+            Event descriptor.
+            </summary>
+        </member>
+        <member name="P:EtwTools.Providers.Kernel.ThreadProvider.SpinLockEvent.ProcessId">
+            <summary>
+            The process the event was recorded in.
+            </summary>
+        </member>
+        <member name="P:EtwTools.Providers.Kernel.ThreadProvider.SpinLockEvent.Timestamp">
+            <summary>
+            The timestamp of the event.
+            </summary>
+        </member>
+        <member name="P:EtwTools.Providers.Kernel.ThreadProvider.SpinLockEvent.Time">
+            <summary>
+            Timing information for the event.
+            </summary>
+        </member>
+        <member name="P:EtwTools.Providers.Kernel.ThreadProvider.SpinLockEvent.ProcessorNumber">
+            <summary>
+            The processor number the event was recorded on.
+            </summary>
+        </member>
+        <member name="M:EtwTools.Providers.Kernel.ThreadProvider.SpinLockEvent.SpinLockAddress">
+            <summary>
+            Retrieves the SpinLockAddress field.
+            </summary>
+        </member>
+        <member name="M:EtwTools.Providers.Kernel.ThreadProvider.SpinLockEvent.CallerAddress">
+            <summary>
+            Retrieves the CallerAddress field.
+            </summary>
+        </member>
+        <member name="M:EtwTools.Providers.Kernel.ThreadProvider.SpinLockEvent.AcquireTime">
+            <summary>
+            Retrieves the AcquireTime field.
+            </summary>
+        </member>
+        <member name="M:EtwTools.Providers.Kernel.ThreadProvider.SpinLockEvent.ReleaseTime">
+            <summary>
+            Retrieves the ReleaseTime field.
+            </summary>
+        </member>
+        <member name="M:EtwTools.Providers.Kernel.ThreadProvider.SpinLockEvent.WaitTimeInCycles">
+            <summary>
+            Retrieves the WaitTimeInCycles field.
+            </summary>
+        </member>
+        <member name="M:EtwTools.Providers.Kernel.ThreadProvider.SpinLockEvent.SpinCount">
+            <summary>
+            Retrieves the SpinCount field.
+            </summary>
+        </member>
+        <member name="M:EtwTools.Providers.Kernel.ThreadProvider.SpinLockEvent.ThreadId">
+            <summary>
+            Retrieves the ThreadId field.
+            </summary>
+        </member>
+        <member name="M:EtwTools.Providers.Kernel.ThreadProvider.SpinLockEvent.InterruptCount">
+            <summary>
+            Retrieves the InterruptCount field.
+            </summary>
+        </member>
+        <member name="M:EtwTools.Providers.Kernel.ThreadProvider.SpinLockEvent.Irql">
+            <summary>
+            Retrieves the Irql field.
+            </summary>
+        </member>
+        <member name="M:EtwTools.Providers.Kernel.ThreadProvider.SpinLockEvent.AcquireDepth">
+            <summary>
+            Retrieves the AcquireDepth field.
+            </summary>
+        </member>
+        <member name="M:EtwTools.Providers.Kernel.ThreadProvider.SpinLockEvent.Flag">
+            <summary>
+            Retrieves the Flag field.
+            </summary>
+        </member>
+        <member name="M:EtwTools.Providers.Kernel.ThreadProvider.SpinLockEvent.#ctor(EtwTools.EtwEvent)">
+            <summary>
+            Creates a new SpinLockEvent.
+            </summary>
+            <param name="etwEvent">The event.</param>
+        </member>
+        <member name="T:EtwTools.Providers.Kernel.ThreadProvider.SetPriorityEvent">
+            <summary>
+            An event wrapper for a SetPriority event.
+            </summary>
+        </member>
+        <member name="F:EtwTools.Providers.Kernel.ThreadProvider.SetPriorityEvent.Id">
+            <summary>
+            Event ID.
+            </summary>
+        </member>
+        <member name="F:EtwTools.Providers.Kernel.ThreadProvider.SetPriorityEvent.Name">
+            <summary>
+            Event name.
+            </summary>
+        </member>
+        <member name="F:EtwTools.Providers.Kernel.ThreadProvider.SetPriorityEvent.Provider">
+            <summary>
+            The event provider.
+            </summary>
+        </member>
+        <member name="P:EtwTools.Providers.Kernel.ThreadProvider.SetPriorityEvent.Descriptor">
+            <summary>
+            Event descriptor.
+            </summary>
+        </member>
+        <member name="P:EtwTools.Providers.Kernel.ThreadProvider.SetPriorityEvent.ProcessId">
+            <summary>
+            The process the event was recorded in.
+            </summary>
+        </member>
+        <member name="P:EtwTools.Providers.Kernel.ThreadProvider.SetPriorityEvent.Timestamp">
+            <summary>
+            The timestamp of the event.
+            </summary>
+        </member>
+        <member name="P:EtwTools.Providers.Kernel.ThreadProvider.SetPriorityEvent.Time">
+            <summary>
+            Timing information for the event.
+            </summary>
+        </member>
+        <member name="P:EtwTools.Providers.Kernel.ThreadProvider.SetPriorityEvent.ProcessorNumber">
+            <summary>
+            The processor number the event was recorded on.
+            </summary>
+        </member>
+        <member name="M:EtwTools.Providers.Kernel.ThreadProvider.SetPriorityEvent.ThreadId">
+            <summary>
+            Retrieves the ThreadId field.
+            </summary>
+        </member>
+        <member name="M:EtwTools.Providers.Kernel.ThreadProvider.SetPriorityEvent.OldPriority">
+            <summary>
+            Retrieves the OldPriority field.
+            </summary>
+        </member>
+        <member name="M:EtwTools.Providers.Kernel.ThreadProvider.SetPriorityEvent.NewPriority">
+            <summary>
+            Retrieves the NewPriority field.
+            </summary>
+        </member>
+        <member name="M:EtwTools.Providers.Kernel.ThreadProvider.SetPriorityEvent.#ctor(EtwTools.EtwEvent)">
+            <summary>
+            Creates a new SetPriorityEvent.
+            </summary>
+            <param name="etwEvent">The event.</param>
+        </member>
+        <member name="T:EtwTools.Providers.Kernel.ThreadProvider.SetBasePriorityEvent">
+            <summary>
+            An event wrapper for a SetBasePriority event.
+            </summary>
+        </member>
+        <member name="F:EtwTools.Providers.Kernel.ThreadProvider.SetBasePriorityEvent.Id">
+            <summary>
+            Event ID.
+            </summary>
+        </member>
+        <member name="F:EtwTools.Providers.Kernel.ThreadProvider.SetBasePriorityEvent.Name">
+            <summary>
+            Event name.
+            </summary>
+        </member>
+        <member name="F:EtwTools.Providers.Kernel.ThreadProvider.SetBasePriorityEvent.Provider">
+            <summary>
+            The event provider.
+            </summary>
+        </member>
+        <member name="P:EtwTools.Providers.Kernel.ThreadProvider.SetBasePriorityEvent.Descriptor">
+            <summary>
+            Event descriptor.
+            </summary>
+        </member>
+        <member name="P:EtwTools.Providers.Kernel.ThreadProvider.SetBasePriorityEvent.ProcessId">
+            <summary>
+            The process the event was recorded in.
+            </summary>
+        </member>
+        <member name="P:EtwTools.Providers.Kernel.ThreadProvider.SetBasePriorityEvent.Timestamp">
+            <summary>
+            The timestamp of the event.
+            </summary>
+        </member>
+        <member name="P:EtwTools.Providers.Kernel.ThreadProvider.SetBasePriorityEvent.Time">
+            <summary>
+            Timing information for the event.
+            </summary>
+        </member>
+        <member name="P:EtwTools.Providers.Kernel.ThreadProvider.SetBasePriorityEvent.ProcessorNumber">
+            <summary>
+            The processor number the event was recorded on.
+            </summary>
+        </member>
+        <member name="M:EtwTools.Providers.Kernel.ThreadProvider.SetBasePriorityEvent.ThreadId">
+            <summary>
+            Retrieves the ThreadId field.
+            </summary>
+        </member>
+        <member name="M:EtwTools.Providers.Kernel.ThreadProvider.SetBasePriorityEvent.OldPriority">
+            <summary>
+            Retrieves the OldPriority field.
+            </summary>
+        </member>
+        <member name="M:EtwTools.Providers.Kernel.ThreadProvider.SetBasePriorityEvent.NewPriority">
+            <summary>
+            Retrieves the NewPriority field.
+            </summary>
+        </member>
+        <member name="M:EtwTools.Providers.Kernel.ThreadProvider.SetBasePriorityEvent.#ctor(EtwTools.EtwEvent)">
+            <summary>
+            Creates a new SetBasePriorityEvent.
+            </summary>
+            <param name="etwEvent">The event.</param>
+        </member>
+        <member name="T:EtwTools.Providers.Kernel.ThreadProvider.ReadyThreadEvent">
+            <summary>
+            An event wrapper for a ReadyThread event.
+            </summary>
+        </member>
+        <member name="F:EtwTools.Providers.Kernel.ThreadProvider.ReadyThreadEvent.Id">
+            <summary>
+            Event ID.
+            </summary>
+        </member>
+        <member name="F:EtwTools.Providers.Kernel.ThreadProvider.ReadyThreadEvent.Name">
+            <summary>
+            Event name.
+            </summary>
+        </member>
+        <member name="F:EtwTools.Providers.Kernel.ThreadProvider.ReadyThreadEvent.Provider">
+            <summary>
+            The event provider.
+            </summary>
+        </member>
+        <member name="P:EtwTools.Providers.Kernel.ThreadProvider.ReadyThreadEvent.Descriptor">
+            <summary>
+            Event descriptor.
+            </summary>
+        </member>
+        <member name="P:EtwTools.Providers.Kernel.ThreadProvider.ReadyThreadEvent.ProcessId">
+            <summary>
+            The process the event was recorded in.
+            </summary>
+        </member>
+        <member name="P:EtwTools.Providers.Kernel.ThreadProvider.ReadyThreadEvent.Timestamp">
+            <summary>
+            The timestamp of the event.
+            </summary>
+        </member>
+        <member name="P:EtwTools.Providers.Kernel.ThreadProvider.ReadyThreadEvent.Time">
+            <summary>
+            Timing information for the event.
+            </summary>
+        </member>
+        <member name="P:EtwTools.Providers.Kernel.ThreadProvider.ReadyThreadEvent.ProcessorNumber">
+            <summary>
+            The processor number the event was recorded on.
+            </summary>
+        </member>
+        <member name="M:EtwTools.Providers.Kernel.ThreadProvider.ReadyThreadEvent.ThreadId">
+            <summary>
+            Retrieves the ThreadId field.
+            </summary>
+        </member>
+        <member name="M:EtwTools.Providers.Kernel.ThreadProvider.ReadyThreadEvent.AdjustReason">
+            <summary>
+            Retrieves the AdjustReason field.
+            </summary>
+        </member>
+        <member name="M:EtwTools.Providers.Kernel.ThreadProvider.ReadyThreadEvent.AdjustIncrement">
+            <summary>
+            Retrieves the AdjustIncrement field.
+            </summary>
+        </member>
+        <member name="M:EtwTools.Providers.Kernel.ThreadProvider.ReadyThreadEvent.Flags">
+            <summary>
+            Retrieves the Flags field.
+            </summary>
+        </member>
+        <member name="M:EtwTools.Providers.Kernel.ThreadProvider.ReadyThreadEvent.#ctor(EtwTools.EtwEvent)">
+            <summary>
+            Creates a new ReadyThreadEvent.
+            </summary>
+            <param name="etwEvent">The event.</param>
+        </member>
+        <member name="T:EtwTools.Providers.Kernel.ThreadProvider.SetPagePriorityEvent">
+            <summary>
+            An event wrapper for a SetPagePriority event.
+            </summary>
+        </member>
+        <member name="F:EtwTools.Providers.Kernel.ThreadProvider.SetPagePriorityEvent.Id">
+            <summary>
+            Event ID.
+            </summary>
+        </member>
+        <member name="F:EtwTools.Providers.Kernel.ThreadProvider.SetPagePriorityEvent.Name">
+            <summary>
+            Event name.
+            </summary>
+        </member>
+        <member name="F:EtwTools.Providers.Kernel.ThreadProvider.SetPagePriorityEvent.Provider">
+            <summary>
+            The event provider.
+            </summary>
+        </member>
+        <member name="P:EtwTools.Providers.Kernel.ThreadProvider.SetPagePriorityEvent.Descriptor">
+            <summary>
+            Event descriptor.
+            </summary>
+        </member>
+        <member name="P:EtwTools.Providers.Kernel.ThreadProvider.SetPagePriorityEvent.ProcessId">
+            <summary>
+            The process the event was recorded in.
+            </summary>
+        </member>
+        <member name="P:EtwTools.Providers.Kernel.ThreadProvider.SetPagePriorityEvent.Timestamp">
+            <summary>
+            The timestamp of the event.
+            </summary>
+        </member>
+        <member name="P:EtwTools.Providers.Kernel.ThreadProvider.SetPagePriorityEvent.Time">
+            <summary>
+            Timing information for the event.
+            </summary>
+        </member>
+        <member name="P:EtwTools.Providers.Kernel.ThreadProvider.SetPagePriorityEvent.ProcessorNumber">
+            <summary>
+            The processor number the event was recorded on.
+            </summary>
+        </member>
+        <member name="M:EtwTools.Providers.Kernel.ThreadProvider.SetPagePriorityEvent.ThreadId">
+            <summary>
+            Retrieves the ThreadId field.
+            </summary>
+        </member>
+        <member name="M:EtwTools.Providers.Kernel.ThreadProvider.SetPagePriorityEvent.OldPriority">
+            <summary>
+            Retrieves the OldPriority field.
+            </summary>
+        </member>
+        <member name="M:EtwTools.Providers.Kernel.ThreadProvider.SetPagePriorityEvent.NewPriority">
+            <summary>
+            Retrieves the NewPriority field.
+            </summary>
+        </member>
+        <member name="M:EtwTools.Providers.Kernel.ThreadProvider.SetPagePriorityEvent.#ctor(EtwTools.EtwEvent)">
+            <summary>
+            Creates a new SetPagePriorityEvent.
+            </summary>
+            <param name="etwEvent">The event.</param>
+        </member>
+        <member name="T:EtwTools.Providers.Kernel.ThreadProvider.SetIoPriorityEvent">
+            <summary>
+            An event wrapper for a SetIoPriority event.
+            </summary>
+        </member>
+        <member name="F:EtwTools.Providers.Kernel.ThreadProvider.SetIoPriorityEvent.Id">
+            <summary>
+            Event ID.
+            </summary>
+        </member>
+        <member name="F:EtwTools.Providers.Kernel.ThreadProvider.SetIoPriorityEvent.Name">
+            <summary>
+            Event name.
+            </summary>
+        </member>
+        <member name="F:EtwTools.Providers.Kernel.ThreadProvider.SetIoPriorityEvent.Provider">
+            <summary>
+            The event provider.
+            </summary>
+        </member>
+        <member name="P:EtwTools.Providers.Kernel.ThreadProvider.SetIoPriorityEvent.Descriptor">
+            <summary>
+            Event descriptor.
+            </summary>
+        </member>
+        <member name="P:EtwTools.Providers.Kernel.ThreadProvider.SetIoPriorityEvent.ProcessId">
+            <summary>
+            The process the event was recorded in.
+            </summary>
+        </member>
+        <member name="P:EtwTools.Providers.Kernel.ThreadProvider.SetIoPriorityEvent.Timestamp">
+            <summary>
+            The timestamp of the event.
+            </summary>
+        </member>
+        <member name="P:EtwTools.Providers.Kernel.ThreadProvider.SetIoPriorityEvent.Time">
+            <summary>
+            Timing information for the event.
+            </summary>
+        </member>
+        <member name="P:EtwTools.Providers.Kernel.ThreadProvider.SetIoPriorityEvent.ProcessorNumber">
+            <summary>
+            The processor number the event was recorded on.
+            </summary>
+        </member>
+        <member name="M:EtwTools.Providers.Kernel.ThreadProvider.SetIoPriorityEvent.ThreadId">
+            <summary>
+            Retrieves the ThreadId field.
+            </summary>
+        </member>
+        <member name="M:EtwTools.Providers.Kernel.ThreadProvider.SetIoPriorityEvent.OldPriority">
+            <summary>
+            Retrieves the OldPriority field.
+            </summary>
+        </member>
+        <member name="M:EtwTools.Providers.Kernel.ThreadProvider.SetIoPriorityEvent.NewPriority">
+            <summary>
+            Retrieves the NewPriority field.
+            </summary>
+        </member>
+        <member name="M:EtwTools.Providers.Kernel.ThreadProvider.SetIoPriorityEvent.#ctor(EtwTools.EtwEvent)">
+            <summary>
+            Creates a new SetIoPriorityEvent.
+            </summary>
+            <param name="etwEvent">The event.</param>
+        </member>
+        <member name="T:EtwTools.Providers.Kernel.ThreadProvider.ThreadAffinityEvent">
+            <summary>
+            An event wrapper for a ThreadAffinity event.
+            </summary>
+        </member>
+        <member name="F:EtwTools.Providers.Kernel.ThreadProvider.ThreadAffinityEvent.Id">
+            <summary>
+            Event ID.
+            </summary>
+        </member>
+        <member name="F:EtwTools.Providers.Kernel.ThreadProvider.ThreadAffinityEvent.Name">
+            <summary>
+            Event name.
+            </summary>
+        </member>
+        <member name="F:EtwTools.Providers.Kernel.ThreadProvider.ThreadAffinityEvent.Provider">
+            <summary>
+            The event provider.
+            </summary>
+        </member>
+        <member name="P:EtwTools.Providers.Kernel.ThreadProvider.ThreadAffinityEvent.Descriptor">
+            <summary>
+            Event descriptor.
+            </summary>
+        </member>
+        <member name="P:EtwTools.Providers.Kernel.ThreadProvider.ThreadAffinityEvent.ProcessId">
+            <summary>
+            The process the event was recorded in.
+            </summary>
+        </member>
+        <member name="P:EtwTools.Providers.Kernel.ThreadProvider.ThreadAffinityEvent.Timestamp">
+            <summary>
+            The timestamp of the event.
+            </summary>
+        </member>
+        <member name="P:EtwTools.Providers.Kernel.ThreadProvider.ThreadAffinityEvent.Time">
+            <summary>
+            Timing information for the event.
+            </summary>
+        </member>
+        <member name="P:EtwTools.Providers.Kernel.ThreadProvider.ThreadAffinityEvent.ProcessorNumber">
+            <summary>
+            The processor number the event was recorded on.
+            </summary>
+        </member>
+        <member name="M:EtwTools.Providers.Kernel.ThreadProvider.ThreadAffinityEvent.Affinity">
+            <summary>
+            Retrieves the Affinity field.
+            </summary>
+        </member>
+        <member name="M:EtwTools.Providers.Kernel.ThreadProvider.ThreadAffinityEvent.ThreadId">
+            <summary>
+            Retrieves the ThreadId field.
+            </summary>
+        </member>
+        <member name="M:EtwTools.Providers.Kernel.ThreadProvider.ThreadAffinityEvent.Group">
+            <summary>
+            Retrieves the Group field.
+            </summary>
+        </member>
+        <member name="M:EtwTools.Providers.Kernel.ThreadProvider.ThreadAffinityEvent.#ctor(EtwTools.EtwEvent)">
+            <summary>
+            Creates a new ThreadAffinityEvent.
+            </summary>
+            <param name="etwEvent">The event.</param>
+        </member>
+        <member name="T:EtwTools.Providers.Kernel.ThreadProvider.WorkerThreadEvent">
+            <summary>
+            An event wrapper for a WorkerThread event.
+            </summary>
+        </member>
+        <member name="F:EtwTools.Providers.Kernel.ThreadProvider.WorkerThreadEvent.Id">
+            <summary>
+            Event ID.
+            </summary>
+        </member>
+        <member name="F:EtwTools.Providers.Kernel.ThreadProvider.WorkerThreadEvent.Name">
+            <summary>
+            Event name.
+            </summary>
+        </member>
+        <member name="F:EtwTools.Providers.Kernel.ThreadProvider.WorkerThreadEvent.Provider">
+            <summary>
+            The event provider.
+            </summary>
+        </member>
+        <member name="P:EtwTools.Providers.Kernel.ThreadProvider.WorkerThreadEvent.Descriptor">
+            <summary>
+            Event descriptor.
+            </summary>
+        </member>
+        <member name="P:EtwTools.Providers.Kernel.ThreadProvider.WorkerThreadEvent.ProcessId">
+            <summary>
+            The process the event was recorded in.
+            </summary>
+        </member>
+        <member name="P:EtwTools.Providers.Kernel.ThreadProvider.WorkerThreadEvent.Timestamp">
+            <summary>
+            The timestamp of the event.
+            </summary>
+        </member>
+        <member name="P:EtwTools.Providers.Kernel.ThreadProvider.WorkerThreadEvent.Time">
+            <summary>
+            Timing information for the event.
+            </summary>
+        </member>
+        <member name="P:EtwTools.Providers.Kernel.ThreadProvider.WorkerThreadEvent.ProcessorNumber">
+            <summary>
+            The processor number the event was recorded on.
+            </summary>
+        </member>
+        <member name="M:EtwTools.Providers.Kernel.ThreadProvider.WorkerThreadEvent.ThreadId">
+            <summary>
+            Retrieves the ThreadId field.
+            </summary>
+        </member>
+        <member name="M:EtwTools.Providers.Kernel.ThreadProvider.WorkerThreadEvent.StartTime">
+            <summary>
+            Retrieves the StartTime field.
+            </summary>
+        </member>
+        <member name="M:EtwTools.Providers.Kernel.ThreadProvider.WorkerThreadEvent.ThreadRoutine">
+            <summary>
+            Retrieves the ThreadRoutine field.
+            </summary>
+        </member>
+        <member name="M:EtwTools.Providers.Kernel.ThreadProvider.WorkerThreadEvent.#ctor(EtwTools.EtwEvent)">
+            <summary>
+            Creates a new WorkerThreadEvent.
+            </summary>
+            <param name="etwEvent">The event.</param>
+        </member>
+        <member name="T:EtwTools.Providers.Kernel.ThreadProvider.AntiStarvationBoostEvent">
+            <summary>
+            An event wrapper for a AntiStarvationBoost event.
+            </summary>
+        </member>
+        <member name="F:EtwTools.Providers.Kernel.ThreadProvider.AntiStarvationBoostEvent.Id">
+            <summary>
+            Event ID.
+            </summary>
+        </member>
+        <member name="F:EtwTools.Providers.Kernel.ThreadProvider.AntiStarvationBoostEvent.Name">
+            <summary>
+            Event name.
+            </summary>
+        </member>
+        <member name="F:EtwTools.Providers.Kernel.ThreadProvider.AntiStarvationBoostEvent.Provider">
+            <summary>
+            The event provider.
+            </summary>
+        </member>
+        <member name="P:EtwTools.Providers.Kernel.ThreadProvider.AntiStarvationBoostEvent.Descriptor">
+            <summary>
+            Event descriptor.
+            </summary>
+        </member>
+        <member name="P:EtwTools.Providers.Kernel.ThreadProvider.AntiStarvationBoostEvent.ProcessId">
+            <summary>
+            The process the event was recorded in.
+            </summary>
+        </member>
+        <member name="P:EtwTools.Providers.Kernel.ThreadProvider.AntiStarvationBoostEvent.Timestamp">
+            <summary>
+            The timestamp of the event.
+            </summary>
+        </member>
+        <member name="P:EtwTools.Providers.Kernel.ThreadProvider.AntiStarvationBoostEvent.Time">
+            <summary>
+            Timing information for the event.
+            </summary>
+        </member>
+        <member name="P:EtwTools.Providers.Kernel.ThreadProvider.AntiStarvationBoostEvent.ProcessorNumber">
+            <summary>
+            The processor number the event was recorded on.
+            </summary>
+        </member>
+        <member name="M:EtwTools.Providers.Kernel.ThreadProvider.AntiStarvationBoostEvent.ThreadId">
+            <summary>
+            Retrieves the ThreadId field.
+            </summary>
+        </member>
+        <member name="M:EtwTools.Providers.Kernel.ThreadProvider.AntiStarvationBoostEvent.ProcessorIndex">
+            <summary>
+            Retrieves the ProcessorIndex field.
+            </summary>
+        </member>
+        <member name="M:EtwTools.Providers.Kernel.ThreadProvider.AntiStarvationBoostEvent.Priority">
+            <summary>
+            Retrieves the Priority field.
+            </summary>
+        </member>
+        <member name="M:EtwTools.Providers.Kernel.ThreadProvider.AntiStarvationBoostEvent.#ctor(EtwTools.EtwEvent)">
+            <summary>
+            Creates a new AntiStarvationBoostEvent.
+            </summary>
+            <param name="etwEvent">The event.</param>
+        </member>
+        <member name="T:EtwTools.Providers.Kernel.ThreadProvider.ThreadMigrationEvent">
+            <summary>
+            An event wrapper for a ThreadMigration event.
+            </summary>
+        </member>
+        <member name="F:EtwTools.Providers.Kernel.ThreadProvider.ThreadMigrationEvent.Id">
+            <summary>
+            Event ID.
+            </summary>
+        </member>
+        <member name="F:EtwTools.Providers.Kernel.ThreadProvider.ThreadMigrationEvent.Name">
+            <summary>
+            Event name.
+            </summary>
+        </member>
+        <member name="F:EtwTools.Providers.Kernel.ThreadProvider.ThreadMigrationEvent.Provider">
+            <summary>
+            The event provider.
+            </summary>
+        </member>
+        <member name="P:EtwTools.Providers.Kernel.ThreadProvider.ThreadMigrationEvent.Descriptor">
+            <summary>
+            Event descriptor.
+            </summary>
+        </member>
+        <member name="P:EtwTools.Providers.Kernel.ThreadProvider.ThreadMigrationEvent.ProcessId">
+            <summary>
+            The process the event was recorded in.
+            </summary>
+        </member>
+        <member name="P:EtwTools.Providers.Kernel.ThreadProvider.ThreadMigrationEvent.Timestamp">
+            <summary>
+            The timestamp of the event.
+            </summary>
+        </member>
+        <member name="P:EtwTools.Providers.Kernel.ThreadProvider.ThreadMigrationEvent.Time">
+            <summary>
+            Timing information for the event.
+            </summary>
+        </member>
+        <member name="P:EtwTools.Providers.Kernel.ThreadProvider.ThreadMigrationEvent.ProcessorNumber">
+            <summary>
+            The processor number the event was recorded on.
+            </summary>
+        </member>
+        <member name="M:EtwTools.Providers.Kernel.ThreadProvider.ThreadMigrationEvent.ThreadId">
+            <summary>
+            Retrieves the ThreadId field.
+            </summary>
+        </member>
+        <member name="M:EtwTools.Providers.Kernel.ThreadProvider.ThreadMigrationEvent.SourceProcessorIndex">
+            <summary>
+            Retrieves the SourceProcessorIndex field.
+            </summary>
+        </member>
+        <member name="M:EtwTools.Providers.Kernel.ThreadProvider.ThreadMigrationEvent.TargetProcessorIndex">
+            <summary>
+            Retrieves the TargetProcessorIndex field.
+            </summary>
+        </member>
+        <member name="M:EtwTools.Providers.Kernel.ThreadProvider.ThreadMigrationEvent.Priority">
+            <summary>
+            Retrieves the Priority field.
+            </summary>
+        </member>
+        <member name="M:EtwTools.Providers.Kernel.ThreadProvider.ThreadMigrationEvent.IdealProcessorAdjust">
+            <summary>
+            Retrieves the IdealProcessorAdjust field.
+            </summary>
+        </member>
+        <member name="M:EtwTools.Providers.Kernel.ThreadProvider.ThreadMigrationEvent.OldIdealProcessorIndex">
+            <summary>
+            Retrieves the OldIdealProcessorIndex field.
+            </summary>
+        </member>
+        <member name="M:EtwTools.Providers.Kernel.ThreadProvider.ThreadMigrationEvent.#ctor(EtwTools.EtwEvent)">
+            <summary>
+            Creates a new ThreadMigrationEvent.
+            </summary>
+            <param name="etwEvent">The event.</param>
+        </member>
+        <member name="T:EtwTools.Providers.Kernel.ThreadProvider.KernelQueueEnqueueEvent">
+            <summary>
+            An event wrapper for a KernelQueueEnqueue event.
+            </summary>
+        </member>
+        <member name="F:EtwTools.Providers.Kernel.ThreadProvider.KernelQueueEnqueueEvent.Id">
+            <summary>
+            Event ID.
+            </summary>
+        </member>
+        <member name="F:EtwTools.Providers.Kernel.ThreadProvider.KernelQueueEnqueueEvent.Name">
+            <summary>
+            Event name.
+            </summary>
+        </member>
+        <member name="F:EtwTools.Providers.Kernel.ThreadProvider.KernelQueueEnqueueEvent.Provider">
+            <summary>
+            The event provider.
+            </summary>
+        </member>
+        <member name="P:EtwTools.Providers.Kernel.ThreadProvider.KernelQueueEnqueueEvent.Descriptor">
+            <summary>
+            Event descriptor.
+            </summary>
+        </member>
+        <member name="P:EtwTools.Providers.Kernel.ThreadProvider.KernelQueueEnqueueEvent.ProcessId">
+            <summary>
+            The process the event was recorded in.
+            </summary>
+        </member>
+        <member name="P:EtwTools.Providers.Kernel.ThreadProvider.KernelQueueEnqueueEvent.Timestamp">
+            <summary>
+            The timestamp of the event.
+            </summary>
+        </member>
+        <member name="P:EtwTools.Providers.Kernel.ThreadProvider.KernelQueueEnqueueEvent.Time">
+            <summary>
+            Timing information for the event.
+            </summary>
+        </member>
+        <member name="P:EtwTools.Providers.Kernel.ThreadProvider.KernelQueueEnqueueEvent.ProcessorNumber">
+            <summary>
+            The processor number the event was recorded on.
+            </summary>
+        </member>
+        <member name="M:EtwTools.Providers.Kernel.ThreadProvider.KernelQueueEnqueueEvent.Entry">
+            <summary>
+            Retrieves the Entry field.
+            </summary>
+        </member>
+        <member name="M:EtwTools.Providers.Kernel.ThreadProvider.KernelQueueEnqueueEvent.ThreadId">
+            <summary>
+            Retrieves the ThreadId field.
+            </summary>
+        </member>
+        <member name="M:EtwTools.Providers.Kernel.ThreadProvider.KernelQueueEnqueueEvent.#ctor(EtwTools.EtwEvent)">
+            <summary>
+            Creates a new KernelQueueEnqueueEvent.
+            </summary>
+            <param name="etwEvent">The event.</param>
+        </member>
+        <member name="T:EtwTools.Providers.Kernel.ThreadProvider.KernelQueueDequeueEvent">
+            <summary>
+            An event wrapper for a KernelQueueDequeue event.
+            </summary>
+        </member>
+        <member name="F:EtwTools.Providers.Kernel.ThreadProvider.KernelQueueDequeueEvent.Id">
+            <summary>
+            Event ID.
+            </summary>
+        </member>
+        <member name="F:EtwTools.Providers.Kernel.ThreadProvider.KernelQueueDequeueEvent.Name">
+            <summary>
+            Event name.
+            </summary>
+        </member>
+        <member name="F:EtwTools.Providers.Kernel.ThreadProvider.KernelQueueDequeueEvent.Provider">
+            <summary>
+            The event provider.
+            </summary>
+        </member>
+        <member name="P:EtwTools.Providers.Kernel.ThreadProvider.KernelQueueDequeueEvent.Descriptor">
+            <summary>
+            Event descriptor.
+            </summary>
+        </member>
+        <member name="P:EtwTools.Providers.Kernel.ThreadProvider.KernelQueueDequeueEvent.ProcessId">
+            <summary>
+            The process the event was recorded in.
+            </summary>
+        </member>
+        <member name="P:EtwTools.Providers.Kernel.ThreadProvider.KernelQueueDequeueEvent.Timestamp">
+            <summary>
+            The timestamp of the event.
+            </summary>
+        </member>
+        <member name="P:EtwTools.Providers.Kernel.ThreadProvider.KernelQueueDequeueEvent.Time">
+            <summary>
+            Timing information for the event.
+            </summary>
+        </member>
+        <member name="P:EtwTools.Providers.Kernel.ThreadProvider.KernelQueueDequeueEvent.ProcessorNumber">
+            <summary>
+            The processor number the event was recorded on.
+            </summary>
+        </member>
+        <member name="M:EtwTools.Providers.Kernel.ThreadProvider.KernelQueueDequeueEvent.ThreadId">
+            <summary>
+            Retrieves the ThreadId field.
+            </summary>
+        </member>
+        <member name="M:EtwTools.Providers.Kernel.ThreadProvider.KernelQueueDequeueEvent.EntryCount">
+            <summary>
+            Retrieves the EntryCount field.
+            </summary>
+        </member>
+        <member name="M:EtwTools.Providers.Kernel.ThreadProvider.KernelQueueDequeueEvent.GetEntries(System.Int32)">
+            <summary>
+            Retrieves the Entries field.
+            </summary>
+        </member>
+        <member name="M:EtwTools.Providers.Kernel.ThreadProvider.KernelQueueDequeueEvent.#ctor(EtwTools.EtwEvent)">
+            <summary>
+            Creates a new KernelQueueDequeueEvent.
+            </summary>
+            <param name="etwEvent">The event.</param>
+        </member>
+        <member name="T:EtwTools.Providers.Kernel.ThreadProvider.WorkerThreadStartEvent">
+            <summary>
+            An event wrapper for a WorkerThreadStart event.
+            </summary>
+        </member>
+        <member name="F:EtwTools.Providers.Kernel.ThreadProvider.WorkerThreadStartEvent.Id">
+            <summary>
+            Event ID.
+            </summary>
+        </member>
+        <member name="F:EtwTools.Providers.Kernel.ThreadProvider.WorkerThreadStartEvent.Name">
+            <summary>
+            Event name.
+            </summary>
+        </member>
+        <member name="F:EtwTools.Providers.Kernel.ThreadProvider.WorkerThreadStartEvent.Provider">
+            <summary>
+            The event provider.
+            </summary>
+        </member>
+        <member name="P:EtwTools.Providers.Kernel.ThreadProvider.WorkerThreadStartEvent.Descriptor">
+            <summary>
+            Event descriptor.
+            </summary>
+        </member>
+        <member name="P:EtwTools.Providers.Kernel.ThreadProvider.WorkerThreadStartEvent.ProcessId">
+            <summary>
+            The process the event was recorded in.
+            </summary>
+        </member>
+        <member name="P:EtwTools.Providers.Kernel.ThreadProvider.WorkerThreadStartEvent.ThreadId">
+            <summary>
+            The thread the event was recorded on.
+            </summary>
+        </member>
+        <member name="P:EtwTools.Providers.Kernel.ThreadProvider.WorkerThreadStartEvent.Timestamp">
+            <summary>
+            The timestamp of the event.
+            </summary>
+        </member>
+        <member name="P:EtwTools.Providers.Kernel.ThreadProvider.WorkerThreadStartEvent.Time">
+            <summary>
+            Timing information for the event.
+            </summary>
+        </member>
+        <member name="P:EtwTools.Providers.Kernel.ThreadProvider.WorkerThreadStartEvent.ProcessorNumber">
+            <summary>
+            The processor number the event was recorded on.
+            </summary>
+        </member>
+        <member name="M:EtwTools.Providers.Kernel.ThreadProvider.WorkerThreadStartEvent.CallbackRoutine">
+            <summary>
+            Retrieves the CallbackRoutine field.
+            </summary>
+        </member>
+        <member name="M:EtwTools.Providers.Kernel.ThreadProvider.WorkerThreadStartEvent.#ctor(EtwTools.EtwEvent)">
+            <summary>
+            Creates a new WorkerThreadStartEvent.
+            </summary>
+            <param name="etwEvent">The event.</param>
+        </member>
+        <member name="T:EtwTools.Providers.Kernel.ThreadProvider.WorkerThreadStopEvent">
+            <summary>
+            An event wrapper for a WorkerThreadStop event.
+            </summary>
+        </member>
+        <member name="F:EtwTools.Providers.Kernel.ThreadProvider.WorkerThreadStopEvent.Id">
+            <summary>
+            Event ID.
+            </summary>
+        </member>
+        <member name="F:EtwTools.Providers.Kernel.ThreadProvider.WorkerThreadStopEvent.Name">
+            <summary>
+            Event name.
+            </summary>
+        </member>
+        <member name="F:EtwTools.Providers.Kernel.ThreadProvider.WorkerThreadStopEvent.Provider">
+            <summary>
+            The event provider.
+            </summary>
+        </member>
+        <member name="P:EtwTools.Providers.Kernel.ThreadProvider.WorkerThreadStopEvent.Descriptor">
+            <summary>
+            Event descriptor.
+            </summary>
+        </member>
+        <member name="P:EtwTools.Providers.Kernel.ThreadProvider.WorkerThreadStopEvent.ProcessId">
+            <summary>
+            The process the event was recorded in.
+            </summary>
+        </member>
+        <member name="P:EtwTools.Providers.Kernel.ThreadProvider.WorkerThreadStopEvent.ThreadId">
+            <summary>
+            The thread the event was recorded on.
+            </summary>
+        </member>
+        <member name="P:EtwTools.Providers.Kernel.ThreadProvider.WorkerThreadStopEvent.Timestamp">
+            <summary>
+            The timestamp of the event.
+            </summary>
+        </member>
+        <member name="P:EtwTools.Providers.Kernel.ThreadProvider.WorkerThreadStopEvent.Time">
+            <summary>
+            Timing information for the event.
+            </summary>
+        </member>
+        <member name="P:EtwTools.Providers.Kernel.ThreadProvider.WorkerThreadStopEvent.ProcessorNumber">
+            <summary>
+            The processor number the event was recorded on.
+            </summary>
+        </member>
+        <member name="M:EtwTools.Providers.Kernel.ThreadProvider.WorkerThreadStopEvent.CallbackRoutine">
+            <summary>
+            Retrieves the CallbackRoutine field.
+            </summary>
+        </member>
+        <member name="M:EtwTools.Providers.Kernel.ThreadProvider.WorkerThreadStopEvent.#ctor(EtwTools.EtwEvent)">
+            <summary>
+            Creates a new WorkerThreadStopEvent.
+            </summary>
+            <param name="etwEvent">The event.</param>
+        </member>
+        <member name="T:EtwTools.Providers.Kernel.ThreadProvider.AutoBoostSetFloorEvent">
+            <summary>
+            An event wrapper for a AutoBoostSetFloor event.
+            </summary>
+        </member>
+        <member name="F:EtwTools.Providers.Kernel.ThreadProvider.AutoBoostSetFloorEvent.Id">
+            <summary>
+            Event ID.
+            </summary>
+        </member>
+        <member name="F:EtwTools.Providers.Kernel.ThreadProvider.AutoBoostSetFloorEvent.Name">
+            <summary>
+            Event name.
+            </summary>
+        </member>
+        <member name="F:EtwTools.Providers.Kernel.ThreadProvider.AutoBoostSetFloorEvent.Provider">
+            <summary>
+            The event provider.
+            </summary>
+        </member>
+        <member name="P:EtwTools.Providers.Kernel.ThreadProvider.AutoBoostSetFloorEvent.Descriptor">
+            <summary>
+            Event descriptor.
+            </summary>
+        </member>
+        <member name="P:EtwTools.Providers.Kernel.ThreadProvider.AutoBoostSetFloorEvent.ProcessId">
+            <summary>
+            The process the event was recorded in.
+            </summary>
+        </member>
+        <member name="P:EtwTools.Providers.Kernel.ThreadProvider.AutoBoostSetFloorEvent.Timestamp">
+            <summary>
+            The timestamp of the event.
+            </summary>
+        </member>
+        <member name="P:EtwTools.Providers.Kernel.ThreadProvider.AutoBoostSetFloorEvent.Time">
+            <summary>
+            Timing information for the event.
+            </summary>
+        </member>
+        <member name="P:EtwTools.Providers.Kernel.ThreadProvider.AutoBoostSetFloorEvent.ProcessorNumber">
+            <summary>
+            The processor number the event was recorded on.
+            </summary>
+        </member>
+        <member name="M:EtwTools.Providers.Kernel.ThreadProvider.AutoBoostSetFloorEvent.Lock">
+            <summary>
+            Retrieves the Lock field.
+            </summary>
+        </member>
+        <member name="M:EtwTools.Providers.Kernel.ThreadProvider.AutoBoostSetFloorEvent.ThreadId">
+            <summary>
+            Retrieves the ThreadId field.
+            </summary>
+        </member>
+        <member name="M:EtwTools.Providers.Kernel.ThreadProvider.AutoBoostSetFloorEvent.NewCpuPriorityFloor">
+            <summary>
+            Retrieves the NewCpuPriorityFloor field.
+            </summary>
+        </member>
+        <member name="M:EtwTools.Providers.Kernel.ThreadProvider.AutoBoostSetFloorEvent.OldCpuPriority">
+            <summary>
+            Retrieves the OldCpuPriority field.
+            </summary>
+        </member>
+        <member name="M:EtwTools.Providers.Kernel.ThreadProvider.AutoBoostSetFloorEvent.IoPriorities">
+            <summary>
+            Retrieves the IoPriorities field.
+            </summary>
+        </member>
+        <member name="M:EtwTools.Providers.Kernel.ThreadProvider.AutoBoostSetFloorEvent.BoostFlags">
+            <summary>
+            Retrieves the BoostFlags field.
+            </summary>
+        </member>
+        <member name="M:EtwTools.Providers.Kernel.ThreadProvider.AutoBoostSetFloorEvent.#ctor(EtwTools.EtwEvent)">
+            <summary>
+            Creates a new AutoBoostSetFloorEvent.
+            </summary>
+            <param name="etwEvent">The event.</param>
+        </member>
+        <member name="T:EtwTools.Providers.Kernel.ThreadProvider.AutoBoostClearFloorEvent">
+            <summary>
+            An event wrapper for a AutoBoostClearFloor event.
+            </summary>
+        </member>
+        <member name="F:EtwTools.Providers.Kernel.ThreadProvider.AutoBoostClearFloorEvent.Id">
+            <summary>
+            Event ID.
+            </summary>
+        </member>
+        <member name="F:EtwTools.Providers.Kernel.ThreadProvider.AutoBoostClearFloorEvent.Name">
+            <summary>
+            Event name.
+            </summary>
+        </member>
+        <member name="F:EtwTools.Providers.Kernel.ThreadProvider.AutoBoostClearFloorEvent.Provider">
+            <summary>
+            The event provider.
+            </summary>
+        </member>
+        <member name="P:EtwTools.Providers.Kernel.ThreadProvider.AutoBoostClearFloorEvent.Descriptor">
+            <summary>
+            Event descriptor.
+            </summary>
+        </member>
+        <member name="P:EtwTools.Providers.Kernel.ThreadProvider.AutoBoostClearFloorEvent.ProcessId">
+            <summary>
+            The process the event was recorded in.
+            </summary>
+        </member>
+        <member name="P:EtwTools.Providers.Kernel.ThreadProvider.AutoBoostClearFloorEvent.Timestamp">
+            <summary>
+            The timestamp of the event.
+            </summary>
+        </member>
+        <member name="P:EtwTools.Providers.Kernel.ThreadProvider.AutoBoostClearFloorEvent.Time">
+            <summary>
+            Timing information for the event.
+            </summary>
+        </member>
+        <member name="P:EtwTools.Providers.Kernel.ThreadProvider.AutoBoostClearFloorEvent.ProcessorNumber">
+            <summary>
+            The processor number the event was recorded on.
+            </summary>
+        </member>
+        <member name="M:EtwTools.Providers.Kernel.ThreadProvider.AutoBoostClearFloorEvent.LockAddress">
+            <summary>
+            Retrieves the LockAddress field.
+            </summary>
+        </member>
+        <member name="M:EtwTools.Providers.Kernel.ThreadProvider.AutoBoostClearFloorEvent.ThreadId">
+            <summary>
+            Retrieves the ThreadId field.
+            </summary>
+        </member>
+        <member name="M:EtwTools.Providers.Kernel.ThreadProvider.AutoBoostClearFloorEvent.BoostBitmap">
+            <summary>
+            Retrieves the BoostBitmap field.
+            </summary>
+        </member>
+        <member name="M:EtwTools.Providers.Kernel.ThreadProvider.AutoBoostClearFloorEvent.#ctor(EtwTools.EtwEvent)">
+            <summary>
+            Creates a new AutoBoostClearFloorEvent.
+            </summary>
+            <param name="etwEvent">The event.</param>
+        </member>
+        <member name="T:EtwTools.Providers.Kernel.ThreadProvider.AutoBoostEntryExhaustionEvent">
+            <summary>
+            An event wrapper for a AutoBoostEntryExhaustion event.
+            </summary>
+        </member>
+        <member name="F:EtwTools.Providers.Kernel.ThreadProvider.AutoBoostEntryExhaustionEvent.Id">
+            <summary>
+            Event ID.
+            </summary>
+        </member>
+        <member name="F:EtwTools.Providers.Kernel.ThreadProvider.AutoBoostEntryExhaustionEvent.Name">
+            <summary>
+            Event name.
+            </summary>
+        </member>
+        <member name="F:EtwTools.Providers.Kernel.ThreadProvider.AutoBoostEntryExhaustionEvent.Provider">
+            <summary>
+            The event provider.
+            </summary>
+        </member>
+        <member name="P:EtwTools.Providers.Kernel.ThreadProvider.AutoBoostEntryExhaustionEvent.Descriptor">
+            <summary>
+            Event descriptor.
+            </summary>
+        </member>
+        <member name="P:EtwTools.Providers.Kernel.ThreadProvider.AutoBoostEntryExhaustionEvent.ProcessId">
+            <summary>
+            The process the event was recorded in.
+            </summary>
+        </member>
+        <member name="P:EtwTools.Providers.Kernel.ThreadProvider.AutoBoostEntryExhaustionEvent.Timestamp">
+            <summary>
+            The timestamp of the event.
+            </summary>
+        </member>
+        <member name="P:EtwTools.Providers.Kernel.ThreadProvider.AutoBoostEntryExhaustionEvent.Time">
+            <summary>
+            Timing information for the event.
+            </summary>
+        </member>
+        <member name="P:EtwTools.Providers.Kernel.ThreadProvider.AutoBoostEntryExhaustionEvent.ProcessorNumber">
+            <summary>
+            The processor number the event was recorded on.
+            </summary>
+        </member>
+        <member name="M:EtwTools.Providers.Kernel.ThreadProvider.AutoBoostEntryExhaustionEvent.LockAddress">
+            <summary>
+            Retrieves the LockAddress field.
+            </summary>
+        </member>
+        <member name="M:EtwTools.Providers.Kernel.ThreadProvider.AutoBoostEntryExhaustionEvent.ThreadId">
+            <summary>
+            Retrieves the ThreadId field.
+            </summary>
+        </member>
+        <member name="M:EtwTools.Providers.Kernel.ThreadProvider.AutoBoostEntryExhaustionEvent.#ctor(EtwTools.EtwEvent)">
+            <summary>
+            Creates a new AutoBoostEntryExhaustionEvent.
+            </summary>
+            <param name="etwEvent">The event.</param>
+        </member>
+        <member name="T:EtwTools.Providers.Kernel.ThreadProvider.SubProcessTagChangedEvent">
+            <summary>
+            An event wrapper for a SubProcessTagChanged event.
+            </summary>
+        </member>
+        <member name="F:EtwTools.Providers.Kernel.ThreadProvider.SubProcessTagChangedEvent.Id">
+            <summary>
+            Event ID.
+            </summary>
+        </member>
+        <member name="F:EtwTools.Providers.Kernel.ThreadProvider.SubProcessTagChangedEvent.Name">
+            <summary>
+            Event name.
+            </summary>
+        </member>
+        <member name="F:EtwTools.Providers.Kernel.ThreadProvider.SubProcessTagChangedEvent.Provider">
+            <summary>
+            The event provider.
+            </summary>
+        </member>
+        <member name="P:EtwTools.Providers.Kernel.ThreadProvider.SubProcessTagChangedEvent.Descriptor">
+            <summary>
+            Event descriptor.
+            </summary>
+        </member>
+        <member name="P:EtwTools.Providers.Kernel.ThreadProvider.SubProcessTagChangedEvent.ProcessId">
+            <summary>
+            The process the event was recorded in.
+            </summary>
+        </member>
+        <member name="P:EtwTools.Providers.Kernel.ThreadProvider.SubProcessTagChangedEvent.ThreadId">
+            <summary>
+            The thread the event was recorded on.
+            </summary>
+        </member>
+        <member name="P:EtwTools.Providers.Kernel.ThreadProvider.SubProcessTagChangedEvent.Timestamp">
+            <summary>
+            The timestamp of the event.
+            </summary>
+        </member>
+        <member name="P:EtwTools.Providers.Kernel.ThreadProvider.SubProcessTagChangedEvent.Time">
+            <summary>
+            Timing information for the event.
+            </summary>
+        </member>
+        <member name="P:EtwTools.Providers.Kernel.ThreadProvider.SubProcessTagChangedEvent.ProcessorNumber">
+            <summary>
+            The processor number the event was recorded on.
+            </summary>
+        </member>
+        <member name="M:EtwTools.Providers.Kernel.ThreadProvider.SubProcessTagChangedEvent.OldTag">
+            <summary>
+            Retrieves the OldTag field.
+            </summary>
+        </member>
+        <member name="M:EtwTools.Providers.Kernel.ThreadProvider.SubProcessTagChangedEvent.NewTag">
+            <summary>
+            Retrieves the NewTag field.
+            </summary>
+        </member>
+        <member name="M:EtwTools.Providers.Kernel.ThreadProvider.SubProcessTagChangedEvent.#ctor(EtwTools.EtwEvent)">
+            <summary>
+            Creates a new SubProcessTagChangedEvent.
+            </summary>
+            <param name="etwEvent">The event.</param>
+        </member>
+        <member name="T:EtwTools.Providers.Kernel.ThreadProvider.SetNameEvent">
+            <summary>
+            An event wrapper for a SetName event.
+            </summary>
+        </member>
+        <member name="F:EtwTools.Providers.Kernel.ThreadProvider.SetNameEvent.Id">
+            <summary>
+            Event ID.
+            </summary>
+        </member>
+        <member name="F:EtwTools.Providers.Kernel.ThreadProvider.SetNameEvent.Name">
+            <summary>
+            Event name.
+            </summary>
+        </member>
+        <member name="F:EtwTools.Providers.Kernel.ThreadProvider.SetNameEvent.Provider">
+            <summary>
+            The event provider.
+            </summary>
+        </member>
+        <member name="P:EtwTools.Providers.Kernel.ThreadProvider.SetNameEvent.Descriptor">
+            <summary>
+            Event descriptor.
+            </summary>
+        </member>
+        <member name="P:EtwTools.Providers.Kernel.ThreadProvider.SetNameEvent.Timestamp">
+            <summary>
+            The timestamp of the event.
+            </summary>
+        </member>
+        <member name="P:EtwTools.Providers.Kernel.ThreadProvider.SetNameEvent.Time">
+            <summary>
+            Timing information for the event.
+            </summary>
+        </member>
+        <member name="P:EtwTools.Providers.Kernel.ThreadProvider.SetNameEvent.ProcessorNumber">
+            <summary>
+            The processor number the event was recorded on.
+            </summary>
+        </member>
+        <member name="M:EtwTools.Providers.Kernel.ThreadProvider.SetNameEvent.ProcessId">
+            <summary>
+            Retrieves the ProcessId field.
+            </summary>
+        </member>
+        <member name="M:EtwTools.Providers.Kernel.ThreadProvider.SetNameEvent.ThreadId">
+            <summary>
+            Retrieves the ThreadId field.
+            </summary>
+        </member>
+        <member name="M:EtwTools.Providers.Kernel.ThreadProvider.SetNameEvent.ThreadName">
+            <summary>
+            Retrieves the ThreadName field.
+            </summary>
+        </member>
+        <member name="M:EtwTools.Providers.Kernel.ThreadProvider.SetNameEvent.#ctor(EtwTools.EtwEvent)">
+            <summary>
+            Creates a new SetNameEvent.
+            </summary>
+            <param name="etwEvent">The event.</param>
+        </member>
+        <member name="T:EtwTools.Providers.Kernel.UdpIpProvider">
+            <summary>
+            Provider for Kernel-UdpIp (bf3a50c5-a9c9-4988-a005-2df0b7c80f80)
+            </summary>
+        </member>
+        <member name="F:EtwTools.Providers.Kernel.UdpIpProvider.Id">
+            <summary>
+            Provider ID.
+            </summary>
+        </member>
+        <member name="F:EtwTools.Providers.Kernel.UdpIpProvider.Name">
+            <summary>
+            Provider name.
+            </summary>
+        </member>
+        <member name="T:EtwTools.Providers.MeasurementBlockProvider">
+            <summary>
+            Provider for MeasurementBlock (143a31db-0372-40b6-b8f1-b4b16adb5f54)
+            </summary>
+        </member>
+        <member name="F:EtwTools.Providers.MeasurementBlockProvider.Id">
+            <summary>
+            Provider ID.
+            </summary>
+        </member>
+        <member name="F:EtwTools.Providers.MeasurementBlockProvider.Name">
+            <summary>
+            Provider name.
+            </summary>
+        </member>
+        <member name="T:EtwTools.Providers.Microsoft.Antimalware.AMFilterProvider">
+            <summary>
+            Provider for Microsoft-Antimalware-AMFilter (cfeb0608-330e-4410-b00d-56d8da9986e6)
+            </summary>
+        </member>
+        <member name="F:EtwTools.Providers.Microsoft.Antimalware.AMFilterProvider.Id">
+            <summary>
+            Provider ID.
+            </summary>
+        </member>
+        <member name="F:EtwTools.Providers.Microsoft.Antimalware.AMFilterProvider.Name">
+            <summary>
+            Provider name.
+            </summary>
+        </member>
+        <member name="T:EtwTools.Providers.Microsoft.ApplicationInsights.CoreProvider">
+            <summary>
+            Provider for Microsoft-ApplicationInsights-Core (74af9f20-af6a-5582-9382-f21f674fb271)
+            </summary>
+        </member>
+        <member name="F:EtwTools.Providers.Microsoft.ApplicationInsights.CoreProvider.Id">
+            <summary>
+            Provider ID.
+            </summary>
+        </member>
+        <member name="F:EtwTools.Providers.Microsoft.ApplicationInsights.CoreProvider.Name">
+            <summary>
+            Provider name.
+            </summary>
+        </member>
+        <member name="T:EtwTools.Providers.Microsoft.VisualStudio.CommonProvider">
+            <summary>
+            Provider for Microsoft-VisualStudio-Common (25c93eda-40a3-596d-950d-998ab963f367)
+            </summary>
+        </member>
+        <member name="F:EtwTools.Providers.Microsoft.VisualStudio.CommonProvider.Id">
+            <summary>
+            Provider ID.
+            </summary>
+        </member>
+        <member name="F:EtwTools.Providers.Microsoft.VisualStudio.CommonProvider.Name">
+            <summary>
+            Provider name.
+            </summary>
+        </member>
+        <member name="T:EtwTools.Providers.Microsoft.VisualStudio.CpsCoreProvider">
+            <summary>
+            Provider for Microsoft-VisualStudio-CpsCore (fdc862e2-43a9-5181-288a-7fade55cc9cc)
+            </summary>
+        </member>
+        <member name="F:EtwTools.Providers.Microsoft.VisualStudio.CpsCoreProvider.Id">
+            <summary>
+            Provider ID.
+            </summary>
+        </member>
+        <member name="F:EtwTools.Providers.Microsoft.VisualStudio.CpsCoreProvider.Name">
+            <summary>
+            Provider name.
+            </summary>
+        </member>
+        <member name="T:EtwTools.Providers.Microsoft.VisualStudio.CpsVsProvider">
+            <summary>
+            Provider for Microsoft-VisualStudio-CpsVs (2bf0e3de-e8a7-5821-ee81-ad9385d138a4)
+            </summary>
+        </member>
+        <member name="F:EtwTools.Providers.Microsoft.VisualStudio.CpsVsProvider.Id">
+            <summary>
+            Provider ID.
+            </summary>
+        </member>
+        <member name="F:EtwTools.Providers.Microsoft.VisualStudio.CpsVsProvider.Name">
+            <summary>
+            Provider name.
+            </summary>
+        </member>
+        <member name="T:EtwTools.Providers.Microsoft.VisualStudio.ThreadingProvider">
+            <summary>
+            Provider for Microsoft-VisualStudio-Threading (589491ba-4f15-53fe-c376-db7f020f5204)
+            </summary>
+        </member>
+        <member name="F:EtwTools.Providers.Microsoft.VisualStudio.ThreadingProvider.Id">
+            <summary>
+            Provider ID.
+            </summary>
+        </member>
+        <member name="F:EtwTools.Providers.Microsoft.VisualStudio.ThreadingProvider.Name">
+            <summary>
+            Provider name.
+            </summary>
+        </member>
+        <member name="T:EtwTools.Providers.Microsoft.Windows.DotNETRuntimeProvider">
+            <summary>
+            Provider for Microsoft-Windows-DotNETRuntime (e13c0d23-ccbc-4e12-931b-d9cc2eee27e4)
+            </summary>
+        </member>
+        <member name="F:EtwTools.Providers.Microsoft.Windows.DotNETRuntimeProvider.Id">
+            <summary>
+            Provider ID.
+            </summary>
+        </member>
+        <member name="F:EtwTools.Providers.Microsoft.Windows.DotNETRuntimeProvider.Name">
+            <summary>
+            Provider name.
+            </summary>
+        </member>
+        <member name="T:EtwTools.Providers.Microsoft.Windows.DotNETRuntimePrivateProvider">
+            <summary>
+            Provider for Microsoft-Windows-DotNETRuntimePrivate (763fd754-7086-4dfe-95eb-c01a46faf4ca)
+            </summary>
+        </member>
+        <member name="F:EtwTools.Providers.Microsoft.Windows.DotNETRuntimePrivateProvider.Id">
+            <summary>
+            Provider ID.
+            </summary>
+        </member>
+        <member name="F:EtwTools.Providers.Microsoft.Windows.DotNETRuntimePrivateProvider.Name">
+            <summary>
+            Provider name.
+            </summary>
+        </member>
+        <member name="T:EtwTools.Providers.Microsoft.Windows.DotNETRuntimeRundownProvider">
+            <summary>
+            Provider for Microsoft-Windows-DotNETRuntimeRundown (a669021c-c450-4609-a035-5af59af4df18)
+            </summary>
+        </member>
+        <member name="F:EtwTools.Providers.Microsoft.Windows.DotNETRuntimeRundownProvider.Id">
+            <summary>
+            Provider ID.
+            </summary>
+        </member>
+        <member name="F:EtwTools.Providers.Microsoft.Windows.DotNETRuntimeRundownProvider.Name">
+            <summary>
+            Provider name.
+            </summary>
+        </member>
+        <member name="T:EtwTools.Providers.Microsoft.Windows.Kernel.EventTracingProvider">
+            <summary>
+            Provider for Microsoft-Windows-Kernel-EventTracing (b675ec37-bdb6-4648-bc92-f3fdc74d3ca2)
+            </summary>
+        </member>
+        <member name="F:EtwTools.Providers.Microsoft.Windows.Kernel.EventTracingProvider.Id">
+            <summary>
+            Provider ID.
+            </summary>
+        </member>
+        <member name="F:EtwTools.Providers.Microsoft.Windows.Kernel.EventTracingProvider.Name">
+            <summary>
+            Provider name.
+            </summary>
+        </member>
+        <member name="T:EtwTools.Providers.Microsoft.Windows.Kernel.FileProvider">
+            <summary>
+            Provider for Microsoft-Windows-Kernel-File (edd08927-9cc4-4e65-b970-c2560fb5c289)
+            </summary>
+        </member>
+        <member name="F:EtwTools.Providers.Microsoft.Windows.Kernel.FileProvider.Id">
+            <summary>
+            Provider ID.
+            </summary>
+        </member>
+        <member name="F:EtwTools.Providers.Microsoft.Windows.Kernel.FileProvider.Name">
+            <summary>
+            Provider name.
+            </summary>
+        </member>
+        <member name="T:EtwTools.Providers.Microsoft.Windows.Kernel.PowerProvider">
+            <summary>
+            Provider for Microsoft-Windows-Kernel-Power (331c3b3a-2005-44c2-ac5e-77220c37d6b4)
+            </summary>
+        </member>
+        <member name="F:EtwTools.Providers.Microsoft.Windows.Kernel.PowerProvider.Id">
+            <summary>
+            Provider ID.
+            </summary>
+        </member>
+        <member name="F:EtwTools.Providers.Microsoft.Windows.Kernel.PowerProvider.Name">
+            <summary>
+            Provider name.
+            </summary>
+        </member>
+        <member name="T:EtwTools.Providers.Microsoft.Windows.Kernel.ProcessProvider">
+            <summary>
+            Provider for Microsoft-Windows-Kernel-Process (22fb2cd6-0e7b-422b-a0c7-2fad1fd0e716)
+            </summary>
+        </member>
+        <member name="F:EtwTools.Providers.Microsoft.Windows.Kernel.ProcessProvider.Id">
+            <summary>
+            Provider ID.
+            </summary>
+        </member>
+        <member name="F:EtwTools.Providers.Microsoft.Windows.Kernel.ProcessProvider.Name">
+            <summary>
+            Provider name.
+            </summary>
+        </member>
+        <member name="T:EtwTools.Providers.Microsoft.Windows.NDIS.PacketCaptureProvider">
+            <summary>
+            Provider for Microsoft-Windows-NDIS-PacketCapture (2ed6006e-4729-4609-b423-3ee7bcd678ef)
+            </summary>
+        </member>
+        <member name="F:EtwTools.Providers.Microsoft.Windows.NDIS.PacketCaptureProvider.Id">
+            <summary>
+            Provider ID.
+            </summary>
+        </member>
+        <member name="F:EtwTools.Providers.Microsoft.Windows.NDIS.PacketCaptureProvider.Name">
+            <summary>
+            Provider name.
+            </summary>
+        </member>
+        <member name="T:EtwTools.Providers.Microsoft.Windows.TCPIPProvider">
+            <summary>
+            Provider for Microsoft-Windows-TCPIP (2f07e2ee-15db-40f1-90ef-9d7ba282188a)
+            </summary>
+        </member>
+        <member name="F:EtwTools.Providers.Microsoft.Windows.TCPIPProvider.Id">
+            <summary>
+            Provider ID.
+            </summary>
+        </member>
+        <member name="F:EtwTools.Providers.Microsoft.Windows.TCPIPProvider.Name">
+            <summary>
+            Provider name.
+            </summary>
+        </member>
+        <member name="T:EtwTools.Providers.RoslynEventSourceProvider">
+            <summary>
+            Provider for RoslynEventSource (bf965e67-c7fb-5c5b-d98f-cdf68f8154c2)
+            </summary>
+        </member>
+        <member name="F:EtwTools.Providers.RoslynEventSourceProvider.Id">
+            <summary>
+            Provider ID.
+            </summary>
+        </member>
+        <member name="F:EtwTools.Providers.RoslynEventSourceProvider.Name">
+            <summary>
+            Provider name.
+            </summary>
+        </member>
+        <member name="T:EtwTools.Providers.StreamJsonRpcProvider">
+            <summary>
+            Provider for StreamJsonRpc (f0cffe53-bcc5-53f5-8873-995568808a3b)
+            </summary>
+        </member>
+        <member name="F:EtwTools.Providers.StreamJsonRpcProvider.Id">
+            <summary>
+            Provider ID.
+            </summary>
+        </member>
+        <member name="F:EtwTools.Providers.StreamJsonRpcProvider.Name">
+            <summary>
+            Provider name.
+            </summary>
+        </member>
+        <member name="T:EtwTools.Providers.System.Diagnostics.Eventing.FrameworkEventSourceProvider">
+            <summary>
+            Provider for System.Diagnostics.Eventing.FrameworkEventSource (8e9f5090-2d75-4d03-8a81-e5afbf85daf1)
+            </summary>
+        </member>
+        <member name="F:EtwTools.Providers.System.Diagnostics.Eventing.FrameworkEventSourceProvider.Id">
+            <summary>
+            Provider ID.
+            </summary>
+        </member>
+        <member name="F:EtwTools.Providers.System.Diagnostics.Eventing.FrameworkEventSourceProvider.Name">
+            <summary>
+            Provider name.
+            </summary>
+        </member>
+        <member name="T:EtwTools.Providers.System.Threading.Tasks.TplEventSourceProvider">
+            <summary>
+            Provider for System.Threading.Tasks.TplEventSource (2e5dba47-a3d2-4d16-8ee0-6671ffdcd7b5)
+            </summary>
+        </member>
+        <member name="F:EtwTools.Providers.System.Threading.Tasks.TplEventSourceProvider.Id">
+            <summary>
+            Provider ID.
+            </summary>
+        </member>
+        <member name="F:EtwTools.Providers.System.Threading.Tasks.TplEventSourceProvider.Name">
+            <summary>
+            Provider name.
             </summary>
         </member>
     </members>

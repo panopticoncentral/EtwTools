@@ -10,56 +10,79 @@ namespace EtwTools
     /// </summary>
     public readonly unsafe ref struct EtwEvent
     {
-        private readonly Span<Native.EventHeaderExtendedDataItem> _eventHeaderExtendedDataItems;
+        private readonly Native.EventRecord* _eventRecord;
 
         /// <summary>
         /// The process the event was recorded in.
         /// </summary>
-        public uint ProcessId { get; init; }
+        public uint ProcessId => _eventRecord->EventHeader.ProcessId;
 
         /// <summary>
         /// The thread the event was recorded on.
         /// </summary>
-        public uint ThreadId { get; init; }
+        public uint ThreadId => _eventRecord->EventHeader.ThreadId;
 
         /// <summary>
         /// The timestamp of the event.
         /// </summary>
-        public long Timestamp { get; init; }
+        public long Timestamp => _eventRecord->EventHeader.TimeStamp;
 
         /// <summary>
         /// The event provider.
         /// </summary>
-        public Guid Provider { get; init; }
+        public Guid Provider => _eventRecord->EventHeader.ProviderId;
 
         /// <summary>
         /// Event descriptor.
         /// </summary>
-        public EtwEventDescriptor Descriptor { get; init; }
+        public EtwEventDescriptor Descriptor => _eventRecord->EventHeader.EventDescriptor;
 
         /// <summary>
         /// Timing information for the event.
         /// </summary>
-        public (ulong? KernelTime, ulong? UserTime, ulong? ProcessorTime) Time { get; init; }
+        public (ulong? KernelTime, ulong? UserTime, ulong? ProcessorTime) Time =>
+            (
+                (_eventRecord->EventHeader.Flags & (Native.EventHeaderFlags.PrivateSession | Native.EventHeaderFlags.NoCpuTime)) == 0 ? _eventRecord->EventHeader.KernelTime : null,
+                (_eventRecord->EventHeader.Flags & (Native.EventHeaderFlags.PrivateSession | Native.EventHeaderFlags.NoCpuTime)) == 0 ? _eventRecord->EventHeader.UserTime : null,
+                (_eventRecord->EventHeader.Flags & (Native.EventHeaderFlags.PrivateSession | Native.EventHeaderFlags.NoCpuTime)) != 0 ? (_eventRecord->EventHeader.KernelTime & (_eventRecord->EventHeader.UserTime << sizeof(uint))) : null
+            );
 
         /// <summary>
         /// The processor number the event was recorded on.
         /// </summary>
-        public byte ProcessorNumber { get; init; }
+        public byte ProcessorNumber => _eventRecord->BufferContext.ProcessorNumber;
 
         /// <summary>
         /// The event data.
         /// </summary>
-        public Span<byte> Data { get; init; }
+        public Span<byte> Data => _eventRecord->UserData;
 
-        internal EtwEvent(Span<Native.EventHeaderExtendedDataItem> eventHeaderExtendedDataItems) : this()
+        internal EtwEvent(Native.EventRecord* eventRecord) : this()
         {
-            _eventHeaderExtendedDataItems = eventHeaderExtendedDataItems;
+            _eventRecord = eventRecord;
         }
+
+        /// <summary>
+        /// Returns the known event ID of the event.
+        /// </summary>
+        /// <returns>The known event ID, or 0 otherwise.</returns>
+        public int GetKnownEventId() => EtwProvider.s_knownProviders.TryGetValue(Provider, out var knownProvider) && knownProvider.Events.TryGetValue(Descriptor, out var knownEvent) ? knownEvent.Id : 0;
+
+        /// <summary>
+        /// Returns the known name of the event.
+        /// </summary>
+        /// <returns>The known name, or null otherwise.</returns>
+        public string GetKnownEventName() => EtwProvider.s_knownProviders.TryGetValue(Provider, out var knownProvider) && knownProvider.Events.TryGetValue(Descriptor, out var knownEvent) ? knownEvent.Name : null;
+
+        /// <summary>
+        /// Returns the known name of the event.
+        /// </summary>
+        /// <returns>The known name, or null otherwise.</returns>
+        public static string GetKnownEventName(Guid providerId, EtwEventDescriptor descriptor) => EtwProvider.s_knownProviders.TryGetValue(providerId, out var knownProvider) && knownProvider.Events != null && knownProvider.Events.TryGetValue(descriptor, out var knownEvent) ? knownEvent.Name : null;
 
         private bool TryGetExtendedData(Native.EventHeaderExtendedType type, out Native.EventHeaderExtendedDataItem extendedData)
         {
-            foreach (var item in _eventHeaderExtendedDataItems)
+            foreach (var item in _eventRecord->ExtendedData)
             {
                 if (item.ExtType == type)
                 {
@@ -235,6 +258,7 @@ namespace EtwTools
         /// </summary>
         /// <returns>Whether the event has TraceLogging event schema.</returns>
         public bool HasTraceLoggingEventSchema() =>
+            TryGetExtendedData(Native.EventHeaderExtendedType.EventKey, out var _) ||
             TryGetExtendedData(Native.EventHeaderExtendedType.EventSchemaTl, out var _);
 
         // No accessor for ProvTraits since it seems to be internal use only.
@@ -297,6 +321,37 @@ namespace EtwTools
                 MatchId = *(ulong*)item.DataPtr,
                 Key = *(T*)(item.DataPtr + sizeof(ulong))
             };
+            return true;
+        }
+
+        /// <summary>
+        /// Gets the description of the event, if it is self-describing.
+        /// </summary>
+        /// <param name="eventInfo">The event description, if there is one.</param>
+        /// <returns>True if event is self-describing, false otherwise.</returns>
+        public bool TryGetEventInfo(out EtwEventInfo eventInfo)
+        {
+            eventInfo = default;
+
+            if (!HasTraceLoggingEventSchema())
+            {
+                return false;
+            }
+
+            uint eventBufferSize = 0;
+            var hr = (Native.Hresult)Native.TdhGetEventInformation(_eventRecord, 0, null, null, &eventBufferSize);
+            if (hr != Native.Hresult.ErrorInsufficientBuffer)
+            {
+                return false;
+            }
+
+            fixed (byte* eventBuffer = new byte[(int)eventBufferSize])
+            {
+                var traceEventInfo = (Native.TraceEventInfo*)eventBuffer;
+                ((Native.Hresult)Native.TdhGetEventInformation(_eventRecord, 0, null, traceEventInfo, &eventBufferSize)).ThrowException();
+                eventInfo = new EtwEventInfo(_eventRecord->EventHeader.EventDescriptor, traceEventInfo);
+            }
+
             return true;
         }
 

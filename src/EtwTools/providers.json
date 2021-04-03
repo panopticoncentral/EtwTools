@@ -1,11 +1,51 @@
 [
   {
+    "name": "Kernel-DiskIO",
+    "id": "3d6fa8d4-fe05-11d0-9dda-00c04fd7ba7c"
+  },
+  {
+    "name": "CodeMarkers",
+    "id": "641d7f6c-481c-42e8-ab7e-d18dc5e5cb9e"
+  },
+  {
+    "name": "DotNet",
+    "id": "319dc449-ada5-50f7-428e-957db6791668"
+  },
+  {
+    "name": "Kernel-FileIO",
+    "id": "90cbdc39-4a3e-11d1-84f4-0000f80464e3"
+  },
+  {
     "name": "Microsoft-Antimalware-AMFilter",
     "id": "cfeb0608-330e-4410-b00d-56d8da9986e6"
   },
   {
+    "name": "Microsoft-ApplicationInsights-Core",
+    "id": "74af9f20-af6a-5582-9382-f21f674fb271"
+  },
+  {
+    "name": "Microsoft-VisualStudio-Common",
+    "id": "25c93eda-40a3-596d-950d-998ab963f367"
+  },
+  {
+    "name": "Microsoft-VisualStudio-CpsCore",
+    "id": "fdc862e2-43a9-5181-288a-7fade55cc9cc"
+  },
+  {
+    "name": "Microsoft-VisualStudio-CpsVs",
+    "id": "2bf0e3de-e8a7-5821-ee81-ad9385d138a4"
+  },
+  {
+    "name": "Microsoft-VisualStudio-Threading",
+    "id": "589491ba-4f15-53fe-c376-db7f020f5204"
+  },
+  {
     "name": "Microsoft-Windows-DotNETRuntime",
     "id": "e13c0d23-ccbc-4e12-931b-d9cc2eee27e4"
+  },
+  {
+    "name": "Microsoft-Windows-DotNETRuntimePrivate",
+    "id": "763fd754-7086-4dfe-95eb-c01a46faf4ca"
   },
   {
     "name": "Microsoft-Windows-DotNETRuntimeRundown",
@@ -35,5 +75,572 @@
     "name": "Microsoft-Windows-TCPIP",
     "id": "2f07e2ee-15db-40f1-90ef-9d7ba282188a"
   },
+  {
+    "name": "Kernel-EventMetadata",
+    "id": "bbccf6c1-6cd1-48c4-80ff-839482e37671"
+  },
+  {
+    "name": "Kernel-EventTraceEvent",
+    "id": "68fdd900-4a3e-11d1-84f4-0000f80464e3"
+  },
+  {
+    "name": "Kernel-FileSystem",
+    "id": "9b79ee91-b5fd-41c0-a243-4248e266e9d0"
+  },
+  {
+    "name": "Kernel-PerfInfo",
+    "id": "ce1dbfb4-137e-4da6-87b0-3f59aa102cbc",
+    "events": {
+      "SampleProfile": {
+        "descriptor": {
+          "opcode": 46,
+          "version": 2
+        },
+        "fields": {
+          "InstructionPointer": "uint",
+          "ThreadId": "uint",
+          "Count": "ushort",
+          "_reserved": "ushort"
+        }
+      },
+      "PmcCounterProfile": {
+        "descriptor": {
+          "opcode": 47,
+          "version": 2
+        },
+        "fields": {
+          "InstructionPointer": "uint",
+          "ThreadId": "uint",
+          "ProfileSource": "ushort",
+          "_reserved": "ushort"
+        }
+      },
+      "SampledProfileSetInterval": {
+        "descriptor": {
+          "opcode": 72,
+          "version": 2
+        },
+        "fields": {
+          "Source": "uint",
+          "NewInterval": "uint",
+          "OldInterval": "uint"
+        }
+      },
+      "SampledProfileIntervalStart": {
+        "descriptor": {
+          "opcode": 73,
+          "version": 3
+        },
+        "fields": {
+          "Source": "uint",
+          "NewInterval": "uint",
+          "OldInterval": "uint",
+          "SourceName": "string"
+        }
+      },
+      "SampledProfileIntervalEnd": {
+        "descriptor": {
+          "opcode": 74,
+          "version": 3
+        },
+        "fields": {
+          "Source": "uint",
+          "NewInterval": "uint",
+          "OldInterval": "uint",
+          "SourceName": "string"
+        }
+      },
+      "SpinlockConfigureStart": {
+        "descriptor": {
+          "opcode": 75,
+          "version": 3
+        },
+        "fields": {
+          "SpinLockSpinThreshold": "uint",
+          "SpinLockContentionSampleRate": "uint",
+          "SpinLockAcquireSampleRate": "uint",
+          "SpinLockHoldThreshold": "uint"
+        }
+      },
+      "SpinlockConfigureEnd": {
+        "descriptor": {
+          "opcode": 76,
+          "version": 3
+        },
+        "fields": {
+          "SpinLockSpinThreshold": "uint",
+          "SpinLockContentionSampleRate": "uint",
+          "SpinLockAcquireSampleRate": "uint",
+          "SpinLockHoldThreshold": "uint"
+        }
+      }
+    }
+  },
+  {
+    "name": "Kernel-Image",
+    "id": "2cb15d1d-5fc1-11d2-abe1-00a0c911f518"
+  },
+  {
+    "name": "Kernel-ImageID",
+    "id": "b3e675d7-2554-4f18-830b-2762732560de"
+  },
+  {
+    "name": "Kernel-PageFault",
+    "id": "3d6fa8d3-fe05-11d0-9dda-00c04fd7ba7c"
+  },
+  {
+    "name": "Kernel-Process",
+    "id": "3d6fa8d0-fe05-11d0-9dda-00c04fd7ba7c"
+  },
+  {
+    "name": "Kernel-StackWalk",
+    "id": "def2fe46-7bd6-4b80-bd94-f57fe20d0ce3",
+    "events": {
+      "Stack": {
+        "descriptor": {
+          "version": 2,
+          "opcode": 32
+        },
+        "fields": {
+          "Timestamp": "ulong",
+          "ProcessId": "uint",
+          "ThreadId": "uint",
+          "Stack": "uint[...]"
+        }
+      },
+      "StackKeyCreate": {
+        "descriptor": {
+          "version": 2,
+          "opcode": 34
+        },
+        "fields": {
+          "StackKey": "uint",
+          "StackFrames": "uint[...]"
+        }
+      },
+      "StackKeyDelete": {
+        "descriptor": {
+          "version": 2,
+          "opcode": 35
+        },
+        "fields": {
+          "StackKey": "uint",
+          "StackFrames": "uint[...]"
+        }
+      },
+      "StackKeyRundown": {
+        "descriptor": {
+          "version": 2,
+          "opcode": 36
+        },
+        "fields": {
+          "StackKey": "uint",
+          "StackFrames": "uint[...]"
+        }
+      },
+      "StackKeyKernel": {
+        "descriptor": {
+          "version": 2,
+          "opcode": 37
+        },
+        "fields": {
+          "Timestamp": "ulong",
+          "ProcessId": "uint",
+          "ThreadId": "uint",
+          "StackKey": "uint"
+        }
+      },
+      "StackKeyUser": {
+        "descriptor": {
+          "version": 2,
+          "opcode": 38
+        },
+        "fields": {
+          "Timestamp": "ulong",
+          "ProcessId": "uint",
+          "ThreadId": "uint",
+          "StackKey": "uint"
+        }
+      }
+    }
+  },
+  {
+    "name": "Kernel-Tcpip",
+    "id": "9a280ac0-c8e0-11d1-84e2-00c04fb998a2"
+  },
+  {
+    "name": "Kernel-Thread",
+    "id": "3d6fa8d1-fe05-11d0-9dda-00c04fd7ba7c",
+    "events": {
+      "Start": {
+        "descriptor": {
+          "opcode": 1,
+          "version": 4
+        },
+        "fields": {
+          "ProcessId": "uint",
+          "ThreadId": "uint",
+          "StackBase": "uint",
+          "StackLimit": "uint",
+          "UserStackBase": "uint",
+          "UserStackLimit": "uint",
+          "Affinity": "uint",
+          "Win32StartAddr": "uint",
+          "TebBase": "uint",
+          "SubProcessTag": "uint",
+          "BasePriority": "byte",
+          "PagePriority": "byte",
+          "IoPriority": "byte",
+          "ThreadFlags": "byte",
+          "ThreadName": "string"
+        }
+      },
+      "End": {
+        "descriptor": {
+          "opcode": 2,
+          "version": 4
+        },
+        "fields": {
+          "ProcessId": "uint",
+          "ThreadId": "uint",
+          "StackBase": "uint",
+          "StackLimit": "uint",
+          "UserStackBase": "uint",
+          "UserStackLimit": "uint",
+          "Affinity": "uint",
+          "Win32StartAddr": "uint",
+          "TebBase": "uint",
+          "SubProcessTag": "uint",
+          "BasePriority": "byte",
+          "PagePriority": "byte",
+          "IoPriority": "byte",
+          "ThreadFlags": "byte",
+          "ThreadName": "string"
+        }
+      },
+      "DCStart": {
+        "descriptor": {
+          "opcode": 3,
+          "version": 4
+        },
+        "fields": {
+          "ProcessId": "uint",
+          "ThreadId": "uint",
+          "StackBase": "uint",
+          "StackLimit": "uint",
+          "UserStackBase": "uint",
+          "UserStackLimit": "uint",
+          "Affinity": "uint",
+          "Win32StartAddr": "uint",
+          "TebBase": "uint",
+          "SubProcessTag": "uint",
+          "BasePriority": "byte",
+          "PagePriority": "byte",
+          "IoPriority": "byte",
+          "ThreadFlags": "byte",
+          "ThreadName": "string"
+        }
+      },
+      "DCEnd": {
+        "descriptor": {
+          "opcode": 4,
+          "version": 4
+        },
+        "fields": {
+          "ProcessId": "uint",
+          "ThreadId": "uint",
+          "StackBase": "uint",
+          "StackLimit": "uint",
+          "UserStackBase": "uint",
+          "UserStackLimit": "uint",
+          "Affinity": "uint",
+          "Win32StartAddr": "uint",
+          "TebBase": "uint",
+          "SubProcessTag": "uint",
+          "BasePriority": "byte",
+          "PagePriority": "byte",
+          "IoPriority": "byte",
+          "ThreadFlags": "byte",
+          "ThreadName": "string"
+        }
+      },
+      "CSwitch": {
+        "descriptor": {
+          "opcode": 36,
+          "version": 4
+        },
+        "fields": {
+          "NewThreadId": "uint",
+          "OldThreadId": "uint",
+          "NewThreadPriority": "sbyte",
+          "OldThreadPriority": "sbyte",
+          "PreviousCState": "byte",
+          "_padding": "byte",
+          "OldThreadWaitReason": "sbyte",
+          "ThreadFlags": "sbyte",
+          "OldThreadState": "sbyte",
+          "OldThreadWaitIdealProcessor": "sbyte",
+          "NewThreadWaitTime": "uint",
+          "_reserved": "uint"
+        }
+      },
+      "CompCS": {
+        "descriptor": {
+          "opcode": 37,
+          "version": 2
+        },
+        "fields": {
+        }
+      },
+      "SpinLock": {
+        "descriptor": {
+          "opcode": 41,
+          "version": 2
+        },
+        "fields": {
+          "SpinLockAddress": "uint",
+          "CallerAddress": "uint",
+          "AcquireTime": "ulong",
+          "ReleaseTime": "ulong",
+          "WaitTimeInCycles": "uint",
+          "SpinCount": "uint",
+          "ThreadId": "uint",
+          "InterruptCount": "uint",
+          "Irql": "byte",
+          "AcquireDepth": "byte",
+          "Flag": "byte",
+          "_reserved": "byte[5]"
+        }
+      },
+      "SetPriority": {
+        "descriptor": {
+          "opcode": 48,
+          "version": 3
+        },
+        "fields": {
+          "ThreadId": "uint",
+          "OldPriority": "byte",
+          "NewPriority": "byte",
+          "_reserved": "ushort"
+        }
+      },
+      "SetBasePriority": {
+        "descriptor": {
+          "opcode": 49,
+          "version": 3
+        },
+        "fields": {
+          "ThreadId": "uint",
+          "OldPriority": "byte",
+          "NewPriority": "byte",
+          "_reserved": "ushort"
+        }
+      },
+      "ReadyThread": {
+        "descriptor": {
+          "opcode": 50,
+          "version": 2
+        },
+        "fields": {
+          "ThreadId": "uint",
+          "AdjustReason": "sbyte",
+          "AdjustIncrement": "sbyte",
+          "Flags": "sbyte",
+          "_reserved": "sbyte"
+        }
+      },
+      "SetPagePriority": {
+        "descriptor": {
+          "opcode": 51,
+          "version": 3
+        },
+        "fields": {
+          "ThreadId": "uint",
+          "OldPriority": "byte",
+          "NewPriority": "byte",
+          "_reserved": "ushort"
+        }
+      },
+      "SetIoPriority": {
+        "descriptor": {
+          "opcode": 52,
+          "version": 3
+        },
+        "fields": {
+          "ThreadId": "uint",
+          "OldPriority": "byte",
+          "NewPriority": "byte",
+          "_reserved": "ushort"
+        }
+      },
+      "ThreadAffinity": {
+        "descriptor": {
+          "opcode": 53,
+          "version": 2
+        },
+        "fields": {
+          "Affinity": "uint",
+          "ThreadId": "uint",
+          "Group": "ushort",
+          "_reserved": "ushort"
+        }
+      },
+      "WorkerThread": {
+        "descriptor": {
+          "opcode": 57,
+          "version": 2
+        },
+        "fields": {
+          "ThreadId": "uint",
+          "StartTime": "ulong",
+          "ThreadRoutine": "uint"
+        }
+      },
+      "AntiStarvationBoost": {
+        "descriptor": {
+          "opcode": 60,
+          "version": 2
+        },
+        "fields": {
+          "ThreadId": "uint",
+          "ProcessorIndex": "ushort",
+          "Priority": "byte",
+          "_reserved": "byte"
+        }
+      },
+      "ThreadMigration": {
+        "descriptor": {
+          "opcode": 61,
+          "version": 2
+        },
+        "fields": {
+          "ThreadId": "uint",
+          "SourceProcessorIndex": "ushort",
+          "TargetProcessorIndex": "ushort",
+          "Priority": "byte",
+          "IdealProcessorAdjust": "bool",
+          "OldIdealProcessorIndex": "ushort"
+        }
+      },
+      "KernelQueueEnqueue": {
+        "descriptor": {
+          "opcode": 62,
+          "version": 2
+        },
+        "fields": {
+          "Entry": "uint",
+          "ThreadId": "uint"
+        }
+      },
+      "KernelQueueDequeue": {
+        "descriptor": {
+          "opcode": 63,
+          "version": 2
+        },
+        "fields": {
+          "ThreadId": "uint",
+          "EntryCount": "uint",
+          "Entries": "uint[...]"
+        }
+      },
+      "WorkerThreadStart": {
+        "descriptor": {
+          "opcode": 64,
+          "version": 2
+        },
+        "fields": {
+          "CallbackRoutine": "uint"
+        }
+      },
+      "WorkerThreadStop": {
+        "descriptor": {
+          "opcode": 65,
+          "version": 2
+        },
+        "fields": {
+          "CallbackRoutine": "uint"
+        }
+      },
+      "AutoBoostSetFloor": {
+        "descriptor": {
+          "opcode": 66,
+          "version": 2
+        },
+        "fields": {
+          "Lock": "uint",
+          "ThreadId": "uint",
+          "NewCpuPriorityFloor": "byte",
+          "OldCpuPriority": "byte",
+          "IoPriorities": "byte",
+          "BoostFlags": "byte"
+        }
+      },
+      "AutoBoostClearFloor": {
+        "descriptor": {
+          "opcode": 67,
+          "version": 2
+        },
+        "fields": {
+          "LockAddress": "uint",
+          "ThreadId": "uint",
+          "BoostBitmap": "uint"
+        }
+      },
+      "AutoBoostEntryExhaustion": {
+        "descriptor": {
+          "opcode": 68,
+          "version": 2
+        },
+        "fields": {
+          "LockAddress": "uint",
+          "ThreadId": "uint"
+        }
+      },
+      "SubProcessTagChanged": {
+        "descriptor": {
+          "opcode": 69,
+          "version": 2
+        },
+        "fields": {
+          "OldTag": "uint",
+          "NewTag": "uint"
+        }
+      },
+      "SetName": {
+        "descriptor": {
+          "opcode": 72,
+          "version": 2
+        },
+        "fields": {
+          "ProcessId": "uint",
+          "ThreadId": "uint",
+          "ThreadName": "string"
+        }
+      }
+    }
+  },
+  {
+    "name": "Kernel-UdpIp",
+    "id": "bf3a50c5-a9c9-4988-a005-2df0b7c80f80"
+  },
+  {
+    "name": "MeasurementBlock",
+    "id": "143a31db-0372-40b6-b8f1-b4b16adb5f54"
+  },
+  {
+    "name": "RoslynEventSource",
+    "id": "bf965e67-c7fb-5c5b-d98f-cdf68f8154c2"
+  },
+  {
+    "name": "StreamJsonRpc",
+    "id": "f0cffe53-bcc5-53f5-8873-995568808a3b"
+  },
+  {
+    "name": "System.Diagnostics.Eventing.FrameworkEventSource",
+    "id": "8e9f5090-2d75-4d03-8a81-e5afbf85daf1"
+  },
+  {
+    "name": "System.Threading.Tasks.TplEventSource",
+    "id": "2e5dba47-a3d2-4d16-8ee0-6671ffdcd7b5"
+  }
 ]
-

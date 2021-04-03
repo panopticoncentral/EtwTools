@@ -553,19 +553,19 @@ namespace EtwTools
         [DllImport("advapi32.dll", CharSet = CharSet.Unicode)]
         public static extern ErrorCode StartTrace(out ulong sessionHandle, string sessionName, EventTraceProperties* properties);
 
-        [DllImport("tdh.dll", CharSet = CharSet.Unicode)]
-        public static extern ErrorCode TdhGetEventMapInformation(EventRecord* eventRecord, string mapName, EventMapInfo* buffer, uint* bufferSize);
-
-        [DllImport("tdh.dll")]
-        public static extern ErrorCode TdhGetManifestEventInformation(Guid* providerGuid, EtwEventDescriptor* eventDescriptor, TraceEventInfo* buffer, uint* bufferSize);
-
         [DllImport("tdh.dll")]
         public static extern ErrorCode TdhEnumerateManifestProviderEvents(Guid* providerGuid, ProviderEventInfo* buffer, uint* bufferSize);
 
         [DllImport("tdh.dll")]
         public static extern ErrorCode TdhEnumerateProviders(byte* buffer, out int bufferSize);
 
+        [DllImport("tdh.dll", CharSet = CharSet.Unicode)]
+        public static extern ErrorCode TdhGetEventInformation(EventRecord* eventRecord, uint contextCount, void* context, TraceEventInfo* buffer, uint* bufferSize);
+
+        [DllImport("tdh.dll", CharSet = CharSet.Unicode)]
+        public static extern ErrorCode TdhGetEventMapInformation(EventRecord* eventRecord, string mapName, EventMapInfo* buffer, uint* bufferSize);
+
         [DllImport("tdh.dll")]
-        public static extern ErrorCode TdhGetEventInformation(EventRecord* eventRecord, uint contextCount, void* context, byte* buffer, int* bufferSize);
+        public static extern ErrorCode TdhGetManifestEventInformation(Guid* providerGuid, EtwEventDescriptor* eventDescriptor, TraceEventInfo* buffer, uint* bufferSize);
     }
 }

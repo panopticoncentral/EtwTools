@@ -22,7 +22,7 @@ namespace EtwTools
         /// <summary>
         /// Whether the provider is well-known.
         /// </summary>
-        public bool IsKnown => s_providers.ContainsKey(Id);
+        public bool IsKnown => s_knownProviders.ContainsKey(Id);
 
         /// <summary>
         /// Creates a provider.
@@ -31,9 +31,9 @@ namespace EtwTools
         public EtwProvider(Guid id)
         {
             Id = id;
-            if (s_providerNames.TryGetValue(id, out var name))
+            if (s_knownProviders.TryGetValue(id, out var knownProvider))
             {
-                Name = name;
+                Name = knownProvider.Name;
             }
         }
 
@@ -203,7 +203,7 @@ namespace EtwTools
         /// Gets descriptions of events supported by this provider.
         /// </summary>
         /// <returns>A list of event descriptors.</returns>
-        public IReadOnlyList<EtwEventInfo> GetEventDescriptors()
+        public IReadOnlyList<EtwEventInfo> GetEventInfos()
         {
             var providerGuid = Id;
             uint bufferSize = 0;
@@ -341,6 +341,19 @@ namespace EtwTools
                 MatchAnyKeyword = matchAnyKeyword;
                 MatchAllKeyword = matchAllKeyword;
             }
+        }
+
+        internal readonly struct KnownProvider
+        {
+            public string Name { get; init; }
+            public EtwProvider Instance { get; init; }
+            public IReadOnlyDictionary<EtwEventDescriptor, KnownEvent> Events { get; init; }
+        }
+
+        internal readonly struct KnownEvent
+        {
+            public int Id { get; init; }
+            public string Name { get; init; }
         }
     }
 }

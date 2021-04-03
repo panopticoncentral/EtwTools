@@ -9,6 +9,21 @@ namespace EtwTools
     public sealed record EtwEventInfo
     {
         /// <summary>
+        /// The event's provider ID.
+        /// </summary>
+        public Guid ProviderId { get; init; }
+
+        /// <summary>
+        /// The event's provider's name.
+        /// </summary>
+        public string ProviderName { get; init; }
+
+        /// <summary>
+        /// The event's ID.
+        /// </summary>
+        public Guid EventId { get; init; }
+
+        /// <summary>
         /// The event descriptor.
         /// </summary>
         public EtwEventDescriptor Descriptor { get; init; }
@@ -83,6 +98,10 @@ namespace EtwTools
             {
                 return;
             }
+
+            ProviderId = eventInfo->ProviderGuid;
+            ProviderName = eventInfo->ProviderNameOffset != 0 ? new string((char*)(eventBuffer + eventInfo->ProviderNameOffset)).Trim() : null;
+            EventId = eventInfo->EventGuid;
 
             ChannelName = eventInfo->ChannelNameOffset != 0 ? new string((char*)(eventBuffer + eventInfo->ChannelNameOffset)).Trim() : null;
             LevelName = eventInfo->LevelNameOffset != 0 ? new string((char*)(eventBuffer + eventInfo->LevelNameOffset)).Trim() : null;
