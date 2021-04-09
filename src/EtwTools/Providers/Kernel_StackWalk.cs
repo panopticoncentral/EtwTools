@@ -24,10 +24,15 @@ namespace EtwTools.Providers.Kernel
         {
             private readonly EtwEvent _etwEvent;
 
+            private const int Offset_Timestamp = 0;
+            private const int Offset_ProcessId = 8;
+            private const int Offset_ThreadId = 12;
+            private const int Offset_Stack = 16;
+
             /// <summary>
             /// Event ID.
             /// </summary>
-            public const int Id = 8;
+            public const int Id = 33;
 
             /// <summary>
             /// Event name.
@@ -37,7 +42,7 @@ namespace EtwTools.Providers.Kernel
             /// <summary>
             /// The event provider.
             /// </summary>
-            public static readonly Guid Provider = new("def2fe46-7bd6-4b80-bd94-f57fe20d0ce3");
+            public static readonly Guid Provider = StackWalkProvider.Id;
 
             /// <summary>
             /// Event descriptor.
@@ -45,34 +50,34 @@ namespace EtwTools.Providers.Kernel
             public static EtwEventDescriptor Descriptor { get; } = new EtwEventDescriptor { Id = 0, Version = 2, Channel = 0, Level = 0, Opcode = (EtwEventType)32, Task = 0, Keyword = 0x0000000000000000 };
 
             /// <summary>
-            /// Timing information for the event.
-            /// </summary>
-            public (ulong? KernelTime, ulong? UserTime, ulong? ProcessorTime) Time => _etwEvent.Time;
-
-            /// <summary>
             /// The processor number the event was recorded on.
             /// </summary>
             public byte ProcessorNumber => _etwEvent.ProcessorNumber;
 
             /// <summary>
+            /// Timing information for the event.
+            /// </summary>
+            public (ulong? KernelTime, ulong? UserTime, ulong? ProcessorTime) Time => _etwEvent.Time;
+
+            /// <summary>
             /// Retrieves the Timestamp field.
             /// </summary>
-            public ulong Timestamp() => BitConverter.ToUInt64(_etwEvent.Data);
+            public ulong Timestamp => BitConverter.ToUInt64(_etwEvent.Data[Offset_Timestamp..Offset_ProcessId]);
 
             /// <summary>
             /// Retrieves the ProcessId field.
             /// </summary>
-            public uint ProcessId() => BitConverter.ToUInt32(_etwEvent.Data[8..]);
+            public uint ProcessId => BitConverter.ToUInt32(_etwEvent.Data[Offset_ProcessId..Offset_ThreadId]);
 
             /// <summary>
             /// Retrieves the ThreadId field.
             /// </summary>
-            public uint ThreadId() => BitConverter.ToUInt32(_etwEvent.Data[12..]);
+            public uint ThreadId => BitConverter.ToUInt32(_etwEvent.Data[Offset_ThreadId..Offset_Stack]);
 
             /// <summary>
             /// Retrieves the Stack field.
             /// </summary>
-            public uint GetStack(int index) => BitConverter.ToUInt32(_etwEvent.Data[(16 + (index * sizeof(uint)))..]);
+            public EtwEvent.AddressEnumerable Stack => new(_etwEvent.Data[Offset_Stack..], _etwEvent.AddressSize);
 
             /// <summary>
             /// Creates a new StackEvent.
@@ -91,10 +96,13 @@ namespace EtwTools.Providers.Kernel
         {
             private readonly EtwEvent _etwEvent;
 
+            private const int Offset_StackKey = 0;
+            private readonly int _offset_StackFrames;
+
             /// <summary>
             /// Event ID.
             /// </summary>
-            public const int Id = 9;
+            public const int Id = 34;
 
             /// <summary>
             /// Event name.
@@ -104,7 +112,7 @@ namespace EtwTools.Providers.Kernel
             /// <summary>
             /// The event provider.
             /// </summary>
-            public static readonly Guid Provider = new("def2fe46-7bd6-4b80-bd94-f57fe20d0ce3");
+            public static readonly Guid Provider = StackWalkProvider.Id;
 
             /// <summary>
             /// Event descriptor.
@@ -127,24 +135,24 @@ namespace EtwTools.Providers.Kernel
             public long Timestamp => _etwEvent.Timestamp;
 
             /// <summary>
-            /// Timing information for the event.
-            /// </summary>
-            public (ulong? KernelTime, ulong? UserTime, ulong? ProcessorTime) Time => _etwEvent.Time;
-
-            /// <summary>
             /// The processor number the event was recorded on.
             /// </summary>
             public byte ProcessorNumber => _etwEvent.ProcessorNumber;
 
             /// <summary>
+            /// Timing information for the event.
+            /// </summary>
+            public (ulong? KernelTime, ulong? UserTime, ulong? ProcessorTime) Time => _etwEvent.Time;
+
+            /// <summary>
             /// Retrieves the StackKey field.
             /// </summary>
-            public uint StackKey() => BitConverter.ToUInt32(_etwEvent.Data);
+            public ulong StackKey => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_StackKey.._offset_StackFrames]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_StackKey.._offset_StackFrames]);
 
             /// <summary>
             /// Retrieves the StackFrames field.
             /// </summary>
-            public uint GetStackFrames(int index) => BitConverter.ToUInt32(_etwEvent.Data[(4 + (index * sizeof(uint)))..]);
+            public EtwEvent.AddressEnumerable StackFrames => new(_etwEvent.Data[_offset_StackFrames..], _etwEvent.AddressSize);
 
             /// <summary>
             /// Creates a new StackKeyCreateEvent.
@@ -153,6 +161,7 @@ namespace EtwTools.Providers.Kernel
             public StackKeyCreateEvent(EtwEvent etwEvent)
             {
                 _etwEvent = etwEvent;
+                _offset_StackFrames = Offset_StackKey + etwEvent.AddressSize;
             }
         }
 
@@ -163,10 +172,13 @@ namespace EtwTools.Providers.Kernel
         {
             private readonly EtwEvent _etwEvent;
 
+            private const int Offset_StackKey = 0;
+            private readonly int _offset_StackFrames;
+
             /// <summary>
             /// Event ID.
             /// </summary>
-            public const int Id = 10;
+            public const int Id = 35;
 
             /// <summary>
             /// Event name.
@@ -176,7 +188,7 @@ namespace EtwTools.Providers.Kernel
             /// <summary>
             /// The event provider.
             /// </summary>
-            public static readonly Guid Provider = new("def2fe46-7bd6-4b80-bd94-f57fe20d0ce3");
+            public static readonly Guid Provider = StackWalkProvider.Id;
 
             /// <summary>
             /// Event descriptor.
@@ -199,24 +211,24 @@ namespace EtwTools.Providers.Kernel
             public long Timestamp => _etwEvent.Timestamp;
 
             /// <summary>
-            /// Timing information for the event.
-            /// </summary>
-            public (ulong? KernelTime, ulong? UserTime, ulong? ProcessorTime) Time => _etwEvent.Time;
-
-            /// <summary>
             /// The processor number the event was recorded on.
             /// </summary>
             public byte ProcessorNumber => _etwEvent.ProcessorNumber;
 
             /// <summary>
+            /// Timing information for the event.
+            /// </summary>
+            public (ulong? KernelTime, ulong? UserTime, ulong? ProcessorTime) Time => _etwEvent.Time;
+
+            /// <summary>
             /// Retrieves the StackKey field.
             /// </summary>
-            public uint StackKey() => BitConverter.ToUInt32(_etwEvent.Data);
+            public ulong StackKey => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_StackKey.._offset_StackFrames]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_StackKey.._offset_StackFrames]);
 
             /// <summary>
             /// Retrieves the StackFrames field.
             /// </summary>
-            public uint GetStackFrames(int index) => BitConverter.ToUInt32(_etwEvent.Data[(4 + (index * sizeof(uint)))..]);
+            public EtwEvent.AddressEnumerable StackFrames => new(_etwEvent.Data[_offset_StackFrames..], _etwEvent.AddressSize);
 
             /// <summary>
             /// Creates a new StackKeyDeleteEvent.
@@ -225,6 +237,7 @@ namespace EtwTools.Providers.Kernel
             public StackKeyDeleteEvent(EtwEvent etwEvent)
             {
                 _etwEvent = etwEvent;
+                _offset_StackFrames = Offset_StackKey + etwEvent.AddressSize;
             }
         }
 
@@ -235,10 +248,13 @@ namespace EtwTools.Providers.Kernel
         {
             private readonly EtwEvent _etwEvent;
 
+            private const int Offset_StackKey = 0;
+            private readonly int _offset_StackFrames;
+
             /// <summary>
             /// Event ID.
             /// </summary>
-            public const int Id = 11;
+            public const int Id = 36;
 
             /// <summary>
             /// Event name.
@@ -248,7 +264,7 @@ namespace EtwTools.Providers.Kernel
             /// <summary>
             /// The event provider.
             /// </summary>
-            public static readonly Guid Provider = new("def2fe46-7bd6-4b80-bd94-f57fe20d0ce3");
+            public static readonly Guid Provider = StackWalkProvider.Id;
 
             /// <summary>
             /// Event descriptor.
@@ -271,24 +287,24 @@ namespace EtwTools.Providers.Kernel
             public long Timestamp => _etwEvent.Timestamp;
 
             /// <summary>
-            /// Timing information for the event.
-            /// </summary>
-            public (ulong? KernelTime, ulong? UserTime, ulong? ProcessorTime) Time => _etwEvent.Time;
-
-            /// <summary>
             /// The processor number the event was recorded on.
             /// </summary>
             public byte ProcessorNumber => _etwEvent.ProcessorNumber;
 
             /// <summary>
+            /// Timing information for the event.
+            /// </summary>
+            public (ulong? KernelTime, ulong? UserTime, ulong? ProcessorTime) Time => _etwEvent.Time;
+
+            /// <summary>
             /// Retrieves the StackKey field.
             /// </summary>
-            public uint StackKey() => BitConverter.ToUInt32(_etwEvent.Data);
+            public ulong StackKey => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_StackKey.._offset_StackFrames]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_StackKey.._offset_StackFrames]);
 
             /// <summary>
             /// Retrieves the StackFrames field.
             /// </summary>
-            public uint GetStackFrames(int index) => BitConverter.ToUInt32(_etwEvent.Data[(4 + (index * sizeof(uint)))..]);
+            public EtwEvent.AddressEnumerable StackFrames => new(_etwEvent.Data[_offset_StackFrames..], _etwEvent.AddressSize);
 
             /// <summary>
             /// Creates a new StackKeyRundownEvent.
@@ -297,6 +313,7 @@ namespace EtwTools.Providers.Kernel
             public StackKeyRundownEvent(EtwEvent etwEvent)
             {
                 _etwEvent = etwEvent;
+                _offset_StackFrames = Offset_StackKey + etwEvent.AddressSize;
             }
         }
 
@@ -307,10 +324,15 @@ namespace EtwTools.Providers.Kernel
         {
             private readonly EtwEvent _etwEvent;
 
+            private const int Offset_Timestamp = 0;
+            private const int Offset_ProcessId = 8;
+            private const int Offset_ThreadId = 12;
+            private const int Offset_StackKey = 16;
+
             /// <summary>
             /// Event ID.
             /// </summary>
-            public const int Id = 12;
+            public const int Id = 37;
 
             /// <summary>
             /// Event name.
@@ -320,7 +342,7 @@ namespace EtwTools.Providers.Kernel
             /// <summary>
             /// The event provider.
             /// </summary>
-            public static readonly Guid Provider = new("def2fe46-7bd6-4b80-bd94-f57fe20d0ce3");
+            public static readonly Guid Provider = StackWalkProvider.Id;
 
             /// <summary>
             /// Event descriptor.
@@ -328,34 +350,34 @@ namespace EtwTools.Providers.Kernel
             public static EtwEventDescriptor Descriptor { get; } = new EtwEventDescriptor { Id = 0, Version = 2, Channel = 0, Level = 0, Opcode = (EtwEventType)37, Task = 0, Keyword = 0x0000000000000000 };
 
             /// <summary>
-            /// Timing information for the event.
-            /// </summary>
-            public (ulong? KernelTime, ulong? UserTime, ulong? ProcessorTime) Time => _etwEvent.Time;
-
-            /// <summary>
             /// The processor number the event was recorded on.
             /// </summary>
             public byte ProcessorNumber => _etwEvent.ProcessorNumber;
 
             /// <summary>
+            /// Timing information for the event.
+            /// </summary>
+            public (ulong? KernelTime, ulong? UserTime, ulong? ProcessorTime) Time => _etwEvent.Time;
+
+            /// <summary>
             /// Retrieves the Timestamp field.
             /// </summary>
-            public ulong Timestamp() => BitConverter.ToUInt64(_etwEvent.Data);
+            public ulong Timestamp => BitConverter.ToUInt64(_etwEvent.Data[Offset_Timestamp..Offset_ProcessId]);
 
             /// <summary>
             /// Retrieves the ProcessId field.
             /// </summary>
-            public uint ProcessId() => BitConverter.ToUInt32(_etwEvent.Data[8..]);
+            public uint ProcessId => BitConverter.ToUInt32(_etwEvent.Data[Offset_ProcessId..Offset_ThreadId]);
 
             /// <summary>
             /// Retrieves the ThreadId field.
             /// </summary>
-            public uint ThreadId() => BitConverter.ToUInt32(_etwEvent.Data[12..]);
+            public uint ThreadId => BitConverter.ToUInt32(_etwEvent.Data[Offset_ThreadId..Offset_StackKey]);
 
             /// <summary>
             /// Retrieves the StackKey field.
             /// </summary>
-            public uint StackKey() => BitConverter.ToUInt32(_etwEvent.Data[16..]);
+            public ulong StackKey => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_StackKey..]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_StackKey..]);
 
             /// <summary>
             /// Creates a new StackKeyKernelEvent.
@@ -374,10 +396,15 @@ namespace EtwTools.Providers.Kernel
         {
             private readonly EtwEvent _etwEvent;
 
+            private const int Offset_Timestamp = 0;
+            private const int Offset_ProcessId = 8;
+            private const int Offset_ThreadId = 12;
+            private const int Offset_StackKey = 16;
+
             /// <summary>
             /// Event ID.
             /// </summary>
-            public const int Id = 13;
+            public const int Id = 38;
 
             /// <summary>
             /// Event name.
@@ -387,7 +414,7 @@ namespace EtwTools.Providers.Kernel
             /// <summary>
             /// The event provider.
             /// </summary>
-            public static readonly Guid Provider = new("def2fe46-7bd6-4b80-bd94-f57fe20d0ce3");
+            public static readonly Guid Provider = StackWalkProvider.Id;
 
             /// <summary>
             /// Event descriptor.
@@ -395,34 +422,34 @@ namespace EtwTools.Providers.Kernel
             public static EtwEventDescriptor Descriptor { get; } = new EtwEventDescriptor { Id = 0, Version = 2, Channel = 0, Level = 0, Opcode = (EtwEventType)38, Task = 0, Keyword = 0x0000000000000000 };
 
             /// <summary>
-            /// Timing information for the event.
-            /// </summary>
-            public (ulong? KernelTime, ulong? UserTime, ulong? ProcessorTime) Time => _etwEvent.Time;
-
-            /// <summary>
             /// The processor number the event was recorded on.
             /// </summary>
             public byte ProcessorNumber => _etwEvent.ProcessorNumber;
 
             /// <summary>
+            /// Timing information for the event.
+            /// </summary>
+            public (ulong? KernelTime, ulong? UserTime, ulong? ProcessorTime) Time => _etwEvent.Time;
+
+            /// <summary>
             /// Retrieves the Timestamp field.
             /// </summary>
-            public ulong Timestamp() => BitConverter.ToUInt64(_etwEvent.Data);
+            public ulong Timestamp => BitConverter.ToUInt64(_etwEvent.Data[Offset_Timestamp..Offset_ProcessId]);
 
             /// <summary>
             /// Retrieves the ProcessId field.
             /// </summary>
-            public uint ProcessId() => BitConverter.ToUInt32(_etwEvent.Data[8..]);
+            public uint ProcessId => BitConverter.ToUInt32(_etwEvent.Data[Offset_ProcessId..Offset_ThreadId]);
 
             /// <summary>
             /// Retrieves the ThreadId field.
             /// </summary>
-            public uint ThreadId() => BitConverter.ToUInt32(_etwEvent.Data[12..]);
+            public uint ThreadId => BitConverter.ToUInt32(_etwEvent.Data[Offset_ThreadId..Offset_StackKey]);
 
             /// <summary>
             /// Retrieves the StackKey field.
             /// </summary>
-            public uint StackKey() => BitConverter.ToUInt32(_etwEvent.Data[16..]);
+            public ulong StackKey => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_StackKey..]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_StackKey..]);
 
             /// <summary>
             /// Creates a new StackKeyUserEvent.

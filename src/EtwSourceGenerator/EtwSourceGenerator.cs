@@ -1,10 +1,17 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
+using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Text;
 
 using Newtonsoft.Json;
+
+// TODO
+//  - Arrays bounded by other parameters
+//  - String arrays
+//  - Structures
 
 if (args.Length != 2)
 {
@@ -43,7 +50,23 @@ string ConverterMethod(string datatype, string location) =>
         "ulong" => $"BitConverter.ToUInt64({location})",
         "long" => $"BitConverter.ToInt64({location})",
         "string" => $"global::System.Text.Encoding.Unicode.GetString({location})",
-        _ => "Unknown"
+        "address" => $"_etwEvent.AddressSize == 4 ? BitConverter.ToUInt32({location}) : BitConverter.ToUInt64({location})",
+        _ => "unknown"
+    };
+
+string ReturnType(string datatype) =>
+    datatype switch
+    {
+        "byte" or "sbyte" or "bool" or "ushort" or "short" or "uint" or "int" or "ulong" or "long" or "string" => datatype,
+        "address" => "ulong",
+        _ => "unknown"
+    };
+
+string VariableSize(string datatype) =>
+    datatype switch
+    {
+        "address" => "etwEvent.AddressSize",
+        _ => "unknown"
     };
 
 int Size(string datatype) =>
@@ -58,40 +81,63 @@ int Size(string datatype) =>
         "int" => 4,
         "ulong" => 8,
         "long" => 8,
-        _ => 0
+        _ => -1
     };
 
-void CreateEventField(Provider provider, Event e, string name, string datatype, StringBuilder builder, ref int offset)
+void CreateEventField(Provider provider, Event e, int i, StringBuilder builder, Dictionary<Field, string> fieldOffsets)
 {
-    var returnType = datatype;
-    var indexed = false;
-    var location = $"_etwEvent.Data{(offset == 0 ? string.Empty : $"[{offset}{(Size(returnType) == 1 ? string.Empty : "..")}]")}";
-
-    if (datatype.EndsWith("[...]", StringComparison.Ordinal))
-    {
-        returnType = datatype[0..^5];
-        indexed = true;
-        location = $"_etwEvent.Data[({offset} + (index * sizeof({returnType}))){(Size(returnType) == 1 ? string.Empty : "..")}]";
-    }
-    else
-    {
-        offset += Size(datatype);
-    }
-
+    var name = e.Fields[i].Name;
     if (name.StartsWith('_'))
     {
         return;
     }
 
-    _ = builder.Append($@"
+    var datatype = e.Fields[i].Datatype;
+    var openBrace = datatype.IndexOf('[');
+    var count = string.Empty;
+
+    if (openBrace != -1)
+    {
+        count = datatype[(openBrace + 1)..^1];
+        datatype = datatype[..openBrace];
+
+        var location = $"_etwEvent.Data[{fieldOffsets[e.Fields[i]]}..{(i + 1 < e.Fields.Count ? fieldOffsets[e.Fields[i + 1]] : string.Empty)}]";
+
+        _ = builder.Append(datatype switch
+        {
+            "address" => $@"
 
             /// <summary>
             /// Retrieves the {name} field.
             /// </summary>
-            public {returnType} {(indexed ? "Get" : string.Empty)}{name}({(indexed ? "int index" : string.Empty)}) => {ConverterMethod(returnType, location)};");
+            public EtwEvent.AddressEnumerable {name} => new({location}, _etwEvent.AddressSize{(count == "..." ? string.Empty : $", {count}")});",
+            "string" => $@"
+
+            /// <summary>
+            /// Retrieves the {name} field.
+            /// </summary>
+            public EtwEvent.StringEnumerable {name} => new({location}{(count == "..." ? string.Empty : $", {count}")});",
+            _ => $@"
+
+            /// <summary>
+            /// Retrieves the {name} field.
+            /// </summary>
+            public EtwEvent.StructEnumerable<{datatype}> {name} => new({location}{(count == "..." ? string.Empty : $", {count}")});"
+        });
+    }
+    else
+    {
+        var location = $"_etwEvent.Data[{fieldOffsets[e.Fields[i]]}{(Size(datatype) == 1 ? string.Empty : $"..{(i + 1 < e.Fields.Count ? fieldOffsets[e.Fields[i + 1]] : string.Empty)}")}]";
+        _ = builder.Append($@"
+
+            /// <summary>
+            /// Retrieves the {name} field.
+            /// </summary>
+            public {ReturnType(datatype)} {name} => {ConverterMethod(datatype, location)};");
+    }
 }
 
-string CreateEventFields(Provider provider, Event e)
+string CreateEventFields(Provider provider, Event e, Dictionary<Field, string> fieldOffsets)
 {
     if (!e.Fields.Any())
     {
@@ -99,17 +145,91 @@ string CreateEventFields(Provider provider, Event e)
     }
 
     var builder = new StringBuilder();
-    var offset = 0;
 
-    foreach (var (name, datatype) in e.Fields)
+    for (var i = 0; i < e.Fields.Count; i++)
     {
-        CreateEventField(provider, e, name, datatype, builder, ref offset);
+        CreateEventField(provider, e, i, builder, fieldOffsets);
     }
 
     return builder.ToString();
 }
 
-string CreateProviderEvents(Provider provider, ref int eventId)
+string CreateEventFieldOffsetInitializers(Provider provider, Event e, Dictionary<Field, string> fieldOffsets)
+{
+    if (!e.Fields.Any())
+    {
+        return string.Empty;
+    }
+
+    var builder = new StringBuilder();
+    var previousField = string.Empty;
+    var previousSize = string.Empty;
+
+    foreach (var f in e.Fields)
+    {
+        var fieldName = fieldOffsets[f];
+
+        if (fieldName.StartsWith('_'))
+        {
+            _ = builder.Append($@"
+                {fieldName} = {previousField} + {previousSize};");
+        }
+
+        var size = Size(f.Datatype);
+        previousSize = size == -1 ? VariableSize(f.Datatype) : size.ToString(CultureInfo.InvariantCulture);
+        previousField = fieldName;
+    }
+
+    return builder.ToString();
+}
+
+string CreateEventFieldOffsets(Provider provider, Event e, Dictionary<Field, string> fieldOffsets)
+{
+    if (!e.Fields.Any())
+    {
+        return string.Empty;
+    }
+
+    var builder = new StringBuilder();
+    var foundVariableField = false;
+    var offset = 0;
+
+    _ = builder.AppendLine();
+
+    foreach (var f in e.Fields)
+    {
+        if (!foundVariableField)
+        {
+            var fieldName = $"Offset_{f.Name}";
+            fieldOffsets[f] = fieldName;
+
+            _ = builder.Append(@$"
+            private const int {fieldName} = {offset};");
+
+            var size = Size(f.Datatype);
+
+            if (size == -1)
+            {
+                foundVariableField = true;
+            }
+            else
+            {
+                offset += size;
+            }
+        }
+        else
+        {
+            var fieldName = $"_offset_{f.Name}";
+            fieldOffsets[f] = fieldName;
+            _ = builder.Append($@"
+            private readonly int {fieldName};");
+        }
+    }
+
+    return builder.ToString();
+}
+
+string CreateProviderEvents(Provider provider, string providerClassName, ref int eventId)
 {
     if (provider.Events == null || provider.Events.Count == 0)
     {
@@ -120,7 +240,8 @@ string CreateProviderEvents(Provider provider, ref int eventId)
 
     foreach (var (name, e) in provider.Events)
     {
-        var processIdEvent = e.Fields.Any(f => f.Key == "ProcessId")
+        Dictionary<Field, string> fieldOffsets = new();
+        var processIdEvent = e.Fields.Any(f => f.Name == "ProcessId")
             ? string.Empty
             : @"
 
@@ -129,7 +250,7 @@ string CreateProviderEvents(Provider provider, ref int eventId)
             /// </summary>
             public uint ProcessId => _etwEvent.ProcessId;";
 
-        var threadIdEvent = e.Fields.Any(f => f.Key == "ThreadId")
+        var threadIdEvent = e.Fields.Any(f => f.Name == "ThreadId")
             ? string.Empty
             : @"
 
@@ -138,7 +259,7 @@ string CreateProviderEvents(Provider provider, ref int eventId)
             /// </summary>
             public uint ThreadId => _etwEvent.ThreadId;";
 
-        var timestampEvent = e.Fields.Any(f => f.Key == "Timestamp")
+        var timestampEvent = e.Fields.Any(f => f.Name == "Timestamp")
             ? string.Empty
             : @"
 
@@ -147,6 +268,15 @@ string CreateProviderEvents(Provider provider, ref int eventId)
             /// </summary>
             public long Timestamp => _etwEvent.Timestamp;";
 
+        var processorNumberEvent = e.Fields.Any(f => f.Name == "ProcessorNumber")
+            ? string.Empty
+            : @"
+
+            /// <summary>
+            /// The processor number the event was recorded on.
+            /// </summary>
+            public byte ProcessorNumber => _etwEvent.ProcessorNumber;";
+
         _ = builder.Append($@"
 
         /// <summary>
@@ -154,7 +284,7 @@ string CreateProviderEvents(Provider provider, ref int eventId)
         /// </summary>
         public readonly ref struct {name}Event
         {{
-            private readonly EtwEvent _etwEvent;
+            private readonly EtwEvent _etwEvent;{CreateEventFieldOffsets(provider, e, fieldOffsets)}
 
             /// <summary>
             /// Event ID.
@@ -169,22 +299,17 @@ string CreateProviderEvents(Provider provider, ref int eventId)
             /// <summary>
             /// The event provider.
             /// </summary>
-            public static readonly Guid Provider = new(""{provider.Id}"");
+            public static readonly Guid Provider = {providerClassName}.Id;
 
             /// <summary>
             /// Event descriptor.
             /// </summary>
-            public static EtwEventDescriptor Descriptor {{ get; }} = new EtwEventDescriptor {{ Id = {e.Descriptor.Id}, Version = {e.Descriptor.Version}, Channel = {e.Descriptor.Channel}, Level = {(e.Descriptor.Level == 0 ? string.Empty : "(EtwTraceLevel)")}{e.Descriptor.Level}, Opcode = (EtwEventType){e.Descriptor.Opcode}, Task = {e.Descriptor.Task}, Keyword = 0x{e.Descriptor.Keyword:X16} }};{processIdEvent}{threadIdEvent}{timestampEvent}
+            public static EtwEventDescriptor Descriptor {{ get; }} = new EtwEventDescriptor {{ Id = {e.Descriptor.Id}, Version = {e.Descriptor.Version}, Channel = {e.Descriptor.Channel}, Level = {(e.Descriptor.Level == 0 ? string.Empty : "(EtwTraceLevel)")}{e.Descriptor.Level}, Opcode = (EtwEventType){e.Descriptor.Opcode}, Task = {e.Descriptor.Task}, Keyword = 0x{e.Descriptor.Keyword:X16} }};{processIdEvent}{threadIdEvent}{timestampEvent}{processorNumberEvent}
 
             /// <summary>
             /// Timing information for the event.
             /// </summary>
-            public (ulong? KernelTime, ulong? UserTime, ulong? ProcessorTime) Time => _etwEvent.Time;
-
-            /// <summary>
-            /// The processor number the event was recorded on.
-            /// </summary>
-            public byte ProcessorNumber => _etwEvent.ProcessorNumber;{CreateEventFields(provider, e)}
+            public (ulong? KernelTime, ulong? UserTime, ulong? ProcessorTime) Time => _etwEvent.Time;{CreateEventFields(provider, e, fieldOffsets)}
 
             /// <summary>
             /// Creates a new {name}Event.
@@ -192,8 +317,54 @@ string CreateProviderEvents(Provider provider, ref int eventId)
             /// <param name=""etwEvent"">The event.</param>
             public {name}Event(EtwEvent etwEvent)
             {{
-                _etwEvent = etwEvent;
+                _etwEvent = etwEvent;{CreateEventFieldOffsetInitializers(provider, e, fieldOffsets)}
             }}
+        }}");
+    }
+
+    return builder.ToString();
+}
+
+string CreateStructFields(Provider provider, IReadOnlyList<Field> fields)
+{
+    if (!fields.Any())
+    {
+        return string.Empty;
+    }
+
+    var builder = new StringBuilder();
+
+    foreach (var f in fields)
+    {
+        _ = builder.Append($@"
+
+            /// <summary>
+            /// Retrieves the {f.Name} field.
+            /// </summary>
+            public {f.Datatype} {f.Name} {{ get; init; }}");
+    }
+
+    return builder.ToString();
+}
+
+string CreateProviderStructs(Provider provider, string providerClassName)
+{
+    if (provider.Structs == null || provider.Structs.Count == 0)
+    {
+        return string.Empty;
+    }
+
+    var builder = new StringBuilder();
+
+    foreach (var (name, fields) in provider.Structs)
+    {
+        _ = builder.Append($@"
+
+        /// <summary>
+        /// A {name} structure.
+        /// </summary>
+        public readonly struct {name}
+        {{{CreateStructFields(provider, fields)}
         }}");
     }
 
@@ -224,7 +395,7 @@ namespace EtwTools.{providerNamespace}
         /// <summary>
         /// Provider name.
         /// </summary>
-        public const string Name = ""{provider.Name}"";{CreateProviderEvents(provider, ref eventId)}
+        public const string Name = ""{provider.Name}"";{CreateProviderEvents(provider, providerClassName, ref eventId)}{CreateProviderStructs(provider, providerClassName)}
     }}
 }}
 ");
@@ -307,17 +478,25 @@ CreateMaps();
 
 return 0;
 
+[DebuggerDisplay("{Name} ({Id})")]
 internal sealed class Provider
 {
     public string Name { get; set; }
     public Guid Id { get; set; }
     public IReadOnlyDictionary<string, Event> Events { get; set; }
+    public IReadOnlyDictionary<string, IReadOnlyList<Field>> Structs { get; set; }
 }
 
 internal sealed class Event
 {
     public EventDescriptor Descriptor { get; set; }
-    public IReadOnlyDictionary<string, string> Fields { get; set; }
+    public IReadOnlyList<Field> Fields { get; set; }
+}
+
+internal sealed class Field
+{
+    public string Name { get; set; }
+    public string Datatype { get; set; }
 }
 
 internal sealed class EventDescriptor

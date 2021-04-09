@@ -2,6 +2,7 @@
 using System.Runtime.InteropServices;
 using System.Runtime.Versioning;
 using System.Security.Principal;
+using System.Text;
 
 namespace EtwTools
 {
@@ -56,6 +57,11 @@ namespace EtwTools
         /// The event data.
         /// </summary>
         public Span<byte> Data => _eventRecord->UserData;
+
+        /// <summary>
+        /// The address size for the event.
+        /// </summary>
+        public int AddressSize => (_eventRecord->EventHeader.Flags & Native.EventHeaderFlags.x64Header) != 0 ? 8 : 4;
 
         internal EtwEvent(Native.EventRecord* eventRecord) : this()
         {
@@ -409,6 +415,218 @@ namespace EtwTools
             /// Stack key.
             /// </summary>
             public T Key { get; init; }
+        }
+
+        /// <summary>
+        /// A structure that can enumerate addresses without allocation.
+        /// </summary>
+        public ref struct AddressEnumerable
+        {
+            private readonly Span<byte> _buffer;
+            private readonly int _addressSize;
+            private readonly uint _count;
+
+            internal AddressEnumerable(Span<byte> buffer, int addressSize) :
+                this(buffer, addressSize, uint.MaxValue)
+            {
+            }
+
+            internal AddressEnumerable(Span<byte> buffer, int addressSize, uint count)
+            {
+                _buffer = buffer;
+                _addressSize = addressSize;
+                _count = count;
+            }
+
+            /// <summary>
+            /// Gets an enumerator.
+            /// </summary>
+            /// <returns>The enumerator.</returns>
+            public AddressEnumerator GetEnumerator() => new(this);
+
+            /// <summary>
+            /// A structure that enumerates over an address collection.
+            /// </summary>
+            public ref struct AddressEnumerator
+            {
+                private readonly AddressEnumerable _enumerable;
+                private int _offset;
+                private int _count;
+
+                /// <summary>
+                /// The current value, if any.
+                /// </summary>
+                public ulong Current => ((_offset < _enumerable._buffer.Length) && (_count <= _enumerable._count))
+                    ? _enumerable._addressSize == 4
+                        ? BitConverter.ToUInt32(_enumerable._buffer[_offset..])
+                        : BitConverter.ToUInt64(_enumerable._buffer[_offset..])
+                    : throw new InvalidOperationException();
+
+                internal AddressEnumerator(AddressEnumerable enumerable)
+                {
+                    _enumerable = enumerable;
+                    _offset = int.MaxValue;
+                    _count = 0;
+                }
+
+                /// <summary>
+                /// Moves to the next address.
+                /// </summary>
+                /// <returns>Whether there is another address.</returns>
+                public bool MoveNext()
+                {
+                    if (_offset == int.MaxValue)
+                    {
+                        _offset = 0;
+                        _count = 1;
+                        return true;
+                    }
+
+                    _offset += _enumerable._addressSize;
+                    _count++;
+                    return (_offset < _enumerable._buffer.Length) && (_count <= _enumerable._count);
+                }
+            }
+        }
+
+        /// <summary>
+        /// A structure that can enumerate strings.
+        /// </summary>
+        public ref struct StringEnumerable
+        {
+            private readonly Span<byte> _buffer;
+            private readonly uint _count;
+
+            internal StringEnumerable(Span<byte> buffer) :
+                this(buffer, uint.MaxValue)
+            {
+            }
+
+            internal StringEnumerable(Span<byte> buffer, uint count)
+            {
+                _buffer = buffer;
+                _count = count;
+            }
+
+            /// <summary>
+            /// Gets an enumerator.
+            /// </summary>
+            /// <returns>The enumerator.</returns>
+            public StringEnumerator GetEnumerator() => new(this);
+
+            /// <summary>
+            /// A structure that enumerates over an address collection.
+            /// </summary>
+            public ref struct StringEnumerator
+            {
+                private readonly StringEnumerable _enumerable;
+                private int _offset;
+                private int _count;
+
+                /// <summary>
+                /// The current value, if any.
+                /// </summary>
+                public string Current => ((_offset < _enumerable._buffer.Length) && (_count <= _enumerable._count))
+                    ? Encoding.Unicode.GetString(_enumerable._buffer[_offset..])
+                    : throw new InvalidOperationException();
+
+                internal StringEnumerator(StringEnumerable enumerable)
+                {
+                    _enumerable = enumerable;
+                    _offset = int.MaxValue;
+                    _count = 0;
+                }
+
+                /// <summary>
+                /// Moves to the next address.
+                /// </summary>
+                /// <returns>Whether there is another address.</returns>
+                public bool MoveNext()
+                {
+                    if (_offset == int.MaxValue)
+                    {
+                        _offset = 0;
+                        _count = 1;
+                        return true;
+                    }
+
+                    while ((_offset < _enumerable._buffer.Length) && ((_enumerable._buffer[_offset] != 0x00) || (_enumerable._buffer[_offset + 1] != 0x00)))
+                    {
+                        _offset += 2;
+                    }
+                    _offset += 2;
+                    _count++;
+                    return (_offset < _enumerable._buffer.Length) && (_count <= _enumerable._count);
+                }
+            }
+        }
+
+        /// <summary>
+        /// A structure that can enumerate structures.
+        /// </summary>
+        public ref struct StructEnumerable<T> where T : unmanaged
+        {
+            private readonly Span<byte> _buffer;
+            private readonly uint _count;
+
+            internal StructEnumerable(Span<byte> buffer) :
+                this(buffer, uint.MaxValue)
+            {
+            }
+
+            internal StructEnumerable(Span<byte> buffer, uint count)
+            {
+                _buffer = buffer;
+                _count = count;
+            }
+
+            /// <summary>
+            /// Gets an enumerator.
+            /// </summary>
+            /// <returns>The enumerator.</returns>
+            public StructEnumerator GetEnumerator() => new(this);
+
+            /// <summary>
+            /// A structure that enumerates over an address collection.
+            /// </summary>
+            public ref struct StructEnumerator
+            {
+                private readonly StructEnumerable<T> _enumerable;
+                private int _offset;
+                private int _count;
+
+                /// <summary>
+                /// The current value, if any.
+                /// </summary>
+                public T Current => ((_offset < _enumerable._buffer.Length) && (_count <= _enumerable._count))
+                    ? MemoryMarshal.AsRef<T>(_enumerable._buffer[_offset..])
+                    : throw new InvalidOperationException();
+
+                internal StructEnumerator(StructEnumerable<T> enumerable)
+                {
+                    _enumerable = enumerable;
+                    _offset = int.MaxValue;
+                    _count = 0;
+                }
+
+                /// <summary>
+                /// Moves to the next address.
+                /// </summary>
+                /// <returns>Whether there is another address.</returns>
+                public bool MoveNext()
+                {
+                    if (_offset == int.MaxValue)
+                    {
+                        _offset = 0;
+                        _count = 1;
+                        return true;
+                    }
+
+                    _offset += sizeof(T);
+                    _count++;
+                    return (_offset < _enumerable._buffer.Length) && (_count <= _enumerable._count);
+                }
+            }
         }
     }
 }

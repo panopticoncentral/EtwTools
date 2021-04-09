@@ -91,89 +91,619 @@
     "name": "Kernel-PerfInfo",
     "id": "ce1dbfb4-137e-4da6-87b0-3f59aa102cbc",
     "events": {
+      "Mark": {
+        "descriptor": {
+          "opcode": 34,
+          "version": 0
+        },
+        "fields": [
+          {
+            "name": "Message",
+            "datatype": "string"
+          }
+        ]
+      },
       "SampleProfile": {
         "descriptor": {
           "opcode": 46,
           "version": 2
         },
-        "fields": {
-          "InstructionPointer": "uint",
-          "ThreadId": "uint",
-          "Count": "ushort",
-          "_reserved": "ushort"
-        }
+        "fields": [
+          {
+            "name": "InstructionPointer",
+            "datatype": "address"
+          },
+          {
+            "name": "ThreadId",
+            "datatype": "uint"
+          },
+          {
+            "name": "Count",
+            "datatype": "ushort"
+          }
+        ]
       },
       "PmcCounterProfile": {
         "descriptor": {
           "opcode": 47,
           "version": 2
         },
-        "fields": {
-          "InstructionPointer": "uint",
-          "ThreadId": "uint",
-          "ProfileSource": "ushort",
-          "_reserved": "ushort"
-        }
+        "fields": [
+          {
+            "name": "InstructionPointer",
+            "datatype": "address"
+          },
+          {
+            "name": "ThreadId",
+            "datatype": "uint"
+          },
+          {
+            "name": "ProfileSource",
+            "datatype": "ushort"
+          }
+        ]
+      },
+      "PmcCounterConfig": {
+        "descriptor": {
+          "opcode": 48,
+          "version": 2
+        },
+        "fields": [
+          {
+            "name": "CounterCount",
+            "datatype": "uint"
+          },
+          {
+            "name": "CounterName",
+            "datatype": "string[CounterCount]"
+          }
+        ]
+      },
+      "PmcCounterCorruption": {
+        "descriptor": {
+          "opcode": 49,
+          "version": 2
+        },
+        "fields": [
+          {
+            "name": "ProcessorNumber",
+            "datatype": "uint"
+          },
+          {
+            "name": "CounterCount",
+            "datatype": "uint"
+          },
+          {
+            "name": "CounterStatus",
+            "datatype": "CounterCorruptionStatus[CounterCount]"
+          }
+        ]
+      },
+      "ISRMsi": {
+        "descriptor": {
+          "opcode": 50,
+          "version": 2
+        },
+        "fields": [
+          {
+            "name": "InitialTime",
+            "datatype": "ulong"
+          },
+          {
+            "name": "Routine",
+            "datatype": "address"
+          },
+          {
+            "name": "ReturnValue",
+            "datatype": "byte"
+          },
+          {
+            "name": "InterruptVector",
+            "datatype": "ushort"
+          },
+          {
+            "name": "_reserved",
+            "datatype": "byte"
+          },
+          {
+            "name": "MessageNumber",
+            "datatype": "uint"
+          }
+        ]
+      },
+      "SystemCallEnter": {
+        "descriptor": {
+          "opcode": 51,
+          "version": 2
+        },
+        "fields": [
+          {
+            "name": "SysCallAddress",
+            "datatype": "address"
+          }
+        ]
+      },
+      "SystemCallExit": {
+        "descriptor": {
+          "opcode": 52,
+          "version": 2
+        },
+        "fields": [
+          {
+            "name": "SysCallNTStatus",
+            "datatype": "uint"
+          }
+        ]
+      },
+      "DebuggerEnabled": {
+        "descriptor": {
+          "opcode": 58,
+          "version": 2
+        },
+        "fields": [
+        ]
+      },
+      "ThreadedDPC": {
+        "descriptor": {
+          "opcode": 66,
+          "version": 2
+        },
+        "fields": [
+          {
+            "name": "InitialTime",
+            "datatype": "ulong"
+          },
+          {
+            "name": "Routine",
+            "datatype": "address"
+          }
+        ]
+      },
+      "ISR": {
+        "descriptor": {
+          "opcode": 67,
+          "version": 2
+        },
+        "fields": [
+          {
+            "name": "InitialTime",
+            "datatype": "ulong"
+          },
+          {
+            "name": "Routine",
+            "datatype": "address"
+          },
+          {
+            "name": "ReturnValue",
+            "datatype": "byte"
+          },
+          {
+            "name": "InterruptVector",
+            "datatype": "ushort"
+          }
+        ]
+      },
+      "DPC": {
+        "descriptor": {
+          "opcode": 68,
+          "version": 2
+        },
+        "fields": [
+          {
+            "name": "InitialTime",
+            "datatype": "ulong"
+          },
+          {
+            "name": "Routine",
+            "datatype": "address"
+          }
+        ]
+      },
+      "TimerDPC": {
+        "descriptor": {
+          "opcode": 69,
+          "version": 2
+        },
+        "fields": [
+          {
+            "name": "InitialTime",
+            "datatype": "ulong"
+          },
+          {
+            "name": "Routine",
+            "datatype": "address"
+          }
+        ]
+      },
+      "IOTimer": {
+        "descriptor": {
+          "opcode": 70,
+          "version": 2
+        },
+        "fields": [
+          {
+            "name": "InitialTime",
+            "datatype": "ulong"
+          },
+          {
+            "name": "Routine",
+            "datatype": "address"
+          }
+        ]
       },
       "SampledProfileSetInterval": {
         "descriptor": {
           "opcode": 72,
           "version": 2
         },
-        "fields": {
-          "Source": "uint",
-          "NewInterval": "uint",
-          "OldInterval": "uint"
-        }
+        "fields": [
+          {
+            "name": "Source",
+            "datatype": "uint"
+          },
+          {
+            "name": "NewInterval",
+            "datatype": "uint"
+          },
+          {
+            "name": "OldInterval",
+            "datatype": "uint"
+          }
+        ]
       },
       "SampledProfileIntervalStart": {
         "descriptor": {
           "opcode": 73,
           "version": 3
         },
-        "fields": {
-          "Source": "uint",
-          "NewInterval": "uint",
-          "OldInterval": "uint",
-          "SourceName": "string"
-        }
+        "fields": [
+          {
+            "name": "Source",
+            "datatype": "uint"
+          },
+          {
+            "name": "NewInterval",
+            "datatype": "uint"
+          },
+          {
+            "name": "OldInterval",
+            "datatype": "uint"
+          },
+          {
+            "name": "SourceName",
+            "datatype": "string"
+          }
+        ]
       },
       "SampledProfileIntervalEnd": {
         "descriptor": {
           "opcode": 74,
           "version": 3
         },
-        "fields": {
-          "Source": "uint",
-          "NewInterval": "uint",
-          "OldInterval": "uint",
-          "SourceName": "string"
-        }
+        "fields": [
+          {
+            "name": "Source",
+            "datatype": "uint"
+          },
+          {
+            "name": "NewInterval",
+            "datatype": "uint"
+          },
+          {
+            "name": "OldInterval",
+            "datatype": "uint"
+          },
+          {
+            "name": "SourceName",
+            "datatype": "string"
+          }
+        ]
       },
       "SpinlockConfigureStart": {
         "descriptor": {
           "opcode": 75,
           "version": 3
         },
-        "fields": {
-          "SpinLockSpinThreshold": "uint",
-          "SpinLockContentionSampleRate": "uint",
-          "SpinLockAcquireSampleRate": "uint",
-          "SpinLockHoldThreshold": "uint"
-        }
+        "fields": [
+          {
+            "name": "SpinLockSpinThreshold",
+            "datatype": "uint"
+          },
+          {
+            "name": "SpinLockContentionSampleRate",
+            "datatype": "uint"
+          },
+          {
+            "name": "SpinLockAcquireSampleRate",
+            "datatype": "uint"
+          },
+          {
+            "name": "SpinLockHoldThreshold",
+            "datatype": "uint"
+          }
+        ]
       },
       "SpinlockConfigureEnd": {
         "descriptor": {
           "opcode": 76,
           "version": 3
         },
-        "fields": {
-          "SpinLockSpinThreshold": "uint",
-          "SpinLockContentionSampleRate": "uint",
-          "SpinLockAcquireSampleRate": "uint",
-          "SpinLockHoldThreshold": "uint"
-        }
+        "fields": [
+          {
+            "name": "SpinLockSpinThreshold",
+            "datatype": "uint"
+          },
+          {
+            "name": "SpinLockContentionSampleRate",
+            "datatype": "uint"
+          },
+          {
+            "name": "SpinLockAcquireSampleRate",
+            "datatype": "uint"
+          },
+          {
+            "name": "SpinLockHoldThreshold",
+            "datatype": "uint"
+          }
+        ]
+      },
+      "ISRUnexpected": {
+        "descriptor": {
+          "opcode": 92,
+          "version": 2
+        },
+        "fields": [
+          {
+            "name": "Vector",
+            "datatype": "ushort"
+          }
+        ]
+      },
+      "IoStartTimer": {
+        "descriptor": {
+          "opcode": 93,
+          "version": 2
+        },
+        "fields": [
+          {
+            "name": "DeviceObject",
+            "datatype": "address"
+          },
+          {
+            "name": "TimerRoutine",
+            "datatype": "address"
+          }
+        ]
+      },
+      "IoStopTimer": {
+
+        "descriptor": {
+          "opcode": 94,
+          "version": 2
+        },
+        "fields": [
+          {
+            "name": "DeviceObject",
+            "datatype": "address"
+          },
+          {
+            "name": "TimerRoutine",
+            "datatype": "address"
+          }
+        ]
+      },
+      "ISRPass": {
+        "descriptor": {
+          "opcode": 95,
+          "version": 2
+        },
+        "fields": [
+          {
+            "name": "InitialTime",
+            "datatype": "ulong"
+          },
+          {
+            "name": "Routine",
+            "datatype": "address"
+          },
+          {
+            "name": "ReturnValue",
+            "datatype": "byte"
+          },
+          {
+            "name": "InterruptVector",
+            "datatype": "ushort"
+          }
+        ]
+      },
+      "WdfISR": {
+        "descriptor": {
+          "opcode": 96,
+          "version": 2
+        },
+        "fields": [
+          {
+            "name": "Routine",
+            "datatype": "address"
+          }
+        ]
+      },
+      "WdfPassiveISR": {
+        "descriptor": {
+          "opcode": 97,
+          "version": 2
+        },
+        "fields": [
+          {
+            "name": "Routine",
+            "datatype": "address"
+          }
+        ]
+      },
+      "WdfDPC": {
+        "descriptor": {
+          "opcode": 98,
+          "version": 2
+        },
+        "fields": [
+          {
+            "name": "Routine",
+            "datatype": "address"
+          }
+        ]
+      },
+      "WdfWorkItem": {
+        "descriptor": {
+          "opcode": 103,
+          "version": 2
+        },
+        "fields": [
+          {
+            "name": "Routine",
+            "datatype": "address"
+          }
+        ]
+      },
+      "SetKTimer2": {
+        "descriptor": {
+          "opcode": 104,
+          "version": 2
+        },
+        "fields": [
+          {
+            "name": "DueTime",
+            "datatype": "ulong"
+          },
+          {
+            "name": "MaximumDueTime",
+            "datatype": "ulong"
+          },
+          {
+            "name": "Period",
+            "datatype": "ulong"
+          },
+          {
+            "name": "Timer",
+            "datatype": "address"
+          },
+          {
+            "name": "Callback",
+            "datatype": "address"
+          },
+          {
+            "name": "CallbackContext",
+            "datatype": "address"
+          },
+          {
+            "name": "TimerFlags",
+            "datatype": "byte"
+          }
+        ]
+      },
+      "ExpireKTimer2": {
+        "descriptor": {
+          "opcode": 105,
+          "version": 2
+        },
+        "fields": [
+          {
+            "name": "DueTime",
+            "datatype": "ulong"
+          },
+          {
+            "name": "MaximumDueTime",
+            "datatype": "ulong"
+          },
+          {
+            "name": "Period",
+            "datatype": "ulong"
+          },
+          {
+            "name": "Timer",
+            "datatype": "address"
+          },
+          {
+            "name": "Callback",
+            "datatype": "address"
+          },
+          {
+            "name": "CallbackContext",
+            "datatype": "address"
+          },
+          {
+            "name": "TimerFlags",
+            "datatype": "byte"
+          }
+        ]
+      },
+      "CancelKTimer2": {
+        "descriptor": {
+          "opcode": 106,
+          "version": 2
+        },
+        "fields": [
+          {
+            "name": "Timer",
+            "datatype": "address"
+          }
+        ]
+      },
+      "DisableKTimer2": {
+        "descriptor": {
+          "opcode": 107,
+          "version": 2
+        },
+        "fields": [
+          {
+            "name": "Timer",
+            "datatype": "address"
+          },
+          {
+            "name": "DisableCallback",
+            "datatype": "address"
+          },
+          {
+            "name": "DisableContext",
+            "datatype": "address"
+          },
+          {
+            "name": "TimerFlags",
+            "datatype": "byte"
+          }
+        ]
+      },
+      "FinalizeKTimer2": {
+        "descriptor": {
+          "opcode": 108,
+          "version": 2
+        },
+        "fields": [
+          {
+            "name": "Timer",
+            "datatype": "address"
+          },
+          {
+            "name": "DisableCallback",
+            "datatype": "address"
+          },
+          {
+            "name": "DisableContext",
+            "datatype": "address"
+          }
+        ]
       }
+    },
+    "structs": {
+      "CounterCorruptionStatus": [
+        {
+          "name": "ProfileSource",
+          "datatype": "uint"
+        },
+        {
+          "name": "LastKnownGoodTimestamp",
+          "datatype": "ulong"
+        }
+      ]
     }
   },
   {
@@ -201,66 +731,120 @@
           "version": 2,
           "opcode": 32
         },
-        "fields": {
-          "Timestamp": "ulong",
-          "ProcessId": "uint",
-          "ThreadId": "uint",
-          "Stack": "uint[...]"
-        }
+        "fields": [
+          {
+            "name": "Timestamp",
+            "datatype": "ulong"
+          },
+          {
+            "name": "ProcessId",
+            "datatype": "uint"
+          },
+          {
+            "name": "ThreadId",
+            "datatype": "uint"
+          },
+          {
+            "name": "Stack",
+            "datatype": "address[...]"
+          }
+        ]
       },
       "StackKeyCreate": {
         "descriptor": {
           "version": 2,
           "opcode": 34
         },
-        "fields": {
-          "StackKey": "uint",
-          "StackFrames": "uint[...]"
-        }
+        "fields": [
+          {
+            "name": "StackKey",
+            "datatype": "address"
+          },
+          {
+            "name": "StackFrames",
+            "datatype": "address[...]"
+          }
+        ]
       },
       "StackKeyDelete": {
         "descriptor": {
           "version": 2,
           "opcode": 35
         },
-        "fields": {
-          "StackKey": "uint",
-          "StackFrames": "uint[...]"
-        }
+        "fields": [
+          {
+            "name": "StackKey",
+            "datatype": "address"
+          },
+          {
+            "name": "StackFrames",
+            "datatype": "address[...]"
+          }
+        ]
       },
       "StackKeyRundown": {
         "descriptor": {
           "version": 2,
           "opcode": 36
         },
-        "fields": {
-          "StackKey": "uint",
-          "StackFrames": "uint[...]"
-        }
+        "fields": [
+          {
+            "name": "StackKey",
+            "datatype": "address"
+          },
+          {
+            "name": "StackFrames",
+            "datatype": "address[...]"
+          }
+        ]
       },
       "StackKeyKernel": {
         "descriptor": {
           "version": 2,
           "opcode": 37
         },
-        "fields": {
-          "Timestamp": "ulong",
-          "ProcessId": "uint",
-          "ThreadId": "uint",
-          "StackKey": "uint"
-        }
+        "fields": [
+          {
+            "name": "Timestamp",
+            "datatype": "ulong"
+          },
+          {
+            "name": "ProcessId",
+            "datatype": "uint"
+          },
+          {
+            "name": "ThreadId",
+            "datatype": "uint"
+          },
+          {
+            "name": "StackKey",
+            "datatype": "address"
+          }
+        ]
       },
       "StackKeyUser": {
         "descriptor": {
           "version": 2,
           "opcode": 38
         },
-        "fields": {
-          "Timestamp": "ulong",
-          "ProcessId": "uint",
-          "ThreadId": "uint",
-          "StackKey": "uint"
-        }
+        "fields": [
+          {
+            "name": "Timestamp",
+            "datatype": "ulong"
+          },
+          {
+            "name": "ProcessId",
+            "datatype": "uint"
+          },
+          {
+            "name": "ThreadId",
+            "datatype": "uint"
+          },
+          {
+            "name": "StackKey",
+            "datatype": "address"
+          }
+        ]
       }
     }
   },
@@ -277,345 +861,744 @@
           "opcode": 1,
           "version": 4
         },
-        "fields": {
-          "ProcessId": "uint",
-          "ThreadId": "uint",
-          "StackBase": "uint",
-          "StackLimit": "uint",
-          "UserStackBase": "uint",
-          "UserStackLimit": "uint",
-          "Affinity": "uint",
-          "Win32StartAddr": "uint",
-          "TebBase": "uint",
-          "SubProcessTag": "uint",
-          "BasePriority": "byte",
-          "PagePriority": "byte",
-          "IoPriority": "byte",
-          "ThreadFlags": "byte",
-          "ThreadName": "string"
-        }
+        "fields": [
+          {
+            "name": "ProcessId",
+            "datatype": "uint"
+          },
+          {
+            "name": "ThreadId",
+            "datatype": "uint"
+          },
+          {
+            "name": "StackBase",
+            "datatype": "address"
+          },
+          {
+            "name": "StackLimit",
+            "datatype": "address"
+          },
+          {
+            "name": "UserStackBase",
+            "datatype": "address"
+          },
+          {
+            "name": "UserStackLimit",
+            "datatype": "address"
+          },
+          {
+            "name": "Affinity",
+            "datatype": "address"
+          },
+          {
+            "name": "Win32StartAddr",
+            "datatype": "address"
+          },
+          {
+            "name": "TebBase",
+            "datatype": "address"
+          },
+          {
+            "name": "SubProcessTag",
+            "datatype": "uint"
+          },
+          {
+            "name": "BasePriority",
+            "datatype": "byte"
+          },
+          {
+            "name": "PagePriority",
+            "datatype": "byte"
+          },
+          {
+            "name": "IoPriority",
+            "datatype": "byte"
+          },
+          {
+            "name": "ThreadFlags",
+            "datatype": "byte"
+          },
+          {
+            "name": "ThreadName",
+            "datatype": "string"
+          }
+        ]
       },
       "End": {
         "descriptor": {
           "opcode": 2,
           "version": 4
         },
-        "fields": {
-          "ProcessId": "uint",
-          "ThreadId": "uint",
-          "StackBase": "uint",
-          "StackLimit": "uint",
-          "UserStackBase": "uint",
-          "UserStackLimit": "uint",
-          "Affinity": "uint",
-          "Win32StartAddr": "uint",
-          "TebBase": "uint",
-          "SubProcessTag": "uint",
-          "BasePriority": "byte",
-          "PagePriority": "byte",
-          "IoPriority": "byte",
-          "ThreadFlags": "byte",
-          "ThreadName": "string"
-        }
+        "fields": [
+          {
+            "name": "ProcessId",
+            "datatype": "uint"
+          },
+          {
+            "name": "ThreadId",
+            "datatype": "uint"
+          },
+          {
+            "name": "StackBase",
+            "datatype": "address"
+          },
+          {
+            "name": "StackLimit",
+            "datatype": "address"
+          },
+          {
+            "name": "UserStackBase",
+            "datatype": "address"
+          },
+          {
+            "name": "UserStackLimit",
+            "datatype": "address"
+          },
+          {
+            "name": "Affinity",
+            "datatype": "address"
+          },
+          {
+            "name": "Win32StartAddr",
+            "datatype": "address"
+          },
+          {
+            "name": "TebBase",
+            "datatype": "address"
+          },
+          {
+            "name": "SubProcessTag",
+            "datatype": "uint"
+          },
+          {
+            "name": "BasePriority",
+            "datatype": "byte"
+          },
+          {
+            "name": "PagePriority",
+            "datatype": "byte"
+          },
+          {
+            "name": "IoPriority",
+            "datatype": "byte"
+          },
+          {
+            "name": "ThreadFlags",
+            "datatype": "byte"
+          },
+          {
+            "name": "ThreadName",
+            "datatype": "string"
+          }
+        ]
       },
       "DCStart": {
         "descriptor": {
           "opcode": 3,
           "version": 4
         },
-        "fields": {
-          "ProcessId": "uint",
-          "ThreadId": "uint",
-          "StackBase": "uint",
-          "StackLimit": "uint",
-          "UserStackBase": "uint",
-          "UserStackLimit": "uint",
-          "Affinity": "uint",
-          "Win32StartAddr": "uint",
-          "TebBase": "uint",
-          "SubProcessTag": "uint",
-          "BasePriority": "byte",
-          "PagePriority": "byte",
-          "IoPriority": "byte",
-          "ThreadFlags": "byte",
-          "ThreadName": "string"
-        }
+        "fields": [
+          {
+            "name": "ProcessId",
+            "datatype": "uint"
+          },
+          {
+            "name": "ThreadId",
+            "datatype": "uint"
+          },
+          {
+            "name": "StackBase",
+            "datatype": "address"
+          },
+          {
+            "name": "StackLimit",
+            "datatype": "address"
+          },
+          {
+            "name": "UserStackBase",
+            "datatype": "address"
+          },
+          {
+            "name": "UserStackLimit",
+            "datatype": "address"
+          },
+          {
+            "name": "Affinity",
+            "datatype": "address"
+          },
+          {
+            "name": "Win32StartAddr",
+            "datatype": "address"
+          },
+          {
+            "name": "TebBase",
+            "datatype": "address"
+          },
+          {
+            "name": "SubProcessTag",
+            "datatype": "uint"
+          },
+          {
+            "name": "BasePriority",
+            "datatype": "byte"
+          },
+          {
+            "name": "PagePriority",
+            "datatype": "byte"
+          },
+          {
+            "name": "IoPriority",
+            "datatype": "byte"
+          },
+          {
+            "name": "ThreadFlags",
+            "datatype": "byte"
+          },
+          {
+            "name": "ThreadName",
+            "datatype": "string"
+          }
+        ]
       },
       "DCEnd": {
         "descriptor": {
           "opcode": 4,
           "version": 4
         },
-        "fields": {
-          "ProcessId": "uint",
-          "ThreadId": "uint",
-          "StackBase": "uint",
-          "StackLimit": "uint",
-          "UserStackBase": "uint",
-          "UserStackLimit": "uint",
-          "Affinity": "uint",
-          "Win32StartAddr": "uint",
-          "TebBase": "uint",
-          "SubProcessTag": "uint",
-          "BasePriority": "byte",
-          "PagePriority": "byte",
-          "IoPriority": "byte",
-          "ThreadFlags": "byte",
-          "ThreadName": "string"
-        }
+        "fields": [
+          {
+            "name": "ProcessId",
+            "datatype": "uint"
+          },
+          {
+            "name": "ThreadId",
+            "datatype": "uint"
+          },
+          {
+            "name": "StackBase",
+            "datatype": "address"
+          },
+          {
+            "name": "StackLimit",
+            "datatype": "address"
+          },
+          {
+            "name": "UserStackBase",
+            "datatype": "address"
+          },
+          {
+            "name": "UserStackLimit",
+            "datatype": "address"
+          },
+          {
+            "name": "Affinity",
+            "datatype": "address"
+          },
+          {
+            "name": "Win32StartAddr",
+            "datatype": "address"
+          },
+          {
+            "name": "TebBase",
+            "datatype": "address"
+          },
+          {
+            "name": "SubProcessTag",
+            "datatype": "uint"
+          },
+          {
+            "name": "BasePriority",
+            "datatype": "byte"
+          },
+          {
+            "name": "PagePriority",
+            "datatype": "byte"
+          },
+          {
+            "name": "IoPriority",
+            "datatype": "byte"
+          },
+          {
+            "name": "ThreadFlags",
+            "datatype": "byte"
+          },
+          {
+            "name": "ThreadName",
+            "datatype": "string"
+          }
+        ]
       },
       "CSwitch": {
         "descriptor": {
           "opcode": 36,
           "version": 4
         },
-        "fields": {
-          "NewThreadId": "uint",
-          "OldThreadId": "uint",
-          "NewThreadPriority": "sbyte",
-          "OldThreadPriority": "sbyte",
-          "PreviousCState": "byte",
-          "_padding": "byte",
-          "OldThreadWaitReason": "sbyte",
-          "ThreadFlags": "sbyte",
-          "OldThreadState": "sbyte",
-          "OldThreadWaitIdealProcessor": "sbyte",
-          "NewThreadWaitTime": "uint",
-          "_reserved": "uint"
-        }
+        "fields": [
+          {
+            "name": "NewThreadId",
+            "datatype": "uint"
+          },
+          {
+            "name": "OldThreadId",
+            "datatype": "uint"
+          },
+          {
+            "name": "NewThreadPriority",
+            "datatype": "sbyte"
+          },
+          {
+            "name": "OldThreadPriority",
+            "datatype": "sbyte"
+          },
+          {
+            "name": "PreviousCState",
+            "datatype": "byte"
+          },
+          {
+            "name": "_padding",
+            "datatype": "byte"
+          },
+          {
+            "name": "OldThreadWaitReason",
+            "datatype": "sbyte"
+          },
+          {
+            "name": "ThreadFlags",
+            "datatype": "sbyte"
+          },
+          {
+            "name": "OldThreadState",
+            "datatype": "sbyte"
+          },
+          {
+            "name": "OldThreadWaitIdealProcessor",
+            "datatype": "sbyte"
+          },
+          {
+            "name": "NewThreadWaitTime",
+            "datatype": "uint"
+          }
+        ]
       },
       "CompCS": {
         "descriptor": {
           "opcode": 37,
           "version": 2
         },
-        "fields": {
-        }
+        "fields": [
+        ]
       },
       "SpinLock": {
         "descriptor": {
           "opcode": 41,
           "version": 2
         },
-        "fields": {
-          "SpinLockAddress": "uint",
-          "CallerAddress": "uint",
-          "AcquireTime": "ulong",
-          "ReleaseTime": "ulong",
-          "WaitTimeInCycles": "uint",
-          "SpinCount": "uint",
-          "ThreadId": "uint",
-          "InterruptCount": "uint",
-          "Irql": "byte",
-          "AcquireDepth": "byte",
-          "Flag": "byte",
-          "_reserved": "byte[5]"
-        }
+        "fields": [
+          {
+            "name": "SpinLockAddress",
+            "datatype": "address"
+          },
+          {
+            "name": "CallerAddress",
+            "datatype": "address"
+          },
+          {
+            "name": "AcquireTime",
+            "datatype": "ulong"
+          },
+          {
+            "name": "ReleaseTime",
+            "datatype": "ulong"
+          },
+          {
+            "name": "WaitTimeInCycles",
+            "datatype": "uint"
+          },
+          {
+            "name": "SpinCount",
+            "datatype": "uint"
+          },
+          {
+            "name": "ThreadId",
+            "datatype": "uint"
+          },
+          {
+            "name": "InterruptCount",
+            "datatype": "uint"
+          },
+          {
+            "name": "Irql",
+            "datatype": "byte"
+          },
+          {
+            "name": "AcquireDepth",
+            "datatype": "byte"
+          },
+          {
+            "name": "Flag",
+            "datatype": "byte"
+          }
+        ]
       },
       "SetPriority": {
         "descriptor": {
           "opcode": 48,
           "version": 3
         },
-        "fields": {
-          "ThreadId": "uint",
-          "OldPriority": "byte",
-          "NewPriority": "byte",
-          "_reserved": "ushort"
-        }
+        "fields": [
+          {
+            "name": "ThreadId",
+            "datatype": "uint"
+          },
+          {
+            "name": "OldPriority",
+            "datatype": "byte"
+          },
+          {
+            "name": "NewPriority",
+            "datatype": "byte"
+          }
+        ]
       },
       "SetBasePriority": {
         "descriptor": {
           "opcode": 49,
           "version": 3
         },
-        "fields": {
-          "ThreadId": "uint",
-          "OldPriority": "byte",
-          "NewPriority": "byte",
-          "_reserved": "ushort"
-        }
+        "fields": [
+          {
+            "name": "ThreadId",
+            "datatype": "uint"
+          },
+          {
+            "name": "OldPriority",
+            "datatype": "byte"
+          },
+          {
+            "name": "NewPriority",
+            "datatype": "byte"
+          }
+        ]
       },
       "ReadyThread": {
         "descriptor": {
           "opcode": 50,
           "version": 2
         },
-        "fields": {
-          "ThreadId": "uint",
-          "AdjustReason": "sbyte",
-          "AdjustIncrement": "sbyte",
-          "Flags": "sbyte",
-          "_reserved": "sbyte"
-        }
+        "fields": [
+          {
+            "name": "ThreadId",
+            "datatype": "uint"
+          },
+          {
+            "name": "AdjustReason",
+            "datatype": "sbyte"
+          },
+          {
+            "name": "AdjustIncrement",
+            "datatype": "sbyte"
+          },
+          {
+            "name": "Flags",
+            "datatype": "sbyte"
+          }
+        ]
       },
       "SetPagePriority": {
         "descriptor": {
           "opcode": 51,
           "version": 3
         },
-        "fields": {
-          "ThreadId": "uint",
-          "OldPriority": "byte",
-          "NewPriority": "byte",
-          "_reserved": "ushort"
-        }
+        "fields": [
+          {
+            "name": "ThreadId",
+            "datatype": "uint"
+          },
+          {
+            "name": "OldPriority",
+            "datatype": "byte"
+          },
+          {
+            "name": "NewPriority",
+            "datatype": "byte"
+          }
+        ]
       },
       "SetIoPriority": {
         "descriptor": {
           "opcode": 52,
           "version": 3
         },
-        "fields": {
-          "ThreadId": "uint",
-          "OldPriority": "byte",
-          "NewPriority": "byte",
-          "_reserved": "ushort"
-        }
+        "fields": [
+          {
+            "name": "ThreadId",
+            "datatype": "uint"
+          },
+          {
+            "name": "OldPriority",
+            "datatype": "byte"
+          },
+          {
+            "name": "NewPriority",
+            "datatype": "byte"
+          }
+        ]
       },
       "ThreadAffinity": {
         "descriptor": {
           "opcode": 53,
           "version": 2
         },
-        "fields": {
-          "Affinity": "uint",
-          "ThreadId": "uint",
-          "Group": "ushort",
-          "_reserved": "ushort"
-        }
+        "fields": [
+          {
+            "name": "Affinity",
+            "datatype": "address"
+          },
+          {
+            "name": "ThreadId",
+            "datatype": "uint"
+          },
+          {
+            "name": "Group",
+            "datatype": "ushort"
+          }
+        ]
       },
       "WorkerThread": {
         "descriptor": {
           "opcode": 57,
           "version": 2
         },
-        "fields": {
-          "ThreadId": "uint",
-          "StartTime": "ulong",
-          "ThreadRoutine": "uint"
-        }
+        "fields": [
+          {
+            "name": "ThreadId",
+            "datatype": "uint"
+          },
+          {
+            "name": "StartTime",
+            "datatype": "ulong"
+          },
+          {
+            "name": "ThreadRoutine",
+            "datatype": "address"
+          }
+        ]
       },
       "AntiStarvationBoost": {
         "descriptor": {
           "opcode": 60,
           "version": 2
         },
-        "fields": {
-          "ThreadId": "uint",
-          "ProcessorIndex": "ushort",
-          "Priority": "byte",
-          "_reserved": "byte"
-        }
+        "fields": [
+          {
+            "name": "ThreadId",
+            "datatype": "uint"
+          },
+          {
+            "name": "ProcessorIndex",
+            "datatype": "ushort"
+          },
+          {
+            "name": "Priority",
+            "datatype": "byte"
+          }
+        ]
       },
       "ThreadMigration": {
         "descriptor": {
           "opcode": 61,
           "version": 2
         },
-        "fields": {
-          "ThreadId": "uint",
-          "SourceProcessorIndex": "ushort",
-          "TargetProcessorIndex": "ushort",
-          "Priority": "byte",
-          "IdealProcessorAdjust": "bool",
-          "OldIdealProcessorIndex": "ushort"
-        }
+        "fields": [
+          {
+            "name": "ThreadId",
+            "datatype": "uint"
+          },
+          {
+            "name": "SourceProcessorIndex",
+            "datatype": "ushort"
+          },
+          {
+            "name": "TargetProcessorIndex",
+            "datatype": "ushort"
+          },
+          {
+            "name": "Priority",
+            "datatype": "byte"
+          },
+          {
+            "name": "IdealProcessorAdjust",
+            "datatype": "bool"
+          },
+          {
+            "name": "OldIdealProcessorIndex",
+            "datatype": "ushort"
+          }
+        ]
       },
       "KernelQueueEnqueue": {
         "descriptor": {
           "opcode": 62,
           "version": 2
         },
-        "fields": {
-          "Entry": "uint",
-          "ThreadId": "uint"
-        }
+        "fields": [
+          {
+            "name": "Entry",
+            "datatype": "address"
+          },
+          {
+            "name": "ThreadId",
+            "datatype": "uint"
+          }
+        ]
       },
       "KernelQueueDequeue": {
         "descriptor": {
           "opcode": 63,
           "version": 2
         },
-        "fields": {
-          "ThreadId": "uint",
-          "EntryCount": "uint",
-          "Entries": "uint[...]"
-        }
+        "fields": [
+          {
+            "name": "ThreadId",
+            "datatype": "uint"
+          },
+          {
+            "name": "EntryCount",
+            "datatype": "uint"
+          },
+          {
+            "name": "Entries",
+            "datatype": "address[EntryCount]"
+          }
+        ]
       },
       "WorkerThreadStart": {
         "descriptor": {
           "opcode": 64,
           "version": 2
         },
-        "fields": {
-          "CallbackRoutine": "uint"
-        }
+        "fields": [
+          {
+            "name": "CallbackRoutine",
+            "datatype": "address"
+          }
+        ]
       },
       "WorkerThreadStop": {
         "descriptor": {
           "opcode": 65,
           "version": 2
         },
-        "fields": {
-          "CallbackRoutine": "uint"
-        }
+        "fields": [
+          {
+            "name": "CallbackRoutine",
+            "datatype": "address"
+          }
+        ]
       },
       "AutoBoostSetFloor": {
         "descriptor": {
           "opcode": 66,
           "version": 2
         },
-        "fields": {
-          "Lock": "uint",
-          "ThreadId": "uint",
-          "NewCpuPriorityFloor": "byte",
-          "OldCpuPriority": "byte",
-          "IoPriorities": "byte",
-          "BoostFlags": "byte"
-        }
+        "fields": [
+          {
+            "name": "Lock",
+            "datatype": "address"
+          },
+          {
+            "name": "ThreadId",
+            "datatype": "uint"
+          },
+          {
+            "name": "NewCpuPriorityFloor",
+            "datatype": "byte"
+          },
+          {
+            "name": "OldCpuPriority",
+            "datatype": "byte"
+          },
+          {
+            "name": "IoPriorities",
+            "datatype": "byte"
+          },
+          {
+            "name": "BoostFlags",
+            "datatype": "byte"
+          }
+        ]
       },
       "AutoBoostClearFloor": {
         "descriptor": {
           "opcode": 67,
           "version": 2
         },
-        "fields": {
-          "LockAddress": "uint",
-          "ThreadId": "uint",
-          "BoostBitmap": "uint"
-        }
+        "fields": [
+          {
+            "name": "LockAddress",
+            "datatype": "address"
+          },
+          {
+            "name": "ThreadId",
+            "datatype": "uint"
+          },
+          {
+            "name": "BoostBitmap",
+            "datatype": "uint"
+          }
+        ]
       },
       "AutoBoostEntryExhaustion": {
         "descriptor": {
           "opcode": 68,
           "version": 2
         },
-        "fields": {
-          "LockAddress": "uint",
-          "ThreadId": "uint"
-        }
+        "fields": [
+          {
+            "name": "LockAddress",
+            "datatype": "address"
+          },
+          {
+            "name": "ThreadId",
+            "datatype": "uint"
+          }
+        ]
       },
       "SubProcessTagChanged": {
         "descriptor": {
           "opcode": 69,
           "version": 2
         },
-        "fields": {
-          "OldTag": "uint",
-          "NewTag": "uint"
-        }
+        "fields": [
+          {
+            "name": "OldTag",
+            "datatype": "uint"
+          },
+          {
+            "name": "NewTag",
+            "datatype": "uint"
+          }
+        ]
       },
       "SetName": {
         "descriptor": {
           "opcode": 72,
           "version": 2
         },
-        "fields": {
-          "ProcessId": "uint",
-          "ThreadId": "uint",
-          "ThreadName": "string"
-        }
+        "fields": [
+          {
+            "name": "ProcessId",
+            "datatype": "uint"
+          },
+          {
+            "name": "ThreadId",
+            "datatype": "uint"
+          },
+          {
+            "name": "ThreadName",
+            "datatype": "string"
+          }
+        ]
       }
     }
   },
