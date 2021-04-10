@@ -537,6 +537,18 @@ namespace EtwTools
                     _count = 0;
                 }
 
+                internal static int StringLength(Span<byte> span, int offset)
+                {
+                    var start = offset;
+                    while ((offset < span.Length) && ((span[offset] != 0x00) || (span[offset + 1] != 0x00)))
+                    {
+                        offset += 2;
+                    }
+                    offset += 2;
+
+                    return offset - start;
+                }
+
                 /// <summary>
                 /// Moves to the next address.
                 /// </summary>
@@ -550,11 +562,7 @@ namespace EtwTools
                         return true;
                     }
 
-                    while ((_offset < _enumerable._buffer.Length) && ((_enumerable._buffer[_offset] != 0x00) || (_enumerable._buffer[_offset + 1] != 0x00)))
-                    {
-                        _offset += 2;
-                    }
-                    _offset += 2;
+                    _offset += StringLength(_enumerable._buffer, _offset);
                     _count++;
                     return (_offset < _enumerable._buffer.Length) && (_count <= _enumerable._count);
                 }

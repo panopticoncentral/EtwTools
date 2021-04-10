@@ -62,10 +62,11 @@ string ReturnType(string datatype) =>
         _ => "unknown"
     };
 
-string VariableSize(string datatype) =>
+string VariableSize(string datatype, string offset) =>
     datatype switch
     {
         "address" => "etwEvent.AddressSize",
+        "string" => $"EtwEvent.StringEnumerable.StringEnumerator.StringLength(etwEvent.Data, {offset})",
         _ => "unknown"
     };
 
@@ -176,7 +177,7 @@ string CreateEventFieldOffsetInitializers(Provider provider, Event e, Dictionary
         }
 
         var size = Size(f.Datatype);
-        previousSize = size == -1 ? VariableSize(f.Datatype) : size.ToString(CultureInfo.InvariantCulture);
+        previousSize = size == -1 ? VariableSize(f.Datatype, fieldName) : size.ToString(CultureInfo.InvariantCulture);
         previousField = fieldName;
     }
 
@@ -304,7 +305,7 @@ string CreateProviderEvents(Provider provider, string providerClassName, ref int
             /// <summary>
             /// Event descriptor.
             /// </summary>
-            public static EtwEventDescriptor Descriptor {{ get; }} = new EtwEventDescriptor {{ Id = {e.Descriptor.Id}, Version = {e.Descriptor.Version}, Channel = {e.Descriptor.Channel}, Level = {(e.Descriptor.Level == 0 ? string.Empty : "(EtwTraceLevel)")}{e.Descriptor.Level}, Opcode = (EtwEventType){e.Descriptor.Opcode}, Task = {e.Descriptor.Task}, Keyword = 0x{e.Descriptor.Keyword:X16} }};{processIdEvent}{threadIdEvent}{timestampEvent}{processorNumberEvent}
+            public static EtwEventDescriptor Descriptor {{ get; }} = new EtwEventDescriptor {{ Id = {e.Descriptor.Id}, Version = {e.Descriptor.Version}, Channel = {e.Descriptor.Channel}, Level = {(e.Descriptor.Level == 0 ? string.Empty : "(EtwTraceLevel)")}{e.Descriptor.Level}, Opcode = {(e.Descriptor.Opcode == 0 ? string.Empty : "(EtwEventType)")}{e.Descriptor.Opcode}, Task = {e.Descriptor.Task}, Keyword = 0x{e.Descriptor.Keyword:X16} }};{processIdEvent}{threadIdEvent}{timestampEvent}{processorNumberEvent}
 
             /// <summary>
             /// Timing information for the event.

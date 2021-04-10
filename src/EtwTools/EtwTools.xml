@@ -6997,6 +6997,1725 @@
             Provider name.
             </summary>
         </member>
+        <member name="T:EtwTools.Providers.System.Diagnostics.Eventing.FrameworkEventSourceProvider.ResourceManagerLookupStartedEvent">
+            <summary>
+            An event wrapper for a ResourceManagerLookupStarted event.
+            </summary>
+        </member>
+        <member name="F:EtwTools.Providers.System.Diagnostics.Eventing.FrameworkEventSourceProvider.ResourceManagerLookupStartedEvent.Id">
+            <summary>
+            Event ID.
+            </summary>
+        </member>
+        <member name="F:EtwTools.Providers.System.Diagnostics.Eventing.FrameworkEventSourceProvider.ResourceManagerLookupStartedEvent.Name">
+            <summary>
+            Event name.
+            </summary>
+        </member>
+        <member name="F:EtwTools.Providers.System.Diagnostics.Eventing.FrameworkEventSourceProvider.ResourceManagerLookupStartedEvent.Provider">
+            <summary>
+            The event provider.
+            </summary>
+        </member>
+        <member name="P:EtwTools.Providers.System.Diagnostics.Eventing.FrameworkEventSourceProvider.ResourceManagerLookupStartedEvent.Descriptor">
+            <summary>
+            Event descriptor.
+            </summary>
+        </member>
+        <member name="P:EtwTools.Providers.System.Diagnostics.Eventing.FrameworkEventSourceProvider.ResourceManagerLookupStartedEvent.ProcessId">
+            <summary>
+            The process the event was recorded in.
+            </summary>
+        </member>
+        <member name="P:EtwTools.Providers.System.Diagnostics.Eventing.FrameworkEventSourceProvider.ResourceManagerLookupStartedEvent.ThreadId">
+            <summary>
+            The thread the event was recorded on.
+            </summary>
+        </member>
+        <member name="P:EtwTools.Providers.System.Diagnostics.Eventing.FrameworkEventSourceProvider.ResourceManagerLookupStartedEvent.Timestamp">
+            <summary>
+            The timestamp of the event.
+            </summary>
+        </member>
+        <member name="P:EtwTools.Providers.System.Diagnostics.Eventing.FrameworkEventSourceProvider.ResourceManagerLookupStartedEvent.ProcessorNumber">
+            <summary>
+            The processor number the event was recorded on.
+            </summary>
+        </member>
+        <member name="P:EtwTools.Providers.System.Diagnostics.Eventing.FrameworkEventSourceProvider.ResourceManagerLookupStartedEvent.Time">
+            <summary>
+            Timing information for the event.
+            </summary>
+        </member>
+        <member name="P:EtwTools.Providers.System.Diagnostics.Eventing.FrameworkEventSourceProvider.ResourceManagerLookupStartedEvent.BaseName">
+            <summary>
+            Retrieves the BaseName field.
+            </summary>
+        </member>
+        <member name="P:EtwTools.Providers.System.Diagnostics.Eventing.FrameworkEventSourceProvider.ResourceManagerLookupStartedEvent.MainAssemblyName">
+            <summary>
+            Retrieves the MainAssemblyName field.
+            </summary>
+        </member>
+        <member name="P:EtwTools.Providers.System.Diagnostics.Eventing.FrameworkEventSourceProvider.ResourceManagerLookupStartedEvent.CultureName">
+            <summary>
+            Retrieves the CultureName field.
+            </summary>
+        </member>
+        <member name="M:EtwTools.Providers.System.Diagnostics.Eventing.FrameworkEventSourceProvider.ResourceManagerLookupStartedEvent.#ctor(EtwTools.EtwEvent)">
+            <summary>
+            Creates a new ResourceManagerLookupStartedEvent.
+            </summary>
+            <param name="etwEvent">The event.</param>
+        </member>
+        <member name="T:EtwTools.Providers.System.Diagnostics.Eventing.FrameworkEventSourceProvider.ResourceManagerLookingForResourceSetEvent">
+            <summary>
+            An event wrapper for a ResourceManagerLookingForResourceSet event.
+            </summary>
+        </member>
+        <member name="F:EtwTools.Providers.System.Diagnostics.Eventing.FrameworkEventSourceProvider.ResourceManagerLookingForResourceSetEvent.Id">
+            <summary>
+            Event ID.
+            </summary>
+        </member>
+        <member name="F:EtwTools.Providers.System.Diagnostics.Eventing.FrameworkEventSourceProvider.ResourceManagerLookingForResourceSetEvent.Name">
+            <summary>
+            Event name.
+            </summary>
+        </member>
+        <member name="F:EtwTools.Providers.System.Diagnostics.Eventing.FrameworkEventSourceProvider.ResourceManagerLookingForResourceSetEvent.Provider">
+            <summary>
+            The event provider.
+            </summary>
+        </member>
+        <member name="P:EtwTools.Providers.System.Diagnostics.Eventing.FrameworkEventSourceProvider.ResourceManagerLookingForResourceSetEvent.Descriptor">
+            <summary>
+            Event descriptor.
+            </summary>
+        </member>
+        <member name="P:EtwTools.Providers.System.Diagnostics.Eventing.FrameworkEventSourceProvider.ResourceManagerLookingForResourceSetEvent.ProcessId">
+            <summary>
+            The process the event was recorded in.
+            </summary>
+        </member>
+        <member name="P:EtwTools.Providers.System.Diagnostics.Eventing.FrameworkEventSourceProvider.ResourceManagerLookingForResourceSetEvent.ThreadId">
+            <summary>
+            The thread the event was recorded on.
+            </summary>
+        </member>
+        <member name="P:EtwTools.Providers.System.Diagnostics.Eventing.FrameworkEventSourceProvider.ResourceManagerLookingForResourceSetEvent.Timestamp">
+            <summary>
+            The timestamp of the event.
+            </summary>
+        </member>
+        <member name="P:EtwTools.Providers.System.Diagnostics.Eventing.FrameworkEventSourceProvider.ResourceManagerLookingForResourceSetEvent.ProcessorNumber">
+            <summary>
+            The processor number the event was recorded on.
+            </summary>
+        </member>
+        <member name="P:EtwTools.Providers.System.Diagnostics.Eventing.FrameworkEventSourceProvider.ResourceManagerLookingForResourceSetEvent.Time">
+            <summary>
+            Timing information for the event.
+            </summary>
+        </member>
+        <member name="P:EtwTools.Providers.System.Diagnostics.Eventing.FrameworkEventSourceProvider.ResourceManagerLookingForResourceSetEvent.BaseName">
+            <summary>
+            Retrieves the BaseName field.
+            </summary>
+        </member>
+        <member name="P:EtwTools.Providers.System.Diagnostics.Eventing.FrameworkEventSourceProvider.ResourceManagerLookingForResourceSetEvent.MainAssemblyName">
+            <summary>
+            Retrieves the MainAssemblyName field.
+            </summary>
+        </member>
+        <member name="P:EtwTools.Providers.System.Diagnostics.Eventing.FrameworkEventSourceProvider.ResourceManagerLookingForResourceSetEvent.CultureName">
+            <summary>
+            Retrieves the CultureName field.
+            </summary>
+        </member>
+        <member name="M:EtwTools.Providers.System.Diagnostics.Eventing.FrameworkEventSourceProvider.ResourceManagerLookingForResourceSetEvent.#ctor(EtwTools.EtwEvent)">
+            <summary>
+            Creates a new ResourceManagerLookingForResourceSetEvent.
+            </summary>
+            <param name="etwEvent">The event.</param>
+        </member>
+        <member name="T:EtwTools.Providers.System.Diagnostics.Eventing.FrameworkEventSourceProvider.ResourceManagerFoundResourceSetInCacheEvent">
+            <summary>
+            An event wrapper for a ResourceManagerFoundResourceSetInCache event.
+            </summary>
+        </member>
+        <member name="F:EtwTools.Providers.System.Diagnostics.Eventing.FrameworkEventSourceProvider.ResourceManagerFoundResourceSetInCacheEvent.Id">
+            <summary>
+            Event ID.
+            </summary>
+        </member>
+        <member name="F:EtwTools.Providers.System.Diagnostics.Eventing.FrameworkEventSourceProvider.ResourceManagerFoundResourceSetInCacheEvent.Name">
+            <summary>
+            Event name.
+            </summary>
+        </member>
+        <member name="F:EtwTools.Providers.System.Diagnostics.Eventing.FrameworkEventSourceProvider.ResourceManagerFoundResourceSetInCacheEvent.Provider">
+            <summary>
+            The event provider.
+            </summary>
+        </member>
+        <member name="P:EtwTools.Providers.System.Diagnostics.Eventing.FrameworkEventSourceProvider.ResourceManagerFoundResourceSetInCacheEvent.Descriptor">
+            <summary>
+            Event descriptor.
+            </summary>
+        </member>
+        <member name="P:EtwTools.Providers.System.Diagnostics.Eventing.FrameworkEventSourceProvider.ResourceManagerFoundResourceSetInCacheEvent.ProcessId">
+            <summary>
+            The process the event was recorded in.
+            </summary>
+        </member>
+        <member name="P:EtwTools.Providers.System.Diagnostics.Eventing.FrameworkEventSourceProvider.ResourceManagerFoundResourceSetInCacheEvent.ThreadId">
+            <summary>
+            The thread the event was recorded on.
+            </summary>
+        </member>
+        <member name="P:EtwTools.Providers.System.Diagnostics.Eventing.FrameworkEventSourceProvider.ResourceManagerFoundResourceSetInCacheEvent.Timestamp">
+            <summary>
+            The timestamp of the event.
+            </summary>
+        </member>
+        <member name="P:EtwTools.Providers.System.Diagnostics.Eventing.FrameworkEventSourceProvider.ResourceManagerFoundResourceSetInCacheEvent.ProcessorNumber">
+            <summary>
+            The processor number the event was recorded on.
+            </summary>
+        </member>
+        <member name="P:EtwTools.Providers.System.Diagnostics.Eventing.FrameworkEventSourceProvider.ResourceManagerFoundResourceSetInCacheEvent.Time">
+            <summary>
+            Timing information for the event.
+            </summary>
+        </member>
+        <member name="P:EtwTools.Providers.System.Diagnostics.Eventing.FrameworkEventSourceProvider.ResourceManagerFoundResourceSetInCacheEvent.BaseName">
+            <summary>
+            Retrieves the BaseName field.
+            </summary>
+        </member>
+        <member name="P:EtwTools.Providers.System.Diagnostics.Eventing.FrameworkEventSourceProvider.ResourceManagerFoundResourceSetInCacheEvent.MainAssemblyName">
+            <summary>
+            Retrieves the MainAssemblyName field.
+            </summary>
+        </member>
+        <member name="P:EtwTools.Providers.System.Diagnostics.Eventing.FrameworkEventSourceProvider.ResourceManagerFoundResourceSetInCacheEvent.CultureName">
+            <summary>
+            Retrieves the CultureName field.
+            </summary>
+        </member>
+        <member name="M:EtwTools.Providers.System.Diagnostics.Eventing.FrameworkEventSourceProvider.ResourceManagerFoundResourceSetInCacheEvent.#ctor(EtwTools.EtwEvent)">
+            <summary>
+            Creates a new ResourceManagerFoundResourceSetInCacheEvent.
+            </summary>
+            <param name="etwEvent">The event.</param>
+        </member>
+        <member name="T:EtwTools.Providers.System.Diagnostics.Eventing.FrameworkEventSourceProvider.ResourceManagerFoundResourceSetInCacheUnexpectedEvent">
+            <summary>
+            An event wrapper for a ResourceManagerFoundResourceSetInCacheUnexpected event.
+            </summary>
+        </member>
+        <member name="F:EtwTools.Providers.System.Diagnostics.Eventing.FrameworkEventSourceProvider.ResourceManagerFoundResourceSetInCacheUnexpectedEvent.Id">
+            <summary>
+            Event ID.
+            </summary>
+        </member>
+        <member name="F:EtwTools.Providers.System.Diagnostics.Eventing.FrameworkEventSourceProvider.ResourceManagerFoundResourceSetInCacheUnexpectedEvent.Name">
+            <summary>
+            Event name.
+            </summary>
+        </member>
+        <member name="F:EtwTools.Providers.System.Diagnostics.Eventing.FrameworkEventSourceProvider.ResourceManagerFoundResourceSetInCacheUnexpectedEvent.Provider">
+            <summary>
+            The event provider.
+            </summary>
+        </member>
+        <member name="P:EtwTools.Providers.System.Diagnostics.Eventing.FrameworkEventSourceProvider.ResourceManagerFoundResourceSetInCacheUnexpectedEvent.Descriptor">
+            <summary>
+            Event descriptor.
+            </summary>
+        </member>
+        <member name="P:EtwTools.Providers.System.Diagnostics.Eventing.FrameworkEventSourceProvider.ResourceManagerFoundResourceSetInCacheUnexpectedEvent.ProcessId">
+            <summary>
+            The process the event was recorded in.
+            </summary>
+        </member>
+        <member name="P:EtwTools.Providers.System.Diagnostics.Eventing.FrameworkEventSourceProvider.ResourceManagerFoundResourceSetInCacheUnexpectedEvent.ThreadId">
+            <summary>
+            The thread the event was recorded on.
+            </summary>
+        </member>
+        <member name="P:EtwTools.Providers.System.Diagnostics.Eventing.FrameworkEventSourceProvider.ResourceManagerFoundResourceSetInCacheUnexpectedEvent.Timestamp">
+            <summary>
+            The timestamp of the event.
+            </summary>
+        </member>
+        <member name="P:EtwTools.Providers.System.Diagnostics.Eventing.FrameworkEventSourceProvider.ResourceManagerFoundResourceSetInCacheUnexpectedEvent.ProcessorNumber">
+            <summary>
+            The processor number the event was recorded on.
+            </summary>
+        </member>
+        <member name="P:EtwTools.Providers.System.Diagnostics.Eventing.FrameworkEventSourceProvider.ResourceManagerFoundResourceSetInCacheUnexpectedEvent.Time">
+            <summary>
+            Timing information for the event.
+            </summary>
+        </member>
+        <member name="P:EtwTools.Providers.System.Diagnostics.Eventing.FrameworkEventSourceProvider.ResourceManagerFoundResourceSetInCacheUnexpectedEvent.BaseName">
+            <summary>
+            Retrieves the BaseName field.
+            </summary>
+        </member>
+        <member name="P:EtwTools.Providers.System.Diagnostics.Eventing.FrameworkEventSourceProvider.ResourceManagerFoundResourceSetInCacheUnexpectedEvent.MainAssemblyName">
+            <summary>
+            Retrieves the MainAssemblyName field.
+            </summary>
+        </member>
+        <member name="P:EtwTools.Providers.System.Diagnostics.Eventing.FrameworkEventSourceProvider.ResourceManagerFoundResourceSetInCacheUnexpectedEvent.CultureName">
+            <summary>
+            Retrieves the CultureName field.
+            </summary>
+        </member>
+        <member name="M:EtwTools.Providers.System.Diagnostics.Eventing.FrameworkEventSourceProvider.ResourceManagerFoundResourceSetInCacheUnexpectedEvent.#ctor(EtwTools.EtwEvent)">
+            <summary>
+            Creates a new ResourceManagerFoundResourceSetInCacheUnexpectedEvent.
+            </summary>
+            <param name="etwEvent">The event.</param>
+        </member>
+        <member name="T:EtwTools.Providers.System.Diagnostics.Eventing.FrameworkEventSourceProvider.ResourceManagerStreamFoundEvent">
+            <summary>
+            An event wrapper for a ResourceManagerStreamFound event.
+            </summary>
+        </member>
+        <member name="F:EtwTools.Providers.System.Diagnostics.Eventing.FrameworkEventSourceProvider.ResourceManagerStreamFoundEvent.Id">
+            <summary>
+            Event ID.
+            </summary>
+        </member>
+        <member name="F:EtwTools.Providers.System.Diagnostics.Eventing.FrameworkEventSourceProvider.ResourceManagerStreamFoundEvent.Name">
+            <summary>
+            Event name.
+            </summary>
+        </member>
+        <member name="F:EtwTools.Providers.System.Diagnostics.Eventing.FrameworkEventSourceProvider.ResourceManagerStreamFoundEvent.Provider">
+            <summary>
+            The event provider.
+            </summary>
+        </member>
+        <member name="P:EtwTools.Providers.System.Diagnostics.Eventing.FrameworkEventSourceProvider.ResourceManagerStreamFoundEvent.Descriptor">
+            <summary>
+            Event descriptor.
+            </summary>
+        </member>
+        <member name="P:EtwTools.Providers.System.Diagnostics.Eventing.FrameworkEventSourceProvider.ResourceManagerStreamFoundEvent.ProcessId">
+            <summary>
+            The process the event was recorded in.
+            </summary>
+        </member>
+        <member name="P:EtwTools.Providers.System.Diagnostics.Eventing.FrameworkEventSourceProvider.ResourceManagerStreamFoundEvent.ThreadId">
+            <summary>
+            The thread the event was recorded on.
+            </summary>
+        </member>
+        <member name="P:EtwTools.Providers.System.Diagnostics.Eventing.FrameworkEventSourceProvider.ResourceManagerStreamFoundEvent.Timestamp">
+            <summary>
+            The timestamp of the event.
+            </summary>
+        </member>
+        <member name="P:EtwTools.Providers.System.Diagnostics.Eventing.FrameworkEventSourceProvider.ResourceManagerStreamFoundEvent.ProcessorNumber">
+            <summary>
+            The processor number the event was recorded on.
+            </summary>
+        </member>
+        <member name="P:EtwTools.Providers.System.Diagnostics.Eventing.FrameworkEventSourceProvider.ResourceManagerStreamFoundEvent.Time">
+            <summary>
+            Timing information for the event.
+            </summary>
+        </member>
+        <member name="P:EtwTools.Providers.System.Diagnostics.Eventing.FrameworkEventSourceProvider.ResourceManagerStreamFoundEvent.BaseName">
+            <summary>
+            Retrieves the BaseName field.
+            </summary>
+        </member>
+        <member name="P:EtwTools.Providers.System.Diagnostics.Eventing.FrameworkEventSourceProvider.ResourceManagerStreamFoundEvent.MainAssemblyName">
+            <summary>
+            Retrieves the MainAssemblyName field.
+            </summary>
+        </member>
+        <member name="P:EtwTools.Providers.System.Diagnostics.Eventing.FrameworkEventSourceProvider.ResourceManagerStreamFoundEvent.CultureName">
+            <summary>
+            Retrieves the CultureName field.
+            </summary>
+        </member>
+        <member name="P:EtwTools.Providers.System.Diagnostics.Eventing.FrameworkEventSourceProvider.ResourceManagerStreamFoundEvent.LoadedAssemblyName">
+            <summary>
+            Retrieves the LoadedAssemblyName field.
+            </summary>
+        </member>
+        <member name="P:EtwTools.Providers.System.Diagnostics.Eventing.FrameworkEventSourceProvider.ResourceManagerStreamFoundEvent.ResourceFileName">
+            <summary>
+            Retrieves the ResourceFileName field.
+            </summary>
+        </member>
+        <member name="M:EtwTools.Providers.System.Diagnostics.Eventing.FrameworkEventSourceProvider.ResourceManagerStreamFoundEvent.#ctor(EtwTools.EtwEvent)">
+            <summary>
+            Creates a new ResourceManagerStreamFoundEvent.
+            </summary>
+            <param name="etwEvent">The event.</param>
+        </member>
+        <member name="T:EtwTools.Providers.System.Diagnostics.Eventing.FrameworkEventSourceProvider.ResourceManagerStreamNotFoundEvent">
+            <summary>
+            An event wrapper for a ResourceManagerStreamNotFound event.
+            </summary>
+        </member>
+        <member name="F:EtwTools.Providers.System.Diagnostics.Eventing.FrameworkEventSourceProvider.ResourceManagerStreamNotFoundEvent.Id">
+            <summary>
+            Event ID.
+            </summary>
+        </member>
+        <member name="F:EtwTools.Providers.System.Diagnostics.Eventing.FrameworkEventSourceProvider.ResourceManagerStreamNotFoundEvent.Name">
+            <summary>
+            Event name.
+            </summary>
+        </member>
+        <member name="F:EtwTools.Providers.System.Diagnostics.Eventing.FrameworkEventSourceProvider.ResourceManagerStreamNotFoundEvent.Provider">
+            <summary>
+            The event provider.
+            </summary>
+        </member>
+        <member name="P:EtwTools.Providers.System.Diagnostics.Eventing.FrameworkEventSourceProvider.ResourceManagerStreamNotFoundEvent.Descriptor">
+            <summary>
+            Event descriptor.
+            </summary>
+        </member>
+        <member name="P:EtwTools.Providers.System.Diagnostics.Eventing.FrameworkEventSourceProvider.ResourceManagerStreamNotFoundEvent.ProcessId">
+            <summary>
+            The process the event was recorded in.
+            </summary>
+        </member>
+        <member name="P:EtwTools.Providers.System.Diagnostics.Eventing.FrameworkEventSourceProvider.ResourceManagerStreamNotFoundEvent.ThreadId">
+            <summary>
+            The thread the event was recorded on.
+            </summary>
+        </member>
+        <member name="P:EtwTools.Providers.System.Diagnostics.Eventing.FrameworkEventSourceProvider.ResourceManagerStreamNotFoundEvent.Timestamp">
+            <summary>
+            The timestamp of the event.
+            </summary>
+        </member>
+        <member name="P:EtwTools.Providers.System.Diagnostics.Eventing.FrameworkEventSourceProvider.ResourceManagerStreamNotFoundEvent.ProcessorNumber">
+            <summary>
+            The processor number the event was recorded on.
+            </summary>
+        </member>
+        <member name="P:EtwTools.Providers.System.Diagnostics.Eventing.FrameworkEventSourceProvider.ResourceManagerStreamNotFoundEvent.Time">
+            <summary>
+            Timing information for the event.
+            </summary>
+        </member>
+        <member name="P:EtwTools.Providers.System.Diagnostics.Eventing.FrameworkEventSourceProvider.ResourceManagerStreamNotFoundEvent.BaseName">
+            <summary>
+            Retrieves the BaseName field.
+            </summary>
+        </member>
+        <member name="P:EtwTools.Providers.System.Diagnostics.Eventing.FrameworkEventSourceProvider.ResourceManagerStreamNotFoundEvent.MainAssemblyName">
+            <summary>
+            Retrieves the MainAssemblyName field.
+            </summary>
+        </member>
+        <member name="P:EtwTools.Providers.System.Diagnostics.Eventing.FrameworkEventSourceProvider.ResourceManagerStreamNotFoundEvent.CultureName">
+            <summary>
+            Retrieves the CultureName field.
+            </summary>
+        </member>
+        <member name="P:EtwTools.Providers.System.Diagnostics.Eventing.FrameworkEventSourceProvider.ResourceManagerStreamNotFoundEvent.LoadedAssemblyName">
+            <summary>
+            Retrieves the LoadedAssemblyName field.
+            </summary>
+        </member>
+        <member name="P:EtwTools.Providers.System.Diagnostics.Eventing.FrameworkEventSourceProvider.ResourceManagerStreamNotFoundEvent.ResourceFileName">
+            <summary>
+            Retrieves the ResourceFileName field.
+            </summary>
+        </member>
+        <member name="M:EtwTools.Providers.System.Diagnostics.Eventing.FrameworkEventSourceProvider.ResourceManagerStreamNotFoundEvent.#ctor(EtwTools.EtwEvent)">
+            <summary>
+            Creates a new ResourceManagerStreamNotFoundEvent.
+            </summary>
+            <param name="etwEvent">The event.</param>
+        </member>
+        <member name="T:EtwTools.Providers.System.Diagnostics.Eventing.FrameworkEventSourceProvider.ResourceManagerGetSatelliteAssemblySucceededEvent">
+            <summary>
+            An event wrapper for a ResourceManagerGetSatelliteAssemblySucceeded event.
+            </summary>
+        </member>
+        <member name="F:EtwTools.Providers.System.Diagnostics.Eventing.FrameworkEventSourceProvider.ResourceManagerGetSatelliteAssemblySucceededEvent.Id">
+            <summary>
+            Event ID.
+            </summary>
+        </member>
+        <member name="F:EtwTools.Providers.System.Diagnostics.Eventing.FrameworkEventSourceProvider.ResourceManagerGetSatelliteAssemblySucceededEvent.Name">
+            <summary>
+            Event name.
+            </summary>
+        </member>
+        <member name="F:EtwTools.Providers.System.Diagnostics.Eventing.FrameworkEventSourceProvider.ResourceManagerGetSatelliteAssemblySucceededEvent.Provider">
+            <summary>
+            The event provider.
+            </summary>
+        </member>
+        <member name="P:EtwTools.Providers.System.Diagnostics.Eventing.FrameworkEventSourceProvider.ResourceManagerGetSatelliteAssemblySucceededEvent.Descriptor">
+            <summary>
+            Event descriptor.
+            </summary>
+        </member>
+        <member name="P:EtwTools.Providers.System.Diagnostics.Eventing.FrameworkEventSourceProvider.ResourceManagerGetSatelliteAssemblySucceededEvent.ProcessId">
+            <summary>
+            The process the event was recorded in.
+            </summary>
+        </member>
+        <member name="P:EtwTools.Providers.System.Diagnostics.Eventing.FrameworkEventSourceProvider.ResourceManagerGetSatelliteAssemblySucceededEvent.ThreadId">
+            <summary>
+            The thread the event was recorded on.
+            </summary>
+        </member>
+        <member name="P:EtwTools.Providers.System.Diagnostics.Eventing.FrameworkEventSourceProvider.ResourceManagerGetSatelliteAssemblySucceededEvent.Timestamp">
+            <summary>
+            The timestamp of the event.
+            </summary>
+        </member>
+        <member name="P:EtwTools.Providers.System.Diagnostics.Eventing.FrameworkEventSourceProvider.ResourceManagerGetSatelliteAssemblySucceededEvent.ProcessorNumber">
+            <summary>
+            The processor number the event was recorded on.
+            </summary>
+        </member>
+        <member name="P:EtwTools.Providers.System.Diagnostics.Eventing.FrameworkEventSourceProvider.ResourceManagerGetSatelliteAssemblySucceededEvent.Time">
+            <summary>
+            Timing information for the event.
+            </summary>
+        </member>
+        <member name="P:EtwTools.Providers.System.Diagnostics.Eventing.FrameworkEventSourceProvider.ResourceManagerGetSatelliteAssemblySucceededEvent.BaseName">
+            <summary>
+            Retrieves the BaseName field.
+            </summary>
+        </member>
+        <member name="P:EtwTools.Providers.System.Diagnostics.Eventing.FrameworkEventSourceProvider.ResourceManagerGetSatelliteAssemblySucceededEvent.MainAssemblyName">
+            <summary>
+            Retrieves the MainAssemblyName field.
+            </summary>
+        </member>
+        <member name="P:EtwTools.Providers.System.Diagnostics.Eventing.FrameworkEventSourceProvider.ResourceManagerGetSatelliteAssemblySucceededEvent.CultureName">
+            <summary>
+            Retrieves the CultureName field.
+            </summary>
+        </member>
+        <member name="P:EtwTools.Providers.System.Diagnostics.Eventing.FrameworkEventSourceProvider.ResourceManagerGetSatelliteAssemblySucceededEvent.AssemblyName">
+            <summary>
+            Retrieves the AssemblyName field.
+            </summary>
+        </member>
+        <member name="M:EtwTools.Providers.System.Diagnostics.Eventing.FrameworkEventSourceProvider.ResourceManagerGetSatelliteAssemblySucceededEvent.#ctor(EtwTools.EtwEvent)">
+            <summary>
+            Creates a new ResourceManagerGetSatelliteAssemblySucceededEvent.
+            </summary>
+            <param name="etwEvent">The event.</param>
+        </member>
+        <member name="T:EtwTools.Providers.System.Diagnostics.Eventing.FrameworkEventSourceProvider.ResourceManagerGetSatelliteAssemblyFailedEvent">
+            <summary>
+            An event wrapper for a ResourceManagerGetSatelliteAssemblyFailed event.
+            </summary>
+        </member>
+        <member name="F:EtwTools.Providers.System.Diagnostics.Eventing.FrameworkEventSourceProvider.ResourceManagerGetSatelliteAssemblyFailedEvent.Id">
+            <summary>
+            Event ID.
+            </summary>
+        </member>
+        <member name="F:EtwTools.Providers.System.Diagnostics.Eventing.FrameworkEventSourceProvider.ResourceManagerGetSatelliteAssemblyFailedEvent.Name">
+            <summary>
+            Event name.
+            </summary>
+        </member>
+        <member name="F:EtwTools.Providers.System.Diagnostics.Eventing.FrameworkEventSourceProvider.ResourceManagerGetSatelliteAssemblyFailedEvent.Provider">
+            <summary>
+            The event provider.
+            </summary>
+        </member>
+        <member name="P:EtwTools.Providers.System.Diagnostics.Eventing.FrameworkEventSourceProvider.ResourceManagerGetSatelliteAssemblyFailedEvent.Descriptor">
+            <summary>
+            Event descriptor.
+            </summary>
+        </member>
+        <member name="P:EtwTools.Providers.System.Diagnostics.Eventing.FrameworkEventSourceProvider.ResourceManagerGetSatelliteAssemblyFailedEvent.ProcessId">
+            <summary>
+            The process the event was recorded in.
+            </summary>
+        </member>
+        <member name="P:EtwTools.Providers.System.Diagnostics.Eventing.FrameworkEventSourceProvider.ResourceManagerGetSatelliteAssemblyFailedEvent.ThreadId">
+            <summary>
+            The thread the event was recorded on.
+            </summary>
+        </member>
+        <member name="P:EtwTools.Providers.System.Diagnostics.Eventing.FrameworkEventSourceProvider.ResourceManagerGetSatelliteAssemblyFailedEvent.Timestamp">
+            <summary>
+            The timestamp of the event.
+            </summary>
+        </member>
+        <member name="P:EtwTools.Providers.System.Diagnostics.Eventing.FrameworkEventSourceProvider.ResourceManagerGetSatelliteAssemblyFailedEvent.ProcessorNumber">
+            <summary>
+            The processor number the event was recorded on.
+            </summary>
+        </member>
+        <member name="P:EtwTools.Providers.System.Diagnostics.Eventing.FrameworkEventSourceProvider.ResourceManagerGetSatelliteAssemblyFailedEvent.Time">
+            <summary>
+            Timing information for the event.
+            </summary>
+        </member>
+        <member name="P:EtwTools.Providers.System.Diagnostics.Eventing.FrameworkEventSourceProvider.ResourceManagerGetSatelliteAssemblyFailedEvent.BaseName">
+            <summary>
+            Retrieves the BaseName field.
+            </summary>
+        </member>
+        <member name="P:EtwTools.Providers.System.Diagnostics.Eventing.FrameworkEventSourceProvider.ResourceManagerGetSatelliteAssemblyFailedEvent.MainAssemblyName">
+            <summary>
+            Retrieves the MainAssemblyName field.
+            </summary>
+        </member>
+        <member name="P:EtwTools.Providers.System.Diagnostics.Eventing.FrameworkEventSourceProvider.ResourceManagerGetSatelliteAssemblyFailedEvent.CultureName">
+            <summary>
+            Retrieves the CultureName field.
+            </summary>
+        </member>
+        <member name="P:EtwTools.Providers.System.Diagnostics.Eventing.FrameworkEventSourceProvider.ResourceManagerGetSatelliteAssemblyFailedEvent.AssemblyName">
+            <summary>
+            Retrieves the AssemblyName field.
+            </summary>
+        </member>
+        <member name="M:EtwTools.Providers.System.Diagnostics.Eventing.FrameworkEventSourceProvider.ResourceManagerGetSatelliteAssemblyFailedEvent.#ctor(EtwTools.EtwEvent)">
+            <summary>
+            Creates a new ResourceManagerGetSatelliteAssemblyFailedEvent.
+            </summary>
+            <param name="etwEvent">The event.</param>
+        </member>
+        <member name="T:EtwTools.Providers.System.Diagnostics.Eventing.FrameworkEventSourceProvider.ResourceManagerCaseInsensitiveResourceStreamLookupSucceededEvent">
+            <summary>
+            An event wrapper for a ResourceManagerCaseInsensitiveResourceStreamLookupSucceeded event.
+            </summary>
+        </member>
+        <member name="F:EtwTools.Providers.System.Diagnostics.Eventing.FrameworkEventSourceProvider.ResourceManagerCaseInsensitiveResourceStreamLookupSucceededEvent.Id">
+            <summary>
+            Event ID.
+            </summary>
+        </member>
+        <member name="F:EtwTools.Providers.System.Diagnostics.Eventing.FrameworkEventSourceProvider.ResourceManagerCaseInsensitiveResourceStreamLookupSucceededEvent.Name">
+            <summary>
+            Event name.
+            </summary>
+        </member>
+        <member name="F:EtwTools.Providers.System.Diagnostics.Eventing.FrameworkEventSourceProvider.ResourceManagerCaseInsensitiveResourceStreamLookupSucceededEvent.Provider">
+            <summary>
+            The event provider.
+            </summary>
+        </member>
+        <member name="P:EtwTools.Providers.System.Diagnostics.Eventing.FrameworkEventSourceProvider.ResourceManagerCaseInsensitiveResourceStreamLookupSucceededEvent.Descriptor">
+            <summary>
+            Event descriptor.
+            </summary>
+        </member>
+        <member name="P:EtwTools.Providers.System.Diagnostics.Eventing.FrameworkEventSourceProvider.ResourceManagerCaseInsensitiveResourceStreamLookupSucceededEvent.ProcessId">
+            <summary>
+            The process the event was recorded in.
+            </summary>
+        </member>
+        <member name="P:EtwTools.Providers.System.Diagnostics.Eventing.FrameworkEventSourceProvider.ResourceManagerCaseInsensitiveResourceStreamLookupSucceededEvent.ThreadId">
+            <summary>
+            The thread the event was recorded on.
+            </summary>
+        </member>
+        <member name="P:EtwTools.Providers.System.Diagnostics.Eventing.FrameworkEventSourceProvider.ResourceManagerCaseInsensitiveResourceStreamLookupSucceededEvent.Timestamp">
+            <summary>
+            The timestamp of the event.
+            </summary>
+        </member>
+        <member name="P:EtwTools.Providers.System.Diagnostics.Eventing.FrameworkEventSourceProvider.ResourceManagerCaseInsensitiveResourceStreamLookupSucceededEvent.ProcessorNumber">
+            <summary>
+            The processor number the event was recorded on.
+            </summary>
+        </member>
+        <member name="P:EtwTools.Providers.System.Diagnostics.Eventing.FrameworkEventSourceProvider.ResourceManagerCaseInsensitiveResourceStreamLookupSucceededEvent.Time">
+            <summary>
+            Timing information for the event.
+            </summary>
+        </member>
+        <member name="P:EtwTools.Providers.System.Diagnostics.Eventing.FrameworkEventSourceProvider.ResourceManagerCaseInsensitiveResourceStreamLookupSucceededEvent.BaseName">
+            <summary>
+            Retrieves the BaseName field.
+            </summary>
+        </member>
+        <member name="P:EtwTools.Providers.System.Diagnostics.Eventing.FrameworkEventSourceProvider.ResourceManagerCaseInsensitiveResourceStreamLookupSucceededEvent.MainAssemblyName">
+            <summary>
+            Retrieves the MainAssemblyName field.
+            </summary>
+        </member>
+        <member name="P:EtwTools.Providers.System.Diagnostics.Eventing.FrameworkEventSourceProvider.ResourceManagerCaseInsensitiveResourceStreamLookupSucceededEvent.AssemblyName">
+            <summary>
+            Retrieves the AssemblyName field.
+            </summary>
+        </member>
+        <member name="P:EtwTools.Providers.System.Diagnostics.Eventing.FrameworkEventSourceProvider.ResourceManagerCaseInsensitiveResourceStreamLookupSucceededEvent.ResourceFileName">
+            <summary>
+            Retrieves the ResourceFileName field.
+            </summary>
+        </member>
+        <member name="M:EtwTools.Providers.System.Diagnostics.Eventing.FrameworkEventSourceProvider.ResourceManagerCaseInsensitiveResourceStreamLookupSucceededEvent.#ctor(EtwTools.EtwEvent)">
+            <summary>
+            Creates a new ResourceManagerCaseInsensitiveResourceStreamLookupSucceededEvent.
+            </summary>
+            <param name="etwEvent">The event.</param>
+        </member>
+        <member name="T:EtwTools.Providers.System.Diagnostics.Eventing.FrameworkEventSourceProvider.ResourceManagerCaseInsensitiveResourceStreamLookupFailedEvent">
+            <summary>
+            An event wrapper for a ResourceManagerCaseInsensitiveResourceStreamLookupFailed event.
+            </summary>
+        </member>
+        <member name="F:EtwTools.Providers.System.Diagnostics.Eventing.FrameworkEventSourceProvider.ResourceManagerCaseInsensitiveResourceStreamLookupFailedEvent.Id">
+            <summary>
+            Event ID.
+            </summary>
+        </member>
+        <member name="F:EtwTools.Providers.System.Diagnostics.Eventing.FrameworkEventSourceProvider.ResourceManagerCaseInsensitiveResourceStreamLookupFailedEvent.Name">
+            <summary>
+            Event name.
+            </summary>
+        </member>
+        <member name="F:EtwTools.Providers.System.Diagnostics.Eventing.FrameworkEventSourceProvider.ResourceManagerCaseInsensitiveResourceStreamLookupFailedEvent.Provider">
+            <summary>
+            The event provider.
+            </summary>
+        </member>
+        <member name="P:EtwTools.Providers.System.Diagnostics.Eventing.FrameworkEventSourceProvider.ResourceManagerCaseInsensitiveResourceStreamLookupFailedEvent.Descriptor">
+            <summary>
+            Event descriptor.
+            </summary>
+        </member>
+        <member name="P:EtwTools.Providers.System.Diagnostics.Eventing.FrameworkEventSourceProvider.ResourceManagerCaseInsensitiveResourceStreamLookupFailedEvent.ProcessId">
+            <summary>
+            The process the event was recorded in.
+            </summary>
+        </member>
+        <member name="P:EtwTools.Providers.System.Diagnostics.Eventing.FrameworkEventSourceProvider.ResourceManagerCaseInsensitiveResourceStreamLookupFailedEvent.ThreadId">
+            <summary>
+            The thread the event was recorded on.
+            </summary>
+        </member>
+        <member name="P:EtwTools.Providers.System.Diagnostics.Eventing.FrameworkEventSourceProvider.ResourceManagerCaseInsensitiveResourceStreamLookupFailedEvent.Timestamp">
+            <summary>
+            The timestamp of the event.
+            </summary>
+        </member>
+        <member name="P:EtwTools.Providers.System.Diagnostics.Eventing.FrameworkEventSourceProvider.ResourceManagerCaseInsensitiveResourceStreamLookupFailedEvent.ProcessorNumber">
+            <summary>
+            The processor number the event was recorded on.
+            </summary>
+        </member>
+        <member name="P:EtwTools.Providers.System.Diagnostics.Eventing.FrameworkEventSourceProvider.ResourceManagerCaseInsensitiveResourceStreamLookupFailedEvent.Time">
+            <summary>
+            Timing information for the event.
+            </summary>
+        </member>
+        <member name="P:EtwTools.Providers.System.Diagnostics.Eventing.FrameworkEventSourceProvider.ResourceManagerCaseInsensitiveResourceStreamLookupFailedEvent.BaseName">
+            <summary>
+            Retrieves the BaseName field.
+            </summary>
+        </member>
+        <member name="P:EtwTools.Providers.System.Diagnostics.Eventing.FrameworkEventSourceProvider.ResourceManagerCaseInsensitiveResourceStreamLookupFailedEvent.MainAssemblyName">
+            <summary>
+            Retrieves the MainAssemblyName field.
+            </summary>
+        </member>
+        <member name="P:EtwTools.Providers.System.Diagnostics.Eventing.FrameworkEventSourceProvider.ResourceManagerCaseInsensitiveResourceStreamLookupFailedEvent.AssemblyName">
+            <summary>
+            Retrieves the AssemblyName field.
+            </summary>
+        </member>
+        <member name="P:EtwTools.Providers.System.Diagnostics.Eventing.FrameworkEventSourceProvider.ResourceManagerCaseInsensitiveResourceStreamLookupFailedEvent.ResourceFileName">
+            <summary>
+            Retrieves the ResourceFileName field.
+            </summary>
+        </member>
+        <member name="M:EtwTools.Providers.System.Diagnostics.Eventing.FrameworkEventSourceProvider.ResourceManagerCaseInsensitiveResourceStreamLookupFailedEvent.#ctor(EtwTools.EtwEvent)">
+            <summary>
+            Creates a new ResourceManagerCaseInsensitiveResourceStreamLookupFailedEvent.
+            </summary>
+            <param name="etwEvent">The event.</param>
+        </member>
+        <member name="T:EtwTools.Providers.System.Diagnostics.Eventing.FrameworkEventSourceProvider.ResourceManagerManifestResourceAccessDeniedEvent">
+            <summary>
+            An event wrapper for a ResourceManagerManifestResourceAccessDenied event.
+            </summary>
+        </member>
+        <member name="F:EtwTools.Providers.System.Diagnostics.Eventing.FrameworkEventSourceProvider.ResourceManagerManifestResourceAccessDeniedEvent.Id">
+            <summary>
+            Event ID.
+            </summary>
+        </member>
+        <member name="F:EtwTools.Providers.System.Diagnostics.Eventing.FrameworkEventSourceProvider.ResourceManagerManifestResourceAccessDeniedEvent.Name">
+            <summary>
+            Event name.
+            </summary>
+        </member>
+        <member name="F:EtwTools.Providers.System.Diagnostics.Eventing.FrameworkEventSourceProvider.ResourceManagerManifestResourceAccessDeniedEvent.Provider">
+            <summary>
+            The event provider.
+            </summary>
+        </member>
+        <member name="P:EtwTools.Providers.System.Diagnostics.Eventing.FrameworkEventSourceProvider.ResourceManagerManifestResourceAccessDeniedEvent.Descriptor">
+            <summary>
+            Event descriptor.
+            </summary>
+        </member>
+        <member name="P:EtwTools.Providers.System.Diagnostics.Eventing.FrameworkEventSourceProvider.ResourceManagerManifestResourceAccessDeniedEvent.ProcessId">
+            <summary>
+            The process the event was recorded in.
+            </summary>
+        </member>
+        <member name="P:EtwTools.Providers.System.Diagnostics.Eventing.FrameworkEventSourceProvider.ResourceManagerManifestResourceAccessDeniedEvent.ThreadId">
+            <summary>
+            The thread the event was recorded on.
+            </summary>
+        </member>
+        <member name="P:EtwTools.Providers.System.Diagnostics.Eventing.FrameworkEventSourceProvider.ResourceManagerManifestResourceAccessDeniedEvent.Timestamp">
+            <summary>
+            The timestamp of the event.
+            </summary>
+        </member>
+        <member name="P:EtwTools.Providers.System.Diagnostics.Eventing.FrameworkEventSourceProvider.ResourceManagerManifestResourceAccessDeniedEvent.ProcessorNumber">
+            <summary>
+            The processor number the event was recorded on.
+            </summary>
+        </member>
+        <member name="P:EtwTools.Providers.System.Diagnostics.Eventing.FrameworkEventSourceProvider.ResourceManagerManifestResourceAccessDeniedEvent.Time">
+            <summary>
+            Timing information for the event.
+            </summary>
+        </member>
+        <member name="P:EtwTools.Providers.System.Diagnostics.Eventing.FrameworkEventSourceProvider.ResourceManagerManifestResourceAccessDeniedEvent.BaseName">
+            <summary>
+            Retrieves the BaseName field.
+            </summary>
+        </member>
+        <member name="P:EtwTools.Providers.System.Diagnostics.Eventing.FrameworkEventSourceProvider.ResourceManagerManifestResourceAccessDeniedEvent.MainAssemblyName">
+            <summary>
+            Retrieves the MainAssemblyName field.
+            </summary>
+        </member>
+        <member name="P:EtwTools.Providers.System.Diagnostics.Eventing.FrameworkEventSourceProvider.ResourceManagerManifestResourceAccessDeniedEvent.AssemblyName">
+            <summary>
+            Retrieves the AssemblyName field.
+            </summary>
+        </member>
+        <member name="P:EtwTools.Providers.System.Diagnostics.Eventing.FrameworkEventSourceProvider.ResourceManagerManifestResourceAccessDeniedEvent.CanonicalName">
+            <summary>
+            Retrieves the CanonicalName field.
+            </summary>
+        </member>
+        <member name="M:EtwTools.Providers.System.Diagnostics.Eventing.FrameworkEventSourceProvider.ResourceManagerManifestResourceAccessDeniedEvent.#ctor(EtwTools.EtwEvent)">
+            <summary>
+            Creates a new ResourceManagerManifestResourceAccessDeniedEvent.
+            </summary>
+            <param name="etwEvent">The event.</param>
+        </member>
+        <member name="T:EtwTools.Providers.System.Diagnostics.Eventing.FrameworkEventSourceProvider.ResourceManagerNeutralResourcesSufficientEvent">
+            <summary>
+            An event wrapper for a ResourceManagerNeutralResourcesSufficient event.
+            </summary>
+        </member>
+        <member name="F:EtwTools.Providers.System.Diagnostics.Eventing.FrameworkEventSourceProvider.ResourceManagerNeutralResourcesSufficientEvent.Id">
+            <summary>
+            Event ID.
+            </summary>
+        </member>
+        <member name="F:EtwTools.Providers.System.Diagnostics.Eventing.FrameworkEventSourceProvider.ResourceManagerNeutralResourcesSufficientEvent.Name">
+            <summary>
+            Event name.
+            </summary>
+        </member>
+        <member name="F:EtwTools.Providers.System.Diagnostics.Eventing.FrameworkEventSourceProvider.ResourceManagerNeutralResourcesSufficientEvent.Provider">
+            <summary>
+            The event provider.
+            </summary>
+        </member>
+        <member name="P:EtwTools.Providers.System.Diagnostics.Eventing.FrameworkEventSourceProvider.ResourceManagerNeutralResourcesSufficientEvent.Descriptor">
+            <summary>
+            Event descriptor.
+            </summary>
+        </member>
+        <member name="P:EtwTools.Providers.System.Diagnostics.Eventing.FrameworkEventSourceProvider.ResourceManagerNeutralResourcesSufficientEvent.ProcessId">
+            <summary>
+            The process the event was recorded in.
+            </summary>
+        </member>
+        <member name="P:EtwTools.Providers.System.Diagnostics.Eventing.FrameworkEventSourceProvider.ResourceManagerNeutralResourcesSufficientEvent.ThreadId">
+            <summary>
+            The thread the event was recorded on.
+            </summary>
+        </member>
+        <member name="P:EtwTools.Providers.System.Diagnostics.Eventing.FrameworkEventSourceProvider.ResourceManagerNeutralResourcesSufficientEvent.Timestamp">
+            <summary>
+            The timestamp of the event.
+            </summary>
+        </member>
+        <member name="P:EtwTools.Providers.System.Diagnostics.Eventing.FrameworkEventSourceProvider.ResourceManagerNeutralResourcesSufficientEvent.ProcessorNumber">
+            <summary>
+            The processor number the event was recorded on.
+            </summary>
+        </member>
+        <member name="P:EtwTools.Providers.System.Diagnostics.Eventing.FrameworkEventSourceProvider.ResourceManagerNeutralResourcesSufficientEvent.Time">
+            <summary>
+            Timing information for the event.
+            </summary>
+        </member>
+        <member name="P:EtwTools.Providers.System.Diagnostics.Eventing.FrameworkEventSourceProvider.ResourceManagerNeutralResourcesSufficientEvent.BaseName">
+            <summary>
+            Retrieves the BaseName field.
+            </summary>
+        </member>
+        <member name="P:EtwTools.Providers.System.Diagnostics.Eventing.FrameworkEventSourceProvider.ResourceManagerNeutralResourcesSufficientEvent.MainAssemblyName">
+            <summary>
+            Retrieves the MainAssemblyName field.
+            </summary>
+        </member>
+        <member name="P:EtwTools.Providers.System.Diagnostics.Eventing.FrameworkEventSourceProvider.ResourceManagerNeutralResourcesSufficientEvent.CultureName">
+            <summary>
+            Retrieves the CultureName field.
+            </summary>
+        </member>
+        <member name="M:EtwTools.Providers.System.Diagnostics.Eventing.FrameworkEventSourceProvider.ResourceManagerNeutralResourcesSufficientEvent.#ctor(EtwTools.EtwEvent)">
+            <summary>
+            Creates a new ResourceManagerNeutralResourcesSufficientEvent.
+            </summary>
+            <param name="etwEvent">The event.</param>
+        </member>
+        <member name="T:EtwTools.Providers.System.Diagnostics.Eventing.FrameworkEventSourceProvider.ResourceManagerNeutralResourceAttributeMissingEvent">
+            <summary>
+            An event wrapper for a ResourceManagerNeutralResourceAttributeMissing event.
+            </summary>
+        </member>
+        <member name="F:EtwTools.Providers.System.Diagnostics.Eventing.FrameworkEventSourceProvider.ResourceManagerNeutralResourceAttributeMissingEvent.Id">
+            <summary>
+            Event ID.
+            </summary>
+        </member>
+        <member name="F:EtwTools.Providers.System.Diagnostics.Eventing.FrameworkEventSourceProvider.ResourceManagerNeutralResourceAttributeMissingEvent.Name">
+            <summary>
+            Event name.
+            </summary>
+        </member>
+        <member name="F:EtwTools.Providers.System.Diagnostics.Eventing.FrameworkEventSourceProvider.ResourceManagerNeutralResourceAttributeMissingEvent.Provider">
+            <summary>
+            The event provider.
+            </summary>
+        </member>
+        <member name="P:EtwTools.Providers.System.Diagnostics.Eventing.FrameworkEventSourceProvider.ResourceManagerNeutralResourceAttributeMissingEvent.Descriptor">
+            <summary>
+            Event descriptor.
+            </summary>
+        </member>
+        <member name="P:EtwTools.Providers.System.Diagnostics.Eventing.FrameworkEventSourceProvider.ResourceManagerNeutralResourceAttributeMissingEvent.ProcessId">
+            <summary>
+            The process the event was recorded in.
+            </summary>
+        </member>
+        <member name="P:EtwTools.Providers.System.Diagnostics.Eventing.FrameworkEventSourceProvider.ResourceManagerNeutralResourceAttributeMissingEvent.ThreadId">
+            <summary>
+            The thread the event was recorded on.
+            </summary>
+        </member>
+        <member name="P:EtwTools.Providers.System.Diagnostics.Eventing.FrameworkEventSourceProvider.ResourceManagerNeutralResourceAttributeMissingEvent.Timestamp">
+            <summary>
+            The timestamp of the event.
+            </summary>
+        </member>
+        <member name="P:EtwTools.Providers.System.Diagnostics.Eventing.FrameworkEventSourceProvider.ResourceManagerNeutralResourceAttributeMissingEvent.ProcessorNumber">
+            <summary>
+            The processor number the event was recorded on.
+            </summary>
+        </member>
+        <member name="P:EtwTools.Providers.System.Diagnostics.Eventing.FrameworkEventSourceProvider.ResourceManagerNeutralResourceAttributeMissingEvent.Time">
+            <summary>
+            Timing information for the event.
+            </summary>
+        </member>
+        <member name="P:EtwTools.Providers.System.Diagnostics.Eventing.FrameworkEventSourceProvider.ResourceManagerNeutralResourceAttributeMissingEvent.MainAssemblyName">
+            <summary>
+            Retrieves the MainAssemblyName field.
+            </summary>
+        </member>
+        <member name="M:EtwTools.Providers.System.Diagnostics.Eventing.FrameworkEventSourceProvider.ResourceManagerNeutralResourceAttributeMissingEvent.#ctor(EtwTools.EtwEvent)">
+            <summary>
+            Creates a new ResourceManagerNeutralResourceAttributeMissingEvent.
+            </summary>
+            <param name="etwEvent">The event.</param>
+        </member>
+        <member name="T:EtwTools.Providers.System.Diagnostics.Eventing.FrameworkEventSourceProvider.ResourceManagerCreatingResourceSetEvent">
+            <summary>
+            An event wrapper for a ResourceManagerCreatingResourceSet event.
+            </summary>
+        </member>
+        <member name="F:EtwTools.Providers.System.Diagnostics.Eventing.FrameworkEventSourceProvider.ResourceManagerCreatingResourceSetEvent.Id">
+            <summary>
+            Event ID.
+            </summary>
+        </member>
+        <member name="F:EtwTools.Providers.System.Diagnostics.Eventing.FrameworkEventSourceProvider.ResourceManagerCreatingResourceSetEvent.Name">
+            <summary>
+            Event name.
+            </summary>
+        </member>
+        <member name="F:EtwTools.Providers.System.Diagnostics.Eventing.FrameworkEventSourceProvider.ResourceManagerCreatingResourceSetEvent.Provider">
+            <summary>
+            The event provider.
+            </summary>
+        </member>
+        <member name="P:EtwTools.Providers.System.Diagnostics.Eventing.FrameworkEventSourceProvider.ResourceManagerCreatingResourceSetEvent.Descriptor">
+            <summary>
+            Event descriptor.
+            </summary>
+        </member>
+        <member name="P:EtwTools.Providers.System.Diagnostics.Eventing.FrameworkEventSourceProvider.ResourceManagerCreatingResourceSetEvent.ProcessId">
+            <summary>
+            The process the event was recorded in.
+            </summary>
+        </member>
+        <member name="P:EtwTools.Providers.System.Diagnostics.Eventing.FrameworkEventSourceProvider.ResourceManagerCreatingResourceSetEvent.ThreadId">
+            <summary>
+            The thread the event was recorded on.
+            </summary>
+        </member>
+        <member name="P:EtwTools.Providers.System.Diagnostics.Eventing.FrameworkEventSourceProvider.ResourceManagerCreatingResourceSetEvent.Timestamp">
+            <summary>
+            The timestamp of the event.
+            </summary>
+        </member>
+        <member name="P:EtwTools.Providers.System.Diagnostics.Eventing.FrameworkEventSourceProvider.ResourceManagerCreatingResourceSetEvent.ProcessorNumber">
+            <summary>
+            The processor number the event was recorded on.
+            </summary>
+        </member>
+        <member name="P:EtwTools.Providers.System.Diagnostics.Eventing.FrameworkEventSourceProvider.ResourceManagerCreatingResourceSetEvent.Time">
+            <summary>
+            Timing information for the event.
+            </summary>
+        </member>
+        <member name="P:EtwTools.Providers.System.Diagnostics.Eventing.FrameworkEventSourceProvider.ResourceManagerCreatingResourceSetEvent.BaseName">
+            <summary>
+            Retrieves the BaseName field.
+            </summary>
+        </member>
+        <member name="P:EtwTools.Providers.System.Diagnostics.Eventing.FrameworkEventSourceProvider.ResourceManagerCreatingResourceSetEvent.MainAssemblyName">
+            <summary>
+            Retrieves the MainAssemblyName field.
+            </summary>
+        </member>
+        <member name="P:EtwTools.Providers.System.Diagnostics.Eventing.FrameworkEventSourceProvider.ResourceManagerCreatingResourceSetEvent.CultureName">
+            <summary>
+            Retrieves the CultureName field.
+            </summary>
+        </member>
+        <member name="P:EtwTools.Providers.System.Diagnostics.Eventing.FrameworkEventSourceProvider.ResourceManagerCreatingResourceSetEvent.FileName">
+            <summary>
+            Retrieves the FileName field.
+            </summary>
+        </member>
+        <member name="M:EtwTools.Providers.System.Diagnostics.Eventing.FrameworkEventSourceProvider.ResourceManagerCreatingResourceSetEvent.#ctor(EtwTools.EtwEvent)">
+            <summary>
+            Creates a new ResourceManagerCreatingResourceSetEvent.
+            </summary>
+            <param name="etwEvent">The event.</param>
+        </member>
+        <member name="T:EtwTools.Providers.System.Diagnostics.Eventing.FrameworkEventSourceProvider.ResourceManagerNotCreatingResourceSetEvent">
+            <summary>
+            An event wrapper for a ResourceManagerNotCreatingResourceSet event.
+            </summary>
+        </member>
+        <member name="F:EtwTools.Providers.System.Diagnostics.Eventing.FrameworkEventSourceProvider.ResourceManagerNotCreatingResourceSetEvent.Id">
+            <summary>
+            Event ID.
+            </summary>
+        </member>
+        <member name="F:EtwTools.Providers.System.Diagnostics.Eventing.FrameworkEventSourceProvider.ResourceManagerNotCreatingResourceSetEvent.Name">
+            <summary>
+            Event name.
+            </summary>
+        </member>
+        <member name="F:EtwTools.Providers.System.Diagnostics.Eventing.FrameworkEventSourceProvider.ResourceManagerNotCreatingResourceSetEvent.Provider">
+            <summary>
+            The event provider.
+            </summary>
+        </member>
+        <member name="P:EtwTools.Providers.System.Diagnostics.Eventing.FrameworkEventSourceProvider.ResourceManagerNotCreatingResourceSetEvent.Descriptor">
+            <summary>
+            Event descriptor.
+            </summary>
+        </member>
+        <member name="P:EtwTools.Providers.System.Diagnostics.Eventing.FrameworkEventSourceProvider.ResourceManagerNotCreatingResourceSetEvent.ProcessId">
+            <summary>
+            The process the event was recorded in.
+            </summary>
+        </member>
+        <member name="P:EtwTools.Providers.System.Diagnostics.Eventing.FrameworkEventSourceProvider.ResourceManagerNotCreatingResourceSetEvent.ThreadId">
+            <summary>
+            The thread the event was recorded on.
+            </summary>
+        </member>
+        <member name="P:EtwTools.Providers.System.Diagnostics.Eventing.FrameworkEventSourceProvider.ResourceManagerNotCreatingResourceSetEvent.Timestamp">
+            <summary>
+            The timestamp of the event.
+            </summary>
+        </member>
+        <member name="P:EtwTools.Providers.System.Diagnostics.Eventing.FrameworkEventSourceProvider.ResourceManagerNotCreatingResourceSetEvent.ProcessorNumber">
+            <summary>
+            The processor number the event was recorded on.
+            </summary>
+        </member>
+        <member name="P:EtwTools.Providers.System.Diagnostics.Eventing.FrameworkEventSourceProvider.ResourceManagerNotCreatingResourceSetEvent.Time">
+            <summary>
+            Timing information for the event.
+            </summary>
+        </member>
+        <member name="P:EtwTools.Providers.System.Diagnostics.Eventing.FrameworkEventSourceProvider.ResourceManagerNotCreatingResourceSetEvent.BaseName">
+            <summary>
+            Retrieves the BaseName field.
+            </summary>
+        </member>
+        <member name="P:EtwTools.Providers.System.Diagnostics.Eventing.FrameworkEventSourceProvider.ResourceManagerNotCreatingResourceSetEvent.MainAssemblyName">
+            <summary>
+            Retrieves the MainAssemblyName field.
+            </summary>
+        </member>
+        <member name="P:EtwTools.Providers.System.Diagnostics.Eventing.FrameworkEventSourceProvider.ResourceManagerNotCreatingResourceSetEvent.CultureName">
+            <summary>
+            Retrieves the CultureName field.
+            </summary>
+        </member>
+        <member name="M:EtwTools.Providers.System.Diagnostics.Eventing.FrameworkEventSourceProvider.ResourceManagerNotCreatingResourceSetEvent.#ctor(EtwTools.EtwEvent)">
+            <summary>
+            Creates a new ResourceManagerNotCreatingResourceSetEvent.
+            </summary>
+            <param name="etwEvent">The event.</param>
+        </member>
+        <member name="T:EtwTools.Providers.System.Diagnostics.Eventing.FrameworkEventSourceProvider.ResourceManagerLookupFailedEvent">
+            <summary>
+            An event wrapper for a ResourceManagerLookupFailed event.
+            </summary>
+        </member>
+        <member name="F:EtwTools.Providers.System.Diagnostics.Eventing.FrameworkEventSourceProvider.ResourceManagerLookupFailedEvent.Id">
+            <summary>
+            Event ID.
+            </summary>
+        </member>
+        <member name="F:EtwTools.Providers.System.Diagnostics.Eventing.FrameworkEventSourceProvider.ResourceManagerLookupFailedEvent.Name">
+            <summary>
+            Event name.
+            </summary>
+        </member>
+        <member name="F:EtwTools.Providers.System.Diagnostics.Eventing.FrameworkEventSourceProvider.ResourceManagerLookupFailedEvent.Provider">
+            <summary>
+            The event provider.
+            </summary>
+        </member>
+        <member name="P:EtwTools.Providers.System.Diagnostics.Eventing.FrameworkEventSourceProvider.ResourceManagerLookupFailedEvent.Descriptor">
+            <summary>
+            Event descriptor.
+            </summary>
+        </member>
+        <member name="P:EtwTools.Providers.System.Diagnostics.Eventing.FrameworkEventSourceProvider.ResourceManagerLookupFailedEvent.ProcessId">
+            <summary>
+            The process the event was recorded in.
+            </summary>
+        </member>
+        <member name="P:EtwTools.Providers.System.Diagnostics.Eventing.FrameworkEventSourceProvider.ResourceManagerLookupFailedEvent.ThreadId">
+            <summary>
+            The thread the event was recorded on.
+            </summary>
+        </member>
+        <member name="P:EtwTools.Providers.System.Diagnostics.Eventing.FrameworkEventSourceProvider.ResourceManagerLookupFailedEvent.Timestamp">
+            <summary>
+            The timestamp of the event.
+            </summary>
+        </member>
+        <member name="P:EtwTools.Providers.System.Diagnostics.Eventing.FrameworkEventSourceProvider.ResourceManagerLookupFailedEvent.ProcessorNumber">
+            <summary>
+            The processor number the event was recorded on.
+            </summary>
+        </member>
+        <member name="P:EtwTools.Providers.System.Diagnostics.Eventing.FrameworkEventSourceProvider.ResourceManagerLookupFailedEvent.Time">
+            <summary>
+            Timing information for the event.
+            </summary>
+        </member>
+        <member name="P:EtwTools.Providers.System.Diagnostics.Eventing.FrameworkEventSourceProvider.ResourceManagerLookupFailedEvent.BaseName">
+            <summary>
+            Retrieves the BaseName field.
+            </summary>
+        </member>
+        <member name="P:EtwTools.Providers.System.Diagnostics.Eventing.FrameworkEventSourceProvider.ResourceManagerLookupFailedEvent.MainAssemblyName">
+            <summary>
+            Retrieves the MainAssemblyName field.
+            </summary>
+        </member>
+        <member name="P:EtwTools.Providers.System.Diagnostics.Eventing.FrameworkEventSourceProvider.ResourceManagerLookupFailedEvent.CultureName">
+            <summary>
+            Retrieves the CultureName field.
+            </summary>
+        </member>
+        <member name="M:EtwTools.Providers.System.Diagnostics.Eventing.FrameworkEventSourceProvider.ResourceManagerLookupFailedEvent.#ctor(EtwTools.EtwEvent)">
+            <summary>
+            Creates a new ResourceManagerLookupFailedEvent.
+            </summary>
+            <param name="etwEvent">The event.</param>
+        </member>
+        <member name="T:EtwTools.Providers.System.Diagnostics.Eventing.FrameworkEventSourceProvider.ResourceManagerReleasingResourcesEvent">
+            <summary>
+            An event wrapper for a ResourceManagerReleasingResources event.
+            </summary>
+        </member>
+        <member name="F:EtwTools.Providers.System.Diagnostics.Eventing.FrameworkEventSourceProvider.ResourceManagerReleasingResourcesEvent.Id">
+            <summary>
+            Event ID.
+            </summary>
+        </member>
+        <member name="F:EtwTools.Providers.System.Diagnostics.Eventing.FrameworkEventSourceProvider.ResourceManagerReleasingResourcesEvent.Name">
+            <summary>
+            Event name.
+            </summary>
+        </member>
+        <member name="F:EtwTools.Providers.System.Diagnostics.Eventing.FrameworkEventSourceProvider.ResourceManagerReleasingResourcesEvent.Provider">
+            <summary>
+            The event provider.
+            </summary>
+        </member>
+        <member name="P:EtwTools.Providers.System.Diagnostics.Eventing.FrameworkEventSourceProvider.ResourceManagerReleasingResourcesEvent.Descriptor">
+            <summary>
+            Event descriptor.
+            </summary>
+        </member>
+        <member name="P:EtwTools.Providers.System.Diagnostics.Eventing.FrameworkEventSourceProvider.ResourceManagerReleasingResourcesEvent.ProcessId">
+            <summary>
+            The process the event was recorded in.
+            </summary>
+        </member>
+        <member name="P:EtwTools.Providers.System.Diagnostics.Eventing.FrameworkEventSourceProvider.ResourceManagerReleasingResourcesEvent.ThreadId">
+            <summary>
+            The thread the event was recorded on.
+            </summary>
+        </member>
+        <member name="P:EtwTools.Providers.System.Diagnostics.Eventing.FrameworkEventSourceProvider.ResourceManagerReleasingResourcesEvent.Timestamp">
+            <summary>
+            The timestamp of the event.
+            </summary>
+        </member>
+        <member name="P:EtwTools.Providers.System.Diagnostics.Eventing.FrameworkEventSourceProvider.ResourceManagerReleasingResourcesEvent.ProcessorNumber">
+            <summary>
+            The processor number the event was recorded on.
+            </summary>
+        </member>
+        <member name="P:EtwTools.Providers.System.Diagnostics.Eventing.FrameworkEventSourceProvider.ResourceManagerReleasingResourcesEvent.Time">
+            <summary>
+            Timing information for the event.
+            </summary>
+        </member>
+        <member name="P:EtwTools.Providers.System.Diagnostics.Eventing.FrameworkEventSourceProvider.ResourceManagerReleasingResourcesEvent.BaseName">
+            <summary>
+            Retrieves the BaseName field.
+            </summary>
+        </member>
+        <member name="P:EtwTools.Providers.System.Diagnostics.Eventing.FrameworkEventSourceProvider.ResourceManagerReleasingResourcesEvent.MainAssemblyName">
+            <summary>
+            Retrieves the MainAssemblyName field.
+            </summary>
+        </member>
+        <member name="M:EtwTools.Providers.System.Diagnostics.Eventing.FrameworkEventSourceProvider.ResourceManagerReleasingResourcesEvent.#ctor(EtwTools.EtwEvent)">
+            <summary>
+            Creates a new ResourceManagerReleasingResourcesEvent.
+            </summary>
+            <param name="etwEvent">The event.</param>
+        </member>
+        <member name="T:EtwTools.Providers.System.Diagnostics.Eventing.FrameworkEventSourceProvider.ResourceManagerNeutralResourcesNotFoundEvent">
+            <summary>
+            An event wrapper for a ResourceManagerNeutralResourcesNotFound event.
+            </summary>
+        </member>
+        <member name="F:EtwTools.Providers.System.Diagnostics.Eventing.FrameworkEventSourceProvider.ResourceManagerNeutralResourcesNotFoundEvent.Id">
+            <summary>
+            Event ID.
+            </summary>
+        </member>
+        <member name="F:EtwTools.Providers.System.Diagnostics.Eventing.FrameworkEventSourceProvider.ResourceManagerNeutralResourcesNotFoundEvent.Name">
+            <summary>
+            Event name.
+            </summary>
+        </member>
+        <member name="F:EtwTools.Providers.System.Diagnostics.Eventing.FrameworkEventSourceProvider.ResourceManagerNeutralResourcesNotFoundEvent.Provider">
+            <summary>
+            The event provider.
+            </summary>
+        </member>
+        <member name="P:EtwTools.Providers.System.Diagnostics.Eventing.FrameworkEventSourceProvider.ResourceManagerNeutralResourcesNotFoundEvent.Descriptor">
+            <summary>
+            Event descriptor.
+            </summary>
+        </member>
+        <member name="P:EtwTools.Providers.System.Diagnostics.Eventing.FrameworkEventSourceProvider.ResourceManagerNeutralResourcesNotFoundEvent.ProcessId">
+            <summary>
+            The process the event was recorded in.
+            </summary>
+        </member>
+        <member name="P:EtwTools.Providers.System.Diagnostics.Eventing.FrameworkEventSourceProvider.ResourceManagerNeutralResourcesNotFoundEvent.ThreadId">
+            <summary>
+            The thread the event was recorded on.
+            </summary>
+        </member>
+        <member name="P:EtwTools.Providers.System.Diagnostics.Eventing.FrameworkEventSourceProvider.ResourceManagerNeutralResourcesNotFoundEvent.Timestamp">
+            <summary>
+            The timestamp of the event.
+            </summary>
+        </member>
+        <member name="P:EtwTools.Providers.System.Diagnostics.Eventing.FrameworkEventSourceProvider.ResourceManagerNeutralResourcesNotFoundEvent.ProcessorNumber">
+            <summary>
+            The processor number the event was recorded on.
+            </summary>
+        </member>
+        <member name="P:EtwTools.Providers.System.Diagnostics.Eventing.FrameworkEventSourceProvider.ResourceManagerNeutralResourcesNotFoundEvent.Time">
+            <summary>
+            Timing information for the event.
+            </summary>
+        </member>
+        <member name="P:EtwTools.Providers.System.Diagnostics.Eventing.FrameworkEventSourceProvider.ResourceManagerNeutralResourcesNotFoundEvent.BaseName">
+            <summary>
+            Retrieves the BaseName field.
+            </summary>
+        </member>
+        <member name="P:EtwTools.Providers.System.Diagnostics.Eventing.FrameworkEventSourceProvider.ResourceManagerNeutralResourcesNotFoundEvent.MainAssemblyName">
+            <summary>
+            Retrieves the MainAssemblyName field.
+            </summary>
+        </member>
+        <member name="P:EtwTools.Providers.System.Diagnostics.Eventing.FrameworkEventSourceProvider.ResourceManagerNeutralResourcesNotFoundEvent.ResName">
+            <summary>
+            Retrieves the ResName field.
+            </summary>
+        </member>
+        <member name="M:EtwTools.Providers.System.Diagnostics.Eventing.FrameworkEventSourceProvider.ResourceManagerNeutralResourcesNotFoundEvent.#ctor(EtwTools.EtwEvent)">
+            <summary>
+            Creates a new ResourceManagerNeutralResourcesNotFoundEvent.
+            </summary>
+            <param name="etwEvent">The event.</param>
+        </member>
+        <member name="T:EtwTools.Providers.System.Diagnostics.Eventing.FrameworkEventSourceProvider.ResourceManagerNeutralResourcesFoundEvent">
+            <summary>
+            An event wrapper for a ResourceManagerNeutralResourcesFound event.
+            </summary>
+        </member>
+        <member name="F:EtwTools.Providers.System.Diagnostics.Eventing.FrameworkEventSourceProvider.ResourceManagerNeutralResourcesFoundEvent.Id">
+            <summary>
+            Event ID.
+            </summary>
+        </member>
+        <member name="F:EtwTools.Providers.System.Diagnostics.Eventing.FrameworkEventSourceProvider.ResourceManagerNeutralResourcesFoundEvent.Name">
+            <summary>
+            Event name.
+            </summary>
+        </member>
+        <member name="F:EtwTools.Providers.System.Diagnostics.Eventing.FrameworkEventSourceProvider.ResourceManagerNeutralResourcesFoundEvent.Provider">
+            <summary>
+            The event provider.
+            </summary>
+        </member>
+        <member name="P:EtwTools.Providers.System.Diagnostics.Eventing.FrameworkEventSourceProvider.ResourceManagerNeutralResourcesFoundEvent.Descriptor">
+            <summary>
+            Event descriptor.
+            </summary>
+        </member>
+        <member name="P:EtwTools.Providers.System.Diagnostics.Eventing.FrameworkEventSourceProvider.ResourceManagerNeutralResourcesFoundEvent.ProcessId">
+            <summary>
+            The process the event was recorded in.
+            </summary>
+        </member>
+        <member name="P:EtwTools.Providers.System.Diagnostics.Eventing.FrameworkEventSourceProvider.ResourceManagerNeutralResourcesFoundEvent.ThreadId">
+            <summary>
+            The thread the event was recorded on.
+            </summary>
+        </member>
+        <member name="P:EtwTools.Providers.System.Diagnostics.Eventing.FrameworkEventSourceProvider.ResourceManagerNeutralResourcesFoundEvent.Timestamp">
+            <summary>
+            The timestamp of the event.
+            </summary>
+        </member>
+        <member name="P:EtwTools.Providers.System.Diagnostics.Eventing.FrameworkEventSourceProvider.ResourceManagerNeutralResourcesFoundEvent.ProcessorNumber">
+            <summary>
+            The processor number the event was recorded on.
+            </summary>
+        </member>
+        <member name="P:EtwTools.Providers.System.Diagnostics.Eventing.FrameworkEventSourceProvider.ResourceManagerNeutralResourcesFoundEvent.Time">
+            <summary>
+            Timing information for the event.
+            </summary>
+        </member>
+        <member name="P:EtwTools.Providers.System.Diagnostics.Eventing.FrameworkEventSourceProvider.ResourceManagerNeutralResourcesFoundEvent.BaseName">
+            <summary>
+            Retrieves the BaseName field.
+            </summary>
+        </member>
+        <member name="P:EtwTools.Providers.System.Diagnostics.Eventing.FrameworkEventSourceProvider.ResourceManagerNeutralResourcesFoundEvent.MainAssemblyName">
+            <summary>
+            Retrieves the MainAssemblyName field.
+            </summary>
+        </member>
+        <member name="P:EtwTools.Providers.System.Diagnostics.Eventing.FrameworkEventSourceProvider.ResourceManagerNeutralResourcesFoundEvent.ResName">
+            <summary>
+            Retrieves the ResName field.
+            </summary>
+        </member>
+        <member name="M:EtwTools.Providers.System.Diagnostics.Eventing.FrameworkEventSourceProvider.ResourceManagerNeutralResourcesFoundEvent.#ctor(EtwTools.EtwEvent)">
+            <summary>
+            Creates a new ResourceManagerNeutralResourcesFoundEvent.
+            </summary>
+            <param name="etwEvent">The event.</param>
+        </member>
+        <member name="T:EtwTools.Providers.System.Diagnostics.Eventing.FrameworkEventSourceProvider.ResourceManagerAddingCultureFromConfigFileEvent">
+            <summary>
+            An event wrapper for a ResourceManagerAddingCultureFromConfigFile event.
+            </summary>
+        </member>
+        <member name="F:EtwTools.Providers.System.Diagnostics.Eventing.FrameworkEventSourceProvider.ResourceManagerAddingCultureFromConfigFileEvent.Id">
+            <summary>
+            Event ID.
+            </summary>
+        </member>
+        <member name="F:EtwTools.Providers.System.Diagnostics.Eventing.FrameworkEventSourceProvider.ResourceManagerAddingCultureFromConfigFileEvent.Name">
+            <summary>
+            Event name.
+            </summary>
+        </member>
+        <member name="F:EtwTools.Providers.System.Diagnostics.Eventing.FrameworkEventSourceProvider.ResourceManagerAddingCultureFromConfigFileEvent.Provider">
+            <summary>
+            The event provider.
+            </summary>
+        </member>
+        <member name="P:EtwTools.Providers.System.Diagnostics.Eventing.FrameworkEventSourceProvider.ResourceManagerAddingCultureFromConfigFileEvent.Descriptor">
+            <summary>
+            Event descriptor.
+            </summary>
+        </member>
+        <member name="P:EtwTools.Providers.System.Diagnostics.Eventing.FrameworkEventSourceProvider.ResourceManagerAddingCultureFromConfigFileEvent.ProcessId">
+            <summary>
+            The process the event was recorded in.
+            </summary>
+        </member>
+        <member name="P:EtwTools.Providers.System.Diagnostics.Eventing.FrameworkEventSourceProvider.ResourceManagerAddingCultureFromConfigFileEvent.ThreadId">
+            <summary>
+            The thread the event was recorded on.
+            </summary>
+        </member>
+        <member name="P:EtwTools.Providers.System.Diagnostics.Eventing.FrameworkEventSourceProvider.ResourceManagerAddingCultureFromConfigFileEvent.Timestamp">
+            <summary>
+            The timestamp of the event.
+            </summary>
+        </member>
+        <member name="P:EtwTools.Providers.System.Diagnostics.Eventing.FrameworkEventSourceProvider.ResourceManagerAddingCultureFromConfigFileEvent.ProcessorNumber">
+            <summary>
+            The processor number the event was recorded on.
+            </summary>
+        </member>
+        <member name="P:EtwTools.Providers.System.Diagnostics.Eventing.FrameworkEventSourceProvider.ResourceManagerAddingCultureFromConfigFileEvent.Time">
+            <summary>
+            Timing information for the event.
+            </summary>
+        </member>
+        <member name="P:EtwTools.Providers.System.Diagnostics.Eventing.FrameworkEventSourceProvider.ResourceManagerAddingCultureFromConfigFileEvent.BaseName">
+            <summary>
+            Retrieves the BaseName field.
+            </summary>
+        </member>
+        <member name="P:EtwTools.Providers.System.Diagnostics.Eventing.FrameworkEventSourceProvider.ResourceManagerAddingCultureFromConfigFileEvent.MainAssemblyName">
+            <summary>
+            Retrieves the MainAssemblyName field.
+            </summary>
+        </member>
+        <member name="P:EtwTools.Providers.System.Diagnostics.Eventing.FrameworkEventSourceProvider.ResourceManagerAddingCultureFromConfigFileEvent.CultureName">
+            <summary>
+            Retrieves the CultureName field.
+            </summary>
+        </member>
+        <member name="M:EtwTools.Providers.System.Diagnostics.Eventing.FrameworkEventSourceProvider.ResourceManagerAddingCultureFromConfigFileEvent.#ctor(EtwTools.EtwEvent)">
+            <summary>
+            Creates a new ResourceManagerAddingCultureFromConfigFileEvent.
+            </summary>
+            <param name="etwEvent">The event.</param>
+        </member>
+        <member name="T:EtwTools.Providers.System.Diagnostics.Eventing.FrameworkEventSourceProvider.ResourceManagerCultureNotFoundInConfigFileEvent">
+            <summary>
+            An event wrapper for a ResourceManagerCultureNotFoundInConfigFile event.
+            </summary>
+        </member>
+        <member name="F:EtwTools.Providers.System.Diagnostics.Eventing.FrameworkEventSourceProvider.ResourceManagerCultureNotFoundInConfigFileEvent.Id">
+            <summary>
+            Event ID.
+            </summary>
+        </member>
+        <member name="F:EtwTools.Providers.System.Diagnostics.Eventing.FrameworkEventSourceProvider.ResourceManagerCultureNotFoundInConfigFileEvent.Name">
+            <summary>
+            Event name.
+            </summary>
+        </member>
+        <member name="F:EtwTools.Providers.System.Diagnostics.Eventing.FrameworkEventSourceProvider.ResourceManagerCultureNotFoundInConfigFileEvent.Provider">
+            <summary>
+            The event provider.
+            </summary>
+        </member>
+        <member name="P:EtwTools.Providers.System.Diagnostics.Eventing.FrameworkEventSourceProvider.ResourceManagerCultureNotFoundInConfigFileEvent.Descriptor">
+            <summary>
+            Event descriptor.
+            </summary>
+        </member>
+        <member name="P:EtwTools.Providers.System.Diagnostics.Eventing.FrameworkEventSourceProvider.ResourceManagerCultureNotFoundInConfigFileEvent.ProcessId">
+            <summary>
+            The process the event was recorded in.
+            </summary>
+        </member>
+        <member name="P:EtwTools.Providers.System.Diagnostics.Eventing.FrameworkEventSourceProvider.ResourceManagerCultureNotFoundInConfigFileEvent.ThreadId">
+            <summary>
+            The thread the event was recorded on.
+            </summary>
+        </member>
+        <member name="P:EtwTools.Providers.System.Diagnostics.Eventing.FrameworkEventSourceProvider.ResourceManagerCultureNotFoundInConfigFileEvent.Timestamp">
+            <summary>
+            The timestamp of the event.
+            </summary>
+        </member>
+        <member name="P:EtwTools.Providers.System.Diagnostics.Eventing.FrameworkEventSourceProvider.ResourceManagerCultureNotFoundInConfigFileEvent.ProcessorNumber">
+            <summary>
+            The processor number the event was recorded on.
+            </summary>
+        </member>
+        <member name="P:EtwTools.Providers.System.Diagnostics.Eventing.FrameworkEventSourceProvider.ResourceManagerCultureNotFoundInConfigFileEvent.Time">
+            <summary>
+            Timing information for the event.
+            </summary>
+        </member>
+        <member name="P:EtwTools.Providers.System.Diagnostics.Eventing.FrameworkEventSourceProvider.ResourceManagerCultureNotFoundInConfigFileEvent.BaseName">
+            <summary>
+            Retrieves the BaseName field.
+            </summary>
+        </member>
+        <member name="P:EtwTools.Providers.System.Diagnostics.Eventing.FrameworkEventSourceProvider.ResourceManagerCultureNotFoundInConfigFileEvent.MainAssemblyName">
+            <summary>
+            Retrieves the MainAssemblyName field.
+            </summary>
+        </member>
+        <member name="P:EtwTools.Providers.System.Diagnostics.Eventing.FrameworkEventSourceProvider.ResourceManagerCultureNotFoundInConfigFileEvent.CultureName">
+            <summary>
+            Retrieves the CultureName field.
+            </summary>
+        </member>
+        <member name="M:EtwTools.Providers.System.Diagnostics.Eventing.FrameworkEventSourceProvider.ResourceManagerCultureNotFoundInConfigFileEvent.#ctor(EtwTools.EtwEvent)">
+            <summary>
+            Creates a new ResourceManagerCultureNotFoundInConfigFileEvent.
+            </summary>
+            <param name="etwEvent">The event.</param>
+        </member>
+        <member name="T:EtwTools.Providers.System.Diagnostics.Eventing.FrameworkEventSourceProvider.ResourceManagerCultureFoundInConfigFileEvent">
+            <summary>
+            An event wrapper for a ResourceManagerCultureFoundInConfigFile event.
+            </summary>
+        </member>
+        <member name="F:EtwTools.Providers.System.Diagnostics.Eventing.FrameworkEventSourceProvider.ResourceManagerCultureFoundInConfigFileEvent.Id">
+            <summary>
+            Event ID.
+            </summary>
+        </member>
+        <member name="F:EtwTools.Providers.System.Diagnostics.Eventing.FrameworkEventSourceProvider.ResourceManagerCultureFoundInConfigFileEvent.Name">
+            <summary>
+            Event name.
+            </summary>
+        </member>
+        <member name="F:EtwTools.Providers.System.Diagnostics.Eventing.FrameworkEventSourceProvider.ResourceManagerCultureFoundInConfigFileEvent.Provider">
+            <summary>
+            The event provider.
+            </summary>
+        </member>
+        <member name="P:EtwTools.Providers.System.Diagnostics.Eventing.FrameworkEventSourceProvider.ResourceManagerCultureFoundInConfigFileEvent.Descriptor">
+            <summary>
+            Event descriptor.
+            </summary>
+        </member>
+        <member name="P:EtwTools.Providers.System.Diagnostics.Eventing.FrameworkEventSourceProvider.ResourceManagerCultureFoundInConfigFileEvent.ProcessId">
+            <summary>
+            The process the event was recorded in.
+            </summary>
+        </member>
+        <member name="P:EtwTools.Providers.System.Diagnostics.Eventing.FrameworkEventSourceProvider.ResourceManagerCultureFoundInConfigFileEvent.ThreadId">
+            <summary>
+            The thread the event was recorded on.
+            </summary>
+        </member>
+        <member name="P:EtwTools.Providers.System.Diagnostics.Eventing.FrameworkEventSourceProvider.ResourceManagerCultureFoundInConfigFileEvent.Timestamp">
+            <summary>
+            The timestamp of the event.
+            </summary>
+        </member>
+        <member name="P:EtwTools.Providers.System.Diagnostics.Eventing.FrameworkEventSourceProvider.ResourceManagerCultureFoundInConfigFileEvent.ProcessorNumber">
+            <summary>
+            The processor number the event was recorded on.
+            </summary>
+        </member>
+        <member name="P:EtwTools.Providers.System.Diagnostics.Eventing.FrameworkEventSourceProvider.ResourceManagerCultureFoundInConfigFileEvent.Time">
+            <summary>
+            Timing information for the event.
+            </summary>
+        </member>
+        <member name="P:EtwTools.Providers.System.Diagnostics.Eventing.FrameworkEventSourceProvider.ResourceManagerCultureFoundInConfigFileEvent.BaseName">
+            <summary>
+            Retrieves the BaseName field.
+            </summary>
+        </member>
+        <member name="P:EtwTools.Providers.System.Diagnostics.Eventing.FrameworkEventSourceProvider.ResourceManagerCultureFoundInConfigFileEvent.MainAssemblyName">
+            <summary>
+            Retrieves the MainAssemblyName field.
+            </summary>
+        </member>
+        <member name="P:EtwTools.Providers.System.Diagnostics.Eventing.FrameworkEventSourceProvider.ResourceManagerCultureFoundInConfigFileEvent.CultureName">
+            <summary>
+            Retrieves the CultureName field.
+            </summary>
+        </member>
+        <member name="M:EtwTools.Providers.System.Diagnostics.Eventing.FrameworkEventSourceProvider.ResourceManagerCultureFoundInConfigFileEvent.#ctor(EtwTools.EtwEvent)">
+            <summary>
+            Creates a new ResourceManagerCultureFoundInConfigFileEvent.
+            </summary>
+            <param name="etwEvent">The event.</param>
+        </member>
+        <member name="T:EtwTools.Providers.System.Diagnostics.Eventing.FrameworkEventSourceProvider.ThreadPoolEnqueueWorkEvent">
+            <summary>
+            An event wrapper for a ThreadPoolEnqueueWork event.
+            </summary>
+        </member>
+        <member name="F:EtwTools.Providers.System.Diagnostics.Eventing.FrameworkEventSourceProvider.ThreadPoolEnqueueWorkEvent.Id">
+            <summary>
+            Event ID.
+            </summary>
+        </member>
+        <member name="F:EtwTools.Providers.System.Diagnostics.Eventing.FrameworkEventSourceProvider.ThreadPoolEnqueueWorkEvent.Name">
+            <summary>
+            Event name.
+            </summary>
+        </member>
+        <member name="F:EtwTools.Providers.System.Diagnostics.Eventing.FrameworkEventSourceProvider.ThreadPoolEnqueueWorkEvent.Provider">
+            <summary>
+            The event provider.
+            </summary>
+        </member>
+        <member name="P:EtwTools.Providers.System.Diagnostics.Eventing.FrameworkEventSourceProvider.ThreadPoolEnqueueWorkEvent.Descriptor">
+            <summary>
+            Event descriptor.
+            </summary>
+        </member>
+        <member name="P:EtwTools.Providers.System.Diagnostics.Eventing.FrameworkEventSourceProvider.ThreadPoolEnqueueWorkEvent.ProcessId">
+            <summary>
+            The process the event was recorded in.
+            </summary>
+        </member>
+        <member name="P:EtwTools.Providers.System.Diagnostics.Eventing.FrameworkEventSourceProvider.ThreadPoolEnqueueWorkEvent.ThreadId">
+            <summary>
+            The thread the event was recorded on.
+            </summary>
+        </member>
+        <member name="P:EtwTools.Providers.System.Diagnostics.Eventing.FrameworkEventSourceProvider.ThreadPoolEnqueueWorkEvent.Timestamp">
+            <summary>
+            The timestamp of the event.
+            </summary>
+        </member>
+        <member name="P:EtwTools.Providers.System.Diagnostics.Eventing.FrameworkEventSourceProvider.ThreadPoolEnqueueWorkEvent.ProcessorNumber">
+            <summary>
+            The processor number the event was recorded on.
+            </summary>
+        </member>
+        <member name="P:EtwTools.Providers.System.Diagnostics.Eventing.FrameworkEventSourceProvider.ThreadPoolEnqueueWorkEvent.Time">
+            <summary>
+            Timing information for the event.
+            </summary>
+        </member>
+        <member name="P:EtwTools.Providers.System.Diagnostics.Eventing.FrameworkEventSourceProvider.ThreadPoolEnqueueWorkEvent.WorkID">
+            <summary>
+            Retrieves the WorkID field.
+            </summary>
+        </member>
+        <member name="M:EtwTools.Providers.System.Diagnostics.Eventing.FrameworkEventSourceProvider.ThreadPoolEnqueueWorkEvent.#ctor(EtwTools.EtwEvent)">
+            <summary>
+            Creates a new ThreadPoolEnqueueWorkEvent.
+            </summary>
+            <param name="etwEvent">The event.</param>
+        </member>
+        <member name="T:EtwTools.Providers.System.Diagnostics.Eventing.FrameworkEventSourceProvider.ThreadPoolDequeueWorkEvent">
+            <summary>
+            An event wrapper for a ThreadPoolDequeueWork event.
+            </summary>
+        </member>
+        <member name="F:EtwTools.Providers.System.Diagnostics.Eventing.FrameworkEventSourceProvider.ThreadPoolDequeueWorkEvent.Id">
+            <summary>
+            Event ID.
+            </summary>
+        </member>
+        <member name="F:EtwTools.Providers.System.Diagnostics.Eventing.FrameworkEventSourceProvider.ThreadPoolDequeueWorkEvent.Name">
+            <summary>
+            Event name.
+            </summary>
+        </member>
+        <member name="F:EtwTools.Providers.System.Diagnostics.Eventing.FrameworkEventSourceProvider.ThreadPoolDequeueWorkEvent.Provider">
+            <summary>
+            The event provider.
+            </summary>
+        </member>
+        <member name="P:EtwTools.Providers.System.Diagnostics.Eventing.FrameworkEventSourceProvider.ThreadPoolDequeueWorkEvent.Descriptor">
+            <summary>
+            Event descriptor.
+            </summary>
+        </member>
+        <member name="P:EtwTools.Providers.System.Diagnostics.Eventing.FrameworkEventSourceProvider.ThreadPoolDequeueWorkEvent.ProcessId">
+            <summary>
+            The process the event was recorded in.
+            </summary>
+        </member>
+        <member name="P:EtwTools.Providers.System.Diagnostics.Eventing.FrameworkEventSourceProvider.ThreadPoolDequeueWorkEvent.ThreadId">
+            <summary>
+            The thread the event was recorded on.
+            </summary>
+        </member>
+        <member name="P:EtwTools.Providers.System.Diagnostics.Eventing.FrameworkEventSourceProvider.ThreadPoolDequeueWorkEvent.Timestamp">
+            <summary>
+            The timestamp of the event.
+            </summary>
+        </member>
+        <member name="P:EtwTools.Providers.System.Diagnostics.Eventing.FrameworkEventSourceProvider.ThreadPoolDequeueWorkEvent.ProcessorNumber">
+            <summary>
+            The processor number the event was recorded on.
+            </summary>
+        </member>
+        <member name="P:EtwTools.Providers.System.Diagnostics.Eventing.FrameworkEventSourceProvider.ThreadPoolDequeueWorkEvent.Time">
+            <summary>
+            Timing information for the event.
+            </summary>
+        </member>
+        <member name="P:EtwTools.Providers.System.Diagnostics.Eventing.FrameworkEventSourceProvider.ThreadPoolDequeueWorkEvent.WorkID">
+            <summary>
+            Retrieves the WorkID field.
+            </summary>
+        </member>
+        <member name="M:EtwTools.Providers.System.Diagnostics.Eventing.FrameworkEventSourceProvider.ThreadPoolDequeueWorkEvent.#ctor(EtwTools.EtwEvent)">
+            <summary>
+            Creates a new ThreadPoolDequeueWorkEvent.
+            </summary>
+            <param name="etwEvent">The event.</param>
+        </member>
         <member name="T:EtwTools.Providers.System.Threading.Tasks.TplEventSourceProvider">
             <summary>
             Provider for System.Threading.Tasks.TplEventSource (2e5dba47-a3d2-4d16-8ee0-6671ffdcd7b5)

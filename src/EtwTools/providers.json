@@ -1620,7 +1620,532 @@
   },
   {
     "name": "System.Diagnostics.Eventing.FrameworkEventSource",
-    "id": "8e9f5090-2d75-4d03-8a81-e5afbf85daf1"
+    "id": "8e9f5090-2d75-4d03-8a81-e5afbf85daf1",
+    "keywords": {
+      "Loader": 1,
+      "ThreadPool": 2,
+      "NetClient": 4,
+      "DynamicTypeUsage": 8,
+      "ThreadTransfer": 16
+    },
+    "events": {
+      "ResourceManagerLookupStarted": {
+        "descriptor": {
+          "id": 1,
+          "level": 4,
+          "keyword": 263882790666242
+        },
+        "fields": [
+          {
+            "name": "BaseName",
+            "datatype": "string"
+          },
+          {
+            "name": "MainAssemblyName",
+            "datatype": "string"
+          },
+          {
+            "name": "CultureName",
+            "datatype": "string"
+          }
+        ]
+      },
+      "ResourceManagerLookingForResourceSet": {
+        "descriptor": {
+          "id": 2,
+          "level": 4,
+          "keyword": 263882790666242
+        },
+        "fields": [
+          {
+            "name": "BaseName",
+            "datatype": "string"
+          },
+          {
+            "name": "MainAssemblyName",
+            "datatype": "string"
+          },
+          {
+            "name": "CultureName",
+            "datatype": "string"
+          }
+        ]
+      },
+      "ResourceManagerFoundResourceSetInCache": {
+        "descriptor": {
+          "id": 3,
+          "level": 4,
+          "keyword": 263882790666242
+        },
+        "fields": [
+          {
+            "name": "BaseName",
+            "datatype": "string"
+          },
+          {
+            "name": "MainAssemblyName",
+            "datatype": "string"
+          },
+          {
+            "name": "CultureName",
+            "datatype": "string"
+          }
+        ]
+      },
+      "ResourceManagerFoundResourceSetInCacheUnexpected": {
+        "descriptor": {
+          "id": 4,
+          "level": 3,
+          "keyword": 263882790666242
+        },
+        "fields": [
+          {
+            "name": "BaseName",
+            "datatype": "string"
+          },
+          {
+            "name": "MainAssemblyName",
+            "datatype": "string"
+          },
+          {
+            "name": "CultureName",
+            "datatype": "string"
+          }
+        ]
+      },
+      "ResourceManagerStreamFound": {
+        "descriptor": {
+          "id": 5,
+          "level": 4,
+          "keyword": 263882790666242
+        },
+        "fields": [
+          {
+            "name": "BaseName",
+            "datatype": "string"
+          },
+          {
+            "name": "MainAssemblyName",
+            "datatype": "string"
+          },
+          {
+            "name": "CultureName",
+            "datatype": "string"
+          },
+          {
+            "name": "LoadedAssemblyName",
+            "datatype": "string"
+          },
+          {
+            "name": "ResourceFileName",
+            "datatype": "string"
+          }
+        ]
+      },
+      "ResourceManagerStreamNotFound": {
+        "descriptor": {
+          "id": 6,
+          "level": 3,
+          "keyword": 263882790666242
+        },
+        "fields": [
+          {
+            "name": "BaseName",
+            "datatype": "string"
+          },
+          {
+            "name": "MainAssemblyName",
+            "datatype": "string"
+          },
+          {
+            "name": "CultureName",
+            "datatype": "string"
+          },
+          {
+            "name": "LoadedAssemblyName",
+            "datatype": "string"
+          },
+          {
+            "name": "ResourceFileName",
+            "datatype": "string"
+          }
+        ]
+      },
+      "ResourceManagerGetSatelliteAssemblySucceeded": {
+        "descriptor": {
+          "id": 7,
+          "level": 4,
+          "keyword": 263882790666242
+        },
+        "fields": [
+          {
+            "name": "BaseName",
+            "datatype": "string"
+          },
+          {
+            "name": "MainAssemblyName",
+            "datatype": "string"
+          },
+          {
+            "name": "CultureName",
+            "datatype": "string"
+          },
+          {
+            "name": "AssemblyName",
+            "datatype": "string"
+          }
+        ]
+      },
+      "ResourceManagerGetSatelliteAssemblyFailed": {
+        "descriptor": {
+          "id": 8,
+          "level": 3,
+          "keyword": 263882790666242
+        },
+        "fields": [
+          {
+            "name": "BaseName",
+            "datatype": "string"
+          },
+          {
+            "name": "MainAssemblyName",
+            "datatype": "string"
+          },
+          {
+            "name": "CultureName",
+            "datatype": "string"
+          },
+          {
+            "name": "AssemblyName",
+            "datatype": "string"
+          }
+        ]
+      },
+      "ResourceManagerCaseInsensitiveResourceStreamLookupSucceeded": {
+        "descriptor": {
+          "id": 9,
+          "level": 4,
+          "keyword": 263882790666242
+        },
+        "fields": [
+          {
+            "name": "BaseName",
+            "datatype": "string"
+          },
+          {
+            "name": "MainAssemblyName",
+            "datatype": "string"
+          },
+          {
+            "name": "AssemblyName",
+            "datatype": "string"
+          },
+          {
+            "name": "ResourceFileName",
+            "datatype": "string"
+          }
+        ]
+      },
+      "ResourceManagerCaseInsensitiveResourceStreamLookupFailed": {
+        "descriptor": {
+          "id": 10,
+          "level": 3,
+          "keyword": 263882790666242
+        },
+        "fields": [
+          {
+            "name": "BaseName",
+            "datatype": "string"
+          },
+          {
+            "name": "MainAssemblyName",
+            "datatype": "string"
+          },
+          {
+            "name": "AssemblyName",
+            "datatype": "string"
+          },
+          {
+            "name": "ResourceFileName",
+            "datatype": "string"
+          }
+        ]
+      },
+      "ResourceManagerManifestResourceAccessDenied": {
+        "descriptor": {
+          "id": 11,
+          "level": 2,
+          "keyword": 263882790666242
+        },
+        "fields": [
+          {
+            "name": "BaseName",
+            "datatype": "string"
+          },
+          {
+            "name": "MainAssemblyName",
+            "datatype": "string"
+          },
+          {
+            "name": "AssemblyName",
+            "datatype": "string"
+          },
+          {
+            "name": "CanonicalName",
+            "datatype": "string"
+          }
+        ]
+      },
+      "ResourceManagerNeutralResourcesSufficient": {
+        "descriptor": {
+          "id": 12,
+          "level": 4,
+          "keyword": 263882790666242
+        },
+        "fields": [
+          {
+            "name": "BaseName",
+            "datatype": "string"
+          },
+          {
+            "name": "MainAssemblyName",
+            "datatype": "string"
+          },
+          {
+            "name": "CultureName",
+            "datatype": "string"
+          }
+        ]
+      },
+      "ResourceManagerNeutralResourceAttributeMissing": {
+        "descriptor": {
+          "id": 13,
+          "level": 3,
+          "keyword": 263882790666242
+        },
+        "fields": [
+          {
+            "name": "MainAssemblyName",
+            "datatype": "string"
+          }
+        ]
+      },
+      "ResourceManagerCreatingResourceSet": {
+        "descriptor": {
+          "id": 14,
+          "level": 4,
+          "keyword": 263882790666242
+        },
+        "fields": [
+          {
+            "name": "BaseName",
+            "datatype": "string"
+          },
+          {
+            "name": "MainAssemblyName",
+            "datatype": "string"
+          },
+          {
+            "name": "CultureName",
+            "datatype": "string"
+          },
+          {
+            "name": "FileName",
+            "datatype": "string"
+          }
+        ]
+      },
+      "ResourceManagerNotCreatingResourceSet": {
+        "descriptor": {
+          "id": 15,
+          "level": 4,
+          "keyword": 263882790666242
+        },
+        "fields": [
+          {
+            "name": "BaseName",
+            "datatype": "string"
+          },
+          {
+            "name": "MainAssemblyName",
+            "datatype": "string"
+          },
+          {
+            "name": "CultureName",
+            "datatype": "string"
+          }
+        ]
+      },
+      "ResourceManagerLookupFailed": {
+        "descriptor": {
+          "id": 16,
+          "level": 3,
+          "keyword": 263882790666242
+        },
+        "fields": [
+          {
+            "name": "BaseName",
+            "datatype": "string"
+          },
+          {
+            "name": "MainAssemblyName",
+            "datatype": "string"
+          },
+          {
+            "name": "CultureName",
+            "datatype": "string"
+          }
+        ]
+      },
+      "ResourceManagerReleasingResources": {
+        "descriptor": {
+          "id": 17,
+          "level": 4,
+          "keyword": 263882790666242
+        },
+        "fields": [
+          {
+            "name": "BaseName",
+            "datatype": "string"
+          },
+          {
+            "name": "MainAssemblyName",
+            "datatype": "string"
+          }
+        ]
+      },
+      "ResourceManagerNeutralResourcesNotFound": {
+        "descriptor": {
+          "id": 18,
+          "level": 3,
+          "keyword": 263882790666242
+        },
+        "fields": [
+          {
+            "name": "BaseName",
+            "datatype": "string"
+          },
+          {
+            "name": "MainAssemblyName",
+            "datatype": "string"
+          },
+          {
+            "name": "ResName",
+            "datatype": "string"
+          }
+        ]
+      },
+      "ResourceManagerNeutralResourcesFound": {
+        "descriptor": {
+          "id": 19,
+          "level": 4,
+          "keyword": 263882790666242
+        },
+        "fields": [
+          {
+            "name": "BaseName",
+            "datatype": "string"
+          },
+          {
+            "name": "MainAssemblyName",
+            "datatype": "string"
+          },
+          {
+            "name": "ResName",
+            "datatype": "string"
+          }
+        ]
+      },
+      "ResourceManagerAddingCultureFromConfigFile": {
+        "descriptor": {
+          "id": 20,
+          "level": 4,
+          "keyword": 263882790666242
+        },
+        "fields": [
+          {
+            "name": "BaseName",
+            "datatype": "string"
+          },
+          {
+            "name": "MainAssemblyName",
+            "datatype": "string"
+          },
+          {
+            "name": "CultureName",
+            "datatype": "string"
+          }
+        ]
+      },
+      "ResourceManagerCultureNotFoundInConfigFile": {
+        "descriptor": {
+          "id": 21,
+          "level": 4,
+          "keyword": 263882790666242
+        },
+        "fields": [
+          {
+            "name": "BaseName",
+            "datatype": "string"
+          },
+          {
+            "name": "MainAssemblyName",
+            "datatype": "string"
+          },
+          {
+            "name": "CultureName",
+            "datatype": "string"
+          }
+        ]
+      },
+      "ResourceManagerCultureFoundInConfigFile": {
+        "descriptor": {
+          "id": 22,
+          "level": 4,
+          "keyword": 263882790666242
+        },
+        "fields": [
+          {
+            "name": "BaseName",
+            "datatype": "string"
+          },
+          {
+            "name": "MainAssemblyName",
+            "datatype": "string"
+          },
+          {
+            "name": "CultureName",
+            "datatype": "string"
+          }
+        ]
+      },
+      "ThreadPoolEnqueueWork": {
+        "descriptor": {
+          "id": 30,
+          "level": 5,
+          "keyword": 263882790666258
+        },
+        "fields": [
+          {
+            "name": "WorkID",
+            "datatype": "long"
+          }
+        ]
+      },
+      "ThreadPoolDequeueWork": {
+        "descriptor": {
+          "id": 31,
+          "level": 5,
+          "keyword": 263882790666258
+        },
+        "fields": [
+          {
+            "name": "WorkID",
+            "datatype": "long"
+          }
+        ]
+      }
+    }
   },
   {
     "name": "System.Threading.Tasks.TplEventSource",
