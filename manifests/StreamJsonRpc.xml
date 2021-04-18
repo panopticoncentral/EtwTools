@@ -1,0 +1,141 @@
+<instrumentationManifest xmlns="http://schemas.microsoft.com/win/2004/08/events">
+  <instrumentation xmlns:xs="http://www.w3.org/2001/XMLSchema"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:win="http://manifests.microsoft.com/win/2004/08/windows/events">
+    <events xmlns="http://schemas.microsoft.com/win/2004/08/events">
+      <provider name="StreamJsonRpc" guid="{f0cffe53-bcc5-53f5-8873-995568808a3b}" resourceFileName="StreamJsonRpc" messageFileName="StreamJsonRpc" symbol="StreamJsonRpc">
+        <tasks>
+          <task name="OutboundCall" message="$(string.task_OutboundCall)" value="1"/>
+          <task name="InboundCall" message="$(string.task_InboundCall)" value="2"/>
+          <task name="MessageTransmission" message="$(string.task_MessageTransmission)" value="3"/>
+          <task name="Cancellation" message="$(string.task_Cancellation)" value="4"/>
+          <task name="Notification" message="$(string.task_Notification)" value="5"/>
+          <task name="MessageHandler" message="$(string.task_MessageHandler)" value="6"/>
+          <task name="EventSourceMessage" message="$(string.task_EventSourceMessage)" value="65534"/>
+        </tasks>
+        <maps>
+          <valueMap name="JsonRpcErrorCode">
+            <map value="0xffffffffffff8300" message="$(string.map_JsonRpcErrorCode.InvocationError)"/>
+            <map value="0xffffffffffff82ff" message="$(string.map_JsonRpcErrorCode.NoMarshaledObjectFound)"/>
+            <map value="0xffffffffffff82fd" message="$(string.map_JsonRpcErrorCode.ResponseSerializationFailure)"/>
+            <map value="0xffffffffffff82fc" message="$(string.map_JsonRpcErrorCode.InvocationErrorWithException)"/>
+            <map value="0xffffffffffff8044" message="$(string.map_JsonRpcErrorCode.ParseError)"/>
+            <map value="0xffffffffffff80a8" message="$(string.map_JsonRpcErrorCode.InvalidRequest)"/>
+            <map value="0xffffffffffff80a7" message="$(string.map_JsonRpcErrorCode.MethodNotFound)"/>
+            <map value="0xffffffffffff80a6" message="$(string.map_JsonRpcErrorCode.InvalidParams)"/>
+            <map value="0xffffffffffff80a5" message="$(string.map_JsonRpcErrorCode.InternalError)"/>
+            <map value="0xffffffffffff7fe0" message="$(string.map_JsonRpcErrorCode.RequestCanceled)"/>
+          </valueMap>
+        </maps>
+        <opcodes>
+        </opcodes>
+        <keywords>
+          <keyword name="Session3" message="$(string.keyword_Session3)" mask="0x100000000000"/>
+          <keyword name="Session2" message="$(string.keyword_Session2)" mask="0x200000000000"/>
+          <keyword name="Session1" message="$(string.keyword_Session1)" mask="0x400000000000"/>
+          <keyword name="Session0" message="$(string.keyword_Session0)" mask="0x800000000000"/>
+        </keywords>
+        <events>
+          <event value="0" version="0" level="win:LogAlways" symbol="EventSourceMessage" task="EventSourceMessage" template="EventSourceMessageArgs"/>
+          <event value="1" version="0" level="win:Verbose" symbol="SendingNotification" opcode="win:Send" task="Notification" template="SendingNotificationArgs"/>
+          <event value="4" version="0" level="win:Informational" symbol="ReceivedResult" opcode="win:Stop" task="OutboundCall" template="ReceivedResultArgs"/>
+          <event value="5" version="0" level="win:Warning" symbol="ReceivedError" message="$(string.event_ReceivedError)" opcode="win:Stop" task="OutboundCall" template="ReceivedErrorArgs"/>
+          <event value="6" version="0" level="win:Warning" symbol="ReceivedNoResponse" message="$(string.event_ReceivedNoResponse)" opcode="win:Stop" task="OutboundCall" template="ReceivedNoResponseArgs"/>
+          <event value="3" version="0" level="win:Informational" symbol="SendingCancellationRequest" opcode="win:Send" task="Cancellation" template="SendingCancellationRequestArgs"/>
+          <event value="20" version="0" level="win:Verbose" symbol="ReceivedNotification" opcode="win:Receive" task="Notification" template="ReceivedNotificationArgs"/>
+          <event value="23" version="0" level="win:Informational" symbol="SendingResult" opcode="win:Stop" task="InboundCall" template="SendingResultArgs"/>
+          <event value="24" version="0" level="win:Warning" symbol="SendingError" message="$(string.event_SendingError)" opcode="win:Stop" task="InboundCall" template="SendingErrorArgs"/>
+          <event value="22" version="0" level="win:Informational" symbol="ReceivedCancellationRequest" opcode="win:Receive" task="Cancellation" template="ReceivedCancellationRequestArgs"/>
+          <event value="30" version="0" level="win:Informational" symbol="TransmissionQueued" opcode="win:Start" task="MessageTransmission"/>
+          <event value="31" version="0" level="win:Informational" symbol="TransmissionCompleted" opcode="win:Stop" task="MessageTransmission"/>
+          <event value="32" version="0" level="win:Informational" symbol="HandlerTransmitted" opcode="win:Send" task="MessageHandler" template="HandlerTransmittedArgs"/>
+          <event value="33" version="0" level="win:Informational" symbol="HandlerReceived" opcode="win:Receive" task="MessageHandler" template="HandlerReceivedArgs"/>
+          <event value="2" version="0" level="win:Verbose" symbol="SendingRequest" opcode="win:Start" task="OutboundCall" template="SendingRequestArgs"/>
+          <event value="21" version="0" level="win:Verbose" symbol="ReceivedRequest" opcode="win:Start" task="InboundCall" template="ReceivedRequestArgs"/>
+        </events>
+        <templates>
+          <template tid="EventSourceMessageArgs">
+            <data name="message" inType="win:UnicodeString"/>
+          </template>
+          <template tid="SendingNotificationArgs">
+            <data name="method" inType="win:UnicodeString"/>
+            <data name="args" inType="win:UnicodeString"/>
+          </template>
+          <template tid="ReceivedResultArgs">
+            <data name="requestId" inType="win:Int64"/>
+          </template>
+          <template tid="ReceivedErrorArgs">
+            <data name="requestId" inType="win:Int64"/>
+            <data name="errorCode" inType="win:UInt32" map="JsonRpcErrorCode"/>
+          </template>
+          <template tid="ReceivedNoResponseArgs">
+            <data name="requestId" inType="win:Int64"/>
+          </template>
+          <template tid="SendingCancellationRequestArgs">
+            <data name="requestId" inType="win:Int64"/>
+          </template>
+          <template tid="ReceivedNotificationArgs">
+            <data name="method" inType="win:UnicodeString"/>
+            <data name="args" inType="win:UnicodeString"/>
+          </template>
+          <template tid="SendingResultArgs">
+            <data name="requestId" inType="win:Int64"/>
+          </template>
+          <template tid="SendingErrorArgs">
+            <data name="requestId" inType="win:Int64"/>
+            <data name="errorCode" inType="win:UInt32" map="JsonRpcErrorCode"/>
+          </template>
+          <template tid="ReceivedCancellationRequestArgs">
+            <data name="requestId" inType="win:Int64"/>
+          </template>
+          <template tid="HandlerTransmittedArgs">
+            <data name="size" inType="win:Int64"/>
+          </template>
+          <template tid="HandlerReceivedArgs">
+            <data name="size" inType="win:Int64"/>
+          </template>
+          <template tid="SendingRequestArgs">
+            <data name="requestId" inType="win:Int64"/>
+            <data name="method" inType="win:UnicodeString"/>
+            <data name="args" inType="win:UnicodeString"/>
+          </template>
+          <template tid="ReceivedRequestArgs">
+            <data name="requestId" inType="win:Int64"/>
+            <data name="method" inType="win:UnicodeString"/>
+            <data name="args" inType="win:UnicodeString"/>
+          </template>
+        </templates>
+      </provider>
+    </events>
+  </instrumentation>
+  <localization>
+    <resources culture="en-US">
+      <stringTable>
+        <string id="event_ReceivedError" value="Request %1 failed with: %2"/>
+        <string id="event_ReceivedNoResponse" value="Request %1 received no response."/>
+        <string id="event_SendingError" value="Request %1 failed with: %2"/>
+        <string id="keyword_Session0" value="Session0"/>
+        <string id="keyword_Session1" value="Session1"/>
+        <string id="keyword_Session2" value="Session2"/>
+        <string id="keyword_Session3" value="Session3"/>
+        <string id="map_JsonRpcErrorCode.InternalError" value="InternalError"/>
+        <string id="map_JsonRpcErrorCode.InvalidParams" value="InvalidParams"/>
+        <string id="map_JsonRpcErrorCode.InvalidRequest" value="InvalidRequest"/>
+        <string id="map_JsonRpcErrorCode.InvocationError" value="InvocationError"/>
+        <string id="map_JsonRpcErrorCode.InvocationErrorWithException" value="InvocationErrorWithException"/>
+        <string id="map_JsonRpcErrorCode.MethodNotFound" value="MethodNotFound"/>
+        <string id="map_JsonRpcErrorCode.NoMarshaledObjectFound" value="NoMarshaledObjectFound"/>
+        <string id="map_JsonRpcErrorCode.ParseError" value="ParseError"/>
+        <string id="map_JsonRpcErrorCode.RequestCanceled" value="RequestCanceled"/>
+        <string id="map_JsonRpcErrorCode.ResponseSerializationFailure" value="ResponseSerializationFailure"/>
+        <string id="task_Cancellation" value="Cancellation"/>
+        <string id="task_EventSourceMessage" value="EventSourceMessage"/>
+        <string id="task_InboundCall" value="InboundCall"/>
+        <string id="task_MessageHandler" value="MessageHandler"/>
+        <string id="task_MessageTransmission" value="MessageTransmission"/>
+        <string id="task_Notification" value="Notification"/>
+        <string id="task_OutboundCall" value="OutboundCall"/>
+      </stringTable>
+    </resources>
+  </localization>
+</instrumentationManifest>

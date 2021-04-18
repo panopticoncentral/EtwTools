@@ -1,0 +1,323 @@
+<instrumentationManifest xmlns="http://schemas.microsoft.com/win/2004/08/events">
+  <instrumentation xmlns:xs="http://www.w3.org/2001/XMLSchema"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:win="http://manifests.microsoft.com/win/2004/08/windows/events">
+    <events xmlns="http://schemas.microsoft.com/win/2004/08/events">
+      <provider name="System.Threading.Tasks.TplEventSource" guid="{2e5dba47-a3d2-4d16-8ee0-6671ffdcd7b5}" resourceFileName="System.Threading.Tasks.TplEventSource" messageFileName="System.Threading.Tasks.TplEventSource" symbol="System_Threading_Tasks_TplEventSource">
+        <tasks>
+          <task name="Loop" message="$(string.task_Loop)" value="1"/>
+          <task name="Invoke" message="$(string.task_Invoke)" value="2"/>
+          <task name="TaskExecute" message="$(string.task_TaskExecute)" value="3"/>
+          <task name="TaskWait" message="$(string.task_TaskWait)" value="4"/>
+          <task name="ForkJoin" message="$(string.task_ForkJoin)" value="5"/>
+          <task name="TaskScheduled" message="$(string.task_TaskScheduled)" value="6"/>
+          <task name="AwaitTaskContinuationScheduled" message="$(string.task_AwaitTaskContinuationScheduled)" value="7"/>
+          <task name="TraceOperation" message="$(string.task_TraceOperation)" value="8"/>
+          <task name="TraceSynchronousWork" message="$(string.task_TraceSynchronousWork)" value="9"/>
+          <task name="NewID" message="$(string.task_NewID)" value="65508"/>
+          <task name="SetActivityId" message="$(string.task_SetActivityId)" value="65509"/>
+          <task name="DebugFacilityMessage1" message="$(string.task_DebugFacilityMessage1)" value="65510"/>
+          <task name="DebugFacilityMessage" message="$(string.task_DebugFacilityMessage)" value="65511"/>
+          <task name="DebugMessage" message="$(string.task_DebugMessage)" value="65512"/>
+          <task name="RunningContinuationList" message="$(string.task_RunningContinuationList)" value="65513"/>
+          <task name="RunningContinuation" message="$(string.task_RunningContinuation)" value="65514"/>
+          <task name="TaskWaitContinuationStarted" message="$(string.task_TaskWaitContinuationStarted)" value="65515"/>
+          <task name="TraceSynchronousWorkEnd" message="$(string.task_TraceSynchronousWorkEnd)" value="65516"/>
+          <task name="TraceSynchronousWorkBegin" message="$(string.task_TraceSynchronousWorkBegin)" value="65517"/>
+          <task name="TraceOperationRelation" message="$(string.task_TraceOperationRelation)" value="65518"/>
+          <task name="TraceOperationEnd" message="$(string.task_TraceOperationEnd)" value="65519"/>
+          <task name="TraceOperationBegin" message="$(string.task_TraceOperationBegin)" value="65520"/>
+          <task name="TaskWaitContinuationComplete" message="$(string.task_TaskWaitContinuationComplete)" value="65521"/>
+          <task name="TaskWaitEnd" message="$(string.task_TaskWaitEnd)" value="65523"/>
+          <task name="TaskCompleted" message="$(string.task_TaskCompleted)" value="65525"/>
+          <task name="TaskStarted" message="$(string.task_TaskStarted)" value="65526"/>
+          <task name="EventSourceMessage" message="$(string.task_EventSourceMessage)" value="65534"/>
+        </tasks>
+        <maps>
+          <valueMap name="ForkJoinOperationType">
+            <map value="0x1" message="$(string.map_ForkJoinOperationType.ParallelInvoke)"/>
+            <map value="0x2" message="$(string.map_ForkJoinOperationType.ParallelFor)"/>
+            <map value="0x3" message="$(string.map_ForkJoinOperationType.ParallelForEach)"/>
+          </valueMap>
+          <valueMap name="TaskWaitBehavior">
+            <map value="0x1" message="$(string.map_TaskWaitBehavior.Synchronous)"/>
+            <map value="0x2" message="$(string.map_TaskWaitBehavior.Asynchronous)"/>
+          </valueMap>
+          <valueMap name="CausalityRelation">
+            <map value="0x0" message="$(string.map_CausalityRelation.AssignDelegate)"/>
+            <map value="0x1" message="$(string.map_CausalityRelation.Join)"/>
+            <map value="0x2" message="$(string.map_CausalityRelation.Choice)"/>
+            <map value="0x3" message="$(string.map_CausalityRelation.Cancel)"/>
+            <map value="0x4" message="$(string.map_CausalityRelation.Error)"/>
+          </valueMap>
+          <valueMap name="AsyncCausalityStatus">
+            <map value="0x2" message="$(string.map_AsyncCausalityStatus.Canceled)"/>
+            <map value="0x1" message="$(string.map_AsyncCausalityStatus.Completed)"/>
+            <map value="0x3" message="$(string.map_AsyncCausalityStatus.Error)"/>
+            <map value="0x0" message="$(string.map_AsyncCausalityStatus.Started)"/>
+          </valueMap>
+          <valueMap name="CausalitySynchronousWork">
+            <map value="0x0" message="$(string.map_CausalitySynchronousWork.CompletionNotification)"/>
+            <map value="0x1" message="$(string.map_CausalitySynchronousWork.ProgressNotification)"/>
+            <map value="0x2" message="$(string.map_CausalitySynchronousWork.Execution)"/>
+          </valueMap>
+        </maps>
+        <opcodes>
+        </opcodes>
+        <keywords>
+          <keyword name="TaskTransfer" message="$(string.keyword_TaskTransfer)" mask="0x1"/>
+          <keyword name="Tasks" message="$(string.keyword_Tasks)" mask="0x2"/>
+          <keyword name="Parallel" message="$(string.keyword_Parallel)" mask="0x4"/>
+          <keyword name="AsyncCausalityOperation" message="$(string.keyword_AsyncCausalityOperation)" mask="0x8"/>
+          <keyword name="AsyncCausalityRelation" message="$(string.keyword_AsyncCausalityRelation)" mask="0x10"/>
+          <keyword name="AsyncCausalitySynchronousWork" message="$(string.keyword_AsyncCausalitySynchronousWork)" mask="0x20"/>
+          <keyword name="TaskStops" message="$(string.keyword_TaskStops)" mask="0x40"/>
+          <keyword name="TasksFlowActivityIds" message="$(string.keyword_TasksFlowActivityIds)" mask="0x80"/>
+          <keyword name="TasksSetActivityIds" message="$(string.keyword_TasksSetActivityIds)" mask="0x10000"/>
+          <keyword name="Debug" message="$(string.keyword_Debug)" mask="0x20000"/>
+          <keyword name="DebugActivityId" message="$(string.keyword_DebugActivityId)" mask="0x40000"/>
+          <keyword name="Session3" message="$(string.keyword_Session3)" mask="0x100000000000"/>
+          <keyword name="Session2" message="$(string.keyword_Session2)" mask="0x200000000000"/>
+          <keyword name="Session1" message="$(string.keyword_Session1)" mask="0x400000000000"/>
+          <keyword name="Session0" message="$(string.keyword_Session0)" mask="0x800000000000"/>
+        </keywords>
+        <events>
+          <event value="0" version="0" level="win:LogAlways" symbol="EventSourceMessage" task="EventSourceMessage" template="EventSourceMessageArgs"/>
+          <event value="1" version="0" level="win:Informational" symbol="ParallelLoopBegin" message="$(string.event_ParallelLoopBegin)" opcode="win:Start" task="Loop" template="ParallelLoopBeginArgs"/>
+          <event value="2" version="0" level="win:Informational" symbol="ParallelLoopEnd" message="$(string.event_ParallelLoopEnd)" opcode="win:Stop" task="Loop" template="ParallelLoopEndArgs"/>
+          <event value="3" version="0" level="win:Informational" symbol="ParallelInvokeBegin" message="$(string.event_ParallelInvokeBegin)" opcode="win:Start" task="Invoke" template="ParallelInvokeBeginArgs"/>
+          <event value="4" version="0" level="win:Informational" symbol="ParallelInvokeEnd" message="$(string.event_ParallelInvokeEnd)" opcode="win:Stop" task="Invoke" template="ParallelInvokeEndArgs"/>
+          <event value="5" version="0" level="win:Verbose" symbol="ParallelFork" message="$(string.event_ParallelFork)" opcode="win:Start" task="ForkJoin" template="ParallelForkArgs"/>
+          <event value="6" version="0" level="win:Verbose" symbol="ParallelJoin" message="$(string.event_ParallelJoin)" opcode="win:Stop" task="ForkJoin" template="ParallelJoinArgs"/>
+          <event value="7" version="1" level="win:Informational" symbol="TaskScheduled" message="$(string.event_TaskScheduled)" keywords="TaskTransfer Tasks" opcode="win:Send" task="TaskScheduled" template="TaskScheduledArgs"/>
+          <event value="8" version="0" level="win:Informational" symbol="TaskStarted" message="$(string.event_TaskStarted)" keywords="Tasks" task="TaskStarted" template="TaskStartedArgs"/>
+          <event value="9" version="1" level="win:Informational" symbol="TaskCompleted" message="$(string.event_TaskCompleted)" keywords="TaskStops" task="TaskCompleted" template="TaskCompletedArgs"/>
+          <event value="10" version="3" level="win:Informational" symbol="TaskWaitBegin" message="$(string.event_TaskWaitBegin)" keywords="TaskTransfer Tasks" opcode="win:Send" task="TaskWait" template="TaskWaitBeginArgs"/>
+          <event value="11" version="0" level="win:Verbose" symbol="TaskWaitEnd" message="$(string.event_TaskWaitEnd)" keywords="Tasks" task="TaskWaitEnd" template="TaskWaitEndArgs"/>
+          <event value="13" version="0" level="win:Verbose" symbol="TaskWaitContinuationComplete" keywords="TaskStops" task="TaskWaitContinuationComplete" template="TaskWaitContinuationCompleteArgs"/>
+          <event value="19" version="0" level="win:Verbose" symbol="TaskWaitContinuationStarted" keywords="TaskStops" task="TaskWaitContinuationStarted" template="TaskWaitContinuationStartedArgs"/>
+          <event value="12" version="0" level="win:Informational" symbol="AwaitTaskContinuationScheduled" keywords="TaskTransfer Tasks" opcode="win:Send" task="AwaitTaskContinuationScheduled" template="AwaitTaskContinuationScheduledArgs"/>
+          <event value="14" version="1" level="win:Informational" symbol="TraceOperationBegin" keywords="AsyncCausalityOperation" task="TraceOperationBegin" template="TraceOperationBeginArgs"/>
+          <event value="16" version="1" level="win:Informational" symbol="TraceOperationRelation" keywords="AsyncCausalityRelation" task="TraceOperationRelation" template="TraceOperationRelationArgs"/>
+          <event value="15" version="1" level="win:Informational" symbol="TraceOperationEnd" keywords="AsyncCausalityOperation" task="TraceOperationEnd" template="TraceOperationEndArgs"/>
+          <event value="17" version="1" level="win:Informational" symbol="TraceSynchronousWorkBegin" keywords="AsyncCausalitySynchronousWork" task="TraceSynchronousWorkBegin" template="TraceSynchronousWorkBeginArgs"/>
+          <event value="18" version="1" level="win:Informational" symbol="TraceSynchronousWorkEnd" keywords="AsyncCausalitySynchronousWork" task="TraceSynchronousWorkEnd" template="TraceSynchronousWorkEndArgs"/>
+          <event value="20" version="0" level="win:Informational" symbol="RunningContinuation" keywords="Debug" task="RunningContinuation" template="RunningContinuationArgs"/>
+          <event value="21" version="0" level="win:Informational" symbol="RunningContinuationList" keywords="Debug" task="RunningContinuationList" template="RunningContinuationListArgs"/>
+          <event value="22" version="0" level="win:Informational" symbol="DebugMessage" keywords="Debug" task="DebugMessage" template="DebugMessageArgs"/>
+          <event value="23" version="0" level="win:Informational" symbol="DebugFacilityMessage" keywords="Debug" task="DebugFacilityMessage" template="DebugFacilityMessageArgs"/>
+          <event value="24" version="0" level="win:Informational" symbol="DebugFacilityMessage1" keywords="Debug" task="DebugFacilityMessage1" template="DebugFacilityMessage1Args"/>
+          <event value="25" version="0" level="win:Informational" symbol="SetActivityId" keywords="DebugActivityId" task="SetActivityId" template="SetActivityIdArgs"/>
+          <event value="26" version="0" level="win:Informational" symbol="NewID" keywords="Debug" task="NewID" template="NewIDArgs"/>
+        </events>
+        <templates>
+          <template tid="EventSourceMessageArgs">
+            <data name="message" inType="win:UnicodeString"/>
+          </template>
+          <template tid="ParallelLoopBeginArgs">
+            <data name="OriginatingTaskSchedulerID" inType="win:Int32"/>
+            <data name="OriginatingTaskID" inType="win:Int32"/>
+            <data name="ForkJoinContextID" inType="win:Int32"/>
+            <data name="OperationType" inType="win:UInt32" map="ForkJoinOperationType"/>
+            <data name="InclusiveFrom" inType="win:Int64"/>
+            <data name="ExclusiveTo" inType="win:Int64"/>
+          </template>
+          <template tid="ParallelLoopEndArgs">
+            <data name="OriginatingTaskSchedulerID" inType="win:Int32"/>
+            <data name="OriginatingTaskID" inType="win:Int32"/>
+            <data name="ForkJoinContextID" inType="win:Int32"/>
+            <data name="TotalIterations" inType="win:Int64"/>
+          </template>
+          <template tid="ParallelInvokeBeginArgs">
+            <data name="OriginatingTaskSchedulerID" inType="win:Int32"/>
+            <data name="OriginatingTaskID" inType="win:Int32"/>
+            <data name="ForkJoinContextID" inType="win:Int32"/>
+            <data name="OperationType" inType="win:UInt32" map="ForkJoinOperationType"/>
+            <data name="ActionCount" inType="win:Int32"/>
+          </template>
+          <template tid="ParallelInvokeEndArgs">
+            <data name="OriginatingTaskSchedulerID" inType="win:Int32"/>
+            <data name="OriginatingTaskID" inType="win:Int32"/>
+            <data name="ForkJoinContextID" inType="win:Int32"/>
+          </template>
+          <template tid="ParallelForkArgs">
+            <data name="OriginatingTaskSchedulerID" inType="win:Int32"/>
+            <data name="OriginatingTaskID" inType="win:Int32"/>
+            <data name="ForkJoinContextID" inType="win:Int32"/>
+          </template>
+          <template tid="ParallelJoinArgs">
+            <data name="OriginatingTaskSchedulerID" inType="win:Int32"/>
+            <data name="OriginatingTaskID" inType="win:Int32"/>
+            <data name="ForkJoinContextID" inType="win:Int32"/>
+          </template>
+          <template tid="TaskScheduledArgs">
+            <data name="OriginatingTaskSchedulerID" inType="win:Int32"/>
+            <data name="OriginatingTaskID" inType="win:Int32"/>
+            <data name="TaskID" inType="win:Int32"/>
+            <data name="CreatingTaskID" inType="win:Int32"/>
+            <data name="TaskCreationOptions" inType="win:Int32"/>
+            <data name="appDomain" inType="win:Int32"/>
+          </template>
+          <template tid="TaskStartedArgs">
+            <data name="OriginatingTaskSchedulerID" inType="win:Int32"/>
+            <data name="OriginatingTaskID" inType="win:Int32"/>
+            <data name="TaskID" inType="win:Int32"/>
+          </template>
+          <template tid="TaskCompletedArgs">
+            <data name="OriginatingTaskSchedulerID" inType="win:Int32"/>
+            <data name="OriginatingTaskID" inType="win:Int32"/>
+            <data name="TaskID" inType="win:Int32"/>
+            <data name="IsExceptional" inType="win:Boolean"/>
+          </template>
+          <template tid="TaskWaitBeginArgs">
+            <data name="OriginatingTaskSchedulerID" inType="win:Int32"/>
+            <data name="OriginatingTaskID" inType="win:Int32"/>
+            <data name="TaskID" inType="win:Int32"/>
+            <data name="Behavior" inType="win:UInt32" map="TaskWaitBehavior"/>
+            <data name="ContinueWithTaskID" inType="win:Int32"/>
+            <data name="appDomain" inType="win:Int32"/>
+          </template>
+          <template tid="TaskWaitEndArgs">
+            <data name="OriginatingTaskSchedulerID" inType="win:Int32"/>
+            <data name="OriginatingTaskID" inType="win:Int32"/>
+            <data name="TaskID" inType="win:Int32"/>
+          </template>
+          <template tid="TaskWaitContinuationCompleteArgs">
+            <data name="TaskID" inType="win:Int32"/>
+          </template>
+          <template tid="TaskWaitContinuationStartedArgs">
+            <data name="TaskID" inType="win:Int32"/>
+          </template>
+          <template tid="AwaitTaskContinuationScheduledArgs">
+            <data name="OriginatingTaskSchedulerID" inType="win:Int32"/>
+            <data name="OriginatingTaskID" inType="win:Int32"/>
+            <data name="ContinuwWithTaskId" inType="win:Int32"/>
+          </template>
+          <template tid="TraceOperationBeginArgs">
+            <data name="TaskID" inType="win:Int32"/>
+            <data name="OperationName" inType="win:UnicodeString"/>
+            <data name="RelatedContext" inType="win:Int64"/>
+          </template>
+          <template tid="TraceOperationRelationArgs">
+            <data name="TaskID" inType="win:Int32"/>
+            <data name="Relation" inType="win:UInt32" map="CausalityRelation"/>
+          </template>
+          <template tid="TraceOperationEndArgs">
+            <data name="TaskID" inType="win:Int32"/>
+            <data name="Status" inType="win:UInt32" map="AsyncCausalityStatus"/>
+          </template>
+          <template tid="TraceSynchronousWorkBeginArgs">
+            <data name="TaskID" inType="win:Int32"/>
+            <data name="Work" inType="win:UInt32" map="CausalitySynchronousWork"/>
+          </template>
+          <template tid="TraceSynchronousWorkEndArgs">
+            <data name="Work" inType="win:UInt32" map="CausalitySynchronousWork"/>
+          </template>
+          <template tid="RunningContinuationArgs">
+            <data name="TaskID" inType="win:Int32"/>
+            <data name="Object" inType="win:Int64"/>
+          </template>
+          <template tid="RunningContinuationListArgs">
+            <data name="TaskID" inType="win:Int32"/>
+            <data name="Index" inType="win:Int32"/>
+            <data name="Object" inType="win:Int64"/>
+          </template>
+          <template tid="DebugMessageArgs">
+            <data name="Message" inType="win:UnicodeString"/>
+          </template>
+          <template tid="DebugFacilityMessageArgs">
+            <data name="Facility" inType="win:UnicodeString"/>
+            <data name="Message" inType="win:UnicodeString"/>
+          </template>
+          <template tid="DebugFacilityMessage1Args">
+            <data name="Facility" inType="win:UnicodeString"/>
+            <data name="Message" inType="win:UnicodeString"/>
+            <data name="Value1" inType="win:UnicodeString"/>
+          </template>
+          <template tid="SetActivityIdArgs">
+            <data name="NewId" inType="win:GUID"/>
+          </template>
+          <template tid="NewIDArgs">
+            <data name="TaskID" inType="win:Int32"/>
+          </template>
+        </templates>
+      </provider>
+    </events>
+  </instrumentation>
+  <localization>
+    <resources culture="en-US">
+      <stringTable>
+        <string id="event_ParallelFork" value="Task %2 entering fork/join %3."/>
+        <string id="event_ParallelInvokeBegin" value="Beginning ParallelInvoke %3 from Task %2 for %5 actions."/>
+        <string id="event_ParallelInvokeEnd" value="Ending ParallelInvoke %3."/>
+        <string id="event_ParallelJoin" value="Task %2 leaving fork/join %3."/>
+        <string id="event_ParallelLoopBegin" value="Beginning %4 loop %3 from Task %2."/>
+        <string id="event_ParallelLoopEnd" value="Ending loop %3 after %4 iterations."/>
+        <string id="event_TaskCompleted" value="Task %3 completed."/>
+        <string id="event_TaskScheduled" value="Task %3 scheduled to TaskScheduler %1."/>
+        <string id="event_TaskStarted" value="Task %3 executing."/>
+        <string id="event_TaskWaitBegin" value="Beginning wait (%4) on Task %3."/>
+        <string id="event_TaskWaitEnd" value="Ending wait on Task %3."/>
+        <string id="keyword_AsyncCausalityOperation" value="AsyncCausalityOperation"/>
+        <string id="keyword_AsyncCausalityRelation" value="AsyncCausalityRelation"/>
+        <string id="keyword_AsyncCausalitySynchronousWork" value="AsyncCausalitySynchronousWork"/>
+        <string id="keyword_Debug" value="Debug"/>
+        <string id="keyword_DebugActivityId" value="DebugActivityId"/>
+        <string id="keyword_Parallel" value="Parallel"/>
+        <string id="keyword_Session0" value="Session0"/>
+        <string id="keyword_Session1" value="Session1"/>
+        <string id="keyword_Session2" value="Session2"/>
+        <string id="keyword_Session3" value="Session3"/>
+        <string id="keyword_Tasks" value="Tasks"/>
+        <string id="keyword_TasksFlowActivityIds" value="TasksFlowActivityIds"/>
+        <string id="keyword_TasksSetActivityIds" value="TasksSetActivityIds"/>
+        <string id="keyword_TaskStops" value="TaskStops"/>
+        <string id="keyword_TaskTransfer" value="TaskTransfer"/>
+        <string id="map_AsyncCausalityStatus.Canceled" value="Canceled"/>
+        <string id="map_AsyncCausalityStatus.Completed" value="Completed"/>
+        <string id="map_AsyncCausalityStatus.Error" value="Error"/>
+        <string id="map_AsyncCausalityStatus.Started" value="Started"/>
+        <string id="map_CausalityRelation.AssignDelegate" value="AssignDelegate"/>
+        <string id="map_CausalityRelation.Cancel" value="Cancel"/>
+        <string id="map_CausalityRelation.Choice" value="Choice"/>
+        <string id="map_CausalityRelation.Error" value="Error"/>
+        <string id="map_CausalityRelation.Join" value="Join"/>
+        <string id="map_CausalitySynchronousWork.CompletionNotification" value="CompletionNotification"/>
+        <string id="map_CausalitySynchronousWork.Execution" value="Execution"/>
+        <string id="map_CausalitySynchronousWork.ProgressNotification" value="ProgressNotification"/>
+        <string id="map_ForkJoinOperationType.ParallelFor" value="ParallelFor"/>
+        <string id="map_ForkJoinOperationType.ParallelForEach" value="ParallelForEach"/>
+        <string id="map_ForkJoinOperationType.ParallelInvoke" value="ParallelInvoke"/>
+        <string id="map_TaskWaitBehavior.Asynchronous" value="Asynchronous"/>
+        <string id="map_TaskWaitBehavior.Synchronous" value="Synchronous"/>
+        <string id="task_AwaitTaskContinuationScheduled" value="AwaitTaskContinuationScheduled"/>
+        <string id="task_DebugFacilityMessage" value="DebugFacilityMessage"/>
+        <string id="task_DebugFacilityMessage1" value="DebugFacilityMessage1"/>
+        <string id="task_DebugMessage" value="DebugMessage"/>
+        <string id="task_EventSourceMessage" value="EventSourceMessage"/>
+        <string id="task_ForkJoin" value="ForkJoin"/>
+        <string id="task_Invoke" value="Invoke"/>
+        <string id="task_Loop" value="Loop"/>
+        <string id="task_NewID" value="NewID"/>
+        <string id="task_RunningContinuation" value="RunningContinuation"/>
+        <string id="task_RunningContinuationList" value="RunningContinuationList"/>
+        <string id="task_SetActivityId" value="SetActivityId"/>
+        <string id="task_TaskCompleted" value="TaskCompleted"/>
+        <string id="task_TaskExecute" value="TaskExecute"/>
+        <string id="task_TaskScheduled" value="TaskScheduled"/>
+        <string id="task_TaskStarted" value="TaskStarted"/>
+        <string id="task_TaskWait" value="TaskWait"/>
+        <string id="task_TaskWaitContinuationComplete" value="TaskWaitContinuationComplete"/>
+        <string id="task_TaskWaitContinuationStarted" value="TaskWaitContinuationStarted"/>
+        <string id="task_TaskWaitEnd" value="TaskWaitEnd"/>
+        <string id="task_TraceOperation" value="TraceOperation"/>
+        <string id="task_TraceOperationBegin" value="TraceOperationBegin"/>
+        <string id="task_TraceOperationEnd" value="TraceOperationEnd"/>
+        <string id="task_TraceOperationRelation" value="TraceOperationRelation"/>
+        <string id="task_TraceSynchronousWork" value="TraceSynchronousWork"/>
+        <string id="task_TraceSynchronousWorkBegin" value="TraceSynchronousWorkBegin"/>
+        <string id="task_TraceSynchronousWorkEnd" value="TraceSynchronousWorkEnd"/>
+      </stringTable>
+    </resources>
+  </localization>
+</instrumentationManifest>

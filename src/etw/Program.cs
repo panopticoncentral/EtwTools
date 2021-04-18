@@ -133,9 +133,10 @@ void AddTraceCommands(Command traceCommand)
 
     var manifestsCommand = new Command("manifests", "Saves self-describing manifests in a trace.")
     {
-        new Argument<string>("trace", "The trace file.")
+        new Argument<string>("trace", "The trace file."),
+        new Option<bool>(new[] { "-a", "--all" }, "Save all manifests, not just the longest one.")
     };
-    manifestsCommand.Handler = CommandHandler.Create<string>(SaveTraceManifests);
+    manifestsCommand.Handler = CommandHandler.Create<string, bool>(SaveTraceManifests);
     traceCommand.AddCommand(manifestsCommand);
 }
 
@@ -655,7 +656,7 @@ static void GetTraceEvents(string trace)
     AnsiConsole.WriteLine();
 }
 
-static void SaveTraceManifests(string trace)
+static void SaveTraceManifests(string trace, bool all)
 {
     using var logFile = new EtwTrace(trace);
 
@@ -663,9 +664,31 @@ static void SaveTraceManifests(string trace)
     var stats = logFile.Open(null, e => collector.ProcessEventSourceManifestEvent(ref e));
     logFile.Process();
 
-    foreach (var (provider, pid, tid, manifest) in collector.GetCompletedManifests())
+    if (all)
     {
-        File.WriteAllText($"{provider}.{pid}.{tid}.xml", manifest);
+        foreach (var (provider, pid, tid, manifest) in collector.GetCompletedManifests())
+        {
+            File.WriteAllText($"{provider}.{pid}.{tid}.xml", manifest);
+        }
+    }
+    else
+    {
+        Dictionary<Guid, string> manifests = new();
+        foreach (var (provider, pid, tid, manifest) in collector.GetCompletedManifests())
+        {
+            if (manifests.TryGetValue(provider, out var currentManifest) &&
+                currentManifest.Length >= manifest.Length)
+            {
+                continue;
+            }
+
+            manifests[provider] = manifest;
+        }
+
+        foreach (var kvp in manifests)
+        {
+            File.WriteAllText($"{kvp.Key}.xml", kvp.Value);
+        }
     }
 }
 

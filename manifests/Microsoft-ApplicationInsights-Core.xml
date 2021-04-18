@@ -1,0 +1,149 @@
+<instrumentationManifest xmlns="http://schemas.microsoft.com/win/2004/08/events">
+  <instrumentation xmlns:xs="http://www.w3.org/2001/XMLSchema"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:win="http://manifests.microsoft.com/win/2004/08/windows/events">
+    <events xmlns="http://schemas.microsoft.com/win/2004/08/events">
+      <provider name="Microsoft-ApplicationInsights-Core" guid="{74af9f20-af6a-5582-9382-f21f674fb271}" resourceFileName="Microsoft-ApplicationInsights-Core" messageFileName="Microsoft-ApplicationInsights-Core" symbol="MicrosoftApplicationInsightsCore">
+        <tasks>
+          <task name="BuildInfoConfigBrokenXmlError" message="$(string.task_BuildInfoConfigBrokenXmlError)" value="65443"/>
+          <task name="LogError" message="$(string.task_LogError)" value="65444"/>
+          <task name="TrackingWasEnabled" message="$(string.task_TrackingWasEnabled)" value="65453"/>
+          <task name="TrackingWasDisabled" message="$(string.task_TrackingWasDisabled)" value="65454"/>
+          <task name="RequestTelemetryIncorrectDuration" message="$(string.task_RequestTelemetryIncorrectDuration)" value="65462"/>
+          <task name="PopulateRequiredStringWithValue" message="$(string.task_PopulateRequiredStringWithValue)" value="65463"/>
+          <task name="TelemetryClientConstructorWithNoTelemetryConfiguration" message="$(string.task_TelemetryClientConstructorWithNoTelemetryConfiguration)" value="65464"/>
+          <task name="DiagnoisticsEventThrottlingSchedulerTimerWasRemoved" message="$(string.task_DiagnoisticsEventThrottlingSchedulerTimerWasRemoved)" value="65474"/>
+          <task name="DiagnoisticsEventThrottlingSchedulerTimerWasCreated" message="$(string.task_DiagnoisticsEventThrottlingSchedulerTimerWasCreated)" value="65484"/>
+          <task name="DiagnoisticsEventThrottlingSchedulerDisposeTimerFailure" message="$(string.task_DiagnoisticsEventThrottlingSchedulerDisposeTimerFailure)" value="65494"/>
+          <task name="DiagnosticsEventThrottlingHasBeenResetForTheEvent" message="$(string.task_DiagnosticsEventThrottlingHasBeenResetForTheEvent)" value="65504"/>
+          <task name="DiagnosticsEventThrottlingHasBeenStartedForTheEvent" message="$(string.task_DiagnosticsEventThrottlingHasBeenStartedForTheEvent)" value="65514"/>
+          <task name="LogVerbose" message="$(string.task_LogVerbose)" value="65524"/>
+          <task name="EventSourceMessage" message="$(string.task_EventSourceMessage)" value="65534"/>
+        </tasks>
+        <opcodes>
+        </opcodes>
+        <keywords>
+          <keyword name="UserActionable" message="$(string.keyword_UserActionable)" mask="0x1"/>
+          <keyword name="Diagnostics" message="$(string.keyword_Diagnostics)" mask="0x2"/>
+          <keyword name="VerboseFailure" message="$(string.keyword_VerboseFailure)" mask="0x4"/>
+          <keyword name="ErrorFailure" message="$(string.keyword_ErrorFailure)" mask="0x8"/>
+          <keyword name="Session3" message="$(string.keyword_Session3)" mask="0x100000000000"/>
+          <keyword name="Session2" message="$(string.keyword_Session2)" mask="0x200000000000"/>
+          <keyword name="Session1" message="$(string.keyword_Session1)" mask="0x400000000000"/>
+          <keyword name="Session0" message="$(string.keyword_Session0)" mask="0x800000000000"/>
+        </keywords>
+        <events>
+          <event value="0" version="0" level="win:LogAlways" symbol="EventSourceMessage" task="EventSourceMessage" template="EventSourceMessageArgs"/>
+          <event value="10" version="0" level="win:Verbose" symbol="LogVerbose" message="$(string.event_LogVerbose)" keywords="VerboseFailure" task="LogVerbose" template="LogVerboseArgs"/>
+          <event value="20" version="0" level="win:Informational" symbol="DiagnosticsEventThrottlingHasBeenStartedForTheEvent" message="$(string.event_DiagnosticsEventThrottlingHasBeenStartedForTheEvent)" keywords="UserActionable Diagnostics" task="DiagnosticsEventThrottlingHasBeenStartedForTheEvent" template="DiagnosticsEventThrottlingHasBeenStartedForTheEventArgs"/>
+          <event value="30" version="0" level="win:Informational" symbol="DiagnosticsEventThrottlingHasBeenResetForTheEvent" message="$(string.event_DiagnosticsEventThrottlingHasBeenResetForTheEvent)" keywords="UserActionable Diagnostics" task="DiagnosticsEventThrottlingHasBeenResetForTheEvent" template="DiagnosticsEventThrottlingHasBeenResetForTheEventArgs"/>
+          <event value="40" version="0" level="win:Warning" symbol="DiagnoisticsEventThrottlingSchedulerDisposeTimerFailure" message="$(string.event_DiagnoisticsEventThrottlingSchedulerDisposeTimerFailure)" keywords="Diagnostics" task="DiagnoisticsEventThrottlingSchedulerDisposeTimerFailure" template="DiagnoisticsEventThrottlingSchedulerDisposeTimerFailureArgs"/>
+          <event value="50" version="0" level="win:Verbose" symbol="DiagnoisticsEventThrottlingSchedulerTimerWasCreated" message="$(string.event_DiagnoisticsEventThrottlingSchedulerTimerWasCreated)" keywords="Diagnostics" task="DiagnoisticsEventThrottlingSchedulerTimerWasCreated" template="DiagnoisticsEventThrottlingSchedulerTimerWasCreatedArgs"/>
+          <event value="60" version="0" level="win:Verbose" symbol="DiagnoisticsEventThrottlingSchedulerTimerWasRemoved" message="$(string.event_DiagnoisticsEventThrottlingSchedulerTimerWasRemoved)" keywords="Diagnostics" task="DiagnoisticsEventThrottlingSchedulerTimerWasRemoved" template="DiagnoisticsEventThrottlingSchedulerTimerWasRemovedArgs"/>
+          <event value="70" version="0" level="win:Warning" symbol="TelemetryClientConstructorWithNoTelemetryConfiguration" message="$(string.event_TelemetryClientConstructorWithNoTelemetryConfiguration)" task="TelemetryClientConstructorWithNoTelemetryConfiguration" template="TelemetryClientConstructorWithNoTelemetryConfigurationArgs"/>
+          <event value="71" version="0" level="win:Verbose" symbol="PopulateRequiredStringWithValue" message="$(string.event_PopulateRequiredStringWithValue)" task="PopulateRequiredStringWithValue" template="PopulateRequiredStringWithValueArgs"/>
+          <event value="72" version="0" level="win:Warning" symbol="RequestTelemetryIncorrectDuration" message="$(string.event_RequestTelemetryIncorrectDuration)" task="RequestTelemetryIncorrectDuration" template="RequestTelemetryIncorrectDurationArgs"/>
+          <event value="80" version="0" level="win:Verbose" symbol="TrackingWasDisabled" message="$(string.event_TrackingWasDisabled)" task="TrackingWasDisabled" template="TrackingWasDisabledArgs"/>
+          <event value="81" version="0" level="win:Verbose" symbol="TrackingWasEnabled" message="$(string.event_TrackingWasEnabled)" task="TrackingWasEnabled" template="TrackingWasEnabledArgs"/>
+          <event value="90" version="0" level="win:Error" symbol="LogError" message="$(string.event_LogError)" keywords="ErrorFailure" task="LogError" template="LogErrorArgs"/>
+          <event value="91" version="0" level="win:Error" symbol="BuildInfoConfigBrokenXmlError" message="$(string.event_BuildInfoConfigBrokenXmlError)" keywords="UserActionable ErrorFailure" task="BuildInfoConfigBrokenXmlError" template="BuildInfoConfigBrokenXmlErrorArgs"/>
+        </events>
+        <templates>
+          <template tid="EventSourceMessageArgs">
+            <data name="message" inType="win:UnicodeString"/>
+          </template>
+          <template tid="LogVerboseArgs">
+            <data name="msg" inType="win:UnicodeString"/>
+            <data name="appDomainName" inType="win:UnicodeString"/>
+          </template>
+          <template tid="DiagnosticsEventThrottlingHasBeenStartedForTheEventArgs">
+            <data name="eventId" inType="win:Int32"/>
+            <data name="appDomainName" inType="win:UnicodeString"/>
+          </template>
+          <template tid="DiagnosticsEventThrottlingHasBeenResetForTheEventArgs">
+            <data name="eventId" inType="win:Int32"/>
+            <data name="executionCount" inType="win:Int32"/>
+            <data name="appDomainName" inType="win:UnicodeString"/>
+          </template>
+          <template tid="DiagnoisticsEventThrottlingSchedulerDisposeTimerFailureArgs">
+            <data name="exception" inType="win:UnicodeString"/>
+            <data name="appDomainName" inType="win:UnicodeString"/>
+          </template>
+          <template tid="DiagnoisticsEventThrottlingSchedulerTimerWasCreatedArgs">
+            <data name="intervalInMilliseconds" inType="win:Int32"/>
+            <data name="appDomainName" inType="win:UnicodeString"/>
+          </template>
+          <template tid="DiagnoisticsEventThrottlingSchedulerTimerWasRemovedArgs">
+            <data name="appDomainName" inType="win:UnicodeString"/>
+          </template>
+          <template tid="TelemetryClientConstructorWithNoTelemetryConfigurationArgs">
+            <data name="appDomainName" inType="win:UnicodeString"/>
+          </template>
+          <template tid="PopulateRequiredStringWithValueArgs">
+            <data name="parameterName" inType="win:UnicodeString"/>
+            <data name="telemetryType" inType="win:UnicodeString"/>
+            <data name="appDomainName" inType="win:UnicodeString"/>
+          </template>
+          <template tid="RequestTelemetryIncorrectDurationArgs">
+            <data name="appDomainName" inType="win:UnicodeString"/>
+          </template>
+          <template tid="TrackingWasDisabledArgs">
+            <data name="appDomainName" inType="win:UnicodeString"/>
+          </template>
+          <template tid="TrackingWasEnabledArgs">
+            <data name="appDomainName" inType="win:UnicodeString"/>
+          </template>
+          <template tid="LogErrorArgs">
+            <data name="msg" inType="win:UnicodeString"/>
+            <data name="appDomainName" inType="win:UnicodeString"/>
+          </template>
+          <template tid="BuildInfoConfigBrokenXmlErrorArgs">
+            <data name="msg" inType="win:UnicodeString"/>
+            <data name="appDomainName" inType="win:UnicodeString"/>
+          </template>
+        </templates>
+      </provider>
+    </events>
+  </instrumentation>
+  <localization>
+    <resources culture="en-US">
+      <stringTable>
+        <string id="event_BuildInfoConfigBrokenXmlError" value="BuildInfo.config file has incorrect xml structure. Context component version will not be populated. Exception: %1."/>
+        <string id="event_DiagnoisticsEventThrottlingSchedulerDisposeTimerFailure" value="Scheduler timer dispose failure: %1"/>
+        <string id="event_DiagnoisticsEventThrottlingSchedulerTimerWasCreated" value="A scheduler timer was created for the interval: %1"/>
+        <string id="event_DiagnoisticsEventThrottlingSchedulerTimerWasRemoved" value="A scheduler timer was removed"/>
+        <string id="event_DiagnosticsEventThrottlingHasBeenResetForTheEvent" value="Diagnostics event throttling has been reset for the event %1, event was fired %2 times during last interval"/>
+        <string id="event_DiagnosticsEventThrottlingHasBeenStartedForTheEvent" value="Diagnostics event throttling has been started for the event %1"/>
+        <string id="event_LogError" value="[msg=Log Error];[msg=%1]"/>
+        <string id="event_LogVerbose" value="[msg=Log verbose];[msg=%1]"/>
+        <string id="event_PopulateRequiredStringWithValue" value="Value for property &apos;%1&apos; of %2 was not found. Populating it by default."/>
+        <string id="event_RequestTelemetryIncorrectDuration" value="Invalid duration for Request Telemetry. Setting it to &apos;00:00:00&apos;."/>
+        <string id="event_TelemetryClientConstructorWithNoTelemetryConfiguration" value="No Telemetry Configuration provided. Using the default TelemetryConfiguration.Active."/>
+        <string id="event_TrackingWasDisabled" value="Telemetry tracking was disabled. Message is dropped."/>
+        <string id="event_TrackingWasEnabled" value="Telemetry tracking was enabled. Messages are being logged."/>
+        <string id="keyword_Diagnostics" value="Diagnostics"/>
+        <string id="keyword_ErrorFailure" value="ErrorFailure"/>
+        <string id="keyword_Session0" value="Session0"/>
+        <string id="keyword_Session1" value="Session1"/>
+        <string id="keyword_Session2" value="Session2"/>
+        <string id="keyword_Session3" value="Session3"/>
+        <string id="keyword_UserActionable" value="UserActionable"/>
+        <string id="keyword_VerboseFailure" value="VerboseFailure"/>
+        <string id="task_BuildInfoConfigBrokenXmlError" value="BuildInfoConfigBrokenXmlError"/>
+        <string id="task_DiagnoisticsEventThrottlingSchedulerDisposeTimerFailure" value="DiagnoisticsEventThrottlingSchedulerDisposeTimerFailure"/>
+        <string id="task_DiagnoisticsEventThrottlingSchedulerTimerWasCreated" value="DiagnoisticsEventThrottlingSchedulerTimerWasCreated"/>
+        <string id="task_DiagnoisticsEventThrottlingSchedulerTimerWasRemoved" value="DiagnoisticsEventThrottlingSchedulerTimerWasRemoved"/>
+        <string id="task_DiagnosticsEventThrottlingHasBeenResetForTheEvent" value="DiagnosticsEventThrottlingHasBeenResetForTheEvent"/>
+        <string id="task_DiagnosticsEventThrottlingHasBeenStartedForTheEvent" value="DiagnosticsEventThrottlingHasBeenStartedForTheEvent"/>
+        <string id="task_EventSourceMessage" value="EventSourceMessage"/>
+        <string id="task_LogError" value="LogError"/>
+        <string id="task_LogVerbose" value="LogVerbose"/>
+        <string id="task_PopulateRequiredStringWithValue" value="PopulateRequiredStringWithValue"/>
+        <string id="task_RequestTelemetryIncorrectDuration" value="RequestTelemetryIncorrectDuration"/>
+        <string id="task_TelemetryClientConstructorWithNoTelemetryConfiguration" value="TelemetryClientConstructorWithNoTelemetryConfiguration"/>
+        <string id="task_TrackingWasDisabled" value="TrackingWasDisabled"/>
+        <string id="task_TrackingWasEnabled" value="TrackingWasEnabled"/>
+      </stringTable>
+    </resources>
+  </localization>
+</instrumentationManifest>

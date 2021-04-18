@@ -1,0 +1,540 @@
+<instrumentationManifest xmlns="http://schemas.microsoft.com/win/2004/08/events">
+  <instrumentation xmlns:xs="http://www.w3.org/2001/XMLSchema"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:win="http://manifests.microsoft.com/win/2004/08/windows/events">
+    <events xmlns="http://schemas.microsoft.com/win/2004/08/events">
+      <provider name="Microsoft-VisualStudio-CpsCore" guid="{fdc862e2-43a9-5181-288a-7fade55cc9cc}" resourceFileName="Microsoft-VisualStudio-CpsCore" messageFileName="Microsoft-VisualStudio-CpsCore" symbol="MicrosoftVisualStudioCpsCore">
+        <tasks>
+          <task name="ReportCoreDirectoryTreeHintFileChanged" message="$(string.task_ReportCoreDirectoryTreeHintFileChanged)" value="65442"/>
+          <task name="ReportOutputDataSource" message="$(string.task_ReportOutputDataSource)" value="65444"/>
+          <task name="ReportProjectDataSourceVersionChanged" message="$(string.task_ReportProjectDataSourceVersionChanged)" value="65445"/>
+          <task name="ReportPrioritySchedulerGap" message="$(string.task_ReportPrioritySchedulerGap)" value="65446"/>
+          <task name="GlobbingWatchingTriggerReevaluationWriterLockRequestResult" message="$(string.task_GlobbingWatchingTriggerReevaluationWriterLockRequestResult)" value="65447"/>
+          <task name="GlobbingWatchingTriggerReevaluationUpgradeableLockRequestEnd" message="$(string.task_GlobbingWatchingTriggerReevaluationUpgradeableLockRequestEnd)" value="65448"/>
+          <task name="GlobbingWatchingTriggerReevaluationUpgradeableLockRequest" message="$(string.task_GlobbingWatchingTriggerReevaluationUpgradeableLockRequest)" value="65449"/>
+          <task name="UpToDateCheckCalculateHash" message="$(string.task_UpToDateCheckCalculateHash)" value="65451"/>
+          <task name="DesignTimeBuildFallbackToLegacy" message="$(string.task_DesignTimeBuildFallbackToLegacy)" value="65452"/>
+          <task name="DesignTimeBuild" message="$(string.task_DesignTimeBuild)" value="65454"/>
+          <task name="ProjectMarkDirtied" message="$(string.task_ProjectMarkDirtied)" value="65455"/>
+          <task name="ProjectEvaluation" message="$(string.task_ProjectEvaluation)" value="65457"/>
+          <task name="GetEvaluatedPropertyValue" message="$(string.task_GetEvaluatedPropertyValue)" value="65459"/>
+          <task name="ProjectDirectoryTreeReleaseSubscription" message="$(string.task_ProjectDirectoryTreeReleaseSubscription)" value="65460"/>
+          <task name="ProjectDirectoryTreeAddSubscription" message="$(string.task_ProjectDirectoryTreeAddSubscription)" value="65461"/>
+          <task name="ProjectDirectoryTreeDisposed" message="$(string.task_ProjectDirectoryTreeDisposed)" value="65462"/>
+          <task name="GlobbingWatchingTriggerReevaluation" message="$(string.task_GlobbingWatchingTriggerReevaluation)" value="65464"/>
+          <task name="GlobbingWatchingConsistentCheck" message="$(string.task_GlobbingWatchingConsistentCheck)" value="65466"/>
+          <task name="ConfiguredProjectVersionChanged" message="$(string.task_ConfiguredProjectVersionChanged)" value="65467"/>
+          <task name="ProjectGlobbingWatchingServiceInitialized" message="$(string.task_ProjectGlobbingWatchingServiceInitialized)" value="65468"/>
+          <task name="UnloadDynamicLoadComponents" message="$(string.task_UnloadDynamicLoadComponents)" value="65470"/>
+          <task name="LoadDynamicLoadComponents" message="$(string.task_LoadDynamicLoadComponents)" value="65472"/>
+          <task name="PublishingProjectCapabilities" message="$(string.task_PublishingProjectCapabilities)" value="65473"/>
+          <task name="CapabilitiesTriggersProjectReload" message="$(string.task_CapabilitiesTriggersProjectReload)" value="65474"/>
+          <task name="InitializeActiveTreeProvider" message="$(string.task_InitializeActiveTreeProvider)" value="65483"/>
+          <task name="SetActiveTreeProvider" message="$(string.task_SetActiveTreeProvider)" value="65485"/>
+          <task name="WaitAutoLoadMethodsToFinish" message="$(string.task_WaitAutoLoadMethodsToFinish)" value="65487"/>
+          <task name="DirectoryTreeLoading" message="$(string.task_DirectoryTreeLoading)" value="65489"/>
+          <task name="PhysicalTreeLoadingStop" message="$(string.task_PhysicalTreeLoadingStop)" value="65490"/>
+          <task name="PhysicalTreeLoading" message="$(string.task_PhysicalTreeLoading)" value="65491"/>
+          <task name="LoadConfiguredProject" message="$(string.task_LoadConfiguredProject)" value="65493"/>
+          <task name="RemoveSourceItems" message="$(string.task_RemoveSourceItems)" value="65501"/>
+          <task name="AddSourceItems" message="$(string.task_AddSourceItems)" value="65503"/>
+          <task name="HintProcess" message="$(string.task_HintProcess)" value="65505"/>
+          <task name="HintSubmission" message="$(string.task_HintSubmission)" value="65507"/>
+          <task name="CreateItemSchema" message="$(string.task_CreateItemSchema)" value="65509"/>
+          <task name="CreatePropertyCatalogs" message="$(string.task_CreatePropertyCatalogs)" value="65511"/>
+          <task name="LoadSchemaFileStop" message="$(string.task_LoadSchemaFileStop)" value="65512"/>
+          <task name="LoadSchemaFile" message="$(string.task_LoadSchemaFile)" value="65513"/>
+          <task name="ProjectTreeProviderInitialization" message="$(string.task_ProjectTreeProviderInitialization)" value="65515"/>
+          <task name="ProjectConfigurationDeactivated" message="$(string.task_ProjectConfigurationDeactivated)" value="65516"/>
+          <task name="ProjectConfigurationActivated" message="$(string.task_ProjectConfigurationActivated)" value="65517"/>
+          <task name="UpdateProjectRuleSnapshot" message="$(string.task_UpdateProjectRuleSnapshot)" value="65519"/>
+          <task name="SubscribeRule" message="$(string.task_SubscribeRule)" value="65521"/>
+          <task name="ProjectBuildRuleSnapshot" message="$(string.task_ProjectBuildRuleSnapshot)" value="65523"/>
+          <task name="ProjectEvaluationRuleSnapshot" message="$(string.task_ProjectEvaluationRuleSnapshot)" value="65525"/>
+          <task name="ProjectSnapshot" message="$(string.task_ProjectSnapshot)" value="65527"/>
+          <task name="ProjectBuildSnapshot" message="$(string.task_ProjectBuildSnapshot)" value="65529"/>
+          <task name="ProjectBuildStop" message="$(string.task_ProjectBuildStop)" value="65530"/>
+          <task name="ProjectBuild" message="$(string.task_ProjectBuild)" value="65531"/>
+          <task name="BatchBuild" message="$(string.task_BatchBuild)" value="65533"/>
+          <task name="EventSourceMessage" message="$(string.task_EventSourceMessage)" value="65534"/>
+        </tasks>
+        <maps>
+          <bitMap name="WatcherChangeTypes">
+            <map value="0x1" message="$(string.map_WatcherChangeTypes.Created)"/>
+            <map value="0x2" message="$(string.map_WatcherChangeTypes.Deleted)"/>
+            <map value="0x4" message="$(string.map_WatcherChangeTypes.Changed)"/>
+            <map value="0x8" message="$(string.map_WatcherChangeTypes.Renamed)"/>
+          </bitMap>
+        </maps>
+        <opcodes>
+        </opcodes>
+        <keywords>
+          <keyword name="Session3" message="$(string.keyword_Session3)" mask="0x100000000000"/>
+          <keyword name="Session2" message="$(string.keyword_Session2)" mask="0x200000000000"/>
+          <keyword name="Session1" message="$(string.keyword_Session1)" mask="0x400000000000"/>
+          <keyword name="Session0" message="$(string.keyword_Session0)" mask="0x800000000000"/>
+        </keywords>
+        <events>
+          <event value="0" version="0" level="win:LogAlways" symbol="EventSourceMessage" task="EventSourceMessage" template="EventSourceMessageArgs"/>
+          <event value="4" version="0" level="win:Informational" symbol="ProjectBuildStop" opcode="win:Stop" task="ProjectBuildStop" template="ProjectBuildStopArgs"/>
+          <event value="25" version="0" level="win:Informational" symbol="CreateItemSchemaStart" opcode="win:Start" task="CreateItemSchema" template="CreateItemSchemaStartArgs"/>
+          <event value="26" version="0" level="win:Informational" symbol="CreateItemSchemaStop" opcode="win:Stop" task="CreateItemSchema" template="CreateItemSchemaStopArgs"/>
+          <event value="61" version="0" level="win:Informational" symbol="PublishingProjectCapabilities" task="PublishingProjectCapabilities" template="PublishingProjectCapabilitiesArgs"/>
+          <event value="62" version="0" level="win:Informational" symbol="LoadDynamicLoadComponentsStart" opcode="win:Start" task="LoadDynamicLoadComponents" template="LoadDynamicLoadComponentsStartArgs"/>
+          <event value="67" version="0" level="win:Informational" symbol="ConfiguredProjectVersionChanged" task="ConfiguredProjectVersionChanged" template="ConfiguredProjectVersionChangedArgs"/>
+          <event value="88" version="0" level="win:Informational" symbol="ReportPrioritySchedulerGap" task="ReportPrioritySchedulerGap" template="ReportPrioritySchedulerGapArgs"/>
+          <event value="89" version="0" level="win:Informational" symbol="ReportProjectDataSourceVersionChanged" task="ReportProjectDataSourceVersionChanged" template="ReportProjectDataSourceVersionChangedArgs"/>
+          <event value="9" version="0" level="win:Verbose" symbol="ProjectEvaluationRuleSnapshotStart" opcode="win:Start" task="ProjectEvaluationRuleSnapshot" template="ProjectEvaluationRuleSnapshotStartArgs"/>
+          <event value="10" version="0" level="win:Verbose" symbol="ProjectEvaluationRuleSnapshotStop" opcode="win:Stop" task="ProjectEvaluationRuleSnapshot" template="ProjectEvaluationRuleSnapshotStopArgs"/>
+          <event value="22" version="0" level="win:Informational" symbol="LoadSchemaFileStop" opcode="win:Stop" task="LoadSchemaFileStop" template="LoadSchemaFileStopArgs"/>
+          <event value="44" version="0" level="win:Informational" symbol="PhysicalTreeLoadingStop" opcode="win:Stop" task="PhysicalTreeLoadingStop" template="PhysicalTreeLoadingStopArgs"/>
+          <event value="63" version="0" level="win:Informational" symbol="LoadDynamicLoadComponentsStop" opcode="win:Stop" task="LoadDynamicLoadComponents" template="LoadDynamicLoadComponentsStopArgs"/>
+          <event value="1" version="0" level="win:Informational" symbol="BatchBuildStart" opcode="win:Start" task="BatchBuild" template="BatchBuildStartArgs"/>
+          <event value="2" version="0" level="win:Informational" symbol="BatchBuildStop" opcode="win:Stop" task="BatchBuild" template="BatchBuildStopArgs"/>
+          <event value="3" version="0" level="win:Informational" symbol="ProjectBuildStart" opcode="win:Start" task="ProjectBuild" template="ProjectBuildStartArgs"/>
+          <event value="5" version="0" level="win:Informational" symbol="ProjectBuildSnapshotStart" opcode="win:Start" task="ProjectBuildSnapshot" template="ProjectBuildSnapshotStartArgs"/>
+          <event value="6" version="0" level="win:Informational" symbol="ProjectBuildSnapshotStop" opcode="win:Stop" task="ProjectBuildSnapshot" template="ProjectBuildSnapshotStopArgs"/>
+          <event value="7" version="0" level="win:Informational" symbol="ProjectSnapshotStart" opcode="win:Start" task="ProjectSnapshot" template="ProjectSnapshotStartArgs"/>
+          <event value="8" version="0" level="win:Informational" symbol="ProjectSnapshotStop" opcode="win:Stop" task="ProjectSnapshot" template="ProjectSnapshotStopArgs"/>
+          <event value="11" version="0" level="win:Verbose" symbol="ProjectBuildRuleSnapshotStart" opcode="win:Start" task="ProjectBuildRuleSnapshot" template="ProjectBuildRuleSnapshotStartArgs"/>
+          <event value="12" version="0" level="win:Verbose" symbol="ProjectBuildRuleSnapshotStop" opcode="win:Stop" task="ProjectBuildRuleSnapshot" template="ProjectBuildRuleSnapshotStopArgs"/>
+          <event value="13" version="0" level="win:Informational" symbol="SubscribeRuleStart" opcode="win:Start" task="SubscribeRule" template="SubscribeRuleStartArgs"/>
+          <event value="14" version="0" level="win:Informational" symbol="SubscribeRuleStop" opcode="win:Stop" task="SubscribeRule" template="SubscribeRuleStopArgs"/>
+          <event value="15" version="0" level="win:Informational" symbol="UpdateProjectRuleSnapshotStart" opcode="win:Start" task="UpdateProjectRuleSnapshot" template="UpdateProjectRuleSnapshotStartArgs"/>
+          <event value="16" version="0" level="win:Informational" symbol="UpdateProjectRuleSnapshotStop" opcode="win:Stop" task="UpdateProjectRuleSnapshot" template="UpdateProjectRuleSnapshotStopArgs"/>
+          <event value="17" version="0" level="win:Informational" symbol="ProjectConfigurationActivated" task="ProjectConfigurationActivated" template="ProjectConfigurationActivatedArgs"/>
+          <event value="18" version="0" level="win:Informational" symbol="ProjectConfigurationDeactivated" task="ProjectConfigurationDeactivated" template="ProjectConfigurationDeactivatedArgs"/>
+          <event value="19" version="0" level="win:Informational" symbol="ProjectTreeProviderInitializationStart" opcode="win:Start" task="ProjectTreeProviderInitialization" template="ProjectTreeProviderInitializationStartArgs"/>
+          <event value="20" version="0" level="win:Informational" symbol="ProjectTreeProviderInitializationStop" opcode="win:Stop" task="ProjectTreeProviderInitialization" template="ProjectTreeProviderInitializationStopArgs"/>
+          <event value="21" version="0" level="win:Informational" symbol="LoadSchemaFileStart" opcode="win:Start" task="LoadSchemaFile" template="LoadSchemaFileStartArgs"/>
+          <event value="23" version="0" level="win:Informational" symbol="CreatePropertyCatalogsStart" opcode="win:Start" task="CreatePropertyCatalogs" template="CreatePropertyCatalogsStartArgs"/>
+          <event value="24" version="0" level="win:Informational" symbol="CreatePropertyCatalogsStop" opcode="win:Stop" task="CreatePropertyCatalogs" template="CreatePropertyCatalogsStopArgs"/>
+          <event value="27" version="0" level="win:Verbose" symbol="HintSubmissionStart" opcode="win:Start" task="HintSubmission" template="HintSubmissionStartArgs"/>
+          <event value="28" version="0" level="win:Verbose" symbol="HintSubmissionStop" opcode="win:Stop" task="HintSubmission"/>
+          <event value="29" version="0" level="win:Informational" symbol="HintProcessStart" opcode="win:Start" task="HintProcess" template="HintProcessStartArgs"/>
+          <event value="30" version="0" level="win:Informational" symbol="HintProcessStop" opcode="win:Stop" task="HintProcess"/>
+          <event value="31" version="0" level="win:Informational" symbol="AddSourceItemsStart" opcode="win:Start" task="AddSourceItems" template="AddSourceItemsStartArgs"/>
+          <event value="32" version="0" level="win:Informational" symbol="AddSourceItemsStop" opcode="win:Stop" task="AddSourceItems"/>
+          <event value="33" version="0" level="win:Informational" symbol="RemoveSourceItemsStart" opcode="win:Start" task="RemoveSourceItems" template="RemoveSourceItemsStartArgs"/>
+          <event value="34" version="0" level="win:Informational" symbol="RemoveSourceItemsStop" opcode="win:Stop" task="RemoveSourceItems"/>
+          <event value="41" version="0" level="win:Informational" symbol="LoadConfiguredProjectStart" opcode="win:Start" task="LoadConfiguredProject" template="LoadConfiguredProjectStartArgs"/>
+          <event value="42" version="0" level="win:Informational" symbol="LoadConfiguredProjectStop" opcode="win:Stop" task="LoadConfiguredProject" template="LoadConfiguredProjectStopArgs"/>
+          <event value="43" version="0" level="win:Informational" symbol="PhysicalTreeLoadingStart" opcode="win:Start" task="PhysicalTreeLoading" template="PhysicalTreeLoadingStartArgs"/>
+          <event value="45" version="0" level="win:Informational" symbol="DirectoryTreeLoadingStart" opcode="win:Start" task="DirectoryTreeLoading" template="DirectoryTreeLoadingStartArgs"/>
+          <event value="46" version="0" level="win:Informational" symbol="DirectoryTreeLoadingStop" opcode="win:Stop" task="DirectoryTreeLoading" template="DirectoryTreeLoadingStopArgs"/>
+          <event value="47" version="0" level="win:Informational" symbol="WaitAutoLoadMethodsToFinishStart" opcode="win:Start" task="WaitAutoLoadMethodsToFinish" template="WaitAutoLoadMethodsToFinishStartArgs"/>
+          <event value="48" version="0" level="win:Informational" symbol="WaitAutoLoadMethodsToFinishStop" opcode="win:Stop" task="WaitAutoLoadMethodsToFinish" template="WaitAutoLoadMethodsToFinishStopArgs"/>
+          <event value="49" version="0" level="win:Informational" symbol="SetActiveTreeProviderStart" opcode="win:Start" task="SetActiveTreeProvider" template="SetActiveTreeProviderStartArgs"/>
+          <event value="50" version="0" level="win:Informational" symbol="SetActiveTreeProviderStop" opcode="win:Stop" task="SetActiveTreeProvider" template="SetActiveTreeProviderStopArgs"/>
+          <event value="51" version="0" level="win:Informational" symbol="InitializeActiveTreeProviderStart" opcode="win:Start" task="InitializeActiveTreeProvider" template="InitializeActiveTreeProviderStartArgs"/>
+          <event value="52" version="0" level="win:Informational" symbol="InitializeActiveTreeProviderStop" opcode="win:Stop" task="InitializeActiveTreeProvider" template="InitializeActiveTreeProviderStopArgs"/>
+          <event value="60" version="0" level="win:Informational" symbol="CapabilitiesTriggersProjectReload" task="CapabilitiesTriggersProjectReload" template="CapabilitiesTriggersProjectReloadArgs"/>
+          <event value="64" version="0" level="win:Informational" symbol="UnloadDynamicLoadComponentsStart" opcode="win:Start" task="UnloadDynamicLoadComponents" template="UnloadDynamicLoadComponentsStartArgs"/>
+          <event value="65" version="0" level="win:Informational" symbol="UnloadDynamicLoadComponentsStop" opcode="win:Stop" task="UnloadDynamicLoadComponents" template="UnloadDynamicLoadComponentsStopArgs"/>
+          <event value="66" version="0" level="win:Informational" symbol="ProjectGlobbingWatchingServiceInitialized" task="ProjectGlobbingWatchingServiceInitialized" template="ProjectGlobbingWatchingServiceInitializedArgs"/>
+          <event value="68" version="0" level="win:Informational" symbol="GlobbingWatchingConsistentCheckStart" opcode="win:Start" task="GlobbingWatchingConsistentCheck" template="GlobbingWatchingConsistentCheckStartArgs"/>
+          <event value="69" version="0" level="win:Informational" symbol="GlobbingWatchingConsistentCheckStop" opcode="win:Stop" task="GlobbingWatchingConsistentCheck" template="GlobbingWatchingConsistentCheckStopArgs"/>
+          <event value="70" version="0" level="win:Informational" symbol="GlobbingWatchingTriggerReevaluationStart" opcode="win:Start" task="GlobbingWatchingTriggerReevaluation" template="GlobbingWatchingTriggerReevaluationStartArgs"/>
+          <event value="71" version="0" level="win:Informational" symbol="GlobbingWatchingTriggerReevaluationStop" opcode="win:Stop" task="GlobbingWatchingTriggerReevaluation" template="GlobbingWatchingTriggerReevaluationStopArgs"/>
+          <event value="72" version="0" level="win:Informational" symbol="ProjectDirectoryTreeDisposed" task="ProjectDirectoryTreeDisposed" template="ProjectDirectoryTreeDisposedArgs"/>
+          <event value="73" version="0" level="win:Informational" symbol="ProjectDirectoryTreeAddSubscription" task="ProjectDirectoryTreeAddSubscription" template="ProjectDirectoryTreeAddSubscriptionArgs"/>
+          <event value="74" version="0" level="win:Informational" symbol="ProjectDirectoryTreeReleaseSubscription" task="ProjectDirectoryTreeReleaseSubscription" template="ProjectDirectoryTreeReleaseSubscriptionArgs"/>
+          <event value="75" version="0" level="win:Verbose" symbol="GetEvaluatedPropertyValueStart" opcode="win:Start" task="GetEvaluatedPropertyValue" template="GetEvaluatedPropertyValueStartArgs"/>
+          <event value="76" version="0" level="win:Verbose" symbol="GetEvaluatedPropertyValueStop" opcode="win:Stop" task="GetEvaluatedPropertyValue" template="GetEvaluatedPropertyValueStopArgs"/>
+          <event value="77" version="0" level="win:Informational" symbol="ProjectEvaluationStart" opcode="win:Start" task="ProjectEvaluation" template="ProjectEvaluationStartArgs"/>
+          <event value="78" version="0" level="win:Informational" symbol="ProjectEvaluationStop" opcode="win:Stop" task="ProjectEvaluation" template="ProjectEvaluationStopArgs"/>
+          <event value="79" version="0" level="win:Informational" symbol="ProjectMarkDirtied" task="ProjectMarkDirtied" template="ProjectMarkDirtiedArgs"/>
+          <event value="80" version="0" level="win:Informational" symbol="DesignTimeBuildStart" opcode="win:Start" task="DesignTimeBuild" template="DesignTimeBuildStartArgs"/>
+          <event value="81" version="0" level="win:Informational" symbol="DesignTimeBuildStop" opcode="win:Stop" task="DesignTimeBuild" template="DesignTimeBuildStopArgs"/>
+          <event value="82" version="0" level="win:Informational" symbol="DesignTimeBuildFallbackToLegacy" task="DesignTimeBuildFallbackToLegacy" template="DesignTimeBuildFallbackToLegacyArgs"/>
+          <event value="83" version="0" level="win:Informational" symbol="UpToDateCheckCalculateHashStart" opcode="win:Start" task="UpToDateCheckCalculateHash" template="UpToDateCheckCalculateHashStartArgs"/>
+          <event value="84" version="0" level="win:Informational" symbol="UpToDateCheckCalculateHashStop" opcode="win:Stop" task="UpToDateCheckCalculateHash" template="UpToDateCheckCalculateHashStopArgs"/>
+          <event value="85" version="0" level="win:Informational" symbol="GlobbingWatchingTriggerReevaluationUpgradeableLockRequestStart" opcode="win:Start" task="GlobbingWatchingTriggerReevaluationUpgradeableLockRequest"/>
+          <event value="86" version="0" level="win:Informational" symbol="GlobbingWatchingTriggerReevaluationUpgradeableLockRequestEnd" task="GlobbingWatchingTriggerReevaluationUpgradeableLockRequestEnd"/>
+          <event value="87" version="0" level="win:Informational" symbol="GlobbingWatchingTriggerReevaluationWriterLockRequestResult" task="GlobbingWatchingTriggerReevaluationWriterLockRequestResult" template="GlobbingWatchingTriggerReevaluationWriterLockRequestResultArgs"/>
+          <event value="90" version="0" level="win:Informational" symbol="ReportOutputDataSourceStart" opcode="win:Start" task="ReportOutputDataSource" template="ReportOutputDataSourceStartArgs"/>
+          <event value="91" version="0" level="win:Informational" symbol="ReportOutputDataSourceStop" opcode="win:Stop" task="ReportOutputDataSource" template="ReportOutputDataSourceStopArgs"/>
+          <event value="92" version="0" level="win:Informational" symbol="ReportCoreDirectoryTreeHintFileChanged" task="ReportCoreDirectoryTreeHintFileChanged" template="ReportCoreDirectoryTreeHintFileChangedArgs"/>
+        </events>
+        <templates>
+          <template tid="EventSourceMessageArgs">
+            <data name="message" inType="win:UnicodeString"/>
+          </template>
+          <template tid="ProjectBuildStopArgs">
+            <data name="projectPath" inType="win:UnicodeString"/>
+            <data name="configuration" inType="win:UnicodeString"/>
+            <data name="requestId" inType="win:Int32"/>
+            <data name="isSuccessful" inType="win:Boolean"/>
+          </template>
+          <template tid="CreateItemSchemaStartArgs">
+            <data name="projectPath" inType="win:UnicodeString"/>
+            <data name="configuration" inType="win:UnicodeString"/>
+            <data name="snapshotId" inType="win:Int32"/>
+          </template>
+          <template tid="CreateItemSchemaStopArgs">
+            <data name="projectPath" inType="win:UnicodeString"/>
+            <data name="configuration" inType="win:UnicodeString"/>
+            <data name="snapshotId" inType="win:Int32"/>
+          </template>
+          <template tid="PublishingProjectCapabilitiesArgs">
+            <data name="projectPath" inType="win:UnicodeString"/>
+            <data name="scope" inType="win:UnicodeString"/>
+            <data name="valueVersionNumber" inType="win:Int64"/>
+            <data name="valueChanged" inType="win:Boolean"/>
+          </template>
+          <template tid="LoadDynamicLoadComponentsStartArgs">
+            <data name="projectPath" inType="win:UnicodeString"/>
+            <data name="scope" inType="win:UnicodeString"/>
+            <data name="valueVersionNumber" inType="win:Int64"/>
+          </template>
+          <template tid="ConfiguredProjectVersionChangedArgs">
+            <data name="projectPath" inType="win:UnicodeString"/>
+            <data name="configurationName" inType="win:UnicodeString"/>
+            <data name="version" inType="win:Int64"/>
+          </template>
+          <template tid="ReportPrioritySchedulerGapArgs">
+            <data name="time" inType="win:Int32"/>
+            <data name="isPostCallback" inType="win:Boolean"/>
+          </template>
+          <template tid="ReportProjectDataSourceVersionChangedArgs">
+            <data name="project" inType="win:UnicodeString"/>
+            <data name="dataSourceId" inType="win:Int32"/>
+            <data name="dataSourceName" inType="win:UnicodeString"/>
+          </template>
+          <template tid="ProjectEvaluationRuleSnapshotStartArgs">
+            <data name="projectPath" inType="win:UnicodeString"/>
+            <data name="configurationName" inType="win:UnicodeString"/>
+            <data name="ruleName" inType="win:UnicodeString"/>
+          </template>
+          <template tid="ProjectEvaluationRuleSnapshotStopArgs">
+            <data name="projectPath" inType="win:UnicodeString"/>
+            <data name="configurationName" inType="win:UnicodeString"/>
+            <data name="ruleName" inType="win:UnicodeString"/>
+          </template>
+          <template tid="LoadSchemaFileStopArgs">
+            <data name="filePath" inType="win:UnicodeString"/>
+          </template>
+          <template tid="PhysicalTreeLoadingStopArgs">
+            <data name="projectPath" inType="win:UnicodeString"/>
+          </template>
+          <template tid="LoadDynamicLoadComponentsStopArgs">
+            <data name="projectPath" inType="win:UnicodeString"/>
+            <data name="scope" inType="win:UnicodeString"/>
+          </template>
+          <template tid="BatchBuildStartArgs">
+            <data name="host" inType="win:UnicodeString"/>
+            <data name="requestCount" inType="win:Int32"/>
+            <data name="requests" inType="win:UnicodeString"/>
+          </template>
+          <template tid="BatchBuildStopArgs">
+            <data name="host" inType="win:UnicodeString"/>
+            <data name="requestCount" inType="win:Int32"/>
+            <data name="_" inType="win:Int32"/>
+          </template>
+          <template tid="ProjectBuildStartArgs">
+            <data name="projectPath" inType="win:UnicodeString"/>
+            <data name="configuration" inType="win:UnicodeString"/>
+            <data name="requestId" inType="win:Int32"/>
+            <data name="targets" inType="win:UnicodeString"/>
+            <data name="isUsingProjectInstance" inType="win:Boolean"/>
+          </template>
+          <template tid="ProjectBuildSnapshotStartArgs">
+            <data name="projectPath" inType="win:UnicodeString"/>
+            <data name="instanceId" inType="win:Int32"/>
+            <data name="targets" inType="win:UnicodeString"/>
+          </template>
+          <template tid="ProjectBuildSnapshotStopArgs">
+            <data name="projectPath" inType="win:UnicodeString"/>
+            <data name="instanceId" inType="win:Int32"/>
+          </template>
+          <template tid="ProjectSnapshotStartArgs">
+            <data name="projectPath" inType="win:UnicodeString"/>
+            <data name="configurationName" inType="win:UnicodeString"/>
+            <data name="version" inType="win:Int64"/>
+          </template>
+          <template tid="ProjectSnapshotStopArgs">
+            <data name="projectPath" inType="win:UnicodeString"/>
+            <data name="configurationName" inType="win:UnicodeString"/>
+            <data name="version" inType="win:Int64"/>
+            <data name="instanceId" inType="win:Int32"/>
+          </template>
+          <template tid="ProjectBuildRuleSnapshotStartArgs">
+            <data name="projectPath" inType="win:UnicodeString"/>
+            <data name="configurationName" inType="win:UnicodeString"/>
+            <data name="ruleName" inType="win:UnicodeString"/>
+          </template>
+          <template tid="ProjectBuildRuleSnapshotStopArgs">
+            <data name="projectPath" inType="win:UnicodeString"/>
+            <data name="configurationName" inType="win:UnicodeString"/>
+            <data name="ruleName" inType="win:UnicodeString"/>
+          </template>
+          <template tid="SubscribeRuleStartArgs">
+            <data name="projectPath" inType="win:UnicodeString"/>
+            <data name="configurationName" inType="win:UnicodeString"/>
+            <data name="rules" inType="win:UnicodeString"/>
+          </template>
+          <template tid="SubscribeRuleStopArgs">
+            <data name="projectPath" inType="win:UnicodeString"/>
+            <data name="configurationName" inType="win:UnicodeString"/>
+            <data name="rules" inType="win:UnicodeString"/>
+          </template>
+          <template tid="UpdateProjectRuleSnapshotStartArgs">
+            <data name="projectPath" inType="win:UnicodeString"/>
+            <data name="configurationName" inType="win:UnicodeString"/>
+            <data name="subscriptionType" inType="win:UnicodeString"/>
+          </template>
+          <template tid="UpdateProjectRuleSnapshotStopArgs">
+            <data name="projectPath" inType="win:UnicodeString"/>
+            <data name="configurationName" inType="win:UnicodeString"/>
+            <data name="subscriptionType" inType="win:UnicodeString"/>
+          </template>
+          <template tid="ProjectConfigurationActivatedArgs">
+            <data name="projectPath" inType="win:UnicodeString"/>
+            <data name="configurationName" inType="win:UnicodeString"/>
+          </template>
+          <template tid="ProjectConfigurationDeactivatedArgs">
+            <data name="projectPath" inType="win:UnicodeString"/>
+            <data name="configurationName" inType="win:UnicodeString"/>
+          </template>
+          <template tid="ProjectTreeProviderInitializationStartArgs">
+            <data name="projectPath" inType="win:UnicodeString"/>
+            <data name="providerName" inType="win:UnicodeString"/>
+          </template>
+          <template tid="ProjectTreeProviderInitializationStopArgs">
+            <data name="projectPath" inType="win:UnicodeString"/>
+            <data name="providerName" inType="win:UnicodeString"/>
+          </template>
+          <template tid="LoadSchemaFileStartArgs">
+            <data name="filePath" inType="win:UnicodeString"/>
+          </template>
+          <template tid="CreatePropertyCatalogsStartArgs">
+            <data name="projectPath" inType="win:UnicodeString"/>
+            <data name="snapshotId" inType="win:Int32"/>
+          </template>
+          <template tid="CreatePropertyCatalogsStopArgs">
+            <data name="projectPath" inType="win:UnicodeString"/>
+            <data name="snapshotId" inType="win:Int32"/>
+          </template>
+          <template tid="HintSubmissionStartArgs">
+            <data name="kind" inType="win:UnicodeString"/>
+            <data name="accumulatedCount" inType="win:Int32"/>
+          </template>
+          <template tid="HintProcessStartArgs">
+            <data name="totalEventCount" inType="win:Int32"/>
+          </template>
+          <template tid="AddSourceItemsStartArgs">
+            <data name="projectPath" inType="win:UnicodeString"/>
+            <data name="itemCount" inType="win:Int32"/>
+          </template>
+          <template tid="RemoveSourceItemsStartArgs">
+            <data name="projectPath" inType="win:UnicodeString"/>
+            <data name="itemCount" inType="win:Int32"/>
+          </template>
+          <template tid="LoadConfiguredProjectStartArgs">
+            <data name="projectPath" inType="win:UnicodeString"/>
+            <data name="configuration" inType="win:UnicodeString"/>
+          </template>
+          <template tid="LoadConfiguredProjectStopArgs">
+            <data name="projectPath" inType="win:UnicodeString"/>
+            <data name="configuration" inType="win:UnicodeString"/>
+            <data name="capabilities" inType="win:UnicodeString"/>
+          </template>
+          <template tid="PhysicalTreeLoadingStartArgs">
+            <data name="projectPath" inType="win:UnicodeString"/>
+          </template>
+          <template tid="DirectoryTreeLoadingStartArgs">
+            <data name="projectPath" inType="win:UnicodeString"/>
+          </template>
+          <template tid="DirectoryTreeLoadingStopArgs">
+            <data name="projectPath" inType="win:UnicodeString"/>
+          </template>
+          <template tid="WaitAutoLoadMethodsToFinishStartArgs">
+            <data name="projectPath" inType="win:UnicodeString"/>
+          </template>
+          <template tid="WaitAutoLoadMethodsToFinishStopArgs">
+            <data name="projectPath" inType="win:UnicodeString"/>
+          </template>
+          <template tid="SetActiveTreeProviderStartArgs">
+            <data name="projectPath" inType="win:UnicodeString"/>
+          </template>
+          <template tid="SetActiveTreeProviderStopArgs">
+            <data name="projectPath" inType="win:UnicodeString"/>
+          </template>
+          <template tid="InitializeActiveTreeProviderStartArgs">
+            <data name="projectPath" inType="win:UnicodeString"/>
+          </template>
+          <template tid="InitializeActiveTreeProviderStopArgs">
+            <data name="projectPath" inType="win:UnicodeString"/>
+          </template>
+          <template tid="CapabilitiesTriggersProjectReloadArgs">
+            <data name="projectPath" inType="win:UnicodeString"/>
+            <data name="scope" inType="win:UnicodeString"/>
+          </template>
+          <template tid="UnloadDynamicLoadComponentsStartArgs">
+            <data name="projectPath" inType="win:UnicodeString"/>
+            <data name="scope" inType="win:UnicodeString"/>
+            <data name="valueVersionNumber" inType="win:Int64"/>
+          </template>
+          <template tid="UnloadDynamicLoadComponentsStopArgs">
+            <data name="projectPath" inType="win:UnicodeString"/>
+            <data name="scope" inType="win:UnicodeString"/>
+          </template>
+          <template tid="ProjectGlobbingWatchingServiceInitializedArgs">
+            <data name="projectPath" inType="win:UnicodeString"/>
+            <data name="configurationName" inType="win:UnicodeString"/>
+          </template>
+          <template tid="GlobbingWatchingConsistentCheckStartArgs">
+            <data name="projectPath" inType="win:UnicodeString"/>
+            <data name="configurationName" inType="win:UnicodeString"/>
+          </template>
+          <template tid="GlobbingWatchingConsistentCheckStopArgs">
+            <data name="projectPath" inType="win:UnicodeString"/>
+            <data name="configurationName" inType="win:UnicodeString"/>
+          </template>
+          <template tid="GlobbingWatchingTriggerReevaluationStartArgs">
+            <data name="projectPath" inType="win:UnicodeString"/>
+            <data name="configurationName" inType="win:UnicodeString"/>
+          </template>
+          <template tid="GlobbingWatchingTriggerReevaluationStopArgs">
+            <data name="projectPath" inType="win:UnicodeString"/>
+            <data name="configurationName" inType="win:UnicodeString"/>
+          </template>
+          <template tid="ProjectDirectoryTreeDisposedArgs">
+            <data name="folderPath" inType="win:UnicodeString"/>
+          </template>
+          <template tid="ProjectDirectoryTreeAddSubscriptionArgs">
+            <data name="folderPath" inType="win:UnicodeString"/>
+          </template>
+          <template tid="ProjectDirectoryTreeReleaseSubscriptionArgs">
+            <data name="folderPath" inType="win:UnicodeString"/>
+          </template>
+          <template tid="GetEvaluatedPropertyValueStartArgs">
+            <data name="propertyName" inType="win:UnicodeString"/>
+          </template>
+          <template tid="GetEvaluatedPropertyValueStopArgs">
+            <data name="propertyName" inType="win:UnicodeString"/>
+            <data name="value" inType="win:UnicodeString"/>
+          </template>
+          <template tid="ProjectEvaluationStartArgs">
+            <data name="project" inType="win:UnicodeString"/>
+            <data name="evaluationId" inType="win:Int32"/>
+          </template>
+          <template tid="ProjectEvaluationStopArgs">
+            <data name="project" inType="win:UnicodeString"/>
+            <data name="evaluationId" inType="win:Int32"/>
+          </template>
+          <template tid="ProjectMarkDirtiedArgs">
+            <data name="project" inType="win:UnicodeString"/>
+          </template>
+          <template tid="DesignTimeBuildStartArgs">
+            <data name="project" inType="win:UnicodeString"/>
+            <data name="configuration" inType="win:UnicodeString"/>
+            <data name="useCache" inType="win:Boolean"/>
+            <data name="targets" inType="win:UnicodeString"/>
+          </template>
+          <template tid="DesignTimeBuildStopArgs">
+            <data name="project" inType="win:UnicodeString"/>
+            <data name="configuration" inType="win:UnicodeString"/>
+            <data name="resetId" inType="win:Int32"/>
+            <data name="isSuccessful" inType="win:Boolean"/>
+            <data name="fromCache" inType="win:Boolean"/>
+          </template>
+          <template tid="DesignTimeBuildFallbackToLegacyArgs">
+            <data name="project" inType="win:UnicodeString"/>
+            <data name="configuration" inType="win:UnicodeString"/>
+          </template>
+          <template tid="UpToDateCheckCalculateHashStartArgs">
+            <data name="project" inType="win:UnicodeString"/>
+            <data name="configuration" inType="win:UnicodeString"/>
+          </template>
+          <template tid="UpToDateCheckCalculateHashStopArgs">
+            <data name="project" inType="win:UnicodeString"/>
+            <data name="configuration" inType="win:UnicodeString"/>
+          </template>
+          <template tid="GlobbingWatchingTriggerReevaluationWriterLockRequestResultArgs">
+            <data name="cancelled" inType="win:Boolean"/>
+          </template>
+          <template tid="ReportOutputDataSourceStartArgs">
+            <data name="project" inType="win:UnicodeString"/>
+            <data name="dataSourceName" inType="win:UnicodeString"/>
+          </template>
+          <template tid="ReportOutputDataSourceStopArgs">
+            <data name="project" inType="win:UnicodeString"/>
+            <data name="dataSourceName" inType="win:UnicodeString"/>
+          </template>
+          <template tid="ReportCoreDirectoryTreeHintFileChangedArgs">
+            <data name="rootPath" inType="win:UnicodeString"/>
+            <data name="filePath" inType="win:UnicodeString"/>
+            <data name="changeType" inType="win:UInt32" map="WatcherChangeTypes"/>
+          </template>
+        </templates>
+      </provider>
+    </events>
+  </instrumentation>
+  <localization>
+    <resources culture="en-US">
+      <stringTable>
+        <string id="keyword_Session0" value="Session0"/>
+        <string id="keyword_Session1" value="Session1"/>
+        <string id="keyword_Session2" value="Session2"/>
+        <string id="keyword_Session3" value="Session3"/>
+        <string id="map_WatcherChangeTypes.Changed" value="Changed"/>
+        <string id="map_WatcherChangeTypes.Created" value="Created"/>
+        <string id="map_WatcherChangeTypes.Deleted" value="Deleted"/>
+        <string id="map_WatcherChangeTypes.Renamed" value="Renamed"/>
+        <string id="task_AddSourceItems" value="AddSourceItems"/>
+        <string id="task_BatchBuild" value="BatchBuild"/>
+        <string id="task_CapabilitiesTriggersProjectReload" value="CapabilitiesTriggersProjectReload"/>
+        <string id="task_ConfiguredProjectVersionChanged" value="ConfiguredProjectVersionChanged"/>
+        <string id="task_CreateItemSchema" value="CreateItemSchema"/>
+        <string id="task_CreatePropertyCatalogs" value="CreatePropertyCatalogs"/>
+        <string id="task_DesignTimeBuild" value="DesignTimeBuild"/>
+        <string id="task_DesignTimeBuildFallbackToLegacy" value="DesignTimeBuildFallbackToLegacy"/>
+        <string id="task_DirectoryTreeLoading" value="DirectoryTreeLoading"/>
+        <string id="task_EventSourceMessage" value="EventSourceMessage"/>
+        <string id="task_GetEvaluatedPropertyValue" value="GetEvaluatedPropertyValue"/>
+        <string id="task_GlobbingWatchingConsistentCheck" value="GlobbingWatchingConsistentCheck"/>
+        <string id="task_GlobbingWatchingTriggerReevaluation" value="GlobbingWatchingTriggerReevaluation"/>
+        <string id="task_GlobbingWatchingTriggerReevaluationUpgradeableLockRequest" value="GlobbingWatchingTriggerReevaluationUpgradeableLockRequest"/>
+        <string id="task_GlobbingWatchingTriggerReevaluationUpgradeableLockRequestEnd" value="GlobbingWatchingTriggerReevaluationUpgradeableLockRequestEnd"/>
+        <string id="task_GlobbingWatchingTriggerReevaluationWriterLockRequestResult" value="GlobbingWatchingTriggerReevaluationWriterLockRequestResult"/>
+        <string id="task_HintProcess" value="HintProcess"/>
+        <string id="task_HintSubmission" value="HintSubmission"/>
+        <string id="task_InitializeActiveTreeProvider" value="InitializeActiveTreeProvider"/>
+        <string id="task_LoadConfiguredProject" value="LoadConfiguredProject"/>
+        <string id="task_LoadDynamicLoadComponents" value="LoadDynamicLoadComponents"/>
+        <string id="task_LoadSchemaFile" value="LoadSchemaFile"/>
+        <string id="task_LoadSchemaFileStop" value="LoadSchemaFileStop"/>
+        <string id="task_PhysicalTreeLoading" value="PhysicalTreeLoading"/>
+        <string id="task_PhysicalTreeLoadingStop" value="PhysicalTreeLoadingStop"/>
+        <string id="task_ProjectBuild" value="ProjectBuild"/>
+        <string id="task_ProjectBuildRuleSnapshot" value="ProjectBuildRuleSnapshot"/>
+        <string id="task_ProjectBuildSnapshot" value="ProjectBuildSnapshot"/>
+        <string id="task_ProjectBuildStop" value="ProjectBuildStop"/>
+        <string id="task_ProjectConfigurationActivated" value="ProjectConfigurationActivated"/>
+        <string id="task_ProjectConfigurationDeactivated" value="ProjectConfigurationDeactivated"/>
+        <string id="task_ProjectDirectoryTreeAddSubscription" value="ProjectDirectoryTreeAddSubscription"/>
+        <string id="task_ProjectDirectoryTreeDisposed" value="ProjectDirectoryTreeDisposed"/>
+        <string id="task_ProjectDirectoryTreeReleaseSubscription" value="ProjectDirectoryTreeReleaseSubscription"/>
+        <string id="task_ProjectEvaluation" value="ProjectEvaluation"/>
+        <string id="task_ProjectEvaluationRuleSnapshot" value="ProjectEvaluationRuleSnapshot"/>
+        <string id="task_ProjectGlobbingWatchingServiceInitialized" value="ProjectGlobbingWatchingServiceInitialized"/>
+        <string id="task_ProjectMarkDirtied" value="ProjectMarkDirtied"/>
+        <string id="task_ProjectSnapshot" value="ProjectSnapshot"/>
+        <string id="task_ProjectTreeProviderInitialization" value="ProjectTreeProviderInitialization"/>
+        <string id="task_PublishingProjectCapabilities" value="PublishingProjectCapabilities"/>
+        <string id="task_RemoveSourceItems" value="RemoveSourceItems"/>
+        <string id="task_ReportCoreDirectoryTreeHintFileChanged" value="ReportCoreDirectoryTreeHintFileChanged"/>
+        <string id="task_ReportOutputDataSource" value="ReportOutputDataSource"/>
+        <string id="task_ReportPrioritySchedulerGap" value="ReportPrioritySchedulerGap"/>
+        <string id="task_ReportProjectDataSourceVersionChanged" value="ReportProjectDataSourceVersionChanged"/>
+        <string id="task_SetActiveTreeProvider" value="SetActiveTreeProvider"/>
+        <string id="task_SubscribeRule" value="SubscribeRule"/>
+        <string id="task_UnloadDynamicLoadComponents" value="UnloadDynamicLoadComponents"/>
+        <string id="task_UpdateProjectRuleSnapshot" value="UpdateProjectRuleSnapshot"/>
+        <string id="task_UpToDateCheckCalculateHash" value="UpToDateCheckCalculateHash"/>
+        <string id="task_WaitAutoLoadMethodsToFinish" value="WaitAutoLoadMethodsToFinish"/>
+      </stringTable>
+    </resources>
+  </localization>
+</instrumentationManifest>

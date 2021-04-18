@@ -2,7 +2,7 @@
   "profiles": {
     "EtwSourceGenerator": {
       "commandName": "Project",
-      "commandLineArgs": "..\\..\\..\\..\\EtwTools\\providers.json ..\\..\\..\\..\\EtwTools\\"
+      "commandLineArgs": "..\\..\\..\\..\\..\\manifests\\ ..\\..\\..\\..\\EtwTools\\Providers\\"
     }
   }
 }
