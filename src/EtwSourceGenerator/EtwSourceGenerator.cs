@@ -248,7 +248,7 @@ static Manifest ReadManifest(string path)
                     "win:Int64" => "long",
                     "win:UInt64" => "ulong",
                     "win:Boolean" => "bool",
-                    "win:GUID" => "System.Guid",
+                    "win:GUID" => "Guid",
                     _ => throw new InvalidOperationException()
                 };
                 _ = attributes.TryGetValue("map", out var map);
@@ -300,13 +300,14 @@ static string ConverterMethod(Field f, string location) =>
         "long" => $"BitConverter.ToInt64({location})",
         "string" => $"System.Text.Encoding.Unicode.GetString({location})",
         "address" => $"_etwEvent.AddressSize == 4 ? BitConverter.ToUInt32({location}) : BitConverter.ToUInt64({location})",
+        "Guid" => $"new({location})",
         _ => "unknown"
     }}";
 
 static string ReturnType(Field f) =>
     f.Map ?? f.Datatype switch
     {
-        "byte" or "sbyte" or "bool" or "ushort" or "short" or "uint" or "int" or "ulong" or "long" or "string" => f.Datatype,
+        "byte" or "sbyte" or "bool" or "ushort" or "short" or "uint" or "int" or "ulong" or "long" or "string" or "Guid" => f.Datatype,
         "address" => "ulong",
         _ => "unknown"
     };
@@ -331,6 +332,7 @@ static int Size(string datatype) =>
         "int" => 4,
         "ulong" => 8,
         "long" => 8,
+        "Guid" => 16,
         _ => -1
     };
 
@@ -538,7 +540,7 @@ static string CreateProviderEvents(Manifest manifest)
             "win:Stop" => "EtwEventType.Stop",
             "win:Send" => "EtwEventType.End",
             "win:Receive" => "EtwEventType.Recieve",
-            _ => e.Descriptor.Opcode.StartsWith("win:", StringComparison.Ordinal) ? throw new InvalidOperationException() : e.Descriptor.Opcode
+            _ => e.Descriptor.Opcode.StartsWith("win:", StringComparison.Ordinal) ? throw new InvalidOperationException() : $"(EtwEventType)Opcodes.{e.Descriptor.Opcode}"
         })},
                 Task = {(e.Descriptor.Task != null ? $"(ushort)Tasks.{e.Descriptor.Task}" : "0")},
                 Keyword = {(e.Descriptor.Keyword == null
@@ -807,6 +809,7 @@ static void CreateProvider(string providersDirectory, Manifest manifest)
     var builder = new StringBuilder(@$"using System;
 
 #pragma warning disable CA1707 // Identifiers should not contain underscores
+#pragma warning disable CA1720 // Identifier contains type name
 
 namespace EtwTools
 {{
@@ -839,12 +842,21 @@ namespace EtwTools
 {
     public partial class EtwProvider
     {
-        internal static readonly Dictionary<Guid, string> s_knownProviders = new()
+        internal static readonly Dictionary<Guid, (string Name, Dictionary<EtwEventDescriptor, string> Events)> s_knownProviders = new()
         {
 ");
     foreach (var manifest in manifests)
     {
-        _ = builder.AppendLine($"            {{ {manifest.Symbol}Provider.Id, {manifest.Symbol}Provider.Name }},");
+        _ = builder.AppendLine(@$"
+            {{ 
+                {manifest.Symbol}Provider.Id,
+                (
+                    {manifest.Symbol}Provider.Name, new Dictionary<EtwEventDescriptor, string>
+                    {{{manifest.Events.Aggregate(new StringBuilder(), (s, e) => s.Append($@"
+                        {{ {manifest.Symbol}Provider.{e.Key}Event.Descriptor, {manifest.Symbol}Provider.{e.Key}Event.Name }},"))}
+                    }}
+                )
+            }},");
     }
     _ = builder.Append(@"        };
     }

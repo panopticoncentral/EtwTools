@@ -1,6 +1,7 @@
 using System;
 
 #pragma warning disable CA1707 // Identifiers should not contain underscores
+#pragma warning disable CA1720 // Identifier contains type name
 
 namespace EtwTools
 {
@@ -2793,7 +2794,7 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the NewId field.
                 /// </summary>
-                public unknown NewId => unknown;
+                public Guid NewId => new(_etwEvent.Data[Offset_NewId..]);
 
                 /// <summary>
                 /// Creates a new SetActivityIdData.

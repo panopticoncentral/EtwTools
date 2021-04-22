@@ -61,8 +61,7 @@ namespace EtwTools
             && Channel == other.Channel
             && Level == other.Level
             && Opcode == other.Opcode
-            && Task == other.Task
-            && Keyword == other.Keyword;
+            && Task == other.Task;
 
         /// <summary>
         /// Determines if a descriptor is equal to anoher object.
@@ -76,7 +75,7 @@ namespace EtwTools
         /// </summary>
         /// <returns>The hash value.</returns>
         public override int GetHashCode() =>
-            HashCode.Combine(Id, Version, Channel, Level, Opcode, Task, Keyword);
+            HashCode.Combine(Id, Version, Channel, Level, Opcode, Task);
 
         /// <summary>
         /// Determines if two descriptors are equal.

@@ -1,6 +1,7 @@
 using System;
 
 #pragma warning disable CA1707 // Identifiers should not contain underscores
+#pragma warning disable CA1720 // Identifier contains type name
 
 namespace EtwTools
 {

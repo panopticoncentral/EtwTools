@@ -69,22 +69,10 @@ namespace EtwTools
         }
 
         /// <summary>
-        /// Returns the known event ID of the event.
-        /// </summary>
-        /// <returns>The known event ID, or 0 otherwise.</returns>
-        public int GetKnownEventId() => EtwProvider.s_knownProviders.TryGetValue(Provider, out var knownProvider) && knownProvider.Events.TryGetValue(Descriptor, out var knownEvent) ? knownEvent.Id : 0;
-
-        /// <summary>
         /// Returns the known name of the event.
         /// </summary>
         /// <returns>The known name, or null otherwise.</returns>
-        public string GetKnownEventName() => EtwProvider.s_knownProviders.TryGetValue(Provider, out var knownProvider) && knownProvider.Events.TryGetValue(Descriptor, out var knownEvent) ? knownEvent.Name : null;
-
-        /// <summary>
-        /// Returns the known name of the event.
-        /// </summary>
-        /// <returns>The known name, or null otherwise.</returns>
-        public static string GetKnownEventName(Guid providerId, EtwEventDescriptor descriptor) => EtwProvider.s_knownProviders.TryGetValue(providerId, out var knownProvider) && knownProvider.Events != null && knownProvider.Events.TryGetValue(descriptor, out var knownEvent) ? knownEvent.Name : null;
+        public static string GetKnownEventName(Guid providerId, EtwEventDescriptor descriptor) => EtwProvider.s_knownProviders.TryGetValue(providerId, out var knownProvider) && knownProvider.Events != null && knownProvider.Events.TryGetValue(descriptor, out var knownEvent) ? knownEvent : null;
 
         private bool TryGetExtendedData(Native.EventHeaderExtendedType type, out Native.EventHeaderExtendedDataItem extendedData)
         {

@@ -33,7 +33,7 @@ namespace EtwTools
             Id = id;
             if (s_knownProviders.TryGetValue(id, out var knownProvider))
             {
-                Name = knownProvider;
+                Name = knownProvider.Name;
             }
         }
 

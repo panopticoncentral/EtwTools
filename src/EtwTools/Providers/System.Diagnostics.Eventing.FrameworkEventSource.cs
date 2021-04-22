@@ -1,6 +1,7 @@
 using System;
 
 #pragma warning disable CA1707 // Identifiers should not contain underscores
+#pragma warning disable CA1720 // Identifier contains type name
 
 namespace EtwTools
 {
@@ -3479,7 +3480,7 @@ namespace EtwTools
                 Version = 0,
                 Channel = 0,
                 Level = EtwTraceLevel.Information,
-                Opcode = ReceiveHandled,
+                Opcode = (EtwEventType)Opcodes.ReceiveHandled,
                 Task = (ushort)Tasks.ThreadTransfer,
                 Keyword = (ulong)Keywords.ThreadTransfer
             };
