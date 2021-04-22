@@ -33,7 +33,7 @@ namespace EtwTools
             Id = id;
             if (s_knownProviders.TryGetValue(id, out var knownProvider))
             {
-                Name = knownProvider.Name;
+                Name = knownProvider;
             }
         }
 
@@ -341,19 +341,6 @@ namespace EtwTools
                 MatchAnyKeyword = matchAnyKeyword;
                 MatchAllKeyword = matchAllKeyword;
             }
-        }
-
-        internal readonly struct KnownProvider
-        {
-            public string Name { get; init; }
-            public EtwProvider Instance { get; init; }
-            public IReadOnlyDictionary<EtwEventDescriptor, KnownEvent> Events { get; init; }
-        }
-
-        internal readonly struct KnownEvent
-        {
-            public int Id { get; init; }
-            public string Name { get; init; }
         }
     }
 }

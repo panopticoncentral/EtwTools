@@ -7,7 +7,24 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EtwTools", "src\EtwTools\Et
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "etw", "src\etw\etw.csproj", "{84CEB322-D893-4A7A-944F-0025BC1969FB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EtwSourceGenerator", "src\EtwSourceGenerator\EtwSourceGenerator.csproj", "{05DC2254-FAB9-4E49-B9F3-AD00595AE763}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EtwSourceGenerator", "src\EtwSourceGenerator\EtwSourceGenerator.csproj", "{05DC2254-FAB9-4E49-B9F3-AD00595AE763}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{79FBD648-DFF5-4669-B1CF-10893DB15546}"
+	ProjectSection(SolutionItems) = preProject
+		.editorconfig = .editorconfig
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Manifests", "Manifests", "{C42E708E-26F0-4C71-97DE-A5A3572444E7}"
+	ProjectSection(SolutionItems) = preProject
+		manifests\Microsoft-ApplicationInsights-Core.xml = manifests\Microsoft-ApplicationInsights-Core.xml
+		manifests\Microsoft-VisualStudio-CpsCore.xml = manifests\Microsoft-VisualStudio-CpsCore.xml
+		manifests\Microsoft-VisualStudio-CpsVs.xml = manifests\Microsoft-VisualStudio-CpsVs.xml
+		manifests\Microsoft-VisualStudio-Threading.xml = manifests\Microsoft-VisualStudio-Threading.xml
+		manifests\RoslynEventSource.xml = manifests\RoslynEventSource.xml
+		manifests\StreamJsonRpc.xml = manifests\StreamJsonRpc.xml
+		manifests\System.Diagnostics.Eventing.FrameworkEventSource.xml = manifests\System.Diagnostics.Eventing.FrameworkEventSource.xml
+		manifests\System.Threading.Tasks.TplEventSource.xml = manifests\System.Threading.Tasks.TplEventSource.xml
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

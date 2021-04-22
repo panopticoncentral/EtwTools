@@ -1,45 +1,22 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Text;
 using System.Xml.Linq;
 
-using Newtonsoft.Json;
-
 const string EventsNamespace = "http://schemas.microsoft.com/win/2004/08/events";
 
-static XElement GetOneChild(XContainer element, string name)
-{
-    if (element.Elements().Count() != 1)
-    {
-        throw new InvalidOperationException();
-    }
-
-    var childElement = element.Elements().Single();
-
-    return childElement.Name != XName.Get(name, EventsNamespace) ? throw new InvalidOperationException() : childElement;
-}
+static XElement GetOneChild(XContainer element, string name) => GetChildren(element, name)[name];
 
 static (XElement, XElement) GetTwoChildren(XContainer element, string firstName, string secondName)
 {
-    if (element.Elements().Count() != 2)
-    {
-        throw new InvalidOperationException();
-    }
-
-    var firstElement = element.Elements().First();
-    var secondElement = element.Elements().Last();
-
-    return firstElement.Name != XName.Get(firstName, EventsNamespace)
-        || (secondElement.Name != XName.Get(secondName, EventsNamespace))
-        ? throw new InvalidOperationException()
-        : (firstElement, secondElement);
+    var children = GetChildren(element, firstName, secondName);
+    return (children[firstName], children[secondName]);
 }
 
-static Dictionary<string, XElement> GetOptionalChildren(XContainer element, params string[] names)
+static Dictionary<string, XElement> GetChildren(XContainer element, params string[] names)
 {
     if (element.Elements().Count() > names.Length)
     {
@@ -64,21 +41,6 @@ static Dictionary<string, XElement> GetOptionalChildren(XContainer element, para
     return result;
 }
 
-static void EnsureOneAttribute(XElement element, (string Name, string Value) attribute)
-{
-    if (element.Attributes().Count() != 1)
-    {
-        throw new InvalidOperationException();
-    }
-
-    var firstAttribute = element.Attributes().Single();
-
-    if (firstAttribute.Name != attribute.Name || firstAttribute.Value != attribute.Value)
-    {
-        throw new InvalidOperationException();
-    }
-}
-
 static void EnsureNoElements(XElement element)
 {
     if (element.Elements().Any())
@@ -87,74 +49,47 @@ static void EnsureNoElements(XElement element)
     }
 }
 
-static (string, string) GetTwoAttributes(XElement element, string firstName, string secondName)
+static Dictionary<string, string> GetAttributes(XElement element, params string[] names)
 {
-    if (element.Attributes().Count() != 2)
+    if (element.Attributes().Count() > names.Length)
     {
         throw new InvalidOperationException();
     }
 
-    var firstAttribute = element.Attributes().First();
-    var secondAttribute = element.Attributes().Last();
+    Dictionary<string, string> result = new();
+    HashSet<string> nameHash = new(names);
 
-    return firstAttribute.Name != XName.Get(firstName)
-        || (secondAttribute.Name != XName.Get(secondName))
-        ? throw new InvalidOperationException()
-        : (firstAttribute.Value, secondAttribute.Value);
+    foreach (var e in element.Attributes())
+    {
+        if (!nameHash.Contains(e.Name.LocalName) || result.ContainsKey(e.Name.LocalName))
+        {
+            throw new InvalidOperationException();
+        }
+
+        result[e.Name.LocalName] = e.Value;
+    }
+
+    return result;
 }
 
-static string GetOneAttribute(XElement element, string name)
+static string GetOneAttribute(XElement element, string name) => GetAttributes(element, name)[name];
+
+static (string, string) GetTwoAttributes(XElement element, string firstName, string secondName)
 {
-    if (element.Attributes().Count() != 1)
-    {
-        throw new InvalidOperationException();
-    }
-
-    var attribute = element.Attributes().First();
-
-    return attribute.Name != XName.Get(name)
-        ? throw new InvalidOperationException()
-        : attribute.Value;
+    var attributes = GetAttributes(element, firstName, secondName);
+    return (attributes[firstName], attributes[secondName]);
 }
 
 static (string, string, string) GetThreeAttributes(XElement element, string firstName, string secondName, string thirdName)
 {
-    if (element.Attributes().Count() != 3)
-    {
-        throw new InvalidOperationException();
-    }
-
-    var firstAttribute = element.Attributes().First();
-    var secondAttribute = element.Attributes().Skip(1).First();
-    var thirdAttribute = element.Attributes().Skip(2).First();
-
-    return firstAttribute.Name != XName.Get(firstName)
-        || (secondAttribute.Name != XName.Get(secondName))
-        || (thirdAttribute.Name != XName.Get(thirdName))
-        ? throw new InvalidOperationException()
-        : (firstAttribute.Value, secondAttribute.Value, thirdAttribute.Value);
+    var attributes = GetAttributes(element, firstName, secondName, thirdName);
+    return (attributes[firstName], attributes[secondName], attributes[thirdName]);
 }
 
 static (string, string, string, string, string) GetFiveAttributes(XElement element, string firstName, string secondName, string thirdName, string fourthName, string fifthName)
 {
-    if (element.Attributes().Count() != 5)
-    {
-        throw new InvalidOperationException();
-    }
-
-    var firstAttribute = element.Attributes().First();
-    var secondAttribute = element.Attributes().Skip(1).First();
-    var thirdAttribute = element.Attributes().Skip(2).First();
-    var fourthAttribute = element.Attributes().Skip(3).First();
-    var fifthAttribute = element.Attributes().Skip(4).First();
-
-    return firstAttribute.Name != XName.Get(firstName)
-        || (secondAttribute.Name != XName.Get(secondName))
-        || (thirdAttribute.Name != XName.Get(thirdName))
-        || (fourthAttribute.Name != XName.Get(fourthName))
-        || (fifthAttribute.Name != XName.Get(fifthName))
-        ? throw new InvalidOperationException()
-        : (firstAttribute.Value, secondAttribute.Value, thirdAttribute.Value, fourthAttribute.Value, fifthAttribute.Value);
+    var attributes = GetAttributes(element, firstName, secondName, thirdName, fourthName, fifthName);
+    return (attributes[firstName], attributes[secondName], attributes[thirdName], attributes[fourthName], attributes[fifthName]);
 }
 
 static void CollectElements<T>(XElement element, T collection, string name, Action<XElement, T> collector)
@@ -205,7 +140,10 @@ static Manifest ReadManifest(string path)
     var instrumentationManifestElement = GetOneChild(document, "instrumentationManifest");
     var (instrumentationElement, localizationElement) = GetTwoChildren(instrumentationManifestElement, "instrumentation", "localization");
     var resourcesElement = GetOneChild(localizationElement, "resources");
-    EnsureOneAttribute(resourcesElement, ("culture", "en-US"));
+    if (GetOneAttribute(resourcesElement, "culture") != "en-US")
+    {
+        throw new InvalidOperationException();
+    }
     var stringtableElement = GetOneChild(resourcesElement, "stringTable");
 
     Dictionary<string, string> stringTable = new();
@@ -220,16 +158,16 @@ static Manifest ReadManifest(string path)
     var providerElement = GetOneChild(eventsElement, "provider");
 
     var (nameAttribute, guidAttribute, resourceFileNameAttribute, messageFileNameAttribute, symbolAttribute) = GetFiveAttributes(providerElement, "name", "guid", "resourceFileName", "messageFileName", "symbol");
-    var componentElements = GetOptionalChildren(providerElement, "tasks", "maps", "opcodes", "keywords", "events", "templates");
+    var componentElements = GetChildren(providerElement, "tasks", "maps", "opcodes", "keywords", "events", "templates");
 
-    Dictionary<string, uint> tasks = new();
+    Dictionary<string, ushort> tasks = new();
     if (componentElements.TryGetValue("tasks", out var tasksElement))
     {
         CollectElements(tasksElement, tasks, "task", (element, tasks) =>
         {
             EnsureNoElements(element);
             var (nameAttribute, messageAttribute, valueAttribute) = GetThreeAttributes(element, "name", "message", "value");
-            tasks[LookupString(stringTable, messageAttribute)] = Convert.ToUInt32(valueAttribute, CultureInfo.InvariantCulture);
+            tasks[LookupString(stringTable, messageAttribute)] = Convert.ToUInt16(valueAttribute, CultureInfo.InvariantCulture);
         });
     }
 
@@ -244,14 +182,14 @@ static Manifest ReadManifest(string path)
         });
     }
 
-    Dictionary<string, ulong> opcodes = new();
+    Dictionary<string, byte> opcodes = new();
     if (componentElements.TryGetValue("opcodes", out var opcodesElement))
     {
         CollectElements(opcodesElement, opcodes, "opcode", (element, opcodes) =>
         {
             EnsureNoElements(element);
             var (nameAttribute, messageAttribute, valueAttribute) = GetThreeAttributes(element, "name", "message", "value");
-            opcodes[LookupString(stringTable, messageAttribute)] = Convert.ToUInt32(valueAttribute, CultureInfo.InvariantCulture);
+            opcodes[LookupString(stringTable, messageAttribute)] = Convert.ToByte(valueAttribute, CultureInfo.InvariantCulture);
         });
     }
 
@@ -290,335 +228,533 @@ static Manifest ReadManifest(string path)
         });
     }
 
-    return new Manifest();
-}
-
-if (args.Length != 2)
-{
-    return -1;
-}
-
-foreach (var file in Directory.GetFiles(args[0]))
-{
-    Console.WriteLine($"Processing manifest '{Path.GetFileNameWithoutExtension(file)}'.");
-    var manifest = ReadManifest(file);
-
-    if (manifest == null)
+    Dictionary<string, Template> templates = new();
+    if (componentElements.TryGetValue("templates", out var templatesElement))
     {
-        Console.WriteLine("Bad manifest.");
-        continue;
+        CollectElements(templatesElement, templates, "template", (element, templates) =>
+        {
+            var templateName = GetOneAttribute(element, "tid");
+            List<Field> fields = new();
+            CollectElements(element, fields, "data", (fieldElement, fields) =>
+            {
+                var attributes = GetAttributes(fieldElement, "name", "inType", "map");
+                var name = attributes["name"];
+                name = $"{char.ToUpperInvariant(name[0])}{name[1..]}";
+                var datatype = attributes["inType"] switch
+                {
+                    "win:UnicodeString" => "string",
+                    "win:Int32" => "int",
+                    "win:UInt32" => "uint",
+                    "win:Int64" => "long",
+                    "win:UInt64" => "ulong",
+                    "win:Boolean" => "bool",
+                    "win:GUID" => "System.Guid",
+                    _ => throw new InvalidOperationException()
+                };
+                _ = attributes.TryGetValue("map", out var map);
+                fields.Add(new Field { Name = name, Datatype = datatype, Map = map });
+            });
+            templates[templateName] = new Template { Fields = fields };
+        });
+    }
+
+    Dictionary<string, Event> events = new();
+    if (componentElements.TryGetValue("events", out var componentEventsElement))
+    {
+        CollectElements(componentEventsElement, events, "event", (element, events) =>
+        {
+            var attributes = GetAttributes(element, "value", "version", "level", "symbol", "opcode", "task", "template", "message", "keywords");
+            var descriptor = new EventDescriptor
+            {
+                Id = attributes.TryGetValue("value", out var value) ? Convert.ToUInt16(value, CultureInfo.InvariantCulture) : (ushort)0,
+                Version = attributes.TryGetValue("version", out var version) ? Convert.ToUInt32(version, CultureInfo.InvariantCulture) : (uint)0,
+                Level = attributes.TryGetValue("level", out var level) ? level : null,
+                Opcode = attributes.TryGetValue("opcode", out var opcode) ? opcode : null,
+                Task = attributes.TryGetValue("task", out var task) ? task : null,
+                Keyword = attributes.TryGetValue("keywords", out var eventKeywords) ? eventKeywords : null
+            };
+            events[attributes["symbol"]] = new Event
+            {
+                Descriptor = descriptor,
+                Fields = attributes.TryGetValue("template", out var eventTemplate)
+                    ? (templates.TryGetValue(eventTemplate, out var template) ? template.Fields : throw new InvalidOperationException())
+                    : null
+            };
+        });
+    }
+
+    return new Manifest { Path = path, Name = nameAttribute, Symbol = symbolAttribute, Guid = guidAttribute, Tasks = tasks, Keywords = keywords, Opcodes = opcodes, Maps = maps, Events = events };
+}
+
+static string ConverterMethod(Field f, string location) =>
+    @$"{(f.Map == null ? string.Empty : $"({f.Map})")}{f.Datatype switch
+    {
+        "byte" => location,
+        "sbyte" => $"(sbyte){location}",
+        "bool" => $"{location} != 0",
+        "ushort" => $"BitConverter.ToUInt16({location})",
+        "short" => $"BitConverter.ToInt16({location})",
+        "uint" => $"BitConverter.ToUInt32({location})",
+        "int" => $"BitConverter.ToInt32({location})",
+        "ulong" => $"BitConverter.ToUInt64({location})",
+        "long" => $"BitConverter.ToInt64({location})",
+        "string" => $"System.Text.Encoding.Unicode.GetString({location})",
+        "address" => $"_etwEvent.AddressSize == 4 ? BitConverter.ToUInt32({location}) : BitConverter.ToUInt64({location})",
+        _ => "unknown"
+    }}";
+
+static string ReturnType(Field f) =>
+    f.Map ?? f.Datatype switch
+    {
+        "byte" or "sbyte" or "bool" or "ushort" or "short" or "uint" or "int" or "ulong" or "long" or "string" => f.Datatype,
+        "address" => "ulong",
+        _ => "unknown"
+    };
+
+static string VariableSize(string datatype, string offset) =>
+    datatype switch
+    {
+        "address" => "etwEvent.AddressSize",
+        "string" => $"EtwEvent.StringEnumerable.StringEnumerator.StringLength(etwEvent.Data, {offset})",
+        _ => "unknown"
+    };
+
+static int Size(string datatype) =>
+    datatype switch
+    {
+        "bool" => 1,
+        "byte" => 1,
+        "sbyte" => 1,
+        "ushort" => 2,
+        "short" => 2,
+        "uint" => 4,
+        "int" => 4,
+        "ulong" => 8,
+        "long" => 8,
+        _ => -1
+    };
+
+static void CreateEventField(Event e, int i, StringBuilder builder, Dictionary<Field, string> fieldOffsets)
+{
+    var field = e.Fields[i];
+    var name = field.Name;
+    if (name.StartsWith('_'))
+    {
+        return;
+    }
+
+    var datatype = field.Datatype;
+    var openBrace = datatype.IndexOf('[');
+    var count = string.Empty;
+
+    if (openBrace != -1)
+    {
+        count = datatype[(openBrace + 1)..^1];
+        datatype = datatype[..openBrace];
+
+        var location = $"_etwEvent.Data[{fieldOffsets[field]}..{(i + 1 < e.Fields.Count ? fieldOffsets[e.Fields[i + 1]] : string.Empty)}]";
+
+        _ = builder.Append(datatype switch
+        {
+            "address" => $@"
+
+                /// <summary>
+                /// Retrieves the {name} field.
+                /// </summary>
+                public EtwEvent.AddressEnumerable {name} => new({location}, _etwEvent.AddressSize{(count == "..." ? string.Empty : $", {count}")});",
+            "string" => $@"
+
+                /// <summary>
+                /// Retrieves the {name} field.
+                /// </summary>
+                public EtwEvent.StringEnumerable {name} => new({location}{(count == "..." ? string.Empty : $", {count}")});",
+            _ => $@"
+
+                /// <summary>
+                /// Retrieves the {name} field.
+                /// </summary>
+                public EtwEvent.StructEnumerable<{datatype}> {name} => new({location}{(count == "..." ? string.Empty : $", {count}")});"
+        });
+    }
+    else
+    {
+        var location = $"_etwEvent.Data[{fieldOffsets[field]}{(Size(datatype) == 1 ? string.Empty : $"..{(i + 1 < e.Fields.Count ? fieldOffsets[e.Fields[i + 1]] : string.Empty)}")}]";
+        _ = builder.Append($@"
+
+                /// <summary>
+                /// Retrieves the {name} field.
+                /// </summary>
+                public {ReturnType(field)} {name} => {ConverterMethod(field, location)};");
     }
 }
 
-return 0;
+static string CreateEventFields(Event e, Dictionary<Field, string> fieldOffsets)
+{
+    if (e.Fields == null || !e.Fields.Any())
+    {
+        return string.Empty;
+    }
 
-//var providers = JsonConvert.DeserializeObject<Provider[]>(File.ReadAllText(args[0]));
+    var builder = new StringBuilder();
 
-//var idToProvider = new Dictionary<Guid, Provider>();
+    for (var i = 0; i < e.Fields.Count; i++)
+    {
+        CreateEventField(e, i, builder, fieldOffsets);
+    }
 
-//foreach (var provider in providers)
-//{
-//    if (idToProvider.TryGetValue(provider.Id, out var _))
-//    {
-//        Console.WriteLine($"Found duplicate provider ID {provider.Id}.");
-//        continue;
-//    }
+    return builder.ToString();
+}
 
-//    idToProvider.Add(provider.Id, provider);
-//}
+static string CreateEventFieldOffsetInitializers(Event e, Dictionary<Field, string> fieldOffsets)
+{
+    if (e.Fields == null || !e.Fields.Any())
+    {
+        return string.Empty;
+    }
 
-//var providersDirectory = Path.Combine(args[1], "Providers");
+    var builder = new StringBuilder();
+    var previousField = string.Empty;
+    var previousSize = string.Empty;
 
-//string ProviderFullName(Provider provider) => $"Providers.{provider.Name.Replace('-', '.')}Provider";
+    foreach (var f in e.Fields)
+    {
+        var fieldName = fieldOffsets[f];
 
-//string ConverterMethod(string datatype, string location) =>
-//    datatype switch
-//    {
-//        "byte" => location,
-//        "sbyte" => $"(sbyte){location}",
-//        "bool" => $"{location} != 0",
-//        "ushort" => $"BitConverter.ToUInt16({location})",
-//        "short" => $"BitConverter.ToInt16({location})",
-//        "uint" => $"BitConverter.ToUInt32({location})",
-//        "int" => $"BitConverter.ToInt32({location})",
-//        "ulong" => $"BitConverter.ToUInt64({location})",
-//        "long" => $"BitConverter.ToInt64({location})",
-//        "string" => $"global::System.Text.Encoding.Unicode.GetString({location})",
-//        "address" => $"_etwEvent.AddressSize == 4 ? BitConverter.ToUInt32({location}) : BitConverter.ToUInt64({location})",
-//        _ => "unknown"
-//    };
+        if (fieldName.StartsWith('_'))
+        {
+            _ = builder.Append($@"
+                    {fieldName} = {previousField} + {previousSize};");
+        }
 
-//string ReturnType(string datatype) =>
-//    datatype switch
-//    {
-//        "byte" or "sbyte" or "bool" or "ushort" or "short" or "uint" or "int" or "ulong" or "long" or "string" => datatype,
-//        "address" => "ulong",
-//        _ => "unknown"
-//    };
+        var size = Size(f.Datatype);
+        previousSize = size == -1 ? VariableSize(f.Datatype, fieldName) : size.ToString(CultureInfo.InvariantCulture);
+        previousField = fieldName;
+    }
 
-//string VariableSize(string datatype, string offset) =>
-//    datatype switch
-//    {
-//        "address" => "etwEvent.AddressSize",
-//        "string" => $"EtwEvent.StringEnumerable.StringEnumerator.StringLength(etwEvent.Data, {offset})",
-//        _ => "unknown"
-//    };
+    return builder.ToString();
+}
 
-//int Size(string datatype) =>
-//    datatype switch
-//    {
-//        "bool" => 1,
-//        "byte" => 1,
-//        "sbyte" => 1,
-//        "ushort" => 2,
-//        "short" => 2,
-//        "uint" => 4,
-//        "int" => 4,
-//        "ulong" => 8,
-//        "long" => 8,
-//        _ => -1
-//    };
+static string CreateEventFieldOffsets(Manifest manifest, Event e, Dictionary<Field, string> fieldOffsets)
+{
+    if (e.Fields == null || !e.Fields.Any())
+    {
+        return string.Empty;
+    }
 
-//void CreateEventField(Provider provider, Event e, int i, StringBuilder builder, Dictionary<Field, string> fieldOffsets)
-//{
-//    var name = e.Fields[i].Name;
-//    if (name.StartsWith('_'))
-//    {
-//        return;
-//    }
+    var builder = new StringBuilder();
+    var foundVariableField = false;
+    var offset = 0;
 
-//    var datatype = e.Fields[i].Datatype;
-//    var openBrace = datatype.IndexOf('[');
-//    var count = string.Empty;
+    _ = builder.AppendLine();
 
-//    if (openBrace != -1)
-//    {
-//        count = datatype[(openBrace + 1)..^1];
-//        datatype = datatype[..openBrace];
+    foreach (var f in e.Fields)
+    {
+        if (!foundVariableField)
+        {
+            var fieldName = $"Offset_{f.Name}";
+            fieldOffsets[f] = fieldName;
 
-//        var location = $"_etwEvent.Data[{fieldOffsets[e.Fields[i]]}..{(i + 1 < e.Fields.Count ? fieldOffsets[e.Fields[i + 1]] : string.Empty)}]";
+            _ = builder.Append(@$"
+                private const int {fieldName} = {offset};");
 
-//        _ = builder.Append(datatype switch
-//        {
-//            "address" => $@"
+            var size = Size(f.Datatype);
 
-//            /// <summary>
-//            /// Retrieves the {name} field.
-//            /// </summary>
-//            public EtwEvent.AddressEnumerable {name} => new({location}, _etwEvent.AddressSize{(count == "..." ? string.Empty : $", {count}")});",
-//            "string" => $@"
+            if (size == -1)
+            {
+                foundVariableField = true;
+            }
+            else
+            {
+                offset += size;
+            }
+        }
+        else
+        {
+            var fieldName = $"_offset_{f.Name}";
+            fieldOffsets[f] = fieldName;
+            _ = builder.Append($@"
+                private readonly int {fieldName};");
+        }
+    }
 
-//            /// <summary>
-//            /// Retrieves the {name} field.
-//            /// </summary>
-//            public EtwEvent.StringEnumerable {name} => new({location}{(count == "..." ? string.Empty : $", {count}")});",
-//            _ => $@"
+    return builder.ToString();
+}
 
-//            /// <summary>
-//            /// Retrieves the {name} field.
-//            /// </summary>
-//            public EtwEvent.StructEnumerable<{datatype}> {name} => new({location}{(count == "..." ? string.Empty : $", {count}")});"
-//        });
-//    }
-//    else
-//    {
-//        var location = $"_etwEvent.Data[{fieldOffsets[e.Fields[i]]}{(Size(datatype) == 1 ? string.Empty : $"..{(i + 1 < e.Fields.Count ? fieldOffsets[e.Fields[i + 1]] : string.Empty)}")}]";
-//        _ = builder.Append($@"
+static string CreateProviderEvents(Manifest manifest)
+{
+    if (manifest.Events == null || manifest.Events.Count == 0)
+    {
+        return string.Empty;
+    }
 
-//            /// <summary>
-//            /// Retrieves the {name} field.
-//            /// </summary>
-//            public {ReturnType(datatype)} {name} => {ConverterMethod(datatype, location)};");
-//    }
-//}
+    var builder = new StringBuilder();
 
-//string CreateEventFields(Provider provider, Event e, Dictionary<Field, string> fieldOffsets)
-//{
-//    if (!e.Fields.Any())
-//    {
-//        return string.Empty;
-//    }
+    foreach (var (name, e) in manifest.Events)
+    {
+        Dictionary<Field, string> fieldOffsets = new();
 
-//    var builder = new StringBuilder();
+        _ = builder.Append($@"
 
-//    for (var i = 0; i < e.Fields.Count; i++)
-//    {
-//        CreateEventField(provider, e, i, builder, fieldOffsets);
-//    }
+        /// <summary>
+        /// An event wrapper for a {name} event.
+        /// </summary>
+        public readonly ref struct {name}Event
+        {{
+            private readonly EtwEvent _etwEvent;
 
-//    return builder.ToString();
-//}
+            /// <summary>
+            /// Event name.
+            /// </summary>
+            public const string Name = ""{name}"";
 
-//string CreateEventFieldOffsetInitializers(Provider provider, Event e, Dictionary<Field, string> fieldOffsets)
-//{
-//    if (!e.Fields.Any())
-//    {
-//        return string.Empty;
-//    }
+            /// <summary>
+            /// The event provider.
+            /// </summary>
+            public static readonly Guid Provider = Id;
 
-//    var builder = new StringBuilder();
-//    var previousField = string.Empty;
-//    var previousSize = string.Empty;
+            /// <summary>
+            /// Event descriptor.
+            /// </summary>
+            public static EtwEventDescriptor Descriptor {{ get; }} = new EtwEventDescriptor
+            {{
+                Id = {e.Descriptor.Id},
+                Version = {e.Descriptor.Version},
+                Channel = {e.Descriptor.Channel},
+                Level = {(e.Descriptor.Level ?? "win:LogAlways") switch
+        {
+            "win:LogAlways" => "EtwTraceLevel.None",
+            "win:Critical" => "EtwTraceLevel.Critical",
+            "win:Error" => "EtwTraceLevel.Error",
+            "win:Warning" => "EtwTraceLevel.Warning",
+            "win:Informational" => "EtwTraceLevel.Information",
+            "win:Verbose" => "EtwTraceLevel.Verbose",
+            _ => throw new InvalidOperationException()
+        }},
+                Opcode = {((e.Descriptor.Opcode ?? "win:Info") switch
+        {
+            "win:Info" => "EtwEventType.Info",
+            "win:Start" => "EtwEventType.Start",
+            "win:End" => "EtwEventType.End",
+            "win:Stop" => "EtwEventType.Stop",
+            "win:Send" => "EtwEventType.End",
+            "win:Receive" => "EtwEventType.Recieve",
+            _ => e.Descriptor.Opcode.StartsWith("win:", StringComparison.Ordinal) ? throw new InvalidOperationException() : e.Descriptor.Opcode
+        })},
+                Task = {(e.Descriptor.Task != null ? $"(ushort)Tasks.{e.Descriptor.Task}" : "0")},
+                Keyword = {(e.Descriptor.Keyword == null
+                    ? "0"
+                    : !e.Descriptor.Keyword.Contains(" ", StringComparison.InvariantCulture)
+                        ? $"(ulong)Keywords.{e.Descriptor.Keyword}"
+                        : $"(ulong)({e.Descriptor.Keyword?.Split(" ").Aggregate(string.Empty, (s, k) => $"{s}{(string.IsNullOrEmpty(s) ? string.Empty : " | ")}Keywords.{k}")})")}
+            }};
 
-//    foreach (var f in e.Fields)
-//    {
-//        var fieldName = fieldOffsets[f];
+            /// <summary>
+            /// The process the event was recorded in.
+            /// </summary>
+            public uint ProcessId => _etwEvent.ProcessId;
 
-//        if (fieldName.StartsWith('_'))
-//        {
-//            _ = builder.Append($@"
-//                {fieldName} = {previousField} + {previousSize};");
-//        }
+            /// <summary>
+            /// The thread the event was recorded on.
+            /// </summary>
+            public uint ThreadId => _etwEvent.ThreadId;
 
-//        var size = Size(f.Datatype);
-//        previousSize = size == -1 ? VariableSize(f.Datatype, fieldName) : size.ToString(CultureInfo.InvariantCulture);
-//        previousField = fieldName;
-//    }
+            /// <summary>
+            /// The timestamp of the event.
+            /// </summary>
+            public long Timestamp => _etwEvent.Timestamp;
 
-//    return builder.ToString();
-//}
+            /// <summary>
+            /// The processor number the event was recorded on.
+            /// </summary>
+            public byte ProcessorNumber => _etwEvent.ProcessorNumber;
 
-//string CreateEventFieldOffsets(Provider provider, Event e, Dictionary<Field, string> fieldOffsets)
-//{
-//    if (!e.Fields.Any())
-//    {
-//        return string.Empty;
-//    }
+            /// <summary>
+            /// Timing information for the event.
+            /// </summary>
+            public (ulong? KernelTime, ulong? UserTime, ulong? ProcessorTime) Time => _etwEvent.Time;{(e.Fields == null || e.Fields.Count == 0 ? string.Empty : $@"
 
-//    var builder = new StringBuilder();
-//    var foundVariableField = false;
-//    var offset = 0;
+            /// <summary>
+            /// Data for the event.
+            /// </summary>
+            public {name}Data Data => new(_etwEvent);")}
 
-//    _ = builder.AppendLine();
+            /// <summary>
+            /// Creates a new {name}Event.
+            /// </summary>
+            /// <param name=""etwEvent"">The event.</param>
+            public {name}Event(EtwEvent etwEvent)
+            {{
+                _etwEvent = etwEvent;
+            }}{(e.Fields == null || e.Fields.Count == 0 ? string.Empty : $@"
 
-//    foreach (var f in e.Fields)
-//    {
-//        if (!foundVariableField)
-//        {
-//            var fieldName = $"Offset_{f.Name}";
-//            fieldOffsets[f] = fieldName;
+            /// <summary>
+            /// A data wrapper for a {name} event.
+            /// </summary>
+            public readonly ref struct {name}Data
+            {{
+                private readonly EtwEvent _etwEvent;{CreateEventFieldOffsets(manifest, e, fieldOffsets)}{CreateEventFields(e, fieldOffsets)}
 
-//            _ = builder.Append(@$"
-//            private const int {fieldName} = {offset};");
+                /// <summary>
+                /// Creates a new {name}Data.
+                /// </summary>
+                /// <param name=""etwEvent"">The event.</param>
+                public {name}Data(EtwEvent etwEvent)
+                {{
+                    _etwEvent = etwEvent;{CreateEventFieldOffsetInitializers(e, fieldOffsets)}
+                }}
+            }}
+")}
+        }}");
+    }
 
-//            var size = Size(f.Datatype);
+    return builder.ToString();
+}
 
-//            if (size == -1)
-//            {
-//                foundVariableField = true;
-//            }
-//            else
-//            {
-//                offset += size;
-//            }
-//        }
-//        else
-//        {
-//            var fieldName = $"_offset_{f.Name}";
-//            fieldOffsets[f] = fieldName;
-//            _ = builder.Append($@"
-//            private readonly int {fieldName};");
-//        }
-//    }
+static string CreateProviderTasks(Manifest manifest)
+{
+    if (manifest.Tasks == null || manifest.Tasks.Count == 0)
+    {
+        return string.Empty;
+    }
 
-//    return builder.ToString();
-//}
+    StringBuilder builder = new();
 
-//string CreateProviderEvents(Provider provider, string providerClassName, ref int eventId)
-//{
-//    if (provider.Events == null || provider.Events.Count == 0)
-//    {
-//        return string.Empty;
-//    }
+    _ = builder.Append($@"
 
-//    var builder = new StringBuilder();
+        /// <summary>
+        /// Tasks supported by {manifest.Name}.
+        /// </summary>
+        public enum Tasks : ushort
+        {{");
 
-//    foreach (var (name, e) in provider.Events)
-//    {
-//        Dictionary<Field, string> fieldOffsets = new();
-//        var processIdEvent = e.Fields.Any(f => f.Name == "ProcessId")
-//            ? string.Empty
-//            : @"
+    foreach (var (name, value) in manifest.Tasks.OrderBy(kvp => kvp.Value))
+    {
+        _ = builder.Append($@"
+            /// <summary>
+            /// '{name}' task.
+            /// </summary>
+            {name} = {value},");
+    }
 
-//            /// <summary>
-//            /// The process the event was recorded in.
-//            /// </summary>
-//            public uint ProcessId => _etwEvent.ProcessId;";
+    _ = builder.Append(@"
+        }");
 
-//        var threadIdEvent = e.Fields.Any(f => f.Name == "ThreadId")
-//            ? string.Empty
-//            : @"
+    return builder.ToString();
+}
 
-//            /// <summary>
-//            /// The thread the event was recorded on.
-//            /// </summary>
-//            public uint ThreadId => _etwEvent.ThreadId;";
+static string CreateProviderOpcodes(Manifest manifest)
+{
+    if (manifest.Opcodes == null || manifest.Opcodes.Count == 0)
+    {
+        return string.Empty;
+    }
 
-//        var timestampEvent = e.Fields.Any(f => f.Name == "Timestamp")
-//            ? string.Empty
-//            : @"
+    StringBuilder builder = new();
 
-//            /// <summary>
-//            /// The timestamp of the event.
-//            /// </summary>
-//            public long Timestamp => _etwEvent.Timestamp;";
+    _ = builder.Append($@"
 
-//        var processorNumberEvent = e.Fields.Any(f => f.Name == "ProcessorNumber")
-//            ? string.Empty
-//            : @"
+        /// <summary>
+        /// Opcodes supported by {manifest.Name}.
+        /// </summary>
+        public enum Opcodes
+        {{");
 
-//            /// <summary>
-//            /// The processor number the event was recorded on.
-//            /// </summary>
-//            public byte ProcessorNumber => _etwEvent.ProcessorNumber;";
+    foreach (var (name, value) in manifest.Opcodes.OrderBy(kvp => kvp.Value))
+    {
+        _ = builder.Append($@"
+            /// <summary>
+            /// '{name}' opcode.
+            /// </summary>
+            {name} = {value},");
+    }
 
-//        _ = builder.Append($@"
+    _ = builder.Append(@"
+        }");
 
-//        /// <summary>
-//        /// An event wrapper for a {name} event.
-//        /// </summary>
-//        public readonly ref struct {name}Event
-//        {{
-//            private readonly EtwEvent _etwEvent;{CreateEventFieldOffsets(provider, e, fieldOffsets)}
+    return builder.ToString();
+}
 
-//            /// <summary>
-//            /// Event ID.
-//            /// </summary>
-//            public const int Id = {eventId++};
+static string CreateProviderKeywords(Manifest manifest)
+{
+    if (manifest.Keywords == null || manifest.Keywords.Count == 0)
+    {
+        return string.Empty;
+    }
 
-//            /// <summary>
-//            /// Event name.
-//            /// </summary>
-//            public const string Name = ""{name}"";
+    StringBuilder builder = new();
 
-//            /// <summary>
-//            /// The event provider.
-//            /// </summary>
-//            public static readonly Guid Provider = {providerClassName}.Id;
+    _ = builder.Append($@"
 
-//            /// <summary>
-//            /// Event descriptor.
-//            /// </summary>
-//            public static EtwEventDescriptor Descriptor {{ get; }} = new EtwEventDescriptor {{ Id = {e.Descriptor.Id}, Version = {e.Descriptor.Version}, Channel = {e.Descriptor.Channel}, Level = {(e.Descriptor.Level == 0 ? string.Empty : "(EtwTraceLevel)")}{e.Descriptor.Level}, Opcode = {(e.Descriptor.Opcode == 0 ? string.Empty : "(EtwEventType)")}{e.Descriptor.Opcode}, Task = {e.Descriptor.Task}, Keyword = 0x{e.Descriptor.Keyword:X16} }};{processIdEvent}{threadIdEvent}{timestampEvent}{processorNumberEvent}
+        /// <summary>
+        /// Keywords supported by {manifest.Name}.
+        /// </summary>
+        [Flags]
+        public enum Keywords : ulong
+        {{");
 
-//            /// <summary>
-//            /// Timing information for the event.
-//            /// </summary>
-//            public (ulong? KernelTime, ulong? UserTime, ulong? ProcessorTime) Time => _etwEvent.Time;{CreateEventFields(provider, e, fieldOffsets)}
+    foreach (var (name, value) in manifest.Keywords.OrderBy(kvp => kvp.Value))
+    {
+        _ = builder.Append($@"
+            /// <summary>
+            /// '{name}' keyword.
+            /// </summary>
+            {name} = 0x{value:X16},");
+    }
 
-//            /// <summary>
-//            /// Creates a new {name}Event.
-//            /// </summary>
-//            /// <param name=""etwEvent"">The event.</param>
-//            public {name}Event(EtwEvent etwEvent)
-//            {{
-//                _etwEvent = etwEvent;{CreateEventFieldOffsetInitializers(provider, e, fieldOffsets)}
-//            }}
-//        }}");
-//    }
+    _ = builder.Append(@"
+        }");
 
-//    return builder.ToString();
-//}
+    return builder.ToString();
+}
+
+static string CreateProviderMaps(Manifest manifest)
+{
+    if (manifest.Maps == null || manifest.Maps.Count == 0)
+    {
+        return string.Empty;
+    }
+
+    StringBuilder builder = new();
+
+    foreach (var (name, value) in manifest.Maps)
+    {
+        _ = builder.Append($@"
+
+        /// <summary>
+        /// {name}.
+        /// </summary>");
+        if (value.Item1)
+        {
+            _ = builder.Append(@"
+        [Flags]
+");
+        }
+
+        _ = builder.Append($@"
+        public enum {name}
+        {{");
+
+        foreach (var (enumValue, enumName) in value.Item2)
+        {
+            _ = !value.Item1
+                ? builder.Append($@"
+            /// <summary>
+            /// {enumName}.
+            /// </summary>
+            {enumName} = {enumValue},")
+                : builder.Append($@"
+            /// <summary>
+            /// {enumName}.
+            /// </summary>
+            {enumName} = 0x{enumValue:X16},");
+        }
+
+        _ = builder.Append(@"
+        }");
+    }
+
+    return builder.ToString();
+}
 
 //string CreateStructFields(Provider provider, IReadOnlyList<Field> fields)
 //{
@@ -666,146 +802,127 @@ return 0;
 //    return builder.ToString();
 //}
 
-//void CreateProvider(Provider provider, ref int eventId)
-//{
-//    var providerClassFullName = ProviderFullName(provider);
-//    var lastDot = providerClassFullName.LastIndexOf('.');
-//    var providerNamespace = providerClassFullName[0..lastDot];
-//    var providerClassName = providerClassFullName[(lastDot + 1)..];
+static void CreateProvider(string providersDirectory, Manifest manifest)
+{
+    var builder = new StringBuilder(@$"using System;
 
-//    var builder = new StringBuilder(@$"using System;
+#pragma warning disable CA1707 // Identifiers should not contain underscores
 
-//namespace EtwTools.{providerNamespace}
-//{{
-//    /// <summary>
-//    /// Provider for {provider.Name} ({provider.Id})
-//    /// </summary>
-//    public sealed class {providerClassName}
-//    {{
-//        /// <summary>
-//        /// Provider ID.
-//        /// </summary>
-//        public static readonly Guid Id = new(""{provider.Id}"");
+namespace EtwTools
+{{
+    /// <summary>
+    /// Provider for {manifest.Name} ({manifest.Guid})
+    /// </summary>
+    public sealed class {manifest.Symbol}Provider
+    {{
+        /// <summary>
+        /// Provider ID.
+        /// </summary>
+        public static readonly Guid Id = new(""{manifest.Guid}"");
 
-//        /// <summary>
-//        /// Provider name.
-//        /// </summary>
-//        public const string Name = ""{provider.Name}"";{CreateProviderEvents(provider, providerClassName, ref eventId)}{CreateProviderStructs(provider, providerClassName)}
-//    }}
-//}}
-//");
+        /// <summary>
+        /// Provider name.
+        /// </summary>
+        public const string Name = ""{manifest.Name}"";{CreateProviderEvents(manifest)}{CreateProviderTasks(manifest)}{CreateProviderOpcodes(manifest)}{CreateProviderKeywords(manifest)}{CreateProviderMaps(manifest)}{/*CreateProviderStructs(provider, providerClassName)*/""}
+    }}
+}}
+");
 
-//    File.WriteAllText(Path.Combine(providersDirectory, $"{provider.Name.Replace('-', '_').Replace('.', '_')}.cs"), builder.ToString());
-//}
+    File.WriteAllText(Path.Combine(providersDirectory, $"{Path.GetFileNameWithoutExtension(manifest.Path)}.cs"), builder.ToString());
+}
 
-//void CreateProviders()
-//{
-//    if (!Directory.Exists(providersDirectory))
-//    {
-//        _ = Directory.CreateDirectory(providersDirectory);
-//    }
+static void CreateMap(string providersDirectory, IReadOnlyList<Manifest> manifests)
+{
+    var builder = new StringBuilder(@"using System;
+using System.Collections.Generic;
+namespace EtwTools
+{
+    public partial class EtwProvider
+    {
+        internal static readonly Dictionary<Guid, string> s_knownProviders = new()
+        {
+");
+    foreach (var manifest in manifests)
+    {
+        _ = builder.AppendLine($"            {{ {manifest.Symbol}Provider.Id, {manifest.Symbol}Provider.Name }},");
+    }
+    _ = builder.Append(@"        };
+    }
+}");
+    File.WriteAllText(Path.Combine(providersDirectory, "EtwProvider.generated.cs"), builder.ToString());
+}
 
-//    var eventId = 1;
-//    foreach (var provider in providers)
-//    {
-//        CreateProvider(provider, ref eventId);
-//    }
-//}
+if (args.Length != 2)
+{
+    return -1;
+}
 
-//string ProviderEventMap(Provider provider)
-//{
-//    if (provider.Events == null || provider.Events.Count == 0)
-//    {
-//        return string.Empty;
-//    }
+var providersDirectory = args[1];
 
-//    var builder = new StringBuilder($", Events = new Dictionary<EtwEventDescriptor, KnownEvent> {{");
-//    var first = true;
+if (!Directory.Exists(providersDirectory))
+{
+    _ = Directory.CreateDirectory(providersDirectory);
+}
 
-//    foreach (var (name, e) in provider.Events)
-//    {
-//        if (!first)
-//        {
-//            _ = builder.Append(',');
-//        }
-//        else
-//        {
-//            first = false;
-//        }
+List<Manifest> manifests = new();
 
-//        var eventFullName = $"{ProviderFullName(provider)}.{name}Event";
-//        _ = builder.Append($" {{ {eventFullName}.Descriptor, new KnownEvent {{ Id = {eventFullName}.Id, Name = {eventFullName}.Name }} }}");
-//    }
+foreach (var file in Directory.GetFiles(args[0]))
+{
+    Console.WriteLine($"Processing manifest '{Path.GetFileNameWithoutExtension(file)}'.");
+    var manifest = ReadManifest(file);
 
-//    _ = builder.Append(" }");
+    if (manifest == null)
+    {
+        Console.WriteLine("Bad manifest.");
+        continue;
+    }
 
-//    return builder.ToString();
-//}
+    CreateProvider(providersDirectory, manifest);
+    manifests.Add(manifest);
+}
 
-//void CreateMaps()
-//{
-//    var builder = new StringBuilder(@"using System;
-//using System.Collections.Generic;
+CreateMap(providersDirectory, manifests);
 
-//namespace EtwTools
-//{
-//    public partial class EtwProvider
-//    {
-//        internal static readonly Dictionary<Guid, KnownProvider> s_knownProviders = new()
-//        {
-//");
+return 0;
 
-//    foreach (var provider in providers)
-//    {
-//        var providerClassFullName = ProviderFullName(provider);
-//        _ = builder.AppendLine($"            {{ {providerClassFullName}.Id, new KnownProvider {{ Name = {providerClassFullName}.Name{ProviderEventMap(provider)} }} }},");
-//    }
+internal record Event
+{
+    public EventDescriptor Descriptor { get; set; }
+    public IReadOnlyList<Field> Fields { get; set; }
+}
 
-//    _ = builder.Append(@"        };
-//    }
-//}");
+internal record EventDescriptor
+{
+    public ushort Id { get; set; }
+    public uint Version { get; set; }
+    public byte Channel { get; set; }
+    public string Level { get; set; }
+    public string Opcode { get; set; }
+    public string Task { get; set; }
+    public string Keyword { get; set; }
+}
 
-//    File.WriteAllText(Path.Combine(args[1], "EtwProvider.generated.cs"), builder.ToString());
-//}
+internal record Template
+{
+    public IReadOnlyList<Field> Fields { get; set; }
+}
 
-//CreateProviders();
-//CreateMaps();
-
-//return 0;
-
-//[DebuggerDisplay("{Name} ({Id})")]
-//internal sealed class Provider
-//{
-//    public string Name { get; set; }
-//    public Guid Id { get; set; }
-//    public IReadOnlyDictionary<string, Event> Events { get; set; }
-//    public IReadOnlyDictionary<string, IReadOnlyList<Field>> Structs { get; set; }
-//}
-
-//internal sealed class Event
-//{
-//    public EventDescriptor Descriptor { get; set; }
-//    public IReadOnlyList<Field> Fields { get; set; }
-//}
-
-//internal sealed class Field
-//{
-//    public string Name { get; set; }
-//    public string Datatype { get; set; }
-//}
-
-//internal sealed class EventDescriptor
-//{
-//    public ushort Id { get; set; }
-//    public uint Version { get; set; }
-//    public byte Channel { get; set; }
-//    public byte Level { get; set; }
-//    public byte Opcode { get; set; }
-//    public ushort Task { get; set; }
-//    public ulong Keyword { get; set; }
-//}
+internal record Field
+{
+    public string Name { get; set; }
+    public string Datatype { get; set; }
+    public string Map { get; set; }
+}
 
 internal record Manifest
 {
-
+    public string Path { get; set; }
+    public string Name { get; set; }
+    public string Symbol { get; set; }
+    public string Guid { get; set; }
+    public Dictionary<string, ushort> Tasks { get; set; }
+    public Dictionary<string, ulong> Keywords { get; set; }
+    public Dictionary<string, byte> Opcodes { get; set; }
+    public Dictionary<string, (bool, Dictionary<long, string>)> Maps { get; set; }
+    public Dictionary<string, Event> Events { get; set; }
 }
