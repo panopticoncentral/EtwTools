@@ -3257,7 +3257,7 @@ namespace EtwTools
                 Version = 0,
                 Channel = 0,
                 Level = EtwTraceLevel.Information,
-                Opcode = EtwEventType.End,
+                Opcode = EtwEventType.Send,
                 Task = (ushort)Tasks.ThreadTransfer,
                 Keyword = (ulong)Keywords.ThreadTransfer
             };

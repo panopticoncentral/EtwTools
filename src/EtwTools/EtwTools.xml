@@ -1238,6 +1238,12 @@
             </summary>
             <returns>The registered providers on the system.</returns>
         </member>
+        <member name="M:EtwTools.EtwProvider.GetManifest">
+            <summary>
+            Gets a manifest representing the provider, if available.
+            </summary>
+            <returns>Manifest, if available.</returns>
+        </member>
         <member name="M:EtwTools.EtwProvider.GetEventInfos">
             <summary>
             Gets descriptions of events supported by this provider.

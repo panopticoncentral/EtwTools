@@ -538,7 +538,7 @@ static string CreateProviderEvents(Manifest manifest)
             "win:Start" => "EtwEventType.Start",
             "win:End" => "EtwEventType.End",
             "win:Stop" => "EtwEventType.Stop",
-            "win:Send" => "EtwEventType.End",
+            "win:Send" => "EtwEventType.Send",
             "win:Receive" => "EtwEventType.Recieve",
             _ => e.Descriptor.Opcode.StartsWith("win:", StringComparison.Ordinal) ? throw new InvalidOperationException() : $"(EtwEventType)Opcodes.{e.Descriptor.Opcode}"
         })},

@@ -89,7 +89,7 @@ void AddProvidersCommands(Command providersCommand)
     {
         new Option<PublishedSort>(new[] { "--sort", "-s" }, () => PublishedSort.Name, "Sort providers."),
         new Option<bool>(new[] { "--json" }, "Output in JSON format."),
-        new Option<bool>(new[] { "--unknown", "-u" }, "Only list unknown providers..")
+        new Option<bool>(new[] { "--unknown", "-u" }, "Only list unknown providers."),
     };
     publishedCommand.Handler = CommandHandler.Create<PublishedSort, bool, bool>(ListPublishedProviders);
     providersCommand.AddCommand(publishedCommand);
@@ -661,7 +661,26 @@ static void SaveTraceManifests(string trace, bool all)
     using var logFile = new EtwTrace(trace);
 
     EtwEventSourceManifestCollector collector = new();
-    var stats = logFile.Open(null, e => collector.ProcessEventSourceManifestEvent(ref e));
+    HashSet<Guid> savedProviders = new();
+    var stats = logFile.Open(null, e =>
+    {
+        if (EtwEventSourceManifestCollector.IsEventSourceManifestEvent(ref e))
+        {
+            collector.ProcessEventSourceManifestEvent(ref e);
+        }
+        else if (!savedProviders.Contains(e.Provider))
+        {
+            var provider = new EtwProvider(e.Provider);
+            var manifest = provider.GetManifest();
+
+            if (manifest != null)
+            {
+                var filename = $"{provider.Name ?? provider.Id.ToString()}.xml";
+                File.WriteAllText(filename, manifest);
+            }
+            _ = savedProviders.Add(e.Provider);
+        }
+    });
     logFile.Process();
 
     if (all)

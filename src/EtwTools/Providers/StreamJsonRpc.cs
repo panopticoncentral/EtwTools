@@ -142,7 +142,7 @@ namespace EtwTools
                 Version = 0,
                 Channel = 0,
                 Level = EtwTraceLevel.Verbose,
-                Opcode = EtwEventType.End,
+                Opcode = EtwEventType.Send,
                 Task = (ushort)Tasks.Notification,
                 Keyword = 0
             };
@@ -539,7 +539,7 @@ namespace EtwTools
                 Version = 0,
                 Channel = 0,
                 Level = EtwTraceLevel.Information,
-                Opcode = EtwEventType.End,
+                Opcode = EtwEventType.Send,
                 Task = (ushort)Tasks.Cancellation,
                 Keyword = 0
             };
@@ -1164,7 +1164,7 @@ namespace EtwTools
                 Version = 0,
                 Channel = 0,
                 Level = EtwTraceLevel.Information,
-                Opcode = EtwEventType.End,
+                Opcode = EtwEventType.Send,
                 Task = (ushort)Tasks.MessageHandler,
                 Keyword = 0
             };

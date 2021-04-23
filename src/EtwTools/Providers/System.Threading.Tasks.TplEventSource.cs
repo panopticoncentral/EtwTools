@@ -826,7 +826,7 @@ namespace EtwTools
                 Version = 1,
                 Channel = 0,
                 Level = EtwTraceLevel.Information,
-                Opcode = EtwEventType.End,
+                Opcode = EtwEventType.Send,
                 Task = (ushort)Tasks.TaskScheduled,
                 Keyword = (ulong)(Keywords.TaskTransfer | Keywords.Tasks)
             };
@@ -1174,7 +1174,7 @@ namespace EtwTools
                 Version = 3,
                 Channel = 0,
                 Level = EtwTraceLevel.Information,
-                Opcode = EtwEventType.End,
+                Opcode = EtwEventType.Send,
                 Task = (ushort)Tasks.TaskWait,
                 Keyword = (ulong)(Keywords.TaskTransfer | Keywords.Tasks)
             };
@@ -1600,7 +1600,7 @@ namespace EtwTools
                 Version = 0,
                 Channel = 0,
                 Level = EtwTraceLevel.Information,
-                Opcode = EtwEventType.End,
+                Opcode = EtwEventType.Send,
                 Task = (ushort)Tasks.AwaitTaskContinuationScheduled,
                 Keyword = (ulong)(Keywords.TaskTransfer | Keywords.Tasks)
             };

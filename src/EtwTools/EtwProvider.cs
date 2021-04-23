@@ -200,6 +200,22 @@ namespace EtwTools
         }
 
         /// <summary>
+        /// Gets a manifest representing the provider, if available.
+        /// </summary>
+        /// <returns>Manifest, if available.</returns>
+        public string GetManifest()
+        {
+            var eventInfos = GetEventInfos();
+
+            if (eventInfos == null)
+            {
+                return null;
+            }
+
+            return string.Empty;
+        }
+
+        /// <summary>
         /// Gets descriptions of events supported by this provider.
         /// </summary>
         /// <returns>A list of event descriptors.</returns>
