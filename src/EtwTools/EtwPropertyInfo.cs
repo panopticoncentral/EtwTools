@@ -1,9 +1,12 @@
-﻿namespace EtwTools
+﻿using System;
+using System.Collections.Generic;
+
+namespace EtwTools
 {
     /// <summary>
     /// Description of an ETW event's property.
     /// </summary>
-    public abstract record EtwPropertyInfo
+    public sealed record EtwPropertyInfo
     {
         /// <summary>
         /// The name of the property.
@@ -11,9 +14,24 @@
         public string Name { get; init; }
 
         /// <summary>
-        /// The kind of property it is.
+        /// The input type of the property.
         /// </summary>
-        public abstract PropertyKind Kind { get; }
+        public EtwInputType InputType { get; init; }
+
+        /// <summary>
+        /// The desired output type of the property.
+        /// </summary>
+        public EtwOutputType OutputType { get; init; }
+
+        /// <summary>
+        /// The name of the map type of the property, if any.
+        /// </summary>
+        public string MapName { get; init; }
+
+        /// <summary>
+        /// The structure properties, if any.
+        /// </summary>
+        public IReadOnlyList<EtwPropertyInfo> Properties { get; init; }
 
         /// <summary>
         /// The length of the property.
@@ -32,6 +50,11 @@
 
         internal static unsafe EtwPropertyInfo Create(Native.TraceEventInfo* traceEventInfo, Native.EventPropertyInfo* propertyInfo)
         {
+            if ((propertyInfo->PropertyFlags & Native.PropertyFlags.HasCustomSchema) != 0)
+            {
+                throw new InvalidOperationException();
+            }
+
             if ((propertyInfo->PropertyFlags & Native.PropertyFlags.Struct) != 0)
             {
                 var properties = new EtwPropertyInfo[propertyInfo->Union2];
@@ -42,7 +65,7 @@
                     properties[i] = Create(traceEventInfo, currentProperty);
                 }
 
-                return new EtwStructPropertyInfo
+                return new EtwPropertyInfo
                 {
                     Name = new string((char*)(((byte*)traceEventInfo) + propertyInfo->NameOffset)),
                     Length = new PropertySize
@@ -69,78 +92,33 @@
             }
             else
             {
-                return (propertyInfo->PropertyFlags & Native.PropertyFlags.HasCustomSchema) != 0
-                    ? new EtwCustomSchemaPropertyInfo
+                return new EtwPropertyInfo
+                {
+                    Name = new string((char*)(((byte*)traceEventInfo) + propertyInfo->NameOffset)),
+                    InputType = (EtwInputType)propertyInfo->Union1,
+                    OutputType = (EtwOutputType)propertyInfo->Union2,
+                    MapName = propertyInfo->Union3 == 0 ? null : new string((char*)(((byte*)traceEventInfo) + propertyInfo->Union3)),
+                    Length = new PropertySize
                     {
-                        Name = new string((char*)(((byte*)traceEventInfo) + propertyInfo->NameOffset)),
-                        Length = new PropertySize
-                        {
-                            Size = propertyInfo->Length,
-                            Kind = (propertyInfo->PropertyFlags & Native.PropertyFlags.ParamLength) != 0
+                        Size = propertyInfo->Length,
+                        Kind = (propertyInfo->PropertyFlags & Native.PropertyFlags.ParamLength) != 0
                                             ? PropertySizeKind.Property
                                             : (propertyInfo->PropertyFlags & Native.PropertyFlags.ParamFixedLength) != 0
                                                 ? PropertySizeKind.Fixed
                                                 : PropertySizeKind.Regular
-                        },
-                        Count = new PropertySize
-                        {
-                            Size = propertyInfo->Count,
-                            Kind = (propertyInfo->PropertyFlags & Native.PropertyFlags.ParamCount) != 0
-                                            ? PropertySizeKind.Property
-                                            : (propertyInfo->PropertyFlags & Native.PropertyFlags.ParamFixedCount) != 0
-                                                ? PropertySizeKind.Fixed
-                                                : PropertySizeKind.Regular
-                        },
-                        Tags = propertyInfo->Tags
-                    }
-                    : new EtwSimplePropertyInfo
+                    },
+                    Count = new PropertySize
                     {
-                        Name = new string((char*)(((byte*)traceEventInfo) + propertyInfo->NameOffset)),
-                        InputType = (EtwInputType)propertyInfo->Union1,
-                        OutputType = (EtwOutputType)propertyInfo->Union2,
-                        MapName = propertyInfo->Union3 == 0 ? null : new string((char*)(((byte*)traceEventInfo) + propertyInfo->Union3)),
-                        Length = new PropertySize
-                        {
-                            Size = propertyInfo->Length,
-                            Kind = (propertyInfo->PropertyFlags & Native.PropertyFlags.ParamLength) != 0
-                                            ? PropertySizeKind.Property
-                                            : (propertyInfo->PropertyFlags & Native.PropertyFlags.ParamFixedLength) != 0
-                                                ? PropertySizeKind.Fixed
-                                                : PropertySizeKind.Regular
-                        },
-                        Count = new PropertySize
-                        {
-                            Size = propertyInfo->Count,
-                            Kind = (propertyInfo->PropertyFlags & Native.PropertyFlags.ParamCount) != 0
+                        Size = propertyInfo->Count,
+                        Kind = (propertyInfo->PropertyFlags & Native.PropertyFlags.ParamCount) != 0
                                             ? PropertySizeKind.Property
                                             : (propertyInfo->PropertyFlags & Native.PropertyFlags.ParamFixedCount) != 0
                                                 ? PropertySizeKind.Fixed
                                                 : PropertySizeKind.Regular
-                        },
-                        Tags = propertyInfo->Tags
-                    };
+                    },
+                    Tags = propertyInfo->Tags
+                };
             }
-        }
-
-        /// <summary>
-        /// The kinds of properties.
-        /// </summary>
-        public enum PropertyKind
-        {
-            /// <summary>
-            /// A simple value.
-            /// </summary>
-            Simple,
-
-            /// <summary>
-            /// A custom schema value.
-            /// </summary>
-            CustomSchema,
-
-            /// <summary>
-            /// A structured value.
-            /// </summary>
-            Struct
         }
 
         /// <summary>

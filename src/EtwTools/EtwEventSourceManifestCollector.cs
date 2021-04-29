@@ -19,17 +19,18 @@ namespace EtwTools
         /// <param name="e">The event.</param>
         /// <returns>Whether it is an EventSource manifest event.</returns>
         public static bool IsEventSourceManifestEvent(ref EtwEvent e) =>
-            e.Descriptor.Id == 0xFFFE && e.Descriptor.Opcode == (EtwEventType)0xFE && e.Descriptor.Task == 0xFFFE;
+            e.Descriptor.Id == 0xFFFE && e.Descriptor.Opcode == (EtwEventOpcode)0xFE && e.Descriptor.Task == 0xFFFE;
 
         /// <summary>
         /// Processes an EventSource manifest event.
         /// </summary>
         /// <param name="e">The event.</param>
-        public void ProcessEventSourceManifestEvent(ref EtwEvent e)
+        /// <returns>The manifest if it is complete.</returns>
+        public string ProcessEventSourceManifestEvent(ref EtwEvent e)
         {
             if (!IsEventSourceManifestEvent(ref e))
             {
-                return;
+                return null;
             }
 
             if (!_manifests.TryGetValue((e.Provider, e.ProcessId, e.ThreadId), out var manifest))
@@ -37,7 +38,7 @@ namespace EtwTools
                 _manifests[(e.Provider, e.ProcessId, e.ThreadId)] = manifest = new();
             }
 
-            _ = manifest.AddEvent(ref e);
+            return manifest.AddEvent(ref e) ? manifest.GetManifest() : null;
         }
 
         /// <summary>
@@ -92,7 +93,6 @@ namespace EtwTools
                     current += _chunks[i].Length;
                 }
 
-                _chunks = null;
                 return Encoding.UTF8.GetString(data);
             }
 
@@ -128,14 +128,17 @@ namespace EtwTools
                     else if (_majorVersion != envelope->MajorVersion
                         || _minorVersion != envelope->MinorVersion
                         || _chunks.Length <= envelope->ChunkNumber
-                        || _chunks[envelope->ChunkNumber] != null)
+                        || (_chunks[envelope->ChunkNumber] != null && _chunks[envelope->ChunkNumber].Length != (e.Data.Length - sizeof(ManifestEnvelope))))
                     {
                         _chunks = null;
                         return false;
                     }
 
-                    _chunks[envelope->ChunkNumber] = e.Data[sizeof(ManifestEnvelope)..].ToArray();
-                    _chunksLeft -= 1;
+                    if (_chunks[envelope->ChunkNumber] == null)
+                    {
+                        _chunks[envelope->ChunkNumber] = e.Data[sizeof(ManifestEnvelope)..].ToArray();
+                        _chunksLeft -= 1;
+                    }
                 }
 
                 return _chunksLeft == 0;

@@ -252,7 +252,6 @@ namespace EtwTools
         /// </summary>
         /// <returns>Whether the event has TraceLogging event schema.</returns>
         public bool HasTraceLoggingEventSchema() =>
-            TryGetExtendedData(Native.EventHeaderExtendedType.EventKey, out var _) ||
             TryGetExtendedData(Native.EventHeaderExtendedType.EventSchemaTl, out var _);
 
         // No accessor for ProvTraits since it seems to be internal use only.
@@ -343,7 +342,7 @@ namespace EtwTools
             {
                 var traceEventInfo = (Native.TraceEventInfo*)eventBuffer;
                 ((Native.Hresult)Native.TdhGetEventInformation(_eventRecord, 0, null, traceEventInfo, &eventBufferSize)).ThrowException();
-                eventInfo = new EtwEventInfo(_eventRecord->EventHeader.EventDescriptor, traceEventInfo);
+                eventInfo = new EtwEventInfo(traceEventInfo);
             }
 
             return true;
@@ -478,19 +477,19 @@ namespace EtwTools
         }
 
         /// <summary>
-        /// A structure that can enumerate strings.
+        /// A structure that can enumerate Unicode strings.
         /// </summary>
-        public ref struct StringEnumerable
+        public ref struct UnicodeStringEnumerable
         {
             private readonly Span<byte> _buffer;
             private readonly uint _count;
 
-            internal StringEnumerable(Span<byte> buffer) :
+            internal UnicodeStringEnumerable(Span<byte> buffer) :
                 this(buffer, uint.MaxValue)
             {
             }
 
-            internal StringEnumerable(Span<byte> buffer, uint count)
+            internal UnicodeStringEnumerable(Span<byte> buffer, uint count)
             {
                 _buffer = buffer;
                 _count = count;
@@ -500,14 +499,14 @@ namespace EtwTools
             /// Gets an enumerator.
             /// </summary>
             /// <returns>The enumerator.</returns>
-            public StringEnumerator GetEnumerator() => new(this);
+            public UnicodeStringEnumerator GetEnumerator() => new(this);
 
             /// <summary>
             /// A structure that enumerates over an address collection.
             /// </summary>
-            public ref struct StringEnumerator
+            public ref struct UnicodeStringEnumerator
             {
-                private readonly StringEnumerable _enumerable;
+                private readonly UnicodeStringEnumerable _enumerable;
                 private int _offset;
                 private int _count;
 
@@ -518,7 +517,7 @@ namespace EtwTools
                     ? Encoding.Unicode.GetString(_enumerable._buffer[_offset..])
                     : throw new InvalidOperationException();
 
-                internal StringEnumerator(StringEnumerable enumerable)
+                internal UnicodeStringEnumerator(UnicodeStringEnumerable enumerable)
                 {
                     _enumerable = enumerable;
                     _offset = int.MaxValue;
@@ -533,6 +532,86 @@ namespace EtwTools
                         offset += 2;
                     }
                     offset += 2;
+
+                    return offset - start;
+                }
+
+                /// <summary>
+                /// Moves to the next address.
+                /// </summary>
+                /// <returns>Whether there is another address.</returns>
+                public bool MoveNext()
+                {
+                    if (_offset == int.MaxValue)
+                    {
+                        _offset = 0;
+                        _count = 1;
+                        return true;
+                    }
+
+                    _offset += StringLength(_enumerable._buffer, _offset);
+                    _count++;
+                    return (_offset < _enumerable._buffer.Length) && (_count <= _enumerable._count);
+                }
+            }
+        }
+
+        /// <summary>
+        /// A structure that can enumerate ANSI strings.
+        /// </summary>
+        public ref struct AnsiStringEnumerable
+        {
+            private readonly Span<byte> _buffer;
+            private readonly uint _count;
+
+            internal AnsiStringEnumerable(Span<byte> buffer) :
+                this(buffer, uint.MaxValue)
+            {
+            }
+
+            internal AnsiStringEnumerable(Span<byte> buffer, uint count)
+            {
+                _buffer = buffer;
+                _count = count;
+            }
+
+            /// <summary>
+            /// Gets an enumerator.
+            /// </summary>
+            /// <returns>The enumerator.</returns>
+            public AnsiStringEnumerator GetEnumerator() => new(this);
+
+            /// <summary>
+            /// A structure that enumerates over an address collection.
+            /// </summary>
+            public ref struct AnsiStringEnumerator
+            {
+                private readonly AnsiStringEnumerable _enumerable;
+                private int _offset;
+                private int _count;
+
+                /// <summary>
+                /// The current value, if any.
+                /// </summary>
+                public string Current => ((_offset < _enumerable._buffer.Length) && (_count <= _enumerable._count))
+                    ? Encoding.ASCII.GetString(_enumerable._buffer[_offset..])
+                    : throw new InvalidOperationException();
+
+                internal AnsiStringEnumerator(AnsiStringEnumerable enumerable)
+                {
+                    _enumerable = enumerable;
+                    _offset = int.MaxValue;
+                    _count = 0;
+                }
+
+                internal static int StringLength(Span<byte> span, int offset)
+                {
+                    var start = offset;
+                    while ((offset < span.Length) && (span[offset] != 0x00))
+                    {
+                        offset++;
+                    }
+                    offset++;
 
                     return offset - start;
                 }

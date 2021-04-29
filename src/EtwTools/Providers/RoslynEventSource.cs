@@ -6,19 +6,74 @@ using System;
 namespace EtwTools
 {
     /// <summary>
-    /// Provider for RoslynEventSource ({bf965e67-c7fb-5c5b-d98f-cdf68f8154c2})
+    /// Provider for RoslynEventSource (bf965e67-c7fb-5c5b-d98f-cdf68f8154c2)
     /// </summary>
     public sealed class RoslynEventSourceProvider
     {
-        /// <summary>
+        /// <summary>s
         /// Provider ID.
         /// </summary>
-        public static readonly Guid Id = new("{bf965e67-c7fb-5c5b-d98f-cdf68f8154c2}");
+        public static readonly Guid Id = new("bf965e67-c7fb-5c5b-d98f-cdf68f8154c2");
 
         /// <summary>
         /// Provider name.
         /// </summary>
         public const string Name = "RoslynEventSource";
+
+        /// <summary>
+        /// Tasks supported by RoslynEventSource.
+        /// </summary>
+        public enum Tasks : ushort
+        {
+            /// <summary>
+            /// 'OnEventCommand' task.
+            /// </summary>
+            OnEventCommand = 65528,
+            /// <summary>
+            /// 'BlockCanceled' task.
+            /// </summary>
+            BlockCanceled = 65529,
+            /// <summary>
+            /// 'SendFunctionDefinitions' task.
+            /// </summary>
+            SendFunctionDefinitions = 65530,
+            /// <summary>
+            /// 'Block' task.
+            /// </summary>
+            Block = 65532,
+            /// <summary>
+            /// 'Log' task.
+            /// </summary>
+            Log = 65533,
+            /// <summary>
+            /// 'EventSourceMessage' task.
+            /// </summary>
+            EventSourceMessage = 65534,
+        }
+
+        /// <summary>
+        /// Keywords supported by RoslynEventSource.
+        /// </summary>
+        [Flags]
+        public enum Keywords : ulong
+        {
+            /// <summary>
+            /// 'Session3' keyword.
+            /// </summary>
+            Session3 = 0x0000100000000000,
+            /// <summary>
+            /// 'Session2' keyword.
+            /// </summary>
+            Session2 = 0x0000200000000000,
+            /// <summary>
+            /// 'Session1' keyword.
+            /// </summary>
+            Session1 = 0x0000400000000000,
+            /// <summary>
+            /// 'Session0' keyword.
+            /// </summary>
+            Session0 = 0x0000800000000000,
+        }
 
         /// <summary>
         /// An event wrapper for a EventSourceMessage event.
@@ -46,7 +101,7 @@ namespace EtwTools
                 Version = 0,
                 Channel = 0,
                 Level = EtwTraceLevel.None,
-                Opcode = EtwEventType.Info,
+                Opcode = EtwEventOpcode.Info,
                 Task = (ushort)Tasks.EventSourceMessage,
                 Keyword = 0
             };
@@ -142,7 +197,7 @@ namespace EtwTools
                 Version = 0,
                 Channel = 0,
                 Level = EtwTraceLevel.Information,
-                Opcode = EtwEventType.Info,
+                Opcode = EtwEventOpcode.Info,
                 Task = (ushort)Tasks.Log,
                 Keyword = 0
             };
@@ -213,7 +268,7 @@ namespace EtwTools
                 public LogData(EtwEvent etwEvent)
                 {
                     _etwEvent = etwEvent;
-                    _offset_FunctionId = Offset_Message + EtwEvent.StringEnumerable.StringEnumerator.StringLength(etwEvent.Data, Offset_Message);
+                    _offset_FunctionId = Offset_Message + EtwEvent.UnicodeStringEnumerable.UnicodeStringEnumerator.StringLength(etwEvent.Data, Offset_Message);
                 }
             }
 
@@ -245,7 +300,7 @@ namespace EtwTools
                 Version = 0,
                 Channel = 0,
                 Level = EtwTraceLevel.Information,
-                Opcode = EtwEventType.Start,
+                Opcode = EtwEventOpcode.Start,
                 Task = (ushort)Tasks.Block,
                 Keyword = 0
             };
@@ -322,7 +377,7 @@ namespace EtwTools
                 public BlockStartData(EtwEvent etwEvent)
                 {
                     _etwEvent = etwEvent;
-                    _offset_FunctionId = Offset_Message + EtwEvent.StringEnumerable.StringEnumerator.StringLength(etwEvent.Data, Offset_Message);
+                    _offset_FunctionId = Offset_Message + EtwEvent.UnicodeStringEnumerable.UnicodeStringEnumerator.StringLength(etwEvent.Data, Offset_Message);
                     _offset_BlockId = _offset_FunctionId + 4;
                 }
             }
@@ -355,7 +410,7 @@ namespace EtwTools
                 Version = 0,
                 Channel = 0,
                 Level = EtwTraceLevel.Information,
-                Opcode = EtwEventType.Stop,
+                Opcode = EtwEventOpcode.End,
                 Task = (ushort)Tasks.Block,
                 Keyword = 0
             };
@@ -463,7 +518,7 @@ namespace EtwTools
                 Version = 0,
                 Channel = 0,
                 Level = EtwTraceLevel.Information,
-                Opcode = EtwEventType.Info,
+                Opcode = EtwEventOpcode.Info,
                 Task = (ushort)Tasks.SendFunctionDefinitions,
                 Keyword = 0
             };
@@ -559,7 +614,7 @@ namespace EtwTools
                 Version = 0,
                 Channel = 0,
                 Level = EtwTraceLevel.Information,
-                Opcode = EtwEventType.Info,
+                Opcode = EtwEventOpcode.Info,
                 Task = (ushort)Tasks.BlockCanceled,
                 Keyword = 0
             };
@@ -667,7 +722,7 @@ namespace EtwTools
                 Version = 0,
                 Channel = 0,
                 Level = EtwTraceLevel.Information,
-                Opcode = EtwEventType.Info,
+                Opcode = EtwEventOpcode.Info,
                 Task = (ushort)Tasks.OnEventCommand,
                 Keyword = 0
             };
@@ -705,61 +760,6 @@ namespace EtwTools
             {
                 _etwEvent = etwEvent;
             }
-        }
-
-        /// <summary>
-        /// Tasks supported by RoslynEventSource.
-        /// </summary>
-        public enum Tasks : ushort
-        {
-            /// <summary>
-            /// 'OnEventCommand' task.
-            /// </summary>
-            OnEventCommand = 65528,
-            /// <summary>
-            /// 'BlockCanceled' task.
-            /// </summary>
-            BlockCanceled = 65529,
-            /// <summary>
-            /// 'SendFunctionDefinitions' task.
-            /// </summary>
-            SendFunctionDefinitions = 65530,
-            /// <summary>
-            /// 'Block' task.
-            /// </summary>
-            Block = 65532,
-            /// <summary>
-            /// 'Log' task.
-            /// </summary>
-            Log = 65533,
-            /// <summary>
-            /// 'EventSourceMessage' task.
-            /// </summary>
-            EventSourceMessage = 65534,
-        }
-
-        /// <summary>
-        /// Keywords supported by RoslynEventSource.
-        /// </summary>
-        [Flags]
-        public enum Keywords : ulong
-        {
-            /// <summary>
-            /// 'Session3' keyword.
-            /// </summary>
-            Session3 = 0x0000100000000000,
-            /// <summary>
-            /// 'Session2' keyword.
-            /// </summary>
-            Session2 = 0x0000200000000000,
-            /// <summary>
-            /// 'Session1' keyword.
-            /// </summary>
-            Session1 = 0x0000400000000000,
-            /// <summary>
-            /// 'Session0' keyword.
-            /// </summary>
-            Session0 = 0x0000800000000000,
         }
 
         /// <summary>

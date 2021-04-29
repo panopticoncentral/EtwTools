@@ -1,0 +1,2407 @@
+{
+  "id": "2bf0e3de-e8a7-5821-ee81-ad9385d138a4",
+  "name": "Microsoft-VisualStudio-CpsVs",
+  "className": "VisualStudioCpsVs",
+  "levels": null,
+  "channels": null,
+  "keywords": [
+    {
+      "name": "Session3",
+      "description": "Session3",
+      "value": 17592186044416
+    },
+    {
+      "name": "Session2",
+      "description": "Session2",
+      "value": 35184372088832
+    },
+    {
+      "name": "Session1",
+      "description": "Session1",
+      "value": 70368744177664
+    },
+    {
+      "name": "Session0",
+      "description": "Session0",
+      "value": 140737488355328
+    }
+  ],
+  "tasks": [
+    {
+      "name": "TransferToBestProjectOwner",
+      "description": "TransferToBestProjectOwner",
+      "value": 65033
+    },
+    {
+      "name": "NotifyQueryStatusDelay",
+      "description": "NotifyQueryStatusDelay",
+      "value": 65432
+    },
+    {
+      "name": "NotifyBeforeSolutionClosing",
+      "description": "NotifyBeforeSolutionClosing",
+      "value": 65433
+    },
+    {
+      "name": "SwitchToMainThreadToPublishTreeFailed",
+      "description": "SwitchToMainThreadToPublishTreeFailed",
+      "value": 65434
+    },
+    {
+      "name": "ProjectReloadedInBackground",
+      "description": "ProjectReloadedInBackground",
+      "value": 65484
+    },
+    {
+      "name": "CpsUpdateSubTypeEnd",
+      "description": "CpsUpdateSubTypeEnd",
+      "value": 65490
+    },
+    {
+      "name": "CpsUpdateSubType",
+      "description": "CpsUpdateSubType",
+      "value": 65491
+    },
+    {
+      "name": "CpsNotifyTask",
+      "description": "CpsNotifyTask",
+      "value": 65493
+    },
+    {
+      "name": "CpsHandlersBeforeCloseSolution",
+      "description": "CpsHandlersBeforeCloseSolution",
+      "value": 65495
+    },
+    {
+      "name": "ResetDesignTimeBuilder",
+      "description": "ResetDesignTimeBuilder",
+      "value": 65496
+    },
+    {
+      "name": "LoadProjectsAndTrees",
+      "description": "LoadProjectsAndTrees",
+      "value": 65498
+    },
+    {
+      "name": "LoadAllProjectNodes",
+      "description": "LoadAllProjectNodes",
+      "value": 65500
+    },
+    {
+      "name": "LoadAllConfiguredProjects",
+      "description": "LoadAllConfiguredProjects",
+      "value": 65502
+    },
+    {
+      "name": "LoadAllUnconfiguredProjects",
+      "description": "LoadAllUnconfiguredProjects",
+      "value": 65504
+    },
+    {
+      "name": "PublishProjectTreeAcquiringLock",
+      "description": "PublishProjectTreeAcquiringLock",
+      "value": 65509
+    },
+    {
+      "name": "PublishProjectTreeCore",
+      "description": "PublishProjectTreeCore",
+      "value": 65511
+    },
+    {
+      "name": "CreateDynamicTypeFromRule",
+      "description": "CreateDynamicTypeFromRule",
+      "value": 65513
+    },
+    {
+      "name": "WaitingProjectTreeLoadingStop",
+      "description": "WaitingProjectTreeLoadingStop",
+      "value": 65516
+    },
+    {
+      "name": "WaitingProjectTreeLoading",
+      "description": "WaitingProjectTreeLoading",
+      "value": 65517
+    },
+    {
+      "name": "LoadInitialProjectTree",
+      "description": "LoadInitialProjectTree",
+      "value": 65519
+    },
+    {
+      "name": "CreateProjectAsync",
+      "description": "CreateProjectAsync",
+      "value": 65521
+    },
+    {
+      "name": "CreateProject",
+      "description": "CreateProject",
+      "value": 65523
+    },
+    {
+      "name": "WaitingLatestReferences",
+      "description": "WaitingLatestReferences",
+      "value": 65525
+    },
+    {
+      "name": "WaitingProjectTreePublishing",
+      "description": "WaitingProjectTreePublishing",
+      "value": 65527
+    },
+    {
+      "name": "InitializeProjectNode",
+      "description": "InitializeProjectNode",
+      "value": 65529
+    },
+    {
+      "name": "SetInitialProjectConfigurationStop",
+      "description": "SetInitialProjectConfigurationStop",
+      "value": 65530
+    },
+    {
+      "name": "SetInitialProjectConfiguration",
+      "description": "SetInitialProjectConfiguration",
+      "value": 65531
+    },
+    {
+      "name": "CreateUnconfiguredProject",
+      "description": "CreateUnconfiguredProject",
+      "value": 65533
+    },
+    {
+      "name": "EventSourceMessage",
+      "description": "EventSourceMessage",
+      "value": 65534
+    }
+  ],
+  "opcodes": [],
+  "events": [
+    {
+      "providerId": "2bf0e3de-e8a7-5821-ee81-ad9385d138a4",
+      "providerName": "Microsoft-VisualStudio-CpsVs",
+      "eventId": "00000000-0000-0000-0000-000000000000",
+      "descriptor": {
+        "id": 0,
+        "version": 0,
+        "channel": 0,
+        "level": "None",
+        "opcode": "Info",
+        "task": 65534,
+        "keyword": 0
+      },
+      "name": "EventSourceMessage",
+      "channelName": null,
+      "levelName": "win:LogAlways",
+      "opcodeName": null,
+      "taskName": "EventSourceMessage",
+      "keywordName": null,
+      "message": null,
+      "eventAttributes": null,
+      "activityIdName": null,
+      "relatedActivityIdName": null,
+      "flags": null,
+      "properties": [
+        {
+          "name": "Message",
+          "inputType": "UnicodeString",
+          "outputType": "Null",
+          "mapName": null,
+          "properties": null,
+          "length": {
+            "size": 0,
+            "kind": "Regular"
+          },
+          "count": {
+            "size": 1,
+            "kind": "Regular"
+          },
+          "tags": 0
+        }
+      ]
+    },
+    {
+      "providerId": "2bf0e3de-e8a7-5821-ee81-ad9385d138a4",
+      "providerName": "Microsoft-VisualStudio-CpsVs",
+      "eventId": "00000000-0000-0000-0000-000000000000",
+      "descriptor": {
+        "id": 11,
+        "version": 0,
+        "channel": 0,
+        "level": "Information",
+        "opcode": "Start",
+        "task": 65523,
+        "keyword": 0
+      },
+      "name": "CreateProjectStart",
+      "channelName": null,
+      "levelName": "win:Informational",
+      "opcodeName": "win:Start",
+      "taskName": "CreateProject",
+      "keywordName": null,
+      "message": null,
+      "eventAttributes": null,
+      "activityIdName": null,
+      "relatedActivityIdName": null,
+      "flags": null,
+      "properties": [
+        {
+          "name": "ProjectFileName",
+          "inputType": "UnicodeString",
+          "outputType": "Null",
+          "mapName": null,
+          "properties": null,
+          "length": {
+            "size": 0,
+            "kind": "Regular"
+          },
+          "count": {
+            "size": 1,
+            "kind": "Regular"
+          },
+          "tags": 0
+        },
+        {
+          "name": "Location",
+          "inputType": "UnicodeString",
+          "outputType": "Null",
+          "mapName": null,
+          "properties": null,
+          "length": {
+            "size": 0,
+            "kind": "Regular"
+          },
+          "count": {
+            "size": 1,
+            "kind": "Regular"
+          },
+          "tags": 0
+        },
+        {
+          "name": "IsNew",
+          "inputType": "Boolean",
+          "outputType": "Null",
+          "mapName": null,
+          "properties": null,
+          "length": {
+            "size": 1,
+            "kind": "Regular"
+          },
+          "count": {
+            "size": 1,
+            "kind": "Regular"
+          },
+          "tags": 0
+        }
+      ]
+    },
+    {
+      "providerId": "2bf0e3de-e8a7-5821-ee81-ad9385d138a4",
+      "providerName": "Microsoft-VisualStudio-CpsVs",
+      "eventId": "00000000-0000-0000-0000-000000000000",
+      "descriptor": {
+        "id": 4,
+        "version": 0,
+        "channel": 0,
+        "level": "Information",
+        "opcode": "End",
+        "task": 65530,
+        "keyword": 0
+      },
+      "name": "SetInitialProjectConfigurationStop",
+      "channelName": null,
+      "levelName": "win:Informational",
+      "opcodeName": "win:Stop",
+      "taskName": "SetInitialProjectConfigurationStop",
+      "keywordName": null,
+      "message": null,
+      "eventAttributes": null,
+      "activityIdName": null,
+      "relatedActivityIdName": null,
+      "flags": null,
+      "properties": [
+        {
+          "name": "ProjectPath",
+          "inputType": "UnicodeString",
+          "outputType": "Null",
+          "mapName": null,
+          "properties": null,
+          "length": {
+            "size": 0,
+            "kind": "Regular"
+          },
+          "count": {
+            "size": 1,
+            "kind": "Regular"
+          },
+          "tags": 0
+        }
+      ]
+    },
+    {
+      "providerId": "2bf0e3de-e8a7-5821-ee81-ad9385d138a4",
+      "providerName": "Microsoft-VisualStudio-CpsVs",
+      "eventId": "00000000-0000-0000-0000-000000000000",
+      "descriptor": {
+        "id": 5,
+        "version": 0,
+        "channel": 0,
+        "level": "Information",
+        "opcode": "Start",
+        "task": 65529,
+        "keyword": 0
+      },
+      "name": "InitializeProjectNodeStart",
+      "channelName": null,
+      "levelName": "win:Informational",
+      "opcodeName": "win:Start",
+      "taskName": "InitializeProjectNode",
+      "keywordName": null,
+      "message": null,
+      "eventAttributes": null,
+      "activityIdName": null,
+      "relatedActivityIdName": null,
+      "flags": null,
+      "properties": [
+        {
+          "name": "ProjectPath",
+          "inputType": "UnicodeString",
+          "outputType": "Null",
+          "mapName": null,
+          "properties": null,
+          "length": {
+            "size": 0,
+            "kind": "Regular"
+          },
+          "count": {
+            "size": 1,
+            "kind": "Regular"
+          },
+          "tags": 0
+        }
+      ]
+    },
+    {
+      "providerId": "2bf0e3de-e8a7-5821-ee81-ad9385d138a4",
+      "providerName": "Microsoft-VisualStudio-CpsVs",
+      "eventId": "00000000-0000-0000-0000-000000000000",
+      "descriptor": {
+        "id": 6,
+        "version": 0,
+        "channel": 0,
+        "level": "Information",
+        "opcode": "End",
+        "task": 65529,
+        "keyword": 0
+      },
+      "name": "InitializeProjectNodeStop",
+      "channelName": null,
+      "levelName": "win:Informational",
+      "opcodeName": "win:Stop",
+      "taskName": "InitializeProjectNode",
+      "keywordName": null,
+      "message": null,
+      "eventAttributes": null,
+      "activityIdName": null,
+      "relatedActivityIdName": null,
+      "flags": null,
+      "properties": [
+        {
+          "name": "ProjectPath",
+          "inputType": "UnicodeString",
+          "outputType": "Null",
+          "mapName": null,
+          "properties": null,
+          "length": {
+            "size": 0,
+            "kind": "Regular"
+          },
+          "count": {
+            "size": 1,
+            "kind": "Regular"
+          },
+          "tags": 0
+        }
+      ]
+    },
+    {
+      "providerId": "2bf0e3de-e8a7-5821-ee81-ad9385d138a4",
+      "providerName": "Microsoft-VisualStudio-CpsVs",
+      "eventId": "00000000-0000-0000-0000-000000000000",
+      "descriptor": {
+        "id": 12,
+        "version": 0,
+        "channel": 0,
+        "level": "Information",
+        "opcode": "End",
+        "task": 65523,
+        "keyword": 0
+      },
+      "name": "CreateProjectStop",
+      "channelName": null,
+      "levelName": "win:Informational",
+      "opcodeName": "win:Stop",
+      "taskName": "CreateProject",
+      "keywordName": null,
+      "message": null,
+      "eventAttributes": null,
+      "activityIdName": null,
+      "relatedActivityIdName": null,
+      "flags": null,
+      "properties": [
+        {
+          "name": "ProjectFileName",
+          "inputType": "UnicodeString",
+          "outputType": "Null",
+          "mapName": null,
+          "properties": null,
+          "length": {
+            "size": 0,
+            "kind": "Regular"
+          },
+          "count": {
+            "size": 1,
+            "kind": "Regular"
+          },
+          "tags": 0
+        },
+        {
+          "name": "Location",
+          "inputType": "UnicodeString",
+          "outputType": "Null",
+          "mapName": null,
+          "properties": null,
+          "length": {
+            "size": 0,
+            "kind": "Regular"
+          },
+          "count": {
+            "size": 1,
+            "kind": "Regular"
+          },
+          "tags": 0
+        },
+        {
+          "name": "Configuration",
+          "inputType": "UnicodeString",
+          "outputType": "Null",
+          "mapName": null,
+          "properties": null,
+          "length": {
+            "size": 0,
+            "kind": "Regular"
+          },
+          "count": {
+            "size": 1,
+            "kind": "Regular"
+          },
+          "tags": 0
+        }
+      ]
+    },
+    {
+      "providerId": "2bf0e3de-e8a7-5821-ee81-ad9385d138a4",
+      "providerName": "Microsoft-VisualStudio-CpsVs",
+      "eventId": "00000000-0000-0000-0000-000000000000",
+      "descriptor": {
+        "id": 18,
+        "version": 0,
+        "channel": 0,
+        "level": "Information",
+        "opcode": "End",
+        "task": 65516,
+        "keyword": 0
+      },
+      "name": "WaitingProjectTreeLoadingStop",
+      "channelName": null,
+      "levelName": "win:Informational",
+      "opcodeName": "win:Stop",
+      "taskName": "WaitingProjectTreeLoadingStop",
+      "keywordName": null,
+      "message": null,
+      "eventAttributes": null,
+      "activityIdName": null,
+      "relatedActivityIdName": null,
+      "flags": null,
+      "properties": [
+        {
+          "name": "ProjectPath",
+          "inputType": "UnicodeString",
+          "outputType": "Null",
+          "mapName": null,
+          "properties": null,
+          "length": {
+            "size": 0,
+            "kind": "Regular"
+          },
+          "count": {
+            "size": 1,
+            "kind": "Regular"
+          },
+          "tags": 0
+        }
+      ]
+    },
+    {
+      "providerId": "2bf0e3de-e8a7-5821-ee81-ad9385d138a4",
+      "providerName": "Microsoft-VisualStudio-CpsVs",
+      "eventId": "00000000-0000-0000-0000-000000000000",
+      "descriptor": {
+        "id": 41,
+        "version": 0,
+        "channel": 0,
+        "level": "Information",
+        "opcode": "Start",
+        "task": 65493,
+        "keyword": 0
+      },
+      "name": "CpsNotifyTaskStart",
+      "channelName": null,
+      "levelName": "win:Informational",
+      "opcodeName": "win:Start",
+      "taskName": "CpsNotifyTask",
+      "keywordName": null,
+      "message": null,
+      "eventAttributes": null,
+      "activityIdName": null,
+      "relatedActivityIdName": null,
+      "flags": null,
+      "properties": [
+        {
+          "name": "StageId",
+          "inputType": "UnicodeString",
+          "outputType": "Null",
+          "mapName": null,
+          "properties": null,
+          "length": {
+            "size": 0,
+            "kind": "Regular"
+          },
+          "count": {
+            "size": 1,
+            "kind": "Regular"
+          },
+          "tags": 0
+        },
+        {
+          "name": "ProjectPath",
+          "inputType": "UnicodeString",
+          "outputType": "Null",
+          "mapName": null,
+          "properties": null,
+          "length": {
+            "size": 0,
+            "kind": "Regular"
+          },
+          "count": {
+            "size": 1,
+            "kind": "Regular"
+          },
+          "tags": 0
+        },
+        {
+          "name": "Name",
+          "inputType": "UnicodeString",
+          "outputType": "Null",
+          "mapName": null,
+          "properties": null,
+          "length": {
+            "size": 0,
+            "kind": "Regular"
+          },
+          "count": {
+            "size": 1,
+            "kind": "Regular"
+          },
+          "tags": 0
+        }
+      ]
+    },
+    {
+      "providerId": "2bf0e3de-e8a7-5821-ee81-ad9385d138a4",
+      "providerName": "Microsoft-VisualStudio-CpsVs",
+      "eventId": "00000000-0000-0000-0000-000000000000",
+      "descriptor": {
+        "id": 1,
+        "version": 0,
+        "channel": 0,
+        "level": "Information",
+        "opcode": "Start",
+        "task": 65533,
+        "keyword": 0
+      },
+      "name": "CreateUnconfiguredProjectStart",
+      "channelName": null,
+      "levelName": "win:Informational",
+      "opcodeName": "win:Start",
+      "taskName": "CreateUnconfiguredProject",
+      "keywordName": null,
+      "message": null,
+      "eventAttributes": null,
+      "activityIdName": null,
+      "relatedActivityIdName": null,
+      "flags": null,
+      "properties": [
+        {
+          "name": "ProjectFileName",
+          "inputType": "UnicodeString",
+          "outputType": "Null",
+          "mapName": null,
+          "properties": null,
+          "length": {
+            "size": 0,
+            "kind": "Regular"
+          },
+          "count": {
+            "size": 1,
+            "kind": "Regular"
+          },
+          "tags": 0
+        },
+        {
+          "name": "Location",
+          "inputType": "UnicodeString",
+          "outputType": "Null",
+          "mapName": null,
+          "properties": null,
+          "length": {
+            "size": 0,
+            "kind": "Regular"
+          },
+          "count": {
+            "size": 1,
+            "kind": "Regular"
+          },
+          "tags": 0
+        }
+      ]
+    },
+    {
+      "providerId": "2bf0e3de-e8a7-5821-ee81-ad9385d138a4",
+      "providerName": "Microsoft-VisualStudio-CpsVs",
+      "eventId": "00000000-0000-0000-0000-000000000000",
+      "descriptor": {
+        "id": 2,
+        "version": 0,
+        "channel": 0,
+        "level": "Information",
+        "opcode": "End",
+        "task": 65533,
+        "keyword": 0
+      },
+      "name": "CreateUnconfiguredProjectStop",
+      "channelName": null,
+      "levelName": "win:Informational",
+      "opcodeName": "win:Stop",
+      "taskName": "CreateUnconfiguredProject",
+      "keywordName": null,
+      "message": null,
+      "eventAttributes": null,
+      "activityIdName": null,
+      "relatedActivityIdName": null,
+      "flags": null,
+      "properties": [
+        {
+          "name": "ProjectFileName",
+          "inputType": "UnicodeString",
+          "outputType": "Null",
+          "mapName": null,
+          "properties": null,
+          "length": {
+            "size": 0,
+            "kind": "Regular"
+          },
+          "count": {
+            "size": 1,
+            "kind": "Regular"
+          },
+          "tags": 0
+        },
+        {
+          "name": "Location",
+          "inputType": "UnicodeString",
+          "outputType": "Null",
+          "mapName": null,
+          "properties": null,
+          "length": {
+            "size": 0,
+            "kind": "Regular"
+          },
+          "count": {
+            "size": 1,
+            "kind": "Regular"
+          },
+          "tags": 0
+        },
+        {
+          "name": "Capabilities",
+          "inputType": "UnicodeString",
+          "outputType": "Null",
+          "mapName": null,
+          "properties": null,
+          "length": {
+            "size": 0,
+            "kind": "Regular"
+          },
+          "count": {
+            "size": 1,
+            "kind": "Regular"
+          },
+          "tags": 0
+        }
+      ]
+    },
+    {
+      "providerId": "2bf0e3de-e8a7-5821-ee81-ad9385d138a4",
+      "providerName": "Microsoft-VisualStudio-CpsVs",
+      "eventId": "00000000-0000-0000-0000-000000000000",
+      "descriptor": {
+        "id": 3,
+        "version": 0,
+        "channel": 0,
+        "level": "Information",
+        "opcode": "Start",
+        "task": 65531,
+        "keyword": 0
+      },
+      "name": "SetInitialProjectConfigurationStart",
+      "channelName": null,
+      "levelName": "win:Informational",
+      "opcodeName": "win:Start",
+      "taskName": "SetInitialProjectConfiguration",
+      "keywordName": null,
+      "message": null,
+      "eventAttributes": null,
+      "activityIdName": null,
+      "relatedActivityIdName": null,
+      "flags": null,
+      "properties": [
+        {
+          "name": "ProjectPath",
+          "inputType": "UnicodeString",
+          "outputType": "Null",
+          "mapName": null,
+          "properties": null,
+          "length": {
+            "size": 0,
+            "kind": "Regular"
+          },
+          "count": {
+            "size": 1,
+            "kind": "Regular"
+          },
+          "tags": 0
+        },
+        {
+          "name": "ConfigurationName",
+          "inputType": "UnicodeString",
+          "outputType": "Null",
+          "mapName": null,
+          "properties": null,
+          "length": {
+            "size": 0,
+            "kind": "Regular"
+          },
+          "count": {
+            "size": 1,
+            "kind": "Regular"
+          },
+          "tags": 0
+        }
+      ]
+    },
+    {
+      "providerId": "2bf0e3de-e8a7-5821-ee81-ad9385d138a4",
+      "providerName": "Microsoft-VisualStudio-CpsVs",
+      "eventId": "00000000-0000-0000-0000-000000000000",
+      "descriptor": {
+        "id": 7,
+        "version": 0,
+        "channel": 0,
+        "level": "Information",
+        "opcode": "Start",
+        "task": 65527,
+        "keyword": 0
+      },
+      "name": "WaitingProjectTreePublishingStart",
+      "channelName": null,
+      "levelName": "win:Informational",
+      "opcodeName": "win:Start",
+      "taskName": "WaitingProjectTreePublishing",
+      "keywordName": null,
+      "message": null,
+      "eventAttributes": null,
+      "activityIdName": null,
+      "relatedActivityIdName": null,
+      "flags": null,
+      "properties": [
+        {
+          "name": "ProjectPath",
+          "inputType": "UnicodeString",
+          "outputType": "Null",
+          "mapName": null,
+          "properties": null,
+          "length": {
+            "size": 0,
+            "kind": "Regular"
+          },
+          "count": {
+            "size": 1,
+            "kind": "Regular"
+          },
+          "tags": 0
+        }
+      ]
+    },
+    {
+      "providerId": "2bf0e3de-e8a7-5821-ee81-ad9385d138a4",
+      "providerName": "Microsoft-VisualStudio-CpsVs",
+      "eventId": "00000000-0000-0000-0000-000000000000",
+      "descriptor": {
+        "id": 8,
+        "version": 0,
+        "channel": 0,
+        "level": "Information",
+        "opcode": "End",
+        "task": 65527,
+        "keyword": 0
+      },
+      "name": "WaitingProjectTreePublishingStop",
+      "channelName": null,
+      "levelName": "win:Informational",
+      "opcodeName": "win:Stop",
+      "taskName": "WaitingProjectTreePublishing",
+      "keywordName": null,
+      "message": null,
+      "eventAttributes": null,
+      "activityIdName": null,
+      "relatedActivityIdName": null,
+      "flags": null,
+      "properties": [
+        {
+          "name": "ProjectPath",
+          "inputType": "UnicodeString",
+          "outputType": "Null",
+          "mapName": null,
+          "properties": null,
+          "length": {
+            "size": 0,
+            "kind": "Regular"
+          },
+          "count": {
+            "size": 1,
+            "kind": "Regular"
+          },
+          "tags": 0
+        }
+      ]
+    },
+    {
+      "providerId": "2bf0e3de-e8a7-5821-ee81-ad9385d138a4",
+      "providerName": "Microsoft-VisualStudio-CpsVs",
+      "eventId": "00000000-0000-0000-0000-000000000000",
+      "descriptor": {
+        "id": 9,
+        "version": 0,
+        "channel": 0,
+        "level": "Information",
+        "opcode": "Start",
+        "task": 65525,
+        "keyword": 0
+      },
+      "name": "WaitingLatestReferencesStart",
+      "channelName": null,
+      "levelName": "win:Informational",
+      "opcodeName": "win:Start",
+      "taskName": "WaitingLatestReferences",
+      "keywordName": null,
+      "message": null,
+      "eventAttributes": null,
+      "activityIdName": null,
+      "relatedActivityIdName": null,
+      "flags": null,
+      "properties": [
+        {
+          "name": "ProjectPath",
+          "inputType": "UnicodeString",
+          "outputType": "Null",
+          "mapName": null,
+          "properties": null,
+          "length": {
+            "size": 0,
+            "kind": "Regular"
+          },
+          "count": {
+            "size": 1,
+            "kind": "Regular"
+          },
+          "tags": 0
+        }
+      ]
+    },
+    {
+      "providerId": "2bf0e3de-e8a7-5821-ee81-ad9385d138a4",
+      "providerName": "Microsoft-VisualStudio-CpsVs",
+      "eventId": "00000000-0000-0000-0000-000000000000",
+      "descriptor": {
+        "id": 10,
+        "version": 0,
+        "channel": 0,
+        "level": "Information",
+        "opcode": "End",
+        "task": 65525,
+        "keyword": 0
+      },
+      "name": "WaitingLatestReferencesStop",
+      "channelName": null,
+      "levelName": "win:Informational",
+      "opcodeName": "win:Stop",
+      "taskName": "WaitingLatestReferences",
+      "keywordName": null,
+      "message": null,
+      "eventAttributes": null,
+      "activityIdName": null,
+      "relatedActivityIdName": null,
+      "flags": null,
+      "properties": [
+        {
+          "name": "ProjectPath",
+          "inputType": "UnicodeString",
+          "outputType": "Null",
+          "mapName": null,
+          "properties": null,
+          "length": {
+            "size": 0,
+            "kind": "Regular"
+          },
+          "count": {
+            "size": 1,
+            "kind": "Regular"
+          },
+          "tags": 0
+        }
+      ]
+    },
+    {
+      "providerId": "2bf0e3de-e8a7-5821-ee81-ad9385d138a4",
+      "providerName": "Microsoft-VisualStudio-CpsVs",
+      "eventId": "00000000-0000-0000-0000-000000000000",
+      "descriptor": {
+        "id": 13,
+        "version": 0,
+        "channel": 0,
+        "level": "Information",
+        "opcode": "Start",
+        "task": 65521,
+        "keyword": 0
+      },
+      "name": "CreateProjectAsyncStart",
+      "channelName": null,
+      "levelName": "win:Informational",
+      "opcodeName": "win:Start",
+      "taskName": "CreateProjectAsync",
+      "keywordName": null,
+      "message": null,
+      "eventAttributes": null,
+      "activityIdName": null,
+      "relatedActivityIdName": null,
+      "flags": null,
+      "properties": [
+        {
+          "name": "ProjectFileName",
+          "inputType": "UnicodeString",
+          "outputType": "Null",
+          "mapName": null,
+          "properties": null,
+          "length": {
+            "size": 0,
+            "kind": "Regular"
+          },
+          "count": {
+            "size": 1,
+            "kind": "Regular"
+          },
+          "tags": 0
+        },
+        {
+          "name": "Location",
+          "inputType": "UnicodeString",
+          "outputType": "Null",
+          "mapName": null,
+          "properties": null,
+          "length": {
+            "size": 0,
+            "kind": "Regular"
+          },
+          "count": {
+            "size": 1,
+            "kind": "Regular"
+          },
+          "tags": 0
+        },
+        {
+          "name": "IsNew",
+          "inputType": "Boolean",
+          "outputType": "Null",
+          "mapName": null,
+          "properties": null,
+          "length": {
+            "size": 1,
+            "kind": "Regular"
+          },
+          "count": {
+            "size": 1,
+            "kind": "Regular"
+          },
+          "tags": 0
+        }
+      ]
+    },
+    {
+      "providerId": "2bf0e3de-e8a7-5821-ee81-ad9385d138a4",
+      "providerName": "Microsoft-VisualStudio-CpsVs",
+      "eventId": "00000000-0000-0000-0000-000000000000",
+      "descriptor": {
+        "id": 15,
+        "version": 0,
+        "channel": 0,
+        "level": "Information",
+        "opcode": "Start",
+        "task": 65519,
+        "keyword": 0
+      },
+      "name": "LoadInitialProjectTreeStart",
+      "channelName": null,
+      "levelName": "win:Informational",
+      "opcodeName": "win:Start",
+      "taskName": "LoadInitialProjectTree",
+      "keywordName": null,
+      "message": null,
+      "eventAttributes": null,
+      "activityIdName": null,
+      "relatedActivityIdName": null,
+      "flags": null,
+      "properties": [
+        {
+          "name": "ProjectPath",
+          "inputType": "UnicodeString",
+          "outputType": "Null",
+          "mapName": null,
+          "properties": null,
+          "length": {
+            "size": 0,
+            "kind": "Regular"
+          },
+          "count": {
+            "size": 1,
+            "kind": "Regular"
+          },
+          "tags": 0
+        }
+      ]
+    },
+    {
+      "providerId": "2bf0e3de-e8a7-5821-ee81-ad9385d138a4",
+      "providerName": "Microsoft-VisualStudio-CpsVs",
+      "eventId": "00000000-0000-0000-0000-000000000000",
+      "descriptor": {
+        "id": 16,
+        "version": 0,
+        "channel": 0,
+        "level": "Information",
+        "opcode": "End",
+        "task": 65519,
+        "keyword": 0
+      },
+      "name": "LoadInitialProjectTreeStop",
+      "channelName": null,
+      "levelName": "win:Informational",
+      "opcodeName": "win:Stop",
+      "taskName": "LoadInitialProjectTree",
+      "keywordName": null,
+      "message": null,
+      "eventAttributes": null,
+      "activityIdName": null,
+      "relatedActivityIdName": null,
+      "flags": null,
+      "properties": [
+        {
+          "name": "ProjectPath",
+          "inputType": "UnicodeString",
+          "outputType": "Null",
+          "mapName": null,
+          "properties": null,
+          "length": {
+            "size": 0,
+            "kind": "Regular"
+          },
+          "count": {
+            "size": 1,
+            "kind": "Regular"
+          },
+          "tags": 0
+        },
+        {
+          "name": "Size",
+          "inputType": "Int32",
+          "outputType": "Null",
+          "mapName": null,
+          "properties": null,
+          "length": {
+            "size": 4,
+            "kind": "Regular"
+          },
+          "count": {
+            "size": 1,
+            "kind": "Regular"
+          },
+          "tags": 0
+        }
+      ]
+    },
+    {
+      "providerId": "2bf0e3de-e8a7-5821-ee81-ad9385d138a4",
+      "providerName": "Microsoft-VisualStudio-CpsVs",
+      "eventId": "00000000-0000-0000-0000-000000000000",
+      "descriptor": {
+        "id": 21,
+        "version": 0,
+        "channel": 0,
+        "level": "Information",
+        "opcode": "Start",
+        "task": 65513,
+        "keyword": 0
+      },
+      "name": "CreateDynamicTypeFromRuleStart",
+      "channelName": null,
+      "levelName": "win:Informational",
+      "opcodeName": "win:Start",
+      "taskName": "CreateDynamicTypeFromRule",
+      "keywordName": null,
+      "message": null,
+      "eventAttributes": null,
+      "activityIdName": null,
+      "relatedActivityIdName": null,
+      "flags": null,
+      "properties": [
+        {
+          "name": "ProjectFileName",
+          "inputType": "UnicodeString",
+          "outputType": "Null",
+          "mapName": null,
+          "properties": null,
+          "length": {
+            "size": 0,
+            "kind": "Regular"
+          },
+          "count": {
+            "size": 1,
+            "kind": "Regular"
+          },
+          "tags": 0
+        },
+        {
+          "name": "Rule",
+          "inputType": "UnicodeString",
+          "outputType": "Null",
+          "mapName": null,
+          "properties": null,
+          "length": {
+            "size": 0,
+            "kind": "Regular"
+          },
+          "count": {
+            "size": 1,
+            "kind": "Regular"
+          },
+          "tags": 0
+        },
+        {
+          "name": "CategoryName",
+          "inputType": "UnicodeString",
+          "outputType": "Null",
+          "mapName": null,
+          "properties": null,
+          "length": {
+            "size": 0,
+            "kind": "Regular"
+          },
+          "count": {
+            "size": 1,
+            "kind": "Regular"
+          },
+          "tags": 0
+        },
+        {
+          "name": "CreateBrowserObject",
+          "inputType": "Boolean",
+          "outputType": "Null",
+          "mapName": null,
+          "properties": null,
+          "length": {
+            "size": 1,
+            "kind": "Regular"
+          },
+          "count": {
+            "size": 1,
+            "kind": "Regular"
+          },
+          "tags": 0
+        }
+      ]
+    },
+    {
+      "providerId": "2bf0e3de-e8a7-5821-ee81-ad9385d138a4",
+      "providerName": "Microsoft-VisualStudio-CpsVs",
+      "eventId": "00000000-0000-0000-0000-000000000000",
+      "descriptor": {
+        "id": 22,
+        "version": 0,
+        "channel": 0,
+        "level": "Information",
+        "opcode": "End",
+        "task": 65513,
+        "keyword": 0
+      },
+      "name": "CreateDynamicTypeFromRuleStop",
+      "channelName": null,
+      "levelName": "win:Informational",
+      "opcodeName": "win:Stop",
+      "taskName": "CreateDynamicTypeFromRule",
+      "keywordName": null,
+      "message": null,
+      "eventAttributes": null,
+      "activityIdName": null,
+      "relatedActivityIdName": null,
+      "flags": null,
+      "properties": [
+        {
+          "name": "ProjectFileName",
+          "inputType": "UnicodeString",
+          "outputType": "Null",
+          "mapName": null,
+          "properties": null,
+          "length": {
+            "size": 0,
+            "kind": "Regular"
+          },
+          "count": {
+            "size": 1,
+            "kind": "Regular"
+          },
+          "tags": 0
+        }
+      ]
+    },
+    {
+      "providerId": "2bf0e3de-e8a7-5821-ee81-ad9385d138a4",
+      "providerName": "Microsoft-VisualStudio-CpsVs",
+      "eventId": "00000000-0000-0000-0000-000000000000",
+      "descriptor": {
+        "id": 23,
+        "version": 0,
+        "channel": 0,
+        "level": "Information",
+        "opcode": "Start",
+        "task": 65511,
+        "keyword": 0
+      },
+      "name": "PublishProjectTreeCoreStart",
+      "channelName": null,
+      "levelName": "win:Informational",
+      "opcodeName": "win:Start",
+      "taskName": "PublishProjectTreeCore",
+      "keywordName": null,
+      "message": null,
+      "eventAttributes": null,
+      "activityIdName": null,
+      "relatedActivityIdName": null,
+      "flags": null,
+      "properties": [
+        {
+          "name": "ProjectFileName",
+          "inputType": "UnicodeString",
+          "outputType": "Null",
+          "mapName": null,
+          "properties": null,
+          "length": {
+            "size": 0,
+            "kind": "Regular"
+          },
+          "count": {
+            "size": 1,
+            "kind": "Regular"
+          },
+          "tags": 0
+        },
+        {
+          "name": "ConfiguredVersion",
+          "inputType": "UnicodeString",
+          "outputType": "Null",
+          "mapName": null,
+          "properties": null,
+          "length": {
+            "size": 0,
+            "kind": "Regular"
+          },
+          "count": {
+            "size": 1,
+            "kind": "Regular"
+          },
+          "tags": 0
+        }
+      ]
+    },
+    {
+      "providerId": "2bf0e3de-e8a7-5821-ee81-ad9385d138a4",
+      "providerName": "Microsoft-VisualStudio-CpsVs",
+      "eventId": "00000000-0000-0000-0000-000000000000",
+      "descriptor": {
+        "id": 24,
+        "version": 0,
+        "channel": 0,
+        "level": "Information",
+        "opcode": "End",
+        "task": 65511,
+        "keyword": 0
+      },
+      "name": "PublishProjectTreeCoreStop",
+      "channelName": null,
+      "levelName": "win:Informational",
+      "opcodeName": "win:Stop",
+      "taskName": "PublishProjectTreeCore",
+      "keywordName": null,
+      "message": null,
+      "eventAttributes": null,
+      "activityIdName": null,
+      "relatedActivityIdName": null,
+      "flags": null,
+      "properties": [
+        {
+          "name": "ProjectFileName",
+          "inputType": "UnicodeString",
+          "outputType": "Null",
+          "mapName": null,
+          "properties": null,
+          "length": {
+            "size": 0,
+            "kind": "Regular"
+          },
+          "count": {
+            "size": 1,
+            "kind": "Regular"
+          },
+          "tags": 0
+        },
+        {
+          "name": "ConfiguredVersion",
+          "inputType": "UnicodeString",
+          "outputType": "Null",
+          "mapName": null,
+          "properties": null,
+          "length": {
+            "size": 0,
+            "kind": "Regular"
+          },
+          "count": {
+            "size": 1,
+            "kind": "Regular"
+          },
+          "tags": 0
+        }
+      ]
+    },
+    {
+      "providerId": "2bf0e3de-e8a7-5821-ee81-ad9385d138a4",
+      "providerName": "Microsoft-VisualStudio-CpsVs",
+      "eventId": "00000000-0000-0000-0000-000000000000",
+      "descriptor": {
+        "id": 25,
+        "version": 0,
+        "channel": 0,
+        "level": "Information",
+        "opcode": "Start",
+        "task": 65509,
+        "keyword": 0
+      },
+      "name": "PublishProjectTreeAcquiringLockStart",
+      "channelName": null,
+      "levelName": "win:Informational",
+      "opcodeName": "win:Start",
+      "taskName": "PublishProjectTreeAcquiringLock",
+      "keywordName": null,
+      "message": null,
+      "eventAttributes": null,
+      "activityIdName": null,
+      "relatedActivityIdName": null,
+      "flags": null,
+      "properties": null
+    },
+    {
+      "providerId": "2bf0e3de-e8a7-5821-ee81-ad9385d138a4",
+      "providerName": "Microsoft-VisualStudio-CpsVs",
+      "eventId": "00000000-0000-0000-0000-000000000000",
+      "descriptor": {
+        "id": 26,
+        "version": 0,
+        "channel": 0,
+        "level": "Information",
+        "opcode": "End",
+        "task": 65509,
+        "keyword": 0
+      },
+      "name": "PublishProjectTreeAcquiringLockStop",
+      "channelName": null,
+      "levelName": "win:Informational",
+      "opcodeName": "win:Stop",
+      "taskName": "PublishProjectTreeAcquiringLock",
+      "keywordName": null,
+      "message": null,
+      "eventAttributes": null,
+      "activityIdName": null,
+      "relatedActivityIdName": null,
+      "flags": null,
+      "properties": [
+        {
+          "name": "AbandonedLockCount",
+          "inputType": "Int32",
+          "outputType": "Null",
+          "mapName": null,
+          "properties": null,
+          "length": {
+            "size": 4,
+            "kind": "Regular"
+          },
+          "count": {
+            "size": 1,
+            "kind": "Regular"
+          },
+          "tags": 0
+        },
+        {
+          "name": "AbandonedAcquiringLockCount",
+          "inputType": "Int32",
+          "outputType": "Null",
+          "mapName": null,
+          "properties": null,
+          "length": {
+            "size": 4,
+            "kind": "Regular"
+          },
+          "count": {
+            "size": 1,
+            "kind": "Regular"
+          },
+          "tags": 0
+        },
+        {
+          "name": "ThreadSwitchingTime",
+          "inputType": "Int64",
+          "outputType": "Null",
+          "mapName": null,
+          "properties": null,
+          "length": {
+            "size": 8,
+            "kind": "Regular"
+          },
+          "count": {
+            "size": 1,
+            "kind": "Regular"
+          },
+          "tags": 0
+        }
+      ]
+    },
+    {
+      "providerId": "2bf0e3de-e8a7-5821-ee81-ad9385d138a4",
+      "providerName": "Microsoft-VisualStudio-CpsVs",
+      "eventId": "00000000-0000-0000-0000-000000000000",
+      "descriptor": {
+        "id": 501,
+        "version": 0,
+        "channel": 0,
+        "level": "Information",
+        "opcode": "Start",
+        "task": 65033,
+        "keyword": 0
+      },
+      "name": "TransferToBestProjectOwnerStart",
+      "channelName": null,
+      "levelName": "win:Informational",
+      "opcodeName": "win:Start",
+      "taskName": "TransferToBestProjectOwner",
+      "keywordName": null,
+      "message": null,
+      "eventAttributes": null,
+      "activityIdName": null,
+      "relatedActivityIdName": null,
+      "flags": null,
+      "properties": [
+        {
+          "name": "FilePath",
+          "inputType": "UnicodeString",
+          "outputType": "Null",
+          "mapName": null,
+          "properties": null,
+          "length": {
+            "size": 0,
+            "kind": "Regular"
+          },
+          "count": {
+            "size": 1,
+            "kind": "Regular"
+          },
+          "tags": 0
+        }
+      ]
+    },
+    {
+      "providerId": "2bf0e3de-e8a7-5821-ee81-ad9385d138a4",
+      "providerName": "Microsoft-VisualStudio-CpsVs",
+      "eventId": "00000000-0000-0000-0000-000000000000",
+      "descriptor": {
+        "id": 502,
+        "version": 0,
+        "channel": 0,
+        "level": "Information",
+        "opcode": "End",
+        "task": 65033,
+        "keyword": 0
+      },
+      "name": "TransferToBestProjectOwnerStop",
+      "channelName": null,
+      "levelName": "win:Informational",
+      "opcodeName": "win:Stop",
+      "taskName": "TransferToBestProjectOwner",
+      "keywordName": null,
+      "message": null,
+      "eventAttributes": null,
+      "activityIdName": null,
+      "relatedActivityIdName": null,
+      "flags": null,
+      "properties": [
+        {
+          "name": "FilePath",
+          "inputType": "UnicodeString",
+          "outputType": "Null",
+          "mapName": null,
+          "properties": null,
+          "length": {
+            "size": 0,
+            "kind": "Regular"
+          },
+          "count": {
+            "size": 1,
+            "kind": "Regular"
+          },
+          "tags": 0
+        }
+      ]
+    },
+    {
+      "providerId": "2bf0e3de-e8a7-5821-ee81-ad9385d138a4",
+      "providerName": "Microsoft-VisualStudio-CpsVs",
+      "eventId": "00000000-0000-0000-0000-000000000000",
+      "descriptor": {
+        "id": 100,
+        "version": 0,
+        "channel": 0,
+        "level": "Information",
+        "opcode": "Info",
+        "task": 65434,
+        "keyword": 0
+      },
+      "name": "SwitchToMainThreadToPublishTreeFailed",
+      "channelName": null,
+      "levelName": "win:Informational",
+      "opcodeName": null,
+      "taskName": "SwitchToMainThreadToPublishTreeFailed",
+      "keywordName": null,
+      "message": null,
+      "eventAttributes": null,
+      "activityIdName": null,
+      "relatedActivityIdName": null,
+      "flags": null,
+      "properties": [
+        {
+          "name": "Count",
+          "inputType": "Int32",
+          "outputType": "Null",
+          "mapName": null,
+          "properties": null,
+          "length": {
+            "size": 4,
+            "kind": "Regular"
+          },
+          "count": {
+            "size": 1,
+            "kind": "Regular"
+          },
+          "tags": 0
+        }
+      ]
+    },
+    {
+      "providerId": "2bf0e3de-e8a7-5821-ee81-ad9385d138a4",
+      "providerName": "Microsoft-VisualStudio-CpsVs",
+      "eventId": "00000000-0000-0000-0000-000000000000",
+      "descriptor": {
+        "id": 101,
+        "version": 0,
+        "channel": 0,
+        "level": "Information",
+        "opcode": "Info",
+        "task": 65433,
+        "keyword": 0
+      },
+      "name": "NotifyBeforeSolutionClosing",
+      "channelName": null,
+      "levelName": "win:Informational",
+      "opcodeName": null,
+      "taskName": "NotifyBeforeSolutionClosing",
+      "keywordName": null,
+      "message": null,
+      "eventAttributes": null,
+      "activityIdName": null,
+      "relatedActivityIdName": null,
+      "flags": null,
+      "properties": null
+    },
+    {
+      "providerId": "2bf0e3de-e8a7-5821-ee81-ad9385d138a4",
+      "providerName": "Microsoft-VisualStudio-CpsVs",
+      "eventId": "00000000-0000-0000-0000-000000000000",
+      "descriptor": {
+        "id": 102,
+        "version": 0,
+        "channel": 0,
+        "level": "Information",
+        "opcode": "Info",
+        "task": 65432,
+        "keyword": 0
+      },
+      "name": "NotifyQueryStatusDelay",
+      "channelName": null,
+      "levelName": "win:Informational",
+      "opcodeName": null,
+      "taskName": "NotifyQueryStatusDelay",
+      "keywordName": null,
+      "message": null,
+      "eventAttributes": null,
+      "activityIdName": null,
+      "relatedActivityIdName": null,
+      "flags": null,
+      "properties": [
+        {
+          "name": "CommandGroup",
+          "inputType": "UnicodeString",
+          "outputType": "Null",
+          "mapName": null,
+          "properties": null,
+          "length": {
+            "size": 0,
+            "kind": "Regular"
+          },
+          "count": {
+            "size": 1,
+            "kind": "Regular"
+          },
+          "tags": 0
+        },
+        {
+          "name": "CommandId",
+          "inputType": "Uint32",
+          "outputType": "Null",
+          "mapName": null,
+          "properties": null,
+          "length": {
+            "size": 4,
+            "kind": "Regular"
+          },
+          "count": {
+            "size": 1,
+            "kind": "Regular"
+          },
+          "tags": 0
+        },
+        {
+          "name": "Handler",
+          "inputType": "UnicodeString",
+          "outputType": "Null",
+          "mapName": null,
+          "properties": null,
+          "length": {
+            "size": 0,
+            "kind": "Regular"
+          },
+          "count": {
+            "size": 1,
+            "kind": "Regular"
+          },
+          "tags": 0
+        },
+        {
+          "name": "DelayTicket",
+          "inputType": "Int32",
+          "outputType": "Null",
+          "mapName": null,
+          "properties": null,
+          "length": {
+            "size": 4,
+            "kind": "Regular"
+          },
+          "count": {
+            "size": 1,
+            "kind": "Regular"
+          },
+          "tags": 0
+        }
+      ]
+    },
+    {
+      "providerId": "2bf0e3de-e8a7-5821-ee81-ad9385d138a4",
+      "providerName": "Microsoft-VisualStudio-CpsVs",
+      "eventId": "00000000-0000-0000-0000-000000000000",
+      "descriptor": {
+        "id": 17,
+        "version": 0,
+        "channel": 0,
+        "level": "Information",
+        "opcode": "Start",
+        "task": 65517,
+        "keyword": 0
+      },
+      "name": "WaitingProjectTreeLoadingStart",
+      "channelName": null,
+      "levelName": "win:Informational",
+      "opcodeName": "win:Start",
+      "taskName": "WaitingProjectTreeLoading",
+      "keywordName": null,
+      "message": null,
+      "eventAttributes": null,
+      "activityIdName": null,
+      "relatedActivityIdName": null,
+      "flags": null,
+      "properties": [
+        {
+          "name": "ProjectPath",
+          "inputType": "UnicodeString",
+          "outputType": "Null",
+          "mapName": null,
+          "properties": null,
+          "length": {
+            "size": 0,
+            "kind": "Regular"
+          },
+          "count": {
+            "size": 1,
+            "kind": "Regular"
+          },
+          "tags": 0
+        }
+      ]
+    },
+    {
+      "providerId": "2bf0e3de-e8a7-5821-ee81-ad9385d138a4",
+      "providerName": "Microsoft-VisualStudio-CpsVs",
+      "eventId": "00000000-0000-0000-0000-000000000000",
+      "descriptor": {
+        "id": 30,
+        "version": 0,
+        "channel": 0,
+        "level": "Information",
+        "opcode": "Start",
+        "task": 65504,
+        "keyword": 0
+      },
+      "name": "LoadAllUnconfiguredProjectsStart",
+      "channelName": null,
+      "levelName": "win:Informational",
+      "opcodeName": "win:Start",
+      "taskName": "LoadAllUnconfiguredProjects",
+      "keywordName": null,
+      "message": null,
+      "eventAttributes": null,
+      "activityIdName": null,
+      "relatedActivityIdName": null,
+      "flags": null,
+      "properties": null
+    },
+    {
+      "providerId": "2bf0e3de-e8a7-5821-ee81-ad9385d138a4",
+      "providerName": "Microsoft-VisualStudio-CpsVs",
+      "eventId": "00000000-0000-0000-0000-000000000000",
+      "descriptor": {
+        "id": 31,
+        "version": 0,
+        "channel": 0,
+        "level": "Information",
+        "opcode": "End",
+        "task": 65504,
+        "keyword": 0
+      },
+      "name": "LoadAllUnconfiguredProjectsStop",
+      "channelName": null,
+      "levelName": "win:Informational",
+      "opcodeName": "win:Stop",
+      "taskName": "LoadAllUnconfiguredProjects",
+      "keywordName": null,
+      "message": null,
+      "eventAttributes": null,
+      "activityIdName": null,
+      "relatedActivityIdName": null,
+      "flags": null,
+      "properties": null
+    },
+    {
+      "providerId": "2bf0e3de-e8a7-5821-ee81-ad9385d138a4",
+      "providerName": "Microsoft-VisualStudio-CpsVs",
+      "eventId": "00000000-0000-0000-0000-000000000000",
+      "descriptor": {
+        "id": 32,
+        "version": 0,
+        "channel": 0,
+        "level": "Information",
+        "opcode": "Start",
+        "task": 65502,
+        "keyword": 0
+      },
+      "name": "LoadAllConfiguredProjectsStart",
+      "channelName": null,
+      "levelName": "win:Informational",
+      "opcodeName": "win:Start",
+      "taskName": "LoadAllConfiguredProjects",
+      "keywordName": null,
+      "message": null,
+      "eventAttributes": null,
+      "activityIdName": null,
+      "relatedActivityIdName": null,
+      "flags": null,
+      "properties": null
+    },
+    {
+      "providerId": "2bf0e3de-e8a7-5821-ee81-ad9385d138a4",
+      "providerName": "Microsoft-VisualStudio-CpsVs",
+      "eventId": "00000000-0000-0000-0000-000000000000",
+      "descriptor": {
+        "id": 33,
+        "version": 0,
+        "channel": 0,
+        "level": "Information",
+        "opcode": "End",
+        "task": 65502,
+        "keyword": 0
+      },
+      "name": "LoadAllConfiguredProjectsStop",
+      "channelName": null,
+      "levelName": "win:Informational",
+      "opcodeName": "win:Stop",
+      "taskName": "LoadAllConfiguredProjects",
+      "keywordName": null,
+      "message": null,
+      "eventAttributes": null,
+      "activityIdName": null,
+      "relatedActivityIdName": null,
+      "flags": null,
+      "properties": null
+    },
+    {
+      "providerId": "2bf0e3de-e8a7-5821-ee81-ad9385d138a4",
+      "providerName": "Microsoft-VisualStudio-CpsVs",
+      "eventId": "00000000-0000-0000-0000-000000000000",
+      "descriptor": {
+        "id": 34,
+        "version": 0,
+        "channel": 0,
+        "level": "Information",
+        "opcode": "Start",
+        "task": 65500,
+        "keyword": 0
+      },
+      "name": "LoadAllProjectNodesStart",
+      "channelName": null,
+      "levelName": "win:Informational",
+      "opcodeName": "win:Start",
+      "taskName": "LoadAllProjectNodes",
+      "keywordName": null,
+      "message": null,
+      "eventAttributes": null,
+      "activityIdName": null,
+      "relatedActivityIdName": null,
+      "flags": null,
+      "properties": null
+    },
+    {
+      "providerId": "2bf0e3de-e8a7-5821-ee81-ad9385d138a4",
+      "providerName": "Microsoft-VisualStudio-CpsVs",
+      "eventId": "00000000-0000-0000-0000-000000000000",
+      "descriptor": {
+        "id": 35,
+        "version": 0,
+        "channel": 0,
+        "level": "Information",
+        "opcode": "End",
+        "task": 65500,
+        "keyword": 0
+      },
+      "name": "LoadAllProjectNodesStop",
+      "channelName": null,
+      "levelName": "win:Informational",
+      "opcodeName": "win:Stop",
+      "taskName": "LoadAllProjectNodes",
+      "keywordName": null,
+      "message": null,
+      "eventAttributes": null,
+      "activityIdName": null,
+      "relatedActivityIdName": null,
+      "flags": null,
+      "properties": null
+    },
+    {
+      "providerId": "2bf0e3de-e8a7-5821-ee81-ad9385d138a4",
+      "providerName": "Microsoft-VisualStudio-CpsVs",
+      "eventId": "00000000-0000-0000-0000-000000000000",
+      "descriptor": {
+        "id": 36,
+        "version": 0,
+        "channel": 0,
+        "level": "Information",
+        "opcode": "Start",
+        "task": 65498,
+        "keyword": 0
+      },
+      "name": "LoadProjectsAndTreesStart",
+      "channelName": null,
+      "levelName": "win:Informational",
+      "opcodeName": "win:Start",
+      "taskName": "LoadProjectsAndTrees",
+      "keywordName": null,
+      "message": null,
+      "eventAttributes": null,
+      "activityIdName": null,
+      "relatedActivityIdName": null,
+      "flags": null,
+      "properties": null
+    },
+    {
+      "providerId": "2bf0e3de-e8a7-5821-ee81-ad9385d138a4",
+      "providerName": "Microsoft-VisualStudio-CpsVs",
+      "eventId": "00000000-0000-0000-0000-000000000000",
+      "descriptor": {
+        "id": 37,
+        "version": 0,
+        "channel": 0,
+        "level": "Information",
+        "opcode": "End",
+        "task": 65498,
+        "keyword": 0
+      },
+      "name": "LoadProjectsAndTreesStop",
+      "channelName": null,
+      "levelName": "win:Informational",
+      "opcodeName": "win:Stop",
+      "taskName": "LoadProjectsAndTrees",
+      "keywordName": null,
+      "message": null,
+      "eventAttributes": null,
+      "activityIdName": null,
+      "relatedActivityIdName": null,
+      "flags": null,
+      "properties": null
+    },
+    {
+      "providerId": "2bf0e3de-e8a7-5821-ee81-ad9385d138a4",
+      "providerName": "Microsoft-VisualStudio-CpsVs",
+      "eventId": "00000000-0000-0000-0000-000000000000",
+      "descriptor": {
+        "id": 38,
+        "version": 0,
+        "channel": 0,
+        "level": "Information",
+        "opcode": "Info",
+        "task": 65496,
+        "keyword": 0
+      },
+      "name": "ResetDesignTimeBuilder",
+      "channelName": null,
+      "levelName": "win:Informational",
+      "opcodeName": null,
+      "taskName": "ResetDesignTimeBuilder",
+      "keywordName": null,
+      "message": null,
+      "eventAttributes": null,
+      "activityIdName": null,
+      "relatedActivityIdName": null,
+      "flags": null,
+      "properties": [
+        {
+          "name": "Project",
+          "inputType": "UnicodeString",
+          "outputType": "Null",
+          "mapName": null,
+          "properties": null,
+          "length": {
+            "size": 0,
+            "kind": "Regular"
+          },
+          "count": {
+            "size": 1,
+            "kind": "Regular"
+          },
+          "tags": 0
+        },
+        {
+          "name": "Configuration",
+          "inputType": "UnicodeString",
+          "outputType": "Null",
+          "mapName": null,
+          "properties": null,
+          "length": {
+            "size": 0,
+            "kind": "Regular"
+          },
+          "count": {
+            "size": 1,
+            "kind": "Regular"
+          },
+          "tags": 0
+        },
+        {
+          "name": "ResetId",
+          "inputType": "Int32",
+          "outputType": "Null",
+          "mapName": null,
+          "properties": null,
+          "length": {
+            "size": 4,
+            "kind": "Regular"
+          },
+          "count": {
+            "size": 1,
+            "kind": "Regular"
+          },
+          "tags": 0
+        }
+      ]
+    },
+    {
+      "providerId": "2bf0e3de-e8a7-5821-ee81-ad9385d138a4",
+      "providerName": "Microsoft-VisualStudio-CpsVs",
+      "eventId": "00000000-0000-0000-0000-000000000000",
+      "descriptor": {
+        "id": 39,
+        "version": 0,
+        "channel": 0,
+        "level": "Information",
+        "opcode": "Start",
+        "task": 65495,
+        "keyword": 0
+      },
+      "name": "CpsHandlersBeforeCloseSolutionStart",
+      "channelName": null,
+      "levelName": "win:Informational",
+      "opcodeName": "win:Start",
+      "taskName": "CpsHandlersBeforeCloseSolution",
+      "keywordName": null,
+      "message": null,
+      "eventAttributes": null,
+      "activityIdName": null,
+      "relatedActivityIdName": null,
+      "flags": null,
+      "properties": null
+    },
+    {
+      "providerId": "2bf0e3de-e8a7-5821-ee81-ad9385d138a4",
+      "providerName": "Microsoft-VisualStudio-CpsVs",
+      "eventId": "00000000-0000-0000-0000-000000000000",
+      "descriptor": {
+        "id": 40,
+        "version": 0,
+        "channel": 0,
+        "level": "Information",
+        "opcode": "End",
+        "task": 65495,
+        "keyword": 0
+      },
+      "name": "CpsHandlersBeforeCloseSolutionStop",
+      "channelName": null,
+      "levelName": "win:Informational",
+      "opcodeName": "win:Stop",
+      "taskName": "CpsHandlersBeforeCloseSolution",
+      "keywordName": null,
+      "message": null,
+      "eventAttributes": null,
+      "activityIdName": null,
+      "relatedActivityIdName": null,
+      "flags": null,
+      "properties": null
+    },
+    {
+      "providerId": "2bf0e3de-e8a7-5821-ee81-ad9385d138a4",
+      "providerName": "Microsoft-VisualStudio-CpsVs",
+      "eventId": "00000000-0000-0000-0000-000000000000",
+      "descriptor": {
+        "id": 42,
+        "version": 0,
+        "channel": 0,
+        "level": "Information",
+        "opcode": "End",
+        "task": 65493,
+        "keyword": 0
+      },
+      "name": "CpsNotifyTaskStop",
+      "channelName": null,
+      "levelName": "win:Informational",
+      "opcodeName": "win:Stop",
+      "taskName": "CpsNotifyTask",
+      "keywordName": null,
+      "message": null,
+      "eventAttributes": null,
+      "activityIdName": null,
+      "relatedActivityIdName": null,
+      "flags": null,
+      "properties": [
+        {
+          "name": "StageId",
+          "inputType": "UnicodeString",
+          "outputType": "Null",
+          "mapName": null,
+          "properties": null,
+          "length": {
+            "size": 0,
+            "kind": "Regular"
+          },
+          "count": {
+            "size": 1,
+            "kind": "Regular"
+          },
+          "tags": 0
+        },
+        {
+          "name": "ProjectPath",
+          "inputType": "UnicodeString",
+          "outputType": "Null",
+          "mapName": null,
+          "properties": null,
+          "length": {
+            "size": 0,
+            "kind": "Regular"
+          },
+          "count": {
+            "size": 1,
+            "kind": "Regular"
+          },
+          "tags": 0
+        },
+        {
+          "name": "Name",
+          "inputType": "UnicodeString",
+          "outputType": "Null",
+          "mapName": null,
+          "properties": null,
+          "length": {
+            "size": 0,
+            "kind": "Regular"
+          },
+          "count": {
+            "size": 1,
+            "kind": "Regular"
+          },
+          "tags": 0
+        }
+      ]
+    },
+    {
+      "providerId": "2bf0e3de-e8a7-5821-ee81-ad9385d138a4",
+      "providerName": "Microsoft-VisualStudio-CpsVs",
+      "eventId": "00000000-0000-0000-0000-000000000000",
+      "descriptor": {
+        "id": 43,
+        "version": 0,
+        "channel": 0,
+        "level": "Information",
+        "opcode": "Start",
+        "task": 65491,
+        "keyword": 0
+      },
+      "name": "CpsUpdateSubTypeStart",
+      "channelName": null,
+      "levelName": "win:Informational",
+      "opcodeName": "win:Start",
+      "taskName": "CpsUpdateSubType",
+      "keywordName": null,
+      "message": null,
+      "eventAttributes": null,
+      "activityIdName": null,
+      "relatedActivityIdName": null,
+      "flags": null,
+      "properties": [
+        {
+          "name": "ProjectPath",
+          "inputType": "UnicodeString",
+          "outputType": "Null",
+          "mapName": null,
+          "properties": null,
+          "length": {
+            "size": 0,
+            "kind": "Regular"
+          },
+          "count": {
+            "size": 1,
+            "kind": "Regular"
+          },
+          "tags": 0
+        }
+      ]
+    },
+    {
+      "providerId": "2bf0e3de-e8a7-5821-ee81-ad9385d138a4",
+      "providerName": "Microsoft-VisualStudio-CpsVs",
+      "eventId": "00000000-0000-0000-0000-000000000000",
+      "descriptor": {
+        "id": 44,
+        "version": 0,
+        "channel": 0,
+        "level": "Information",
+        "opcode": "Info",
+        "task": 65490,
+        "keyword": 0
+      },
+      "name": "CpsUpdateSubTypeEnd",
+      "channelName": null,
+      "levelName": "win:Informational",
+      "opcodeName": null,
+      "taskName": "CpsUpdateSubTypeEnd",
+      "keywordName": null,
+      "message": null,
+      "eventAttributes": null,
+      "activityIdName": null,
+      "relatedActivityIdName": null,
+      "flags": null,
+      "properties": [
+        {
+          "name": "ProjectPath",
+          "inputType": "UnicodeString",
+          "outputType": "Null",
+          "mapName": null,
+          "properties": null,
+          "length": {
+            "size": 0,
+            "kind": "Regular"
+          },
+          "count": {
+            "size": 1,
+            "kind": "Regular"
+          },
+          "tags": 0
+        },
+        {
+          "name": "Count",
+          "inputType": "Int32",
+          "outputType": "Null",
+          "mapName": null,
+          "properties": null,
+          "length": {
+            "size": 4,
+            "kind": "Regular"
+          },
+          "count": {
+            "size": 1,
+            "kind": "Regular"
+          },
+          "tags": 0
+        },
+        {
+          "name": "Changed",
+          "inputType": "Boolean",
+          "outputType": "Null",
+          "mapName": null,
+          "properties": null,
+          "length": {
+            "size": 1,
+            "kind": "Regular"
+          },
+          "count": {
+            "size": 1,
+            "kind": "Regular"
+          },
+          "tags": 0
+        },
+        {
+          "name": "Reevaluated",
+          "inputType": "Boolean",
+          "outputType": "Null",
+          "mapName": null,
+          "properties": null,
+          "length": {
+            "size": 1,
+            "kind": "Regular"
+          },
+          "count": {
+            "size": 1,
+            "kind": "Regular"
+          },
+          "tags": 0
+        }
+      ]
+    },
+    {
+      "providerId": "2bf0e3de-e8a7-5821-ee81-ad9385d138a4",
+      "providerName": "Microsoft-VisualStudio-CpsVs",
+      "eventId": "00000000-0000-0000-0000-000000000000",
+      "descriptor": {
+        "id": 50,
+        "version": 0,
+        "channel": 0,
+        "level": "Information",
+        "opcode": "Info",
+        "task": 65484,
+        "keyword": 0
+      },
+      "name": "ProjectReloadedInBackground",
+      "channelName": null,
+      "levelName": "win:Informational",
+      "opcodeName": null,
+      "taskName": "ProjectReloadedInBackground",
+      "keywordName": null,
+      "message": null,
+      "eventAttributes": null,
+      "activityIdName": null,
+      "relatedActivityIdName": null,
+      "flags": null,
+      "properties": [
+        {
+          "name": "Project",
+          "inputType": "UnicodeString",
+          "outputType": "Null",
+          "mapName": null,
+          "properties": null,
+          "length": {
+            "size": 0,
+            "kind": "Regular"
+          },
+          "count": {
+            "size": 1,
+            "kind": "Regular"
+          },
+          "tags": 0
+        },
+        {
+          "name": "ConfiguredVersion",
+          "inputType": "UnicodeString",
+          "outputType": "Null",
+          "mapName": null,
+          "properties": null,
+          "length": {
+            "size": 0,
+            "kind": "Regular"
+          },
+          "count": {
+            "size": 1,
+            "kind": "Regular"
+          },
+          "tags": 0
+        }
+      ]
+    }
+  ],
+  "maps": []
+}

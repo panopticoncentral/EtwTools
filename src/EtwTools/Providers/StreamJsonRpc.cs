@@ -6,19 +6,78 @@ using System;
 namespace EtwTools
 {
     /// <summary>
-    /// Provider for StreamJsonRpc ({f0cffe53-bcc5-53f5-8873-995568808a3b})
+    /// Provider for StreamJsonRpc (f0cffe53-bcc5-53f5-8873-995568808a3b)
     /// </summary>
     public sealed class StreamJsonRpcProvider
     {
-        /// <summary>
+        /// <summary>s
         /// Provider ID.
         /// </summary>
-        public static readonly Guid Id = new("{f0cffe53-bcc5-53f5-8873-995568808a3b}");
+        public static readonly Guid Id = new("f0cffe53-bcc5-53f5-8873-995568808a3b");
 
         /// <summary>
         /// Provider name.
         /// </summary>
         public const string Name = "StreamJsonRpc";
+
+        /// <summary>
+        /// Tasks supported by StreamJsonRpc.
+        /// </summary>
+        public enum Tasks : ushort
+        {
+            /// <summary>
+            /// 'OutboundCall' task.
+            /// </summary>
+            OutboundCall = 1,
+            /// <summary>
+            /// 'InboundCall' task.
+            /// </summary>
+            InboundCall = 2,
+            /// <summary>
+            /// 'MessageTransmission' task.
+            /// </summary>
+            MessageTransmission = 3,
+            /// <summary>
+            /// 'Cancellation' task.
+            /// </summary>
+            Cancellation = 4,
+            /// <summary>
+            /// 'Notification' task.
+            /// </summary>
+            Notification = 5,
+            /// <summary>
+            /// 'MessageHandler' task.
+            /// </summary>
+            MessageHandler = 6,
+            /// <summary>
+            /// 'EventSourceMessage' task.
+            /// </summary>
+            EventSourceMessage = 65534,
+        }
+
+        /// <summary>
+        /// Keywords supported by StreamJsonRpc.
+        /// </summary>
+        [Flags]
+        public enum Keywords : ulong
+        {
+            /// <summary>
+            /// 'Session3' keyword.
+            /// </summary>
+            Session3 = 0x0000100000000000,
+            /// <summary>
+            /// 'Session2' keyword.
+            /// </summary>
+            Session2 = 0x0000200000000000,
+            /// <summary>
+            /// 'Session1' keyword.
+            /// </summary>
+            Session1 = 0x0000400000000000,
+            /// <summary>
+            /// 'Session0' keyword.
+            /// </summary>
+            Session0 = 0x0000800000000000,
+        }
 
         /// <summary>
         /// An event wrapper for a EventSourceMessage event.
@@ -46,7 +105,7 @@ namespace EtwTools
                 Version = 0,
                 Channel = 0,
                 Level = EtwTraceLevel.None,
-                Opcode = EtwEventType.Info,
+                Opcode = EtwEventOpcode.Info,
                 Task = (ushort)Tasks.EventSourceMessage,
                 Keyword = 0
             };
@@ -142,7 +201,7 @@ namespace EtwTools
                 Version = 0,
                 Channel = 0,
                 Level = EtwTraceLevel.Verbose,
-                Opcode = EtwEventType.Send,
+                Opcode = EtwEventOpcode.Send,
                 Task = (ushort)Tasks.Notification,
                 Keyword = 0
             };
@@ -213,7 +272,7 @@ namespace EtwTools
                 public SendingNotificationData(EtwEvent etwEvent)
                 {
                     _etwEvent = etwEvent;
-                    _offset_Args = Offset_Method + EtwEvent.StringEnumerable.StringEnumerator.StringLength(etwEvent.Data, Offset_Method);
+                    _offset_Args = Offset_Method + EtwEvent.UnicodeStringEnumerable.UnicodeStringEnumerator.StringLength(etwEvent.Data, Offset_Method);
                 }
             }
 
@@ -245,7 +304,7 @@ namespace EtwTools
                 Version = 0,
                 Channel = 0,
                 Level = EtwTraceLevel.Information,
-                Opcode = EtwEventType.Stop,
+                Opcode = EtwEventOpcode.End,
                 Task = (ushort)Tasks.OutboundCall,
                 Keyword = 0
             };
@@ -341,7 +400,7 @@ namespace EtwTools
                 Version = 0,
                 Channel = 0,
                 Level = EtwTraceLevel.Warning,
-                Opcode = EtwEventType.Stop,
+                Opcode = EtwEventOpcode.End,
                 Task = (ushort)Tasks.OutboundCall,
                 Keyword = 0
             };
@@ -443,7 +502,7 @@ namespace EtwTools
                 Version = 0,
                 Channel = 0,
                 Level = EtwTraceLevel.Warning,
-                Opcode = EtwEventType.Stop,
+                Opcode = EtwEventOpcode.End,
                 Task = (ushort)Tasks.OutboundCall,
                 Keyword = 0
             };
@@ -539,7 +598,7 @@ namespace EtwTools
                 Version = 0,
                 Channel = 0,
                 Level = EtwTraceLevel.Information,
-                Opcode = EtwEventType.Send,
+                Opcode = EtwEventOpcode.Send,
                 Task = (ushort)Tasks.Cancellation,
                 Keyword = 0
             };
@@ -635,7 +694,7 @@ namespace EtwTools
                 Version = 0,
                 Channel = 0,
                 Level = EtwTraceLevel.Verbose,
-                Opcode = EtwEventType.Recieve,
+                Opcode = EtwEventOpcode.Recieve,
                 Task = (ushort)Tasks.Notification,
                 Keyword = 0
             };
@@ -706,7 +765,7 @@ namespace EtwTools
                 public ReceivedNotificationData(EtwEvent etwEvent)
                 {
                     _etwEvent = etwEvent;
-                    _offset_Args = Offset_Method + EtwEvent.StringEnumerable.StringEnumerator.StringLength(etwEvent.Data, Offset_Method);
+                    _offset_Args = Offset_Method + EtwEvent.UnicodeStringEnumerable.UnicodeStringEnumerator.StringLength(etwEvent.Data, Offset_Method);
                 }
             }
 
@@ -738,7 +797,7 @@ namespace EtwTools
                 Version = 0,
                 Channel = 0,
                 Level = EtwTraceLevel.Information,
-                Opcode = EtwEventType.Stop,
+                Opcode = EtwEventOpcode.End,
                 Task = (ushort)Tasks.InboundCall,
                 Keyword = 0
             };
@@ -834,7 +893,7 @@ namespace EtwTools
                 Version = 0,
                 Channel = 0,
                 Level = EtwTraceLevel.Warning,
-                Opcode = EtwEventType.Stop,
+                Opcode = EtwEventOpcode.End,
                 Task = (ushort)Tasks.InboundCall,
                 Keyword = 0
             };
@@ -936,7 +995,7 @@ namespace EtwTools
                 Version = 0,
                 Channel = 0,
                 Level = EtwTraceLevel.Information,
-                Opcode = EtwEventType.Recieve,
+                Opcode = EtwEventOpcode.Recieve,
                 Task = (ushort)Tasks.Cancellation,
                 Keyword = 0
             };
@@ -1032,7 +1091,7 @@ namespace EtwTools
                 Version = 0,
                 Channel = 0,
                 Level = EtwTraceLevel.Information,
-                Opcode = EtwEventType.Start,
+                Opcode = EtwEventOpcode.Start,
                 Task = (ushort)Tasks.MessageTransmission,
                 Keyword = 0
             };
@@ -1098,7 +1157,7 @@ namespace EtwTools
                 Version = 0,
                 Channel = 0,
                 Level = EtwTraceLevel.Information,
-                Opcode = EtwEventType.Stop,
+                Opcode = EtwEventOpcode.End,
                 Task = (ushort)Tasks.MessageTransmission,
                 Keyword = 0
             };
@@ -1164,7 +1223,7 @@ namespace EtwTools
                 Version = 0,
                 Channel = 0,
                 Level = EtwTraceLevel.Information,
-                Opcode = EtwEventType.Send,
+                Opcode = EtwEventOpcode.Send,
                 Task = (ushort)Tasks.MessageHandler,
                 Keyword = 0
             };
@@ -1260,7 +1319,7 @@ namespace EtwTools
                 Version = 0,
                 Channel = 0,
                 Level = EtwTraceLevel.Information,
-                Opcode = EtwEventType.Recieve,
+                Opcode = EtwEventOpcode.Recieve,
                 Task = (ushort)Tasks.MessageHandler,
                 Keyword = 0
             };
@@ -1356,7 +1415,7 @@ namespace EtwTools
                 Version = 0,
                 Channel = 0,
                 Level = EtwTraceLevel.Verbose,
-                Opcode = EtwEventType.Start,
+                Opcode = EtwEventOpcode.Start,
                 Task = (ushort)Tasks.OutboundCall,
                 Keyword = 0
             };
@@ -1433,7 +1492,7 @@ namespace EtwTools
                 public SendingRequestData(EtwEvent etwEvent)
                 {
                     _etwEvent = etwEvent;
-                    _offset_Args = Offset_Method + EtwEvent.StringEnumerable.StringEnumerator.StringLength(etwEvent.Data, Offset_Method);
+                    _offset_Args = Offset_Method + EtwEvent.UnicodeStringEnumerable.UnicodeStringEnumerator.StringLength(etwEvent.Data, Offset_Method);
                 }
             }
 
@@ -1465,7 +1524,7 @@ namespace EtwTools
                 Version = 0,
                 Channel = 0,
                 Level = EtwTraceLevel.Verbose,
-                Opcode = EtwEventType.Start,
+                Opcode = EtwEventOpcode.Start,
                 Task = (ushort)Tasks.InboundCall,
                 Keyword = 0
             };
@@ -1542,69 +1601,10 @@ namespace EtwTools
                 public ReceivedRequestData(EtwEvent etwEvent)
                 {
                     _etwEvent = etwEvent;
-                    _offset_Args = Offset_Method + EtwEvent.StringEnumerable.StringEnumerator.StringLength(etwEvent.Data, Offset_Method);
+                    _offset_Args = Offset_Method + EtwEvent.UnicodeStringEnumerable.UnicodeStringEnumerator.StringLength(etwEvent.Data, Offset_Method);
                 }
             }
 
-        }
-
-        /// <summary>
-        /// Tasks supported by StreamJsonRpc.
-        /// </summary>
-        public enum Tasks : ushort
-        {
-            /// <summary>
-            /// 'OutboundCall' task.
-            /// </summary>
-            OutboundCall = 1,
-            /// <summary>
-            /// 'InboundCall' task.
-            /// </summary>
-            InboundCall = 2,
-            /// <summary>
-            /// 'MessageTransmission' task.
-            /// </summary>
-            MessageTransmission = 3,
-            /// <summary>
-            /// 'Cancellation' task.
-            /// </summary>
-            Cancellation = 4,
-            /// <summary>
-            /// 'Notification' task.
-            /// </summary>
-            Notification = 5,
-            /// <summary>
-            /// 'MessageHandler' task.
-            /// </summary>
-            MessageHandler = 6,
-            /// <summary>
-            /// 'EventSourceMessage' task.
-            /// </summary>
-            EventSourceMessage = 65534,
-        }
-
-        /// <summary>
-        /// Keywords supported by StreamJsonRpc.
-        /// </summary>
-        [Flags]
-        public enum Keywords : ulong
-        {
-            /// <summary>
-            /// 'Session3' keyword.
-            /// </summary>
-            Session3 = 0x0000100000000000,
-            /// <summary>
-            /// 'Session2' keyword.
-            /// </summary>
-            Session2 = 0x0000200000000000,
-            /// <summary>
-            /// 'Session1' keyword.
-            /// </summary>
-            Session1 = 0x0000400000000000,
-            /// <summary>
-            /// 'Session0' keyword.
-            /// </summary>
-            Session0 = 0x0000800000000000,
         }
 
         /// <summary>
@@ -1651,7 +1651,7 @@ namespace EtwTools
             /// <summary>
             /// RequestCanceled.
             /// </summary>
-            RequestCanceled = -32800,
+            RequestCanceled = 32736,
         }
     }
 }

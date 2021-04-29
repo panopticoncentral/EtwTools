@@ -199,31 +199,11 @@ namespace EtwTools
             return result;
         }
 
-        /// <summary>
-        /// Gets a manifest representing the provider, if available.
-        /// </summary>
-        /// <returns>Manifest, if available.</returns>
-        public string GetManifest()
-        {
-            var eventInfos = GetEventInfos();
-
-            if (eventInfos == null)
-            {
-                return null;
-            }
-
-            return string.Empty;
-        }
-
-        /// <summary>
-        /// Gets descriptions of events supported by this provider.
-        /// </summary>
-        /// <returns>A list of event descriptors.</returns>
-        public IReadOnlyList<EtwEventInfo> GetEventInfos()
+        private IReadOnlyList<EtwProviderFieldInfo> GetFieldInfos(Native.EventFieldType type)
         {
             var providerGuid = Id;
             uint bufferSize = 0;
-            var hr = (Native.Hresult)Native.TdhEnumerateManifestProviderEvents(&providerGuid, null, &bufferSize);
+            var hr = (Native.Hresult)Native.TdhEnumerateProviderFieldInformation(&providerGuid, type, null, &bufferSize);
             if (hr != Native.Hresult.ErrorInsufficientBuffer)
             {
                 // There are lots of error codes possible here, so just fail.
@@ -231,50 +211,137 @@ namespace EtwTools
             }
 
             var buffer = stackalloc byte[(int)bufferSize];
-            var providerEventInfo = (Native.ProviderEventInfo*)buffer;
-            ((Native.Hresult)Native.TdhEnumerateManifestProviderEvents(&providerGuid, providerEventInfo, &bufferSize)).ThrowException();
+            var providerFieldInfoArray = (Native.ProviderFieldInfoArray*)buffer;
+            ((Native.Hresult)Native.TdhEnumerateProviderFieldInformation(&providerGuid, type, providerFieldInfoArray, &bufferSize)).ThrowException();
 
-            var infos = new EtwEventInfo[providerEventInfo->NumberOfEvents];
-            for (var i = 0; i < providerEventInfo->NumberOfEvents; i++)
+            var result = new List<EtwProviderFieldInfo>((int)providerFieldInfoArray->NumberOfElements);
+
+            for (var i = 0; i < providerFieldInfoArray->NumberOfElements; i++)
             {
-                var eventDescriptor = (EtwEventDescriptor*)(buffer + sizeof(Native.ProviderEventInfo) + (i * sizeof(EtwEventDescriptor)));
+                var providerFieldInfo = (Native.ProviderFieldInfo*)(buffer + sizeof(Native.ProviderFieldInfoArray) + (i * sizeof(Native.ProviderFieldInfo)));
+                var name = string.Empty;
+                var description = string.Empty;
 
-                uint eventBufferSize = 0;
-                hr = (Native.Hresult)Native.TdhGetManifestEventInformation(&providerGuid, eventDescriptor, null, &eventBufferSize);
-                if (hr != Native.Hresult.ErrorInsufficientBuffer)
+                if (providerFieldInfo->NameOffset != 0)
                 {
-                    infos[i] = new EtwEventInfo(*eventDescriptor, null);
-                    continue;
+                    name = new string((char*)&buffer[providerFieldInfo->NameOffset]);
                 }
 
-                fixed (byte* eventBuffer = new byte[(int)eventBufferSize])
+                if (providerFieldInfo->DescriptionOffset != 0)
                 {
-                    var eventInfo = (Native.TraceEventInfo*)eventBuffer;
-                    ((Native.Hresult)Native.TdhGetManifestEventInformation(&providerGuid, eventDescriptor, eventInfo, &eventBufferSize)).ThrowException();
-                    infos[i] = new EtwEventInfo(*eventDescriptor, eventInfo);
+                    description = new string((char*)&buffer[providerFieldInfo->DescriptionOffset]);
                 }
+
+                result.Add(new EtwProviderFieldInfo { Name = name, Description = description.Trim(), Value = providerFieldInfo->Value });
             }
 
-            return infos;
+            return result;
+        }
+
+        /// <summary>
+        /// Get information about the levels supported by this provider.
+        /// </summary>
+        /// <returns>The levels.</returns>
+        public IReadOnlyList<EtwProviderFieldInfo> GetLevelInfos() => GetFieldInfos(Native.EventFieldType.LevelInformation);
+
+        /// <summary>
+        /// Get information about the channels supported by this provider.
+        /// </summary>
+        /// <returns>The channels.</returns>
+        public IReadOnlyList<EtwProviderFieldInfo> GetChannelInfos() => GetFieldInfos(Native.EventFieldType.ChannelInformation);
+
+        /// <summary>
+        /// Get information about the keywords supported by this provider.
+        /// </summary>
+        /// <returns>The keywords.</returns>
+        public IReadOnlyList<EtwProviderFieldInfo> GetKeywordInfos() => GetFieldInfos(Native.EventFieldType.KeywordInformation);
+
+        /// <summary>
+        /// Gets descriptions of events supported by this provider.
+        /// </summary>
+        /// <returns>A list of event descriptors.</returns>
+        public IReadOnlyList<EtwEventInfo> GetEventInfos()
+        {
+            List<EtwEventInfo> eventInfos = new();
+
+            // Get WBEM service, if it fails then just no MOF providers...
+            var locator = (Native.IWbemLocator)new Native.WbemLocator();
+            _ = (Native.Hresult)locator.ConnectServer_("root\\wmi", null, null, null, 0, null, null, out var services);
+
+            for (var version = (byte)0; version <= byte.MaxValue; version++)
+            {
+                var eventRecord = new Native.EventRecord { EventHeader = new Native.EventHeader { ProviderId = Id, EventDescriptor = new EtwEventDescriptor { Version = version } } };
+                uint bufferSize = 0;
+                uint index = 0;
+                uint count = 0;
+
+                var hr = (Native.Hresult)Native.TdhGetAllEventsInformation(&eventRecord, null, &index, &count, null, &bufferSize);
+                if (hr != Native.Hresult.ErrorInsufficientBuffer)
+                {
+                    // Try MOF instead of XML
+                    if (services != null)
+                    {
+                        eventRecord = new Native.EventRecord { EventHeader = new Native.EventHeader { ProviderId = Id, EventDescriptor = new EtwEventDescriptor { Version = version }, Flags = Native.EventHeaderFlags.ClassicHeader } };
+
+                        hr = (Native.Hresult)Native.TdhGetAllEventsInformation(&eventRecord, services, &index, &count, null, &bufferSize);
+                        if (hr == Native.Hresult.ErrorNotFound)
+                        {
+                            break;
+                        }
+                        else if (hr != Native.Hresult.ErrorInsufficientBuffer)
+                        {
+                            return null;
+                        }
+                    }
+                    else
+                    {
+                        return null;
+                    }
+                }
+
+                static void CollectEvents(List<EtwEventInfo> eventInfos, Native.EventRecord eventRecord, uint bufferSize, Native.IWbemServices services)
+                {
+                    uint index = 0;
+                    uint count = 0;
+                    var buffer = stackalloc byte[(int)bufferSize];
+                    var traceEventInfo = (Native.TraceEventInfo**)buffer;
+                    ((Native.Hresult)Native.TdhGetAllEventsInformation(&eventRecord, services, &index, &count, traceEventInfo, &bufferSize)).ThrowException();
+
+                    for (uint i = 0; i < count; i++)
+                    {
+                        eventInfos.Add(new EtwEventInfo(traceEventInfo[i]));
+                    }
+                }
+
+                CollectEvents(eventInfos, eventRecord, bufferSize, services);
+            }
+
+            return eventInfos;
         }
 
         /// <summary>
         /// Returns a map for an event property.
         /// </summary>
         /// <param name="name">The name of the map.</param>
-        /// <param name="version">The version of the map to retrieve.</param>
         /// <returns>The map.</returns>
-        public EtwPropertyMapInfo GetPropertyMap(string name, byte version)
+        public EtwPropertyMapInfo GetPropertyMap(string name)
         {
-            Dictionary<uint, string> map = new();
+            Dictionary<ulong, string> map = new();
 
-            Native.EventRecord eventRecord = new() { EventHeader = new() { ProviderId = Id, EventDescriptor = new() { Version = version } } };
+            Native.EventRecord eventRecord = new() { EventHeader = new() { ProviderId = Id } };
             uint bufferSize = 0;
             var hr = (Native.Hresult)Native.TdhGetEventMapInformation(&eventRecord, name, null, &bufferSize);
 
             if (hr != Native.Hresult.ErrorInsufficientBuffer)
             {
-                return null;
+                // Try MOF instead of XML
+                eventRecord = new Native.EventRecord { EventHeader = new Native.EventHeader { ProviderId = Id, Flags = Native.EventHeaderFlags.ClassicHeader } };
+
+                hr = (Native.Hresult)Native.TdhGetEventMapInformation(&eventRecord, name, null, &bufferSize);
+                if (hr != Native.Hresult.ErrorInsufficientBuffer)
+                {
+                    return null;
+                }
             }
 
             var buffer = stackalloc byte[(int)bufferSize];
@@ -294,7 +361,7 @@ namespace EtwTools
                 map[mapEntry->Value] = new string((char*)&buffer[mapEntry->OutputOffset]).Trim();
             }
 
-            return new EtwPropertyMapInfo { Flags = (eventMapInfo->Flag & Native.MapFlags.ManifestBitmap) != 0, Values = map };
+            return new EtwPropertyMapInfo { Name = name, Flags = (eventMapInfo->Flag & Native.MapFlags.ManifestBitmap) != 0, Values = map };
         }
 
         /// <summary>

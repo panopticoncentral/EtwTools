@@ -1,0 +1,72 @@
+{
+  "id": "319dc449-ada5-50f7-428e-957db6791668",
+  "name": "Dotnet",
+  "className": "Dotnet",
+  "levels": null,
+  "channels": null,
+  "keywords": null,
+  "tasks": null,
+  "opcodes": null,
+  "events": [
+    {
+      "providerId": "319dc449-ada5-50f7-428e-957db6791668",
+      "providerName": "DotNet",
+      "eventId": "00000000-0000-0000-0000-000000000000",
+      "descriptor": {
+        "id": 2652,
+        "version": 42,
+        "channel": 11,
+        "level": "Verbose",
+        "opcode": "Info",
+        "task": 0,
+        "keyword": 35184372088832
+      },
+      "name": "AssemblyInfo",
+      "channelName": null,
+      "levelName": null,
+      "opcodeName": null,
+      "taskName": null,
+      "keywordName": null,
+      "message": null,
+      "eventAttributes": null,
+      "activityIdName": null,
+      "relatedActivityIdName": null,
+      "flags": 0,
+      "properties": [
+        {
+          "name": "TargetFrameworkAttribute",
+          "inputType": "UnicodeString",
+          "outputType": "Null",
+          "mapName": null,
+          "properties": null,
+          "length": {
+            "size": 0,
+            "kind": "Regular"
+          },
+          "count": {
+            "size": 1,
+            "kind": "Regular"
+          },
+          "tags": 0
+        },
+        {
+          "name": "AssemblyName",
+          "inputType": "AnsiString",
+          "outputType": "Null",
+          "mapName": null,
+          "properties": null,
+          "length": {
+            "size": 0,
+            "kind": "Regular"
+          },
+          "count": {
+            "size": 1,
+            "kind": "Regular"
+          },
+          "tags": 0
+        }
+      ]
+    }
+  ],
+  "maps": null
+}

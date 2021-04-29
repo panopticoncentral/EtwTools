@@ -6,19 +6,105 @@ using System;
 namespace EtwTools
 {
     /// <summary>
-    /// Provider for Microsoft-VisualStudio-Threading ({589491ba-4f15-53fe-c376-db7f020f5204})
+    /// Provider for Microsoft-VisualStudio-Threading (589491ba-4f15-53fe-c376-db7f020f5204)
     /// </summary>
-    public sealed class MicrosoftVisualStudioThreadingProvider
+    public sealed class VisualStudioThreadingProvider
     {
-        /// <summary>
+        /// <summary>s
         /// Provider ID.
         /// </summary>
-        public static readonly Guid Id = new("{589491ba-4f15-53fe-c376-db7f020f5204}");
+        public static readonly Guid Id = new("589491ba-4f15-53fe-c376-db7f020f5204");
 
         /// <summary>
         /// Provider name.
         /// </summary>
         public const string Name = "Microsoft-VisualStudio-Threading";
+
+        /// <summary>
+        /// Tasks supported by Microsoft-VisualStudio-Threading.
+        /// </summary>
+        public enum Tasks : ushort
+        {
+            /// <summary>
+            /// 'LockRequest' task.
+            /// </summary>
+            LockRequest = 1,
+            /// <summary>
+            /// 'LockRequestContention' task.
+            /// </summary>
+            LockRequestContention = 2,
+            /// <summary>
+            /// 'CircularJoinableTaskDependencyDetected' task.
+            /// </summary>
+            CircularJoinableTaskDependencyDetected = 65517,
+            /// <summary>
+            /// 'PostExecutionStop' task.
+            /// </summary>
+            PostExecutionStop = 65518,
+            /// <summary>
+            /// 'PostExecution' task.
+            /// </summary>
+            PostExecution = 65519,
+            /// <summary>
+            /// 'WaitSynchronously' task.
+            /// </summary>
+            WaitSynchronously = 65521,
+            /// <summary>
+            /// 'CompleteOnCurrentThreadStop' task.
+            /// </summary>
+            CompleteOnCurrentThreadStop = 65522,
+            /// <summary>
+            /// 'CompleteOnCurrentThread' task.
+            /// </summary>
+            CompleteOnCurrentThread = 65523,
+            /// <summary>
+            /// 'EventSourceMessage' task.
+            /// </summary>
+            EventSourceMessage = 65534,
+        }
+
+        /// <summary>
+        /// Opcodes supported by Microsoft-VisualStudio-Threading.
+        /// </summary>
+        public enum Opcodes
+        {
+            /// <summary>
+            /// 'ReaderWriterLockWaiting' opcode.
+            /// </summary>
+            ReaderWriterLockWaiting = 100,
+            /// <summary>
+            /// 'ReaderWriterLockIssued' opcode.
+            /// </summary>
+            ReaderWriterLockIssued = 101,
+            /// <summary>
+            /// 'ReaderWriterLockIssuedAfterContention' opcode.
+            /// </summary>
+            ReaderWriterLockIssuedAfterContention = 102,
+        }
+
+        /// <summary>
+        /// Keywords supported by Microsoft-VisualStudio-Threading.
+        /// </summary>
+        [Flags]
+        public enum Keywords : ulong
+        {
+            /// <summary>
+            /// 'Session3' keyword.
+            /// </summary>
+            Session3 = 0x0000100000000000,
+            /// <summary>
+            /// 'Session2' keyword.
+            /// </summary>
+            Session2 = 0x0000200000000000,
+            /// <summary>
+            /// 'Session1' keyword.
+            /// </summary>
+            Session1 = 0x0000400000000000,
+            /// <summary>
+            /// 'Session0' keyword.
+            /// </summary>
+            Session0 = 0x0000800000000000,
+        }
 
         /// <summary>
         /// An event wrapper for a EventSourceMessage event.
@@ -46,7 +132,7 @@ namespace EtwTools
                 Version = 0,
                 Channel = 0,
                 Level = EtwTraceLevel.None,
-                Opcode = EtwEventType.Info,
+                Opcode = EtwEventOpcode.Info,
                 Task = (ushort)Tasks.EventSourceMessage,
                 Keyword = 0
             };
@@ -142,7 +228,7 @@ namespace EtwTools
                 Version = 0,
                 Channel = 0,
                 Level = EtwTraceLevel.Information,
-                Opcode = EtwEventType.Stop,
+                Opcode = EtwEventOpcode.End,
                 Task = (ushort)Tasks.CompleteOnCurrentThreadStop,
                 Keyword = 0
             };
@@ -238,7 +324,7 @@ namespace EtwTools
                 Version = 0,
                 Channel = 0,
                 Level = EtwTraceLevel.Verbose,
-                Opcode = EtwEventType.Start,
+                Opcode = EtwEventOpcode.Start,
                 Task = (ushort)Tasks.WaitSynchronously,
                 Keyword = 0
             };
@@ -304,7 +390,7 @@ namespace EtwTools
                 Version = 0,
                 Channel = 0,
                 Level = EtwTraceLevel.Verbose,
-                Opcode = EtwEventType.Stop,
+                Opcode = EtwEventOpcode.End,
                 Task = (ushort)Tasks.WaitSynchronously,
                 Keyword = 0
             };
@@ -370,7 +456,7 @@ namespace EtwTools
                 Version = 0,
                 Channel = 0,
                 Level = EtwTraceLevel.Verbose,
-                Opcode = EtwEventType.Stop,
+                Opcode = EtwEventOpcode.End,
                 Task = (ushort)Tasks.PostExecutionStop,
                 Keyword = 0
             };
@@ -466,7 +552,7 @@ namespace EtwTools
                 Version = 0,
                 Channel = 0,
                 Level = EtwTraceLevel.Information,
-                Opcode = EtwEventType.Info,
+                Opcode = EtwEventOpcode.Info,
                 Task = (ushort)Tasks.CircularJoinableTaskDependencyDetected,
                 Keyword = 0
             };
@@ -568,7 +654,7 @@ namespace EtwTools
                 Version = 0,
                 Channel = 0,
                 Level = EtwTraceLevel.Information,
-                Opcode = (EtwEventType)Opcodes.ReaderWriterLockIssued,
+                Opcode = (EtwEventOpcode)Opcodes.ReaderWriterLockIssued,
                 Task = (ushort)Tasks.LockRequest,
                 Keyword = 0
             };
@@ -682,7 +768,7 @@ namespace EtwTools
                 Version = 0,
                 Channel = 0,
                 Level = EtwTraceLevel.Information,
-                Opcode = EtwEventType.Start,
+                Opcode = EtwEventOpcode.Start,
                 Task = (ushort)Tasks.LockRequestContention,
                 Keyword = 0
             };
@@ -802,7 +888,7 @@ namespace EtwTools
                 Version = 0,
                 Channel = 0,
                 Level = EtwTraceLevel.Information,
-                Opcode = EtwEventType.Stop,
+                Opcode = EtwEventOpcode.End,
                 Task = (ushort)Tasks.LockRequestContention,
                 Keyword = 0
             };
@@ -904,7 +990,7 @@ namespace EtwTools
                 Version = 0,
                 Channel = 0,
                 Level = EtwTraceLevel.Information,
-                Opcode = EtwEventType.Start,
+                Opcode = EtwEventOpcode.Start,
                 Task = (ushort)Tasks.CompleteOnCurrentThread,
                 Keyword = 0
             };
@@ -1006,7 +1092,7 @@ namespace EtwTools
                 Version = 0,
                 Channel = 0,
                 Level = EtwTraceLevel.Verbose,
-                Opcode = EtwEventType.Start,
+                Opcode = EtwEventOpcode.Start,
                 Task = (ushort)Tasks.PostExecution,
                 Keyword = 0
             };
@@ -1080,92 +1166,6 @@ namespace EtwTools
                 }
             }
 
-        }
-
-        /// <summary>
-        /// Tasks supported by Microsoft-VisualStudio-Threading.
-        /// </summary>
-        public enum Tasks : ushort
-        {
-            /// <summary>
-            /// 'LockRequest' task.
-            /// </summary>
-            LockRequest = 1,
-            /// <summary>
-            /// 'LockRequestContention' task.
-            /// </summary>
-            LockRequestContention = 2,
-            /// <summary>
-            /// 'CircularJoinableTaskDependencyDetected' task.
-            /// </summary>
-            CircularJoinableTaskDependencyDetected = 65517,
-            /// <summary>
-            /// 'PostExecutionStop' task.
-            /// </summary>
-            PostExecutionStop = 65518,
-            /// <summary>
-            /// 'PostExecution' task.
-            /// </summary>
-            PostExecution = 65519,
-            /// <summary>
-            /// 'WaitSynchronously' task.
-            /// </summary>
-            WaitSynchronously = 65521,
-            /// <summary>
-            /// 'CompleteOnCurrentThreadStop' task.
-            /// </summary>
-            CompleteOnCurrentThreadStop = 65522,
-            /// <summary>
-            /// 'CompleteOnCurrentThread' task.
-            /// </summary>
-            CompleteOnCurrentThread = 65523,
-            /// <summary>
-            /// 'EventSourceMessage' task.
-            /// </summary>
-            EventSourceMessage = 65534,
-        }
-
-        /// <summary>
-        /// Opcodes supported by Microsoft-VisualStudio-Threading.
-        /// </summary>
-        public enum Opcodes
-        {
-            /// <summary>
-            /// 'ReaderWriterLockWaiting' opcode.
-            /// </summary>
-            ReaderWriterLockWaiting = 100,
-            /// <summary>
-            /// 'ReaderWriterLockIssued' opcode.
-            /// </summary>
-            ReaderWriterLockIssued = 101,
-            /// <summary>
-            /// 'ReaderWriterLockIssuedAfterContention' opcode.
-            /// </summary>
-            ReaderWriterLockIssuedAfterContention = 102,
-        }
-
-        /// <summary>
-        /// Keywords supported by Microsoft-VisualStudio-Threading.
-        /// </summary>
-        [Flags]
-        public enum Keywords : ulong
-        {
-            /// <summary>
-            /// 'Session3' keyword.
-            /// </summary>
-            Session3 = 0x0000100000000000,
-            /// <summary>
-            /// 'Session2' keyword.
-            /// </summary>
-            Session2 = 0x0000200000000000,
-            /// <summary>
-            /// 'Session1' keyword.
-            /// </summary>
-            Session1 = 0x0000400000000000,
-            /// <summary>
-            /// 'Session0' keyword.
-            /// </summary>
-            Session0 = 0x0000800000000000,
         }
 
         /// <summary>

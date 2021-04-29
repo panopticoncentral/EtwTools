@@ -32,7 +32,7 @@ namespace EtwTools
         /// <summary>
         /// The opcode of the event.
         /// </summary>
-        public EtwEventType Opcode { get; init; }
+        public EtwEventOpcode Opcode { get; init; }
 
         /// <summary>
         /// The task of the event.

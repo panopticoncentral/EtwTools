@@ -8,6 +8,11 @@ namespace EtwTools
     public sealed record EtwPropertyMapInfo
     {
         /// <summary>
+        /// The name of the map.
+        /// </summary>
+        public string Name { get; init; }
+
+        /// <summary>
         /// The values are bitflags.
         /// </summary>
         public bool Flags { get; init; }
@@ -15,6 +20,6 @@ namespace EtwTools
         /// <summary>
         /// The values.
         /// </summary>
-        public IReadOnlyDictionary<uint, string> Values { get; init; }
+        public IReadOnlyDictionary<ulong, string> Values { get; init; }
     }
 }

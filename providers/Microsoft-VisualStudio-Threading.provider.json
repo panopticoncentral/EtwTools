@@ -1,0 +1,721 @@
+{
+  "id": "589491ba-4f15-53fe-c376-db7f020f5204",
+  "name": "Microsoft-VisualStudio-Threading",
+  "className": "VisualStudioThreading",
+  "levels": null,
+  "channels": null,
+  "keywords": [
+    {
+      "name": "Session3",
+      "description": "Session3",
+      "value": 17592186044416
+    },
+    {
+      "name": "Session2",
+      "description": "Session2",
+      "value": 35184372088832
+    },
+    {
+      "name": "Session1",
+      "description": "Session1",
+      "value": 70368744177664
+    },
+    {
+      "name": "Session0",
+      "description": "Session0",
+      "value": 140737488355328
+    }
+  ],
+  "tasks": [
+    {
+      "name": "LockRequest",
+      "description": "LockRequest",
+      "value": 1
+    },
+    {
+      "name": "LockRequestContention",
+      "description": "LockRequestContention",
+      "value": 2
+    },
+    {
+      "name": "CircularJoinableTaskDependencyDetected",
+      "description": "CircularJoinableTaskDependencyDetected",
+      "value": 65517
+    },
+    {
+      "name": "PostExecutionStop",
+      "description": "PostExecutionStop",
+      "value": 65518
+    },
+    {
+      "name": "PostExecution",
+      "description": "PostExecution",
+      "value": 65519
+    },
+    {
+      "name": "WaitSynchronously",
+      "description": "WaitSynchronously",
+      "value": 65521
+    },
+    {
+      "name": "CompleteOnCurrentThreadStop",
+      "description": "CompleteOnCurrentThreadStop",
+      "value": 65522
+    },
+    {
+      "name": "CompleteOnCurrentThread",
+      "description": "CompleteOnCurrentThread",
+      "value": 65523
+    },
+    {
+      "name": "EventSourceMessage",
+      "description": "EventSourceMessage",
+      "value": 65534
+    }
+  ],
+  "opcodes": [
+    {
+      "name": "ReaderWriterLockWaiting",
+      "description": null,
+      "value": 100
+    },
+    {
+      "name": "ReaderWriterLockIssued",
+      "description": null,
+      "value": 101
+    },
+    {
+      "name": "ReaderWriterLockIssuedAfterContention",
+      "description": null,
+      "value": 102
+    }
+  ],
+  "events": [
+    {
+      "providerId": "589491ba-4f15-53fe-c376-db7f020f5204",
+      "providerName": "Microsoft-VisualStudio-Threading",
+      "eventId": "00000000-0000-0000-0000-000000000000",
+      "descriptor": {
+        "id": 0,
+        "version": 0,
+        "channel": 0,
+        "level": "None",
+        "opcode": "Info",
+        "task": 65534,
+        "keyword": 0
+      },
+      "name": "EventSourceMessage",
+      "channelName": null,
+      "levelName": "win:LogAlways",
+      "opcodeName": null,
+      "taskName": "EventSourceMessage",
+      "keywordName": null,
+      "message": null,
+      "eventAttributes": null,
+      "activityIdName": null,
+      "relatedActivityIdName": null,
+      "flags": null,
+      "properties": [
+        {
+          "name": "Message",
+          "inputType": "UnicodeString",
+          "outputType": "Null",
+          "mapName": null,
+          "properties": null,
+          "length": {
+            "size": 0,
+            "kind": "Regular"
+          },
+          "count": {
+            "size": 1,
+            "kind": "Regular"
+          },
+          "tags": 0
+        }
+      ]
+    },
+    {
+      "providerId": "589491ba-4f15-53fe-c376-db7f020f5204",
+      "providerName": "Microsoft-VisualStudio-Threading",
+      "eventId": "00000000-0000-0000-0000-000000000000",
+      "descriptor": {
+        "id": 12,
+        "version": 0,
+        "channel": 0,
+        "level": "Information",
+        "opcode": "End",
+        "task": 65522,
+        "keyword": 0
+      },
+      "name": "CompleteOnCurrentThreadStop",
+      "channelName": null,
+      "levelName": "win:Informational",
+      "opcodeName": "win:Stop",
+      "taskName": "CompleteOnCurrentThreadStop",
+      "keywordName": null,
+      "message": null,
+      "eventAttributes": null,
+      "activityIdName": null,
+      "relatedActivityIdName": null,
+      "flags": null,
+      "properties": [
+        {
+          "name": "TaskId",
+          "inputType": "Int32",
+          "outputType": "Null",
+          "mapName": null,
+          "properties": null,
+          "length": {
+            "size": 4,
+            "kind": "Regular"
+          },
+          "count": {
+            "size": 1,
+            "kind": "Regular"
+          },
+          "tags": 0
+        }
+      ]
+    },
+    {
+      "providerId": "589491ba-4f15-53fe-c376-db7f020f5204",
+      "providerName": "Microsoft-VisualStudio-Threading",
+      "eventId": "00000000-0000-0000-0000-000000000000",
+      "descriptor": {
+        "id": 13,
+        "version": 0,
+        "channel": 0,
+        "level": "Verbose",
+        "opcode": "Start",
+        "task": 65521,
+        "keyword": 0
+      },
+      "name": "WaitSynchronouslyStart",
+      "channelName": null,
+      "levelName": "win:Verbose",
+      "opcodeName": "win:Start",
+      "taskName": "WaitSynchronously",
+      "keywordName": null,
+      "message": null,
+      "eventAttributes": null,
+      "activityIdName": null,
+      "relatedActivityIdName": null,
+      "flags": null,
+      "properties": null
+    },
+    {
+      "providerId": "589491ba-4f15-53fe-c376-db7f020f5204",
+      "providerName": "Microsoft-VisualStudio-Threading",
+      "eventId": "00000000-0000-0000-0000-000000000000",
+      "descriptor": {
+        "id": 14,
+        "version": 0,
+        "channel": 0,
+        "level": "Verbose",
+        "opcode": "End",
+        "task": 65521,
+        "keyword": 0
+      },
+      "name": "WaitSynchronouslyStop",
+      "channelName": null,
+      "levelName": "win:Verbose",
+      "opcodeName": "win:Stop",
+      "taskName": "WaitSynchronously",
+      "keywordName": null,
+      "message": null,
+      "eventAttributes": null,
+      "activityIdName": null,
+      "relatedActivityIdName": null,
+      "flags": null,
+      "properties": null
+    },
+    {
+      "providerId": "589491ba-4f15-53fe-c376-db7f020f5204",
+      "providerName": "Microsoft-VisualStudio-Threading",
+      "eventId": "00000000-0000-0000-0000-000000000000",
+      "descriptor": {
+        "id": 16,
+        "version": 0,
+        "channel": 0,
+        "level": "Verbose",
+        "opcode": "End",
+        "task": 65518,
+        "keyword": 0
+      },
+      "name": "PostExecutionStop",
+      "channelName": null,
+      "levelName": "win:Verbose",
+      "opcodeName": "win:Stop",
+      "taskName": "PostExecutionStop",
+      "keywordName": null,
+      "message": null,
+      "eventAttributes": null,
+      "activityIdName": null,
+      "relatedActivityIdName": null,
+      "flags": null,
+      "properties": [
+        {
+          "name": "RequestId",
+          "inputType": "Int32",
+          "outputType": "Null",
+          "mapName": null,
+          "properties": null,
+          "length": {
+            "size": 4,
+            "kind": "Regular"
+          },
+          "count": {
+            "size": 1,
+            "kind": "Regular"
+          },
+          "tags": 0
+        }
+      ]
+    },
+    {
+      "providerId": "589491ba-4f15-53fe-c376-db7f020f5204",
+      "providerName": "Microsoft-VisualStudio-Threading",
+      "eventId": "00000000-0000-0000-0000-000000000000",
+      "descriptor": {
+        "id": 17,
+        "version": 0,
+        "channel": 0,
+        "level": "Information",
+        "opcode": "Info",
+        "task": 65517,
+        "keyword": 0
+      },
+      "name": "CircularJoinableTaskDependencyDetected",
+      "channelName": null,
+      "levelName": "win:Informational",
+      "opcodeName": null,
+      "taskName": "CircularJoinableTaskDependencyDetected",
+      "keywordName": null,
+      "message": null,
+      "eventAttributes": null,
+      "activityIdName": null,
+      "relatedActivityIdName": null,
+      "flags": null,
+      "properties": [
+        {
+          "name": "InitUnreachableCount",
+          "inputType": "Int32",
+          "outputType": "Null",
+          "mapName": null,
+          "properties": null,
+          "length": {
+            "size": 4,
+            "kind": "Regular"
+          },
+          "count": {
+            "size": 1,
+            "kind": "Regular"
+          },
+          "tags": 0
+        },
+        {
+          "name": "ReachableCount",
+          "inputType": "Int32",
+          "outputType": "Null",
+          "mapName": null,
+          "properties": null,
+          "length": {
+            "size": 4,
+            "kind": "Regular"
+          },
+          "count": {
+            "size": 1,
+            "kind": "Regular"
+          },
+          "tags": 0
+        }
+      ]
+    },
+    {
+      "providerId": "589491ba-4f15-53fe-c376-db7f020f5204",
+      "providerName": "Microsoft-VisualStudio-Threading",
+      "eventId": "00000000-0000-0000-0000-000000000000",
+      "descriptor": {
+        "id": 1,
+        "version": 0,
+        "channel": 0,
+        "level": "Information",
+        "opcode": 101,
+        "task": 1,
+        "keyword": 0
+      },
+      "name": "ReaderWriterLockIssued",
+      "channelName": null,
+      "levelName": "win:Informational",
+      "opcodeName": "ReaderWriterLockIssued",
+      "taskName": "LockRequest",
+      "keywordName": null,
+      "message": null,
+      "eventAttributes": null,
+      "activityIdName": null,
+      "relatedActivityIdName": null,
+      "flags": null,
+      "properties": [
+        {
+          "name": "LockId",
+          "inputType": "Int32",
+          "outputType": "Null",
+          "mapName": null,
+          "properties": null,
+          "length": {
+            "size": 4,
+            "kind": "Regular"
+          },
+          "count": {
+            "size": 1,
+            "kind": "Regular"
+          },
+          "tags": 0
+        },
+        {
+          "name": "Kind",
+          "inputType": "Uint32",
+          "outputType": "Null",
+          "mapName": "LockKind",
+          "properties": null,
+          "length": {
+            "size": 4,
+            "kind": "Regular"
+          },
+          "count": {
+            "size": 1,
+            "kind": "Regular"
+          },
+          "tags": 0
+        },
+        {
+          "name": "IssuedUpgradeableReadCount",
+          "inputType": "Int32",
+          "outputType": "Null",
+          "mapName": null,
+          "properties": null,
+          "length": {
+            "size": 4,
+            "kind": "Regular"
+          },
+          "count": {
+            "size": 1,
+            "kind": "Regular"
+          },
+          "tags": 0
+        },
+        {
+          "name": "IssuedReadCount",
+          "inputType": "Int32",
+          "outputType": "Null",
+          "mapName": null,
+          "properties": null,
+          "length": {
+            "size": 4,
+            "kind": "Regular"
+          },
+          "count": {
+            "size": 1,
+            "kind": "Regular"
+          },
+          "tags": 0
+        }
+      ]
+    },
+    {
+      "providerId": "589491ba-4f15-53fe-c376-db7f020f5204",
+      "providerName": "Microsoft-VisualStudio-Threading",
+      "eventId": "00000000-0000-0000-0000-000000000000",
+      "descriptor": {
+        "id": 2,
+        "version": 0,
+        "channel": 0,
+        "level": "Information",
+        "opcode": "Start",
+        "task": 2,
+        "keyword": 0
+      },
+      "name": "WaitReaderWriterLockStart",
+      "channelName": null,
+      "levelName": "win:Informational",
+      "opcodeName": "win:Start",
+      "taskName": "LockRequestContention",
+      "keywordName": null,
+      "message": null,
+      "eventAttributes": null,
+      "activityIdName": null,
+      "relatedActivityIdName": null,
+      "flags": null,
+      "properties": [
+        {
+          "name": "LockId",
+          "inputType": "Int32",
+          "outputType": "Null",
+          "mapName": null,
+          "properties": null,
+          "length": {
+            "size": 4,
+            "kind": "Regular"
+          },
+          "count": {
+            "size": 1,
+            "kind": "Regular"
+          },
+          "tags": 0
+        },
+        {
+          "name": "Kind",
+          "inputType": "Uint32",
+          "outputType": "Null",
+          "mapName": "LockKind",
+          "properties": null,
+          "length": {
+            "size": 4,
+            "kind": "Regular"
+          },
+          "count": {
+            "size": 1,
+            "kind": "Regular"
+          },
+          "tags": 0
+        },
+        {
+          "name": "IssuedWriteCount",
+          "inputType": "Int32",
+          "outputType": "Null",
+          "mapName": null,
+          "properties": null,
+          "length": {
+            "size": 4,
+            "kind": "Regular"
+          },
+          "count": {
+            "size": 1,
+            "kind": "Regular"
+          },
+          "tags": 0
+        },
+        {
+          "name": "IssuedUpgradeableReadCount",
+          "inputType": "Int32",
+          "outputType": "Null",
+          "mapName": null,
+          "properties": null,
+          "length": {
+            "size": 4,
+            "kind": "Regular"
+          },
+          "count": {
+            "size": 1,
+            "kind": "Regular"
+          },
+          "tags": 0
+        },
+        {
+          "name": "IssuedReadCount",
+          "inputType": "Int32",
+          "outputType": "Null",
+          "mapName": null,
+          "properties": null,
+          "length": {
+            "size": 4,
+            "kind": "Regular"
+          },
+          "count": {
+            "size": 1,
+            "kind": "Regular"
+          },
+          "tags": 0
+        }
+      ]
+    },
+    {
+      "providerId": "589491ba-4f15-53fe-c376-db7f020f5204",
+      "providerName": "Microsoft-VisualStudio-Threading",
+      "eventId": "00000000-0000-0000-0000-000000000000",
+      "descriptor": {
+        "id": 3,
+        "version": 0,
+        "channel": 0,
+        "level": "Information",
+        "opcode": "End",
+        "task": 2,
+        "keyword": 0
+      },
+      "name": "WaitReaderWriterLockStop",
+      "channelName": null,
+      "levelName": "win:Informational",
+      "opcodeName": "win:Stop",
+      "taskName": "LockRequestContention",
+      "keywordName": null,
+      "message": null,
+      "eventAttributes": null,
+      "activityIdName": null,
+      "relatedActivityIdName": null,
+      "flags": null,
+      "properties": [
+        {
+          "name": "LockId",
+          "inputType": "Int32",
+          "outputType": "Null",
+          "mapName": null,
+          "properties": null,
+          "length": {
+            "size": 4,
+            "kind": "Regular"
+          },
+          "count": {
+            "size": 1,
+            "kind": "Regular"
+          },
+          "tags": 0
+        },
+        {
+          "name": "Kind",
+          "inputType": "Uint32",
+          "outputType": "Null",
+          "mapName": "LockKind",
+          "properties": null,
+          "length": {
+            "size": 4,
+            "kind": "Regular"
+          },
+          "count": {
+            "size": 1,
+            "kind": "Regular"
+          },
+          "tags": 0
+        }
+      ]
+    },
+    {
+      "providerId": "589491ba-4f15-53fe-c376-db7f020f5204",
+      "providerName": "Microsoft-VisualStudio-Threading",
+      "eventId": "00000000-0000-0000-0000-000000000000",
+      "descriptor": {
+        "id": 11,
+        "version": 0,
+        "channel": 0,
+        "level": "Information",
+        "opcode": "Start",
+        "task": 65523,
+        "keyword": 0
+      },
+      "name": "CompleteOnCurrentThreadStart",
+      "channelName": null,
+      "levelName": "win:Informational",
+      "opcodeName": "win:Start",
+      "taskName": "CompleteOnCurrentThread",
+      "keywordName": null,
+      "message": null,
+      "eventAttributes": null,
+      "activityIdName": null,
+      "relatedActivityIdName": null,
+      "flags": null,
+      "properties": [
+        {
+          "name": "TaskId",
+          "inputType": "Int32",
+          "outputType": "Null",
+          "mapName": null,
+          "properties": null,
+          "length": {
+            "size": 4,
+            "kind": "Regular"
+          },
+          "count": {
+            "size": 1,
+            "kind": "Regular"
+          },
+          "tags": 0
+        },
+        {
+          "name": "IsOnMainThread",
+          "inputType": "Boolean",
+          "outputType": "Null",
+          "mapName": null,
+          "properties": null,
+          "length": {
+            "size": 1,
+            "kind": "Regular"
+          },
+          "count": {
+            "size": 1,
+            "kind": "Regular"
+          },
+          "tags": 0
+        }
+      ]
+    },
+    {
+      "providerId": "589491ba-4f15-53fe-c376-db7f020f5204",
+      "providerName": "Microsoft-VisualStudio-Threading",
+      "eventId": "00000000-0000-0000-0000-000000000000",
+      "descriptor": {
+        "id": 15,
+        "version": 0,
+        "channel": 0,
+        "level": "Verbose",
+        "opcode": "Start",
+        "task": 65519,
+        "keyword": 0
+      },
+      "name": "PostExecutionStart",
+      "channelName": null,
+      "levelName": "win:Verbose",
+      "opcodeName": "win:Start",
+      "taskName": "PostExecution",
+      "keywordName": null,
+      "message": null,
+      "eventAttributes": null,
+      "activityIdName": null,
+      "relatedActivityIdName": null,
+      "flags": null,
+      "properties": [
+        {
+          "name": "RequestId",
+          "inputType": "Int32",
+          "outputType": "Null",
+          "mapName": null,
+          "properties": null,
+          "length": {
+            "size": 4,
+            "kind": "Regular"
+          },
+          "count": {
+            "size": 1,
+            "kind": "Regular"
+          },
+          "tags": 0
+        },
+        {
+          "name": "MainThreadAffinitized",
+          "inputType": "Boolean",
+          "outputType": "Null",
+          "mapName": null,
+          "properties": null,
+          "length": {
+            "size": 1,
+            "kind": "Regular"
+          },
+          "count": {
+            "size": 1,
+            "kind": "Regular"
+          },
+          "tags": 0
+        }
+      ]
+    }
+  ],
+  "maps": [
+    {
+      "name": "LockKind",
+      "flags": false,
+      "values": {
+        "0": "Read",
+        "1": "UpgradeableRead",
+        "2": "Write"
+      }
+    }
+  ]
+}

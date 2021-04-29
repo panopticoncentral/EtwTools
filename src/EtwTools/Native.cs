@@ -11,6 +11,7 @@ namespace EtwTools
         {
             public const uint FacilityWin32 = 0x80070000;
 
+            public static readonly Hresult OK = new(0x0);
             public static readonly Hresult ErrorFileNotFound = new(0x80070002);
             public static readonly Hresult ErrorInvalidData = new(0x8007000D);
             public static readonly Hresult ErrorInsufficientBuffer = new(0x8007007A);
@@ -46,6 +47,8 @@ namespace EtwTools
             public static bool operator !=(Hresult left, Hresult right) => !left.Equals(right);
 
             public static explicit operator Hresult(ErrorCode errorCode) => new(errorCode);
+
+            public static explicit operator Hresult(int errorCode) => new((uint)errorCode);
         }
 
         public readonly struct ErrorCode
@@ -250,6 +253,16 @@ namespace EtwTools
             String
         }
 
+        public enum EventFieldType
+        {
+            KeywordInformation,
+            LevelInformation,
+            ChannelInformation,
+            TaskInformation,
+            OpcodeInformation,
+            InformationMax,
+        };
+
 #pragma warning disable IDE1006
         [StructLayout(LayoutKind.Sequential)]
         public readonly struct WnodeHeader
@@ -370,7 +383,7 @@ namespace EtwTools
         {
             public ushort Size { get; }
             public ushort FieldTypeFlags { get; }
-            public EtwEventType Type { get; }
+            public EtwEventOpcode Type { get; }
             public EtwTraceLevel Level { get; }
             public ushort Version { get; }
             public uint ThreadId { get; }
@@ -530,6 +543,22 @@ namespace EtwTools
             private readonly uint _reserved;
         }
 
+        [StructLayout(LayoutKind.Sequential)]
+        public readonly struct ProviderFieldInfoArray
+        {
+            public uint NumberOfElements { get; }
+            public EventFieldType FieldType { get; }
+        }
+
+        [StructLayout(LayoutKind.Sequential)]
+        public readonly struct ProviderFieldInfo
+        {
+            public uint NameOffset { get; }
+            public uint DescriptionOffset { get; }
+            public ulong Value { get; }
+        };
+
+
 #pragma warning restore IDE1006
 
         [DllImport("advapi32.dll", CharSet = CharSet.Unicode)]
@@ -557,7 +586,13 @@ namespace EtwTools
         public static extern ErrorCode TdhEnumerateManifestProviderEvents(Guid* providerGuid, ProviderEventInfo* buffer, uint* bufferSize);
 
         [DllImport("tdh.dll")]
+        public static extern ErrorCode TdhEnumerateProviderFieldInformation(Guid* providerGuid, EventFieldType fieldType, ProviderFieldInfoArray* buffer, uint* bufferSize);
+
+        [DllImport("tdh.dll")]
         public static extern ErrorCode TdhEnumerateProviders(byte* buffer, out int bufferSize);
+
+        [DllImport("tdh.dll", CharSet = CharSet.Unicode)]
+        public static extern ErrorCode TdhGetAllEventsInformation(EventRecord* pEvent, IWbemServices wbemServices, uint* index, uint* count, TraceEventInfo** buffer, uint* bufferSize);
 
         [DllImport("tdh.dll", CharSet = CharSet.Unicode)]
         public static extern ErrorCode TdhGetEventInformation(EventRecord* eventRecord, uint contextCount, void* context, TraceEventInfo* buffer, uint* bufferSize);
@@ -567,5 +602,30 @@ namespace EtwTools
 
         [DllImport("tdh.dll")]
         public static extern ErrorCode TdhGetManifestEventInformation(Guid* providerGuid, EtwEventDescriptor* eventDescriptor, TraceEventInfo* buffer, uint* bufferSize);
+
+        [Guid("4590F811-1D3A-11D0-891F-00AA004B2E24")]
+        [ComImport]
+        public class WbemLocator
+        {
+        }
+
+        [Guid("DC12A687-737F-11CF-884D-00AA004B2E24")]
+        [ComImport]
+        public interface IWbemLocator
+        {
+            [PreserveSig] int ConnectServer_([In][MarshalAs(UnmanagedType.BStr)] string strNetworkResource, [In][MarshalAs(UnmanagedType.BStr)] string strUser, [In][MarshalAs(UnmanagedType.BStr)] string strPassword, [In][MarshalAs(UnmanagedType.BStr)] string strLocale, [In] int lSecurityFlags, [In][MarshalAs(UnmanagedType.BStr)] string strAuthority, [In][MarshalAs(UnmanagedType.Interface)] IWbemContext pCtx, [Out][MarshalAs(UnmanagedType.Interface)] out IWbemServices ppNamespace);
+        }
+
+        [Guid("44ACA674-E8FC-11D0-A07C-00C04FB68820")]
+        [ComImport]
+        public interface IWbemContext
+        {
+        }
+
+        [Guid("9556DC99-828C-11CF-A37E-00AA003240C7")]
+        [ComImport]
+        public interface IWbemServices
+        {
+        }
     }
 }

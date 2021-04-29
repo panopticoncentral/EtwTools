@@ -6,19 +6,122 @@ using System;
 namespace EtwTools
 {
     /// <summary>
-    /// Provider for Microsoft-ApplicationInsights-Core ({74af9f20-af6a-5582-9382-f21f674fb271})
+    /// Provider for Microsoft-ApplicationInsights-Core (74af9f20-af6a-5582-9382-f21f674fb271)
     /// </summary>
-    public sealed class MicrosoftApplicationInsightsCoreProvider
+    public sealed class ApplicationInsightsCoreProvider
     {
-        /// <summary>
+        /// <summary>s
         /// Provider ID.
         /// </summary>
-        public static readonly Guid Id = new("{74af9f20-af6a-5582-9382-f21f674fb271}");
+        public static readonly Guid Id = new("74af9f20-af6a-5582-9382-f21f674fb271");
 
         /// <summary>
         /// Provider name.
         /// </summary>
         public const string Name = "Microsoft-ApplicationInsights-Core";
+
+        /// <summary>
+        /// Tasks supported by Microsoft-ApplicationInsights-Core.
+        /// </summary>
+        public enum Tasks : ushort
+        {
+            /// <summary>
+            /// 'BuildInfoConfigBrokenXmlError' task.
+            /// </summary>
+            BuildInfoConfigBrokenXmlError = 65443,
+            /// <summary>
+            /// 'LogError' task.
+            /// </summary>
+            LogError = 65444,
+            /// <summary>
+            /// 'TrackingWasEnabled' task.
+            /// </summary>
+            TrackingWasEnabled = 65453,
+            /// <summary>
+            /// 'TrackingWasDisabled' task.
+            /// </summary>
+            TrackingWasDisabled = 65454,
+            /// <summary>
+            /// 'RequestTelemetryIncorrectDuration' task.
+            /// </summary>
+            RequestTelemetryIncorrectDuration = 65462,
+            /// <summary>
+            /// 'PopulateRequiredStringWithValue' task.
+            /// </summary>
+            PopulateRequiredStringWithValue = 65463,
+            /// <summary>
+            /// 'TelemetryClientConstructorWithNoTelemetryConfiguration' task.
+            /// </summary>
+            TelemetryClientConstructorWithNoTelemetryConfiguration = 65464,
+            /// <summary>
+            /// 'DiagnoisticsEventThrottlingSchedulerTimerWasRemoved' task.
+            /// </summary>
+            DiagnoisticsEventThrottlingSchedulerTimerWasRemoved = 65474,
+            /// <summary>
+            /// 'DiagnoisticsEventThrottlingSchedulerTimerWasCreated' task.
+            /// </summary>
+            DiagnoisticsEventThrottlingSchedulerTimerWasCreated = 65484,
+            /// <summary>
+            /// 'DiagnoisticsEventThrottlingSchedulerDisposeTimerFailure' task.
+            /// </summary>
+            DiagnoisticsEventThrottlingSchedulerDisposeTimerFailure = 65494,
+            /// <summary>
+            /// 'DiagnosticsEventThrottlingHasBeenResetForTheEvent' task.
+            /// </summary>
+            DiagnosticsEventThrottlingHasBeenResetForTheEvent = 65504,
+            /// <summary>
+            /// 'DiagnosticsEventThrottlingHasBeenStartedForTheEvent' task.
+            /// </summary>
+            DiagnosticsEventThrottlingHasBeenStartedForTheEvent = 65514,
+            /// <summary>
+            /// 'LogVerbose' task.
+            /// </summary>
+            LogVerbose = 65524,
+            /// <summary>
+            /// 'EventSourceMessage' task.
+            /// </summary>
+            EventSourceMessage = 65534,
+        }
+
+        /// <summary>
+        /// Keywords supported by Microsoft-ApplicationInsights-Core.
+        /// </summary>
+        [Flags]
+        public enum Keywords : ulong
+        {
+            /// <summary>
+            /// 'UserActionable' keyword.
+            /// </summary>
+            UserActionable = 0x0000000000000001,
+            /// <summary>
+            /// 'Diagnostics' keyword.
+            /// </summary>
+            Diagnostics = 0x0000000000000002,
+            /// <summary>
+            /// 'VerboseFailure' keyword.
+            /// </summary>
+            VerboseFailure = 0x0000000000000004,
+            /// <summary>
+            /// 'ErrorFailure' keyword.
+            /// </summary>
+            ErrorFailure = 0x0000000000000008,
+            /// <summary>
+            /// 'Session3' keyword.
+            /// </summary>
+            Session3 = 0x0000100000000000,
+            /// <summary>
+            /// 'Session2' keyword.
+            /// </summary>
+            Session2 = 0x0000200000000000,
+            /// <summary>
+            /// 'Session1' keyword.
+            /// </summary>
+            Session1 = 0x0000400000000000,
+            /// <summary>
+            /// 'Session0' keyword.
+            /// </summary>
+            Session0 = 0x0000800000000000,
+        }
 
         /// <summary>
         /// An event wrapper for a EventSourceMessage event.
@@ -46,7 +149,7 @@ namespace EtwTools
                 Version = 0,
                 Channel = 0,
                 Level = EtwTraceLevel.None,
-                Opcode = EtwEventType.Info,
+                Opcode = EtwEventOpcode.Info,
                 Task = (ushort)Tasks.EventSourceMessage,
                 Keyword = 0
             };
@@ -142,7 +245,7 @@ namespace EtwTools
                 Version = 0,
                 Channel = 0,
                 Level = EtwTraceLevel.Verbose,
-                Opcode = EtwEventType.Info,
+                Opcode = EtwEventOpcode.Info,
                 Task = (ushort)Tasks.LogVerbose,
                 Keyword = (ulong)Keywords.VerboseFailure
             };
@@ -213,7 +316,7 @@ namespace EtwTools
                 public LogVerboseData(EtwEvent etwEvent)
                 {
                     _etwEvent = etwEvent;
-                    _offset_AppDomainName = Offset_Msg + EtwEvent.StringEnumerable.StringEnumerator.StringLength(etwEvent.Data, Offset_Msg);
+                    _offset_AppDomainName = Offset_Msg + EtwEvent.UnicodeStringEnumerable.UnicodeStringEnumerator.StringLength(etwEvent.Data, Offset_Msg);
                 }
             }
 
@@ -245,7 +348,7 @@ namespace EtwTools
                 Version = 0,
                 Channel = 0,
                 Level = EtwTraceLevel.Information,
-                Opcode = EtwEventType.Info,
+                Opcode = EtwEventOpcode.Info,
                 Task = (ushort)Tasks.DiagnosticsEventThrottlingHasBeenStartedForTheEvent,
                 Keyword = (ulong)(Keywords.UserActionable | Keywords.Diagnostics)
             };
@@ -347,7 +450,7 @@ namespace EtwTools
                 Version = 0,
                 Channel = 0,
                 Level = EtwTraceLevel.Information,
-                Opcode = EtwEventType.Info,
+                Opcode = EtwEventOpcode.Info,
                 Task = (ushort)Tasks.DiagnosticsEventThrottlingHasBeenResetForTheEvent,
                 Keyword = (ulong)(Keywords.UserActionable | Keywords.Diagnostics)
             };
@@ -455,7 +558,7 @@ namespace EtwTools
                 Version = 0,
                 Channel = 0,
                 Level = EtwTraceLevel.Warning,
-                Opcode = EtwEventType.Info,
+                Opcode = EtwEventOpcode.Info,
                 Task = (ushort)Tasks.DiagnoisticsEventThrottlingSchedulerDisposeTimerFailure,
                 Keyword = (ulong)Keywords.Diagnostics
             };
@@ -526,7 +629,7 @@ namespace EtwTools
                 public DiagnoisticsEventThrottlingSchedulerDisposeTimerFailureData(EtwEvent etwEvent)
                 {
                     _etwEvent = etwEvent;
-                    _offset_AppDomainName = Offset_Exception + EtwEvent.StringEnumerable.StringEnumerator.StringLength(etwEvent.Data, Offset_Exception);
+                    _offset_AppDomainName = Offset_Exception + EtwEvent.UnicodeStringEnumerable.UnicodeStringEnumerator.StringLength(etwEvent.Data, Offset_Exception);
                 }
             }
 
@@ -558,7 +661,7 @@ namespace EtwTools
                 Version = 0,
                 Channel = 0,
                 Level = EtwTraceLevel.Verbose,
-                Opcode = EtwEventType.Info,
+                Opcode = EtwEventOpcode.Info,
                 Task = (ushort)Tasks.DiagnoisticsEventThrottlingSchedulerTimerWasCreated,
                 Keyword = (ulong)Keywords.Diagnostics
             };
@@ -660,7 +763,7 @@ namespace EtwTools
                 Version = 0,
                 Channel = 0,
                 Level = EtwTraceLevel.Verbose,
-                Opcode = EtwEventType.Info,
+                Opcode = EtwEventOpcode.Info,
                 Task = (ushort)Tasks.DiagnoisticsEventThrottlingSchedulerTimerWasRemoved,
                 Keyword = (ulong)Keywords.Diagnostics
             };
@@ -756,7 +859,7 @@ namespace EtwTools
                 Version = 0,
                 Channel = 0,
                 Level = EtwTraceLevel.Warning,
-                Opcode = EtwEventType.Info,
+                Opcode = EtwEventOpcode.Info,
                 Task = (ushort)Tasks.TelemetryClientConstructorWithNoTelemetryConfiguration,
                 Keyword = 0
             };
@@ -852,7 +955,7 @@ namespace EtwTools
                 Version = 0,
                 Channel = 0,
                 Level = EtwTraceLevel.Verbose,
-                Opcode = EtwEventType.Info,
+                Opcode = EtwEventOpcode.Info,
                 Task = (ushort)Tasks.PopulateRequiredStringWithValue,
                 Keyword = 0
             };
@@ -929,8 +1032,8 @@ namespace EtwTools
                 public PopulateRequiredStringWithValueData(EtwEvent etwEvent)
                 {
                     _etwEvent = etwEvent;
-                    _offset_TelemetryType = Offset_ParameterName + EtwEvent.StringEnumerable.StringEnumerator.StringLength(etwEvent.Data, Offset_ParameterName);
-                    _offset_AppDomainName = _offset_TelemetryType + EtwEvent.StringEnumerable.StringEnumerator.StringLength(etwEvent.Data, _offset_TelemetryType);
+                    _offset_TelemetryType = Offset_ParameterName + EtwEvent.UnicodeStringEnumerable.UnicodeStringEnumerator.StringLength(etwEvent.Data, Offset_ParameterName);
+                    _offset_AppDomainName = _offset_TelemetryType + EtwEvent.UnicodeStringEnumerable.UnicodeStringEnumerator.StringLength(etwEvent.Data, _offset_TelemetryType);
                 }
             }
 
@@ -962,7 +1065,7 @@ namespace EtwTools
                 Version = 0,
                 Channel = 0,
                 Level = EtwTraceLevel.Warning,
-                Opcode = EtwEventType.Info,
+                Opcode = EtwEventOpcode.Info,
                 Task = (ushort)Tasks.RequestTelemetryIncorrectDuration,
                 Keyword = 0
             };
@@ -1058,7 +1161,7 @@ namespace EtwTools
                 Version = 0,
                 Channel = 0,
                 Level = EtwTraceLevel.Verbose,
-                Opcode = EtwEventType.Info,
+                Opcode = EtwEventOpcode.Info,
                 Task = (ushort)Tasks.TrackingWasDisabled,
                 Keyword = 0
             };
@@ -1154,7 +1257,7 @@ namespace EtwTools
                 Version = 0,
                 Channel = 0,
                 Level = EtwTraceLevel.Verbose,
-                Opcode = EtwEventType.Info,
+                Opcode = EtwEventOpcode.Info,
                 Task = (ushort)Tasks.TrackingWasEnabled,
                 Keyword = 0
             };
@@ -1250,7 +1353,7 @@ namespace EtwTools
                 Version = 0,
                 Channel = 0,
                 Level = EtwTraceLevel.Error,
-                Opcode = EtwEventType.Info,
+                Opcode = EtwEventOpcode.Info,
                 Task = (ushort)Tasks.LogError,
                 Keyword = (ulong)Keywords.ErrorFailure
             };
@@ -1321,7 +1424,7 @@ namespace EtwTools
                 public LogErrorData(EtwEvent etwEvent)
                 {
                     _etwEvent = etwEvent;
-                    _offset_AppDomainName = Offset_Msg + EtwEvent.StringEnumerable.StringEnumerator.StringLength(etwEvent.Data, Offset_Msg);
+                    _offset_AppDomainName = Offset_Msg + EtwEvent.UnicodeStringEnumerable.UnicodeStringEnumerator.StringLength(etwEvent.Data, Offset_Msg);
                 }
             }
 
@@ -1353,7 +1456,7 @@ namespace EtwTools
                 Version = 0,
                 Channel = 0,
                 Level = EtwTraceLevel.Error,
-                Opcode = EtwEventType.Info,
+                Opcode = EtwEventOpcode.Info,
                 Task = (ushort)Tasks.BuildInfoConfigBrokenXmlError,
                 Keyword = (ulong)(Keywords.UserActionable | Keywords.ErrorFailure)
             };
@@ -1424,113 +1527,10 @@ namespace EtwTools
                 public BuildInfoConfigBrokenXmlErrorData(EtwEvent etwEvent)
                 {
                     _etwEvent = etwEvent;
-                    _offset_AppDomainName = Offset_Msg + EtwEvent.StringEnumerable.StringEnumerator.StringLength(etwEvent.Data, Offset_Msg);
+                    _offset_AppDomainName = Offset_Msg + EtwEvent.UnicodeStringEnumerable.UnicodeStringEnumerator.StringLength(etwEvent.Data, Offset_Msg);
                 }
             }
 
-        }
-
-        /// <summary>
-        /// Tasks supported by Microsoft-ApplicationInsights-Core.
-        /// </summary>
-        public enum Tasks : ushort
-        {
-            /// <summary>
-            /// 'BuildInfoConfigBrokenXmlError' task.
-            /// </summary>
-            BuildInfoConfigBrokenXmlError = 65443,
-            /// <summary>
-            /// 'LogError' task.
-            /// </summary>
-            LogError = 65444,
-            /// <summary>
-            /// 'TrackingWasEnabled' task.
-            /// </summary>
-            TrackingWasEnabled = 65453,
-            /// <summary>
-            /// 'TrackingWasDisabled' task.
-            /// </summary>
-            TrackingWasDisabled = 65454,
-            /// <summary>
-            /// 'RequestTelemetryIncorrectDuration' task.
-            /// </summary>
-            RequestTelemetryIncorrectDuration = 65462,
-            /// <summary>
-            /// 'PopulateRequiredStringWithValue' task.
-            /// </summary>
-            PopulateRequiredStringWithValue = 65463,
-            /// <summary>
-            /// 'TelemetryClientConstructorWithNoTelemetryConfiguration' task.
-            /// </summary>
-            TelemetryClientConstructorWithNoTelemetryConfiguration = 65464,
-            /// <summary>
-            /// 'DiagnoisticsEventThrottlingSchedulerTimerWasRemoved' task.
-            /// </summary>
-            DiagnoisticsEventThrottlingSchedulerTimerWasRemoved = 65474,
-            /// <summary>
-            /// 'DiagnoisticsEventThrottlingSchedulerTimerWasCreated' task.
-            /// </summary>
-            DiagnoisticsEventThrottlingSchedulerTimerWasCreated = 65484,
-            /// <summary>
-            /// 'DiagnoisticsEventThrottlingSchedulerDisposeTimerFailure' task.
-            /// </summary>
-            DiagnoisticsEventThrottlingSchedulerDisposeTimerFailure = 65494,
-            /// <summary>
-            /// 'DiagnosticsEventThrottlingHasBeenResetForTheEvent' task.
-            /// </summary>
-            DiagnosticsEventThrottlingHasBeenResetForTheEvent = 65504,
-            /// <summary>
-            /// 'DiagnosticsEventThrottlingHasBeenStartedForTheEvent' task.
-            /// </summary>
-            DiagnosticsEventThrottlingHasBeenStartedForTheEvent = 65514,
-            /// <summary>
-            /// 'LogVerbose' task.
-            /// </summary>
-            LogVerbose = 65524,
-            /// <summary>
-            /// 'EventSourceMessage' task.
-            /// </summary>
-            EventSourceMessage = 65534,
-        }
-
-        /// <summary>
-        /// Keywords supported by Microsoft-ApplicationInsights-Core.
-        /// </summary>
-        [Flags]
-        public enum Keywords : ulong
-        {
-            /// <summary>
-            /// 'UserActionable' keyword.
-            /// </summary>
-            UserActionable = 0x0000000000000001,
-            /// <summary>
-            /// 'Diagnostics' keyword.
-            /// </summary>
-            Diagnostics = 0x0000000000000002,
-            /// <summary>
-            /// 'VerboseFailure' keyword.
-            /// </summary>
-            VerboseFailure = 0x0000000000000004,
-            /// <summary>
-            /// 'ErrorFailure' keyword.
-            /// </summary>
-            ErrorFailure = 0x0000000000000008,
-            /// <summary>
-            /// 'Session3' keyword.
-            /// </summary>
-            Session3 = 0x0000100000000000,
-            /// <summary>
-            /// 'Session2' keyword.
-            /// </summary>
-            Session2 = 0x0000200000000000,
-            /// <summary>
-            /// 'Session1' keyword.
-            /// </summary>
-            Session1 = 0x0000400000000000,
-            /// <summary>
-            /// 'Session0' keyword.
-            /// </summary>
-            Session0 = 0x0000800000000000,
         }
     }
 }

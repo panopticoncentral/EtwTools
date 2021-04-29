@@ -88,11 +88,18 @@ namespace EtwTools
         /// </summary>
         public IReadOnlyList<EtwPropertyInfo> Properties { get; init; }
 
-        internal unsafe EtwEventInfo(EtwEventDescriptor eventDescriptor, Native.TraceEventInfo* eventInfo)
+        /// <summary>
+        /// Creates a new event info.
+        /// </summary>
+        public EtwEventInfo()
+        {
+        }
+
+        internal unsafe EtwEventInfo(Native.TraceEventInfo* eventInfo)
         {
             var eventBuffer = (byte*)eventInfo;
 
-            Descriptor = eventDescriptor;
+            Descriptor = eventInfo->EventDescriptor;
 
             if (eventInfo == null)
             {

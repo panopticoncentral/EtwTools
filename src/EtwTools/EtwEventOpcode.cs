@@ -3,7 +3,7 @@
     /// <summary>
     /// Common ETW event types.
     /// </summary>
-    public enum EtwEventType : byte
+    public enum EtwEventOpcode : byte
     {
         /// <summary>
         /// Informational event.
