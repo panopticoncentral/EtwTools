@@ -1,0 +1,1133 @@
+{
+  "name": "KernelThread",
+  "displayName": "Kernel-Thread",
+  "id": "3d6fa8d1-fe05-11d0-9dda-00c04fd7ba7c",
+  "events": [
+    {
+      "name": "SetName",
+      "displayName": "SetName",
+      "descriptor": {
+        "id": 0,
+        "version": 2,
+        "channel": 0,
+        "level": "None",
+        "opcode": 72,
+        "task": 0,
+        "keyword": 0
+      },
+      "fields": [
+        {
+          "name": "ProcessId",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "ThreadId",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "ThreadName",
+          "datatype": "string",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "CompCS",
+      "displayName": "CompCS",
+      "descriptor": {
+        "id": 0,
+        "version": 2,
+        "channel": 0,
+        "level": "None",
+        "opcode": 37,
+        "task": 0,
+        "keyword": 0
+      },
+      "fields": []
+    },
+    {
+      "name": "SpinLock",
+      "displayName": "SpinLock",
+      "descriptor": {
+        "id": 0,
+        "version": 2,
+        "channel": 0,
+        "level": "None",
+        "opcode": 41,
+        "task": 0,
+        "keyword": 0
+      },
+      "fields": [
+        {
+          "name": "SpinLockAddress",
+          "datatype": "pointer",
+          "map": null
+        },
+        {
+          "name": "CallerAddress",
+          "datatype": "pointer",
+          "map": null
+        },
+        {
+          "name": "AcquireTime",
+          "datatype": "ulong",
+          "map": null
+        },
+        {
+          "name": "ReleaseTime",
+          "datatype": "ulong",
+          "map": null
+        },
+        {
+          "name": "WaitTimeInCycles",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "SpinCount",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "ThreadId",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "InterruptCount",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "Irql",
+          "datatype": "byte",
+          "map": null
+        },
+        {
+          "name": "AcquireDepth",
+          "datatype": "byte",
+          "map": null
+        },
+        {
+          "name": "Flag",
+          "datatype": "byte",
+          "map": null
+        },
+        {
+          "name": "Reserved",
+          "datatype": "byte",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "ReadyThread",
+      "displayName": "ReadyThread",
+      "descriptor": {
+        "id": 0,
+        "version": 2,
+        "channel": 0,
+        "level": "None",
+        "opcode": 50,
+        "task": 0,
+        "keyword": 0
+      },
+      "fields": [
+        {
+          "name": "TThreadId",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "AdjustReason",
+          "datatype": "sbyte",
+          "map": null
+        },
+        {
+          "name": "AdjustIncrement",
+          "datatype": "sbyte",
+          "map": null
+        },
+        {
+          "name": "Flag",
+          "datatype": "sbyte",
+          "map": null
+        },
+        {
+          "name": "Reserved",
+          "datatype": "sbyte",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "ThreadAffinity",
+      "displayName": "ThreadAffinity",
+      "descriptor": {
+        "id": 0,
+        "version": 2,
+        "channel": 0,
+        "level": "None",
+        "opcode": 53,
+        "task": 0,
+        "keyword": 0
+      },
+      "fields": [
+        {
+          "name": "Affinity",
+          "datatype": "pointer",
+          "map": null
+        },
+        {
+          "name": "ThreadId",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "Group",
+          "datatype": "ushort",
+          "map": null
+        },
+        {
+          "name": "Reserved",
+          "datatype": "ushort",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "WorkerThread",
+      "displayName": "WorkerThread",
+      "descriptor": {
+        "id": 0,
+        "version": 2,
+        "channel": 0,
+        "level": "None",
+        "opcode": 57,
+        "task": 0,
+        "keyword": 0
+      },
+      "fields": [
+        {
+          "name": "TThreadId",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "StartTime",
+          "datatype": "ulong",
+          "map": null
+        },
+        {
+          "name": "ThreadRoutine",
+          "datatype": "pointer",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "AntiStarvationBoost",
+      "displayName": "AntiStarvationBoost",
+      "descriptor": {
+        "id": 0,
+        "version": 2,
+        "channel": 0,
+        "level": "None",
+        "opcode": 60,
+        "task": 0,
+        "keyword": 0
+      },
+      "fields": [
+        {
+          "name": "ThreadId",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "ProcessorIndex",
+          "datatype": "ushort",
+          "map": null
+        },
+        {
+          "name": "Priority",
+          "datatype": "byte",
+          "map": null
+        },
+        {
+          "name": "Reserved",
+          "datatype": "byte",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "ThreadMigration",
+      "displayName": "ThreadMigration",
+      "descriptor": {
+        "id": 0,
+        "version": 2,
+        "channel": 0,
+        "level": "None",
+        "opcode": 61,
+        "task": 0,
+        "keyword": 0
+      },
+      "fields": [
+        {
+          "name": "ThreadId",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "SourceProcessorIndex",
+          "datatype": "ushort",
+          "map": null
+        },
+        {
+          "name": "TargetProcessorIndex",
+          "datatype": "ushort",
+          "map": null
+        },
+        {
+          "name": "Priority",
+          "datatype": "byte",
+          "map": null
+        },
+        {
+          "name": "IdealProcessorAdjust",
+          "datatype": "bool",
+          "map": null
+        },
+        {
+          "name": "OldIdealProcessorIndex",
+          "datatype": "ushort",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "KernelQueueEnqueue",
+      "displayName": "KernelQueueEnqueue",
+      "descriptor": {
+        "id": 0,
+        "version": 2,
+        "channel": 0,
+        "level": "None",
+        "opcode": 62,
+        "task": 0,
+        "keyword": 0
+      },
+      "fields": [
+        {
+          "name": "Entry",
+          "datatype": "pointer",
+          "map": null
+        },
+        {
+          "name": "ThreadId",
+          "datatype": "uint",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "KernelQueueDequeue",
+      "displayName": "KernelQueueDequeue",
+      "descriptor": {
+        "id": 0,
+        "version": 2,
+        "channel": 0,
+        "level": "None",
+        "opcode": 63,
+        "task": 0,
+        "keyword": 0
+      },
+      "fields": [
+        {
+          "name": "ThreadId",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "EntryCount",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "Entries",
+          "datatype": "pointer[EntryCount]",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "WorkerThreadStart",
+      "displayName": "WorkerThreadStart",
+      "descriptor": {
+        "id": 0,
+        "version": 2,
+        "channel": 0,
+        "level": "None",
+        "opcode": 64,
+        "task": 0,
+        "keyword": 0
+      },
+      "fields": [
+        {
+          "name": "CallbackRoutine",
+          "datatype": "pointer",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "WorkerThreadEnd",
+      "displayName": "WorkerThreadEnd",
+      "descriptor": {
+        "id": 0,
+        "version": 2,
+        "channel": 0,
+        "level": "None",
+        "opcode": 65,
+        "task": 0,
+        "keyword": 0
+      },
+      "fields": [
+        {
+          "name": "CallbackRoutine",
+          "datatype": "pointer",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "AutoBoostSetFloor",
+      "displayName": "AutoBoostSetFloor",
+      "descriptor": {
+        "id": 0,
+        "version": 2,
+        "channel": 0,
+        "level": "None",
+        "opcode": 66,
+        "task": 0,
+        "keyword": 0
+      },
+      "fields": [
+        {
+          "name": "Lock",
+          "datatype": "pointer",
+          "map": null
+        },
+        {
+          "name": "ThreadId",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "NewCpuPriorityFloor",
+          "datatype": "byte",
+          "map": null
+        },
+        {
+          "name": "OldCpuPriority",
+          "datatype": "byte",
+          "map": null
+        },
+        {
+          "name": "IoPriorities",
+          "datatype": "byte",
+          "map": null
+        },
+        {
+          "name": "BoostFlags",
+          "datatype": "byte",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "AutoBoostClearFloor",
+      "displayName": "AutoBoostClearFloor",
+      "descriptor": {
+        "id": 0,
+        "version": 2,
+        "channel": 0,
+        "level": "None",
+        "opcode": 67,
+        "task": 0,
+        "keyword": 0
+      },
+      "fields": [
+        {
+          "name": "LockAddress",
+          "datatype": "pointer",
+          "map": null
+        },
+        {
+          "name": "ThreadId",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "BoostBitmap",
+          "datatype": "uint",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "AutoBoostEntryExhaustion",
+      "displayName": "AutoBoostEntryExhaustion",
+      "descriptor": {
+        "id": 0,
+        "version": 2,
+        "channel": 0,
+        "level": "None",
+        "opcode": 68,
+        "task": 0,
+        "keyword": 0
+      },
+      "fields": [
+        {
+          "name": "LockAddress",
+          "datatype": "pointer",
+          "map": null
+        },
+        {
+          "name": "ThreadId",
+          "datatype": "uint",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "SubProcessTagChanged",
+      "displayName": "SubProcessTagChanged",
+      "descriptor": {
+        "id": 0,
+        "version": 2,
+        "channel": 0,
+        "level": "None",
+        "opcode": 69,
+        "task": 0,
+        "keyword": 0
+      },
+      "fields": [
+        {
+          "name": "OldTag",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "NewTag",
+          "datatype": "uint",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "SetPriority",
+      "displayName": "SetPriority",
+      "descriptor": {
+        "id": 0,
+        "version": 3,
+        "channel": 0,
+        "level": "None",
+        "opcode": 48,
+        "task": 0,
+        "keyword": 0
+      },
+      "fields": [
+        {
+          "name": "ThreadId",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "OldPriority",
+          "datatype": "byte",
+          "map": null
+        },
+        {
+          "name": "NewPriority",
+          "datatype": "byte",
+          "map": null
+        },
+        {
+          "name": "Reserved",
+          "datatype": "ushort",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "SetBasePriority",
+      "displayName": "SetBasePriority",
+      "descriptor": {
+        "id": 0,
+        "version": 3,
+        "channel": 0,
+        "level": "None",
+        "opcode": 49,
+        "task": 0,
+        "keyword": 0
+      },
+      "fields": [
+        {
+          "name": "ThreadId",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "OldPriority",
+          "datatype": "byte",
+          "map": null
+        },
+        {
+          "name": "NewPriority",
+          "datatype": "byte",
+          "map": null
+        },
+        {
+          "name": "Reserved",
+          "datatype": "ushort",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "SetPagePriority",
+      "displayName": "SetPagePriority",
+      "descriptor": {
+        "id": 0,
+        "version": 3,
+        "channel": 0,
+        "level": "None",
+        "opcode": 51,
+        "task": 0,
+        "keyword": 0
+      },
+      "fields": [
+        {
+          "name": "ThreadId",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "OldPriority",
+          "datatype": "byte",
+          "map": null
+        },
+        {
+          "name": "NewPriority",
+          "datatype": "byte",
+          "map": null
+        },
+        {
+          "name": "Reserved",
+          "datatype": "ushort",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "SetIoPriority",
+      "displayName": "SetIoPriority",
+      "descriptor": {
+        "id": 0,
+        "version": 3,
+        "channel": 0,
+        "level": "None",
+        "opcode": 52,
+        "task": 0,
+        "keyword": 0
+      },
+      "fields": [
+        {
+          "name": "ThreadId",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "OldPriority",
+          "datatype": "byte",
+          "map": null
+        },
+        {
+          "name": "NewPriority",
+          "datatype": "byte",
+          "map": null
+        },
+        {
+          "name": "Reserved",
+          "datatype": "ushort",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "ThreadStart",
+      "displayName": "ThreadStart",
+      "descriptor": {
+        "id": 0,
+        "version": 4,
+        "channel": 0,
+        "level": "None",
+        "opcode": "Start",
+        "task": 0,
+        "keyword": 0
+      },
+      "fields": [
+        {
+          "name": "ProcessId",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "TThreadId",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "StackBase",
+          "datatype": "pointer",
+          "map": null
+        },
+        {
+          "name": "StackLimit",
+          "datatype": "pointer",
+          "map": null
+        },
+        {
+          "name": "UserStackBase",
+          "datatype": "pointer",
+          "map": null
+        },
+        {
+          "name": "UserStackLimit",
+          "datatype": "pointer",
+          "map": null
+        },
+        {
+          "name": "Affinity",
+          "datatype": "pointer",
+          "map": null
+        },
+        {
+          "name": "Win32StartAddr",
+          "datatype": "pointer",
+          "map": null
+        },
+        {
+          "name": "TebBase",
+          "datatype": "pointer",
+          "map": null
+        },
+        {
+          "name": "SubProcessTag",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "BasePriority",
+          "datatype": "byte",
+          "map": null
+        },
+        {
+          "name": "PagePriority",
+          "datatype": "byte",
+          "map": null
+        },
+        {
+          "name": "IoPriority",
+          "datatype": "byte",
+          "map": null
+        },
+        {
+          "name": "ThreadFlags",
+          "datatype": "byte",
+          "map": null
+        },
+        {
+          "name": "ThreadName",
+          "datatype": "string",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "ThreadEnd",
+      "displayName": "ThreadEnd",
+      "descriptor": {
+        "id": 0,
+        "version": 4,
+        "channel": 0,
+        "level": "None",
+        "opcode": "End",
+        "task": 0,
+        "keyword": 0
+      },
+      "fields": [
+        {
+          "name": "ProcessId",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "TThreadId",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "StackBase",
+          "datatype": "pointer",
+          "map": null
+        },
+        {
+          "name": "StackLimit",
+          "datatype": "pointer",
+          "map": null
+        },
+        {
+          "name": "UserStackBase",
+          "datatype": "pointer",
+          "map": null
+        },
+        {
+          "name": "UserStackLimit",
+          "datatype": "pointer",
+          "map": null
+        },
+        {
+          "name": "Affinity",
+          "datatype": "pointer",
+          "map": null
+        },
+        {
+          "name": "Win32StartAddr",
+          "datatype": "pointer",
+          "map": null
+        },
+        {
+          "name": "TebBase",
+          "datatype": "pointer",
+          "map": null
+        },
+        {
+          "name": "SubProcessTag",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "BasePriority",
+          "datatype": "byte",
+          "map": null
+        },
+        {
+          "name": "PagePriority",
+          "datatype": "byte",
+          "map": null
+        },
+        {
+          "name": "IoPriority",
+          "datatype": "byte",
+          "map": null
+        },
+        {
+          "name": "ThreadFlags",
+          "datatype": "byte",
+          "map": null
+        },
+        {
+          "name": "ThreadName",
+          "datatype": "string",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "DataCollectionStart",
+      "displayName": "DataCollectionStart",
+      "descriptor": {
+        "id": 0,
+        "version": 4,
+        "channel": 0,
+        "level": "None",
+        "opcode": "DataCollectionStart",
+        "task": 0,
+        "keyword": 0
+      },
+      "fields": [
+        {
+          "name": "ProcessId",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "TThreadId",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "StackBase",
+          "datatype": "pointer",
+          "map": null
+        },
+        {
+          "name": "StackLimit",
+          "datatype": "pointer",
+          "map": null
+        },
+        {
+          "name": "UserStackBase",
+          "datatype": "pointer",
+          "map": null
+        },
+        {
+          "name": "UserStackLimit",
+          "datatype": "pointer",
+          "map": null
+        },
+        {
+          "name": "Affinity",
+          "datatype": "pointer",
+          "map": null
+        },
+        {
+          "name": "Win32StartAddr",
+          "datatype": "pointer",
+          "map": null
+        },
+        {
+          "name": "TebBase",
+          "datatype": "pointer",
+          "map": null
+        },
+        {
+          "name": "SubProcessTag",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "BasePriority",
+          "datatype": "byte",
+          "map": null
+        },
+        {
+          "name": "PagePriority",
+          "datatype": "byte",
+          "map": null
+        },
+        {
+          "name": "IoPriority",
+          "datatype": "byte",
+          "map": null
+        },
+        {
+          "name": "ThreadFlags",
+          "datatype": "byte",
+          "map": null
+        },
+        {
+          "name": "ThreadName",
+          "datatype": "string",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "DataCollectionEnd",
+      "displayName": "DataCollectionEnd",
+      "descriptor": {
+        "id": 0,
+        "version": 4,
+        "channel": 0,
+        "level": "None",
+        "opcode": "DataCollectionEnd",
+        "task": 0,
+        "keyword": 0
+      },
+      "fields": [
+        {
+          "name": "ProcessId",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "TThreadId",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "StackBase",
+          "datatype": "pointer",
+          "map": null
+        },
+        {
+          "name": "StackLimit",
+          "datatype": "pointer",
+          "map": null
+        },
+        {
+          "name": "UserStackBase",
+          "datatype": "pointer",
+          "map": null
+        },
+        {
+          "name": "UserStackLimit",
+          "datatype": "pointer",
+          "map": null
+        },
+        {
+          "name": "Affinity",
+          "datatype": "pointer",
+          "map": null
+        },
+        {
+          "name": "Win32StartAddr",
+          "datatype": "pointer",
+          "map": null
+        },
+        {
+          "name": "TebBase",
+          "datatype": "pointer",
+          "map": null
+        },
+        {
+          "name": "SubProcessTag",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "BasePriority",
+          "datatype": "byte",
+          "map": null
+        },
+        {
+          "name": "PagePriority",
+          "datatype": "byte",
+          "map": null
+        },
+        {
+          "name": "IoPriority",
+          "datatype": "byte",
+          "map": null
+        },
+        {
+          "name": "ThreadFlags",
+          "datatype": "byte",
+          "map": null
+        },
+        {
+          "name": "ThreadName",
+          "datatype": "string",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "CSwitch",
+      "displayName": "CSwitch",
+      "descriptor": {
+        "id": 0,
+        "version": 4,
+        "channel": 0,
+        "level": "None",
+        "opcode": 36,
+        "task": 0,
+        "keyword": 0
+      },
+      "fields": [
+        {
+          "name": "NewThreadId",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "OldThreadId",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "NewThreadPriority",
+          "datatype": "sbyte",
+          "map": null
+        },
+        {
+          "name": "OldThreadPriority",
+          "datatype": "sbyte",
+          "map": null
+        },
+        {
+          "name": "PreviousCState",
+          "datatype": "byte",
+          "map": null
+        },
+        {
+          "name": "SpareByte",
+          "datatype": "sbyte",
+          "map": null
+        },
+        {
+          "name": "OldThreadWaitReason",
+          "datatype": "sbyte",
+          "map": null
+        },
+        {
+          "name": "ThreadFlags",
+          "datatype": "sbyte",
+          "map": null
+        },
+        {
+          "name": "OldThreadState",
+          "datatype": "sbyte",
+          "map": null
+        },
+        {
+          "name": "OldThreadWaitIdealProcessor",
+          "datatype": "sbyte",
+          "map": null
+        },
+        {
+          "name": "NewThreadWaitTime",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "Reserved",
+          "datatype": "uint",
+          "map": null
+        }
+      ]
+    }
+  ],
+  "tasks": {},
+  "opcodes": {
+    "36": "CSwitch",
+    "37": "CompCS",
+    "41": "SpinLock",
+    "48": "SetPriority",
+    "49": "SetBasePriority",
+    "50": "ReadyThread",
+    "51": "SetPagePriority",
+    "52": "SetIoPriority",
+    "53": "ThreadAffinity",
+    "57": "WorkerThread",
+    "60": "AntiStarvationBoost",
+    "61": "ThreadMigration",
+    "62": "KernelQueueEnqueue",
+    "63": "KernelQueueDequeue",
+    "64": "WorkerThreadStart",
+    "65": "WorkerThreadEnd",
+    "66": "AutoBoostSetFloor",
+    "67": "AutoBoostClearFloor",
+    "68": "AutoBoostEntryExhaustion",
+    "69": "SubProcessTagChanged",
+    "72": "SetName"
+  },
+  "keywords": {},
+  "maps": [],
+  "structs": []
+}

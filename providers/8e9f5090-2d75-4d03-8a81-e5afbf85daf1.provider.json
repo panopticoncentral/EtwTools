@@ -1,0 +1,1038 @@
+{
+  "name": "FrameworkEventSource",
+  "displayName": "System.Diagnostics.Eventing.FrameworkEventSource",
+  "id": "8e9f5090-2d75-4d03-8a81-e5afbf85daf1",
+  "events": [
+    {
+      "name": "EventSourceMessage",
+      "displayName": "EventSourceMessage",
+      "descriptor": {
+        "id": 0,
+        "version": 0,
+        "channel": 0,
+        "level": "None",
+        "opcode": "Info",
+        "task": 65534,
+        "keyword": 0
+      },
+      "fields": [
+        {
+          "name": "Message",
+          "datatype": "string",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "ResourceManagerLookupStarted",
+      "displayName": "ResourceManagerLookupStarted",
+      "descriptor": {
+        "id": 1,
+        "version": 0,
+        "channel": 0,
+        "level": "Information",
+        "opcode": "Info",
+        "task": 65533,
+        "keyword": 1
+      },
+      "fields": [
+        {
+          "name": "BaseName",
+          "datatype": "string",
+          "map": null
+        },
+        {
+          "name": "MainAssemblyName",
+          "datatype": "string",
+          "map": null
+        },
+        {
+          "name": "CultureName",
+          "datatype": "string",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "ResourceManagerLookingForResourceSet",
+      "displayName": "ResourceManagerLookingForResourceSet",
+      "descriptor": {
+        "id": 2,
+        "version": 0,
+        "channel": 0,
+        "level": "Information",
+        "opcode": "Info",
+        "task": 65532,
+        "keyword": 1
+      },
+      "fields": [
+        {
+          "name": "BaseName",
+          "datatype": "string",
+          "map": null
+        },
+        {
+          "name": "MainAssemblyName",
+          "datatype": "string",
+          "map": null
+        },
+        {
+          "name": "CultureName",
+          "datatype": "string",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "ResourceManagerFoundResourceSetInCache",
+      "displayName": "ResourceManagerFoundResourceSetInCache",
+      "descriptor": {
+        "id": 3,
+        "version": 0,
+        "channel": 0,
+        "level": "Information",
+        "opcode": "Info",
+        "task": 65531,
+        "keyword": 1
+      },
+      "fields": [
+        {
+          "name": "BaseName",
+          "datatype": "string",
+          "map": null
+        },
+        {
+          "name": "MainAssemblyName",
+          "datatype": "string",
+          "map": null
+        },
+        {
+          "name": "CultureName",
+          "datatype": "string",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "ResourceManagerFoundResourceSetInCacheUnexpected",
+      "displayName": "ResourceManagerFoundResourceSetInCacheUnexpected",
+      "descriptor": {
+        "id": 4,
+        "version": 0,
+        "channel": 0,
+        "level": "Warning",
+        "opcode": "Info",
+        "task": 65530,
+        "keyword": 1
+      },
+      "fields": [
+        {
+          "name": "BaseName",
+          "datatype": "string",
+          "map": null
+        },
+        {
+          "name": "MainAssemblyName",
+          "datatype": "string",
+          "map": null
+        },
+        {
+          "name": "CultureName",
+          "datatype": "string",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "ResourceManagerStreamFound",
+      "displayName": "ResourceManagerStreamFound",
+      "descriptor": {
+        "id": 5,
+        "version": 0,
+        "channel": 0,
+        "level": "Information",
+        "opcode": "Info",
+        "task": 65529,
+        "keyword": 1
+      },
+      "fields": [
+        {
+          "name": "BaseName",
+          "datatype": "string",
+          "map": null
+        },
+        {
+          "name": "MainAssemblyName",
+          "datatype": "string",
+          "map": null
+        },
+        {
+          "name": "CultureName",
+          "datatype": "string",
+          "map": null
+        },
+        {
+          "name": "LoadedAssemblyName",
+          "datatype": "string",
+          "map": null
+        },
+        {
+          "name": "ResourceFileName",
+          "datatype": "string",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "ResourceManagerStreamNotFound",
+      "displayName": "ResourceManagerStreamNotFound",
+      "descriptor": {
+        "id": 6,
+        "version": 0,
+        "channel": 0,
+        "level": "Warning",
+        "opcode": "Info",
+        "task": 65528,
+        "keyword": 1
+      },
+      "fields": [
+        {
+          "name": "BaseName",
+          "datatype": "string",
+          "map": null
+        },
+        {
+          "name": "MainAssemblyName",
+          "datatype": "string",
+          "map": null
+        },
+        {
+          "name": "CultureName",
+          "datatype": "string",
+          "map": null
+        },
+        {
+          "name": "LoadedAssemblyName",
+          "datatype": "string",
+          "map": null
+        },
+        {
+          "name": "ResourceFileName",
+          "datatype": "string",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "ResourceManagerGetSatelliteAssemblySucceeded",
+      "displayName": "ResourceManagerGetSatelliteAssemblySucceeded",
+      "descriptor": {
+        "id": 7,
+        "version": 0,
+        "channel": 0,
+        "level": "Information",
+        "opcode": "Info",
+        "task": 65527,
+        "keyword": 1
+      },
+      "fields": [
+        {
+          "name": "BaseName",
+          "datatype": "string",
+          "map": null
+        },
+        {
+          "name": "MainAssemblyName",
+          "datatype": "string",
+          "map": null
+        },
+        {
+          "name": "CultureName",
+          "datatype": "string",
+          "map": null
+        },
+        {
+          "name": "AssemblyName",
+          "datatype": "string",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "ResourceManagerGetSatelliteAssemblyFailed",
+      "displayName": "ResourceManagerGetSatelliteAssemblyFailed",
+      "descriptor": {
+        "id": 8,
+        "version": 0,
+        "channel": 0,
+        "level": "Warning",
+        "opcode": "Info",
+        "task": 65526,
+        "keyword": 1
+      },
+      "fields": [
+        {
+          "name": "BaseName",
+          "datatype": "string",
+          "map": null
+        },
+        {
+          "name": "MainAssemblyName",
+          "datatype": "string",
+          "map": null
+        },
+        {
+          "name": "CultureName",
+          "datatype": "string",
+          "map": null
+        },
+        {
+          "name": "AssemblyName",
+          "datatype": "string",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "ResourceManagerCaseInsensitiveResourceStreamLookupSucceeded",
+      "displayName": "ResourceManagerCaseInsensitiveResourceStreamLookupSucceeded",
+      "descriptor": {
+        "id": 9,
+        "version": 0,
+        "channel": 0,
+        "level": "Information",
+        "opcode": "Info",
+        "task": 65525,
+        "keyword": 1
+      },
+      "fields": [
+        {
+          "name": "BaseName",
+          "datatype": "string",
+          "map": null
+        },
+        {
+          "name": "MainAssemblyName",
+          "datatype": "string",
+          "map": null
+        },
+        {
+          "name": "AssemblyName",
+          "datatype": "string",
+          "map": null
+        },
+        {
+          "name": "ResourceFileName",
+          "datatype": "string",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "ResourceManagerCaseInsensitiveResourceStreamLookupFailed",
+      "displayName": "ResourceManagerCaseInsensitiveResourceStreamLookupFailed",
+      "descriptor": {
+        "id": 10,
+        "version": 0,
+        "channel": 0,
+        "level": "Warning",
+        "opcode": "Info",
+        "task": 65524,
+        "keyword": 1
+      },
+      "fields": [
+        {
+          "name": "BaseName",
+          "datatype": "string",
+          "map": null
+        },
+        {
+          "name": "MainAssemblyName",
+          "datatype": "string",
+          "map": null
+        },
+        {
+          "name": "AssemblyName",
+          "datatype": "string",
+          "map": null
+        },
+        {
+          "name": "ResourceFileName",
+          "datatype": "string",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "ResourceManagerManifestResourceAccessDenied",
+      "displayName": "ResourceManagerManifestResourceAccessDenied",
+      "descriptor": {
+        "id": 11,
+        "version": 0,
+        "channel": 0,
+        "level": "Error",
+        "opcode": "Info",
+        "task": 65523,
+        "keyword": 1
+      },
+      "fields": [
+        {
+          "name": "BaseName",
+          "datatype": "string",
+          "map": null
+        },
+        {
+          "name": "MainAssemblyName",
+          "datatype": "string",
+          "map": null
+        },
+        {
+          "name": "AssemblyName",
+          "datatype": "string",
+          "map": null
+        },
+        {
+          "name": "CanonicalName",
+          "datatype": "string",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "ResourceManagerNeutralResourcesSufficient",
+      "displayName": "ResourceManagerNeutralResourcesSufficient",
+      "descriptor": {
+        "id": 12,
+        "version": 0,
+        "channel": 0,
+        "level": "Information",
+        "opcode": "Info",
+        "task": 65522,
+        "keyword": 1
+      },
+      "fields": [
+        {
+          "name": "BaseName",
+          "datatype": "string",
+          "map": null
+        },
+        {
+          "name": "MainAssemblyName",
+          "datatype": "string",
+          "map": null
+        },
+        {
+          "name": "CultureName",
+          "datatype": "string",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "ResourceManagerNeutralResourceAttributeMissing",
+      "displayName": "ResourceManagerNeutralResourceAttributeMissing",
+      "descriptor": {
+        "id": 13,
+        "version": 0,
+        "channel": 0,
+        "level": "Warning",
+        "opcode": "Info",
+        "task": 65521,
+        "keyword": 1
+      },
+      "fields": [
+        {
+          "name": "MainAssemblyName",
+          "datatype": "string",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "ResourceManagerCreatingResourceSet",
+      "displayName": "ResourceManagerCreatingResourceSet",
+      "descriptor": {
+        "id": 14,
+        "version": 0,
+        "channel": 0,
+        "level": "Information",
+        "opcode": "Info",
+        "task": 65520,
+        "keyword": 1
+      },
+      "fields": [
+        {
+          "name": "BaseName",
+          "datatype": "string",
+          "map": null
+        },
+        {
+          "name": "MainAssemblyName",
+          "datatype": "string",
+          "map": null
+        },
+        {
+          "name": "CultureName",
+          "datatype": "string",
+          "map": null
+        },
+        {
+          "name": "FileName",
+          "datatype": "string",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "ResourceManagerNotCreatingResourceSet",
+      "displayName": "ResourceManagerNotCreatingResourceSet",
+      "descriptor": {
+        "id": 15,
+        "version": 0,
+        "channel": 0,
+        "level": "Information",
+        "opcode": "Info",
+        "task": 65519,
+        "keyword": 1
+      },
+      "fields": [
+        {
+          "name": "BaseName",
+          "datatype": "string",
+          "map": null
+        },
+        {
+          "name": "MainAssemblyName",
+          "datatype": "string",
+          "map": null
+        },
+        {
+          "name": "CultureName",
+          "datatype": "string",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "ResourceManagerLookupFailed",
+      "displayName": "ResourceManagerLookupFailed",
+      "descriptor": {
+        "id": 16,
+        "version": 0,
+        "channel": 0,
+        "level": "Warning",
+        "opcode": "Info",
+        "task": 65518,
+        "keyword": 1
+      },
+      "fields": [
+        {
+          "name": "BaseName",
+          "datatype": "string",
+          "map": null
+        },
+        {
+          "name": "MainAssemblyName",
+          "datatype": "string",
+          "map": null
+        },
+        {
+          "name": "CultureName",
+          "datatype": "string",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "ResourceManagerReleasingResources",
+      "displayName": "ResourceManagerReleasingResources",
+      "descriptor": {
+        "id": 17,
+        "version": 0,
+        "channel": 0,
+        "level": "Information",
+        "opcode": "Info",
+        "task": 65517,
+        "keyword": 1
+      },
+      "fields": [
+        {
+          "name": "BaseName",
+          "datatype": "string",
+          "map": null
+        },
+        {
+          "name": "MainAssemblyName",
+          "datatype": "string",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "ResourceManagerNeutralResourcesNotFound",
+      "displayName": "ResourceManagerNeutralResourcesNotFound",
+      "descriptor": {
+        "id": 18,
+        "version": 0,
+        "channel": 0,
+        "level": "Warning",
+        "opcode": "Info",
+        "task": 65516,
+        "keyword": 1
+      },
+      "fields": [
+        {
+          "name": "BaseName",
+          "datatype": "string",
+          "map": null
+        },
+        {
+          "name": "MainAssemblyName",
+          "datatype": "string",
+          "map": null
+        },
+        {
+          "name": "ResName",
+          "datatype": "string",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "ResourceManagerNeutralResourcesFound",
+      "displayName": "ResourceManagerNeutralResourcesFound",
+      "descriptor": {
+        "id": 19,
+        "version": 0,
+        "channel": 0,
+        "level": "Information",
+        "opcode": "Info",
+        "task": 65515,
+        "keyword": 1
+      },
+      "fields": [
+        {
+          "name": "BaseName",
+          "datatype": "string",
+          "map": null
+        },
+        {
+          "name": "MainAssemblyName",
+          "datatype": "string",
+          "map": null
+        },
+        {
+          "name": "ResName",
+          "datatype": "string",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "ResourceManagerAddingCultureFromConfigFile",
+      "displayName": "ResourceManagerAddingCultureFromConfigFile",
+      "descriptor": {
+        "id": 20,
+        "version": 0,
+        "channel": 0,
+        "level": "Information",
+        "opcode": "Info",
+        "task": 65514,
+        "keyword": 1
+      },
+      "fields": [
+        {
+          "name": "BaseName",
+          "datatype": "string",
+          "map": null
+        },
+        {
+          "name": "MainAssemblyName",
+          "datatype": "string",
+          "map": null
+        },
+        {
+          "name": "CultureName",
+          "datatype": "string",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "ResourceManagerCultureNotFoundInConfigFile",
+      "displayName": "ResourceManagerCultureNotFoundInConfigFile",
+      "descriptor": {
+        "id": 21,
+        "version": 0,
+        "channel": 0,
+        "level": "Information",
+        "opcode": "Info",
+        "task": 65513,
+        "keyword": 1
+      },
+      "fields": [
+        {
+          "name": "BaseName",
+          "datatype": "string",
+          "map": null
+        },
+        {
+          "name": "MainAssemblyName",
+          "datatype": "string",
+          "map": null
+        },
+        {
+          "name": "CultureName",
+          "datatype": "string",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "ResourceManagerCultureFoundInConfigFile",
+      "displayName": "ResourceManagerCultureFoundInConfigFile",
+      "descriptor": {
+        "id": 22,
+        "version": 0,
+        "channel": 0,
+        "level": "Information",
+        "opcode": "Info",
+        "task": 65512,
+        "keyword": 1
+      },
+      "fields": [
+        {
+          "name": "BaseName",
+          "datatype": "string",
+          "map": null
+        },
+        {
+          "name": "MainAssemblyName",
+          "datatype": "string",
+          "map": null
+        },
+        {
+          "name": "CultureName",
+          "datatype": "string",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "ThreadPoolEnqueueWork",
+      "displayName": "ThreadPoolEnqueueWork",
+      "descriptor": {
+        "id": 30,
+        "version": 0,
+        "channel": 0,
+        "level": "Verbose",
+        "opcode": "Info",
+        "task": 65504,
+        "keyword": 18
+      },
+      "fields": [
+        {
+          "name": "WorkID",
+          "datatype": "long",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "ThreadPoolDequeueWork",
+      "displayName": "ThreadPoolDequeueWork",
+      "descriptor": {
+        "id": 31,
+        "version": 0,
+        "channel": 0,
+        "level": "Verbose",
+        "opcode": "Info",
+        "task": 65503,
+        "keyword": 18
+      },
+      "fields": [
+        {
+          "name": "WorkID",
+          "datatype": "long",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "GetResponseStart",
+      "displayName": "GetResponseStart",
+      "descriptor": {
+        "id": 140,
+        "version": 1,
+        "channel": 0,
+        "level": "Information",
+        "opcode": "Start",
+        "task": 1,
+        "keyword": 4
+      },
+      "fields": [
+        {
+          "name": "Id",
+          "datatype": "long",
+          "map": null
+        },
+        {
+          "name": "Uri",
+          "datatype": "string",
+          "map": null
+        },
+        {
+          "name": "Success",
+          "datatype": "bool",
+          "map": null
+        },
+        {
+          "name": "Synchronous",
+          "datatype": "bool",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "GetResponseStop",
+      "displayName": "GetResponseStop",
+      "descriptor": {
+        "id": 141,
+        "version": 1,
+        "channel": 0,
+        "level": "Information",
+        "opcode": "End",
+        "task": 1,
+        "keyword": 4
+      },
+      "fields": [
+        {
+          "name": "Id",
+          "datatype": "long",
+          "map": null
+        },
+        {
+          "name": "Success",
+          "datatype": "bool",
+          "map": null
+        },
+        {
+          "name": "Synchronous",
+          "datatype": "bool",
+          "map": null
+        },
+        {
+          "name": "StatusCode",
+          "datatype": "int",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "GetRequestStreamStart",
+      "displayName": "GetRequestStreamStart",
+      "descriptor": {
+        "id": 142,
+        "version": 1,
+        "channel": 0,
+        "level": "Information",
+        "opcode": "Start",
+        "task": 2,
+        "keyword": 4
+      },
+      "fields": [
+        {
+          "name": "Id",
+          "datatype": "long",
+          "map": null
+        },
+        {
+          "name": "Uri",
+          "datatype": "string",
+          "map": null
+        },
+        {
+          "name": "Success",
+          "datatype": "bool",
+          "map": null
+        },
+        {
+          "name": "Synchronous",
+          "datatype": "bool",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "GetRequestStreamStop",
+      "displayName": "GetRequestStreamStop",
+      "descriptor": {
+        "id": 143,
+        "version": 1,
+        "channel": 0,
+        "level": "Information",
+        "opcode": "End",
+        "task": 2,
+        "keyword": 4
+      },
+      "fields": [
+        {
+          "name": "Id",
+          "datatype": "long",
+          "map": null
+        },
+        {
+          "name": "Success",
+          "datatype": "bool",
+          "map": null
+        },
+        {
+          "name": "Synchronous",
+          "datatype": "bool",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "ThreadTransferSend",
+      "displayName": "ThreadTransferSend",
+      "descriptor": {
+        "id": 150,
+        "version": 0,
+        "channel": 0,
+        "level": "Information",
+        "opcode": "Send",
+        "task": 3,
+        "keyword": 16
+      },
+      "fields": [
+        {
+          "name": "Id",
+          "datatype": "long",
+          "map": null
+        },
+        {
+          "name": "Kind",
+          "datatype": "int",
+          "map": null
+        },
+        {
+          "name": "Info",
+          "datatype": "string",
+          "map": null
+        },
+        {
+          "name": "MultiDequeues",
+          "datatype": "bool",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "ThreadTransferReceive",
+      "displayName": "ThreadTransferReceive",
+      "descriptor": {
+        "id": 151,
+        "version": 0,
+        "channel": 0,
+        "level": "Information",
+        "opcode": "Recieve",
+        "task": 3,
+        "keyword": 16
+      },
+      "fields": [
+        {
+          "name": "Id",
+          "datatype": "long",
+          "map": null
+        },
+        {
+          "name": "Kind",
+          "datatype": "int",
+          "map": null
+        },
+        {
+          "name": "Info",
+          "datatype": "string",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "ThreadTransferReceiveHandled",
+      "displayName": "ThreadTransferReceiveHandled",
+      "descriptor": {
+        "id": 152,
+        "version": 0,
+        "channel": 0,
+        "level": "Information",
+        "opcode": 11,
+        "task": 3,
+        "keyword": 16
+      },
+      "fields": [
+        {
+          "name": "Id",
+          "datatype": "long",
+          "map": null
+        },
+        {
+          "name": "Kind",
+          "datatype": "int",
+          "map": null
+        },
+        {
+          "name": "Info",
+          "datatype": "string",
+          "map": null
+        }
+      ]
+    }
+  ],
+  "tasks": {
+    "1": "GetResponse",
+    "2": "GetRequestStream",
+    "3": "ThreadTransfer",
+    "65503": "ThreadPoolDequeueWork",
+    "65504": "ThreadPoolEnqueueWork",
+    "65512": "ResourceManagerCultureFoundInConfigFile",
+    "65513": "ResourceManagerCultureNotFoundInConfigFile",
+    "65514": "ResourceManagerAddingCultureFromConfigFile",
+    "65515": "ResourceManagerNeutralResourcesFound",
+    "65516": "ResourceManagerNeutralResourcesNotFound",
+    "65517": "ResourceManagerReleasingResources",
+    "65518": "ResourceManagerLookupFailed",
+    "65519": "ResourceManagerNotCreatingResourceSet",
+    "65520": "ResourceManagerCreatingResourceSet",
+    "65521": "ResourceManagerNeutralResourceAttributeMissing",
+    "65522": "ResourceManagerNeutralResourcesSufficient",
+    "65523": "ResourceManagerManifestResourceAccessDenied",
+    "65524": "ResourceManagerCaseInsensitiveResourceStreamLookupFailed",
+    "65525": "ResourceManagerCaseInsensitiveResourceStreamLookupSucceeded",
+    "65526": "ResourceManagerGetSatelliteAssemblyFailed",
+    "65527": "ResourceManagerGetSatelliteAssemblySucceeded",
+    "65528": "ResourceManagerStreamNotFound",
+    "65529": "ResourceManagerStreamFound",
+    "65530": "ResourceManagerFoundResourceSetInCacheUnexpected",
+    "65531": "ResourceManagerFoundResourceSetInCache",
+    "65532": "ResourceManagerLookingForResourceSet",
+    "65533": "ResourceManagerLookupStarted",
+    "65534": "EventSourceMessage"
+  },
+  "opcodes": {
+    "11": "ReceiveHandled"
+  },
+  "keywords": {
+    "1": "Loader",
+    "2": "ThreadPool",
+    "4": "NetClient",
+    "8": "DynamicTypeUsage",
+    "16": "ThreadTransfer",
+    "17592186044416": "Session3",
+    "35184372088832": "Session2",
+    "70368744177664": "Session1",
+    "140737488355328": "Session0"
+  },
+  "maps": [],
+  "structs": []
+}

@@ -1,0 +1,304 @@
+{
+  "name": "VisualStudioThreading",
+  "displayName": "Microsoft-VisualStudio-Threading",
+  "id": "589491ba-4f15-53fe-c376-db7f020f5204",
+  "events": [
+    {
+      "name": "EventSourceMessage",
+      "displayName": "EventSourceMessage",
+      "descriptor": {
+        "id": 0,
+        "version": 0,
+        "channel": 0,
+        "level": "None",
+        "opcode": "Info",
+        "task": 65534,
+        "keyword": 0
+      },
+      "fields": [
+        {
+          "name": "Message",
+          "datatype": "string",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "CompleteOnCurrentThreadStop",
+      "displayName": "CompleteOnCurrentThreadStop",
+      "descriptor": {
+        "id": 12,
+        "version": 0,
+        "channel": 0,
+        "level": "Information",
+        "opcode": "End",
+        "task": 65522,
+        "keyword": 0
+      },
+      "fields": [
+        {
+          "name": "TaskId",
+          "datatype": "int",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "WaitSynchronouslyStart",
+      "displayName": "WaitSynchronouslyStart",
+      "descriptor": {
+        "id": 13,
+        "version": 0,
+        "channel": 0,
+        "level": "Verbose",
+        "opcode": "Start",
+        "task": 65521,
+        "keyword": 0
+      },
+      "fields": null
+    },
+    {
+      "name": "WaitSynchronouslyStop",
+      "displayName": "WaitSynchronouslyStop",
+      "descriptor": {
+        "id": 14,
+        "version": 0,
+        "channel": 0,
+        "level": "Verbose",
+        "opcode": "End",
+        "task": 65521,
+        "keyword": 0
+      },
+      "fields": null
+    },
+    {
+      "name": "PostExecutionStop",
+      "displayName": "PostExecutionStop",
+      "descriptor": {
+        "id": 16,
+        "version": 0,
+        "channel": 0,
+        "level": "Verbose",
+        "opcode": "End",
+        "task": 65518,
+        "keyword": 0
+      },
+      "fields": [
+        {
+          "name": "RequestId",
+          "datatype": "int",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "CircularJoinableTaskDependencyDetected",
+      "displayName": "CircularJoinableTaskDependencyDetected",
+      "descriptor": {
+        "id": 17,
+        "version": 0,
+        "channel": 0,
+        "level": "Information",
+        "opcode": "Info",
+        "task": 65517,
+        "keyword": 0
+      },
+      "fields": [
+        {
+          "name": "InitUnreachableCount",
+          "datatype": "int",
+          "map": null
+        },
+        {
+          "name": "ReachableCount",
+          "datatype": "int",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "ReaderWriterLockIssued",
+      "displayName": "ReaderWriterLockIssued",
+      "descriptor": {
+        "id": 1,
+        "version": 0,
+        "channel": 0,
+        "level": "Information",
+        "opcode": 101,
+        "task": 1,
+        "keyword": 0
+      },
+      "fields": [
+        {
+          "name": "LockId",
+          "datatype": "int",
+          "map": null
+        },
+        {
+          "name": "Kind",
+          "datatype": "int",
+          "map": "LockKind"
+        },
+        {
+          "name": "IssuedUpgradeableReadCount",
+          "datatype": "int",
+          "map": null
+        },
+        {
+          "name": "IssuedReadCount",
+          "datatype": "int",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "WaitReaderWriterLockStart",
+      "displayName": "WaitReaderWriterLockStart",
+      "descriptor": {
+        "id": 2,
+        "version": 0,
+        "channel": 0,
+        "level": "Information",
+        "opcode": "Start",
+        "task": 2,
+        "keyword": 0
+      },
+      "fields": [
+        {
+          "name": "LockId",
+          "datatype": "int",
+          "map": null
+        },
+        {
+          "name": "Kind",
+          "datatype": "int",
+          "map": "LockKind"
+        },
+        {
+          "name": "IssuedWriteCount",
+          "datatype": "int",
+          "map": null
+        },
+        {
+          "name": "IssuedUpgradeableReadCount",
+          "datatype": "int",
+          "map": null
+        },
+        {
+          "name": "IssuedReadCount",
+          "datatype": "int",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "WaitReaderWriterLockStop",
+      "displayName": "WaitReaderWriterLockStop",
+      "descriptor": {
+        "id": 3,
+        "version": 0,
+        "channel": 0,
+        "level": "Information",
+        "opcode": "End",
+        "task": 2,
+        "keyword": 0
+      },
+      "fields": [
+        {
+          "name": "LockId",
+          "datatype": "int",
+          "map": null
+        },
+        {
+          "name": "Kind",
+          "datatype": "int",
+          "map": "LockKind"
+        }
+      ]
+    },
+    {
+      "name": "CompleteOnCurrentThreadStart",
+      "displayName": "CompleteOnCurrentThreadStart",
+      "descriptor": {
+        "id": 11,
+        "version": 0,
+        "channel": 0,
+        "level": "Information",
+        "opcode": "Start",
+        "task": 65523,
+        "keyword": 0
+      },
+      "fields": [
+        {
+          "name": "TaskId",
+          "datatype": "int",
+          "map": null
+        },
+        {
+          "name": "IsOnMainThread",
+          "datatype": "bool",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "PostExecutionStart",
+      "displayName": "PostExecutionStart",
+      "descriptor": {
+        "id": 15,
+        "version": 0,
+        "channel": 0,
+        "level": "Verbose",
+        "opcode": "Start",
+        "task": 65519,
+        "keyword": 0
+      },
+      "fields": [
+        {
+          "name": "RequestId",
+          "datatype": "int",
+          "map": null
+        },
+        {
+          "name": "MainThreadAffinitized",
+          "datatype": "bool",
+          "map": null
+        }
+      ]
+    }
+  ],
+  "tasks": {
+    "1": "LockRequest",
+    "2": "LockRequestContention",
+    "65517": "CircularJoinableTaskDependencyDetected",
+    "65518": "PostExecutionStop",
+    "65519": "PostExecution",
+    "65521": "WaitSynchronously",
+    "65522": "CompleteOnCurrentThreadStop",
+    "65523": "CompleteOnCurrentThread",
+    "65534": "EventSourceMessage"
+  },
+  "opcodes": {
+    "100": "ReaderWriterLockWaiting",
+    "101": "ReaderWriterLockIssued",
+    "102": "ReaderWriterLockIssuedAfterContention"
+  },
+  "keywords": {
+    "17592186044416": "Session3",
+    "35184372088832": "Session2",
+    "70368744177664": "Session1",
+    "140737488355328": "Session0"
+  },
+  "maps": [
+    {
+      "name": "LockKind",
+      "flags": false,
+      "values": {
+        "0": "Read",
+        "1": "UpgradeableRead",
+        "2": "Write"
+      }
+    }
+  ],
+  "structs": []
+}

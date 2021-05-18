@@ -84,7 +84,7 @@ var sessionCommand = new Command("session", "Commands that work on individual se
 rootCommand.Add(sessionCommand);
 AddSessionCommands(sessionCommand);
 
-void AddProvidersCommands(Command providersCommand)
+void AddProviderCommands(Command providersCommand)
 {
     var listCommand = new Command("list", "List all providers published on the system.")
     {
@@ -103,31 +103,33 @@ void AddProvidersCommands(Command providersCommand)
     processCommand.Handler = CommandHandler.Create<uint, bool>(ListRegisteredProvidersInProcess);
     providersCommand.AddCommand(processCommand);
 
-    var infoCommand = new Command("info", "Saves provider information.")
+    var publishedCommand = new Command("published", "Gets information about a registered provider.")
     {
-        new Argument<string>("provider", "The provider ID.")
+        new Argument<string>("provider", "The provider ID."),
+        new Option<string>(new[] { "-a", "--add" }, "Add to a provider directory.")
     };
-    infoCommand.Handler = CommandHandler.Create<string>(SaveProvider);
-    providersCommand.AddCommand(infoCommand);
+    publishedCommand.Handler = CommandHandler.Create<string, string>(GetPublishedProvider);
+    providersCommand.AddCommand(publishedCommand);
 
-    var manifestCommand = new Command("manifest", "Saves provider information from a manifest.")
+    var manifestCommand = new Command("manifest", "Gets provider information from a manifest.")
     {
-        new Argument<string>("manifest", "The manifest path (can contain wildcards).")
+        new Argument<string>("manifest", "The manifest path."),
+        new Option<string>(new[] { "-a", "--add" }, "Add to a provider directory.")
     };
-    manifestCommand.Handler = CommandHandler.Create<string>(SaveManifestProvider);
+    manifestCommand.Handler = CommandHandler.Create<string, string>(GetManifestProvider);
     providersCommand.AddCommand(manifestCommand);
 
-    var generateCommand = new Command("generate", "Generates a provider class from provider information.")
+    var generateCommand = new Command("generate", "Generates provider classes from a provider directory.")
     {
-        new Argument<string>("provider", "The provider information file (can contain wildcards).")
+        new Argument<string>("providers", "The provider directory.")
     };
-    generateCommand.Handler = CommandHandler.Create<string>(GenerateProvider);
+    generateCommand.Handler = CommandHandler.Create<string>(GenerateProviders);
     providersCommand.AddCommand(generateCommand);
 }
 
-var providersCommand = new Command("providers", "Commands that work on event providers.");
-rootCommand.Add(providersCommand);
-AddProvidersCommands(providersCommand);
+var providerCommand = new Command("provider", "Commands that work on event providers.");
+rootCommand.Add(providerCommand);
+AddProviderCommands(providerCommand);
 
 void AddTraceCommands(Command traceCommand)
 {
@@ -141,9 +143,10 @@ void AddTraceCommands(Command traceCommand)
 
     var traceLoggingCommand = new Command("tracelogging", "Saves TraceLogging provider information stored in a trace.")
     {
-        new Argument<string>("trace", "The trace file.")
+        new Argument<string>("trace", "The trace file."),
+        new Option<string>(new[] { "-a", "--add" }, "Add to a provider directory.")
     };
-    traceLoggingCommand.Handler = CommandHandler.Create<string>(SaveTraceLoggingProviders);
+    traceLoggingCommand.Handler = CommandHandler.Create<string, string>(SaveTraceLoggingProviders);
     traceCommand.AddCommand(traceLoggingCommand);
 
     var eventSourceCommand = new Command("eventsource", "Saves System.Diagnostics.Tracing.EventSource provider manifests stored in a trace.")
@@ -478,7 +481,223 @@ void ListRegisteredProvidersInProcess(uint pid, bool json)
     }
 }
 
-static void SaveProvider(string provider)
+string GetDatatype(EtwPropertyInfo p, Dictionary<string, Struct> providerStructs, ref int structId)
+{
+    var datatype = p.InputType switch
+    {
+        EtwInputType.Boolean => "bool",
+        EtwInputType.Uint8 or EtwInputType.Binary => "byte",
+        EtwInputType.Int8 => "sbyte",
+        EtwInputType.Uint16 => "ushort",
+        EtwInputType.Int16 => "short",
+        EtwInputType.Uint32 => "uint",
+        EtwInputType.Int32 => "int",
+        EtwInputType.Uint64 => "ulong",
+        EtwInputType.Int64 => "long",
+        EtwInputType.Double => "double",
+        EtwInputType.UnicodeString => "string",
+        EtwInputType.AnsiString => "ansistring",
+        EtwInputType.UnicodeChar => "char",
+        EtwInputType.Guid => "guid",
+        EtwInputType.Pointer => "pointer",
+        _ => "unknown"
+    };
+
+    if (p.Properties != null)
+    {
+        if (datatype is not "unknown")
+        {
+            throw new InvalidOperationException();
+        }
+
+        var name = $"Struct{structId++}";
+        var fields = new List<Field>();
+
+        foreach (var inner in p.Properties)
+        {
+            fields.Add(new Field { Name = inner.Name, Datatype = GetDatatype(inner, providerStructs, ref structId), Map = inner.MapName });
+        }
+
+        providerStructs[name] = new Struct { Name = name, Fields = fields };
+        datatype = name;
+    }
+    else if (datatype is "unknown")
+    {
+        throw new InvalidOperationException();
+    }
+
+    string count = null;
+
+    if (p.Length is string propertyLength)
+    {
+        count = propertyLength;
+    }
+
+    switch (p.Count)
+    {
+        case int actualCount:
+            if (actualCount != 1)
+            {
+                throw new InvalidOperationException();
+            }
+            break;
+
+        case string propertyCount:
+            count = propertyCount;
+            break;
+    }
+
+    return $"{datatype}{(count != null ? $"[{count}]" : string.Empty)}";
+}
+
+void AddProvider(string directory, Guid id, string name, IEnumerable<EtwProviderFieldInfo> levels, IEnumerable<EtwProviderFieldInfo> channels, IEnumerable<EtwProviderFieldInfo> tasks, IEnumerable<EtwProviderFieldInfo> keywords, IEnumerable<EtwProviderFieldInfo> opcodes, IEnumerable<EtwEventInfo> events, IEnumerable<EtwPropertyMapInfo> maps)
+{
+    var filename = Path.Combine(directory, $"{id}.provider.json");
+    var structId = 0;
+
+    string displayName;
+    Dictionary<EtwEventDescriptor, Event> providerEvents;
+    Dictionary<ulong, string> providerTasks;
+    Dictionary<ulong, string> providerOpcodes;
+    Dictionary<ulong, string> providerKeywords;
+    Dictionary<string, Map> providerMaps;
+    Dictionary<string, Struct> providerStructs;
+
+    if (File.Exists(filename))
+    {
+        var provider = JsonConvert.DeserializeObject<Provider>(File.ReadAllText(filename));
+
+        name = provider.Name;
+        displayName = provider.DisplayName;
+        providerEvents = provider.Events.ToDictionary(e => e.Descriptor, e => e);
+        providerTasks = new(provider.Tasks);
+        providerOpcodes = new(provider.Opcodes);
+        providerKeywords = new(provider.Keywords);
+        providerMaps = provider.Maps.ToDictionary(m => m.Name, m => m);
+        providerStructs = provider.Structs.ToDictionary(s => s.Name, s => s);
+    }
+    else
+    {
+        displayName = name;
+        providerEvents = new();
+        providerTasks = new();
+        providerOpcodes = new();
+        providerKeywords = new();
+        providerMaps = new();
+        providerStructs = new();
+    }
+
+    foreach (var e in events)
+    {
+        if (providerEvents.ContainsKey(e.Descriptor))
+        {
+            continue;
+        }
+
+        //if (e.Descriptor.Version > 0)
+        //{
+        //    var found = false;
+        //    for (var i = e.Descriptor.Version; i < 0xFF; i--)
+        //    {
+        //        if (providerEvents.ContainsKey(new EtwEventDescriptor
+        //        {
+        //            Id = e.Descriptor.Id,
+        //            Version = i,
+        //            Channel = e.Descriptor.Channel,
+        //            Level = e.Descriptor.Level,
+        //            Opcode = e.Descriptor.Opcode,
+        //            Task = e.Descriptor.Task,
+        //            Keyword = e.Descriptor.Keyword
+        //        }))
+        //        {
+        //            found = true;
+        //        }
+        //    }
+
+        //    if (found)
+        //    {
+        //        break;
+        //    }
+        //}
+
+        var eventName = e.Name ?? $"{e.TaskName ?? string.Empty}{e.OpcodeName ?? string.Empty}";
+
+        providerEvents[e.Descriptor] = new Event
+        {
+            Name = eventName,
+            DisplayName = eventName,
+            Descriptor = e.Descriptor,
+            Fields = e.Properties?.Select(p => new Field { Name = p.Name, Datatype = GetDatatype(p, providerStructs, ref structId), Map = p.MapName }),
+        };
+    }
+
+    if (tasks != null)
+    {
+        foreach (var t in tasks)
+        {
+            if (providerTasks.ContainsKey(t.Value))
+            {
+                continue;
+            }
+
+            providerTasks[t.Value] = t.Name;
+        }
+    }
+
+    if (opcodes != null)
+    {
+        foreach (var o in opcodes)
+        {
+            if (providerOpcodes.ContainsKey(o.Value))
+            {
+                continue;
+            }
+
+            providerOpcodes[o.Value] = o.Name;
+        }
+    }
+
+    if (keywords != null)
+    {
+        foreach (var k in keywords)
+        {
+            if (providerKeywords.ContainsKey(k.Value))
+            {
+                continue;
+            }
+
+            providerKeywords[k.Value] = k.Name;
+        }
+    }
+
+    if (maps != null)
+    {
+        foreach (var m in maps)
+        {
+            if (providerMaps.ContainsKey(m.Name))
+            {
+                continue;
+            }
+
+            providerMaps[m.Name] = new Map { Name = m.Name, Flags = m.Flags, Values = m.Values.ToDictionary(kvp => kvp.Key, kvp => kvp.Value) };
+        }
+    }
+
+    File.WriteAllText(filename, JsonConvert.SerializeObject(new Provider
+    {
+        Name = name,
+        DisplayName = displayName,
+        Id = id,
+        Events = providerEvents.Values,
+        Tasks = providerTasks,
+        Opcodes = providerOpcodes,
+        Keywords = providerKeywords,
+        Maps = providerMaps.Values,
+        Structs = providerStructs.Values
+    }, defaultJsonSettings));
+}
+
+void GetPublishedProvider(string provider, string add)
 {
     EtwProvider etwProvider = null;
     string name = null;
@@ -503,7 +722,9 @@ static void SaveProvider(string provider)
     }
 
     var eventInfos = etwProvider.GetEventInfos();
-    Dictionary<string, EtwPropertyMapInfo> maps = new();
+    Dictionary<string, EtwPropertyMapInfo> mapsMap = new();
+    Dictionary<ulong, EtwProviderFieldInfo> opcodesMap = new();
+    Dictionary<ulong, EtwProviderFieldInfo> tasksMap = new();
 
     static void GatherMaps(Dictionary<string, EtwPropertyMapInfo> maps, EtwProvider etwProvider, EtwEventInfo e, EtwPropertyInfo property)
     {
@@ -511,124 +732,160 @@ static void SaveProvider(string provider)
         {
             maps[property.MapName] = etwProvider.GetPropertyMap(property.MapName);
         }
+
+        if (property.Properties != null)
+        {
+            foreach (var innerProperty in property.Properties)
+            {
+                GatherMaps(maps, etwProvider, e, innerProperty);
+            }
+        }
     }
 
     foreach (var e in eventInfos)
     {
+        if (!Enum.IsDefined(e.Descriptor.Opcode) && !string.IsNullOrEmpty(e.OpcodeName) && !opcodesMap.ContainsKey((ulong)e.Descriptor.Opcode))
+        {
+            opcodesMap[(ulong)e.Descriptor.Opcode] = new EtwProviderFieldInfo { Name = e.OpcodeName, Value = (ulong)e.Descriptor.Opcode };
+        }
+
+        if (!string.IsNullOrEmpty(e.TaskName) && !tasksMap.ContainsKey(e.Descriptor.Task))
+        {
+            tasksMap[e.Descriptor.Task] = new EtwProviderFieldInfo { Name = e.TaskName, Value = e.Descriptor.Task };
+        }
+
         foreach (var p in e.Properties)
         {
-            GatherMaps(maps, etwProvider, e, p);
+            GatherMaps(mapsMap, etwProvider, e, p);
         }
     }
 
-    File.WriteAllText($"{name ?? etwProvider.Id.ToString()}.provider.json",
-        JsonConvert.SerializeObject(new ProviderInformation
+    var maps = mapsMap.Values.OrderBy(m => m.Name);
+    var opcodes = opcodesMap.Values.OrderBy(o => o.Value);
+    var tasks = tasksMap.Values.OrderBy(t => t.Value);
+
+    if (add != null)
+    {
+        AddProvider(add, etwProvider.Id, name, etwProvider.GetLevelInfos(), etwProvider.GetChannelInfos(), tasks, etwProvider.GetKeywordInfos(), opcodes, eventInfos, maps);
+    }
+    else
+    {
+        Console.WriteLine(JsonConvert.SerializeObject(new
         {
-            Id = etwProvider.Id,
+            etwProvider.Id,
             Name = name,
             Levels = etwProvider.GetLevelInfos(),
             Channels = etwProvider.GetChannelInfos(),
             Keywords = etwProvider.GetKeywordInfos(),
+            Opcodes = opcodes,
+            Tasks = tasks,
             Events = eventInfos,
-            Maps = maps.Values
+            Maps = maps
 
-        },
-        new JsonSerializerSettings
-        {
-            Formatting = Formatting.Indented,
-            Converters = new[] { new StringEnumConverter() },
-            ContractResolver = new DefaultContractResolver
-            {
-                NamingStrategy = new CamelCaseNamingStrategy()
-            }
-        }));
-}
-
-static void SaveManifestProvider(string manifest)
-{
-    var path = Path.GetDirectoryName(manifest);
-    foreach (var file in Directory.GetFiles(string.IsNullOrEmpty(path) ? "." : path, Path.GetFileName(manifest)))
-    {
-        var etwManifest = EtwManifest.Parse(File.ReadAllText(file));
-        var taskMap = etwManifest.Tasks.ToDictionary(t => t.Name, t => t.Value);
-        var keywordMap = etwManifest.Keywords.ToDictionary(t => t.Name, t => t.Value);
-
-        File.WriteAllText($"{etwManifest.Name ?? etwManifest.Id.ToString()}.provider.json.",
-            JsonConvert.SerializeObject(new ProviderInformation
-            {
-                Id = Guid.Parse(etwManifest.Id),
-                Name = etwManifest.Name,
-                /* no levels */
-                /* no channels */
-                Tasks = etwManifest.Tasks,
-                Keywords = etwManifest.Keywords,
-                Opcodes = etwManifest.Opcodes.Select(kvp => new EtwProviderFieldInfo { Name = kvp.Key, Value = kvp.Value }),
-                Events = etwManifest.Events.Select(kvp => new EtwEventInfo()
-                {
-                    ProviderId = new Guid(etwManifest.Id),
-                    ProviderName = etwManifest.Name,
-                    EventId = new Guid(),
-                    Descriptor = new EtwEventDescriptor
-                    {
-                        Id = kvp.Value.Descriptor.Id,
-                        Version = kvp.Value.Descriptor.Version,
-                        Channel = kvp.Value.Descriptor.Channel,
-                        Level = kvp.Value.Descriptor.Level != null ? kvp.Value.Descriptor.Level switch
-                        {
-                            "win:LogAlways" => EtwTraceLevel.None,
-                            "win:Critical" => EtwTraceLevel.Critical,
-                            "win:Error" => EtwTraceLevel.Error,
-                            "win:Warning" => EtwTraceLevel.Warning,
-                            "win:Informational" => EtwTraceLevel.Information,
-                            "win:Verbose" => EtwTraceLevel.Verbose,
-                            _ => throw new InvalidOperationException()
-                        } : 0,
-                        Opcode = kvp.Value.Descriptor.Opcode != null ? kvp.Value.Descriptor.Opcode switch
-                        {
-                            "win:Info" => EtwEventOpcode.Info,
-                            "win:Start" => EtwEventOpcode.Start,
-                            "win:End" => EtwEventOpcode.End,
-                            "win:Stop" => EtwEventOpcode.Stop,
-                            "win:Send" => EtwEventOpcode.Send,
-                            "win:Receive" => EtwEventOpcode.Recieve,
-                            _ => kvp.Value.Descriptor.Opcode.StartsWith("win:", StringComparison.Ordinal)
-                                ? throw new InvalidOperationException()
-                                : (EtwEventOpcode)etwManifest.Opcodes[kvp.Value.Descriptor.Opcode]
-                        } : 0,
-                        Task = kvp.Value.Descriptor.Task != null ? (ushort)taskMap[kvp.Value.Descriptor.Task] : (ushort)0,
-                        Keyword = kvp.Value.Descriptor.Keyword != null
-                            ? kvp.Value.Descriptor.Keyword.Split(" ").Aggregate((ulong)0, (s, k) => s + keywordMap[k])
-                            : 0
-                    },
-                    LevelName = kvp.Value.Descriptor.Level,
-                    OpcodeName = kvp.Value.Descriptor.Opcode,
-                    TaskName = kvp.Value.Descriptor.Task,
-                    KeywordName = kvp.Value.Descriptor.Keyword,
-                    Name = kvp.Key,
-                    Properties = kvp.Value.Template != null ? etwManifest.Templates[kvp.Value.Template].Fields.Select(t => new EtwPropertyInfo
-                    {
-                        Name = t.Name,
-                        InputType = t.Datatype,
-                        MapName = t.Map,
-                        Count = new EtwPropertyInfo.PropertySize { Kind = EtwPropertyInfo.PropertySizeKind.Regular, Size = 1 },
-                        Length = new EtwPropertyInfo.PropertySize { Kind = EtwPropertyInfo.PropertySizeKind.Regular, Size = Size(t.Datatype) == -1 ? (uint)0 : (uint)Size(t.Datatype) }
-                    }).ToArray() : null
-                }),
-                Maps = etwManifest.Maps.Select(kvp => new EtwPropertyMapInfo { Name = kvp.Key, Flags = kvp.Value.Flags, Values = kvp.Value.Values })
-            },
-            new JsonSerializerSettings
-            {
-                Formatting = Formatting.Indented,
-                Converters = new[] { new StringEnumConverter() },
-                ContractResolver = new DefaultContractResolver
-                {
-                    NamingStrategy = new CamelCaseNamingStrategy()
-                }
-            }));
+        }, defaultJsonSettings));
     }
 }
 
-static string CreateProviderTasks(ProviderInformation provider)
+void GetManifestProvider(string manifest, string add)
+{
+    var etwManifest = EtwManifest.Parse(File.ReadAllText(manifest));
+    var taskMap = etwManifest.Tasks.ToDictionary(t => t.Name, t => t.Value);
+    var keywordMap = etwManifest.Keywords.ToDictionary(t => t.Name, t => t.Value);
+
+    var id = Guid.Parse(etwManifest.Id);
+    var opcodes = etwManifest.Opcodes.Select(kvp => new EtwProviderFieldInfo { Name = kvp.Key, Value = kvp.Value });
+
+    static int Size(EtwInputType datatype) =>
+        datatype switch
+        {
+            EtwInputType.Boolean => 1,
+            EtwInputType.Uint8 => 1,
+            EtwInputType.Int8 => 1,
+            EtwInputType.Uint16 => 2,
+            EtwInputType.Int16 => 2,
+            EtwInputType.Uint32 => 4,
+            EtwInputType.Int32 => 4,
+            EtwInputType.Uint64 => 8,
+            EtwInputType.Int64 => 8,
+            EtwInputType.Guid => 16,
+            _ => -1
+        };
+
+    var events = etwManifest.Events.Select(kvp => new EtwEventInfo()
+    {
+        ProviderId = new Guid(etwManifest.Id),
+        ProviderName = etwManifest.Name,
+        EventId = new Guid(),
+        Descriptor = new EtwEventDescriptor
+        {
+            Id = kvp.Value.Descriptor.Id,
+            Version = kvp.Value.Descriptor.Version,
+            Channel = kvp.Value.Descriptor.Channel,
+            Level = kvp.Value.Descriptor.Level != null ? kvp.Value.Descriptor.Level switch
+            {
+                "win:LogAlways" => EtwTraceLevel.None,
+                "win:Critical" => EtwTraceLevel.Critical,
+                "win:Error" => EtwTraceLevel.Error,
+                "win:Warning" => EtwTraceLevel.Warning,
+                "win:Informational" => EtwTraceLevel.Information,
+                "win:Verbose" => EtwTraceLevel.Verbose,
+                _ => throw new InvalidOperationException()
+            } : 0,
+            Opcode = kvp.Value.Descriptor.Opcode != null ? kvp.Value.Descriptor.Opcode switch
+            {
+                "win:Info" => EtwEventOpcode.Info,
+                "win:Start" => EtwEventOpcode.Start,
+                "win:End" => EtwEventOpcode.End,
+                "win:Stop" => EtwEventOpcode.Stop,
+                "win:Send" => EtwEventOpcode.Send,
+                "win:Receive" => EtwEventOpcode.Recieve,
+                _ => kvp.Value.Descriptor.Opcode.StartsWith("win:", StringComparison.Ordinal)
+                    ? throw new InvalidOperationException()
+                    : (EtwEventOpcode)etwManifest.Opcodes[kvp.Value.Descriptor.Opcode]
+            } : 0,
+            Task = kvp.Value.Descriptor.Task != null ? (ushort)taskMap[kvp.Value.Descriptor.Task] : (ushort)0,
+            Keyword = kvp.Value.Descriptor.Keyword != null
+                        ? kvp.Value.Descriptor.Keyword.Split(" ").Aggregate((ulong)0, (s, k) => s + keywordMap[k])
+                        : 0
+        },
+        LevelName = kvp.Value.Descriptor.Level,
+        OpcodeName = kvp.Value.Descriptor.Opcode,
+        TaskName = kvp.Value.Descriptor.Task,
+        KeywordName = kvp.Value.Descriptor.Keyword,
+        Name = kvp.Key,
+        Properties = kvp.Value.Template != null ? etwManifest.Templates[kvp.Value.Template].Fields.Select(t => new EtwPropertyInfo
+        {
+            Name = t.Name,
+            InputType = t.Datatype,
+            MapName = t.Map,
+            Count = 1,
+            Length = Size(t.Datatype) == -1 ? 0 : (uint)Size(t.Datatype)
+        }).ToArray() : null
+    });
+    var maps = etwManifest.Maps.Select(kvp => new EtwPropertyMapInfo { Name = kvp.Key, Flags = kvp.Value.Flags, Values = kvp.Value.Values });
+
+    if (add != null)
+    {
+        AddProvider(add, id, etwManifest.Name, null, null, etwManifest.Tasks, etwManifest.Keywords, opcodes, events, maps);
+    }
+    else
+    {
+        Console.WriteLine(JsonConvert.SerializeObject(new
+        {
+            Id = id,
+            etwManifest.Name,
+            /* no levels */
+            /* no channels */
+            etwManifest.Tasks,
+            etwManifest.Keywords,
+            Opcodes = opcodes,
+            Events = events,
+            Maps = maps
+        }, defaultJsonSettings));
+    }
+}
+
+static string CreateProviderTasks(Provider provider)
 {
     if (provider.Tasks == null || !provider.Tasks.Any())
     {
@@ -640,18 +897,18 @@ static string CreateProviderTasks(ProviderInformation provider)
     _ = builder.Append($@"
 
         /// <summary>
-        /// Tasks supported by {provider.Name}.
+        /// Tasks supported by {provider.DisplayName}.
         /// </summary>
         public enum Tasks : ushort
         {{");
 
-    foreach (var task in provider.Tasks.OrderBy(t => t.Value))
+    foreach (var task in provider.Tasks.OrderBy(t => t.Key))
     {
         _ = builder.Append($@"
             /// <summary>
-            /// '{task.Description ?? task.Name}' task.
+            /// '{task.Value}' task.
             /// </summary>
-            {task.Name} = {task.Value},");
+            {task.Value} = {task.Key},");
     }
 
     _ = builder.Append(@"
@@ -660,7 +917,7 @@ static string CreateProviderTasks(ProviderInformation provider)
     return builder.ToString();
 }
 
-static string CreateProviderOpcodes(ProviderInformation provider)
+static string CreateProviderOpcodes(Provider provider)
 {
     if (provider.Opcodes == null || !provider.Opcodes.Any())
     {
@@ -677,13 +934,13 @@ static string CreateProviderOpcodes(ProviderInformation provider)
         public enum Opcodes
         {{");
 
-    foreach (var opcode in provider.Opcodes.OrderBy(o => o.Value))
+    foreach (var opcode in provider.Opcodes.OrderBy(o => o.Key))
     {
         _ = builder.Append($@"
             /// <summary>
-            /// '{opcode.Description ?? opcode.Name}' opcode.
+            /// '{opcode.Value}' opcode.
             /// </summary>
-            {opcode.Name} = {opcode.Value},");
+            {opcode.Value} = {opcode.Key},");
     }
 
     _ = builder.Append(@"
@@ -692,7 +949,7 @@ static string CreateProviderOpcodes(ProviderInformation provider)
     return builder.ToString();
 }
 
-static string CreateProviderKeywords(ProviderInformation provider)
+static string CreateProviderKeywords(Provider provider)
 {
     if (provider.Keywords == null || !provider.Keywords.Any())
     {
@@ -710,13 +967,13 @@ static string CreateProviderKeywords(ProviderInformation provider)
         public enum Keywords : ulong
         {{");
 
-    foreach (var keyword in provider.Keywords.OrderBy(k => k.Value))
+    foreach (var keyword in provider.Keywords.OrderBy(k => k.Key))
     {
         _ = builder.Append($@"
             /// <summary>
-            /// '{keyword.Description ?? keyword.Name}' keyword.
+            /// '{keyword.Value}' keyword.
             /// </summary>
-            {keyword.Name} = 0x{keyword.Value:X16},");
+            {keyword.Value} = 0x{keyword.Key:X16},");
     }
 
     _ = builder.Append(@"
@@ -725,7 +982,7 @@ static string CreateProviderKeywords(ProviderInformation provider)
     return builder.ToString();
 }
 
-static string CreateProviderMaps(ProviderInformation provider)
+static string CreateProviderMaps(Provider provider)
 {
     if (provider.Maps == null || !provider.Maps.Any())
     {
@@ -748,7 +1005,7 @@ static string CreateProviderMaps(ProviderInformation provider)
         }
 
         _ = builder.Append($@"
-        public enum {map.Name}
+        public enum {map.Name} : ulong
         {{");
 
         foreach (var (enumValue, enumName) in map.Values)
@@ -758,12 +1015,12 @@ static string CreateProviderMaps(ProviderInformation provider)
             /// <summary>
             /// {enumName}.
             /// </summary>
-            {enumName} = {(short)enumValue},")
+            {enumName} = {enumValue},")
                 : builder.Append($@"
             /// <summary>
             /// {enumName}.
             /// </summary>
-            {enumName} = 0x{(short)enumValue:X16},");
+            {enumName} = 0x{enumValue:X16},");
         }
 
         _ = builder.Append(@"
@@ -773,140 +1030,286 @@ static string CreateProviderMaps(ProviderInformation provider)
     return builder.ToString();
 }
 
-static string CreateProviderStructs(ProviderInformation provider)
+static string CreateProviderStructs(Provider provider, Dictionary<string, Struct> structs)
 {
-    if (provider.Events == null)
+    if (provider.Structs == null || !provider.Structs.Any())
     {
         return string.Empty;
     }
 
-    var structs = provider.Events.Where(e => e.Properties != null).SelectMany(e => e.Properties).Where(p => p.Properties != null);
+    var builder = new StringBuilder();
 
-    return !structs.Any() ? string.Empty : throw new NotImplementedException();
+    foreach (var s in provider.Structs)
+    {
+        var fields = s.Fields.ToList();
+        _ = builder.Append($@"
+
+        /// <summary>
+        /// A data wrapper for a {s.Name} structure.
+        /// </summary>
+        public ref struct {s.Name}
+        {{
+            private readonly EtwEvent _etwEvent;
+            private readonly int _offset;{CreateEventPropertyOffsetFields(3, true, s.Fields, structs)}{CreateEventPropertyOffsetProperties(3, true, fields, structs)}{CreateEventFields(3, fields, structs)}
+
+            /// <summary>
+            /// Creates a new {s.Name}.
+            /// </summary>
+            public {s.Name}(EtwEvent e, int offset)
+            {{
+                _etwEvent = e;
+                _offset = offset;{CreateEventFieldOffsetInitializers(3, true, fields, structs)}
+            }}
+        }}
+
+        /// <summary>
+        /// A structure that can enumerate {s.Name} structures.
+        /// </summary>
+        public ref struct {s.Name}Enumerable
+        {{
+            private readonly EtwEvent _etwEvent;
+            private readonly int _offset;
+            private readonly uint _count;
+
+            internal {s.Name}Enumerable(EtwEvent e, int offset) :
+                this(e, offset, uint.MaxValue)
+            {{
+            }}
+
+            internal {s.Name}Enumerable(EtwEvent e, int offset, uint count)
+            {{
+                _etwEvent = e;
+                _offset = offset;
+                _count = count;
+            }}
+
+            /// <summary>
+            /// Gets an enumerator.
+            /// </summary>
+            /// <returns>The enumerator.</returns>
+            public {s.Name}Enumerator GetEnumerator() => new(this);
+
+            /// <summary>
+            /// A structure that enumerates over an {s.Name} collection.
+            /// </summary>
+            public ref struct {s.Name}Enumerator
+            {{
+                private readonly {s.Name}Enumerable _enumerable;
+                private int _offset;
+                private int _index;
+
+                /// <summary>
+                /// The current value, if any.
+                /// </summary>
+                public {s.Name} Current => ((_offset < _enumerable._etwEvent.Data.Length) && (_index <= _enumerable._count))
+                    ? new(_enumerable._etwEvent, _offset)
+                    : throw new InvalidOperationException();
+
+                internal {s.Name}Enumerator({s.Name}Enumerable enumerable)
+                {{
+                    _enumerable = enumerable;
+                    _offset = int.MaxValue;
+                    _index = 0;
+                }}
+
+                /// <summary>
+                /// Moves to the next address.
+                /// </summary>
+                /// <returns>Whether there is another address.</returns>
+                public bool MoveNext()
+                {{
+                    if (_offset == int.MaxValue)
+                    {{
+                        _offset = _enumerable._offset;
+                        _index = 1;
+                        return true;
+                    }}
+
+                    _offset += Current.StructSize;
+                    _index++;
+                    return (_offset < _enumerable._etwEvent.Data.Length) && (_index <= _enumerable._count);
+                }}
+            }}
+        }}
+");
+    }
+
+    return builder.ToString();
 }
 
-static string ConverterMethod(EtwPropertyInfo f, string location) =>
-    @$"{(f.MapName == null ? string.Empty : $"({f.MapName})")}{f.InputType switch
+static string ConverterMethod(Field f, string location, Dictionary<string, Struct> structs) =>
+    $@"{(f.Map == null ? string.Empty : $"({f.Map})")}{f.Datatype switch
     {
-        EtwInputType.Uint8 => location,
-        EtwInputType.Int8 => $"(sbyte){location}",
-        EtwInputType.Boolean => $"{location} != 0",
-        EtwInputType.Uint16 => $"BitConverter.ToUInt16({location})",
-        EtwInputType.Int16 => $"BitConverter.ToInt16({location})",
-        EtwInputType.Uint32 => $"BitConverter.ToUInt32({location})",
-        EtwInputType.Int32 => $"BitConverter.ToInt32({location})",
-        EtwInputType.Uint64 => $"BitConverter.ToUInt64({location})",
-        EtwInputType.Int64 => $"BitConverter.ToInt64({location})",
-        EtwInputType.UnicodeString => $"System.Text.Encoding.Unicode.GetString({location})",
-        EtwInputType.AnsiString => $"System.Text.Encoding.ASCII.GetString({location})",
-        EtwInputType.Pointer => $"_etwEvent.AddressSize == 4 ? BitConverter.ToUInt32({location}) : BitConverter.ToUInt64({location})",
-        EtwInputType.Guid => $"new({location})",
-        _ => "unknown"
+        "byte" => location,
+        "sbyte" => $"(sbyte){location}",
+        "bool" => $"{location} != 0",
+        "ushort" => $"BitConverter.ToUInt16({location})",
+        "short" => $"BitConverter.ToInt16({location})",
+        "uint" => $"BitConverter.ToUInt32({location})",
+        "int" => $"BitConverter.ToInt32({location})",
+        "ulong" => $"BitConverter.ToUInt64({location})",
+        "long" => $"BitConverter.ToInt64({location})",
+        "char" => $"BitConverter.ToChar({location})",
+        "double" => $"BitConverter.ToDouble({location})",
+        "string" => $"System.Text.Encoding.Unicode.GetString({location})",
+        "ansistring" => $"System.Text.Encoding.ASCII.GetString({location})",
+        "pointer" => $"_etwEvent.AddressSize == 4 ? BitConverter.ToUInt32({location}) : BitConverter.ToUInt64({location})",
+        "guid" => $"new({location})",
+        _ => "unknown",
     }}";
 
-static string ReturnType(EtwPropertyInfo f) =>
-    f.MapName ?? f.InputType switch
+static string ReturnType(Field f) =>
+    f.Map ?? f.Datatype switch
     {
-        EtwInputType.Boolean => "bool",
-        EtwInputType.Uint8 => "byte",
-        EtwInputType.Int8 => "sbyte",
-        EtwInputType.Uint16 => "ushort",
-        EtwInputType.Int16 => "short",
-        EtwInputType.Uint32 => "uint",
-        EtwInputType.Int32 => "int",
-        EtwInputType.Uint64 => "ulong",
-        EtwInputType.Int64 => "long",
-        EtwInputType.UnicodeString or EtwInputType.AnsiString => "string",
-        EtwInputType.Guid => "Guid",
-        EtwInputType.Pointer => "ulong",
-        _ => "unknown"
+        "bool" or "byte" or "sbyte" or "ushort" or "short" or "uint" or "int" or "ulong" or "long" or "char" => f.Datatype,
+        "string" or "ansistring" => "string",
+        "guid" => "Guid",
+        "pointer" => "ulong",
+        _ => f.Datatype
     };
 
-static string VariableSize(EtwInputType datatype, string offset) =>
-    datatype switch
-    {
-        EtwInputType.Pointer => "etwEvent.AddressSize",
-        EtwInputType.AnsiString => $"EtwEvent.AnsiStringEnumerable.AnsiStringEnumerator.StringLength(etwEvent.Data, {offset})",
-        EtwInputType.UnicodeString => $"EtwEvent.UnicodeStringEnumerable.UnicodeStringEnumerator.StringLength(etwEvent.Data, {offset})",
-        _ => "unknown"
-    };
+static string VariableSize(string type, string offset, Dictionary<string, Struct> structs)
+{
+    string count = null;
+    var leftBracket = type.IndexOf('[', StringComparison.Ordinal);
 
-static int Size(EtwInputType datatype) =>
-    datatype switch
+    if (leftBracket != -1)
     {
-        EtwInputType.Boolean => 1,
-        EtwInputType.Uint8 => 1,
-        EtwInputType.Int8 => 1,
-        EtwInputType.Uint16 => 2,
-        EtwInputType.Int16 => 2,
-        EtwInputType.Uint32 => 4,
-        EtwInputType.Int32 => 4,
-        EtwInputType.Uint64 => 8,
-        EtwInputType.Int64 => 8,
-        EtwInputType.Guid => 16,
-        _ => -1
-    };
+        count = type[(leftBracket + 1)..(type.Length - 1)];
+        type = type[..leftBracket];
+    }
 
-static void CreateEventField(IReadOnlyList<EtwPropertyInfo> fields, int i, StringBuilder builder, Dictionary<EtwPropertyInfo, string> fieldOffsets)
+    if (count != null)
+    {
+        var size = Size(type, structs);
+        return size != -1 ? $"({size} * (int){count})" : "unknown";
+    }
+    else
+    {
+        return type switch
+        {
+            "pointer" => "_etwEvent.AddressSize",
+            "ansistring" => $"EtwEvent.AnsiStringEnumerable.AnsiStringEnumerator.StringLength(_etwEvent.Data, {offset})",
+            "string" => $"EtwEvent.UnicodeStringEnumerable.UnicodeStringEnumerator.StringLength(_etwEvent.Data, {offset})",
+            _ => "unknown"
+        };
+    }
+}
+
+static int Size(string type, Dictionary<string, Struct> structs)
+{
+    if (type.IndexOf('[', StringComparison.Ordinal) != -1)
+    {
+        return -1;
+    }
+
+    switch (type)
+    {
+        case "bool" or "byte" or "sbyte":
+            return 1;
+
+        case "ushort" or "short" or "char":
+            return 2;
+
+        case "uint" or "int":
+            return 4;
+
+        case "ulong" or "long" or "double":
+            return 8;
+
+        case "guid":
+            return 16;
+    }
+
+    if (structs.TryGetValue(type, out var s))
+    {
+        var size = 0;
+        foreach (var f in s.Fields)
+        {
+            var fieldSize = Size(f.Datatype, structs);
+
+            if (fieldSize != -1)
+            {
+                size += fieldSize;
+            }
+            else
+            {
+                return -1;
+            }
+        }
+
+        return size;
+    }
+
+    return -1;
+}
+
+static void CreateEventField(int indent, IReadOnlyList<Field> fields, int i, StringBuilder builder, Dictionary<string, Struct> structs)
 {
     var field = fields[i];
+    var nextField = i + 1 < fields.Count ? fields[i + 1] : null;
+    var indentString = new string(' ', indent * 4);
     var name = field.Name;
     if (name.StartsWith('_'))
     {
         return;
     }
 
-    var datatype = field.InputType;
-    //var openBrace = datatype.IndexOf('[');
-    var count = string.Empty;
+    var type = field.Datatype;
+    string count = null;
+    var leftBracket = type.IndexOf('[', StringComparison.Ordinal);
 
-    if (field.Length.Kind != EtwPropertyInfo.PropertySizeKind.Regular || field.Count.Kind != EtwPropertyInfo.PropertySizeKind.Regular)
+    if (leftBracket != -1)
     {
-        throw new InvalidOperationException();
+        count = type[(leftBracket + 1)..(type.Length - 1)];
+        type = type[..leftBracket];
     }
 
-    //if (openBrace != -1)
-    //{
-    //    count = datatype[(openBrace + 1)..^1];
-    //    datatype = datatype[..openBrace];
+    var fieldOffsetName = $"Offset_{field.Name}";
 
-    //    var location = $"_etwEvent.Data[{fieldOffsets[field]}..{(i + 1 < t.Fields.Count ? fieldOffsets[t.Fields[i + 1]] : string.Empty)}]";
-
-    //    _ = builder.Append(datatype switch
-    //    {
-    //        EtwInputType.Pointer => $@"
-
-    //            /// <summary>
-    //            /// Retrieves the {name} field.
-    //            /// </summary>
-    //            public EtwEvent.AddressEnumerable {name} => new({location}, _etwEvent.AddressSize{(count == "..." ? string.Empty : $", {count}")});",
-    //        EtwInputType.UnicodeString => $@"
-
-    //            /// <summary>
-    //            /// Retrieves the {name} field.
-    //            /// </summary>
-    //            public EtwEvent.UnicodeStringEnumerable {name} => new({location}{(count == "..." ? string.Empty : $", {count}")});",
-    //        _ => $@"
-
-    //            /// <summary>
-    //            /// Retrieves the {name} field.
-    //            /// </summary>
-    //            public EtwEvent.StructEnumerable<{datatype}> {name} => new({location}{(count == "..." ? string.Empty : $", {count}")});"
-    //    });
-    //}
-    //else
+    if (count != null)
     {
-        var location = $"_etwEvent.Data[{fieldOffsets[field]}{(Size(datatype) == 1 ? string.Empty : $"..{(i + 1 < fields.Count ? fieldOffsets[fields[i + 1]] : string.Empty)}")}]";
+        _ = builder.Append(type switch
+        {
+            "pointer" => $@"
+
+{indentString}/// <summary>
+{indentString}/// Retrieves the {name} field.
+{indentString}/// </summary>
+{indentString}public EtwEvent.AddressEnumerable {name} => new(_etwEvent, {fieldOffsetName}{(count == "..." ? string.Empty : $", {count}")});",
+            "string" => $@"
+
+{indentString}/// <summary>
+{indentString}/// Retrieves the {name} field.
+{indentString}/// </summary>
+{indentString}public EtwEvent.UnicodeStringEnumerable {name} => new(_etwEvent, {fieldOffsetName}{(count == "..." ? string.Empty : $", {count}")});",
+            "bool" or "byte" or "sbyte" or "ushort" or "short" or "char" or "uint" or "int" or "ulong" or "long" or "double" or "guid" => $@"
+
+{indentString}/// <summary>
+{indentString}/// Retrieves the {name} field.
+{indentString}/// </summary>
+{indentString}public EtwEvent.StructEnumerable<{type}> {name} => new(_etwEvent, {fieldOffsetName}{(count == "..." ? string.Empty : $", {count}")});",
+            _ => $@"
+
+{indentString}/// <summary>
+{indentString}/// Retrieves the {name} field.
+{indentString}/// </summary>
+{indentString}public {type}Enumerable {name} => new(_etwEvent, {fieldOffsetName}{(count == "..." ? string.Empty : $", {count}")});"
+        });
+    }
+    else
+    {
+        var location = $"_etwEvent.Data[{fieldOffsetName}{(Size(type, structs) == 1 ? string.Empty : $"..")}]";
         _ = builder.Append($@"
 
-                /// <summary>
-                /// Retrieves the {name} field.
-                /// </summary>
-                public {ReturnType(field)} {name} => {ConverterMethod(field, location)};");
+{indentString}/// <summary>
+{indentString}/// Retrieves the {name} field.
+{indentString}/// </summary>
+{indentString}public {ReturnType(field)} {name} => {ConverterMethod(field, location, structs)};");
     }
 }
 
-static string CreateEventFields(IReadOnlyList<EtwPropertyInfo> fields, Dictionary<EtwPropertyInfo, string> fieldOffsets)
+static string CreateEventFields(int indent, IReadOnlyList<Field> fields, Dictionary<string, Struct> structs)
 {
     if (fields == null || !fields.Any())
     {
@@ -917,13 +1320,13 @@ static string CreateEventFields(IReadOnlyList<EtwPropertyInfo> fields, Dictionar
 
     for (var i = 0; i < fields.Count; i++)
     {
-        CreateEventField(fields, i, builder, fieldOffsets);
+        CreateEventField(indent, fields, i, builder, structs);
     }
 
     return builder.ToString();
 }
 
-static string CreateEventFieldOffsetInitializers(IReadOnlyList<EtwPropertyInfo> fields, Dictionary<EtwPropertyInfo, string> fieldOffsets)
+static string CreateEventFieldOffsetInitializers(int indent, bool isStruct, IReadOnlyList<Field> fields, Dictionary<string, Struct> structs)
 {
     if (fields == null || !fields.Any())
     {
@@ -931,28 +1334,24 @@ static string CreateEventFieldOffsetInitializers(IReadOnlyList<EtwPropertyInfo> 
     }
 
     var builder = new StringBuilder();
-    var previousField = string.Empty;
-    var previousSize = string.Empty;
+    var indentString = new string(' ', indent * 4);
 
     foreach (var f in fields)
     {
-        var fieldName = fieldOffsets[f];
+        _ = builder.Append($@"
+{indentString}    _offset_{f.Name} = -1;");
+    }
 
-        if (fieldName.StartsWith('_'))
-        {
-            _ = builder.Append($@"
-                    {fieldName} = {previousField} + {previousSize};");
-        }
-
-        var size = Size(f.InputType);
-        previousSize = size == -1 ? VariableSize(f.InputType, fieldName) : size.ToString(CultureInfo.InvariantCulture);
-        previousField = fieldName;
+    if (isStruct)
+    {
+        _ = builder.Append($@"
+{indentString}    _structSize = -1;");
     }
 
     return builder.ToString();
 }
 
-static string CreateEventFieldOffsets(IReadOnlyList<EtwPropertyInfo> fields, Dictionary<EtwPropertyInfo, string> fieldOffsets)
+static string CreateEventPropertyOffsetProperties(int indent, bool isStruct, IReadOnlyList<Field> fields, Dictionary<string, Struct> structs)
 {
     if (fields == null || !fields.Any())
     {
@@ -960,45 +1359,79 @@ static string CreateEventFieldOffsets(IReadOnlyList<EtwPropertyInfo> fields, Dic
     }
 
     var builder = new StringBuilder();
-    var foundVariableField = false;
-    var offset = 0;
+    var previousFieldOffset = isStruct ? "_offset" : null;
+    string previousFieldSize = null;
+    var indentString = new string(' ', indent * 4);
+
+    foreach (var f in fields)
+    {
+        _ = builder.Append($@"
+
+{indentString}private int Offset_{f.Name}
+{indentString}{{
+{indentString}    get
+{indentString}    {{
+{indentString}        if (_offset_{f.Name} == -1)
+{indentString}        {{
+{indentString}            _offset_{f.Name} = {(previousFieldOffset == null ? string.Empty : $"{previousFieldOffset} + ")}{previousFieldSize ?? "0"};
+{indentString}        }}
+
+{indentString}        return _offset_{f.Name};
+{indentString}    }}
+{indentString}}}");
+
+        var size = Size(f.Datatype, structs);
+        previousFieldOffset = $"Offset_{f.Name}";
+        previousFieldSize = size == -1 ? VariableSize(f.Datatype, previousFieldOffset, structs) : size.ToString(CultureInfo.InvariantCulture);
+    }
+
+    if (isStruct)
+    {
+        _ = builder.Append($@"
+
+{indentString}/// <summary>
+{indentString}/// Size of the structure.
+{indentString}/// </summary>
+{indentString}public int StructSize
+{indentString}{{
+{indentString}    get
+{indentString}    {{
+{indentString}        if (_structSize == -1)
+{indentString}        {{
+{indentString}            _structSize = {(previousFieldOffset == null ? string.Empty : $"{previousFieldOffset} + ")}{previousFieldSize ?? "0"};
+{indentString}        }}
+
+{indentString}        return _structSize;
+{indentString}    }}
+{indentString}}}");
+    }
+
+    return builder.ToString();
+}
+
+static string CreateEventPropertyOffsetFields(int indent, bool isStruct, IEnumerable<Field> fields, Dictionary<string, Struct> structs)
+{
+    var builder = new StringBuilder();
+    var indentString = new string(' ', indent * 4);
 
     _ = builder.AppendLine();
 
     foreach (var f in fields)
     {
-        if (!foundVariableField)
-        {
-            var fieldName = $"Offset_{f.Name}";
-            fieldOffsets[f] = fieldName;
+        _ = builder.Append($@"
+{indentString}private int _offset_{f.Name};");
+    }
 
-            _ = builder.Append(@$"
-                private const int {fieldName} = {offset};");
-
-            var size = Size(f.InputType);
-
-            if (size == -1)
-            {
-                foundVariableField = true;
-            }
-            else
-            {
-                offset += size;
-            }
-        }
-        else
-        {
-            var fieldName = $"_offset_{f.Name}";
-            fieldOffsets[f] = fieldName;
-            _ = builder.Append($@"
-                private readonly int {fieldName};");
-        }
+    if (isStruct)
+    {
+        _ = builder.Append($@"
+{indentString}private int _structSize;");
     }
 
     return builder.ToString();
 }
 
-static string CreateProviderEvents(ProviderInformation provider)
+static string CreateProviderEvents(Provider provider, Dictionary<string, Struct> structs)
 {
     if (provider.Events == null || !provider.Events.Any())
     {
@@ -1009,12 +1442,12 @@ static string CreateProviderEvents(ProviderInformation provider)
 
     foreach (var e in provider.Events)
     {
-        Dictionary<EtwPropertyInfo, string> fieldOffsets = new();
+        var fields = e.Fields?.ToList();
 
         _ = builder.Append($@"
 
         /// <summary>
-        /// An event wrapper for a {e.Name} event.
+        /// An event wrapper for a {e.DisplayName} event.
         /// </summary>
         public readonly ref struct {e.Name}Event
         {{
@@ -1023,7 +1456,7 @@ static string CreateProviderEvents(ProviderInformation provider)
             /// <summary>
             /// Event name.
             /// </summary>
-            public const string Name = ""{e.Name}"";
+            public const string Name = ""{e.DisplayName}"";
 
             /// <summary>
             /// The event provider.
@@ -1039,9 +1472,11 @@ static string CreateProviderEvents(ProviderInformation provider)
                 Version = {e.Descriptor.Version},
                 Channel = {e.Descriptor.Channel},
                 Level = EtwTraceLevel.{e.Descriptor.Level},
-                Opcode = {(Enum.IsDefined(typeof(EtwEventOpcode), e.Descriptor.Opcode) ? $"EtwEventOpcode.{e.Descriptor.Opcode}" : $"(EtwEventOpcode)Opcodes.{e.OpcodeName}")},
-                Task = {(e.TaskName == null ? e.Descriptor.Task.ToString(CultureInfo.InvariantCulture) : $"(ushort)Tasks.{e.TaskName}")},
-                Keyword = {(e.KeywordName == null ? e.Descriptor.Keyword.ToString(CultureInfo.InvariantCulture) : $"(ulong){(e.KeywordName.Contains(" ") ? "(" : string.Empty)}{e.KeywordName.Split(" ").Aggregate(string.Empty, (s, k) => $"{s}{(string.IsNullOrEmpty(s) ? string.Empty : " | ")}Keywords.{k}")}{(e.KeywordName.Contains(" ") ? ")" : string.Empty)}")}
+                Opcode = {(provider.Opcodes.TryGetValue((ulong)e.Descriptor.Opcode, out var opcodeName) ? $"(EtwEventOpcode)Opcodes.{opcodeName}" : $"EtwEventOpcode.{e.Descriptor.Opcode}")},
+                Task = {(provider.Tasks.TryGetValue(e.Descriptor.Task, out var taskName) ? $"(ushort)Tasks.{taskName}" : e.Descriptor.Task.ToString(CultureInfo.InvariantCulture))},
+                Keyword = {(e.Descriptor.Keyword == 0
+                    ? "0"
+                    : Enumerable.Range(0, 63).Aggregate(string.Empty, (v, k) => (e.Descriptor.Keyword & (1ul << k)) == 0 ? v : $"{(string.IsNullOrEmpty(v) ? v : $"{v} | ")}{(provider.Keywords.TryGetValue(1ul << k, out var keywordName) ? $"(ulong)Keywords.{keywordName}" : $"(ulong)0x{2ul << k:X}")}"))}
             }};
 
             /// <summary>
@@ -1067,7 +1502,7 @@ static string CreateProviderEvents(ProviderInformation provider)
             /// <summary>
             /// Timing information for the event.
             /// </summary>
-            public (ulong? KernelTime, ulong? UserTime, ulong? ProcessorTime) Time => _etwEvent.Time;{(e.Properties == null || e.Properties.Count == 0 ? string.Empty : $@"
+            public (ulong? KernelTime, ulong? UserTime, ulong? ProcessorTime) Time => _etwEvent.Time;{(e.Fields == null || !e.Fields.Any() ? string.Empty : $@"
 
             /// <summary>
             /// Data for the event.
@@ -1081,14 +1516,14 @@ static string CreateProviderEvents(ProviderInformation provider)
             public {e.Name}Event(EtwEvent etwEvent)
             {{
                 _etwEvent = etwEvent;
-            }}{(e.Properties == null || e.Properties.Count == 0 ? string.Empty : $@"
+            }}{(e.Fields == null || !e.Fields.Any() ? string.Empty : $@"
 
             /// <summary>
             /// A data wrapper for a {e.Name} event.
             /// </summary>
-            public readonly ref struct {e.Name}Data
+            public ref struct {e.Name}Data
             {{
-                private readonly EtwEvent _etwEvent;{CreateEventFieldOffsets(e.Properties, fieldOffsets)}{CreateEventFields(e.Properties, fieldOffsets)}
+                private readonly EtwEvent _etwEvent;{CreateEventPropertyOffsetFields(4, false, fields, structs)}{CreateEventPropertyOffsetProperties(4, false, fields, structs)}{CreateEventFields(4, fields, structs)}
 
                 /// <summary>
                 /// Creates a new {e.Name}Data.
@@ -1096,7 +1531,7 @@ static string CreateProviderEvents(ProviderInformation provider)
                 /// <param name=""etwEvent"">The event.</param>
                 public {e.Name}Data(EtwEvent etwEvent)
                 {{
-                    _etwEvent = etwEvent;{CreateEventFieldOffsetInitializers(e.Properties, fieldOffsets)}
+                    _etwEvent = etwEvent;{CreateEventFieldOffsetInitializers(4, false, fields, structs)}
                 }}
             }}
 ")}
@@ -1106,19 +1541,22 @@ static string CreateProviderEvents(ProviderInformation provider)
     return builder.ToString();
 }
 
-static void CreateProvider(ProviderInformation provider)
+static void CreateProvider(Provider provider)
 {
+    var structs = provider.Structs.ToDictionary(s => s.Name, s => s);
+
     var builder = new StringBuilder(@$"using System;
 
+#pragma warning disable IDE0004 // Remove Unnecessary Cast
 #pragma warning disable CA1707 // Identifiers should not contain underscores
 #pragma warning disable CA1720 // Identifier contains type name
 
 namespace EtwTools
 {{
     /// <summary>
-    /// Provider for {provider.Name} ({provider.Id})
+    /// Provider for {provider.DisplayName} ({provider.Id})
     /// </summary>
-    public sealed class {provider.ClassName}Provider
+    public sealed class {provider.Name}Provider
     {{
         /// <summary>s
         /// Provider ID.
@@ -1128,15 +1566,15 @@ namespace EtwTools
         /// <summary>
         /// Provider name.
         /// </summary>
-        public const string Name = ""{provider.Name}"";{CreateProviderTasks(provider)}{CreateProviderOpcodes(provider)}{CreateProviderKeywords(provider)}{CreateProviderEvents(provider)}{CreateProviderMaps(provider)}{CreateProviderStructs(provider)}
+        public const string Name = ""{provider.DisplayName}"";{CreateProviderTasks(provider)}{CreateProviderOpcodes(provider)}{CreateProviderKeywords(provider)}{CreateProviderEvents(provider, structs)}{CreateProviderMaps(provider)}{CreateProviderStructs(provider, structs)}
     }}
 }}
 ");
 
-    File.WriteAllText($"{provider.ClassName}.cs", builder.ToString());
+    File.WriteAllText($"{provider.Name}.cs", builder.ToString());
 }
 
-static void CreateMap(List<ProviderInformation> providers)
+static void CreateMap(List<Provider> providers)
 {
     var builder = new StringBuilder(@"using System;
 using System.Collections.Generic;
@@ -1150,11 +1588,11 @@ namespace EtwTools
     {
         _ = builder.AppendLine(@$"
             {{ 
-                {provider.ClassName}Provider.Id,
+                {provider.Name}Provider.Id,
                 (
-                    {provider.ClassName}Provider.Name, new Dictionary<EtwEventDescriptor, string>
+                    {provider.Name}Provider.Name, new Dictionary<EtwEventDescriptor, string>
                     {{{provider.Events.Aggregate(new StringBuilder(), (s, e) => s.Append($@"
-                        {{ {provider.ClassName}Provider.{e.Name}Event.Descriptor, {provider.ClassName}Provider.{e.Name}Event.Name }},"))}
+                        {{ {provider.Name}Provider.{e.Name}Event.Descriptor, {provider.Name}Provider.{e.Name}Event.Name }},"))}
                     }}
                 )
             }},");
@@ -1165,19 +1603,19 @@ namespace EtwTools
     File.WriteAllText("EtwProvider.generated.cs", builder.ToString());
 }
 
-static void GenerateProvider(string provider)
+static void GenerateProviders(string providers)
 {
-    List<ProviderInformation> providers = new();
-    var path = Path.GetDirectoryName(provider);
+    List<Provider> providerList = new();
 
-    foreach (var file in Directory.GetFiles(string.IsNullOrEmpty(path) ? "." : path, Path.GetFileName(provider)))
+    foreach (var file in Directory.GetFiles(providers))
     {
-        var providerInformation = JsonConvert.DeserializeObject<ProviderInformation>(File.ReadAllText(file));
-        CreateProvider(providerInformation);
-        providers.Add(providerInformation);
+        AnsiConsole.WriteLine($"Processing provider '{file}'.");
+        var provider = JsonConvert.DeserializeObject<Provider>(File.ReadAllText(file));
+        CreateProvider(provider);
+        providerList.Add(provider);
     }
 
-    CreateMap(providers);
+    CreateMap(providerList);
 }
 
 void GetTraceInfo(string trace, bool json)
@@ -1250,11 +1688,13 @@ void GetTraceInfo(string trace, bool json)
     }
 }
 
-static void SaveTraceLoggingProviders(string trace)
+void SaveTraceLoggingProviders(string trace, string add)
 {
     using var logFile = new EtwTrace(trace);
 
+    Dictionary<Guid, string> providers = new();
     Dictionary<Guid, Dictionary<EtwEventDescriptor, EtwEventInfo>> events = new();
+
     var stats = logFile.Open(null, e =>
     {
         if (!e.HasTraceLoggingEventSchema())
@@ -1277,6 +1717,7 @@ static void SaveTraceLoggingProviders(string trace)
             return;
         }
 
+        providers[e.Provider] = eventInfo.ProviderName;
         providerEvents[e.Descriptor] = eventInfo;
     });
 
@@ -1284,22 +1725,19 @@ static void SaveTraceLoggingProviders(string trace)
 
     foreach (var (provider, providerEvents) in events)
     {
-        File.WriteAllText($"{provider}.provider.json",
-            JsonConvert.SerializeObject(new ProviderInformation
-            {
-                Id = provider,
-                Events = providerEvents.Values
-
-            },
-            new JsonSerializerSettings
-            {
-                Formatting = Formatting.Indented,
-                Converters = new[] { new StringEnumConverter() },
-                ContractResolver = new DefaultContractResolver
+        if (add != null)
+        {
+            AddProvider(add, provider, providers[provider], null, null, null, null, null, providerEvents.Values, null);
+        }
+        else
+        {
+            File.WriteAllText($"{provider}.provider.json",
+                JsonConvert.SerializeObject(new
                 {
-                    NamingStrategy = new CamelCaseNamingStrategy()
-                }
-            }));
+                    Id = provider,
+                    Events = providerEvents.Values
+                }, defaultJsonSettings));
+        }
     }
 }
 
@@ -1347,43 +1785,49 @@ static void SaveEventSourceProviders(string trace, bool all)
 
 return await rootCommand.InvokeAsync(args);
 
+internal sealed record Provider
+{
+    public string Name { get; init; }
+    public string DisplayName { get; init; }
+    public Guid Id { get; init; }
+    public IEnumerable<Event> Events { get; init; }
+    public IReadOnlyDictionary<ulong, string> Tasks { get; init; }
+    public IReadOnlyDictionary<ulong, string> Opcodes { get; init; }
+    public IReadOnlyDictionary<ulong, string> Keywords { get; init; }
+    public IEnumerable<Map> Maps { get; init; }
+    public IEnumerable<Struct> Structs { get; init; }
+}
+
+internal sealed record Event
+{
+    public string Name { get; init; }
+    public string DisplayName { get; init; }
+    public EtwEventDescriptor Descriptor { get; init; }
+    public IEnumerable<Field> Fields { get; init; }
+}
+
+internal sealed record Field
+{
+    public string Name { get; init; }
+    public string Datatype { get; init; }
+    public string Map { get; init; }
+}
+
+internal sealed record Struct
+{
+    public string Name { get; init; }
+    public IEnumerable<Field> Fields { get; init; }
+}
+
+internal sealed record Map
+{
+    public string Name { get; init; }
+    public bool Flags { get; init; }
+    public IReadOnlyDictionary<ulong, string> Values { get; init; }
+}
+
 internal enum PublishedSort
 {
     Name,
     Id
-}
-
-internal enum RegisteredSort
-{
-    Id,
-    Count
-}
-
-internal readonly struct EventInformation
-{
-    public IReadOnlyList<EtwEventInfo> Events { get; init; }
-    public IReadOnlyDictionary<string, EtwPropertyMapInfo> Maps { get; init; }
-}
-
-internal sealed record ProviderInformation
-{
-    public Guid Id { get; init; }
-
-    public string Name { get; init; }
-
-    public string ClassName { get; init; }
-
-    public IEnumerable<EtwProviderFieldInfo> Levels { get; init; }
-
-    public IEnumerable<EtwProviderFieldInfo> Channels { get; init; }
-
-    public IEnumerable<EtwProviderFieldInfo> Keywords { get; init; }
-
-    public IEnumerable<EtwProviderFieldInfo> Tasks { get; init; }
-
-    public IEnumerable<EtwProviderFieldInfo> Opcodes { get; init; }
-
-    public IEnumerable<EtwEventInfo> Events { get; init; }
-
-    public IEnumerable<EtwPropertyMapInfo> Maps { get; init; }
 }

@@ -1,0 +1,979 @@
+{
+  "name": "KernelPerfInfo",
+  "displayName": "Kernel-PerfInfo",
+  "id": "ce1dbfb4-137e-4da6-87b0-3f59aa102cbc",
+  "events": [
+    {
+      "name": "Mark",
+      "displayName": "Mark",
+      "descriptor": {
+        "id": 0,
+        "version": 0,
+        "channel": 0,
+        "level": "None",
+        "opcode": 34,
+        "task": 0,
+        "keyword": 0
+      },
+      "fields": [
+        {
+          "name": "Message",
+          "datatype": "ansistring",
+          "map": null
+        },
+        {
+          "name": "Padding",
+          "datatype": "char",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "SampleProf",
+      "displayName": "SampleProf",
+      "descriptor": {
+        "id": 0,
+        "version": 2,
+        "channel": 0,
+        "level": "None",
+        "opcode": 46,
+        "task": 0,
+        "keyword": 0
+      },
+      "fields": [
+        {
+          "name": "InstructionPointer",
+          "datatype": "pointer",
+          "map": null
+        },
+        {
+          "name": "ThreadId",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "Count",
+          "datatype": "ushort",
+          "map": null
+        },
+        {
+          "name": "Reserved",
+          "datatype": "ushort",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "PmcCounterProf",
+      "displayName": "PmcCounterProf",
+      "descriptor": {
+        "id": 0,
+        "version": 2,
+        "channel": 0,
+        "level": "None",
+        "opcode": 47,
+        "task": 0,
+        "keyword": 0
+      },
+      "fields": [
+        {
+          "name": "InstructionPointer",
+          "datatype": "pointer",
+          "map": null
+        },
+        {
+          "name": "ThreadId",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "ProfileSource",
+          "datatype": "ushort",
+          "map": null
+        },
+        {
+          "name": "Reserved",
+          "datatype": "ushort",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "SetInterval",
+      "displayName": "SetInterval",
+      "descriptor": {
+        "id": 0,
+        "version": 2,
+        "channel": 0,
+        "level": "None",
+        "opcode": 72,
+        "task": 0,
+        "keyword": 0
+      },
+      "fields": [
+        {
+          "name": "Source",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "NewInterval",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "OldInterval",
+          "datatype": "uint",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "PmcCtrConfig",
+      "displayName": "PmcCtrConfig",
+      "descriptor": {
+        "id": 0,
+        "version": 2,
+        "channel": 0,
+        "level": "None",
+        "opcode": 48,
+        "task": 0,
+        "keyword": 0
+      },
+      "fields": [
+        {
+          "name": "CounterCount",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "CounterName",
+          "datatype": "string[CounterCount]",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "SysClEnter",
+      "displayName": "SysClEnter",
+      "descriptor": {
+        "id": 0,
+        "version": 2,
+        "channel": 0,
+        "level": "None",
+        "opcode": 51,
+        "task": 0,
+        "keyword": 0
+      },
+      "fields": [
+        {
+          "name": "SysCallAddress",
+          "datatype": "pointer",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "SysClExit",
+      "displayName": "SysClExit",
+      "descriptor": {
+        "id": 0,
+        "version": 2,
+        "channel": 0,
+        "level": "None",
+        "opcode": 52,
+        "task": 0,
+        "keyword": 0
+      },
+      "fields": [
+        {
+          "name": "SysCallNtStatus",
+          "datatype": "uint",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "ISR",
+      "displayName": "ISR",
+      "descriptor": {
+        "id": 0,
+        "version": 2,
+        "channel": 0,
+        "level": "None",
+        "opcode": 67,
+        "task": 0,
+        "keyword": 0
+      },
+      "fields": [
+        {
+          "name": "InitialTime",
+          "datatype": "ulong",
+          "map": null
+        },
+        {
+          "name": "Routine",
+          "datatype": "pointer",
+          "map": null
+        },
+        {
+          "name": "ReturnValue",
+          "datatype": "byte",
+          "map": null
+        },
+        {
+          "name": "Vector",
+          "datatype": "ushort",
+          "map": null
+        },
+        {
+          "name": "Reserved",
+          "datatype": "byte",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "ISR_PASS",
+      "displayName": "ISR_PASS",
+      "descriptor": {
+        "id": 0,
+        "version": 2,
+        "channel": 0,
+        "level": "None",
+        "opcode": 95,
+        "task": 0,
+        "keyword": 0
+      },
+      "fields": [
+        {
+          "name": "InitialTime",
+          "datatype": "ulong",
+          "map": null
+        },
+        {
+          "name": "Routine",
+          "datatype": "pointer",
+          "map": null
+        },
+        {
+          "name": "ReturnValue",
+          "datatype": "byte",
+          "map": null
+        },
+        {
+          "name": "Vector",
+          "datatype": "ushort",
+          "map": null
+        },
+        {
+          "name": "Reserved",
+          "datatype": "byte",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "ISR_MSI",
+      "displayName": "ISR_MSI",
+      "descriptor": {
+        "id": 0,
+        "version": 2,
+        "channel": 0,
+        "level": "None",
+        "opcode": 50,
+        "task": 0,
+        "keyword": 0
+      },
+      "fields": [
+        {
+          "name": "InitialTime",
+          "datatype": "ulong",
+          "map": null
+        },
+        {
+          "name": "Routine",
+          "datatype": "pointer",
+          "map": null
+        },
+        {
+          "name": "ReturnValue",
+          "datatype": "byte",
+          "map": null
+        },
+        {
+          "name": "Vector",
+          "datatype": "ushort",
+          "map": null
+        },
+        {
+          "name": "Reserved",
+          "datatype": "byte",
+          "map": null
+        },
+        {
+          "name": "MessageNumber",
+          "datatype": "uint",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "ISR_Unexpected",
+      "displayName": "ISR_Unexpected",
+      "descriptor": {
+        "id": 0,
+        "version": 2,
+        "channel": 0,
+        "level": "None",
+        "opcode": 92,
+        "task": 0,
+        "keyword": 0
+      },
+      "fields": [
+        {
+          "name": "Vector",
+          "datatype": "ushort",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "ThreadedDPC",
+      "displayName": "ThreadedDPC",
+      "descriptor": {
+        "id": 0,
+        "version": 2,
+        "channel": 0,
+        "level": "None",
+        "opcode": 66,
+        "task": 0,
+        "keyword": 0
+      },
+      "fields": [
+        {
+          "name": "InitialTime",
+          "datatype": "ulong",
+          "map": null
+        },
+        {
+          "name": "Routine",
+          "datatype": "pointer",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "DPC",
+      "displayName": "DPC",
+      "descriptor": {
+        "id": 0,
+        "version": 2,
+        "channel": 0,
+        "level": "None",
+        "opcode": 68,
+        "task": 0,
+        "keyword": 0
+      },
+      "fields": [
+        {
+          "name": "InitialTime",
+          "datatype": "ulong",
+          "map": null
+        },
+        {
+          "name": "Routine",
+          "datatype": "pointer",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "TimerDPC",
+      "displayName": "TimerDPC",
+      "descriptor": {
+        "id": 0,
+        "version": 2,
+        "channel": 0,
+        "level": "None",
+        "opcode": 69,
+        "task": 0,
+        "keyword": 0
+      },
+      "fields": [
+        {
+          "name": "InitialTime",
+          "datatype": "ulong",
+          "map": null
+        },
+        {
+          "name": "Routine",
+          "datatype": "pointer",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "IOTimer",
+      "displayName": "IOTimer",
+      "descriptor": {
+        "id": 0,
+        "version": 2,
+        "channel": 0,
+        "level": "None",
+        "opcode": 70,
+        "task": 0,
+        "keyword": 0
+      },
+      "fields": [
+        {
+          "name": "InitialTime",
+          "datatype": "ulong",
+          "map": null
+        },
+        {
+          "name": "Routine",
+          "datatype": "pointer",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "WdfDPC",
+      "displayName": "WdfDPC",
+      "descriptor": {
+        "id": 0,
+        "version": 2,
+        "channel": 0,
+        "level": "None",
+        "opcode": 98,
+        "task": 0,
+        "keyword": 0
+      },
+      "fields": [
+        {
+          "name": "Routine",
+          "datatype": "pointer",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "WdfISR",
+      "displayName": "WdfISR",
+      "descriptor": {
+        "id": 0,
+        "version": 2,
+        "channel": 0,
+        "level": "None",
+        "opcode": 96,
+        "task": 0,
+        "keyword": 0
+      },
+      "fields": [
+        {
+          "name": "Routine",
+          "datatype": "pointer",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "WdfPassiveISR",
+      "displayName": "WdfPassiveISR",
+      "descriptor": {
+        "id": 0,
+        "version": 2,
+        "channel": 0,
+        "level": "None",
+        "opcode": 97,
+        "task": 0,
+        "keyword": 0
+      },
+      "fields": [
+        {
+          "name": "Routine",
+          "datatype": "pointer",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "WdfWorkItem",
+      "displayName": "WdfWorkItem",
+      "descriptor": {
+        "id": 0,
+        "version": 2,
+        "channel": 0,
+        "level": "None",
+        "opcode": 103,
+        "task": 0,
+        "keyword": 0
+      },
+      "fields": [
+        {
+          "name": "Routine",
+          "datatype": "pointer",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "DebuggerEnabled",
+      "displayName": "DebuggerEnabled",
+      "descriptor": {
+        "id": 0,
+        "version": 2,
+        "channel": 0,
+        "level": "None",
+        "opcode": 58,
+        "task": 0,
+        "keyword": 0
+      },
+      "fields": []
+    },
+    {
+      "name": "IoStartTimer",
+      "displayName": "IoStartTimer",
+      "descriptor": {
+        "id": 0,
+        "version": 2,
+        "channel": 0,
+        "level": "None",
+        "opcode": 93,
+        "task": 0,
+        "keyword": 0
+      },
+      "fields": [
+        {
+          "name": "DeviceObject",
+          "datatype": "pointer",
+          "map": null
+        },
+        {
+          "name": "TimerRoutine",
+          "datatype": "pointer",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "IoStopTimer",
+      "displayName": "IoStopTimer",
+      "descriptor": {
+        "id": 0,
+        "version": 2,
+        "channel": 0,
+        "level": "None",
+        "opcode": 94,
+        "task": 0,
+        "keyword": 0
+      },
+      "fields": [
+        {
+          "name": "DeviceObject",
+          "datatype": "pointer",
+          "map": null
+        },
+        {
+          "name": "TimerRoutine",
+          "datatype": "pointer",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "SetKTimer2",
+      "displayName": "SetKTimer2",
+      "descriptor": {
+        "id": 0,
+        "version": 2,
+        "channel": 0,
+        "level": "None",
+        "opcode": 104,
+        "task": 0,
+        "keyword": 0
+      },
+      "fields": [
+        {
+          "name": "DueTime",
+          "datatype": "ulong",
+          "map": null
+        },
+        {
+          "name": "MaximumDueTime",
+          "datatype": "ulong",
+          "map": null
+        },
+        {
+          "name": "Period",
+          "datatype": "ulong",
+          "map": null
+        },
+        {
+          "name": "Timer",
+          "datatype": "pointer",
+          "map": null
+        },
+        {
+          "name": "Callback",
+          "datatype": "pointer",
+          "map": null
+        },
+        {
+          "name": "CallbackContext",
+          "datatype": "pointer",
+          "map": null
+        },
+        {
+          "name": "TimerFlags",
+          "datatype": "byte",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "ExpireKTimer2",
+      "displayName": "ExpireKTimer2",
+      "descriptor": {
+        "id": 0,
+        "version": 2,
+        "channel": 0,
+        "level": "None",
+        "opcode": 105,
+        "task": 0,
+        "keyword": 0
+      },
+      "fields": [
+        {
+          "name": "DueTime",
+          "datatype": "ulong",
+          "map": null
+        },
+        {
+          "name": "MaximumDueTime",
+          "datatype": "ulong",
+          "map": null
+        },
+        {
+          "name": "Period",
+          "datatype": "ulong",
+          "map": null
+        },
+        {
+          "name": "Timer",
+          "datatype": "pointer",
+          "map": null
+        },
+        {
+          "name": "Callback",
+          "datatype": "pointer",
+          "map": null
+        },
+        {
+          "name": "CallbackContext",
+          "datatype": "pointer",
+          "map": null
+        },
+        {
+          "name": "TimerFlags",
+          "datatype": "byte",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "CancelKTimer2",
+      "displayName": "CancelKTimer2",
+      "descriptor": {
+        "id": 0,
+        "version": 2,
+        "channel": 0,
+        "level": "None",
+        "opcode": 106,
+        "task": 0,
+        "keyword": 0
+      },
+      "fields": [
+        {
+          "name": "Timer",
+          "datatype": "pointer",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "DisableKTimer2",
+      "displayName": "DisableKTimer2",
+      "descriptor": {
+        "id": 0,
+        "version": 2,
+        "channel": 0,
+        "level": "None",
+        "opcode": 107,
+        "task": 0,
+        "keyword": 0
+      },
+      "fields": [
+        {
+          "name": "Timer",
+          "datatype": "pointer",
+          "map": null
+        },
+        {
+          "name": "DisableCallback",
+          "datatype": "pointer",
+          "map": null
+        },
+        {
+          "name": "DisableContext",
+          "datatype": "pointer",
+          "map": null
+        },
+        {
+          "name": "TimerFlags",
+          "datatype": "byte",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "FinalizeKTimer2",
+      "displayName": "FinalizeKTimer2",
+      "descriptor": {
+        "id": 0,
+        "version": 2,
+        "channel": 0,
+        "level": "None",
+        "opcode": 108,
+        "task": 0,
+        "keyword": 0
+      },
+      "fields": [
+        {
+          "name": "Timer",
+          "datatype": "pointer",
+          "map": null
+        },
+        {
+          "name": "DisableCallback",
+          "datatype": "pointer",
+          "map": null
+        },
+        {
+          "name": "DisableContext",
+          "datatype": "pointer",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "KernelHypercall",
+      "displayName": "KernelHypercall",
+      "descriptor": {
+        "id": 0,
+        "version": 2,
+        "channel": 0,
+        "level": "None",
+        "opcode": 114,
+        "task": 0,
+        "keyword": 0
+      },
+      "fields": [
+        {
+          "name": "CallCode",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "IsFast",
+          "datatype": "byte",
+          "map": null
+        },
+        {
+          "name": "IsNested",
+          "datatype": "byte",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "SampledProfileIntervalCollectionStart",
+      "displayName": "SampledProfileIntervalCollectionStart",
+      "descriptor": {
+        "id": 0,
+        "version": 3,
+        "channel": 0,
+        "level": "None",
+        "opcode": 73,
+        "task": 0,
+        "keyword": 0
+      },
+      "fields": [
+        {
+          "name": "Source",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "NewInterval",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "OldInterval",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "SourceName",
+          "datatype": "string",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "SampledProfileIntervalCollectionEnd",
+      "displayName": "SampledProfileIntervalCollectionEnd",
+      "descriptor": {
+        "id": 0,
+        "version": 3,
+        "channel": 0,
+        "level": "None",
+        "opcode": 74,
+        "task": 0,
+        "keyword": 0
+      },
+      "fields": [
+        {
+          "name": "Source",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "NewInterval",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "OldInterval",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "SourceName",
+          "datatype": "string",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "SpinlockConfigureCollectionStart",
+      "displayName": "SpinlockConfigureCollectionStart",
+      "descriptor": {
+        "id": 0,
+        "version": 3,
+        "channel": 0,
+        "level": "None",
+        "opcode": 75,
+        "task": 0,
+        "keyword": 0
+      },
+      "fields": [
+        {
+          "name": "SpinLockSpinThreshold",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "SpinLockContentionSampleRate",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "SpinLockAcquireSampleRate",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "SpinLockHoldThreshold",
+          "datatype": "uint",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "SpinlockConfigureCollectionEnd",
+      "displayName": "SpinlockConfigureCollectionEnd",
+      "descriptor": {
+        "id": 0,
+        "version": 3,
+        "channel": 0,
+        "level": "None",
+        "opcode": 76,
+        "task": 0,
+        "keyword": 0
+      },
+      "fields": [
+        {
+          "name": "SpinLockSpinThreshold",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "SpinLockContentionSampleRate",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "SpinLockAcquireSampleRate",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "SpinLockHoldThreshold",
+          "datatype": "uint",
+          "map": null
+        }
+      ]
+    }
+  ],
+  "tasks": {},
+  "opcodes": {
+    "34": "Mark",
+    "46": "SampleProf",
+    "47": "PmcCounterProf",
+    "48": "PmcCtrConfig",
+    "50": "ISR_MSI",
+    "51": "SysClEnter",
+    "52": "SysClExit",
+    "58": "DebuggerEnabled",
+    "66": "ThreadedDPC",
+    "67": "ISR",
+    "68": "DPC",
+    "69": "TimerDPC",
+    "70": "IOTimer",
+    "72": "SetInterval",
+    "73": "SampledProfileIntervalCollectionStart",
+    "74": "SampledProfileIntervalCollectionEnd",
+    "75": "SpinlockConfigureCollectionStart",
+    "76": "SpinlockConfigureCollectionEnd",
+    "92": "ISR_Unexpected",
+    "93": "IoStartTimer",
+    "94": "IoStopTimer",
+    "95": "ISR_PASS",
+    "96": "WdfISR",
+    "97": "WdfPassiveISR",
+    "98": "WdfDPC",
+    "103": "WdfWorkItem",
+    "104": "SetKTimer2",
+    "105": "ExpireKTimer2",
+    "106": "CancelKTimer2",
+    "107": "DisableKTimer2",
+    "108": "FinalizeKTimer2",
+    "114": "KernelHypercall"
+  },
+  "keywords": {},
+  "maps": [],
+  "structs": []
+}

@@ -150,13 +150,65 @@ namespace EtwTools
                 return;
             }
 
-            var properties = new EtwPropertyInfo[eventInfo->PropertyCount];
-            for (var i = 0; i < eventInfo->PropertyCount; i++)
+            var properties = new EtwPropertyInfo[eventInfo->TopLevelPropertyCount];
+            for (var i = 0; i < eventInfo->TopLevelPropertyCount; i++)
             {
-                var currentProperty = (Native.EventPropertyInfo*)(eventBuffer + sizeof(Native.TraceEventInfo) + (sizeof(Native.EventPropertyInfo) * i));
-                properties[i] = EtwPropertyInfo.Create(eventInfo, currentProperty);
+                properties[i] = Create(eventInfo, i);
             }
             Properties = properties;
+        }
+
+        internal static unsafe EtwPropertyInfo Create(Native.TraceEventInfo* eventInfo, int index)
+        {
+            var eventBuffer = (byte*)eventInfo;
+
+            string GetString(uint offset) => new((char*)(eventBuffer + offset));
+            Native.EventPropertyInfo* GetProperty(int index) => (Native.EventPropertyInfo*)(eventBuffer + sizeof(Native.TraceEventInfo) + (sizeof(Native.EventPropertyInfo) * index));
+
+            var propertyInfo = GetProperty(index);
+            if ((propertyInfo->PropertyFlags & Native.PropertyFlags.HasCustomSchema) != 0)
+            {
+                throw new InvalidOperationException();
+            }
+
+            var name = GetString(propertyInfo->NameOffset);
+            object length = ((propertyInfo->PropertyFlags & Native.PropertyFlags.ParamLength) != 0)
+                ? GetString(GetProperty(propertyInfo->Length)->NameOffset)
+                : propertyInfo->Length;
+            object count = ((propertyInfo->PropertyFlags & Native.PropertyFlags.ParamCount) != 0)
+                ? GetString(GetProperty(propertyInfo->Count)->NameOffset)
+                : propertyInfo->Count;
+
+            if ((propertyInfo->PropertyFlags & Native.PropertyFlags.Struct) != 0)
+            {
+                var properties = new EtwPropertyInfo[propertyInfo->Union2];
+                for (var i = 0; i < propertyInfo->Union2; i++)
+                {
+                    properties[i] = Create(eventInfo, i + propertyInfo->Union1);
+                }
+
+                return new EtwPropertyInfo
+                {
+                    Name = name,
+                    Length = length,
+                    Count = count,
+                    Properties = properties,
+                    Tags = propertyInfo->Tags
+                };
+            }
+            else
+            {
+                return new EtwPropertyInfo
+                {
+                    Name = name,
+                    InputType = (EtwInputType)propertyInfo->Union1,
+                    OutputType = (EtwOutputType)propertyInfo->Union2,
+                    MapName = propertyInfo->Union3 == 0 ? null : new string((char*)(((byte*)eventInfo) + propertyInfo->Union3)),
+                    Length = length,
+                    Count = count,
+                    Tags = propertyInfo->Tags
+                };
+            }
         }
     }
 }

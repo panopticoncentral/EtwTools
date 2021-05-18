@@ -1,5 +1,6 @@
 using System;
 
+#pragma warning disable IDE0004 // Remove Unnecessary Cast
 #pragma warning disable CA1707 // Identifiers should not contain underscores
 #pragma warning disable CA1720 // Identifier contains type name
 
@@ -140,7 +141,7 @@ namespace EtwTools
         }
 
         /// <summary>
-        /// Opcodes supported by System.Diagnostics.Eventing.FrameworkEventSource.
+        /// Opcodes supported by FrameworkEventSource.
         /// </summary>
         public enum Opcodes
         {
@@ -151,7 +152,7 @@ namespace EtwTools
         }
 
         /// <summary>
-        /// Keywords supported by System.Diagnostics.Eventing.FrameworkEventSource.
+        /// Keywords supported by FrameworkEventSource.
         /// </summary>
         [Flags]
         public enum Keywords : ulong
@@ -267,11 +268,24 @@ namespace EtwTools
             /// <summary>
             /// A data wrapper for a EventSourceMessage event.
             /// </summary>
-            public readonly ref struct EventSourceMessageData
+            public ref struct EventSourceMessageData
             {
                 private readonly EtwEvent _etwEvent;
 
-                private const int Offset_Message = 0;
+                private int _offset_Message;
+
+                private int Offset_Message
+                {
+                    get
+                    {
+                        if (_offset_Message == -1)
+                        {
+                            _offset_Message = 0;
+                        }
+
+                        return _offset_Message;
+                    }
+                }
 
                 /// <summary>
                 /// Retrieves the Message field.
@@ -285,6 +299,7 @@ namespace EtwTools
                 public EventSourceMessageData(EtwEvent etwEvent)
                 {
                     _etwEvent = etwEvent;
+                    _offset_Message = -1;
                 }
             }
 
@@ -363,28 +378,67 @@ namespace EtwTools
             /// <summary>
             /// A data wrapper for a ResourceManagerLookupStarted event.
             /// </summary>
-            public readonly ref struct ResourceManagerLookupStartedData
+            public ref struct ResourceManagerLookupStartedData
             {
                 private readonly EtwEvent _etwEvent;
 
-                private const int Offset_BaseName = 0;
-                private readonly int _offset_MainAssemblyName;
-                private readonly int _offset_CultureName;
+                private int _offset_BaseName;
+                private int _offset_MainAssemblyName;
+                private int _offset_CultureName;
+
+                private int Offset_BaseName
+                {
+                    get
+                    {
+                        if (_offset_BaseName == -1)
+                        {
+                            _offset_BaseName = 0;
+                        }
+
+                        return _offset_BaseName;
+                    }
+                }
+
+                private int Offset_MainAssemblyName
+                {
+                    get
+                    {
+                        if (_offset_MainAssemblyName == -1)
+                        {
+                            _offset_MainAssemblyName = Offset_BaseName + EtwEvent.UnicodeStringEnumerable.UnicodeStringEnumerator.StringLength(_etwEvent.Data, Offset_BaseName);
+                        }
+
+                        return _offset_MainAssemblyName;
+                    }
+                }
+
+                private int Offset_CultureName
+                {
+                    get
+                    {
+                        if (_offset_CultureName == -1)
+                        {
+                            _offset_CultureName = Offset_MainAssemblyName + EtwEvent.UnicodeStringEnumerable.UnicodeStringEnumerator.StringLength(_etwEvent.Data, Offset_MainAssemblyName);
+                        }
+
+                        return _offset_CultureName;
+                    }
+                }
 
                 /// <summary>
                 /// Retrieves the BaseName field.
                 /// </summary>
-                public string BaseName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_BaseName.._offset_MainAssemblyName]);
+                public string BaseName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_BaseName..]);
 
                 /// <summary>
                 /// Retrieves the MainAssemblyName field.
                 /// </summary>
-                public string MainAssemblyName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[_offset_MainAssemblyName.._offset_CultureName]);
+                public string MainAssemblyName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_MainAssemblyName..]);
 
                 /// <summary>
                 /// Retrieves the CultureName field.
                 /// </summary>
-                public string CultureName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[_offset_CultureName..]);
+                public string CultureName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_CultureName..]);
 
                 /// <summary>
                 /// Creates a new ResourceManagerLookupStartedData.
@@ -393,8 +447,9 @@ namespace EtwTools
                 public ResourceManagerLookupStartedData(EtwEvent etwEvent)
                 {
                     _etwEvent = etwEvent;
-                    _offset_MainAssemblyName = Offset_BaseName + EtwEvent.UnicodeStringEnumerable.UnicodeStringEnumerator.StringLength(etwEvent.Data, Offset_BaseName);
-                    _offset_CultureName = _offset_MainAssemblyName + EtwEvent.UnicodeStringEnumerable.UnicodeStringEnumerator.StringLength(etwEvent.Data, _offset_MainAssemblyName);
+                    _offset_BaseName = -1;
+                    _offset_MainAssemblyName = -1;
+                    _offset_CultureName = -1;
                 }
             }
 
@@ -473,28 +528,67 @@ namespace EtwTools
             /// <summary>
             /// A data wrapper for a ResourceManagerLookingForResourceSet event.
             /// </summary>
-            public readonly ref struct ResourceManagerLookingForResourceSetData
+            public ref struct ResourceManagerLookingForResourceSetData
             {
                 private readonly EtwEvent _etwEvent;
 
-                private const int Offset_BaseName = 0;
-                private readonly int _offset_MainAssemblyName;
-                private readonly int _offset_CultureName;
+                private int _offset_BaseName;
+                private int _offset_MainAssemblyName;
+                private int _offset_CultureName;
+
+                private int Offset_BaseName
+                {
+                    get
+                    {
+                        if (_offset_BaseName == -1)
+                        {
+                            _offset_BaseName = 0;
+                        }
+
+                        return _offset_BaseName;
+                    }
+                }
+
+                private int Offset_MainAssemblyName
+                {
+                    get
+                    {
+                        if (_offset_MainAssemblyName == -1)
+                        {
+                            _offset_MainAssemblyName = Offset_BaseName + EtwEvent.UnicodeStringEnumerable.UnicodeStringEnumerator.StringLength(_etwEvent.Data, Offset_BaseName);
+                        }
+
+                        return _offset_MainAssemblyName;
+                    }
+                }
+
+                private int Offset_CultureName
+                {
+                    get
+                    {
+                        if (_offset_CultureName == -1)
+                        {
+                            _offset_CultureName = Offset_MainAssemblyName + EtwEvent.UnicodeStringEnumerable.UnicodeStringEnumerator.StringLength(_etwEvent.Data, Offset_MainAssemblyName);
+                        }
+
+                        return _offset_CultureName;
+                    }
+                }
 
                 /// <summary>
                 /// Retrieves the BaseName field.
                 /// </summary>
-                public string BaseName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_BaseName.._offset_MainAssemblyName]);
+                public string BaseName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_BaseName..]);
 
                 /// <summary>
                 /// Retrieves the MainAssemblyName field.
                 /// </summary>
-                public string MainAssemblyName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[_offset_MainAssemblyName.._offset_CultureName]);
+                public string MainAssemblyName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_MainAssemblyName..]);
 
                 /// <summary>
                 /// Retrieves the CultureName field.
                 /// </summary>
-                public string CultureName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[_offset_CultureName..]);
+                public string CultureName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_CultureName..]);
 
                 /// <summary>
                 /// Creates a new ResourceManagerLookingForResourceSetData.
@@ -503,8 +597,9 @@ namespace EtwTools
                 public ResourceManagerLookingForResourceSetData(EtwEvent etwEvent)
                 {
                     _etwEvent = etwEvent;
-                    _offset_MainAssemblyName = Offset_BaseName + EtwEvent.UnicodeStringEnumerable.UnicodeStringEnumerator.StringLength(etwEvent.Data, Offset_BaseName);
-                    _offset_CultureName = _offset_MainAssemblyName + EtwEvent.UnicodeStringEnumerable.UnicodeStringEnumerator.StringLength(etwEvent.Data, _offset_MainAssemblyName);
+                    _offset_BaseName = -1;
+                    _offset_MainAssemblyName = -1;
+                    _offset_CultureName = -1;
                 }
             }
 
@@ -583,28 +678,67 @@ namespace EtwTools
             /// <summary>
             /// A data wrapper for a ResourceManagerFoundResourceSetInCache event.
             /// </summary>
-            public readonly ref struct ResourceManagerFoundResourceSetInCacheData
+            public ref struct ResourceManagerFoundResourceSetInCacheData
             {
                 private readonly EtwEvent _etwEvent;
 
-                private const int Offset_BaseName = 0;
-                private readonly int _offset_MainAssemblyName;
-                private readonly int _offset_CultureName;
+                private int _offset_BaseName;
+                private int _offset_MainAssemblyName;
+                private int _offset_CultureName;
+
+                private int Offset_BaseName
+                {
+                    get
+                    {
+                        if (_offset_BaseName == -1)
+                        {
+                            _offset_BaseName = 0;
+                        }
+
+                        return _offset_BaseName;
+                    }
+                }
+
+                private int Offset_MainAssemblyName
+                {
+                    get
+                    {
+                        if (_offset_MainAssemblyName == -1)
+                        {
+                            _offset_MainAssemblyName = Offset_BaseName + EtwEvent.UnicodeStringEnumerable.UnicodeStringEnumerator.StringLength(_etwEvent.Data, Offset_BaseName);
+                        }
+
+                        return _offset_MainAssemblyName;
+                    }
+                }
+
+                private int Offset_CultureName
+                {
+                    get
+                    {
+                        if (_offset_CultureName == -1)
+                        {
+                            _offset_CultureName = Offset_MainAssemblyName + EtwEvent.UnicodeStringEnumerable.UnicodeStringEnumerator.StringLength(_etwEvent.Data, Offset_MainAssemblyName);
+                        }
+
+                        return _offset_CultureName;
+                    }
+                }
 
                 /// <summary>
                 /// Retrieves the BaseName field.
                 /// </summary>
-                public string BaseName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_BaseName.._offset_MainAssemblyName]);
+                public string BaseName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_BaseName..]);
 
                 /// <summary>
                 /// Retrieves the MainAssemblyName field.
                 /// </summary>
-                public string MainAssemblyName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[_offset_MainAssemblyName.._offset_CultureName]);
+                public string MainAssemblyName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_MainAssemblyName..]);
 
                 /// <summary>
                 /// Retrieves the CultureName field.
                 /// </summary>
-                public string CultureName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[_offset_CultureName..]);
+                public string CultureName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_CultureName..]);
 
                 /// <summary>
                 /// Creates a new ResourceManagerFoundResourceSetInCacheData.
@@ -613,8 +747,9 @@ namespace EtwTools
                 public ResourceManagerFoundResourceSetInCacheData(EtwEvent etwEvent)
                 {
                     _etwEvent = etwEvent;
-                    _offset_MainAssemblyName = Offset_BaseName + EtwEvent.UnicodeStringEnumerable.UnicodeStringEnumerator.StringLength(etwEvent.Data, Offset_BaseName);
-                    _offset_CultureName = _offset_MainAssemblyName + EtwEvent.UnicodeStringEnumerable.UnicodeStringEnumerator.StringLength(etwEvent.Data, _offset_MainAssemblyName);
+                    _offset_BaseName = -1;
+                    _offset_MainAssemblyName = -1;
+                    _offset_CultureName = -1;
                 }
             }
 
@@ -693,28 +828,67 @@ namespace EtwTools
             /// <summary>
             /// A data wrapper for a ResourceManagerFoundResourceSetInCacheUnexpected event.
             /// </summary>
-            public readonly ref struct ResourceManagerFoundResourceSetInCacheUnexpectedData
+            public ref struct ResourceManagerFoundResourceSetInCacheUnexpectedData
             {
                 private readonly EtwEvent _etwEvent;
 
-                private const int Offset_BaseName = 0;
-                private readonly int _offset_MainAssemblyName;
-                private readonly int _offset_CultureName;
+                private int _offset_BaseName;
+                private int _offset_MainAssemblyName;
+                private int _offset_CultureName;
+
+                private int Offset_BaseName
+                {
+                    get
+                    {
+                        if (_offset_BaseName == -1)
+                        {
+                            _offset_BaseName = 0;
+                        }
+
+                        return _offset_BaseName;
+                    }
+                }
+
+                private int Offset_MainAssemblyName
+                {
+                    get
+                    {
+                        if (_offset_MainAssemblyName == -1)
+                        {
+                            _offset_MainAssemblyName = Offset_BaseName + EtwEvent.UnicodeStringEnumerable.UnicodeStringEnumerator.StringLength(_etwEvent.Data, Offset_BaseName);
+                        }
+
+                        return _offset_MainAssemblyName;
+                    }
+                }
+
+                private int Offset_CultureName
+                {
+                    get
+                    {
+                        if (_offset_CultureName == -1)
+                        {
+                            _offset_CultureName = Offset_MainAssemblyName + EtwEvent.UnicodeStringEnumerable.UnicodeStringEnumerator.StringLength(_etwEvent.Data, Offset_MainAssemblyName);
+                        }
+
+                        return _offset_CultureName;
+                    }
+                }
 
                 /// <summary>
                 /// Retrieves the BaseName field.
                 /// </summary>
-                public string BaseName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_BaseName.._offset_MainAssemblyName]);
+                public string BaseName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_BaseName..]);
 
                 /// <summary>
                 /// Retrieves the MainAssemblyName field.
                 /// </summary>
-                public string MainAssemblyName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[_offset_MainAssemblyName.._offset_CultureName]);
+                public string MainAssemblyName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_MainAssemblyName..]);
 
                 /// <summary>
                 /// Retrieves the CultureName field.
                 /// </summary>
-                public string CultureName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[_offset_CultureName..]);
+                public string CultureName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_CultureName..]);
 
                 /// <summary>
                 /// Creates a new ResourceManagerFoundResourceSetInCacheUnexpectedData.
@@ -723,8 +897,9 @@ namespace EtwTools
                 public ResourceManagerFoundResourceSetInCacheUnexpectedData(EtwEvent etwEvent)
                 {
                     _etwEvent = etwEvent;
-                    _offset_MainAssemblyName = Offset_BaseName + EtwEvent.UnicodeStringEnumerable.UnicodeStringEnumerator.StringLength(etwEvent.Data, Offset_BaseName);
-                    _offset_CultureName = _offset_MainAssemblyName + EtwEvent.UnicodeStringEnumerable.UnicodeStringEnumerator.StringLength(etwEvent.Data, _offset_MainAssemblyName);
+                    _offset_BaseName = -1;
+                    _offset_MainAssemblyName = -1;
+                    _offset_CultureName = -1;
                 }
             }
 
@@ -803,40 +978,105 @@ namespace EtwTools
             /// <summary>
             /// A data wrapper for a ResourceManagerStreamFound event.
             /// </summary>
-            public readonly ref struct ResourceManagerStreamFoundData
+            public ref struct ResourceManagerStreamFoundData
             {
                 private readonly EtwEvent _etwEvent;
 
-                private const int Offset_BaseName = 0;
-                private readonly int _offset_MainAssemblyName;
-                private readonly int _offset_CultureName;
-                private readonly int _offset_LoadedAssemblyName;
-                private readonly int _offset_ResourceFileName;
+                private int _offset_BaseName;
+                private int _offset_MainAssemblyName;
+                private int _offset_CultureName;
+                private int _offset_LoadedAssemblyName;
+                private int _offset_ResourceFileName;
+
+                private int Offset_BaseName
+                {
+                    get
+                    {
+                        if (_offset_BaseName == -1)
+                        {
+                            _offset_BaseName = 0;
+                        }
+
+                        return _offset_BaseName;
+                    }
+                }
+
+                private int Offset_MainAssemblyName
+                {
+                    get
+                    {
+                        if (_offset_MainAssemblyName == -1)
+                        {
+                            _offset_MainAssemblyName = Offset_BaseName + EtwEvent.UnicodeStringEnumerable.UnicodeStringEnumerator.StringLength(_etwEvent.Data, Offset_BaseName);
+                        }
+
+                        return _offset_MainAssemblyName;
+                    }
+                }
+
+                private int Offset_CultureName
+                {
+                    get
+                    {
+                        if (_offset_CultureName == -1)
+                        {
+                            _offset_CultureName = Offset_MainAssemblyName + EtwEvent.UnicodeStringEnumerable.UnicodeStringEnumerator.StringLength(_etwEvent.Data, Offset_MainAssemblyName);
+                        }
+
+                        return _offset_CultureName;
+                    }
+                }
+
+                private int Offset_LoadedAssemblyName
+                {
+                    get
+                    {
+                        if (_offset_LoadedAssemblyName == -1)
+                        {
+                            _offset_LoadedAssemblyName = Offset_CultureName + EtwEvent.UnicodeStringEnumerable.UnicodeStringEnumerator.StringLength(_etwEvent.Data, Offset_CultureName);
+                        }
+
+                        return _offset_LoadedAssemblyName;
+                    }
+                }
+
+                private int Offset_ResourceFileName
+                {
+                    get
+                    {
+                        if (_offset_ResourceFileName == -1)
+                        {
+                            _offset_ResourceFileName = Offset_LoadedAssemblyName + EtwEvent.UnicodeStringEnumerable.UnicodeStringEnumerator.StringLength(_etwEvent.Data, Offset_LoadedAssemblyName);
+                        }
+
+                        return _offset_ResourceFileName;
+                    }
+                }
 
                 /// <summary>
                 /// Retrieves the BaseName field.
                 /// </summary>
-                public string BaseName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_BaseName.._offset_MainAssemblyName]);
+                public string BaseName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_BaseName..]);
 
                 /// <summary>
                 /// Retrieves the MainAssemblyName field.
                 /// </summary>
-                public string MainAssemblyName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[_offset_MainAssemblyName.._offset_CultureName]);
+                public string MainAssemblyName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_MainAssemblyName..]);
 
                 /// <summary>
                 /// Retrieves the CultureName field.
                 /// </summary>
-                public string CultureName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[_offset_CultureName.._offset_LoadedAssemblyName]);
+                public string CultureName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_CultureName..]);
 
                 /// <summary>
                 /// Retrieves the LoadedAssemblyName field.
                 /// </summary>
-                public string LoadedAssemblyName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[_offset_LoadedAssemblyName.._offset_ResourceFileName]);
+                public string LoadedAssemblyName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_LoadedAssemblyName..]);
 
                 /// <summary>
                 /// Retrieves the ResourceFileName field.
                 /// </summary>
-                public string ResourceFileName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[_offset_ResourceFileName..]);
+                public string ResourceFileName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_ResourceFileName..]);
 
                 /// <summary>
                 /// Creates a new ResourceManagerStreamFoundData.
@@ -845,10 +1085,11 @@ namespace EtwTools
                 public ResourceManagerStreamFoundData(EtwEvent etwEvent)
                 {
                     _etwEvent = etwEvent;
-                    _offset_MainAssemblyName = Offset_BaseName + EtwEvent.UnicodeStringEnumerable.UnicodeStringEnumerator.StringLength(etwEvent.Data, Offset_BaseName);
-                    _offset_CultureName = _offset_MainAssemblyName + EtwEvent.UnicodeStringEnumerable.UnicodeStringEnumerator.StringLength(etwEvent.Data, _offset_MainAssemblyName);
-                    _offset_LoadedAssemblyName = _offset_CultureName + EtwEvent.UnicodeStringEnumerable.UnicodeStringEnumerator.StringLength(etwEvent.Data, _offset_CultureName);
-                    _offset_ResourceFileName = _offset_LoadedAssemblyName + EtwEvent.UnicodeStringEnumerable.UnicodeStringEnumerator.StringLength(etwEvent.Data, _offset_LoadedAssemblyName);
+                    _offset_BaseName = -1;
+                    _offset_MainAssemblyName = -1;
+                    _offset_CultureName = -1;
+                    _offset_LoadedAssemblyName = -1;
+                    _offset_ResourceFileName = -1;
                 }
             }
 
@@ -927,40 +1168,105 @@ namespace EtwTools
             /// <summary>
             /// A data wrapper for a ResourceManagerStreamNotFound event.
             /// </summary>
-            public readonly ref struct ResourceManagerStreamNotFoundData
+            public ref struct ResourceManagerStreamNotFoundData
             {
                 private readonly EtwEvent _etwEvent;
 
-                private const int Offset_BaseName = 0;
-                private readonly int _offset_MainAssemblyName;
-                private readonly int _offset_CultureName;
-                private readonly int _offset_LoadedAssemblyName;
-                private readonly int _offset_ResourceFileName;
+                private int _offset_BaseName;
+                private int _offset_MainAssemblyName;
+                private int _offset_CultureName;
+                private int _offset_LoadedAssemblyName;
+                private int _offset_ResourceFileName;
+
+                private int Offset_BaseName
+                {
+                    get
+                    {
+                        if (_offset_BaseName == -1)
+                        {
+                            _offset_BaseName = 0;
+                        }
+
+                        return _offset_BaseName;
+                    }
+                }
+
+                private int Offset_MainAssemblyName
+                {
+                    get
+                    {
+                        if (_offset_MainAssemblyName == -1)
+                        {
+                            _offset_MainAssemblyName = Offset_BaseName + EtwEvent.UnicodeStringEnumerable.UnicodeStringEnumerator.StringLength(_etwEvent.Data, Offset_BaseName);
+                        }
+
+                        return _offset_MainAssemblyName;
+                    }
+                }
+
+                private int Offset_CultureName
+                {
+                    get
+                    {
+                        if (_offset_CultureName == -1)
+                        {
+                            _offset_CultureName = Offset_MainAssemblyName + EtwEvent.UnicodeStringEnumerable.UnicodeStringEnumerator.StringLength(_etwEvent.Data, Offset_MainAssemblyName);
+                        }
+
+                        return _offset_CultureName;
+                    }
+                }
+
+                private int Offset_LoadedAssemblyName
+                {
+                    get
+                    {
+                        if (_offset_LoadedAssemblyName == -1)
+                        {
+                            _offset_LoadedAssemblyName = Offset_CultureName + EtwEvent.UnicodeStringEnumerable.UnicodeStringEnumerator.StringLength(_etwEvent.Data, Offset_CultureName);
+                        }
+
+                        return _offset_LoadedAssemblyName;
+                    }
+                }
+
+                private int Offset_ResourceFileName
+                {
+                    get
+                    {
+                        if (_offset_ResourceFileName == -1)
+                        {
+                            _offset_ResourceFileName = Offset_LoadedAssemblyName + EtwEvent.UnicodeStringEnumerable.UnicodeStringEnumerator.StringLength(_etwEvent.Data, Offset_LoadedAssemblyName);
+                        }
+
+                        return _offset_ResourceFileName;
+                    }
+                }
 
                 /// <summary>
                 /// Retrieves the BaseName field.
                 /// </summary>
-                public string BaseName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_BaseName.._offset_MainAssemblyName]);
+                public string BaseName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_BaseName..]);
 
                 /// <summary>
                 /// Retrieves the MainAssemblyName field.
                 /// </summary>
-                public string MainAssemblyName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[_offset_MainAssemblyName.._offset_CultureName]);
+                public string MainAssemblyName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_MainAssemblyName..]);
 
                 /// <summary>
                 /// Retrieves the CultureName field.
                 /// </summary>
-                public string CultureName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[_offset_CultureName.._offset_LoadedAssemblyName]);
+                public string CultureName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_CultureName..]);
 
                 /// <summary>
                 /// Retrieves the LoadedAssemblyName field.
                 /// </summary>
-                public string LoadedAssemblyName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[_offset_LoadedAssemblyName.._offset_ResourceFileName]);
+                public string LoadedAssemblyName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_LoadedAssemblyName..]);
 
                 /// <summary>
                 /// Retrieves the ResourceFileName field.
                 /// </summary>
-                public string ResourceFileName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[_offset_ResourceFileName..]);
+                public string ResourceFileName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_ResourceFileName..]);
 
                 /// <summary>
                 /// Creates a new ResourceManagerStreamNotFoundData.
@@ -969,10 +1275,11 @@ namespace EtwTools
                 public ResourceManagerStreamNotFoundData(EtwEvent etwEvent)
                 {
                     _etwEvent = etwEvent;
-                    _offset_MainAssemblyName = Offset_BaseName + EtwEvent.UnicodeStringEnumerable.UnicodeStringEnumerator.StringLength(etwEvent.Data, Offset_BaseName);
-                    _offset_CultureName = _offset_MainAssemblyName + EtwEvent.UnicodeStringEnumerable.UnicodeStringEnumerator.StringLength(etwEvent.Data, _offset_MainAssemblyName);
-                    _offset_LoadedAssemblyName = _offset_CultureName + EtwEvent.UnicodeStringEnumerable.UnicodeStringEnumerator.StringLength(etwEvent.Data, _offset_CultureName);
-                    _offset_ResourceFileName = _offset_LoadedAssemblyName + EtwEvent.UnicodeStringEnumerable.UnicodeStringEnumerator.StringLength(etwEvent.Data, _offset_LoadedAssemblyName);
+                    _offset_BaseName = -1;
+                    _offset_MainAssemblyName = -1;
+                    _offset_CultureName = -1;
+                    _offset_LoadedAssemblyName = -1;
+                    _offset_ResourceFileName = -1;
                 }
             }
 
@@ -1051,34 +1358,86 @@ namespace EtwTools
             /// <summary>
             /// A data wrapper for a ResourceManagerGetSatelliteAssemblySucceeded event.
             /// </summary>
-            public readonly ref struct ResourceManagerGetSatelliteAssemblySucceededData
+            public ref struct ResourceManagerGetSatelliteAssemblySucceededData
             {
                 private readonly EtwEvent _etwEvent;
 
-                private const int Offset_BaseName = 0;
-                private readonly int _offset_MainAssemblyName;
-                private readonly int _offset_CultureName;
-                private readonly int _offset_AssemblyName;
+                private int _offset_BaseName;
+                private int _offset_MainAssemblyName;
+                private int _offset_CultureName;
+                private int _offset_AssemblyName;
+
+                private int Offset_BaseName
+                {
+                    get
+                    {
+                        if (_offset_BaseName == -1)
+                        {
+                            _offset_BaseName = 0;
+                        }
+
+                        return _offset_BaseName;
+                    }
+                }
+
+                private int Offset_MainAssemblyName
+                {
+                    get
+                    {
+                        if (_offset_MainAssemblyName == -1)
+                        {
+                            _offset_MainAssemblyName = Offset_BaseName + EtwEvent.UnicodeStringEnumerable.UnicodeStringEnumerator.StringLength(_etwEvent.Data, Offset_BaseName);
+                        }
+
+                        return _offset_MainAssemblyName;
+                    }
+                }
+
+                private int Offset_CultureName
+                {
+                    get
+                    {
+                        if (_offset_CultureName == -1)
+                        {
+                            _offset_CultureName = Offset_MainAssemblyName + EtwEvent.UnicodeStringEnumerable.UnicodeStringEnumerator.StringLength(_etwEvent.Data, Offset_MainAssemblyName);
+                        }
+
+                        return _offset_CultureName;
+                    }
+                }
+
+                private int Offset_AssemblyName
+                {
+                    get
+                    {
+                        if (_offset_AssemblyName == -1)
+                        {
+                            _offset_AssemblyName = Offset_CultureName + EtwEvent.UnicodeStringEnumerable.UnicodeStringEnumerator.StringLength(_etwEvent.Data, Offset_CultureName);
+                        }
+
+                        return _offset_AssemblyName;
+                    }
+                }
 
                 /// <summary>
                 /// Retrieves the BaseName field.
                 /// </summary>
-                public string BaseName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_BaseName.._offset_MainAssemblyName]);
+                public string BaseName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_BaseName..]);
 
                 /// <summary>
                 /// Retrieves the MainAssemblyName field.
                 /// </summary>
-                public string MainAssemblyName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[_offset_MainAssemblyName.._offset_CultureName]);
+                public string MainAssemblyName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_MainAssemblyName..]);
 
                 /// <summary>
                 /// Retrieves the CultureName field.
                 /// </summary>
-                public string CultureName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[_offset_CultureName.._offset_AssemblyName]);
+                public string CultureName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_CultureName..]);
 
                 /// <summary>
                 /// Retrieves the AssemblyName field.
                 /// </summary>
-                public string AssemblyName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[_offset_AssemblyName..]);
+                public string AssemblyName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_AssemblyName..]);
 
                 /// <summary>
                 /// Creates a new ResourceManagerGetSatelliteAssemblySucceededData.
@@ -1087,9 +1446,10 @@ namespace EtwTools
                 public ResourceManagerGetSatelliteAssemblySucceededData(EtwEvent etwEvent)
                 {
                     _etwEvent = etwEvent;
-                    _offset_MainAssemblyName = Offset_BaseName + EtwEvent.UnicodeStringEnumerable.UnicodeStringEnumerator.StringLength(etwEvent.Data, Offset_BaseName);
-                    _offset_CultureName = _offset_MainAssemblyName + EtwEvent.UnicodeStringEnumerable.UnicodeStringEnumerator.StringLength(etwEvent.Data, _offset_MainAssemblyName);
-                    _offset_AssemblyName = _offset_CultureName + EtwEvent.UnicodeStringEnumerable.UnicodeStringEnumerator.StringLength(etwEvent.Data, _offset_CultureName);
+                    _offset_BaseName = -1;
+                    _offset_MainAssemblyName = -1;
+                    _offset_CultureName = -1;
+                    _offset_AssemblyName = -1;
                 }
             }
 
@@ -1168,34 +1528,86 @@ namespace EtwTools
             /// <summary>
             /// A data wrapper for a ResourceManagerGetSatelliteAssemblyFailed event.
             /// </summary>
-            public readonly ref struct ResourceManagerGetSatelliteAssemblyFailedData
+            public ref struct ResourceManagerGetSatelliteAssemblyFailedData
             {
                 private readonly EtwEvent _etwEvent;
 
-                private const int Offset_BaseName = 0;
-                private readonly int _offset_MainAssemblyName;
-                private readonly int _offset_CultureName;
-                private readonly int _offset_AssemblyName;
+                private int _offset_BaseName;
+                private int _offset_MainAssemblyName;
+                private int _offset_CultureName;
+                private int _offset_AssemblyName;
+
+                private int Offset_BaseName
+                {
+                    get
+                    {
+                        if (_offset_BaseName == -1)
+                        {
+                            _offset_BaseName = 0;
+                        }
+
+                        return _offset_BaseName;
+                    }
+                }
+
+                private int Offset_MainAssemblyName
+                {
+                    get
+                    {
+                        if (_offset_MainAssemblyName == -1)
+                        {
+                            _offset_MainAssemblyName = Offset_BaseName + EtwEvent.UnicodeStringEnumerable.UnicodeStringEnumerator.StringLength(_etwEvent.Data, Offset_BaseName);
+                        }
+
+                        return _offset_MainAssemblyName;
+                    }
+                }
+
+                private int Offset_CultureName
+                {
+                    get
+                    {
+                        if (_offset_CultureName == -1)
+                        {
+                            _offset_CultureName = Offset_MainAssemblyName + EtwEvent.UnicodeStringEnumerable.UnicodeStringEnumerator.StringLength(_etwEvent.Data, Offset_MainAssemblyName);
+                        }
+
+                        return _offset_CultureName;
+                    }
+                }
+
+                private int Offset_AssemblyName
+                {
+                    get
+                    {
+                        if (_offset_AssemblyName == -1)
+                        {
+                            _offset_AssemblyName = Offset_CultureName + EtwEvent.UnicodeStringEnumerable.UnicodeStringEnumerator.StringLength(_etwEvent.Data, Offset_CultureName);
+                        }
+
+                        return _offset_AssemblyName;
+                    }
+                }
 
                 /// <summary>
                 /// Retrieves the BaseName field.
                 /// </summary>
-                public string BaseName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_BaseName.._offset_MainAssemblyName]);
+                public string BaseName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_BaseName..]);
 
                 /// <summary>
                 /// Retrieves the MainAssemblyName field.
                 /// </summary>
-                public string MainAssemblyName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[_offset_MainAssemblyName.._offset_CultureName]);
+                public string MainAssemblyName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_MainAssemblyName..]);
 
                 /// <summary>
                 /// Retrieves the CultureName field.
                 /// </summary>
-                public string CultureName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[_offset_CultureName.._offset_AssemblyName]);
+                public string CultureName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_CultureName..]);
 
                 /// <summary>
                 /// Retrieves the AssemblyName field.
                 /// </summary>
-                public string AssemblyName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[_offset_AssemblyName..]);
+                public string AssemblyName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_AssemblyName..]);
 
                 /// <summary>
                 /// Creates a new ResourceManagerGetSatelliteAssemblyFailedData.
@@ -1204,9 +1616,10 @@ namespace EtwTools
                 public ResourceManagerGetSatelliteAssemblyFailedData(EtwEvent etwEvent)
                 {
                     _etwEvent = etwEvent;
-                    _offset_MainAssemblyName = Offset_BaseName + EtwEvent.UnicodeStringEnumerable.UnicodeStringEnumerator.StringLength(etwEvent.Data, Offset_BaseName);
-                    _offset_CultureName = _offset_MainAssemblyName + EtwEvent.UnicodeStringEnumerable.UnicodeStringEnumerator.StringLength(etwEvent.Data, _offset_MainAssemblyName);
-                    _offset_AssemblyName = _offset_CultureName + EtwEvent.UnicodeStringEnumerable.UnicodeStringEnumerator.StringLength(etwEvent.Data, _offset_CultureName);
+                    _offset_BaseName = -1;
+                    _offset_MainAssemblyName = -1;
+                    _offset_CultureName = -1;
+                    _offset_AssemblyName = -1;
                 }
             }
 
@@ -1285,34 +1698,86 @@ namespace EtwTools
             /// <summary>
             /// A data wrapper for a ResourceManagerCaseInsensitiveResourceStreamLookupSucceeded event.
             /// </summary>
-            public readonly ref struct ResourceManagerCaseInsensitiveResourceStreamLookupSucceededData
+            public ref struct ResourceManagerCaseInsensitiveResourceStreamLookupSucceededData
             {
                 private readonly EtwEvent _etwEvent;
 
-                private const int Offset_BaseName = 0;
-                private readonly int _offset_MainAssemblyName;
-                private readonly int _offset_AssemblyName;
-                private readonly int _offset_ResourceFileName;
+                private int _offset_BaseName;
+                private int _offset_MainAssemblyName;
+                private int _offset_AssemblyName;
+                private int _offset_ResourceFileName;
+
+                private int Offset_BaseName
+                {
+                    get
+                    {
+                        if (_offset_BaseName == -1)
+                        {
+                            _offset_BaseName = 0;
+                        }
+
+                        return _offset_BaseName;
+                    }
+                }
+
+                private int Offset_MainAssemblyName
+                {
+                    get
+                    {
+                        if (_offset_MainAssemblyName == -1)
+                        {
+                            _offset_MainAssemblyName = Offset_BaseName + EtwEvent.UnicodeStringEnumerable.UnicodeStringEnumerator.StringLength(_etwEvent.Data, Offset_BaseName);
+                        }
+
+                        return _offset_MainAssemblyName;
+                    }
+                }
+
+                private int Offset_AssemblyName
+                {
+                    get
+                    {
+                        if (_offset_AssemblyName == -1)
+                        {
+                            _offset_AssemblyName = Offset_MainAssemblyName + EtwEvent.UnicodeStringEnumerable.UnicodeStringEnumerator.StringLength(_etwEvent.Data, Offset_MainAssemblyName);
+                        }
+
+                        return _offset_AssemblyName;
+                    }
+                }
+
+                private int Offset_ResourceFileName
+                {
+                    get
+                    {
+                        if (_offset_ResourceFileName == -1)
+                        {
+                            _offset_ResourceFileName = Offset_AssemblyName + EtwEvent.UnicodeStringEnumerable.UnicodeStringEnumerator.StringLength(_etwEvent.Data, Offset_AssemblyName);
+                        }
+
+                        return _offset_ResourceFileName;
+                    }
+                }
 
                 /// <summary>
                 /// Retrieves the BaseName field.
                 /// </summary>
-                public string BaseName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_BaseName.._offset_MainAssemblyName]);
+                public string BaseName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_BaseName..]);
 
                 /// <summary>
                 /// Retrieves the MainAssemblyName field.
                 /// </summary>
-                public string MainAssemblyName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[_offset_MainAssemblyName.._offset_AssemblyName]);
+                public string MainAssemblyName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_MainAssemblyName..]);
 
                 /// <summary>
                 /// Retrieves the AssemblyName field.
                 /// </summary>
-                public string AssemblyName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[_offset_AssemblyName.._offset_ResourceFileName]);
+                public string AssemblyName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_AssemblyName..]);
 
                 /// <summary>
                 /// Retrieves the ResourceFileName field.
                 /// </summary>
-                public string ResourceFileName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[_offset_ResourceFileName..]);
+                public string ResourceFileName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_ResourceFileName..]);
 
                 /// <summary>
                 /// Creates a new ResourceManagerCaseInsensitiveResourceStreamLookupSucceededData.
@@ -1321,9 +1786,10 @@ namespace EtwTools
                 public ResourceManagerCaseInsensitiveResourceStreamLookupSucceededData(EtwEvent etwEvent)
                 {
                     _etwEvent = etwEvent;
-                    _offset_MainAssemblyName = Offset_BaseName + EtwEvent.UnicodeStringEnumerable.UnicodeStringEnumerator.StringLength(etwEvent.Data, Offset_BaseName);
-                    _offset_AssemblyName = _offset_MainAssemblyName + EtwEvent.UnicodeStringEnumerable.UnicodeStringEnumerator.StringLength(etwEvent.Data, _offset_MainAssemblyName);
-                    _offset_ResourceFileName = _offset_AssemblyName + EtwEvent.UnicodeStringEnumerable.UnicodeStringEnumerator.StringLength(etwEvent.Data, _offset_AssemblyName);
+                    _offset_BaseName = -1;
+                    _offset_MainAssemblyName = -1;
+                    _offset_AssemblyName = -1;
+                    _offset_ResourceFileName = -1;
                 }
             }
 
@@ -1402,34 +1868,86 @@ namespace EtwTools
             /// <summary>
             /// A data wrapper for a ResourceManagerCaseInsensitiveResourceStreamLookupFailed event.
             /// </summary>
-            public readonly ref struct ResourceManagerCaseInsensitiveResourceStreamLookupFailedData
+            public ref struct ResourceManagerCaseInsensitiveResourceStreamLookupFailedData
             {
                 private readonly EtwEvent _etwEvent;
 
-                private const int Offset_BaseName = 0;
-                private readonly int _offset_MainAssemblyName;
-                private readonly int _offset_AssemblyName;
-                private readonly int _offset_ResourceFileName;
+                private int _offset_BaseName;
+                private int _offset_MainAssemblyName;
+                private int _offset_AssemblyName;
+                private int _offset_ResourceFileName;
+
+                private int Offset_BaseName
+                {
+                    get
+                    {
+                        if (_offset_BaseName == -1)
+                        {
+                            _offset_BaseName = 0;
+                        }
+
+                        return _offset_BaseName;
+                    }
+                }
+
+                private int Offset_MainAssemblyName
+                {
+                    get
+                    {
+                        if (_offset_MainAssemblyName == -1)
+                        {
+                            _offset_MainAssemblyName = Offset_BaseName + EtwEvent.UnicodeStringEnumerable.UnicodeStringEnumerator.StringLength(_etwEvent.Data, Offset_BaseName);
+                        }
+
+                        return _offset_MainAssemblyName;
+                    }
+                }
+
+                private int Offset_AssemblyName
+                {
+                    get
+                    {
+                        if (_offset_AssemblyName == -1)
+                        {
+                            _offset_AssemblyName = Offset_MainAssemblyName + EtwEvent.UnicodeStringEnumerable.UnicodeStringEnumerator.StringLength(_etwEvent.Data, Offset_MainAssemblyName);
+                        }
+
+                        return _offset_AssemblyName;
+                    }
+                }
+
+                private int Offset_ResourceFileName
+                {
+                    get
+                    {
+                        if (_offset_ResourceFileName == -1)
+                        {
+                            _offset_ResourceFileName = Offset_AssemblyName + EtwEvent.UnicodeStringEnumerable.UnicodeStringEnumerator.StringLength(_etwEvent.Data, Offset_AssemblyName);
+                        }
+
+                        return _offset_ResourceFileName;
+                    }
+                }
 
                 /// <summary>
                 /// Retrieves the BaseName field.
                 /// </summary>
-                public string BaseName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_BaseName.._offset_MainAssemblyName]);
+                public string BaseName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_BaseName..]);
 
                 /// <summary>
                 /// Retrieves the MainAssemblyName field.
                 /// </summary>
-                public string MainAssemblyName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[_offset_MainAssemblyName.._offset_AssemblyName]);
+                public string MainAssemblyName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_MainAssemblyName..]);
 
                 /// <summary>
                 /// Retrieves the AssemblyName field.
                 /// </summary>
-                public string AssemblyName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[_offset_AssemblyName.._offset_ResourceFileName]);
+                public string AssemblyName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_AssemblyName..]);
 
                 /// <summary>
                 /// Retrieves the ResourceFileName field.
                 /// </summary>
-                public string ResourceFileName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[_offset_ResourceFileName..]);
+                public string ResourceFileName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_ResourceFileName..]);
 
                 /// <summary>
                 /// Creates a new ResourceManagerCaseInsensitiveResourceStreamLookupFailedData.
@@ -1438,9 +1956,10 @@ namespace EtwTools
                 public ResourceManagerCaseInsensitiveResourceStreamLookupFailedData(EtwEvent etwEvent)
                 {
                     _etwEvent = etwEvent;
-                    _offset_MainAssemblyName = Offset_BaseName + EtwEvent.UnicodeStringEnumerable.UnicodeStringEnumerator.StringLength(etwEvent.Data, Offset_BaseName);
-                    _offset_AssemblyName = _offset_MainAssemblyName + EtwEvent.UnicodeStringEnumerable.UnicodeStringEnumerator.StringLength(etwEvent.Data, _offset_MainAssemblyName);
-                    _offset_ResourceFileName = _offset_AssemblyName + EtwEvent.UnicodeStringEnumerable.UnicodeStringEnumerator.StringLength(etwEvent.Data, _offset_AssemblyName);
+                    _offset_BaseName = -1;
+                    _offset_MainAssemblyName = -1;
+                    _offset_AssemblyName = -1;
+                    _offset_ResourceFileName = -1;
                 }
             }
 
@@ -1519,34 +2038,86 @@ namespace EtwTools
             /// <summary>
             /// A data wrapper for a ResourceManagerManifestResourceAccessDenied event.
             /// </summary>
-            public readonly ref struct ResourceManagerManifestResourceAccessDeniedData
+            public ref struct ResourceManagerManifestResourceAccessDeniedData
             {
                 private readonly EtwEvent _etwEvent;
 
-                private const int Offset_BaseName = 0;
-                private readonly int _offset_MainAssemblyName;
-                private readonly int _offset_AssemblyName;
-                private readonly int _offset_CanonicalName;
+                private int _offset_BaseName;
+                private int _offset_MainAssemblyName;
+                private int _offset_AssemblyName;
+                private int _offset_CanonicalName;
+
+                private int Offset_BaseName
+                {
+                    get
+                    {
+                        if (_offset_BaseName == -1)
+                        {
+                            _offset_BaseName = 0;
+                        }
+
+                        return _offset_BaseName;
+                    }
+                }
+
+                private int Offset_MainAssemblyName
+                {
+                    get
+                    {
+                        if (_offset_MainAssemblyName == -1)
+                        {
+                            _offset_MainAssemblyName = Offset_BaseName + EtwEvent.UnicodeStringEnumerable.UnicodeStringEnumerator.StringLength(_etwEvent.Data, Offset_BaseName);
+                        }
+
+                        return _offset_MainAssemblyName;
+                    }
+                }
+
+                private int Offset_AssemblyName
+                {
+                    get
+                    {
+                        if (_offset_AssemblyName == -1)
+                        {
+                            _offset_AssemblyName = Offset_MainAssemblyName + EtwEvent.UnicodeStringEnumerable.UnicodeStringEnumerator.StringLength(_etwEvent.Data, Offset_MainAssemblyName);
+                        }
+
+                        return _offset_AssemblyName;
+                    }
+                }
+
+                private int Offset_CanonicalName
+                {
+                    get
+                    {
+                        if (_offset_CanonicalName == -1)
+                        {
+                            _offset_CanonicalName = Offset_AssemblyName + EtwEvent.UnicodeStringEnumerable.UnicodeStringEnumerator.StringLength(_etwEvent.Data, Offset_AssemblyName);
+                        }
+
+                        return _offset_CanonicalName;
+                    }
+                }
 
                 /// <summary>
                 /// Retrieves the BaseName field.
                 /// </summary>
-                public string BaseName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_BaseName.._offset_MainAssemblyName]);
+                public string BaseName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_BaseName..]);
 
                 /// <summary>
                 /// Retrieves the MainAssemblyName field.
                 /// </summary>
-                public string MainAssemblyName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[_offset_MainAssemblyName.._offset_AssemblyName]);
+                public string MainAssemblyName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_MainAssemblyName..]);
 
                 /// <summary>
                 /// Retrieves the AssemblyName field.
                 /// </summary>
-                public string AssemblyName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[_offset_AssemblyName.._offset_CanonicalName]);
+                public string AssemblyName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_AssemblyName..]);
 
                 /// <summary>
                 /// Retrieves the CanonicalName field.
                 /// </summary>
-                public string CanonicalName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[_offset_CanonicalName..]);
+                public string CanonicalName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_CanonicalName..]);
 
                 /// <summary>
                 /// Creates a new ResourceManagerManifestResourceAccessDeniedData.
@@ -1555,9 +2126,10 @@ namespace EtwTools
                 public ResourceManagerManifestResourceAccessDeniedData(EtwEvent etwEvent)
                 {
                     _etwEvent = etwEvent;
-                    _offset_MainAssemblyName = Offset_BaseName + EtwEvent.UnicodeStringEnumerable.UnicodeStringEnumerator.StringLength(etwEvent.Data, Offset_BaseName);
-                    _offset_AssemblyName = _offset_MainAssemblyName + EtwEvent.UnicodeStringEnumerable.UnicodeStringEnumerator.StringLength(etwEvent.Data, _offset_MainAssemblyName);
-                    _offset_CanonicalName = _offset_AssemblyName + EtwEvent.UnicodeStringEnumerable.UnicodeStringEnumerator.StringLength(etwEvent.Data, _offset_AssemblyName);
+                    _offset_BaseName = -1;
+                    _offset_MainAssemblyName = -1;
+                    _offset_AssemblyName = -1;
+                    _offset_CanonicalName = -1;
                 }
             }
 
@@ -1636,28 +2208,67 @@ namespace EtwTools
             /// <summary>
             /// A data wrapper for a ResourceManagerNeutralResourcesSufficient event.
             /// </summary>
-            public readonly ref struct ResourceManagerNeutralResourcesSufficientData
+            public ref struct ResourceManagerNeutralResourcesSufficientData
             {
                 private readonly EtwEvent _etwEvent;
 
-                private const int Offset_BaseName = 0;
-                private readonly int _offset_MainAssemblyName;
-                private readonly int _offset_CultureName;
+                private int _offset_BaseName;
+                private int _offset_MainAssemblyName;
+                private int _offset_CultureName;
+
+                private int Offset_BaseName
+                {
+                    get
+                    {
+                        if (_offset_BaseName == -1)
+                        {
+                            _offset_BaseName = 0;
+                        }
+
+                        return _offset_BaseName;
+                    }
+                }
+
+                private int Offset_MainAssemblyName
+                {
+                    get
+                    {
+                        if (_offset_MainAssemblyName == -1)
+                        {
+                            _offset_MainAssemblyName = Offset_BaseName + EtwEvent.UnicodeStringEnumerable.UnicodeStringEnumerator.StringLength(_etwEvent.Data, Offset_BaseName);
+                        }
+
+                        return _offset_MainAssemblyName;
+                    }
+                }
+
+                private int Offset_CultureName
+                {
+                    get
+                    {
+                        if (_offset_CultureName == -1)
+                        {
+                            _offset_CultureName = Offset_MainAssemblyName + EtwEvent.UnicodeStringEnumerable.UnicodeStringEnumerator.StringLength(_etwEvent.Data, Offset_MainAssemblyName);
+                        }
+
+                        return _offset_CultureName;
+                    }
+                }
 
                 /// <summary>
                 /// Retrieves the BaseName field.
                 /// </summary>
-                public string BaseName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_BaseName.._offset_MainAssemblyName]);
+                public string BaseName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_BaseName..]);
 
                 /// <summary>
                 /// Retrieves the MainAssemblyName field.
                 /// </summary>
-                public string MainAssemblyName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[_offset_MainAssemblyName.._offset_CultureName]);
+                public string MainAssemblyName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_MainAssemblyName..]);
 
                 /// <summary>
                 /// Retrieves the CultureName field.
                 /// </summary>
-                public string CultureName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[_offset_CultureName..]);
+                public string CultureName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_CultureName..]);
 
                 /// <summary>
                 /// Creates a new ResourceManagerNeutralResourcesSufficientData.
@@ -1666,8 +2277,9 @@ namespace EtwTools
                 public ResourceManagerNeutralResourcesSufficientData(EtwEvent etwEvent)
                 {
                     _etwEvent = etwEvent;
-                    _offset_MainAssemblyName = Offset_BaseName + EtwEvent.UnicodeStringEnumerable.UnicodeStringEnumerator.StringLength(etwEvent.Data, Offset_BaseName);
-                    _offset_CultureName = _offset_MainAssemblyName + EtwEvent.UnicodeStringEnumerable.UnicodeStringEnumerator.StringLength(etwEvent.Data, _offset_MainAssemblyName);
+                    _offset_BaseName = -1;
+                    _offset_MainAssemblyName = -1;
+                    _offset_CultureName = -1;
                 }
             }
 
@@ -1746,11 +2358,24 @@ namespace EtwTools
             /// <summary>
             /// A data wrapper for a ResourceManagerNeutralResourceAttributeMissing event.
             /// </summary>
-            public readonly ref struct ResourceManagerNeutralResourceAttributeMissingData
+            public ref struct ResourceManagerNeutralResourceAttributeMissingData
             {
                 private readonly EtwEvent _etwEvent;
 
-                private const int Offset_MainAssemblyName = 0;
+                private int _offset_MainAssemblyName;
+
+                private int Offset_MainAssemblyName
+                {
+                    get
+                    {
+                        if (_offset_MainAssemblyName == -1)
+                        {
+                            _offset_MainAssemblyName = 0;
+                        }
+
+                        return _offset_MainAssemblyName;
+                    }
+                }
 
                 /// <summary>
                 /// Retrieves the MainAssemblyName field.
@@ -1764,6 +2389,7 @@ namespace EtwTools
                 public ResourceManagerNeutralResourceAttributeMissingData(EtwEvent etwEvent)
                 {
                     _etwEvent = etwEvent;
+                    _offset_MainAssemblyName = -1;
                 }
             }
 
@@ -1842,34 +2468,86 @@ namespace EtwTools
             /// <summary>
             /// A data wrapper for a ResourceManagerCreatingResourceSet event.
             /// </summary>
-            public readonly ref struct ResourceManagerCreatingResourceSetData
+            public ref struct ResourceManagerCreatingResourceSetData
             {
                 private readonly EtwEvent _etwEvent;
 
-                private const int Offset_BaseName = 0;
-                private readonly int _offset_MainAssemblyName;
-                private readonly int _offset_CultureName;
-                private readonly int _offset_FileName;
+                private int _offset_BaseName;
+                private int _offset_MainAssemblyName;
+                private int _offset_CultureName;
+                private int _offset_FileName;
+
+                private int Offset_BaseName
+                {
+                    get
+                    {
+                        if (_offset_BaseName == -1)
+                        {
+                            _offset_BaseName = 0;
+                        }
+
+                        return _offset_BaseName;
+                    }
+                }
+
+                private int Offset_MainAssemblyName
+                {
+                    get
+                    {
+                        if (_offset_MainAssemblyName == -1)
+                        {
+                            _offset_MainAssemblyName = Offset_BaseName + EtwEvent.UnicodeStringEnumerable.UnicodeStringEnumerator.StringLength(_etwEvent.Data, Offset_BaseName);
+                        }
+
+                        return _offset_MainAssemblyName;
+                    }
+                }
+
+                private int Offset_CultureName
+                {
+                    get
+                    {
+                        if (_offset_CultureName == -1)
+                        {
+                            _offset_CultureName = Offset_MainAssemblyName + EtwEvent.UnicodeStringEnumerable.UnicodeStringEnumerator.StringLength(_etwEvent.Data, Offset_MainAssemblyName);
+                        }
+
+                        return _offset_CultureName;
+                    }
+                }
+
+                private int Offset_FileName
+                {
+                    get
+                    {
+                        if (_offset_FileName == -1)
+                        {
+                            _offset_FileName = Offset_CultureName + EtwEvent.UnicodeStringEnumerable.UnicodeStringEnumerator.StringLength(_etwEvent.Data, Offset_CultureName);
+                        }
+
+                        return _offset_FileName;
+                    }
+                }
 
                 /// <summary>
                 /// Retrieves the BaseName field.
                 /// </summary>
-                public string BaseName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_BaseName.._offset_MainAssemblyName]);
+                public string BaseName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_BaseName..]);
 
                 /// <summary>
                 /// Retrieves the MainAssemblyName field.
                 /// </summary>
-                public string MainAssemblyName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[_offset_MainAssemblyName.._offset_CultureName]);
+                public string MainAssemblyName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_MainAssemblyName..]);
 
                 /// <summary>
                 /// Retrieves the CultureName field.
                 /// </summary>
-                public string CultureName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[_offset_CultureName.._offset_FileName]);
+                public string CultureName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_CultureName..]);
 
                 /// <summary>
                 /// Retrieves the FileName field.
                 /// </summary>
-                public string FileName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[_offset_FileName..]);
+                public string FileName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_FileName..]);
 
                 /// <summary>
                 /// Creates a new ResourceManagerCreatingResourceSetData.
@@ -1878,9 +2556,10 @@ namespace EtwTools
                 public ResourceManagerCreatingResourceSetData(EtwEvent etwEvent)
                 {
                     _etwEvent = etwEvent;
-                    _offset_MainAssemblyName = Offset_BaseName + EtwEvent.UnicodeStringEnumerable.UnicodeStringEnumerator.StringLength(etwEvent.Data, Offset_BaseName);
-                    _offset_CultureName = _offset_MainAssemblyName + EtwEvent.UnicodeStringEnumerable.UnicodeStringEnumerator.StringLength(etwEvent.Data, _offset_MainAssemblyName);
-                    _offset_FileName = _offset_CultureName + EtwEvent.UnicodeStringEnumerable.UnicodeStringEnumerator.StringLength(etwEvent.Data, _offset_CultureName);
+                    _offset_BaseName = -1;
+                    _offset_MainAssemblyName = -1;
+                    _offset_CultureName = -1;
+                    _offset_FileName = -1;
                 }
             }
 
@@ -1959,28 +2638,67 @@ namespace EtwTools
             /// <summary>
             /// A data wrapper for a ResourceManagerNotCreatingResourceSet event.
             /// </summary>
-            public readonly ref struct ResourceManagerNotCreatingResourceSetData
+            public ref struct ResourceManagerNotCreatingResourceSetData
             {
                 private readonly EtwEvent _etwEvent;
 
-                private const int Offset_BaseName = 0;
-                private readonly int _offset_MainAssemblyName;
-                private readonly int _offset_CultureName;
+                private int _offset_BaseName;
+                private int _offset_MainAssemblyName;
+                private int _offset_CultureName;
+
+                private int Offset_BaseName
+                {
+                    get
+                    {
+                        if (_offset_BaseName == -1)
+                        {
+                            _offset_BaseName = 0;
+                        }
+
+                        return _offset_BaseName;
+                    }
+                }
+
+                private int Offset_MainAssemblyName
+                {
+                    get
+                    {
+                        if (_offset_MainAssemblyName == -1)
+                        {
+                            _offset_MainAssemblyName = Offset_BaseName + EtwEvent.UnicodeStringEnumerable.UnicodeStringEnumerator.StringLength(_etwEvent.Data, Offset_BaseName);
+                        }
+
+                        return _offset_MainAssemblyName;
+                    }
+                }
+
+                private int Offset_CultureName
+                {
+                    get
+                    {
+                        if (_offset_CultureName == -1)
+                        {
+                            _offset_CultureName = Offset_MainAssemblyName + EtwEvent.UnicodeStringEnumerable.UnicodeStringEnumerator.StringLength(_etwEvent.Data, Offset_MainAssemblyName);
+                        }
+
+                        return _offset_CultureName;
+                    }
+                }
 
                 /// <summary>
                 /// Retrieves the BaseName field.
                 /// </summary>
-                public string BaseName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_BaseName.._offset_MainAssemblyName]);
+                public string BaseName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_BaseName..]);
 
                 /// <summary>
                 /// Retrieves the MainAssemblyName field.
                 /// </summary>
-                public string MainAssemblyName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[_offset_MainAssemblyName.._offset_CultureName]);
+                public string MainAssemblyName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_MainAssemblyName..]);
 
                 /// <summary>
                 /// Retrieves the CultureName field.
                 /// </summary>
-                public string CultureName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[_offset_CultureName..]);
+                public string CultureName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_CultureName..]);
 
                 /// <summary>
                 /// Creates a new ResourceManagerNotCreatingResourceSetData.
@@ -1989,8 +2707,9 @@ namespace EtwTools
                 public ResourceManagerNotCreatingResourceSetData(EtwEvent etwEvent)
                 {
                     _etwEvent = etwEvent;
-                    _offset_MainAssemblyName = Offset_BaseName + EtwEvent.UnicodeStringEnumerable.UnicodeStringEnumerator.StringLength(etwEvent.Data, Offset_BaseName);
-                    _offset_CultureName = _offset_MainAssemblyName + EtwEvent.UnicodeStringEnumerable.UnicodeStringEnumerator.StringLength(etwEvent.Data, _offset_MainAssemblyName);
+                    _offset_BaseName = -1;
+                    _offset_MainAssemblyName = -1;
+                    _offset_CultureName = -1;
                 }
             }
 
@@ -2069,28 +2788,67 @@ namespace EtwTools
             /// <summary>
             /// A data wrapper for a ResourceManagerLookupFailed event.
             /// </summary>
-            public readonly ref struct ResourceManagerLookupFailedData
+            public ref struct ResourceManagerLookupFailedData
             {
                 private readonly EtwEvent _etwEvent;
 
-                private const int Offset_BaseName = 0;
-                private readonly int _offset_MainAssemblyName;
-                private readonly int _offset_CultureName;
+                private int _offset_BaseName;
+                private int _offset_MainAssemblyName;
+                private int _offset_CultureName;
+
+                private int Offset_BaseName
+                {
+                    get
+                    {
+                        if (_offset_BaseName == -1)
+                        {
+                            _offset_BaseName = 0;
+                        }
+
+                        return _offset_BaseName;
+                    }
+                }
+
+                private int Offset_MainAssemblyName
+                {
+                    get
+                    {
+                        if (_offset_MainAssemblyName == -1)
+                        {
+                            _offset_MainAssemblyName = Offset_BaseName + EtwEvent.UnicodeStringEnumerable.UnicodeStringEnumerator.StringLength(_etwEvent.Data, Offset_BaseName);
+                        }
+
+                        return _offset_MainAssemblyName;
+                    }
+                }
+
+                private int Offset_CultureName
+                {
+                    get
+                    {
+                        if (_offset_CultureName == -1)
+                        {
+                            _offset_CultureName = Offset_MainAssemblyName + EtwEvent.UnicodeStringEnumerable.UnicodeStringEnumerator.StringLength(_etwEvent.Data, Offset_MainAssemblyName);
+                        }
+
+                        return _offset_CultureName;
+                    }
+                }
 
                 /// <summary>
                 /// Retrieves the BaseName field.
                 /// </summary>
-                public string BaseName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_BaseName.._offset_MainAssemblyName]);
+                public string BaseName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_BaseName..]);
 
                 /// <summary>
                 /// Retrieves the MainAssemblyName field.
                 /// </summary>
-                public string MainAssemblyName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[_offset_MainAssemblyName.._offset_CultureName]);
+                public string MainAssemblyName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_MainAssemblyName..]);
 
                 /// <summary>
                 /// Retrieves the CultureName field.
                 /// </summary>
-                public string CultureName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[_offset_CultureName..]);
+                public string CultureName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_CultureName..]);
 
                 /// <summary>
                 /// Creates a new ResourceManagerLookupFailedData.
@@ -2099,8 +2857,9 @@ namespace EtwTools
                 public ResourceManagerLookupFailedData(EtwEvent etwEvent)
                 {
                     _etwEvent = etwEvent;
-                    _offset_MainAssemblyName = Offset_BaseName + EtwEvent.UnicodeStringEnumerable.UnicodeStringEnumerator.StringLength(etwEvent.Data, Offset_BaseName);
-                    _offset_CultureName = _offset_MainAssemblyName + EtwEvent.UnicodeStringEnumerable.UnicodeStringEnumerator.StringLength(etwEvent.Data, _offset_MainAssemblyName);
+                    _offset_BaseName = -1;
+                    _offset_MainAssemblyName = -1;
+                    _offset_CultureName = -1;
                 }
             }
 
@@ -2179,22 +2938,48 @@ namespace EtwTools
             /// <summary>
             /// A data wrapper for a ResourceManagerReleasingResources event.
             /// </summary>
-            public readonly ref struct ResourceManagerReleasingResourcesData
+            public ref struct ResourceManagerReleasingResourcesData
             {
                 private readonly EtwEvent _etwEvent;
 
-                private const int Offset_BaseName = 0;
-                private readonly int _offset_MainAssemblyName;
+                private int _offset_BaseName;
+                private int _offset_MainAssemblyName;
+
+                private int Offset_BaseName
+                {
+                    get
+                    {
+                        if (_offset_BaseName == -1)
+                        {
+                            _offset_BaseName = 0;
+                        }
+
+                        return _offset_BaseName;
+                    }
+                }
+
+                private int Offset_MainAssemblyName
+                {
+                    get
+                    {
+                        if (_offset_MainAssemblyName == -1)
+                        {
+                            _offset_MainAssemblyName = Offset_BaseName + EtwEvent.UnicodeStringEnumerable.UnicodeStringEnumerator.StringLength(_etwEvent.Data, Offset_BaseName);
+                        }
+
+                        return _offset_MainAssemblyName;
+                    }
+                }
 
                 /// <summary>
                 /// Retrieves the BaseName field.
                 /// </summary>
-                public string BaseName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_BaseName.._offset_MainAssemblyName]);
+                public string BaseName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_BaseName..]);
 
                 /// <summary>
                 /// Retrieves the MainAssemblyName field.
                 /// </summary>
-                public string MainAssemblyName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[_offset_MainAssemblyName..]);
+                public string MainAssemblyName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_MainAssemblyName..]);
 
                 /// <summary>
                 /// Creates a new ResourceManagerReleasingResourcesData.
@@ -2203,7 +2988,8 @@ namespace EtwTools
                 public ResourceManagerReleasingResourcesData(EtwEvent etwEvent)
                 {
                     _etwEvent = etwEvent;
-                    _offset_MainAssemblyName = Offset_BaseName + EtwEvent.UnicodeStringEnumerable.UnicodeStringEnumerator.StringLength(etwEvent.Data, Offset_BaseName);
+                    _offset_BaseName = -1;
+                    _offset_MainAssemblyName = -1;
                 }
             }
 
@@ -2282,28 +3068,67 @@ namespace EtwTools
             /// <summary>
             /// A data wrapper for a ResourceManagerNeutralResourcesNotFound event.
             /// </summary>
-            public readonly ref struct ResourceManagerNeutralResourcesNotFoundData
+            public ref struct ResourceManagerNeutralResourcesNotFoundData
             {
                 private readonly EtwEvent _etwEvent;
 
-                private const int Offset_BaseName = 0;
-                private readonly int _offset_MainAssemblyName;
-                private readonly int _offset_ResName;
+                private int _offset_BaseName;
+                private int _offset_MainAssemblyName;
+                private int _offset_ResName;
+
+                private int Offset_BaseName
+                {
+                    get
+                    {
+                        if (_offset_BaseName == -1)
+                        {
+                            _offset_BaseName = 0;
+                        }
+
+                        return _offset_BaseName;
+                    }
+                }
+
+                private int Offset_MainAssemblyName
+                {
+                    get
+                    {
+                        if (_offset_MainAssemblyName == -1)
+                        {
+                            _offset_MainAssemblyName = Offset_BaseName + EtwEvent.UnicodeStringEnumerable.UnicodeStringEnumerator.StringLength(_etwEvent.Data, Offset_BaseName);
+                        }
+
+                        return _offset_MainAssemblyName;
+                    }
+                }
+
+                private int Offset_ResName
+                {
+                    get
+                    {
+                        if (_offset_ResName == -1)
+                        {
+                            _offset_ResName = Offset_MainAssemblyName + EtwEvent.UnicodeStringEnumerable.UnicodeStringEnumerator.StringLength(_etwEvent.Data, Offset_MainAssemblyName);
+                        }
+
+                        return _offset_ResName;
+                    }
+                }
 
                 /// <summary>
                 /// Retrieves the BaseName field.
                 /// </summary>
-                public string BaseName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_BaseName.._offset_MainAssemblyName]);
+                public string BaseName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_BaseName..]);
 
                 /// <summary>
                 /// Retrieves the MainAssemblyName field.
                 /// </summary>
-                public string MainAssemblyName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[_offset_MainAssemblyName.._offset_ResName]);
+                public string MainAssemblyName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_MainAssemblyName..]);
 
                 /// <summary>
                 /// Retrieves the ResName field.
                 /// </summary>
-                public string ResName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[_offset_ResName..]);
+                public string ResName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_ResName..]);
 
                 /// <summary>
                 /// Creates a new ResourceManagerNeutralResourcesNotFoundData.
@@ -2312,8 +3137,9 @@ namespace EtwTools
                 public ResourceManagerNeutralResourcesNotFoundData(EtwEvent etwEvent)
                 {
                     _etwEvent = etwEvent;
-                    _offset_MainAssemblyName = Offset_BaseName + EtwEvent.UnicodeStringEnumerable.UnicodeStringEnumerator.StringLength(etwEvent.Data, Offset_BaseName);
-                    _offset_ResName = _offset_MainAssemblyName + EtwEvent.UnicodeStringEnumerable.UnicodeStringEnumerator.StringLength(etwEvent.Data, _offset_MainAssemblyName);
+                    _offset_BaseName = -1;
+                    _offset_MainAssemblyName = -1;
+                    _offset_ResName = -1;
                 }
             }
 
@@ -2392,28 +3218,67 @@ namespace EtwTools
             /// <summary>
             /// A data wrapper for a ResourceManagerNeutralResourcesFound event.
             /// </summary>
-            public readonly ref struct ResourceManagerNeutralResourcesFoundData
+            public ref struct ResourceManagerNeutralResourcesFoundData
             {
                 private readonly EtwEvent _etwEvent;
 
-                private const int Offset_BaseName = 0;
-                private readonly int _offset_MainAssemblyName;
-                private readonly int _offset_ResName;
+                private int _offset_BaseName;
+                private int _offset_MainAssemblyName;
+                private int _offset_ResName;
+
+                private int Offset_BaseName
+                {
+                    get
+                    {
+                        if (_offset_BaseName == -1)
+                        {
+                            _offset_BaseName = 0;
+                        }
+
+                        return _offset_BaseName;
+                    }
+                }
+
+                private int Offset_MainAssemblyName
+                {
+                    get
+                    {
+                        if (_offset_MainAssemblyName == -1)
+                        {
+                            _offset_MainAssemblyName = Offset_BaseName + EtwEvent.UnicodeStringEnumerable.UnicodeStringEnumerator.StringLength(_etwEvent.Data, Offset_BaseName);
+                        }
+
+                        return _offset_MainAssemblyName;
+                    }
+                }
+
+                private int Offset_ResName
+                {
+                    get
+                    {
+                        if (_offset_ResName == -1)
+                        {
+                            _offset_ResName = Offset_MainAssemblyName + EtwEvent.UnicodeStringEnumerable.UnicodeStringEnumerator.StringLength(_etwEvent.Data, Offset_MainAssemblyName);
+                        }
+
+                        return _offset_ResName;
+                    }
+                }
 
                 /// <summary>
                 /// Retrieves the BaseName field.
                 /// </summary>
-                public string BaseName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_BaseName.._offset_MainAssemblyName]);
+                public string BaseName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_BaseName..]);
 
                 /// <summary>
                 /// Retrieves the MainAssemblyName field.
                 /// </summary>
-                public string MainAssemblyName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[_offset_MainAssemblyName.._offset_ResName]);
+                public string MainAssemblyName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_MainAssemblyName..]);
 
                 /// <summary>
                 /// Retrieves the ResName field.
                 /// </summary>
-                public string ResName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[_offset_ResName..]);
+                public string ResName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_ResName..]);
 
                 /// <summary>
                 /// Creates a new ResourceManagerNeutralResourcesFoundData.
@@ -2422,8 +3287,9 @@ namespace EtwTools
                 public ResourceManagerNeutralResourcesFoundData(EtwEvent etwEvent)
                 {
                     _etwEvent = etwEvent;
-                    _offset_MainAssemblyName = Offset_BaseName + EtwEvent.UnicodeStringEnumerable.UnicodeStringEnumerator.StringLength(etwEvent.Data, Offset_BaseName);
-                    _offset_ResName = _offset_MainAssemblyName + EtwEvent.UnicodeStringEnumerable.UnicodeStringEnumerator.StringLength(etwEvent.Data, _offset_MainAssemblyName);
+                    _offset_BaseName = -1;
+                    _offset_MainAssemblyName = -1;
+                    _offset_ResName = -1;
                 }
             }
 
@@ -2502,28 +3368,67 @@ namespace EtwTools
             /// <summary>
             /// A data wrapper for a ResourceManagerAddingCultureFromConfigFile event.
             /// </summary>
-            public readonly ref struct ResourceManagerAddingCultureFromConfigFileData
+            public ref struct ResourceManagerAddingCultureFromConfigFileData
             {
                 private readonly EtwEvent _etwEvent;
 
-                private const int Offset_BaseName = 0;
-                private readonly int _offset_MainAssemblyName;
-                private readonly int _offset_CultureName;
+                private int _offset_BaseName;
+                private int _offset_MainAssemblyName;
+                private int _offset_CultureName;
+
+                private int Offset_BaseName
+                {
+                    get
+                    {
+                        if (_offset_BaseName == -1)
+                        {
+                            _offset_BaseName = 0;
+                        }
+
+                        return _offset_BaseName;
+                    }
+                }
+
+                private int Offset_MainAssemblyName
+                {
+                    get
+                    {
+                        if (_offset_MainAssemblyName == -1)
+                        {
+                            _offset_MainAssemblyName = Offset_BaseName + EtwEvent.UnicodeStringEnumerable.UnicodeStringEnumerator.StringLength(_etwEvent.Data, Offset_BaseName);
+                        }
+
+                        return _offset_MainAssemblyName;
+                    }
+                }
+
+                private int Offset_CultureName
+                {
+                    get
+                    {
+                        if (_offset_CultureName == -1)
+                        {
+                            _offset_CultureName = Offset_MainAssemblyName + EtwEvent.UnicodeStringEnumerable.UnicodeStringEnumerator.StringLength(_etwEvent.Data, Offset_MainAssemblyName);
+                        }
+
+                        return _offset_CultureName;
+                    }
+                }
 
                 /// <summary>
                 /// Retrieves the BaseName field.
                 /// </summary>
-                public string BaseName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_BaseName.._offset_MainAssemblyName]);
+                public string BaseName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_BaseName..]);
 
                 /// <summary>
                 /// Retrieves the MainAssemblyName field.
                 /// </summary>
-                public string MainAssemblyName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[_offset_MainAssemblyName.._offset_CultureName]);
+                public string MainAssemblyName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_MainAssemblyName..]);
 
                 /// <summary>
                 /// Retrieves the CultureName field.
                 /// </summary>
-                public string CultureName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[_offset_CultureName..]);
+                public string CultureName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_CultureName..]);
 
                 /// <summary>
                 /// Creates a new ResourceManagerAddingCultureFromConfigFileData.
@@ -2532,8 +3437,9 @@ namespace EtwTools
                 public ResourceManagerAddingCultureFromConfigFileData(EtwEvent etwEvent)
                 {
                     _etwEvent = etwEvent;
-                    _offset_MainAssemblyName = Offset_BaseName + EtwEvent.UnicodeStringEnumerable.UnicodeStringEnumerator.StringLength(etwEvent.Data, Offset_BaseName);
-                    _offset_CultureName = _offset_MainAssemblyName + EtwEvent.UnicodeStringEnumerable.UnicodeStringEnumerator.StringLength(etwEvent.Data, _offset_MainAssemblyName);
+                    _offset_BaseName = -1;
+                    _offset_MainAssemblyName = -1;
+                    _offset_CultureName = -1;
                 }
             }
 
@@ -2612,28 +3518,67 @@ namespace EtwTools
             /// <summary>
             /// A data wrapper for a ResourceManagerCultureNotFoundInConfigFile event.
             /// </summary>
-            public readonly ref struct ResourceManagerCultureNotFoundInConfigFileData
+            public ref struct ResourceManagerCultureNotFoundInConfigFileData
             {
                 private readonly EtwEvent _etwEvent;
 
-                private const int Offset_BaseName = 0;
-                private readonly int _offset_MainAssemblyName;
-                private readonly int _offset_CultureName;
+                private int _offset_BaseName;
+                private int _offset_MainAssemblyName;
+                private int _offset_CultureName;
+
+                private int Offset_BaseName
+                {
+                    get
+                    {
+                        if (_offset_BaseName == -1)
+                        {
+                            _offset_BaseName = 0;
+                        }
+
+                        return _offset_BaseName;
+                    }
+                }
+
+                private int Offset_MainAssemblyName
+                {
+                    get
+                    {
+                        if (_offset_MainAssemblyName == -1)
+                        {
+                            _offset_MainAssemblyName = Offset_BaseName + EtwEvent.UnicodeStringEnumerable.UnicodeStringEnumerator.StringLength(_etwEvent.Data, Offset_BaseName);
+                        }
+
+                        return _offset_MainAssemblyName;
+                    }
+                }
+
+                private int Offset_CultureName
+                {
+                    get
+                    {
+                        if (_offset_CultureName == -1)
+                        {
+                            _offset_CultureName = Offset_MainAssemblyName + EtwEvent.UnicodeStringEnumerable.UnicodeStringEnumerator.StringLength(_etwEvent.Data, Offset_MainAssemblyName);
+                        }
+
+                        return _offset_CultureName;
+                    }
+                }
 
                 /// <summary>
                 /// Retrieves the BaseName field.
                 /// </summary>
-                public string BaseName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_BaseName.._offset_MainAssemblyName]);
+                public string BaseName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_BaseName..]);
 
                 /// <summary>
                 /// Retrieves the MainAssemblyName field.
                 /// </summary>
-                public string MainAssemblyName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[_offset_MainAssemblyName.._offset_CultureName]);
+                public string MainAssemblyName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_MainAssemblyName..]);
 
                 /// <summary>
                 /// Retrieves the CultureName field.
                 /// </summary>
-                public string CultureName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[_offset_CultureName..]);
+                public string CultureName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_CultureName..]);
 
                 /// <summary>
                 /// Creates a new ResourceManagerCultureNotFoundInConfigFileData.
@@ -2642,8 +3587,9 @@ namespace EtwTools
                 public ResourceManagerCultureNotFoundInConfigFileData(EtwEvent etwEvent)
                 {
                     _etwEvent = etwEvent;
-                    _offset_MainAssemblyName = Offset_BaseName + EtwEvent.UnicodeStringEnumerable.UnicodeStringEnumerator.StringLength(etwEvent.Data, Offset_BaseName);
-                    _offset_CultureName = _offset_MainAssemblyName + EtwEvent.UnicodeStringEnumerable.UnicodeStringEnumerator.StringLength(etwEvent.Data, _offset_MainAssemblyName);
+                    _offset_BaseName = -1;
+                    _offset_MainAssemblyName = -1;
+                    _offset_CultureName = -1;
                 }
             }
 
@@ -2722,28 +3668,67 @@ namespace EtwTools
             /// <summary>
             /// A data wrapper for a ResourceManagerCultureFoundInConfigFile event.
             /// </summary>
-            public readonly ref struct ResourceManagerCultureFoundInConfigFileData
+            public ref struct ResourceManagerCultureFoundInConfigFileData
             {
                 private readonly EtwEvent _etwEvent;
 
-                private const int Offset_BaseName = 0;
-                private readonly int _offset_MainAssemblyName;
-                private readonly int _offset_CultureName;
+                private int _offset_BaseName;
+                private int _offset_MainAssemblyName;
+                private int _offset_CultureName;
+
+                private int Offset_BaseName
+                {
+                    get
+                    {
+                        if (_offset_BaseName == -1)
+                        {
+                            _offset_BaseName = 0;
+                        }
+
+                        return _offset_BaseName;
+                    }
+                }
+
+                private int Offset_MainAssemblyName
+                {
+                    get
+                    {
+                        if (_offset_MainAssemblyName == -1)
+                        {
+                            _offset_MainAssemblyName = Offset_BaseName + EtwEvent.UnicodeStringEnumerable.UnicodeStringEnumerator.StringLength(_etwEvent.Data, Offset_BaseName);
+                        }
+
+                        return _offset_MainAssemblyName;
+                    }
+                }
+
+                private int Offset_CultureName
+                {
+                    get
+                    {
+                        if (_offset_CultureName == -1)
+                        {
+                            _offset_CultureName = Offset_MainAssemblyName + EtwEvent.UnicodeStringEnumerable.UnicodeStringEnumerator.StringLength(_etwEvent.Data, Offset_MainAssemblyName);
+                        }
+
+                        return _offset_CultureName;
+                    }
+                }
 
                 /// <summary>
                 /// Retrieves the BaseName field.
                 /// </summary>
-                public string BaseName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_BaseName.._offset_MainAssemblyName]);
+                public string BaseName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_BaseName..]);
 
                 /// <summary>
                 /// Retrieves the MainAssemblyName field.
                 /// </summary>
-                public string MainAssemblyName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[_offset_MainAssemblyName.._offset_CultureName]);
+                public string MainAssemblyName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_MainAssemblyName..]);
 
                 /// <summary>
                 /// Retrieves the CultureName field.
                 /// </summary>
-                public string CultureName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[_offset_CultureName..]);
+                public string CultureName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_CultureName..]);
 
                 /// <summary>
                 /// Creates a new ResourceManagerCultureFoundInConfigFileData.
@@ -2752,8 +3737,9 @@ namespace EtwTools
                 public ResourceManagerCultureFoundInConfigFileData(EtwEvent etwEvent)
                 {
                     _etwEvent = etwEvent;
-                    _offset_MainAssemblyName = Offset_BaseName + EtwEvent.UnicodeStringEnumerable.UnicodeStringEnumerator.StringLength(etwEvent.Data, Offset_BaseName);
-                    _offset_CultureName = _offset_MainAssemblyName + EtwEvent.UnicodeStringEnumerable.UnicodeStringEnumerator.StringLength(etwEvent.Data, _offset_MainAssemblyName);
+                    _offset_BaseName = -1;
+                    _offset_MainAssemblyName = -1;
+                    _offset_CultureName = -1;
                 }
             }
 
@@ -2787,7 +3773,7 @@ namespace EtwTools
                 Level = EtwTraceLevel.Verbose,
                 Opcode = EtwEventOpcode.Info,
                 Task = (ushort)Tasks.ThreadPoolEnqueueWork,
-                Keyword = (ulong)(Keywords.ThreadPool | Keywords.ThreadTransfer)
+                Keyword = (ulong)Keywords.ThreadPool | (ulong)Keywords.ThreadTransfer
             };
 
             /// <summary>
@@ -2832,11 +3818,24 @@ namespace EtwTools
             /// <summary>
             /// A data wrapper for a ThreadPoolEnqueueWork event.
             /// </summary>
-            public readonly ref struct ThreadPoolEnqueueWorkData
+            public ref struct ThreadPoolEnqueueWorkData
             {
                 private readonly EtwEvent _etwEvent;
 
-                private const int Offset_WorkID = 0;
+                private int _offset_WorkID;
+
+                private int Offset_WorkID
+                {
+                    get
+                    {
+                        if (_offset_WorkID == -1)
+                        {
+                            _offset_WorkID = 0;
+                        }
+
+                        return _offset_WorkID;
+                    }
+                }
 
                 /// <summary>
                 /// Retrieves the WorkID field.
@@ -2850,6 +3849,7 @@ namespace EtwTools
                 public ThreadPoolEnqueueWorkData(EtwEvent etwEvent)
                 {
                     _etwEvent = etwEvent;
+                    _offset_WorkID = -1;
                 }
             }
 
@@ -2883,7 +3883,7 @@ namespace EtwTools
                 Level = EtwTraceLevel.Verbose,
                 Opcode = EtwEventOpcode.Info,
                 Task = (ushort)Tasks.ThreadPoolDequeueWork,
-                Keyword = (ulong)(Keywords.ThreadPool | Keywords.ThreadTransfer)
+                Keyword = (ulong)Keywords.ThreadPool | (ulong)Keywords.ThreadTransfer
             };
 
             /// <summary>
@@ -2928,11 +3928,24 @@ namespace EtwTools
             /// <summary>
             /// A data wrapper for a ThreadPoolDequeueWork event.
             /// </summary>
-            public readonly ref struct ThreadPoolDequeueWorkData
+            public ref struct ThreadPoolDequeueWorkData
             {
                 private readonly EtwEvent _etwEvent;
 
-                private const int Offset_WorkID = 0;
+                private int _offset_WorkID;
+
+                private int Offset_WorkID
+                {
+                    get
+                    {
+                        if (_offset_WorkID == -1)
+                        {
+                            _offset_WorkID = 0;
+                        }
+
+                        return _offset_WorkID;
+                    }
+                }
 
                 /// <summary>
                 /// Retrieves the WorkID field.
@@ -2946,6 +3959,7 @@ namespace EtwTools
                 public ThreadPoolDequeueWorkData(EtwEvent etwEvent)
                 {
                     _etwEvent = etwEvent;
+                    _offset_WorkID = -1;
                 }
             }
 
@@ -3024,34 +4038,86 @@ namespace EtwTools
             /// <summary>
             /// A data wrapper for a GetResponseStart event.
             /// </summary>
-            public readonly ref struct GetResponseStartData
+            public ref struct GetResponseStartData
             {
                 private readonly EtwEvent _etwEvent;
 
-                private const int Offset_Id = 0;
-                private const int Offset_Uri = 8;
-                private readonly int _offset_Success;
-                private readonly int _offset_Synchronous;
+                private int _offset_Id;
+                private int _offset_Uri;
+                private int _offset_Success;
+                private int _offset_Synchronous;
+
+                private int Offset_Id
+                {
+                    get
+                    {
+                        if (_offset_Id == -1)
+                        {
+                            _offset_Id = 0;
+                        }
+
+                        return _offset_Id;
+                    }
+                }
+
+                private int Offset_Uri
+                {
+                    get
+                    {
+                        if (_offset_Uri == -1)
+                        {
+                            _offset_Uri = Offset_Id + 8;
+                        }
+
+                        return _offset_Uri;
+                    }
+                }
+
+                private int Offset_Success
+                {
+                    get
+                    {
+                        if (_offset_Success == -1)
+                        {
+                            _offset_Success = Offset_Uri + EtwEvent.UnicodeStringEnumerable.UnicodeStringEnumerator.StringLength(_etwEvent.Data, Offset_Uri);
+                        }
+
+                        return _offset_Success;
+                    }
+                }
+
+                private int Offset_Synchronous
+                {
+                    get
+                    {
+                        if (_offset_Synchronous == -1)
+                        {
+                            _offset_Synchronous = Offset_Success + 1;
+                        }
+
+                        return _offset_Synchronous;
+                    }
+                }
 
                 /// <summary>
                 /// Retrieves the Id field.
                 /// </summary>
-                public long Id => BitConverter.ToInt64(_etwEvent.Data[Offset_Id..Offset_Uri]);
+                public long Id => BitConverter.ToInt64(_etwEvent.Data[Offset_Id..]);
 
                 /// <summary>
                 /// Retrieves the Uri field.
                 /// </summary>
-                public string Uri => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_Uri.._offset_Success]);
+                public string Uri => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_Uri..]);
 
                 /// <summary>
                 /// Retrieves the Success field.
                 /// </summary>
-                public bool Success => _etwEvent.Data[_offset_Success] != 0;
+                public bool Success => _etwEvent.Data[Offset_Success] != 0;
 
                 /// <summary>
                 /// Retrieves the Synchronous field.
                 /// </summary>
-                public bool Synchronous => _etwEvent.Data[_offset_Synchronous] != 0;
+                public bool Synchronous => _etwEvent.Data[Offset_Synchronous] != 0;
 
                 /// <summary>
                 /// Creates a new GetResponseStartData.
@@ -3060,8 +4126,10 @@ namespace EtwTools
                 public GetResponseStartData(EtwEvent etwEvent)
                 {
                     _etwEvent = etwEvent;
-                    _offset_Success = Offset_Uri + EtwEvent.UnicodeStringEnumerable.UnicodeStringEnumerator.StringLength(etwEvent.Data, Offset_Uri);
-                    _offset_Synchronous = _offset_Success + 1;
+                    _offset_Id = -1;
+                    _offset_Uri = -1;
+                    _offset_Success = -1;
+                    _offset_Synchronous = -1;
                 }
             }
 
@@ -3140,19 +4208,71 @@ namespace EtwTools
             /// <summary>
             /// A data wrapper for a GetResponseStop event.
             /// </summary>
-            public readonly ref struct GetResponseStopData
+            public ref struct GetResponseStopData
             {
                 private readonly EtwEvent _etwEvent;
 
-                private const int Offset_Id = 0;
-                private const int Offset_Success = 8;
-                private const int Offset_Synchronous = 9;
-                private const int Offset_StatusCode = 10;
+                private int _offset_Id;
+                private int _offset_Success;
+                private int _offset_Synchronous;
+                private int _offset_StatusCode;
+
+                private int Offset_Id
+                {
+                    get
+                    {
+                        if (_offset_Id == -1)
+                        {
+                            _offset_Id = 0;
+                        }
+
+                        return _offset_Id;
+                    }
+                }
+
+                private int Offset_Success
+                {
+                    get
+                    {
+                        if (_offset_Success == -1)
+                        {
+                            _offset_Success = Offset_Id + 8;
+                        }
+
+                        return _offset_Success;
+                    }
+                }
+
+                private int Offset_Synchronous
+                {
+                    get
+                    {
+                        if (_offset_Synchronous == -1)
+                        {
+                            _offset_Synchronous = Offset_Success + 1;
+                        }
+
+                        return _offset_Synchronous;
+                    }
+                }
+
+                private int Offset_StatusCode
+                {
+                    get
+                    {
+                        if (_offset_StatusCode == -1)
+                        {
+                            _offset_StatusCode = Offset_Synchronous + 1;
+                        }
+
+                        return _offset_StatusCode;
+                    }
+                }
 
                 /// <summary>
                 /// Retrieves the Id field.
                 /// </summary>
-                public long Id => BitConverter.ToInt64(_etwEvent.Data[Offset_Id..Offset_Success]);
+                public long Id => BitConverter.ToInt64(_etwEvent.Data[Offset_Id..]);
 
                 /// <summary>
                 /// Retrieves the Success field.
@@ -3176,6 +4296,10 @@ namespace EtwTools
                 public GetResponseStopData(EtwEvent etwEvent)
                 {
                     _etwEvent = etwEvent;
+                    _offset_Id = -1;
+                    _offset_Success = -1;
+                    _offset_Synchronous = -1;
+                    _offset_StatusCode = -1;
                 }
             }
 
@@ -3254,34 +4378,86 @@ namespace EtwTools
             /// <summary>
             /// A data wrapper for a GetRequestStreamStart event.
             /// </summary>
-            public readonly ref struct GetRequestStreamStartData
+            public ref struct GetRequestStreamStartData
             {
                 private readonly EtwEvent _etwEvent;
 
-                private const int Offset_Id = 0;
-                private const int Offset_Uri = 8;
-                private readonly int _offset_Success;
-                private readonly int _offset_Synchronous;
+                private int _offset_Id;
+                private int _offset_Uri;
+                private int _offset_Success;
+                private int _offset_Synchronous;
+
+                private int Offset_Id
+                {
+                    get
+                    {
+                        if (_offset_Id == -1)
+                        {
+                            _offset_Id = 0;
+                        }
+
+                        return _offset_Id;
+                    }
+                }
+
+                private int Offset_Uri
+                {
+                    get
+                    {
+                        if (_offset_Uri == -1)
+                        {
+                            _offset_Uri = Offset_Id + 8;
+                        }
+
+                        return _offset_Uri;
+                    }
+                }
+
+                private int Offset_Success
+                {
+                    get
+                    {
+                        if (_offset_Success == -1)
+                        {
+                            _offset_Success = Offset_Uri + EtwEvent.UnicodeStringEnumerable.UnicodeStringEnumerator.StringLength(_etwEvent.Data, Offset_Uri);
+                        }
+
+                        return _offset_Success;
+                    }
+                }
+
+                private int Offset_Synchronous
+                {
+                    get
+                    {
+                        if (_offset_Synchronous == -1)
+                        {
+                            _offset_Synchronous = Offset_Success + 1;
+                        }
+
+                        return _offset_Synchronous;
+                    }
+                }
 
                 /// <summary>
                 /// Retrieves the Id field.
                 /// </summary>
-                public long Id => BitConverter.ToInt64(_etwEvent.Data[Offset_Id..Offset_Uri]);
+                public long Id => BitConverter.ToInt64(_etwEvent.Data[Offset_Id..]);
 
                 /// <summary>
                 /// Retrieves the Uri field.
                 /// </summary>
-                public string Uri => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_Uri.._offset_Success]);
+                public string Uri => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_Uri..]);
 
                 /// <summary>
                 /// Retrieves the Success field.
                 /// </summary>
-                public bool Success => _etwEvent.Data[_offset_Success] != 0;
+                public bool Success => _etwEvent.Data[Offset_Success] != 0;
 
                 /// <summary>
                 /// Retrieves the Synchronous field.
                 /// </summary>
-                public bool Synchronous => _etwEvent.Data[_offset_Synchronous] != 0;
+                public bool Synchronous => _etwEvent.Data[Offset_Synchronous] != 0;
 
                 /// <summary>
                 /// Creates a new GetRequestStreamStartData.
@@ -3290,8 +4466,10 @@ namespace EtwTools
                 public GetRequestStreamStartData(EtwEvent etwEvent)
                 {
                     _etwEvent = etwEvent;
-                    _offset_Success = Offset_Uri + EtwEvent.UnicodeStringEnumerable.UnicodeStringEnumerator.StringLength(etwEvent.Data, Offset_Uri);
-                    _offset_Synchronous = _offset_Success + 1;
+                    _offset_Id = -1;
+                    _offset_Uri = -1;
+                    _offset_Success = -1;
+                    _offset_Synchronous = -1;
                 }
             }
 
@@ -3370,18 +4548,57 @@ namespace EtwTools
             /// <summary>
             /// A data wrapper for a GetRequestStreamStop event.
             /// </summary>
-            public readonly ref struct GetRequestStreamStopData
+            public ref struct GetRequestStreamStopData
             {
                 private readonly EtwEvent _etwEvent;
 
-                private const int Offset_Id = 0;
-                private const int Offset_Success = 8;
-                private const int Offset_Synchronous = 9;
+                private int _offset_Id;
+                private int _offset_Success;
+                private int _offset_Synchronous;
+
+                private int Offset_Id
+                {
+                    get
+                    {
+                        if (_offset_Id == -1)
+                        {
+                            _offset_Id = 0;
+                        }
+
+                        return _offset_Id;
+                    }
+                }
+
+                private int Offset_Success
+                {
+                    get
+                    {
+                        if (_offset_Success == -1)
+                        {
+                            _offset_Success = Offset_Id + 8;
+                        }
+
+                        return _offset_Success;
+                    }
+                }
+
+                private int Offset_Synchronous
+                {
+                    get
+                    {
+                        if (_offset_Synchronous == -1)
+                        {
+                            _offset_Synchronous = Offset_Success + 1;
+                        }
+
+                        return _offset_Synchronous;
+                    }
+                }
 
                 /// <summary>
                 /// Retrieves the Id field.
                 /// </summary>
-                public long Id => BitConverter.ToInt64(_etwEvent.Data[Offset_Id..Offset_Success]);
+                public long Id => BitConverter.ToInt64(_etwEvent.Data[Offset_Id..]);
 
                 /// <summary>
                 /// Retrieves the Success field.
@@ -3400,6 +4617,9 @@ namespace EtwTools
                 public GetRequestStreamStopData(EtwEvent etwEvent)
                 {
                     _etwEvent = etwEvent;
+                    _offset_Id = -1;
+                    _offset_Success = -1;
+                    _offset_Synchronous = -1;
                 }
             }
 
@@ -3478,34 +4698,86 @@ namespace EtwTools
             /// <summary>
             /// A data wrapper for a ThreadTransferSend event.
             /// </summary>
-            public readonly ref struct ThreadTransferSendData
+            public ref struct ThreadTransferSendData
             {
                 private readonly EtwEvent _etwEvent;
 
-                private const int Offset_Id = 0;
-                private const int Offset_Kind = 8;
-                private const int Offset_Info = 12;
-                private readonly int _offset_MultiDequeues;
+                private int _offset_Id;
+                private int _offset_Kind;
+                private int _offset_Info;
+                private int _offset_MultiDequeues;
+
+                private int Offset_Id
+                {
+                    get
+                    {
+                        if (_offset_Id == -1)
+                        {
+                            _offset_Id = 0;
+                        }
+
+                        return _offset_Id;
+                    }
+                }
+
+                private int Offset_Kind
+                {
+                    get
+                    {
+                        if (_offset_Kind == -1)
+                        {
+                            _offset_Kind = Offset_Id + 8;
+                        }
+
+                        return _offset_Kind;
+                    }
+                }
+
+                private int Offset_Info
+                {
+                    get
+                    {
+                        if (_offset_Info == -1)
+                        {
+                            _offset_Info = Offset_Kind + 4;
+                        }
+
+                        return _offset_Info;
+                    }
+                }
+
+                private int Offset_MultiDequeues
+                {
+                    get
+                    {
+                        if (_offset_MultiDequeues == -1)
+                        {
+                            _offset_MultiDequeues = Offset_Info + EtwEvent.UnicodeStringEnumerable.UnicodeStringEnumerator.StringLength(_etwEvent.Data, Offset_Info);
+                        }
+
+                        return _offset_MultiDequeues;
+                    }
+                }
 
                 /// <summary>
                 /// Retrieves the Id field.
                 /// </summary>
-                public long Id => BitConverter.ToInt64(_etwEvent.Data[Offset_Id..Offset_Kind]);
+                public long Id => BitConverter.ToInt64(_etwEvent.Data[Offset_Id..]);
 
                 /// <summary>
                 /// Retrieves the Kind field.
                 /// </summary>
-                public int Kind => BitConverter.ToInt32(_etwEvent.Data[Offset_Kind..Offset_Info]);
+                public int Kind => BitConverter.ToInt32(_etwEvent.Data[Offset_Kind..]);
 
                 /// <summary>
                 /// Retrieves the Info field.
                 /// </summary>
-                public string Info => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_Info.._offset_MultiDequeues]);
+                public string Info => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_Info..]);
 
                 /// <summary>
                 /// Retrieves the MultiDequeues field.
                 /// </summary>
-                public bool MultiDequeues => _etwEvent.Data[_offset_MultiDequeues] != 0;
+                public bool MultiDequeues => _etwEvent.Data[Offset_MultiDequeues] != 0;
 
                 /// <summary>
                 /// Creates a new ThreadTransferSendData.
@@ -3514,7 +4786,10 @@ namespace EtwTools
                 public ThreadTransferSendData(EtwEvent etwEvent)
                 {
                     _etwEvent = etwEvent;
-                    _offset_MultiDequeues = Offset_Info + EtwEvent.UnicodeStringEnumerable.UnicodeStringEnumerator.StringLength(etwEvent.Data, Offset_Info);
+                    _offset_Id = -1;
+                    _offset_Kind = -1;
+                    _offset_Info = -1;
+                    _offset_MultiDequeues = -1;
                 }
             }
 
@@ -3593,23 +4868,62 @@ namespace EtwTools
             /// <summary>
             /// A data wrapper for a ThreadTransferReceive event.
             /// </summary>
-            public readonly ref struct ThreadTransferReceiveData
+            public ref struct ThreadTransferReceiveData
             {
                 private readonly EtwEvent _etwEvent;
 
-                private const int Offset_Id = 0;
-                private const int Offset_Kind = 8;
-                private const int Offset_Info = 12;
+                private int _offset_Id;
+                private int _offset_Kind;
+                private int _offset_Info;
+
+                private int Offset_Id
+                {
+                    get
+                    {
+                        if (_offset_Id == -1)
+                        {
+                            _offset_Id = 0;
+                        }
+
+                        return _offset_Id;
+                    }
+                }
+
+                private int Offset_Kind
+                {
+                    get
+                    {
+                        if (_offset_Kind == -1)
+                        {
+                            _offset_Kind = Offset_Id + 8;
+                        }
+
+                        return _offset_Kind;
+                    }
+                }
+
+                private int Offset_Info
+                {
+                    get
+                    {
+                        if (_offset_Info == -1)
+                        {
+                            _offset_Info = Offset_Kind + 4;
+                        }
+
+                        return _offset_Info;
+                    }
+                }
 
                 /// <summary>
                 /// Retrieves the Id field.
                 /// </summary>
-                public long Id => BitConverter.ToInt64(_etwEvent.Data[Offset_Id..Offset_Kind]);
+                public long Id => BitConverter.ToInt64(_etwEvent.Data[Offset_Id..]);
 
                 /// <summary>
                 /// Retrieves the Kind field.
                 /// </summary>
-                public int Kind => BitConverter.ToInt32(_etwEvent.Data[Offset_Kind..Offset_Info]);
+                public int Kind => BitConverter.ToInt32(_etwEvent.Data[Offset_Kind..]);
 
                 /// <summary>
                 /// Retrieves the Info field.
@@ -3623,6 +4937,9 @@ namespace EtwTools
                 public ThreadTransferReceiveData(EtwEvent etwEvent)
                 {
                     _etwEvent = etwEvent;
+                    _offset_Id = -1;
+                    _offset_Kind = -1;
+                    _offset_Info = -1;
                 }
             }
 
@@ -3701,23 +5018,62 @@ namespace EtwTools
             /// <summary>
             /// A data wrapper for a ThreadTransferReceiveHandled event.
             /// </summary>
-            public readonly ref struct ThreadTransferReceiveHandledData
+            public ref struct ThreadTransferReceiveHandledData
             {
                 private readonly EtwEvent _etwEvent;
 
-                private const int Offset_Id = 0;
-                private const int Offset_Kind = 8;
-                private const int Offset_Info = 12;
+                private int _offset_Id;
+                private int _offset_Kind;
+                private int _offset_Info;
+
+                private int Offset_Id
+                {
+                    get
+                    {
+                        if (_offset_Id == -1)
+                        {
+                            _offset_Id = 0;
+                        }
+
+                        return _offset_Id;
+                    }
+                }
+
+                private int Offset_Kind
+                {
+                    get
+                    {
+                        if (_offset_Kind == -1)
+                        {
+                            _offset_Kind = Offset_Id + 8;
+                        }
+
+                        return _offset_Kind;
+                    }
+                }
+
+                private int Offset_Info
+                {
+                    get
+                    {
+                        if (_offset_Info == -1)
+                        {
+                            _offset_Info = Offset_Kind + 4;
+                        }
+
+                        return _offset_Info;
+                    }
+                }
 
                 /// <summary>
                 /// Retrieves the Id field.
                 /// </summary>
-                public long Id => BitConverter.ToInt64(_etwEvent.Data[Offset_Id..Offset_Kind]);
+                public long Id => BitConverter.ToInt64(_etwEvent.Data[Offset_Id..]);
 
                 /// <summary>
                 /// Retrieves the Kind field.
                 /// </summary>
-                public int Kind => BitConverter.ToInt32(_etwEvent.Data[Offset_Kind..Offset_Info]);
+                public int Kind => BitConverter.ToInt32(_etwEvent.Data[Offset_Kind..]);
 
                 /// <summary>
                 /// Retrieves the Info field.
@@ -3731,6 +5087,9 @@ namespace EtwTools
                 public ThreadTransferReceiveHandledData(EtwEvent etwEvent)
                 {
                     _etwEvent = etwEvent;
+                    _offset_Id = -1;
+                    _offset_Kind = -1;
+                    _offset_Info = -1;
                 }
             }
 

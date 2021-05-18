@@ -1,5 +1,6 @@
 using System;
 
+#pragma warning disable IDE0004 // Remove Unnecessary Cast
 #pragma warning disable CA1707 // Identifiers should not contain underscores
 #pragma warning disable CA1720 // Identifier contains type name
 
@@ -148,11 +149,24 @@ namespace EtwTools
             /// <summary>
             /// A data wrapper for a EventSourceMessage event.
             /// </summary>
-            public readonly ref struct EventSourceMessageData
+            public ref struct EventSourceMessageData
             {
                 private readonly EtwEvent _etwEvent;
 
-                private const int Offset_Message = 0;
+                private int _offset_Message;
+
+                private int Offset_Message
+                {
+                    get
+                    {
+                        if (_offset_Message == -1)
+                        {
+                            _offset_Message = 0;
+                        }
+
+                        return _offset_Message;
+                    }
+                }
 
                 /// <summary>
                 /// Retrieves the Message field.
@@ -166,6 +180,7 @@ namespace EtwTools
                 public EventSourceMessageData(EtwEvent etwEvent)
                 {
                     _etwEvent = etwEvent;
+                    _offset_Message = -1;
                 }
             }
 
@@ -244,22 +259,48 @@ namespace EtwTools
             /// <summary>
             /// A data wrapper for a Log event.
             /// </summary>
-            public readonly ref struct LogData
+            public ref struct LogData
             {
                 private readonly EtwEvent _etwEvent;
 
-                private const int Offset_Message = 0;
-                private readonly int _offset_FunctionId;
+                private int _offset_Message;
+                private int _offset_FunctionId;
+
+                private int Offset_Message
+                {
+                    get
+                    {
+                        if (_offset_Message == -1)
+                        {
+                            _offset_Message = 0;
+                        }
+
+                        return _offset_Message;
+                    }
+                }
+
+                private int Offset_FunctionId
+                {
+                    get
+                    {
+                        if (_offset_FunctionId == -1)
+                        {
+                            _offset_FunctionId = Offset_Message + EtwEvent.UnicodeStringEnumerable.UnicodeStringEnumerator.StringLength(_etwEvent.Data, Offset_Message);
+                        }
+
+                        return _offset_FunctionId;
+                    }
+                }
 
                 /// <summary>
                 /// Retrieves the Message field.
                 /// </summary>
-                public string Message => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_Message.._offset_FunctionId]);
+                public string Message => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_Message..]);
 
                 /// <summary>
                 /// Retrieves the FunctionId field.
                 /// </summary>
-                public FunctionId FunctionId => (FunctionId)BitConverter.ToUInt32(_etwEvent.Data[_offset_FunctionId..]);
+                public FunctionId FunctionId => (FunctionId)BitConverter.ToInt32(_etwEvent.Data[Offset_FunctionId..]);
 
                 /// <summary>
                 /// Creates a new LogData.
@@ -268,7 +309,8 @@ namespace EtwTools
                 public LogData(EtwEvent etwEvent)
                 {
                     _etwEvent = etwEvent;
-                    _offset_FunctionId = Offset_Message + EtwEvent.UnicodeStringEnumerable.UnicodeStringEnumerator.StringLength(etwEvent.Data, Offset_Message);
+                    _offset_Message = -1;
+                    _offset_FunctionId = -1;
                 }
             }
 
@@ -347,28 +389,67 @@ namespace EtwTools
             /// <summary>
             /// A data wrapper for a BlockStart event.
             /// </summary>
-            public readonly ref struct BlockStartData
+            public ref struct BlockStartData
             {
                 private readonly EtwEvent _etwEvent;
 
-                private const int Offset_Message = 0;
-                private readonly int _offset_FunctionId;
-                private readonly int _offset_BlockId;
+                private int _offset_Message;
+                private int _offset_FunctionId;
+                private int _offset_BlockId;
+
+                private int Offset_Message
+                {
+                    get
+                    {
+                        if (_offset_Message == -1)
+                        {
+                            _offset_Message = 0;
+                        }
+
+                        return _offset_Message;
+                    }
+                }
+
+                private int Offset_FunctionId
+                {
+                    get
+                    {
+                        if (_offset_FunctionId == -1)
+                        {
+                            _offset_FunctionId = Offset_Message + EtwEvent.UnicodeStringEnumerable.UnicodeStringEnumerator.StringLength(_etwEvent.Data, Offset_Message);
+                        }
+
+                        return _offset_FunctionId;
+                    }
+                }
+
+                private int Offset_BlockId
+                {
+                    get
+                    {
+                        if (_offset_BlockId == -1)
+                        {
+                            _offset_BlockId = Offset_FunctionId + 4;
+                        }
+
+                        return _offset_BlockId;
+                    }
+                }
 
                 /// <summary>
                 /// Retrieves the Message field.
                 /// </summary>
-                public string Message => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_Message.._offset_FunctionId]);
+                public string Message => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_Message..]);
 
                 /// <summary>
                 /// Retrieves the FunctionId field.
                 /// </summary>
-                public FunctionId FunctionId => (FunctionId)BitConverter.ToUInt32(_etwEvent.Data[_offset_FunctionId.._offset_BlockId]);
+                public FunctionId FunctionId => (FunctionId)BitConverter.ToInt32(_etwEvent.Data[Offset_FunctionId..]);
 
                 /// <summary>
                 /// Retrieves the BlockId field.
                 /// </summary>
-                public int BlockId => BitConverter.ToInt32(_etwEvent.Data[_offset_BlockId..]);
+                public int BlockId => BitConverter.ToInt32(_etwEvent.Data[Offset_BlockId..]);
 
                 /// <summary>
                 /// Creates a new BlockStartData.
@@ -377,8 +458,9 @@ namespace EtwTools
                 public BlockStartData(EtwEvent etwEvent)
                 {
                     _etwEvent = etwEvent;
-                    _offset_FunctionId = Offset_Message + EtwEvent.UnicodeStringEnumerable.UnicodeStringEnumerator.StringLength(etwEvent.Data, Offset_Message);
-                    _offset_BlockId = _offset_FunctionId + 4;
+                    _offset_Message = -1;
+                    _offset_FunctionId = -1;
+                    _offset_BlockId = -1;
                 }
             }
 
@@ -457,23 +539,62 @@ namespace EtwTools
             /// <summary>
             /// A data wrapper for a BlockStop event.
             /// </summary>
-            public readonly ref struct BlockStopData
+            public ref struct BlockStopData
             {
                 private readonly EtwEvent _etwEvent;
 
-                private const int Offset_FunctionId = 0;
-                private const int Offset_Tick = 4;
-                private const int Offset_BlockId = 8;
+                private int _offset_FunctionId;
+                private int _offset_Tick;
+                private int _offset_BlockId;
+
+                private int Offset_FunctionId
+                {
+                    get
+                    {
+                        if (_offset_FunctionId == -1)
+                        {
+                            _offset_FunctionId = 0;
+                        }
+
+                        return _offset_FunctionId;
+                    }
+                }
+
+                private int Offset_Tick
+                {
+                    get
+                    {
+                        if (_offset_Tick == -1)
+                        {
+                            _offset_Tick = Offset_FunctionId + 4;
+                        }
+
+                        return _offset_Tick;
+                    }
+                }
+
+                private int Offset_BlockId
+                {
+                    get
+                    {
+                        if (_offset_BlockId == -1)
+                        {
+                            _offset_BlockId = Offset_Tick + 4;
+                        }
+
+                        return _offset_BlockId;
+                    }
+                }
 
                 /// <summary>
                 /// Retrieves the FunctionId field.
                 /// </summary>
-                public FunctionId FunctionId => (FunctionId)BitConverter.ToUInt32(_etwEvent.Data[Offset_FunctionId..Offset_Tick]);
+                public FunctionId FunctionId => (FunctionId)BitConverter.ToInt32(_etwEvent.Data[Offset_FunctionId..]);
 
                 /// <summary>
                 /// Retrieves the Tick field.
                 /// </summary>
-                public int Tick => BitConverter.ToInt32(_etwEvent.Data[Offset_Tick..Offset_BlockId]);
+                public int Tick => BitConverter.ToInt32(_etwEvent.Data[Offset_Tick..]);
 
                 /// <summary>
                 /// Retrieves the BlockId field.
@@ -487,6 +608,9 @@ namespace EtwTools
                 public BlockStopData(EtwEvent etwEvent)
                 {
                     _etwEvent = etwEvent;
+                    _offset_FunctionId = -1;
+                    _offset_Tick = -1;
+                    _offset_BlockId = -1;
                 }
             }
 
@@ -565,11 +689,24 @@ namespace EtwTools
             /// <summary>
             /// A data wrapper for a SendFunctionDefinitions event.
             /// </summary>
-            public readonly ref struct SendFunctionDefinitionsData
+            public ref struct SendFunctionDefinitionsData
             {
                 private readonly EtwEvent _etwEvent;
 
-                private const int Offset_Definitions = 0;
+                private int _offset_Definitions;
+
+                private int Offset_Definitions
+                {
+                    get
+                    {
+                        if (_offset_Definitions == -1)
+                        {
+                            _offset_Definitions = 0;
+                        }
+
+                        return _offset_Definitions;
+                    }
+                }
 
                 /// <summary>
                 /// Retrieves the Definitions field.
@@ -583,6 +720,7 @@ namespace EtwTools
                 public SendFunctionDefinitionsData(EtwEvent etwEvent)
                 {
                     _etwEvent = etwEvent;
+                    _offset_Definitions = -1;
                 }
             }
 
@@ -661,23 +799,62 @@ namespace EtwTools
             /// <summary>
             /// A data wrapper for a BlockCanceled event.
             /// </summary>
-            public readonly ref struct BlockCanceledData
+            public ref struct BlockCanceledData
             {
                 private readonly EtwEvent _etwEvent;
 
-                private const int Offset_FunctionId = 0;
-                private const int Offset_Tick = 4;
-                private const int Offset_BlockId = 8;
+                private int _offset_FunctionId;
+                private int _offset_Tick;
+                private int _offset_BlockId;
+
+                private int Offset_FunctionId
+                {
+                    get
+                    {
+                        if (_offset_FunctionId == -1)
+                        {
+                            _offset_FunctionId = 0;
+                        }
+
+                        return _offset_FunctionId;
+                    }
+                }
+
+                private int Offset_Tick
+                {
+                    get
+                    {
+                        if (_offset_Tick == -1)
+                        {
+                            _offset_Tick = Offset_FunctionId + 4;
+                        }
+
+                        return _offset_Tick;
+                    }
+                }
+
+                private int Offset_BlockId
+                {
+                    get
+                    {
+                        if (_offset_BlockId == -1)
+                        {
+                            _offset_BlockId = Offset_Tick + 4;
+                        }
+
+                        return _offset_BlockId;
+                    }
+                }
 
                 /// <summary>
                 /// Retrieves the FunctionId field.
                 /// </summary>
-                public FunctionId FunctionId => (FunctionId)BitConverter.ToUInt32(_etwEvent.Data[Offset_FunctionId..Offset_Tick]);
+                public FunctionId FunctionId => (FunctionId)BitConverter.ToInt32(_etwEvent.Data[Offset_FunctionId..]);
 
                 /// <summary>
                 /// Retrieves the Tick field.
                 /// </summary>
-                public int Tick => BitConverter.ToInt32(_etwEvent.Data[Offset_Tick..Offset_BlockId]);
+                public int Tick => BitConverter.ToInt32(_etwEvent.Data[Offset_Tick..]);
 
                 /// <summary>
                 /// Retrieves the BlockId field.
@@ -691,6 +868,9 @@ namespace EtwTools
                 public BlockCanceledData(EtwEvent etwEvent)
                 {
                     _etwEvent = etwEvent;
+                    _offset_FunctionId = -1;
+                    _offset_Tick = -1;
+                    _offset_BlockId = -1;
                 }
             }
 
@@ -765,7 +945,7 @@ namespace EtwTools
         /// <summary>
         /// FunctionId.
         /// </summary>
-        public enum FunctionId
+        public enum FunctionId : ulong
         {
             /// <summary>
             /// TestEvent_NotUsed.

@@ -1,5 +1,6 @@
 using System;
 
+#pragma warning disable IDE0004 // Remove Unnecessary Cast
 #pragma warning disable CA1707 // Identifiers should not contain underscores
 #pragma warning disable CA1720 // Identifier contains type name
 
@@ -152,11 +153,24 @@ namespace EtwTools
             /// <summary>
             /// A data wrapper for a EventSourceMessage event.
             /// </summary>
-            public readonly ref struct EventSourceMessageData
+            public ref struct EventSourceMessageData
             {
                 private readonly EtwEvent _etwEvent;
 
-                private const int Offset_Message = 0;
+                private int _offset_Message;
+
+                private int Offset_Message
+                {
+                    get
+                    {
+                        if (_offset_Message == -1)
+                        {
+                            _offset_Message = 0;
+                        }
+
+                        return _offset_Message;
+                    }
+                }
 
                 /// <summary>
                 /// Retrieves the Message field.
@@ -170,6 +184,7 @@ namespace EtwTools
                 public EventSourceMessageData(EtwEvent etwEvent)
                 {
                     _etwEvent = etwEvent;
+                    _offset_Message = -1;
                 }
             }
 
@@ -248,22 +263,48 @@ namespace EtwTools
             /// <summary>
             /// A data wrapper for a SendingNotification event.
             /// </summary>
-            public readonly ref struct SendingNotificationData
+            public ref struct SendingNotificationData
             {
                 private readonly EtwEvent _etwEvent;
 
-                private const int Offset_Method = 0;
-                private readonly int _offset_Args;
+                private int _offset_Method;
+                private int _offset_Args;
+
+                private int Offset_Method
+                {
+                    get
+                    {
+                        if (_offset_Method == -1)
+                        {
+                            _offset_Method = 0;
+                        }
+
+                        return _offset_Method;
+                    }
+                }
+
+                private int Offset_Args
+                {
+                    get
+                    {
+                        if (_offset_Args == -1)
+                        {
+                            _offset_Args = Offset_Method + EtwEvent.UnicodeStringEnumerable.UnicodeStringEnumerator.StringLength(_etwEvent.Data, Offset_Method);
+                        }
+
+                        return _offset_Args;
+                    }
+                }
 
                 /// <summary>
                 /// Retrieves the Method field.
                 /// </summary>
-                public string Method => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_Method.._offset_Args]);
+                public string Method => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_Method..]);
 
                 /// <summary>
                 /// Retrieves the Args field.
                 /// </summary>
-                public string Args => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[_offset_Args..]);
+                public string Args => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_Args..]);
 
                 /// <summary>
                 /// Creates a new SendingNotificationData.
@@ -272,7 +313,8 @@ namespace EtwTools
                 public SendingNotificationData(EtwEvent etwEvent)
                 {
                     _etwEvent = etwEvent;
-                    _offset_Args = Offset_Method + EtwEvent.UnicodeStringEnumerable.UnicodeStringEnumerator.StringLength(etwEvent.Data, Offset_Method);
+                    _offset_Method = -1;
+                    _offset_Args = -1;
                 }
             }
 
@@ -351,11 +393,24 @@ namespace EtwTools
             /// <summary>
             /// A data wrapper for a ReceivedResult event.
             /// </summary>
-            public readonly ref struct ReceivedResultData
+            public ref struct ReceivedResultData
             {
                 private readonly EtwEvent _etwEvent;
 
-                private const int Offset_RequestId = 0;
+                private int _offset_RequestId;
+
+                private int Offset_RequestId
+                {
+                    get
+                    {
+                        if (_offset_RequestId == -1)
+                        {
+                            _offset_RequestId = 0;
+                        }
+
+                        return _offset_RequestId;
+                    }
+                }
 
                 /// <summary>
                 /// Retrieves the RequestId field.
@@ -369,6 +424,7 @@ namespace EtwTools
                 public ReceivedResultData(EtwEvent etwEvent)
                 {
                     _etwEvent = etwEvent;
+                    _offset_RequestId = -1;
                 }
             }
 
@@ -447,22 +503,48 @@ namespace EtwTools
             /// <summary>
             /// A data wrapper for a ReceivedError event.
             /// </summary>
-            public readonly ref struct ReceivedErrorData
+            public ref struct ReceivedErrorData
             {
                 private readonly EtwEvent _etwEvent;
 
-                private const int Offset_RequestId = 0;
-                private const int Offset_ErrorCode = 8;
+                private int _offset_RequestId;
+                private int _offset_ErrorCode;
+
+                private int Offset_RequestId
+                {
+                    get
+                    {
+                        if (_offset_RequestId == -1)
+                        {
+                            _offset_RequestId = 0;
+                        }
+
+                        return _offset_RequestId;
+                    }
+                }
+
+                private int Offset_ErrorCode
+                {
+                    get
+                    {
+                        if (_offset_ErrorCode == -1)
+                        {
+                            _offset_ErrorCode = Offset_RequestId + 8;
+                        }
+
+                        return _offset_ErrorCode;
+                    }
+                }
 
                 /// <summary>
                 /// Retrieves the RequestId field.
                 /// </summary>
-                public long RequestId => BitConverter.ToInt64(_etwEvent.Data[Offset_RequestId..Offset_ErrorCode]);
+                public long RequestId => BitConverter.ToInt64(_etwEvent.Data[Offset_RequestId..]);
 
                 /// <summary>
                 /// Retrieves the ErrorCode field.
                 /// </summary>
-                public JsonRpcErrorCode ErrorCode => (JsonRpcErrorCode)BitConverter.ToUInt32(_etwEvent.Data[Offset_ErrorCode..]);
+                public JsonRpcErrorCode ErrorCode => (JsonRpcErrorCode)BitConverter.ToInt32(_etwEvent.Data[Offset_ErrorCode..]);
 
                 /// <summary>
                 /// Creates a new ReceivedErrorData.
@@ -471,6 +553,8 @@ namespace EtwTools
                 public ReceivedErrorData(EtwEvent etwEvent)
                 {
                     _etwEvent = etwEvent;
+                    _offset_RequestId = -1;
+                    _offset_ErrorCode = -1;
                 }
             }
 
@@ -549,11 +633,24 @@ namespace EtwTools
             /// <summary>
             /// A data wrapper for a ReceivedNoResponse event.
             /// </summary>
-            public readonly ref struct ReceivedNoResponseData
+            public ref struct ReceivedNoResponseData
             {
                 private readonly EtwEvent _etwEvent;
 
-                private const int Offset_RequestId = 0;
+                private int _offset_RequestId;
+
+                private int Offset_RequestId
+                {
+                    get
+                    {
+                        if (_offset_RequestId == -1)
+                        {
+                            _offset_RequestId = 0;
+                        }
+
+                        return _offset_RequestId;
+                    }
+                }
 
                 /// <summary>
                 /// Retrieves the RequestId field.
@@ -567,6 +664,7 @@ namespace EtwTools
                 public ReceivedNoResponseData(EtwEvent etwEvent)
                 {
                     _etwEvent = etwEvent;
+                    _offset_RequestId = -1;
                 }
             }
 
@@ -645,11 +743,24 @@ namespace EtwTools
             /// <summary>
             /// A data wrapper for a SendingCancellationRequest event.
             /// </summary>
-            public readonly ref struct SendingCancellationRequestData
+            public ref struct SendingCancellationRequestData
             {
                 private readonly EtwEvent _etwEvent;
 
-                private const int Offset_RequestId = 0;
+                private int _offset_RequestId;
+
+                private int Offset_RequestId
+                {
+                    get
+                    {
+                        if (_offset_RequestId == -1)
+                        {
+                            _offset_RequestId = 0;
+                        }
+
+                        return _offset_RequestId;
+                    }
+                }
 
                 /// <summary>
                 /// Retrieves the RequestId field.
@@ -663,6 +774,7 @@ namespace EtwTools
                 public SendingCancellationRequestData(EtwEvent etwEvent)
                 {
                     _etwEvent = etwEvent;
+                    _offset_RequestId = -1;
                 }
             }
 
@@ -741,22 +853,48 @@ namespace EtwTools
             /// <summary>
             /// A data wrapper for a ReceivedNotification event.
             /// </summary>
-            public readonly ref struct ReceivedNotificationData
+            public ref struct ReceivedNotificationData
             {
                 private readonly EtwEvent _etwEvent;
 
-                private const int Offset_Method = 0;
-                private readonly int _offset_Args;
+                private int _offset_Method;
+                private int _offset_Args;
+
+                private int Offset_Method
+                {
+                    get
+                    {
+                        if (_offset_Method == -1)
+                        {
+                            _offset_Method = 0;
+                        }
+
+                        return _offset_Method;
+                    }
+                }
+
+                private int Offset_Args
+                {
+                    get
+                    {
+                        if (_offset_Args == -1)
+                        {
+                            _offset_Args = Offset_Method + EtwEvent.UnicodeStringEnumerable.UnicodeStringEnumerator.StringLength(_etwEvent.Data, Offset_Method);
+                        }
+
+                        return _offset_Args;
+                    }
+                }
 
                 /// <summary>
                 /// Retrieves the Method field.
                 /// </summary>
-                public string Method => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_Method.._offset_Args]);
+                public string Method => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_Method..]);
 
                 /// <summary>
                 /// Retrieves the Args field.
                 /// </summary>
-                public string Args => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[_offset_Args..]);
+                public string Args => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_Args..]);
 
                 /// <summary>
                 /// Creates a new ReceivedNotificationData.
@@ -765,7 +903,8 @@ namespace EtwTools
                 public ReceivedNotificationData(EtwEvent etwEvent)
                 {
                     _etwEvent = etwEvent;
-                    _offset_Args = Offset_Method + EtwEvent.UnicodeStringEnumerable.UnicodeStringEnumerator.StringLength(etwEvent.Data, Offset_Method);
+                    _offset_Method = -1;
+                    _offset_Args = -1;
                 }
             }
 
@@ -844,11 +983,24 @@ namespace EtwTools
             /// <summary>
             /// A data wrapper for a SendingResult event.
             /// </summary>
-            public readonly ref struct SendingResultData
+            public ref struct SendingResultData
             {
                 private readonly EtwEvent _etwEvent;
 
-                private const int Offset_RequestId = 0;
+                private int _offset_RequestId;
+
+                private int Offset_RequestId
+                {
+                    get
+                    {
+                        if (_offset_RequestId == -1)
+                        {
+                            _offset_RequestId = 0;
+                        }
+
+                        return _offset_RequestId;
+                    }
+                }
 
                 /// <summary>
                 /// Retrieves the RequestId field.
@@ -862,6 +1014,7 @@ namespace EtwTools
                 public SendingResultData(EtwEvent etwEvent)
                 {
                     _etwEvent = etwEvent;
+                    _offset_RequestId = -1;
                 }
             }
 
@@ -940,22 +1093,48 @@ namespace EtwTools
             /// <summary>
             /// A data wrapper for a SendingError event.
             /// </summary>
-            public readonly ref struct SendingErrorData
+            public ref struct SendingErrorData
             {
                 private readonly EtwEvent _etwEvent;
 
-                private const int Offset_RequestId = 0;
-                private const int Offset_ErrorCode = 8;
+                private int _offset_RequestId;
+                private int _offset_ErrorCode;
+
+                private int Offset_RequestId
+                {
+                    get
+                    {
+                        if (_offset_RequestId == -1)
+                        {
+                            _offset_RequestId = 0;
+                        }
+
+                        return _offset_RequestId;
+                    }
+                }
+
+                private int Offset_ErrorCode
+                {
+                    get
+                    {
+                        if (_offset_ErrorCode == -1)
+                        {
+                            _offset_ErrorCode = Offset_RequestId + 8;
+                        }
+
+                        return _offset_ErrorCode;
+                    }
+                }
 
                 /// <summary>
                 /// Retrieves the RequestId field.
                 /// </summary>
-                public long RequestId => BitConverter.ToInt64(_etwEvent.Data[Offset_RequestId..Offset_ErrorCode]);
+                public long RequestId => BitConverter.ToInt64(_etwEvent.Data[Offset_RequestId..]);
 
                 /// <summary>
                 /// Retrieves the ErrorCode field.
                 /// </summary>
-                public JsonRpcErrorCode ErrorCode => (JsonRpcErrorCode)BitConverter.ToUInt32(_etwEvent.Data[Offset_ErrorCode..]);
+                public JsonRpcErrorCode ErrorCode => (JsonRpcErrorCode)BitConverter.ToInt32(_etwEvent.Data[Offset_ErrorCode..]);
 
                 /// <summary>
                 /// Creates a new SendingErrorData.
@@ -964,6 +1143,8 @@ namespace EtwTools
                 public SendingErrorData(EtwEvent etwEvent)
                 {
                     _etwEvent = etwEvent;
+                    _offset_RequestId = -1;
+                    _offset_ErrorCode = -1;
                 }
             }
 
@@ -1042,11 +1223,24 @@ namespace EtwTools
             /// <summary>
             /// A data wrapper for a ReceivedCancellationRequest event.
             /// </summary>
-            public readonly ref struct ReceivedCancellationRequestData
+            public ref struct ReceivedCancellationRequestData
             {
                 private readonly EtwEvent _etwEvent;
 
-                private const int Offset_RequestId = 0;
+                private int _offset_RequestId;
+
+                private int Offset_RequestId
+                {
+                    get
+                    {
+                        if (_offset_RequestId == -1)
+                        {
+                            _offset_RequestId = 0;
+                        }
+
+                        return _offset_RequestId;
+                    }
+                }
 
                 /// <summary>
                 /// Retrieves the RequestId field.
@@ -1060,6 +1254,7 @@ namespace EtwTools
                 public ReceivedCancellationRequestData(EtwEvent etwEvent)
                 {
                     _etwEvent = etwEvent;
+                    _offset_RequestId = -1;
                 }
             }
 
@@ -1270,11 +1465,24 @@ namespace EtwTools
             /// <summary>
             /// A data wrapper for a HandlerTransmitted event.
             /// </summary>
-            public readonly ref struct HandlerTransmittedData
+            public ref struct HandlerTransmittedData
             {
                 private readonly EtwEvent _etwEvent;
 
-                private const int Offset_Size = 0;
+                private int _offset_Size;
+
+                private int Offset_Size
+                {
+                    get
+                    {
+                        if (_offset_Size == -1)
+                        {
+                            _offset_Size = 0;
+                        }
+
+                        return _offset_Size;
+                    }
+                }
 
                 /// <summary>
                 /// Retrieves the Size field.
@@ -1288,6 +1496,7 @@ namespace EtwTools
                 public HandlerTransmittedData(EtwEvent etwEvent)
                 {
                     _etwEvent = etwEvent;
+                    _offset_Size = -1;
                 }
             }
 
@@ -1366,11 +1575,24 @@ namespace EtwTools
             /// <summary>
             /// A data wrapper for a HandlerReceived event.
             /// </summary>
-            public readonly ref struct HandlerReceivedData
+            public ref struct HandlerReceivedData
             {
                 private readonly EtwEvent _etwEvent;
 
-                private const int Offset_Size = 0;
+                private int _offset_Size;
+
+                private int Offset_Size
+                {
+                    get
+                    {
+                        if (_offset_Size == -1)
+                        {
+                            _offset_Size = 0;
+                        }
+
+                        return _offset_Size;
+                    }
+                }
 
                 /// <summary>
                 /// Retrieves the Size field.
@@ -1384,6 +1606,7 @@ namespace EtwTools
                 public HandlerReceivedData(EtwEvent etwEvent)
                 {
                     _etwEvent = etwEvent;
+                    _offset_Size = -1;
                 }
             }
 
@@ -1462,28 +1685,67 @@ namespace EtwTools
             /// <summary>
             /// A data wrapper for a SendingRequest event.
             /// </summary>
-            public readonly ref struct SendingRequestData
+            public ref struct SendingRequestData
             {
                 private readonly EtwEvent _etwEvent;
 
-                private const int Offset_RequestId = 0;
-                private const int Offset_Method = 8;
-                private readonly int _offset_Args;
+                private int _offset_RequestId;
+                private int _offset_Method;
+                private int _offset_Args;
+
+                private int Offset_RequestId
+                {
+                    get
+                    {
+                        if (_offset_RequestId == -1)
+                        {
+                            _offset_RequestId = 0;
+                        }
+
+                        return _offset_RequestId;
+                    }
+                }
+
+                private int Offset_Method
+                {
+                    get
+                    {
+                        if (_offset_Method == -1)
+                        {
+                            _offset_Method = Offset_RequestId + 8;
+                        }
+
+                        return _offset_Method;
+                    }
+                }
+
+                private int Offset_Args
+                {
+                    get
+                    {
+                        if (_offset_Args == -1)
+                        {
+                            _offset_Args = Offset_Method + EtwEvent.UnicodeStringEnumerable.UnicodeStringEnumerator.StringLength(_etwEvent.Data, Offset_Method);
+                        }
+
+                        return _offset_Args;
+                    }
+                }
 
                 /// <summary>
                 /// Retrieves the RequestId field.
                 /// </summary>
-                public long RequestId => BitConverter.ToInt64(_etwEvent.Data[Offset_RequestId..Offset_Method]);
+                public long RequestId => BitConverter.ToInt64(_etwEvent.Data[Offset_RequestId..]);
 
                 /// <summary>
                 /// Retrieves the Method field.
                 /// </summary>
-                public string Method => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_Method.._offset_Args]);
+                public string Method => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_Method..]);
 
                 /// <summary>
                 /// Retrieves the Args field.
                 /// </summary>
-                public string Args => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[_offset_Args..]);
+                public string Args => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_Args..]);
 
                 /// <summary>
                 /// Creates a new SendingRequestData.
@@ -1492,7 +1754,9 @@ namespace EtwTools
                 public SendingRequestData(EtwEvent etwEvent)
                 {
                     _etwEvent = etwEvent;
-                    _offset_Args = Offset_Method + EtwEvent.UnicodeStringEnumerable.UnicodeStringEnumerator.StringLength(etwEvent.Data, Offset_Method);
+                    _offset_RequestId = -1;
+                    _offset_Method = -1;
+                    _offset_Args = -1;
                 }
             }
 
@@ -1571,28 +1835,67 @@ namespace EtwTools
             /// <summary>
             /// A data wrapper for a ReceivedRequest event.
             /// </summary>
-            public readonly ref struct ReceivedRequestData
+            public ref struct ReceivedRequestData
             {
                 private readonly EtwEvent _etwEvent;
 
-                private const int Offset_RequestId = 0;
-                private const int Offset_Method = 8;
-                private readonly int _offset_Args;
+                private int _offset_RequestId;
+                private int _offset_Method;
+                private int _offset_Args;
+
+                private int Offset_RequestId
+                {
+                    get
+                    {
+                        if (_offset_RequestId == -1)
+                        {
+                            _offset_RequestId = 0;
+                        }
+
+                        return _offset_RequestId;
+                    }
+                }
+
+                private int Offset_Method
+                {
+                    get
+                    {
+                        if (_offset_Method == -1)
+                        {
+                            _offset_Method = Offset_RequestId + 8;
+                        }
+
+                        return _offset_Method;
+                    }
+                }
+
+                private int Offset_Args
+                {
+                    get
+                    {
+                        if (_offset_Args == -1)
+                        {
+                            _offset_Args = Offset_Method + EtwEvent.UnicodeStringEnumerable.UnicodeStringEnumerator.StringLength(_etwEvent.Data, Offset_Method);
+                        }
+
+                        return _offset_Args;
+                    }
+                }
 
                 /// <summary>
                 /// Retrieves the RequestId field.
                 /// </summary>
-                public long RequestId => BitConverter.ToInt64(_etwEvent.Data[Offset_RequestId..Offset_Method]);
+                public long RequestId => BitConverter.ToInt64(_etwEvent.Data[Offset_RequestId..]);
 
                 /// <summary>
                 /// Retrieves the Method field.
                 /// </summary>
-                public string Method => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_Method.._offset_Args]);
+                public string Method => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_Method..]);
 
                 /// <summary>
                 /// Retrieves the Args field.
                 /// </summary>
-                public string Args => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[_offset_Args..]);
+                public string Args => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_Args..]);
 
                 /// <summary>
                 /// Creates a new ReceivedRequestData.
@@ -1601,7 +1904,9 @@ namespace EtwTools
                 public ReceivedRequestData(EtwEvent etwEvent)
                 {
                     _etwEvent = etwEvent;
-                    _offset_Args = Offset_Method + EtwEvent.UnicodeStringEnumerable.UnicodeStringEnumerator.StringLength(etwEvent.Data, Offset_Method);
+                    _offset_RequestId = -1;
+                    _offset_Method = -1;
+                    _offset_Args = -1;
                 }
             }
 
@@ -1610,48 +1915,48 @@ namespace EtwTools
         /// <summary>
         /// JsonRpcErrorCode.
         /// </summary>
-        public enum JsonRpcErrorCode
+        public enum JsonRpcErrorCode : ulong
         {
             /// <summary>
             /// InvocationError.
             /// </summary>
-            InvocationError = -32000,
+            InvocationError = 18446744073709519616,
             /// <summary>
             /// NoMarshaledObjectFound.
             /// </summary>
-            NoMarshaledObjectFound = -32001,
+            NoMarshaledObjectFound = 18446744073709519615,
             /// <summary>
             /// ResponseSerializationFailure.
             /// </summary>
-            ResponseSerializationFailure = -32003,
+            ResponseSerializationFailure = 18446744073709519613,
             /// <summary>
             /// InvocationErrorWithException.
             /// </summary>
-            InvocationErrorWithException = -32004,
+            InvocationErrorWithException = 18446744073709519612,
             /// <summary>
             /// ParseError.
             /// </summary>
-            ParseError = -32700,
+            ParseError = 18446744073709518916,
             /// <summary>
             /// InvalidRequest.
             /// </summary>
-            InvalidRequest = -32600,
+            InvalidRequest = 18446744073709519016,
             /// <summary>
             /// MethodNotFound.
             /// </summary>
-            MethodNotFound = -32601,
+            MethodNotFound = 18446744073709519015,
             /// <summary>
             /// InvalidParams.
             /// </summary>
-            InvalidParams = -32602,
+            InvalidParams = 18446744073709519014,
             /// <summary>
             /// InternalError.
             /// </summary>
-            InternalError = -32603,
+            InternalError = 18446744073709519013,
             /// <summary>
             /// RequestCanceled.
             /// </summary>
-            RequestCanceled = 32736,
+            RequestCanceled = 18446744073709518816,
         }
     }
 }

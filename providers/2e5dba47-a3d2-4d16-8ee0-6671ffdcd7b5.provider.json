@@ -1,0 +1,884 @@
+{
+  "name": "TplEventSource",
+  "displayName": "System.Threading.Tasks.TplEventSource",
+  "id": "2e5dba47-a3d2-4d16-8ee0-6671ffdcd7b5",
+  "events": [
+    {
+      "name": "EventSourceMessage",
+      "displayName": "EventSourceMessage",
+      "descriptor": {
+        "id": 0,
+        "version": 0,
+        "channel": 0,
+        "level": "None",
+        "opcode": "Info",
+        "task": 65534,
+        "keyword": 0
+      },
+      "fields": [
+        {
+          "name": "Message",
+          "datatype": "string",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "ParallelLoopBegin",
+      "displayName": "ParallelLoopBegin",
+      "descriptor": {
+        "id": 1,
+        "version": 0,
+        "channel": 0,
+        "level": "Information",
+        "opcode": "Start",
+        "task": 1,
+        "keyword": 0
+      },
+      "fields": [
+        {
+          "name": "OriginatingTaskSchedulerID",
+          "datatype": "int",
+          "map": null
+        },
+        {
+          "name": "OriginatingTaskID",
+          "datatype": "int",
+          "map": null
+        },
+        {
+          "name": "ForkJoinContextID",
+          "datatype": "int",
+          "map": null
+        },
+        {
+          "name": "OperationType",
+          "datatype": "int",
+          "map": "ForkJoinOperationType"
+        },
+        {
+          "name": "InclusiveFrom",
+          "datatype": "long",
+          "map": null
+        },
+        {
+          "name": "ExclusiveTo",
+          "datatype": "long",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "ParallelLoopEnd",
+      "displayName": "ParallelLoopEnd",
+      "descriptor": {
+        "id": 2,
+        "version": 0,
+        "channel": 0,
+        "level": "Information",
+        "opcode": "End",
+        "task": 1,
+        "keyword": 0
+      },
+      "fields": [
+        {
+          "name": "OriginatingTaskSchedulerID",
+          "datatype": "int",
+          "map": null
+        },
+        {
+          "name": "OriginatingTaskID",
+          "datatype": "int",
+          "map": null
+        },
+        {
+          "name": "ForkJoinContextID",
+          "datatype": "int",
+          "map": null
+        },
+        {
+          "name": "TotalIterations",
+          "datatype": "long",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "ParallelInvokeBegin",
+      "displayName": "ParallelInvokeBegin",
+      "descriptor": {
+        "id": 3,
+        "version": 0,
+        "channel": 0,
+        "level": "Information",
+        "opcode": "Start",
+        "task": 2,
+        "keyword": 0
+      },
+      "fields": [
+        {
+          "name": "OriginatingTaskSchedulerID",
+          "datatype": "int",
+          "map": null
+        },
+        {
+          "name": "OriginatingTaskID",
+          "datatype": "int",
+          "map": null
+        },
+        {
+          "name": "ForkJoinContextID",
+          "datatype": "int",
+          "map": null
+        },
+        {
+          "name": "OperationType",
+          "datatype": "int",
+          "map": "ForkJoinOperationType"
+        },
+        {
+          "name": "ActionCount",
+          "datatype": "int",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "ParallelInvokeEnd",
+      "displayName": "ParallelInvokeEnd",
+      "descriptor": {
+        "id": 4,
+        "version": 0,
+        "channel": 0,
+        "level": "Information",
+        "opcode": "End",
+        "task": 2,
+        "keyword": 0
+      },
+      "fields": [
+        {
+          "name": "OriginatingTaskSchedulerID",
+          "datatype": "int",
+          "map": null
+        },
+        {
+          "name": "OriginatingTaskID",
+          "datatype": "int",
+          "map": null
+        },
+        {
+          "name": "ForkJoinContextID",
+          "datatype": "int",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "ParallelFork",
+      "displayName": "ParallelFork",
+      "descriptor": {
+        "id": 5,
+        "version": 0,
+        "channel": 0,
+        "level": "Verbose",
+        "opcode": "Start",
+        "task": 5,
+        "keyword": 0
+      },
+      "fields": [
+        {
+          "name": "OriginatingTaskSchedulerID",
+          "datatype": "int",
+          "map": null
+        },
+        {
+          "name": "OriginatingTaskID",
+          "datatype": "int",
+          "map": null
+        },
+        {
+          "name": "ForkJoinContextID",
+          "datatype": "int",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "ParallelJoin",
+      "displayName": "ParallelJoin",
+      "descriptor": {
+        "id": 6,
+        "version": 0,
+        "channel": 0,
+        "level": "Verbose",
+        "opcode": "End",
+        "task": 5,
+        "keyword": 0
+      },
+      "fields": [
+        {
+          "name": "OriginatingTaskSchedulerID",
+          "datatype": "int",
+          "map": null
+        },
+        {
+          "name": "OriginatingTaskID",
+          "datatype": "int",
+          "map": null
+        },
+        {
+          "name": "ForkJoinContextID",
+          "datatype": "int",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "TaskScheduled",
+      "displayName": "TaskScheduled",
+      "descriptor": {
+        "id": 7,
+        "version": 1,
+        "channel": 0,
+        "level": "Information",
+        "opcode": "Send",
+        "task": 6,
+        "keyword": 3
+      },
+      "fields": [
+        {
+          "name": "OriginatingTaskSchedulerID",
+          "datatype": "int",
+          "map": null
+        },
+        {
+          "name": "OriginatingTaskID",
+          "datatype": "int",
+          "map": null
+        },
+        {
+          "name": "TaskID",
+          "datatype": "int",
+          "map": null
+        },
+        {
+          "name": "CreatingTaskID",
+          "datatype": "int",
+          "map": null
+        },
+        {
+          "name": "TaskCreationOptions",
+          "datatype": "int",
+          "map": null
+        },
+        {
+          "name": "AppDomain",
+          "datatype": "int",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "TaskStarted",
+      "displayName": "TaskStarted",
+      "descriptor": {
+        "id": 8,
+        "version": 0,
+        "channel": 0,
+        "level": "Information",
+        "opcode": "Info",
+        "task": 65526,
+        "keyword": 2
+      },
+      "fields": [
+        {
+          "name": "OriginatingTaskSchedulerID",
+          "datatype": "int",
+          "map": null
+        },
+        {
+          "name": "OriginatingTaskID",
+          "datatype": "int",
+          "map": null
+        },
+        {
+          "name": "TaskID",
+          "datatype": "int",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "TaskCompleted",
+      "displayName": "TaskCompleted",
+      "descriptor": {
+        "id": 9,
+        "version": 1,
+        "channel": 0,
+        "level": "Information",
+        "opcode": "Info",
+        "task": 65525,
+        "keyword": 64
+      },
+      "fields": [
+        {
+          "name": "OriginatingTaskSchedulerID",
+          "datatype": "int",
+          "map": null
+        },
+        {
+          "name": "OriginatingTaskID",
+          "datatype": "int",
+          "map": null
+        },
+        {
+          "name": "TaskID",
+          "datatype": "int",
+          "map": null
+        },
+        {
+          "name": "IsExceptional",
+          "datatype": "bool",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "TaskWaitBegin",
+      "displayName": "TaskWaitBegin",
+      "descriptor": {
+        "id": 10,
+        "version": 3,
+        "channel": 0,
+        "level": "Information",
+        "opcode": "Send",
+        "task": 4,
+        "keyword": 3
+      },
+      "fields": [
+        {
+          "name": "OriginatingTaskSchedulerID",
+          "datatype": "int",
+          "map": null
+        },
+        {
+          "name": "OriginatingTaskID",
+          "datatype": "int",
+          "map": null
+        },
+        {
+          "name": "TaskID",
+          "datatype": "int",
+          "map": null
+        },
+        {
+          "name": "Behavior",
+          "datatype": "int",
+          "map": "TaskWaitBehavior"
+        },
+        {
+          "name": "ContinueWithTaskID",
+          "datatype": "int",
+          "map": null
+        },
+        {
+          "name": "AppDomain",
+          "datatype": "int",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "TaskWaitEnd",
+      "displayName": "TaskWaitEnd",
+      "descriptor": {
+        "id": 11,
+        "version": 0,
+        "channel": 0,
+        "level": "Verbose",
+        "opcode": "Info",
+        "task": 65523,
+        "keyword": 2
+      },
+      "fields": [
+        {
+          "name": "OriginatingTaskSchedulerID",
+          "datatype": "int",
+          "map": null
+        },
+        {
+          "name": "OriginatingTaskID",
+          "datatype": "int",
+          "map": null
+        },
+        {
+          "name": "TaskID",
+          "datatype": "int",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "TaskWaitContinuationComplete",
+      "displayName": "TaskWaitContinuationComplete",
+      "descriptor": {
+        "id": 13,
+        "version": 0,
+        "channel": 0,
+        "level": "Verbose",
+        "opcode": "Info",
+        "task": 65521,
+        "keyword": 64
+      },
+      "fields": [
+        {
+          "name": "TaskID",
+          "datatype": "int",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "TaskWaitContinuationStarted",
+      "displayName": "TaskWaitContinuationStarted",
+      "descriptor": {
+        "id": 19,
+        "version": 0,
+        "channel": 0,
+        "level": "Verbose",
+        "opcode": "Info",
+        "task": 65515,
+        "keyword": 64
+      },
+      "fields": [
+        {
+          "name": "TaskID",
+          "datatype": "int",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "AwaitTaskContinuationScheduled",
+      "displayName": "AwaitTaskContinuationScheduled",
+      "descriptor": {
+        "id": 12,
+        "version": 0,
+        "channel": 0,
+        "level": "Information",
+        "opcode": "Send",
+        "task": 7,
+        "keyword": 3
+      },
+      "fields": [
+        {
+          "name": "OriginatingTaskSchedulerID",
+          "datatype": "int",
+          "map": null
+        },
+        {
+          "name": "OriginatingTaskID",
+          "datatype": "int",
+          "map": null
+        },
+        {
+          "name": "ContinuwWithTaskId",
+          "datatype": "int",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "TraceOperationBegin",
+      "displayName": "TraceOperationBegin",
+      "descriptor": {
+        "id": 14,
+        "version": 1,
+        "channel": 0,
+        "level": "Information",
+        "opcode": "Info",
+        "task": 65520,
+        "keyword": 8
+      },
+      "fields": [
+        {
+          "name": "TaskID",
+          "datatype": "int",
+          "map": null
+        },
+        {
+          "name": "OperationName",
+          "datatype": "string",
+          "map": null
+        },
+        {
+          "name": "RelatedContext",
+          "datatype": "long",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "TraceOperationRelation",
+      "displayName": "TraceOperationRelation",
+      "descriptor": {
+        "id": 16,
+        "version": 1,
+        "channel": 0,
+        "level": "Information",
+        "opcode": "Info",
+        "task": 65518,
+        "keyword": 16
+      },
+      "fields": [
+        {
+          "name": "TaskID",
+          "datatype": "int",
+          "map": null
+        },
+        {
+          "name": "Relation",
+          "datatype": "int",
+          "map": "CausalityRelation"
+        }
+      ]
+    },
+    {
+      "name": "TraceOperationEnd",
+      "displayName": "TraceOperationEnd",
+      "descriptor": {
+        "id": 15,
+        "version": 1,
+        "channel": 0,
+        "level": "Information",
+        "opcode": "Info",
+        "task": 65519,
+        "keyword": 8
+      },
+      "fields": [
+        {
+          "name": "TaskID",
+          "datatype": "int",
+          "map": null
+        },
+        {
+          "name": "Status",
+          "datatype": "int",
+          "map": "AsyncCausalityStatus"
+        }
+      ]
+    },
+    {
+      "name": "TraceSynchronousWorkBegin",
+      "displayName": "TraceSynchronousWorkBegin",
+      "descriptor": {
+        "id": 17,
+        "version": 1,
+        "channel": 0,
+        "level": "Information",
+        "opcode": "Info",
+        "task": 65517,
+        "keyword": 32
+      },
+      "fields": [
+        {
+          "name": "TaskID",
+          "datatype": "int",
+          "map": null
+        },
+        {
+          "name": "Work",
+          "datatype": "int",
+          "map": "CausalitySynchronousWork"
+        }
+      ]
+    },
+    {
+      "name": "TraceSynchronousWorkEnd",
+      "displayName": "TraceSynchronousWorkEnd",
+      "descriptor": {
+        "id": 18,
+        "version": 1,
+        "channel": 0,
+        "level": "Information",
+        "opcode": "Info",
+        "task": 65516,
+        "keyword": 32
+      },
+      "fields": [
+        {
+          "name": "Work",
+          "datatype": "int",
+          "map": "CausalitySynchronousWork"
+        }
+      ]
+    },
+    {
+      "name": "RunningContinuation",
+      "displayName": "RunningContinuation",
+      "descriptor": {
+        "id": 20,
+        "version": 0,
+        "channel": 0,
+        "level": "Information",
+        "opcode": "Info",
+        "task": 65514,
+        "keyword": 131072
+      },
+      "fields": [
+        {
+          "name": "TaskID",
+          "datatype": "int",
+          "map": null
+        },
+        {
+          "name": "Object",
+          "datatype": "long",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "RunningContinuationList",
+      "displayName": "RunningContinuationList",
+      "descriptor": {
+        "id": 21,
+        "version": 0,
+        "channel": 0,
+        "level": "Information",
+        "opcode": "Info",
+        "task": 65513,
+        "keyword": 131072
+      },
+      "fields": [
+        {
+          "name": "TaskID",
+          "datatype": "int",
+          "map": null
+        },
+        {
+          "name": "Index",
+          "datatype": "int",
+          "map": null
+        },
+        {
+          "name": "Object",
+          "datatype": "long",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "DebugMessage",
+      "displayName": "DebugMessage",
+      "descriptor": {
+        "id": 22,
+        "version": 0,
+        "channel": 0,
+        "level": "Information",
+        "opcode": "Info",
+        "task": 65512,
+        "keyword": 131072
+      },
+      "fields": [
+        {
+          "name": "Message",
+          "datatype": "string",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "DebugFacilityMessage",
+      "displayName": "DebugFacilityMessage",
+      "descriptor": {
+        "id": 23,
+        "version": 0,
+        "channel": 0,
+        "level": "Information",
+        "opcode": "Info",
+        "task": 65511,
+        "keyword": 131072
+      },
+      "fields": [
+        {
+          "name": "Facility",
+          "datatype": "string",
+          "map": null
+        },
+        {
+          "name": "Message",
+          "datatype": "string",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "DebugFacilityMessage1",
+      "displayName": "DebugFacilityMessage1",
+      "descriptor": {
+        "id": 24,
+        "version": 0,
+        "channel": 0,
+        "level": "Information",
+        "opcode": "Info",
+        "task": 65510,
+        "keyword": 131072
+      },
+      "fields": [
+        {
+          "name": "Facility",
+          "datatype": "string",
+          "map": null
+        },
+        {
+          "name": "Message",
+          "datatype": "string",
+          "map": null
+        },
+        {
+          "name": "Value1",
+          "datatype": "string",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "SetActivityId",
+      "displayName": "SetActivityId",
+      "descriptor": {
+        "id": 25,
+        "version": 0,
+        "channel": 0,
+        "level": "Information",
+        "opcode": "Info",
+        "task": 65509,
+        "keyword": 262144
+      },
+      "fields": [
+        {
+          "name": "NewId",
+          "datatype": "guid",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "NewID",
+      "displayName": "NewID",
+      "descriptor": {
+        "id": 26,
+        "version": 0,
+        "channel": 0,
+        "level": "Information",
+        "opcode": "Info",
+        "task": 65508,
+        "keyword": 131072
+      },
+      "fields": [
+        {
+          "name": "TaskID",
+          "datatype": "int",
+          "map": null
+        }
+      ]
+    }
+  ],
+  "tasks": {
+    "1": "Loop",
+    "2": "Invoke",
+    "3": "TaskExecute",
+    "4": "TaskWait",
+    "5": "ForkJoin",
+    "6": "TaskScheduled",
+    "7": "AwaitTaskContinuationScheduled",
+    "8": "TraceOperation",
+    "9": "TraceSynchronousWork",
+    "65508": "NewID",
+    "65509": "SetActivityId",
+    "65510": "DebugFacilityMessage1",
+    "65511": "DebugFacilityMessage",
+    "65512": "DebugMessage",
+    "65513": "RunningContinuationList",
+    "65514": "RunningContinuation",
+    "65515": "TaskWaitContinuationStarted",
+    "65516": "TraceSynchronousWorkEnd",
+    "65517": "TraceSynchronousWorkBegin",
+    "65518": "TraceOperationRelation",
+    "65519": "TraceOperationEnd",
+    "65520": "TraceOperationBegin",
+    "65521": "TaskWaitContinuationComplete",
+    "65523": "TaskWaitEnd",
+    "65525": "TaskCompleted",
+    "65526": "TaskStarted",
+    "65534": "EventSourceMessage"
+  },
+  "opcodes": {},
+  "keywords": {
+    "1": "TaskTransfer",
+    "2": "Tasks",
+    "4": "Parallel",
+    "8": "AsyncCausalityOperation",
+    "16": "AsyncCausalityRelation",
+    "32": "AsyncCausalitySynchronousWork",
+    "64": "TaskStops",
+    "128": "TasksFlowActivityIds",
+    "65536": "TasksSetActivityIds",
+    "131072": "Debug",
+    "262144": "DebugActivityId",
+    "17592186044416": "Session3",
+    "35184372088832": "Session2",
+    "70368744177664": "Session1",
+    "140737488355328": "Session0"
+  },
+  "maps": [
+    {
+      "name": "ForkJoinOperationType",
+      "flags": false,
+      "values": {
+        "1": "ParallelInvoke",
+        "2": "ParallelFor",
+        "3": "ParallelForEach"
+      }
+    },
+    {
+      "name": "TaskWaitBehavior",
+      "flags": false,
+      "values": {
+        "1": "Synchronous",
+        "2": "Asynchronous"
+      }
+    },
+    {
+      "name": "CausalityRelation",
+      "flags": false,
+      "values": {
+        "0": "AssignDelegate",
+        "1": "Join",
+        "2": "Choice",
+        "3": "Cancel",
+        "4": "Error"
+      }
+    },
+    {
+      "name": "AsyncCausalityStatus",
+      "flags": false,
+      "values": {
+        "2": "Canceled",
+        "1": "Completed",
+        "3": "Error",
+        "0": "Started"
+      }
+    },
+    {
+      "name": "CausalitySynchronousWork",
+      "flags": false,
+      "values": {
+        "0": "CompletionNotification",
+        "1": "ProgressNotification",
+        "2": "Execution"
+      }
+    }
+  ],
+  "structs": []
+}

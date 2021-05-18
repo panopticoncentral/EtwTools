@@ -1,5 +1,6 @@
 using System;
 
+#pragma warning disable IDE0004 // Remove Unnecessary Cast
 #pragma warning disable CA1707 // Identifiers should not contain underscores
 #pragma warning disable CA1720 // Identifier contains type name
 
@@ -64,7 +65,7 @@ namespace EtwTools
         }
 
         /// <summary>
-        /// Opcodes supported by Microsoft-VisualStudio-Threading.
+        /// Opcodes supported by VisualStudioThreading.
         /// </summary>
         public enum Opcodes
         {
@@ -83,7 +84,7 @@ namespace EtwTools
         }
 
         /// <summary>
-        /// Keywords supported by Microsoft-VisualStudio-Threading.
+        /// Keywords supported by VisualStudioThreading.
         /// </summary>
         [Flags]
         public enum Keywords : ulong
@@ -179,11 +180,24 @@ namespace EtwTools
             /// <summary>
             /// A data wrapper for a EventSourceMessage event.
             /// </summary>
-            public readonly ref struct EventSourceMessageData
+            public ref struct EventSourceMessageData
             {
                 private readonly EtwEvent _etwEvent;
 
-                private const int Offset_Message = 0;
+                private int _offset_Message;
+
+                private int Offset_Message
+                {
+                    get
+                    {
+                        if (_offset_Message == -1)
+                        {
+                            _offset_Message = 0;
+                        }
+
+                        return _offset_Message;
+                    }
+                }
 
                 /// <summary>
                 /// Retrieves the Message field.
@@ -197,6 +211,7 @@ namespace EtwTools
                 public EventSourceMessageData(EtwEvent etwEvent)
                 {
                     _etwEvent = etwEvent;
+                    _offset_Message = -1;
                 }
             }
 
@@ -275,11 +290,24 @@ namespace EtwTools
             /// <summary>
             /// A data wrapper for a CompleteOnCurrentThreadStop event.
             /// </summary>
-            public readonly ref struct CompleteOnCurrentThreadStopData
+            public ref struct CompleteOnCurrentThreadStopData
             {
                 private readonly EtwEvent _etwEvent;
 
-                private const int Offset_TaskId = 0;
+                private int _offset_TaskId;
+
+                private int Offset_TaskId
+                {
+                    get
+                    {
+                        if (_offset_TaskId == -1)
+                        {
+                            _offset_TaskId = 0;
+                        }
+
+                        return _offset_TaskId;
+                    }
+                }
 
                 /// <summary>
                 /// Retrieves the TaskId field.
@@ -293,6 +321,7 @@ namespace EtwTools
                 public CompleteOnCurrentThreadStopData(EtwEvent etwEvent)
                 {
                     _etwEvent = etwEvent;
+                    _offset_TaskId = -1;
                 }
             }
 
@@ -503,11 +532,24 @@ namespace EtwTools
             /// <summary>
             /// A data wrapper for a PostExecutionStop event.
             /// </summary>
-            public readonly ref struct PostExecutionStopData
+            public ref struct PostExecutionStopData
             {
                 private readonly EtwEvent _etwEvent;
 
-                private const int Offset_RequestId = 0;
+                private int _offset_RequestId;
+
+                private int Offset_RequestId
+                {
+                    get
+                    {
+                        if (_offset_RequestId == -1)
+                        {
+                            _offset_RequestId = 0;
+                        }
+
+                        return _offset_RequestId;
+                    }
+                }
 
                 /// <summary>
                 /// Retrieves the RequestId field.
@@ -521,6 +563,7 @@ namespace EtwTools
                 public PostExecutionStopData(EtwEvent etwEvent)
                 {
                     _etwEvent = etwEvent;
+                    _offset_RequestId = -1;
                 }
             }
 
@@ -599,17 +642,43 @@ namespace EtwTools
             /// <summary>
             /// A data wrapper for a CircularJoinableTaskDependencyDetected event.
             /// </summary>
-            public readonly ref struct CircularJoinableTaskDependencyDetectedData
+            public ref struct CircularJoinableTaskDependencyDetectedData
             {
                 private readonly EtwEvent _etwEvent;
 
-                private const int Offset_InitUnreachableCount = 0;
-                private const int Offset_ReachableCount = 4;
+                private int _offset_InitUnreachableCount;
+                private int _offset_ReachableCount;
+
+                private int Offset_InitUnreachableCount
+                {
+                    get
+                    {
+                        if (_offset_InitUnreachableCount == -1)
+                        {
+                            _offset_InitUnreachableCount = 0;
+                        }
+
+                        return _offset_InitUnreachableCount;
+                    }
+                }
+
+                private int Offset_ReachableCount
+                {
+                    get
+                    {
+                        if (_offset_ReachableCount == -1)
+                        {
+                            _offset_ReachableCount = Offset_InitUnreachableCount + 4;
+                        }
+
+                        return _offset_ReachableCount;
+                    }
+                }
 
                 /// <summary>
                 /// Retrieves the InitUnreachableCount field.
                 /// </summary>
-                public int InitUnreachableCount => BitConverter.ToInt32(_etwEvent.Data[Offset_InitUnreachableCount..Offset_ReachableCount]);
+                public int InitUnreachableCount => BitConverter.ToInt32(_etwEvent.Data[Offset_InitUnreachableCount..]);
 
                 /// <summary>
                 /// Retrieves the ReachableCount field.
@@ -623,6 +692,8 @@ namespace EtwTools
                 public CircularJoinableTaskDependencyDetectedData(EtwEvent etwEvent)
                 {
                     _etwEvent = etwEvent;
+                    _offset_InitUnreachableCount = -1;
+                    _offset_ReachableCount = -1;
                 }
             }
 
@@ -701,29 +772,81 @@ namespace EtwTools
             /// <summary>
             /// A data wrapper for a ReaderWriterLockIssued event.
             /// </summary>
-            public readonly ref struct ReaderWriterLockIssuedData
+            public ref struct ReaderWriterLockIssuedData
             {
                 private readonly EtwEvent _etwEvent;
 
-                private const int Offset_LockId = 0;
-                private const int Offset_Kind = 4;
-                private const int Offset_IssuedUpgradeableReadCount = 8;
-                private const int Offset_IssuedReadCount = 12;
+                private int _offset_LockId;
+                private int _offset_Kind;
+                private int _offset_IssuedUpgradeableReadCount;
+                private int _offset_IssuedReadCount;
+
+                private int Offset_LockId
+                {
+                    get
+                    {
+                        if (_offset_LockId == -1)
+                        {
+                            _offset_LockId = 0;
+                        }
+
+                        return _offset_LockId;
+                    }
+                }
+
+                private int Offset_Kind
+                {
+                    get
+                    {
+                        if (_offset_Kind == -1)
+                        {
+                            _offset_Kind = Offset_LockId + 4;
+                        }
+
+                        return _offset_Kind;
+                    }
+                }
+
+                private int Offset_IssuedUpgradeableReadCount
+                {
+                    get
+                    {
+                        if (_offset_IssuedUpgradeableReadCount == -1)
+                        {
+                            _offset_IssuedUpgradeableReadCount = Offset_Kind + 4;
+                        }
+
+                        return _offset_IssuedUpgradeableReadCount;
+                    }
+                }
+
+                private int Offset_IssuedReadCount
+                {
+                    get
+                    {
+                        if (_offset_IssuedReadCount == -1)
+                        {
+                            _offset_IssuedReadCount = Offset_IssuedUpgradeableReadCount + 4;
+                        }
+
+                        return _offset_IssuedReadCount;
+                    }
+                }
 
                 /// <summary>
                 /// Retrieves the LockId field.
                 /// </summary>
-                public int LockId => BitConverter.ToInt32(_etwEvent.Data[Offset_LockId..Offset_Kind]);
+                public int LockId => BitConverter.ToInt32(_etwEvent.Data[Offset_LockId..]);
 
                 /// <summary>
                 /// Retrieves the Kind field.
                 /// </summary>
-                public LockKind Kind => (LockKind)BitConverter.ToUInt32(_etwEvent.Data[Offset_Kind..Offset_IssuedUpgradeableReadCount]);
+                public LockKind Kind => (LockKind)BitConverter.ToInt32(_etwEvent.Data[Offset_Kind..]);
 
                 /// <summary>
                 /// Retrieves the IssuedUpgradeableReadCount field.
                 /// </summary>
-                public int IssuedUpgradeableReadCount => BitConverter.ToInt32(_etwEvent.Data[Offset_IssuedUpgradeableReadCount..Offset_IssuedReadCount]);
+                public int IssuedUpgradeableReadCount => BitConverter.ToInt32(_etwEvent.Data[Offset_IssuedUpgradeableReadCount..]);
 
                 /// <summary>
                 /// Retrieves the IssuedReadCount field.
@@ -737,6 +860,10 @@ namespace EtwTools
                 public ReaderWriterLockIssuedData(EtwEvent etwEvent)
                 {
                     _etwEvent = etwEvent;
+                    _offset_LockId = -1;
+                    _offset_Kind = -1;
+                    _offset_IssuedUpgradeableReadCount = -1;
+                    _offset_IssuedReadCount = -1;
                 }
             }
 
@@ -815,35 +942,100 @@ namespace EtwTools
             /// <summary>
             /// A data wrapper for a WaitReaderWriterLockStart event.
             /// </summary>
-            public readonly ref struct WaitReaderWriterLockStartData
+            public ref struct WaitReaderWriterLockStartData
             {
                 private readonly EtwEvent _etwEvent;
 
-                private const int Offset_LockId = 0;
-                private const int Offset_Kind = 4;
-                private const int Offset_IssuedWriteCount = 8;
-                private const int Offset_IssuedUpgradeableReadCount = 12;
-                private const int Offset_IssuedReadCount = 16;
+                private int _offset_LockId;
+                private int _offset_Kind;
+                private int _offset_IssuedWriteCount;
+                private int _offset_IssuedUpgradeableReadCount;
+                private int _offset_IssuedReadCount;
+
+                private int Offset_LockId
+                {
+                    get
+                    {
+                        if (_offset_LockId == -1)
+                        {
+                            _offset_LockId = 0;
+                        }
+
+                        return _offset_LockId;
+                    }
+                }
+
+                private int Offset_Kind
+                {
+                    get
+                    {
+                        if (_offset_Kind == -1)
+                        {
+                            _offset_Kind = Offset_LockId + 4;
+                        }
+
+                        return _offset_Kind;
+                    }
+                }
+
+                private int Offset_IssuedWriteCount
+                {
+                    get
+                    {
+                        if (_offset_IssuedWriteCount == -1)
+                        {
+                            _offset_IssuedWriteCount = Offset_Kind + 4;
+                        }
+
+                        return _offset_IssuedWriteCount;
+                    }
+                }
+
+                private int Offset_IssuedUpgradeableReadCount
+                {
+                    get
+                    {
+                        if (_offset_IssuedUpgradeableReadCount == -1)
+                        {
+                            _offset_IssuedUpgradeableReadCount = Offset_IssuedWriteCount + 4;
+                        }
+
+                        return _offset_IssuedUpgradeableReadCount;
+                    }
+                }
+
+                private int Offset_IssuedReadCount
+                {
+                    get
+                    {
+                        if (_offset_IssuedReadCount == -1)
+                        {
+                            _offset_IssuedReadCount = Offset_IssuedUpgradeableReadCount + 4;
+                        }
+
+                        return _offset_IssuedReadCount;
+                    }
+                }
 
                 /// <summary>
                 /// Retrieves the LockId field.
                 /// </summary>
-                public int LockId => BitConverter.ToInt32(_etwEvent.Data[Offset_LockId..Offset_Kind]);
+                public int LockId => BitConverter.ToInt32(_etwEvent.Data[Offset_LockId..]);
 
                 /// <summary>
                 /// Retrieves the Kind field.
                 /// </summary>
-                public LockKind Kind => (LockKind)BitConverter.ToUInt32(_etwEvent.Data[Offset_Kind..Offset_IssuedWriteCount]);
+                public LockKind Kind => (LockKind)BitConverter.ToInt32(_etwEvent.Data[Offset_Kind..]);
 
                 /// <summary>
                 /// Retrieves the IssuedWriteCount field.
                 /// </summary>
-                public int IssuedWriteCount => BitConverter.ToInt32(_etwEvent.Data[Offset_IssuedWriteCount..Offset_IssuedUpgradeableReadCount]);
+                public int IssuedWriteCount => BitConverter.ToInt32(_etwEvent.Data[Offset_IssuedWriteCount..]);
 
                 /// <summary>
                 /// Retrieves the IssuedUpgradeableReadCount field.
                 /// </summary>
-                public int IssuedUpgradeableReadCount => BitConverter.ToInt32(_etwEvent.Data[Offset_IssuedUpgradeableReadCount..Offset_IssuedReadCount]);
+                public int IssuedUpgradeableReadCount => BitConverter.ToInt32(_etwEvent.Data[Offset_IssuedUpgradeableReadCount..]);
 
                 /// <summary>
                 /// Retrieves the IssuedReadCount field.
@@ -857,6 +1049,11 @@ namespace EtwTools
                 public WaitReaderWriterLockStartData(EtwEvent etwEvent)
                 {
                     _etwEvent = etwEvent;
+                    _offset_LockId = -1;
+                    _offset_Kind = -1;
+                    _offset_IssuedWriteCount = -1;
+                    _offset_IssuedUpgradeableReadCount = -1;
+                    _offset_IssuedReadCount = -1;
                 }
             }
 
@@ -935,22 +1132,48 @@ namespace EtwTools
             /// <summary>
             /// A data wrapper for a WaitReaderWriterLockStop event.
             /// </summary>
-            public readonly ref struct WaitReaderWriterLockStopData
+            public ref struct WaitReaderWriterLockStopData
             {
                 private readonly EtwEvent _etwEvent;
 
-                private const int Offset_LockId = 0;
-                private const int Offset_Kind = 4;
+                private int _offset_LockId;
+                private int _offset_Kind;
+
+                private int Offset_LockId
+                {
+                    get
+                    {
+                        if (_offset_LockId == -1)
+                        {
+                            _offset_LockId = 0;
+                        }
+
+                        return _offset_LockId;
+                    }
+                }
+
+                private int Offset_Kind
+                {
+                    get
+                    {
+                        if (_offset_Kind == -1)
+                        {
+                            _offset_Kind = Offset_LockId + 4;
+                        }
+
+                        return _offset_Kind;
+                    }
+                }
 
                 /// <summary>
                 /// Retrieves the LockId field.
                 /// </summary>
-                public int LockId => BitConverter.ToInt32(_etwEvent.Data[Offset_LockId..Offset_Kind]);
+                public int LockId => BitConverter.ToInt32(_etwEvent.Data[Offset_LockId..]);
 
                 /// <summary>
                 /// Retrieves the Kind field.
                 /// </summary>
-                public LockKind Kind => (LockKind)BitConverter.ToUInt32(_etwEvent.Data[Offset_Kind..]);
+                public LockKind Kind => (LockKind)BitConverter.ToInt32(_etwEvent.Data[Offset_Kind..]);
 
                 /// <summary>
                 /// Creates a new WaitReaderWriterLockStopData.
@@ -959,6 +1182,8 @@ namespace EtwTools
                 public WaitReaderWriterLockStopData(EtwEvent etwEvent)
                 {
                     _etwEvent = etwEvent;
+                    _offset_LockId = -1;
+                    _offset_Kind = -1;
                 }
             }
 
@@ -1037,17 +1262,43 @@ namespace EtwTools
             /// <summary>
             /// A data wrapper for a CompleteOnCurrentThreadStart event.
             /// </summary>
-            public readonly ref struct CompleteOnCurrentThreadStartData
+            public ref struct CompleteOnCurrentThreadStartData
             {
                 private readonly EtwEvent _etwEvent;
 
-                private const int Offset_TaskId = 0;
-                private const int Offset_IsOnMainThread = 4;
+                private int _offset_TaskId;
+                private int _offset_IsOnMainThread;
+
+                private int Offset_TaskId
+                {
+                    get
+                    {
+                        if (_offset_TaskId == -1)
+                        {
+                            _offset_TaskId = 0;
+                        }
+
+                        return _offset_TaskId;
+                    }
+                }
+
+                private int Offset_IsOnMainThread
+                {
+                    get
+                    {
+                        if (_offset_IsOnMainThread == -1)
+                        {
+                            _offset_IsOnMainThread = Offset_TaskId + 4;
+                        }
+
+                        return _offset_IsOnMainThread;
+                    }
+                }
 
                 /// <summary>
                 /// Retrieves the TaskId field.
                 /// </summary>
-                public int TaskId => BitConverter.ToInt32(_etwEvent.Data[Offset_TaskId..Offset_IsOnMainThread]);
+                public int TaskId => BitConverter.ToInt32(_etwEvent.Data[Offset_TaskId..]);
 
                 /// <summary>
                 /// Retrieves the IsOnMainThread field.
@@ -1061,6 +1312,8 @@ namespace EtwTools
                 public CompleteOnCurrentThreadStartData(EtwEvent etwEvent)
                 {
                     _etwEvent = etwEvent;
+                    _offset_TaskId = -1;
+                    _offset_IsOnMainThread = -1;
                 }
             }
 
@@ -1139,17 +1392,43 @@ namespace EtwTools
             /// <summary>
             /// A data wrapper for a PostExecutionStart event.
             /// </summary>
-            public readonly ref struct PostExecutionStartData
+            public ref struct PostExecutionStartData
             {
                 private readonly EtwEvent _etwEvent;
 
-                private const int Offset_RequestId = 0;
-                private const int Offset_MainThreadAffinitized = 4;
+                private int _offset_RequestId;
+                private int _offset_MainThreadAffinitized;
+
+                private int Offset_RequestId
+                {
+                    get
+                    {
+                        if (_offset_RequestId == -1)
+                        {
+                            _offset_RequestId = 0;
+                        }
+
+                        return _offset_RequestId;
+                    }
+                }
+
+                private int Offset_MainThreadAffinitized
+                {
+                    get
+                    {
+                        if (_offset_MainThreadAffinitized == -1)
+                        {
+                            _offset_MainThreadAffinitized = Offset_RequestId + 4;
+                        }
+
+                        return _offset_MainThreadAffinitized;
+                    }
+                }
 
                 /// <summary>
                 /// Retrieves the RequestId field.
                 /// </summary>
-                public int RequestId => BitConverter.ToInt32(_etwEvent.Data[Offset_RequestId..Offset_MainThreadAffinitized]);
+                public int RequestId => BitConverter.ToInt32(_etwEvent.Data[Offset_RequestId..]);
 
                 /// <summary>
                 /// Retrieves the MainThreadAffinitized field.
@@ -1163,6 +1442,8 @@ namespace EtwTools
                 public PostExecutionStartData(EtwEvent etwEvent)
                 {
                     _etwEvent = etwEvent;
+                    _offset_RequestId = -1;
+                    _offset_MainThreadAffinitized = -1;
                 }
             }
 
@@ -1171,7 +1452,7 @@ namespace EtwTools
         /// <summary>
         /// LockKind.
         /// </summary>
-        public enum LockKind
+        public enum LockKind : ulong
         {
             /// <summary>
             /// Read.

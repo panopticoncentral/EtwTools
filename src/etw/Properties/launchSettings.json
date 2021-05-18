@@ -2,7 +2,7 @@
   "profiles": {
     "trace": {
       "commandName": "Project",
-      "commandLineArgs": "providers generate working\\*.json",
+      "commandLineArgs": "provider generate C:\\dev\\etwtools\\providers\\",
       "nativeDebugging": true
     }
   }

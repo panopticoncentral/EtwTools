@@ -1,5 +1,6 @@
 using System;
 
+#pragma warning disable IDE0004 // Remove Unnecessary Cast
 #pragma warning disable CA1707 // Identifiers should not contain underscores
 #pragma warning disable CA1720 // Identifier contains type name
 
@@ -144,7 +145,7 @@ namespace EtwTools
         }
 
         /// <summary>
-        /// Keywords supported by Microsoft-VisualStudio-CpsVs.
+        /// Keywords supported by VisualStudioCpsVs.
         /// </summary>
         [Flags]
         public enum Keywords : ulong
@@ -240,11 +241,24 @@ namespace EtwTools
             /// <summary>
             /// A data wrapper for a EventSourceMessage event.
             /// </summary>
-            public readonly ref struct EventSourceMessageData
+            public ref struct EventSourceMessageData
             {
                 private readonly EtwEvent _etwEvent;
 
-                private const int Offset_Message = 0;
+                private int _offset_Message;
+
+                private int Offset_Message
+                {
+                    get
+                    {
+                        if (_offset_Message == -1)
+                        {
+                            _offset_Message = 0;
+                        }
+
+                        return _offset_Message;
+                    }
+                }
 
                 /// <summary>
                 /// Retrieves the Message field.
@@ -258,6 +272,7 @@ namespace EtwTools
                 public EventSourceMessageData(EtwEvent etwEvent)
                 {
                     _etwEvent = etwEvent;
+                    _offset_Message = -1;
                 }
             }
 
@@ -336,28 +351,67 @@ namespace EtwTools
             /// <summary>
             /// A data wrapper for a CreateProjectStart event.
             /// </summary>
-            public readonly ref struct CreateProjectStartData
+            public ref struct CreateProjectStartData
             {
                 private readonly EtwEvent _etwEvent;
 
-                private const int Offset_ProjectFileName = 0;
-                private readonly int _offset_Location;
-                private readonly int _offset_IsNew;
+                private int _offset_ProjectFileName;
+                private int _offset_Location;
+                private int _offset_IsNew;
+
+                private int Offset_ProjectFileName
+                {
+                    get
+                    {
+                        if (_offset_ProjectFileName == -1)
+                        {
+                            _offset_ProjectFileName = 0;
+                        }
+
+                        return _offset_ProjectFileName;
+                    }
+                }
+
+                private int Offset_Location
+                {
+                    get
+                    {
+                        if (_offset_Location == -1)
+                        {
+                            _offset_Location = Offset_ProjectFileName + EtwEvent.UnicodeStringEnumerable.UnicodeStringEnumerator.StringLength(_etwEvent.Data, Offset_ProjectFileName);
+                        }
+
+                        return _offset_Location;
+                    }
+                }
+
+                private int Offset_IsNew
+                {
+                    get
+                    {
+                        if (_offset_IsNew == -1)
+                        {
+                            _offset_IsNew = Offset_Location + EtwEvent.UnicodeStringEnumerable.UnicodeStringEnumerator.StringLength(_etwEvent.Data, Offset_Location);
+                        }
+
+                        return _offset_IsNew;
+                    }
+                }
 
                 /// <summary>
                 /// Retrieves the ProjectFileName field.
                 /// </summary>
-                public string ProjectFileName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_ProjectFileName.._offset_Location]);
+                public string ProjectFileName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_ProjectFileName..]);
 
                 /// <summary>
                 /// Retrieves the Location field.
                 /// </summary>
-                public string Location => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[_offset_Location.._offset_IsNew]);
+                public string Location => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_Location..]);
 
                 /// <summary>
                 /// Retrieves the IsNew field.
                 /// </summary>
-                public bool IsNew => _etwEvent.Data[_offset_IsNew] != 0;
+                public bool IsNew => _etwEvent.Data[Offset_IsNew] != 0;
 
                 /// <summary>
                 /// Creates a new CreateProjectStartData.
@@ -366,8 +420,9 @@ namespace EtwTools
                 public CreateProjectStartData(EtwEvent etwEvent)
                 {
                     _etwEvent = etwEvent;
-                    _offset_Location = Offset_ProjectFileName + EtwEvent.UnicodeStringEnumerable.UnicodeStringEnumerator.StringLength(etwEvent.Data, Offset_ProjectFileName);
-                    _offset_IsNew = _offset_Location + EtwEvent.UnicodeStringEnumerable.UnicodeStringEnumerator.StringLength(etwEvent.Data, _offset_Location);
+                    _offset_ProjectFileName = -1;
+                    _offset_Location = -1;
+                    _offset_IsNew = -1;
                 }
             }
 
@@ -446,11 +501,24 @@ namespace EtwTools
             /// <summary>
             /// A data wrapper for a SetInitialProjectConfigurationStop event.
             /// </summary>
-            public readonly ref struct SetInitialProjectConfigurationStopData
+            public ref struct SetInitialProjectConfigurationStopData
             {
                 private readonly EtwEvent _etwEvent;
 
-                private const int Offset_ProjectPath = 0;
+                private int _offset_ProjectPath;
+
+                private int Offset_ProjectPath
+                {
+                    get
+                    {
+                        if (_offset_ProjectPath == -1)
+                        {
+                            _offset_ProjectPath = 0;
+                        }
+
+                        return _offset_ProjectPath;
+                    }
+                }
 
                 /// <summary>
                 /// Retrieves the ProjectPath field.
@@ -464,6 +532,7 @@ namespace EtwTools
                 public SetInitialProjectConfigurationStopData(EtwEvent etwEvent)
                 {
                     _etwEvent = etwEvent;
+                    _offset_ProjectPath = -1;
                 }
             }
 
@@ -542,11 +611,24 @@ namespace EtwTools
             /// <summary>
             /// A data wrapper for a InitializeProjectNodeStart event.
             /// </summary>
-            public readonly ref struct InitializeProjectNodeStartData
+            public ref struct InitializeProjectNodeStartData
             {
                 private readonly EtwEvent _etwEvent;
 
-                private const int Offset_ProjectPath = 0;
+                private int _offset_ProjectPath;
+
+                private int Offset_ProjectPath
+                {
+                    get
+                    {
+                        if (_offset_ProjectPath == -1)
+                        {
+                            _offset_ProjectPath = 0;
+                        }
+
+                        return _offset_ProjectPath;
+                    }
+                }
 
                 /// <summary>
                 /// Retrieves the ProjectPath field.
@@ -560,6 +642,7 @@ namespace EtwTools
                 public InitializeProjectNodeStartData(EtwEvent etwEvent)
                 {
                     _etwEvent = etwEvent;
+                    _offset_ProjectPath = -1;
                 }
             }
 
@@ -638,11 +721,24 @@ namespace EtwTools
             /// <summary>
             /// A data wrapper for a InitializeProjectNodeStop event.
             /// </summary>
-            public readonly ref struct InitializeProjectNodeStopData
+            public ref struct InitializeProjectNodeStopData
             {
                 private readonly EtwEvent _etwEvent;
 
-                private const int Offset_ProjectPath = 0;
+                private int _offset_ProjectPath;
+
+                private int Offset_ProjectPath
+                {
+                    get
+                    {
+                        if (_offset_ProjectPath == -1)
+                        {
+                            _offset_ProjectPath = 0;
+                        }
+
+                        return _offset_ProjectPath;
+                    }
+                }
 
                 /// <summary>
                 /// Retrieves the ProjectPath field.
@@ -656,6 +752,7 @@ namespace EtwTools
                 public InitializeProjectNodeStopData(EtwEvent etwEvent)
                 {
                     _etwEvent = etwEvent;
+                    _offset_ProjectPath = -1;
                 }
             }
 
@@ -734,28 +831,67 @@ namespace EtwTools
             /// <summary>
             /// A data wrapper for a CreateProjectStop event.
             /// </summary>
-            public readonly ref struct CreateProjectStopData
+            public ref struct CreateProjectStopData
             {
                 private readonly EtwEvent _etwEvent;
 
-                private const int Offset_ProjectFileName = 0;
-                private readonly int _offset_Location;
-                private readonly int _offset_Configuration;
+                private int _offset_ProjectFileName;
+                private int _offset_Location;
+                private int _offset_Configuration;
+
+                private int Offset_ProjectFileName
+                {
+                    get
+                    {
+                        if (_offset_ProjectFileName == -1)
+                        {
+                            _offset_ProjectFileName = 0;
+                        }
+
+                        return _offset_ProjectFileName;
+                    }
+                }
+
+                private int Offset_Location
+                {
+                    get
+                    {
+                        if (_offset_Location == -1)
+                        {
+                            _offset_Location = Offset_ProjectFileName + EtwEvent.UnicodeStringEnumerable.UnicodeStringEnumerator.StringLength(_etwEvent.Data, Offset_ProjectFileName);
+                        }
+
+                        return _offset_Location;
+                    }
+                }
+
+                private int Offset_Configuration
+                {
+                    get
+                    {
+                        if (_offset_Configuration == -1)
+                        {
+                            _offset_Configuration = Offset_Location + EtwEvent.UnicodeStringEnumerable.UnicodeStringEnumerator.StringLength(_etwEvent.Data, Offset_Location);
+                        }
+
+                        return _offset_Configuration;
+                    }
+                }
 
                 /// <summary>
                 /// Retrieves the ProjectFileName field.
                 /// </summary>
-                public string ProjectFileName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_ProjectFileName.._offset_Location]);
+                public string ProjectFileName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_ProjectFileName..]);
 
                 /// <summary>
                 /// Retrieves the Location field.
                 /// </summary>
-                public string Location => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[_offset_Location.._offset_Configuration]);
+                public string Location => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_Location..]);
 
                 /// <summary>
                 /// Retrieves the Configuration field.
                 /// </summary>
-                public string Configuration => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[_offset_Configuration..]);
+                public string Configuration => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_Configuration..]);
 
                 /// <summary>
                 /// Creates a new CreateProjectStopData.
@@ -764,8 +900,9 @@ namespace EtwTools
                 public CreateProjectStopData(EtwEvent etwEvent)
                 {
                     _etwEvent = etwEvent;
-                    _offset_Location = Offset_ProjectFileName + EtwEvent.UnicodeStringEnumerable.UnicodeStringEnumerator.StringLength(etwEvent.Data, Offset_ProjectFileName);
-                    _offset_Configuration = _offset_Location + EtwEvent.UnicodeStringEnumerable.UnicodeStringEnumerator.StringLength(etwEvent.Data, _offset_Location);
+                    _offset_ProjectFileName = -1;
+                    _offset_Location = -1;
+                    _offset_Configuration = -1;
                 }
             }
 
@@ -844,11 +981,24 @@ namespace EtwTools
             /// <summary>
             /// A data wrapper for a WaitingProjectTreeLoadingStop event.
             /// </summary>
-            public readonly ref struct WaitingProjectTreeLoadingStopData
+            public ref struct WaitingProjectTreeLoadingStopData
             {
                 private readonly EtwEvent _etwEvent;
 
-                private const int Offset_ProjectPath = 0;
+                private int _offset_ProjectPath;
+
+                private int Offset_ProjectPath
+                {
+                    get
+                    {
+                        if (_offset_ProjectPath == -1)
+                        {
+                            _offset_ProjectPath = 0;
+                        }
+
+                        return _offset_ProjectPath;
+                    }
+                }
 
                 /// <summary>
                 /// Retrieves the ProjectPath field.
@@ -862,6 +1012,7 @@ namespace EtwTools
                 public WaitingProjectTreeLoadingStopData(EtwEvent etwEvent)
                 {
                     _etwEvent = etwEvent;
+                    _offset_ProjectPath = -1;
                 }
             }
 
@@ -940,28 +1091,67 @@ namespace EtwTools
             /// <summary>
             /// A data wrapper for a CpsNotifyTaskStart event.
             /// </summary>
-            public readonly ref struct CpsNotifyTaskStartData
+            public ref struct CpsNotifyTaskStartData
             {
                 private readonly EtwEvent _etwEvent;
 
-                private const int Offset_StageId = 0;
-                private readonly int _offset_ProjectPath;
-                private readonly int _offset_Name;
+                private int _offset_StageId;
+                private int _offset_ProjectPath;
+                private int _offset_Name;
+
+                private int Offset_StageId
+                {
+                    get
+                    {
+                        if (_offset_StageId == -1)
+                        {
+                            _offset_StageId = 0;
+                        }
+
+                        return _offset_StageId;
+                    }
+                }
+
+                private int Offset_ProjectPath
+                {
+                    get
+                    {
+                        if (_offset_ProjectPath == -1)
+                        {
+                            _offset_ProjectPath = Offset_StageId + EtwEvent.UnicodeStringEnumerable.UnicodeStringEnumerator.StringLength(_etwEvent.Data, Offset_StageId);
+                        }
+
+                        return _offset_ProjectPath;
+                    }
+                }
+
+                private int Offset_Name
+                {
+                    get
+                    {
+                        if (_offset_Name == -1)
+                        {
+                            _offset_Name = Offset_ProjectPath + EtwEvent.UnicodeStringEnumerable.UnicodeStringEnumerator.StringLength(_etwEvent.Data, Offset_ProjectPath);
+                        }
+
+                        return _offset_Name;
+                    }
+                }
 
                 /// <summary>
                 /// Retrieves the StageId field.
                 /// </summary>
-                public string StageId => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_StageId.._offset_ProjectPath]);
+                public string StageId => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_StageId..]);
 
                 /// <summary>
                 /// Retrieves the ProjectPath field.
                 /// </summary>
-                public string ProjectPath => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[_offset_ProjectPath.._offset_Name]);
+                public string ProjectPath => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_ProjectPath..]);
 
                 /// <summary>
                 /// Retrieves the Name field.
                 /// </summary>
-                public string Name => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[_offset_Name..]);
+                public string Name => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_Name..]);
 
                 /// <summary>
                 /// Creates a new CpsNotifyTaskStartData.
@@ -970,8 +1160,9 @@ namespace EtwTools
                 public CpsNotifyTaskStartData(EtwEvent etwEvent)
                 {
                     _etwEvent = etwEvent;
-                    _offset_ProjectPath = Offset_StageId + EtwEvent.UnicodeStringEnumerable.UnicodeStringEnumerator.StringLength(etwEvent.Data, Offset_StageId);
-                    _offset_Name = _offset_ProjectPath + EtwEvent.UnicodeStringEnumerable.UnicodeStringEnumerator.StringLength(etwEvent.Data, _offset_ProjectPath);
+                    _offset_StageId = -1;
+                    _offset_ProjectPath = -1;
+                    _offset_Name = -1;
                 }
             }
 
@@ -1050,22 +1241,48 @@ namespace EtwTools
             /// <summary>
             /// A data wrapper for a CreateUnconfiguredProjectStart event.
             /// </summary>
-            public readonly ref struct CreateUnconfiguredProjectStartData
+            public ref struct CreateUnconfiguredProjectStartData
             {
                 private readonly EtwEvent _etwEvent;
 
-                private const int Offset_ProjectFileName = 0;
-                private readonly int _offset_Location;
+                private int _offset_ProjectFileName;
+                private int _offset_Location;
+
+                private int Offset_ProjectFileName
+                {
+                    get
+                    {
+                        if (_offset_ProjectFileName == -1)
+                        {
+                            _offset_ProjectFileName = 0;
+                        }
+
+                        return _offset_ProjectFileName;
+                    }
+                }
+
+                private int Offset_Location
+                {
+                    get
+                    {
+                        if (_offset_Location == -1)
+                        {
+                            _offset_Location = Offset_ProjectFileName + EtwEvent.UnicodeStringEnumerable.UnicodeStringEnumerator.StringLength(_etwEvent.Data, Offset_ProjectFileName);
+                        }
+
+                        return _offset_Location;
+                    }
+                }
 
                 /// <summary>
                 /// Retrieves the ProjectFileName field.
                 /// </summary>
-                public string ProjectFileName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_ProjectFileName.._offset_Location]);
+                public string ProjectFileName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_ProjectFileName..]);
 
                 /// <summary>
                 /// Retrieves the Location field.
                 /// </summary>
-                public string Location => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[_offset_Location..]);
+                public string Location => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_Location..]);
 
                 /// <summary>
                 /// Creates a new CreateUnconfiguredProjectStartData.
@@ -1074,7 +1291,8 @@ namespace EtwTools
                 public CreateUnconfiguredProjectStartData(EtwEvent etwEvent)
                 {
                     _etwEvent = etwEvent;
-                    _offset_Location = Offset_ProjectFileName + EtwEvent.UnicodeStringEnumerable.UnicodeStringEnumerator.StringLength(etwEvent.Data, Offset_ProjectFileName);
+                    _offset_ProjectFileName = -1;
+                    _offset_Location = -1;
                 }
             }
 
@@ -1153,28 +1371,67 @@ namespace EtwTools
             /// <summary>
             /// A data wrapper for a CreateUnconfiguredProjectStop event.
             /// </summary>
-            public readonly ref struct CreateUnconfiguredProjectStopData
+            public ref struct CreateUnconfiguredProjectStopData
             {
                 private readonly EtwEvent _etwEvent;
 
-                private const int Offset_ProjectFileName = 0;
-                private readonly int _offset_Location;
-                private readonly int _offset_Capabilities;
+                private int _offset_ProjectFileName;
+                private int _offset_Location;
+                private int _offset_Capabilities;
+
+                private int Offset_ProjectFileName
+                {
+                    get
+                    {
+                        if (_offset_ProjectFileName == -1)
+                        {
+                            _offset_ProjectFileName = 0;
+                        }
+
+                        return _offset_ProjectFileName;
+                    }
+                }
+
+                private int Offset_Location
+                {
+                    get
+                    {
+                        if (_offset_Location == -1)
+                        {
+                            _offset_Location = Offset_ProjectFileName + EtwEvent.UnicodeStringEnumerable.UnicodeStringEnumerator.StringLength(_etwEvent.Data, Offset_ProjectFileName);
+                        }
+
+                        return _offset_Location;
+                    }
+                }
+
+                private int Offset_Capabilities
+                {
+                    get
+                    {
+                        if (_offset_Capabilities == -1)
+                        {
+                            _offset_Capabilities = Offset_Location + EtwEvent.UnicodeStringEnumerable.UnicodeStringEnumerator.StringLength(_etwEvent.Data, Offset_Location);
+                        }
+
+                        return _offset_Capabilities;
+                    }
+                }
 
                 /// <summary>
                 /// Retrieves the ProjectFileName field.
                 /// </summary>
-                public string ProjectFileName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_ProjectFileName.._offset_Location]);
+                public string ProjectFileName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_ProjectFileName..]);
 
                 /// <summary>
                 /// Retrieves the Location field.
                 /// </summary>
-                public string Location => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[_offset_Location.._offset_Capabilities]);
+                public string Location => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_Location..]);
 
                 /// <summary>
                 /// Retrieves the Capabilities field.
                 /// </summary>
-                public string Capabilities => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[_offset_Capabilities..]);
+                public string Capabilities => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_Capabilities..]);
 
                 /// <summary>
                 /// Creates a new CreateUnconfiguredProjectStopData.
@@ -1183,8 +1440,9 @@ namespace EtwTools
                 public CreateUnconfiguredProjectStopData(EtwEvent etwEvent)
                 {
                     _etwEvent = etwEvent;
-                    _offset_Location = Offset_ProjectFileName + EtwEvent.UnicodeStringEnumerable.UnicodeStringEnumerator.StringLength(etwEvent.Data, Offset_ProjectFileName);
-                    _offset_Capabilities = _offset_Location + EtwEvent.UnicodeStringEnumerable.UnicodeStringEnumerator.StringLength(etwEvent.Data, _offset_Location);
+                    _offset_ProjectFileName = -1;
+                    _offset_Location = -1;
+                    _offset_Capabilities = -1;
                 }
             }
 
@@ -1263,22 +1521,48 @@ namespace EtwTools
             /// <summary>
             /// A data wrapper for a SetInitialProjectConfigurationStart event.
             /// </summary>
-            public readonly ref struct SetInitialProjectConfigurationStartData
+            public ref struct SetInitialProjectConfigurationStartData
             {
                 private readonly EtwEvent _etwEvent;
 
-                private const int Offset_ProjectPath = 0;
-                private readonly int _offset_ConfigurationName;
+                private int _offset_ProjectPath;
+                private int _offset_ConfigurationName;
+
+                private int Offset_ProjectPath
+                {
+                    get
+                    {
+                        if (_offset_ProjectPath == -1)
+                        {
+                            _offset_ProjectPath = 0;
+                        }
+
+                        return _offset_ProjectPath;
+                    }
+                }
+
+                private int Offset_ConfigurationName
+                {
+                    get
+                    {
+                        if (_offset_ConfigurationName == -1)
+                        {
+                            _offset_ConfigurationName = Offset_ProjectPath + EtwEvent.UnicodeStringEnumerable.UnicodeStringEnumerator.StringLength(_etwEvent.Data, Offset_ProjectPath);
+                        }
+
+                        return _offset_ConfigurationName;
+                    }
+                }
 
                 /// <summary>
                 /// Retrieves the ProjectPath field.
                 /// </summary>
-                public string ProjectPath => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_ProjectPath.._offset_ConfigurationName]);
+                public string ProjectPath => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_ProjectPath..]);
 
                 /// <summary>
                 /// Retrieves the ConfigurationName field.
                 /// </summary>
-                public string ConfigurationName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[_offset_ConfigurationName..]);
+                public string ConfigurationName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_ConfigurationName..]);
 
                 /// <summary>
                 /// Creates a new SetInitialProjectConfigurationStartData.
@@ -1287,7 +1571,8 @@ namespace EtwTools
                 public SetInitialProjectConfigurationStartData(EtwEvent etwEvent)
                 {
                     _etwEvent = etwEvent;
-                    _offset_ConfigurationName = Offset_ProjectPath + EtwEvent.UnicodeStringEnumerable.UnicodeStringEnumerator.StringLength(etwEvent.Data, Offset_ProjectPath);
+                    _offset_ProjectPath = -1;
+                    _offset_ConfigurationName = -1;
                 }
             }
 
@@ -1366,11 +1651,24 @@ namespace EtwTools
             /// <summary>
             /// A data wrapper for a WaitingProjectTreePublishingStart event.
             /// </summary>
-            public readonly ref struct WaitingProjectTreePublishingStartData
+            public ref struct WaitingProjectTreePublishingStartData
             {
                 private readonly EtwEvent _etwEvent;
 
-                private const int Offset_ProjectPath = 0;
+                private int _offset_ProjectPath;
+
+                private int Offset_ProjectPath
+                {
+                    get
+                    {
+                        if (_offset_ProjectPath == -1)
+                        {
+                            _offset_ProjectPath = 0;
+                        }
+
+                        return _offset_ProjectPath;
+                    }
+                }
 
                 /// <summary>
                 /// Retrieves the ProjectPath field.
@@ -1384,6 +1682,7 @@ namespace EtwTools
                 public WaitingProjectTreePublishingStartData(EtwEvent etwEvent)
                 {
                     _etwEvent = etwEvent;
+                    _offset_ProjectPath = -1;
                 }
             }
 
@@ -1462,11 +1761,24 @@ namespace EtwTools
             /// <summary>
             /// A data wrapper for a WaitingProjectTreePublishingStop event.
             /// </summary>
-            public readonly ref struct WaitingProjectTreePublishingStopData
+            public ref struct WaitingProjectTreePublishingStopData
             {
                 private readonly EtwEvent _etwEvent;
 
-                private const int Offset_ProjectPath = 0;
+                private int _offset_ProjectPath;
+
+                private int Offset_ProjectPath
+                {
+                    get
+                    {
+                        if (_offset_ProjectPath == -1)
+                        {
+                            _offset_ProjectPath = 0;
+                        }
+
+                        return _offset_ProjectPath;
+                    }
+                }
 
                 /// <summary>
                 /// Retrieves the ProjectPath field.
@@ -1480,6 +1792,7 @@ namespace EtwTools
                 public WaitingProjectTreePublishingStopData(EtwEvent etwEvent)
                 {
                     _etwEvent = etwEvent;
+                    _offset_ProjectPath = -1;
                 }
             }
 
@@ -1558,11 +1871,24 @@ namespace EtwTools
             /// <summary>
             /// A data wrapper for a WaitingLatestReferencesStart event.
             /// </summary>
-            public readonly ref struct WaitingLatestReferencesStartData
+            public ref struct WaitingLatestReferencesStartData
             {
                 private readonly EtwEvent _etwEvent;
 
-                private const int Offset_ProjectPath = 0;
+                private int _offset_ProjectPath;
+
+                private int Offset_ProjectPath
+                {
+                    get
+                    {
+                        if (_offset_ProjectPath == -1)
+                        {
+                            _offset_ProjectPath = 0;
+                        }
+
+                        return _offset_ProjectPath;
+                    }
+                }
 
                 /// <summary>
                 /// Retrieves the ProjectPath field.
@@ -1576,6 +1902,7 @@ namespace EtwTools
                 public WaitingLatestReferencesStartData(EtwEvent etwEvent)
                 {
                     _etwEvent = etwEvent;
+                    _offset_ProjectPath = -1;
                 }
             }
 
@@ -1654,11 +1981,24 @@ namespace EtwTools
             /// <summary>
             /// A data wrapper for a WaitingLatestReferencesStop event.
             /// </summary>
-            public readonly ref struct WaitingLatestReferencesStopData
+            public ref struct WaitingLatestReferencesStopData
             {
                 private readonly EtwEvent _etwEvent;
 
-                private const int Offset_ProjectPath = 0;
+                private int _offset_ProjectPath;
+
+                private int Offset_ProjectPath
+                {
+                    get
+                    {
+                        if (_offset_ProjectPath == -1)
+                        {
+                            _offset_ProjectPath = 0;
+                        }
+
+                        return _offset_ProjectPath;
+                    }
+                }
 
                 /// <summary>
                 /// Retrieves the ProjectPath field.
@@ -1672,6 +2012,7 @@ namespace EtwTools
                 public WaitingLatestReferencesStopData(EtwEvent etwEvent)
                 {
                     _etwEvent = etwEvent;
+                    _offset_ProjectPath = -1;
                 }
             }
 
@@ -1750,28 +2091,67 @@ namespace EtwTools
             /// <summary>
             /// A data wrapper for a CreateProjectAsyncStart event.
             /// </summary>
-            public readonly ref struct CreateProjectAsyncStartData
+            public ref struct CreateProjectAsyncStartData
             {
                 private readonly EtwEvent _etwEvent;
 
-                private const int Offset_ProjectFileName = 0;
-                private readonly int _offset_Location;
-                private readonly int _offset_IsNew;
+                private int _offset_ProjectFileName;
+                private int _offset_Location;
+                private int _offset_IsNew;
+
+                private int Offset_ProjectFileName
+                {
+                    get
+                    {
+                        if (_offset_ProjectFileName == -1)
+                        {
+                            _offset_ProjectFileName = 0;
+                        }
+
+                        return _offset_ProjectFileName;
+                    }
+                }
+
+                private int Offset_Location
+                {
+                    get
+                    {
+                        if (_offset_Location == -1)
+                        {
+                            _offset_Location = Offset_ProjectFileName + EtwEvent.UnicodeStringEnumerable.UnicodeStringEnumerator.StringLength(_etwEvent.Data, Offset_ProjectFileName);
+                        }
+
+                        return _offset_Location;
+                    }
+                }
+
+                private int Offset_IsNew
+                {
+                    get
+                    {
+                        if (_offset_IsNew == -1)
+                        {
+                            _offset_IsNew = Offset_Location + EtwEvent.UnicodeStringEnumerable.UnicodeStringEnumerator.StringLength(_etwEvent.Data, Offset_Location);
+                        }
+
+                        return _offset_IsNew;
+                    }
+                }
 
                 /// <summary>
                 /// Retrieves the ProjectFileName field.
                 /// </summary>
-                public string ProjectFileName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_ProjectFileName.._offset_Location]);
+                public string ProjectFileName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_ProjectFileName..]);
 
                 /// <summary>
                 /// Retrieves the Location field.
                 /// </summary>
-                public string Location => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[_offset_Location.._offset_IsNew]);
+                public string Location => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_Location..]);
 
                 /// <summary>
                 /// Retrieves the IsNew field.
                 /// </summary>
-                public bool IsNew => _etwEvent.Data[_offset_IsNew] != 0;
+                public bool IsNew => _etwEvent.Data[Offset_IsNew] != 0;
 
                 /// <summary>
                 /// Creates a new CreateProjectAsyncStartData.
@@ -1780,8 +2160,9 @@ namespace EtwTools
                 public CreateProjectAsyncStartData(EtwEvent etwEvent)
                 {
                     _etwEvent = etwEvent;
-                    _offset_Location = Offset_ProjectFileName + EtwEvent.UnicodeStringEnumerable.UnicodeStringEnumerator.StringLength(etwEvent.Data, Offset_ProjectFileName);
-                    _offset_IsNew = _offset_Location + EtwEvent.UnicodeStringEnumerable.UnicodeStringEnumerator.StringLength(etwEvent.Data, _offset_Location);
+                    _offset_ProjectFileName = -1;
+                    _offset_Location = -1;
+                    _offset_IsNew = -1;
                 }
             }
 
@@ -1860,11 +2241,24 @@ namespace EtwTools
             /// <summary>
             /// A data wrapper for a LoadInitialProjectTreeStart event.
             /// </summary>
-            public readonly ref struct LoadInitialProjectTreeStartData
+            public ref struct LoadInitialProjectTreeStartData
             {
                 private readonly EtwEvent _etwEvent;
 
-                private const int Offset_ProjectPath = 0;
+                private int _offset_ProjectPath;
+
+                private int Offset_ProjectPath
+                {
+                    get
+                    {
+                        if (_offset_ProjectPath == -1)
+                        {
+                            _offset_ProjectPath = 0;
+                        }
+
+                        return _offset_ProjectPath;
+                    }
+                }
 
                 /// <summary>
                 /// Retrieves the ProjectPath field.
@@ -1878,6 +2272,7 @@ namespace EtwTools
                 public LoadInitialProjectTreeStartData(EtwEvent etwEvent)
                 {
                     _etwEvent = etwEvent;
+                    _offset_ProjectPath = -1;
                 }
             }
 
@@ -1956,22 +2351,48 @@ namespace EtwTools
             /// <summary>
             /// A data wrapper for a LoadInitialProjectTreeStop event.
             /// </summary>
-            public readonly ref struct LoadInitialProjectTreeStopData
+            public ref struct LoadInitialProjectTreeStopData
             {
                 private readonly EtwEvent _etwEvent;
 
-                private const int Offset_ProjectPath = 0;
-                private readonly int _offset_Size;
+                private int _offset_ProjectPath;
+                private int _offset_Size;
+
+                private int Offset_ProjectPath
+                {
+                    get
+                    {
+                        if (_offset_ProjectPath == -1)
+                        {
+                            _offset_ProjectPath = 0;
+                        }
+
+                        return _offset_ProjectPath;
+                    }
+                }
+
+                private int Offset_Size
+                {
+                    get
+                    {
+                        if (_offset_Size == -1)
+                        {
+                            _offset_Size = Offset_ProjectPath + EtwEvent.UnicodeStringEnumerable.UnicodeStringEnumerator.StringLength(_etwEvent.Data, Offset_ProjectPath);
+                        }
+
+                        return _offset_Size;
+                    }
+                }
 
                 /// <summary>
                 /// Retrieves the ProjectPath field.
                 /// </summary>
-                public string ProjectPath => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_ProjectPath.._offset_Size]);
+                public string ProjectPath => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_ProjectPath..]);
 
                 /// <summary>
                 /// Retrieves the Size field.
                 /// </summary>
-                public int Size => BitConverter.ToInt32(_etwEvent.Data[_offset_Size..]);
+                public int Size => BitConverter.ToInt32(_etwEvent.Data[Offset_Size..]);
 
                 /// <summary>
                 /// Creates a new LoadInitialProjectTreeStopData.
@@ -1980,7 +2401,8 @@ namespace EtwTools
                 public LoadInitialProjectTreeStopData(EtwEvent etwEvent)
                 {
                     _etwEvent = etwEvent;
-                    _offset_Size = Offset_ProjectPath + EtwEvent.UnicodeStringEnumerable.UnicodeStringEnumerator.StringLength(etwEvent.Data, Offset_ProjectPath);
+                    _offset_ProjectPath = -1;
+                    _offset_Size = -1;
                 }
             }
 
@@ -2059,34 +2481,86 @@ namespace EtwTools
             /// <summary>
             /// A data wrapper for a CreateDynamicTypeFromRuleStart event.
             /// </summary>
-            public readonly ref struct CreateDynamicTypeFromRuleStartData
+            public ref struct CreateDynamicTypeFromRuleStartData
             {
                 private readonly EtwEvent _etwEvent;
 
-                private const int Offset_ProjectFileName = 0;
-                private readonly int _offset_Rule;
-                private readonly int _offset_CategoryName;
-                private readonly int _offset_CreateBrowserObject;
+                private int _offset_ProjectFileName;
+                private int _offset_Rule;
+                private int _offset_CategoryName;
+                private int _offset_CreateBrowserObject;
+
+                private int Offset_ProjectFileName
+                {
+                    get
+                    {
+                        if (_offset_ProjectFileName == -1)
+                        {
+                            _offset_ProjectFileName = 0;
+                        }
+
+                        return _offset_ProjectFileName;
+                    }
+                }
+
+                private int Offset_Rule
+                {
+                    get
+                    {
+                        if (_offset_Rule == -1)
+                        {
+                            _offset_Rule = Offset_ProjectFileName + EtwEvent.UnicodeStringEnumerable.UnicodeStringEnumerator.StringLength(_etwEvent.Data, Offset_ProjectFileName);
+                        }
+
+                        return _offset_Rule;
+                    }
+                }
+
+                private int Offset_CategoryName
+                {
+                    get
+                    {
+                        if (_offset_CategoryName == -1)
+                        {
+                            _offset_CategoryName = Offset_Rule + EtwEvent.UnicodeStringEnumerable.UnicodeStringEnumerator.StringLength(_etwEvent.Data, Offset_Rule);
+                        }
+
+                        return _offset_CategoryName;
+                    }
+                }
+
+                private int Offset_CreateBrowserObject
+                {
+                    get
+                    {
+                        if (_offset_CreateBrowserObject == -1)
+                        {
+                            _offset_CreateBrowserObject = Offset_CategoryName + EtwEvent.UnicodeStringEnumerable.UnicodeStringEnumerator.StringLength(_etwEvent.Data, Offset_CategoryName);
+                        }
+
+                        return _offset_CreateBrowserObject;
+                    }
+                }
 
                 /// <summary>
                 /// Retrieves the ProjectFileName field.
                 /// </summary>
-                public string ProjectFileName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_ProjectFileName.._offset_Rule]);
+                public string ProjectFileName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_ProjectFileName..]);
 
                 /// <summary>
                 /// Retrieves the Rule field.
                 /// </summary>
-                public string Rule => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[_offset_Rule.._offset_CategoryName]);
+                public string Rule => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_Rule..]);
 
                 /// <summary>
                 /// Retrieves the CategoryName field.
                 /// </summary>
-                public string CategoryName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[_offset_CategoryName.._offset_CreateBrowserObject]);
+                public string CategoryName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_CategoryName..]);
 
                 /// <summary>
                 /// Retrieves the CreateBrowserObject field.
                 /// </summary>
-                public bool CreateBrowserObject => _etwEvent.Data[_offset_CreateBrowserObject] != 0;
+                public bool CreateBrowserObject => _etwEvent.Data[Offset_CreateBrowserObject] != 0;
 
                 /// <summary>
                 /// Creates a new CreateDynamicTypeFromRuleStartData.
@@ -2095,9 +2569,10 @@ namespace EtwTools
                 public CreateDynamicTypeFromRuleStartData(EtwEvent etwEvent)
                 {
                     _etwEvent = etwEvent;
-                    _offset_Rule = Offset_ProjectFileName + EtwEvent.UnicodeStringEnumerable.UnicodeStringEnumerator.StringLength(etwEvent.Data, Offset_ProjectFileName);
-                    _offset_CategoryName = _offset_Rule + EtwEvent.UnicodeStringEnumerable.UnicodeStringEnumerator.StringLength(etwEvent.Data, _offset_Rule);
-                    _offset_CreateBrowserObject = _offset_CategoryName + EtwEvent.UnicodeStringEnumerable.UnicodeStringEnumerator.StringLength(etwEvent.Data, _offset_CategoryName);
+                    _offset_ProjectFileName = -1;
+                    _offset_Rule = -1;
+                    _offset_CategoryName = -1;
+                    _offset_CreateBrowserObject = -1;
                 }
             }
 
@@ -2176,11 +2651,24 @@ namespace EtwTools
             /// <summary>
             /// A data wrapper for a CreateDynamicTypeFromRuleStop event.
             /// </summary>
-            public readonly ref struct CreateDynamicTypeFromRuleStopData
+            public ref struct CreateDynamicTypeFromRuleStopData
             {
                 private readonly EtwEvent _etwEvent;
 
-                private const int Offset_ProjectFileName = 0;
+                private int _offset_ProjectFileName;
+
+                private int Offset_ProjectFileName
+                {
+                    get
+                    {
+                        if (_offset_ProjectFileName == -1)
+                        {
+                            _offset_ProjectFileName = 0;
+                        }
+
+                        return _offset_ProjectFileName;
+                    }
+                }
 
                 /// <summary>
                 /// Retrieves the ProjectFileName field.
@@ -2194,6 +2682,7 @@ namespace EtwTools
                 public CreateDynamicTypeFromRuleStopData(EtwEvent etwEvent)
                 {
                     _etwEvent = etwEvent;
+                    _offset_ProjectFileName = -1;
                 }
             }
 
@@ -2272,22 +2761,48 @@ namespace EtwTools
             /// <summary>
             /// A data wrapper for a PublishProjectTreeCoreStart event.
             /// </summary>
-            public readonly ref struct PublishProjectTreeCoreStartData
+            public ref struct PublishProjectTreeCoreStartData
             {
                 private readonly EtwEvent _etwEvent;
 
-                private const int Offset_ProjectFileName = 0;
-                private readonly int _offset_ConfiguredVersion;
+                private int _offset_ProjectFileName;
+                private int _offset_ConfiguredVersion;
+
+                private int Offset_ProjectFileName
+                {
+                    get
+                    {
+                        if (_offset_ProjectFileName == -1)
+                        {
+                            _offset_ProjectFileName = 0;
+                        }
+
+                        return _offset_ProjectFileName;
+                    }
+                }
+
+                private int Offset_ConfiguredVersion
+                {
+                    get
+                    {
+                        if (_offset_ConfiguredVersion == -1)
+                        {
+                            _offset_ConfiguredVersion = Offset_ProjectFileName + EtwEvent.UnicodeStringEnumerable.UnicodeStringEnumerator.StringLength(_etwEvent.Data, Offset_ProjectFileName);
+                        }
+
+                        return _offset_ConfiguredVersion;
+                    }
+                }
 
                 /// <summary>
                 /// Retrieves the ProjectFileName field.
                 /// </summary>
-                public string ProjectFileName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_ProjectFileName.._offset_ConfiguredVersion]);
+                public string ProjectFileName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_ProjectFileName..]);
 
                 /// <summary>
                 /// Retrieves the ConfiguredVersion field.
                 /// </summary>
-                public string ConfiguredVersion => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[_offset_ConfiguredVersion..]);
+                public string ConfiguredVersion => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_ConfiguredVersion..]);
 
                 /// <summary>
                 /// Creates a new PublishProjectTreeCoreStartData.
@@ -2296,7 +2811,8 @@ namespace EtwTools
                 public PublishProjectTreeCoreStartData(EtwEvent etwEvent)
                 {
                     _etwEvent = etwEvent;
-                    _offset_ConfiguredVersion = Offset_ProjectFileName + EtwEvent.UnicodeStringEnumerable.UnicodeStringEnumerator.StringLength(etwEvent.Data, Offset_ProjectFileName);
+                    _offset_ProjectFileName = -1;
+                    _offset_ConfiguredVersion = -1;
                 }
             }
 
@@ -2375,22 +2891,48 @@ namespace EtwTools
             /// <summary>
             /// A data wrapper for a PublishProjectTreeCoreStop event.
             /// </summary>
-            public readonly ref struct PublishProjectTreeCoreStopData
+            public ref struct PublishProjectTreeCoreStopData
             {
                 private readonly EtwEvent _etwEvent;
 
-                private const int Offset_ProjectFileName = 0;
-                private readonly int _offset_ConfiguredVersion;
+                private int _offset_ProjectFileName;
+                private int _offset_ConfiguredVersion;
+
+                private int Offset_ProjectFileName
+                {
+                    get
+                    {
+                        if (_offset_ProjectFileName == -1)
+                        {
+                            _offset_ProjectFileName = 0;
+                        }
+
+                        return _offset_ProjectFileName;
+                    }
+                }
+
+                private int Offset_ConfiguredVersion
+                {
+                    get
+                    {
+                        if (_offset_ConfiguredVersion == -1)
+                        {
+                            _offset_ConfiguredVersion = Offset_ProjectFileName + EtwEvent.UnicodeStringEnumerable.UnicodeStringEnumerator.StringLength(_etwEvent.Data, Offset_ProjectFileName);
+                        }
+
+                        return _offset_ConfiguredVersion;
+                    }
+                }
 
                 /// <summary>
                 /// Retrieves the ProjectFileName field.
                 /// </summary>
-                public string ProjectFileName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_ProjectFileName.._offset_ConfiguredVersion]);
+                public string ProjectFileName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_ProjectFileName..]);
 
                 /// <summary>
                 /// Retrieves the ConfiguredVersion field.
                 /// </summary>
-                public string ConfiguredVersion => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[_offset_ConfiguredVersion..]);
+                public string ConfiguredVersion => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_ConfiguredVersion..]);
 
                 /// <summary>
                 /// Creates a new PublishProjectTreeCoreStopData.
@@ -2399,7 +2941,8 @@ namespace EtwTools
                 public PublishProjectTreeCoreStopData(EtwEvent etwEvent)
                 {
                     _etwEvent = etwEvent;
-                    _offset_ConfiguredVersion = Offset_ProjectFileName + EtwEvent.UnicodeStringEnumerable.UnicodeStringEnumerator.StringLength(etwEvent.Data, Offset_ProjectFileName);
+                    _offset_ProjectFileName = -1;
+                    _offset_ConfiguredVersion = -1;
                 }
             }
 
@@ -2544,23 +3087,62 @@ namespace EtwTools
             /// <summary>
             /// A data wrapper for a PublishProjectTreeAcquiringLockStop event.
             /// </summary>
-            public readonly ref struct PublishProjectTreeAcquiringLockStopData
+            public ref struct PublishProjectTreeAcquiringLockStopData
             {
                 private readonly EtwEvent _etwEvent;
 
-                private const int Offset_AbandonedLockCount = 0;
-                private const int Offset_AbandonedAcquiringLockCount = 4;
-                private const int Offset_ThreadSwitchingTime = 8;
+                private int _offset_AbandonedLockCount;
+                private int _offset_AbandonedAcquiringLockCount;
+                private int _offset_ThreadSwitchingTime;
+
+                private int Offset_AbandonedLockCount
+                {
+                    get
+                    {
+                        if (_offset_AbandonedLockCount == -1)
+                        {
+                            _offset_AbandonedLockCount = 0;
+                        }
+
+                        return _offset_AbandonedLockCount;
+                    }
+                }
+
+                private int Offset_AbandonedAcquiringLockCount
+                {
+                    get
+                    {
+                        if (_offset_AbandonedAcquiringLockCount == -1)
+                        {
+                            _offset_AbandonedAcquiringLockCount = Offset_AbandonedLockCount + 4;
+                        }
+
+                        return _offset_AbandonedAcquiringLockCount;
+                    }
+                }
+
+                private int Offset_ThreadSwitchingTime
+                {
+                    get
+                    {
+                        if (_offset_ThreadSwitchingTime == -1)
+                        {
+                            _offset_ThreadSwitchingTime = Offset_AbandonedAcquiringLockCount + 4;
+                        }
+
+                        return _offset_ThreadSwitchingTime;
+                    }
+                }
 
                 /// <summary>
                 /// Retrieves the AbandonedLockCount field.
                 /// </summary>
-                public int AbandonedLockCount => BitConverter.ToInt32(_etwEvent.Data[Offset_AbandonedLockCount..Offset_AbandonedAcquiringLockCount]);
+                public int AbandonedLockCount => BitConverter.ToInt32(_etwEvent.Data[Offset_AbandonedLockCount..]);
 
                 /// <summary>
                 /// Retrieves the AbandonedAcquiringLockCount field.
                 /// </summary>
-                public int AbandonedAcquiringLockCount => BitConverter.ToInt32(_etwEvent.Data[Offset_AbandonedAcquiringLockCount..Offset_ThreadSwitchingTime]);
+                public int AbandonedAcquiringLockCount => BitConverter.ToInt32(_etwEvent.Data[Offset_AbandonedAcquiringLockCount..]);
 
                 /// <summary>
                 /// Retrieves the ThreadSwitchingTime field.
@@ -2574,6 +3156,9 @@ namespace EtwTools
                 public PublishProjectTreeAcquiringLockStopData(EtwEvent etwEvent)
                 {
                     _etwEvent = etwEvent;
+                    _offset_AbandonedLockCount = -1;
+                    _offset_AbandonedAcquiringLockCount = -1;
+                    _offset_ThreadSwitchingTime = -1;
                 }
             }
 
@@ -2652,11 +3237,24 @@ namespace EtwTools
             /// <summary>
             /// A data wrapper for a TransferToBestProjectOwnerStart event.
             /// </summary>
-            public readonly ref struct TransferToBestProjectOwnerStartData
+            public ref struct TransferToBestProjectOwnerStartData
             {
                 private readonly EtwEvent _etwEvent;
 
-                private const int Offset_FilePath = 0;
+                private int _offset_FilePath;
+
+                private int Offset_FilePath
+                {
+                    get
+                    {
+                        if (_offset_FilePath == -1)
+                        {
+                            _offset_FilePath = 0;
+                        }
+
+                        return _offset_FilePath;
+                    }
+                }
 
                 /// <summary>
                 /// Retrieves the FilePath field.
@@ -2670,6 +3268,7 @@ namespace EtwTools
                 public TransferToBestProjectOwnerStartData(EtwEvent etwEvent)
                 {
                     _etwEvent = etwEvent;
+                    _offset_FilePath = -1;
                 }
             }
 
@@ -2748,11 +3347,24 @@ namespace EtwTools
             /// <summary>
             /// A data wrapper for a TransferToBestProjectOwnerStop event.
             /// </summary>
-            public readonly ref struct TransferToBestProjectOwnerStopData
+            public ref struct TransferToBestProjectOwnerStopData
             {
                 private readonly EtwEvent _etwEvent;
 
-                private const int Offset_FilePath = 0;
+                private int _offset_FilePath;
+
+                private int Offset_FilePath
+                {
+                    get
+                    {
+                        if (_offset_FilePath == -1)
+                        {
+                            _offset_FilePath = 0;
+                        }
+
+                        return _offset_FilePath;
+                    }
+                }
 
                 /// <summary>
                 /// Retrieves the FilePath field.
@@ -2766,6 +3378,7 @@ namespace EtwTools
                 public TransferToBestProjectOwnerStopData(EtwEvent etwEvent)
                 {
                     _etwEvent = etwEvent;
+                    _offset_FilePath = -1;
                 }
             }
 
@@ -2844,11 +3457,24 @@ namespace EtwTools
             /// <summary>
             /// A data wrapper for a SwitchToMainThreadToPublishTreeFailed event.
             /// </summary>
-            public readonly ref struct SwitchToMainThreadToPublishTreeFailedData
+            public ref struct SwitchToMainThreadToPublishTreeFailedData
             {
                 private readonly EtwEvent _etwEvent;
 
-                private const int Offset_Count = 0;
+                private int _offset_Count;
+
+                private int Offset_Count
+                {
+                    get
+                    {
+                        if (_offset_Count == -1)
+                        {
+                            _offset_Count = 0;
+                        }
+
+                        return _offset_Count;
+                    }
+                }
 
                 /// <summary>
                 /// Retrieves the Count field.
@@ -2862,6 +3488,7 @@ namespace EtwTools
                 public SwitchToMainThreadToPublishTreeFailedData(EtwEvent etwEvent)
                 {
                     _etwEvent = etwEvent;
+                    _offset_Count = -1;
                 }
             }
 
@@ -3006,34 +3633,86 @@ namespace EtwTools
             /// <summary>
             /// A data wrapper for a NotifyQueryStatusDelay event.
             /// </summary>
-            public readonly ref struct NotifyQueryStatusDelayData
+            public ref struct NotifyQueryStatusDelayData
             {
                 private readonly EtwEvent _etwEvent;
 
-                private const int Offset_CommandGroup = 0;
-                private readonly int _offset_CommandId;
-                private readonly int _offset_Handler;
-                private readonly int _offset_DelayTicket;
+                private int _offset_CommandGroup;
+                private int _offset_CommandId;
+                private int _offset_Handler;
+                private int _offset_DelayTicket;
+
+                private int Offset_CommandGroup
+                {
+                    get
+                    {
+                        if (_offset_CommandGroup == -1)
+                        {
+                            _offset_CommandGroup = 0;
+                        }
+
+                        return _offset_CommandGroup;
+                    }
+                }
+
+                private int Offset_CommandId
+                {
+                    get
+                    {
+                        if (_offset_CommandId == -1)
+                        {
+                            _offset_CommandId = Offset_CommandGroup + EtwEvent.UnicodeStringEnumerable.UnicodeStringEnumerator.StringLength(_etwEvent.Data, Offset_CommandGroup);
+                        }
+
+                        return _offset_CommandId;
+                    }
+                }
+
+                private int Offset_Handler
+                {
+                    get
+                    {
+                        if (_offset_Handler == -1)
+                        {
+                            _offset_Handler = Offset_CommandId + 4;
+                        }
+
+                        return _offset_Handler;
+                    }
+                }
+
+                private int Offset_DelayTicket
+                {
+                    get
+                    {
+                        if (_offset_DelayTicket == -1)
+                        {
+                            _offset_DelayTicket = Offset_Handler + EtwEvent.UnicodeStringEnumerable.UnicodeStringEnumerator.StringLength(_etwEvent.Data, Offset_Handler);
+                        }
+
+                        return _offset_DelayTicket;
+                    }
+                }
 
                 /// <summary>
                 /// Retrieves the CommandGroup field.
                 /// </summary>
-                public string CommandGroup => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_CommandGroup.._offset_CommandId]);
+                public string CommandGroup => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_CommandGroup..]);
 
                 /// <summary>
                 /// Retrieves the CommandId field.
                 /// </summary>
-                public uint CommandId => BitConverter.ToUInt32(_etwEvent.Data[_offset_CommandId.._offset_Handler]);
+                public uint CommandId => BitConverter.ToUInt32(_etwEvent.Data[Offset_CommandId..]);
 
                 /// <summary>
                 /// Retrieves the Handler field.
                 /// </summary>
-                public string Handler => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[_offset_Handler.._offset_DelayTicket]);
+                public string Handler => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_Handler..]);
 
                 /// <summary>
                 /// Retrieves the DelayTicket field.
                 /// </summary>
-                public int DelayTicket => BitConverter.ToInt32(_etwEvent.Data[_offset_DelayTicket..]);
+                public int DelayTicket => BitConverter.ToInt32(_etwEvent.Data[Offset_DelayTicket..]);
 
                 /// <summary>
                 /// Creates a new NotifyQueryStatusDelayData.
@@ -3042,9 +3721,10 @@ namespace EtwTools
                 public NotifyQueryStatusDelayData(EtwEvent etwEvent)
                 {
                     _etwEvent = etwEvent;
-                    _offset_CommandId = Offset_CommandGroup + EtwEvent.UnicodeStringEnumerable.UnicodeStringEnumerator.StringLength(etwEvent.Data, Offset_CommandGroup);
-                    _offset_Handler = _offset_CommandId + 4;
-                    _offset_DelayTicket = _offset_Handler + EtwEvent.UnicodeStringEnumerable.UnicodeStringEnumerator.StringLength(etwEvent.Data, _offset_Handler);
+                    _offset_CommandGroup = -1;
+                    _offset_CommandId = -1;
+                    _offset_Handler = -1;
+                    _offset_DelayTicket = -1;
                 }
             }
 
@@ -3123,11 +3803,24 @@ namespace EtwTools
             /// <summary>
             /// A data wrapper for a WaitingProjectTreeLoadingStart event.
             /// </summary>
-            public readonly ref struct WaitingProjectTreeLoadingStartData
+            public ref struct WaitingProjectTreeLoadingStartData
             {
                 private readonly EtwEvent _etwEvent;
 
-                private const int Offset_ProjectPath = 0;
+                private int _offset_ProjectPath;
+
+                private int Offset_ProjectPath
+                {
+                    get
+                    {
+                        if (_offset_ProjectPath == -1)
+                        {
+                            _offset_ProjectPath = 0;
+                        }
+
+                        return _offset_ProjectPath;
+                    }
+                }
 
                 /// <summary>
                 /// Retrieves the ProjectPath field.
@@ -3141,6 +3834,7 @@ namespace EtwTools
                 public WaitingProjectTreeLoadingStartData(EtwEvent etwEvent)
                 {
                     _etwEvent = etwEvent;
+                    _offset_ProjectPath = -1;
                 }
             }
 
@@ -3747,28 +4441,67 @@ namespace EtwTools
             /// <summary>
             /// A data wrapper for a ResetDesignTimeBuilder event.
             /// </summary>
-            public readonly ref struct ResetDesignTimeBuilderData
+            public ref struct ResetDesignTimeBuilderData
             {
                 private readonly EtwEvent _etwEvent;
 
-                private const int Offset_Project = 0;
-                private readonly int _offset_Configuration;
-                private readonly int _offset_ResetId;
+                private int _offset_Project;
+                private int _offset_Configuration;
+                private int _offset_ResetId;
+
+                private int Offset_Project
+                {
+                    get
+                    {
+                        if (_offset_Project == -1)
+                        {
+                            _offset_Project = 0;
+                        }
+
+                        return _offset_Project;
+                    }
+                }
+
+                private int Offset_Configuration
+                {
+                    get
+                    {
+                        if (_offset_Configuration == -1)
+                        {
+                            _offset_Configuration = Offset_Project + EtwEvent.UnicodeStringEnumerable.UnicodeStringEnumerator.StringLength(_etwEvent.Data, Offset_Project);
+                        }
+
+                        return _offset_Configuration;
+                    }
+                }
+
+                private int Offset_ResetId
+                {
+                    get
+                    {
+                        if (_offset_ResetId == -1)
+                        {
+                            _offset_ResetId = Offset_Configuration + EtwEvent.UnicodeStringEnumerable.UnicodeStringEnumerator.StringLength(_etwEvent.Data, Offset_Configuration);
+                        }
+
+                        return _offset_ResetId;
+                    }
+                }
 
                 /// <summary>
                 /// Retrieves the Project field.
                 /// </summary>
-                public string Project => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_Project.._offset_Configuration]);
+                public string Project => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_Project..]);
 
                 /// <summary>
                 /// Retrieves the Configuration field.
                 /// </summary>
-                public string Configuration => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[_offset_Configuration.._offset_ResetId]);
+                public string Configuration => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_Configuration..]);
 
                 /// <summary>
                 /// Retrieves the ResetId field.
                 /// </summary>
-                public int ResetId => BitConverter.ToInt32(_etwEvent.Data[_offset_ResetId..]);
+                public int ResetId => BitConverter.ToInt32(_etwEvent.Data[Offset_ResetId..]);
 
                 /// <summary>
                 /// Creates a new ResetDesignTimeBuilderData.
@@ -3777,8 +4510,9 @@ namespace EtwTools
                 public ResetDesignTimeBuilderData(EtwEvent etwEvent)
                 {
                     _etwEvent = etwEvent;
-                    _offset_Configuration = Offset_Project + EtwEvent.UnicodeStringEnumerable.UnicodeStringEnumerator.StringLength(etwEvent.Data, Offset_Project);
-                    _offset_ResetId = _offset_Configuration + EtwEvent.UnicodeStringEnumerable.UnicodeStringEnumerator.StringLength(etwEvent.Data, _offset_Configuration);
+                    _offset_Project = -1;
+                    _offset_Configuration = -1;
+                    _offset_ResetId = -1;
                 }
             }
 
@@ -3989,28 +4723,67 @@ namespace EtwTools
             /// <summary>
             /// A data wrapper for a CpsNotifyTaskStop event.
             /// </summary>
-            public readonly ref struct CpsNotifyTaskStopData
+            public ref struct CpsNotifyTaskStopData
             {
                 private readonly EtwEvent _etwEvent;
 
-                private const int Offset_StageId = 0;
-                private readonly int _offset_ProjectPath;
-                private readonly int _offset_Name;
+                private int _offset_StageId;
+                private int _offset_ProjectPath;
+                private int _offset_Name;
+
+                private int Offset_StageId
+                {
+                    get
+                    {
+                        if (_offset_StageId == -1)
+                        {
+                            _offset_StageId = 0;
+                        }
+
+                        return _offset_StageId;
+                    }
+                }
+
+                private int Offset_ProjectPath
+                {
+                    get
+                    {
+                        if (_offset_ProjectPath == -1)
+                        {
+                            _offset_ProjectPath = Offset_StageId + EtwEvent.UnicodeStringEnumerable.UnicodeStringEnumerator.StringLength(_etwEvent.Data, Offset_StageId);
+                        }
+
+                        return _offset_ProjectPath;
+                    }
+                }
+
+                private int Offset_Name
+                {
+                    get
+                    {
+                        if (_offset_Name == -1)
+                        {
+                            _offset_Name = Offset_ProjectPath + EtwEvent.UnicodeStringEnumerable.UnicodeStringEnumerator.StringLength(_etwEvent.Data, Offset_ProjectPath);
+                        }
+
+                        return _offset_Name;
+                    }
+                }
 
                 /// <summary>
                 /// Retrieves the StageId field.
                 /// </summary>
-                public string StageId => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_StageId.._offset_ProjectPath]);
+                public string StageId => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_StageId..]);
 
                 /// <summary>
                 /// Retrieves the ProjectPath field.
                 /// </summary>
-                public string ProjectPath => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[_offset_ProjectPath.._offset_Name]);
+                public string ProjectPath => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_ProjectPath..]);
 
                 /// <summary>
                 /// Retrieves the Name field.
                 /// </summary>
-                public string Name => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[_offset_Name..]);
+                public string Name => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_Name..]);
 
                 /// <summary>
                 /// Creates a new CpsNotifyTaskStopData.
@@ -4019,8 +4792,9 @@ namespace EtwTools
                 public CpsNotifyTaskStopData(EtwEvent etwEvent)
                 {
                     _etwEvent = etwEvent;
-                    _offset_ProjectPath = Offset_StageId + EtwEvent.UnicodeStringEnumerable.UnicodeStringEnumerator.StringLength(etwEvent.Data, Offset_StageId);
-                    _offset_Name = _offset_ProjectPath + EtwEvent.UnicodeStringEnumerable.UnicodeStringEnumerator.StringLength(etwEvent.Data, _offset_ProjectPath);
+                    _offset_StageId = -1;
+                    _offset_ProjectPath = -1;
+                    _offset_Name = -1;
                 }
             }
 
@@ -4099,11 +4873,24 @@ namespace EtwTools
             /// <summary>
             /// A data wrapper for a CpsUpdateSubTypeStart event.
             /// </summary>
-            public readonly ref struct CpsUpdateSubTypeStartData
+            public ref struct CpsUpdateSubTypeStartData
             {
                 private readonly EtwEvent _etwEvent;
 
-                private const int Offset_ProjectPath = 0;
+                private int _offset_ProjectPath;
+
+                private int Offset_ProjectPath
+                {
+                    get
+                    {
+                        if (_offset_ProjectPath == -1)
+                        {
+                            _offset_ProjectPath = 0;
+                        }
+
+                        return _offset_ProjectPath;
+                    }
+                }
 
                 /// <summary>
                 /// Retrieves the ProjectPath field.
@@ -4117,6 +4904,7 @@ namespace EtwTools
                 public CpsUpdateSubTypeStartData(EtwEvent etwEvent)
                 {
                     _etwEvent = etwEvent;
+                    _offset_ProjectPath = -1;
                 }
             }
 
@@ -4195,34 +4983,86 @@ namespace EtwTools
             /// <summary>
             /// A data wrapper for a CpsUpdateSubTypeEnd event.
             /// </summary>
-            public readonly ref struct CpsUpdateSubTypeEndData
+            public ref struct CpsUpdateSubTypeEndData
             {
                 private readonly EtwEvent _etwEvent;
 
-                private const int Offset_ProjectPath = 0;
-                private readonly int _offset_Count;
-                private readonly int _offset_Changed;
-                private readonly int _offset_Reevaluated;
+                private int _offset_ProjectPath;
+                private int _offset_Count;
+                private int _offset_Changed;
+                private int _offset_Reevaluated;
+
+                private int Offset_ProjectPath
+                {
+                    get
+                    {
+                        if (_offset_ProjectPath == -1)
+                        {
+                            _offset_ProjectPath = 0;
+                        }
+
+                        return _offset_ProjectPath;
+                    }
+                }
+
+                private int Offset_Count
+                {
+                    get
+                    {
+                        if (_offset_Count == -1)
+                        {
+                            _offset_Count = Offset_ProjectPath + EtwEvent.UnicodeStringEnumerable.UnicodeStringEnumerator.StringLength(_etwEvent.Data, Offset_ProjectPath);
+                        }
+
+                        return _offset_Count;
+                    }
+                }
+
+                private int Offset_Changed
+                {
+                    get
+                    {
+                        if (_offset_Changed == -1)
+                        {
+                            _offset_Changed = Offset_Count + 4;
+                        }
+
+                        return _offset_Changed;
+                    }
+                }
+
+                private int Offset_Reevaluated
+                {
+                    get
+                    {
+                        if (_offset_Reevaluated == -1)
+                        {
+                            _offset_Reevaluated = Offset_Changed + 1;
+                        }
+
+                        return _offset_Reevaluated;
+                    }
+                }
 
                 /// <summary>
                 /// Retrieves the ProjectPath field.
                 /// </summary>
-                public string ProjectPath => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_ProjectPath.._offset_Count]);
+                public string ProjectPath => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_ProjectPath..]);
 
                 /// <summary>
                 /// Retrieves the Count field.
                 /// </summary>
-                public int Count => BitConverter.ToInt32(_etwEvent.Data[_offset_Count.._offset_Changed]);
+                public int Count => BitConverter.ToInt32(_etwEvent.Data[Offset_Count..]);
 
                 /// <summary>
                 /// Retrieves the Changed field.
                 /// </summary>
-                public bool Changed => _etwEvent.Data[_offset_Changed] != 0;
+                public bool Changed => _etwEvent.Data[Offset_Changed] != 0;
 
                 /// <summary>
                 /// Retrieves the Reevaluated field.
                 /// </summary>
-                public bool Reevaluated => _etwEvent.Data[_offset_Reevaluated] != 0;
+                public bool Reevaluated => _etwEvent.Data[Offset_Reevaluated] != 0;
 
                 /// <summary>
                 /// Creates a new CpsUpdateSubTypeEndData.
@@ -4231,9 +5071,10 @@ namespace EtwTools
                 public CpsUpdateSubTypeEndData(EtwEvent etwEvent)
                 {
                     _etwEvent = etwEvent;
-                    _offset_Count = Offset_ProjectPath + EtwEvent.UnicodeStringEnumerable.UnicodeStringEnumerator.StringLength(etwEvent.Data, Offset_ProjectPath);
-                    _offset_Changed = _offset_Count + 4;
-                    _offset_Reevaluated = _offset_Changed + 1;
+                    _offset_ProjectPath = -1;
+                    _offset_Count = -1;
+                    _offset_Changed = -1;
+                    _offset_Reevaluated = -1;
                 }
             }
 
@@ -4312,22 +5153,48 @@ namespace EtwTools
             /// <summary>
             /// A data wrapper for a ProjectReloadedInBackground event.
             /// </summary>
-            public readonly ref struct ProjectReloadedInBackgroundData
+            public ref struct ProjectReloadedInBackgroundData
             {
                 private readonly EtwEvent _etwEvent;
 
-                private const int Offset_Project = 0;
-                private readonly int _offset_ConfiguredVersion;
+                private int _offset_Project;
+                private int _offset_ConfiguredVersion;
+
+                private int Offset_Project
+                {
+                    get
+                    {
+                        if (_offset_Project == -1)
+                        {
+                            _offset_Project = 0;
+                        }
+
+                        return _offset_Project;
+                    }
+                }
+
+                private int Offset_ConfiguredVersion
+                {
+                    get
+                    {
+                        if (_offset_ConfiguredVersion == -1)
+                        {
+                            _offset_ConfiguredVersion = Offset_Project + EtwEvent.UnicodeStringEnumerable.UnicodeStringEnumerator.StringLength(_etwEvent.Data, Offset_Project);
+                        }
+
+                        return _offset_ConfiguredVersion;
+                    }
+                }
 
                 /// <summary>
                 /// Retrieves the Project field.
                 /// </summary>
-                public string Project => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_Project.._offset_ConfiguredVersion]);
+                public string Project => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_Project..]);
 
                 /// <summary>
                 /// Retrieves the ConfiguredVersion field.
                 /// </summary>
-                public string ConfiguredVersion => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[_offset_ConfiguredVersion..]);
+                public string ConfiguredVersion => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_ConfiguredVersion..]);
 
                 /// <summary>
                 /// Creates a new ProjectReloadedInBackgroundData.
@@ -4336,7 +5203,8 @@ namespace EtwTools
                 public ProjectReloadedInBackgroundData(EtwEvent etwEvent)
                 {
                     _etwEvent = etwEvent;
-                    _offset_ConfiguredVersion = Offset_Project + EtwEvent.UnicodeStringEnumerable.UnicodeStringEnumerator.StringLength(etwEvent.Data, Offset_Project);
+                    _offset_Project = -1;
+                    _offset_ConfiguredVersion = -1;
                 }
             }
 

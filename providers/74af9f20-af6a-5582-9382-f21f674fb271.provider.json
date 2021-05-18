@@ -1,0 +1,366 @@
+{
+  "name": "ApplicationInsightsCore",
+  "displayName": "Microsoft-ApplicationInsights-Core",
+  "id": "74af9f20-af6a-5582-9382-f21f674fb271",
+  "events": [
+    {
+      "name": "EventSourceMessage",
+      "displayName": "EventSourceMessage",
+      "descriptor": {
+        "id": 0,
+        "version": 0,
+        "channel": 0,
+        "level": "None",
+        "opcode": "Info",
+        "task": 65534,
+        "keyword": 0
+      },
+      "fields": [
+        {
+          "name": "Message",
+          "datatype": "string",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "LogVerbose",
+      "displayName": "LogVerbose",
+      "descriptor": {
+        "id": 10,
+        "version": 0,
+        "channel": 0,
+        "level": "Verbose",
+        "opcode": "Info",
+        "task": 65524,
+        "keyword": 4
+      },
+      "fields": [
+        {
+          "name": "Msg",
+          "datatype": "string",
+          "map": null
+        },
+        {
+          "name": "AppDomainName",
+          "datatype": "string",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "DiagnosticsEventThrottlingHasBeenStartedForTheEvent",
+      "displayName": "DiagnosticsEventThrottlingHasBeenStartedForTheEvent",
+      "descriptor": {
+        "id": 20,
+        "version": 0,
+        "channel": 0,
+        "level": "Information",
+        "opcode": "Info",
+        "task": 65514,
+        "keyword": 3
+      },
+      "fields": [
+        {
+          "name": "EventId",
+          "datatype": "int",
+          "map": null
+        },
+        {
+          "name": "AppDomainName",
+          "datatype": "string",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "DiagnosticsEventThrottlingHasBeenResetForTheEvent",
+      "displayName": "DiagnosticsEventThrottlingHasBeenResetForTheEvent",
+      "descriptor": {
+        "id": 30,
+        "version": 0,
+        "channel": 0,
+        "level": "Information",
+        "opcode": "Info",
+        "task": 65504,
+        "keyword": 3
+      },
+      "fields": [
+        {
+          "name": "EventId",
+          "datatype": "int",
+          "map": null
+        },
+        {
+          "name": "ExecutionCount",
+          "datatype": "int",
+          "map": null
+        },
+        {
+          "name": "AppDomainName",
+          "datatype": "string",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "DiagnoisticsEventThrottlingSchedulerDisposeTimerFailure",
+      "displayName": "DiagnoisticsEventThrottlingSchedulerDisposeTimerFailure",
+      "descriptor": {
+        "id": 40,
+        "version": 0,
+        "channel": 0,
+        "level": "Warning",
+        "opcode": "Info",
+        "task": 65494,
+        "keyword": 2
+      },
+      "fields": [
+        {
+          "name": "Exception",
+          "datatype": "string",
+          "map": null
+        },
+        {
+          "name": "AppDomainName",
+          "datatype": "string",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "DiagnoisticsEventThrottlingSchedulerTimerWasCreated",
+      "displayName": "DiagnoisticsEventThrottlingSchedulerTimerWasCreated",
+      "descriptor": {
+        "id": 50,
+        "version": 0,
+        "channel": 0,
+        "level": "Verbose",
+        "opcode": "Info",
+        "task": 65484,
+        "keyword": 2
+      },
+      "fields": [
+        {
+          "name": "IntervalInMilliseconds",
+          "datatype": "int",
+          "map": null
+        },
+        {
+          "name": "AppDomainName",
+          "datatype": "string",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "DiagnoisticsEventThrottlingSchedulerTimerWasRemoved",
+      "displayName": "DiagnoisticsEventThrottlingSchedulerTimerWasRemoved",
+      "descriptor": {
+        "id": 60,
+        "version": 0,
+        "channel": 0,
+        "level": "Verbose",
+        "opcode": "Info",
+        "task": 65474,
+        "keyword": 2
+      },
+      "fields": [
+        {
+          "name": "AppDomainName",
+          "datatype": "string",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "TelemetryClientConstructorWithNoTelemetryConfiguration",
+      "displayName": "TelemetryClientConstructorWithNoTelemetryConfiguration",
+      "descriptor": {
+        "id": 70,
+        "version": 0,
+        "channel": 0,
+        "level": "Warning",
+        "opcode": "Info",
+        "task": 65464,
+        "keyword": 0
+      },
+      "fields": [
+        {
+          "name": "AppDomainName",
+          "datatype": "string",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "PopulateRequiredStringWithValue",
+      "displayName": "PopulateRequiredStringWithValue",
+      "descriptor": {
+        "id": 71,
+        "version": 0,
+        "channel": 0,
+        "level": "Verbose",
+        "opcode": "Info",
+        "task": 65463,
+        "keyword": 0
+      },
+      "fields": [
+        {
+          "name": "ParameterName",
+          "datatype": "string",
+          "map": null
+        },
+        {
+          "name": "TelemetryType",
+          "datatype": "string",
+          "map": null
+        },
+        {
+          "name": "AppDomainName",
+          "datatype": "string",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "RequestTelemetryIncorrectDuration",
+      "displayName": "RequestTelemetryIncorrectDuration",
+      "descriptor": {
+        "id": 72,
+        "version": 0,
+        "channel": 0,
+        "level": "Warning",
+        "opcode": "Info",
+        "task": 65462,
+        "keyword": 0
+      },
+      "fields": [
+        {
+          "name": "AppDomainName",
+          "datatype": "string",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "TrackingWasDisabled",
+      "displayName": "TrackingWasDisabled",
+      "descriptor": {
+        "id": 80,
+        "version": 0,
+        "channel": 0,
+        "level": "Verbose",
+        "opcode": "Info",
+        "task": 65454,
+        "keyword": 0
+      },
+      "fields": [
+        {
+          "name": "AppDomainName",
+          "datatype": "string",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "TrackingWasEnabled",
+      "displayName": "TrackingWasEnabled",
+      "descriptor": {
+        "id": 81,
+        "version": 0,
+        "channel": 0,
+        "level": "Verbose",
+        "opcode": "Info",
+        "task": 65453,
+        "keyword": 0
+      },
+      "fields": [
+        {
+          "name": "AppDomainName",
+          "datatype": "string",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "LogError",
+      "displayName": "LogError",
+      "descriptor": {
+        "id": 90,
+        "version": 0,
+        "channel": 0,
+        "level": "Error",
+        "opcode": "Info",
+        "task": 65444,
+        "keyword": 8
+      },
+      "fields": [
+        {
+          "name": "Msg",
+          "datatype": "string",
+          "map": null
+        },
+        {
+          "name": "AppDomainName",
+          "datatype": "string",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "BuildInfoConfigBrokenXmlError",
+      "displayName": "BuildInfoConfigBrokenXmlError",
+      "descriptor": {
+        "id": 91,
+        "version": 0,
+        "channel": 0,
+        "level": "Error",
+        "opcode": "Info",
+        "task": 65443,
+        "keyword": 9
+      },
+      "fields": [
+        {
+          "name": "Msg",
+          "datatype": "string",
+          "map": null
+        },
+        {
+          "name": "AppDomainName",
+          "datatype": "string",
+          "map": null
+        }
+      ]
+    }
+  ],
+  "tasks": {
+    "65443": "BuildInfoConfigBrokenXmlError",
+    "65444": "LogError",
+    "65453": "TrackingWasEnabled",
+    "65454": "TrackingWasDisabled",
+    "65462": "RequestTelemetryIncorrectDuration",
+    "65463": "PopulateRequiredStringWithValue",
+    "65464": "TelemetryClientConstructorWithNoTelemetryConfiguration",
+    "65474": "DiagnoisticsEventThrottlingSchedulerTimerWasRemoved",
+    "65484": "DiagnoisticsEventThrottlingSchedulerTimerWasCreated",
+    "65494": "DiagnoisticsEventThrottlingSchedulerDisposeTimerFailure",
+    "65504": "DiagnosticsEventThrottlingHasBeenResetForTheEvent",
+    "65514": "DiagnosticsEventThrottlingHasBeenStartedForTheEvent",
+    "65524": "LogVerbose",
+    "65534": "EventSourceMessage"
+  },
+  "opcodes": {},
+  "keywords": {
+    "1": "UserActionable",
+    "2": "Diagnostics",
+    "4": "VerboseFailure",
+    "8": "ErrorFailure",
+    "17592186044416": "Session3",
+    "35184372088832": "Session2",
+    "70368744177664": "Session1",
+    "140737488355328": "Session0"
+  },
+  "maps": [],
+  "structs": []
+}

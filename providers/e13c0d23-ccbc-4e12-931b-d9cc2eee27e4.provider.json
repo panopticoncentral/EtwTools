@@ -1,0 +1,5278 @@
+{
+  "name": "DotnetRuntime",
+  "displayName": "Microsoft-Windows-DotNETRuntime",
+  "id": "e13c0d23-ccbc-4e12-931b-d9cc2eee27e4",
+  "events": [
+    {
+      "name": "TypeBulkType",
+      "displayName": "TypeBulkType",
+      "descriptor": {
+        "id": 15,
+        "version": 0,
+        "channel": 0,
+        "level": "Information",
+        "opcode": 10,
+        "task": 21,
+        "keyword": 524288
+      },
+      "fields": [
+        {
+          "name": "Count",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "ClrInstanceID",
+          "datatype": "ushort",
+          "map": null
+        },
+        {
+          "name": "Values",
+          "datatype": "TypeBulkTypeValue[Count]",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "GCBulkRootEdge",
+      "displayName": "GCBulkRootEdge",
+      "descriptor": {
+        "id": 16,
+        "version": 0,
+        "channel": 0,
+        "level": "Information",
+        "opcode": 20,
+        "task": 1,
+        "keyword": 1048576
+      },
+      "fields": [
+        {
+          "name": "Index",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "Count",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "ClrInstanceID",
+          "datatype": "ushort",
+          "map": null
+        },
+        {
+          "name": "Values",
+          "datatype": "GCBulkRootEdgeValue[Count]",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "GCBulkRootConditionalWeakTableElementEdge",
+      "displayName": "GCBulkRootConditionalWeakTableElementEdge",
+      "descriptor": {
+        "id": 17,
+        "version": 0,
+        "channel": 0,
+        "level": "Information",
+        "opcode": 21,
+        "task": 1,
+        "keyword": 1048576
+      },
+      "fields": [
+        {
+          "name": "Index",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "Count",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "ClrInstanceID",
+          "datatype": "ushort",
+          "map": null
+        },
+        {
+          "name": "Values",
+          "datatype": "GCBulkRootConditionalWeakTableElementEdgeValue[Count]",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "GCBulkNode",
+      "displayName": "GCBulkNode",
+      "descriptor": {
+        "id": 18,
+        "version": 0,
+        "channel": 0,
+        "level": "Information",
+        "opcode": 22,
+        "task": 1,
+        "keyword": 1048576
+      },
+      "fields": [
+        {
+          "name": "Index",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "Count",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "ClrInstanceID",
+          "datatype": "ushort",
+          "map": null
+        },
+        {
+          "name": "Values",
+          "datatype": "GCBulkNodeValue[Count]",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "GCBulkEdge",
+      "displayName": "GCBulkEdge",
+      "descriptor": {
+        "id": 19,
+        "version": 0,
+        "channel": 0,
+        "level": "Information",
+        "opcode": 23,
+        "task": 1,
+        "keyword": 1048576
+      },
+      "fields": [
+        {
+          "name": "Index",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "Count",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "ClrInstanceID",
+          "datatype": "ushort",
+          "map": null
+        },
+        {
+          "name": "Values",
+          "datatype": "GCBulkEdgeValue[Count]",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "GCSampledObjectAllocationHigh",
+      "displayName": "GCSampledObjectAllocationHigh",
+      "descriptor": {
+        "id": 20,
+        "version": 0,
+        "channel": 0,
+        "level": "Information",
+        "opcode": 24,
+        "task": 1,
+        "keyword": 2097152
+      },
+      "fields": [
+        {
+          "name": "Address",
+          "datatype": "pointer",
+          "map": null
+        },
+        {
+          "name": "TypeID",
+          "datatype": "pointer",
+          "map": null
+        },
+        {
+          "name": "ObjectCountForTypeSample",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "TotalSizeForTypeSample",
+          "datatype": "ulong",
+          "map": null
+        },
+        {
+          "name": "ClrInstanceID",
+          "datatype": "ushort",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "GCBulkSurvivingObjectRanges",
+      "displayName": "GCBulkSurvivingObjectRanges",
+      "descriptor": {
+        "id": 21,
+        "version": 0,
+        "channel": 0,
+        "level": "Information",
+        "opcode": 25,
+        "task": 1,
+        "keyword": 4194304
+      },
+      "fields": [
+        {
+          "name": "Index",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "Count",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "ClrInstanceID",
+          "datatype": "ushort",
+          "map": null
+        },
+        {
+          "name": "Values",
+          "datatype": "GCBulkSurvivingObjectRangesValue[Count]",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "GCBulkMovedObjectRanges",
+      "displayName": "GCBulkMovedObjectRanges",
+      "descriptor": {
+        "id": 22,
+        "version": 0,
+        "channel": 0,
+        "level": "Information",
+        "opcode": 26,
+        "task": 1,
+        "keyword": 4194304
+      },
+      "fields": [
+        {
+          "name": "Index",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "Count",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "ClrInstanceID",
+          "datatype": "ushort",
+          "map": null
+        },
+        {
+          "name": "Values",
+          "datatype": "GCBulkMovedObjectRangesValue[Count]",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "GCGenerationRange",
+      "displayName": "GCGenerationRange",
+      "descriptor": {
+        "id": 23,
+        "version": 0,
+        "channel": 0,
+        "level": "Information",
+        "opcode": 27,
+        "task": 1,
+        "keyword": 4194304
+      },
+      "fields": [
+        {
+          "name": "Generation",
+          "datatype": "byte",
+          "map": null
+        },
+        {
+          "name": "RangeStart",
+          "datatype": "pointer",
+          "map": null
+        },
+        {
+          "name": "RangeUsedLength",
+          "datatype": "ulong",
+          "map": null
+        },
+        {
+          "name": "RangeReservedLength",
+          "datatype": "ulong",
+          "map": null
+        },
+        {
+          "name": "ClrInstanceID",
+          "datatype": "ushort",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "GCMarkStackRoots",
+      "displayName": "GCMarkStackRoots",
+      "descriptor": {
+        "id": 25,
+        "version": 0,
+        "channel": 0,
+        "level": "Information",
+        "opcode": 28,
+        "task": 1,
+        "keyword": 1
+      },
+      "fields": [
+        {
+          "name": "HeapNum",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "ClrInstanceID",
+          "datatype": "ushort",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "GCMarkFinalizeQueueRoots",
+      "displayName": "GCMarkFinalizeQueueRoots",
+      "descriptor": {
+        "id": 26,
+        "version": 0,
+        "channel": 0,
+        "level": "Information",
+        "opcode": 29,
+        "task": 1,
+        "keyword": 1
+      },
+      "fields": [
+        {
+          "name": "HeapNum",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "ClrInstanceID",
+          "datatype": "ushort",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "GCMarkHandles",
+      "displayName": "GCMarkHandles",
+      "descriptor": {
+        "id": 27,
+        "version": 0,
+        "channel": 0,
+        "level": "Information",
+        "opcode": 30,
+        "task": 1,
+        "keyword": 1
+      },
+      "fields": [
+        {
+          "name": "HeapNum",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "ClrInstanceID",
+          "datatype": "ushort",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "GCMarkCards",
+      "displayName": "GCMarkCards",
+      "descriptor": {
+        "id": 28,
+        "version": 0,
+        "channel": 0,
+        "level": "Information",
+        "opcode": 31,
+        "task": 1,
+        "keyword": 1
+      },
+      "fields": [
+        {
+          "name": "HeapNum",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "ClrInstanceID",
+          "datatype": "ushort",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "GCFinalizeObject",
+      "displayName": "GCFinalizeObject",
+      "descriptor": {
+        "id": 29,
+        "version": 0,
+        "channel": 0,
+        "level": "Verbose",
+        "opcode": 32,
+        "task": 1,
+        "keyword": 1
+      },
+      "fields": [
+        {
+          "name": "TypeID",
+          "datatype": "pointer",
+          "map": null
+        },
+        {
+          "name": "ObjectID",
+          "datatype": "pointer",
+          "map": null
+        },
+        {
+          "name": "ClrInstanceID",
+          "datatype": "ushort",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "GCSetGCHandle",
+      "displayName": "GCSetGCHandle",
+      "descriptor": {
+        "id": 30,
+        "version": 0,
+        "channel": 0,
+        "level": "Information",
+        "opcode": 33,
+        "task": 1,
+        "keyword": 2
+      },
+      "fields": [
+        {
+          "name": "HandleID",
+          "datatype": "pointer",
+          "map": null
+        },
+        {
+          "name": "ObjectID",
+          "datatype": "pointer",
+          "map": null
+        },
+        {
+          "name": "Kind",
+          "datatype": "uint",
+          "map": "GCHandleKindMap"
+        },
+        {
+          "name": "Generation",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "AppDomainID",
+          "datatype": "ulong",
+          "map": null
+        },
+        {
+          "name": "ClrInstanceID",
+          "datatype": "ushort",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "GCDestoryGCHandle",
+      "displayName": "GCDestoryGCHandle",
+      "descriptor": {
+        "id": 31,
+        "version": 0,
+        "channel": 0,
+        "level": "Information",
+        "opcode": 34,
+        "task": 1,
+        "keyword": 2
+      },
+      "fields": [
+        {
+          "name": "HandleID",
+          "datatype": "pointer",
+          "map": null
+        },
+        {
+          "name": "ClrInstanceID",
+          "datatype": "ushort",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "GCSampledObjectAllocationLow",
+      "displayName": "GCSampledObjectAllocationLow",
+      "descriptor": {
+        "id": 32,
+        "version": 0,
+        "channel": 0,
+        "level": "Information",
+        "opcode": 24,
+        "task": 1,
+        "keyword": 33554432
+      },
+      "fields": [
+        {
+          "name": "Address",
+          "datatype": "pointer",
+          "map": null
+        },
+        {
+          "name": "TypeID",
+          "datatype": "pointer",
+          "map": null
+        },
+        {
+          "name": "ObjectCountForTypeSample",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "TotalSizeForTypeSample",
+          "datatype": "ulong",
+          "map": null
+        },
+        {
+          "name": "ClrInstanceID",
+          "datatype": "ushort",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "GCPinObjectAtGCTime",
+      "displayName": "GCPinObjectAtGCTime",
+      "descriptor": {
+        "id": 33,
+        "version": 0,
+        "channel": 0,
+        "level": "Verbose",
+        "opcode": 36,
+        "task": 1,
+        "keyword": 1
+      },
+      "fields": [
+        {
+          "name": "HandleID",
+          "datatype": "pointer",
+          "map": null
+        },
+        {
+          "name": "ObjectID",
+          "datatype": "pointer",
+          "map": null
+        },
+        {
+          "name": "ObjectSize",
+          "datatype": "ulong",
+          "map": null
+        },
+        {
+          "name": "TypeName",
+          "datatype": "string",
+          "map": null
+        },
+        {
+          "name": "ClrInstanceID",
+          "datatype": "ushort",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "GCTriggered",
+      "displayName": "GCTriggered",
+      "descriptor": {
+        "id": 35,
+        "version": 0,
+        "channel": 0,
+        "level": "Information",
+        "opcode": 35,
+        "task": 1,
+        "keyword": 1
+      },
+      "fields": [
+        {
+          "name": "Reason",
+          "datatype": "uint",
+          "map": "GCReasonMap"
+        },
+        {
+          "name": "ClrInstanceID",
+          "datatype": "ushort",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "GCBulkRootCCW",
+      "displayName": "GCBulkRootCCW",
+      "descriptor": {
+        "id": 36,
+        "version": 0,
+        "channel": 0,
+        "level": "Information",
+        "opcode": 38,
+        "task": 1,
+        "keyword": 1048576
+      },
+      "fields": [
+        {
+          "name": "Count",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "ClrInstanceID",
+          "datatype": "ushort",
+          "map": null
+        },
+        {
+          "name": "Values",
+          "datatype": "GCBulkRootCCWValue[Count]",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "GCBulkRCW",
+      "displayName": "GCBulkRCW",
+      "descriptor": {
+        "id": 37,
+        "version": 0,
+        "channel": 0,
+        "level": "Information",
+        "opcode": 39,
+        "task": 1,
+        "keyword": 1048576
+      },
+      "fields": [
+        {
+          "name": "Count",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "ClrInstanceID",
+          "datatype": "ushort",
+          "map": null
+        },
+        {
+          "name": "Values",
+          "datatype": "GCBulkRCWValue[Count]",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "GCBulkRootStaticVar",
+      "displayName": "GCBulkRootStaticVar",
+      "descriptor": {
+        "id": 38,
+        "version": 0,
+        "channel": 0,
+        "level": "Information",
+        "opcode": 40,
+        "task": 1,
+        "keyword": 1048576
+      },
+      "fields": [
+        {
+          "name": "Count",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "AppDomainID",
+          "datatype": "ulong",
+          "map": null
+        },
+        {
+          "name": "ClrInstanceID",
+          "datatype": "ushort",
+          "map": null
+        },
+        {
+          "name": "Values",
+          "datatype": "GCBulkRootStaticVarValue[Count]",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "GCDynamicEvent",
+      "displayName": "GCDynamicEvent",
+      "descriptor": {
+        "id": 39,
+        "version": 0,
+        "channel": 0,
+        "level": "None",
+        "opcode": 41,
+        "task": 1,
+        "keyword": 66060291
+      },
+      "fields": [
+        {
+          "name": "Name",
+          "datatype": "string",
+          "map": null
+        },
+        {
+          "name": "DataSize",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "Data",
+          "datatype": "byte[DataSize]",
+          "map": null
+        },
+        {
+          "name": "ClrInstanceID",
+          "datatype": "ushort",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "WorkerThreadCreationV2Start",
+      "displayName": "WorkerThreadCreationV2Start",
+      "descriptor": {
+        "id": 40,
+        "version": 0,
+        "channel": 0,
+        "level": "Information",
+        "opcode": "Start",
+        "task": 2,
+        "keyword": 65536
+      },
+      "fields": [
+        {
+          "name": "WorkerThreadCount",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "RetiredWorkerThreads",
+          "datatype": "uint",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "WorkerThreadCreationV2Stop",
+      "displayName": "WorkerThreadCreationV2Stop",
+      "descriptor": {
+        "id": 41,
+        "version": 0,
+        "channel": 0,
+        "level": "Information",
+        "opcode": "End",
+        "task": 2,
+        "keyword": 65536
+      },
+      "fields": [
+        {
+          "name": "WorkerThreadCount",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "RetiredWorkerThreads",
+          "datatype": "uint",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "WorkerThreadRetirementV2Start",
+      "displayName": "WorkerThreadRetirementV2Start",
+      "descriptor": {
+        "id": 42,
+        "version": 0,
+        "channel": 0,
+        "level": "Information",
+        "opcode": "Start",
+        "task": 4,
+        "keyword": 65536
+      },
+      "fields": [
+        {
+          "name": "WorkerThreadCount",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "RetiredWorkerThreads",
+          "datatype": "uint",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "WorkerThreadRetirementV2Stop",
+      "displayName": "WorkerThreadRetirementV2Stop",
+      "descriptor": {
+        "id": 43,
+        "version": 0,
+        "channel": 0,
+        "level": "Information",
+        "opcode": "End",
+        "task": 4,
+        "keyword": 65536
+      },
+      "fields": [
+        {
+          "name": "WorkerThreadCount",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "RetiredWorkerThreads",
+          "datatype": "uint",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "ThreadpoolSuspensionV2Start",
+      "displayName": "ThreadpoolSuspensionV2Start",
+      "descriptor": {
+        "id": 48,
+        "version": 0,
+        "channel": 0,
+        "level": "Information",
+        "opcode": "Start",
+        "task": 6,
+        "keyword": 65536
+      },
+      "fields": [
+        {
+          "name": "ClrThreadID",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "CpuUtilization",
+          "datatype": "uint",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "ThreadpoolSuspensionV2Stop",
+      "displayName": "ThreadpoolSuspensionV2Stop",
+      "descriptor": {
+        "id": 49,
+        "version": 0,
+        "channel": 0,
+        "level": "Information",
+        "opcode": "End",
+        "task": 6,
+        "keyword": 65536
+      },
+      "fields": [
+        {
+          "name": "ClrThreadID",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "CpuUtilization",
+          "datatype": "uint",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "ThreadPoolWorkerThreadStart",
+      "displayName": "ThreadPoolWorkerThreadStart",
+      "descriptor": {
+        "id": 50,
+        "version": 0,
+        "channel": 0,
+        "level": "Information",
+        "opcode": "Start",
+        "task": 16,
+        "keyword": 65536
+      },
+      "fields": [
+        {
+          "name": "ActiveWorkerThreadCount",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "RetiredWorkerThreadCount",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "ClrInstanceID",
+          "datatype": "ushort",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "ThreadPoolWorkerThreadStop",
+      "displayName": "ThreadPoolWorkerThreadStop",
+      "descriptor": {
+        "id": 51,
+        "version": 0,
+        "channel": 0,
+        "level": "Information",
+        "opcode": "End",
+        "task": 16,
+        "keyword": 65536
+      },
+      "fields": [
+        {
+          "name": "ActiveWorkerThreadCount",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "RetiredWorkerThreadCount",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "ClrInstanceID",
+          "datatype": "ushort",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "ThreadPoolWorkerThreadRetirementStart",
+      "displayName": "ThreadPoolWorkerThreadRetirementStart",
+      "descriptor": {
+        "id": 52,
+        "version": 0,
+        "channel": 0,
+        "level": "Information",
+        "opcode": "Start",
+        "task": 17,
+        "keyword": 65536
+      },
+      "fields": [
+        {
+          "name": "ActiveWorkerThreadCount",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "RetiredWorkerThreadCount",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "ClrInstanceID",
+          "datatype": "ushort",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "ThreadPoolWorkerThreadRetirementStop",
+      "displayName": "ThreadPoolWorkerThreadRetirementStop",
+      "descriptor": {
+        "id": 53,
+        "version": 0,
+        "channel": 0,
+        "level": "Information",
+        "opcode": "End",
+        "task": 17,
+        "keyword": 65536
+      },
+      "fields": [
+        {
+          "name": "ActiveWorkerThreadCount",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "RetiredWorkerThreadCount",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "ClrInstanceID",
+          "datatype": "ushort",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "ThreadPoolWorkerThreadAdjustmentSample",
+      "displayName": "ThreadPoolWorkerThreadAdjustmentSample",
+      "descriptor": {
+        "id": 54,
+        "version": 0,
+        "channel": 0,
+        "level": "Information",
+        "opcode": 100,
+        "task": 18,
+        "keyword": 65536
+      },
+      "fields": [
+        {
+          "name": "Throughput",
+          "datatype": "double",
+          "map": null
+        },
+        {
+          "name": "ClrInstanceID",
+          "datatype": "ushort",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "ThreadPoolWorkerThreadAdjustmentAdjustment",
+      "displayName": "ThreadPoolWorkerThreadAdjustmentAdjustment",
+      "descriptor": {
+        "id": 55,
+        "version": 0,
+        "channel": 0,
+        "level": "Information",
+        "opcode": 101,
+        "task": 18,
+        "keyword": 65536
+      },
+      "fields": [
+        {
+          "name": "AverageThroughput",
+          "datatype": "double",
+          "map": null
+        },
+        {
+          "name": "NewWorkerThreadCount",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "Reason",
+          "datatype": "uint",
+          "map": "ThreadAdjustmentReasonMap"
+        },
+        {
+          "name": "ClrInstanceID",
+          "datatype": "ushort",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "ThreadPoolWorkerThreadAdjustmentStats",
+      "displayName": "ThreadPoolWorkerThreadAdjustmentStats",
+      "descriptor": {
+        "id": 56,
+        "version": 0,
+        "channel": 0,
+        "level": "Verbose",
+        "opcode": 102,
+        "task": 18,
+        "keyword": 65536
+      },
+      "fields": [
+        {
+          "name": "Duration",
+          "datatype": "double",
+          "map": null
+        },
+        {
+          "name": "Throughput",
+          "datatype": "double",
+          "map": null
+        },
+        {
+          "name": "ThreadWave",
+          "datatype": "double",
+          "map": null
+        },
+        {
+          "name": "ThroughputWave",
+          "datatype": "double",
+          "map": null
+        },
+        {
+          "name": "ThroughputErrorEstimate",
+          "datatype": "double",
+          "map": null
+        },
+        {
+          "name": "AverageThroughputErrorEstimate",
+          "datatype": "double",
+          "map": null
+        },
+        {
+          "name": "ThroughputRatio",
+          "datatype": "double",
+          "map": null
+        },
+        {
+          "name": "Confidence",
+          "datatype": "double",
+          "map": null
+        },
+        {
+          "name": "NewControlSetting",
+          "datatype": "double",
+          "map": null
+        },
+        {
+          "name": "NewThreadWaveMagnitude",
+          "datatype": "ushort",
+          "map": null
+        },
+        {
+          "name": "ClrInstanceID",
+          "datatype": "ushort",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "ThreadPoolWorkerThreadWait",
+      "displayName": "ThreadPoolWorkerThreadWait",
+      "descriptor": {
+        "id": 57,
+        "version": 0,
+        "channel": 0,
+        "level": "Information",
+        "opcode": 90,
+        "task": 16,
+        "keyword": 65536
+      },
+      "fields": [
+        {
+          "name": "ActiveWorkerThreadCount",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "RetiredWorkerThreadCount",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "ClrInstanceID",
+          "datatype": "ushort",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "ThreadPoolWorkingThreadCountStart",
+      "displayName": "ThreadPoolWorkingThreadCountStart",
+      "descriptor": {
+        "id": 60,
+        "version": 0,
+        "channel": 0,
+        "level": "Verbose",
+        "opcode": "Start",
+        "task": 22,
+        "keyword": 65536
+      },
+      "fields": [
+        {
+          "name": "Count",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "ClrInstanceID",
+          "datatype": "ushort",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "ThreadPoolEnqueue",
+      "displayName": "ThreadPoolEnqueue",
+      "descriptor": {
+        "id": 61,
+        "version": 0,
+        "channel": 0,
+        "level": "Verbose",
+        "opcode": 11,
+        "task": 23,
+        "keyword": 2147549184
+      },
+      "fields": [
+        {
+          "name": "WorkID",
+          "datatype": "pointer",
+          "map": null
+        },
+        {
+          "name": "ClrInstanceID",
+          "datatype": "ushort",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "ThreadPoolDequeue",
+      "displayName": "ThreadPoolDequeue",
+      "descriptor": {
+        "id": 62,
+        "version": 0,
+        "channel": 0,
+        "level": "Verbose",
+        "opcode": 12,
+        "task": 23,
+        "keyword": 2147549184
+      },
+      "fields": [
+        {
+          "name": "WorkID",
+          "datatype": "pointer",
+          "map": null
+        },
+        {
+          "name": "ClrInstanceID",
+          "datatype": "ushort",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "ThreadPoolIOEnqueue",
+      "displayName": "ThreadPoolIOEnqueue",
+      "descriptor": {
+        "id": 63,
+        "version": 0,
+        "channel": 0,
+        "level": "Verbose",
+        "opcode": 13,
+        "task": 23,
+        "keyword": 2147549184
+      },
+      "fields": [
+        {
+          "name": "NativeOverlapped",
+          "datatype": "pointer",
+          "map": null
+        },
+        {
+          "name": "Overlapped",
+          "datatype": "pointer",
+          "map": null
+        },
+        {
+          "name": "MultiDequeues",
+          "datatype": "bool",
+          "map": null
+        },
+        {
+          "name": "ClrInstanceID",
+          "datatype": "ushort",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "ThreadPoolIODequeue",
+      "displayName": "ThreadPoolIODequeue",
+      "descriptor": {
+        "id": 64,
+        "version": 0,
+        "channel": 0,
+        "level": "Verbose",
+        "opcode": 14,
+        "task": 23,
+        "keyword": 2147549184
+      },
+      "fields": [
+        {
+          "name": "NativeOverlapped",
+          "datatype": "pointer",
+          "map": null
+        },
+        {
+          "name": "Overlapped",
+          "datatype": "pointer",
+          "map": null
+        },
+        {
+          "name": "ClrInstanceID",
+          "datatype": "ushort",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "ThreadPoolIOPack",
+      "displayName": "ThreadPoolIOPack",
+      "descriptor": {
+        "id": 65,
+        "version": 0,
+        "channel": 0,
+        "level": "Verbose",
+        "opcode": 15,
+        "task": 23,
+        "keyword": 65536
+      },
+      "fields": [
+        {
+          "name": "NativeOverlapped",
+          "datatype": "pointer",
+          "map": null
+        },
+        {
+          "name": "Overlapped",
+          "datatype": "pointer",
+          "map": null
+        },
+        {
+          "name": "ClrInstanceID",
+          "datatype": "ushort",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "ThreadCreating",
+      "displayName": "ThreadCreating",
+      "descriptor": {
+        "id": 70,
+        "version": 0,
+        "channel": 0,
+        "level": "Information",
+        "opcode": 11,
+        "task": 24,
+        "keyword": 2147549184
+      },
+      "fields": [
+        {
+          "name": "ID",
+          "datatype": "pointer",
+          "map": null
+        },
+        {
+          "name": "ClrInstanceID",
+          "datatype": "ushort",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "ThreadRunning",
+      "displayName": "ThreadRunning",
+      "descriptor": {
+        "id": 71,
+        "version": 0,
+        "channel": 0,
+        "level": "Information",
+        "opcode": 12,
+        "task": 24,
+        "keyword": 2147549184
+      },
+      "fields": [
+        {
+          "name": "ID",
+          "datatype": "pointer",
+          "map": null
+        },
+        {
+          "name": "ClrInstanceID",
+          "datatype": "ushort",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "ClrStackWalk",
+      "displayName": "ClrStackWalk",
+      "descriptor": {
+        "id": 82,
+        "version": 0,
+        "channel": 0,
+        "level": "None",
+        "opcode": 82,
+        "task": 11,
+        "keyword": 1073741824
+      },
+      "fields": [
+        {
+          "name": "ClrInstanceID",
+          "datatype": "ushort",
+          "map": null
+        },
+        {
+          "name": "Reserved1",
+          "datatype": "byte",
+          "map": null
+        },
+        {
+          "name": "Reserved2",
+          "datatype": "byte",
+          "map": null
+        },
+        {
+          "name": "FrameCount",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "Stack",
+          "datatype": "pointer",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "AppDomainResourceManagementMemAllocated",
+      "displayName": "AppDomainResourceManagementMemAllocated",
+      "descriptor": {
+        "id": 83,
+        "version": 0,
+        "channel": 0,
+        "level": "Information",
+        "opcode": 48,
+        "task": 14,
+        "keyword": 2048
+      },
+      "fields": [
+        {
+          "name": "AppDomainID",
+          "datatype": "ulong",
+          "map": null
+        },
+        {
+          "name": "Allocated",
+          "datatype": "ulong",
+          "map": null
+        },
+        {
+          "name": "ClrInstanceID",
+          "datatype": "ushort",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "AppDomainResourceManagementMemSurvived",
+      "displayName": "AppDomainResourceManagementMemSurvived",
+      "descriptor": {
+        "id": 84,
+        "version": 0,
+        "channel": 0,
+        "level": "Information",
+        "opcode": 49,
+        "task": 14,
+        "keyword": 2048
+      },
+      "fields": [
+        {
+          "name": "AppDomainID",
+          "datatype": "ulong",
+          "map": null
+        },
+        {
+          "name": "Survived",
+          "datatype": "ulong",
+          "map": null
+        },
+        {
+          "name": "ProcessSurvived",
+          "datatype": "ulong",
+          "map": null
+        },
+        {
+          "name": "ClrInstanceID",
+          "datatype": "ushort",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "AppDomainResourceManagementThreadCreated",
+      "displayName": "AppDomainResourceManagementThreadCreated",
+      "descriptor": {
+        "id": 85,
+        "version": 0,
+        "channel": 0,
+        "level": "Information",
+        "opcode": 50,
+        "task": 14,
+        "keyword": 67584
+      },
+      "fields": [
+        {
+          "name": "ManagedThreadID",
+          "datatype": "ulong",
+          "map": null
+        },
+        {
+          "name": "AppDomainID",
+          "datatype": "ulong",
+          "map": null
+        },
+        {
+          "name": "Flags",
+          "datatype": "uint",
+          "map": "ThreadFlagsMap"
+        },
+        {
+          "name": "ManagedThreadIndex",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "OSThreadID",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "ClrInstanceID",
+          "datatype": "ushort",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "AppDomainResourceManagementThreadTerminated",
+      "displayName": "AppDomainResourceManagementThreadTerminated",
+      "descriptor": {
+        "id": 86,
+        "version": 0,
+        "channel": 0,
+        "level": "Information",
+        "opcode": 51,
+        "task": 14,
+        "keyword": 67584
+      },
+      "fields": [
+        {
+          "name": "ManagedThreadID",
+          "datatype": "ulong",
+          "map": null
+        },
+        {
+          "name": "AppDomainID",
+          "datatype": "ulong",
+          "map": null
+        },
+        {
+          "name": "ClrInstanceID",
+          "datatype": "ushort",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "AppDomainResourceManagementDomainEnter",
+      "displayName": "AppDomainResourceManagementDomainEnter",
+      "descriptor": {
+        "id": 87,
+        "version": 0,
+        "channel": 0,
+        "level": "Information",
+        "opcode": 52,
+        "task": 14,
+        "keyword": 67584
+      },
+      "fields": [
+        {
+          "name": "ManagedThreadID",
+          "datatype": "ulong",
+          "map": null
+        },
+        {
+          "name": "AppDomainID",
+          "datatype": "ulong",
+          "map": null
+        },
+        {
+          "name": "ClrInstanceID",
+          "datatype": "ushort",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "ILStubStubGenerated",
+      "displayName": "ILStubStubGenerated",
+      "descriptor": {
+        "id": 88,
+        "version": 0,
+        "channel": 0,
+        "level": "Information",
+        "opcode": 88,
+        "task": 15,
+        "keyword": 8192
+      },
+      "fields": [
+        {
+          "name": "ClrInstanceID",
+          "datatype": "ushort",
+          "map": null
+        },
+        {
+          "name": "ModuleID",
+          "datatype": "ulong",
+          "map": null
+        },
+        {
+          "name": "StubMethodID",
+          "datatype": "ulong",
+          "map": null
+        },
+        {
+          "name": "StubFlags",
+          "datatype": "uint",
+          "map": "ILStubGeneratedFlagsMap"
+        },
+        {
+          "name": "ManagedInteropMethodToken",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "ManagedInteropMethodNamespace",
+          "datatype": "string",
+          "map": null
+        },
+        {
+          "name": "ManagedInteropMethodName",
+          "datatype": "string",
+          "map": null
+        },
+        {
+          "name": "ManagedInteropMethodSignature",
+          "datatype": "string",
+          "map": null
+        },
+        {
+          "name": "NativeMethodSignature",
+          "datatype": "string",
+          "map": null
+        },
+        {
+          "name": "StubMethodSignature",
+          "datatype": "string",
+          "map": null
+        },
+        {
+          "name": "StubMethodILCode",
+          "datatype": "string",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "ILStubStubCacheHit",
+      "displayName": "ILStubStubCacheHit",
+      "descriptor": {
+        "id": 89,
+        "version": 0,
+        "channel": 0,
+        "level": "Information",
+        "opcode": 89,
+        "task": 15,
+        "keyword": 8192
+      },
+      "fields": [
+        {
+          "name": "ClrInstanceID",
+          "datatype": "ushort",
+          "map": null
+        },
+        {
+          "name": "ModuleID",
+          "datatype": "ulong",
+          "map": null
+        },
+        {
+          "name": "StubMethodID",
+          "datatype": "ulong",
+          "map": null
+        },
+        {
+          "name": "ManagedInteropMethodToken",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "ManagedInteropMethodNamespace",
+          "datatype": "string",
+          "map": null
+        },
+        {
+          "name": "ManagedInteropMethodName",
+          "datatype": "string",
+          "map": null
+        },
+        {
+          "name": "ManagedInteropMethodSignature",
+          "datatype": "string",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "ContentionStop",
+      "displayName": "ContentionStop",
+      "descriptor": {
+        "id": 91,
+        "version": 0,
+        "channel": 0,
+        "level": "Information",
+        "opcode": "End",
+        "task": 8,
+        "keyword": 16384
+      },
+      "fields": [
+        {
+          "name": "ContentionFlags",
+          "datatype": "byte",
+          "map": "ContentionFlagsMap"
+        },
+        {
+          "name": "ClrInstanceID",
+          "datatype": "ushort",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "MethodDCStartCompleteV2",
+      "displayName": "MethodDCStartCompleteV2",
+      "descriptor": {
+        "id": 135,
+        "version": 0,
+        "channel": 0,
+        "level": "Information",
+        "opcode": 14,
+        "task": 9,
+        "keyword": 48
+      },
+      "fields": []
+    },
+    {
+      "name": "MethodDCEndCompleteV2",
+      "displayName": "MethodDCEndCompleteV2",
+      "descriptor": {
+        "id": 136,
+        "version": 0,
+        "channel": 0,
+        "level": "Information",
+        "opcode": 15,
+        "task": 9,
+        "keyword": 48
+      },
+      "fields": []
+    },
+    {
+      "name": "MethodDCStartV2",
+      "displayName": "MethodDCStartV2",
+      "descriptor": {
+        "id": 137,
+        "version": 0,
+        "channel": 0,
+        "level": "Information",
+        "opcode": 35,
+        "task": 9,
+        "keyword": 48
+      },
+      "fields": [
+        {
+          "name": "MethodID",
+          "datatype": "ulong",
+          "map": null
+        },
+        {
+          "name": "ModuleID",
+          "datatype": "ulong",
+          "map": null
+        },
+        {
+          "name": "MethodStartAddress",
+          "datatype": "ulong",
+          "map": null
+        },
+        {
+          "name": "MethodSize",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "MethodToken",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "MethodFlags",
+          "datatype": "uint",
+          "map": "MethodFlagsMap"
+        }
+      ]
+    },
+    {
+      "name": "MethodDCStopV2",
+      "displayName": "MethodDCStopV2",
+      "descriptor": {
+        "id": 138,
+        "version": 0,
+        "channel": 0,
+        "level": "Information",
+        "opcode": 36,
+        "task": 9,
+        "keyword": 48
+      },
+      "fields": [
+        {
+          "name": "MethodID",
+          "datatype": "ulong",
+          "map": null
+        },
+        {
+          "name": "ModuleID",
+          "datatype": "ulong",
+          "map": null
+        },
+        {
+          "name": "MethodStartAddress",
+          "datatype": "ulong",
+          "map": null
+        },
+        {
+          "name": "MethodSize",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "MethodToken",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "MethodFlags",
+          "datatype": "uint",
+          "map": "MethodFlagsMap"
+        }
+      ]
+    },
+    {
+      "name": "MethodDCStartVerboseV2",
+      "displayName": "MethodDCStartVerboseV2",
+      "descriptor": {
+        "id": 139,
+        "version": 0,
+        "channel": 0,
+        "level": "Information",
+        "opcode": 39,
+        "task": 9,
+        "keyword": 48
+      },
+      "fields": [
+        {
+          "name": "MethodID",
+          "datatype": "ulong",
+          "map": null
+        },
+        {
+          "name": "ModuleID",
+          "datatype": "ulong",
+          "map": null
+        },
+        {
+          "name": "MethodStartAddress",
+          "datatype": "ulong",
+          "map": null
+        },
+        {
+          "name": "MethodSize",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "MethodToken",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "MethodFlags",
+          "datatype": "uint",
+          "map": "MethodFlagsMap"
+        },
+        {
+          "name": "MethodNamespace",
+          "datatype": "string",
+          "map": null
+        },
+        {
+          "name": "MethodName",
+          "datatype": "string",
+          "map": null
+        },
+        {
+          "name": "MethodSignature",
+          "datatype": "string",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "MethodDCStopVerboseV2",
+      "displayName": "MethodDCStopVerboseV2",
+      "descriptor": {
+        "id": 140,
+        "version": 0,
+        "channel": 0,
+        "level": "Information",
+        "opcode": 40,
+        "task": 9,
+        "keyword": 48
+      },
+      "fields": [
+        {
+          "name": "MethodID",
+          "datatype": "ulong",
+          "map": null
+        },
+        {
+          "name": "ModuleID",
+          "datatype": "ulong",
+          "map": null
+        },
+        {
+          "name": "MethodStartAddress",
+          "datatype": "ulong",
+          "map": null
+        },
+        {
+          "name": "MethodSize",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "MethodToken",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "MethodFlags",
+          "datatype": "uint",
+          "map": "MethodFlagsMap"
+        },
+        {
+          "name": "MethodNamespace",
+          "datatype": "string",
+          "map": null
+        },
+        {
+          "name": "MethodName",
+          "datatype": "string",
+          "map": null
+        },
+        {
+          "name": "MethodSignature",
+          "datatype": "string",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "LoaderModuleDCStartV2",
+      "displayName": "LoaderModuleDCStartV2",
+      "descriptor": {
+        "id": 149,
+        "version": 0,
+        "channel": 0,
+        "level": "Information",
+        "opcode": 35,
+        "task": 10,
+        "keyword": 8
+      },
+      "fields": [
+        {
+          "name": "ModuleID",
+          "datatype": "ulong",
+          "map": null
+        },
+        {
+          "name": "AssemblyID",
+          "datatype": "ulong",
+          "map": null
+        },
+        {
+          "name": "ModuleFlags",
+          "datatype": "uint",
+          "map": "ModuleFlagsMap"
+        },
+        {
+          "name": "Reserved1",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "ModuleILPath",
+          "datatype": "string",
+          "map": null
+        },
+        {
+          "name": "ModuleNativePath",
+          "datatype": "string",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "LoaderModuleDCStopV2",
+      "displayName": "LoaderModuleDCStopV2",
+      "descriptor": {
+        "id": 150,
+        "version": 0,
+        "channel": 0,
+        "level": "Information",
+        "opcode": 36,
+        "task": 10,
+        "keyword": 8
+      },
+      "fields": [
+        {
+          "name": "ModuleID",
+          "datatype": "ulong",
+          "map": null
+        },
+        {
+          "name": "AssemblyID",
+          "datatype": "ulong",
+          "map": null
+        },
+        {
+          "name": "ModuleFlags",
+          "datatype": "uint",
+          "map": "ModuleFlagsMap"
+        },
+        {
+          "name": "Reserved1",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "ModuleILPath",
+          "datatype": "string",
+          "map": null
+        },
+        {
+          "name": "ModuleNativePath",
+          "datatype": "string",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "ClrPerfTrackModuleRangeLoad",
+      "displayName": "ClrPerfTrackModuleRangeLoad",
+      "descriptor": {
+        "id": 158,
+        "version": 0,
+        "channel": 0,
+        "level": "Information",
+        "opcode": 10,
+        "task": 20,
+        "keyword": 536870912
+      },
+      "fields": [
+        {
+          "name": "ClrInstanceID",
+          "datatype": "ushort",
+          "map": null
+        },
+        {
+          "name": "ModuleID",
+          "datatype": "ulong",
+          "map": null
+        },
+        {
+          "name": "RangeBegin",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "RangeSize",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "RangeType",
+          "datatype": "byte",
+          "map": "ModuleRangeTypeMap"
+        }
+      ]
+    },
+    {
+      "name": "MethodInliningSucceeded",
+      "displayName": "MethodInliningSucceeded",
+      "descriptor": {
+        "id": 185,
+        "version": 0,
+        "channel": 0,
+        "level": "Verbose",
+        "opcode": 83,
+        "task": 9,
+        "keyword": 4096
+      },
+      "fields": [
+        {
+          "name": "MethodBeingCompiledNamespace",
+          "datatype": "string",
+          "map": null
+        },
+        {
+          "name": "MethodBeingCompiledName",
+          "datatype": "string",
+          "map": null
+        },
+        {
+          "name": "MethodBeingCompiledNameSignature",
+          "datatype": "string",
+          "map": null
+        },
+        {
+          "name": "InlinerNamespace",
+          "datatype": "string",
+          "map": null
+        },
+        {
+          "name": "InlinerName",
+          "datatype": "string",
+          "map": null
+        },
+        {
+          "name": "InlinerNameSignature",
+          "datatype": "string",
+          "map": null
+        },
+        {
+          "name": "InlineeNamespace",
+          "datatype": "string",
+          "map": null
+        },
+        {
+          "name": "InlineeName",
+          "datatype": "string",
+          "map": null
+        },
+        {
+          "name": "InlineeNameSignature",
+          "datatype": "string",
+          "map": null
+        },
+        {
+          "name": "ClrInstanceID",
+          "datatype": "ushort",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "MethodInliningFailed",
+      "displayName": "MethodInliningFailed",
+      "descriptor": {
+        "id": 186,
+        "version": 0,
+        "channel": 0,
+        "level": "Verbose",
+        "opcode": 84,
+        "task": 9,
+        "keyword": 4096
+      },
+      "fields": [
+        {
+          "name": "MethodBeingCompiledNamespace",
+          "datatype": "string",
+          "map": null
+        },
+        {
+          "name": "MethodBeingCompiledName",
+          "datatype": "string",
+          "map": null
+        },
+        {
+          "name": "MethodBeingCompiledNameSignature",
+          "datatype": "string",
+          "map": null
+        },
+        {
+          "name": "InlinerNamespace",
+          "datatype": "string",
+          "map": null
+        },
+        {
+          "name": "InlinerName",
+          "datatype": "string",
+          "map": null
+        },
+        {
+          "name": "InlinerNameSignature",
+          "datatype": "string",
+          "map": null
+        },
+        {
+          "name": "InlineeNamespace",
+          "datatype": "string",
+          "map": null
+        },
+        {
+          "name": "InlineeName",
+          "datatype": "string",
+          "map": null
+        },
+        {
+          "name": "InlineeNameSignature",
+          "datatype": "string",
+          "map": null
+        },
+        {
+          "name": "FailAlways",
+          "datatype": "bool",
+          "map": null
+        },
+        {
+          "name": "FailReason",
+          "datatype": "ansistring",
+          "map": null
+        },
+        {
+          "name": "ClrInstanceID",
+          "datatype": "ushort",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "RuntimeStart",
+      "displayName": "RuntimeStart",
+      "descriptor": {
+        "id": 187,
+        "version": 0,
+        "channel": 0,
+        "level": "Information",
+        "opcode": "Start",
+        "task": 19,
+        "keyword": 0
+      },
+      "fields": [
+        {
+          "name": "ClrInstanceID",
+          "datatype": "ushort",
+          "map": null
+        },
+        {
+          "name": "Sku",
+          "datatype": "ushort",
+          "map": "RuntimeSkuMap"
+        },
+        {
+          "name": "BclMajorVersion",
+          "datatype": "ushort",
+          "map": null
+        },
+        {
+          "name": "BclMinorVersion",
+          "datatype": "ushort",
+          "map": null
+        },
+        {
+          "name": "BclBuildNumber",
+          "datatype": "ushort",
+          "map": null
+        },
+        {
+          "name": "BclQfeNumber",
+          "datatype": "ushort",
+          "map": null
+        },
+        {
+          "name": "VMMajorVersion",
+          "datatype": "ushort",
+          "map": null
+        },
+        {
+          "name": "VMMinorVersion",
+          "datatype": "ushort",
+          "map": null
+        },
+        {
+          "name": "VMBuildNumber",
+          "datatype": "ushort",
+          "map": null
+        },
+        {
+          "name": "VMQfeNumber",
+          "datatype": "ushort",
+          "map": null
+        },
+        {
+          "name": "StartupFlags",
+          "datatype": "uint",
+          "map": "StartupFlagsMap"
+        },
+        {
+          "name": "StartupMode",
+          "datatype": "byte",
+          "map": "StartupModeMap"
+        },
+        {
+          "name": "CommandLine",
+          "datatype": "string",
+          "map": null
+        },
+        {
+          "name": "ComObjectGuid",
+          "datatype": "guid",
+          "map": null
+        },
+        {
+          "name": "RuntimeDllPath",
+          "datatype": "string",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "MethodTailCallSucceeded",
+      "displayName": "MethodTailCallSucceeded",
+      "descriptor": {
+        "id": 188,
+        "version": 0,
+        "channel": 0,
+        "level": "Verbose",
+        "opcode": 85,
+        "task": 9,
+        "keyword": 4096
+      },
+      "fields": [
+        {
+          "name": "MethodBeingCompiledNamespace",
+          "datatype": "string",
+          "map": null
+        },
+        {
+          "name": "MethodBeingCompiledName",
+          "datatype": "string",
+          "map": null
+        },
+        {
+          "name": "MethodBeingCompiledNameSignature",
+          "datatype": "string",
+          "map": null
+        },
+        {
+          "name": "CallerNamespace",
+          "datatype": "string",
+          "map": null
+        },
+        {
+          "name": "CallerName",
+          "datatype": "string",
+          "map": null
+        },
+        {
+          "name": "CallerNameSignature",
+          "datatype": "string",
+          "map": null
+        },
+        {
+          "name": "CalleeNamespace",
+          "datatype": "string",
+          "map": null
+        },
+        {
+          "name": "CalleeName",
+          "datatype": "string",
+          "map": null
+        },
+        {
+          "name": "CalleeNameSignature",
+          "datatype": "string",
+          "map": null
+        },
+        {
+          "name": "TailPrefix",
+          "datatype": "bool",
+          "map": null
+        },
+        {
+          "name": "TailCallType",
+          "datatype": "uint",
+          "map": "TailCallTypeMap"
+        },
+        {
+          "name": "ClrInstanceID",
+          "datatype": "ushort",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "MethodTailCallFailed",
+      "displayName": "MethodTailCallFailed",
+      "descriptor": {
+        "id": 189,
+        "version": 0,
+        "channel": 0,
+        "level": "Verbose",
+        "opcode": 86,
+        "task": 9,
+        "keyword": 4096
+      },
+      "fields": [
+        {
+          "name": "MethodBeingCompiledNamespace",
+          "datatype": "string",
+          "map": null
+        },
+        {
+          "name": "MethodBeingCompiledName",
+          "datatype": "string",
+          "map": null
+        },
+        {
+          "name": "MethodBeingCompiledNameSignature",
+          "datatype": "string",
+          "map": null
+        },
+        {
+          "name": "CallerNamespace",
+          "datatype": "string",
+          "map": null
+        },
+        {
+          "name": "CallerName",
+          "datatype": "string",
+          "map": null
+        },
+        {
+          "name": "CallerNameSignature",
+          "datatype": "string",
+          "map": null
+        },
+        {
+          "name": "CalleeNamespace",
+          "datatype": "string",
+          "map": null
+        },
+        {
+          "name": "CalleeName",
+          "datatype": "string",
+          "map": null
+        },
+        {
+          "name": "CalleeNameSignature",
+          "datatype": "string",
+          "map": null
+        },
+        {
+          "name": "TailPrefix",
+          "datatype": "bool",
+          "map": null
+        },
+        {
+          "name": "FailReason",
+          "datatype": "ansistring",
+          "map": null
+        },
+        {
+          "name": "ClrInstanceID",
+          "datatype": "ushort",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "MethodMethodILToNativeMap",
+      "displayName": "MethodMethodILToNativeMap",
+      "descriptor": {
+        "id": 190,
+        "version": 0,
+        "channel": 0,
+        "level": "Verbose",
+        "opcode": 87,
+        "task": 9,
+        "keyword": 131072
+      },
+      "fields": [
+        {
+          "name": "MethodID",
+          "datatype": "ulong",
+          "map": null
+        },
+        {
+          "name": "ReJITID",
+          "datatype": "ulong",
+          "map": null
+        },
+        {
+          "name": "MethodExtent",
+          "datatype": "byte",
+          "map": null
+        },
+        {
+          "name": "CountOfMapEntries",
+          "datatype": "ushort",
+          "map": null
+        },
+        {
+          "name": "ILOffsets",
+          "datatype": "uint[CountOfMapEntries]",
+          "map": null
+        },
+        {
+          "name": "NativeOffsets",
+          "datatype": "uint[CountOfMapEntries]",
+          "map": null
+        },
+        {
+          "name": "ClrInstanceID",
+          "datatype": "ushort",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "GCIncreaseMemoryPressure",
+      "displayName": "GCIncreaseMemoryPressure",
+      "descriptor": {
+        "id": 200,
+        "version": 0,
+        "channel": 0,
+        "level": "Verbose",
+        "opcode": 200,
+        "task": 1,
+        "keyword": 1
+      },
+      "fields": [
+        {
+          "name": "BytesAllocated",
+          "datatype": "ulong",
+          "map": null
+        },
+        {
+          "name": "ClrInstanceID",
+          "datatype": "ushort",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "GCDecreaseMemoryPressure",
+      "displayName": "GCDecreaseMemoryPressure",
+      "descriptor": {
+        "id": 201,
+        "version": 0,
+        "channel": 0,
+        "level": "Verbose",
+        "opcode": 201,
+        "task": 1,
+        "keyword": 1
+      },
+      "fields": [
+        {
+          "name": "BytesFreed",
+          "datatype": "ulong",
+          "map": null
+        },
+        {
+          "name": "ClrInstanceID",
+          "datatype": "ushort",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "GCMark",
+      "displayName": "GCMark",
+      "descriptor": {
+        "id": 202,
+        "version": 0,
+        "channel": 0,
+        "level": "Information",
+        "opcode": 202,
+        "task": 1,
+        "keyword": 1
+      },
+      "fields": [
+        {
+          "name": "HeapNum",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "ClrInstanceID",
+          "datatype": "ushort",
+          "map": null
+        },
+        {
+          "name": "Type",
+          "datatype": "uint",
+          "map": "GCRootKindMap"
+        },
+        {
+          "name": "Bytes",
+          "datatype": "ulong",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "GCLoaded",
+      "displayName": "GCLoaded",
+      "descriptor": {
+        "id": 206,
+        "version": 0,
+        "channel": 0,
+        "level": "Information",
+        "opcode": 206,
+        "task": 1,
+        "keyword": 1
+      },
+      "fields": [
+        {
+          "name": "GCName",
+          "datatype": "string",
+          "map": null
+        },
+        {
+          "name": "ClrInstanceID",
+          "datatype": "ushort",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "DebugIPCEventStart",
+      "displayName": "DebugIPCEventStart",
+      "descriptor": {
+        "id": 240,
+        "version": 0,
+        "channel": 0,
+        "level": "Information",
+        "opcode": "Start",
+        "task": 25,
+        "keyword": 4294967296
+      },
+      "fields": []
+    },
+    {
+      "name": "DebugIPCEventStop",
+      "displayName": "DebugIPCEventStop",
+      "descriptor": {
+        "id": 241,
+        "version": 0,
+        "channel": 0,
+        "level": "Information",
+        "opcode": "End",
+        "task": 25,
+        "keyword": 4294967296
+      },
+      "fields": []
+    },
+    {
+      "name": "DebugExceptionProcessingStart",
+      "displayName": "DebugExceptionProcessingStart",
+      "descriptor": {
+        "id": 242,
+        "version": 0,
+        "channel": 0,
+        "level": "Information",
+        "opcode": "Start",
+        "task": 26,
+        "keyword": 4294967296
+      },
+      "fields": []
+    },
+    {
+      "name": "DebugExceptionProcessingStop",
+      "displayName": "DebugExceptionProcessingStop",
+      "descriptor": {
+        "id": 243,
+        "version": 0,
+        "channel": 0,
+        "level": "Information",
+        "opcode": "End",
+        "task": 26,
+        "keyword": 4294967296
+      },
+      "fields": []
+    },
+    {
+      "name": "ExceptionCatchStart",
+      "displayName": "ExceptionCatchStart",
+      "descriptor": {
+        "id": 250,
+        "version": 0,
+        "channel": 0,
+        "level": "Information",
+        "opcode": "Start",
+        "task": 27,
+        "keyword": 32768
+      },
+      "fields": [
+        {
+          "name": "EntryEIP",
+          "datatype": "ulong",
+          "map": null
+        },
+        {
+          "name": "MethodID",
+          "datatype": "ulong",
+          "map": null
+        },
+        {
+          "name": "MethodName",
+          "datatype": "string",
+          "map": null
+        },
+        {
+          "name": "ClrInstanceID",
+          "datatype": "ushort",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "ExceptionCatchStop",
+      "displayName": "ExceptionCatchStop",
+      "descriptor": {
+        "id": 251,
+        "version": 0,
+        "channel": 0,
+        "level": "Information",
+        "opcode": "End",
+        "task": 27,
+        "keyword": 32768
+      },
+      "fields": []
+    },
+    {
+      "name": "ExceptionFinallyStart",
+      "displayName": "ExceptionFinallyStart",
+      "descriptor": {
+        "id": 252,
+        "version": 0,
+        "channel": 0,
+        "level": "Information",
+        "opcode": "Start",
+        "task": 28,
+        "keyword": 32768
+      },
+      "fields": [
+        {
+          "name": "EntryEIP",
+          "datatype": "ulong",
+          "map": null
+        },
+        {
+          "name": "MethodID",
+          "datatype": "ulong",
+          "map": null
+        },
+        {
+          "name": "MethodName",
+          "datatype": "string",
+          "map": null
+        },
+        {
+          "name": "ClrInstanceID",
+          "datatype": "ushort",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "ExceptionFinallyStop",
+      "displayName": "ExceptionFinallyStop",
+      "descriptor": {
+        "id": 253,
+        "version": 0,
+        "channel": 0,
+        "level": "Information",
+        "opcode": "End",
+        "task": 28,
+        "keyword": 32768
+      },
+      "fields": []
+    },
+    {
+      "name": "ExceptionFilterStart",
+      "displayName": "ExceptionFilterStart",
+      "descriptor": {
+        "id": 254,
+        "version": 0,
+        "channel": 0,
+        "level": "Information",
+        "opcode": "Start",
+        "task": 29,
+        "keyword": 32768
+      },
+      "fields": [
+        {
+          "name": "EntryEIP",
+          "datatype": "ulong",
+          "map": null
+        },
+        {
+          "name": "MethodID",
+          "datatype": "ulong",
+          "map": null
+        },
+        {
+          "name": "MethodName",
+          "datatype": "string",
+          "map": null
+        },
+        {
+          "name": "ClrInstanceID",
+          "datatype": "ushort",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "ExceptionFilterStop",
+      "displayName": "ExceptionFilterStop",
+      "descriptor": {
+        "id": 255,
+        "version": 0,
+        "channel": 0,
+        "level": "Information",
+        "opcode": "End",
+        "task": 29,
+        "keyword": 32768
+      },
+      "fields": []
+    },
+    {
+      "name": "ExceptionStop",
+      "displayName": "ExceptionStop",
+      "descriptor": {
+        "id": 256,
+        "version": 0,
+        "channel": 0,
+        "level": "Information",
+        "opcode": "End",
+        "task": 7,
+        "keyword": 32768
+      },
+      "fields": []
+    },
+    {
+      "name": "GCStop",
+      "displayName": "GCStop",
+      "descriptor": {
+        "id": 2,
+        "version": 1,
+        "channel": 0,
+        "level": "Information",
+        "opcode": "End",
+        "task": 1,
+        "keyword": 1
+      },
+      "fields": [
+        {
+          "name": "Count",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "Depth",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "ClrInstanceID",
+          "datatype": "ushort",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "GCRestartEEStop",
+      "displayName": "GCRestartEEStop",
+      "descriptor": {
+        "id": 3,
+        "version": 1,
+        "channel": 0,
+        "level": "Information",
+        "opcode": 132,
+        "task": 1,
+        "keyword": 1
+      },
+      "fields": [
+        {
+          "name": "ClrInstanceID",
+          "datatype": "ushort",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "GCHeapStats",
+      "displayName": "GCHeapStats",
+      "descriptor": {
+        "id": 4,
+        "version": 1,
+        "channel": 0,
+        "level": "Information",
+        "opcode": 133,
+        "task": 1,
+        "keyword": 1
+      },
+      "fields": [
+        {
+          "name": "GenerationSize0",
+          "datatype": "ulong",
+          "map": null
+        },
+        {
+          "name": "TotalPromotedSize0",
+          "datatype": "ulong",
+          "map": null
+        },
+        {
+          "name": "GenerationSize1",
+          "datatype": "ulong",
+          "map": null
+        },
+        {
+          "name": "TotalPromotedSize1",
+          "datatype": "ulong",
+          "map": null
+        },
+        {
+          "name": "GenerationSize2",
+          "datatype": "ulong",
+          "map": null
+        },
+        {
+          "name": "TotalPromotedSize2",
+          "datatype": "ulong",
+          "map": null
+        },
+        {
+          "name": "GenerationSize3",
+          "datatype": "ulong",
+          "map": null
+        },
+        {
+          "name": "TotalPromotedSize3",
+          "datatype": "ulong",
+          "map": null
+        },
+        {
+          "name": "FinalizationPromotedSize",
+          "datatype": "ulong",
+          "map": null
+        },
+        {
+          "name": "FinalizationPromotedCount",
+          "datatype": "ulong",
+          "map": null
+        },
+        {
+          "name": "PinnedObjectCount",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "SinkBlockCount",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "GCHandleCount",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "ClrInstanceID",
+          "datatype": "ushort",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "GCCreateSegment",
+      "displayName": "GCCreateSegment",
+      "descriptor": {
+        "id": 5,
+        "version": 1,
+        "channel": 0,
+        "level": "Information",
+        "opcode": 134,
+        "task": 1,
+        "keyword": 1
+      },
+      "fields": [
+        {
+          "name": "Address",
+          "datatype": "ulong",
+          "map": null
+        },
+        {
+          "name": "Size",
+          "datatype": "ulong",
+          "map": null
+        },
+        {
+          "name": "Type",
+          "datatype": "uint",
+          "map": "GCSegmentTypeMap"
+        },
+        {
+          "name": "ClrInstanceID",
+          "datatype": "ushort",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "GCFreeSegment",
+      "displayName": "GCFreeSegment",
+      "descriptor": {
+        "id": 6,
+        "version": 1,
+        "channel": 0,
+        "level": "Information",
+        "opcode": 135,
+        "task": 1,
+        "keyword": 1
+      },
+      "fields": [
+        {
+          "name": "Address",
+          "datatype": "ulong",
+          "map": null
+        },
+        {
+          "name": "ClrInstanceID",
+          "datatype": "ushort",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "GCRestartEEStart",
+      "displayName": "GCRestartEEStart",
+      "descriptor": {
+        "id": 7,
+        "version": 1,
+        "channel": 0,
+        "level": "Information",
+        "opcode": 136,
+        "task": 1,
+        "keyword": 1
+      },
+      "fields": [
+        {
+          "name": "ClrInstanceID",
+          "datatype": "ushort",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "GCSuspendEEStop",
+      "displayName": "GCSuspendEEStop",
+      "descriptor": {
+        "id": 8,
+        "version": 1,
+        "channel": 0,
+        "level": "Information",
+        "opcode": 137,
+        "task": 1,
+        "keyword": 1
+      },
+      "fields": [
+        {
+          "name": "ClrInstanceID",
+          "datatype": "ushort",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "GCSuspendEEStart",
+      "displayName": "GCSuspendEEStart",
+      "descriptor": {
+        "id": 9,
+        "version": 1,
+        "channel": 0,
+        "level": "Information",
+        "opcode": 10,
+        "task": 1,
+        "keyword": 1
+      },
+      "fields": [
+        {
+          "name": "Reason",
+          "datatype": "uint",
+          "map": "GCSuspendEEReasonMap"
+        },
+        {
+          "name": "Count",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "ClrInstanceID",
+          "datatype": "ushort",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "GCCreateConcurrentThread",
+      "displayName": "GCCreateConcurrentThread",
+      "descriptor": {
+        "id": 11,
+        "version": 1,
+        "channel": 0,
+        "level": "Information",
+        "opcode": 12,
+        "task": 1,
+        "keyword": 65537
+      },
+      "fields": [
+        {
+          "name": "ClrInstanceID",
+          "datatype": "ushort",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "GCTerminateConcurrentThread",
+      "displayName": "GCTerminateConcurrentThread",
+      "descriptor": {
+        "id": 12,
+        "version": 1,
+        "channel": 0,
+        "level": "Information",
+        "opcode": 13,
+        "task": 1,
+        "keyword": 65537
+      },
+      "fields": [
+        {
+          "name": "ClrInstanceID",
+          "datatype": "ushort",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "GCFinalizersStop",
+      "displayName": "GCFinalizersStop",
+      "descriptor": {
+        "id": 13,
+        "version": 1,
+        "channel": 0,
+        "level": "Information",
+        "opcode": 15,
+        "task": 1,
+        "keyword": 1
+      },
+      "fields": [
+        {
+          "name": "Count",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "ClrInstanceID",
+          "datatype": "ushort",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "GCFinalizersStart",
+      "displayName": "GCFinalizersStart",
+      "descriptor": {
+        "id": 14,
+        "version": 1,
+        "channel": 0,
+        "level": "Information",
+        "opcode": 19,
+        "task": 1,
+        "keyword": 1
+      },
+      "fields": [
+        {
+          "name": "ClrInstanceID",
+          "datatype": "ushort",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "IOThreadCreationStart",
+      "displayName": "IOThreadCreationStart",
+      "descriptor": {
+        "id": 44,
+        "version": 1,
+        "channel": 0,
+        "level": "Information",
+        "opcode": "Start",
+        "task": 3,
+        "keyword": 65536
+      },
+      "fields": [
+        {
+          "name": "IOThreadCount",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "RetiredIOThreads",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "ClrInstanceID",
+          "datatype": "ushort",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "IOThreadCreationStop",
+      "displayName": "IOThreadCreationStop",
+      "descriptor": {
+        "id": 45,
+        "version": 1,
+        "channel": 0,
+        "level": "Information",
+        "opcode": "End",
+        "task": 3,
+        "keyword": 65536
+      },
+      "fields": [
+        {
+          "name": "IOThreadCount",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "RetiredIOThreads",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "ClrInstanceID",
+          "datatype": "ushort",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "IOThreadRetirementStart",
+      "displayName": "IOThreadRetirementStart",
+      "descriptor": {
+        "id": 46,
+        "version": 1,
+        "channel": 0,
+        "level": "Information",
+        "opcode": "Start",
+        "task": 5,
+        "keyword": 65536
+      },
+      "fields": [
+        {
+          "name": "IOThreadCount",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "RetiredIOThreads",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "ClrInstanceID",
+          "datatype": "ushort",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "IOThreadRetirementStop",
+      "displayName": "IOThreadRetirementStop",
+      "descriptor": {
+        "id": 47,
+        "version": 1,
+        "channel": 0,
+        "level": "Information",
+        "opcode": "End",
+        "task": 5,
+        "keyword": 65536
+      },
+      "fields": [
+        {
+          "name": "IOThreadCount",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "RetiredIOThreads",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "ClrInstanceID",
+          "datatype": "ushort",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "ExceptionStart",
+      "displayName": "ExceptionStart",
+      "descriptor": {
+        "id": 80,
+        "version": 1,
+        "channel": 0,
+        "level": "Error",
+        "opcode": "Start",
+        "task": 7,
+        "keyword": 8589967360
+      },
+      "fields": [
+        {
+          "name": "ExceptionType",
+          "datatype": "string",
+          "map": null
+        },
+        {
+          "name": "ExceptionMessage",
+          "datatype": "string",
+          "map": null
+        },
+        {
+          "name": "ExceptionEIP",
+          "datatype": "pointer",
+          "map": null
+        },
+        {
+          "name": "ExceptionHRESULT",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "ExceptionFlags",
+          "datatype": "ushort",
+          "map": "ExceptionThrownFlagsMap"
+        },
+        {
+          "name": "ClrInstanceID",
+          "datatype": "ushort",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "ContentionStart",
+      "displayName": "ContentionStart",
+      "descriptor": {
+        "id": 81,
+        "version": 1,
+        "channel": 0,
+        "level": "Information",
+        "opcode": "Start",
+        "task": 8,
+        "keyword": 16384
+      },
+      "fields": [
+        {
+          "name": "ContentionFlags",
+          "datatype": "byte",
+          "map": "ContentionFlagsMap"
+        },
+        {
+          "name": "ClrInstanceID",
+          "datatype": "ushort",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "MethodJittingStarted",
+      "displayName": "MethodJittingStarted",
+      "descriptor": {
+        "id": 145,
+        "version": 1,
+        "channel": 0,
+        "level": "Verbose",
+        "opcode": 42,
+        "task": 9,
+        "keyword": 16
+      },
+      "fields": [
+        {
+          "name": "MethodID",
+          "datatype": "ulong",
+          "map": null
+        },
+        {
+          "name": "ModuleID",
+          "datatype": "ulong",
+          "map": null
+        },
+        {
+          "name": "MethodToken",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "MethodILSize",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "MethodNamespace",
+          "datatype": "string",
+          "map": null
+        },
+        {
+          "name": "MethodName",
+          "datatype": "string",
+          "map": null
+        },
+        {
+          "name": "MethodSignature",
+          "datatype": "string",
+          "map": null
+        },
+        {
+          "name": "ClrInstanceID",
+          "datatype": "ushort",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "LoaderDomainModuleLoad",
+      "displayName": "LoaderDomainModuleLoad",
+      "descriptor": {
+        "id": 151,
+        "version": 1,
+        "channel": 0,
+        "level": "Information",
+        "opcode": 45,
+        "task": 10,
+        "keyword": 8
+      },
+      "fields": [
+        {
+          "name": "ModuleID",
+          "datatype": "ulong",
+          "map": null
+        },
+        {
+          "name": "AssemblyID",
+          "datatype": "ulong",
+          "map": null
+        },
+        {
+          "name": "AppDomainID",
+          "datatype": "ulong",
+          "map": null
+        },
+        {
+          "name": "ModuleFlags",
+          "datatype": "uint",
+          "map": "ModuleFlagsMap"
+        },
+        {
+          "name": "Reserved1",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "ModuleILPath",
+          "datatype": "string",
+          "map": null
+        },
+        {
+          "name": "ModuleNativePath",
+          "datatype": "string",
+          "map": null
+        },
+        {
+          "name": "ClrInstanceID",
+          "datatype": "ushort",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "LoaderAssemblyLoad",
+      "displayName": "LoaderAssemblyLoad",
+      "descriptor": {
+        "id": 154,
+        "version": 1,
+        "channel": 0,
+        "level": "Information",
+        "opcode": 37,
+        "task": 10,
+        "keyword": 8
+      },
+      "fields": [
+        {
+          "name": "AssemblyID",
+          "datatype": "ulong",
+          "map": null
+        },
+        {
+          "name": "AppDomainID",
+          "datatype": "ulong",
+          "map": null
+        },
+        {
+          "name": "BindingID",
+          "datatype": "ulong",
+          "map": null
+        },
+        {
+          "name": "AssemblyFlags",
+          "datatype": "uint",
+          "map": "AssemblyFlagsMap"
+        },
+        {
+          "name": "FullyQualifiedAssemblyName",
+          "datatype": "string",
+          "map": null
+        },
+        {
+          "name": "ClrInstanceID",
+          "datatype": "ushort",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "LoaderAssemblyUnload",
+      "displayName": "LoaderAssemblyUnload",
+      "descriptor": {
+        "id": 155,
+        "version": 1,
+        "channel": 0,
+        "level": "Information",
+        "opcode": 38,
+        "task": 10,
+        "keyword": 8
+      },
+      "fields": [
+        {
+          "name": "AssemblyID",
+          "datatype": "ulong",
+          "map": null
+        },
+        {
+          "name": "AppDomainID",
+          "datatype": "ulong",
+          "map": null
+        },
+        {
+          "name": "BindingID",
+          "datatype": "ulong",
+          "map": null
+        },
+        {
+          "name": "AssemblyFlags",
+          "datatype": "uint",
+          "map": "AssemblyFlagsMap"
+        },
+        {
+          "name": "FullyQualifiedAssemblyName",
+          "datatype": "string",
+          "map": null
+        },
+        {
+          "name": "ClrInstanceID",
+          "datatype": "ushort",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "LoaderAppDomainLoad",
+      "displayName": "LoaderAppDomainLoad",
+      "descriptor": {
+        "id": 156,
+        "version": 1,
+        "channel": 0,
+        "level": "Information",
+        "opcode": 41,
+        "task": 10,
+        "keyword": 8
+      },
+      "fields": [
+        {
+          "name": "AppDomainID",
+          "datatype": "ulong",
+          "map": null
+        },
+        {
+          "name": "AppDomainFlags",
+          "datatype": "uint",
+          "map": "AppDomainFlagsMap"
+        },
+        {
+          "name": "AppDomainName",
+          "datatype": "string",
+          "map": null
+        },
+        {
+          "name": "AppDomainIndex",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "ClrInstanceID",
+          "datatype": "ushort",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "LoaderAppDomainUnload",
+      "displayName": "LoaderAppDomainUnload",
+      "descriptor": {
+        "id": 157,
+        "version": 1,
+        "channel": 0,
+        "level": "Information",
+        "opcode": 42,
+        "task": 10,
+        "keyword": 8
+      },
+      "fields": [
+        {
+          "name": "AppDomainID",
+          "datatype": "ulong",
+          "map": null
+        },
+        {
+          "name": "AppDomainFlags",
+          "datatype": "uint",
+          "map": "AppDomainFlagsMap"
+        },
+        {
+          "name": "AppDomainName",
+          "datatype": "string",
+          "map": null
+        },
+        {
+          "name": "AppDomainIndex",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "ClrInstanceID",
+          "datatype": "ushort",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "StrongNameVerificationStart",
+      "displayName": "StrongNameVerificationStart",
+      "descriptor": {
+        "id": 181,
+        "version": 1,
+        "channel": 0,
+        "level": "Verbose",
+        "opcode": "Start",
+        "task": 12,
+        "keyword": 1024
+      },
+      "fields": [
+        {
+          "name": "VerificationFlags",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "ErrorCode",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "FullyQualifiedAssemblyName",
+          "datatype": "string",
+          "map": null
+        },
+        {
+          "name": "ClrInstanceID",
+          "datatype": "ushort",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "StrongNameVerificationStop",
+      "displayName": "StrongNameVerificationStop",
+      "descriptor": {
+        "id": 182,
+        "version": 1,
+        "channel": 0,
+        "level": "Information",
+        "opcode": "End",
+        "task": 12,
+        "keyword": 1024
+      },
+      "fields": [
+        {
+          "name": "VerificationFlags",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "ErrorCode",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "FullyQualifiedAssemblyName",
+          "datatype": "string",
+          "map": null
+        },
+        {
+          "name": "ClrInstanceID",
+          "datatype": "ushort",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "AuthenticodeVerificationStart",
+      "displayName": "AuthenticodeVerificationStart",
+      "descriptor": {
+        "id": 183,
+        "version": 1,
+        "channel": 0,
+        "level": "Verbose",
+        "opcode": "Start",
+        "task": 13,
+        "keyword": 1024
+      },
+      "fields": [
+        {
+          "name": "VerificationFlags",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "ErrorCode",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "ModulePath",
+          "datatype": "string",
+          "map": null
+        },
+        {
+          "name": "ClrInstanceID",
+          "datatype": "ushort",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "AuthenticodeVerificationStop",
+      "displayName": "AuthenticodeVerificationStop",
+      "descriptor": {
+        "id": 184,
+        "version": 1,
+        "channel": 0,
+        "level": "Information",
+        "opcode": "End",
+        "task": 13,
+        "keyword": 1024
+      },
+      "fields": [
+        {
+          "name": "VerificationFlags",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "ErrorCode",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "ModulePath",
+          "datatype": "string",
+          "map": null
+        },
+        {
+          "name": "ClrInstanceID",
+          "datatype": "ushort",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "GCStart",
+      "displayName": "GCStart",
+      "descriptor": {
+        "id": 1,
+        "version": 2,
+        "channel": 0,
+        "level": "Information",
+        "opcode": "Start",
+        "task": 1,
+        "keyword": 1
+      },
+      "fields": [
+        {
+          "name": "Count",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "Depth",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "Reason",
+          "datatype": "uint",
+          "map": "GCReasonMap"
+        },
+        {
+          "name": "Type",
+          "datatype": "uint",
+          "map": "GCTypeMap"
+        },
+        {
+          "name": "ClrInstanceID",
+          "datatype": "ushort",
+          "map": null
+        },
+        {
+          "name": "ClientSequenceNumber",
+          "datatype": "ulong",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "MethodLoad",
+      "displayName": "MethodLoad",
+      "descriptor": {
+        "id": 141,
+        "version": 2,
+        "channel": 0,
+        "level": "Information",
+        "opcode": 33,
+        "task": 9,
+        "keyword": 48
+      },
+      "fields": [
+        {
+          "name": "MethodID",
+          "datatype": "ulong",
+          "map": null
+        },
+        {
+          "name": "ModuleID",
+          "datatype": "ulong",
+          "map": null
+        },
+        {
+          "name": "MethodStartAddress",
+          "datatype": "ulong",
+          "map": null
+        },
+        {
+          "name": "MethodSize",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "MethodToken",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "MethodFlags",
+          "datatype": "uint",
+          "map": "MethodFlagsMap"
+        },
+        {
+          "name": "ClrInstanceID",
+          "datatype": "ushort",
+          "map": null
+        },
+        {
+          "name": "ReJITID",
+          "datatype": "ulong",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "MethodUnload",
+      "displayName": "MethodUnload",
+      "descriptor": {
+        "id": 142,
+        "version": 2,
+        "channel": 0,
+        "level": "Information",
+        "opcode": 34,
+        "task": 9,
+        "keyword": 48
+      },
+      "fields": [
+        {
+          "name": "MethodID",
+          "datatype": "ulong",
+          "map": null
+        },
+        {
+          "name": "ModuleID",
+          "datatype": "ulong",
+          "map": null
+        },
+        {
+          "name": "MethodStartAddress",
+          "datatype": "ulong",
+          "map": null
+        },
+        {
+          "name": "MethodSize",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "MethodToken",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "MethodFlags",
+          "datatype": "uint",
+          "map": "MethodFlagsMap"
+        },
+        {
+          "name": "ClrInstanceID",
+          "datatype": "ushort",
+          "map": null
+        },
+        {
+          "name": "ReJITID",
+          "datatype": "ulong",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "MethodLoadVerbose",
+      "displayName": "MethodLoadVerbose",
+      "descriptor": {
+        "id": 143,
+        "version": 2,
+        "channel": 0,
+        "level": "Information",
+        "opcode": 37,
+        "task": 9,
+        "keyword": 48
+      },
+      "fields": [
+        {
+          "name": "MethodID",
+          "datatype": "ulong",
+          "map": null
+        },
+        {
+          "name": "ModuleID",
+          "datatype": "ulong",
+          "map": null
+        },
+        {
+          "name": "MethodStartAddress",
+          "datatype": "ulong",
+          "map": null
+        },
+        {
+          "name": "MethodSize",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "MethodToken",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "MethodFlags",
+          "datatype": "uint",
+          "map": "MethodFlagsMap"
+        },
+        {
+          "name": "MethodNamespace",
+          "datatype": "string",
+          "map": null
+        },
+        {
+          "name": "MethodName",
+          "datatype": "string",
+          "map": null
+        },
+        {
+          "name": "MethodSignature",
+          "datatype": "string",
+          "map": null
+        },
+        {
+          "name": "ClrInstanceID",
+          "datatype": "ushort",
+          "map": null
+        },
+        {
+          "name": "ReJITID",
+          "datatype": "ulong",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "MethodUnloadVerbose",
+      "displayName": "MethodUnloadVerbose",
+      "descriptor": {
+        "id": 144,
+        "version": 2,
+        "channel": 0,
+        "level": "Information",
+        "opcode": 38,
+        "task": 9,
+        "keyword": 48
+      },
+      "fields": [
+        {
+          "name": "MethodID",
+          "datatype": "ulong",
+          "map": null
+        },
+        {
+          "name": "ModuleID",
+          "datatype": "ulong",
+          "map": null
+        },
+        {
+          "name": "MethodStartAddress",
+          "datatype": "ulong",
+          "map": null
+        },
+        {
+          "name": "MethodSize",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "MethodToken",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "MethodFlags",
+          "datatype": "uint",
+          "map": "MethodFlagsMap"
+        },
+        {
+          "name": "MethodNamespace",
+          "datatype": "string",
+          "map": null
+        },
+        {
+          "name": "MethodName",
+          "datatype": "string",
+          "map": null
+        },
+        {
+          "name": "MethodSignature",
+          "datatype": "string",
+          "map": null
+        },
+        {
+          "name": "ClrInstanceID",
+          "datatype": "ushort",
+          "map": null
+        },
+        {
+          "name": "ReJITID",
+          "datatype": "ulong",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "LoaderModuleLoad",
+      "displayName": "LoaderModuleLoad",
+      "descriptor": {
+        "id": 152,
+        "version": 2,
+        "channel": 0,
+        "level": "Information",
+        "opcode": 33,
+        "task": 10,
+        "keyword": 536870920
+      },
+      "fields": [
+        {
+          "name": "ModuleID",
+          "datatype": "ulong",
+          "map": null
+        },
+        {
+          "name": "AssemblyID",
+          "datatype": "ulong",
+          "map": null
+        },
+        {
+          "name": "ModuleFlags",
+          "datatype": "uint",
+          "map": "ModuleFlagsMap"
+        },
+        {
+          "name": "Reserved1",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "ModuleILPath",
+          "datatype": "string",
+          "map": null
+        },
+        {
+          "name": "ModuleNativePath",
+          "datatype": "string",
+          "map": null
+        },
+        {
+          "name": "ClrInstanceID",
+          "datatype": "ushort",
+          "map": null
+        },
+        {
+          "name": "ManagedPdbSignature",
+          "datatype": "guid",
+          "map": null
+        },
+        {
+          "name": "ManagedPdbAge",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "ManagedPdbBuildPath",
+          "datatype": "string",
+          "map": null
+        },
+        {
+          "name": "NativePdbSignature",
+          "datatype": "guid",
+          "map": null
+        },
+        {
+          "name": "NativePdbAge",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "NativePdbBuildPath",
+          "datatype": "string",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "LoaderModuleUnload",
+      "displayName": "LoaderModuleUnload",
+      "descriptor": {
+        "id": 153,
+        "version": 2,
+        "channel": 0,
+        "level": "Information",
+        "opcode": 34,
+        "task": 10,
+        "keyword": 536870920
+      },
+      "fields": [
+        {
+          "name": "ModuleID",
+          "datatype": "ulong",
+          "map": null
+        },
+        {
+          "name": "AssemblyID",
+          "datatype": "ulong",
+          "map": null
+        },
+        {
+          "name": "ModuleFlags",
+          "datatype": "uint",
+          "map": "ModuleFlagsMap"
+        },
+        {
+          "name": "Reserved1",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "ModuleILPath",
+          "datatype": "string",
+          "map": null
+        },
+        {
+          "name": "ModuleNativePath",
+          "datatype": "string",
+          "map": null
+        },
+        {
+          "name": "ClrInstanceID",
+          "datatype": "ushort",
+          "map": null
+        },
+        {
+          "name": "ManagedPdbSignature",
+          "datatype": "guid",
+          "map": null
+        },
+        {
+          "name": "ManagedPdbAge",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "ManagedPdbBuildPath",
+          "datatype": "string",
+          "map": null
+        },
+        {
+          "name": "NativePdbSignature",
+          "datatype": "guid",
+          "map": null
+        },
+        {
+          "name": "NativePdbAge",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "NativePdbBuildPath",
+          "datatype": "string",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "GCJoin",
+      "displayName": "GCJoin",
+      "descriptor": {
+        "id": 203,
+        "version": 2,
+        "channel": 0,
+        "level": "Verbose",
+        "opcode": 203,
+        "task": 1,
+        "keyword": 1
+      },
+      "fields": [
+        {
+          "name": "Heap",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "JoinTime",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "JoinType",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "ClrInstanceID",
+          "datatype": "ushort",
+          "map": null
+        },
+        {
+          "name": "JoinID",
+          "datatype": "uint",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "GCGlobalHeapHistory",
+      "displayName": "GCGlobalHeapHistory",
+      "descriptor": {
+        "id": 205,
+        "version": 2,
+        "channel": 0,
+        "level": "Information",
+        "opcode": 205,
+        "task": 1,
+        "keyword": 1
+      },
+      "fields": [
+        {
+          "name": "FinalYoungestDesired",
+          "datatype": "ulong",
+          "map": null
+        },
+        {
+          "name": "NumHeaps",
+          "datatype": "int",
+          "map": null
+        },
+        {
+          "name": "CondemnedGeneration",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "Gen0ReductionCount",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "Reason",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "GlobalMechanisms",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "ClrInstanceID",
+          "datatype": "ushort",
+          "map": null
+        },
+        {
+          "name": "PauseMode",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "MemoryPressure",
+          "datatype": "uint",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "GCAllocationTick",
+      "displayName": "GCAllocationTick",
+      "descriptor": {
+        "id": 10,
+        "version": 3,
+        "channel": 0,
+        "level": "Verbose",
+        "opcode": 11,
+        "task": 1,
+        "keyword": 1
+      },
+      "fields": [
+        {
+          "name": "AllocationAmount",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "AllocationKind",
+          "datatype": "uint",
+          "map": "GCAllocationKindMap"
+        },
+        {
+          "name": "ClrInstanceID",
+          "datatype": "ushort",
+          "map": null
+        },
+        {
+          "name": "AllocationAmount64",
+          "datatype": "ulong",
+          "map": null
+        },
+        {
+          "name": "TypeID",
+          "datatype": "pointer",
+          "map": null
+        },
+        {
+          "name": "TypeName",
+          "datatype": "string",
+          "map": null
+        },
+        {
+          "name": "HeapIndex",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "Address",
+          "datatype": "pointer",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "GCPerHeapHistory",
+      "displayName": "GCPerHeapHistory",
+      "descriptor": {
+        "id": 204,
+        "version": 3,
+        "channel": 0,
+        "level": "Information",
+        "opcode": 204,
+        "task": 1,
+        "keyword": 1
+      },
+      "fields": [
+        {
+          "name": "ClrInstanceID",
+          "datatype": "ushort",
+          "map": null
+        },
+        {
+          "name": "FreeListAllocated",
+          "datatype": "pointer",
+          "map": null
+        },
+        {
+          "name": "FreeListRejected",
+          "datatype": "pointer",
+          "map": null
+        },
+        {
+          "name": "EndOfSegAllocated",
+          "datatype": "pointer",
+          "map": null
+        },
+        {
+          "name": "CondemnedAllocated",
+          "datatype": "pointer",
+          "map": null
+        },
+        {
+          "name": "PinnedAllocated",
+          "datatype": "pointer",
+          "map": null
+        },
+        {
+          "name": "PinnedAllocatedAdvance",
+          "datatype": "pointer",
+          "map": null
+        },
+        {
+          "name": "RunningFreeListEfficiency",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "CondemnReasons0",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "CondemnReasons1",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "CompactMechanisms",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "ExpandMechanisms",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "HeapIndex",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "ExtraGen0Commit",
+          "datatype": "pointer",
+          "map": null
+        },
+        {
+          "name": "Count",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "Values",
+          "datatype": "GCPerHeapHistoryValue[Count]",
+          "map": null
+        }
+      ]
+    }
+  ],
+  "tasks": {
+    "1": "GC",
+    "2": "WorkerThreadCreationV2",
+    "3": "IOThreadCreation",
+    "4": "WorkerThreadRetirementV2",
+    "5": "IOThreadRetirement",
+    "6": "ThreadpoolSuspensionV2",
+    "7": "Exception",
+    "8": "Contention",
+    "9": "Method",
+    "10": "Loader",
+    "11": "ClrStack",
+    "12": "StrongNameVerification",
+    "13": "AuthenticodeVerification",
+    "14": "AppDomainResourceManagement",
+    "15": "ILStub",
+    "16": "ThreadPoolWorkerThread",
+    "17": "ThreadPoolWorkerThreadRetirement",
+    "18": "ThreadPoolWorkerThreadAdjustment",
+    "19": "Runtime",
+    "20": "ClrPerfTrack",
+    "21": "Type",
+    "22": "ThreadPoolWorkingThreadCount",
+    "23": "ThreadPool",
+    "24": "Thread",
+    "25": "DebugIPCEvent",
+    "26": "DebugExceptionProcessing",
+    "27": "ExceptionCatch",
+    "28": "ExceptionFinally",
+    "29": "ExceptionFilter"
+  },
+  "opcodes": {
+    "10": "SuspendEEStart",
+    "11": "AllocationTick",
+    "12": "CreateConcurrentThread",
+    "13": "TerminateConcurrentThread",
+    "14": "IODequeue",
+    "15": "FinalizersStop",
+    "19": "FinalizersStart",
+    "20": "GCBulkRootEdge",
+    "21": "GCBulkRootConditionalWeakTableElementEdge",
+    "22": "GCBulkNode",
+    "23": "GCBulkEdge",
+    "24": "GCSampledObjectAllocation",
+    "25": "GCBulkSurvivingObjectRanges",
+    "26": "GCBulkMovedObjectRanges",
+    "27": "GCGenerationRange",
+    "28": "MarkStackRoots",
+    "29": "MarkFinalizeQueueRoots",
+    "30": "MarkHandles",
+    "31": "MarkCards",
+    "32": "FinalizeObject",
+    "33": "SetGCHandle",
+    "34": "DestoryGCHandle",
+    "35": "Triggered",
+    "36": "PinObjectAtGCTime",
+    "37": "LoadVerbose",
+    "38": "GCBulkRootCCW",
+    "39": "GCBulkRCW",
+    "40": "GCBulkRootStaticVar",
+    "41": "GCDynamicEvent",
+    "42": "JittingStarted",
+    "45": "DomainModuleLoad",
+    "48": "MemAllocated",
+    "49": "MemSurvived",
+    "50": "ThreadCreated",
+    "51": "ThreadTerminated",
+    "52": "DomainEnter",
+    "82": "Walk",
+    "83": "InliningSucceeded",
+    "84": "InliningFailed",
+    "85": "TailCallSucceeded",
+    "86": "TailCallFailed",
+    "87": "MethodILToNativeMap",
+    "88": "StubGenerated",
+    "89": "StubCacheHit",
+    "90": "Wait",
+    "100": "Sample",
+    "101": "Adjustment",
+    "102": "Stats",
+    "132": "RestartEEStop",
+    "133": "HeapStats",
+    "134": "CreateSegment",
+    "135": "FreeSegment",
+    "136": "RestartEEStart",
+    "137": "SuspendEEStop",
+    "200": "IncreaseMemoryPressure",
+    "201": "DecreaseMemoryPressure",
+    "202": "Mark",
+    "203": "GCJoin",
+    "204": "PerHeapHistory",
+    "205": "GlobalHeapHistory",
+    "206": "GCLoaded"
+  },
+  "keywords": {
+    "1": "GCKeyword",
+    "2": "GCHandleKeyword",
+    "4": "FusionKeyword",
+    "8": "LoaderKeyword",
+    "16": "JitKeyword",
+    "32": "NGenKeyword",
+    "64": "StartEnumerationKeyword",
+    "128": "EndEnumerationKeyword",
+    "1024": "SecurityKeyword",
+    "2048": "AppDomainResourceManagementKeyword",
+    "4096": "JitTracingKeyword",
+    "8192": "InteropKeyword",
+    "16384": "ContentionKeyword",
+    "32768": "ExceptionKeyword",
+    "65536": "ThreadingKeyword",
+    "131072": "JittedMethodILToNativeMapKeyword",
+    "262144": "OverrideAndSuppressNGenEventsKeyword",
+    "524288": "TypeKeyword",
+    "1048576": "GCHeapDumpKeyword",
+    "2097152": "GCSampledObjectAllocationHighKeyword",
+    "4194304": "GCHeapSurvivalAndMovementKeyword",
+    "8388608": "GCHeapCollectKeyword",
+    "16777216": "GCHeapAndTypeNamesKeyword",
+    "33554432": "GCSampledObjectAllocationLowKeyword",
+    "536870912": "PerfTrackKeyword",
+    "1073741824": "StackKeyword",
+    "2147483648": "ThreadTransferKeyword",
+    "4294967296": "DebuggerKeyword",
+    "8589934592": "MonitoringKeyword"
+  },
+  "maps": [
+    {
+      "name": "AppDomainFlagsMap",
+      "flags": true,
+      "values": {
+        "1": "Default",
+        "2": "Executable",
+        "4": "Shared"
+      }
+    },
+    {
+      "name": "AssemblyFlagsMap",
+      "flags": true,
+      "values": {
+        "1": "DomainNeutral",
+        "2": "Dynamic",
+        "4": "Native",
+        "8": "Collectible"
+      }
+    },
+    {
+      "name": "ContentionFlagsMap",
+      "flags": false,
+      "values": {
+        "0": "Managed",
+        "1": "Native"
+      }
+    },
+    {
+      "name": "ExceptionThrownFlagsMap",
+      "flags": true,
+      "values": {
+        "1": "HasInnerException",
+        "2": "Nested",
+        "4": "ReThrown",
+        "8": "CorruptedState",
+        "16": "CLSCompliant"
+      }
+    },
+    {
+      "name": "GCAllocationKindMap",
+      "flags": false,
+      "values": {
+        "0": "Small",
+        "1": "Large"
+      }
+    },
+    {
+      "name": "GCHandleKindMap",
+      "flags": false,
+      "values": {
+        "0": "WeakShort",
+        "1": "WeakLong",
+        "2": "Strong",
+        "3": "Pinned",
+        "4": "Variable",
+        "5": "RefCounted",
+        "6": "Dependent",
+        "7": "AsyncPinned",
+        "8": "SizedRef"
+      }
+    },
+    {
+      "name": "GCReasonMap",
+      "flags": false,
+      "values": {
+        "0": "AllocSmall",
+        "1": "Induced",
+        "2": "LowMemory",
+        "3": "Empty",
+        "4": "AllocLarge",
+        "5": "OutOfSpaceSmallObjectHeap",
+        "6": "OutOfSpaceLargeObjectHeap",
+        "7": "InducedNoForce",
+        "8": "Stress",
+        "9": "InducedLowMemory"
+      }
+    },
+    {
+      "name": "GCRootKindMap",
+      "flags": false,
+      "values": {
+        "0": "Stack",
+        "1": "Finalizer",
+        "2": "Handle",
+        "3": "Older",
+        "4": "SizedRef",
+        "5": "Overflow"
+      }
+    },
+    {
+      "name": "GCSegmentTypeMap",
+      "flags": false,
+      "values": {
+        "0": "SmallObjectHeap",
+        "1": "LargeObjectHeap",
+        "2": "ReadOnlyHeap"
+      }
+    },
+    {
+      "name": "GCSuspendEEReasonMap",
+      "flags": false,
+      "values": {
+        "0": "SuspendOther",
+        "1": "SuspendForGC",
+        "2": "SuspendForAppDomainShutdown",
+        "3": "SuspendForCodePitching",
+        "4": "SuspendForShutdown",
+        "5": "SuspendForDebugger",
+        "6": "SuspendForGCPrep",
+        "7": "SuspendForDebuggerSweep"
+      }
+    },
+    {
+      "name": "GCTypeMap",
+      "flags": false,
+      "values": {
+        "0": "NonConcurrentGC",
+        "1": "BackgroundGC",
+        "2": "ForegroundGC"
+      }
+    },
+    {
+      "name": "ILStubGeneratedFlagsMap",
+      "flags": true,
+      "values": {
+        "1": "ReverseInterop",
+        "2": "ComInterop",
+        "4": "NGenedStub",
+        "8": "Delegate",
+        "16": "VarArg",
+        "32": "UnmanagedCallee"
+      }
+    },
+    {
+      "name": "MethodFlagsMap",
+      "flags": true,
+      "values": {
+        "1": "Dynamic",
+        "2": "Generic",
+        "4": "HasSharedGenericCode",
+        "8": "Jitted"
+      }
+    },
+    {
+      "name": "ModuleFlagsMap",
+      "flags": true,
+      "values": {
+        "1": "DomainNeutral",
+        "2": "Native",
+        "4": "Dynamic",
+        "8": "Manifest"
+      }
+    },
+    {
+      "name": "ModuleRangeTypeMap",
+      "flags": true,
+      "values": {
+        "4": "ColdRange"
+      }
+    },
+    {
+      "name": "RuntimeSkuMap",
+      "flags": true,
+      "values": {
+        "1": "DesktopClr",
+        "2": "CoreClr"
+      }
+    },
+    {
+      "name": "StartupFlagsMap",
+      "flags": true,
+      "values": {
+        "1": "CONCURRENT_GC",
+        "2": "LOADER_OPTIMIZATION_SINGLE_DOMAIN",
+        "4": "LOADER_OPTIMIZATION_MULTI_DOMAIN",
+        "16": "LOADER_SAFEMODE",
+        "256": "LOADER_SETPREFERENCE",
+        "4096": "SERVER_GC",
+        "8192": "HOARD_GC_VM",
+        "16384": "SINGLE_VERSION_HOSTING_INTERFACE",
+        "65536": "LEGACY_IMPERSONATION",
+        "131072": "DISABLE_COMMITTHREADSTACK",
+        "262144": "ALWAYSFLOW_IMPERSONATION",
+        "524288": "TRIM_GC_COMMIT",
+        "1048576": "ETW",
+        "2097152": "SERVER_BUILD",
+        "4194304": "ARM"
+      }
+    },
+    {
+      "name": "StartupModeMap",
+      "flags": true,
+      "values": {
+        "1": "ManagedExe",
+        "2": "HostedClr",
+        "4": "IjwDll",
+        "8": "ComActivated",
+        "16": "Other"
+      }
+    },
+    {
+      "name": "TailCallTypeMap",
+      "flags": false,
+      "values": {
+        "0": "OptimizedTailCall",
+        "1": "RecursiveLoop",
+        "2": "HelperAssistedTailCall"
+      }
+    },
+    {
+      "name": "ThreadAdjustmentReasonMap",
+      "flags": false,
+      "values": {
+        "0": "Warmup",
+        "1": "Initializing",
+        "2": "RandomMove",
+        "3": "ClimbingMove",
+        "4": "ChangePoint",
+        "5": "Stabilizing",
+        "6": "Starvation",
+        "7": "ThreadTimedOut"
+      }
+    },
+    {
+      "name": "ThreadFlagsMap",
+      "flags": true,
+      "values": {
+        "1": "GCSpecial",
+        "2": "Finalizer",
+        "4": "ThreadPoolWorker"
+      }
+    },
+    {
+      "name": "GCRootCCWFlagsMap",
+      "flags": true,
+      "values": {
+        "1": "Strong",
+        "2": "Pegged"
+      }
+    },
+    {
+      "name": "GCRootFlagsMap",
+      "flags": true,
+      "values": {
+        "1": "Pinning",
+        "2": "WeakRef",
+        "4": "Interior",
+        "8": "RefCounted"
+      }
+    },
+    {
+      "name": "GCRootStaticVarFlagsMap",
+      "flags": true,
+      "values": {
+        "1": "ThreadLocal"
+      }
+    },
+    {
+      "name": "TypeFlagsMap",
+      "flags": true,
+      "values": {
+        "1": "Delegate",
+        "2": "Finalizable",
+        "4": "ExternallyImplementedCOMObject",
+        "8": "Array"
+      }
+    }
+  ],
+  "structs": [
+    {
+      "name": "TypeBulkTypeValue",
+      "fields": [
+        {
+          "name": "TypeID",
+          "datatype": "ulong",
+          "map": null
+        },
+        {
+          "name": "ModuleID",
+          "datatype": "ulong",
+          "map": null
+        },
+        {
+          "name": "TypeNameID",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "Flags",
+          "datatype": "uint",
+          "map": "TypeFlagsMap"
+        },
+        {
+          "name": "CorElementType",
+          "datatype": "byte",
+          "map": null
+        },
+        {
+          "name": "Name",
+          "datatype": "string",
+          "map": null
+        },
+        {
+          "name": "TypeParameterCount",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "TypeParameters",
+          "datatype": "ulong[TypeParameterCount]",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "GCBulkRootEdgeValue",
+      "fields": [
+        {
+          "name": "RootedNodeAddress",
+          "datatype": "pointer",
+          "map": null
+        },
+        {
+          "name": "GCRootKind",
+          "datatype": "byte",
+          "map": "GCRootKindMap"
+        },
+        {
+          "name": "GCRootFlag",
+          "datatype": "uint",
+          "map": "GCRootFlagsMap"
+        },
+        {
+          "name": "GCRootID",
+          "datatype": "pointer",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "GCBulkRootConditionalWeakTableElementEdgeValue",
+      "fields": [
+        {
+          "name": "GCKeyNodeID",
+          "datatype": "pointer",
+          "map": null
+        },
+        {
+          "name": "GCValueNodeID",
+          "datatype": "pointer",
+          "map": null
+        },
+        {
+          "name": "GCRootID",
+          "datatype": "pointer",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "GCBulkNodeValue",
+      "fields": [
+        {
+          "name": "Address",
+          "datatype": "pointer",
+          "map": null
+        },
+        {
+          "name": "Size",
+          "datatype": "ulong",
+          "map": null
+        },
+        {
+          "name": "TypeID",
+          "datatype": "ulong",
+          "map": null
+        },
+        {
+          "name": "EdgeCount",
+          "datatype": "ulong",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "GCBulkEdgeValue",
+      "fields": [
+        {
+          "name": "Value",
+          "datatype": "pointer",
+          "map": null
+        },
+        {
+          "name": "ReferencingFieldID",
+          "datatype": "uint",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "GCBulkSurvivingObjectRangesValue",
+      "fields": [
+        {
+          "name": "RangeBase",
+          "datatype": "pointer",
+          "map": null
+        },
+        {
+          "name": "RangeLength",
+          "datatype": "ulong",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "GCBulkMovedObjectRangesValue",
+      "fields": [
+        {
+          "name": "OldRangeBase",
+          "datatype": "pointer",
+          "map": null
+        },
+        {
+          "name": "NewRangeBase",
+          "datatype": "pointer",
+          "map": null
+        },
+        {
+          "name": "RangeLength",
+          "datatype": "ulong",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "GCBulkRootCCWValue",
+      "fields": [
+        {
+          "name": "GCRootID",
+          "datatype": "ulong",
+          "map": null
+        },
+        {
+          "name": "ObjectID",
+          "datatype": "ulong",
+          "map": null
+        },
+        {
+          "name": "TypeID",
+          "datatype": "ulong",
+          "map": null
+        },
+        {
+          "name": "IUnknown",
+          "datatype": "ulong",
+          "map": null
+        },
+        {
+          "name": "RefCount",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "PeggedRefCount",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "Flags",
+          "datatype": "uint",
+          "map": "GCRootCCWFlagsMap"
+        }
+      ]
+    },
+    {
+      "name": "GCBulkRCWValue",
+      "fields": [
+        {
+          "name": "ObjectID",
+          "datatype": "ulong",
+          "map": null
+        },
+        {
+          "name": "TypeID",
+          "datatype": "ulong",
+          "map": null
+        },
+        {
+          "name": "IUnknown",
+          "datatype": "ulong",
+          "map": null
+        },
+        {
+          "name": "VTable",
+          "datatype": "ulong",
+          "map": null
+        },
+        {
+          "name": "RefCount",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "Flags",
+          "datatype": "uint",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "GCBulkRootStaticVarValue",
+      "fields": [
+        {
+          "name": "GCRootID",
+          "datatype": "ulong",
+          "map": null
+        },
+        {
+          "name": "ObjectID",
+          "datatype": "ulong",
+          "map": null
+        },
+        {
+          "name": "TypeID",
+          "datatype": "ulong",
+          "map": null
+        },
+        {
+          "name": "Flags",
+          "datatype": "uint",
+          "map": "GCRootStaticVarFlagsMap"
+        },
+        {
+          "name": "FieldName",
+          "datatype": "string",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "GCPerHeapHistoryValue",
+      "fields": [
+        {
+          "name": "SizeBefore",
+          "datatype": "pointer",
+          "map": null
+        },
+        {
+          "name": "FreeListBefore",
+          "datatype": "pointer",
+          "map": null
+        },
+        {
+          "name": "FreeObjBefore",
+          "datatype": "pointer",
+          "map": null
+        },
+        {
+          "name": "SizeAfter",
+          "datatype": "pointer",
+          "map": null
+        },
+        {
+          "name": "FreeListAfter",
+          "datatype": "pointer",
+          "map": null
+        },
+        {
+          "name": "FreeObjAfter",
+          "datatype": "pointer",
+          "map": null
+        },
+        {
+          "name": "In",
+          "datatype": "pointer",
+          "map": null
+        },
+        {
+          "name": "PinnedSurv",
+          "datatype": "pointer",
+          "map": null
+        },
+        {
+          "name": "NonePinnedSurv",
+          "datatype": "pointer",
+          "map": null
+        },
+        {
+          "name": "NewAllocation",
+          "datatype": "pointer",
+          "map": null
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,1030 @@
+{
+  "name": "VisualStudioCpsVs",
+  "displayName": "Microsoft-VisualStudio-CpsVs",
+  "id": "2bf0e3de-e8a7-5821-ee81-ad9385d138a4",
+  "events": [
+    {
+      "name": "EventSourceMessage",
+      "displayName": "EventSourceMessage",
+      "descriptor": {
+        "id": 0,
+        "version": 0,
+        "channel": 0,
+        "level": "None",
+        "opcode": "Info",
+        "task": 65534,
+        "keyword": 0
+      },
+      "fields": [
+        {
+          "name": "Message",
+          "datatype": "string",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "CreateProjectStart",
+      "displayName": "CreateProjectStart",
+      "descriptor": {
+        "id": 11,
+        "version": 0,
+        "channel": 0,
+        "level": "Information",
+        "opcode": "Start",
+        "task": 65523,
+        "keyword": 0
+      },
+      "fields": [
+        {
+          "name": "ProjectFileName",
+          "datatype": "string",
+          "map": null
+        },
+        {
+          "name": "Location",
+          "datatype": "string",
+          "map": null
+        },
+        {
+          "name": "IsNew",
+          "datatype": "bool",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "SetInitialProjectConfigurationStop",
+      "displayName": "SetInitialProjectConfigurationStop",
+      "descriptor": {
+        "id": 4,
+        "version": 0,
+        "channel": 0,
+        "level": "Information",
+        "opcode": "End",
+        "task": 65530,
+        "keyword": 0
+      },
+      "fields": [
+        {
+          "name": "ProjectPath",
+          "datatype": "string",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "InitializeProjectNodeStart",
+      "displayName": "InitializeProjectNodeStart",
+      "descriptor": {
+        "id": 5,
+        "version": 0,
+        "channel": 0,
+        "level": "Information",
+        "opcode": "Start",
+        "task": 65529,
+        "keyword": 0
+      },
+      "fields": [
+        {
+          "name": "ProjectPath",
+          "datatype": "string",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "InitializeProjectNodeStop",
+      "displayName": "InitializeProjectNodeStop",
+      "descriptor": {
+        "id": 6,
+        "version": 0,
+        "channel": 0,
+        "level": "Information",
+        "opcode": "End",
+        "task": 65529,
+        "keyword": 0
+      },
+      "fields": [
+        {
+          "name": "ProjectPath",
+          "datatype": "string",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "CreateProjectStop",
+      "displayName": "CreateProjectStop",
+      "descriptor": {
+        "id": 12,
+        "version": 0,
+        "channel": 0,
+        "level": "Information",
+        "opcode": "End",
+        "task": 65523,
+        "keyword": 0
+      },
+      "fields": [
+        {
+          "name": "ProjectFileName",
+          "datatype": "string",
+          "map": null
+        },
+        {
+          "name": "Location",
+          "datatype": "string",
+          "map": null
+        },
+        {
+          "name": "Configuration",
+          "datatype": "string",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "WaitingProjectTreeLoadingStop",
+      "displayName": "WaitingProjectTreeLoadingStop",
+      "descriptor": {
+        "id": 18,
+        "version": 0,
+        "channel": 0,
+        "level": "Information",
+        "opcode": "End",
+        "task": 65516,
+        "keyword": 0
+      },
+      "fields": [
+        {
+          "name": "ProjectPath",
+          "datatype": "string",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "CpsNotifyTaskStart",
+      "displayName": "CpsNotifyTaskStart",
+      "descriptor": {
+        "id": 41,
+        "version": 0,
+        "channel": 0,
+        "level": "Information",
+        "opcode": "Start",
+        "task": 65493,
+        "keyword": 0
+      },
+      "fields": [
+        {
+          "name": "StageId",
+          "datatype": "string",
+          "map": null
+        },
+        {
+          "name": "ProjectPath",
+          "datatype": "string",
+          "map": null
+        },
+        {
+          "name": "Name",
+          "datatype": "string",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "CreateUnconfiguredProjectStart",
+      "displayName": "CreateUnconfiguredProjectStart",
+      "descriptor": {
+        "id": 1,
+        "version": 0,
+        "channel": 0,
+        "level": "Information",
+        "opcode": "Start",
+        "task": 65533,
+        "keyword": 0
+      },
+      "fields": [
+        {
+          "name": "ProjectFileName",
+          "datatype": "string",
+          "map": null
+        },
+        {
+          "name": "Location",
+          "datatype": "string",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "CreateUnconfiguredProjectStop",
+      "displayName": "CreateUnconfiguredProjectStop",
+      "descriptor": {
+        "id": 2,
+        "version": 0,
+        "channel": 0,
+        "level": "Information",
+        "opcode": "End",
+        "task": 65533,
+        "keyword": 0
+      },
+      "fields": [
+        {
+          "name": "ProjectFileName",
+          "datatype": "string",
+          "map": null
+        },
+        {
+          "name": "Location",
+          "datatype": "string",
+          "map": null
+        },
+        {
+          "name": "Capabilities",
+          "datatype": "string",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "SetInitialProjectConfigurationStart",
+      "displayName": "SetInitialProjectConfigurationStart",
+      "descriptor": {
+        "id": 3,
+        "version": 0,
+        "channel": 0,
+        "level": "Information",
+        "opcode": "Start",
+        "task": 65531,
+        "keyword": 0
+      },
+      "fields": [
+        {
+          "name": "ProjectPath",
+          "datatype": "string",
+          "map": null
+        },
+        {
+          "name": "ConfigurationName",
+          "datatype": "string",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "WaitingProjectTreePublishingStart",
+      "displayName": "WaitingProjectTreePublishingStart",
+      "descriptor": {
+        "id": 7,
+        "version": 0,
+        "channel": 0,
+        "level": "Information",
+        "opcode": "Start",
+        "task": 65527,
+        "keyword": 0
+      },
+      "fields": [
+        {
+          "name": "ProjectPath",
+          "datatype": "string",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "WaitingProjectTreePublishingStop",
+      "displayName": "WaitingProjectTreePublishingStop",
+      "descriptor": {
+        "id": 8,
+        "version": 0,
+        "channel": 0,
+        "level": "Information",
+        "opcode": "End",
+        "task": 65527,
+        "keyword": 0
+      },
+      "fields": [
+        {
+          "name": "ProjectPath",
+          "datatype": "string",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "WaitingLatestReferencesStart",
+      "displayName": "WaitingLatestReferencesStart",
+      "descriptor": {
+        "id": 9,
+        "version": 0,
+        "channel": 0,
+        "level": "Information",
+        "opcode": "Start",
+        "task": 65525,
+        "keyword": 0
+      },
+      "fields": [
+        {
+          "name": "ProjectPath",
+          "datatype": "string",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "WaitingLatestReferencesStop",
+      "displayName": "WaitingLatestReferencesStop",
+      "descriptor": {
+        "id": 10,
+        "version": 0,
+        "channel": 0,
+        "level": "Information",
+        "opcode": "End",
+        "task": 65525,
+        "keyword": 0
+      },
+      "fields": [
+        {
+          "name": "ProjectPath",
+          "datatype": "string",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "CreateProjectAsyncStart",
+      "displayName": "CreateProjectAsyncStart",
+      "descriptor": {
+        "id": 13,
+        "version": 0,
+        "channel": 0,
+        "level": "Information",
+        "opcode": "Start",
+        "task": 65521,
+        "keyword": 0
+      },
+      "fields": [
+        {
+          "name": "ProjectFileName",
+          "datatype": "string",
+          "map": null
+        },
+        {
+          "name": "Location",
+          "datatype": "string",
+          "map": null
+        },
+        {
+          "name": "IsNew",
+          "datatype": "bool",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "LoadInitialProjectTreeStart",
+      "displayName": "LoadInitialProjectTreeStart",
+      "descriptor": {
+        "id": 15,
+        "version": 0,
+        "channel": 0,
+        "level": "Information",
+        "opcode": "Start",
+        "task": 65519,
+        "keyword": 0
+      },
+      "fields": [
+        {
+          "name": "ProjectPath",
+          "datatype": "string",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "LoadInitialProjectTreeStop",
+      "displayName": "LoadInitialProjectTreeStop",
+      "descriptor": {
+        "id": 16,
+        "version": 0,
+        "channel": 0,
+        "level": "Information",
+        "opcode": "End",
+        "task": 65519,
+        "keyword": 0
+      },
+      "fields": [
+        {
+          "name": "ProjectPath",
+          "datatype": "string",
+          "map": null
+        },
+        {
+          "name": "Size",
+          "datatype": "int",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "CreateDynamicTypeFromRuleStart",
+      "displayName": "CreateDynamicTypeFromRuleStart",
+      "descriptor": {
+        "id": 21,
+        "version": 0,
+        "channel": 0,
+        "level": "Information",
+        "opcode": "Start",
+        "task": 65513,
+        "keyword": 0
+      },
+      "fields": [
+        {
+          "name": "ProjectFileName",
+          "datatype": "string",
+          "map": null
+        },
+        {
+          "name": "Rule",
+          "datatype": "string",
+          "map": null
+        },
+        {
+          "name": "CategoryName",
+          "datatype": "string",
+          "map": null
+        },
+        {
+          "name": "CreateBrowserObject",
+          "datatype": "bool",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "CreateDynamicTypeFromRuleStop",
+      "displayName": "CreateDynamicTypeFromRuleStop",
+      "descriptor": {
+        "id": 22,
+        "version": 0,
+        "channel": 0,
+        "level": "Information",
+        "opcode": "End",
+        "task": 65513,
+        "keyword": 0
+      },
+      "fields": [
+        {
+          "name": "ProjectFileName",
+          "datatype": "string",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "PublishProjectTreeCoreStart",
+      "displayName": "PublishProjectTreeCoreStart",
+      "descriptor": {
+        "id": 23,
+        "version": 0,
+        "channel": 0,
+        "level": "Information",
+        "opcode": "Start",
+        "task": 65511,
+        "keyword": 0
+      },
+      "fields": [
+        {
+          "name": "ProjectFileName",
+          "datatype": "string",
+          "map": null
+        },
+        {
+          "name": "ConfiguredVersion",
+          "datatype": "string",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "PublishProjectTreeCoreStop",
+      "displayName": "PublishProjectTreeCoreStop",
+      "descriptor": {
+        "id": 24,
+        "version": 0,
+        "channel": 0,
+        "level": "Information",
+        "opcode": "End",
+        "task": 65511,
+        "keyword": 0
+      },
+      "fields": [
+        {
+          "name": "ProjectFileName",
+          "datatype": "string",
+          "map": null
+        },
+        {
+          "name": "ConfiguredVersion",
+          "datatype": "string",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "PublishProjectTreeAcquiringLockStart",
+      "displayName": "PublishProjectTreeAcquiringLockStart",
+      "descriptor": {
+        "id": 25,
+        "version": 0,
+        "channel": 0,
+        "level": "Information",
+        "opcode": "Start",
+        "task": 65509,
+        "keyword": 0
+      },
+      "fields": null
+    },
+    {
+      "name": "PublishProjectTreeAcquiringLockStop",
+      "displayName": "PublishProjectTreeAcquiringLockStop",
+      "descriptor": {
+        "id": 26,
+        "version": 0,
+        "channel": 0,
+        "level": "Information",
+        "opcode": "End",
+        "task": 65509,
+        "keyword": 0
+      },
+      "fields": [
+        {
+          "name": "AbandonedLockCount",
+          "datatype": "int",
+          "map": null
+        },
+        {
+          "name": "AbandonedAcquiringLockCount",
+          "datatype": "int",
+          "map": null
+        },
+        {
+          "name": "ThreadSwitchingTime",
+          "datatype": "long",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "TransferToBestProjectOwnerStart",
+      "displayName": "TransferToBestProjectOwnerStart",
+      "descriptor": {
+        "id": 501,
+        "version": 0,
+        "channel": 0,
+        "level": "Information",
+        "opcode": "Start",
+        "task": 65033,
+        "keyword": 0
+      },
+      "fields": [
+        {
+          "name": "FilePath",
+          "datatype": "string",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "TransferToBestProjectOwnerStop",
+      "displayName": "TransferToBestProjectOwnerStop",
+      "descriptor": {
+        "id": 502,
+        "version": 0,
+        "channel": 0,
+        "level": "Information",
+        "opcode": "End",
+        "task": 65033,
+        "keyword": 0
+      },
+      "fields": [
+        {
+          "name": "FilePath",
+          "datatype": "string",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "SwitchToMainThreadToPublishTreeFailed",
+      "displayName": "SwitchToMainThreadToPublishTreeFailed",
+      "descriptor": {
+        "id": 100,
+        "version": 0,
+        "channel": 0,
+        "level": "Information",
+        "opcode": "Info",
+        "task": 65434,
+        "keyword": 0
+      },
+      "fields": [
+        {
+          "name": "Count",
+          "datatype": "int",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "NotifyBeforeSolutionClosing",
+      "displayName": "NotifyBeforeSolutionClosing",
+      "descriptor": {
+        "id": 101,
+        "version": 0,
+        "channel": 0,
+        "level": "Information",
+        "opcode": "Info",
+        "task": 65433,
+        "keyword": 0
+      },
+      "fields": null
+    },
+    {
+      "name": "NotifyQueryStatusDelay",
+      "displayName": "NotifyQueryStatusDelay",
+      "descriptor": {
+        "id": 102,
+        "version": 0,
+        "channel": 0,
+        "level": "Information",
+        "opcode": "Info",
+        "task": 65432,
+        "keyword": 0
+      },
+      "fields": [
+        {
+          "name": "CommandGroup",
+          "datatype": "string",
+          "map": null
+        },
+        {
+          "name": "CommandId",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "Handler",
+          "datatype": "string",
+          "map": null
+        },
+        {
+          "name": "DelayTicket",
+          "datatype": "int",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "WaitingProjectTreeLoadingStart",
+      "displayName": "WaitingProjectTreeLoadingStart",
+      "descriptor": {
+        "id": 17,
+        "version": 0,
+        "channel": 0,
+        "level": "Information",
+        "opcode": "Start",
+        "task": 65517,
+        "keyword": 0
+      },
+      "fields": [
+        {
+          "name": "ProjectPath",
+          "datatype": "string",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "LoadAllUnconfiguredProjectsStart",
+      "displayName": "LoadAllUnconfiguredProjectsStart",
+      "descriptor": {
+        "id": 30,
+        "version": 0,
+        "channel": 0,
+        "level": "Information",
+        "opcode": "Start",
+        "task": 65504,
+        "keyword": 0
+      },
+      "fields": null
+    },
+    {
+      "name": "LoadAllUnconfiguredProjectsStop",
+      "displayName": "LoadAllUnconfiguredProjectsStop",
+      "descriptor": {
+        "id": 31,
+        "version": 0,
+        "channel": 0,
+        "level": "Information",
+        "opcode": "End",
+        "task": 65504,
+        "keyword": 0
+      },
+      "fields": null
+    },
+    {
+      "name": "LoadAllConfiguredProjectsStart",
+      "displayName": "LoadAllConfiguredProjectsStart",
+      "descriptor": {
+        "id": 32,
+        "version": 0,
+        "channel": 0,
+        "level": "Information",
+        "opcode": "Start",
+        "task": 65502,
+        "keyword": 0
+      },
+      "fields": null
+    },
+    {
+      "name": "LoadAllConfiguredProjectsStop",
+      "displayName": "LoadAllConfiguredProjectsStop",
+      "descriptor": {
+        "id": 33,
+        "version": 0,
+        "channel": 0,
+        "level": "Information",
+        "opcode": "End",
+        "task": 65502,
+        "keyword": 0
+      },
+      "fields": null
+    },
+    {
+      "name": "LoadAllProjectNodesStart",
+      "displayName": "LoadAllProjectNodesStart",
+      "descriptor": {
+        "id": 34,
+        "version": 0,
+        "channel": 0,
+        "level": "Information",
+        "opcode": "Start",
+        "task": 65500,
+        "keyword": 0
+      },
+      "fields": null
+    },
+    {
+      "name": "LoadAllProjectNodesStop",
+      "displayName": "LoadAllProjectNodesStop",
+      "descriptor": {
+        "id": 35,
+        "version": 0,
+        "channel": 0,
+        "level": "Information",
+        "opcode": "End",
+        "task": 65500,
+        "keyword": 0
+      },
+      "fields": null
+    },
+    {
+      "name": "LoadProjectsAndTreesStart",
+      "displayName": "LoadProjectsAndTreesStart",
+      "descriptor": {
+        "id": 36,
+        "version": 0,
+        "channel": 0,
+        "level": "Information",
+        "opcode": "Start",
+        "task": 65498,
+        "keyword": 0
+      },
+      "fields": null
+    },
+    {
+      "name": "LoadProjectsAndTreesStop",
+      "displayName": "LoadProjectsAndTreesStop",
+      "descriptor": {
+        "id": 37,
+        "version": 0,
+        "channel": 0,
+        "level": "Information",
+        "opcode": "End",
+        "task": 65498,
+        "keyword": 0
+      },
+      "fields": null
+    },
+    {
+      "name": "ResetDesignTimeBuilder",
+      "displayName": "ResetDesignTimeBuilder",
+      "descriptor": {
+        "id": 38,
+        "version": 0,
+        "channel": 0,
+        "level": "Information",
+        "opcode": "Info",
+        "task": 65496,
+        "keyword": 0
+      },
+      "fields": [
+        {
+          "name": "Project",
+          "datatype": "string",
+          "map": null
+        },
+        {
+          "name": "Configuration",
+          "datatype": "string",
+          "map": null
+        },
+        {
+          "name": "ResetId",
+          "datatype": "int",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "CpsHandlersBeforeCloseSolutionStart",
+      "displayName": "CpsHandlersBeforeCloseSolutionStart",
+      "descriptor": {
+        "id": 39,
+        "version": 0,
+        "channel": 0,
+        "level": "Information",
+        "opcode": "Start",
+        "task": 65495,
+        "keyword": 0
+      },
+      "fields": null
+    },
+    {
+      "name": "CpsHandlersBeforeCloseSolutionStop",
+      "displayName": "CpsHandlersBeforeCloseSolutionStop",
+      "descriptor": {
+        "id": 40,
+        "version": 0,
+        "channel": 0,
+        "level": "Information",
+        "opcode": "End",
+        "task": 65495,
+        "keyword": 0
+      },
+      "fields": null
+    },
+    {
+      "name": "CpsNotifyTaskStop",
+      "displayName": "CpsNotifyTaskStop",
+      "descriptor": {
+        "id": 42,
+        "version": 0,
+        "channel": 0,
+        "level": "Information",
+        "opcode": "End",
+        "task": 65493,
+        "keyword": 0
+      },
+      "fields": [
+        {
+          "name": "StageId",
+          "datatype": "string",
+          "map": null
+        },
+        {
+          "name": "ProjectPath",
+          "datatype": "string",
+          "map": null
+        },
+        {
+          "name": "Name",
+          "datatype": "string",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "CpsUpdateSubTypeStart",
+      "displayName": "CpsUpdateSubTypeStart",
+      "descriptor": {
+        "id": 43,
+        "version": 0,
+        "channel": 0,
+        "level": "Information",
+        "opcode": "Start",
+        "task": 65491,
+        "keyword": 0
+      },
+      "fields": [
+        {
+          "name": "ProjectPath",
+          "datatype": "string",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "CpsUpdateSubTypeEnd",
+      "displayName": "CpsUpdateSubTypeEnd",
+      "descriptor": {
+        "id": 44,
+        "version": 0,
+        "channel": 0,
+        "level": "Information",
+        "opcode": "Info",
+        "task": 65490,
+        "keyword": 0
+      },
+      "fields": [
+        {
+          "name": "ProjectPath",
+          "datatype": "string",
+          "map": null
+        },
+        {
+          "name": "Count",
+          "datatype": "int",
+          "map": null
+        },
+        {
+          "name": "Changed",
+          "datatype": "bool",
+          "map": null
+        },
+        {
+          "name": "Reevaluated",
+          "datatype": "bool",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "ProjectReloadedInBackground",
+      "displayName": "ProjectReloadedInBackground",
+      "descriptor": {
+        "id": 50,
+        "version": 0,
+        "channel": 0,
+        "level": "Information",
+        "opcode": "Info",
+        "task": 65484,
+        "keyword": 0
+      },
+      "fields": [
+        {
+          "name": "Project",
+          "datatype": "string",
+          "map": null
+        },
+        {
+          "name": "ConfiguredVersion",
+          "datatype": "string",
+          "map": null
+        }
+      ]
+    }
+  ],
+  "tasks": {
+    "65033": "TransferToBestProjectOwner",
+    "65432": "NotifyQueryStatusDelay",
+    "65433": "NotifyBeforeSolutionClosing",
+    "65434": "SwitchToMainThreadToPublishTreeFailed",
+    "65484": "ProjectReloadedInBackground",
+    "65490": "CpsUpdateSubTypeEnd",
+    "65491": "CpsUpdateSubType",
+    "65493": "CpsNotifyTask",
+    "65495": "CpsHandlersBeforeCloseSolution",
+    "65496": "ResetDesignTimeBuilder",
+    "65498": "LoadProjectsAndTrees",
+    "65500": "LoadAllProjectNodes",
+    "65502": "LoadAllConfiguredProjects",
+    "65504": "LoadAllUnconfiguredProjects",
+    "65509": "PublishProjectTreeAcquiringLock",
+    "65511": "PublishProjectTreeCore",
+    "65513": "CreateDynamicTypeFromRule",
+    "65516": "WaitingProjectTreeLoadingStop",
+    "65517": "WaitingProjectTreeLoading",
+    "65519": "LoadInitialProjectTree",
+    "65521": "CreateProjectAsync",
+    "65523": "CreateProject",
+    "65525": "WaitingLatestReferences",
+    "65527": "WaitingProjectTreePublishing",
+    "65529": "InitializeProjectNode",
+    "65530": "SetInitialProjectConfigurationStop",
+    "65531": "SetInitialProjectConfiguration",
+    "65533": "CreateUnconfiguredProject",
+    "65534": "EventSourceMessage"
+  },
+  "opcodes": {},
+  "keywords": {
+    "17592186044416": "Session3",
+    "35184372088832": "Session2",
+    "70368744177664": "Session1",
+    "140737488355328": "Session0"
+  },
+  "maps": [],
+  "structs": []
+}

@@ -1,0 +1,199 @@
+{
+  "name": "KernelStackWalk",
+  "displayName": "Kernel-StackWalk",
+  "id": "def2fe46-7bd6-4b80-bd94-f57fe20d0ce3",
+  "events": [
+    {
+      "name": "Stack",
+      "displayName": "Stack",
+      "descriptor": {
+        "id": 0,
+        "version": 2,
+        "channel": 0,
+        "level": "None",
+        "opcode": 32,
+        "task": 0,
+        "keyword": 0
+      },
+      "fields": [
+        {
+          "name": "Timestamp",
+          "datatype": "ulong",
+          "map": null
+        },
+        {
+          "name": "ProcessId",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "ThreadId",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "Stack",
+          "datatype": "pointer[...]",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "StackKeyCreate",
+      "displayName": "StackKeyCreate",
+      "descriptor": {
+        "id": 0,
+        "version": 2,
+        "channel": 0,
+        "level": "None",
+        "opcode": 34,
+        "task": 0,
+        "keyword": 0
+      },
+      "fields": [
+        {
+          "name": "StackKey",
+          "datatype": "pointer",
+          "map": null
+        },
+        {
+          "name": "StackFrames",
+          "datatype": "pointer[...]",
+          "map": null
+        }
+    ]
+    },
+    {
+      "name": "StackKeyDelete",
+      "displayName": "StackKeyDelete",
+      "descriptor": {
+        "id": 0,
+        "version": 2,
+        "channel": 0,
+        "level": "None",
+        "opcode": 35,
+        "task": 0,
+        "keyword": 0
+      },
+      "fields": [
+        {
+          "name": "StackKey",
+          "datatype": "pointer",
+          "map": null
+        },
+        {
+          "name": "StackFrames",
+          "datatype": "pointer[...]",
+          "map": null
+        }
+    ]
+    },
+    {
+      "name": "StackKeyRundown",
+      "displayName": "StackKeyRundown",
+      "descriptor": {
+        "id": 0,
+        "version": 2,
+        "channel": 0,
+        "level": "None",
+        "opcode": 36,
+        "task": 0,
+        "keyword": 0
+      },
+      "fields": [
+        {
+          "name": "StackKey",
+          "datatype": "pointer",
+          "map": null
+        },
+        {
+          "name": "StackFrames",
+          "datatype": "pointer[...]",
+          "map": null
+        }
+    ]
+    },
+    {
+      "name": "StackKeyKernel",
+      "displayName": "StackKeyKernel",
+      "descriptor": {
+        "id": 0,
+        "version": 2,
+        "channel": 0,
+        "level": "None",
+        "opcode": 37,
+        "task": 0,
+        "keyword": 0
+      },
+      "fields": [
+        {
+          "name": "Timestamp",
+          "datatype": "ulong",
+          "map": null
+        },
+        {
+          "name": "ProcessId",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "ThreadId",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "StackKey",
+          "datatype": "pointer",
+          "map": null
+        }
+    ]
+    },
+    {
+      "name": "StackKeyUser",
+      "displayName": "StackKeyUser",
+      "descriptor": {
+        "id": 0,
+        "version": 2,
+        "channel": 0,
+        "level": "None",
+        "opcode": 38,
+        "task": 0,
+        "keyword": 0
+      },
+      "fields": [
+        {
+          "name": "Timestamp",
+          "datatype": "ulong",
+          "map": null
+        },
+        {
+          "name": "ProcessId",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "ThreadId",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "StackKey",
+          "datatype": "pointer",
+          "map": null
+        }
+    ]
+    }
+ ],
+  "tasks": {},
+  "opcodes": {
+    "32": "Stack",
+    "34": "StackKeyCreate",
+    "35": "StackKeyDelete",
+    "36": "StackKeyRundown",
+    "37": "StackKeyKernel",
+    "38": "StackKeyUser"
+  },
+  "keywords": {},
+  "maps": [],
+  "structs": []
+}

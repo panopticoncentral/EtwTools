@@ -409,19 +409,19 @@ namespace EtwTools
         /// </summary>
         public ref struct AddressEnumerable
         {
-            private readonly Span<byte> _buffer;
-            private readonly int _addressSize;
+            private readonly EtwEvent _event;
+            private readonly int _offset;
             private readonly uint _count;
 
-            internal AddressEnumerable(Span<byte> buffer, int addressSize) :
-                this(buffer, addressSize, uint.MaxValue)
+            internal AddressEnumerable(EtwEvent e, int offset) :
+                this(e, offset, uint.MaxValue)
             {
             }
 
-            internal AddressEnumerable(Span<byte> buffer, int addressSize, uint count)
+            internal AddressEnumerable(EtwEvent e, int offset, uint count)
             {
-                _buffer = buffer;
-                _addressSize = addressSize;
+                _event = e;
+                _offset = offset;
                 _count = count;
             }
 
@@ -438,22 +438,22 @@ namespace EtwTools
             {
                 private readonly AddressEnumerable _enumerable;
                 private int _offset;
-                private int _count;
+                private int _index;
 
                 /// <summary>
                 /// The current value, if any.
                 /// </summary>
-                public ulong Current => ((_offset < _enumerable._buffer.Length) && (_count <= _enumerable._count))
-                    ? _enumerable._addressSize == 4
-                        ? BitConverter.ToUInt32(_enumerable._buffer[_offset..])
-                        : BitConverter.ToUInt64(_enumerable._buffer[_offset..])
+                public ulong Current => ((_offset < _enumerable._event.Data.Length) && (_index <= _enumerable._count))
+                    ? _enumerable._event.AddressSize == 4
+                        ? BitConverter.ToUInt32(_enumerable._event.Data[_offset..])
+                        : BitConverter.ToUInt64(_enumerable._event.Data[_offset..])
                     : throw new InvalidOperationException();
 
                 internal AddressEnumerator(AddressEnumerable enumerable)
                 {
                     _enumerable = enumerable;
                     _offset = int.MaxValue;
-                    _count = 0;
+                    _index = 0;
                 }
 
                 /// <summary>
@@ -464,14 +464,14 @@ namespace EtwTools
                 {
                     if (_offset == int.MaxValue)
                     {
-                        _offset = 0;
-                        _count = 1;
+                        _offset = _enumerable._offset;
+                        _index = 1;
                         return true;
                     }
 
-                    _offset += _enumerable._addressSize;
-                    _count++;
-                    return (_offset < _enumerable._buffer.Length) && (_count <= _enumerable._count);
+                    _offset += _enumerable._event.AddressSize;
+                    _index++;
+                    return (_offset < _enumerable._event.Data.Length) && (_index <= _enumerable._count);
                 }
             }
         }
@@ -481,17 +481,19 @@ namespace EtwTools
         /// </summary>
         public ref struct UnicodeStringEnumerable
         {
-            private readonly Span<byte> _buffer;
+            private readonly EtwEvent _event;
+            private readonly int _offset;
             private readonly uint _count;
 
-            internal UnicodeStringEnumerable(Span<byte> buffer) :
-                this(buffer, uint.MaxValue)
+            internal UnicodeStringEnumerable(EtwEvent e, int offset) :
+                this(e, offset, uint.MaxValue)
             {
             }
 
-            internal UnicodeStringEnumerable(Span<byte> buffer, uint count)
+            internal UnicodeStringEnumerable(EtwEvent e, int offset, uint count)
             {
-                _buffer = buffer;
+                _event = e;
+                _offset = offset;
                 _count = count;
             }
 
@@ -508,20 +510,20 @@ namespace EtwTools
             {
                 private readonly UnicodeStringEnumerable _enumerable;
                 private int _offset;
-                private int _count;
+                private int _index;
 
                 /// <summary>
                 /// The current value, if any.
                 /// </summary>
-                public string Current => ((_offset < _enumerable._buffer.Length) && (_count <= _enumerable._count))
-                    ? Encoding.Unicode.GetString(_enumerable._buffer[_offset..])
+                public string Current => ((_offset < _enumerable._event.Data.Length) && (_index <= _enumerable._count))
+                    ? Encoding.Unicode.GetString(_enumerable._event.Data[_offset..])
                     : throw new InvalidOperationException();
 
                 internal UnicodeStringEnumerator(UnicodeStringEnumerable enumerable)
                 {
                     _enumerable = enumerable;
                     _offset = int.MaxValue;
-                    _count = 0;
+                    _index = 0;
                 }
 
                 internal static int StringLength(Span<byte> span, int offset)
@@ -544,14 +546,14 @@ namespace EtwTools
                 {
                     if (_offset == int.MaxValue)
                     {
-                        _offset = 0;
-                        _count = 1;
+                        _offset = _enumerable._offset;
+                        _index = 1;
                         return true;
                     }
 
-                    _offset += StringLength(_enumerable._buffer, _offset);
-                    _count++;
-                    return (_offset < _enumerable._buffer.Length) && (_count <= _enumerable._count);
+                    _offset += StringLength(_enumerable._event.Data, _offset);
+                    _index++;
+                    return (_offset < _enumerable._event.Data.Length) && (_index <= _enumerable._count);
                 }
             }
         }
@@ -561,17 +563,19 @@ namespace EtwTools
         /// </summary>
         public ref struct AnsiStringEnumerable
         {
-            private readonly Span<byte> _buffer;
+            private readonly EtwEvent _event;
+            private readonly int _offset;
             private readonly uint _count;
 
-            internal AnsiStringEnumerable(Span<byte> buffer) :
-                this(buffer, uint.MaxValue)
+            internal AnsiStringEnumerable(EtwEvent e, int offset) :
+                this(e, offset, uint.MaxValue)
             {
             }
 
-            internal AnsiStringEnumerable(Span<byte> buffer, uint count)
+            internal AnsiStringEnumerable(EtwEvent e, int offset, uint count)
             {
-                _buffer = buffer;
+                _event = e;
+                _offset = offset;
                 _count = count;
             }
 
@@ -588,20 +592,20 @@ namespace EtwTools
             {
                 private readonly AnsiStringEnumerable _enumerable;
                 private int _offset;
-                private int _count;
+                private int _index;
 
                 /// <summary>
                 /// The current value, if any.
                 /// </summary>
-                public string Current => ((_offset < _enumerable._buffer.Length) && (_count <= _enumerable._count))
-                    ? Encoding.ASCII.GetString(_enumerable._buffer[_offset..])
+                public string Current => ((_offset < _enumerable._event.Data.Length) && (_index <= _enumerable._count))
+                    ? Encoding.ASCII.GetString(_enumerable._event.Data[_offset..])
                     : throw new InvalidOperationException();
 
                 internal AnsiStringEnumerator(AnsiStringEnumerable enumerable)
                 {
                     _enumerable = enumerable;
                     _offset = int.MaxValue;
-                    _count = 0;
+                    _index = 0;
                 }
 
                 internal static int StringLength(Span<byte> span, int offset)
@@ -624,14 +628,14 @@ namespace EtwTools
                 {
                     if (_offset == int.MaxValue)
                     {
-                        _offset = 0;
-                        _count = 1;
+                        _offset = _enumerable._offset;
+                        _index = 1;
                         return true;
                     }
 
-                    _offset += StringLength(_enumerable._buffer, _offset);
-                    _count++;
-                    return (_offset < _enumerable._buffer.Length) && (_count <= _enumerable._count);
+                    _offset += StringLength(_enumerable._event.Data, _offset);
+                    _index++;
+                    return (_offset < _enumerable._event.Data.Length) && (_index <= _enumerable._count);
                 }
             }
         }
@@ -641,17 +645,19 @@ namespace EtwTools
         /// </summary>
         public ref struct StructEnumerable<T> where T : unmanaged
         {
-            private readonly Span<byte> _buffer;
+            private readonly EtwEvent _event;
+            private readonly int _offset;
             private readonly uint _count;
 
-            internal StructEnumerable(Span<byte> buffer) :
-                this(buffer, uint.MaxValue)
+            internal StructEnumerable(EtwEvent e, int offset) :
+                this(e, offset, uint.MaxValue)
             {
             }
 
-            internal StructEnumerable(Span<byte> buffer, uint count)
+            internal StructEnumerable(EtwEvent e, int offset, uint count)
             {
-                _buffer = buffer;
+                _event = e;
+                _offset = offset;
                 _count = count;
             }
 
@@ -668,20 +674,20 @@ namespace EtwTools
             {
                 private readonly StructEnumerable<T> _enumerable;
                 private int _offset;
-                private int _count;
+                private int _index;
 
                 /// <summary>
                 /// The current value, if any.
                 /// </summary>
-                public T Current => ((_offset < _enumerable._buffer.Length) && (_count <= _enumerable._count))
-                    ? MemoryMarshal.AsRef<T>(_enumerable._buffer[_offset..])
+                public T Current => ((_offset < _enumerable._event.Data.Length) && (_index <= _enumerable._count))
+                    ? MemoryMarshal.AsRef<T>(_enumerable._event.Data[_offset..])
                     : throw new InvalidOperationException();
 
                 internal StructEnumerator(StructEnumerable<T> enumerable)
                 {
                     _enumerable = enumerable;
                     _offset = int.MaxValue;
-                    _count = 0;
+                    _index = 0;
                 }
 
                 /// <summary>
@@ -692,14 +698,14 @@ namespace EtwTools
                 {
                     if (_offset == int.MaxValue)
                     {
-                        _offset = 0;
-                        _count = 1;
+                        _offset = _enumerable._offset;
+                        _index = 1;
                         return true;
                     }
 
                     _offset += sizeof(T);
-                    _count++;
-                    return (_offset < _enumerable._buffer.Length) && (_count <= _enumerable._count);
+                    _index++;
+                    return (_offset < _enumerable._event.Data.Length) && (_index <= _enumerable._count);
                 }
             }
         }

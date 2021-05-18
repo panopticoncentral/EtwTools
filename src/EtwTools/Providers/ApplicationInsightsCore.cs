@@ -1,5 +1,6 @@
 using System;
 
+#pragma warning disable IDE0004 // Remove Unnecessary Cast
 #pragma warning disable CA1707 // Identifiers should not contain underscores
 #pragma warning disable CA1720 // Identifier contains type name
 
@@ -84,7 +85,7 @@ namespace EtwTools
         }
 
         /// <summary>
-        /// Keywords supported by Microsoft-ApplicationInsights-Core.
+        /// Keywords supported by ApplicationInsightsCore.
         /// </summary>
         [Flags]
         public enum Keywords : ulong
@@ -196,11 +197,24 @@ namespace EtwTools
             /// <summary>
             /// A data wrapper for a EventSourceMessage event.
             /// </summary>
-            public readonly ref struct EventSourceMessageData
+            public ref struct EventSourceMessageData
             {
                 private readonly EtwEvent _etwEvent;
 
-                private const int Offset_Message = 0;
+                private int _offset_Message;
+
+                private int Offset_Message
+                {
+                    get
+                    {
+                        if (_offset_Message == -1)
+                        {
+                            _offset_Message = 0;
+                        }
+
+                        return _offset_Message;
+                    }
+                }
 
                 /// <summary>
                 /// Retrieves the Message field.
@@ -214,6 +228,7 @@ namespace EtwTools
                 public EventSourceMessageData(EtwEvent etwEvent)
                 {
                     _etwEvent = etwEvent;
+                    _offset_Message = -1;
                 }
             }
 
@@ -292,22 +307,48 @@ namespace EtwTools
             /// <summary>
             /// A data wrapper for a LogVerbose event.
             /// </summary>
-            public readonly ref struct LogVerboseData
+            public ref struct LogVerboseData
             {
                 private readonly EtwEvent _etwEvent;
 
-                private const int Offset_Msg = 0;
-                private readonly int _offset_AppDomainName;
+                private int _offset_Msg;
+                private int _offset_AppDomainName;
+
+                private int Offset_Msg
+                {
+                    get
+                    {
+                        if (_offset_Msg == -1)
+                        {
+                            _offset_Msg = 0;
+                        }
+
+                        return _offset_Msg;
+                    }
+                }
+
+                private int Offset_AppDomainName
+                {
+                    get
+                    {
+                        if (_offset_AppDomainName == -1)
+                        {
+                            _offset_AppDomainName = Offset_Msg + EtwEvent.UnicodeStringEnumerable.UnicodeStringEnumerator.StringLength(_etwEvent.Data, Offset_Msg);
+                        }
+
+                        return _offset_AppDomainName;
+                    }
+                }
 
                 /// <summary>
                 /// Retrieves the Msg field.
                 /// </summary>
-                public string Msg => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_Msg.._offset_AppDomainName]);
+                public string Msg => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_Msg..]);
 
                 /// <summary>
                 /// Retrieves the AppDomainName field.
                 /// </summary>
-                public string AppDomainName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[_offset_AppDomainName..]);
+                public string AppDomainName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_AppDomainName..]);
 
                 /// <summary>
                 /// Creates a new LogVerboseData.
@@ -316,7 +357,8 @@ namespace EtwTools
                 public LogVerboseData(EtwEvent etwEvent)
                 {
                     _etwEvent = etwEvent;
-                    _offset_AppDomainName = Offset_Msg + EtwEvent.UnicodeStringEnumerable.UnicodeStringEnumerator.StringLength(etwEvent.Data, Offset_Msg);
+                    _offset_Msg = -1;
+                    _offset_AppDomainName = -1;
                 }
             }
 
@@ -350,7 +392,7 @@ namespace EtwTools
                 Level = EtwTraceLevel.Information,
                 Opcode = EtwEventOpcode.Info,
                 Task = (ushort)Tasks.DiagnosticsEventThrottlingHasBeenStartedForTheEvent,
-                Keyword = (ulong)(Keywords.UserActionable | Keywords.Diagnostics)
+                Keyword = (ulong)Keywords.UserActionable | (ulong)Keywords.Diagnostics
             };
 
             /// <summary>
@@ -395,17 +437,43 @@ namespace EtwTools
             /// <summary>
             /// A data wrapper for a DiagnosticsEventThrottlingHasBeenStartedForTheEvent event.
             /// </summary>
-            public readonly ref struct DiagnosticsEventThrottlingHasBeenStartedForTheEventData
+            public ref struct DiagnosticsEventThrottlingHasBeenStartedForTheEventData
             {
                 private readonly EtwEvent _etwEvent;
 
-                private const int Offset_EventId = 0;
-                private const int Offset_AppDomainName = 4;
+                private int _offset_EventId;
+                private int _offset_AppDomainName;
+
+                private int Offset_EventId
+                {
+                    get
+                    {
+                        if (_offset_EventId == -1)
+                        {
+                            _offset_EventId = 0;
+                        }
+
+                        return _offset_EventId;
+                    }
+                }
+
+                private int Offset_AppDomainName
+                {
+                    get
+                    {
+                        if (_offset_AppDomainName == -1)
+                        {
+                            _offset_AppDomainName = Offset_EventId + 4;
+                        }
+
+                        return _offset_AppDomainName;
+                    }
+                }
 
                 /// <summary>
                 /// Retrieves the EventId field.
                 /// </summary>
-                public int EventId => BitConverter.ToInt32(_etwEvent.Data[Offset_EventId..Offset_AppDomainName]);
+                public int EventId => BitConverter.ToInt32(_etwEvent.Data[Offset_EventId..]);
 
                 /// <summary>
                 /// Retrieves the AppDomainName field.
@@ -419,6 +487,8 @@ namespace EtwTools
                 public DiagnosticsEventThrottlingHasBeenStartedForTheEventData(EtwEvent etwEvent)
                 {
                     _etwEvent = etwEvent;
+                    _offset_EventId = -1;
+                    _offset_AppDomainName = -1;
                 }
             }
 
@@ -452,7 +522,7 @@ namespace EtwTools
                 Level = EtwTraceLevel.Information,
                 Opcode = EtwEventOpcode.Info,
                 Task = (ushort)Tasks.DiagnosticsEventThrottlingHasBeenResetForTheEvent,
-                Keyword = (ulong)(Keywords.UserActionable | Keywords.Diagnostics)
+                Keyword = (ulong)Keywords.UserActionable | (ulong)Keywords.Diagnostics
             };
 
             /// <summary>
@@ -497,23 +567,62 @@ namespace EtwTools
             /// <summary>
             /// A data wrapper for a DiagnosticsEventThrottlingHasBeenResetForTheEvent event.
             /// </summary>
-            public readonly ref struct DiagnosticsEventThrottlingHasBeenResetForTheEventData
+            public ref struct DiagnosticsEventThrottlingHasBeenResetForTheEventData
             {
                 private readonly EtwEvent _etwEvent;
 
-                private const int Offset_EventId = 0;
-                private const int Offset_ExecutionCount = 4;
-                private const int Offset_AppDomainName = 8;
+                private int _offset_EventId;
+                private int _offset_ExecutionCount;
+                private int _offset_AppDomainName;
+
+                private int Offset_EventId
+                {
+                    get
+                    {
+                        if (_offset_EventId == -1)
+                        {
+                            _offset_EventId = 0;
+                        }
+
+                        return _offset_EventId;
+                    }
+                }
+
+                private int Offset_ExecutionCount
+                {
+                    get
+                    {
+                        if (_offset_ExecutionCount == -1)
+                        {
+                            _offset_ExecutionCount = Offset_EventId + 4;
+                        }
+
+                        return _offset_ExecutionCount;
+                    }
+                }
+
+                private int Offset_AppDomainName
+                {
+                    get
+                    {
+                        if (_offset_AppDomainName == -1)
+                        {
+                            _offset_AppDomainName = Offset_ExecutionCount + 4;
+                        }
+
+                        return _offset_AppDomainName;
+                    }
+                }
 
                 /// <summary>
                 /// Retrieves the EventId field.
                 /// </summary>
-                public int EventId => BitConverter.ToInt32(_etwEvent.Data[Offset_EventId..Offset_ExecutionCount]);
+                public int EventId => BitConverter.ToInt32(_etwEvent.Data[Offset_EventId..]);
 
                 /// <summary>
                 /// Retrieves the ExecutionCount field.
                 /// </summary>
-                public int ExecutionCount => BitConverter.ToInt32(_etwEvent.Data[Offset_ExecutionCount..Offset_AppDomainName]);
+                public int ExecutionCount => BitConverter.ToInt32(_etwEvent.Data[Offset_ExecutionCount..]);
 
                 /// <summary>
                 /// Retrieves the AppDomainName field.
@@ -527,6 +636,9 @@ namespace EtwTools
                 public DiagnosticsEventThrottlingHasBeenResetForTheEventData(EtwEvent etwEvent)
                 {
                     _etwEvent = etwEvent;
+                    _offset_EventId = -1;
+                    _offset_ExecutionCount = -1;
+                    _offset_AppDomainName = -1;
                 }
             }
 
@@ -605,22 +717,48 @@ namespace EtwTools
             /// <summary>
             /// A data wrapper for a DiagnoisticsEventThrottlingSchedulerDisposeTimerFailure event.
             /// </summary>
-            public readonly ref struct DiagnoisticsEventThrottlingSchedulerDisposeTimerFailureData
+            public ref struct DiagnoisticsEventThrottlingSchedulerDisposeTimerFailureData
             {
                 private readonly EtwEvent _etwEvent;
 
-                private const int Offset_Exception = 0;
-                private readonly int _offset_AppDomainName;
+                private int _offset_Exception;
+                private int _offset_AppDomainName;
+
+                private int Offset_Exception
+                {
+                    get
+                    {
+                        if (_offset_Exception == -1)
+                        {
+                            _offset_Exception = 0;
+                        }
+
+                        return _offset_Exception;
+                    }
+                }
+
+                private int Offset_AppDomainName
+                {
+                    get
+                    {
+                        if (_offset_AppDomainName == -1)
+                        {
+                            _offset_AppDomainName = Offset_Exception + EtwEvent.UnicodeStringEnumerable.UnicodeStringEnumerator.StringLength(_etwEvent.Data, Offset_Exception);
+                        }
+
+                        return _offset_AppDomainName;
+                    }
+                }
 
                 /// <summary>
                 /// Retrieves the Exception field.
                 /// </summary>
-                public string Exception => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_Exception.._offset_AppDomainName]);
+                public string Exception => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_Exception..]);
 
                 /// <summary>
                 /// Retrieves the AppDomainName field.
                 /// </summary>
-                public string AppDomainName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[_offset_AppDomainName..]);
+                public string AppDomainName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_AppDomainName..]);
 
                 /// <summary>
                 /// Creates a new DiagnoisticsEventThrottlingSchedulerDisposeTimerFailureData.
@@ -629,7 +767,8 @@ namespace EtwTools
                 public DiagnoisticsEventThrottlingSchedulerDisposeTimerFailureData(EtwEvent etwEvent)
                 {
                     _etwEvent = etwEvent;
-                    _offset_AppDomainName = Offset_Exception + EtwEvent.UnicodeStringEnumerable.UnicodeStringEnumerator.StringLength(etwEvent.Data, Offset_Exception);
+                    _offset_Exception = -1;
+                    _offset_AppDomainName = -1;
                 }
             }
 
@@ -708,17 +847,43 @@ namespace EtwTools
             /// <summary>
             /// A data wrapper for a DiagnoisticsEventThrottlingSchedulerTimerWasCreated event.
             /// </summary>
-            public readonly ref struct DiagnoisticsEventThrottlingSchedulerTimerWasCreatedData
+            public ref struct DiagnoisticsEventThrottlingSchedulerTimerWasCreatedData
             {
                 private readonly EtwEvent _etwEvent;
 
-                private const int Offset_IntervalInMilliseconds = 0;
-                private const int Offset_AppDomainName = 4;
+                private int _offset_IntervalInMilliseconds;
+                private int _offset_AppDomainName;
+
+                private int Offset_IntervalInMilliseconds
+                {
+                    get
+                    {
+                        if (_offset_IntervalInMilliseconds == -1)
+                        {
+                            _offset_IntervalInMilliseconds = 0;
+                        }
+
+                        return _offset_IntervalInMilliseconds;
+                    }
+                }
+
+                private int Offset_AppDomainName
+                {
+                    get
+                    {
+                        if (_offset_AppDomainName == -1)
+                        {
+                            _offset_AppDomainName = Offset_IntervalInMilliseconds + 4;
+                        }
+
+                        return _offset_AppDomainName;
+                    }
+                }
 
                 /// <summary>
                 /// Retrieves the IntervalInMilliseconds field.
                 /// </summary>
-                public int IntervalInMilliseconds => BitConverter.ToInt32(_etwEvent.Data[Offset_IntervalInMilliseconds..Offset_AppDomainName]);
+                public int IntervalInMilliseconds => BitConverter.ToInt32(_etwEvent.Data[Offset_IntervalInMilliseconds..]);
 
                 /// <summary>
                 /// Retrieves the AppDomainName field.
@@ -732,6 +897,8 @@ namespace EtwTools
                 public DiagnoisticsEventThrottlingSchedulerTimerWasCreatedData(EtwEvent etwEvent)
                 {
                     _etwEvent = etwEvent;
+                    _offset_IntervalInMilliseconds = -1;
+                    _offset_AppDomainName = -1;
                 }
             }
 
@@ -810,11 +977,24 @@ namespace EtwTools
             /// <summary>
             /// A data wrapper for a DiagnoisticsEventThrottlingSchedulerTimerWasRemoved event.
             /// </summary>
-            public readonly ref struct DiagnoisticsEventThrottlingSchedulerTimerWasRemovedData
+            public ref struct DiagnoisticsEventThrottlingSchedulerTimerWasRemovedData
             {
                 private readonly EtwEvent _etwEvent;
 
-                private const int Offset_AppDomainName = 0;
+                private int _offset_AppDomainName;
+
+                private int Offset_AppDomainName
+                {
+                    get
+                    {
+                        if (_offset_AppDomainName == -1)
+                        {
+                            _offset_AppDomainName = 0;
+                        }
+
+                        return _offset_AppDomainName;
+                    }
+                }
 
                 /// <summary>
                 /// Retrieves the AppDomainName field.
@@ -828,6 +1008,7 @@ namespace EtwTools
                 public DiagnoisticsEventThrottlingSchedulerTimerWasRemovedData(EtwEvent etwEvent)
                 {
                     _etwEvent = etwEvent;
+                    _offset_AppDomainName = -1;
                 }
             }
 
@@ -906,11 +1087,24 @@ namespace EtwTools
             /// <summary>
             /// A data wrapper for a TelemetryClientConstructorWithNoTelemetryConfiguration event.
             /// </summary>
-            public readonly ref struct TelemetryClientConstructorWithNoTelemetryConfigurationData
+            public ref struct TelemetryClientConstructorWithNoTelemetryConfigurationData
             {
                 private readonly EtwEvent _etwEvent;
 
-                private const int Offset_AppDomainName = 0;
+                private int _offset_AppDomainName;
+
+                private int Offset_AppDomainName
+                {
+                    get
+                    {
+                        if (_offset_AppDomainName == -1)
+                        {
+                            _offset_AppDomainName = 0;
+                        }
+
+                        return _offset_AppDomainName;
+                    }
+                }
 
                 /// <summary>
                 /// Retrieves the AppDomainName field.
@@ -924,6 +1118,7 @@ namespace EtwTools
                 public TelemetryClientConstructorWithNoTelemetryConfigurationData(EtwEvent etwEvent)
                 {
                     _etwEvent = etwEvent;
+                    _offset_AppDomainName = -1;
                 }
             }
 
@@ -1002,28 +1197,67 @@ namespace EtwTools
             /// <summary>
             /// A data wrapper for a PopulateRequiredStringWithValue event.
             /// </summary>
-            public readonly ref struct PopulateRequiredStringWithValueData
+            public ref struct PopulateRequiredStringWithValueData
             {
                 private readonly EtwEvent _etwEvent;
 
-                private const int Offset_ParameterName = 0;
-                private readonly int _offset_TelemetryType;
-                private readonly int _offset_AppDomainName;
+                private int _offset_ParameterName;
+                private int _offset_TelemetryType;
+                private int _offset_AppDomainName;
+
+                private int Offset_ParameterName
+                {
+                    get
+                    {
+                        if (_offset_ParameterName == -1)
+                        {
+                            _offset_ParameterName = 0;
+                        }
+
+                        return _offset_ParameterName;
+                    }
+                }
+
+                private int Offset_TelemetryType
+                {
+                    get
+                    {
+                        if (_offset_TelemetryType == -1)
+                        {
+                            _offset_TelemetryType = Offset_ParameterName + EtwEvent.UnicodeStringEnumerable.UnicodeStringEnumerator.StringLength(_etwEvent.Data, Offset_ParameterName);
+                        }
+
+                        return _offset_TelemetryType;
+                    }
+                }
+
+                private int Offset_AppDomainName
+                {
+                    get
+                    {
+                        if (_offset_AppDomainName == -1)
+                        {
+                            _offset_AppDomainName = Offset_TelemetryType + EtwEvent.UnicodeStringEnumerable.UnicodeStringEnumerator.StringLength(_etwEvent.Data, Offset_TelemetryType);
+                        }
+
+                        return _offset_AppDomainName;
+                    }
+                }
 
                 /// <summary>
                 /// Retrieves the ParameterName field.
                 /// </summary>
-                public string ParameterName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_ParameterName.._offset_TelemetryType]);
+                public string ParameterName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_ParameterName..]);
 
                 /// <summary>
                 /// Retrieves the TelemetryType field.
                 /// </summary>
-                public string TelemetryType => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[_offset_TelemetryType.._offset_AppDomainName]);
+                public string TelemetryType => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_TelemetryType..]);
 
                 /// <summary>
                 /// Retrieves the AppDomainName field.
                 /// </summary>
-                public string AppDomainName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[_offset_AppDomainName..]);
+                public string AppDomainName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_AppDomainName..]);
 
                 /// <summary>
                 /// Creates a new PopulateRequiredStringWithValueData.
@@ -1032,8 +1266,9 @@ namespace EtwTools
                 public PopulateRequiredStringWithValueData(EtwEvent etwEvent)
                 {
                     _etwEvent = etwEvent;
-                    _offset_TelemetryType = Offset_ParameterName + EtwEvent.UnicodeStringEnumerable.UnicodeStringEnumerator.StringLength(etwEvent.Data, Offset_ParameterName);
-                    _offset_AppDomainName = _offset_TelemetryType + EtwEvent.UnicodeStringEnumerable.UnicodeStringEnumerator.StringLength(etwEvent.Data, _offset_TelemetryType);
+                    _offset_ParameterName = -1;
+                    _offset_TelemetryType = -1;
+                    _offset_AppDomainName = -1;
                 }
             }
 
@@ -1112,11 +1347,24 @@ namespace EtwTools
             /// <summary>
             /// A data wrapper for a RequestTelemetryIncorrectDuration event.
             /// </summary>
-            public readonly ref struct RequestTelemetryIncorrectDurationData
+            public ref struct RequestTelemetryIncorrectDurationData
             {
                 private readonly EtwEvent _etwEvent;
 
-                private const int Offset_AppDomainName = 0;
+                private int _offset_AppDomainName;
+
+                private int Offset_AppDomainName
+                {
+                    get
+                    {
+                        if (_offset_AppDomainName == -1)
+                        {
+                            _offset_AppDomainName = 0;
+                        }
+
+                        return _offset_AppDomainName;
+                    }
+                }
 
                 /// <summary>
                 /// Retrieves the AppDomainName field.
@@ -1130,6 +1378,7 @@ namespace EtwTools
                 public RequestTelemetryIncorrectDurationData(EtwEvent etwEvent)
                 {
                     _etwEvent = etwEvent;
+                    _offset_AppDomainName = -1;
                 }
             }
 
@@ -1208,11 +1457,24 @@ namespace EtwTools
             /// <summary>
             /// A data wrapper for a TrackingWasDisabled event.
             /// </summary>
-            public readonly ref struct TrackingWasDisabledData
+            public ref struct TrackingWasDisabledData
             {
                 private readonly EtwEvent _etwEvent;
 
-                private const int Offset_AppDomainName = 0;
+                private int _offset_AppDomainName;
+
+                private int Offset_AppDomainName
+                {
+                    get
+                    {
+                        if (_offset_AppDomainName == -1)
+                        {
+                            _offset_AppDomainName = 0;
+                        }
+
+                        return _offset_AppDomainName;
+                    }
+                }
 
                 /// <summary>
                 /// Retrieves the AppDomainName field.
@@ -1226,6 +1488,7 @@ namespace EtwTools
                 public TrackingWasDisabledData(EtwEvent etwEvent)
                 {
                     _etwEvent = etwEvent;
+                    _offset_AppDomainName = -1;
                 }
             }
 
@@ -1304,11 +1567,24 @@ namespace EtwTools
             /// <summary>
             /// A data wrapper for a TrackingWasEnabled event.
             /// </summary>
-            public readonly ref struct TrackingWasEnabledData
+            public ref struct TrackingWasEnabledData
             {
                 private readonly EtwEvent _etwEvent;
 
-                private const int Offset_AppDomainName = 0;
+                private int _offset_AppDomainName;
+
+                private int Offset_AppDomainName
+                {
+                    get
+                    {
+                        if (_offset_AppDomainName == -1)
+                        {
+                            _offset_AppDomainName = 0;
+                        }
+
+                        return _offset_AppDomainName;
+                    }
+                }
 
                 /// <summary>
                 /// Retrieves the AppDomainName field.
@@ -1322,6 +1598,7 @@ namespace EtwTools
                 public TrackingWasEnabledData(EtwEvent etwEvent)
                 {
                     _etwEvent = etwEvent;
+                    _offset_AppDomainName = -1;
                 }
             }
 
@@ -1400,22 +1677,48 @@ namespace EtwTools
             /// <summary>
             /// A data wrapper for a LogError event.
             /// </summary>
-            public readonly ref struct LogErrorData
+            public ref struct LogErrorData
             {
                 private readonly EtwEvent _etwEvent;
 
-                private const int Offset_Msg = 0;
-                private readonly int _offset_AppDomainName;
+                private int _offset_Msg;
+                private int _offset_AppDomainName;
+
+                private int Offset_Msg
+                {
+                    get
+                    {
+                        if (_offset_Msg == -1)
+                        {
+                            _offset_Msg = 0;
+                        }
+
+                        return _offset_Msg;
+                    }
+                }
+
+                private int Offset_AppDomainName
+                {
+                    get
+                    {
+                        if (_offset_AppDomainName == -1)
+                        {
+                            _offset_AppDomainName = Offset_Msg + EtwEvent.UnicodeStringEnumerable.UnicodeStringEnumerator.StringLength(_etwEvent.Data, Offset_Msg);
+                        }
+
+                        return _offset_AppDomainName;
+                    }
+                }
 
                 /// <summary>
                 /// Retrieves the Msg field.
                 /// </summary>
-                public string Msg => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_Msg.._offset_AppDomainName]);
+                public string Msg => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_Msg..]);
 
                 /// <summary>
                 /// Retrieves the AppDomainName field.
                 /// </summary>
-                public string AppDomainName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[_offset_AppDomainName..]);
+                public string AppDomainName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_AppDomainName..]);
 
                 /// <summary>
                 /// Creates a new LogErrorData.
@@ -1424,7 +1727,8 @@ namespace EtwTools
                 public LogErrorData(EtwEvent etwEvent)
                 {
                     _etwEvent = etwEvent;
-                    _offset_AppDomainName = Offset_Msg + EtwEvent.UnicodeStringEnumerable.UnicodeStringEnumerator.StringLength(etwEvent.Data, Offset_Msg);
+                    _offset_Msg = -1;
+                    _offset_AppDomainName = -1;
                 }
             }
 
@@ -1458,7 +1762,7 @@ namespace EtwTools
                 Level = EtwTraceLevel.Error,
                 Opcode = EtwEventOpcode.Info,
                 Task = (ushort)Tasks.BuildInfoConfigBrokenXmlError,
-                Keyword = (ulong)(Keywords.UserActionable | Keywords.ErrorFailure)
+                Keyword = (ulong)Keywords.UserActionable | (ulong)Keywords.ErrorFailure
             };
 
             /// <summary>
@@ -1503,22 +1807,48 @@ namespace EtwTools
             /// <summary>
             /// A data wrapper for a BuildInfoConfigBrokenXmlError event.
             /// </summary>
-            public readonly ref struct BuildInfoConfigBrokenXmlErrorData
+            public ref struct BuildInfoConfigBrokenXmlErrorData
             {
                 private readonly EtwEvent _etwEvent;
 
-                private const int Offset_Msg = 0;
-                private readonly int _offset_AppDomainName;
+                private int _offset_Msg;
+                private int _offset_AppDomainName;
+
+                private int Offset_Msg
+                {
+                    get
+                    {
+                        if (_offset_Msg == -1)
+                        {
+                            _offset_Msg = 0;
+                        }
+
+                        return _offset_Msg;
+                    }
+                }
+
+                private int Offset_AppDomainName
+                {
+                    get
+                    {
+                        if (_offset_AppDomainName == -1)
+                        {
+                            _offset_AppDomainName = Offset_Msg + EtwEvent.UnicodeStringEnumerable.UnicodeStringEnumerator.StringLength(_etwEvent.Data, Offset_Msg);
+                        }
+
+                        return _offset_AppDomainName;
+                    }
+                }
 
                 /// <summary>
                 /// Retrieves the Msg field.
                 /// </summary>
-                public string Msg => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_Msg.._offset_AppDomainName]);
+                public string Msg => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_Msg..]);
 
                 /// <summary>
                 /// Retrieves the AppDomainName field.
                 /// </summary>
-                public string AppDomainName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[_offset_AppDomainName..]);
+                public string AppDomainName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_AppDomainName..]);
 
                 /// <summary>
                 /// Creates a new BuildInfoConfigBrokenXmlErrorData.
@@ -1527,7 +1857,8 @@ namespace EtwTools
                 public BuildInfoConfigBrokenXmlErrorData(EtwEvent etwEvent)
                 {
                     _etwEvent = etwEvent;
-                    _offset_AppDomainName = Offset_Msg + EtwEvent.UnicodeStringEnumerable.UnicodeStringEnumerator.StringLength(etwEvent.Data, Offset_Msg);
+                    _offset_Msg = -1;
+                    _offset_AppDomainName = -1;
                 }
             }
 

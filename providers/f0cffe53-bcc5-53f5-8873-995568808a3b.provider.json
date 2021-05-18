@@ -1,0 +1,390 @@
+{
+  "name": "StreamJsonRpc",
+  "displayName": "StreamJsonRpc",
+  "id": "f0cffe53-bcc5-53f5-8873-995568808a3b",
+  "events": [
+    {
+      "name": "EventSourceMessage",
+      "displayName": "EventSourceMessage",
+      "descriptor": {
+        "id": 0,
+        "version": 0,
+        "channel": 0,
+        "level": "None",
+        "opcode": "Info",
+        "task": 65534,
+        "keyword": 0
+      },
+      "fields": [
+        {
+          "name": "Message",
+          "datatype": "string",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "SendingNotification",
+      "displayName": "SendingNotification",
+      "descriptor": {
+        "id": 1,
+        "version": 0,
+        "channel": 0,
+        "level": "Verbose",
+        "opcode": "Send",
+        "task": 5,
+        "keyword": 0
+      },
+      "fields": [
+        {
+          "name": "Method",
+          "datatype": "string",
+          "map": null
+        },
+        {
+          "name": "Args",
+          "datatype": "string",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "ReceivedResult",
+      "displayName": "ReceivedResult",
+      "descriptor": {
+        "id": 4,
+        "version": 0,
+        "channel": 0,
+        "level": "Information",
+        "opcode": "End",
+        "task": 1,
+        "keyword": 0
+      },
+      "fields": [
+        {
+          "name": "RequestId",
+          "datatype": "long",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "ReceivedError",
+      "displayName": "ReceivedError",
+      "descriptor": {
+        "id": 5,
+        "version": 0,
+        "channel": 0,
+        "level": "Warning",
+        "opcode": "End",
+        "task": 1,
+        "keyword": 0
+      },
+      "fields": [
+        {
+          "name": "RequestId",
+          "datatype": "long",
+          "map": null
+        },
+        {
+          "name": "ErrorCode",
+          "datatype": "int",
+          "map": "JsonRpcErrorCode"
+        }
+      ]
+    },
+    {
+      "name": "ReceivedNoResponse",
+      "displayName": "ReceivedNoResponse",
+      "descriptor": {
+        "id": 6,
+        "version": 0,
+        "channel": 0,
+        "level": "Warning",
+        "opcode": "End",
+        "task": 1,
+        "keyword": 0
+      },
+      "fields": [
+        {
+          "name": "RequestId",
+          "datatype": "long",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "SendingCancellationRequest",
+      "displayName": "SendingCancellationRequest",
+      "descriptor": {
+        "id": 3,
+        "version": 0,
+        "channel": 0,
+        "level": "Information",
+        "opcode": "Send",
+        "task": 4,
+        "keyword": 0
+      },
+      "fields": [
+        {
+          "name": "RequestId",
+          "datatype": "long",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "ReceivedNotification",
+      "displayName": "ReceivedNotification",
+      "descriptor": {
+        "id": 20,
+        "version": 0,
+        "channel": 0,
+        "level": "Verbose",
+        "opcode": "Recieve",
+        "task": 5,
+        "keyword": 0
+      },
+      "fields": [
+        {
+          "name": "Method",
+          "datatype": "string",
+          "map": null
+        },
+        {
+          "name": "Args",
+          "datatype": "string",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "SendingResult",
+      "displayName": "SendingResult",
+      "descriptor": {
+        "id": 23,
+        "version": 0,
+        "channel": 0,
+        "level": "Information",
+        "opcode": "End",
+        "task": 2,
+        "keyword": 0
+      },
+      "fields": [
+        {
+          "name": "RequestId",
+          "datatype": "long",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "SendingError",
+      "displayName": "SendingError",
+      "descriptor": {
+        "id": 24,
+        "version": 0,
+        "channel": 0,
+        "level": "Warning",
+        "opcode": "End",
+        "task": 2,
+        "keyword": 0
+      },
+      "fields": [
+        {
+          "name": "RequestId",
+          "datatype": "long",
+          "map": null
+        },
+        {
+          "name": "ErrorCode",
+          "datatype": "int",
+          "map": "JsonRpcErrorCode"
+        }
+      ]
+    },
+    {
+      "name": "ReceivedCancellationRequest",
+      "displayName": "ReceivedCancellationRequest",
+      "descriptor": {
+        "id": 22,
+        "version": 0,
+        "channel": 0,
+        "level": "Information",
+        "opcode": "Recieve",
+        "task": 4,
+        "keyword": 0
+      },
+      "fields": [
+        {
+          "name": "RequestId",
+          "datatype": "long",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "TransmissionQueued",
+      "displayName": "TransmissionQueued",
+      "descriptor": {
+        "id": 30,
+        "version": 0,
+        "channel": 0,
+        "level": "Information",
+        "opcode": "Start",
+        "task": 3,
+        "keyword": 0
+      },
+      "fields": null
+    },
+    {
+      "name": "TransmissionCompleted",
+      "displayName": "TransmissionCompleted",
+      "descriptor": {
+        "id": 31,
+        "version": 0,
+        "channel": 0,
+        "level": "Information",
+        "opcode": "End",
+        "task": 3,
+        "keyword": 0
+      },
+      "fields": null
+    },
+    {
+      "name": "HandlerTransmitted",
+      "displayName": "HandlerTransmitted",
+      "descriptor": {
+        "id": 32,
+        "version": 0,
+        "channel": 0,
+        "level": "Information",
+        "opcode": "Send",
+        "task": 6,
+        "keyword": 0
+      },
+      "fields": [
+        {
+          "name": "Size",
+          "datatype": "long",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "HandlerReceived",
+      "displayName": "HandlerReceived",
+      "descriptor": {
+        "id": 33,
+        "version": 0,
+        "channel": 0,
+        "level": "Information",
+        "opcode": "Recieve",
+        "task": 6,
+        "keyword": 0
+      },
+      "fields": [
+        {
+          "name": "Size",
+          "datatype": "long",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "SendingRequest",
+      "displayName": "SendingRequest",
+      "descriptor": {
+        "id": 2,
+        "version": 0,
+        "channel": 0,
+        "level": "Verbose",
+        "opcode": "Start",
+        "task": 1,
+        "keyword": 0
+      },
+      "fields": [
+        {
+          "name": "RequestId",
+          "datatype": "long",
+          "map": null
+        },
+        {
+          "name": "Method",
+          "datatype": "string",
+          "map": null
+        },
+        {
+          "name": "Args",
+          "datatype": "string",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "ReceivedRequest",
+      "displayName": "ReceivedRequest",
+      "descriptor": {
+        "id": 21,
+        "version": 0,
+        "channel": 0,
+        "level": "Verbose",
+        "opcode": "Start",
+        "task": 2,
+        "keyword": 0
+      },
+      "fields": [
+        {
+          "name": "RequestId",
+          "datatype": "long",
+          "map": null
+        },
+        {
+          "name": "Method",
+          "datatype": "string",
+          "map": null
+        },
+        {
+          "name": "Args",
+          "datatype": "string",
+          "map": null
+        }
+      ]
+    }
+  ],
+  "tasks": {
+    "1": "OutboundCall",
+    "2": "InboundCall",
+    "3": "MessageTransmission",
+    "4": "Cancellation",
+    "5": "Notification",
+    "6": "MessageHandler",
+    "65534": "EventSourceMessage"
+  },
+  "opcodes": {},
+  "keywords": {
+    "17592186044416": "Session3",
+    "35184372088832": "Session2",
+    "70368744177664": "Session1",
+    "140737488355328": "Session0"
+  },
+  "maps": [
+    {
+      "name": "JsonRpcErrorCode",
+      "flags": false,
+      "values": {
+        "18446744073709519616": "InvocationError",
+        "18446744073709519615": "NoMarshaledObjectFound",
+        "18446744073709519613": "ResponseSerializationFailure",
+        "18446744073709519612": "InvocationErrorWithException",
+        "18446744073709518916": "ParseError",
+        "18446744073709519016": "InvalidRequest",
+        "18446744073709519015": "MethodNotFound",
+        "18446744073709519014": "InvalidParams",
+        "18446744073709519013": "InternalError",
+        "18446744073709518816": "RequestCanceled"
+      }
+    }
+  ],
+  "structs": []
+}

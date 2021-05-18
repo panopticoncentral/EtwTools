@@ -1,5 +1,6 @@
 using System;
 
+#pragma warning disable IDE0004 // Remove Unnecessary Cast
 #pragma warning disable CA1707 // Identifiers should not contain underscores
 #pragma warning disable CA1720 // Identifier contains type name
 
@@ -136,7 +137,7 @@ namespace EtwTools
         }
 
         /// <summary>
-        /// Keywords supported by System.Threading.Tasks.TplEventSource.
+        /// Keywords supported by TplEventSource.
         /// </summary>
         [Flags]
         public enum Keywords : ulong
@@ -276,11 +277,24 @@ namespace EtwTools
             /// <summary>
             /// A data wrapper for a EventSourceMessage event.
             /// </summary>
-            public readonly ref struct EventSourceMessageData
+            public ref struct EventSourceMessageData
             {
                 private readonly EtwEvent _etwEvent;
 
-                private const int Offset_Message = 0;
+                private int _offset_Message;
+
+                private int Offset_Message
+                {
+                    get
+                    {
+                        if (_offset_Message == -1)
+                        {
+                            _offset_Message = 0;
+                        }
+
+                        return _offset_Message;
+                    }
+                }
 
                 /// <summary>
                 /// Retrieves the Message field.
@@ -294,6 +308,7 @@ namespace EtwTools
                 public EventSourceMessageData(EtwEvent etwEvent)
                 {
                     _etwEvent = etwEvent;
+                    _offset_Message = -1;
                 }
             }
 
@@ -372,41 +387,119 @@ namespace EtwTools
             /// <summary>
             /// A data wrapper for a ParallelLoopBegin event.
             /// </summary>
-            public readonly ref struct ParallelLoopBeginData
+            public ref struct ParallelLoopBeginData
             {
                 private readonly EtwEvent _etwEvent;
 
-                private const int Offset_OriginatingTaskSchedulerID = 0;
-                private const int Offset_OriginatingTaskID = 4;
-                private const int Offset_ForkJoinContextID = 8;
-                private const int Offset_OperationType = 12;
-                private const int Offset_InclusiveFrom = 16;
-                private const int Offset_ExclusiveTo = 24;
+                private int _offset_OriginatingTaskSchedulerID;
+                private int _offset_OriginatingTaskID;
+                private int _offset_ForkJoinContextID;
+                private int _offset_OperationType;
+                private int _offset_InclusiveFrom;
+                private int _offset_ExclusiveTo;
+
+                private int Offset_OriginatingTaskSchedulerID
+                {
+                    get
+                    {
+                        if (_offset_OriginatingTaskSchedulerID == -1)
+                        {
+                            _offset_OriginatingTaskSchedulerID = 0;
+                        }
+
+                        return _offset_OriginatingTaskSchedulerID;
+                    }
+                }
+
+                private int Offset_OriginatingTaskID
+                {
+                    get
+                    {
+                        if (_offset_OriginatingTaskID == -1)
+                        {
+                            _offset_OriginatingTaskID = Offset_OriginatingTaskSchedulerID + 4;
+                        }
+
+                        return _offset_OriginatingTaskID;
+                    }
+                }
+
+                private int Offset_ForkJoinContextID
+                {
+                    get
+                    {
+                        if (_offset_ForkJoinContextID == -1)
+                        {
+                            _offset_ForkJoinContextID = Offset_OriginatingTaskID + 4;
+                        }
+
+                        return _offset_ForkJoinContextID;
+                    }
+                }
+
+                private int Offset_OperationType
+                {
+                    get
+                    {
+                        if (_offset_OperationType == -1)
+                        {
+                            _offset_OperationType = Offset_ForkJoinContextID + 4;
+                        }
+
+                        return _offset_OperationType;
+                    }
+                }
+
+                private int Offset_InclusiveFrom
+                {
+                    get
+                    {
+                        if (_offset_InclusiveFrom == -1)
+                        {
+                            _offset_InclusiveFrom = Offset_OperationType + 4;
+                        }
+
+                        return _offset_InclusiveFrom;
+                    }
+                }
+
+                private int Offset_ExclusiveTo
+                {
+                    get
+                    {
+                        if (_offset_ExclusiveTo == -1)
+                        {
+                            _offset_ExclusiveTo = Offset_InclusiveFrom + 8;
+                        }
+
+                        return _offset_ExclusiveTo;
+                    }
+                }
 
                 /// <summary>
                 /// Retrieves the OriginatingTaskSchedulerID field.
                 /// </summary>
-                public int OriginatingTaskSchedulerID => BitConverter.ToInt32(_etwEvent.Data[Offset_OriginatingTaskSchedulerID..Offset_OriginatingTaskID]);
+                public int OriginatingTaskSchedulerID => BitConverter.ToInt32(_etwEvent.Data[Offset_OriginatingTaskSchedulerID..]);
 
                 /// <summary>
                 /// Retrieves the OriginatingTaskID field.
                 /// </summary>
-                public int OriginatingTaskID => BitConverter.ToInt32(_etwEvent.Data[Offset_OriginatingTaskID..Offset_ForkJoinContextID]);
+                public int OriginatingTaskID => BitConverter.ToInt32(_etwEvent.Data[Offset_OriginatingTaskID..]);
 
                 /// <summary>
                 /// Retrieves the ForkJoinContextID field.
                 /// </summary>
-                public int ForkJoinContextID => BitConverter.ToInt32(_etwEvent.Data[Offset_ForkJoinContextID..Offset_OperationType]);
+                public int ForkJoinContextID => BitConverter.ToInt32(_etwEvent.Data[Offset_ForkJoinContextID..]);
 
                 /// <summary>
                 /// Retrieves the OperationType field.
                 /// </summary>
-                public ForkJoinOperationType OperationType => (ForkJoinOperationType)BitConverter.ToUInt32(_etwEvent.Data[Offset_OperationType..Offset_InclusiveFrom]);
+                public ForkJoinOperationType OperationType => (ForkJoinOperationType)BitConverter.ToInt32(_etwEvent.Data[Offset_OperationType..]);
 
                 /// <summary>
                 /// Retrieves the InclusiveFrom field.
                 /// </summary>
-                public long InclusiveFrom => BitConverter.ToInt64(_etwEvent.Data[Offset_InclusiveFrom..Offset_ExclusiveTo]);
+                public long InclusiveFrom => BitConverter.ToInt64(_etwEvent.Data[Offset_InclusiveFrom..]);
 
                 /// <summary>
                 /// Retrieves the ExclusiveTo field.
@@ -420,6 +513,12 @@ namespace EtwTools
                 public ParallelLoopBeginData(EtwEvent etwEvent)
                 {
                     _etwEvent = etwEvent;
+                    _offset_OriginatingTaskSchedulerID = -1;
+                    _offset_OriginatingTaskID = -1;
+                    _offset_ForkJoinContextID = -1;
+                    _offset_OperationType = -1;
+                    _offset_InclusiveFrom = -1;
+                    _offset_ExclusiveTo = -1;
                 }
             }
 
@@ -498,29 +597,81 @@ namespace EtwTools
             /// <summary>
             /// A data wrapper for a ParallelLoopEnd event.
             /// </summary>
-            public readonly ref struct ParallelLoopEndData
+            public ref struct ParallelLoopEndData
             {
                 private readonly EtwEvent _etwEvent;
 
-                private const int Offset_OriginatingTaskSchedulerID = 0;
-                private const int Offset_OriginatingTaskID = 4;
-                private const int Offset_ForkJoinContextID = 8;
-                private const int Offset_TotalIterations = 12;
+                private int _offset_OriginatingTaskSchedulerID;
+                private int _offset_OriginatingTaskID;
+                private int _offset_ForkJoinContextID;
+                private int _offset_TotalIterations;
+
+                private int Offset_OriginatingTaskSchedulerID
+                {
+                    get
+                    {
+                        if (_offset_OriginatingTaskSchedulerID == -1)
+                        {
+                            _offset_OriginatingTaskSchedulerID = 0;
+                        }
+
+                        return _offset_OriginatingTaskSchedulerID;
+                    }
+                }
+
+                private int Offset_OriginatingTaskID
+                {
+                    get
+                    {
+                        if (_offset_OriginatingTaskID == -1)
+                        {
+                            _offset_OriginatingTaskID = Offset_OriginatingTaskSchedulerID + 4;
+                        }
+
+                        return _offset_OriginatingTaskID;
+                    }
+                }
+
+                private int Offset_ForkJoinContextID
+                {
+                    get
+                    {
+                        if (_offset_ForkJoinContextID == -1)
+                        {
+                            _offset_ForkJoinContextID = Offset_OriginatingTaskID + 4;
+                        }
+
+                        return _offset_ForkJoinContextID;
+                    }
+                }
+
+                private int Offset_TotalIterations
+                {
+                    get
+                    {
+                        if (_offset_TotalIterations == -1)
+                        {
+                            _offset_TotalIterations = Offset_ForkJoinContextID + 4;
+                        }
+
+                        return _offset_TotalIterations;
+                    }
+                }
 
                 /// <summary>
                 /// Retrieves the OriginatingTaskSchedulerID field.
                 /// </summary>
-                public int OriginatingTaskSchedulerID => BitConverter.ToInt32(_etwEvent.Data[Offset_OriginatingTaskSchedulerID..Offset_OriginatingTaskID]);
+                public int OriginatingTaskSchedulerID => BitConverter.ToInt32(_etwEvent.Data[Offset_OriginatingTaskSchedulerID..]);
 
                 /// <summary>
                 /// Retrieves the OriginatingTaskID field.
                 /// </summary>
-                public int OriginatingTaskID => BitConverter.ToInt32(_etwEvent.Data[Offset_OriginatingTaskID..Offset_ForkJoinContextID]);
+                public int OriginatingTaskID => BitConverter.ToInt32(_etwEvent.Data[Offset_OriginatingTaskID..]);
 
                 /// <summary>
                 /// Retrieves the ForkJoinContextID field.
                 /// </summary>
-                public int ForkJoinContextID => BitConverter.ToInt32(_etwEvent.Data[Offset_ForkJoinContextID..Offset_TotalIterations]);
+                public int ForkJoinContextID => BitConverter.ToInt32(_etwEvent.Data[Offset_ForkJoinContextID..]);
 
                 /// <summary>
                 /// Retrieves the TotalIterations field.
@@ -534,6 +685,10 @@ namespace EtwTools
                 public ParallelLoopEndData(EtwEvent etwEvent)
                 {
                     _etwEvent = etwEvent;
+                    _offset_OriginatingTaskSchedulerID = -1;
+                    _offset_OriginatingTaskID = -1;
+                    _offset_ForkJoinContextID = -1;
+                    _offset_TotalIterations = -1;
                 }
             }
 
@@ -612,35 +767,100 @@ namespace EtwTools
             /// <summary>
             /// A data wrapper for a ParallelInvokeBegin event.
             /// </summary>
-            public readonly ref struct ParallelInvokeBeginData
+            public ref struct ParallelInvokeBeginData
             {
                 private readonly EtwEvent _etwEvent;
 
-                private const int Offset_OriginatingTaskSchedulerID = 0;
-                private const int Offset_OriginatingTaskID = 4;
-                private const int Offset_ForkJoinContextID = 8;
-                private const int Offset_OperationType = 12;
-                private const int Offset_ActionCount = 16;
+                private int _offset_OriginatingTaskSchedulerID;
+                private int _offset_OriginatingTaskID;
+                private int _offset_ForkJoinContextID;
+                private int _offset_OperationType;
+                private int _offset_ActionCount;
+
+                private int Offset_OriginatingTaskSchedulerID
+                {
+                    get
+                    {
+                        if (_offset_OriginatingTaskSchedulerID == -1)
+                        {
+                            _offset_OriginatingTaskSchedulerID = 0;
+                        }
+
+                        return _offset_OriginatingTaskSchedulerID;
+                    }
+                }
+
+                private int Offset_OriginatingTaskID
+                {
+                    get
+                    {
+                        if (_offset_OriginatingTaskID == -1)
+                        {
+                            _offset_OriginatingTaskID = Offset_OriginatingTaskSchedulerID + 4;
+                        }
+
+                        return _offset_OriginatingTaskID;
+                    }
+                }
+
+                private int Offset_ForkJoinContextID
+                {
+                    get
+                    {
+                        if (_offset_ForkJoinContextID == -1)
+                        {
+                            _offset_ForkJoinContextID = Offset_OriginatingTaskID + 4;
+                        }
+
+                        return _offset_ForkJoinContextID;
+                    }
+                }
+
+                private int Offset_OperationType
+                {
+                    get
+                    {
+                        if (_offset_OperationType == -1)
+                        {
+                            _offset_OperationType = Offset_ForkJoinContextID + 4;
+                        }
+
+                        return _offset_OperationType;
+                    }
+                }
+
+                private int Offset_ActionCount
+                {
+                    get
+                    {
+                        if (_offset_ActionCount == -1)
+                        {
+                            _offset_ActionCount = Offset_OperationType + 4;
+                        }
+
+                        return _offset_ActionCount;
+                    }
+                }
 
                 /// <summary>
                 /// Retrieves the OriginatingTaskSchedulerID field.
                 /// </summary>
-                public int OriginatingTaskSchedulerID => BitConverter.ToInt32(_etwEvent.Data[Offset_OriginatingTaskSchedulerID..Offset_OriginatingTaskID]);
+                public int OriginatingTaskSchedulerID => BitConverter.ToInt32(_etwEvent.Data[Offset_OriginatingTaskSchedulerID..]);
 
                 /// <summary>
                 /// Retrieves the OriginatingTaskID field.
                 /// </summary>
-                public int OriginatingTaskID => BitConverter.ToInt32(_etwEvent.Data[Offset_OriginatingTaskID..Offset_ForkJoinContextID]);
+                public int OriginatingTaskID => BitConverter.ToInt32(_etwEvent.Data[Offset_OriginatingTaskID..]);
 
                 /// <summary>
                 /// Retrieves the ForkJoinContextID field.
                 /// </summary>
-                public int ForkJoinContextID => BitConverter.ToInt32(_etwEvent.Data[Offset_ForkJoinContextID..Offset_OperationType]);
+                public int ForkJoinContextID => BitConverter.ToInt32(_etwEvent.Data[Offset_ForkJoinContextID..]);
 
                 /// <summary>
                 /// Retrieves the OperationType field.
                 /// </summary>
-                public ForkJoinOperationType OperationType => (ForkJoinOperationType)BitConverter.ToUInt32(_etwEvent.Data[Offset_OperationType..Offset_ActionCount]);
+                public ForkJoinOperationType OperationType => (ForkJoinOperationType)BitConverter.ToInt32(_etwEvent.Data[Offset_OperationType..]);
 
                 /// <summary>
                 /// Retrieves the ActionCount field.
@@ -654,6 +874,11 @@ namespace EtwTools
                 public ParallelInvokeBeginData(EtwEvent etwEvent)
                 {
                     _etwEvent = etwEvent;
+                    _offset_OriginatingTaskSchedulerID = -1;
+                    _offset_OriginatingTaskID = -1;
+                    _offset_ForkJoinContextID = -1;
+                    _offset_OperationType = -1;
+                    _offset_ActionCount = -1;
                 }
             }
 
@@ -732,23 +957,62 @@ namespace EtwTools
             /// <summary>
             /// A data wrapper for a ParallelInvokeEnd event.
             /// </summary>
-            public readonly ref struct ParallelInvokeEndData
+            public ref struct ParallelInvokeEndData
             {
                 private readonly EtwEvent _etwEvent;
 
-                private const int Offset_OriginatingTaskSchedulerID = 0;
-                private const int Offset_OriginatingTaskID = 4;
-                private const int Offset_ForkJoinContextID = 8;
+                private int _offset_OriginatingTaskSchedulerID;
+                private int _offset_OriginatingTaskID;
+                private int _offset_ForkJoinContextID;
+
+                private int Offset_OriginatingTaskSchedulerID
+                {
+                    get
+                    {
+                        if (_offset_OriginatingTaskSchedulerID == -1)
+                        {
+                            _offset_OriginatingTaskSchedulerID = 0;
+                        }
+
+                        return _offset_OriginatingTaskSchedulerID;
+                    }
+                }
+
+                private int Offset_OriginatingTaskID
+                {
+                    get
+                    {
+                        if (_offset_OriginatingTaskID == -1)
+                        {
+                            _offset_OriginatingTaskID = Offset_OriginatingTaskSchedulerID + 4;
+                        }
+
+                        return _offset_OriginatingTaskID;
+                    }
+                }
+
+                private int Offset_ForkJoinContextID
+                {
+                    get
+                    {
+                        if (_offset_ForkJoinContextID == -1)
+                        {
+                            _offset_ForkJoinContextID = Offset_OriginatingTaskID + 4;
+                        }
+
+                        return _offset_ForkJoinContextID;
+                    }
+                }
 
                 /// <summary>
                 /// Retrieves the OriginatingTaskSchedulerID field.
                 /// </summary>
-                public int OriginatingTaskSchedulerID => BitConverter.ToInt32(_etwEvent.Data[Offset_OriginatingTaskSchedulerID..Offset_OriginatingTaskID]);
+                public int OriginatingTaskSchedulerID => BitConverter.ToInt32(_etwEvent.Data[Offset_OriginatingTaskSchedulerID..]);
 
                 /// <summary>
                 /// Retrieves the OriginatingTaskID field.
                 /// </summary>
-                public int OriginatingTaskID => BitConverter.ToInt32(_etwEvent.Data[Offset_OriginatingTaskID..Offset_ForkJoinContextID]);
+                public int OriginatingTaskID => BitConverter.ToInt32(_etwEvent.Data[Offset_OriginatingTaskID..]);
 
                 /// <summary>
                 /// Retrieves the ForkJoinContextID field.
@@ -762,6 +1026,9 @@ namespace EtwTools
                 public ParallelInvokeEndData(EtwEvent etwEvent)
                 {
                     _etwEvent = etwEvent;
+                    _offset_OriginatingTaskSchedulerID = -1;
+                    _offset_OriginatingTaskID = -1;
+                    _offset_ForkJoinContextID = -1;
                 }
             }
 
@@ -840,23 +1107,62 @@ namespace EtwTools
             /// <summary>
             /// A data wrapper for a ParallelFork event.
             /// </summary>
-            public readonly ref struct ParallelForkData
+            public ref struct ParallelForkData
             {
                 private readonly EtwEvent _etwEvent;
 
-                private const int Offset_OriginatingTaskSchedulerID = 0;
-                private const int Offset_OriginatingTaskID = 4;
-                private const int Offset_ForkJoinContextID = 8;
+                private int _offset_OriginatingTaskSchedulerID;
+                private int _offset_OriginatingTaskID;
+                private int _offset_ForkJoinContextID;
+
+                private int Offset_OriginatingTaskSchedulerID
+                {
+                    get
+                    {
+                        if (_offset_OriginatingTaskSchedulerID == -1)
+                        {
+                            _offset_OriginatingTaskSchedulerID = 0;
+                        }
+
+                        return _offset_OriginatingTaskSchedulerID;
+                    }
+                }
+
+                private int Offset_OriginatingTaskID
+                {
+                    get
+                    {
+                        if (_offset_OriginatingTaskID == -1)
+                        {
+                            _offset_OriginatingTaskID = Offset_OriginatingTaskSchedulerID + 4;
+                        }
+
+                        return _offset_OriginatingTaskID;
+                    }
+                }
+
+                private int Offset_ForkJoinContextID
+                {
+                    get
+                    {
+                        if (_offset_ForkJoinContextID == -1)
+                        {
+                            _offset_ForkJoinContextID = Offset_OriginatingTaskID + 4;
+                        }
+
+                        return _offset_ForkJoinContextID;
+                    }
+                }
 
                 /// <summary>
                 /// Retrieves the OriginatingTaskSchedulerID field.
                 /// </summary>
-                public int OriginatingTaskSchedulerID => BitConverter.ToInt32(_etwEvent.Data[Offset_OriginatingTaskSchedulerID..Offset_OriginatingTaskID]);
+                public int OriginatingTaskSchedulerID => BitConverter.ToInt32(_etwEvent.Data[Offset_OriginatingTaskSchedulerID..]);
 
                 /// <summary>
                 /// Retrieves the OriginatingTaskID field.
                 /// </summary>
-                public int OriginatingTaskID => BitConverter.ToInt32(_etwEvent.Data[Offset_OriginatingTaskID..Offset_ForkJoinContextID]);
+                public int OriginatingTaskID => BitConverter.ToInt32(_etwEvent.Data[Offset_OriginatingTaskID..]);
 
                 /// <summary>
                 /// Retrieves the ForkJoinContextID field.
@@ -870,6 +1176,9 @@ namespace EtwTools
                 public ParallelForkData(EtwEvent etwEvent)
                 {
                     _etwEvent = etwEvent;
+                    _offset_OriginatingTaskSchedulerID = -1;
+                    _offset_OriginatingTaskID = -1;
+                    _offset_ForkJoinContextID = -1;
                 }
             }
 
@@ -948,23 +1257,62 @@ namespace EtwTools
             /// <summary>
             /// A data wrapper for a ParallelJoin event.
             /// </summary>
-            public readonly ref struct ParallelJoinData
+            public ref struct ParallelJoinData
             {
                 private readonly EtwEvent _etwEvent;
 
-                private const int Offset_OriginatingTaskSchedulerID = 0;
-                private const int Offset_OriginatingTaskID = 4;
-                private const int Offset_ForkJoinContextID = 8;
+                private int _offset_OriginatingTaskSchedulerID;
+                private int _offset_OriginatingTaskID;
+                private int _offset_ForkJoinContextID;
+
+                private int Offset_OriginatingTaskSchedulerID
+                {
+                    get
+                    {
+                        if (_offset_OriginatingTaskSchedulerID == -1)
+                        {
+                            _offset_OriginatingTaskSchedulerID = 0;
+                        }
+
+                        return _offset_OriginatingTaskSchedulerID;
+                    }
+                }
+
+                private int Offset_OriginatingTaskID
+                {
+                    get
+                    {
+                        if (_offset_OriginatingTaskID == -1)
+                        {
+                            _offset_OriginatingTaskID = Offset_OriginatingTaskSchedulerID + 4;
+                        }
+
+                        return _offset_OriginatingTaskID;
+                    }
+                }
+
+                private int Offset_ForkJoinContextID
+                {
+                    get
+                    {
+                        if (_offset_ForkJoinContextID == -1)
+                        {
+                            _offset_ForkJoinContextID = Offset_OriginatingTaskID + 4;
+                        }
+
+                        return _offset_ForkJoinContextID;
+                    }
+                }
 
                 /// <summary>
                 /// Retrieves the OriginatingTaskSchedulerID field.
                 /// </summary>
-                public int OriginatingTaskSchedulerID => BitConverter.ToInt32(_etwEvent.Data[Offset_OriginatingTaskSchedulerID..Offset_OriginatingTaskID]);
+                public int OriginatingTaskSchedulerID => BitConverter.ToInt32(_etwEvent.Data[Offset_OriginatingTaskSchedulerID..]);
 
                 /// <summary>
                 /// Retrieves the OriginatingTaskID field.
                 /// </summary>
-                public int OriginatingTaskID => BitConverter.ToInt32(_etwEvent.Data[Offset_OriginatingTaskID..Offset_ForkJoinContextID]);
+                public int OriginatingTaskID => BitConverter.ToInt32(_etwEvent.Data[Offset_OriginatingTaskID..]);
 
                 /// <summary>
                 /// Retrieves the ForkJoinContextID field.
@@ -978,6 +1326,9 @@ namespace EtwTools
                 public ParallelJoinData(EtwEvent etwEvent)
                 {
                     _etwEvent = etwEvent;
+                    _offset_OriginatingTaskSchedulerID = -1;
+                    _offset_OriginatingTaskID = -1;
+                    _offset_ForkJoinContextID = -1;
                 }
             }
 
@@ -1011,7 +1362,7 @@ namespace EtwTools
                 Level = EtwTraceLevel.Information,
                 Opcode = EtwEventOpcode.Send,
                 Task = (ushort)Tasks.TaskScheduled,
-                Keyword = (ulong)(Keywords.TaskTransfer | Keywords.Tasks)
+                Keyword = (ulong)Keywords.TaskTransfer | (ulong)Keywords.Tasks
             };
 
             /// <summary>
@@ -1056,41 +1407,119 @@ namespace EtwTools
             /// <summary>
             /// A data wrapper for a TaskScheduled event.
             /// </summary>
-            public readonly ref struct TaskScheduledData
+            public ref struct TaskScheduledData
             {
                 private readonly EtwEvent _etwEvent;
 
-                private const int Offset_OriginatingTaskSchedulerID = 0;
-                private const int Offset_OriginatingTaskID = 4;
-                private const int Offset_TaskID = 8;
-                private const int Offset_CreatingTaskID = 12;
-                private const int Offset_TaskCreationOptions = 16;
-                private const int Offset_AppDomain = 20;
+                private int _offset_OriginatingTaskSchedulerID;
+                private int _offset_OriginatingTaskID;
+                private int _offset_TaskID;
+                private int _offset_CreatingTaskID;
+                private int _offset_TaskCreationOptions;
+                private int _offset_AppDomain;
+
+                private int Offset_OriginatingTaskSchedulerID
+                {
+                    get
+                    {
+                        if (_offset_OriginatingTaskSchedulerID == -1)
+                        {
+                            _offset_OriginatingTaskSchedulerID = 0;
+                        }
+
+                        return _offset_OriginatingTaskSchedulerID;
+                    }
+                }
+
+                private int Offset_OriginatingTaskID
+                {
+                    get
+                    {
+                        if (_offset_OriginatingTaskID == -1)
+                        {
+                            _offset_OriginatingTaskID = Offset_OriginatingTaskSchedulerID + 4;
+                        }
+
+                        return _offset_OriginatingTaskID;
+                    }
+                }
+
+                private int Offset_TaskID
+                {
+                    get
+                    {
+                        if (_offset_TaskID == -1)
+                        {
+                            _offset_TaskID = Offset_OriginatingTaskID + 4;
+                        }
+
+                        return _offset_TaskID;
+                    }
+                }
+
+                private int Offset_CreatingTaskID
+                {
+                    get
+                    {
+                        if (_offset_CreatingTaskID == -1)
+                        {
+                            _offset_CreatingTaskID = Offset_TaskID + 4;
+                        }
+
+                        return _offset_CreatingTaskID;
+                    }
+                }
+
+                private int Offset_TaskCreationOptions
+                {
+                    get
+                    {
+                        if (_offset_TaskCreationOptions == -1)
+                        {
+                            _offset_TaskCreationOptions = Offset_CreatingTaskID + 4;
+                        }
+
+                        return _offset_TaskCreationOptions;
+                    }
+                }
+
+                private int Offset_AppDomain
+                {
+                    get
+                    {
+                        if (_offset_AppDomain == -1)
+                        {
+                            _offset_AppDomain = Offset_TaskCreationOptions + 4;
+                        }
+
+                        return _offset_AppDomain;
+                    }
+                }
 
                 /// <summary>
                 /// Retrieves the OriginatingTaskSchedulerID field.
                 /// </summary>
-                public int OriginatingTaskSchedulerID => BitConverter.ToInt32(_etwEvent.Data[Offset_OriginatingTaskSchedulerID..Offset_OriginatingTaskID]);
+                public int OriginatingTaskSchedulerID => BitConverter.ToInt32(_etwEvent.Data[Offset_OriginatingTaskSchedulerID..]);
 
                 /// <summary>
                 /// Retrieves the OriginatingTaskID field.
                 /// </summary>
-                public int OriginatingTaskID => BitConverter.ToInt32(_etwEvent.Data[Offset_OriginatingTaskID..Offset_TaskID]);
+                public int OriginatingTaskID => BitConverter.ToInt32(_etwEvent.Data[Offset_OriginatingTaskID..]);
 
                 /// <summary>
                 /// Retrieves the TaskID field.
                 /// </summary>
-                public int TaskID => BitConverter.ToInt32(_etwEvent.Data[Offset_TaskID..Offset_CreatingTaskID]);
+                public int TaskID => BitConverter.ToInt32(_etwEvent.Data[Offset_TaskID..]);
 
                 /// <summary>
                 /// Retrieves the CreatingTaskID field.
                 /// </summary>
-                public int CreatingTaskID => BitConverter.ToInt32(_etwEvent.Data[Offset_CreatingTaskID..Offset_TaskCreationOptions]);
+                public int CreatingTaskID => BitConverter.ToInt32(_etwEvent.Data[Offset_CreatingTaskID..]);
 
                 /// <summary>
                 /// Retrieves the TaskCreationOptions field.
                 /// </summary>
-                public int TaskCreationOptions => BitConverter.ToInt32(_etwEvent.Data[Offset_TaskCreationOptions..Offset_AppDomain]);
+                public int TaskCreationOptions => BitConverter.ToInt32(_etwEvent.Data[Offset_TaskCreationOptions..]);
 
                 /// <summary>
                 /// Retrieves the AppDomain field.
@@ -1104,6 +1533,12 @@ namespace EtwTools
                 public TaskScheduledData(EtwEvent etwEvent)
                 {
                     _etwEvent = etwEvent;
+                    _offset_OriginatingTaskSchedulerID = -1;
+                    _offset_OriginatingTaskID = -1;
+                    _offset_TaskID = -1;
+                    _offset_CreatingTaskID = -1;
+                    _offset_TaskCreationOptions = -1;
+                    _offset_AppDomain = -1;
                 }
             }
 
@@ -1182,23 +1617,62 @@ namespace EtwTools
             /// <summary>
             /// A data wrapper for a TaskStarted event.
             /// </summary>
-            public readonly ref struct TaskStartedData
+            public ref struct TaskStartedData
             {
                 private readonly EtwEvent _etwEvent;
 
-                private const int Offset_OriginatingTaskSchedulerID = 0;
-                private const int Offset_OriginatingTaskID = 4;
-                private const int Offset_TaskID = 8;
+                private int _offset_OriginatingTaskSchedulerID;
+                private int _offset_OriginatingTaskID;
+                private int _offset_TaskID;
+
+                private int Offset_OriginatingTaskSchedulerID
+                {
+                    get
+                    {
+                        if (_offset_OriginatingTaskSchedulerID == -1)
+                        {
+                            _offset_OriginatingTaskSchedulerID = 0;
+                        }
+
+                        return _offset_OriginatingTaskSchedulerID;
+                    }
+                }
+
+                private int Offset_OriginatingTaskID
+                {
+                    get
+                    {
+                        if (_offset_OriginatingTaskID == -1)
+                        {
+                            _offset_OriginatingTaskID = Offset_OriginatingTaskSchedulerID + 4;
+                        }
+
+                        return _offset_OriginatingTaskID;
+                    }
+                }
+
+                private int Offset_TaskID
+                {
+                    get
+                    {
+                        if (_offset_TaskID == -1)
+                        {
+                            _offset_TaskID = Offset_OriginatingTaskID + 4;
+                        }
+
+                        return _offset_TaskID;
+                    }
+                }
 
                 /// <summary>
                 /// Retrieves the OriginatingTaskSchedulerID field.
                 /// </summary>
-                public int OriginatingTaskSchedulerID => BitConverter.ToInt32(_etwEvent.Data[Offset_OriginatingTaskSchedulerID..Offset_OriginatingTaskID]);
+                public int OriginatingTaskSchedulerID => BitConverter.ToInt32(_etwEvent.Data[Offset_OriginatingTaskSchedulerID..]);
 
                 /// <summary>
                 /// Retrieves the OriginatingTaskID field.
                 /// </summary>
-                public int OriginatingTaskID => BitConverter.ToInt32(_etwEvent.Data[Offset_OriginatingTaskID..Offset_TaskID]);
+                public int OriginatingTaskID => BitConverter.ToInt32(_etwEvent.Data[Offset_OriginatingTaskID..]);
 
                 /// <summary>
                 /// Retrieves the TaskID field.
@@ -1212,6 +1686,9 @@ namespace EtwTools
                 public TaskStartedData(EtwEvent etwEvent)
                 {
                     _etwEvent = etwEvent;
+                    _offset_OriginatingTaskSchedulerID = -1;
+                    _offset_OriginatingTaskID = -1;
+                    _offset_TaskID = -1;
                 }
             }
 
@@ -1290,29 +1767,81 @@ namespace EtwTools
             /// <summary>
             /// A data wrapper for a TaskCompleted event.
             /// </summary>
-            public readonly ref struct TaskCompletedData
+            public ref struct TaskCompletedData
             {
                 private readonly EtwEvent _etwEvent;
 
-                private const int Offset_OriginatingTaskSchedulerID = 0;
-                private const int Offset_OriginatingTaskID = 4;
-                private const int Offset_TaskID = 8;
-                private const int Offset_IsExceptional = 12;
+                private int _offset_OriginatingTaskSchedulerID;
+                private int _offset_OriginatingTaskID;
+                private int _offset_TaskID;
+                private int _offset_IsExceptional;
+
+                private int Offset_OriginatingTaskSchedulerID
+                {
+                    get
+                    {
+                        if (_offset_OriginatingTaskSchedulerID == -1)
+                        {
+                            _offset_OriginatingTaskSchedulerID = 0;
+                        }
+
+                        return _offset_OriginatingTaskSchedulerID;
+                    }
+                }
+
+                private int Offset_OriginatingTaskID
+                {
+                    get
+                    {
+                        if (_offset_OriginatingTaskID == -1)
+                        {
+                            _offset_OriginatingTaskID = Offset_OriginatingTaskSchedulerID + 4;
+                        }
+
+                        return _offset_OriginatingTaskID;
+                    }
+                }
+
+                private int Offset_TaskID
+                {
+                    get
+                    {
+                        if (_offset_TaskID == -1)
+                        {
+                            _offset_TaskID = Offset_OriginatingTaskID + 4;
+                        }
+
+                        return _offset_TaskID;
+                    }
+                }
+
+                private int Offset_IsExceptional
+                {
+                    get
+                    {
+                        if (_offset_IsExceptional == -1)
+                        {
+                            _offset_IsExceptional = Offset_TaskID + 4;
+                        }
+
+                        return _offset_IsExceptional;
+                    }
+                }
 
                 /// <summary>
                 /// Retrieves the OriginatingTaskSchedulerID field.
                 /// </summary>
-                public int OriginatingTaskSchedulerID => BitConverter.ToInt32(_etwEvent.Data[Offset_OriginatingTaskSchedulerID..Offset_OriginatingTaskID]);
+                public int OriginatingTaskSchedulerID => BitConverter.ToInt32(_etwEvent.Data[Offset_OriginatingTaskSchedulerID..]);
 
                 /// <summary>
                 /// Retrieves the OriginatingTaskID field.
                 /// </summary>
-                public int OriginatingTaskID => BitConverter.ToInt32(_etwEvent.Data[Offset_OriginatingTaskID..Offset_TaskID]);
+                public int OriginatingTaskID => BitConverter.ToInt32(_etwEvent.Data[Offset_OriginatingTaskID..]);
 
                 /// <summary>
                 /// Retrieves the TaskID field.
                 /// </summary>
-                public int TaskID => BitConverter.ToInt32(_etwEvent.Data[Offset_TaskID..Offset_IsExceptional]);
+                public int TaskID => BitConverter.ToInt32(_etwEvent.Data[Offset_TaskID..]);
 
                 /// <summary>
                 /// Retrieves the IsExceptional field.
@@ -1326,6 +1855,10 @@ namespace EtwTools
                 public TaskCompletedData(EtwEvent etwEvent)
                 {
                     _etwEvent = etwEvent;
+                    _offset_OriginatingTaskSchedulerID = -1;
+                    _offset_OriginatingTaskID = -1;
+                    _offset_TaskID = -1;
+                    _offset_IsExceptional = -1;
                 }
             }
 
@@ -1359,7 +1892,7 @@ namespace EtwTools
                 Level = EtwTraceLevel.Information,
                 Opcode = EtwEventOpcode.Send,
                 Task = (ushort)Tasks.TaskWait,
-                Keyword = (ulong)(Keywords.TaskTransfer | Keywords.Tasks)
+                Keyword = (ulong)Keywords.TaskTransfer | (ulong)Keywords.Tasks
             };
 
             /// <summary>
@@ -1404,41 +1937,119 @@ namespace EtwTools
             /// <summary>
             /// A data wrapper for a TaskWaitBegin event.
             /// </summary>
-            public readonly ref struct TaskWaitBeginData
+            public ref struct TaskWaitBeginData
             {
                 private readonly EtwEvent _etwEvent;
 
-                private const int Offset_OriginatingTaskSchedulerID = 0;
-                private const int Offset_OriginatingTaskID = 4;
-                private const int Offset_TaskID = 8;
-                private const int Offset_Behavior = 12;
-                private const int Offset_ContinueWithTaskID = 16;
-                private const int Offset_AppDomain = 20;
+                private int _offset_OriginatingTaskSchedulerID;
+                private int _offset_OriginatingTaskID;
+                private int _offset_TaskID;
+                private int _offset_Behavior;
+                private int _offset_ContinueWithTaskID;
+                private int _offset_AppDomain;
+
+                private int Offset_OriginatingTaskSchedulerID
+                {
+                    get
+                    {
+                        if (_offset_OriginatingTaskSchedulerID == -1)
+                        {
+                            _offset_OriginatingTaskSchedulerID = 0;
+                        }
+
+                        return _offset_OriginatingTaskSchedulerID;
+                    }
+                }
+
+                private int Offset_OriginatingTaskID
+                {
+                    get
+                    {
+                        if (_offset_OriginatingTaskID == -1)
+                        {
+                            _offset_OriginatingTaskID = Offset_OriginatingTaskSchedulerID + 4;
+                        }
+
+                        return _offset_OriginatingTaskID;
+                    }
+                }
+
+                private int Offset_TaskID
+                {
+                    get
+                    {
+                        if (_offset_TaskID == -1)
+                        {
+                            _offset_TaskID = Offset_OriginatingTaskID + 4;
+                        }
+
+                        return _offset_TaskID;
+                    }
+                }
+
+                private int Offset_Behavior
+                {
+                    get
+                    {
+                        if (_offset_Behavior == -1)
+                        {
+                            _offset_Behavior = Offset_TaskID + 4;
+                        }
+
+                        return _offset_Behavior;
+                    }
+                }
+
+                private int Offset_ContinueWithTaskID
+                {
+                    get
+                    {
+                        if (_offset_ContinueWithTaskID == -1)
+                        {
+                            _offset_ContinueWithTaskID = Offset_Behavior + 4;
+                        }
+
+                        return _offset_ContinueWithTaskID;
+                    }
+                }
+
+                private int Offset_AppDomain
+                {
+                    get
+                    {
+                        if (_offset_AppDomain == -1)
+                        {
+                            _offset_AppDomain = Offset_ContinueWithTaskID + 4;
+                        }
+
+                        return _offset_AppDomain;
+                    }
+                }
 
                 /// <summary>
                 /// Retrieves the OriginatingTaskSchedulerID field.
                 /// </summary>
-                public int OriginatingTaskSchedulerID => BitConverter.ToInt32(_etwEvent.Data[Offset_OriginatingTaskSchedulerID..Offset_OriginatingTaskID]);
+                public int OriginatingTaskSchedulerID => BitConverter.ToInt32(_etwEvent.Data[Offset_OriginatingTaskSchedulerID..]);
 
                 /// <summary>
                 /// Retrieves the OriginatingTaskID field.
                 /// </summary>
-                public int OriginatingTaskID => BitConverter.ToInt32(_etwEvent.Data[Offset_OriginatingTaskID..Offset_TaskID]);
+                public int OriginatingTaskID => BitConverter.ToInt32(_etwEvent.Data[Offset_OriginatingTaskID..]);
 
                 /// <summary>
                 /// Retrieves the TaskID field.
                 /// </summary>
-                public int TaskID => BitConverter.ToInt32(_etwEvent.Data[Offset_TaskID..Offset_Behavior]);
+                public int TaskID => BitConverter.ToInt32(_etwEvent.Data[Offset_TaskID..]);
 
                 /// <summary>
                 /// Retrieves the Behavior field.
                 /// </summary>
-                public TaskWaitBehavior Behavior => (TaskWaitBehavior)BitConverter.ToUInt32(_etwEvent.Data[Offset_Behavior..Offset_ContinueWithTaskID]);
+                public TaskWaitBehavior Behavior => (TaskWaitBehavior)BitConverter.ToInt32(_etwEvent.Data[Offset_Behavior..]);
 
                 /// <summary>
                 /// Retrieves the ContinueWithTaskID field.
                 /// </summary>
-                public int ContinueWithTaskID => BitConverter.ToInt32(_etwEvent.Data[Offset_ContinueWithTaskID..Offset_AppDomain]);
+                public int ContinueWithTaskID => BitConverter.ToInt32(_etwEvent.Data[Offset_ContinueWithTaskID..]);
 
                 /// <summary>
                 /// Retrieves the AppDomain field.
@@ -1452,6 +2063,12 @@ namespace EtwTools
                 public TaskWaitBeginData(EtwEvent etwEvent)
                 {
                     _etwEvent = etwEvent;
+                    _offset_OriginatingTaskSchedulerID = -1;
+                    _offset_OriginatingTaskID = -1;
+                    _offset_TaskID = -1;
+                    _offset_Behavior = -1;
+                    _offset_ContinueWithTaskID = -1;
+                    _offset_AppDomain = -1;
                 }
             }
 
@@ -1530,23 +2147,62 @@ namespace EtwTools
             /// <summary>
             /// A data wrapper for a TaskWaitEnd event.
             /// </summary>
-            public readonly ref struct TaskWaitEndData
+            public ref struct TaskWaitEndData
             {
                 private readonly EtwEvent _etwEvent;
 
-                private const int Offset_OriginatingTaskSchedulerID = 0;
-                private const int Offset_OriginatingTaskID = 4;
-                private const int Offset_TaskID = 8;
+                private int _offset_OriginatingTaskSchedulerID;
+                private int _offset_OriginatingTaskID;
+                private int _offset_TaskID;
+
+                private int Offset_OriginatingTaskSchedulerID
+                {
+                    get
+                    {
+                        if (_offset_OriginatingTaskSchedulerID == -1)
+                        {
+                            _offset_OriginatingTaskSchedulerID = 0;
+                        }
+
+                        return _offset_OriginatingTaskSchedulerID;
+                    }
+                }
+
+                private int Offset_OriginatingTaskID
+                {
+                    get
+                    {
+                        if (_offset_OriginatingTaskID == -1)
+                        {
+                            _offset_OriginatingTaskID = Offset_OriginatingTaskSchedulerID + 4;
+                        }
+
+                        return _offset_OriginatingTaskID;
+                    }
+                }
+
+                private int Offset_TaskID
+                {
+                    get
+                    {
+                        if (_offset_TaskID == -1)
+                        {
+                            _offset_TaskID = Offset_OriginatingTaskID + 4;
+                        }
+
+                        return _offset_TaskID;
+                    }
+                }
 
                 /// <summary>
                 /// Retrieves the OriginatingTaskSchedulerID field.
                 /// </summary>
-                public int OriginatingTaskSchedulerID => BitConverter.ToInt32(_etwEvent.Data[Offset_OriginatingTaskSchedulerID..Offset_OriginatingTaskID]);
+                public int OriginatingTaskSchedulerID => BitConverter.ToInt32(_etwEvent.Data[Offset_OriginatingTaskSchedulerID..]);
 
                 /// <summary>
                 /// Retrieves the OriginatingTaskID field.
                 /// </summary>
-                public int OriginatingTaskID => BitConverter.ToInt32(_etwEvent.Data[Offset_OriginatingTaskID..Offset_TaskID]);
+                public int OriginatingTaskID => BitConverter.ToInt32(_etwEvent.Data[Offset_OriginatingTaskID..]);
 
                 /// <summary>
                 /// Retrieves the TaskID field.
@@ -1560,6 +2216,9 @@ namespace EtwTools
                 public TaskWaitEndData(EtwEvent etwEvent)
                 {
                     _etwEvent = etwEvent;
+                    _offset_OriginatingTaskSchedulerID = -1;
+                    _offset_OriginatingTaskID = -1;
+                    _offset_TaskID = -1;
                 }
             }
 
@@ -1638,11 +2297,24 @@ namespace EtwTools
             /// <summary>
             /// A data wrapper for a TaskWaitContinuationComplete event.
             /// </summary>
-            public readonly ref struct TaskWaitContinuationCompleteData
+            public ref struct TaskWaitContinuationCompleteData
             {
                 private readonly EtwEvent _etwEvent;
 
-                private const int Offset_TaskID = 0;
+                private int _offset_TaskID;
+
+                private int Offset_TaskID
+                {
+                    get
+                    {
+                        if (_offset_TaskID == -1)
+                        {
+                            _offset_TaskID = 0;
+                        }
+
+                        return _offset_TaskID;
+                    }
+                }
 
                 /// <summary>
                 /// Retrieves the TaskID field.
@@ -1656,6 +2328,7 @@ namespace EtwTools
                 public TaskWaitContinuationCompleteData(EtwEvent etwEvent)
                 {
                     _etwEvent = etwEvent;
+                    _offset_TaskID = -1;
                 }
             }
 
@@ -1734,11 +2407,24 @@ namespace EtwTools
             /// <summary>
             /// A data wrapper for a TaskWaitContinuationStarted event.
             /// </summary>
-            public readonly ref struct TaskWaitContinuationStartedData
+            public ref struct TaskWaitContinuationStartedData
             {
                 private readonly EtwEvent _etwEvent;
 
-                private const int Offset_TaskID = 0;
+                private int _offset_TaskID;
+
+                private int Offset_TaskID
+                {
+                    get
+                    {
+                        if (_offset_TaskID == -1)
+                        {
+                            _offset_TaskID = 0;
+                        }
+
+                        return _offset_TaskID;
+                    }
+                }
 
                 /// <summary>
                 /// Retrieves the TaskID field.
@@ -1752,6 +2438,7 @@ namespace EtwTools
                 public TaskWaitContinuationStartedData(EtwEvent etwEvent)
                 {
                     _etwEvent = etwEvent;
+                    _offset_TaskID = -1;
                 }
             }
 
@@ -1785,7 +2472,7 @@ namespace EtwTools
                 Level = EtwTraceLevel.Information,
                 Opcode = EtwEventOpcode.Send,
                 Task = (ushort)Tasks.AwaitTaskContinuationScheduled,
-                Keyword = (ulong)(Keywords.TaskTransfer | Keywords.Tasks)
+                Keyword = (ulong)Keywords.TaskTransfer | (ulong)Keywords.Tasks
             };
 
             /// <summary>
@@ -1830,23 +2517,62 @@ namespace EtwTools
             /// <summary>
             /// A data wrapper for a AwaitTaskContinuationScheduled event.
             /// </summary>
-            public readonly ref struct AwaitTaskContinuationScheduledData
+            public ref struct AwaitTaskContinuationScheduledData
             {
                 private readonly EtwEvent _etwEvent;
 
-                private const int Offset_OriginatingTaskSchedulerID = 0;
-                private const int Offset_OriginatingTaskID = 4;
-                private const int Offset_ContinuwWithTaskId = 8;
+                private int _offset_OriginatingTaskSchedulerID;
+                private int _offset_OriginatingTaskID;
+                private int _offset_ContinuwWithTaskId;
+
+                private int Offset_OriginatingTaskSchedulerID
+                {
+                    get
+                    {
+                        if (_offset_OriginatingTaskSchedulerID == -1)
+                        {
+                            _offset_OriginatingTaskSchedulerID = 0;
+                        }
+
+                        return _offset_OriginatingTaskSchedulerID;
+                    }
+                }
+
+                private int Offset_OriginatingTaskID
+                {
+                    get
+                    {
+                        if (_offset_OriginatingTaskID == -1)
+                        {
+                            _offset_OriginatingTaskID = Offset_OriginatingTaskSchedulerID + 4;
+                        }
+
+                        return _offset_OriginatingTaskID;
+                    }
+                }
+
+                private int Offset_ContinuwWithTaskId
+                {
+                    get
+                    {
+                        if (_offset_ContinuwWithTaskId == -1)
+                        {
+                            _offset_ContinuwWithTaskId = Offset_OriginatingTaskID + 4;
+                        }
+
+                        return _offset_ContinuwWithTaskId;
+                    }
+                }
 
                 /// <summary>
                 /// Retrieves the OriginatingTaskSchedulerID field.
                 /// </summary>
-                public int OriginatingTaskSchedulerID => BitConverter.ToInt32(_etwEvent.Data[Offset_OriginatingTaskSchedulerID..Offset_OriginatingTaskID]);
+                public int OriginatingTaskSchedulerID => BitConverter.ToInt32(_etwEvent.Data[Offset_OriginatingTaskSchedulerID..]);
 
                 /// <summary>
                 /// Retrieves the OriginatingTaskID field.
                 /// </summary>
-                public int OriginatingTaskID => BitConverter.ToInt32(_etwEvent.Data[Offset_OriginatingTaskID..Offset_ContinuwWithTaskId]);
+                public int OriginatingTaskID => BitConverter.ToInt32(_etwEvent.Data[Offset_OriginatingTaskID..]);
 
                 /// <summary>
                 /// Retrieves the ContinuwWithTaskId field.
@@ -1860,6 +2586,9 @@ namespace EtwTools
                 public AwaitTaskContinuationScheduledData(EtwEvent etwEvent)
                 {
                     _etwEvent = etwEvent;
+                    _offset_OriginatingTaskSchedulerID = -1;
+                    _offset_OriginatingTaskID = -1;
+                    _offset_ContinuwWithTaskId = -1;
                 }
             }
 
@@ -1938,28 +2667,67 @@ namespace EtwTools
             /// <summary>
             /// A data wrapper for a TraceOperationBegin event.
             /// </summary>
-            public readonly ref struct TraceOperationBeginData
+            public ref struct TraceOperationBeginData
             {
                 private readonly EtwEvent _etwEvent;
 
-                private const int Offset_TaskID = 0;
-                private const int Offset_OperationName = 4;
-                private readonly int _offset_RelatedContext;
+                private int _offset_TaskID;
+                private int _offset_OperationName;
+                private int _offset_RelatedContext;
+
+                private int Offset_TaskID
+                {
+                    get
+                    {
+                        if (_offset_TaskID == -1)
+                        {
+                            _offset_TaskID = 0;
+                        }
+
+                        return _offset_TaskID;
+                    }
+                }
+
+                private int Offset_OperationName
+                {
+                    get
+                    {
+                        if (_offset_OperationName == -1)
+                        {
+                            _offset_OperationName = Offset_TaskID + 4;
+                        }
+
+                        return _offset_OperationName;
+                    }
+                }
+
+                private int Offset_RelatedContext
+                {
+                    get
+                    {
+                        if (_offset_RelatedContext == -1)
+                        {
+                            _offset_RelatedContext = Offset_OperationName + EtwEvent.UnicodeStringEnumerable.UnicodeStringEnumerator.StringLength(_etwEvent.Data, Offset_OperationName);
+                        }
+
+                        return _offset_RelatedContext;
+                    }
+                }
 
                 /// <summary>
                 /// Retrieves the TaskID field.
                 /// </summary>
-                public int TaskID => BitConverter.ToInt32(_etwEvent.Data[Offset_TaskID..Offset_OperationName]);
+                public int TaskID => BitConverter.ToInt32(_etwEvent.Data[Offset_TaskID..]);
 
                 /// <summary>
                 /// Retrieves the OperationName field.
                 /// </summary>
-                public string OperationName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_OperationName.._offset_RelatedContext]);
+                public string OperationName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_OperationName..]);
 
                 /// <summary>
                 /// Retrieves the RelatedContext field.
                 /// </summary>
-                public long RelatedContext => BitConverter.ToInt64(_etwEvent.Data[_offset_RelatedContext..]);
+                public long RelatedContext => BitConverter.ToInt64(_etwEvent.Data[Offset_RelatedContext..]);
 
                 /// <summary>
                 /// Creates a new TraceOperationBeginData.
@@ -1968,7 +2736,9 @@ namespace EtwTools
                 public TraceOperationBeginData(EtwEvent etwEvent)
                 {
                     _etwEvent = etwEvent;
-                    _offset_RelatedContext = Offset_OperationName + EtwEvent.UnicodeStringEnumerable.UnicodeStringEnumerator.StringLength(etwEvent.Data, Offset_OperationName);
+                    _offset_TaskID = -1;
+                    _offset_OperationName = -1;
+                    _offset_RelatedContext = -1;
                 }
             }
 
@@ -2047,22 +2817,48 @@ namespace EtwTools
             /// <summary>
             /// A data wrapper for a TraceOperationRelation event.
             /// </summary>
-            public readonly ref struct TraceOperationRelationData
+            public ref struct TraceOperationRelationData
             {
                 private readonly EtwEvent _etwEvent;
 
-                private const int Offset_TaskID = 0;
-                private const int Offset_Relation = 4;
+                private int _offset_TaskID;
+                private int _offset_Relation;
+
+                private int Offset_TaskID
+                {
+                    get
+                    {
+                        if (_offset_TaskID == -1)
+                        {
+                            _offset_TaskID = 0;
+                        }
+
+                        return _offset_TaskID;
+                    }
+                }
+
+                private int Offset_Relation
+                {
+                    get
+                    {
+                        if (_offset_Relation == -1)
+                        {
+                            _offset_Relation = Offset_TaskID + 4;
+                        }
+
+                        return _offset_Relation;
+                    }
+                }
 
                 /// <summary>
                 /// Retrieves the TaskID field.
                 /// </summary>
-                public int TaskID => BitConverter.ToInt32(_etwEvent.Data[Offset_TaskID..Offset_Relation]);
+                public int TaskID => BitConverter.ToInt32(_etwEvent.Data[Offset_TaskID..]);
 
                 /// <summary>
                 /// Retrieves the Relation field.
                 /// </summary>
-                public CausalityRelation Relation => (CausalityRelation)BitConverter.ToUInt32(_etwEvent.Data[Offset_Relation..]);
+                public CausalityRelation Relation => (CausalityRelation)BitConverter.ToInt32(_etwEvent.Data[Offset_Relation..]);
 
                 /// <summary>
                 /// Creates a new TraceOperationRelationData.
@@ -2071,6 +2867,8 @@ namespace EtwTools
                 public TraceOperationRelationData(EtwEvent etwEvent)
                 {
                     _etwEvent = etwEvent;
+                    _offset_TaskID = -1;
+                    _offset_Relation = -1;
                 }
             }
 
@@ -2149,22 +2947,48 @@ namespace EtwTools
             /// <summary>
             /// A data wrapper for a TraceOperationEnd event.
             /// </summary>
-            public readonly ref struct TraceOperationEndData
+            public ref struct TraceOperationEndData
             {
                 private readonly EtwEvent _etwEvent;
 
-                private const int Offset_TaskID = 0;
-                private const int Offset_Status = 4;
+                private int _offset_TaskID;
+                private int _offset_Status;
+
+                private int Offset_TaskID
+                {
+                    get
+                    {
+                        if (_offset_TaskID == -1)
+                        {
+                            _offset_TaskID = 0;
+                        }
+
+                        return _offset_TaskID;
+                    }
+                }
+
+                private int Offset_Status
+                {
+                    get
+                    {
+                        if (_offset_Status == -1)
+                        {
+                            _offset_Status = Offset_TaskID + 4;
+                        }
+
+                        return _offset_Status;
+                    }
+                }
 
                 /// <summary>
                 /// Retrieves the TaskID field.
                 /// </summary>
-                public int TaskID => BitConverter.ToInt32(_etwEvent.Data[Offset_TaskID..Offset_Status]);
+                public int TaskID => BitConverter.ToInt32(_etwEvent.Data[Offset_TaskID..]);
 
                 /// <summary>
                 /// Retrieves the Status field.
                 /// </summary>
-                public AsyncCausalityStatus Status => (AsyncCausalityStatus)BitConverter.ToUInt32(_etwEvent.Data[Offset_Status..]);
+                public AsyncCausalityStatus Status => (AsyncCausalityStatus)BitConverter.ToInt32(_etwEvent.Data[Offset_Status..]);
 
                 /// <summary>
                 /// Creates a new TraceOperationEndData.
@@ -2173,6 +2997,8 @@ namespace EtwTools
                 public TraceOperationEndData(EtwEvent etwEvent)
                 {
                     _etwEvent = etwEvent;
+                    _offset_TaskID = -1;
+                    _offset_Status = -1;
                 }
             }
 
@@ -2251,22 +3077,48 @@ namespace EtwTools
             /// <summary>
             /// A data wrapper for a TraceSynchronousWorkBegin event.
             /// </summary>
-            public readonly ref struct TraceSynchronousWorkBeginData
+            public ref struct TraceSynchronousWorkBeginData
             {
                 private readonly EtwEvent _etwEvent;
 
-                private const int Offset_TaskID = 0;
-                private const int Offset_Work = 4;
+                private int _offset_TaskID;
+                private int _offset_Work;
+
+                private int Offset_TaskID
+                {
+                    get
+                    {
+                        if (_offset_TaskID == -1)
+                        {
+                            _offset_TaskID = 0;
+                        }
+
+                        return _offset_TaskID;
+                    }
+                }
+
+                private int Offset_Work
+                {
+                    get
+                    {
+                        if (_offset_Work == -1)
+                        {
+                            _offset_Work = Offset_TaskID + 4;
+                        }
+
+                        return _offset_Work;
+                    }
+                }
 
                 /// <summary>
                 /// Retrieves the TaskID field.
                 /// </summary>
-                public int TaskID => BitConverter.ToInt32(_etwEvent.Data[Offset_TaskID..Offset_Work]);
+                public int TaskID => BitConverter.ToInt32(_etwEvent.Data[Offset_TaskID..]);
 
                 /// <summary>
                 /// Retrieves the Work field.
                 /// </summary>
-                public CausalitySynchronousWork Work => (CausalitySynchronousWork)BitConverter.ToUInt32(_etwEvent.Data[Offset_Work..]);
+                public CausalitySynchronousWork Work => (CausalitySynchronousWork)BitConverter.ToInt32(_etwEvent.Data[Offset_Work..]);
 
                 /// <summary>
                 /// Creates a new TraceSynchronousWorkBeginData.
@@ -2275,6 +3127,8 @@ namespace EtwTools
                 public TraceSynchronousWorkBeginData(EtwEvent etwEvent)
                 {
                     _etwEvent = etwEvent;
+                    _offset_TaskID = -1;
+                    _offset_Work = -1;
                 }
             }
 
@@ -2353,16 +3207,29 @@ namespace EtwTools
             /// <summary>
             /// A data wrapper for a TraceSynchronousWorkEnd event.
             /// </summary>
-            public readonly ref struct TraceSynchronousWorkEndData
+            public ref struct TraceSynchronousWorkEndData
             {
                 private readonly EtwEvent _etwEvent;
 
-                private const int Offset_Work = 0;
+                private int _offset_Work;
+
+                private int Offset_Work
+                {
+                    get
+                    {
+                        if (_offset_Work == -1)
+                        {
+                            _offset_Work = 0;
+                        }
+
+                        return _offset_Work;
+                    }
+                }
 
                 /// <summary>
                 /// Retrieves the Work field.
                 /// </summary>
-                public CausalitySynchronousWork Work => (CausalitySynchronousWork)BitConverter.ToUInt32(_etwEvent.Data[Offset_Work..]);
+                public CausalitySynchronousWork Work => (CausalitySynchronousWork)BitConverter.ToInt32(_etwEvent.Data[Offset_Work..]);
 
                 /// <summary>
                 /// Creates a new TraceSynchronousWorkEndData.
@@ -2371,6 +3238,7 @@ namespace EtwTools
                 public TraceSynchronousWorkEndData(EtwEvent etwEvent)
                 {
                     _etwEvent = etwEvent;
+                    _offset_Work = -1;
                 }
             }
 
@@ -2449,17 +3317,43 @@ namespace EtwTools
             /// <summary>
             /// A data wrapper for a RunningContinuation event.
             /// </summary>
-            public readonly ref struct RunningContinuationData
+            public ref struct RunningContinuationData
             {
                 private readonly EtwEvent _etwEvent;
 
-                private const int Offset_TaskID = 0;
-                private const int Offset_Object = 4;
+                private int _offset_TaskID;
+                private int _offset_Object;
+
+                private int Offset_TaskID
+                {
+                    get
+                    {
+                        if (_offset_TaskID == -1)
+                        {
+                            _offset_TaskID = 0;
+                        }
+
+                        return _offset_TaskID;
+                    }
+                }
+
+                private int Offset_Object
+                {
+                    get
+                    {
+                        if (_offset_Object == -1)
+                        {
+                            _offset_Object = Offset_TaskID + 4;
+                        }
+
+                        return _offset_Object;
+                    }
+                }
 
                 /// <summary>
                 /// Retrieves the TaskID field.
                 /// </summary>
-                public int TaskID => BitConverter.ToInt32(_etwEvent.Data[Offset_TaskID..Offset_Object]);
+                public int TaskID => BitConverter.ToInt32(_etwEvent.Data[Offset_TaskID..]);
 
                 /// <summary>
                 /// Retrieves the Object field.
@@ -2473,6 +3367,8 @@ namespace EtwTools
                 public RunningContinuationData(EtwEvent etwEvent)
                 {
                     _etwEvent = etwEvent;
+                    _offset_TaskID = -1;
+                    _offset_Object = -1;
                 }
             }
 
@@ -2551,23 +3447,62 @@ namespace EtwTools
             /// <summary>
             /// A data wrapper for a RunningContinuationList event.
             /// </summary>
-            public readonly ref struct RunningContinuationListData
+            public ref struct RunningContinuationListData
             {
                 private readonly EtwEvent _etwEvent;
 
-                private const int Offset_TaskID = 0;
-                private const int Offset_Index = 4;
-                private const int Offset_Object = 8;
+                private int _offset_TaskID;
+                private int _offset_Index;
+                private int _offset_Object;
+
+                private int Offset_TaskID
+                {
+                    get
+                    {
+                        if (_offset_TaskID == -1)
+                        {
+                            _offset_TaskID = 0;
+                        }
+
+                        return _offset_TaskID;
+                    }
+                }
+
+                private int Offset_Index
+                {
+                    get
+                    {
+                        if (_offset_Index == -1)
+                        {
+                            _offset_Index = Offset_TaskID + 4;
+                        }
+
+                        return _offset_Index;
+                    }
+                }
+
+                private int Offset_Object
+                {
+                    get
+                    {
+                        if (_offset_Object == -1)
+                        {
+                            _offset_Object = Offset_Index + 4;
+                        }
+
+                        return _offset_Object;
+                    }
+                }
 
                 /// <summary>
                 /// Retrieves the TaskID field.
                 /// </summary>
-                public int TaskID => BitConverter.ToInt32(_etwEvent.Data[Offset_TaskID..Offset_Index]);
+                public int TaskID => BitConverter.ToInt32(_etwEvent.Data[Offset_TaskID..]);
 
                 /// <summary>
                 /// Retrieves the Index field.
                 /// </summary>
-                public int Index => BitConverter.ToInt32(_etwEvent.Data[Offset_Index..Offset_Object]);
+                public int Index => BitConverter.ToInt32(_etwEvent.Data[Offset_Index..]);
 
                 /// <summary>
                 /// Retrieves the Object field.
@@ -2581,6 +3516,9 @@ namespace EtwTools
                 public RunningContinuationListData(EtwEvent etwEvent)
                 {
                     _etwEvent = etwEvent;
+                    _offset_TaskID = -1;
+                    _offset_Index = -1;
+                    _offset_Object = -1;
                 }
             }
 
@@ -2659,11 +3597,24 @@ namespace EtwTools
             /// <summary>
             /// A data wrapper for a DebugMessage event.
             /// </summary>
-            public readonly ref struct DebugMessageData
+            public ref struct DebugMessageData
             {
                 private readonly EtwEvent _etwEvent;
 
-                private const int Offset_Message = 0;
+                private int _offset_Message;
+
+                private int Offset_Message
+                {
+                    get
+                    {
+                        if (_offset_Message == -1)
+                        {
+                            _offset_Message = 0;
+                        }
+
+                        return _offset_Message;
+                    }
+                }
 
                 /// <summary>
                 /// Retrieves the Message field.
@@ -2677,6 +3628,7 @@ namespace EtwTools
                 public DebugMessageData(EtwEvent etwEvent)
                 {
                     _etwEvent = etwEvent;
+                    _offset_Message = -1;
                 }
             }
 
@@ -2755,22 +3707,48 @@ namespace EtwTools
             /// <summary>
             /// A data wrapper for a DebugFacilityMessage event.
             /// </summary>
-            public readonly ref struct DebugFacilityMessageData
+            public ref struct DebugFacilityMessageData
             {
                 private readonly EtwEvent _etwEvent;
 
-                private const int Offset_Facility = 0;
-                private readonly int _offset_Message;
+                private int _offset_Facility;
+                private int _offset_Message;
+
+                private int Offset_Facility
+                {
+                    get
+                    {
+                        if (_offset_Facility == -1)
+                        {
+                            _offset_Facility = 0;
+                        }
+
+                        return _offset_Facility;
+                    }
+                }
+
+                private int Offset_Message
+                {
+                    get
+                    {
+                        if (_offset_Message == -1)
+                        {
+                            _offset_Message = Offset_Facility + EtwEvent.UnicodeStringEnumerable.UnicodeStringEnumerator.StringLength(_etwEvent.Data, Offset_Facility);
+                        }
+
+                        return _offset_Message;
+                    }
+                }
 
                 /// <summary>
                 /// Retrieves the Facility field.
                 /// </summary>
-                public string Facility => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_Facility.._offset_Message]);
+                public string Facility => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_Facility..]);
 
                 /// <summary>
                 /// Retrieves the Message field.
                 /// </summary>
-                public string Message => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[_offset_Message..]);
+                public string Message => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_Message..]);
 
                 /// <summary>
                 /// Creates a new DebugFacilityMessageData.
@@ -2779,7 +3757,8 @@ namespace EtwTools
                 public DebugFacilityMessageData(EtwEvent etwEvent)
                 {
                     _etwEvent = etwEvent;
-                    _offset_Message = Offset_Facility + EtwEvent.UnicodeStringEnumerable.UnicodeStringEnumerator.StringLength(etwEvent.Data, Offset_Facility);
+                    _offset_Facility = -1;
+                    _offset_Message = -1;
                 }
             }
 
@@ -2858,28 +3837,67 @@ namespace EtwTools
             /// <summary>
             /// A data wrapper for a DebugFacilityMessage1 event.
             /// </summary>
-            public readonly ref struct DebugFacilityMessage1Data
+            public ref struct DebugFacilityMessage1Data
             {
                 private readonly EtwEvent _etwEvent;
 
-                private const int Offset_Facility = 0;
-                private readonly int _offset_Message;
-                private readonly int _offset_Value1;
+                private int _offset_Facility;
+                private int _offset_Message;
+                private int _offset_Value1;
+
+                private int Offset_Facility
+                {
+                    get
+                    {
+                        if (_offset_Facility == -1)
+                        {
+                            _offset_Facility = 0;
+                        }
+
+                        return _offset_Facility;
+                    }
+                }
+
+                private int Offset_Message
+                {
+                    get
+                    {
+                        if (_offset_Message == -1)
+                        {
+                            _offset_Message = Offset_Facility + EtwEvent.UnicodeStringEnumerable.UnicodeStringEnumerator.StringLength(_etwEvent.Data, Offset_Facility);
+                        }
+
+                        return _offset_Message;
+                    }
+                }
+
+                private int Offset_Value1
+                {
+                    get
+                    {
+                        if (_offset_Value1 == -1)
+                        {
+                            _offset_Value1 = Offset_Message + EtwEvent.UnicodeStringEnumerable.UnicodeStringEnumerator.StringLength(_etwEvent.Data, Offset_Message);
+                        }
+
+                        return _offset_Value1;
+                    }
+                }
 
                 /// <summary>
                 /// Retrieves the Facility field.
                 /// </summary>
-                public string Facility => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_Facility.._offset_Message]);
+                public string Facility => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_Facility..]);
 
                 /// <summary>
                 /// Retrieves the Message field.
                 /// </summary>
-                public string Message => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[_offset_Message.._offset_Value1]);
+                public string Message => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_Message..]);
 
                 /// <summary>
                 /// Retrieves the Value1 field.
                 /// </summary>
-                public string Value1 => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[_offset_Value1..]);
+                public string Value1 => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_Value1..]);
 
                 /// <summary>
                 /// Creates a new DebugFacilityMessage1Data.
@@ -2888,8 +3906,9 @@ namespace EtwTools
                 public DebugFacilityMessage1Data(EtwEvent etwEvent)
                 {
                     _etwEvent = etwEvent;
-                    _offset_Message = Offset_Facility + EtwEvent.UnicodeStringEnumerable.UnicodeStringEnumerator.StringLength(etwEvent.Data, Offset_Facility);
-                    _offset_Value1 = _offset_Message + EtwEvent.UnicodeStringEnumerable.UnicodeStringEnumerator.StringLength(etwEvent.Data, _offset_Message);
+                    _offset_Facility = -1;
+                    _offset_Message = -1;
+                    _offset_Value1 = -1;
                 }
             }
 
@@ -2968,11 +3987,24 @@ namespace EtwTools
             /// <summary>
             /// A data wrapper for a SetActivityId event.
             /// </summary>
-            public readonly ref struct SetActivityIdData
+            public ref struct SetActivityIdData
             {
                 private readonly EtwEvent _etwEvent;
 
-                private const int Offset_NewId = 0;
+                private int _offset_NewId;
+
+                private int Offset_NewId
+                {
+                    get
+                    {
+                        if (_offset_NewId == -1)
+                        {
+                            _offset_NewId = 0;
+                        }
+
+                        return _offset_NewId;
+                    }
+                }
 
                 /// <summary>
                 /// Retrieves the NewId field.
@@ -2986,6 +4018,7 @@ namespace EtwTools
                 public SetActivityIdData(EtwEvent etwEvent)
                 {
                     _etwEvent = etwEvent;
+                    _offset_NewId = -1;
                 }
             }
 
@@ -3064,11 +4097,24 @@ namespace EtwTools
             /// <summary>
             /// A data wrapper for a NewID event.
             /// </summary>
-            public readonly ref struct NewIDData
+            public ref struct NewIDData
             {
                 private readonly EtwEvent _etwEvent;
 
-                private const int Offset_TaskID = 0;
+                private int _offset_TaskID;
+
+                private int Offset_TaskID
+                {
+                    get
+                    {
+                        if (_offset_TaskID == -1)
+                        {
+                            _offset_TaskID = 0;
+                        }
+
+                        return _offset_TaskID;
+                    }
+                }
 
                 /// <summary>
                 /// Retrieves the TaskID field.
@@ -3082,6 +4128,7 @@ namespace EtwTools
                 public NewIDData(EtwEvent etwEvent)
                 {
                     _etwEvent = etwEvent;
+                    _offset_TaskID = -1;
                 }
             }
 
@@ -3090,7 +4137,7 @@ namespace EtwTools
         /// <summary>
         /// ForkJoinOperationType.
         /// </summary>
-        public enum ForkJoinOperationType
+        public enum ForkJoinOperationType : ulong
         {
             /// <summary>
             /// ParallelInvoke.
@@ -3109,7 +4156,7 @@ namespace EtwTools
         /// <summary>
         /// TaskWaitBehavior.
         /// </summary>
-        public enum TaskWaitBehavior
+        public enum TaskWaitBehavior : ulong
         {
             /// <summary>
             /// Synchronous.
@@ -3124,7 +4171,7 @@ namespace EtwTools
         /// <summary>
         /// CausalityRelation.
         /// </summary>
-        public enum CausalityRelation
+        public enum CausalityRelation : ulong
         {
             /// <summary>
             /// AssignDelegate.
@@ -3151,7 +4198,7 @@ namespace EtwTools
         /// <summary>
         /// AsyncCausalityStatus.
         /// </summary>
-        public enum AsyncCausalityStatus
+        public enum AsyncCausalityStatus : ulong
         {
             /// <summary>
             /// Canceled.
@@ -3174,7 +4221,7 @@ namespace EtwTools
         /// <summary>
         /// CausalitySynchronousWork.
         /// </summary>
-        public enum CausalitySynchronousWork
+        public enum CausalitySynchronousWork : ulong
         {
             /// <summary>
             /// CompletionNotification.

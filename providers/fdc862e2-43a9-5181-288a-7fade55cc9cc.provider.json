@@ -1,0 +1,2085 @@
+{
+  "name": "VisualStudioCpsCore",
+  "displayName": "Microsoft-VisualStudio-CpsCore",
+  "id": "fdc862e2-43a9-5181-288a-7fade55cc9cc",
+  "events": [
+    {
+      "name": "EventSourceMessage",
+      "displayName": "EventSourceMessage",
+      "descriptor": {
+        "id": 0,
+        "version": 0,
+        "channel": 0,
+        "level": "None",
+        "opcode": "Info",
+        "task": 65534,
+        "keyword": 0
+      },
+      "fields": [
+        {
+          "name": "Message",
+          "datatype": "string",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "ProjectBuildStop",
+      "displayName": "ProjectBuildStop",
+      "descriptor": {
+        "id": 4,
+        "version": 0,
+        "channel": 0,
+        "level": "Information",
+        "opcode": "End",
+        "task": 65530,
+        "keyword": 0
+      },
+      "fields": [
+        {
+          "name": "ProjectPath",
+          "datatype": "string",
+          "map": null
+        },
+        {
+          "name": "Configuration",
+          "datatype": "string",
+          "map": null
+        },
+        {
+          "name": "RequestId",
+          "datatype": "int",
+          "map": null
+        },
+        {
+          "name": "IsSuccessful",
+          "datatype": "bool",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "CreateItemSchemaStart",
+      "displayName": "CreateItemSchemaStart",
+      "descriptor": {
+        "id": 25,
+        "version": 0,
+        "channel": 0,
+        "level": "Information",
+        "opcode": "Start",
+        "task": 65509,
+        "keyword": 0
+      },
+      "fields": [
+        {
+          "name": "ProjectPath",
+          "datatype": "string",
+          "map": null
+        },
+        {
+          "name": "Configuration",
+          "datatype": "string",
+          "map": null
+        },
+        {
+          "name": "SnapshotId",
+          "datatype": "int",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "CreateItemSchemaStop",
+      "displayName": "CreateItemSchemaStop",
+      "descriptor": {
+        "id": 26,
+        "version": 0,
+        "channel": 0,
+        "level": "Information",
+        "opcode": "End",
+        "task": 65509,
+        "keyword": 0
+      },
+      "fields": [
+        {
+          "name": "ProjectPath",
+          "datatype": "string",
+          "map": null
+        },
+        {
+          "name": "Configuration",
+          "datatype": "string",
+          "map": null
+        },
+        {
+          "name": "SnapshotId",
+          "datatype": "int",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "PublishingProjectCapabilities",
+      "displayName": "PublishingProjectCapabilities",
+      "descriptor": {
+        "id": 61,
+        "version": 0,
+        "channel": 0,
+        "level": "Information",
+        "opcode": "Info",
+        "task": 65473,
+        "keyword": 0
+      },
+      "fields": [
+        {
+          "name": "ProjectPath",
+          "datatype": "string",
+          "map": null
+        },
+        {
+          "name": "Scope",
+          "datatype": "string",
+          "map": null
+        },
+        {
+          "name": "ValueVersionNumber",
+          "datatype": "long",
+          "map": null
+        },
+        {
+          "name": "ValueChanged",
+          "datatype": "bool",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "LoadDynamicLoadComponentsStart",
+      "displayName": "LoadDynamicLoadComponentsStart",
+      "descriptor": {
+        "id": 62,
+        "version": 0,
+        "channel": 0,
+        "level": "Information",
+        "opcode": "Start",
+        "task": 65472,
+        "keyword": 0
+      },
+      "fields": [
+        {
+          "name": "ProjectPath",
+          "datatype": "string",
+          "map": null
+        },
+        {
+          "name": "Scope",
+          "datatype": "string",
+          "map": null
+        },
+        {
+          "name": "ValueVersionNumber",
+          "datatype": "long",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "ConfiguredProjectVersionChanged",
+      "displayName": "ConfiguredProjectVersionChanged",
+      "descriptor": {
+        "id": 67,
+        "version": 0,
+        "channel": 0,
+        "level": "Information",
+        "opcode": "Info",
+        "task": 65467,
+        "keyword": 0
+      },
+      "fields": [
+        {
+          "name": "ProjectPath",
+          "datatype": "string",
+          "map": null
+        },
+        {
+          "name": "ConfigurationName",
+          "datatype": "string",
+          "map": null
+        },
+        {
+          "name": "Version",
+          "datatype": "long",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "ReportPrioritySchedulerGap",
+      "displayName": "ReportPrioritySchedulerGap",
+      "descriptor": {
+        "id": 88,
+        "version": 0,
+        "channel": 0,
+        "level": "Information",
+        "opcode": "Info",
+        "task": 65446,
+        "keyword": 0
+      },
+      "fields": [
+        {
+          "name": "Time",
+          "datatype": "int",
+          "map": null
+        },
+        {
+          "name": "IsPostCallback",
+          "datatype": "bool",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "ReportProjectDataSourceVersionChanged",
+      "displayName": "ReportProjectDataSourceVersionChanged",
+      "descriptor": {
+        "id": 89,
+        "version": 0,
+        "channel": 0,
+        "level": "Information",
+        "opcode": "Info",
+        "task": 65445,
+        "keyword": 0
+      },
+      "fields": [
+        {
+          "name": "Project",
+          "datatype": "string",
+          "map": null
+        },
+        {
+          "name": "DataSourceId",
+          "datatype": "int",
+          "map": null
+        },
+        {
+          "name": "DataSourceName",
+          "datatype": "string",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "ProjectEvaluationRuleSnapshotStart",
+      "displayName": "ProjectEvaluationRuleSnapshotStart",
+      "descriptor": {
+        "id": 9,
+        "version": 0,
+        "channel": 0,
+        "level": "Verbose",
+        "opcode": "Start",
+        "task": 65525,
+        "keyword": 0
+      },
+      "fields": [
+        {
+          "name": "ProjectPath",
+          "datatype": "string",
+          "map": null
+        },
+        {
+          "name": "ConfigurationName",
+          "datatype": "string",
+          "map": null
+        },
+        {
+          "name": "RuleName",
+          "datatype": "string",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "ProjectEvaluationRuleSnapshotStop",
+      "displayName": "ProjectEvaluationRuleSnapshotStop",
+      "descriptor": {
+        "id": 10,
+        "version": 0,
+        "channel": 0,
+        "level": "Verbose",
+        "opcode": "End",
+        "task": 65525,
+        "keyword": 0
+      },
+      "fields": [
+        {
+          "name": "ProjectPath",
+          "datatype": "string",
+          "map": null
+        },
+        {
+          "name": "ConfigurationName",
+          "datatype": "string",
+          "map": null
+        },
+        {
+          "name": "RuleName",
+          "datatype": "string",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "LoadSchemaFileStop",
+      "displayName": "LoadSchemaFileStop",
+      "descriptor": {
+        "id": 22,
+        "version": 0,
+        "channel": 0,
+        "level": "Information",
+        "opcode": "End",
+        "task": 65512,
+        "keyword": 0
+      },
+      "fields": [
+        {
+          "name": "FilePath",
+          "datatype": "string",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "PhysicalTreeLoadingStop",
+      "displayName": "PhysicalTreeLoadingStop",
+      "descriptor": {
+        "id": 44,
+        "version": 0,
+        "channel": 0,
+        "level": "Information",
+        "opcode": "End",
+        "task": 65490,
+        "keyword": 0
+      },
+      "fields": [
+        {
+          "name": "ProjectPath",
+          "datatype": "string",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "LoadDynamicLoadComponentsStop",
+      "displayName": "LoadDynamicLoadComponentsStop",
+      "descriptor": {
+        "id": 63,
+        "version": 0,
+        "channel": 0,
+        "level": "Information",
+        "opcode": "End",
+        "task": 65472,
+        "keyword": 0
+      },
+      "fields": [
+        {
+          "name": "ProjectPath",
+          "datatype": "string",
+          "map": null
+        },
+        {
+          "name": "Scope",
+          "datatype": "string",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "BatchBuildStart",
+      "displayName": "BatchBuildStart",
+      "descriptor": {
+        "id": 1,
+        "version": 0,
+        "channel": 0,
+        "level": "Information",
+        "opcode": "Start",
+        "task": 65533,
+        "keyword": 0
+      },
+      "fields": [
+        {
+          "name": "Host",
+          "datatype": "string",
+          "map": null
+        },
+        {
+          "name": "RequestCount",
+          "datatype": "int",
+          "map": null
+        },
+        {
+          "name": "Requests",
+          "datatype": "string",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "BatchBuildStop",
+      "displayName": "BatchBuildStop",
+      "descriptor": {
+        "id": 2,
+        "version": 0,
+        "channel": 0,
+        "level": "Information",
+        "opcode": "End",
+        "task": 65533,
+        "keyword": 0
+      },
+      "fields": [
+        {
+          "name": "Host",
+          "datatype": "string",
+          "map": null
+        },
+        {
+          "name": "RequestCount",
+          "datatype": "int",
+          "map": null
+        },
+        {
+          "name": "_",
+          "datatype": "int",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "ProjectBuildStart",
+      "displayName": "ProjectBuildStart",
+      "descriptor": {
+        "id": 3,
+        "version": 0,
+        "channel": 0,
+        "level": "Information",
+        "opcode": "Start",
+        "task": 65531,
+        "keyword": 0
+      },
+      "fields": [
+        {
+          "name": "ProjectPath",
+          "datatype": "string",
+          "map": null
+        },
+        {
+          "name": "Configuration",
+          "datatype": "string",
+          "map": null
+        },
+        {
+          "name": "RequestId",
+          "datatype": "int",
+          "map": null
+        },
+        {
+          "name": "Targets",
+          "datatype": "string",
+          "map": null
+        },
+        {
+          "name": "IsUsingProjectInstance",
+          "datatype": "bool",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "ProjectBuildSnapshotStart",
+      "displayName": "ProjectBuildSnapshotStart",
+      "descriptor": {
+        "id": 5,
+        "version": 0,
+        "channel": 0,
+        "level": "Information",
+        "opcode": "Start",
+        "task": 65529,
+        "keyword": 0
+      },
+      "fields": [
+        {
+          "name": "ProjectPath",
+          "datatype": "string",
+          "map": null
+        },
+        {
+          "name": "InstanceId",
+          "datatype": "int",
+          "map": null
+        },
+        {
+          "name": "Targets",
+          "datatype": "string",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "ProjectBuildSnapshotStop",
+      "displayName": "ProjectBuildSnapshotStop",
+      "descriptor": {
+        "id": 6,
+        "version": 0,
+        "channel": 0,
+        "level": "Information",
+        "opcode": "End",
+        "task": 65529,
+        "keyword": 0
+      },
+      "fields": [
+        {
+          "name": "ProjectPath",
+          "datatype": "string",
+          "map": null
+        },
+        {
+          "name": "InstanceId",
+          "datatype": "int",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "ProjectSnapshotStart",
+      "displayName": "ProjectSnapshotStart",
+      "descriptor": {
+        "id": 7,
+        "version": 0,
+        "channel": 0,
+        "level": "Information",
+        "opcode": "Start",
+        "task": 65527,
+        "keyword": 0
+      },
+      "fields": [
+        {
+          "name": "ProjectPath",
+          "datatype": "string",
+          "map": null
+        },
+        {
+          "name": "ConfigurationName",
+          "datatype": "string",
+          "map": null
+        },
+        {
+          "name": "Version",
+          "datatype": "long",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "ProjectSnapshotStop",
+      "displayName": "ProjectSnapshotStop",
+      "descriptor": {
+        "id": 8,
+        "version": 0,
+        "channel": 0,
+        "level": "Information",
+        "opcode": "End",
+        "task": 65527,
+        "keyword": 0
+      },
+      "fields": [
+        {
+          "name": "ProjectPath",
+          "datatype": "string",
+          "map": null
+        },
+        {
+          "name": "ConfigurationName",
+          "datatype": "string",
+          "map": null
+        },
+        {
+          "name": "Version",
+          "datatype": "long",
+          "map": null
+        },
+        {
+          "name": "InstanceId",
+          "datatype": "int",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "ProjectBuildRuleSnapshotStart",
+      "displayName": "ProjectBuildRuleSnapshotStart",
+      "descriptor": {
+        "id": 11,
+        "version": 0,
+        "channel": 0,
+        "level": "Verbose",
+        "opcode": "Start",
+        "task": 65523,
+        "keyword": 0
+      },
+      "fields": [
+        {
+          "name": "ProjectPath",
+          "datatype": "string",
+          "map": null
+        },
+        {
+          "name": "ConfigurationName",
+          "datatype": "string",
+          "map": null
+        },
+        {
+          "name": "RuleName",
+          "datatype": "string",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "ProjectBuildRuleSnapshotStop",
+      "displayName": "ProjectBuildRuleSnapshotStop",
+      "descriptor": {
+        "id": 12,
+        "version": 0,
+        "channel": 0,
+        "level": "Verbose",
+        "opcode": "End",
+        "task": 65523,
+        "keyword": 0
+      },
+      "fields": [
+        {
+          "name": "ProjectPath",
+          "datatype": "string",
+          "map": null
+        },
+        {
+          "name": "ConfigurationName",
+          "datatype": "string",
+          "map": null
+        },
+        {
+          "name": "RuleName",
+          "datatype": "string",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "SubscribeRuleStart",
+      "displayName": "SubscribeRuleStart",
+      "descriptor": {
+        "id": 13,
+        "version": 0,
+        "channel": 0,
+        "level": "Information",
+        "opcode": "Start",
+        "task": 65521,
+        "keyword": 0
+      },
+      "fields": [
+        {
+          "name": "ProjectPath",
+          "datatype": "string",
+          "map": null
+        },
+        {
+          "name": "ConfigurationName",
+          "datatype": "string",
+          "map": null
+        },
+        {
+          "name": "Rules",
+          "datatype": "string",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "SubscribeRuleStop",
+      "displayName": "SubscribeRuleStop",
+      "descriptor": {
+        "id": 14,
+        "version": 0,
+        "channel": 0,
+        "level": "Information",
+        "opcode": "End",
+        "task": 65521,
+        "keyword": 0
+      },
+      "fields": [
+        {
+          "name": "ProjectPath",
+          "datatype": "string",
+          "map": null
+        },
+        {
+          "name": "ConfigurationName",
+          "datatype": "string",
+          "map": null
+        },
+        {
+          "name": "Rules",
+          "datatype": "string",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "UpdateProjectRuleSnapshotStart",
+      "displayName": "UpdateProjectRuleSnapshotStart",
+      "descriptor": {
+        "id": 15,
+        "version": 0,
+        "channel": 0,
+        "level": "Information",
+        "opcode": "Start",
+        "task": 65519,
+        "keyword": 0
+      },
+      "fields": [
+        {
+          "name": "ProjectPath",
+          "datatype": "string",
+          "map": null
+        },
+        {
+          "name": "ConfigurationName",
+          "datatype": "string",
+          "map": null
+        },
+        {
+          "name": "SubscriptionType",
+          "datatype": "string",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "UpdateProjectRuleSnapshotStop",
+      "displayName": "UpdateProjectRuleSnapshotStop",
+      "descriptor": {
+        "id": 16,
+        "version": 0,
+        "channel": 0,
+        "level": "Information",
+        "opcode": "End",
+        "task": 65519,
+        "keyword": 0
+      },
+      "fields": [
+        {
+          "name": "ProjectPath",
+          "datatype": "string",
+          "map": null
+        },
+        {
+          "name": "ConfigurationName",
+          "datatype": "string",
+          "map": null
+        },
+        {
+          "name": "SubscriptionType",
+          "datatype": "string",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "ProjectConfigurationActivated",
+      "displayName": "ProjectConfigurationActivated",
+      "descriptor": {
+        "id": 17,
+        "version": 0,
+        "channel": 0,
+        "level": "Information",
+        "opcode": "Info",
+        "task": 65517,
+        "keyword": 0
+      },
+      "fields": [
+        {
+          "name": "ProjectPath",
+          "datatype": "string",
+          "map": null
+        },
+        {
+          "name": "ConfigurationName",
+          "datatype": "string",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "ProjectConfigurationDeactivated",
+      "displayName": "ProjectConfigurationDeactivated",
+      "descriptor": {
+        "id": 18,
+        "version": 0,
+        "channel": 0,
+        "level": "Information",
+        "opcode": "Info",
+        "task": 65516,
+        "keyword": 0
+      },
+      "fields": [
+        {
+          "name": "ProjectPath",
+          "datatype": "string",
+          "map": null
+        },
+        {
+          "name": "ConfigurationName",
+          "datatype": "string",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "ProjectTreeProviderInitializationStart",
+      "displayName": "ProjectTreeProviderInitializationStart",
+      "descriptor": {
+        "id": 19,
+        "version": 0,
+        "channel": 0,
+        "level": "Information",
+        "opcode": "Start",
+        "task": 65515,
+        "keyword": 0
+      },
+      "fields": [
+        {
+          "name": "ProjectPath",
+          "datatype": "string",
+          "map": null
+        },
+        {
+          "name": "ProviderName",
+          "datatype": "string",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "ProjectTreeProviderInitializationStop",
+      "displayName": "ProjectTreeProviderInitializationStop",
+      "descriptor": {
+        "id": 20,
+        "version": 0,
+        "channel": 0,
+        "level": "Information",
+        "opcode": "End",
+        "task": 65515,
+        "keyword": 0
+      },
+      "fields": [
+        {
+          "name": "ProjectPath",
+          "datatype": "string",
+          "map": null
+        },
+        {
+          "name": "ProviderName",
+          "datatype": "string",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "LoadSchemaFileStart",
+      "displayName": "LoadSchemaFileStart",
+      "descriptor": {
+        "id": 21,
+        "version": 0,
+        "channel": 0,
+        "level": "Information",
+        "opcode": "Start",
+        "task": 65513,
+        "keyword": 0
+      },
+      "fields": [
+        {
+          "name": "FilePath",
+          "datatype": "string",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "CreatePropertyCatalogsStart",
+      "displayName": "CreatePropertyCatalogsStart",
+      "descriptor": {
+        "id": 23,
+        "version": 0,
+        "channel": 0,
+        "level": "Information",
+        "opcode": "Start",
+        "task": 65511,
+        "keyword": 0
+      },
+      "fields": [
+        {
+          "name": "ProjectPath",
+          "datatype": "string",
+          "map": null
+        },
+        {
+          "name": "SnapshotId",
+          "datatype": "int",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "CreatePropertyCatalogsStop",
+      "displayName": "CreatePropertyCatalogsStop",
+      "descriptor": {
+        "id": 24,
+        "version": 0,
+        "channel": 0,
+        "level": "Information",
+        "opcode": "End",
+        "task": 65511,
+        "keyword": 0
+      },
+      "fields": [
+        {
+          "name": "ProjectPath",
+          "datatype": "string",
+          "map": null
+        },
+        {
+          "name": "SnapshotId",
+          "datatype": "int",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "HintSubmissionStart",
+      "displayName": "HintSubmissionStart",
+      "descriptor": {
+        "id": 27,
+        "version": 0,
+        "channel": 0,
+        "level": "Verbose",
+        "opcode": "Start",
+        "task": 65507,
+        "keyword": 0
+      },
+      "fields": [
+        {
+          "name": "Kind",
+          "datatype": "string",
+          "map": null
+        },
+        {
+          "name": "AccumulatedCount",
+          "datatype": "int",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "HintSubmissionStop",
+      "displayName": "HintSubmissionStop",
+      "descriptor": {
+        "id": 28,
+        "version": 0,
+        "channel": 0,
+        "level": "Verbose",
+        "opcode": "End",
+        "task": 65507,
+        "keyword": 0
+      },
+      "fields": null
+    },
+    {
+      "name": "HintProcessStart",
+      "displayName": "HintProcessStart",
+      "descriptor": {
+        "id": 29,
+        "version": 0,
+        "channel": 0,
+        "level": "Information",
+        "opcode": "Start",
+        "task": 65505,
+        "keyword": 0
+      },
+      "fields": [
+        {
+          "name": "TotalEventCount",
+          "datatype": "int",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "HintProcessStop",
+      "displayName": "HintProcessStop",
+      "descriptor": {
+        "id": 30,
+        "version": 0,
+        "channel": 0,
+        "level": "Information",
+        "opcode": "End",
+        "task": 65505,
+        "keyword": 0
+      },
+      "fields": null
+    },
+    {
+      "name": "AddSourceItemsStart",
+      "displayName": "AddSourceItemsStart",
+      "descriptor": {
+        "id": 31,
+        "version": 0,
+        "channel": 0,
+        "level": "Information",
+        "opcode": "Start",
+        "task": 65503,
+        "keyword": 0
+      },
+      "fields": [
+        {
+          "name": "ProjectPath",
+          "datatype": "string",
+          "map": null
+        },
+        {
+          "name": "ItemCount",
+          "datatype": "int",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "AddSourceItemsStop",
+      "displayName": "AddSourceItemsStop",
+      "descriptor": {
+        "id": 32,
+        "version": 0,
+        "channel": 0,
+        "level": "Information",
+        "opcode": "End",
+        "task": 65503,
+        "keyword": 0
+      },
+      "fields": null
+    },
+    {
+      "name": "RemoveSourceItemsStart",
+      "displayName": "RemoveSourceItemsStart",
+      "descriptor": {
+        "id": 33,
+        "version": 0,
+        "channel": 0,
+        "level": "Information",
+        "opcode": "Start",
+        "task": 65501,
+        "keyword": 0
+      },
+      "fields": [
+        {
+          "name": "ProjectPath",
+          "datatype": "string",
+          "map": null
+        },
+        {
+          "name": "ItemCount",
+          "datatype": "int",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "RemoveSourceItemsStop",
+      "displayName": "RemoveSourceItemsStop",
+      "descriptor": {
+        "id": 34,
+        "version": 0,
+        "channel": 0,
+        "level": "Information",
+        "opcode": "End",
+        "task": 65501,
+        "keyword": 0
+      },
+      "fields": null
+    },
+    {
+      "name": "LoadConfiguredProjectStart",
+      "displayName": "LoadConfiguredProjectStart",
+      "descriptor": {
+        "id": 41,
+        "version": 0,
+        "channel": 0,
+        "level": "Information",
+        "opcode": "Start",
+        "task": 65493,
+        "keyword": 0
+      },
+      "fields": [
+        {
+          "name": "ProjectPath",
+          "datatype": "string",
+          "map": null
+        },
+        {
+          "name": "Configuration",
+          "datatype": "string",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "LoadConfiguredProjectStop",
+      "displayName": "LoadConfiguredProjectStop",
+      "descriptor": {
+        "id": 42,
+        "version": 0,
+        "channel": 0,
+        "level": "Information",
+        "opcode": "End",
+        "task": 65493,
+        "keyword": 0
+      },
+      "fields": [
+        {
+          "name": "ProjectPath",
+          "datatype": "string",
+          "map": null
+        },
+        {
+          "name": "Configuration",
+          "datatype": "string",
+          "map": null
+        },
+        {
+          "name": "Capabilities",
+          "datatype": "string",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "PhysicalTreeLoadingStart",
+      "displayName": "PhysicalTreeLoadingStart",
+      "descriptor": {
+        "id": 43,
+        "version": 0,
+        "channel": 0,
+        "level": "Information",
+        "opcode": "Start",
+        "task": 65491,
+        "keyword": 0
+      },
+      "fields": [
+        {
+          "name": "ProjectPath",
+          "datatype": "string",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "DirectoryTreeLoadingStart",
+      "displayName": "DirectoryTreeLoadingStart",
+      "descriptor": {
+        "id": 45,
+        "version": 0,
+        "channel": 0,
+        "level": "Information",
+        "opcode": "Start",
+        "task": 65489,
+        "keyword": 0
+      },
+      "fields": [
+        {
+          "name": "ProjectPath",
+          "datatype": "string",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "DirectoryTreeLoadingStop",
+      "displayName": "DirectoryTreeLoadingStop",
+      "descriptor": {
+        "id": 46,
+        "version": 0,
+        "channel": 0,
+        "level": "Information",
+        "opcode": "End",
+        "task": 65489,
+        "keyword": 0
+      },
+      "fields": [
+        {
+          "name": "ProjectPath",
+          "datatype": "string",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "WaitAutoLoadMethodsToFinishStart",
+      "displayName": "WaitAutoLoadMethodsToFinishStart",
+      "descriptor": {
+        "id": 47,
+        "version": 0,
+        "channel": 0,
+        "level": "Information",
+        "opcode": "Start",
+        "task": 65487,
+        "keyword": 0
+      },
+      "fields": [
+        {
+          "name": "ProjectPath",
+          "datatype": "string",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "WaitAutoLoadMethodsToFinishStop",
+      "displayName": "WaitAutoLoadMethodsToFinishStop",
+      "descriptor": {
+        "id": 48,
+        "version": 0,
+        "channel": 0,
+        "level": "Information",
+        "opcode": "End",
+        "task": 65487,
+        "keyword": 0
+      },
+      "fields": [
+        {
+          "name": "ProjectPath",
+          "datatype": "string",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "SetActiveTreeProviderStart",
+      "displayName": "SetActiveTreeProviderStart",
+      "descriptor": {
+        "id": 49,
+        "version": 0,
+        "channel": 0,
+        "level": "Information",
+        "opcode": "Start",
+        "task": 65485,
+        "keyword": 0
+      },
+      "fields": [
+        {
+          "name": "ProjectPath",
+          "datatype": "string",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "SetActiveTreeProviderStop",
+      "displayName": "SetActiveTreeProviderStop",
+      "descriptor": {
+        "id": 50,
+        "version": 0,
+        "channel": 0,
+        "level": "Information",
+        "opcode": "End",
+        "task": 65485,
+        "keyword": 0
+      },
+      "fields": [
+        {
+          "name": "ProjectPath",
+          "datatype": "string",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "InitializeActiveTreeProviderStart",
+      "displayName": "InitializeActiveTreeProviderStart",
+      "descriptor": {
+        "id": 51,
+        "version": 0,
+        "channel": 0,
+        "level": "Information",
+        "opcode": "Start",
+        "task": 65483,
+        "keyword": 0
+      },
+      "fields": [
+        {
+          "name": "ProjectPath",
+          "datatype": "string",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "InitializeActiveTreeProviderStop",
+      "displayName": "InitializeActiveTreeProviderStop",
+      "descriptor": {
+        "id": 52,
+        "version": 0,
+        "channel": 0,
+        "level": "Information",
+        "opcode": "End",
+        "task": 65483,
+        "keyword": 0
+      },
+      "fields": [
+        {
+          "name": "ProjectPath",
+          "datatype": "string",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "CapabilitiesTriggersProjectReload",
+      "displayName": "CapabilitiesTriggersProjectReload",
+      "descriptor": {
+        "id": 60,
+        "version": 0,
+        "channel": 0,
+        "level": "Information",
+        "opcode": "Info",
+        "task": 65474,
+        "keyword": 0
+      },
+      "fields": [
+        {
+          "name": "ProjectPath",
+          "datatype": "string",
+          "map": null
+        },
+        {
+          "name": "Scope",
+          "datatype": "string",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "UnloadDynamicLoadComponentsStart",
+      "displayName": "UnloadDynamicLoadComponentsStart",
+      "descriptor": {
+        "id": 64,
+        "version": 0,
+        "channel": 0,
+        "level": "Information",
+        "opcode": "Start",
+        "task": 65470,
+        "keyword": 0
+      },
+      "fields": [
+        {
+          "name": "ProjectPath",
+          "datatype": "string",
+          "map": null
+        },
+        {
+          "name": "Scope",
+          "datatype": "string",
+          "map": null
+        },
+        {
+          "name": "ValueVersionNumber",
+          "datatype": "long",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "UnloadDynamicLoadComponentsStop",
+      "displayName": "UnloadDynamicLoadComponentsStop",
+      "descriptor": {
+        "id": 65,
+        "version": 0,
+        "channel": 0,
+        "level": "Information",
+        "opcode": "End",
+        "task": 65470,
+        "keyword": 0
+      },
+      "fields": [
+        {
+          "name": "ProjectPath",
+          "datatype": "string",
+          "map": null
+        },
+        {
+          "name": "Scope",
+          "datatype": "string",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "ProjectGlobbingWatchingServiceInitialized",
+      "displayName": "ProjectGlobbingWatchingServiceInitialized",
+      "descriptor": {
+        "id": 66,
+        "version": 0,
+        "channel": 0,
+        "level": "Information",
+        "opcode": "Info",
+        "task": 65468,
+        "keyword": 0
+      },
+      "fields": [
+        {
+          "name": "ProjectPath",
+          "datatype": "string",
+          "map": null
+        },
+        {
+          "name": "ConfigurationName",
+          "datatype": "string",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "GlobbingWatchingConsistentCheckStart",
+      "displayName": "GlobbingWatchingConsistentCheckStart",
+      "descriptor": {
+        "id": 68,
+        "version": 0,
+        "channel": 0,
+        "level": "Information",
+        "opcode": "Start",
+        "task": 65466,
+        "keyword": 0
+      },
+      "fields": [
+        {
+          "name": "ProjectPath",
+          "datatype": "string",
+          "map": null
+        },
+        {
+          "name": "ConfigurationName",
+          "datatype": "string",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "GlobbingWatchingConsistentCheckStop",
+      "displayName": "GlobbingWatchingConsistentCheckStop",
+      "descriptor": {
+        "id": 69,
+        "version": 0,
+        "channel": 0,
+        "level": "Information",
+        "opcode": "End",
+        "task": 65466,
+        "keyword": 0
+      },
+      "fields": [
+        {
+          "name": "ProjectPath",
+          "datatype": "string",
+          "map": null
+        },
+        {
+          "name": "ConfigurationName",
+          "datatype": "string",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "GlobbingWatchingTriggerReevaluationStart",
+      "displayName": "GlobbingWatchingTriggerReevaluationStart",
+      "descriptor": {
+        "id": 70,
+        "version": 0,
+        "channel": 0,
+        "level": "Information",
+        "opcode": "Start",
+        "task": 65464,
+        "keyword": 0
+      },
+      "fields": [
+        {
+          "name": "ProjectPath",
+          "datatype": "string",
+          "map": null
+        },
+        {
+          "name": "ConfigurationName",
+          "datatype": "string",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "GlobbingWatchingTriggerReevaluationStop",
+      "displayName": "GlobbingWatchingTriggerReevaluationStop",
+      "descriptor": {
+        "id": 71,
+        "version": 0,
+        "channel": 0,
+        "level": "Information",
+        "opcode": "End",
+        "task": 65464,
+        "keyword": 0
+      },
+      "fields": [
+        {
+          "name": "ProjectPath",
+          "datatype": "string",
+          "map": null
+        },
+        {
+          "name": "ConfigurationName",
+          "datatype": "string",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "ProjectDirectoryTreeDisposed",
+      "displayName": "ProjectDirectoryTreeDisposed",
+      "descriptor": {
+        "id": 72,
+        "version": 0,
+        "channel": 0,
+        "level": "Information",
+        "opcode": "Info",
+        "task": 65462,
+        "keyword": 0
+      },
+      "fields": [
+        {
+          "name": "FolderPath",
+          "datatype": "string",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "ProjectDirectoryTreeAddSubscription",
+      "displayName": "ProjectDirectoryTreeAddSubscription",
+      "descriptor": {
+        "id": 73,
+        "version": 0,
+        "channel": 0,
+        "level": "Information",
+        "opcode": "Info",
+        "task": 65461,
+        "keyword": 0
+      },
+      "fields": [
+        {
+          "name": "FolderPath",
+          "datatype": "string",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "ProjectDirectoryTreeReleaseSubscription",
+      "displayName": "ProjectDirectoryTreeReleaseSubscription",
+      "descriptor": {
+        "id": 74,
+        "version": 0,
+        "channel": 0,
+        "level": "Information",
+        "opcode": "Info",
+        "task": 65460,
+        "keyword": 0
+      },
+      "fields": [
+        {
+          "name": "FolderPath",
+          "datatype": "string",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "GetEvaluatedPropertyValueStart",
+      "displayName": "GetEvaluatedPropertyValueStart",
+      "descriptor": {
+        "id": 75,
+        "version": 0,
+        "channel": 0,
+        "level": "Verbose",
+        "opcode": "Start",
+        "task": 65459,
+        "keyword": 0
+      },
+      "fields": [
+        {
+          "name": "PropertyName",
+          "datatype": "string",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "GetEvaluatedPropertyValueStop",
+      "displayName": "GetEvaluatedPropertyValueStop",
+      "descriptor": {
+        "id": 76,
+        "version": 0,
+        "channel": 0,
+        "level": "Verbose",
+        "opcode": "End",
+        "task": 65459,
+        "keyword": 0
+      },
+      "fields": [
+        {
+          "name": "PropertyName",
+          "datatype": "string",
+          "map": null
+        },
+        {
+          "name": "Value",
+          "datatype": "string",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "ProjectEvaluationStart",
+      "displayName": "ProjectEvaluationStart",
+      "descriptor": {
+        "id": 77,
+        "version": 0,
+        "channel": 0,
+        "level": "Information",
+        "opcode": "Start",
+        "task": 65457,
+        "keyword": 0
+      },
+      "fields": [
+        {
+          "name": "Project",
+          "datatype": "string",
+          "map": null
+        },
+        {
+          "name": "EvaluationId",
+          "datatype": "int",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "ProjectEvaluationStop",
+      "displayName": "ProjectEvaluationStop",
+      "descriptor": {
+        "id": 78,
+        "version": 0,
+        "channel": 0,
+        "level": "Information",
+        "opcode": "End",
+        "task": 65457,
+        "keyword": 0
+      },
+      "fields": [
+        {
+          "name": "Project",
+          "datatype": "string",
+          "map": null
+        },
+        {
+          "name": "EvaluationId",
+          "datatype": "int",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "ProjectMarkDirtied",
+      "displayName": "ProjectMarkDirtied",
+      "descriptor": {
+        "id": 79,
+        "version": 0,
+        "channel": 0,
+        "level": "Information",
+        "opcode": "Info",
+        "task": 65455,
+        "keyword": 0
+      },
+      "fields": [
+        {
+          "name": "Project",
+          "datatype": "string",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "DesignTimeBuildStart",
+      "displayName": "DesignTimeBuildStart",
+      "descriptor": {
+        "id": 80,
+        "version": 0,
+        "channel": 0,
+        "level": "Information",
+        "opcode": "Start",
+        "task": 65454,
+        "keyword": 0
+      },
+      "fields": [
+        {
+          "name": "Project",
+          "datatype": "string",
+          "map": null
+        },
+        {
+          "name": "Configuration",
+          "datatype": "string",
+          "map": null
+        },
+        {
+          "name": "UseCache",
+          "datatype": "bool",
+          "map": null
+        },
+        {
+          "name": "Targets",
+          "datatype": "string",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "DesignTimeBuildStop",
+      "displayName": "DesignTimeBuildStop",
+      "descriptor": {
+        "id": 81,
+        "version": 0,
+        "channel": 0,
+        "level": "Information",
+        "opcode": "End",
+        "task": 65454,
+        "keyword": 0
+      },
+      "fields": [
+        {
+          "name": "Project",
+          "datatype": "string",
+          "map": null
+        },
+        {
+          "name": "Configuration",
+          "datatype": "string",
+          "map": null
+        },
+        {
+          "name": "ResetId",
+          "datatype": "int",
+          "map": null
+        },
+        {
+          "name": "IsSuccessful",
+          "datatype": "bool",
+          "map": null
+        },
+        {
+          "name": "FromCache",
+          "datatype": "bool",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "DesignTimeBuildFallbackToLegacy",
+      "displayName": "DesignTimeBuildFallbackToLegacy",
+      "descriptor": {
+        "id": 82,
+        "version": 0,
+        "channel": 0,
+        "level": "Information",
+        "opcode": "Info",
+        "task": 65452,
+        "keyword": 0
+      },
+      "fields": [
+        {
+          "name": "Project",
+          "datatype": "string",
+          "map": null
+        },
+        {
+          "name": "Configuration",
+          "datatype": "string",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "UpToDateCheckCalculateHashStart",
+      "displayName": "UpToDateCheckCalculateHashStart",
+      "descriptor": {
+        "id": 83,
+        "version": 0,
+        "channel": 0,
+        "level": "Information",
+        "opcode": "Start",
+        "task": 65451,
+        "keyword": 0
+      },
+      "fields": [
+        {
+          "name": "Project",
+          "datatype": "string",
+          "map": null
+        },
+        {
+          "name": "Configuration",
+          "datatype": "string",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "UpToDateCheckCalculateHashStop",
+      "displayName": "UpToDateCheckCalculateHashStop",
+      "descriptor": {
+        "id": 84,
+        "version": 0,
+        "channel": 0,
+        "level": "Information",
+        "opcode": "End",
+        "task": 65451,
+        "keyword": 0
+      },
+      "fields": [
+        {
+          "name": "Project",
+          "datatype": "string",
+          "map": null
+        },
+        {
+          "name": "Configuration",
+          "datatype": "string",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "GlobbingWatchingTriggerReevaluationUpgradeableLockRequestStart",
+      "displayName": "GlobbingWatchingTriggerReevaluationUpgradeableLockRequestStart",
+      "descriptor": {
+        "id": 85,
+        "version": 0,
+        "channel": 0,
+        "level": "Information",
+        "opcode": "Start",
+        "task": 65449,
+        "keyword": 0
+      },
+      "fields": null
+    },
+    {
+      "name": "GlobbingWatchingTriggerReevaluationUpgradeableLockRequestEnd",
+      "displayName": "GlobbingWatchingTriggerReevaluationUpgradeableLockRequestEnd",
+      "descriptor": {
+        "id": 86,
+        "version": 0,
+        "channel": 0,
+        "level": "Information",
+        "opcode": "Info",
+        "task": 65448,
+        "keyword": 0
+      },
+      "fields": null
+    },
+    {
+      "name": "GlobbingWatchingTriggerReevaluationWriterLockRequestResult",
+      "displayName": "GlobbingWatchingTriggerReevaluationWriterLockRequestResult",
+      "descriptor": {
+        "id": 87,
+        "version": 0,
+        "channel": 0,
+        "level": "Information",
+        "opcode": "Info",
+        "task": 65447,
+        "keyword": 0
+      },
+      "fields": [
+        {
+          "name": "Cancelled",
+          "datatype": "bool",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "ReportOutputDataSourceStart",
+      "displayName": "ReportOutputDataSourceStart",
+      "descriptor": {
+        "id": 90,
+        "version": 0,
+        "channel": 0,
+        "level": "Information",
+        "opcode": "Start",
+        "task": 65444,
+        "keyword": 0
+      },
+      "fields": [
+        {
+          "name": "Project",
+          "datatype": "string",
+          "map": null
+        },
+        {
+          "name": "DataSourceName",
+          "datatype": "string",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "ReportOutputDataSourceStop",
+      "displayName": "ReportOutputDataSourceStop",
+      "descriptor": {
+        "id": 91,
+        "version": 0,
+        "channel": 0,
+        "level": "Information",
+        "opcode": "End",
+        "task": 65444,
+        "keyword": 0
+      },
+      "fields": [
+        {
+          "name": "Project",
+          "datatype": "string",
+          "map": null
+        },
+        {
+          "name": "DataSourceName",
+          "datatype": "string",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "ReportCoreDirectoryTreeHintFileChanged",
+      "displayName": "ReportCoreDirectoryTreeHintFileChanged",
+      "descriptor": {
+        "id": 92,
+        "version": 0,
+        "channel": 0,
+        "level": "Information",
+        "opcode": "Info",
+        "task": 65442,
+        "keyword": 0
+      },
+      "fields": [
+        {
+          "name": "RootPath",
+          "datatype": "string",
+          "map": null
+        },
+        {
+          "name": "FilePath",
+          "datatype": "string",
+          "map": null
+        },
+        {
+          "name": "ChangeType",
+          "datatype": "int",
+          "map": "WatcherChangeTypes"
+        }
+      ]
+    }
+  ],
+  "tasks": {
+    "65442": "ReportCoreDirectoryTreeHintFileChanged",
+    "65444": "ReportOutputDataSource",
+    "65445": "ReportProjectDataSourceVersionChanged",
+    "65446": "ReportPrioritySchedulerGap",
+    "65447": "GlobbingWatchingTriggerReevaluationWriterLockRequestResult",
+    "65448": "GlobbingWatchingTriggerReevaluationUpgradeableLockRequestEnd",
+    "65449": "GlobbingWatchingTriggerReevaluationUpgradeableLockRequest",
+    "65451": "UpToDateCheckCalculateHash",
+    "65452": "DesignTimeBuildFallbackToLegacy",
+    "65454": "DesignTimeBuild",
+    "65455": "ProjectMarkDirtied",
+    "65457": "ProjectEvaluation",
+    "65459": "GetEvaluatedPropertyValue",
+    "65460": "ProjectDirectoryTreeReleaseSubscription",
+    "65461": "ProjectDirectoryTreeAddSubscription",
+    "65462": "ProjectDirectoryTreeDisposed",
+    "65464": "GlobbingWatchingTriggerReevaluation",
+    "65466": "GlobbingWatchingConsistentCheck",
+    "65467": "ConfiguredProjectVersionChanged",
+    "65468": "ProjectGlobbingWatchingServiceInitialized",
+    "65470": "UnloadDynamicLoadComponents",
+    "65472": "LoadDynamicLoadComponents",
+    "65473": "PublishingProjectCapabilities",
+    "65474": "CapabilitiesTriggersProjectReload",
+    "65483": "InitializeActiveTreeProvider",
+    "65485": "SetActiveTreeProvider",
+    "65487": "WaitAutoLoadMethodsToFinish",
+    "65489": "DirectoryTreeLoading",
+    "65490": "PhysicalTreeLoadingStop",
+    "65491": "PhysicalTreeLoading",
+    "65493": "LoadConfiguredProject",
+    "65501": "RemoveSourceItems",
+    "65503": "AddSourceItems",
+    "65505": "HintProcess",
+    "65507": "HintSubmission",
+    "65509": "CreateItemSchema",
+    "65511": "CreatePropertyCatalogs",
+    "65512": "LoadSchemaFileStop",
+    "65513": "LoadSchemaFile",
+    "65515": "ProjectTreeProviderInitialization",
+    "65516": "ProjectConfigurationDeactivated",
+    "65517": "ProjectConfigurationActivated",
+    "65519": "UpdateProjectRuleSnapshot",
+    "65521": "SubscribeRule",
+    "65523": "ProjectBuildRuleSnapshot",
+    "65525": "ProjectEvaluationRuleSnapshot",
+    "65527": "ProjectSnapshot",
+    "65529": "ProjectBuildSnapshot",
+    "65530": "ProjectBuildStop",
+    "65531": "ProjectBuild",
+    "65533": "BatchBuild",
+    "65534": "EventSourceMessage"
+  },
+  "opcodes": {},
+  "keywords": {
+    "17592186044416": "Session3",
+    "35184372088832": "Session2",
+    "70368744177664": "Session1",
+    "140737488355328": "Session0"
+  },
+  "maps": [
+    {
+      "name": "WatcherChangeTypes",
+      "flags": true,
+      "values": {
+        "1": "Created",
+        "2": "Deleted",
+        "4": "Changed",
+        "8": "Renamed"
+      }
+    }
+  ],
+  "structs": []
+}

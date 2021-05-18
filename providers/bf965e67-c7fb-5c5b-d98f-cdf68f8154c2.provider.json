@@ -1,69 +1,11 @@
 {
-  "id": "bf965e67-c7fb-5c5b-d98f-cdf68f8154c2",
   "name": "RoslynEventSource",
-  "className": "RoslynEventSource",
-  "levels": null,
-  "channels": null,
-  "keywords": [
-    {
-      "name": "Session3",
-      "description": "Session3",
-      "value": 17592186044416
-    },
-    {
-      "name": "Session2",
-      "description": "Session2",
-      "value": 35184372088832
-    },
-    {
-      "name": "Session1",
-      "description": "Session1",
-      "value": 70368744177664
-    },
-    {
-      "name": "Session0",
-      "description": "Session0",
-      "value": 140737488355328
-    }
-  ],
-  "tasks": [
-    {
-      "name": "OnEventCommand",
-      "description": "OnEventCommand",
-      "value": 65528
-    },
-    {
-      "name": "BlockCanceled",
-      "description": "BlockCanceled",
-      "value": 65529
-    },
-    {
-      "name": "SendFunctionDefinitions",
-      "description": "SendFunctionDefinitions",
-      "value": 65530
-    },
-    {
-      "name": "Block",
-      "description": "Block",
-      "value": 65532
-    },
-    {
-      "name": "Log",
-      "description": "Log",
-      "value": 65533
-    },
-    {
-      "name": "EventSourceMessage",
-      "description": "EventSourceMessage",
-      "value": 65534
-    }
-  ],
-  "opcodes": [],
+  "displayName": "RoslynEventSource",
+  "id": "bf965e67-c7fb-5c5b-d98f-cdf68f8154c2",
   "events": [
     {
-      "providerId": "bf965e67-c7fb-5c5b-d98f-cdf68f8154c2",
-      "providerName": "RoslynEventSource",
-      "eventId": "00000000-0000-0000-0000-000000000000",
+      "name": "EventSourceMessage",
+      "displayName": "EventSourceMessage",
       "descriptor": {
         "id": 0,
         "version": 0,
@@ -73,40 +15,17 @@
         "task": 65534,
         "keyword": 0
       },
-      "name": "EventSourceMessage",
-      "channelName": null,
-      "levelName": "win:LogAlways",
-      "opcodeName": null,
-      "taskName": "EventSourceMessage",
-      "keywordName": null,
-      "message": null,
-      "eventAttributes": null,
-      "activityIdName": null,
-      "relatedActivityIdName": null,
-      "flags": null,
-      "properties": [
+      "fields": [
         {
           "name": "Message",
-          "inputType": "UnicodeString",
-          "outputType": "Null",
-          "mapName": null,
-          "properties": null,
-          "length": {
-            "size": 0,
-            "kind": "Regular"
-          },
-          "count": {
-            "size": 1,
-            "kind": "Regular"
-          },
-          "tags": 0
+          "datatype": "string",
+          "map": null
         }
       ]
     },
     {
-      "providerId": "bf965e67-c7fb-5c5b-d98f-cdf68f8154c2",
-      "providerName": "RoslynEventSource",
-      "eventId": "00000000-0000-0000-0000-000000000000",
+      "name": "Log",
+      "displayName": "Log",
       "descriptor": {
         "id": 1,
         "version": 0,
@@ -116,56 +35,22 @@
         "task": 65533,
         "keyword": 0
       },
-      "name": "Log",
-      "channelName": null,
-      "levelName": "win:Informational",
-      "opcodeName": null,
-      "taskName": "Log",
-      "keywordName": null,
-      "message": null,
-      "eventAttributes": null,
-      "activityIdName": null,
-      "relatedActivityIdName": null,
-      "flags": null,
-      "properties": [
+      "fields": [
         {
           "name": "Message",
-          "inputType": "UnicodeString",
-          "outputType": "Null",
-          "mapName": null,
-          "properties": null,
-          "length": {
-            "size": 0,
-            "kind": "Regular"
-          },
-          "count": {
-            "size": 1,
-            "kind": "Regular"
-          },
-          "tags": 0
+          "datatype": "string",
+          "map": null
         },
         {
           "name": "FunctionId",
-          "inputType": "Uint32",
-          "outputType": "Null",
-          "mapName": "FunctionId",
-          "properties": null,
-          "length": {
-            "size": 4,
-            "kind": "Regular"
-          },
-          "count": {
-            "size": 1,
-            "kind": "Regular"
-          },
-          "tags": 0
+          "datatype": "int",
+          "map": "FunctionId"
         }
       ]
     },
     {
-      "providerId": "bf965e67-c7fb-5c5b-d98f-cdf68f8154c2",
-      "providerName": "RoslynEventSource",
-      "eventId": "00000000-0000-0000-0000-000000000000",
+      "name": "BlockStart",
+      "displayName": "BlockStart",
       "descriptor": {
         "id": 2,
         "version": 0,
@@ -175,72 +60,27 @@
         "task": 65532,
         "keyword": 0
       },
-      "name": "BlockStart",
-      "channelName": null,
-      "levelName": "win:Informational",
-      "opcodeName": "win:Start",
-      "taskName": "Block",
-      "keywordName": null,
-      "message": null,
-      "eventAttributes": null,
-      "activityIdName": null,
-      "relatedActivityIdName": null,
-      "flags": null,
-      "properties": [
+      "fields": [
         {
           "name": "Message",
-          "inputType": "UnicodeString",
-          "outputType": "Null",
-          "mapName": null,
-          "properties": null,
-          "length": {
-            "size": 0,
-            "kind": "Regular"
-          },
-          "count": {
-            "size": 1,
-            "kind": "Regular"
-          },
-          "tags": 0
+          "datatype": "string",
+          "map": null
         },
         {
           "name": "FunctionId",
-          "inputType": "Uint32",
-          "outputType": "Null",
-          "mapName": "FunctionId",
-          "properties": null,
-          "length": {
-            "size": 4,
-            "kind": "Regular"
-          },
-          "count": {
-            "size": 1,
-            "kind": "Regular"
-          },
-          "tags": 0
+          "datatype": "int",
+          "map": "FunctionId"
         },
         {
           "name": "BlockId",
-          "inputType": "Int32",
-          "outputType": "Null",
-          "mapName": null,
-          "properties": null,
-          "length": {
-            "size": 4,
-            "kind": "Regular"
-          },
-          "count": {
-            "size": 1,
-            "kind": "Regular"
-          },
-          "tags": 0
+          "datatype": "int",
+          "map": null
         }
       ]
     },
     {
-      "providerId": "bf965e67-c7fb-5c5b-d98f-cdf68f8154c2",
-      "providerName": "RoslynEventSource",
-      "eventId": "00000000-0000-0000-0000-000000000000",
+      "name": "BlockStop",
+      "displayName": "BlockStop",
       "descriptor": {
         "id": 3,
         "version": 0,
@@ -250,72 +90,27 @@
         "task": 65532,
         "keyword": 0
       },
-      "name": "BlockStop",
-      "channelName": null,
-      "levelName": "win:Informational",
-      "opcodeName": "win:Stop",
-      "taskName": "Block",
-      "keywordName": null,
-      "message": null,
-      "eventAttributes": null,
-      "activityIdName": null,
-      "relatedActivityIdName": null,
-      "flags": null,
-      "properties": [
+      "fields": [
         {
           "name": "FunctionId",
-          "inputType": "Uint32",
-          "outputType": "Null",
-          "mapName": "FunctionId",
-          "properties": null,
-          "length": {
-            "size": 4,
-            "kind": "Regular"
-          },
-          "count": {
-            "size": 1,
-            "kind": "Regular"
-          },
-          "tags": 0
+          "datatype": "int",
+          "map": "FunctionId"
         },
         {
           "name": "Tick",
-          "inputType": "Int32",
-          "outputType": "Null",
-          "mapName": null,
-          "properties": null,
-          "length": {
-            "size": 4,
-            "kind": "Regular"
-          },
-          "count": {
-            "size": 1,
-            "kind": "Regular"
-          },
-          "tags": 0
+          "datatype": "int",
+          "map": null
         },
         {
           "name": "BlockId",
-          "inputType": "Int32",
-          "outputType": "Null",
-          "mapName": null,
-          "properties": null,
-          "length": {
-            "size": 4,
-            "kind": "Regular"
-          },
-          "count": {
-            "size": 1,
-            "kind": "Regular"
-          },
-          "tags": 0
+          "datatype": "int",
+          "map": null
         }
       ]
     },
     {
-      "providerId": "bf965e67-c7fb-5c5b-d98f-cdf68f8154c2",
-      "providerName": "RoslynEventSource",
-      "eventId": "00000000-0000-0000-0000-000000000000",
+      "name": "SendFunctionDefinitions",
+      "displayName": "SendFunctionDefinitions",
       "descriptor": {
         "id": 4,
         "version": 0,
@@ -325,40 +120,17 @@
         "task": 65530,
         "keyword": 0
       },
-      "name": "SendFunctionDefinitions",
-      "channelName": null,
-      "levelName": "win:Informational",
-      "opcodeName": null,
-      "taskName": "SendFunctionDefinitions",
-      "keywordName": null,
-      "message": null,
-      "eventAttributes": null,
-      "activityIdName": null,
-      "relatedActivityIdName": null,
-      "flags": null,
-      "properties": [
+      "fields": [
         {
           "name": "Definitions",
-          "inputType": "UnicodeString",
-          "outputType": "Null",
-          "mapName": null,
-          "properties": null,
-          "length": {
-            "size": 0,
-            "kind": "Regular"
-          },
-          "count": {
-            "size": 1,
-            "kind": "Regular"
-          },
-          "tags": 0
+          "datatype": "string",
+          "map": null
         }
       ]
     },
     {
-      "providerId": "bf965e67-c7fb-5c5b-d98f-cdf68f8154c2",
-      "providerName": "RoslynEventSource",
-      "eventId": "00000000-0000-0000-0000-000000000000",
+      "name": "BlockCanceled",
+      "displayName": "BlockCanceled",
       "descriptor": {
         "id": 5,
         "version": 0,
@@ -368,72 +140,27 @@
         "task": 65529,
         "keyword": 0
       },
-      "name": "BlockCanceled",
-      "channelName": null,
-      "levelName": "win:Informational",
-      "opcodeName": null,
-      "taskName": "BlockCanceled",
-      "keywordName": null,
-      "message": null,
-      "eventAttributes": null,
-      "activityIdName": null,
-      "relatedActivityIdName": null,
-      "flags": null,
-      "properties": [
+      "fields": [
         {
           "name": "FunctionId",
-          "inputType": "Uint32",
-          "outputType": "Null",
-          "mapName": "FunctionId",
-          "properties": null,
-          "length": {
-            "size": 4,
-            "kind": "Regular"
-          },
-          "count": {
-            "size": 1,
-            "kind": "Regular"
-          },
-          "tags": 0
+          "datatype": "int",
+          "map": "FunctionId"
         },
         {
           "name": "Tick",
-          "inputType": "Int32",
-          "outputType": "Null",
-          "mapName": null,
-          "properties": null,
-          "length": {
-            "size": 4,
-            "kind": "Regular"
-          },
-          "count": {
-            "size": 1,
-            "kind": "Regular"
-          },
-          "tags": 0
+          "datatype": "int",
+          "map": null
         },
         {
           "name": "BlockId",
-          "inputType": "Int32",
-          "outputType": "Null",
-          "mapName": null,
-          "properties": null,
-          "length": {
-            "size": 4,
-            "kind": "Regular"
-          },
-          "count": {
-            "size": 1,
-            "kind": "Regular"
-          },
-          "tags": 0
+          "datatype": "int",
+          "map": null
         }
       ]
     },
     {
-      "providerId": "bf965e67-c7fb-5c5b-d98f-cdf68f8154c2",
-      "providerName": "RoslynEventSource",
-      "eventId": "00000000-0000-0000-0000-000000000000",
+      "name": "OnEventCommand",
+      "displayName": "OnEventCommand",
       "descriptor": {
         "id": 6,
         "version": 0,
@@ -443,20 +170,24 @@
         "task": 65528,
         "keyword": 0
       },
-      "name": "OnEventCommand",
-      "channelName": null,
-      "levelName": "win:Informational",
-      "opcodeName": null,
-      "taskName": "OnEventCommand",
-      "keywordName": null,
-      "message": null,
-      "eventAttributes": null,
-      "activityIdName": null,
-      "relatedActivityIdName": null,
-      "flags": null,
-      "properties": null
+      "fields": null
     }
   ],
+  "tasks": {
+    "65528": "OnEventCommand",
+    "65529": "BlockCanceled",
+    "65530": "SendFunctionDefinitions",
+    "65532": "Block",
+    "65533": "Log",
+    "65534": "EventSourceMessage"
+  },
+  "opcodes": {},
+  "keywords": {
+    "17592186044416": "Session3",
+    "35184372088832": "Session2",
+    "70368744177664": "Session1",
+    "140737488355328": "Session0"
+  },
   "maps": [
     {
       "name": "FunctionId",
@@ -860,5 +591,6 @@
         "484": "LSP_TimeInQueue"
       }
     }
-  ]
+  ],
+  "structs": []
 }
