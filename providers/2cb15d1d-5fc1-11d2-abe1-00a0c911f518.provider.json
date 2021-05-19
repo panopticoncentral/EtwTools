@@ -1,0 +1,1948 @@
+{
+  "name": "KernelImage",
+  "displayName": "Kernel-Image",
+  "id": "2cb15d1d-5fc1-11d2-abe1-00a0c911f518",
+  "events": [
+    {
+      "name": "Load",
+      "displayName": "Load",
+      "descriptor": {
+        "id": 0,
+        "version": 0,
+        "channel": 0,
+        "level": "None",
+        "opcode": 10,
+        "task": 0,
+        "keyword": 0
+      },
+      "fields": [
+        {
+          "name": "BaseAddress",
+          "datatype": "pointer",
+          "map": null
+        },
+        {
+          "name": "ModuleSize",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "ImageFileName",
+          "datatype": "string",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "Load",
+      "displayName": "Load",
+      "descriptor": {
+        "id": 0,
+        "version": 1,
+        "channel": 0,
+        "level": "None",
+        "opcode": 10,
+        "task": 0,
+        "keyword": 0
+      },
+      "fields": [
+        {
+          "name": "ImageBase",
+          "datatype": "pointer",
+          "map": null
+        },
+        {
+          "name": "ImageSize",
+          "datatype": "pointer",
+          "map": null
+        },
+        {
+          "name": "ProcessId",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "FileName",
+          "datatype": "string",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "KernelBase",
+      "displayName": "KernelBase",
+      "descriptor": {
+        "id": 0,
+        "version": 2,
+        "channel": 0,
+        "level": "None",
+        "opcode": 33,
+        "task": 0,
+        "keyword": 0
+      },
+      "fields": [
+        {
+          "name": "ImageBase",
+          "datatype": "pointer",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "LoaderLockAttempt",
+      "displayName": "LoaderLockAttempt",
+      "descriptor": {
+        "id": 0,
+        "version": 2,
+        "channel": 0,
+        "level": "None",
+        "opcode": 128,
+        "task": 0,
+        "keyword": 0
+      },
+      "fields": []
+    },
+    {
+      "name": "LoaderLockAcquire",
+      "displayName": "LoaderLockAcquire",
+      "descriptor": {
+        "id": 0,
+        "version": 2,
+        "channel": 0,
+        "level": "None",
+        "opcode": 129,
+        "task": 0,
+        "keyword": 0
+      },
+      "fields": []
+    },
+    {
+      "name": "LoaderLockTriedAndFailed",
+      "displayName": "LoaderLockTriedAndFailed",
+      "descriptor": {
+        "id": 0,
+        "version": 2,
+        "channel": 0,
+        "level": "None",
+        "opcode": 130,
+        "task": 0,
+        "keyword": 0
+      },
+      "fields": []
+    },
+    {
+      "name": "LoaderLockWait",
+      "displayName": "LoaderLockWait",
+      "descriptor": {
+        "id": 0,
+        "version": 2,
+        "channel": 0,
+        "level": "None",
+        "opcode": 131,
+        "task": 0,
+        "keyword": 0
+      },
+      "fields": []
+    },
+    {
+      "name": "ProcessInitDone",
+      "displayName": "ProcessInitDone",
+      "descriptor": {
+        "id": 0,
+        "version": 2,
+        "channel": 0,
+        "level": "None",
+        "opcode": 132,
+        "task": 0,
+        "keyword": 0
+      },
+      "fields": []
+    },
+    {
+      "name": "CreateSectionBegin",
+      "displayName": "CreateSectionBegin",
+      "descriptor": {
+        "id": 0,
+        "version": 2,
+        "channel": 0,
+        "level": "None",
+        "opcode": 133,
+        "task": 0,
+        "keyword": 0
+      },
+      "fields": []
+    },
+    {
+      "name": "CreateSectionEnd",
+      "displayName": "CreateSectionEnd",
+      "descriptor": {
+        "id": 0,
+        "version": 2,
+        "channel": 0,
+        "level": "None",
+        "opcode": 134,
+        "task": 0,
+        "keyword": 0
+      },
+      "fields": []
+    },
+    {
+      "name": "MapViewBegin",
+      "displayName": "MapViewBegin",
+      "descriptor": {
+        "id": 0,
+        "version": 2,
+        "channel": 0,
+        "level": "None",
+        "opcode": 135,
+        "task": 0,
+        "keyword": 0
+      },
+      "fields": []
+    },
+    {
+      "name": "FindDllByName",
+      "displayName": "FindDllByName",
+      "descriptor": {
+        "id": 0,
+        "version": 2,
+        "channel": 0,
+        "level": "None",
+        "opcode": 160,
+        "task": 0,
+        "keyword": 0
+      },
+      "fields": [
+        {
+          "name": "BaseAddress",
+          "datatype": "ulong",
+          "map": null
+        },
+        {
+          "name": "ErrorOpcode",
+          "datatype": "byte",
+          "map": null
+        },
+        {
+          "name": "Code",
+          "datatype": "sbyte",
+          "map": null
+        },
+        {
+          "name": "String",
+          "datatype": "string",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "MapViewEnd",
+      "displayName": "MapViewEnd",
+      "descriptor": {
+        "id": 0,
+        "version": 2,
+        "channel": 0,
+        "level": "None",
+        "opcode": 161,
+        "task": 0,
+        "keyword": 0
+      },
+      "fields": [
+        {
+          "name": "BaseAddress",
+          "datatype": "ulong",
+          "map": null
+        },
+        {
+          "name": "ErrorOpcode",
+          "datatype": "byte",
+          "map": null
+        },
+        {
+          "name": "Code",
+          "datatype": "sbyte",
+          "map": null
+        },
+        {
+          "name": "String",
+          "datatype": "string",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "LoaderLockRelease",
+      "displayName": "LoaderLockRelease",
+      "descriptor": {
+        "id": 0,
+        "version": 2,
+        "channel": 0,
+        "level": "None",
+        "opcode": 162,
+        "task": 0,
+        "keyword": 0
+      },
+      "fields": [
+        {
+          "name": "BaseAddress",
+          "datatype": "ulong",
+          "map": null
+        },
+        {
+          "name": "ErrorOpcode",
+          "datatype": "byte",
+          "map": null
+        },
+        {
+          "name": "Code",
+          "datatype": "sbyte",
+          "map": null
+        },
+        {
+          "name": "String",
+          "datatype": "string",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "DllMainEnter",
+      "displayName": "DllMainEnter",
+      "descriptor": {
+        "id": 0,
+        "version": 2,
+        "channel": 0,
+        "level": "None",
+        "opcode": 163,
+        "task": 0,
+        "keyword": 0
+      },
+      "fields": [
+        {
+          "name": "BaseAddress",
+          "datatype": "ulong",
+          "map": null
+        },
+        {
+          "name": "ErrorOpcode",
+          "datatype": "byte",
+          "map": null
+        },
+        {
+          "name": "Code",
+          "datatype": "sbyte",
+          "map": null
+        },
+        {
+          "name": "String",
+          "datatype": "string",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "LoaderError",
+      "displayName": "LoaderError",
+      "descriptor": {
+        "id": 0,
+        "version": 2,
+        "channel": 0,
+        "level": "None",
+        "opcode": 164,
+        "task": 0,
+        "keyword": 0
+      },
+      "fields": [
+        {
+          "name": "BaseAddress",
+          "datatype": "ulong",
+          "map": null
+        },
+        {
+          "name": "ErrorOpcode",
+          "datatype": "byte",
+          "map": null
+        },
+        {
+          "name": "Code",
+          "datatype": "sbyte",
+          "map": null
+        },
+        {
+          "name": "String",
+          "datatype": "string",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "RelocateImageBegin",
+      "displayName": "RelocateImageBegin",
+      "descriptor": {
+        "id": 0,
+        "version": 2,
+        "channel": 0,
+        "level": "None",
+        "opcode": 144,
+        "task": 0,
+        "keyword": 0
+      },
+      "fields": [
+        {
+          "name": "BaseAddress",
+          "datatype": "ulong",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "RelocateImageEnd",
+      "displayName": "RelocateImageEnd",
+      "descriptor": {
+        "id": 0,
+        "version": 2,
+        "channel": 0,
+        "level": "None",
+        "opcode": 145,
+        "task": 0,
+        "keyword": 0
+      },
+      "fields": [
+        {
+          "name": "BaseAddress",
+          "datatype": "ulong",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "HandleOldDescsBegin",
+      "displayName": "HandleOldDescsBegin",
+      "descriptor": {
+        "id": 0,
+        "version": 2,
+        "channel": 0,
+        "level": "None",
+        "opcode": 146,
+        "task": 0,
+        "keyword": 0
+      },
+      "fields": [
+        {
+          "name": "BaseAddress",
+          "datatype": "ulong",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "HandleOldDescsEnd",
+      "displayName": "HandleOldDescsEnd",
+      "descriptor": {
+        "id": 0,
+        "version": 2,
+        "channel": 0,
+        "level": "None",
+        "opcode": 147,
+        "task": 0,
+        "keyword": 0
+      },
+      "fields": [
+        {
+          "name": "BaseAddress",
+          "datatype": "ulong",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "HandleNewDescsBegin",
+      "displayName": "HandleNewDescsBegin",
+      "descriptor": {
+        "id": 0,
+        "version": 2,
+        "channel": 0,
+        "level": "None",
+        "opcode": 148,
+        "task": 0,
+        "keyword": 0
+      },
+      "fields": [
+        {
+          "name": "BaseAddress",
+          "datatype": "ulong",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "HandleNewDescsEnd",
+      "displayName": "HandleNewDescsEnd",
+      "descriptor": {
+        "id": 0,
+        "version": 2,
+        "channel": 0,
+        "level": "None",
+        "opcode": 149,
+        "task": 0,
+        "keyword": 0
+      },
+      "fields": [
+        {
+          "name": "BaseAddress",
+          "datatype": "ulong",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "DllMainExit",
+      "displayName": "DllMainExit",
+      "descriptor": {
+        "id": 0,
+        "version": 2,
+        "channel": 0,
+        "level": "None",
+        "opcode": 150,
+        "task": 0,
+        "keyword": 0
+      },
+      "fields": [
+        {
+          "name": "BaseAddress",
+          "datatype": "ulong",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "Load",
+      "displayName": "Load",
+      "descriptor": {
+        "id": 0,
+        "version": 2,
+        "channel": 0,
+        "level": "None",
+        "opcode": 10,
+        "task": 0,
+        "keyword": 0
+      },
+      "fields": [
+        {
+          "name": "ImageBase",
+          "datatype": "pointer",
+          "map": null
+        },
+        {
+          "name": "ImageSize",
+          "datatype": "pointer",
+          "map": null
+        },
+        {
+          "name": "ProcessId",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "ImageChecksum",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "TimeDateStamp",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "Reserved0",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "DefaultBase",
+          "datatype": "pointer",
+          "map": null
+        },
+        {
+          "name": "Reserved1",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "Reserved2",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "Reserved3",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "Reserved4",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "FileName",
+          "datatype": "string",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "UnLoad",
+      "displayName": "UnLoad",
+      "descriptor": {
+        "id": 0,
+        "version": 2,
+        "channel": 0,
+        "level": "None",
+        "opcode": "End",
+        "task": 0,
+        "keyword": 0
+      },
+      "fields": [
+        {
+          "name": "ImageBase",
+          "datatype": "pointer",
+          "map": null
+        },
+        {
+          "name": "ImageSize",
+          "datatype": "pointer",
+          "map": null
+        },
+        {
+          "name": "ProcessId",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "ImageChecksum",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "TimeDateStamp",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "Reserved0",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "DefaultBase",
+          "datatype": "pointer",
+          "map": null
+        },
+        {
+          "name": "Reserved1",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "Reserved2",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "Reserved3",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "Reserved4",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "FileName",
+          "datatype": "string",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "DCStart",
+      "displayName": "DCStart",
+      "descriptor": {
+        "id": 0,
+        "version": 2,
+        "channel": 0,
+        "level": "None",
+        "opcode": "DataCollectionStart",
+        "task": 0,
+        "keyword": 0
+      },
+      "fields": [
+        {
+          "name": "ImageBase",
+          "datatype": "pointer",
+          "map": null
+        },
+        {
+          "name": "ImageSize",
+          "datatype": "pointer",
+          "map": null
+        },
+        {
+          "name": "ProcessId",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "ImageChecksum",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "TimeDateStamp",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "Reserved0",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "DefaultBase",
+          "datatype": "pointer",
+          "map": null
+        },
+        {
+          "name": "Reserved1",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "Reserved2",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "Reserved3",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "Reserved4",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "FileName",
+          "datatype": "string",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "DCEnd",
+      "displayName": "DCEnd",
+      "descriptor": {
+        "id": 0,
+        "version": 2,
+        "channel": 0,
+        "level": "None",
+        "opcode": "DataCollectionEnd",
+        "task": 0,
+        "keyword": 0
+      },
+      "fields": [
+        {
+          "name": "ImageBase",
+          "datatype": "pointer",
+          "map": null
+        },
+        {
+          "name": "ImageSize",
+          "datatype": "pointer",
+          "map": null
+        },
+        {
+          "name": "ProcessId",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "ImageChecksum",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "TimeDateStamp",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "Reserved0",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "DefaultBase",
+          "datatype": "pointer",
+          "map": null
+        },
+        {
+          "name": "Reserved1",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "Reserved2",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "Reserved3",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "Reserved4",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "FileName",
+          "datatype": "string",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "HypercallPage",
+      "displayName": "HypercallPage",
+      "descriptor": {
+        "id": 0,
+        "version": 2,
+        "channel": 0,
+        "level": "None",
+        "opcode": 34,
+        "task": 0,
+        "keyword": 0
+      },
+      "fields": [
+        {
+          "name": "HypercallPageVa",
+          "datatype": "pointer",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "Load",
+      "displayName": "Load",
+      "descriptor": {
+        "id": 0,
+        "version": 3,
+        "channel": 0,
+        "level": "None",
+        "opcode": 10,
+        "task": 0,
+        "keyword": 0
+      },
+      "fields": [
+        {
+          "name": "ImageBase",
+          "datatype": "pointer",
+          "map": null
+        },
+        {
+          "name": "ImageSize",
+          "datatype": "pointer",
+          "map": null
+        },
+        {
+          "name": "ProcessId",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "ImageChecksum",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "TimeDateStamp",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "SignatureLevel",
+          "datatype": "byte",
+          "map": null
+        },
+        {
+          "name": "SignatureType",
+          "datatype": "byte",
+          "map": null
+        },
+        {
+          "name": "Reserved0",
+          "datatype": "ushort",
+          "map": null
+        },
+        {
+          "name": "DefaultBase",
+          "datatype": "pointer",
+          "map": null
+        },
+        {
+          "name": "Reserved1",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "Reserved2",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "Reserved3",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "Reserved4",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "FileName",
+          "datatype": "string",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "UnLoad",
+      "displayName": "UnLoad",
+      "descriptor": {
+        "id": 0,
+        "version": 3,
+        "channel": 0,
+        "level": "None",
+        "opcode": "End",
+        "task": 0,
+        "keyword": 0
+      },
+      "fields": [
+        {
+          "name": "ImageBase",
+          "datatype": "pointer",
+          "map": null
+        },
+        {
+          "name": "ImageSize",
+          "datatype": "pointer",
+          "map": null
+        },
+        {
+          "name": "ProcessId",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "ImageChecksum",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "TimeDateStamp",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "SignatureLevel",
+          "datatype": "byte",
+          "map": null
+        },
+        {
+          "name": "SignatureType",
+          "datatype": "byte",
+          "map": null
+        },
+        {
+          "name": "Reserved0",
+          "datatype": "ushort",
+          "map": null
+        },
+        {
+          "name": "DefaultBase",
+          "datatype": "pointer",
+          "map": null
+        },
+        {
+          "name": "Reserved1",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "Reserved2",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "Reserved3",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "Reserved4",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "FileName",
+          "datatype": "string",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "DCStart",
+      "displayName": "DCStart",
+      "descriptor": {
+        "id": 0,
+        "version": 3,
+        "channel": 0,
+        "level": "None",
+        "opcode": "DataCollectionStart",
+        "task": 0,
+        "keyword": 0
+      },
+      "fields": [
+        {
+          "name": "ImageBase",
+          "datatype": "pointer",
+          "map": null
+        },
+        {
+          "name": "ImageSize",
+          "datatype": "pointer",
+          "map": null
+        },
+        {
+          "name": "ProcessId",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "ImageChecksum",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "TimeDateStamp",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "SignatureLevel",
+          "datatype": "byte",
+          "map": null
+        },
+        {
+          "name": "SignatureType",
+          "datatype": "byte",
+          "map": null
+        },
+        {
+          "name": "Reserved0",
+          "datatype": "ushort",
+          "map": null
+        },
+        {
+          "name": "DefaultBase",
+          "datatype": "pointer",
+          "map": null
+        },
+        {
+          "name": "Reserved1",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "Reserved2",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "Reserved3",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "Reserved4",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "FileName",
+          "datatype": "string",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "DCEnd",
+      "displayName": "DCEnd",
+      "descriptor": {
+        "id": 0,
+        "version": 3,
+        "channel": 0,
+        "level": "None",
+        "opcode": "DataCollectionEnd",
+        "task": 0,
+        "keyword": 0
+      },
+      "fields": [
+        {
+          "name": "ImageBase",
+          "datatype": "pointer",
+          "map": null
+        },
+        {
+          "name": "ImageSize",
+          "datatype": "pointer",
+          "map": null
+        },
+        {
+          "name": "ProcessId",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "ImageChecksum",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "TimeDateStamp",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "SignatureLevel",
+          "datatype": "byte",
+          "map": null
+        },
+        {
+          "name": "SignatureType",
+          "datatype": "byte",
+          "map": null
+        },
+        {
+          "name": "Reserved0",
+          "datatype": "ushort",
+          "map": null
+        },
+        {
+          "name": "DefaultBase",
+          "datatype": "pointer",
+          "map": null
+        },
+        {
+          "name": "Reserved1",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "Reserved2",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "Reserved3",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "Reserved4",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "FileName",
+          "datatype": "string",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "MapViewStart",
+      "displayName": "MapViewStart",
+      "descriptor": {
+        "id": 0,
+        "version": 3,
+        "channel": 0,
+        "level": "None",
+        "opcode": 165,
+        "task": 0,
+        "keyword": 0
+      },
+      "fields": [
+        {
+          "name": "BaseAddress",
+          "datatype": "ulong",
+          "map": null
+        },
+        {
+          "name": "ErrorOpcode",
+          "datatype": "byte",
+          "map": null
+        },
+        {
+          "name": "Code",
+          "datatype": "sbyte",
+          "map": null
+        },
+        {
+          "name": "String",
+          "datatype": "string",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "SnappingStart",
+      "displayName": "SnappingStart",
+      "descriptor": {
+        "id": 0,
+        "version": 3,
+        "channel": 0,
+        "level": "None",
+        "opcode": 166,
+        "task": 0,
+        "keyword": 0
+      },
+      "fields": [
+        {
+          "name": "BaseAddress",
+          "datatype": "ulong",
+          "map": null
+        },
+        {
+          "name": "ErrorOpcode",
+          "datatype": "byte",
+          "map": null
+        },
+        {
+          "name": "Code",
+          "datatype": "sbyte",
+          "map": null
+        },
+        {
+          "name": "String",
+          "datatype": "string",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "SnappingEnd",
+      "displayName": "SnappingEnd",
+      "descriptor": {
+        "id": 0,
+        "version": 3,
+        "channel": 0,
+        "level": "None",
+        "opcode": 167,
+        "task": 0,
+        "keyword": 0
+      },
+      "fields": [
+        {
+          "name": "BaseAddress",
+          "datatype": "ulong",
+          "map": null
+        },
+        {
+          "name": "ErrorOpcode",
+          "datatype": "byte",
+          "map": null
+        },
+        {
+          "name": "Code",
+          "datatype": "sbyte",
+          "map": null
+        },
+        {
+          "name": "String",
+          "datatype": "string",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "LoadingStart",
+      "displayName": "LoadingStart",
+      "descriptor": {
+        "id": 0,
+        "version": 3,
+        "channel": 0,
+        "level": "None",
+        "opcode": 168,
+        "task": 0,
+        "keyword": 0
+      },
+      "fields": [
+        {
+          "name": "BaseAddress",
+          "datatype": "ulong",
+          "map": null
+        },
+        {
+          "name": "ErrorOpcode",
+          "datatype": "byte",
+          "map": null
+        },
+        {
+          "name": "Code",
+          "datatype": "sbyte",
+          "map": null
+        },
+        {
+          "name": "String",
+          "datatype": "string",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "LoadingEnd",
+      "displayName": "LoadingEnd",
+      "descriptor": {
+        "id": 0,
+        "version": 3,
+        "channel": 0,
+        "level": "None",
+        "opcode": 169,
+        "task": 0,
+        "keyword": 0
+      },
+      "fields": [
+        {
+          "name": "BaseAddress",
+          "datatype": "ulong",
+          "map": null
+        },
+        {
+          "name": "ErrorOpcode",
+          "datatype": "byte",
+          "map": null
+        },
+        {
+          "name": "Code",
+          "datatype": "sbyte",
+          "map": null
+        },
+        {
+          "name": "String",
+          "datatype": "string",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "FoundKnownDll",
+      "displayName": "FoundKnownDll",
+      "descriptor": {
+        "id": 0,
+        "version": 3,
+        "channel": 0,
+        "level": "None",
+        "opcode": 170,
+        "task": 0,
+        "keyword": 0
+      },
+      "fields": [
+        {
+          "name": "BaseAddress",
+          "datatype": "ulong",
+          "map": null
+        },
+        {
+          "name": "ErrorOpcode",
+          "datatype": "byte",
+          "map": null
+        },
+        {
+          "name": "Code",
+          "datatype": "sbyte",
+          "map": null
+        },
+        {
+          "name": "String",
+          "datatype": "string",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "AbnormalTermination",
+      "displayName": "AbnormalTermination",
+      "descriptor": {
+        "id": 0,
+        "version": 3,
+        "channel": 0,
+        "level": "None",
+        "opcode": 171,
+        "task": 0,
+        "keyword": 0
+      },
+      "fields": [
+        {
+          "name": "BaseAddress",
+          "datatype": "ulong",
+          "map": null
+        },
+        {
+          "name": "ErrorOpcode",
+          "datatype": "byte",
+          "map": null
+        },
+        {
+          "name": "Code",
+          "datatype": "sbyte",
+          "map": null
+        },
+        {
+          "name": "String",
+          "datatype": "string",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "ModulePlaceHolder",
+      "displayName": "ModulePlaceHolder",
+      "descriptor": {
+        "id": 0,
+        "version": 3,
+        "channel": 0,
+        "level": "None",
+        "opcode": 172,
+        "task": 0,
+        "keyword": 0
+      },
+      "fields": [
+        {
+          "name": "BaseAddress",
+          "datatype": "ulong",
+          "map": null
+        },
+        {
+          "name": "ErrorOpcode",
+          "datatype": "byte",
+          "map": null
+        },
+        {
+          "name": "Code",
+          "datatype": "sbyte",
+          "map": null
+        },
+        {
+          "name": "String",
+          "datatype": "string",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "ReadyToInit",
+      "displayName": "ReadyToInit",
+      "descriptor": {
+        "id": 0,
+        "version": 3,
+        "channel": 0,
+        "level": "None",
+        "opcode": 173,
+        "task": 0,
+        "keyword": 0
+      },
+      "fields": [
+        {
+          "name": "BaseAddress",
+          "datatype": "ulong",
+          "map": null
+        },
+        {
+          "name": "ErrorOpcode",
+          "datatype": "byte",
+          "map": null
+        },
+        {
+          "name": "Code",
+          "datatype": "sbyte",
+          "map": null
+        },
+        {
+          "name": "String",
+          "datatype": "string",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "ReadyToRun",
+      "displayName": "ReadyToRun",
+      "descriptor": {
+        "id": 0,
+        "version": 3,
+        "channel": 0,
+        "level": "None",
+        "opcode": 174,
+        "task": 0,
+        "keyword": 0
+      },
+      "fields": [
+        {
+          "name": "BaseAddress",
+          "datatype": "ulong",
+          "map": null
+        },
+        {
+          "name": "ErrorOpcode",
+          "datatype": "byte",
+          "map": null
+        },
+        {
+          "name": "Code",
+          "datatype": "sbyte",
+          "map": null
+        },
+        {
+          "name": "String",
+          "datatype": "string",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "ApiSetResolving",
+      "displayName": "ApiSetResolving",
+      "descriptor": {
+        "id": 0,
+        "version": 3,
+        "channel": 0,
+        "level": "None",
+        "opcode": 208,
+        "task": 0,
+        "keyword": 0
+      },
+      "fields": [
+        {
+          "name": "BaseAddress",
+          "datatype": "ulong",
+          "map": null
+        },
+        {
+          "name": "ErrorOpcode",
+          "datatype": "byte",
+          "map": null
+        },
+        {
+          "name": "Code",
+          "datatype": "sbyte",
+          "map": null
+        },
+        {
+          "name": "String",
+          "datatype": "string",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "ApiSetHosted",
+      "displayName": "ApiSetHosted",
+      "descriptor": {
+        "id": 0,
+        "version": 3,
+        "channel": 0,
+        "level": "None",
+        "opcode": 209,
+        "task": 0,
+        "keyword": 0
+      },
+      "fields": [
+        {
+          "name": "BaseAddress",
+          "datatype": "ulong",
+          "map": null
+        },
+        {
+          "name": "ErrorOpcode",
+          "datatype": "byte",
+          "map": null
+        },
+        {
+          "name": "Code",
+          "datatype": "sbyte",
+          "map": null
+        },
+        {
+          "name": "String",
+          "datatype": "string",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "ApiSetUnhosted",
+      "displayName": "ApiSetUnhosted",
+      "descriptor": {
+        "id": 0,
+        "version": 3,
+        "channel": 0,
+        "level": "None",
+        "opcode": 210,
+        "task": 0,
+        "keyword": 0
+      },
+      "fields": [
+        {
+          "name": "BaseAddress",
+          "datatype": "ulong",
+          "map": null
+        },
+        {
+          "name": "ErrorOpcode",
+          "datatype": "byte",
+          "map": null
+        },
+        {
+          "name": "Code",
+          "datatype": "sbyte",
+          "map": null
+        },
+        {
+          "name": "String",
+          "datatype": "string",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "ApiSetUnresolved",
+      "displayName": "ApiSetUnresolved",
+      "descriptor": {
+        "id": 0,
+        "version": 3,
+        "channel": 0,
+        "level": "None",
+        "opcode": 211,
+        "task": 0,
+        "keyword": 0
+      },
+      "fields": [
+        {
+          "name": "BaseAddress",
+          "datatype": "ulong",
+          "map": null
+        },
+        {
+          "name": "ErrorOpcode",
+          "datatype": "byte",
+          "map": null
+        },
+        {
+          "name": "Code",
+          "datatype": "sbyte",
+          "map": null
+        },
+        {
+          "name": "String",
+          "datatype": "string",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "DllSearchPathExternal",
+      "displayName": "DllSearchPathExternal",
+      "descriptor": {
+        "id": 0,
+        "version": 3,
+        "channel": 0,
+        "level": "None",
+        "opcode": 192,
+        "task": 0,
+        "keyword": 0
+      },
+      "fields": [
+        {
+          "name": "BaseAddress",
+          "datatype": "ulong",
+          "map": null
+        },
+        {
+          "name": "ErrorOpcode",
+          "datatype": "byte",
+          "map": null
+        },
+        {
+          "name": "Code",
+          "datatype": "sbyte",
+          "map": null
+        },
+        {
+          "name": "String1",
+          "datatype": "string",
+          "map": null
+        },
+        {
+          "name": "String2",
+          "datatype": "string",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "DllSearchPathInternal",
+      "displayName": "DllSearchPathInternal",
+      "descriptor": {
+        "id": 0,
+        "version": 3,
+        "channel": 0,
+        "level": "None",
+        "opcode": 193,
+        "task": 0,
+        "keyword": 0
+      },
+      "fields": [
+        {
+          "name": "BaseAddress",
+          "datatype": "ulong",
+          "map": null
+        },
+        {
+          "name": "ErrorOpcode",
+          "datatype": "byte",
+          "map": null
+        },
+        {
+          "name": "Code",
+          "datatype": "sbyte",
+          "map": null
+        },
+        {
+          "name": "String1",
+          "datatype": "string",
+          "map": null
+        },
+        {
+          "name": "String2",
+          "datatype": "string",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "NewDllLoad",
+      "displayName": "NewDllLoad",
+      "descriptor": {
+        "id": 0,
+        "version": 3,
+        "channel": 0,
+        "level": "None",
+        "opcode": 176,
+        "task": 0,
+        "keyword": 0
+      },
+      "fields": [
+        {
+          "name": "NewDllBaseAddress",
+          "datatype": "pointer",
+          "map": null
+        },
+        {
+          "name": "ParentDllBaseAddress",
+          "datatype": "pointer",
+          "map": null
+        },
+        {
+          "name": "LoadReason",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "FilePath",
+          "datatype": "string",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "NewDllLoadAsData",
+      "displayName": "NewDllLoadAsData",
+      "descriptor": {
+        "id": 0,
+        "version": 3,
+        "channel": 0,
+        "level": "None",
+        "opcode": 177,
+        "task": 0,
+        "keyword": 0
+      },
+      "fields": [
+        {
+          "name": "NewDllBaseAddress",
+          "datatype": "pointer",
+          "map": null
+        },
+        {
+          "name": "ParentDllBaseAddress",
+          "datatype": "pointer",
+          "map": null
+        },
+        {
+          "name": "LoadReason",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "FilePath",
+          "datatype": "string",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "DllSearchResults",
+      "displayName": "DllSearchResults",
+      "descriptor": {
+        "id": 0,
+        "version": 3,
+        "channel": 0,
+        "level": "None",
+        "opcode": 212,
+        "task": 0,
+        "keyword": 0
+      },
+      "fields": [
+        {
+          "name": "LdrLoadFlags",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "LdrSearchFlags",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "SearchInfo",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "LoadReason",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "FullDllName",
+          "datatype": "string",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "DllPathSearchResults",
+      "displayName": "DllPathSearchResults",
+      "descriptor": {
+        "id": 0,
+        "version": 3,
+        "channel": 0,
+        "level": "None",
+        "opcode": 213,
+        "task": 0,
+        "keyword": 0
+      },
+      "fields": [
+        {
+          "name": "SearchInfo",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "Cwd",
+          "datatype": "string",
+          "map": null
+        },
+        {
+          "name": "AppDir",
+          "datatype": "string",
+          "map": null
+        },
+        {
+          "name": "DllDir",
+          "datatype": "string",
+          "map": null
+        },
+        {
+          "name": "DllLoadDir",
+          "datatype": "string",
+          "map": null
+        }
+      ]
+    }
+  ],
+  "tasks": {},
+  "opcodes": {
+    "10": "Load",
+    "33": "KernelBase",
+    "34": "HypercallPage",
+    "128": "LoaderLockAttempt",
+    "129": "LoaderLockAcquire",
+    "130": "LoaderLockTriedAndFailed",
+    "131": "LoaderLockWait",
+    "132": "ProcessInitDone",
+    "133": "CreateSectionBegin",
+    "134": "CreateSectionEnd",
+    "135": "MapViewBegin",
+    "144": "RelocateImageBegin",
+    "145": "RelocateImageEnd",
+    "146": "HandleOldDescsBegin",
+    "147": "HandleOldDescsEnd",
+    "148": "HandleNewDescsBegin",
+    "149": "HandleNewDescsEnd",
+    "150": "DllMainExit",
+    "160": "FindDllByName",
+    "161": "MapViewEnd",
+    "162": "LoaderLockRelease",
+    "163": "DllMainEnter",
+    "164": "LoaderError",
+    "165": "MapViewStart",
+    "166": "SnappingStart",
+    "167": "SnappingEnd",
+    "168": "LoadingStart",
+    "169": "LoadingEnd",
+    "170": "FoundKnownDll",
+    "171": "AbnormalTermination",
+    "172": "ModulePlaceHolder",
+    "173": "ReadyToInit",
+    "174": "ReadyToRun",
+    "176": "NewDllLoad",
+    "177": "NewDllLoadAsData",
+    "192": "DllSearchPathExternal",
+    "193": "DllSearchPathInternal",
+    "208": "ApiSetResolving",
+    "209": "ApiSetHosted",
+    "210": "ApiSetUnhosted",
+    "211": "ApiSetUnresolved",
+    "212": "DllSearchResults",
+    "213": "DllPathSearchResults"
+  },
+  "keywords": {},
+  "maps": [],
+  "structs": []
+}

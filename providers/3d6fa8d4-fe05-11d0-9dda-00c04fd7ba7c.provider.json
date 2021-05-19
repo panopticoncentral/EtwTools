@@ -1,0 +1,1175 @@
+{
+  "name": "KernelDiskIo",
+  "displayName": "Kernel-DiskIo",
+  "id": "3d6fa8d4-fe05-11d0-9dda-00c04fd7ba7c",
+  "events": [
+    {
+      "name": "Read",
+      "displayName": "Read",
+      "descriptor": {
+        "id": 0,
+        "version": 0,
+        "channel": 0,
+        "level": "None",
+        "opcode": 10,
+        "task": 0,
+        "keyword": 0
+      },
+      "fields": [
+        {
+          "name": "DiskNumber",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "IrpFlags",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "TransferSize",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "Reserved",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "ByteOffset",
+          "datatype": "ulong",
+          "map": null
+        },
+        {
+          "name": "FileObject",
+          "datatype": "pointer",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "Write",
+      "displayName": "Write",
+      "descriptor": {
+        "id": 0,
+        "version": 0,
+        "channel": 0,
+        "level": "None",
+        "opcode": 11,
+        "task": 0,
+        "keyword": 0
+      },
+      "fields": [
+        {
+          "name": "DiskNumber",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "IrpFlags",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "TransferSize",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "Reserved",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "ByteOffset",
+          "datatype": "ulong",
+          "map": null
+        },
+        {
+          "name": "FileObject",
+          "datatype": "pointer",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "DrvMjFnRet",
+      "displayName": "DrvMjFnRet",
+      "descriptor": {
+        "id": 0,
+        "version": 1,
+        "channel": 0,
+        "level": "None",
+        "opcode": 35,
+        "task": 0,
+        "keyword": 0
+      },
+      "fields": [
+        {
+          "name": "UniqMatchId",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "Irp",
+          "datatype": "pointer",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "DrvComplReq",
+      "displayName": "DrvComplReq",
+      "descriptor": {
+        "id": 0,
+        "version": 1,
+        "channel": 0,
+        "level": "None",
+        "opcode": 52,
+        "task": 0,
+        "keyword": 0
+      },
+      "fields": [
+        {
+          "name": "RoutineAddr",
+          "datatype": "pointer",
+          "map": null
+        },
+        {
+          "name": "Irp",
+          "datatype": "pointer",
+          "map": null
+        },
+        {
+          "name": "UniqMatchId",
+          "datatype": "uint",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "DrvComplReqRet",
+      "displayName": "DrvComplReqRet",
+      "descriptor": {
+        "id": 0,
+        "version": 1,
+        "channel": 0,
+        "level": "None",
+        "opcode": 53,
+        "task": 0,
+        "keyword": 0
+      },
+      "fields": [
+        {
+          "name": "Irp",
+          "datatype": "pointer",
+          "map": null
+        },
+        {
+          "name": "UniqMatchId",
+          "datatype": "uint",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "Read",
+      "displayName": "Read",
+      "descriptor": {
+        "id": 0,
+        "version": 1,
+        "channel": 0,
+        "level": "None",
+        "opcode": 10,
+        "task": 0,
+        "keyword": 0
+      },
+      "fields": [
+        {
+          "name": "DiskNumber",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "IrpFlags",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "TransferSize",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "ResponseTime",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "ByteOffset",
+          "datatype": "ulong",
+          "map": null
+        },
+        {
+          "name": "FileObject",
+          "datatype": "pointer",
+          "map": null
+        },
+        {
+          "name": "HighResResponseTime",
+          "datatype": "ulong",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "Write",
+      "displayName": "Write",
+      "descriptor": {
+        "id": 0,
+        "version": 1,
+        "channel": 0,
+        "level": "None",
+        "opcode": 11,
+        "task": 0,
+        "keyword": 0
+      },
+      "fields": [
+        {
+          "name": "DiskNumber",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "IrpFlags",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "TransferSize",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "ResponseTime",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "ByteOffset",
+          "datatype": "ulong",
+          "map": null
+        },
+        {
+          "name": "FileObject",
+          "datatype": "pointer",
+          "map": null
+        },
+        {
+          "name": "HighResResponseTime",
+          "datatype": "ulong",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "DrvMjFnCall",
+      "displayName": "DrvMjFnCall",
+      "descriptor": {
+        "id": 0,
+        "version": 1,
+        "channel": 0,
+        "level": "None",
+        "opcode": 34,
+        "task": 0,
+        "keyword": 0
+      },
+      "fields": [
+        {
+          "name": "UniqMatchId",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "RoutineAddr",
+          "datatype": "pointer",
+          "map": null
+        },
+        {
+          "name": "Irp",
+          "datatype": "pointer",
+          "map": null
+        },
+        {
+          "name": "MajorFunction",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "MinorFunction",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "FileObject",
+          "datatype": "pointer",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "Read",
+      "displayName": "Read",
+      "descriptor": {
+        "id": 0,
+        "version": 2,
+        "channel": 0,
+        "level": "None",
+        "opcode": 10,
+        "task": 0,
+        "keyword": 0
+      },
+      "fields": [
+        {
+          "name": "DiskNumber",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "IrpFlags",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "TransferSize",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "Reserved",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "ByteOffset",
+          "datatype": "ulong",
+          "map": null
+        },
+        {
+          "name": "FileObject",
+          "datatype": "pointer",
+          "map": null
+        },
+        {
+          "name": "Irp",
+          "datatype": "pointer",
+          "map": null
+        },
+        {
+          "name": "HighResResponseTime",
+          "datatype": "ulong",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "Write",
+      "displayName": "Write",
+      "descriptor": {
+        "id": 0,
+        "version": 2,
+        "channel": 0,
+        "level": "None",
+        "opcode": 11,
+        "task": 0,
+        "keyword": 0
+      },
+      "fields": [
+        {
+          "name": "DiskNumber",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "IrpFlags",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "TransferSize",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "Reserved",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "ByteOffset",
+          "datatype": "ulong",
+          "map": null
+        },
+        {
+          "name": "FileObject",
+          "datatype": "pointer",
+          "map": null
+        },
+        {
+          "name": "Irp",
+          "datatype": "pointer",
+          "map": null
+        },
+        {
+          "name": "HighResResponseTime",
+          "datatype": "ulong",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "DrvMjFnRet",
+      "displayName": "DrvMjFnRet",
+      "descriptor": {
+        "id": 0,
+        "version": 2,
+        "channel": 0,
+        "level": "None",
+        "opcode": 35,
+        "task": 0,
+        "keyword": 0
+      },
+      "fields": [
+        {
+          "name": "Irp",
+          "datatype": "pointer",
+          "map": null
+        },
+        {
+          "name": "UniqMatchId",
+          "datatype": "uint",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "DrvComplRout",
+      "displayName": "DrvComplRout",
+      "descriptor": {
+        "id": 0,
+        "version": 2,
+        "channel": 0,
+        "level": "None",
+        "opcode": 37,
+        "task": 0,
+        "keyword": 0
+      },
+      "fields": [
+        {
+          "name": "Routine",
+          "datatype": "pointer",
+          "map": null
+        },
+        {
+          "name": "IrpPtr",
+          "datatype": "pointer",
+          "map": null
+        },
+        {
+          "name": "UniqMatchId",
+          "datatype": "uint",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "DrvMjFnCall",
+      "displayName": "DrvMjFnCall",
+      "descriptor": {
+        "id": 0,
+        "version": 2,
+        "channel": 0,
+        "level": "None",
+        "opcode": 34,
+        "task": 0,
+        "keyword": 0
+      },
+      "fields": [
+        {
+          "name": "MajorFunction",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "MinorFunction",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "RoutineAddr",
+          "datatype": "pointer",
+          "map": null
+        },
+        {
+          "name": "FileObject",
+          "datatype": "pointer",
+          "map": null
+        },
+        {
+          "name": "Irp",
+          "datatype": "pointer",
+          "map": null
+        },
+        {
+          "name": "UniqMatchId",
+          "datatype": "uint",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "DrvComplReqRet",
+      "displayName": "DrvComplReqRet",
+      "descriptor": {
+        "id": 0,
+        "version": 2,
+        "channel": 0,
+        "level": "None",
+        "opcode": 53,
+        "task": 0,
+        "keyword": 0
+      },
+      "fields": [
+        {
+          "name": "Irp",
+          "datatype": "pointer",
+          "map": null
+        },
+        {
+          "name": "UniqMatchId",
+          "datatype": "uint",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "FlushBuffers",
+      "displayName": "FlushBuffers",
+      "descriptor": {
+        "id": 0,
+        "version": 2,
+        "channel": 0,
+        "level": "None",
+        "opcode": 14,
+        "task": 0,
+        "keyword": 0
+      },
+      "fields": [
+        {
+          "name": "DiskNumber",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "IrpFlags",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "HighResResponseTime",
+          "datatype": "ulong",
+          "map": null
+        },
+        {
+          "name": "Irp",
+          "datatype": "pointer",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "ReadInit",
+      "displayName": "ReadInit",
+      "descriptor": {
+        "id": 0,
+        "version": 2,
+        "channel": 0,
+        "level": "None",
+        "opcode": 12,
+        "task": 0,
+        "keyword": 0
+      },
+      "fields": [
+        {
+          "name": "Irp",
+          "datatype": "pointer",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "WriteInit",
+      "displayName": "WriteInit",
+      "descriptor": {
+        "id": 0,
+        "version": 2,
+        "channel": 0,
+        "level": "None",
+        "opcode": 13,
+        "task": 0,
+        "keyword": 0
+      },
+      "fields": [
+        {
+          "name": "Irp",
+          "datatype": "pointer",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "FlushInit",
+      "displayName": "FlushInit",
+      "descriptor": {
+        "id": 0,
+        "version": 2,
+        "channel": 0,
+        "level": "None",
+        "opcode": 15,
+        "task": 0,
+        "keyword": 0
+      },
+      "fields": [
+        {
+          "name": "Irp",
+          "datatype": "pointer",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "DrvComplReq",
+      "displayName": "DrvComplReq",
+      "descriptor": {
+        "id": 0,
+        "version": 2,
+        "channel": 0,
+        "level": "None",
+        "opcode": 52,
+        "task": 0,
+        "keyword": 0
+      },
+      "fields": [
+        {
+          "name": "RoutineAddr",
+          "datatype": "pointer",
+          "map": null
+        },
+        {
+          "name": "Irp",
+          "datatype": "pointer",
+          "map": null
+        },
+        {
+          "name": "UniqMatchId",
+          "datatype": "uint",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "ReadInit",
+      "displayName": "ReadInit",
+      "descriptor": {
+        "id": 0,
+        "version": 3,
+        "channel": 0,
+        "level": "None",
+        "opcode": 12,
+        "task": 0,
+        "keyword": 0
+      },
+      "fields": [
+        {
+          "name": "Irp",
+          "datatype": "pointer",
+          "map": null
+        },
+        {
+          "name": "IssuingThreadId",
+          "datatype": "uint",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "WriteInit",
+      "displayName": "WriteInit",
+      "descriptor": {
+        "id": 0,
+        "version": 3,
+        "channel": 0,
+        "level": "None",
+        "opcode": 13,
+        "task": 0,
+        "keyword": 0
+      },
+      "fields": [
+        {
+          "name": "Irp",
+          "datatype": "pointer",
+          "map": null
+        },
+        {
+          "name": "IssuingThreadId",
+          "datatype": "uint",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "FlushInit",
+      "displayName": "FlushInit",
+      "descriptor": {
+        "id": 0,
+        "version": 3,
+        "channel": 0,
+        "level": "None",
+        "opcode": 15,
+        "task": 0,
+        "keyword": 0
+      },
+      "fields": [
+        {
+          "name": "Irp",
+          "datatype": "pointer",
+          "map": null
+        },
+        {
+          "name": "IssuingThreadId",
+          "datatype": "uint",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "OpticalReadInit",
+      "displayName": "OpticalReadInit",
+      "descriptor": {
+        "id": 0,
+        "version": 3,
+        "channel": 0,
+        "level": "None",
+        "opcode": 58,
+        "task": 0,
+        "keyword": 0
+      },
+      "fields": [
+        {
+          "name": "Irp",
+          "datatype": "pointer",
+          "map": null
+        },
+        {
+          "name": "IssuingThreadId",
+          "datatype": "uint",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "OpticalWriteInit",
+      "displayName": "OpticalWriteInit",
+      "descriptor": {
+        "id": 0,
+        "version": 3,
+        "channel": 0,
+        "level": "None",
+        "opcode": 59,
+        "task": 0,
+        "keyword": 0
+      },
+      "fields": [
+        {
+          "name": "Irp",
+          "datatype": "pointer",
+          "map": null
+        },
+        {
+          "name": "IssuingThreadId",
+          "datatype": "uint",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "OpticalFlushInit",
+      "displayName": "OpticalFlushInit",
+      "descriptor": {
+        "id": 0,
+        "version": 3,
+        "channel": 0,
+        "level": "None",
+        "opcode": 60,
+        "task": 0,
+        "keyword": 0
+      },
+      "fields": [
+        {
+          "name": "Irp",
+          "datatype": "pointer",
+          "map": null
+        },
+        {
+          "name": "IssuingThreadId",
+          "datatype": "uint",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "Read",
+      "displayName": "Read",
+      "descriptor": {
+        "id": 0,
+        "version": 3,
+        "channel": 0,
+        "level": "None",
+        "opcode": 10,
+        "task": 0,
+        "keyword": 0
+      },
+      "fields": [
+        {
+          "name": "DiskNumber",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "IrpFlags",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "TransferSize",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "Reserved",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "ByteOffset",
+          "datatype": "ulong",
+          "map": null
+        },
+        {
+          "name": "FileObject",
+          "datatype": "pointer",
+          "map": null
+        },
+        {
+          "name": "Irp",
+          "datatype": "pointer",
+          "map": null
+        },
+        {
+          "name": "HighResResponseTime",
+          "datatype": "ulong",
+          "map": null
+        },
+        {
+          "name": "IssuingThreadId",
+          "datatype": "uint",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "Write",
+      "displayName": "Write",
+      "descriptor": {
+        "id": 0,
+        "version": 3,
+        "channel": 0,
+        "level": "None",
+        "opcode": 11,
+        "task": 0,
+        "keyword": 0
+      },
+      "fields": [
+        {
+          "name": "DiskNumber",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "IrpFlags",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "TransferSize",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "Reserved",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "ByteOffset",
+          "datatype": "ulong",
+          "map": null
+        },
+        {
+          "name": "FileObject",
+          "datatype": "pointer",
+          "map": null
+        },
+        {
+          "name": "Irp",
+          "datatype": "pointer",
+          "map": null
+        },
+        {
+          "name": "HighResResponseTime",
+          "datatype": "ulong",
+          "map": null
+        },
+        {
+          "name": "IssuingThreadId",
+          "datatype": "uint",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "OpticalRead",
+      "displayName": "OpticalRead",
+      "descriptor": {
+        "id": 0,
+        "version": 3,
+        "channel": 0,
+        "level": "None",
+        "opcode": 55,
+        "task": 0,
+        "keyword": 0
+      },
+      "fields": [
+        {
+          "name": "DiskNumber",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "IrpFlags",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "TransferSize",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "Reserved",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "ByteOffset",
+          "datatype": "ulong",
+          "map": null
+        },
+        {
+          "name": "FileObject",
+          "datatype": "pointer",
+          "map": null
+        },
+        {
+          "name": "Irp",
+          "datatype": "pointer",
+          "map": null
+        },
+        {
+          "name": "HighResResponseTime",
+          "datatype": "ulong",
+          "map": null
+        },
+        {
+          "name": "IssuingThreadId",
+          "datatype": "uint",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "OpticalWrite",
+      "displayName": "OpticalWrite",
+      "descriptor": {
+        "id": 0,
+        "version": 3,
+        "channel": 0,
+        "level": "None",
+        "opcode": 56,
+        "task": 0,
+        "keyword": 0
+      },
+      "fields": [
+        {
+          "name": "DiskNumber",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "IrpFlags",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "TransferSize",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "Reserved",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "ByteOffset",
+          "datatype": "ulong",
+          "map": null
+        },
+        {
+          "name": "FileObject",
+          "datatype": "pointer",
+          "map": null
+        },
+        {
+          "name": "Irp",
+          "datatype": "pointer",
+          "map": null
+        },
+        {
+          "name": "HighResResponseTime",
+          "datatype": "ulong",
+          "map": null
+        },
+        {
+          "name": "IssuingThreadId",
+          "datatype": "uint",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "FlushBuffers",
+      "displayName": "FlushBuffers",
+      "descriptor": {
+        "id": 0,
+        "version": 3,
+        "channel": 0,
+        "level": "None",
+        "opcode": 14,
+        "task": 0,
+        "keyword": 0
+      },
+      "fields": [
+        {
+          "name": "DiskNumber",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "IrpFlags",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "HighResResponseTime",
+          "datatype": "ulong",
+          "map": null
+        },
+        {
+          "name": "Irp",
+          "datatype": "pointer",
+          "map": null
+        },
+        {
+          "name": "IssuingThreadId",
+          "datatype": "uint",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "OpticalFlushBuffers",
+      "displayName": "OpticalFlushBuffers",
+      "descriptor": {
+        "id": 0,
+        "version": 3,
+        "channel": 0,
+        "level": "None",
+        "opcode": 57,
+        "task": 0,
+        "keyword": 0
+      },
+      "fields": [
+        {
+          "name": "DiskNumber",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "IrpFlags",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "HighResResponseTime",
+          "datatype": "ulong",
+          "map": null
+        },
+        {
+          "name": "Irp",
+          "datatype": "pointer",
+          "map": null
+        },
+        {
+          "name": "IssuingThreadId",
+          "datatype": "uint",
+          "map": null
+        }
+      ]
+    }
+  ],
+  "tasks": {},
+  "opcodes": {
+    "10": "Read",
+    "11": "Write",
+    "12": "ReadInit",
+    "13": "WriteInit",
+    "14": "FlushBuffers",
+    "15": "FlushInit",
+    "34": "DrvMjFnCall",
+    "35": "DrvMjFnRet",
+    "37": "DrvComplRout",
+    "52": "DrvComplReq",
+    "53": "DrvComplReqRet",
+    "55": "OpticalRead",
+    "56": "OpticalWrite",
+    "57": "OpticalFlushBuffers",
+    "58": "OpticalReadInit",
+    "59": "OpticalWriteInit",
+    "60": "OpticalFlushInit"
+  },
+  "keywords": {},
+  "maps": [],
+  "structs": []
+}

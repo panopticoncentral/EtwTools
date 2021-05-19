@@ -10534,7 +10534,7 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the ChangeType field.
                 /// </summary>
-                public WatcherChangeTypes ChangeType => (WatcherChangeTypes)BitConverter.ToInt32(_etwEvent.Data[Offset_ChangeType..]);
+                public WatcherChangeTypes ChangeType => (WatcherChangeTypes)BitConverter.ToUInt32(_etwEvent.Data[Offset_ChangeType..]);
 
                 /// <summary>
                 /// Creates a new ReportCoreDirectoryTreeHintFileChangedData.

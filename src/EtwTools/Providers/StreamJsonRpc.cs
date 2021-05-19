@@ -544,7 +544,7 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the ErrorCode field.
                 /// </summary>
-                public JsonRpcErrorCode ErrorCode => (JsonRpcErrorCode)BitConverter.ToInt32(_etwEvent.Data[Offset_ErrorCode..]);
+                public JsonRpcErrorCode ErrorCode => (JsonRpcErrorCode)BitConverter.ToUInt32(_etwEvent.Data[Offset_ErrorCode..]);
 
                 /// <summary>
                 /// Creates a new ReceivedErrorData.
@@ -1134,7 +1134,7 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the ErrorCode field.
                 /// </summary>
-                public JsonRpcErrorCode ErrorCode => (JsonRpcErrorCode)BitConverter.ToInt32(_etwEvent.Data[Offset_ErrorCode..]);
+                public JsonRpcErrorCode ErrorCode => (JsonRpcErrorCode)BitConverter.ToUInt32(_etwEvent.Data[Offset_ErrorCode..]);
 
                 /// <summary>
                 /// Creates a new SendingErrorData.

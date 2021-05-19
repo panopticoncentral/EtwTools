@@ -1,0 +1,1988 @@
+{
+  "name": "WindowsKernelFile",
+  "displayName": "Microsoft-Windows-Kernel-File",
+  "id": "edd08927-9cc4-4e65-b970-c2560fb5c289",
+  "events": [
+    {
+      "name": "NameCreateInfo",
+      "displayName": "NameCreateInfo",
+      "descriptor": {
+        "id": 10,
+        "version": 0,
+        "channel": 16,
+        "level": "Information",
+        "opcode": "Info",
+        "task": 10,
+        "keyword": 9223372036854775824
+      },
+      "fields": [
+        {
+          "name": "FileKey",
+          "datatype": "pointer",
+          "map": null
+        },
+        {
+          "name": "FileName",
+          "datatype": "string",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "NameDeleteInfo",
+      "displayName": "NameDeleteInfo",
+      "descriptor": {
+        "id": 11,
+        "version": 0,
+        "channel": 16,
+        "level": "Information",
+        "opcode": "Info",
+        "task": 11,
+        "keyword": 9223372036854775824
+      },
+      "fields": [
+        {
+          "name": "FileKey",
+          "datatype": "pointer",
+          "map": null
+        },
+        {
+          "name": "FileName",
+          "datatype": "string",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "CreateInfo",
+      "displayName": "CreateInfo",
+      "descriptor": {
+        "id": 12,
+        "version": 0,
+        "channel": 16,
+        "level": "Information",
+        "opcode": "Info",
+        "task": 12,
+        "keyword": 9223372036854775968
+      },
+      "fields": [
+        {
+          "name": "Irp",
+          "datatype": "pointer",
+          "map": null
+        },
+        {
+          "name": "ThreadId",
+          "datatype": "pointer",
+          "map": null
+        },
+        {
+          "name": "FileObject",
+          "datatype": "pointer",
+          "map": null
+        },
+        {
+          "name": "CreateOptions",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "CreateAttributes",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "ShareAccess",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "FileName",
+          "datatype": "string",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "CleanupInfo",
+      "displayName": "CleanupInfo",
+      "descriptor": {
+        "id": 13,
+        "version": 0,
+        "channel": 16,
+        "level": "Information",
+        "opcode": "Info",
+        "task": 13,
+        "keyword": 9223372036854775840
+      },
+      "fields": [
+        {
+          "name": "Irp",
+          "datatype": "pointer",
+          "map": null
+        },
+        {
+          "name": "ThreadId",
+          "datatype": "pointer",
+          "map": null
+        },
+        {
+          "name": "FileObject",
+          "datatype": "pointer",
+          "map": null
+        },
+        {
+          "name": "FileKey",
+          "datatype": "pointer",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "CloseInfo",
+      "displayName": "CloseInfo",
+      "descriptor": {
+        "id": 14,
+        "version": 0,
+        "channel": 16,
+        "level": "Information",
+        "opcode": "Info",
+        "task": 14,
+        "keyword": 9223372036854775840
+      },
+      "fields": [
+        {
+          "name": "Irp",
+          "datatype": "pointer",
+          "map": null
+        },
+        {
+          "name": "ThreadId",
+          "datatype": "pointer",
+          "map": null
+        },
+        {
+          "name": "FileObject",
+          "datatype": "pointer",
+          "map": null
+        },
+        {
+          "name": "FileKey",
+          "datatype": "pointer",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "ReadInfo",
+      "displayName": "ReadInfo",
+      "descriptor": {
+        "id": 15,
+        "version": 0,
+        "channel": 16,
+        "level": "Information",
+        "opcode": "Info",
+        "task": 15,
+        "keyword": 9223372036854776096
+      },
+      "fields": [
+        {
+          "name": "ByteOffset",
+          "datatype": "ulong",
+          "map": null
+        },
+        {
+          "name": "Irp",
+          "datatype": "pointer",
+          "map": null
+        },
+        {
+          "name": "ThreadId",
+          "datatype": "pointer",
+          "map": null
+        },
+        {
+          "name": "FileObject",
+          "datatype": "pointer",
+          "map": null
+        },
+        {
+          "name": "FileKey",
+          "datatype": "pointer",
+          "map": null
+        },
+        {
+          "name": "IOSize",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "IOFlags",
+          "datatype": "uint",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "WriteInfo",
+      "displayName": "WriteInfo",
+      "descriptor": {
+        "id": 16,
+        "version": 0,
+        "channel": 16,
+        "level": "Information",
+        "opcode": "Info",
+        "task": 16,
+        "keyword": 9223372036854776352
+      },
+      "fields": [
+        {
+          "name": "ByteOffset",
+          "datatype": "ulong",
+          "map": null
+        },
+        {
+          "name": "Irp",
+          "datatype": "pointer",
+          "map": null
+        },
+        {
+          "name": "ThreadId",
+          "datatype": "pointer",
+          "map": null
+        },
+        {
+          "name": "FileObject",
+          "datatype": "pointer",
+          "map": null
+        },
+        {
+          "name": "FileKey",
+          "datatype": "pointer",
+          "map": null
+        },
+        {
+          "name": "IOSize",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "IOFlags",
+          "datatype": "uint",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "SetInformationInfo",
+      "displayName": "SetInformationInfo",
+      "descriptor": {
+        "id": 17,
+        "version": 0,
+        "channel": 16,
+        "level": "Information",
+        "opcode": "Info",
+        "task": 17,
+        "keyword": 9223372036854775840
+      },
+      "fields": [
+        {
+          "name": "Irp",
+          "datatype": "pointer",
+          "map": null
+        },
+        {
+          "name": "ThreadId",
+          "datatype": "pointer",
+          "map": null
+        },
+        {
+          "name": "FileObject",
+          "datatype": "pointer",
+          "map": null
+        },
+        {
+          "name": "FileKey",
+          "datatype": "pointer",
+          "map": null
+        },
+        {
+          "name": "ExtraInformation",
+          "datatype": "pointer",
+          "map": null
+        },
+        {
+          "name": "InfoClass",
+          "datatype": "uint",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "SetDeleteInfo",
+      "displayName": "SetDeleteInfo",
+      "descriptor": {
+        "id": 18,
+        "version": 0,
+        "channel": 16,
+        "level": "Information",
+        "opcode": "Info",
+        "task": 18,
+        "keyword": 9223372036854775840
+      },
+      "fields": [
+        {
+          "name": "Irp",
+          "datatype": "pointer",
+          "map": null
+        },
+        {
+          "name": "ThreadId",
+          "datatype": "pointer",
+          "map": null
+        },
+        {
+          "name": "FileObject",
+          "datatype": "pointer",
+          "map": null
+        },
+        {
+          "name": "FileKey",
+          "datatype": "pointer",
+          "map": null
+        },
+        {
+          "name": "ExtraInformation",
+          "datatype": "pointer",
+          "map": null
+        },
+        {
+          "name": "InfoClass",
+          "datatype": "uint",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "RenameInfo",
+      "displayName": "RenameInfo",
+      "descriptor": {
+        "id": 19,
+        "version": 0,
+        "channel": 16,
+        "level": "Information",
+        "opcode": "Info",
+        "task": 19,
+        "keyword": 9223372036854775840
+      },
+      "fields": [
+        {
+          "name": "Irp",
+          "datatype": "pointer",
+          "map": null
+        },
+        {
+          "name": "ThreadId",
+          "datatype": "pointer",
+          "map": null
+        },
+        {
+          "name": "FileObject",
+          "datatype": "pointer",
+          "map": null
+        },
+        {
+          "name": "FileKey",
+          "datatype": "pointer",
+          "map": null
+        },
+        {
+          "name": "ExtraInformation",
+          "datatype": "pointer",
+          "map": null
+        },
+        {
+          "name": "InfoClass",
+          "datatype": "uint",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "DirEnumInfo",
+      "displayName": "DirEnumInfo",
+      "descriptor": {
+        "id": 20,
+        "version": 0,
+        "channel": 16,
+        "level": "Information",
+        "opcode": "Info",
+        "task": 20,
+        "keyword": 9223372036854775840
+      },
+      "fields": [
+        {
+          "name": "Irp",
+          "datatype": "pointer",
+          "map": null
+        },
+        {
+          "name": "ThreadId",
+          "datatype": "pointer",
+          "map": null
+        },
+        {
+          "name": "FileObject",
+          "datatype": "pointer",
+          "map": null
+        },
+        {
+          "name": "FileKey",
+          "datatype": "pointer",
+          "map": null
+        },
+        {
+          "name": "Length",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "InfoClass",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "FileIndex",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "FileName",
+          "datatype": "string",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "FlushInfo",
+      "displayName": "FlushInfo",
+      "descriptor": {
+        "id": 21,
+        "version": 0,
+        "channel": 16,
+        "level": "Information",
+        "opcode": "Info",
+        "task": 21,
+        "keyword": 9223372036854775840
+      },
+      "fields": [
+        {
+          "name": "Irp",
+          "datatype": "pointer",
+          "map": null
+        },
+        {
+          "name": "ThreadId",
+          "datatype": "pointer",
+          "map": null
+        },
+        {
+          "name": "FileObject",
+          "datatype": "pointer",
+          "map": null
+        },
+        {
+          "name": "FileKey",
+          "datatype": "pointer",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "QueryInformationInfo",
+      "displayName": "QueryInformationInfo",
+      "descriptor": {
+        "id": 22,
+        "version": 0,
+        "channel": 16,
+        "level": "Information",
+        "opcode": "Info",
+        "task": 22,
+        "keyword": 9223372036854775840
+      },
+      "fields": [
+        {
+          "name": "Irp",
+          "datatype": "pointer",
+          "map": null
+        },
+        {
+          "name": "ThreadId",
+          "datatype": "pointer",
+          "map": null
+        },
+        {
+          "name": "FileObject",
+          "datatype": "pointer",
+          "map": null
+        },
+        {
+          "name": "FileKey",
+          "datatype": "pointer",
+          "map": null
+        },
+        {
+          "name": "ExtraInformation",
+          "datatype": "pointer",
+          "map": null
+        },
+        {
+          "name": "InfoClass",
+          "datatype": "uint",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "FSCTLInfo",
+      "displayName": "FSCTLInfo",
+      "descriptor": {
+        "id": 23,
+        "version": 0,
+        "channel": 16,
+        "level": "Information",
+        "opcode": "Info",
+        "task": 23,
+        "keyword": 9223372036854775840
+      },
+      "fields": [
+        {
+          "name": "Irp",
+          "datatype": "pointer",
+          "map": null
+        },
+        {
+          "name": "ThreadId",
+          "datatype": "pointer",
+          "map": null
+        },
+        {
+          "name": "FileObject",
+          "datatype": "pointer",
+          "map": null
+        },
+        {
+          "name": "FileKey",
+          "datatype": "pointer",
+          "map": null
+        },
+        {
+          "name": "ExtraInformation",
+          "datatype": "pointer",
+          "map": null
+        },
+        {
+          "name": "InfoClass",
+          "datatype": "uint",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "OperationEndInfo",
+      "displayName": "OperationEndInfo",
+      "descriptor": {
+        "id": 24,
+        "version": 0,
+        "channel": 16,
+        "level": "Information",
+        "opcode": "Info",
+        "task": 24,
+        "keyword": 9223372036854775904
+      },
+      "fields": [
+        {
+          "name": "Irp",
+          "datatype": "pointer",
+          "map": null
+        },
+        {
+          "name": "ExtraInformation",
+          "datatype": "pointer",
+          "map": null
+        },
+        {
+          "name": "Status",
+          "datatype": "uint",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "DirNotifyInfo",
+      "displayName": "DirNotifyInfo",
+      "descriptor": {
+        "id": 25,
+        "version": 0,
+        "channel": 16,
+        "level": "Information",
+        "opcode": "Info",
+        "task": 25,
+        "keyword": 9223372036854775840
+      },
+      "fields": [
+        {
+          "name": "Irp",
+          "datatype": "pointer",
+          "map": null
+        },
+        {
+          "name": "ThreadId",
+          "datatype": "pointer",
+          "map": null
+        },
+        {
+          "name": "FileObject",
+          "datatype": "pointer",
+          "map": null
+        },
+        {
+          "name": "FileKey",
+          "datatype": "pointer",
+          "map": null
+        },
+        {
+          "name": "Length",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "InfoClass",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "FileIndex",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "FileName",
+          "datatype": "string",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "DeletePathInfo",
+      "displayName": "DeletePathInfo",
+      "descriptor": {
+        "id": 26,
+        "version": 0,
+        "channel": 16,
+        "level": "Information",
+        "opcode": "Info",
+        "task": 26,
+        "keyword": 9223372036854776832
+      },
+      "fields": [
+        {
+          "name": "Irp",
+          "datatype": "pointer",
+          "map": null
+        },
+        {
+          "name": "ThreadId",
+          "datatype": "pointer",
+          "map": null
+        },
+        {
+          "name": "FileObject",
+          "datatype": "pointer",
+          "map": null
+        },
+        {
+          "name": "FileKey",
+          "datatype": "pointer",
+          "map": null
+        },
+        {
+          "name": "ExtraInformation",
+          "datatype": "pointer",
+          "map": null
+        },
+        {
+          "name": "InfoClass",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "FilePath",
+          "datatype": "string",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "RenamePathInfo",
+      "displayName": "RenamePathInfo",
+      "descriptor": {
+        "id": 27,
+        "version": 0,
+        "channel": 16,
+        "level": "Information",
+        "opcode": "Info",
+        "task": 27,
+        "keyword": 9223372036854777856
+      },
+      "fields": [
+        {
+          "name": "Irp",
+          "datatype": "pointer",
+          "map": null
+        },
+        {
+          "name": "ThreadId",
+          "datatype": "pointer",
+          "map": null
+        },
+        {
+          "name": "FileObject",
+          "datatype": "pointer",
+          "map": null
+        },
+        {
+          "name": "FileKey",
+          "datatype": "pointer",
+          "map": null
+        },
+        {
+          "name": "ExtraInformation",
+          "datatype": "pointer",
+          "map": null
+        },
+        {
+          "name": "InfoClass",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "FilePath",
+          "datatype": "string",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "SetLinkPathInfo",
+      "displayName": "SetLinkPathInfo",
+      "descriptor": {
+        "id": 28,
+        "version": 0,
+        "channel": 16,
+        "level": "Information",
+        "opcode": "Info",
+        "task": 28,
+        "keyword": 9223372036854777856
+      },
+      "fields": [
+        {
+          "name": "Irp",
+          "datatype": "pointer",
+          "map": null
+        },
+        {
+          "name": "ThreadId",
+          "datatype": "pointer",
+          "map": null
+        },
+        {
+          "name": "FileObject",
+          "datatype": "pointer",
+          "map": null
+        },
+        {
+          "name": "FileKey",
+          "datatype": "pointer",
+          "map": null
+        },
+        {
+          "name": "ExtraInformation",
+          "datatype": "pointer",
+          "map": null
+        },
+        {
+          "name": "InfoClass",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "FilePath",
+          "datatype": "string",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "SetLinkInfo",
+      "displayName": "SetLinkInfo",
+      "descriptor": {
+        "id": 29,
+        "version": 0,
+        "channel": 16,
+        "level": "Information",
+        "opcode": "Info",
+        "task": 19,
+        "keyword": 9223372036854775840
+      },
+      "fields": [
+        {
+          "name": "Irp",
+          "datatype": "pointer",
+          "map": null
+        },
+        {
+          "name": "ThreadId",
+          "datatype": "pointer",
+          "map": null
+        },
+        {
+          "name": "FileObject",
+          "datatype": "pointer",
+          "map": null
+        },
+        {
+          "name": "FileKey",
+          "datatype": "pointer",
+          "map": null
+        },
+        {
+          "name": "ExtraInformation",
+          "datatype": "pointer",
+          "map": null
+        },
+        {
+          "name": "InfoClass",
+          "datatype": "uint",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "CreateNewFileInfo",
+      "displayName": "CreateNewFileInfo",
+      "descriptor": {
+        "id": 30,
+        "version": 0,
+        "channel": 16,
+        "level": "Information",
+        "opcode": "Info",
+        "task": 30,
+        "keyword": 9223372036854779904
+      },
+      "fields": [
+        {
+          "name": "Irp",
+          "datatype": "pointer",
+          "map": null
+        },
+        {
+          "name": "ThreadId",
+          "datatype": "pointer",
+          "map": null
+        },
+        {
+          "name": "FileObject",
+          "datatype": "pointer",
+          "map": null
+        },
+        {
+          "name": "CreateOptions",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "CreateAttributes",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "ShareAccess",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "FileName",
+          "datatype": "string",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "CreateInfo",
+      "displayName": "CreateInfo",
+      "descriptor": {
+        "id": 12,
+        "version": 1,
+        "channel": 16,
+        "level": "Information",
+        "opcode": "Info",
+        "task": 12,
+        "keyword": 9223372036854775968
+      },
+      "fields": [
+        {
+          "name": "Irp",
+          "datatype": "pointer",
+          "map": null
+        },
+        {
+          "name": "FileObject",
+          "datatype": "pointer",
+          "map": null
+        },
+        {
+          "name": "IssuingThreadId",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "CreateOptions",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "CreateAttributes",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "ShareAccess",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "FileName",
+          "datatype": "string",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "CleanupInfo",
+      "displayName": "CleanupInfo",
+      "descriptor": {
+        "id": 13,
+        "version": 1,
+        "channel": 16,
+        "level": "Information",
+        "opcode": "Info",
+        "task": 13,
+        "keyword": 9223372036854775840
+      },
+      "fields": [
+        {
+          "name": "Irp",
+          "datatype": "pointer",
+          "map": null
+        },
+        {
+          "name": "FileObject",
+          "datatype": "pointer",
+          "map": null
+        },
+        {
+          "name": "FileKey",
+          "datatype": "pointer",
+          "map": null
+        },
+        {
+          "name": "IssuingThreadId",
+          "datatype": "uint",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "CloseInfo",
+      "displayName": "CloseInfo",
+      "descriptor": {
+        "id": 14,
+        "version": 1,
+        "channel": 16,
+        "level": "Information",
+        "opcode": "Info",
+        "task": 14,
+        "keyword": 9223372036854775840
+      },
+      "fields": [
+        {
+          "name": "Irp",
+          "datatype": "pointer",
+          "map": null
+        },
+        {
+          "name": "FileObject",
+          "datatype": "pointer",
+          "map": null
+        },
+        {
+          "name": "FileKey",
+          "datatype": "pointer",
+          "map": null
+        },
+        {
+          "name": "IssuingThreadId",
+          "datatype": "uint",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "ReadInfo",
+      "displayName": "ReadInfo",
+      "descriptor": {
+        "id": 15,
+        "version": 1,
+        "channel": 16,
+        "level": "Information",
+        "opcode": "Info",
+        "task": 15,
+        "keyword": 9223372036854776096
+      },
+      "fields": [
+        {
+          "name": "ByteOffset",
+          "datatype": "ulong",
+          "map": null
+        },
+        {
+          "name": "Irp",
+          "datatype": "pointer",
+          "map": null
+        },
+        {
+          "name": "FileObject",
+          "datatype": "pointer",
+          "map": null
+        },
+        {
+          "name": "FileKey",
+          "datatype": "pointer",
+          "map": null
+        },
+        {
+          "name": "IssuingThreadId",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "IOSize",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "IOFlags",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "ExtraFlags",
+          "datatype": "uint",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "WriteInfo",
+      "displayName": "WriteInfo",
+      "descriptor": {
+        "id": 16,
+        "version": 1,
+        "channel": 16,
+        "level": "Information",
+        "opcode": "Info",
+        "task": 16,
+        "keyword": 9223372036854776352
+      },
+      "fields": [
+        {
+          "name": "ByteOffset",
+          "datatype": "ulong",
+          "map": null
+        },
+        {
+          "name": "Irp",
+          "datatype": "pointer",
+          "map": null
+        },
+        {
+          "name": "FileObject",
+          "datatype": "pointer",
+          "map": null
+        },
+        {
+          "name": "FileKey",
+          "datatype": "pointer",
+          "map": null
+        },
+        {
+          "name": "IssuingThreadId",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "IOSize",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "IOFlags",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "ExtraFlags",
+          "datatype": "uint",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "SetInformationInfo",
+      "displayName": "SetInformationInfo",
+      "descriptor": {
+        "id": 17,
+        "version": 1,
+        "channel": 16,
+        "level": "Information",
+        "opcode": "Info",
+        "task": 17,
+        "keyword": 9223372036854775840
+      },
+      "fields": [
+        {
+          "name": "Irp",
+          "datatype": "pointer",
+          "map": null
+        },
+        {
+          "name": "FileObject",
+          "datatype": "pointer",
+          "map": null
+        },
+        {
+          "name": "FileKey",
+          "datatype": "pointer",
+          "map": null
+        },
+        {
+          "name": "ExtraInformation",
+          "datatype": "pointer",
+          "map": null
+        },
+        {
+          "name": "IssuingThreadId",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "InfoClass",
+          "datatype": "uint",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "SetDeleteInfo",
+      "displayName": "SetDeleteInfo",
+      "descriptor": {
+        "id": 18,
+        "version": 1,
+        "channel": 16,
+        "level": "Information",
+        "opcode": "Info",
+        "task": 18,
+        "keyword": 9223372036854775840
+      },
+      "fields": [
+        {
+          "name": "Irp",
+          "datatype": "pointer",
+          "map": null
+        },
+        {
+          "name": "FileObject",
+          "datatype": "pointer",
+          "map": null
+        },
+        {
+          "name": "FileKey",
+          "datatype": "pointer",
+          "map": null
+        },
+        {
+          "name": "ExtraInformation",
+          "datatype": "pointer",
+          "map": null
+        },
+        {
+          "name": "IssuingThreadId",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "InfoClass",
+          "datatype": "uint",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "RenameInfo",
+      "displayName": "RenameInfo",
+      "descriptor": {
+        "id": 19,
+        "version": 1,
+        "channel": 16,
+        "level": "Information",
+        "opcode": "Info",
+        "task": 19,
+        "keyword": 9223372036854775840
+      },
+      "fields": [
+        {
+          "name": "Irp",
+          "datatype": "pointer",
+          "map": null
+        },
+        {
+          "name": "FileObject",
+          "datatype": "pointer",
+          "map": null
+        },
+        {
+          "name": "FileKey",
+          "datatype": "pointer",
+          "map": null
+        },
+        {
+          "name": "ExtraInformation",
+          "datatype": "pointer",
+          "map": null
+        },
+        {
+          "name": "IssuingThreadId",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "InfoClass",
+          "datatype": "uint",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "DirEnumInfo",
+      "displayName": "DirEnumInfo",
+      "descriptor": {
+        "id": 20,
+        "version": 1,
+        "channel": 16,
+        "level": "Information",
+        "opcode": "Info",
+        "task": 20,
+        "keyword": 9223372036854775840
+      },
+      "fields": [
+        {
+          "name": "Irp",
+          "datatype": "pointer",
+          "map": null
+        },
+        {
+          "name": "FileObject",
+          "datatype": "pointer",
+          "map": null
+        },
+        {
+          "name": "FileKey",
+          "datatype": "pointer",
+          "map": null
+        },
+        {
+          "name": "IssuingThreadId",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "Length",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "InfoClass",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "FileIndex",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "FileName",
+          "datatype": "string",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "FlushInfo",
+      "displayName": "FlushInfo",
+      "descriptor": {
+        "id": 21,
+        "version": 1,
+        "channel": 16,
+        "level": "Information",
+        "opcode": "Info",
+        "task": 21,
+        "keyword": 9223372036854775840
+      },
+      "fields": [
+        {
+          "name": "Irp",
+          "datatype": "pointer",
+          "map": null
+        },
+        {
+          "name": "FileObject",
+          "datatype": "pointer",
+          "map": null
+        },
+        {
+          "name": "FileKey",
+          "datatype": "pointer",
+          "map": null
+        },
+        {
+          "name": "IssuingThreadId",
+          "datatype": "uint",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "QueryInformationInfo",
+      "displayName": "QueryInformationInfo",
+      "descriptor": {
+        "id": 22,
+        "version": 1,
+        "channel": 16,
+        "level": "Information",
+        "opcode": "Info",
+        "task": 22,
+        "keyword": 9223372036854775840
+      },
+      "fields": [
+        {
+          "name": "Irp",
+          "datatype": "pointer",
+          "map": null
+        },
+        {
+          "name": "FileObject",
+          "datatype": "pointer",
+          "map": null
+        },
+        {
+          "name": "FileKey",
+          "datatype": "pointer",
+          "map": null
+        },
+        {
+          "name": "ExtraInformation",
+          "datatype": "pointer",
+          "map": null
+        },
+        {
+          "name": "IssuingThreadId",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "InfoClass",
+          "datatype": "uint",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "FSCTLInfo",
+      "displayName": "FSCTLInfo",
+      "descriptor": {
+        "id": 23,
+        "version": 1,
+        "channel": 16,
+        "level": "Information",
+        "opcode": "Info",
+        "task": 23,
+        "keyword": 9223372036854775840
+      },
+      "fields": [
+        {
+          "name": "Irp",
+          "datatype": "pointer",
+          "map": null
+        },
+        {
+          "name": "FileObject",
+          "datatype": "pointer",
+          "map": null
+        },
+        {
+          "name": "FileKey",
+          "datatype": "pointer",
+          "map": null
+        },
+        {
+          "name": "ExtraInformation",
+          "datatype": "pointer",
+          "map": null
+        },
+        {
+          "name": "IssuingThreadId",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "InfoClass",
+          "datatype": "uint",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "DirNotifyInfo",
+      "displayName": "DirNotifyInfo",
+      "descriptor": {
+        "id": 25,
+        "version": 1,
+        "channel": 16,
+        "level": "Information",
+        "opcode": "Info",
+        "task": 25,
+        "keyword": 9223372036854775840
+      },
+      "fields": [
+        {
+          "name": "Irp",
+          "datatype": "pointer",
+          "map": null
+        },
+        {
+          "name": "FileObject",
+          "datatype": "pointer",
+          "map": null
+        },
+        {
+          "name": "FileKey",
+          "datatype": "pointer",
+          "map": null
+        },
+        {
+          "name": "IssuingThreadId",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "Length",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "InfoClass",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "FileIndex",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "FileName",
+          "datatype": "string",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "DeletePathInfo",
+      "displayName": "DeletePathInfo",
+      "descriptor": {
+        "id": 26,
+        "version": 1,
+        "channel": 16,
+        "level": "Information",
+        "opcode": "Info",
+        "task": 26,
+        "keyword": 9223372036854776832
+      },
+      "fields": [
+        {
+          "name": "Irp",
+          "datatype": "pointer",
+          "map": null
+        },
+        {
+          "name": "FileObject",
+          "datatype": "pointer",
+          "map": null
+        },
+        {
+          "name": "FileKey",
+          "datatype": "pointer",
+          "map": null
+        },
+        {
+          "name": "ExtraInformation",
+          "datatype": "pointer",
+          "map": null
+        },
+        {
+          "name": "IssuingThreadId",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "InfoClass",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "FilePath",
+          "datatype": "string",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "RenamePathInfo",
+      "displayName": "RenamePathInfo",
+      "descriptor": {
+        "id": 27,
+        "version": 1,
+        "channel": 16,
+        "level": "Information",
+        "opcode": "Info",
+        "task": 27,
+        "keyword": 9223372036854777856
+      },
+      "fields": [
+        {
+          "name": "Irp",
+          "datatype": "pointer",
+          "map": null
+        },
+        {
+          "name": "FileObject",
+          "datatype": "pointer",
+          "map": null
+        },
+        {
+          "name": "FileKey",
+          "datatype": "pointer",
+          "map": null
+        },
+        {
+          "name": "ExtraInformation",
+          "datatype": "pointer",
+          "map": null
+        },
+        {
+          "name": "IssuingThreadId",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "InfoClass",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "FilePath",
+          "datatype": "string",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "SetLinkPathInfo",
+      "displayName": "SetLinkPathInfo",
+      "descriptor": {
+        "id": 28,
+        "version": 1,
+        "channel": 16,
+        "level": "Information",
+        "opcode": "Info",
+        "task": 28,
+        "keyword": 9223372036854777856
+      },
+      "fields": [
+        {
+          "name": "Irp",
+          "datatype": "pointer",
+          "map": null
+        },
+        {
+          "name": "FileObject",
+          "datatype": "pointer",
+          "map": null
+        },
+        {
+          "name": "FileKey",
+          "datatype": "pointer",
+          "map": null
+        },
+        {
+          "name": "ExtraInformation",
+          "datatype": "pointer",
+          "map": null
+        },
+        {
+          "name": "IssuingThreadId",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "InfoClass",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "FilePath",
+          "datatype": "string",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "SetLinkInfo",
+      "displayName": "SetLinkInfo",
+      "descriptor": {
+        "id": 29,
+        "version": 1,
+        "channel": 16,
+        "level": "Information",
+        "opcode": "Info",
+        "task": 19,
+        "keyword": 9223372036854775840
+      },
+      "fields": [
+        {
+          "name": "Irp",
+          "datatype": "pointer",
+          "map": null
+        },
+        {
+          "name": "FileObject",
+          "datatype": "pointer",
+          "map": null
+        },
+        {
+          "name": "FileKey",
+          "datatype": "pointer",
+          "map": null
+        },
+        {
+          "name": "ExtraInformation",
+          "datatype": "pointer",
+          "map": null
+        },
+        {
+          "name": "IssuingThreadId",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "InfoClass",
+          "datatype": "uint",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "CreateNewFileInfo",
+      "displayName": "CreateNewFileInfo",
+      "descriptor": {
+        "id": 30,
+        "version": 1,
+        "channel": 16,
+        "level": "Information",
+        "opcode": "Info",
+        "task": 30,
+        "keyword": 9223372036854779904
+      },
+      "fields": [
+        {
+          "name": "Irp",
+          "datatype": "pointer",
+          "map": null
+        },
+        {
+          "name": "FileObject",
+          "datatype": "pointer",
+          "map": null
+        },
+        {
+          "name": "IssuingThreadId",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "CreateOptions",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "CreateAttributes",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "ShareAccess",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "FileName",
+          "datatype": "string",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "SetSecurityInfo",
+      "displayName": "SetSecurityInfo",
+      "descriptor": {
+        "id": 31,
+        "version": 1,
+        "channel": 16,
+        "level": "Information",
+        "opcode": "Info",
+        "task": 31,
+        "keyword": 9223372036854775840
+      },
+      "fields": [
+        {
+          "name": "Irp",
+          "datatype": "pointer",
+          "map": null
+        },
+        {
+          "name": "FileObject",
+          "datatype": "pointer",
+          "map": null
+        },
+        {
+          "name": "FileKey",
+          "datatype": "pointer",
+          "map": null
+        },
+        {
+          "name": "ExtraInformation",
+          "datatype": "pointer",
+          "map": null
+        },
+        {
+          "name": "IssuingThreadId",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "InfoClass",
+          "datatype": "uint",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "QuerySecurityInfo",
+      "displayName": "QuerySecurityInfo",
+      "descriptor": {
+        "id": 32,
+        "version": 1,
+        "channel": 16,
+        "level": "Information",
+        "opcode": "Info",
+        "task": 32,
+        "keyword": 9223372036854775840
+      },
+      "fields": [
+        {
+          "name": "Irp",
+          "datatype": "pointer",
+          "map": null
+        },
+        {
+          "name": "FileObject",
+          "datatype": "pointer",
+          "map": null
+        },
+        {
+          "name": "FileKey",
+          "datatype": "pointer",
+          "map": null
+        },
+        {
+          "name": "ExtraInformation",
+          "datatype": "pointer",
+          "map": null
+        },
+        {
+          "name": "IssuingThreadId",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "InfoClass",
+          "datatype": "uint",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "SetEAInfo",
+      "displayName": "SetEAInfo",
+      "descriptor": {
+        "id": 33,
+        "version": 1,
+        "channel": 16,
+        "level": "Information",
+        "opcode": "Info",
+        "task": 33,
+        "keyword": 9223372036854775840
+      },
+      "fields": [
+        {
+          "name": "Irp",
+          "datatype": "pointer",
+          "map": null
+        },
+        {
+          "name": "FileObject",
+          "datatype": "pointer",
+          "map": null
+        },
+        {
+          "name": "FileKey",
+          "datatype": "pointer",
+          "map": null
+        },
+        {
+          "name": "ExtraInformation",
+          "datatype": "pointer",
+          "map": null
+        },
+        {
+          "name": "IssuingThreadId",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "InfoClass",
+          "datatype": "uint",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "QueryEAInfo",
+      "displayName": "QueryEAInfo",
+      "descriptor": {
+        "id": 34,
+        "version": 1,
+        "channel": 16,
+        "level": "Information",
+        "opcode": "Info",
+        "task": 34,
+        "keyword": 9223372036854775840
+      },
+      "fields": [
+        {
+          "name": "Irp",
+          "datatype": "pointer",
+          "map": null
+        },
+        {
+          "name": "FileObject",
+          "datatype": "pointer",
+          "map": null
+        },
+        {
+          "name": "FileKey",
+          "datatype": "pointer",
+          "map": null
+        },
+        {
+          "name": "ExtraInformation",
+          "datatype": "pointer",
+          "map": null
+        },
+        {
+          "name": "IssuingThreadId",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "InfoClass",
+          "datatype": "uint",
+          "map": null
+        }
+      ]
+    }
+  ],
+  "tasks": {
+    "10": "NameCreate",
+    "11": "NameDelete",
+    "12": "Create",
+    "13": "Cleanup",
+    "14": "Close",
+    "15": "Read",
+    "16": "Write",
+    "17": "SetInformation",
+    "18": "SetDelete",
+    "19": "Rename",
+    "20": "DirEnum",
+    "21": "Flush",
+    "22": "QueryInformation",
+    "23": "FSCTL",
+    "24": "OperationEnd",
+    "25": "DirNotify",
+    "26": "DeletePath",
+    "27": "RenamePath",
+    "28": "SetLinkPath",
+    "30": "CreateNewFile",
+    "31": "SetSecurity",
+    "32": "QuerySecurity",
+    "33": "SetEA",
+    "34": "QueryEA"
+  },
+  "opcodes": {},
+  "keywords": {
+    "16": "KERNEL_FILE_KEYWORD_FILENAME",
+    "32": "KERNEL_FILE_KEYWORD_FILEIO",
+    "64": "KERNEL_FILE_KEYWORD_OP_END",
+    "128": "KERNEL_FILE_KEYWORD_CREATE",
+    "256": "KERNEL_FILE_KEYWORD_READ",
+    "512": "KERNEL_FILE_KEYWORD_WRITE",
+    "1024": "KERNEL_FILE_KEYWORD_DELETE_PATH",
+    "2048": "KERNEL_FILE_KEYWORD_RENAME_SETLINK_PATH",
+    "4096": "KERNEL_FILE_KEYWORD_CREATE_NEW_FILE",
+    "9223372036854775808": "Microsoft_Windows_Kernel_File_Analytic"
+  },
+  "maps": [],
+  "structs": []
+}

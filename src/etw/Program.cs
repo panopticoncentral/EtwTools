@@ -500,6 +500,7 @@ string GetDatatype(EtwPropertyInfo p, Dictionary<string, Struct> providerStructs
         EtwInputType.UnicodeChar => "char",
         EtwInputType.Guid => "guid",
         EtwInputType.Pointer => "pointer",
+        EtwInputType.SizeT => "pointer",
         _ => "unknown"
     };
 
@@ -550,7 +551,7 @@ string GetDatatype(EtwPropertyInfo p, Dictionary<string, Struct> providerStructs
     return $"{datatype}{(count != null ? $"[{count}]" : string.Empty)}";
 }
 
-void AddProvider(string directory, Guid id, string name, IEnumerable<EtwProviderFieldInfo> levels, IEnumerable<EtwProviderFieldInfo> channels, IEnumerable<EtwProviderFieldInfo> tasks, IEnumerable<EtwProviderFieldInfo> keywords, IEnumerable<EtwProviderFieldInfo> opcodes, IEnumerable<EtwEventInfo> events, IEnumerable<EtwPropertyMapInfo> maps)
+void AddProvider(string directory, Guid id, string name, bool isPublished, IEnumerable<EtwProviderFieldInfo> levels, IEnumerable<EtwProviderFieldInfo> channels, IEnumerable<EtwProviderFieldInfo> tasks, IEnumerable<EtwProviderFieldInfo> keywords, IEnumerable<EtwProviderFieldInfo> opcodes, IEnumerable<EtwEventInfo> events, IEnumerable<EtwPropertyMapInfo> maps)
 {
     var filename = Path.Combine(directory, $"{id}.provider.json");
     var structId = 0;
@@ -620,7 +621,8 @@ void AddProvider(string directory, Guid id, string name, IEnumerable<EtwProvider
         //    }
         //}
 
-        var eventName = e.Name ?? $"{e.TaskName ?? string.Empty}{e.OpcodeName ?? string.Empty}";
+        var opcodeName = e.OpcodeName == null ? null : (e.OpcodeName.StartsWith("win:", StringComparison.Ordinal) ? e.OpcodeName[4..] : e.OpcodeName);
+        var eventName = (!isPublished && e.Name != null) ? e.Name : $"{e.TaskName ?? string.Empty}{(e.TaskName != null && e.TaskName.EndsWith(opcodeName, StringComparison.Ordinal) ? string.Empty : opcodeName)}";
 
         providerEvents[e.Descriptor] = new Event
         {
@@ -766,7 +768,7 @@ void GetPublishedProvider(string provider, string add)
 
     if (add != null)
     {
-        AddProvider(add, etwProvider.Id, name, etwProvider.GetLevelInfos(), etwProvider.GetChannelInfos(), tasks, etwProvider.GetKeywordInfos(), opcodes, eventInfos, maps);
+        AddProvider(add, etwProvider.Id, name, true, etwProvider.GetLevelInfos(), etwProvider.GetChannelInfos(), tasks, etwProvider.GetKeywordInfos(), opcodes, eventInfos, maps);
     }
     else
     {
@@ -866,7 +868,7 @@ void GetManifestProvider(string manifest, string add)
 
     if (add != null)
     {
-        AddProvider(add, id, etwManifest.Name, null, null, etwManifest.Tasks, etwManifest.Keywords, opcodes, events, maps);
+        AddProvider(add, id, etwManifest.Name, false, null, null, etwManifest.Tasks, etwManifest.Keywords, opcodes, events, maps);
     }
     else
     {
@@ -1431,6 +1433,8 @@ static string CreateEventPropertyOffsetFields(int indent, bool isStruct, IEnumer
     return builder.ToString();
 }
 
+static string EventName(Event e) => $"{e.Name}Event{(e.Descriptor.Version > 0 ? $"V{e.Descriptor.Version}" : string.Empty)}";
+
 static string CreateProviderEvents(Provider provider, Dictionary<string, Struct> structs)
 {
     if (provider.Events == null || !provider.Events.Any())
@@ -1449,7 +1453,7 @@ static string CreateProviderEvents(Provider provider, Dictionary<string, Struct>
         /// <summary>
         /// An event wrapper for a {e.DisplayName} event.
         /// </summary>
-        public readonly ref struct {e.Name}Event
+        public readonly ref struct {EventName(e)}
         {{
             private readonly EtwEvent _etwEvent;
 
@@ -1510,10 +1514,10 @@ static string CreateProviderEvents(Provider provider, Dictionary<string, Struct>
             public {e.Name}Data Data => new(_etwEvent);")}
 
             /// <summary>
-            /// Creates a new {e.Name}Event.
+            /// Creates a new {EventName(e)}.
             /// </summary>
             /// <param name=""etwEvent"">The event.</param>
-            public {e.Name}Event(EtwEvent etwEvent)
+            public {EventName(e)}(EtwEvent etwEvent)
             {{
                 _etwEvent = etwEvent;
             }}{(e.Fields == null || !e.Fields.Any() ? string.Empty : $@"
@@ -1592,7 +1596,7 @@ namespace EtwTools
                 (
                     {provider.Name}Provider.Name, new Dictionary<EtwEventDescriptor, string>
                     {{{provider.Events.Aggregate(new StringBuilder(), (s, e) => s.Append($@"
-                        {{ {provider.Name}Provider.{e.Name}Event.Descriptor, {provider.Name}Provider.{e.Name}Event.Name }},"))}
+                        {{ {provider.Name}Provider.{EventName(e)}.Descriptor, {provider.Name}Provider.{EventName(e)}.Name }},"))}
                     }}
                 )
             }},");
@@ -1661,10 +1665,11 @@ void GetTraceInfo(string trace, bool json)
         foreach (var kvp in eventCount.OrderByDescending(kvp => kvp.Value))
         {
             var provider = new EtwProvider(kvp.Key.Item1);
+            var eventName = EtwEvent.GetKnownEventName(kvp.Key.Item1, kvp.Key.Item2);
 
             _ = table.AddRow(
                 provider.Name ?? provider.Id.ToString(),
-                EtwEvent.GetKnownEventName(kvp.Key.Item1, kvp.Key.Item2) ?? kvp.Key.Item2.ToString(),
+                eventName != null ? $"{eventName} (v{kvp.Key.Item2.Version})" : kvp.Key.Item2.ToString(),
                 kvp.Value.Count.ToString(CultureInfo.InvariantCulture),
                 kvp.Value.Size.ToString(CultureInfo.InvariantCulture));
         }
@@ -1727,7 +1732,7 @@ void SaveTraceLoggingProviders(string trace, string add)
     {
         if (add != null)
         {
-            AddProvider(add, provider, providers[provider], null, null, null, null, null, providerEvents.Values, null);
+            AddProvider(add, provider, providers[provider], false, null, null, null, null, null, providerEvents.Values, null);
         }
         else
         {

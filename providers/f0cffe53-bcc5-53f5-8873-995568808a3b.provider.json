@@ -88,7 +88,7 @@
         },
         {
           "name": "ErrorCode",
-          "datatype": "int",
+          "datatype": "uint",
           "map": "JsonRpcErrorCode"
         }
       ]
@@ -198,7 +198,7 @@
         },
         {
           "name": "ErrorCode",
-          "datatype": "int",
+          "datatype": "uint",
           "map": "JsonRpcErrorCode"
         }
       ]

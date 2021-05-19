@@ -300,7 +300,7 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the FunctionId field.
                 /// </summary>
-                public FunctionId FunctionId => (FunctionId)BitConverter.ToInt32(_etwEvent.Data[Offset_FunctionId..]);
+                public FunctionId FunctionId => (FunctionId)BitConverter.ToUInt32(_etwEvent.Data[Offset_FunctionId..]);
 
                 /// <summary>
                 /// Creates a new LogData.
@@ -444,7 +444,7 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the FunctionId field.
                 /// </summary>
-                public FunctionId FunctionId => (FunctionId)BitConverter.ToInt32(_etwEvent.Data[Offset_FunctionId..]);
+                public FunctionId FunctionId => (FunctionId)BitConverter.ToUInt32(_etwEvent.Data[Offset_FunctionId..]);
 
                 /// <summary>
                 /// Retrieves the BlockId field.
@@ -589,7 +589,7 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the FunctionId field.
                 /// </summary>
-                public FunctionId FunctionId => (FunctionId)BitConverter.ToInt32(_etwEvent.Data[Offset_FunctionId..]);
+                public FunctionId FunctionId => (FunctionId)BitConverter.ToUInt32(_etwEvent.Data[Offset_FunctionId..]);
 
                 /// <summary>
                 /// Retrieves the Tick field.
@@ -849,7 +849,7 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the FunctionId field.
                 /// </summary>
-                public FunctionId FunctionId => (FunctionId)BitConverter.ToInt32(_etwEvent.Data[Offset_FunctionId..]);
+                public FunctionId FunctionId => (FunctionId)BitConverter.ToUInt32(_etwEvent.Data[Offset_FunctionId..]);
 
                 /// <summary>
                 /// Retrieves the Tick field.

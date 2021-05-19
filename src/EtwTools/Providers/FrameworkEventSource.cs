@@ -3968,7 +3968,7 @@ namespace EtwTools
         /// <summary>
         /// An event wrapper for a GetResponseStart event.
         /// </summary>
-        public readonly ref struct GetResponseStartEvent
+        public readonly ref struct GetResponseStartEventV1
         {
             private readonly EtwEvent _etwEvent;
 
@@ -4027,10 +4027,10 @@ namespace EtwTools
             public GetResponseStartData Data => new(_etwEvent);
 
             /// <summary>
-            /// Creates a new GetResponseStartEvent.
+            /// Creates a new GetResponseStartEventV1.
             /// </summary>
             /// <param name="etwEvent">The event.</param>
-            public GetResponseStartEvent(EtwEvent etwEvent)
+            public GetResponseStartEventV1(EtwEvent etwEvent)
             {
                 _etwEvent = etwEvent;
             }
@@ -4138,7 +4138,7 @@ namespace EtwTools
         /// <summary>
         /// An event wrapper for a GetResponseStop event.
         /// </summary>
-        public readonly ref struct GetResponseStopEvent
+        public readonly ref struct GetResponseStopEventV1
         {
             private readonly EtwEvent _etwEvent;
 
@@ -4197,10 +4197,10 @@ namespace EtwTools
             public GetResponseStopData Data => new(_etwEvent);
 
             /// <summary>
-            /// Creates a new GetResponseStopEvent.
+            /// Creates a new GetResponseStopEventV1.
             /// </summary>
             /// <param name="etwEvent">The event.</param>
-            public GetResponseStopEvent(EtwEvent etwEvent)
+            public GetResponseStopEventV1(EtwEvent etwEvent)
             {
                 _etwEvent = etwEvent;
             }
@@ -4308,7 +4308,7 @@ namespace EtwTools
         /// <summary>
         /// An event wrapper for a GetRequestStreamStart event.
         /// </summary>
-        public readonly ref struct GetRequestStreamStartEvent
+        public readonly ref struct GetRequestStreamStartEventV1
         {
             private readonly EtwEvent _etwEvent;
 
@@ -4367,10 +4367,10 @@ namespace EtwTools
             public GetRequestStreamStartData Data => new(_etwEvent);
 
             /// <summary>
-            /// Creates a new GetRequestStreamStartEvent.
+            /// Creates a new GetRequestStreamStartEventV1.
             /// </summary>
             /// <param name="etwEvent">The event.</param>
-            public GetRequestStreamStartEvent(EtwEvent etwEvent)
+            public GetRequestStreamStartEventV1(EtwEvent etwEvent)
             {
                 _etwEvent = etwEvent;
             }
@@ -4478,7 +4478,7 @@ namespace EtwTools
         /// <summary>
         /// An event wrapper for a GetRequestStreamStop event.
         /// </summary>
-        public readonly ref struct GetRequestStreamStopEvent
+        public readonly ref struct GetRequestStreamStopEventV1
         {
             private readonly EtwEvent _etwEvent;
 
@@ -4537,10 +4537,10 @@ namespace EtwTools
             public GetRequestStreamStopData Data => new(_etwEvent);
 
             /// <summary>
-            /// Creates a new GetRequestStreamStopEvent.
+            /// Creates a new GetRequestStreamStopEventV1.
             /// </summary>
             /// <param name="etwEvent">The event.</param>
-            public GetRequestStreamStopEvent(EtwEvent etwEvent)
+            public GetRequestStreamStopEventV1(EtwEvent etwEvent)
             {
                 _etwEvent = etwEvent;
             }

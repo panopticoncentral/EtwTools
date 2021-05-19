@@ -841,7 +841,7 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the Kind field.
                 /// </summary>
-                public LockKind Kind => (LockKind)BitConverter.ToInt32(_etwEvent.Data[Offset_Kind..]);
+                public LockKind Kind => (LockKind)BitConverter.ToUInt32(_etwEvent.Data[Offset_Kind..]);
 
                 /// <summary>
                 /// Retrieves the IssuedUpgradeableReadCount field.
@@ -1025,7 +1025,7 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the Kind field.
                 /// </summary>
-                public LockKind Kind => (LockKind)BitConverter.ToInt32(_etwEvent.Data[Offset_Kind..]);
+                public LockKind Kind => (LockKind)BitConverter.ToUInt32(_etwEvent.Data[Offset_Kind..]);
 
                 /// <summary>
                 /// Retrieves the IssuedWriteCount field.
@@ -1173,7 +1173,7 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the Kind field.
                 /// </summary>
-                public LockKind Kind => (LockKind)BitConverter.ToInt32(_etwEvent.Data[Offset_Kind..]);
+                public LockKind Kind => (LockKind)BitConverter.ToUInt32(_etwEvent.Data[Offset_Kind..]);
 
                 /// <summary>
                 /// Creates a new WaitReaderWriterLockStopData.

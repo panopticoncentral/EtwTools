@@ -53,7 +53,7 @@
         },
         {
           "name": "OperationType",
-          "datatype": "int",
+          "datatype": "uint",
           "map": "ForkJoinOperationType"
         },
         {
@@ -133,7 +133,7 @@
         },
         {
           "name": "OperationType",
-          "datatype": "int",
+          "datatype": "uint",
           "map": "ForkJoinOperationType"
         },
         {
@@ -373,7 +373,7 @@
         },
         {
           "name": "Behavior",
-          "datatype": "int",
+          "datatype": "uint",
           "map": "TaskWaitBehavior"
         },
         {
@@ -538,7 +538,7 @@
         },
         {
           "name": "Relation",
-          "datatype": "int",
+          "datatype": "uint",
           "map": "CausalityRelation"
         }
       ]
@@ -563,7 +563,7 @@
         },
         {
           "name": "Status",
-          "datatype": "int",
+          "datatype": "uint",
           "map": "AsyncCausalityStatus"
         }
       ]
@@ -588,7 +588,7 @@
         },
         {
           "name": "Work",
-          "datatype": "int",
+          "datatype": "uint",
           "map": "CausalitySynchronousWork"
         }
       ]
@@ -608,7 +608,7 @@
       "fields": [
         {
           "name": "Work",
-          "datatype": "int",
+          "datatype": "uint",
           "map": "CausalitySynchronousWork"
         }
       ]

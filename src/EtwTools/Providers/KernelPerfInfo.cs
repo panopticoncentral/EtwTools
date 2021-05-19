@@ -289,7 +289,717 @@ namespace EtwTools
         /// <summary>
         /// An event wrapper for a SampleProf event.
         /// </summary>
-        public readonly ref struct SampleProfEvent
+        public readonly ref struct SampleProfEventV1
+        {
+            private readonly EtwEvent _etwEvent;
+
+            /// <summary>
+            /// Event name.
+            /// </summary>
+            public const string Name = "SampleProf";
+
+            /// <summary>
+            /// The event provider.
+            /// </summary>
+            public static readonly Guid Provider = Id;
+
+            /// <summary>
+            /// Event descriptor.
+            /// </summary>
+            public static EtwEventDescriptor Descriptor { get; } = new EtwEventDescriptor
+            {
+                Id = 0,
+                Version = 1,
+                Channel = 0,
+                Level = EtwTraceLevel.None,
+                Opcode = (EtwEventOpcode)Opcodes.SampleProf,
+                Task = 0,
+                Keyword = 0
+            };
+
+            /// <summary>
+            /// The process the event was recorded in.
+            /// </summary>
+            public uint ProcessId => _etwEvent.ProcessId;
+
+            /// <summary>
+            /// The thread the event was recorded on.
+            /// </summary>
+            public uint ThreadId => _etwEvent.ThreadId;
+
+            /// <summary>
+            /// The timestamp of the event.
+            /// </summary>
+            public long Timestamp => _etwEvent.Timestamp;
+
+            /// <summary>
+            /// The processor number the event was recorded on.
+            /// </summary>
+            public byte ProcessorNumber => _etwEvent.ProcessorNumber;
+
+            /// <summary>
+            /// Timing information for the event.
+            /// </summary>
+            public (ulong? KernelTime, ulong? UserTime, ulong? ProcessorTime) Time => _etwEvent.Time;
+
+            /// <summary>
+            /// Data for the event.
+            /// </summary>
+            public SampleProfData Data => new(_etwEvent);
+
+            /// <summary>
+            /// Creates a new SampleProfEventV1.
+            /// </summary>
+            /// <param name="etwEvent">The event.</param>
+            public SampleProfEventV1(EtwEvent etwEvent)
+            {
+                _etwEvent = etwEvent;
+            }
+
+            /// <summary>
+            /// A data wrapper for a SampleProf event.
+            /// </summary>
+            public ref struct SampleProfData
+            {
+                private readonly EtwEvent _etwEvent;
+
+                private int _offset_InstructionPointer;
+                private int _offset_ThreadId;
+                private int _offset_Count;
+
+                private int Offset_InstructionPointer
+                {
+                    get
+                    {
+                        if (_offset_InstructionPointer == -1)
+                        {
+                            _offset_InstructionPointer = 0;
+                        }
+
+                        return _offset_InstructionPointer;
+                    }
+                }
+
+                private int Offset_ThreadId
+                {
+                    get
+                    {
+                        if (_offset_ThreadId == -1)
+                        {
+                            _offset_ThreadId = Offset_InstructionPointer + _etwEvent.AddressSize;
+                        }
+
+                        return _offset_ThreadId;
+                    }
+                }
+
+                private int Offset_Count
+                {
+                    get
+                    {
+                        if (_offset_Count == -1)
+                        {
+                            _offset_Count = Offset_ThreadId + 4;
+                        }
+
+                        return _offset_Count;
+                    }
+                }
+
+                /// <summary>
+                /// Retrieves the InstructionPointer field.
+                /// </summary>
+                public ulong InstructionPointer => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_InstructionPointer..]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_InstructionPointer..]);
+
+                /// <summary>
+                /// Retrieves the ThreadId field.
+                /// </summary>
+                public uint ThreadId => BitConverter.ToUInt32(_etwEvent.Data[Offset_ThreadId..]);
+
+                /// <summary>
+                /// Retrieves the Count field.
+                /// </summary>
+                public ushort Count => BitConverter.ToUInt16(_etwEvent.Data[Offset_Count..]);
+
+                /// <summary>
+                /// Creates a new SampleProfData.
+                /// </summary>
+                /// <param name="etwEvent">The event.</param>
+                public SampleProfData(EtwEvent etwEvent)
+                {
+                    _etwEvent = etwEvent;
+                    _offset_InstructionPointer = -1;
+                    _offset_ThreadId = -1;
+                    _offset_Count = -1;
+                }
+            }
+
+        }
+
+        /// <summary>
+        /// An event wrapper for a DPC event.
+        /// </summary>
+        public readonly ref struct DPCEventV1
+        {
+            private readonly EtwEvent _etwEvent;
+
+            /// <summary>
+            /// Event name.
+            /// </summary>
+            public const string Name = "DPC";
+
+            /// <summary>
+            /// The event provider.
+            /// </summary>
+            public static readonly Guid Provider = Id;
+
+            /// <summary>
+            /// Event descriptor.
+            /// </summary>
+            public static EtwEventDescriptor Descriptor { get; } = new EtwEventDescriptor
+            {
+                Id = 0,
+                Version = 1,
+                Channel = 0,
+                Level = EtwTraceLevel.None,
+                Opcode = (EtwEventOpcode)Opcodes.DPC,
+                Task = 0,
+                Keyword = 0
+            };
+
+            /// <summary>
+            /// The process the event was recorded in.
+            /// </summary>
+            public uint ProcessId => _etwEvent.ProcessId;
+
+            /// <summary>
+            /// The thread the event was recorded on.
+            /// </summary>
+            public uint ThreadId => _etwEvent.ThreadId;
+
+            /// <summary>
+            /// The timestamp of the event.
+            /// </summary>
+            public long Timestamp => _etwEvent.Timestamp;
+
+            /// <summary>
+            /// The processor number the event was recorded on.
+            /// </summary>
+            public byte ProcessorNumber => _etwEvent.ProcessorNumber;
+
+            /// <summary>
+            /// Timing information for the event.
+            /// </summary>
+            public (ulong? KernelTime, ulong? UserTime, ulong? ProcessorTime) Time => _etwEvent.Time;
+
+            /// <summary>
+            /// Data for the event.
+            /// </summary>
+            public DPCData Data => new(_etwEvent);
+
+            /// <summary>
+            /// Creates a new DPCEventV1.
+            /// </summary>
+            /// <param name="etwEvent">The event.</param>
+            public DPCEventV1(EtwEvent etwEvent)
+            {
+                _etwEvent = etwEvent;
+            }
+
+            /// <summary>
+            /// A data wrapper for a DPC event.
+            /// </summary>
+            public ref struct DPCData
+            {
+                private readonly EtwEvent _etwEvent;
+
+                private int _offset_InitialTime;
+                private int _offset_Routine;
+
+                private int Offset_InitialTime
+                {
+                    get
+                    {
+                        if (_offset_InitialTime == -1)
+                        {
+                            _offset_InitialTime = 0;
+                        }
+
+                        return _offset_InitialTime;
+                    }
+                }
+
+                private int Offset_Routine
+                {
+                    get
+                    {
+                        if (_offset_Routine == -1)
+                        {
+                            _offset_Routine = Offset_InitialTime + 8;
+                        }
+
+                        return _offset_Routine;
+                    }
+                }
+
+                /// <summary>
+                /// Retrieves the InitialTime field.
+                /// </summary>
+                public ulong InitialTime => BitConverter.ToUInt64(_etwEvent.Data[Offset_InitialTime..]);
+
+                /// <summary>
+                /// Retrieves the Routine field.
+                /// </summary>
+                public ulong Routine => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_Routine..]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_Routine..]);
+
+                /// <summary>
+                /// Creates a new DPCData.
+                /// </summary>
+                /// <param name="etwEvent">The event.</param>
+                public DPCData(EtwEvent etwEvent)
+                {
+                    _etwEvent = etwEvent;
+                    _offset_InitialTime = -1;
+                    _offset_Routine = -1;
+                }
+            }
+
+        }
+
+        /// <summary>
+        /// An event wrapper for a TimerDPC event.
+        /// </summary>
+        public readonly ref struct TimerDPCEventV1
+        {
+            private readonly EtwEvent _etwEvent;
+
+            /// <summary>
+            /// Event name.
+            /// </summary>
+            public const string Name = "TimerDPC";
+
+            /// <summary>
+            /// The event provider.
+            /// </summary>
+            public static readonly Guid Provider = Id;
+
+            /// <summary>
+            /// Event descriptor.
+            /// </summary>
+            public static EtwEventDescriptor Descriptor { get; } = new EtwEventDescriptor
+            {
+                Id = 0,
+                Version = 1,
+                Channel = 0,
+                Level = EtwTraceLevel.None,
+                Opcode = (EtwEventOpcode)Opcodes.TimerDPC,
+                Task = 0,
+                Keyword = 0
+            };
+
+            /// <summary>
+            /// The process the event was recorded in.
+            /// </summary>
+            public uint ProcessId => _etwEvent.ProcessId;
+
+            /// <summary>
+            /// The thread the event was recorded on.
+            /// </summary>
+            public uint ThreadId => _etwEvent.ThreadId;
+
+            /// <summary>
+            /// The timestamp of the event.
+            /// </summary>
+            public long Timestamp => _etwEvent.Timestamp;
+
+            /// <summary>
+            /// The processor number the event was recorded on.
+            /// </summary>
+            public byte ProcessorNumber => _etwEvent.ProcessorNumber;
+
+            /// <summary>
+            /// Timing information for the event.
+            /// </summary>
+            public (ulong? KernelTime, ulong? UserTime, ulong? ProcessorTime) Time => _etwEvent.Time;
+
+            /// <summary>
+            /// Data for the event.
+            /// </summary>
+            public TimerDPCData Data => new(_etwEvent);
+
+            /// <summary>
+            /// Creates a new TimerDPCEventV1.
+            /// </summary>
+            /// <param name="etwEvent">The event.</param>
+            public TimerDPCEventV1(EtwEvent etwEvent)
+            {
+                _etwEvent = etwEvent;
+            }
+
+            /// <summary>
+            /// A data wrapper for a TimerDPC event.
+            /// </summary>
+            public ref struct TimerDPCData
+            {
+                private readonly EtwEvent _etwEvent;
+
+                private int _offset_InitialTime;
+                private int _offset_Routine;
+
+                private int Offset_InitialTime
+                {
+                    get
+                    {
+                        if (_offset_InitialTime == -1)
+                        {
+                            _offset_InitialTime = 0;
+                        }
+
+                        return _offset_InitialTime;
+                    }
+                }
+
+                private int Offset_Routine
+                {
+                    get
+                    {
+                        if (_offset_Routine == -1)
+                        {
+                            _offset_Routine = Offset_InitialTime + 8;
+                        }
+
+                        return _offset_Routine;
+                    }
+                }
+
+                /// <summary>
+                /// Retrieves the InitialTime field.
+                /// </summary>
+                public ulong InitialTime => BitConverter.ToUInt64(_etwEvent.Data[Offset_InitialTime..]);
+
+                /// <summary>
+                /// Retrieves the Routine field.
+                /// </summary>
+                public ulong Routine => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_Routine..]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_Routine..]);
+
+                /// <summary>
+                /// Creates a new TimerDPCData.
+                /// </summary>
+                /// <param name="etwEvent">The event.</param>
+                public TimerDPCData(EtwEvent etwEvent)
+                {
+                    _etwEvent = etwEvent;
+                    _offset_InitialTime = -1;
+                    _offset_Routine = -1;
+                }
+            }
+
+        }
+
+        /// <summary>
+        /// An event wrapper for a ISR event.
+        /// </summary>
+        public readonly ref struct ISREventV1
+        {
+            private readonly EtwEvent _etwEvent;
+
+            /// <summary>
+            /// Event name.
+            /// </summary>
+            public const string Name = "ISR";
+
+            /// <summary>
+            /// The event provider.
+            /// </summary>
+            public static readonly Guid Provider = Id;
+
+            /// <summary>
+            /// Event descriptor.
+            /// </summary>
+            public static EtwEventDescriptor Descriptor { get; } = new EtwEventDescriptor
+            {
+                Id = 0,
+                Version = 1,
+                Channel = 0,
+                Level = EtwTraceLevel.None,
+                Opcode = (EtwEventOpcode)Opcodes.ISR,
+                Task = 0,
+                Keyword = 0
+            };
+
+            /// <summary>
+            /// The process the event was recorded in.
+            /// </summary>
+            public uint ProcessId => _etwEvent.ProcessId;
+
+            /// <summary>
+            /// The thread the event was recorded on.
+            /// </summary>
+            public uint ThreadId => _etwEvent.ThreadId;
+
+            /// <summary>
+            /// The timestamp of the event.
+            /// </summary>
+            public long Timestamp => _etwEvent.Timestamp;
+
+            /// <summary>
+            /// The processor number the event was recorded on.
+            /// </summary>
+            public byte ProcessorNumber => _etwEvent.ProcessorNumber;
+
+            /// <summary>
+            /// Timing information for the event.
+            /// </summary>
+            public (ulong? KernelTime, ulong? UserTime, ulong? ProcessorTime) Time => _etwEvent.Time;
+
+            /// <summary>
+            /// Data for the event.
+            /// </summary>
+            public ISRData Data => new(_etwEvent);
+
+            /// <summary>
+            /// Creates a new ISREventV1.
+            /// </summary>
+            /// <param name="etwEvent">The event.</param>
+            public ISREventV1(EtwEvent etwEvent)
+            {
+                _etwEvent = etwEvent;
+            }
+
+            /// <summary>
+            /// A data wrapper for a ISR event.
+            /// </summary>
+            public ref struct ISRData
+            {
+                private readonly EtwEvent _etwEvent;
+
+                private int _offset_InitialTime;
+                private int _offset_Routine;
+                private int _offset_ReturnValue;
+
+                private int Offset_InitialTime
+                {
+                    get
+                    {
+                        if (_offset_InitialTime == -1)
+                        {
+                            _offset_InitialTime = 0;
+                        }
+
+                        return _offset_InitialTime;
+                    }
+                }
+
+                private int Offset_Routine
+                {
+                    get
+                    {
+                        if (_offset_Routine == -1)
+                        {
+                            _offset_Routine = Offset_InitialTime + 8;
+                        }
+
+                        return _offset_Routine;
+                    }
+                }
+
+                private int Offset_ReturnValue
+                {
+                    get
+                    {
+                        if (_offset_ReturnValue == -1)
+                        {
+                            _offset_ReturnValue = Offset_Routine + _etwEvent.AddressSize;
+                        }
+
+                        return _offset_ReturnValue;
+                    }
+                }
+
+                /// <summary>
+                /// Retrieves the InitialTime field.
+                /// </summary>
+                public ulong InitialTime => BitConverter.ToUInt64(_etwEvent.Data[Offset_InitialTime..]);
+
+                /// <summary>
+                /// Retrieves the Routine field.
+                /// </summary>
+                public ulong Routine => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_Routine..]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_Routine..]);
+
+                /// <summary>
+                /// Retrieves the ReturnValue field.
+                /// </summary>
+                public uint ReturnValue => BitConverter.ToUInt32(_etwEvent.Data[Offset_ReturnValue..]);
+
+                /// <summary>
+                /// Creates a new ISRData.
+                /// </summary>
+                /// <param name="etwEvent">The event.</param>
+                public ISRData(EtwEvent etwEvent)
+                {
+                    _etwEvent = etwEvent;
+                    _offset_InitialTime = -1;
+                    _offset_Routine = -1;
+                    _offset_ReturnValue = -1;
+                }
+            }
+
+        }
+
+        /// <summary>
+        /// An event wrapper for a ISR-PASS event.
+        /// </summary>
+        public readonly ref struct ISR_PASSEventV1
+        {
+            private readonly EtwEvent _etwEvent;
+
+            /// <summary>
+            /// Event name.
+            /// </summary>
+            public const string Name = "ISR-PASS";
+
+            /// <summary>
+            /// The event provider.
+            /// </summary>
+            public static readonly Guid Provider = Id;
+
+            /// <summary>
+            /// Event descriptor.
+            /// </summary>
+            public static EtwEventDescriptor Descriptor { get; } = new EtwEventDescriptor
+            {
+                Id = 0,
+                Version = 1,
+                Channel = 0,
+                Level = EtwTraceLevel.None,
+                Opcode = (EtwEventOpcode)Opcodes.ISR_PASS,
+                Task = 0,
+                Keyword = 0
+            };
+
+            /// <summary>
+            /// The process the event was recorded in.
+            /// </summary>
+            public uint ProcessId => _etwEvent.ProcessId;
+
+            /// <summary>
+            /// The thread the event was recorded on.
+            /// </summary>
+            public uint ThreadId => _etwEvent.ThreadId;
+
+            /// <summary>
+            /// The timestamp of the event.
+            /// </summary>
+            public long Timestamp => _etwEvent.Timestamp;
+
+            /// <summary>
+            /// The processor number the event was recorded on.
+            /// </summary>
+            public byte ProcessorNumber => _etwEvent.ProcessorNumber;
+
+            /// <summary>
+            /// Timing information for the event.
+            /// </summary>
+            public (ulong? KernelTime, ulong? UserTime, ulong? ProcessorTime) Time => _etwEvent.Time;
+
+            /// <summary>
+            /// Data for the event.
+            /// </summary>
+            public ISR_PASSData Data => new(_etwEvent);
+
+            /// <summary>
+            /// Creates a new ISR_PASSEventV1.
+            /// </summary>
+            /// <param name="etwEvent">The event.</param>
+            public ISR_PASSEventV1(EtwEvent etwEvent)
+            {
+                _etwEvent = etwEvent;
+            }
+
+            /// <summary>
+            /// A data wrapper for a ISR_PASS event.
+            /// </summary>
+            public ref struct ISR_PASSData
+            {
+                private readonly EtwEvent _etwEvent;
+
+                private int _offset_InitialTime;
+                private int _offset_Routine;
+                private int _offset_ReturnValue;
+
+                private int Offset_InitialTime
+                {
+                    get
+                    {
+                        if (_offset_InitialTime == -1)
+                        {
+                            _offset_InitialTime = 0;
+                        }
+
+                        return _offset_InitialTime;
+                    }
+                }
+
+                private int Offset_Routine
+                {
+                    get
+                    {
+                        if (_offset_Routine == -1)
+                        {
+                            _offset_Routine = Offset_InitialTime + 8;
+                        }
+
+                        return _offset_Routine;
+                    }
+                }
+
+                private int Offset_ReturnValue
+                {
+                    get
+                    {
+                        if (_offset_ReturnValue == -1)
+                        {
+                            _offset_ReturnValue = Offset_Routine + _etwEvent.AddressSize;
+                        }
+
+                        return _offset_ReturnValue;
+                    }
+                }
+
+                /// <summary>
+                /// Retrieves the InitialTime field.
+                /// </summary>
+                public ulong InitialTime => BitConverter.ToUInt64(_etwEvent.Data[Offset_InitialTime..]);
+
+                /// <summary>
+                /// Retrieves the Routine field.
+                /// </summary>
+                public ulong Routine => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_Routine..]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_Routine..]);
+
+                /// <summary>
+                /// Retrieves the ReturnValue field.
+                /// </summary>
+                public uint ReturnValue => BitConverter.ToUInt32(_etwEvent.Data[Offset_ReturnValue..]);
+
+                /// <summary>
+                /// Creates a new ISR_PASSData.
+                /// </summary>
+                /// <param name="etwEvent">The event.</param>
+                public ISR_PASSData(EtwEvent etwEvent)
+                {
+                    _etwEvent = etwEvent;
+                    _offset_InitialTime = -1;
+                    _offset_Routine = -1;
+                    _offset_ReturnValue = -1;
+                }
+            }
+
+        }
+
+        /// <summary>
+        /// An event wrapper for a SampleProf event.
+        /// </summary>
+        public readonly ref struct SampleProfEventV2
         {
             private readonly EtwEvent _etwEvent;
 
@@ -348,10 +1058,10 @@ namespace EtwTools
             public SampleProfData Data => new(_etwEvent);
 
             /// <summary>
-            /// Creates a new SampleProfEvent.
+            /// Creates a new SampleProfEventV2.
             /// </summary>
             /// <param name="etwEvent">The event.</param>
-            public SampleProfEvent(EtwEvent etwEvent)
+            public SampleProfEventV2(EtwEvent etwEvent)
             {
                 _etwEvent = etwEvent;
             }
@@ -459,7 +1169,7 @@ namespace EtwTools
         /// <summary>
         /// An event wrapper for a PmcCounterProf event.
         /// </summary>
-        public readonly ref struct PmcCounterProfEvent
+        public readonly ref struct PmcCounterProfEventV2
         {
             private readonly EtwEvent _etwEvent;
 
@@ -518,10 +1228,10 @@ namespace EtwTools
             public PmcCounterProfData Data => new(_etwEvent);
 
             /// <summary>
-            /// Creates a new PmcCounterProfEvent.
+            /// Creates a new PmcCounterProfEventV2.
             /// </summary>
             /// <param name="etwEvent">The event.</param>
-            public PmcCounterProfEvent(EtwEvent etwEvent)
+            public PmcCounterProfEventV2(EtwEvent etwEvent)
             {
                 _etwEvent = etwEvent;
             }
@@ -629,7 +1339,7 @@ namespace EtwTools
         /// <summary>
         /// An event wrapper for a SetInterval event.
         /// </summary>
-        public readonly ref struct SetIntervalEvent
+        public readonly ref struct SetIntervalEventV2
         {
             private readonly EtwEvent _etwEvent;
 
@@ -688,10 +1398,10 @@ namespace EtwTools
             public SetIntervalData Data => new(_etwEvent);
 
             /// <summary>
-            /// Creates a new SetIntervalEvent.
+            /// Creates a new SetIntervalEventV2.
             /// </summary>
             /// <param name="etwEvent">The event.</param>
-            public SetIntervalEvent(EtwEvent etwEvent)
+            public SetIntervalEventV2(EtwEvent etwEvent)
             {
                 _etwEvent = etwEvent;
             }
@@ -777,9 +1487,309 @@ namespace EtwTools
         }
 
         /// <summary>
+        /// An event wrapper for a SampledProfileIntervalCollectionStart event.
+        /// </summary>
+        public readonly ref struct SampledProfileIntervalCollectionStartEventV2
+        {
+            private readonly EtwEvent _etwEvent;
+
+            /// <summary>
+            /// Event name.
+            /// </summary>
+            public const string Name = "SampledProfileIntervalCollectionStart";
+
+            /// <summary>
+            /// The event provider.
+            /// </summary>
+            public static readonly Guid Provider = Id;
+
+            /// <summary>
+            /// Event descriptor.
+            /// </summary>
+            public static EtwEventDescriptor Descriptor { get; } = new EtwEventDescriptor
+            {
+                Id = 0,
+                Version = 2,
+                Channel = 0,
+                Level = EtwTraceLevel.None,
+                Opcode = (EtwEventOpcode)Opcodes.SampledProfileIntervalCollectionStart,
+                Task = 0,
+                Keyword = 0
+            };
+
+            /// <summary>
+            /// The process the event was recorded in.
+            /// </summary>
+            public uint ProcessId => _etwEvent.ProcessId;
+
+            /// <summary>
+            /// The thread the event was recorded on.
+            /// </summary>
+            public uint ThreadId => _etwEvent.ThreadId;
+
+            /// <summary>
+            /// The timestamp of the event.
+            /// </summary>
+            public long Timestamp => _etwEvent.Timestamp;
+
+            /// <summary>
+            /// The processor number the event was recorded on.
+            /// </summary>
+            public byte ProcessorNumber => _etwEvent.ProcessorNumber;
+
+            /// <summary>
+            /// Timing information for the event.
+            /// </summary>
+            public (ulong? KernelTime, ulong? UserTime, ulong? ProcessorTime) Time => _etwEvent.Time;
+
+            /// <summary>
+            /// Data for the event.
+            /// </summary>
+            public SampledProfileIntervalCollectionStartData Data => new(_etwEvent);
+
+            /// <summary>
+            /// Creates a new SampledProfileIntervalCollectionStartEventV2.
+            /// </summary>
+            /// <param name="etwEvent">The event.</param>
+            public SampledProfileIntervalCollectionStartEventV2(EtwEvent etwEvent)
+            {
+                _etwEvent = etwEvent;
+            }
+
+            /// <summary>
+            /// A data wrapper for a SampledProfileIntervalCollectionStart event.
+            /// </summary>
+            public ref struct SampledProfileIntervalCollectionStartData
+            {
+                private readonly EtwEvent _etwEvent;
+
+                private int _offset_Source;
+                private int _offset_NewInterval;
+                private int _offset_OldInterval;
+
+                private int Offset_Source
+                {
+                    get
+                    {
+                        if (_offset_Source == -1)
+                        {
+                            _offset_Source = 0;
+                        }
+
+                        return _offset_Source;
+                    }
+                }
+
+                private int Offset_NewInterval
+                {
+                    get
+                    {
+                        if (_offset_NewInterval == -1)
+                        {
+                            _offset_NewInterval = Offset_Source + 4;
+                        }
+
+                        return _offset_NewInterval;
+                    }
+                }
+
+                private int Offset_OldInterval
+                {
+                    get
+                    {
+                        if (_offset_OldInterval == -1)
+                        {
+                            _offset_OldInterval = Offset_NewInterval + 4;
+                        }
+
+                        return _offset_OldInterval;
+                    }
+                }
+
+                /// <summary>
+                /// Retrieves the Source field.
+                /// </summary>
+                public uint Source => BitConverter.ToUInt32(_etwEvent.Data[Offset_Source..]);
+
+                /// <summary>
+                /// Retrieves the NewInterval field.
+                /// </summary>
+                public uint NewInterval => BitConverter.ToUInt32(_etwEvent.Data[Offset_NewInterval..]);
+
+                /// <summary>
+                /// Retrieves the OldInterval field.
+                /// </summary>
+                public uint OldInterval => BitConverter.ToUInt32(_etwEvent.Data[Offset_OldInterval..]);
+
+                /// <summary>
+                /// Creates a new SampledProfileIntervalCollectionStartData.
+                /// </summary>
+                /// <param name="etwEvent">The event.</param>
+                public SampledProfileIntervalCollectionStartData(EtwEvent etwEvent)
+                {
+                    _etwEvent = etwEvent;
+                    _offset_Source = -1;
+                    _offset_NewInterval = -1;
+                    _offset_OldInterval = -1;
+                }
+            }
+
+        }
+
+        /// <summary>
+        /// An event wrapper for a SampledProfileIntervalCollectionEnd event.
+        /// </summary>
+        public readonly ref struct SampledProfileIntervalCollectionEndEventV2
+        {
+            private readonly EtwEvent _etwEvent;
+
+            /// <summary>
+            /// Event name.
+            /// </summary>
+            public const string Name = "SampledProfileIntervalCollectionEnd";
+
+            /// <summary>
+            /// The event provider.
+            /// </summary>
+            public static readonly Guid Provider = Id;
+
+            /// <summary>
+            /// Event descriptor.
+            /// </summary>
+            public static EtwEventDescriptor Descriptor { get; } = new EtwEventDescriptor
+            {
+                Id = 0,
+                Version = 2,
+                Channel = 0,
+                Level = EtwTraceLevel.None,
+                Opcode = (EtwEventOpcode)Opcodes.SampledProfileIntervalCollectionEnd,
+                Task = 0,
+                Keyword = 0
+            };
+
+            /// <summary>
+            /// The process the event was recorded in.
+            /// </summary>
+            public uint ProcessId => _etwEvent.ProcessId;
+
+            /// <summary>
+            /// The thread the event was recorded on.
+            /// </summary>
+            public uint ThreadId => _etwEvent.ThreadId;
+
+            /// <summary>
+            /// The timestamp of the event.
+            /// </summary>
+            public long Timestamp => _etwEvent.Timestamp;
+
+            /// <summary>
+            /// The processor number the event was recorded on.
+            /// </summary>
+            public byte ProcessorNumber => _etwEvent.ProcessorNumber;
+
+            /// <summary>
+            /// Timing information for the event.
+            /// </summary>
+            public (ulong? KernelTime, ulong? UserTime, ulong? ProcessorTime) Time => _etwEvent.Time;
+
+            /// <summary>
+            /// Data for the event.
+            /// </summary>
+            public SampledProfileIntervalCollectionEndData Data => new(_etwEvent);
+
+            /// <summary>
+            /// Creates a new SampledProfileIntervalCollectionEndEventV2.
+            /// </summary>
+            /// <param name="etwEvent">The event.</param>
+            public SampledProfileIntervalCollectionEndEventV2(EtwEvent etwEvent)
+            {
+                _etwEvent = etwEvent;
+            }
+
+            /// <summary>
+            /// A data wrapper for a SampledProfileIntervalCollectionEnd event.
+            /// </summary>
+            public ref struct SampledProfileIntervalCollectionEndData
+            {
+                private readonly EtwEvent _etwEvent;
+
+                private int _offset_Source;
+                private int _offset_NewInterval;
+                private int _offset_OldInterval;
+
+                private int Offset_Source
+                {
+                    get
+                    {
+                        if (_offset_Source == -1)
+                        {
+                            _offset_Source = 0;
+                        }
+
+                        return _offset_Source;
+                    }
+                }
+
+                private int Offset_NewInterval
+                {
+                    get
+                    {
+                        if (_offset_NewInterval == -1)
+                        {
+                            _offset_NewInterval = Offset_Source + 4;
+                        }
+
+                        return _offset_NewInterval;
+                    }
+                }
+
+                private int Offset_OldInterval
+                {
+                    get
+                    {
+                        if (_offset_OldInterval == -1)
+                        {
+                            _offset_OldInterval = Offset_NewInterval + 4;
+                        }
+
+                        return _offset_OldInterval;
+                    }
+                }
+
+                /// <summary>
+                /// Retrieves the Source field.
+                /// </summary>
+                public uint Source => BitConverter.ToUInt32(_etwEvent.Data[Offset_Source..]);
+
+                /// <summary>
+                /// Retrieves the NewInterval field.
+                /// </summary>
+                public uint NewInterval => BitConverter.ToUInt32(_etwEvent.Data[Offset_NewInterval..]);
+
+                /// <summary>
+                /// Retrieves the OldInterval field.
+                /// </summary>
+                public uint OldInterval => BitConverter.ToUInt32(_etwEvent.Data[Offset_OldInterval..]);
+
+                /// <summary>
+                /// Creates a new SampledProfileIntervalCollectionEndData.
+                /// </summary>
+                /// <param name="etwEvent">The event.</param>
+                public SampledProfileIntervalCollectionEndData(EtwEvent etwEvent)
+                {
+                    _etwEvent = etwEvent;
+                    _offset_Source = -1;
+                    _offset_NewInterval = -1;
+                    _offset_OldInterval = -1;
+                }
+            }
+
+        }
+
+        /// <summary>
         /// An event wrapper for a PmcCtrConfig event.
         /// </summary>
-        public readonly ref struct PmcCtrConfigEvent
+        public readonly ref struct PmcCtrConfigEventV2
         {
             private readonly EtwEvent _etwEvent;
 
@@ -838,10 +1848,10 @@ namespace EtwTools
             public PmcCtrConfigData Data => new(_etwEvent);
 
             /// <summary>
-            /// Creates a new PmcCtrConfigEvent.
+            /// Creates a new PmcCtrConfigEventV2.
             /// </summary>
             /// <param name="etwEvent">The event.</param>
-            public PmcCtrConfigEvent(EtwEvent etwEvent)
+            public PmcCtrConfigEventV2(EtwEvent etwEvent)
             {
                 _etwEvent = etwEvent;
             }
@@ -907,9 +1917,309 @@ namespace EtwTools
         }
 
         /// <summary>
+        /// An event wrapper for a SpinlockConfigureCollectionStart event.
+        /// </summary>
+        public readonly ref struct SpinlockConfigureCollectionStartEventV2
+        {
+            private readonly EtwEvent _etwEvent;
+
+            /// <summary>
+            /// Event name.
+            /// </summary>
+            public const string Name = "SpinlockConfigureCollectionStart";
+
+            /// <summary>
+            /// The event provider.
+            /// </summary>
+            public static readonly Guid Provider = Id;
+
+            /// <summary>
+            /// Event descriptor.
+            /// </summary>
+            public static EtwEventDescriptor Descriptor { get; } = new EtwEventDescriptor
+            {
+                Id = 0,
+                Version = 2,
+                Channel = 0,
+                Level = EtwTraceLevel.None,
+                Opcode = (EtwEventOpcode)Opcodes.SpinlockConfigureCollectionStart,
+                Task = 0,
+                Keyword = 0
+            };
+
+            /// <summary>
+            /// The process the event was recorded in.
+            /// </summary>
+            public uint ProcessId => _etwEvent.ProcessId;
+
+            /// <summary>
+            /// The thread the event was recorded on.
+            /// </summary>
+            public uint ThreadId => _etwEvent.ThreadId;
+
+            /// <summary>
+            /// The timestamp of the event.
+            /// </summary>
+            public long Timestamp => _etwEvent.Timestamp;
+
+            /// <summary>
+            /// The processor number the event was recorded on.
+            /// </summary>
+            public byte ProcessorNumber => _etwEvent.ProcessorNumber;
+
+            /// <summary>
+            /// Timing information for the event.
+            /// </summary>
+            public (ulong? KernelTime, ulong? UserTime, ulong? ProcessorTime) Time => _etwEvent.Time;
+
+            /// <summary>
+            /// Data for the event.
+            /// </summary>
+            public SpinlockConfigureCollectionStartData Data => new(_etwEvent);
+
+            /// <summary>
+            /// Creates a new SpinlockConfigureCollectionStartEventV2.
+            /// </summary>
+            /// <param name="etwEvent">The event.</param>
+            public SpinlockConfigureCollectionStartEventV2(EtwEvent etwEvent)
+            {
+                _etwEvent = etwEvent;
+            }
+
+            /// <summary>
+            /// A data wrapper for a SpinlockConfigureCollectionStart event.
+            /// </summary>
+            public ref struct SpinlockConfigureCollectionStartData
+            {
+                private readonly EtwEvent _etwEvent;
+
+                private int _offset_SpinLockSpinThreshold;
+                private int _offset_SpinLockContentionSampleRate;
+                private int _offset_SpinLockAcquireSampleRate;
+
+                private int Offset_SpinLockSpinThreshold
+                {
+                    get
+                    {
+                        if (_offset_SpinLockSpinThreshold == -1)
+                        {
+                            _offset_SpinLockSpinThreshold = 0;
+                        }
+
+                        return _offset_SpinLockSpinThreshold;
+                    }
+                }
+
+                private int Offset_SpinLockContentionSampleRate
+                {
+                    get
+                    {
+                        if (_offset_SpinLockContentionSampleRate == -1)
+                        {
+                            _offset_SpinLockContentionSampleRate = Offset_SpinLockSpinThreshold + 4;
+                        }
+
+                        return _offset_SpinLockContentionSampleRate;
+                    }
+                }
+
+                private int Offset_SpinLockAcquireSampleRate
+                {
+                    get
+                    {
+                        if (_offset_SpinLockAcquireSampleRate == -1)
+                        {
+                            _offset_SpinLockAcquireSampleRate = Offset_SpinLockContentionSampleRate + 4;
+                        }
+
+                        return _offset_SpinLockAcquireSampleRate;
+                    }
+                }
+
+                /// <summary>
+                /// Retrieves the SpinLockSpinThreshold field.
+                /// </summary>
+                public uint SpinLockSpinThreshold => BitConverter.ToUInt32(_etwEvent.Data[Offset_SpinLockSpinThreshold..]);
+
+                /// <summary>
+                /// Retrieves the SpinLockContentionSampleRate field.
+                /// </summary>
+                public uint SpinLockContentionSampleRate => BitConverter.ToUInt32(_etwEvent.Data[Offset_SpinLockContentionSampleRate..]);
+
+                /// <summary>
+                /// Retrieves the SpinLockAcquireSampleRate field.
+                /// </summary>
+                public uint SpinLockAcquireSampleRate => BitConverter.ToUInt32(_etwEvent.Data[Offset_SpinLockAcquireSampleRate..]);
+
+                /// <summary>
+                /// Creates a new SpinlockConfigureCollectionStartData.
+                /// </summary>
+                /// <param name="etwEvent">The event.</param>
+                public SpinlockConfigureCollectionStartData(EtwEvent etwEvent)
+                {
+                    _etwEvent = etwEvent;
+                    _offset_SpinLockSpinThreshold = -1;
+                    _offset_SpinLockContentionSampleRate = -1;
+                    _offset_SpinLockAcquireSampleRate = -1;
+                }
+            }
+
+        }
+
+        /// <summary>
+        /// An event wrapper for a SpinlockConfigureCollectionEnd event.
+        /// </summary>
+        public readonly ref struct SpinlockConfigureCollectionEndEventV2
+        {
+            private readonly EtwEvent _etwEvent;
+
+            /// <summary>
+            /// Event name.
+            /// </summary>
+            public const string Name = "SpinlockConfigureCollectionEnd";
+
+            /// <summary>
+            /// The event provider.
+            /// </summary>
+            public static readonly Guid Provider = Id;
+
+            /// <summary>
+            /// Event descriptor.
+            /// </summary>
+            public static EtwEventDescriptor Descriptor { get; } = new EtwEventDescriptor
+            {
+                Id = 0,
+                Version = 2,
+                Channel = 0,
+                Level = EtwTraceLevel.None,
+                Opcode = (EtwEventOpcode)Opcodes.SpinlockConfigureCollectionEnd,
+                Task = 0,
+                Keyword = 0
+            };
+
+            /// <summary>
+            /// The process the event was recorded in.
+            /// </summary>
+            public uint ProcessId => _etwEvent.ProcessId;
+
+            /// <summary>
+            /// The thread the event was recorded on.
+            /// </summary>
+            public uint ThreadId => _etwEvent.ThreadId;
+
+            /// <summary>
+            /// The timestamp of the event.
+            /// </summary>
+            public long Timestamp => _etwEvent.Timestamp;
+
+            /// <summary>
+            /// The processor number the event was recorded on.
+            /// </summary>
+            public byte ProcessorNumber => _etwEvent.ProcessorNumber;
+
+            /// <summary>
+            /// Timing information for the event.
+            /// </summary>
+            public (ulong? KernelTime, ulong? UserTime, ulong? ProcessorTime) Time => _etwEvent.Time;
+
+            /// <summary>
+            /// Data for the event.
+            /// </summary>
+            public SpinlockConfigureCollectionEndData Data => new(_etwEvent);
+
+            /// <summary>
+            /// Creates a new SpinlockConfigureCollectionEndEventV2.
+            /// </summary>
+            /// <param name="etwEvent">The event.</param>
+            public SpinlockConfigureCollectionEndEventV2(EtwEvent etwEvent)
+            {
+                _etwEvent = etwEvent;
+            }
+
+            /// <summary>
+            /// A data wrapper for a SpinlockConfigureCollectionEnd event.
+            /// </summary>
+            public ref struct SpinlockConfigureCollectionEndData
+            {
+                private readonly EtwEvent _etwEvent;
+
+                private int _offset_SpinLockSpinThreshold;
+                private int _offset_SpinLockContentionSampleRate;
+                private int _offset_SpinLockAcquireSampleRate;
+
+                private int Offset_SpinLockSpinThreshold
+                {
+                    get
+                    {
+                        if (_offset_SpinLockSpinThreshold == -1)
+                        {
+                            _offset_SpinLockSpinThreshold = 0;
+                        }
+
+                        return _offset_SpinLockSpinThreshold;
+                    }
+                }
+
+                private int Offset_SpinLockContentionSampleRate
+                {
+                    get
+                    {
+                        if (_offset_SpinLockContentionSampleRate == -1)
+                        {
+                            _offset_SpinLockContentionSampleRate = Offset_SpinLockSpinThreshold + 4;
+                        }
+
+                        return _offset_SpinLockContentionSampleRate;
+                    }
+                }
+
+                private int Offset_SpinLockAcquireSampleRate
+                {
+                    get
+                    {
+                        if (_offset_SpinLockAcquireSampleRate == -1)
+                        {
+                            _offset_SpinLockAcquireSampleRate = Offset_SpinLockContentionSampleRate + 4;
+                        }
+
+                        return _offset_SpinLockAcquireSampleRate;
+                    }
+                }
+
+                /// <summary>
+                /// Retrieves the SpinLockSpinThreshold field.
+                /// </summary>
+                public uint SpinLockSpinThreshold => BitConverter.ToUInt32(_etwEvent.Data[Offset_SpinLockSpinThreshold..]);
+
+                /// <summary>
+                /// Retrieves the SpinLockContentionSampleRate field.
+                /// </summary>
+                public uint SpinLockContentionSampleRate => BitConverter.ToUInt32(_etwEvent.Data[Offset_SpinLockContentionSampleRate..]);
+
+                /// <summary>
+                /// Retrieves the SpinLockAcquireSampleRate field.
+                /// </summary>
+                public uint SpinLockAcquireSampleRate => BitConverter.ToUInt32(_etwEvent.Data[Offset_SpinLockAcquireSampleRate..]);
+
+                /// <summary>
+                /// Creates a new SpinlockConfigureCollectionEndData.
+                /// </summary>
+                /// <param name="etwEvent">The event.</param>
+                public SpinlockConfigureCollectionEndData(EtwEvent etwEvent)
+                {
+                    _etwEvent = etwEvent;
+                    _offset_SpinLockSpinThreshold = -1;
+                    _offset_SpinLockContentionSampleRate = -1;
+                    _offset_SpinLockAcquireSampleRate = -1;
+                }
+            }
+
+        }
+
+        /// <summary>
         /// An event wrapper for a SysClEnter event.
         /// </summary>
-        public readonly ref struct SysClEnterEvent
+        public readonly ref struct SysClEnterEventV2
         {
             private readonly EtwEvent _etwEvent;
 
@@ -968,10 +2278,10 @@ namespace EtwTools
             public SysClEnterData Data => new(_etwEvent);
 
             /// <summary>
-            /// Creates a new SysClEnterEvent.
+            /// Creates a new SysClEnterEventV2.
             /// </summary>
             /// <param name="etwEvent">The event.</param>
-            public SysClEnterEvent(EtwEvent etwEvent)
+            public SysClEnterEventV2(EtwEvent etwEvent)
             {
                 _etwEvent = etwEvent;
             }
@@ -1019,7 +2329,7 @@ namespace EtwTools
         /// <summary>
         /// An event wrapper for a SysClExit event.
         /// </summary>
-        public readonly ref struct SysClExitEvent
+        public readonly ref struct SysClExitEventV2
         {
             private readonly EtwEvent _etwEvent;
 
@@ -1078,10 +2388,10 @@ namespace EtwTools
             public SysClExitData Data => new(_etwEvent);
 
             /// <summary>
-            /// Creates a new SysClExitEvent.
+            /// Creates a new SysClExitEventV2.
             /// </summary>
             /// <param name="etwEvent">The event.</param>
-            public SysClExitEvent(EtwEvent etwEvent)
+            public SysClExitEventV2(EtwEvent etwEvent)
             {
                 _etwEvent = etwEvent;
             }
@@ -1129,7 +2439,7 @@ namespace EtwTools
         /// <summary>
         /// An event wrapper for a ISR event.
         /// </summary>
-        public readonly ref struct ISREvent
+        public readonly ref struct ISREventV2
         {
             private readonly EtwEvent _etwEvent;
 
@@ -1188,10 +2498,10 @@ namespace EtwTools
             public ISRData Data => new(_etwEvent);
 
             /// <summary>
-            /// Creates a new ISREvent.
+            /// Creates a new ISREventV2.
             /// </summary>
             /// <param name="etwEvent">The event.</param>
-            public ISREvent(EtwEvent etwEvent)
+            public ISREventV2(EtwEvent etwEvent)
             {
                 _etwEvent = etwEvent;
             }
@@ -1317,16 +2627,16 @@ namespace EtwTools
         }
 
         /// <summary>
-        /// An event wrapper for a ISR_PASS event.
+        /// An event wrapper for a ISR-PASS event.
         /// </summary>
-        public readonly ref struct ISR_PASSEvent
+        public readonly ref struct ISR_PASSEventV2
         {
             private readonly EtwEvent _etwEvent;
 
             /// <summary>
             /// Event name.
             /// </summary>
-            public const string Name = "ISR_PASS";
+            public const string Name = "ISR-PASS";
 
             /// <summary>
             /// The event provider.
@@ -1378,10 +2688,10 @@ namespace EtwTools
             public ISR_PASSData Data => new(_etwEvent);
 
             /// <summary>
-            /// Creates a new ISR_PASSEvent.
+            /// Creates a new ISR_PASSEventV2.
             /// </summary>
             /// <param name="etwEvent">The event.</param>
-            public ISR_PASSEvent(EtwEvent etwEvent)
+            public ISR_PASSEventV2(EtwEvent etwEvent)
             {
                 _etwEvent = etwEvent;
             }
@@ -1507,16 +2817,16 @@ namespace EtwTools
         }
 
         /// <summary>
-        /// An event wrapper for a ISR_MSI event.
+        /// An event wrapper for a ISR-MSI event.
         /// </summary>
-        public readonly ref struct ISR_MSIEvent
+        public readonly ref struct ISR_MSIEventV2
         {
             private readonly EtwEvent _etwEvent;
 
             /// <summary>
             /// Event name.
             /// </summary>
-            public const string Name = "ISR_MSI";
+            public const string Name = "ISR-MSI";
 
             /// <summary>
             /// The event provider.
@@ -1568,10 +2878,10 @@ namespace EtwTools
             public ISR_MSIData Data => new(_etwEvent);
 
             /// <summary>
-            /// Creates a new ISR_MSIEvent.
+            /// Creates a new ISR_MSIEventV2.
             /// </summary>
             /// <param name="etwEvent">The event.</param>
-            public ISR_MSIEvent(EtwEvent etwEvent)
+            public ISR_MSIEventV2(EtwEvent etwEvent)
             {
                 _etwEvent = etwEvent;
             }
@@ -1717,16 +3027,16 @@ namespace EtwTools
         }
 
         /// <summary>
-        /// An event wrapper for a ISR_Unexpected event.
+        /// An event wrapper for a ISR-Unexpected event.
         /// </summary>
-        public readonly ref struct ISR_UnexpectedEvent
+        public readonly ref struct ISR_UnexpectedEventV2
         {
             private readonly EtwEvent _etwEvent;
 
             /// <summary>
             /// Event name.
             /// </summary>
-            public const string Name = "ISR_Unexpected";
+            public const string Name = "ISR-Unexpected";
 
             /// <summary>
             /// The event provider.
@@ -1778,10 +3088,10 @@ namespace EtwTools
             public ISR_UnexpectedData Data => new(_etwEvent);
 
             /// <summary>
-            /// Creates a new ISR_UnexpectedEvent.
+            /// Creates a new ISR_UnexpectedEventV2.
             /// </summary>
             /// <param name="etwEvent">The event.</param>
-            public ISR_UnexpectedEvent(EtwEvent etwEvent)
+            public ISR_UnexpectedEventV2(EtwEvent etwEvent)
             {
                 _etwEvent = etwEvent;
             }
@@ -1829,7 +3139,7 @@ namespace EtwTools
         /// <summary>
         /// An event wrapper for a ThreadedDPC event.
         /// </summary>
-        public readonly ref struct ThreadedDPCEvent
+        public readonly ref struct ThreadedDPCEventV2
         {
             private readonly EtwEvent _etwEvent;
 
@@ -1888,10 +3198,10 @@ namespace EtwTools
             public ThreadedDPCData Data => new(_etwEvent);
 
             /// <summary>
-            /// Creates a new ThreadedDPCEvent.
+            /// Creates a new ThreadedDPCEventV2.
             /// </summary>
             /// <param name="etwEvent">The event.</param>
-            public ThreadedDPCEvent(EtwEvent etwEvent)
+            public ThreadedDPCEventV2(EtwEvent etwEvent)
             {
                 _etwEvent = etwEvent;
             }
@@ -1959,7 +3269,7 @@ namespace EtwTools
         /// <summary>
         /// An event wrapper for a DPC event.
         /// </summary>
-        public readonly ref struct DPCEvent
+        public readonly ref struct DPCEventV2
         {
             private readonly EtwEvent _etwEvent;
 
@@ -2018,10 +3328,10 @@ namespace EtwTools
             public DPCData Data => new(_etwEvent);
 
             /// <summary>
-            /// Creates a new DPCEvent.
+            /// Creates a new DPCEventV2.
             /// </summary>
             /// <param name="etwEvent">The event.</param>
-            public DPCEvent(EtwEvent etwEvent)
+            public DPCEventV2(EtwEvent etwEvent)
             {
                 _etwEvent = etwEvent;
             }
@@ -2089,7 +3399,7 @@ namespace EtwTools
         /// <summary>
         /// An event wrapper for a TimerDPC event.
         /// </summary>
-        public readonly ref struct TimerDPCEvent
+        public readonly ref struct TimerDPCEventV2
         {
             private readonly EtwEvent _etwEvent;
 
@@ -2148,10 +3458,10 @@ namespace EtwTools
             public TimerDPCData Data => new(_etwEvent);
 
             /// <summary>
-            /// Creates a new TimerDPCEvent.
+            /// Creates a new TimerDPCEventV2.
             /// </summary>
             /// <param name="etwEvent">The event.</param>
-            public TimerDPCEvent(EtwEvent etwEvent)
+            public TimerDPCEventV2(EtwEvent etwEvent)
             {
                 _etwEvent = etwEvent;
             }
@@ -2219,7 +3529,7 @@ namespace EtwTools
         /// <summary>
         /// An event wrapper for a IOTimer event.
         /// </summary>
-        public readonly ref struct IOTimerEvent
+        public readonly ref struct IOTimerEventV2
         {
             private readonly EtwEvent _etwEvent;
 
@@ -2278,10 +3588,10 @@ namespace EtwTools
             public IOTimerData Data => new(_etwEvent);
 
             /// <summary>
-            /// Creates a new IOTimerEvent.
+            /// Creates a new IOTimerEventV2.
             /// </summary>
             /// <param name="etwEvent">The event.</param>
-            public IOTimerEvent(EtwEvent etwEvent)
+            public IOTimerEventV2(EtwEvent etwEvent)
             {
                 _etwEvent = etwEvent;
             }
@@ -2349,7 +3659,7 @@ namespace EtwTools
         /// <summary>
         /// An event wrapper for a WdfDPC event.
         /// </summary>
-        public readonly ref struct WdfDPCEvent
+        public readonly ref struct WdfDPCEventV2
         {
             private readonly EtwEvent _etwEvent;
 
@@ -2408,10 +3718,10 @@ namespace EtwTools
             public WdfDPCData Data => new(_etwEvent);
 
             /// <summary>
-            /// Creates a new WdfDPCEvent.
+            /// Creates a new WdfDPCEventV2.
             /// </summary>
             /// <param name="etwEvent">The event.</param>
-            public WdfDPCEvent(EtwEvent etwEvent)
+            public WdfDPCEventV2(EtwEvent etwEvent)
             {
                 _etwEvent = etwEvent;
             }
@@ -2459,7 +3769,7 @@ namespace EtwTools
         /// <summary>
         /// An event wrapper for a WdfISR event.
         /// </summary>
-        public readonly ref struct WdfISREvent
+        public readonly ref struct WdfISREventV2
         {
             private readonly EtwEvent _etwEvent;
 
@@ -2518,10 +3828,10 @@ namespace EtwTools
             public WdfISRData Data => new(_etwEvent);
 
             /// <summary>
-            /// Creates a new WdfISREvent.
+            /// Creates a new WdfISREventV2.
             /// </summary>
             /// <param name="etwEvent">The event.</param>
-            public WdfISREvent(EtwEvent etwEvent)
+            public WdfISREventV2(EtwEvent etwEvent)
             {
                 _etwEvent = etwEvent;
             }
@@ -2569,7 +3879,7 @@ namespace EtwTools
         /// <summary>
         /// An event wrapper for a WdfPassiveISR event.
         /// </summary>
-        public readonly ref struct WdfPassiveISREvent
+        public readonly ref struct WdfPassiveISREventV2
         {
             private readonly EtwEvent _etwEvent;
 
@@ -2628,10 +3938,10 @@ namespace EtwTools
             public WdfPassiveISRData Data => new(_etwEvent);
 
             /// <summary>
-            /// Creates a new WdfPassiveISREvent.
+            /// Creates a new WdfPassiveISREventV2.
             /// </summary>
             /// <param name="etwEvent">The event.</param>
-            public WdfPassiveISREvent(EtwEvent etwEvent)
+            public WdfPassiveISREventV2(EtwEvent etwEvent)
             {
                 _etwEvent = etwEvent;
             }
@@ -2679,7 +3989,7 @@ namespace EtwTools
         /// <summary>
         /// An event wrapper for a WdfWorkItem event.
         /// </summary>
-        public readonly ref struct WdfWorkItemEvent
+        public readonly ref struct WdfWorkItemEventV2
         {
             private readonly EtwEvent _etwEvent;
 
@@ -2738,10 +4048,10 @@ namespace EtwTools
             public WdfWorkItemData Data => new(_etwEvent);
 
             /// <summary>
-            /// Creates a new WdfWorkItemEvent.
+            /// Creates a new WdfWorkItemEventV2.
             /// </summary>
             /// <param name="etwEvent">The event.</param>
-            public WdfWorkItemEvent(EtwEvent etwEvent)
+            public WdfWorkItemEventV2(EtwEvent etwEvent)
             {
                 _etwEvent = etwEvent;
             }
@@ -2789,7 +4099,7 @@ namespace EtwTools
         /// <summary>
         /// An event wrapper for a DebuggerEnabled event.
         /// </summary>
-        public readonly ref struct DebuggerEnabledEvent
+        public readonly ref struct DebuggerEnabledEventV2
         {
             private readonly EtwEvent _etwEvent;
 
@@ -2843,10 +4153,10 @@ namespace EtwTools
             public (ulong? KernelTime, ulong? UserTime, ulong? ProcessorTime) Time => _etwEvent.Time;
 
             /// <summary>
-            /// Creates a new DebuggerEnabledEvent.
+            /// Creates a new DebuggerEnabledEventV2.
             /// </summary>
             /// <param name="etwEvent">The event.</param>
-            public DebuggerEnabledEvent(EtwEvent etwEvent)
+            public DebuggerEnabledEventV2(EtwEvent etwEvent)
             {
                 _etwEvent = etwEvent;
             }
@@ -2855,7 +4165,7 @@ namespace EtwTools
         /// <summary>
         /// An event wrapper for a IoStartTimer event.
         /// </summary>
-        public readonly ref struct IoStartTimerEvent
+        public readonly ref struct IoStartTimerEventV2
         {
             private readonly EtwEvent _etwEvent;
 
@@ -2914,10 +4224,10 @@ namespace EtwTools
             public IoStartTimerData Data => new(_etwEvent);
 
             /// <summary>
-            /// Creates a new IoStartTimerEvent.
+            /// Creates a new IoStartTimerEventV2.
             /// </summary>
             /// <param name="etwEvent">The event.</param>
-            public IoStartTimerEvent(EtwEvent etwEvent)
+            public IoStartTimerEventV2(EtwEvent etwEvent)
             {
                 _etwEvent = etwEvent;
             }
@@ -2985,7 +4295,7 @@ namespace EtwTools
         /// <summary>
         /// An event wrapper for a IoStopTimer event.
         /// </summary>
-        public readonly ref struct IoStopTimerEvent
+        public readonly ref struct IoStopTimerEventV2
         {
             private readonly EtwEvent _etwEvent;
 
@@ -3044,10 +4354,10 @@ namespace EtwTools
             public IoStopTimerData Data => new(_etwEvent);
 
             /// <summary>
-            /// Creates a new IoStopTimerEvent.
+            /// Creates a new IoStopTimerEventV2.
             /// </summary>
             /// <param name="etwEvent">The event.</param>
-            public IoStopTimerEvent(EtwEvent etwEvent)
+            public IoStopTimerEventV2(EtwEvent etwEvent)
             {
                 _etwEvent = etwEvent;
             }
@@ -3115,7 +4425,7 @@ namespace EtwTools
         /// <summary>
         /// An event wrapper for a SetKTimer2 event.
         /// </summary>
-        public readonly ref struct SetKTimer2Event
+        public readonly ref struct SetKTimer2EventV2
         {
             private readonly EtwEvent _etwEvent;
 
@@ -3174,10 +4484,10 @@ namespace EtwTools
             public SetKTimer2Data Data => new(_etwEvent);
 
             /// <summary>
-            /// Creates a new SetKTimer2Event.
+            /// Creates a new SetKTimer2EventV2.
             /// </summary>
             /// <param name="etwEvent">The event.</param>
-            public SetKTimer2Event(EtwEvent etwEvent)
+            public SetKTimer2EventV2(EtwEvent etwEvent)
             {
                 _etwEvent = etwEvent;
             }
@@ -3345,7 +4655,7 @@ namespace EtwTools
         /// <summary>
         /// An event wrapper for a ExpireKTimer2 event.
         /// </summary>
-        public readonly ref struct ExpireKTimer2Event
+        public readonly ref struct ExpireKTimer2EventV2
         {
             private readonly EtwEvent _etwEvent;
 
@@ -3404,10 +4714,10 @@ namespace EtwTools
             public ExpireKTimer2Data Data => new(_etwEvent);
 
             /// <summary>
-            /// Creates a new ExpireKTimer2Event.
+            /// Creates a new ExpireKTimer2EventV2.
             /// </summary>
             /// <param name="etwEvent">The event.</param>
-            public ExpireKTimer2Event(EtwEvent etwEvent)
+            public ExpireKTimer2EventV2(EtwEvent etwEvent)
             {
                 _etwEvent = etwEvent;
             }
@@ -3575,7 +4885,7 @@ namespace EtwTools
         /// <summary>
         /// An event wrapper for a CancelKTimer2 event.
         /// </summary>
-        public readonly ref struct CancelKTimer2Event
+        public readonly ref struct CancelKTimer2EventV2
         {
             private readonly EtwEvent _etwEvent;
 
@@ -3634,10 +4944,10 @@ namespace EtwTools
             public CancelKTimer2Data Data => new(_etwEvent);
 
             /// <summary>
-            /// Creates a new CancelKTimer2Event.
+            /// Creates a new CancelKTimer2EventV2.
             /// </summary>
             /// <param name="etwEvent">The event.</param>
-            public CancelKTimer2Event(EtwEvent etwEvent)
+            public CancelKTimer2EventV2(EtwEvent etwEvent)
             {
                 _etwEvent = etwEvent;
             }
@@ -3685,7 +4995,7 @@ namespace EtwTools
         /// <summary>
         /// An event wrapper for a DisableKTimer2 event.
         /// </summary>
-        public readonly ref struct DisableKTimer2Event
+        public readonly ref struct DisableKTimer2EventV2
         {
             private readonly EtwEvent _etwEvent;
 
@@ -3744,10 +5054,10 @@ namespace EtwTools
             public DisableKTimer2Data Data => new(_etwEvent);
 
             /// <summary>
-            /// Creates a new DisableKTimer2Event.
+            /// Creates a new DisableKTimer2EventV2.
             /// </summary>
             /// <param name="etwEvent">The event.</param>
-            public DisableKTimer2Event(EtwEvent etwEvent)
+            public DisableKTimer2EventV2(EtwEvent etwEvent)
             {
                 _etwEvent = etwEvent;
             }
@@ -3855,7 +5165,7 @@ namespace EtwTools
         /// <summary>
         /// An event wrapper for a FinalizeKTimer2 event.
         /// </summary>
-        public readonly ref struct FinalizeKTimer2Event
+        public readonly ref struct FinalizeKTimer2EventV2
         {
             private readonly EtwEvent _etwEvent;
 
@@ -3914,10 +5224,10 @@ namespace EtwTools
             public FinalizeKTimer2Data Data => new(_etwEvent);
 
             /// <summary>
-            /// Creates a new FinalizeKTimer2Event.
+            /// Creates a new FinalizeKTimer2EventV2.
             /// </summary>
             /// <param name="etwEvent">The event.</param>
-            public FinalizeKTimer2Event(EtwEvent etwEvent)
+            public FinalizeKTimer2EventV2(EtwEvent etwEvent)
             {
                 _etwEvent = etwEvent;
             }
@@ -4005,7 +5315,7 @@ namespace EtwTools
         /// <summary>
         /// An event wrapper for a KernelHypercall event.
         /// </summary>
-        public readonly ref struct KernelHypercallEvent
+        public readonly ref struct KernelHypercallEventV2
         {
             private readonly EtwEvent _etwEvent;
 
@@ -4064,10 +5374,10 @@ namespace EtwTools
             public KernelHypercallData Data => new(_etwEvent);
 
             /// <summary>
-            /// Creates a new KernelHypercallEvent.
+            /// Creates a new KernelHypercallEventV2.
             /// </summary>
             /// <param name="etwEvent">The event.</param>
-            public KernelHypercallEvent(EtwEvent etwEvent)
+            public KernelHypercallEventV2(EtwEvent etwEvent)
             {
                 _etwEvent = etwEvent;
             }
@@ -4155,7 +5465,7 @@ namespace EtwTools
         /// <summary>
         /// An event wrapper for a SampledProfileIntervalCollectionStart event.
         /// </summary>
-        public readonly ref struct SampledProfileIntervalCollectionStartEvent
+        public readonly ref struct SampledProfileIntervalCollectionStartEventV3
         {
             private readonly EtwEvent _etwEvent;
 
@@ -4214,10 +5524,10 @@ namespace EtwTools
             public SampledProfileIntervalCollectionStartData Data => new(_etwEvent);
 
             /// <summary>
-            /// Creates a new SampledProfileIntervalCollectionStartEvent.
+            /// Creates a new SampledProfileIntervalCollectionStartEventV3.
             /// </summary>
             /// <param name="etwEvent">The event.</param>
-            public SampledProfileIntervalCollectionStartEvent(EtwEvent etwEvent)
+            public SampledProfileIntervalCollectionStartEventV3(EtwEvent etwEvent)
             {
                 _etwEvent = etwEvent;
             }
@@ -4325,7 +5635,7 @@ namespace EtwTools
         /// <summary>
         /// An event wrapper for a SampledProfileIntervalCollectionEnd event.
         /// </summary>
-        public readonly ref struct SampledProfileIntervalCollectionEndEvent
+        public readonly ref struct SampledProfileIntervalCollectionEndEventV3
         {
             private readonly EtwEvent _etwEvent;
 
@@ -4384,10 +5694,10 @@ namespace EtwTools
             public SampledProfileIntervalCollectionEndData Data => new(_etwEvent);
 
             /// <summary>
-            /// Creates a new SampledProfileIntervalCollectionEndEvent.
+            /// Creates a new SampledProfileIntervalCollectionEndEventV3.
             /// </summary>
             /// <param name="etwEvent">The event.</param>
-            public SampledProfileIntervalCollectionEndEvent(EtwEvent etwEvent)
+            public SampledProfileIntervalCollectionEndEventV3(EtwEvent etwEvent)
             {
                 _etwEvent = etwEvent;
             }
@@ -4495,7 +5805,7 @@ namespace EtwTools
         /// <summary>
         /// An event wrapper for a SpinlockConfigureCollectionStart event.
         /// </summary>
-        public readonly ref struct SpinlockConfigureCollectionStartEvent
+        public readonly ref struct SpinlockConfigureCollectionStartEventV3
         {
             private readonly EtwEvent _etwEvent;
 
@@ -4554,10 +5864,10 @@ namespace EtwTools
             public SpinlockConfigureCollectionStartData Data => new(_etwEvent);
 
             /// <summary>
-            /// Creates a new SpinlockConfigureCollectionStartEvent.
+            /// Creates a new SpinlockConfigureCollectionStartEventV3.
             /// </summary>
             /// <param name="etwEvent">The event.</param>
-            public SpinlockConfigureCollectionStartEvent(EtwEvent etwEvent)
+            public SpinlockConfigureCollectionStartEventV3(EtwEvent etwEvent)
             {
                 _etwEvent = etwEvent;
             }
@@ -4665,7 +5975,7 @@ namespace EtwTools
         /// <summary>
         /// An event wrapper for a SpinlockConfigureCollectionEnd event.
         /// </summary>
-        public readonly ref struct SpinlockConfigureCollectionEndEvent
+        public readonly ref struct SpinlockConfigureCollectionEndEventV3
         {
             private readonly EtwEvent _etwEvent;
 
@@ -4724,10 +6034,10 @@ namespace EtwTools
             public SpinlockConfigureCollectionEndData Data => new(_etwEvent);
 
             /// <summary>
-            /// Creates a new SpinlockConfigureCollectionEndEvent.
+            /// Creates a new SpinlockConfigureCollectionEndEventV3.
             /// </summary>
             /// <param name="etwEvent">The event.</param>
-            public SpinlockConfigureCollectionEndEvent(EtwEvent etwEvent)
+            public SpinlockConfigureCollectionEndEventV3(EtwEvent etwEvent)
             {
                 _etwEvent = etwEvent;
             }

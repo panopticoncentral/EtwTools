@@ -1,0 +1,2186 @@
+{
+  "name": "DotnetRuntimeRundown",
+  "displayName": "Microsoft-Windows-DotNETRuntimeRundown",
+  "id": "a669021c-c450-4609-a035-5af59af4df18",
+  "events": [
+    {
+      "name": "ClrStackWalk",
+      "displayName": "ClrStackWalk",
+      "descriptor": {
+        "id": 0,
+        "version": 0,
+        "channel": 0,
+        "level": "None",
+        "opcode": 82,
+        "task": 11,
+        "keyword": 1073741824
+      },
+      "fields": [
+        {
+          "name": "ClrInstanceID",
+          "datatype": "ushort",
+          "map": null
+        },
+        {
+          "name": "Reserved1",
+          "datatype": "byte",
+          "map": null
+        },
+        {
+          "name": "Reserved2",
+          "datatype": "byte",
+          "map": null
+        },
+        {
+          "name": "FrameCount",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "Stack",
+          "datatype": "pointer",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "MethodDCStart",
+      "displayName": "MethodDCStart",
+      "descriptor": {
+        "id": 141,
+        "version": 0,
+        "channel": 0,
+        "level": "Information",
+        "opcode": 35,
+        "task": 1,
+        "keyword": 48
+      },
+      "fields": [
+        {
+          "name": "MethodID",
+          "datatype": "ulong",
+          "map": null
+        },
+        {
+          "name": "ModuleID",
+          "datatype": "ulong",
+          "map": null
+        },
+        {
+          "name": "MethodStartAddress",
+          "datatype": "ulong",
+          "map": null
+        },
+        {
+          "name": "MethodSize",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "MethodToken",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "MethodFlags",
+          "datatype": "uint",
+          "map": "MethodFlagsMap"
+        }
+      ]
+    },
+    {
+      "name": "MethodDCStop",
+      "displayName": "MethodDCStop",
+      "descriptor": {
+        "id": 142,
+        "version": 0,
+        "channel": 0,
+        "level": "Information",
+        "opcode": 36,
+        "task": 1,
+        "keyword": 48
+      },
+      "fields": [
+        {
+          "name": "MethodID",
+          "datatype": "ulong",
+          "map": null
+        },
+        {
+          "name": "ModuleID",
+          "datatype": "ulong",
+          "map": null
+        },
+        {
+          "name": "MethodStartAddress",
+          "datatype": "ulong",
+          "map": null
+        },
+        {
+          "name": "MethodSize",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "MethodToken",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "MethodFlags",
+          "datatype": "uint",
+          "map": "MethodFlagsMap"
+        }
+      ]
+    },
+    {
+      "name": "MethodDCStartVerbose",
+      "displayName": "MethodDCStartVerbose",
+      "descriptor": {
+        "id": 143,
+        "version": 0,
+        "channel": 0,
+        "level": "Information",
+        "opcode": 39,
+        "task": 1,
+        "keyword": 48
+      },
+      "fields": [
+        {
+          "name": "MethodID",
+          "datatype": "ulong",
+          "map": null
+        },
+        {
+          "name": "ModuleID",
+          "datatype": "ulong",
+          "map": null
+        },
+        {
+          "name": "MethodStartAddress",
+          "datatype": "ulong",
+          "map": null
+        },
+        {
+          "name": "MethodSize",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "MethodToken",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "MethodFlags",
+          "datatype": "uint",
+          "map": "MethodFlagsMap"
+        },
+        {
+          "name": "MethodNamespace",
+          "datatype": "string",
+          "map": null
+        },
+        {
+          "name": "MethodName",
+          "datatype": "string",
+          "map": null
+        },
+        {
+          "name": "MethodSignature",
+          "datatype": "string",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "MethodDCStopVerbose",
+      "displayName": "MethodDCStopVerbose",
+      "descriptor": {
+        "id": 144,
+        "version": 0,
+        "channel": 0,
+        "level": "Information",
+        "opcode": 40,
+        "task": 1,
+        "keyword": 48
+      },
+      "fields": [
+        {
+          "name": "MethodID",
+          "datatype": "ulong",
+          "map": null
+        },
+        {
+          "name": "ModuleID",
+          "datatype": "ulong",
+          "map": null
+        },
+        {
+          "name": "MethodStartAddress",
+          "datatype": "ulong",
+          "map": null
+        },
+        {
+          "name": "MethodSize",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "MethodToken",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "MethodFlags",
+          "datatype": "uint",
+          "map": "MethodFlagsMap"
+        },
+        {
+          "name": "MethodNamespace",
+          "datatype": "string",
+          "map": null
+        },
+        {
+          "name": "MethodName",
+          "datatype": "string",
+          "map": null
+        },
+        {
+          "name": "MethodSignature",
+          "datatype": "string",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "MethodDCStartComplete",
+      "displayName": "MethodDCStartComplete",
+      "descriptor": {
+        "id": 145,
+        "version": 0,
+        "channel": 0,
+        "level": "Information",
+        "opcode": 14,
+        "task": 1,
+        "keyword": 131128
+      },
+      "fields": []
+    },
+    {
+      "name": "MethodDCStopComplete",
+      "displayName": "MethodDCStopComplete",
+      "descriptor": {
+        "id": 146,
+        "version": 0,
+        "channel": 0,
+        "level": "Information",
+        "opcode": 15,
+        "task": 1,
+        "keyword": 131128
+      },
+      "fields": []
+    },
+    {
+      "name": "MethodDCStartInit",
+      "displayName": "MethodDCStartInit",
+      "descriptor": {
+        "id": 147,
+        "version": 0,
+        "channel": 0,
+        "level": "Information",
+        "opcode": 16,
+        "task": 1,
+        "keyword": 131128
+      },
+      "fields": []
+    },
+    {
+      "name": "MethodDCStopInit",
+      "displayName": "MethodDCStopInit",
+      "descriptor": {
+        "id": 148,
+        "version": 0,
+        "channel": 0,
+        "level": "Information",
+        "opcode": 17,
+        "task": 1,
+        "keyword": 131128
+      },
+      "fields": []
+    },
+    {
+      "name": "MethodMethodDCStartILToNativeMap",
+      "displayName": "MethodMethodDCStartILToNativeMap",
+      "descriptor": {
+        "id": 149,
+        "version": 0,
+        "channel": 0,
+        "level": "Verbose",
+        "opcode": 41,
+        "task": 1,
+        "keyword": 131072
+      },
+      "fields": [
+        {
+          "name": "MethodID",
+          "datatype": "ulong",
+          "map": null
+        },
+        {
+          "name": "ReJITID",
+          "datatype": "ulong",
+          "map": null
+        },
+        {
+          "name": "MethodExtent",
+          "datatype": "byte",
+          "map": null
+        },
+        {
+          "name": "CountOfMapEntries",
+          "datatype": "ushort",
+          "map": null
+        },
+        {
+          "name": "ILOffsets",
+          "datatype": "uint[CountOfMapEntries]",
+          "map": null
+        },
+        {
+          "name": "NativeOffsets",
+          "datatype": "uint[CountOfMapEntries]",
+          "map": null
+        },
+        {
+          "name": "ClrInstanceID",
+          "datatype": "ushort",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "MethodMethodDCEndILToNativeMap",
+      "displayName": "MethodMethodDCEndILToNativeMap",
+      "descriptor": {
+        "id": 150,
+        "version": 0,
+        "channel": 0,
+        "level": "Verbose",
+        "opcode": 42,
+        "task": 1,
+        "keyword": 131072
+      },
+      "fields": [
+        {
+          "name": "MethodID",
+          "datatype": "ulong",
+          "map": null
+        },
+        {
+          "name": "ReJITID",
+          "datatype": "ulong",
+          "map": null
+        },
+        {
+          "name": "MethodExtent",
+          "datatype": "byte",
+          "map": null
+        },
+        {
+          "name": "CountOfMapEntries",
+          "datatype": "ushort",
+          "map": null
+        },
+        {
+          "name": "ILOffsets",
+          "datatype": "uint[CountOfMapEntries]",
+          "map": null
+        },
+        {
+          "name": "NativeOffsets",
+          "datatype": "uint[CountOfMapEntries]",
+          "map": null
+        },
+        {
+          "name": "ClrInstanceID",
+          "datatype": "ushort",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "LoaderDomainModuleDCStart",
+      "displayName": "LoaderDomainModuleDCStart",
+      "descriptor": {
+        "id": 151,
+        "version": 0,
+        "channel": 0,
+        "level": "Information",
+        "opcode": 46,
+        "task": 2,
+        "keyword": 8
+      },
+      "fields": [
+        {
+          "name": "ModuleID",
+          "datatype": "ulong",
+          "map": null
+        },
+        {
+          "name": "AssemblyID",
+          "datatype": "ulong",
+          "map": null
+        },
+        {
+          "name": "AppDomainID",
+          "datatype": "ulong",
+          "map": null
+        },
+        {
+          "name": "ModuleFlags",
+          "datatype": "uint",
+          "map": "ModuleFlagsMap"
+        },
+        {
+          "name": "Reserved1",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "ModuleILPath",
+          "datatype": "string",
+          "map": null
+        },
+        {
+          "name": "ModuleNativePath",
+          "datatype": "string",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "LoaderDomainModuleDCStop",
+      "displayName": "LoaderDomainModuleDCStop",
+      "descriptor": {
+        "id": 152,
+        "version": 0,
+        "channel": 0,
+        "level": "Information",
+        "opcode": 47,
+        "task": 2,
+        "keyword": 8
+      },
+      "fields": [
+        {
+          "name": "ModuleID",
+          "datatype": "ulong",
+          "map": null
+        },
+        {
+          "name": "AssemblyID",
+          "datatype": "ulong",
+          "map": null
+        },
+        {
+          "name": "AppDomainID",
+          "datatype": "ulong",
+          "map": null
+        },
+        {
+          "name": "ModuleFlags",
+          "datatype": "uint",
+          "map": "ModuleFlagsMap"
+        },
+        {
+          "name": "Reserved1",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "ModuleILPath",
+          "datatype": "string",
+          "map": null
+        },
+        {
+          "name": "ModuleNativePath",
+          "datatype": "string",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "LoaderModuleDCStart",
+      "displayName": "LoaderModuleDCStart",
+      "descriptor": {
+        "id": 153,
+        "version": 0,
+        "channel": 0,
+        "level": "Information",
+        "opcode": 35,
+        "task": 2,
+        "keyword": 8
+      },
+      "fields": [
+        {
+          "name": "ModuleID",
+          "datatype": "ulong",
+          "map": null
+        },
+        {
+          "name": "AssemblyID",
+          "datatype": "ulong",
+          "map": null
+        },
+        {
+          "name": "ModuleFlags",
+          "datatype": "uint",
+          "map": "ModuleFlagsMap"
+        },
+        {
+          "name": "Reserved1",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "ModuleILPath",
+          "datatype": "string",
+          "map": null
+        },
+        {
+          "name": "ModuleNativePath",
+          "datatype": "string",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "LoaderModuleDCStop",
+      "displayName": "LoaderModuleDCStop",
+      "descriptor": {
+        "id": 154,
+        "version": 0,
+        "channel": 0,
+        "level": "Information",
+        "opcode": 36,
+        "task": 2,
+        "keyword": 8
+      },
+      "fields": [
+        {
+          "name": "ModuleID",
+          "datatype": "ulong",
+          "map": null
+        },
+        {
+          "name": "AssemblyID",
+          "datatype": "ulong",
+          "map": null
+        },
+        {
+          "name": "ModuleFlags",
+          "datatype": "uint",
+          "map": "ModuleFlagsMap"
+        },
+        {
+          "name": "Reserved1",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "ModuleILPath",
+          "datatype": "string",
+          "map": null
+        },
+        {
+          "name": "ModuleNativePath",
+          "datatype": "string",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "LoaderAssemblyDCStart",
+      "displayName": "LoaderAssemblyDCStart",
+      "descriptor": {
+        "id": 155,
+        "version": 0,
+        "channel": 0,
+        "level": "Information",
+        "opcode": 39,
+        "task": 2,
+        "keyword": 8
+      },
+      "fields": [
+        {
+          "name": "AssemblyID",
+          "datatype": "ulong",
+          "map": null
+        },
+        {
+          "name": "AppDomainID",
+          "datatype": "ulong",
+          "map": null
+        },
+        {
+          "name": "AssemblyFlags",
+          "datatype": "uint",
+          "map": "AssemblyFlagsMap"
+        },
+        {
+          "name": "FullyQualifiedAssemblyName",
+          "datatype": "string",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "LoaderAssemblyDCStop",
+      "displayName": "LoaderAssemblyDCStop",
+      "descriptor": {
+        "id": 156,
+        "version": 0,
+        "channel": 0,
+        "level": "Information",
+        "opcode": 40,
+        "task": 2,
+        "keyword": 8
+      },
+      "fields": [
+        {
+          "name": "AssemblyID",
+          "datatype": "ulong",
+          "map": null
+        },
+        {
+          "name": "AppDomainID",
+          "datatype": "ulong",
+          "map": null
+        },
+        {
+          "name": "AssemblyFlags",
+          "datatype": "uint",
+          "map": "AssemblyFlagsMap"
+        },
+        {
+          "name": "FullyQualifiedAssemblyName",
+          "datatype": "string",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "LoaderAppDomainDCStart",
+      "displayName": "LoaderAppDomainDCStart",
+      "descriptor": {
+        "id": 157,
+        "version": 0,
+        "channel": 0,
+        "level": "Information",
+        "opcode": 43,
+        "task": 2,
+        "keyword": 8
+      },
+      "fields": [
+        {
+          "name": "AppDomainID",
+          "datatype": "ulong",
+          "map": null
+        },
+        {
+          "name": "AppDomainFlags",
+          "datatype": "uint",
+          "map": "AppDomainFlagsMap"
+        },
+        {
+          "name": "AppDomainName",
+          "datatype": "string",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "LoaderAppDomainDCStop",
+      "displayName": "LoaderAppDomainDCStop",
+      "descriptor": {
+        "id": 158,
+        "version": 0,
+        "channel": 0,
+        "level": "Information",
+        "opcode": 44,
+        "task": 2,
+        "keyword": 8
+      },
+      "fields": [
+        {
+          "name": "AppDomainID",
+          "datatype": "ulong",
+          "map": null
+        },
+        {
+          "name": "AppDomainFlags",
+          "datatype": "uint",
+          "map": "AppDomainFlagsMap"
+        },
+        {
+          "name": "AppDomainName",
+          "datatype": "string",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "LoaderThreadDCStop",
+      "displayName": "LoaderThreadDCStop",
+      "descriptor": {
+        "id": 159,
+        "version": 0,
+        "channel": 0,
+        "level": "Information",
+        "opcode": 48,
+        "task": 2,
+        "keyword": 67584
+      },
+      "fields": [
+        {
+          "name": "ManagedThreadID",
+          "datatype": "ulong",
+          "map": null
+        },
+        {
+          "name": "AppDomainID",
+          "datatype": "ulong",
+          "map": null
+        },
+        {
+          "name": "Flags",
+          "datatype": "uint",
+          "map": "ThreadFlagsMap"
+        },
+        {
+          "name": "ManagedThreadIndex",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "OSThreadID",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "ClrInstanceID",
+          "datatype": "ushort",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "ClrPerfTrackModuleRangeDCStart",
+      "displayName": "ClrPerfTrackModuleRangeDCStart",
+      "descriptor": {
+        "id": 160,
+        "version": 0,
+        "channel": 0,
+        "level": "Information",
+        "opcode": 10,
+        "task": 20,
+        "keyword": 536870912
+      },
+      "fields": [
+        {
+          "name": "ClrInstanceID",
+          "datatype": "ushort",
+          "map": null
+        },
+        {
+          "name": "ModuleID",
+          "datatype": "ulong",
+          "map": null
+        },
+        {
+          "name": "RangeBegin",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "RangeSize",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "RangeType",
+          "datatype": "byte",
+          "map": "ModuleRangeTypeMap"
+        }
+      ]
+    },
+    {
+      "name": "ClrPerfTrackModuleRangeDCEnd",
+      "displayName": "ClrPerfTrackModuleRangeDCEnd",
+      "descriptor": {
+        "id": 161,
+        "version": 0,
+        "channel": 0,
+        "level": "Information",
+        "opcode": 11,
+        "task": 20,
+        "keyword": 536870912
+      },
+      "fields": [
+        {
+          "name": "ClrInstanceID",
+          "datatype": "ushort",
+          "map": null
+        },
+        {
+          "name": "ModuleID",
+          "datatype": "ulong",
+          "map": null
+        },
+        {
+          "name": "RangeBegin",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "RangeSize",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "RangeType",
+          "datatype": "byte",
+          "map": "ModuleRangeTypeMap"
+        }
+      ]
+    },
+    {
+      "name": "RuntimeStart",
+      "displayName": "RuntimeStart",
+      "descriptor": {
+        "id": 187,
+        "version": 0,
+        "channel": 0,
+        "level": "Information",
+        "opcode": "Start",
+        "task": 19,
+        "keyword": 0
+      },
+      "fields": [
+        {
+          "name": "ClrInstanceID",
+          "datatype": "ushort",
+          "map": null
+        },
+        {
+          "name": "Sku",
+          "datatype": "ushort",
+          "map": "RuntimeSkuMap"
+        },
+        {
+          "name": "BclMajorVersion",
+          "datatype": "ushort",
+          "map": null
+        },
+        {
+          "name": "BclMinorVersion",
+          "datatype": "ushort",
+          "map": null
+        },
+        {
+          "name": "BclBuildNumber",
+          "datatype": "ushort",
+          "map": null
+        },
+        {
+          "name": "BclQfeNumber",
+          "datatype": "ushort",
+          "map": null
+        },
+        {
+          "name": "VMMajorVersion",
+          "datatype": "ushort",
+          "map": null
+        },
+        {
+          "name": "VMMinorVersion",
+          "datatype": "ushort",
+          "map": null
+        },
+        {
+          "name": "VMBuildNumber",
+          "datatype": "ushort",
+          "map": null
+        },
+        {
+          "name": "VMQfeNumber",
+          "datatype": "ushort",
+          "map": null
+        },
+        {
+          "name": "StartupFlags",
+          "datatype": "uint",
+          "map": "StartupFlagsMap"
+        },
+        {
+          "name": "StartupMode",
+          "datatype": "byte",
+          "map": "StartupModeMap"
+        },
+        {
+          "name": "CommandLine",
+          "datatype": "string",
+          "map": null
+        },
+        {
+          "name": "ComObjectGuid",
+          "datatype": "guid",
+          "map": null
+        },
+        {
+          "name": "RuntimeDllPath",
+          "datatype": "string",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "MethodDCStart",
+      "displayName": "MethodDCStart",
+      "descriptor": {
+        "id": 141,
+        "version": 1,
+        "channel": 0,
+        "level": "Information",
+        "opcode": 35,
+        "task": 1,
+        "keyword": 48
+      },
+      "fields": [
+        {
+          "name": "MethodID",
+          "datatype": "ulong",
+          "map": null
+        },
+        {
+          "name": "ModuleID",
+          "datatype": "ulong",
+          "map": null
+        },
+        {
+          "name": "MethodStartAddress",
+          "datatype": "ulong",
+          "map": null
+        },
+        {
+          "name": "MethodSize",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "MethodToken",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "MethodFlags",
+          "datatype": "uint",
+          "map": "MethodFlagsMap"
+        },
+        {
+          "name": "ClrInstanceID",
+          "datatype": "ushort",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "MethodDCStop",
+      "displayName": "MethodDCStop",
+      "descriptor": {
+        "id": 142,
+        "version": 1,
+        "channel": 0,
+        "level": "Information",
+        "opcode": 36,
+        "task": 1,
+        "keyword": 48
+      },
+      "fields": [
+        {
+          "name": "MethodID",
+          "datatype": "ulong",
+          "map": null
+        },
+        {
+          "name": "ModuleID",
+          "datatype": "ulong",
+          "map": null
+        },
+        {
+          "name": "MethodStartAddress",
+          "datatype": "ulong",
+          "map": null
+        },
+        {
+          "name": "MethodSize",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "MethodToken",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "MethodFlags",
+          "datatype": "uint",
+          "map": "MethodFlagsMap"
+        },
+        {
+          "name": "ClrInstanceID",
+          "datatype": "ushort",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "MethodDCStartVerbose",
+      "displayName": "MethodDCStartVerbose",
+      "descriptor": {
+        "id": 143,
+        "version": 1,
+        "channel": 0,
+        "level": "Information",
+        "opcode": 39,
+        "task": 1,
+        "keyword": 48
+      },
+      "fields": [
+        {
+          "name": "MethodID",
+          "datatype": "ulong",
+          "map": null
+        },
+        {
+          "name": "ModuleID",
+          "datatype": "ulong",
+          "map": null
+        },
+        {
+          "name": "MethodStartAddress",
+          "datatype": "ulong",
+          "map": null
+        },
+        {
+          "name": "MethodSize",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "MethodToken",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "MethodFlags",
+          "datatype": "uint",
+          "map": "MethodFlagsMap"
+        },
+        {
+          "name": "MethodNamespace",
+          "datatype": "string",
+          "map": null
+        },
+        {
+          "name": "MethodName",
+          "datatype": "string",
+          "map": null
+        },
+        {
+          "name": "MethodSignature",
+          "datatype": "string",
+          "map": null
+        },
+        {
+          "name": "ClrInstanceID",
+          "datatype": "ushort",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "MethodDCStopVerbose",
+      "displayName": "MethodDCStopVerbose",
+      "descriptor": {
+        "id": 144,
+        "version": 1,
+        "channel": 0,
+        "level": "Information",
+        "opcode": 40,
+        "task": 1,
+        "keyword": 48
+      },
+      "fields": [
+        {
+          "name": "MethodID",
+          "datatype": "ulong",
+          "map": null
+        },
+        {
+          "name": "ModuleID",
+          "datatype": "ulong",
+          "map": null
+        },
+        {
+          "name": "MethodStartAddress",
+          "datatype": "ulong",
+          "map": null
+        },
+        {
+          "name": "MethodSize",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "MethodToken",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "MethodFlags",
+          "datatype": "uint",
+          "map": "MethodFlagsMap"
+        },
+        {
+          "name": "MethodNamespace",
+          "datatype": "string",
+          "map": null
+        },
+        {
+          "name": "MethodName",
+          "datatype": "string",
+          "map": null
+        },
+        {
+          "name": "MethodSignature",
+          "datatype": "string",
+          "map": null
+        },
+        {
+          "name": "ClrInstanceID",
+          "datatype": "ushort",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "MethodDCStartComplete",
+      "displayName": "MethodDCStartComplete",
+      "descriptor": {
+        "id": 145,
+        "version": 1,
+        "channel": 0,
+        "level": "Information",
+        "opcode": 14,
+        "task": 1,
+        "keyword": 131128
+      },
+      "fields": [
+        {
+          "name": "ClrInstanceID",
+          "datatype": "ushort",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "MethodDCStopComplete",
+      "displayName": "MethodDCStopComplete",
+      "descriptor": {
+        "id": 146,
+        "version": 1,
+        "channel": 0,
+        "level": "Information",
+        "opcode": 15,
+        "task": 1,
+        "keyword": 131128
+      },
+      "fields": [
+        {
+          "name": "ClrInstanceID",
+          "datatype": "ushort",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "MethodDCStartInit",
+      "displayName": "MethodDCStartInit",
+      "descriptor": {
+        "id": 147,
+        "version": 1,
+        "channel": 0,
+        "level": "Information",
+        "opcode": 16,
+        "task": 1,
+        "keyword": 131128
+      },
+      "fields": [
+        {
+          "name": "ClrInstanceID",
+          "datatype": "ushort",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "MethodDCStopInit",
+      "displayName": "MethodDCStopInit",
+      "descriptor": {
+        "id": 148,
+        "version": 1,
+        "channel": 0,
+        "level": "Information",
+        "opcode": 17,
+        "task": 1,
+        "keyword": 131128
+      },
+      "fields": [
+        {
+          "name": "ClrInstanceID",
+          "datatype": "ushort",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "LoaderDomainModuleDCStart",
+      "displayName": "LoaderDomainModuleDCStart",
+      "descriptor": {
+        "id": 151,
+        "version": 1,
+        "channel": 0,
+        "level": "Information",
+        "opcode": 46,
+        "task": 2,
+        "keyword": 8
+      },
+      "fields": [
+        {
+          "name": "ModuleID",
+          "datatype": "ulong",
+          "map": null
+        },
+        {
+          "name": "AssemblyID",
+          "datatype": "ulong",
+          "map": null
+        },
+        {
+          "name": "AppDomainID",
+          "datatype": "ulong",
+          "map": null
+        },
+        {
+          "name": "ModuleFlags",
+          "datatype": "uint",
+          "map": "ModuleFlagsMap"
+        },
+        {
+          "name": "Reserved1",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "ModuleILPath",
+          "datatype": "string",
+          "map": null
+        },
+        {
+          "name": "ModuleNativePath",
+          "datatype": "string",
+          "map": null
+        },
+        {
+          "name": "ClrInstanceID",
+          "datatype": "ushort",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "LoaderDomainModuleDCStop",
+      "displayName": "LoaderDomainModuleDCStop",
+      "descriptor": {
+        "id": 152,
+        "version": 1,
+        "channel": 0,
+        "level": "Information",
+        "opcode": 47,
+        "task": 2,
+        "keyword": 8
+      },
+      "fields": [
+        {
+          "name": "ModuleID",
+          "datatype": "ulong",
+          "map": null
+        },
+        {
+          "name": "AssemblyID",
+          "datatype": "ulong",
+          "map": null
+        },
+        {
+          "name": "AppDomainID",
+          "datatype": "ulong",
+          "map": null
+        },
+        {
+          "name": "ModuleFlags",
+          "datatype": "uint",
+          "map": "ModuleFlagsMap"
+        },
+        {
+          "name": "Reserved1",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "ModuleILPath",
+          "datatype": "string",
+          "map": null
+        },
+        {
+          "name": "ModuleNativePath",
+          "datatype": "string",
+          "map": null
+        },
+        {
+          "name": "ClrInstanceID",
+          "datatype": "ushort",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "LoaderModuleDCStart",
+      "displayName": "LoaderModuleDCStart",
+      "descriptor": {
+        "id": 153,
+        "version": 1,
+        "channel": 0,
+        "level": "Information",
+        "opcode": 35,
+        "task": 2,
+        "keyword": 536870920
+      },
+      "fields": [
+        {
+          "name": "ModuleID",
+          "datatype": "ulong",
+          "map": null
+        },
+        {
+          "name": "AssemblyID",
+          "datatype": "ulong",
+          "map": null
+        },
+        {
+          "name": "ModuleFlags",
+          "datatype": "uint",
+          "map": "ModuleFlagsMap"
+        },
+        {
+          "name": "Reserved1",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "ModuleILPath",
+          "datatype": "string",
+          "map": null
+        },
+        {
+          "name": "ModuleNativePath",
+          "datatype": "string",
+          "map": null
+        },
+        {
+          "name": "ClrInstanceID",
+          "datatype": "ushort",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "LoaderModuleDCStop",
+      "displayName": "LoaderModuleDCStop",
+      "descriptor": {
+        "id": 154,
+        "version": 1,
+        "channel": 0,
+        "level": "Information",
+        "opcode": 36,
+        "task": 2,
+        "keyword": 536870920
+      },
+      "fields": [
+        {
+          "name": "ModuleID",
+          "datatype": "ulong",
+          "map": null
+        },
+        {
+          "name": "AssemblyID",
+          "datatype": "ulong",
+          "map": null
+        },
+        {
+          "name": "ModuleFlags",
+          "datatype": "uint",
+          "map": "ModuleFlagsMap"
+        },
+        {
+          "name": "Reserved1",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "ModuleILPath",
+          "datatype": "string",
+          "map": null
+        },
+        {
+          "name": "ModuleNativePath",
+          "datatype": "string",
+          "map": null
+        },
+        {
+          "name": "ClrInstanceID",
+          "datatype": "ushort",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "LoaderAssemblyDCStart",
+      "displayName": "LoaderAssemblyDCStart",
+      "descriptor": {
+        "id": 155,
+        "version": 1,
+        "channel": 0,
+        "level": "Information",
+        "opcode": 39,
+        "task": 2,
+        "keyword": 8
+      },
+      "fields": [
+        {
+          "name": "AssemblyID",
+          "datatype": "ulong",
+          "map": null
+        },
+        {
+          "name": "AppDomainID",
+          "datatype": "ulong",
+          "map": null
+        },
+        {
+          "name": "BindingID",
+          "datatype": "ulong",
+          "map": null
+        },
+        {
+          "name": "AssemblyFlags",
+          "datatype": "uint",
+          "map": "AssemblyFlagsMap"
+        },
+        {
+          "name": "FullyQualifiedAssemblyName",
+          "datatype": "string",
+          "map": null
+        },
+        {
+          "name": "ClrInstanceID",
+          "datatype": "ushort",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "LoaderAssemblyDCStop",
+      "displayName": "LoaderAssemblyDCStop",
+      "descriptor": {
+        "id": 156,
+        "version": 1,
+        "channel": 0,
+        "level": "Information",
+        "opcode": 40,
+        "task": 2,
+        "keyword": 8
+      },
+      "fields": [
+        {
+          "name": "AssemblyID",
+          "datatype": "ulong",
+          "map": null
+        },
+        {
+          "name": "AppDomainID",
+          "datatype": "ulong",
+          "map": null
+        },
+        {
+          "name": "BindingID",
+          "datatype": "ulong",
+          "map": null
+        },
+        {
+          "name": "AssemblyFlags",
+          "datatype": "uint",
+          "map": "AssemblyFlagsMap"
+        },
+        {
+          "name": "FullyQualifiedAssemblyName",
+          "datatype": "string",
+          "map": null
+        },
+        {
+          "name": "ClrInstanceID",
+          "datatype": "ushort",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "LoaderAppDomainDCStart",
+      "displayName": "LoaderAppDomainDCStart",
+      "descriptor": {
+        "id": 157,
+        "version": 1,
+        "channel": 0,
+        "level": "Information",
+        "opcode": 43,
+        "task": 2,
+        "keyword": 8
+      },
+      "fields": [
+        {
+          "name": "AppDomainID",
+          "datatype": "ulong",
+          "map": null
+        },
+        {
+          "name": "AppDomainFlags",
+          "datatype": "uint",
+          "map": "AppDomainFlagsMap"
+        },
+        {
+          "name": "AppDomainName",
+          "datatype": "string",
+          "map": null
+        },
+        {
+          "name": "AppDomainIndex",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "ClrInstanceID",
+          "datatype": "ushort",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "LoaderAppDomainDCStop",
+      "displayName": "LoaderAppDomainDCStop",
+      "descriptor": {
+        "id": 158,
+        "version": 1,
+        "channel": 0,
+        "level": "Information",
+        "opcode": 44,
+        "task": 2,
+        "keyword": 8
+      },
+      "fields": [
+        {
+          "name": "AppDomainID",
+          "datatype": "ulong",
+          "map": null
+        },
+        {
+          "name": "AppDomainFlags",
+          "datatype": "uint",
+          "map": "AppDomainFlagsMap"
+        },
+        {
+          "name": "AppDomainName",
+          "datatype": "string",
+          "map": null
+        },
+        {
+          "name": "AppDomainIndex",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "ClrInstanceID",
+          "datatype": "ushort",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "MethodDCStart",
+      "displayName": "MethodDCStart",
+      "descriptor": {
+        "id": 141,
+        "version": 2,
+        "channel": 0,
+        "level": "Information",
+        "opcode": 35,
+        "task": 1,
+        "keyword": 48
+      },
+      "fields": [
+        {
+          "name": "MethodID",
+          "datatype": "ulong",
+          "map": null
+        },
+        {
+          "name": "ModuleID",
+          "datatype": "ulong",
+          "map": null
+        },
+        {
+          "name": "MethodStartAddress",
+          "datatype": "ulong",
+          "map": null
+        },
+        {
+          "name": "MethodSize",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "MethodToken",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "MethodFlags",
+          "datatype": "uint",
+          "map": "MethodFlagsMap"
+        },
+        {
+          "name": "ClrInstanceID",
+          "datatype": "ushort",
+          "map": null
+        },
+        {
+          "name": "ReJITID",
+          "datatype": "ulong",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "MethodDCStop",
+      "displayName": "MethodDCStop",
+      "descriptor": {
+        "id": 142,
+        "version": 2,
+        "channel": 0,
+        "level": "Information",
+        "opcode": 36,
+        "task": 1,
+        "keyword": 48
+      },
+      "fields": [
+        {
+          "name": "MethodID",
+          "datatype": "ulong",
+          "map": null
+        },
+        {
+          "name": "ModuleID",
+          "datatype": "ulong",
+          "map": null
+        },
+        {
+          "name": "MethodStartAddress",
+          "datatype": "ulong",
+          "map": null
+        },
+        {
+          "name": "MethodSize",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "MethodToken",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "MethodFlags",
+          "datatype": "uint",
+          "map": "MethodFlagsMap"
+        },
+        {
+          "name": "ClrInstanceID",
+          "datatype": "ushort",
+          "map": null
+        },
+        {
+          "name": "ReJITID",
+          "datatype": "ulong",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "MethodDCStartVerbose",
+      "displayName": "MethodDCStartVerbose",
+      "descriptor": {
+        "id": 143,
+        "version": 2,
+        "channel": 0,
+        "level": "Information",
+        "opcode": 39,
+        "task": 1,
+        "keyword": 48
+      },
+      "fields": [
+        {
+          "name": "MethodID",
+          "datatype": "ulong",
+          "map": null
+        },
+        {
+          "name": "ModuleID",
+          "datatype": "ulong",
+          "map": null
+        },
+        {
+          "name": "MethodStartAddress",
+          "datatype": "ulong",
+          "map": null
+        },
+        {
+          "name": "MethodSize",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "MethodToken",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "MethodFlags",
+          "datatype": "uint",
+          "map": "MethodFlagsMap"
+        },
+        {
+          "name": "MethodNamespace",
+          "datatype": "string",
+          "map": null
+        },
+        {
+          "name": "MethodName",
+          "datatype": "string",
+          "map": null
+        },
+        {
+          "name": "MethodSignature",
+          "datatype": "string",
+          "map": null
+        },
+        {
+          "name": "ClrInstanceID",
+          "datatype": "ushort",
+          "map": null
+        },
+        {
+          "name": "ReJITID",
+          "datatype": "ulong",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "MethodDCStopVerbose",
+      "displayName": "MethodDCStopVerbose",
+      "descriptor": {
+        "id": 144,
+        "version": 2,
+        "channel": 0,
+        "level": "Information",
+        "opcode": 40,
+        "task": 1,
+        "keyword": 48
+      },
+      "fields": [
+        {
+          "name": "MethodID",
+          "datatype": "ulong",
+          "map": null
+        },
+        {
+          "name": "ModuleID",
+          "datatype": "ulong",
+          "map": null
+        },
+        {
+          "name": "MethodStartAddress",
+          "datatype": "ulong",
+          "map": null
+        },
+        {
+          "name": "MethodSize",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "MethodToken",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "MethodFlags",
+          "datatype": "uint",
+          "map": "MethodFlagsMap"
+        },
+        {
+          "name": "MethodNamespace",
+          "datatype": "string",
+          "map": null
+        },
+        {
+          "name": "MethodName",
+          "datatype": "string",
+          "map": null
+        },
+        {
+          "name": "MethodSignature",
+          "datatype": "string",
+          "map": null
+        },
+        {
+          "name": "ClrInstanceID",
+          "datatype": "ushort",
+          "map": null
+        },
+        {
+          "name": "ReJITID",
+          "datatype": "ulong",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "LoaderModuleDCStart",
+      "displayName": "LoaderModuleDCStart",
+      "descriptor": {
+        "id": 153,
+        "version": 2,
+        "channel": 0,
+        "level": "Information",
+        "opcode": 35,
+        "task": 2,
+        "keyword": 536870920
+      },
+      "fields": [
+        {
+          "name": "ModuleID",
+          "datatype": "ulong",
+          "map": null
+        },
+        {
+          "name": "AssemblyID",
+          "datatype": "ulong",
+          "map": null
+        },
+        {
+          "name": "ModuleFlags",
+          "datatype": "uint",
+          "map": "ModuleFlagsMap"
+        },
+        {
+          "name": "Reserved1",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "ModuleILPath",
+          "datatype": "string",
+          "map": null
+        },
+        {
+          "name": "ModuleNativePath",
+          "datatype": "string",
+          "map": null
+        },
+        {
+          "name": "ClrInstanceID",
+          "datatype": "ushort",
+          "map": null
+        },
+        {
+          "name": "ManagedPdbSignature",
+          "datatype": "guid",
+          "map": null
+        },
+        {
+          "name": "ManagedPdbAge",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "ManagedPdbBuildPath",
+          "datatype": "string",
+          "map": null
+        },
+        {
+          "name": "NativePdbSignature",
+          "datatype": "guid",
+          "map": null
+        },
+        {
+          "name": "NativePdbAge",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "NativePdbBuildPath",
+          "datatype": "string",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "LoaderModuleDCStop",
+      "displayName": "LoaderModuleDCStop",
+      "descriptor": {
+        "id": 154,
+        "version": 2,
+        "channel": 0,
+        "level": "Information",
+        "opcode": 36,
+        "task": 2,
+        "keyword": 536870920
+      },
+      "fields": [
+        {
+          "name": "ModuleID",
+          "datatype": "ulong",
+          "map": null
+        },
+        {
+          "name": "AssemblyID",
+          "datatype": "ulong",
+          "map": null
+        },
+        {
+          "name": "ModuleFlags",
+          "datatype": "uint",
+          "map": "ModuleFlagsMap"
+        },
+        {
+          "name": "Reserved1",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "ModuleILPath",
+          "datatype": "string",
+          "map": null
+        },
+        {
+          "name": "ModuleNativePath",
+          "datatype": "string",
+          "map": null
+        },
+        {
+          "name": "ClrInstanceID",
+          "datatype": "ushort",
+          "map": null
+        },
+        {
+          "name": "ManagedPdbSignature",
+          "datatype": "guid",
+          "map": null
+        },
+        {
+          "name": "ManagedPdbAge",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "ManagedPdbBuildPath",
+          "datatype": "string",
+          "map": null
+        },
+        {
+          "name": "NativePdbSignature",
+          "datatype": "guid",
+          "map": null
+        },
+        {
+          "name": "NativePdbAge",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "NativePdbBuildPath",
+          "datatype": "string",
+          "map": null
+        }
+      ]
+    }
+  ],
+  "tasks": {
+    "1": "Method",
+    "2": "Loader",
+    "11": "ClrStack",
+    "19": "Runtime",
+    "20": "ClrPerfTrack"
+  },
+  "opcodes": {
+    "10": "ModuleRangeDCStart",
+    "11": "ModuleRangeDCEnd",
+    "14": "DCStartComplete",
+    "15": "DCStopComplete",
+    "16": "DCStartInit",
+    "17": "DCStopInit",
+    "35": "DCStart",
+    "36": "DCStop",
+    "39": "DCStartVerbose",
+    "40": "DCStopVerbose",
+    "41": "MethodDCStartILToNativeMap",
+    "42": "MethodDCEndILToNativeMap",
+    "43": "AppDomainDCStart",
+    "44": "AppDomainDCStop",
+    "46": "DomainModuleDCStart",
+    "47": "DomainModuleDCStop",
+    "48": "ThreadDCStop",
+    "82": "Walk"
+  },
+  "keywords": {
+    "8": "LoaderRundownKeyword",
+    "16": "JitRundownKeyword",
+    "32": "NGenRundownKeyword",
+    "64": "StartRundownKeyword",
+    "256": "EndRundownKeyword",
+    "2048": "AppDomainResourceManagementRundownKeyword",
+    "65536": "ThreadingKeyword",
+    "131072": "JittedMethodILToNativeMapRundownKeyword",
+    "262144": "OverrideAndSuppressNGenEventsRundownKeyword",
+    "536870912": "PerfTrackRundownKeyword",
+    "1073741824": "StackKeyword"
+  },
+  "maps": [
+    {
+      "name": "AppDomainFlagsMap",
+      "flags": true,
+      "values": {
+        "1": "Default",
+        "2": "Executable",
+        "4": "Shared"
+      }
+    },
+    {
+      "name": "AssemblyFlagsMap",
+      "flags": true,
+      "values": {
+        "1": "DomainNeutral",
+        "2": "Dynamic",
+        "4": "Native",
+        "8": "Collectible"
+      }
+    },
+    {
+      "name": "MethodFlagsMap",
+      "flags": true,
+      "values": {
+        "1": "Dynamic",
+        "2": "Generic",
+        "4": "HasSharedGenericCode",
+        "8": "Jitted"
+      }
+    },
+    {
+      "name": "ModuleFlagsMap",
+      "flags": true,
+      "values": {
+        "1": "DomainNeutral",
+        "2": "Native",
+        "4": "Dynamic",
+        "8": "Manifest"
+      }
+    },
+    {
+      "name": "ModuleRangeTypeMap",
+      "flags": true,
+      "values": {
+        "4": "ColdRange"
+      }
+    },
+    {
+      "name": "RuntimeSkuMap",
+      "flags": true,
+      "values": {
+        "1": "DesktopClr",
+        "2": "CoreClr"
+      }
+    },
+    {
+      "name": "StartupFlagsMap",
+      "flags": true,
+      "values": {
+        "1": "CONCURRENT_GC",
+        "2": "LOADER_OPTIMIZATION_SINGLE_DOMAIN",
+        "4": "LOADER_OPTIMIZATION_MULTI_DOMAIN",
+        "16": "LOADER_SAFEMODE",
+        "256": "LOADER_SETPREFERENCE",
+        "4096": "SERVER_GC",
+        "8192": "HOARD_GC_VM",
+        "16384": "SINGLE_VERSION_HOSTING_INTERFACE",
+        "65536": "LEGACY_IMPERSONATION",
+        "131072": "DISABLE_COMMITTHREADSTACK",
+        "262144": "ALWAYSFLOW_IMPERSONATION",
+        "524288": "TRIM_GC_COMMIT",
+        "1048576": "ETW",
+        "2097152": "SERVER_BUILD",
+        "4194304": "ARM"
+      }
+    },
+    {
+      "name": "StartupModeMap",
+      "flags": true,
+      "values": {
+        "1": "ManagedExe",
+        "2": "HostedClr",
+        "4": "IjwDll",
+        "8": "ComActivated",
+        "16": "Other"
+      }
+    },
+    {
+      "name": "ThreadFlagsMap",
+      "flags": true,
+      "values": {
+        "1": "GCSpecial",
+        "2": "Finalizer",
+        "4": "ThreadPoolWorker"
+      }
+    }
+  ],
+  "structs": []
+}

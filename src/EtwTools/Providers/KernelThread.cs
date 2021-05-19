@@ -113,9 +113,3069 @@ namespace EtwTools
         }
 
         /// <summary>
+        /// An event wrapper for a Start event.
+        /// </summary>
+        public readonly ref struct StartEvent
+        {
+            private readonly EtwEvent _etwEvent;
+
+            /// <summary>
+            /// Event name.
+            /// </summary>
+            public const string Name = "Start";
+
+            /// <summary>
+            /// The event provider.
+            /// </summary>
+            public static readonly Guid Provider = Id;
+
+            /// <summary>
+            /// Event descriptor.
+            /// </summary>
+            public static EtwEventDescriptor Descriptor { get; } = new EtwEventDescriptor
+            {
+                Id = 0,
+                Version = 0,
+                Channel = 0,
+                Level = EtwTraceLevel.None,
+                Opcode = EtwEventOpcode.Start,
+                Task = 0,
+                Keyword = 0
+            };
+
+            /// <summary>
+            /// The process the event was recorded in.
+            /// </summary>
+            public uint ProcessId => _etwEvent.ProcessId;
+
+            /// <summary>
+            /// The thread the event was recorded on.
+            /// </summary>
+            public uint ThreadId => _etwEvent.ThreadId;
+
+            /// <summary>
+            /// The timestamp of the event.
+            /// </summary>
+            public long Timestamp => _etwEvent.Timestamp;
+
+            /// <summary>
+            /// The processor number the event was recorded on.
+            /// </summary>
+            public byte ProcessorNumber => _etwEvent.ProcessorNumber;
+
+            /// <summary>
+            /// Timing information for the event.
+            /// </summary>
+            public (ulong? KernelTime, ulong? UserTime, ulong? ProcessorTime) Time => _etwEvent.Time;
+
+            /// <summary>
+            /// Data for the event.
+            /// </summary>
+            public StartData Data => new(_etwEvent);
+
+            /// <summary>
+            /// Creates a new StartEvent.
+            /// </summary>
+            /// <param name="etwEvent">The event.</param>
+            public StartEvent(EtwEvent etwEvent)
+            {
+                _etwEvent = etwEvent;
+            }
+
+            /// <summary>
+            /// A data wrapper for a Start event.
+            /// </summary>
+            public ref struct StartData
+            {
+                private readonly EtwEvent _etwEvent;
+
+                private int _offset_TThreadId;
+                private int _offset_ProcessId;
+
+                private int Offset_TThreadId
+                {
+                    get
+                    {
+                        if (_offset_TThreadId == -1)
+                        {
+                            _offset_TThreadId = 0;
+                        }
+
+                        return _offset_TThreadId;
+                    }
+                }
+
+                private int Offset_ProcessId
+                {
+                    get
+                    {
+                        if (_offset_ProcessId == -1)
+                        {
+                            _offset_ProcessId = Offset_TThreadId + 4;
+                        }
+
+                        return _offset_ProcessId;
+                    }
+                }
+
+                /// <summary>
+                /// Retrieves the TThreadId field.
+                /// </summary>
+                public uint TThreadId => BitConverter.ToUInt32(_etwEvent.Data[Offset_TThreadId..]);
+
+                /// <summary>
+                /// Retrieves the ProcessId field.
+                /// </summary>
+                public uint ProcessId => BitConverter.ToUInt32(_etwEvent.Data[Offset_ProcessId..]);
+
+                /// <summary>
+                /// Creates a new StartData.
+                /// </summary>
+                /// <param name="etwEvent">The event.</param>
+                public StartData(EtwEvent etwEvent)
+                {
+                    _etwEvent = etwEvent;
+                    _offset_TThreadId = -1;
+                    _offset_ProcessId = -1;
+                }
+            }
+
+        }
+
+        /// <summary>
+        /// An event wrapper for a End event.
+        /// </summary>
+        public readonly ref struct EndEvent
+        {
+            private readonly EtwEvent _etwEvent;
+
+            /// <summary>
+            /// Event name.
+            /// </summary>
+            public const string Name = "End";
+
+            /// <summary>
+            /// The event provider.
+            /// </summary>
+            public static readonly Guid Provider = Id;
+
+            /// <summary>
+            /// Event descriptor.
+            /// </summary>
+            public static EtwEventDescriptor Descriptor { get; } = new EtwEventDescriptor
+            {
+                Id = 0,
+                Version = 0,
+                Channel = 0,
+                Level = EtwTraceLevel.None,
+                Opcode = EtwEventOpcode.End,
+                Task = 0,
+                Keyword = 0
+            };
+
+            /// <summary>
+            /// The process the event was recorded in.
+            /// </summary>
+            public uint ProcessId => _etwEvent.ProcessId;
+
+            /// <summary>
+            /// The thread the event was recorded on.
+            /// </summary>
+            public uint ThreadId => _etwEvent.ThreadId;
+
+            /// <summary>
+            /// The timestamp of the event.
+            /// </summary>
+            public long Timestamp => _etwEvent.Timestamp;
+
+            /// <summary>
+            /// The processor number the event was recorded on.
+            /// </summary>
+            public byte ProcessorNumber => _etwEvent.ProcessorNumber;
+
+            /// <summary>
+            /// Timing information for the event.
+            /// </summary>
+            public (ulong? KernelTime, ulong? UserTime, ulong? ProcessorTime) Time => _etwEvent.Time;
+
+            /// <summary>
+            /// Data for the event.
+            /// </summary>
+            public EndData Data => new(_etwEvent);
+
+            /// <summary>
+            /// Creates a new EndEvent.
+            /// </summary>
+            /// <param name="etwEvent">The event.</param>
+            public EndEvent(EtwEvent etwEvent)
+            {
+                _etwEvent = etwEvent;
+            }
+
+            /// <summary>
+            /// A data wrapper for a End event.
+            /// </summary>
+            public ref struct EndData
+            {
+                private readonly EtwEvent _etwEvent;
+
+                private int _offset_TThreadId;
+                private int _offset_ProcessId;
+
+                private int Offset_TThreadId
+                {
+                    get
+                    {
+                        if (_offset_TThreadId == -1)
+                        {
+                            _offset_TThreadId = 0;
+                        }
+
+                        return _offset_TThreadId;
+                    }
+                }
+
+                private int Offset_ProcessId
+                {
+                    get
+                    {
+                        if (_offset_ProcessId == -1)
+                        {
+                            _offset_ProcessId = Offset_TThreadId + 4;
+                        }
+
+                        return _offset_ProcessId;
+                    }
+                }
+
+                /// <summary>
+                /// Retrieves the TThreadId field.
+                /// </summary>
+                public uint TThreadId => BitConverter.ToUInt32(_etwEvent.Data[Offset_TThreadId..]);
+
+                /// <summary>
+                /// Retrieves the ProcessId field.
+                /// </summary>
+                public uint ProcessId => BitConverter.ToUInt32(_etwEvent.Data[Offset_ProcessId..]);
+
+                /// <summary>
+                /// Creates a new EndData.
+                /// </summary>
+                /// <param name="etwEvent">The event.</param>
+                public EndData(EtwEvent etwEvent)
+                {
+                    _etwEvent = etwEvent;
+                    _offset_TThreadId = -1;
+                    _offset_ProcessId = -1;
+                }
+            }
+
+        }
+
+        /// <summary>
+        /// An event wrapper for a DCStart event.
+        /// </summary>
+        public readonly ref struct DCStartEvent
+        {
+            private readonly EtwEvent _etwEvent;
+
+            /// <summary>
+            /// Event name.
+            /// </summary>
+            public const string Name = "DCStart";
+
+            /// <summary>
+            /// The event provider.
+            /// </summary>
+            public static readonly Guid Provider = Id;
+
+            /// <summary>
+            /// Event descriptor.
+            /// </summary>
+            public static EtwEventDescriptor Descriptor { get; } = new EtwEventDescriptor
+            {
+                Id = 0,
+                Version = 0,
+                Channel = 0,
+                Level = EtwTraceLevel.None,
+                Opcode = EtwEventOpcode.DataCollectionStart,
+                Task = 0,
+                Keyword = 0
+            };
+
+            /// <summary>
+            /// The process the event was recorded in.
+            /// </summary>
+            public uint ProcessId => _etwEvent.ProcessId;
+
+            /// <summary>
+            /// The thread the event was recorded on.
+            /// </summary>
+            public uint ThreadId => _etwEvent.ThreadId;
+
+            /// <summary>
+            /// The timestamp of the event.
+            /// </summary>
+            public long Timestamp => _etwEvent.Timestamp;
+
+            /// <summary>
+            /// The processor number the event was recorded on.
+            /// </summary>
+            public byte ProcessorNumber => _etwEvent.ProcessorNumber;
+
+            /// <summary>
+            /// Timing information for the event.
+            /// </summary>
+            public (ulong? KernelTime, ulong? UserTime, ulong? ProcessorTime) Time => _etwEvent.Time;
+
+            /// <summary>
+            /// Data for the event.
+            /// </summary>
+            public DCStartData Data => new(_etwEvent);
+
+            /// <summary>
+            /// Creates a new DCStartEvent.
+            /// </summary>
+            /// <param name="etwEvent">The event.</param>
+            public DCStartEvent(EtwEvent etwEvent)
+            {
+                _etwEvent = etwEvent;
+            }
+
+            /// <summary>
+            /// A data wrapper for a DCStart event.
+            /// </summary>
+            public ref struct DCStartData
+            {
+                private readonly EtwEvent _etwEvent;
+
+                private int _offset_TThreadId;
+                private int _offset_ProcessId;
+
+                private int Offset_TThreadId
+                {
+                    get
+                    {
+                        if (_offset_TThreadId == -1)
+                        {
+                            _offset_TThreadId = 0;
+                        }
+
+                        return _offset_TThreadId;
+                    }
+                }
+
+                private int Offset_ProcessId
+                {
+                    get
+                    {
+                        if (_offset_ProcessId == -1)
+                        {
+                            _offset_ProcessId = Offset_TThreadId + 4;
+                        }
+
+                        return _offset_ProcessId;
+                    }
+                }
+
+                /// <summary>
+                /// Retrieves the TThreadId field.
+                /// </summary>
+                public uint TThreadId => BitConverter.ToUInt32(_etwEvent.Data[Offset_TThreadId..]);
+
+                /// <summary>
+                /// Retrieves the ProcessId field.
+                /// </summary>
+                public uint ProcessId => BitConverter.ToUInt32(_etwEvent.Data[Offset_ProcessId..]);
+
+                /// <summary>
+                /// Creates a new DCStartData.
+                /// </summary>
+                /// <param name="etwEvent">The event.</param>
+                public DCStartData(EtwEvent etwEvent)
+                {
+                    _etwEvent = etwEvent;
+                    _offset_TThreadId = -1;
+                    _offset_ProcessId = -1;
+                }
+            }
+
+        }
+
+        /// <summary>
+        /// An event wrapper for a DCEnd event.
+        /// </summary>
+        public readonly ref struct DCEndEvent
+        {
+            private readonly EtwEvent _etwEvent;
+
+            /// <summary>
+            /// Event name.
+            /// </summary>
+            public const string Name = "DCEnd";
+
+            /// <summary>
+            /// The event provider.
+            /// </summary>
+            public static readonly Guid Provider = Id;
+
+            /// <summary>
+            /// Event descriptor.
+            /// </summary>
+            public static EtwEventDescriptor Descriptor { get; } = new EtwEventDescriptor
+            {
+                Id = 0,
+                Version = 0,
+                Channel = 0,
+                Level = EtwTraceLevel.None,
+                Opcode = EtwEventOpcode.DataCollectionEnd,
+                Task = 0,
+                Keyword = 0
+            };
+
+            /// <summary>
+            /// The process the event was recorded in.
+            /// </summary>
+            public uint ProcessId => _etwEvent.ProcessId;
+
+            /// <summary>
+            /// The thread the event was recorded on.
+            /// </summary>
+            public uint ThreadId => _etwEvent.ThreadId;
+
+            /// <summary>
+            /// The timestamp of the event.
+            /// </summary>
+            public long Timestamp => _etwEvent.Timestamp;
+
+            /// <summary>
+            /// The processor number the event was recorded on.
+            /// </summary>
+            public byte ProcessorNumber => _etwEvent.ProcessorNumber;
+
+            /// <summary>
+            /// Timing information for the event.
+            /// </summary>
+            public (ulong? KernelTime, ulong? UserTime, ulong? ProcessorTime) Time => _etwEvent.Time;
+
+            /// <summary>
+            /// Data for the event.
+            /// </summary>
+            public DCEndData Data => new(_etwEvent);
+
+            /// <summary>
+            /// Creates a new DCEndEvent.
+            /// </summary>
+            /// <param name="etwEvent">The event.</param>
+            public DCEndEvent(EtwEvent etwEvent)
+            {
+                _etwEvent = etwEvent;
+            }
+
+            /// <summary>
+            /// A data wrapper for a DCEnd event.
+            /// </summary>
+            public ref struct DCEndData
+            {
+                private readonly EtwEvent _etwEvent;
+
+                private int _offset_TThreadId;
+                private int _offset_ProcessId;
+
+                private int Offset_TThreadId
+                {
+                    get
+                    {
+                        if (_offset_TThreadId == -1)
+                        {
+                            _offset_TThreadId = 0;
+                        }
+
+                        return _offset_TThreadId;
+                    }
+                }
+
+                private int Offset_ProcessId
+                {
+                    get
+                    {
+                        if (_offset_ProcessId == -1)
+                        {
+                            _offset_ProcessId = Offset_TThreadId + 4;
+                        }
+
+                        return _offset_ProcessId;
+                    }
+                }
+
+                /// <summary>
+                /// Retrieves the TThreadId field.
+                /// </summary>
+                public uint TThreadId => BitConverter.ToUInt32(_etwEvent.Data[Offset_TThreadId..]);
+
+                /// <summary>
+                /// Retrieves the ProcessId field.
+                /// </summary>
+                public uint ProcessId => BitConverter.ToUInt32(_etwEvent.Data[Offset_ProcessId..]);
+
+                /// <summary>
+                /// Creates a new DCEndData.
+                /// </summary>
+                /// <param name="etwEvent">The event.</param>
+                public DCEndData(EtwEvent etwEvent)
+                {
+                    _etwEvent = etwEvent;
+                    _offset_TThreadId = -1;
+                    _offset_ProcessId = -1;
+                }
+            }
+
+        }
+
+        /// <summary>
+        /// An event wrapper for a Start event.
+        /// </summary>
+        public readonly ref struct StartEventV1
+        {
+            private readonly EtwEvent _etwEvent;
+
+            /// <summary>
+            /// Event name.
+            /// </summary>
+            public const string Name = "Start";
+
+            /// <summary>
+            /// The event provider.
+            /// </summary>
+            public static readonly Guid Provider = Id;
+
+            /// <summary>
+            /// Event descriptor.
+            /// </summary>
+            public static EtwEventDescriptor Descriptor { get; } = new EtwEventDescriptor
+            {
+                Id = 0,
+                Version = 1,
+                Channel = 0,
+                Level = EtwTraceLevel.None,
+                Opcode = EtwEventOpcode.Start,
+                Task = 0,
+                Keyword = 0
+            };
+
+            /// <summary>
+            /// The process the event was recorded in.
+            /// </summary>
+            public uint ProcessId => _etwEvent.ProcessId;
+
+            /// <summary>
+            /// The thread the event was recorded on.
+            /// </summary>
+            public uint ThreadId => _etwEvent.ThreadId;
+
+            /// <summary>
+            /// The timestamp of the event.
+            /// </summary>
+            public long Timestamp => _etwEvent.Timestamp;
+
+            /// <summary>
+            /// The processor number the event was recorded on.
+            /// </summary>
+            public byte ProcessorNumber => _etwEvent.ProcessorNumber;
+
+            /// <summary>
+            /// Timing information for the event.
+            /// </summary>
+            public (ulong? KernelTime, ulong? UserTime, ulong? ProcessorTime) Time => _etwEvent.Time;
+
+            /// <summary>
+            /// Data for the event.
+            /// </summary>
+            public StartData Data => new(_etwEvent);
+
+            /// <summary>
+            /// Creates a new StartEventV1.
+            /// </summary>
+            /// <param name="etwEvent">The event.</param>
+            public StartEventV1(EtwEvent etwEvent)
+            {
+                _etwEvent = etwEvent;
+            }
+
+            /// <summary>
+            /// A data wrapper for a Start event.
+            /// </summary>
+            public ref struct StartData
+            {
+                private readonly EtwEvent _etwEvent;
+
+                private int _offset_ProcessId;
+                private int _offset_TThreadId;
+                private int _offset_StackBase;
+                private int _offset_StackLimit;
+                private int _offset_UserStackBase;
+                private int _offset_UserStackLimit;
+                private int _offset_StartAddr;
+                private int _offset_Win32StartAddr;
+                private int _offset_WaitMode;
+
+                private int Offset_ProcessId
+                {
+                    get
+                    {
+                        if (_offset_ProcessId == -1)
+                        {
+                            _offset_ProcessId = 0;
+                        }
+
+                        return _offset_ProcessId;
+                    }
+                }
+
+                private int Offset_TThreadId
+                {
+                    get
+                    {
+                        if (_offset_TThreadId == -1)
+                        {
+                            _offset_TThreadId = Offset_ProcessId + 4;
+                        }
+
+                        return _offset_TThreadId;
+                    }
+                }
+
+                private int Offset_StackBase
+                {
+                    get
+                    {
+                        if (_offset_StackBase == -1)
+                        {
+                            _offset_StackBase = Offset_TThreadId + 4;
+                        }
+
+                        return _offset_StackBase;
+                    }
+                }
+
+                private int Offset_StackLimit
+                {
+                    get
+                    {
+                        if (_offset_StackLimit == -1)
+                        {
+                            _offset_StackLimit = Offset_StackBase + _etwEvent.AddressSize;
+                        }
+
+                        return _offset_StackLimit;
+                    }
+                }
+
+                private int Offset_UserStackBase
+                {
+                    get
+                    {
+                        if (_offset_UserStackBase == -1)
+                        {
+                            _offset_UserStackBase = Offset_StackLimit + _etwEvent.AddressSize;
+                        }
+
+                        return _offset_UserStackBase;
+                    }
+                }
+
+                private int Offset_UserStackLimit
+                {
+                    get
+                    {
+                        if (_offset_UserStackLimit == -1)
+                        {
+                            _offset_UserStackLimit = Offset_UserStackBase + _etwEvent.AddressSize;
+                        }
+
+                        return _offset_UserStackLimit;
+                    }
+                }
+
+                private int Offset_StartAddr
+                {
+                    get
+                    {
+                        if (_offset_StartAddr == -1)
+                        {
+                            _offset_StartAddr = Offset_UserStackLimit + _etwEvent.AddressSize;
+                        }
+
+                        return _offset_StartAddr;
+                    }
+                }
+
+                private int Offset_Win32StartAddr
+                {
+                    get
+                    {
+                        if (_offset_Win32StartAddr == -1)
+                        {
+                            _offset_Win32StartAddr = Offset_StartAddr + _etwEvent.AddressSize;
+                        }
+
+                        return _offset_Win32StartAddr;
+                    }
+                }
+
+                private int Offset_WaitMode
+                {
+                    get
+                    {
+                        if (_offset_WaitMode == -1)
+                        {
+                            _offset_WaitMode = Offset_Win32StartAddr + _etwEvent.AddressSize;
+                        }
+
+                        return _offset_WaitMode;
+                    }
+                }
+
+                /// <summary>
+                /// Retrieves the ProcessId field.
+                /// </summary>
+                public uint ProcessId => BitConverter.ToUInt32(_etwEvent.Data[Offset_ProcessId..]);
+
+                /// <summary>
+                /// Retrieves the TThreadId field.
+                /// </summary>
+                public uint TThreadId => BitConverter.ToUInt32(_etwEvent.Data[Offset_TThreadId..]);
+
+                /// <summary>
+                /// Retrieves the StackBase field.
+                /// </summary>
+                public ulong StackBase => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_StackBase..]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_StackBase..]);
+
+                /// <summary>
+                /// Retrieves the StackLimit field.
+                /// </summary>
+                public ulong StackLimit => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_StackLimit..]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_StackLimit..]);
+
+                /// <summary>
+                /// Retrieves the UserStackBase field.
+                /// </summary>
+                public ulong UserStackBase => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_UserStackBase..]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_UserStackBase..]);
+
+                /// <summary>
+                /// Retrieves the UserStackLimit field.
+                /// </summary>
+                public ulong UserStackLimit => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_UserStackLimit..]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_UserStackLimit..]);
+
+                /// <summary>
+                /// Retrieves the StartAddr field.
+                /// </summary>
+                public ulong StartAddr => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_StartAddr..]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_StartAddr..]);
+
+                /// <summary>
+                /// Retrieves the Win32StartAddr field.
+                /// </summary>
+                public ulong Win32StartAddr => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_Win32StartAddr..]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_Win32StartAddr..]);
+
+                /// <summary>
+                /// Retrieves the WaitMode field.
+                /// </summary>
+                public sbyte WaitMode => (sbyte)_etwEvent.Data[Offset_WaitMode];
+
+                /// <summary>
+                /// Creates a new StartData.
+                /// </summary>
+                /// <param name="etwEvent">The event.</param>
+                public StartData(EtwEvent etwEvent)
+                {
+                    _etwEvent = etwEvent;
+                    _offset_ProcessId = -1;
+                    _offset_TThreadId = -1;
+                    _offset_StackBase = -1;
+                    _offset_StackLimit = -1;
+                    _offset_UserStackBase = -1;
+                    _offset_UserStackLimit = -1;
+                    _offset_StartAddr = -1;
+                    _offset_Win32StartAddr = -1;
+                    _offset_WaitMode = -1;
+                }
+            }
+
+        }
+
+        /// <summary>
+        /// An event wrapper for a DCStart event.
+        /// </summary>
+        public readonly ref struct DCStartEventV1
+        {
+            private readonly EtwEvent _etwEvent;
+
+            /// <summary>
+            /// Event name.
+            /// </summary>
+            public const string Name = "DCStart";
+
+            /// <summary>
+            /// The event provider.
+            /// </summary>
+            public static readonly Guid Provider = Id;
+
+            /// <summary>
+            /// Event descriptor.
+            /// </summary>
+            public static EtwEventDescriptor Descriptor { get; } = new EtwEventDescriptor
+            {
+                Id = 0,
+                Version = 1,
+                Channel = 0,
+                Level = EtwTraceLevel.None,
+                Opcode = EtwEventOpcode.DataCollectionStart,
+                Task = 0,
+                Keyword = 0
+            };
+
+            /// <summary>
+            /// The process the event was recorded in.
+            /// </summary>
+            public uint ProcessId => _etwEvent.ProcessId;
+
+            /// <summary>
+            /// The thread the event was recorded on.
+            /// </summary>
+            public uint ThreadId => _etwEvent.ThreadId;
+
+            /// <summary>
+            /// The timestamp of the event.
+            /// </summary>
+            public long Timestamp => _etwEvent.Timestamp;
+
+            /// <summary>
+            /// The processor number the event was recorded on.
+            /// </summary>
+            public byte ProcessorNumber => _etwEvent.ProcessorNumber;
+
+            /// <summary>
+            /// Timing information for the event.
+            /// </summary>
+            public (ulong? KernelTime, ulong? UserTime, ulong? ProcessorTime) Time => _etwEvent.Time;
+
+            /// <summary>
+            /// Data for the event.
+            /// </summary>
+            public DCStartData Data => new(_etwEvent);
+
+            /// <summary>
+            /// Creates a new DCStartEventV1.
+            /// </summary>
+            /// <param name="etwEvent">The event.</param>
+            public DCStartEventV1(EtwEvent etwEvent)
+            {
+                _etwEvent = etwEvent;
+            }
+
+            /// <summary>
+            /// A data wrapper for a DCStart event.
+            /// </summary>
+            public ref struct DCStartData
+            {
+                private readonly EtwEvent _etwEvent;
+
+                private int _offset_ProcessId;
+                private int _offset_TThreadId;
+                private int _offset_StackBase;
+                private int _offset_StackLimit;
+                private int _offset_UserStackBase;
+                private int _offset_UserStackLimit;
+                private int _offset_StartAddr;
+                private int _offset_Win32StartAddr;
+                private int _offset_WaitMode;
+
+                private int Offset_ProcessId
+                {
+                    get
+                    {
+                        if (_offset_ProcessId == -1)
+                        {
+                            _offset_ProcessId = 0;
+                        }
+
+                        return _offset_ProcessId;
+                    }
+                }
+
+                private int Offset_TThreadId
+                {
+                    get
+                    {
+                        if (_offset_TThreadId == -1)
+                        {
+                            _offset_TThreadId = Offset_ProcessId + 4;
+                        }
+
+                        return _offset_TThreadId;
+                    }
+                }
+
+                private int Offset_StackBase
+                {
+                    get
+                    {
+                        if (_offset_StackBase == -1)
+                        {
+                            _offset_StackBase = Offset_TThreadId + 4;
+                        }
+
+                        return _offset_StackBase;
+                    }
+                }
+
+                private int Offset_StackLimit
+                {
+                    get
+                    {
+                        if (_offset_StackLimit == -1)
+                        {
+                            _offset_StackLimit = Offset_StackBase + _etwEvent.AddressSize;
+                        }
+
+                        return _offset_StackLimit;
+                    }
+                }
+
+                private int Offset_UserStackBase
+                {
+                    get
+                    {
+                        if (_offset_UserStackBase == -1)
+                        {
+                            _offset_UserStackBase = Offset_StackLimit + _etwEvent.AddressSize;
+                        }
+
+                        return _offset_UserStackBase;
+                    }
+                }
+
+                private int Offset_UserStackLimit
+                {
+                    get
+                    {
+                        if (_offset_UserStackLimit == -1)
+                        {
+                            _offset_UserStackLimit = Offset_UserStackBase + _etwEvent.AddressSize;
+                        }
+
+                        return _offset_UserStackLimit;
+                    }
+                }
+
+                private int Offset_StartAddr
+                {
+                    get
+                    {
+                        if (_offset_StartAddr == -1)
+                        {
+                            _offset_StartAddr = Offset_UserStackLimit + _etwEvent.AddressSize;
+                        }
+
+                        return _offset_StartAddr;
+                    }
+                }
+
+                private int Offset_Win32StartAddr
+                {
+                    get
+                    {
+                        if (_offset_Win32StartAddr == -1)
+                        {
+                            _offset_Win32StartAddr = Offset_StartAddr + _etwEvent.AddressSize;
+                        }
+
+                        return _offset_Win32StartAddr;
+                    }
+                }
+
+                private int Offset_WaitMode
+                {
+                    get
+                    {
+                        if (_offset_WaitMode == -1)
+                        {
+                            _offset_WaitMode = Offset_Win32StartAddr + _etwEvent.AddressSize;
+                        }
+
+                        return _offset_WaitMode;
+                    }
+                }
+
+                /// <summary>
+                /// Retrieves the ProcessId field.
+                /// </summary>
+                public uint ProcessId => BitConverter.ToUInt32(_etwEvent.Data[Offset_ProcessId..]);
+
+                /// <summary>
+                /// Retrieves the TThreadId field.
+                /// </summary>
+                public uint TThreadId => BitConverter.ToUInt32(_etwEvent.Data[Offset_TThreadId..]);
+
+                /// <summary>
+                /// Retrieves the StackBase field.
+                /// </summary>
+                public ulong StackBase => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_StackBase..]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_StackBase..]);
+
+                /// <summary>
+                /// Retrieves the StackLimit field.
+                /// </summary>
+                public ulong StackLimit => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_StackLimit..]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_StackLimit..]);
+
+                /// <summary>
+                /// Retrieves the UserStackBase field.
+                /// </summary>
+                public ulong UserStackBase => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_UserStackBase..]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_UserStackBase..]);
+
+                /// <summary>
+                /// Retrieves the UserStackLimit field.
+                /// </summary>
+                public ulong UserStackLimit => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_UserStackLimit..]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_UserStackLimit..]);
+
+                /// <summary>
+                /// Retrieves the StartAddr field.
+                /// </summary>
+                public ulong StartAddr => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_StartAddr..]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_StartAddr..]);
+
+                /// <summary>
+                /// Retrieves the Win32StartAddr field.
+                /// </summary>
+                public ulong Win32StartAddr => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_Win32StartAddr..]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_Win32StartAddr..]);
+
+                /// <summary>
+                /// Retrieves the WaitMode field.
+                /// </summary>
+                public sbyte WaitMode => (sbyte)_etwEvent.Data[Offset_WaitMode];
+
+                /// <summary>
+                /// Creates a new DCStartData.
+                /// </summary>
+                /// <param name="etwEvent">The event.</param>
+                public DCStartData(EtwEvent etwEvent)
+                {
+                    _etwEvent = etwEvent;
+                    _offset_ProcessId = -1;
+                    _offset_TThreadId = -1;
+                    _offset_StackBase = -1;
+                    _offset_StackLimit = -1;
+                    _offset_UserStackBase = -1;
+                    _offset_UserStackLimit = -1;
+                    _offset_StartAddr = -1;
+                    _offset_Win32StartAddr = -1;
+                    _offset_WaitMode = -1;
+                }
+            }
+
+        }
+
+        /// <summary>
+        /// An event wrapper for a DCEnd event.
+        /// </summary>
+        public readonly ref struct DCEndEventV1
+        {
+            private readonly EtwEvent _etwEvent;
+
+            /// <summary>
+            /// Event name.
+            /// </summary>
+            public const string Name = "DCEnd";
+
+            /// <summary>
+            /// The event provider.
+            /// </summary>
+            public static readonly Guid Provider = Id;
+
+            /// <summary>
+            /// Event descriptor.
+            /// </summary>
+            public static EtwEventDescriptor Descriptor { get; } = new EtwEventDescriptor
+            {
+                Id = 0,
+                Version = 1,
+                Channel = 0,
+                Level = EtwTraceLevel.None,
+                Opcode = EtwEventOpcode.DataCollectionEnd,
+                Task = 0,
+                Keyword = 0
+            };
+
+            /// <summary>
+            /// The process the event was recorded in.
+            /// </summary>
+            public uint ProcessId => _etwEvent.ProcessId;
+
+            /// <summary>
+            /// The thread the event was recorded on.
+            /// </summary>
+            public uint ThreadId => _etwEvent.ThreadId;
+
+            /// <summary>
+            /// The timestamp of the event.
+            /// </summary>
+            public long Timestamp => _etwEvent.Timestamp;
+
+            /// <summary>
+            /// The processor number the event was recorded on.
+            /// </summary>
+            public byte ProcessorNumber => _etwEvent.ProcessorNumber;
+
+            /// <summary>
+            /// Timing information for the event.
+            /// </summary>
+            public (ulong? KernelTime, ulong? UserTime, ulong? ProcessorTime) Time => _etwEvent.Time;
+
+            /// <summary>
+            /// Data for the event.
+            /// </summary>
+            public DCEndData Data => new(_etwEvent);
+
+            /// <summary>
+            /// Creates a new DCEndEventV1.
+            /// </summary>
+            /// <param name="etwEvent">The event.</param>
+            public DCEndEventV1(EtwEvent etwEvent)
+            {
+                _etwEvent = etwEvent;
+            }
+
+            /// <summary>
+            /// A data wrapper for a DCEnd event.
+            /// </summary>
+            public ref struct DCEndData
+            {
+                private readonly EtwEvent _etwEvent;
+
+                private int _offset_ProcessId;
+                private int _offset_TThreadId;
+                private int _offset_StackBase;
+                private int _offset_StackLimit;
+                private int _offset_UserStackBase;
+                private int _offset_UserStackLimit;
+                private int _offset_StartAddr;
+                private int _offset_Win32StartAddr;
+                private int _offset_WaitMode;
+
+                private int Offset_ProcessId
+                {
+                    get
+                    {
+                        if (_offset_ProcessId == -1)
+                        {
+                            _offset_ProcessId = 0;
+                        }
+
+                        return _offset_ProcessId;
+                    }
+                }
+
+                private int Offset_TThreadId
+                {
+                    get
+                    {
+                        if (_offset_TThreadId == -1)
+                        {
+                            _offset_TThreadId = Offset_ProcessId + 4;
+                        }
+
+                        return _offset_TThreadId;
+                    }
+                }
+
+                private int Offset_StackBase
+                {
+                    get
+                    {
+                        if (_offset_StackBase == -1)
+                        {
+                            _offset_StackBase = Offset_TThreadId + 4;
+                        }
+
+                        return _offset_StackBase;
+                    }
+                }
+
+                private int Offset_StackLimit
+                {
+                    get
+                    {
+                        if (_offset_StackLimit == -1)
+                        {
+                            _offset_StackLimit = Offset_StackBase + _etwEvent.AddressSize;
+                        }
+
+                        return _offset_StackLimit;
+                    }
+                }
+
+                private int Offset_UserStackBase
+                {
+                    get
+                    {
+                        if (_offset_UserStackBase == -1)
+                        {
+                            _offset_UserStackBase = Offset_StackLimit + _etwEvent.AddressSize;
+                        }
+
+                        return _offset_UserStackBase;
+                    }
+                }
+
+                private int Offset_UserStackLimit
+                {
+                    get
+                    {
+                        if (_offset_UserStackLimit == -1)
+                        {
+                            _offset_UserStackLimit = Offset_UserStackBase + _etwEvent.AddressSize;
+                        }
+
+                        return _offset_UserStackLimit;
+                    }
+                }
+
+                private int Offset_StartAddr
+                {
+                    get
+                    {
+                        if (_offset_StartAddr == -1)
+                        {
+                            _offset_StartAddr = Offset_UserStackLimit + _etwEvent.AddressSize;
+                        }
+
+                        return _offset_StartAddr;
+                    }
+                }
+
+                private int Offset_Win32StartAddr
+                {
+                    get
+                    {
+                        if (_offset_Win32StartAddr == -1)
+                        {
+                            _offset_Win32StartAddr = Offset_StartAddr + _etwEvent.AddressSize;
+                        }
+
+                        return _offset_Win32StartAddr;
+                    }
+                }
+
+                private int Offset_WaitMode
+                {
+                    get
+                    {
+                        if (_offset_WaitMode == -1)
+                        {
+                            _offset_WaitMode = Offset_Win32StartAddr + _etwEvent.AddressSize;
+                        }
+
+                        return _offset_WaitMode;
+                    }
+                }
+
+                /// <summary>
+                /// Retrieves the ProcessId field.
+                /// </summary>
+                public uint ProcessId => BitConverter.ToUInt32(_etwEvent.Data[Offset_ProcessId..]);
+
+                /// <summary>
+                /// Retrieves the TThreadId field.
+                /// </summary>
+                public uint TThreadId => BitConverter.ToUInt32(_etwEvent.Data[Offset_TThreadId..]);
+
+                /// <summary>
+                /// Retrieves the StackBase field.
+                /// </summary>
+                public ulong StackBase => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_StackBase..]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_StackBase..]);
+
+                /// <summary>
+                /// Retrieves the StackLimit field.
+                /// </summary>
+                public ulong StackLimit => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_StackLimit..]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_StackLimit..]);
+
+                /// <summary>
+                /// Retrieves the UserStackBase field.
+                /// </summary>
+                public ulong UserStackBase => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_UserStackBase..]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_UserStackBase..]);
+
+                /// <summary>
+                /// Retrieves the UserStackLimit field.
+                /// </summary>
+                public ulong UserStackLimit => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_UserStackLimit..]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_UserStackLimit..]);
+
+                /// <summary>
+                /// Retrieves the StartAddr field.
+                /// </summary>
+                public ulong StartAddr => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_StartAddr..]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_StartAddr..]);
+
+                /// <summary>
+                /// Retrieves the Win32StartAddr field.
+                /// </summary>
+                public ulong Win32StartAddr => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_Win32StartAddr..]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_Win32StartAddr..]);
+
+                /// <summary>
+                /// Retrieves the WaitMode field.
+                /// </summary>
+                public sbyte WaitMode => (sbyte)_etwEvent.Data[Offset_WaitMode];
+
+                /// <summary>
+                /// Creates a new DCEndData.
+                /// </summary>
+                /// <param name="etwEvent">The event.</param>
+                public DCEndData(EtwEvent etwEvent)
+                {
+                    _etwEvent = etwEvent;
+                    _offset_ProcessId = -1;
+                    _offset_TThreadId = -1;
+                    _offset_StackBase = -1;
+                    _offset_StackLimit = -1;
+                    _offset_UserStackBase = -1;
+                    _offset_UserStackLimit = -1;
+                    _offset_StartAddr = -1;
+                    _offset_Win32StartAddr = -1;
+                    _offset_WaitMode = -1;
+                }
+            }
+
+        }
+
+        /// <summary>
+        /// An event wrapper for a End event.
+        /// </summary>
+        public readonly ref struct EndEventV1
+        {
+            private readonly EtwEvent _etwEvent;
+
+            /// <summary>
+            /// Event name.
+            /// </summary>
+            public const string Name = "End";
+
+            /// <summary>
+            /// The event provider.
+            /// </summary>
+            public static readonly Guid Provider = Id;
+
+            /// <summary>
+            /// Event descriptor.
+            /// </summary>
+            public static EtwEventDescriptor Descriptor { get; } = new EtwEventDescriptor
+            {
+                Id = 0,
+                Version = 1,
+                Channel = 0,
+                Level = EtwTraceLevel.None,
+                Opcode = EtwEventOpcode.End,
+                Task = 0,
+                Keyword = 0
+            };
+
+            /// <summary>
+            /// The process the event was recorded in.
+            /// </summary>
+            public uint ProcessId => _etwEvent.ProcessId;
+
+            /// <summary>
+            /// The thread the event was recorded on.
+            /// </summary>
+            public uint ThreadId => _etwEvent.ThreadId;
+
+            /// <summary>
+            /// The timestamp of the event.
+            /// </summary>
+            public long Timestamp => _etwEvent.Timestamp;
+
+            /// <summary>
+            /// The processor number the event was recorded on.
+            /// </summary>
+            public byte ProcessorNumber => _etwEvent.ProcessorNumber;
+
+            /// <summary>
+            /// Timing information for the event.
+            /// </summary>
+            public (ulong? KernelTime, ulong? UserTime, ulong? ProcessorTime) Time => _etwEvent.Time;
+
+            /// <summary>
+            /// Data for the event.
+            /// </summary>
+            public EndData Data => new(_etwEvent);
+
+            /// <summary>
+            /// Creates a new EndEventV1.
+            /// </summary>
+            /// <param name="etwEvent">The event.</param>
+            public EndEventV1(EtwEvent etwEvent)
+            {
+                _etwEvent = etwEvent;
+            }
+
+            /// <summary>
+            /// A data wrapper for a End event.
+            /// </summary>
+            public ref struct EndData
+            {
+                private readonly EtwEvent _etwEvent;
+
+                private int _offset_ProcessId;
+                private int _offset_TThreadId;
+
+                private int Offset_ProcessId
+                {
+                    get
+                    {
+                        if (_offset_ProcessId == -1)
+                        {
+                            _offset_ProcessId = 0;
+                        }
+
+                        return _offset_ProcessId;
+                    }
+                }
+
+                private int Offset_TThreadId
+                {
+                    get
+                    {
+                        if (_offset_TThreadId == -1)
+                        {
+                            _offset_TThreadId = Offset_ProcessId + 4;
+                        }
+
+                        return _offset_TThreadId;
+                    }
+                }
+
+                /// <summary>
+                /// Retrieves the ProcessId field.
+                /// </summary>
+                public uint ProcessId => BitConverter.ToUInt32(_etwEvent.Data[Offset_ProcessId..]);
+
+                /// <summary>
+                /// Retrieves the TThreadId field.
+                /// </summary>
+                public uint TThreadId => BitConverter.ToUInt32(_etwEvent.Data[Offset_TThreadId..]);
+
+                /// <summary>
+                /// Creates a new EndData.
+                /// </summary>
+                /// <param name="etwEvent">The event.</param>
+                public EndData(EtwEvent etwEvent)
+                {
+                    _etwEvent = etwEvent;
+                    _offset_ProcessId = -1;
+                    _offset_TThreadId = -1;
+                }
+            }
+
+        }
+
+        /// <summary>
+        /// An event wrapper for a CSwitch event.
+        /// </summary>
+        public readonly ref struct CSwitchEventV1
+        {
+            private readonly EtwEvent _etwEvent;
+
+            /// <summary>
+            /// Event name.
+            /// </summary>
+            public const string Name = "CSwitch";
+
+            /// <summary>
+            /// The event provider.
+            /// </summary>
+            public static readonly Guid Provider = Id;
+
+            /// <summary>
+            /// Event descriptor.
+            /// </summary>
+            public static EtwEventDescriptor Descriptor { get; } = new EtwEventDescriptor
+            {
+                Id = 0,
+                Version = 1,
+                Channel = 0,
+                Level = EtwTraceLevel.None,
+                Opcode = (EtwEventOpcode)Opcodes.CSwitch,
+                Task = 0,
+                Keyword = 0
+            };
+
+            /// <summary>
+            /// The process the event was recorded in.
+            /// </summary>
+            public uint ProcessId => _etwEvent.ProcessId;
+
+            /// <summary>
+            /// The thread the event was recorded on.
+            /// </summary>
+            public uint ThreadId => _etwEvent.ThreadId;
+
+            /// <summary>
+            /// The timestamp of the event.
+            /// </summary>
+            public long Timestamp => _etwEvent.Timestamp;
+
+            /// <summary>
+            /// The processor number the event was recorded on.
+            /// </summary>
+            public byte ProcessorNumber => _etwEvent.ProcessorNumber;
+
+            /// <summary>
+            /// Timing information for the event.
+            /// </summary>
+            public (ulong? KernelTime, ulong? UserTime, ulong? ProcessorTime) Time => _etwEvent.Time;
+
+            /// <summary>
+            /// Data for the event.
+            /// </summary>
+            public CSwitchData Data => new(_etwEvent);
+
+            /// <summary>
+            /// Creates a new CSwitchEventV1.
+            /// </summary>
+            /// <param name="etwEvent">The event.</param>
+            public CSwitchEventV1(EtwEvent etwEvent)
+            {
+                _etwEvent = etwEvent;
+            }
+
+            /// <summary>
+            /// A data wrapper for a CSwitch event.
+            /// </summary>
+            public ref struct CSwitchData
+            {
+                private readonly EtwEvent _etwEvent;
+
+                private int _offset_NewThreadId;
+                private int _offset_OldThreadId;
+                private int _offset_NewThreadPriority;
+                private int _offset_OldThreadPriority;
+                private int _offset_NewThreadQuantum;
+                private int _offset_OldThreadQuantum;
+                private int _offset_OldThreadWaitReason;
+                private int _offset_OldThreadWaitMode;
+                private int _offset_OldThreadState;
+                private int _offset_OldThreadWaitIdealProcessor;
+
+                private int Offset_NewThreadId
+                {
+                    get
+                    {
+                        if (_offset_NewThreadId == -1)
+                        {
+                            _offset_NewThreadId = 0;
+                        }
+
+                        return _offset_NewThreadId;
+                    }
+                }
+
+                private int Offset_OldThreadId
+                {
+                    get
+                    {
+                        if (_offset_OldThreadId == -1)
+                        {
+                            _offset_OldThreadId = Offset_NewThreadId + 4;
+                        }
+
+                        return _offset_OldThreadId;
+                    }
+                }
+
+                private int Offset_NewThreadPriority
+                {
+                    get
+                    {
+                        if (_offset_NewThreadPriority == -1)
+                        {
+                            _offset_NewThreadPriority = Offset_OldThreadId + 4;
+                        }
+
+                        return _offset_NewThreadPriority;
+                    }
+                }
+
+                private int Offset_OldThreadPriority
+                {
+                    get
+                    {
+                        if (_offset_OldThreadPriority == -1)
+                        {
+                            _offset_OldThreadPriority = Offset_NewThreadPriority + 1;
+                        }
+
+                        return _offset_OldThreadPriority;
+                    }
+                }
+
+                private int Offset_NewThreadQuantum
+                {
+                    get
+                    {
+                        if (_offset_NewThreadQuantum == -1)
+                        {
+                            _offset_NewThreadQuantum = Offset_OldThreadPriority + 1;
+                        }
+
+                        return _offset_NewThreadQuantum;
+                    }
+                }
+
+                private int Offset_OldThreadQuantum
+                {
+                    get
+                    {
+                        if (_offset_OldThreadQuantum == -1)
+                        {
+                            _offset_OldThreadQuantum = Offset_NewThreadQuantum + 1;
+                        }
+
+                        return _offset_OldThreadQuantum;
+                    }
+                }
+
+                private int Offset_OldThreadWaitReason
+                {
+                    get
+                    {
+                        if (_offset_OldThreadWaitReason == -1)
+                        {
+                            _offset_OldThreadWaitReason = Offset_OldThreadQuantum + 1;
+                        }
+
+                        return _offset_OldThreadWaitReason;
+                    }
+                }
+
+                private int Offset_OldThreadWaitMode
+                {
+                    get
+                    {
+                        if (_offset_OldThreadWaitMode == -1)
+                        {
+                            _offset_OldThreadWaitMode = Offset_OldThreadWaitReason + 1;
+                        }
+
+                        return _offset_OldThreadWaitMode;
+                    }
+                }
+
+                private int Offset_OldThreadState
+                {
+                    get
+                    {
+                        if (_offset_OldThreadState == -1)
+                        {
+                            _offset_OldThreadState = Offset_OldThreadWaitMode + 1;
+                        }
+
+                        return _offset_OldThreadState;
+                    }
+                }
+
+                private int Offset_OldThreadWaitIdealProcessor
+                {
+                    get
+                    {
+                        if (_offset_OldThreadWaitIdealProcessor == -1)
+                        {
+                            _offset_OldThreadWaitIdealProcessor = Offset_OldThreadState + 1;
+                        }
+
+                        return _offset_OldThreadWaitIdealProcessor;
+                    }
+                }
+
+                /// <summary>
+                /// Retrieves the NewThreadId field.
+                /// </summary>
+                public uint NewThreadId => BitConverter.ToUInt32(_etwEvent.Data[Offset_NewThreadId..]);
+
+                /// <summary>
+                /// Retrieves the OldThreadId field.
+                /// </summary>
+                public uint OldThreadId => BitConverter.ToUInt32(_etwEvent.Data[Offset_OldThreadId..]);
+
+                /// <summary>
+                /// Retrieves the NewThreadPriority field.
+                /// </summary>
+                public sbyte NewThreadPriority => (sbyte)_etwEvent.Data[Offset_NewThreadPriority];
+
+                /// <summary>
+                /// Retrieves the OldThreadPriority field.
+                /// </summary>
+                public sbyte OldThreadPriority => (sbyte)_etwEvent.Data[Offset_OldThreadPriority];
+
+                /// <summary>
+                /// Retrieves the NewThreadQuantum field.
+                /// </summary>
+                public sbyte NewThreadQuantum => (sbyte)_etwEvent.Data[Offset_NewThreadQuantum];
+
+                /// <summary>
+                /// Retrieves the OldThreadQuantum field.
+                /// </summary>
+                public sbyte OldThreadQuantum => (sbyte)_etwEvent.Data[Offset_OldThreadQuantum];
+
+                /// <summary>
+                /// Retrieves the OldThreadWaitReason field.
+                /// </summary>
+                public sbyte OldThreadWaitReason => (sbyte)_etwEvent.Data[Offset_OldThreadWaitReason];
+
+                /// <summary>
+                /// Retrieves the OldThreadWaitMode field.
+                /// </summary>
+                public sbyte OldThreadWaitMode => (sbyte)_etwEvent.Data[Offset_OldThreadWaitMode];
+
+                /// <summary>
+                /// Retrieves the OldThreadState field.
+                /// </summary>
+                public sbyte OldThreadState => (sbyte)_etwEvent.Data[Offset_OldThreadState];
+
+                /// <summary>
+                /// Retrieves the OldThreadWaitIdealProcessor field.
+                /// </summary>
+                public sbyte OldThreadWaitIdealProcessor => (sbyte)_etwEvent.Data[Offset_OldThreadWaitIdealProcessor];
+
+                /// <summary>
+                /// Creates a new CSwitchData.
+                /// </summary>
+                /// <param name="etwEvent">The event.</param>
+                public CSwitchData(EtwEvent etwEvent)
+                {
+                    _etwEvent = etwEvent;
+                    _offset_NewThreadId = -1;
+                    _offset_OldThreadId = -1;
+                    _offset_NewThreadPriority = -1;
+                    _offset_OldThreadPriority = -1;
+                    _offset_NewThreadQuantum = -1;
+                    _offset_OldThreadQuantum = -1;
+                    _offset_OldThreadWaitReason = -1;
+                    _offset_OldThreadWaitMode = -1;
+                    _offset_OldThreadState = -1;
+                    _offset_OldThreadWaitIdealProcessor = -1;
+                }
+            }
+
+        }
+
+        /// <summary>
+        /// An event wrapper for a WorkerThread event.
+        /// </summary>
+        public readonly ref struct WorkerThreadEventV1
+        {
+            private readonly EtwEvent _etwEvent;
+
+            /// <summary>
+            /// Event name.
+            /// </summary>
+            public const string Name = "WorkerThread";
+
+            /// <summary>
+            /// The event provider.
+            /// </summary>
+            public static readonly Guid Provider = Id;
+
+            /// <summary>
+            /// Event descriptor.
+            /// </summary>
+            public static EtwEventDescriptor Descriptor { get; } = new EtwEventDescriptor
+            {
+                Id = 0,
+                Version = 1,
+                Channel = 0,
+                Level = EtwTraceLevel.None,
+                Opcode = (EtwEventOpcode)Opcodes.WorkerThread,
+                Task = 0,
+                Keyword = 0
+            };
+
+            /// <summary>
+            /// The process the event was recorded in.
+            /// </summary>
+            public uint ProcessId => _etwEvent.ProcessId;
+
+            /// <summary>
+            /// The thread the event was recorded on.
+            /// </summary>
+            public uint ThreadId => _etwEvent.ThreadId;
+
+            /// <summary>
+            /// The timestamp of the event.
+            /// </summary>
+            public long Timestamp => _etwEvent.Timestamp;
+
+            /// <summary>
+            /// The processor number the event was recorded on.
+            /// </summary>
+            public byte ProcessorNumber => _etwEvent.ProcessorNumber;
+
+            /// <summary>
+            /// Timing information for the event.
+            /// </summary>
+            public (ulong? KernelTime, ulong? UserTime, ulong? ProcessorTime) Time => _etwEvent.Time;
+
+            /// <summary>
+            /// Data for the event.
+            /// </summary>
+            public WorkerThreadData Data => new(_etwEvent);
+
+            /// <summary>
+            /// Creates a new WorkerThreadEventV1.
+            /// </summary>
+            /// <param name="etwEvent">The event.</param>
+            public WorkerThreadEventV1(EtwEvent etwEvent)
+            {
+                _etwEvent = etwEvent;
+            }
+
+            /// <summary>
+            /// A data wrapper for a WorkerThread event.
+            /// </summary>
+            public ref struct WorkerThreadData
+            {
+                private readonly EtwEvent _etwEvent;
+
+                private int _offset_TThreadId;
+                private int _offset_StartTime;
+                private int _offset_ThreadRoutine;
+
+                private int Offset_TThreadId
+                {
+                    get
+                    {
+                        if (_offset_TThreadId == -1)
+                        {
+                            _offset_TThreadId = 0;
+                        }
+
+                        return _offset_TThreadId;
+                    }
+                }
+
+                private int Offset_StartTime
+                {
+                    get
+                    {
+                        if (_offset_StartTime == -1)
+                        {
+                            _offset_StartTime = Offset_TThreadId + 4;
+                        }
+
+                        return _offset_StartTime;
+                    }
+                }
+
+                private int Offset_ThreadRoutine
+                {
+                    get
+                    {
+                        if (_offset_ThreadRoutine == -1)
+                        {
+                            _offset_ThreadRoutine = Offset_StartTime + 8;
+                        }
+
+                        return _offset_ThreadRoutine;
+                    }
+                }
+
+                /// <summary>
+                /// Retrieves the TThreadId field.
+                /// </summary>
+                public uint TThreadId => BitConverter.ToUInt32(_etwEvent.Data[Offset_TThreadId..]);
+
+                /// <summary>
+                /// Retrieves the StartTime field.
+                /// </summary>
+                public ulong StartTime => BitConverter.ToUInt64(_etwEvent.Data[Offset_StartTime..]);
+
+                /// <summary>
+                /// Retrieves the ThreadRoutine field.
+                /// </summary>
+                public ulong ThreadRoutine => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_ThreadRoutine..]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_ThreadRoutine..]);
+
+                /// <summary>
+                /// Creates a new WorkerThreadData.
+                /// </summary>
+                /// <param name="etwEvent">The event.</param>
+                public WorkerThreadData(EtwEvent etwEvent)
+                {
+                    _etwEvent = etwEvent;
+                    _offset_TThreadId = -1;
+                    _offset_StartTime = -1;
+                    _offset_ThreadRoutine = -1;
+                }
+            }
+
+        }
+
+        /// <summary>
+        /// An event wrapper for a Start event.
+        /// </summary>
+        public readonly ref struct StartEventV2
+        {
+            private readonly EtwEvent _etwEvent;
+
+            /// <summary>
+            /// Event name.
+            /// </summary>
+            public const string Name = "Start";
+
+            /// <summary>
+            /// The event provider.
+            /// </summary>
+            public static readonly Guid Provider = Id;
+
+            /// <summary>
+            /// Event descriptor.
+            /// </summary>
+            public static EtwEventDescriptor Descriptor { get; } = new EtwEventDescriptor
+            {
+                Id = 0,
+                Version = 2,
+                Channel = 0,
+                Level = EtwTraceLevel.None,
+                Opcode = EtwEventOpcode.Start,
+                Task = 0,
+                Keyword = 0
+            };
+
+            /// <summary>
+            /// The process the event was recorded in.
+            /// </summary>
+            public uint ProcessId => _etwEvent.ProcessId;
+
+            /// <summary>
+            /// The thread the event was recorded on.
+            /// </summary>
+            public uint ThreadId => _etwEvent.ThreadId;
+
+            /// <summary>
+            /// The timestamp of the event.
+            /// </summary>
+            public long Timestamp => _etwEvent.Timestamp;
+
+            /// <summary>
+            /// The processor number the event was recorded on.
+            /// </summary>
+            public byte ProcessorNumber => _etwEvent.ProcessorNumber;
+
+            /// <summary>
+            /// Timing information for the event.
+            /// </summary>
+            public (ulong? KernelTime, ulong? UserTime, ulong? ProcessorTime) Time => _etwEvent.Time;
+
+            /// <summary>
+            /// Data for the event.
+            /// </summary>
+            public StartData Data => new(_etwEvent);
+
+            /// <summary>
+            /// Creates a new StartEventV2.
+            /// </summary>
+            /// <param name="etwEvent">The event.</param>
+            public StartEventV2(EtwEvent etwEvent)
+            {
+                _etwEvent = etwEvent;
+            }
+
+            /// <summary>
+            /// A data wrapper for a Start event.
+            /// </summary>
+            public ref struct StartData
+            {
+                private readonly EtwEvent _etwEvent;
+
+                private int _offset_ProcessId;
+                private int _offset_TThreadId;
+                private int _offset_StackBase;
+                private int _offset_StackLimit;
+                private int _offset_UserStackBase;
+                private int _offset_UserStackLimit;
+                private int _offset_StartAddr;
+                private int _offset_Win32StartAddr;
+                private int _offset_TebBase;
+                private int _offset_SubProcessTag;
+
+                private int Offset_ProcessId
+                {
+                    get
+                    {
+                        if (_offset_ProcessId == -1)
+                        {
+                            _offset_ProcessId = 0;
+                        }
+
+                        return _offset_ProcessId;
+                    }
+                }
+
+                private int Offset_TThreadId
+                {
+                    get
+                    {
+                        if (_offset_TThreadId == -1)
+                        {
+                            _offset_TThreadId = Offset_ProcessId + 4;
+                        }
+
+                        return _offset_TThreadId;
+                    }
+                }
+
+                private int Offset_StackBase
+                {
+                    get
+                    {
+                        if (_offset_StackBase == -1)
+                        {
+                            _offset_StackBase = Offset_TThreadId + 4;
+                        }
+
+                        return _offset_StackBase;
+                    }
+                }
+
+                private int Offset_StackLimit
+                {
+                    get
+                    {
+                        if (_offset_StackLimit == -1)
+                        {
+                            _offset_StackLimit = Offset_StackBase + _etwEvent.AddressSize;
+                        }
+
+                        return _offset_StackLimit;
+                    }
+                }
+
+                private int Offset_UserStackBase
+                {
+                    get
+                    {
+                        if (_offset_UserStackBase == -1)
+                        {
+                            _offset_UserStackBase = Offset_StackLimit + _etwEvent.AddressSize;
+                        }
+
+                        return _offset_UserStackBase;
+                    }
+                }
+
+                private int Offset_UserStackLimit
+                {
+                    get
+                    {
+                        if (_offset_UserStackLimit == -1)
+                        {
+                            _offset_UserStackLimit = Offset_UserStackBase + _etwEvent.AddressSize;
+                        }
+
+                        return _offset_UserStackLimit;
+                    }
+                }
+
+                private int Offset_StartAddr
+                {
+                    get
+                    {
+                        if (_offset_StartAddr == -1)
+                        {
+                            _offset_StartAddr = Offset_UserStackLimit + _etwEvent.AddressSize;
+                        }
+
+                        return _offset_StartAddr;
+                    }
+                }
+
+                private int Offset_Win32StartAddr
+                {
+                    get
+                    {
+                        if (_offset_Win32StartAddr == -1)
+                        {
+                            _offset_Win32StartAddr = Offset_StartAddr + _etwEvent.AddressSize;
+                        }
+
+                        return _offset_Win32StartAddr;
+                    }
+                }
+
+                private int Offset_TebBase
+                {
+                    get
+                    {
+                        if (_offset_TebBase == -1)
+                        {
+                            _offset_TebBase = Offset_Win32StartAddr + _etwEvent.AddressSize;
+                        }
+
+                        return _offset_TebBase;
+                    }
+                }
+
+                private int Offset_SubProcessTag
+                {
+                    get
+                    {
+                        if (_offset_SubProcessTag == -1)
+                        {
+                            _offset_SubProcessTag = Offset_TebBase + _etwEvent.AddressSize;
+                        }
+
+                        return _offset_SubProcessTag;
+                    }
+                }
+
+                /// <summary>
+                /// Retrieves the ProcessId field.
+                /// </summary>
+                public uint ProcessId => BitConverter.ToUInt32(_etwEvent.Data[Offset_ProcessId..]);
+
+                /// <summary>
+                /// Retrieves the TThreadId field.
+                /// </summary>
+                public uint TThreadId => BitConverter.ToUInt32(_etwEvent.Data[Offset_TThreadId..]);
+
+                /// <summary>
+                /// Retrieves the StackBase field.
+                /// </summary>
+                public ulong StackBase => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_StackBase..]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_StackBase..]);
+
+                /// <summary>
+                /// Retrieves the StackLimit field.
+                /// </summary>
+                public ulong StackLimit => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_StackLimit..]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_StackLimit..]);
+
+                /// <summary>
+                /// Retrieves the UserStackBase field.
+                /// </summary>
+                public ulong UserStackBase => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_UserStackBase..]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_UserStackBase..]);
+
+                /// <summary>
+                /// Retrieves the UserStackLimit field.
+                /// </summary>
+                public ulong UserStackLimit => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_UserStackLimit..]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_UserStackLimit..]);
+
+                /// <summary>
+                /// Retrieves the StartAddr field.
+                /// </summary>
+                public ulong StartAddr => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_StartAddr..]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_StartAddr..]);
+
+                /// <summary>
+                /// Retrieves the Win32StartAddr field.
+                /// </summary>
+                public ulong Win32StartAddr => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_Win32StartAddr..]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_Win32StartAddr..]);
+
+                /// <summary>
+                /// Retrieves the TebBase field.
+                /// </summary>
+                public ulong TebBase => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_TebBase..]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_TebBase..]);
+
+                /// <summary>
+                /// Retrieves the SubProcessTag field.
+                /// </summary>
+                public uint SubProcessTag => BitConverter.ToUInt32(_etwEvent.Data[Offset_SubProcessTag..]);
+
+                /// <summary>
+                /// Creates a new StartData.
+                /// </summary>
+                /// <param name="etwEvent">The event.</param>
+                public StartData(EtwEvent etwEvent)
+                {
+                    _etwEvent = etwEvent;
+                    _offset_ProcessId = -1;
+                    _offset_TThreadId = -1;
+                    _offset_StackBase = -1;
+                    _offset_StackLimit = -1;
+                    _offset_UserStackBase = -1;
+                    _offset_UserStackLimit = -1;
+                    _offset_StartAddr = -1;
+                    _offset_Win32StartAddr = -1;
+                    _offset_TebBase = -1;
+                    _offset_SubProcessTag = -1;
+                }
+            }
+
+        }
+
+        /// <summary>
+        /// An event wrapper for a End event.
+        /// </summary>
+        public readonly ref struct EndEventV2
+        {
+            private readonly EtwEvent _etwEvent;
+
+            /// <summary>
+            /// Event name.
+            /// </summary>
+            public const string Name = "End";
+
+            /// <summary>
+            /// The event provider.
+            /// </summary>
+            public static readonly Guid Provider = Id;
+
+            /// <summary>
+            /// Event descriptor.
+            /// </summary>
+            public static EtwEventDescriptor Descriptor { get; } = new EtwEventDescriptor
+            {
+                Id = 0,
+                Version = 2,
+                Channel = 0,
+                Level = EtwTraceLevel.None,
+                Opcode = EtwEventOpcode.End,
+                Task = 0,
+                Keyword = 0
+            };
+
+            /// <summary>
+            /// The process the event was recorded in.
+            /// </summary>
+            public uint ProcessId => _etwEvent.ProcessId;
+
+            /// <summary>
+            /// The thread the event was recorded on.
+            /// </summary>
+            public uint ThreadId => _etwEvent.ThreadId;
+
+            /// <summary>
+            /// The timestamp of the event.
+            /// </summary>
+            public long Timestamp => _etwEvent.Timestamp;
+
+            /// <summary>
+            /// The processor number the event was recorded on.
+            /// </summary>
+            public byte ProcessorNumber => _etwEvent.ProcessorNumber;
+
+            /// <summary>
+            /// Timing information for the event.
+            /// </summary>
+            public (ulong? KernelTime, ulong? UserTime, ulong? ProcessorTime) Time => _etwEvent.Time;
+
+            /// <summary>
+            /// Data for the event.
+            /// </summary>
+            public EndData Data => new(_etwEvent);
+
+            /// <summary>
+            /// Creates a new EndEventV2.
+            /// </summary>
+            /// <param name="etwEvent">The event.</param>
+            public EndEventV2(EtwEvent etwEvent)
+            {
+                _etwEvent = etwEvent;
+            }
+
+            /// <summary>
+            /// A data wrapper for a End event.
+            /// </summary>
+            public ref struct EndData
+            {
+                private readonly EtwEvent _etwEvent;
+
+                private int _offset_ProcessId;
+                private int _offset_TThreadId;
+                private int _offset_StackBase;
+                private int _offset_StackLimit;
+                private int _offset_UserStackBase;
+                private int _offset_UserStackLimit;
+                private int _offset_StartAddr;
+                private int _offset_Win32StartAddr;
+                private int _offset_TebBase;
+                private int _offset_SubProcessTag;
+
+                private int Offset_ProcessId
+                {
+                    get
+                    {
+                        if (_offset_ProcessId == -1)
+                        {
+                            _offset_ProcessId = 0;
+                        }
+
+                        return _offset_ProcessId;
+                    }
+                }
+
+                private int Offset_TThreadId
+                {
+                    get
+                    {
+                        if (_offset_TThreadId == -1)
+                        {
+                            _offset_TThreadId = Offset_ProcessId + 4;
+                        }
+
+                        return _offset_TThreadId;
+                    }
+                }
+
+                private int Offset_StackBase
+                {
+                    get
+                    {
+                        if (_offset_StackBase == -1)
+                        {
+                            _offset_StackBase = Offset_TThreadId + 4;
+                        }
+
+                        return _offset_StackBase;
+                    }
+                }
+
+                private int Offset_StackLimit
+                {
+                    get
+                    {
+                        if (_offset_StackLimit == -1)
+                        {
+                            _offset_StackLimit = Offset_StackBase + _etwEvent.AddressSize;
+                        }
+
+                        return _offset_StackLimit;
+                    }
+                }
+
+                private int Offset_UserStackBase
+                {
+                    get
+                    {
+                        if (_offset_UserStackBase == -1)
+                        {
+                            _offset_UserStackBase = Offset_StackLimit + _etwEvent.AddressSize;
+                        }
+
+                        return _offset_UserStackBase;
+                    }
+                }
+
+                private int Offset_UserStackLimit
+                {
+                    get
+                    {
+                        if (_offset_UserStackLimit == -1)
+                        {
+                            _offset_UserStackLimit = Offset_UserStackBase + _etwEvent.AddressSize;
+                        }
+
+                        return _offset_UserStackLimit;
+                    }
+                }
+
+                private int Offset_StartAddr
+                {
+                    get
+                    {
+                        if (_offset_StartAddr == -1)
+                        {
+                            _offset_StartAddr = Offset_UserStackLimit + _etwEvent.AddressSize;
+                        }
+
+                        return _offset_StartAddr;
+                    }
+                }
+
+                private int Offset_Win32StartAddr
+                {
+                    get
+                    {
+                        if (_offset_Win32StartAddr == -1)
+                        {
+                            _offset_Win32StartAddr = Offset_StartAddr + _etwEvent.AddressSize;
+                        }
+
+                        return _offset_Win32StartAddr;
+                    }
+                }
+
+                private int Offset_TebBase
+                {
+                    get
+                    {
+                        if (_offset_TebBase == -1)
+                        {
+                            _offset_TebBase = Offset_Win32StartAddr + _etwEvent.AddressSize;
+                        }
+
+                        return _offset_TebBase;
+                    }
+                }
+
+                private int Offset_SubProcessTag
+                {
+                    get
+                    {
+                        if (_offset_SubProcessTag == -1)
+                        {
+                            _offset_SubProcessTag = Offset_TebBase + _etwEvent.AddressSize;
+                        }
+
+                        return _offset_SubProcessTag;
+                    }
+                }
+
+                /// <summary>
+                /// Retrieves the ProcessId field.
+                /// </summary>
+                public uint ProcessId => BitConverter.ToUInt32(_etwEvent.Data[Offset_ProcessId..]);
+
+                /// <summary>
+                /// Retrieves the TThreadId field.
+                /// </summary>
+                public uint TThreadId => BitConverter.ToUInt32(_etwEvent.Data[Offset_TThreadId..]);
+
+                /// <summary>
+                /// Retrieves the StackBase field.
+                /// </summary>
+                public ulong StackBase => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_StackBase..]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_StackBase..]);
+
+                /// <summary>
+                /// Retrieves the StackLimit field.
+                /// </summary>
+                public ulong StackLimit => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_StackLimit..]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_StackLimit..]);
+
+                /// <summary>
+                /// Retrieves the UserStackBase field.
+                /// </summary>
+                public ulong UserStackBase => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_UserStackBase..]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_UserStackBase..]);
+
+                /// <summary>
+                /// Retrieves the UserStackLimit field.
+                /// </summary>
+                public ulong UserStackLimit => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_UserStackLimit..]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_UserStackLimit..]);
+
+                /// <summary>
+                /// Retrieves the StartAddr field.
+                /// </summary>
+                public ulong StartAddr => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_StartAddr..]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_StartAddr..]);
+
+                /// <summary>
+                /// Retrieves the Win32StartAddr field.
+                /// </summary>
+                public ulong Win32StartAddr => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_Win32StartAddr..]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_Win32StartAddr..]);
+
+                /// <summary>
+                /// Retrieves the TebBase field.
+                /// </summary>
+                public ulong TebBase => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_TebBase..]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_TebBase..]);
+
+                /// <summary>
+                /// Retrieves the SubProcessTag field.
+                /// </summary>
+                public uint SubProcessTag => BitConverter.ToUInt32(_etwEvent.Data[Offset_SubProcessTag..]);
+
+                /// <summary>
+                /// Creates a new EndData.
+                /// </summary>
+                /// <param name="etwEvent">The event.</param>
+                public EndData(EtwEvent etwEvent)
+                {
+                    _etwEvent = etwEvent;
+                    _offset_ProcessId = -1;
+                    _offset_TThreadId = -1;
+                    _offset_StackBase = -1;
+                    _offset_StackLimit = -1;
+                    _offset_UserStackBase = -1;
+                    _offset_UserStackLimit = -1;
+                    _offset_StartAddr = -1;
+                    _offset_Win32StartAddr = -1;
+                    _offset_TebBase = -1;
+                    _offset_SubProcessTag = -1;
+                }
+            }
+
+        }
+
+        /// <summary>
+        /// An event wrapper for a DCStart event.
+        /// </summary>
+        public readonly ref struct DCStartEventV2
+        {
+            private readonly EtwEvent _etwEvent;
+
+            /// <summary>
+            /// Event name.
+            /// </summary>
+            public const string Name = "DCStart";
+
+            /// <summary>
+            /// The event provider.
+            /// </summary>
+            public static readonly Guid Provider = Id;
+
+            /// <summary>
+            /// Event descriptor.
+            /// </summary>
+            public static EtwEventDescriptor Descriptor { get; } = new EtwEventDescriptor
+            {
+                Id = 0,
+                Version = 2,
+                Channel = 0,
+                Level = EtwTraceLevel.None,
+                Opcode = EtwEventOpcode.DataCollectionStart,
+                Task = 0,
+                Keyword = 0
+            };
+
+            /// <summary>
+            /// The process the event was recorded in.
+            /// </summary>
+            public uint ProcessId => _etwEvent.ProcessId;
+
+            /// <summary>
+            /// The thread the event was recorded on.
+            /// </summary>
+            public uint ThreadId => _etwEvent.ThreadId;
+
+            /// <summary>
+            /// The timestamp of the event.
+            /// </summary>
+            public long Timestamp => _etwEvent.Timestamp;
+
+            /// <summary>
+            /// The processor number the event was recorded on.
+            /// </summary>
+            public byte ProcessorNumber => _etwEvent.ProcessorNumber;
+
+            /// <summary>
+            /// Timing information for the event.
+            /// </summary>
+            public (ulong? KernelTime, ulong? UserTime, ulong? ProcessorTime) Time => _etwEvent.Time;
+
+            /// <summary>
+            /// Data for the event.
+            /// </summary>
+            public DCStartData Data => new(_etwEvent);
+
+            /// <summary>
+            /// Creates a new DCStartEventV2.
+            /// </summary>
+            /// <param name="etwEvent">The event.</param>
+            public DCStartEventV2(EtwEvent etwEvent)
+            {
+                _etwEvent = etwEvent;
+            }
+
+            /// <summary>
+            /// A data wrapper for a DCStart event.
+            /// </summary>
+            public ref struct DCStartData
+            {
+                private readonly EtwEvent _etwEvent;
+
+                private int _offset_ProcessId;
+                private int _offset_TThreadId;
+                private int _offset_StackBase;
+                private int _offset_StackLimit;
+                private int _offset_UserStackBase;
+                private int _offset_UserStackLimit;
+                private int _offset_StartAddr;
+                private int _offset_Win32StartAddr;
+                private int _offset_TebBase;
+                private int _offset_SubProcessTag;
+
+                private int Offset_ProcessId
+                {
+                    get
+                    {
+                        if (_offset_ProcessId == -1)
+                        {
+                            _offset_ProcessId = 0;
+                        }
+
+                        return _offset_ProcessId;
+                    }
+                }
+
+                private int Offset_TThreadId
+                {
+                    get
+                    {
+                        if (_offset_TThreadId == -1)
+                        {
+                            _offset_TThreadId = Offset_ProcessId + 4;
+                        }
+
+                        return _offset_TThreadId;
+                    }
+                }
+
+                private int Offset_StackBase
+                {
+                    get
+                    {
+                        if (_offset_StackBase == -1)
+                        {
+                            _offset_StackBase = Offset_TThreadId + 4;
+                        }
+
+                        return _offset_StackBase;
+                    }
+                }
+
+                private int Offset_StackLimit
+                {
+                    get
+                    {
+                        if (_offset_StackLimit == -1)
+                        {
+                            _offset_StackLimit = Offset_StackBase + _etwEvent.AddressSize;
+                        }
+
+                        return _offset_StackLimit;
+                    }
+                }
+
+                private int Offset_UserStackBase
+                {
+                    get
+                    {
+                        if (_offset_UserStackBase == -1)
+                        {
+                            _offset_UserStackBase = Offset_StackLimit + _etwEvent.AddressSize;
+                        }
+
+                        return _offset_UserStackBase;
+                    }
+                }
+
+                private int Offset_UserStackLimit
+                {
+                    get
+                    {
+                        if (_offset_UserStackLimit == -1)
+                        {
+                            _offset_UserStackLimit = Offset_UserStackBase + _etwEvent.AddressSize;
+                        }
+
+                        return _offset_UserStackLimit;
+                    }
+                }
+
+                private int Offset_StartAddr
+                {
+                    get
+                    {
+                        if (_offset_StartAddr == -1)
+                        {
+                            _offset_StartAddr = Offset_UserStackLimit + _etwEvent.AddressSize;
+                        }
+
+                        return _offset_StartAddr;
+                    }
+                }
+
+                private int Offset_Win32StartAddr
+                {
+                    get
+                    {
+                        if (_offset_Win32StartAddr == -1)
+                        {
+                            _offset_Win32StartAddr = Offset_StartAddr + _etwEvent.AddressSize;
+                        }
+
+                        return _offset_Win32StartAddr;
+                    }
+                }
+
+                private int Offset_TebBase
+                {
+                    get
+                    {
+                        if (_offset_TebBase == -1)
+                        {
+                            _offset_TebBase = Offset_Win32StartAddr + _etwEvent.AddressSize;
+                        }
+
+                        return _offset_TebBase;
+                    }
+                }
+
+                private int Offset_SubProcessTag
+                {
+                    get
+                    {
+                        if (_offset_SubProcessTag == -1)
+                        {
+                            _offset_SubProcessTag = Offset_TebBase + _etwEvent.AddressSize;
+                        }
+
+                        return _offset_SubProcessTag;
+                    }
+                }
+
+                /// <summary>
+                /// Retrieves the ProcessId field.
+                /// </summary>
+                public uint ProcessId => BitConverter.ToUInt32(_etwEvent.Data[Offset_ProcessId..]);
+
+                /// <summary>
+                /// Retrieves the TThreadId field.
+                /// </summary>
+                public uint TThreadId => BitConverter.ToUInt32(_etwEvent.Data[Offset_TThreadId..]);
+
+                /// <summary>
+                /// Retrieves the StackBase field.
+                /// </summary>
+                public ulong StackBase => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_StackBase..]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_StackBase..]);
+
+                /// <summary>
+                /// Retrieves the StackLimit field.
+                /// </summary>
+                public ulong StackLimit => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_StackLimit..]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_StackLimit..]);
+
+                /// <summary>
+                /// Retrieves the UserStackBase field.
+                /// </summary>
+                public ulong UserStackBase => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_UserStackBase..]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_UserStackBase..]);
+
+                /// <summary>
+                /// Retrieves the UserStackLimit field.
+                /// </summary>
+                public ulong UserStackLimit => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_UserStackLimit..]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_UserStackLimit..]);
+
+                /// <summary>
+                /// Retrieves the StartAddr field.
+                /// </summary>
+                public ulong StartAddr => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_StartAddr..]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_StartAddr..]);
+
+                /// <summary>
+                /// Retrieves the Win32StartAddr field.
+                /// </summary>
+                public ulong Win32StartAddr => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_Win32StartAddr..]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_Win32StartAddr..]);
+
+                /// <summary>
+                /// Retrieves the TebBase field.
+                /// </summary>
+                public ulong TebBase => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_TebBase..]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_TebBase..]);
+
+                /// <summary>
+                /// Retrieves the SubProcessTag field.
+                /// </summary>
+                public uint SubProcessTag => BitConverter.ToUInt32(_etwEvent.Data[Offset_SubProcessTag..]);
+
+                /// <summary>
+                /// Creates a new DCStartData.
+                /// </summary>
+                /// <param name="etwEvent">The event.</param>
+                public DCStartData(EtwEvent etwEvent)
+                {
+                    _etwEvent = etwEvent;
+                    _offset_ProcessId = -1;
+                    _offset_TThreadId = -1;
+                    _offset_StackBase = -1;
+                    _offset_StackLimit = -1;
+                    _offset_UserStackBase = -1;
+                    _offset_UserStackLimit = -1;
+                    _offset_StartAddr = -1;
+                    _offset_Win32StartAddr = -1;
+                    _offset_TebBase = -1;
+                    _offset_SubProcessTag = -1;
+                }
+            }
+
+        }
+
+        /// <summary>
+        /// An event wrapper for a DCEnd event.
+        /// </summary>
+        public readonly ref struct DCEndEventV2
+        {
+            private readonly EtwEvent _etwEvent;
+
+            /// <summary>
+            /// Event name.
+            /// </summary>
+            public const string Name = "DCEnd";
+
+            /// <summary>
+            /// The event provider.
+            /// </summary>
+            public static readonly Guid Provider = Id;
+
+            /// <summary>
+            /// Event descriptor.
+            /// </summary>
+            public static EtwEventDescriptor Descriptor { get; } = new EtwEventDescriptor
+            {
+                Id = 0,
+                Version = 2,
+                Channel = 0,
+                Level = EtwTraceLevel.None,
+                Opcode = EtwEventOpcode.DataCollectionEnd,
+                Task = 0,
+                Keyword = 0
+            };
+
+            /// <summary>
+            /// The process the event was recorded in.
+            /// </summary>
+            public uint ProcessId => _etwEvent.ProcessId;
+
+            /// <summary>
+            /// The thread the event was recorded on.
+            /// </summary>
+            public uint ThreadId => _etwEvent.ThreadId;
+
+            /// <summary>
+            /// The timestamp of the event.
+            /// </summary>
+            public long Timestamp => _etwEvent.Timestamp;
+
+            /// <summary>
+            /// The processor number the event was recorded on.
+            /// </summary>
+            public byte ProcessorNumber => _etwEvent.ProcessorNumber;
+
+            /// <summary>
+            /// Timing information for the event.
+            /// </summary>
+            public (ulong? KernelTime, ulong? UserTime, ulong? ProcessorTime) Time => _etwEvent.Time;
+
+            /// <summary>
+            /// Data for the event.
+            /// </summary>
+            public DCEndData Data => new(_etwEvent);
+
+            /// <summary>
+            /// Creates a new DCEndEventV2.
+            /// </summary>
+            /// <param name="etwEvent">The event.</param>
+            public DCEndEventV2(EtwEvent etwEvent)
+            {
+                _etwEvent = etwEvent;
+            }
+
+            /// <summary>
+            /// A data wrapper for a DCEnd event.
+            /// </summary>
+            public ref struct DCEndData
+            {
+                private readonly EtwEvent _etwEvent;
+
+                private int _offset_ProcessId;
+                private int _offset_TThreadId;
+                private int _offset_StackBase;
+                private int _offset_StackLimit;
+                private int _offset_UserStackBase;
+                private int _offset_UserStackLimit;
+                private int _offset_StartAddr;
+                private int _offset_Win32StartAddr;
+                private int _offset_TebBase;
+                private int _offset_SubProcessTag;
+
+                private int Offset_ProcessId
+                {
+                    get
+                    {
+                        if (_offset_ProcessId == -1)
+                        {
+                            _offset_ProcessId = 0;
+                        }
+
+                        return _offset_ProcessId;
+                    }
+                }
+
+                private int Offset_TThreadId
+                {
+                    get
+                    {
+                        if (_offset_TThreadId == -1)
+                        {
+                            _offset_TThreadId = Offset_ProcessId + 4;
+                        }
+
+                        return _offset_TThreadId;
+                    }
+                }
+
+                private int Offset_StackBase
+                {
+                    get
+                    {
+                        if (_offset_StackBase == -1)
+                        {
+                            _offset_StackBase = Offset_TThreadId + 4;
+                        }
+
+                        return _offset_StackBase;
+                    }
+                }
+
+                private int Offset_StackLimit
+                {
+                    get
+                    {
+                        if (_offset_StackLimit == -1)
+                        {
+                            _offset_StackLimit = Offset_StackBase + _etwEvent.AddressSize;
+                        }
+
+                        return _offset_StackLimit;
+                    }
+                }
+
+                private int Offset_UserStackBase
+                {
+                    get
+                    {
+                        if (_offset_UserStackBase == -1)
+                        {
+                            _offset_UserStackBase = Offset_StackLimit + _etwEvent.AddressSize;
+                        }
+
+                        return _offset_UserStackBase;
+                    }
+                }
+
+                private int Offset_UserStackLimit
+                {
+                    get
+                    {
+                        if (_offset_UserStackLimit == -1)
+                        {
+                            _offset_UserStackLimit = Offset_UserStackBase + _etwEvent.AddressSize;
+                        }
+
+                        return _offset_UserStackLimit;
+                    }
+                }
+
+                private int Offset_StartAddr
+                {
+                    get
+                    {
+                        if (_offset_StartAddr == -1)
+                        {
+                            _offset_StartAddr = Offset_UserStackLimit + _etwEvent.AddressSize;
+                        }
+
+                        return _offset_StartAddr;
+                    }
+                }
+
+                private int Offset_Win32StartAddr
+                {
+                    get
+                    {
+                        if (_offset_Win32StartAddr == -1)
+                        {
+                            _offset_Win32StartAddr = Offset_StartAddr + _etwEvent.AddressSize;
+                        }
+
+                        return _offset_Win32StartAddr;
+                    }
+                }
+
+                private int Offset_TebBase
+                {
+                    get
+                    {
+                        if (_offset_TebBase == -1)
+                        {
+                            _offset_TebBase = Offset_Win32StartAddr + _etwEvent.AddressSize;
+                        }
+
+                        return _offset_TebBase;
+                    }
+                }
+
+                private int Offset_SubProcessTag
+                {
+                    get
+                    {
+                        if (_offset_SubProcessTag == -1)
+                        {
+                            _offset_SubProcessTag = Offset_TebBase + _etwEvent.AddressSize;
+                        }
+
+                        return _offset_SubProcessTag;
+                    }
+                }
+
+                /// <summary>
+                /// Retrieves the ProcessId field.
+                /// </summary>
+                public uint ProcessId => BitConverter.ToUInt32(_etwEvent.Data[Offset_ProcessId..]);
+
+                /// <summary>
+                /// Retrieves the TThreadId field.
+                /// </summary>
+                public uint TThreadId => BitConverter.ToUInt32(_etwEvent.Data[Offset_TThreadId..]);
+
+                /// <summary>
+                /// Retrieves the StackBase field.
+                /// </summary>
+                public ulong StackBase => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_StackBase..]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_StackBase..]);
+
+                /// <summary>
+                /// Retrieves the StackLimit field.
+                /// </summary>
+                public ulong StackLimit => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_StackLimit..]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_StackLimit..]);
+
+                /// <summary>
+                /// Retrieves the UserStackBase field.
+                /// </summary>
+                public ulong UserStackBase => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_UserStackBase..]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_UserStackBase..]);
+
+                /// <summary>
+                /// Retrieves the UserStackLimit field.
+                /// </summary>
+                public ulong UserStackLimit => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_UserStackLimit..]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_UserStackLimit..]);
+
+                /// <summary>
+                /// Retrieves the StartAddr field.
+                /// </summary>
+                public ulong StartAddr => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_StartAddr..]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_StartAddr..]);
+
+                /// <summary>
+                /// Retrieves the Win32StartAddr field.
+                /// </summary>
+                public ulong Win32StartAddr => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_Win32StartAddr..]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_Win32StartAddr..]);
+
+                /// <summary>
+                /// Retrieves the TebBase field.
+                /// </summary>
+                public ulong TebBase => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_TebBase..]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_TebBase..]);
+
+                /// <summary>
+                /// Retrieves the SubProcessTag field.
+                /// </summary>
+                public uint SubProcessTag => BitConverter.ToUInt32(_etwEvent.Data[Offset_SubProcessTag..]);
+
+                /// <summary>
+                /// Creates a new DCEndData.
+                /// </summary>
+                /// <param name="etwEvent">The event.</param>
+                public DCEndData(EtwEvent etwEvent)
+                {
+                    _etwEvent = etwEvent;
+                    _offset_ProcessId = -1;
+                    _offset_TThreadId = -1;
+                    _offset_StackBase = -1;
+                    _offset_StackLimit = -1;
+                    _offset_UserStackBase = -1;
+                    _offset_UserStackLimit = -1;
+                    _offset_StartAddr = -1;
+                    _offset_Win32StartAddr = -1;
+                    _offset_TebBase = -1;
+                    _offset_SubProcessTag = -1;
+                }
+            }
+
+        }
+
+        /// <summary>
         /// An event wrapper for a SetName event.
         /// </summary>
-        public readonly ref struct SetNameEvent
+        public readonly ref struct SetNameEventV2
         {
             private readonly EtwEvent _etwEvent;
 
@@ -174,10 +3234,10 @@ namespace EtwTools
             public SetNameData Data => new(_etwEvent);
 
             /// <summary>
-            /// Creates a new SetNameEvent.
+            /// Creates a new SetNameEventV2.
             /// </summary>
             /// <param name="etwEvent">The event.</param>
-            public SetNameEvent(EtwEvent etwEvent)
+            public SetNameEventV2(EtwEvent etwEvent)
             {
                 _etwEvent = etwEvent;
             }
@@ -263,9 +3323,339 @@ namespace EtwTools
         }
 
         /// <summary>
+        /// An event wrapper for a CSwitch event.
+        /// </summary>
+        public readonly ref struct CSwitchEventV2
+        {
+            private readonly EtwEvent _etwEvent;
+
+            /// <summary>
+            /// Event name.
+            /// </summary>
+            public const string Name = "CSwitch";
+
+            /// <summary>
+            /// The event provider.
+            /// </summary>
+            public static readonly Guid Provider = Id;
+
+            /// <summary>
+            /// Event descriptor.
+            /// </summary>
+            public static EtwEventDescriptor Descriptor { get; } = new EtwEventDescriptor
+            {
+                Id = 0,
+                Version = 2,
+                Channel = 0,
+                Level = EtwTraceLevel.None,
+                Opcode = (EtwEventOpcode)Opcodes.CSwitch,
+                Task = 0,
+                Keyword = 0
+            };
+
+            /// <summary>
+            /// The process the event was recorded in.
+            /// </summary>
+            public uint ProcessId => _etwEvent.ProcessId;
+
+            /// <summary>
+            /// The thread the event was recorded on.
+            /// </summary>
+            public uint ThreadId => _etwEvent.ThreadId;
+
+            /// <summary>
+            /// The timestamp of the event.
+            /// </summary>
+            public long Timestamp => _etwEvent.Timestamp;
+
+            /// <summary>
+            /// The processor number the event was recorded on.
+            /// </summary>
+            public byte ProcessorNumber => _etwEvent.ProcessorNumber;
+
+            /// <summary>
+            /// Timing information for the event.
+            /// </summary>
+            public (ulong? KernelTime, ulong? UserTime, ulong? ProcessorTime) Time => _etwEvent.Time;
+
+            /// <summary>
+            /// Data for the event.
+            /// </summary>
+            public CSwitchData Data => new(_etwEvent);
+
+            /// <summary>
+            /// Creates a new CSwitchEventV2.
+            /// </summary>
+            /// <param name="etwEvent">The event.</param>
+            public CSwitchEventV2(EtwEvent etwEvent)
+            {
+                _etwEvent = etwEvent;
+            }
+
+            /// <summary>
+            /// A data wrapper for a CSwitch event.
+            /// </summary>
+            public ref struct CSwitchData
+            {
+                private readonly EtwEvent _etwEvent;
+
+                private int _offset_NewThreadId;
+                private int _offset_OldThreadId;
+                private int _offset_NewThreadPriority;
+                private int _offset_OldThreadPriority;
+                private int _offset_PreviousCState;
+                private int _offset_SpareByte;
+                private int _offset_OldThreadWaitReason;
+                private int _offset_OldThreadWaitMode;
+                private int _offset_OldThreadState;
+                private int _offset_OldThreadWaitIdealProcessor;
+                private int _offset_NewThreadWaitTime;
+                private int _offset_Reserved;
+
+                private int Offset_NewThreadId
+                {
+                    get
+                    {
+                        if (_offset_NewThreadId == -1)
+                        {
+                            _offset_NewThreadId = 0;
+                        }
+
+                        return _offset_NewThreadId;
+                    }
+                }
+
+                private int Offset_OldThreadId
+                {
+                    get
+                    {
+                        if (_offset_OldThreadId == -1)
+                        {
+                            _offset_OldThreadId = Offset_NewThreadId + 4;
+                        }
+
+                        return _offset_OldThreadId;
+                    }
+                }
+
+                private int Offset_NewThreadPriority
+                {
+                    get
+                    {
+                        if (_offset_NewThreadPriority == -1)
+                        {
+                            _offset_NewThreadPriority = Offset_OldThreadId + 4;
+                        }
+
+                        return _offset_NewThreadPriority;
+                    }
+                }
+
+                private int Offset_OldThreadPriority
+                {
+                    get
+                    {
+                        if (_offset_OldThreadPriority == -1)
+                        {
+                            _offset_OldThreadPriority = Offset_NewThreadPriority + 1;
+                        }
+
+                        return _offset_OldThreadPriority;
+                    }
+                }
+
+                private int Offset_PreviousCState
+                {
+                    get
+                    {
+                        if (_offset_PreviousCState == -1)
+                        {
+                            _offset_PreviousCState = Offset_OldThreadPriority + 1;
+                        }
+
+                        return _offset_PreviousCState;
+                    }
+                }
+
+                private int Offset_SpareByte
+                {
+                    get
+                    {
+                        if (_offset_SpareByte == -1)
+                        {
+                            _offset_SpareByte = Offset_PreviousCState + 1;
+                        }
+
+                        return _offset_SpareByte;
+                    }
+                }
+
+                private int Offset_OldThreadWaitReason
+                {
+                    get
+                    {
+                        if (_offset_OldThreadWaitReason == -1)
+                        {
+                            _offset_OldThreadWaitReason = Offset_SpareByte + 1;
+                        }
+
+                        return _offset_OldThreadWaitReason;
+                    }
+                }
+
+                private int Offset_OldThreadWaitMode
+                {
+                    get
+                    {
+                        if (_offset_OldThreadWaitMode == -1)
+                        {
+                            _offset_OldThreadWaitMode = Offset_OldThreadWaitReason + 1;
+                        }
+
+                        return _offset_OldThreadWaitMode;
+                    }
+                }
+
+                private int Offset_OldThreadState
+                {
+                    get
+                    {
+                        if (_offset_OldThreadState == -1)
+                        {
+                            _offset_OldThreadState = Offset_OldThreadWaitMode + 1;
+                        }
+
+                        return _offset_OldThreadState;
+                    }
+                }
+
+                private int Offset_OldThreadWaitIdealProcessor
+                {
+                    get
+                    {
+                        if (_offset_OldThreadWaitIdealProcessor == -1)
+                        {
+                            _offset_OldThreadWaitIdealProcessor = Offset_OldThreadState + 1;
+                        }
+
+                        return _offset_OldThreadWaitIdealProcessor;
+                    }
+                }
+
+                private int Offset_NewThreadWaitTime
+                {
+                    get
+                    {
+                        if (_offset_NewThreadWaitTime == -1)
+                        {
+                            _offset_NewThreadWaitTime = Offset_OldThreadWaitIdealProcessor + 1;
+                        }
+
+                        return _offset_NewThreadWaitTime;
+                    }
+                }
+
+                private int Offset_Reserved
+                {
+                    get
+                    {
+                        if (_offset_Reserved == -1)
+                        {
+                            _offset_Reserved = Offset_NewThreadWaitTime + 4;
+                        }
+
+                        return _offset_Reserved;
+                    }
+                }
+
+                /// <summary>
+                /// Retrieves the NewThreadId field.
+                /// </summary>
+                public uint NewThreadId => BitConverter.ToUInt32(_etwEvent.Data[Offset_NewThreadId..]);
+
+                /// <summary>
+                /// Retrieves the OldThreadId field.
+                /// </summary>
+                public uint OldThreadId => BitConverter.ToUInt32(_etwEvent.Data[Offset_OldThreadId..]);
+
+                /// <summary>
+                /// Retrieves the NewThreadPriority field.
+                /// </summary>
+                public sbyte NewThreadPriority => (sbyte)_etwEvent.Data[Offset_NewThreadPriority];
+
+                /// <summary>
+                /// Retrieves the OldThreadPriority field.
+                /// </summary>
+                public sbyte OldThreadPriority => (sbyte)_etwEvent.Data[Offset_OldThreadPriority];
+
+                /// <summary>
+                /// Retrieves the PreviousCState field.
+                /// </summary>
+                public byte PreviousCState => _etwEvent.Data[Offset_PreviousCState];
+
+                /// <summary>
+                /// Retrieves the SpareByte field.
+                /// </summary>
+                public sbyte SpareByte => (sbyte)_etwEvent.Data[Offset_SpareByte];
+
+                /// <summary>
+                /// Retrieves the OldThreadWaitReason field.
+                /// </summary>
+                public sbyte OldThreadWaitReason => (sbyte)_etwEvent.Data[Offset_OldThreadWaitReason];
+
+                /// <summary>
+                /// Retrieves the OldThreadWaitMode field.
+                /// </summary>
+                public sbyte OldThreadWaitMode => (sbyte)_etwEvent.Data[Offset_OldThreadWaitMode];
+
+                /// <summary>
+                /// Retrieves the OldThreadState field.
+                /// </summary>
+                public sbyte OldThreadState => (sbyte)_etwEvent.Data[Offset_OldThreadState];
+
+                /// <summary>
+                /// Retrieves the OldThreadWaitIdealProcessor field.
+                /// </summary>
+                public sbyte OldThreadWaitIdealProcessor => (sbyte)_etwEvent.Data[Offset_OldThreadWaitIdealProcessor];
+
+                /// <summary>
+                /// Retrieves the NewThreadWaitTime field.
+                /// </summary>
+                public uint NewThreadWaitTime => BitConverter.ToUInt32(_etwEvent.Data[Offset_NewThreadWaitTime..]);
+
+                /// <summary>
+                /// Retrieves the Reserved field.
+                /// </summary>
+                public uint Reserved => BitConverter.ToUInt32(_etwEvent.Data[Offset_Reserved..]);
+
+                /// <summary>
+                /// Creates a new CSwitchData.
+                /// </summary>
+                /// <param name="etwEvent">The event.</param>
+                public CSwitchData(EtwEvent etwEvent)
+                {
+                    _etwEvent = etwEvent;
+                    _offset_NewThreadId = -1;
+                    _offset_OldThreadId = -1;
+                    _offset_NewThreadPriority = -1;
+                    _offset_OldThreadPriority = -1;
+                    _offset_PreviousCState = -1;
+                    _offset_SpareByte = -1;
+                    _offset_OldThreadWaitReason = -1;
+                    _offset_OldThreadWaitMode = -1;
+                    _offset_OldThreadState = -1;
+                    _offset_OldThreadWaitIdealProcessor = -1;
+                    _offset_NewThreadWaitTime = -1;
+                    _offset_Reserved = -1;
+                }
+            }
+
+        }
+
+        /// <summary>
         /// An event wrapper for a CompCS event.
         /// </summary>
-        public readonly ref struct CompCSEvent
+        public readonly ref struct CompCSEventV2
         {
             private readonly EtwEvent _etwEvent;
 
@@ -319,10 +3709,10 @@ namespace EtwTools
             public (ulong? KernelTime, ulong? UserTime, ulong? ProcessorTime) Time => _etwEvent.Time;
 
             /// <summary>
-            /// Creates a new CompCSEvent.
+            /// Creates a new CompCSEventV2.
             /// </summary>
             /// <param name="etwEvent">The event.</param>
-            public CompCSEvent(EtwEvent etwEvent)
+            public CompCSEventV2(EtwEvent etwEvent)
             {
                 _etwEvent = etwEvent;
             }
@@ -331,7 +3721,7 @@ namespace EtwTools
         /// <summary>
         /// An event wrapper for a SpinLock event.
         /// </summary>
-        public readonly ref struct SpinLockEvent
+        public readonly ref struct SpinLockEventV2
         {
             private readonly EtwEvent _etwEvent;
 
@@ -390,10 +3780,10 @@ namespace EtwTools
             public SpinLockData Data => new(_etwEvent);
 
             /// <summary>
-            /// Creates a new SpinLockEvent.
+            /// Creates a new SpinLockEventV2.
             /// </summary>
             /// <param name="etwEvent">The event.</param>
-            public SpinLockEvent(EtwEvent etwEvent)
+            public SpinLockEventV2(EtwEvent etwEvent)
             {
                 _etwEvent = etwEvent;
             }
@@ -661,7 +4051,7 @@ namespace EtwTools
         /// <summary>
         /// An event wrapper for a ReadyThread event.
         /// </summary>
-        public readonly ref struct ReadyThreadEvent
+        public readonly ref struct ReadyThreadEventV2
         {
             private readonly EtwEvent _etwEvent;
 
@@ -720,10 +4110,10 @@ namespace EtwTools
             public ReadyThreadData Data => new(_etwEvent);
 
             /// <summary>
-            /// Creates a new ReadyThreadEvent.
+            /// Creates a new ReadyThreadEventV2.
             /// </summary>
             /// <param name="etwEvent">The event.</param>
-            public ReadyThreadEvent(EtwEvent etwEvent)
+            public ReadyThreadEventV2(EtwEvent etwEvent)
             {
                 _etwEvent = etwEvent;
             }
@@ -851,7 +4241,7 @@ namespace EtwTools
         /// <summary>
         /// An event wrapper for a ThreadAffinity event.
         /// </summary>
-        public readonly ref struct ThreadAffinityEvent
+        public readonly ref struct ThreadAffinityEventV2
         {
             private readonly EtwEvent _etwEvent;
 
@@ -910,10 +4300,10 @@ namespace EtwTools
             public ThreadAffinityData Data => new(_etwEvent);
 
             /// <summary>
-            /// Creates a new ThreadAffinityEvent.
+            /// Creates a new ThreadAffinityEventV2.
             /// </summary>
             /// <param name="etwEvent">The event.</param>
-            public ThreadAffinityEvent(EtwEvent etwEvent)
+            public ThreadAffinityEventV2(EtwEvent etwEvent)
             {
                 _etwEvent = etwEvent;
             }
@@ -1021,7 +4411,7 @@ namespace EtwTools
         /// <summary>
         /// An event wrapper for a WorkerThread event.
         /// </summary>
-        public readonly ref struct WorkerThreadEvent
+        public readonly ref struct WorkerThreadEventV2
         {
             private readonly EtwEvent _etwEvent;
 
@@ -1080,10 +4470,10 @@ namespace EtwTools
             public WorkerThreadData Data => new(_etwEvent);
 
             /// <summary>
-            /// Creates a new WorkerThreadEvent.
+            /// Creates a new WorkerThreadEventV2.
             /// </summary>
             /// <param name="etwEvent">The event.</param>
-            public WorkerThreadEvent(EtwEvent etwEvent)
+            public WorkerThreadEventV2(EtwEvent etwEvent)
             {
                 _etwEvent = etwEvent;
             }
@@ -1171,7 +4561,7 @@ namespace EtwTools
         /// <summary>
         /// An event wrapper for a AntiStarvationBoost event.
         /// </summary>
-        public readonly ref struct AntiStarvationBoostEvent
+        public readonly ref struct AntiStarvationBoostEventV2
         {
             private readonly EtwEvent _etwEvent;
 
@@ -1230,10 +4620,10 @@ namespace EtwTools
             public AntiStarvationBoostData Data => new(_etwEvent);
 
             /// <summary>
-            /// Creates a new AntiStarvationBoostEvent.
+            /// Creates a new AntiStarvationBoostEventV2.
             /// </summary>
             /// <param name="etwEvent">The event.</param>
-            public AntiStarvationBoostEvent(EtwEvent etwEvent)
+            public AntiStarvationBoostEventV2(EtwEvent etwEvent)
             {
                 _etwEvent = etwEvent;
             }
@@ -1341,7 +4731,7 @@ namespace EtwTools
         /// <summary>
         /// An event wrapper for a ThreadMigration event.
         /// </summary>
-        public readonly ref struct ThreadMigrationEvent
+        public readonly ref struct ThreadMigrationEventV2
         {
             private readonly EtwEvent _etwEvent;
 
@@ -1400,10 +4790,10 @@ namespace EtwTools
             public ThreadMigrationData Data => new(_etwEvent);
 
             /// <summary>
-            /// Creates a new ThreadMigrationEvent.
+            /// Creates a new ThreadMigrationEventV2.
             /// </summary>
             /// <param name="etwEvent">The event.</param>
-            public ThreadMigrationEvent(EtwEvent etwEvent)
+            public ThreadMigrationEventV2(EtwEvent etwEvent)
             {
                 _etwEvent = etwEvent;
             }
@@ -1551,7 +4941,7 @@ namespace EtwTools
         /// <summary>
         /// An event wrapper for a KernelQueueEnqueue event.
         /// </summary>
-        public readonly ref struct KernelQueueEnqueueEvent
+        public readonly ref struct KernelQueueEnqueueEventV2
         {
             private readonly EtwEvent _etwEvent;
 
@@ -1610,10 +5000,10 @@ namespace EtwTools
             public KernelQueueEnqueueData Data => new(_etwEvent);
 
             /// <summary>
-            /// Creates a new KernelQueueEnqueueEvent.
+            /// Creates a new KernelQueueEnqueueEventV2.
             /// </summary>
             /// <param name="etwEvent">The event.</param>
-            public KernelQueueEnqueueEvent(EtwEvent etwEvent)
+            public KernelQueueEnqueueEventV2(EtwEvent etwEvent)
             {
                 _etwEvent = etwEvent;
             }
@@ -1681,7 +5071,7 @@ namespace EtwTools
         /// <summary>
         /// An event wrapper for a KernelQueueDequeue event.
         /// </summary>
-        public readonly ref struct KernelQueueDequeueEvent
+        public readonly ref struct KernelQueueDequeueEventV2
         {
             private readonly EtwEvent _etwEvent;
 
@@ -1740,10 +5130,10 @@ namespace EtwTools
             public KernelQueueDequeueData Data => new(_etwEvent);
 
             /// <summary>
-            /// Creates a new KernelQueueDequeueEvent.
+            /// Creates a new KernelQueueDequeueEventV2.
             /// </summary>
             /// <param name="etwEvent">The event.</param>
-            public KernelQueueDequeueEvent(EtwEvent etwEvent)
+            public KernelQueueDequeueEventV2(EtwEvent etwEvent)
             {
                 _etwEvent = etwEvent;
             }
@@ -1831,7 +5221,7 @@ namespace EtwTools
         /// <summary>
         /// An event wrapper for a WorkerThreadStart event.
         /// </summary>
-        public readonly ref struct WorkerThreadStartEvent
+        public readonly ref struct WorkerThreadStartEventV2
         {
             private readonly EtwEvent _etwEvent;
 
@@ -1890,10 +5280,10 @@ namespace EtwTools
             public WorkerThreadStartData Data => new(_etwEvent);
 
             /// <summary>
-            /// Creates a new WorkerThreadStartEvent.
+            /// Creates a new WorkerThreadStartEventV2.
             /// </summary>
             /// <param name="etwEvent">The event.</param>
-            public WorkerThreadStartEvent(EtwEvent etwEvent)
+            public WorkerThreadStartEventV2(EtwEvent etwEvent)
             {
                 _etwEvent = etwEvent;
             }
@@ -1941,7 +5331,7 @@ namespace EtwTools
         /// <summary>
         /// An event wrapper for a WorkerThreadEnd event.
         /// </summary>
-        public readonly ref struct WorkerThreadEndEvent
+        public readonly ref struct WorkerThreadEndEventV2
         {
             private readonly EtwEvent _etwEvent;
 
@@ -2000,10 +5390,10 @@ namespace EtwTools
             public WorkerThreadEndData Data => new(_etwEvent);
 
             /// <summary>
-            /// Creates a new WorkerThreadEndEvent.
+            /// Creates a new WorkerThreadEndEventV2.
             /// </summary>
             /// <param name="etwEvent">The event.</param>
-            public WorkerThreadEndEvent(EtwEvent etwEvent)
+            public WorkerThreadEndEventV2(EtwEvent etwEvent)
             {
                 _etwEvent = etwEvent;
             }
@@ -2051,7 +5441,7 @@ namespace EtwTools
         /// <summary>
         /// An event wrapper for a AutoBoostSetFloor event.
         /// </summary>
-        public readonly ref struct AutoBoostSetFloorEvent
+        public readonly ref struct AutoBoostSetFloorEventV2
         {
             private readonly EtwEvent _etwEvent;
 
@@ -2110,10 +5500,10 @@ namespace EtwTools
             public AutoBoostSetFloorData Data => new(_etwEvent);
 
             /// <summary>
-            /// Creates a new AutoBoostSetFloorEvent.
+            /// Creates a new AutoBoostSetFloorEventV2.
             /// </summary>
             /// <param name="etwEvent">The event.</param>
-            public AutoBoostSetFloorEvent(EtwEvent etwEvent)
+            public AutoBoostSetFloorEventV2(EtwEvent etwEvent)
             {
                 _etwEvent = etwEvent;
             }
@@ -2261,7 +5651,7 @@ namespace EtwTools
         /// <summary>
         /// An event wrapper for a AutoBoostClearFloor event.
         /// </summary>
-        public readonly ref struct AutoBoostClearFloorEvent
+        public readonly ref struct AutoBoostClearFloorEventV2
         {
             private readonly EtwEvent _etwEvent;
 
@@ -2320,10 +5710,10 @@ namespace EtwTools
             public AutoBoostClearFloorData Data => new(_etwEvent);
 
             /// <summary>
-            /// Creates a new AutoBoostClearFloorEvent.
+            /// Creates a new AutoBoostClearFloorEventV2.
             /// </summary>
             /// <param name="etwEvent">The event.</param>
-            public AutoBoostClearFloorEvent(EtwEvent etwEvent)
+            public AutoBoostClearFloorEventV2(EtwEvent etwEvent)
             {
                 _etwEvent = etwEvent;
             }
@@ -2411,7 +5801,7 @@ namespace EtwTools
         /// <summary>
         /// An event wrapper for a AutoBoostEntryExhaustion event.
         /// </summary>
-        public readonly ref struct AutoBoostEntryExhaustionEvent
+        public readonly ref struct AutoBoostEntryExhaustionEventV2
         {
             private readonly EtwEvent _etwEvent;
 
@@ -2470,10 +5860,10 @@ namespace EtwTools
             public AutoBoostEntryExhaustionData Data => new(_etwEvent);
 
             /// <summary>
-            /// Creates a new AutoBoostEntryExhaustionEvent.
+            /// Creates a new AutoBoostEntryExhaustionEventV2.
             /// </summary>
             /// <param name="etwEvent">The event.</param>
-            public AutoBoostEntryExhaustionEvent(EtwEvent etwEvent)
+            public AutoBoostEntryExhaustionEventV2(EtwEvent etwEvent)
             {
                 _etwEvent = etwEvent;
             }
@@ -2541,7 +5931,7 @@ namespace EtwTools
         /// <summary>
         /// An event wrapper for a SubProcessTagChanged event.
         /// </summary>
-        public readonly ref struct SubProcessTagChangedEvent
+        public readonly ref struct SubProcessTagChangedEventV2
         {
             private readonly EtwEvent _etwEvent;
 
@@ -2600,10 +5990,10 @@ namespace EtwTools
             public SubProcessTagChangedData Data => new(_etwEvent);
 
             /// <summary>
-            /// Creates a new SubProcessTagChangedEvent.
+            /// Creates a new SubProcessTagChangedEventV2.
             /// </summary>
             /// <param name="etwEvent">The event.</param>
-            public SubProcessTagChangedEvent(EtwEvent etwEvent)
+            public SubProcessTagChangedEventV2(EtwEvent etwEvent)
             {
                 _etwEvent = etwEvent;
             }
@@ -2669,9 +6059,1489 @@ namespace EtwTools
         }
 
         /// <summary>
+        /// An event wrapper for a Start event.
+        /// </summary>
+        public readonly ref struct StartEventV3
+        {
+            private readonly EtwEvent _etwEvent;
+
+            /// <summary>
+            /// Event name.
+            /// </summary>
+            public const string Name = "Start";
+
+            /// <summary>
+            /// The event provider.
+            /// </summary>
+            public static readonly Guid Provider = Id;
+
+            /// <summary>
+            /// Event descriptor.
+            /// </summary>
+            public static EtwEventDescriptor Descriptor { get; } = new EtwEventDescriptor
+            {
+                Id = 0,
+                Version = 3,
+                Channel = 0,
+                Level = EtwTraceLevel.None,
+                Opcode = EtwEventOpcode.Start,
+                Task = 0,
+                Keyword = 0
+            };
+
+            /// <summary>
+            /// The process the event was recorded in.
+            /// </summary>
+            public uint ProcessId => _etwEvent.ProcessId;
+
+            /// <summary>
+            /// The thread the event was recorded on.
+            /// </summary>
+            public uint ThreadId => _etwEvent.ThreadId;
+
+            /// <summary>
+            /// The timestamp of the event.
+            /// </summary>
+            public long Timestamp => _etwEvent.Timestamp;
+
+            /// <summary>
+            /// The processor number the event was recorded on.
+            /// </summary>
+            public byte ProcessorNumber => _etwEvent.ProcessorNumber;
+
+            /// <summary>
+            /// Timing information for the event.
+            /// </summary>
+            public (ulong? KernelTime, ulong? UserTime, ulong? ProcessorTime) Time => _etwEvent.Time;
+
+            /// <summary>
+            /// Data for the event.
+            /// </summary>
+            public StartData Data => new(_etwEvent);
+
+            /// <summary>
+            /// Creates a new StartEventV3.
+            /// </summary>
+            /// <param name="etwEvent">The event.</param>
+            public StartEventV3(EtwEvent etwEvent)
+            {
+                _etwEvent = etwEvent;
+            }
+
+            /// <summary>
+            /// A data wrapper for a Start event.
+            /// </summary>
+            public ref struct StartData
+            {
+                private readonly EtwEvent _etwEvent;
+
+                private int _offset_ProcessId;
+                private int _offset_TThreadId;
+                private int _offset_StackBase;
+                private int _offset_StackLimit;
+                private int _offset_UserStackBase;
+                private int _offset_UserStackLimit;
+                private int _offset_Affinity;
+                private int _offset_Win32StartAddr;
+                private int _offset_TebBase;
+                private int _offset_SubProcessTag;
+                private int _offset_BasePriority;
+                private int _offset_PagePriority;
+                private int _offset_IoPriority;
+                private int _offset_ThreadFlags;
+
+                private int Offset_ProcessId
+                {
+                    get
+                    {
+                        if (_offset_ProcessId == -1)
+                        {
+                            _offset_ProcessId = 0;
+                        }
+
+                        return _offset_ProcessId;
+                    }
+                }
+
+                private int Offset_TThreadId
+                {
+                    get
+                    {
+                        if (_offset_TThreadId == -1)
+                        {
+                            _offset_TThreadId = Offset_ProcessId + 4;
+                        }
+
+                        return _offset_TThreadId;
+                    }
+                }
+
+                private int Offset_StackBase
+                {
+                    get
+                    {
+                        if (_offset_StackBase == -1)
+                        {
+                            _offset_StackBase = Offset_TThreadId + 4;
+                        }
+
+                        return _offset_StackBase;
+                    }
+                }
+
+                private int Offset_StackLimit
+                {
+                    get
+                    {
+                        if (_offset_StackLimit == -1)
+                        {
+                            _offset_StackLimit = Offset_StackBase + _etwEvent.AddressSize;
+                        }
+
+                        return _offset_StackLimit;
+                    }
+                }
+
+                private int Offset_UserStackBase
+                {
+                    get
+                    {
+                        if (_offset_UserStackBase == -1)
+                        {
+                            _offset_UserStackBase = Offset_StackLimit + _etwEvent.AddressSize;
+                        }
+
+                        return _offset_UserStackBase;
+                    }
+                }
+
+                private int Offset_UserStackLimit
+                {
+                    get
+                    {
+                        if (_offset_UserStackLimit == -1)
+                        {
+                            _offset_UserStackLimit = Offset_UserStackBase + _etwEvent.AddressSize;
+                        }
+
+                        return _offset_UserStackLimit;
+                    }
+                }
+
+                private int Offset_Affinity
+                {
+                    get
+                    {
+                        if (_offset_Affinity == -1)
+                        {
+                            _offset_Affinity = Offset_UserStackLimit + _etwEvent.AddressSize;
+                        }
+
+                        return _offset_Affinity;
+                    }
+                }
+
+                private int Offset_Win32StartAddr
+                {
+                    get
+                    {
+                        if (_offset_Win32StartAddr == -1)
+                        {
+                            _offset_Win32StartAddr = Offset_Affinity + _etwEvent.AddressSize;
+                        }
+
+                        return _offset_Win32StartAddr;
+                    }
+                }
+
+                private int Offset_TebBase
+                {
+                    get
+                    {
+                        if (_offset_TebBase == -1)
+                        {
+                            _offset_TebBase = Offset_Win32StartAddr + _etwEvent.AddressSize;
+                        }
+
+                        return _offset_TebBase;
+                    }
+                }
+
+                private int Offset_SubProcessTag
+                {
+                    get
+                    {
+                        if (_offset_SubProcessTag == -1)
+                        {
+                            _offset_SubProcessTag = Offset_TebBase + _etwEvent.AddressSize;
+                        }
+
+                        return _offset_SubProcessTag;
+                    }
+                }
+
+                private int Offset_BasePriority
+                {
+                    get
+                    {
+                        if (_offset_BasePriority == -1)
+                        {
+                            _offset_BasePriority = Offset_SubProcessTag + 4;
+                        }
+
+                        return _offset_BasePriority;
+                    }
+                }
+
+                private int Offset_PagePriority
+                {
+                    get
+                    {
+                        if (_offset_PagePriority == -1)
+                        {
+                            _offset_PagePriority = Offset_BasePriority + 1;
+                        }
+
+                        return _offset_PagePriority;
+                    }
+                }
+
+                private int Offset_IoPriority
+                {
+                    get
+                    {
+                        if (_offset_IoPriority == -1)
+                        {
+                            _offset_IoPriority = Offset_PagePriority + 1;
+                        }
+
+                        return _offset_IoPriority;
+                    }
+                }
+
+                private int Offset_ThreadFlags
+                {
+                    get
+                    {
+                        if (_offset_ThreadFlags == -1)
+                        {
+                            _offset_ThreadFlags = Offset_IoPriority + 1;
+                        }
+
+                        return _offset_ThreadFlags;
+                    }
+                }
+
+                /// <summary>
+                /// Retrieves the ProcessId field.
+                /// </summary>
+                public uint ProcessId => BitConverter.ToUInt32(_etwEvent.Data[Offset_ProcessId..]);
+
+                /// <summary>
+                /// Retrieves the TThreadId field.
+                /// </summary>
+                public uint TThreadId => BitConverter.ToUInt32(_etwEvent.Data[Offset_TThreadId..]);
+
+                /// <summary>
+                /// Retrieves the StackBase field.
+                /// </summary>
+                public ulong StackBase => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_StackBase..]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_StackBase..]);
+
+                /// <summary>
+                /// Retrieves the StackLimit field.
+                /// </summary>
+                public ulong StackLimit => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_StackLimit..]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_StackLimit..]);
+
+                /// <summary>
+                /// Retrieves the UserStackBase field.
+                /// </summary>
+                public ulong UserStackBase => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_UserStackBase..]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_UserStackBase..]);
+
+                /// <summary>
+                /// Retrieves the UserStackLimit field.
+                /// </summary>
+                public ulong UserStackLimit => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_UserStackLimit..]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_UserStackLimit..]);
+
+                /// <summary>
+                /// Retrieves the Affinity field.
+                /// </summary>
+                public ulong Affinity => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_Affinity..]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_Affinity..]);
+
+                /// <summary>
+                /// Retrieves the Win32StartAddr field.
+                /// </summary>
+                public ulong Win32StartAddr => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_Win32StartAddr..]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_Win32StartAddr..]);
+
+                /// <summary>
+                /// Retrieves the TebBase field.
+                /// </summary>
+                public ulong TebBase => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_TebBase..]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_TebBase..]);
+
+                /// <summary>
+                /// Retrieves the SubProcessTag field.
+                /// </summary>
+                public uint SubProcessTag => BitConverter.ToUInt32(_etwEvent.Data[Offset_SubProcessTag..]);
+
+                /// <summary>
+                /// Retrieves the BasePriority field.
+                /// </summary>
+                public byte BasePriority => _etwEvent.Data[Offset_BasePriority];
+
+                /// <summary>
+                /// Retrieves the PagePriority field.
+                /// </summary>
+                public byte PagePriority => _etwEvent.Data[Offset_PagePriority];
+
+                /// <summary>
+                /// Retrieves the IoPriority field.
+                /// </summary>
+                public byte IoPriority => _etwEvent.Data[Offset_IoPriority];
+
+                /// <summary>
+                /// Retrieves the ThreadFlags field.
+                /// </summary>
+                public byte ThreadFlags => _etwEvent.Data[Offset_ThreadFlags];
+
+                /// <summary>
+                /// Creates a new StartData.
+                /// </summary>
+                /// <param name="etwEvent">The event.</param>
+                public StartData(EtwEvent etwEvent)
+                {
+                    _etwEvent = etwEvent;
+                    _offset_ProcessId = -1;
+                    _offset_TThreadId = -1;
+                    _offset_StackBase = -1;
+                    _offset_StackLimit = -1;
+                    _offset_UserStackBase = -1;
+                    _offset_UserStackLimit = -1;
+                    _offset_Affinity = -1;
+                    _offset_Win32StartAddr = -1;
+                    _offset_TebBase = -1;
+                    _offset_SubProcessTag = -1;
+                    _offset_BasePriority = -1;
+                    _offset_PagePriority = -1;
+                    _offset_IoPriority = -1;
+                    _offset_ThreadFlags = -1;
+                }
+            }
+
+        }
+
+        /// <summary>
+        /// An event wrapper for a End event.
+        /// </summary>
+        public readonly ref struct EndEventV3
+        {
+            private readonly EtwEvent _etwEvent;
+
+            /// <summary>
+            /// Event name.
+            /// </summary>
+            public const string Name = "End";
+
+            /// <summary>
+            /// The event provider.
+            /// </summary>
+            public static readonly Guid Provider = Id;
+
+            /// <summary>
+            /// Event descriptor.
+            /// </summary>
+            public static EtwEventDescriptor Descriptor { get; } = new EtwEventDescriptor
+            {
+                Id = 0,
+                Version = 3,
+                Channel = 0,
+                Level = EtwTraceLevel.None,
+                Opcode = EtwEventOpcode.End,
+                Task = 0,
+                Keyword = 0
+            };
+
+            /// <summary>
+            /// The process the event was recorded in.
+            /// </summary>
+            public uint ProcessId => _etwEvent.ProcessId;
+
+            /// <summary>
+            /// The thread the event was recorded on.
+            /// </summary>
+            public uint ThreadId => _etwEvent.ThreadId;
+
+            /// <summary>
+            /// The timestamp of the event.
+            /// </summary>
+            public long Timestamp => _etwEvent.Timestamp;
+
+            /// <summary>
+            /// The processor number the event was recorded on.
+            /// </summary>
+            public byte ProcessorNumber => _etwEvent.ProcessorNumber;
+
+            /// <summary>
+            /// Timing information for the event.
+            /// </summary>
+            public (ulong? KernelTime, ulong? UserTime, ulong? ProcessorTime) Time => _etwEvent.Time;
+
+            /// <summary>
+            /// Data for the event.
+            /// </summary>
+            public EndData Data => new(_etwEvent);
+
+            /// <summary>
+            /// Creates a new EndEventV3.
+            /// </summary>
+            /// <param name="etwEvent">The event.</param>
+            public EndEventV3(EtwEvent etwEvent)
+            {
+                _etwEvent = etwEvent;
+            }
+
+            /// <summary>
+            /// A data wrapper for a End event.
+            /// </summary>
+            public ref struct EndData
+            {
+                private readonly EtwEvent _etwEvent;
+
+                private int _offset_ProcessId;
+                private int _offset_TThreadId;
+                private int _offset_StackBase;
+                private int _offset_StackLimit;
+                private int _offset_UserStackBase;
+                private int _offset_UserStackLimit;
+                private int _offset_Affinity;
+                private int _offset_Win32StartAddr;
+                private int _offset_TebBase;
+                private int _offset_SubProcessTag;
+                private int _offset_BasePriority;
+                private int _offset_PagePriority;
+                private int _offset_IoPriority;
+                private int _offset_ThreadFlags;
+
+                private int Offset_ProcessId
+                {
+                    get
+                    {
+                        if (_offset_ProcessId == -1)
+                        {
+                            _offset_ProcessId = 0;
+                        }
+
+                        return _offset_ProcessId;
+                    }
+                }
+
+                private int Offset_TThreadId
+                {
+                    get
+                    {
+                        if (_offset_TThreadId == -1)
+                        {
+                            _offset_TThreadId = Offset_ProcessId + 4;
+                        }
+
+                        return _offset_TThreadId;
+                    }
+                }
+
+                private int Offset_StackBase
+                {
+                    get
+                    {
+                        if (_offset_StackBase == -1)
+                        {
+                            _offset_StackBase = Offset_TThreadId + 4;
+                        }
+
+                        return _offset_StackBase;
+                    }
+                }
+
+                private int Offset_StackLimit
+                {
+                    get
+                    {
+                        if (_offset_StackLimit == -1)
+                        {
+                            _offset_StackLimit = Offset_StackBase + _etwEvent.AddressSize;
+                        }
+
+                        return _offset_StackLimit;
+                    }
+                }
+
+                private int Offset_UserStackBase
+                {
+                    get
+                    {
+                        if (_offset_UserStackBase == -1)
+                        {
+                            _offset_UserStackBase = Offset_StackLimit + _etwEvent.AddressSize;
+                        }
+
+                        return _offset_UserStackBase;
+                    }
+                }
+
+                private int Offset_UserStackLimit
+                {
+                    get
+                    {
+                        if (_offset_UserStackLimit == -1)
+                        {
+                            _offset_UserStackLimit = Offset_UserStackBase + _etwEvent.AddressSize;
+                        }
+
+                        return _offset_UserStackLimit;
+                    }
+                }
+
+                private int Offset_Affinity
+                {
+                    get
+                    {
+                        if (_offset_Affinity == -1)
+                        {
+                            _offset_Affinity = Offset_UserStackLimit + _etwEvent.AddressSize;
+                        }
+
+                        return _offset_Affinity;
+                    }
+                }
+
+                private int Offset_Win32StartAddr
+                {
+                    get
+                    {
+                        if (_offset_Win32StartAddr == -1)
+                        {
+                            _offset_Win32StartAddr = Offset_Affinity + _etwEvent.AddressSize;
+                        }
+
+                        return _offset_Win32StartAddr;
+                    }
+                }
+
+                private int Offset_TebBase
+                {
+                    get
+                    {
+                        if (_offset_TebBase == -1)
+                        {
+                            _offset_TebBase = Offset_Win32StartAddr + _etwEvent.AddressSize;
+                        }
+
+                        return _offset_TebBase;
+                    }
+                }
+
+                private int Offset_SubProcessTag
+                {
+                    get
+                    {
+                        if (_offset_SubProcessTag == -1)
+                        {
+                            _offset_SubProcessTag = Offset_TebBase + _etwEvent.AddressSize;
+                        }
+
+                        return _offset_SubProcessTag;
+                    }
+                }
+
+                private int Offset_BasePriority
+                {
+                    get
+                    {
+                        if (_offset_BasePriority == -1)
+                        {
+                            _offset_BasePriority = Offset_SubProcessTag + 4;
+                        }
+
+                        return _offset_BasePriority;
+                    }
+                }
+
+                private int Offset_PagePriority
+                {
+                    get
+                    {
+                        if (_offset_PagePriority == -1)
+                        {
+                            _offset_PagePriority = Offset_BasePriority + 1;
+                        }
+
+                        return _offset_PagePriority;
+                    }
+                }
+
+                private int Offset_IoPriority
+                {
+                    get
+                    {
+                        if (_offset_IoPriority == -1)
+                        {
+                            _offset_IoPriority = Offset_PagePriority + 1;
+                        }
+
+                        return _offset_IoPriority;
+                    }
+                }
+
+                private int Offset_ThreadFlags
+                {
+                    get
+                    {
+                        if (_offset_ThreadFlags == -1)
+                        {
+                            _offset_ThreadFlags = Offset_IoPriority + 1;
+                        }
+
+                        return _offset_ThreadFlags;
+                    }
+                }
+
+                /// <summary>
+                /// Retrieves the ProcessId field.
+                /// </summary>
+                public uint ProcessId => BitConverter.ToUInt32(_etwEvent.Data[Offset_ProcessId..]);
+
+                /// <summary>
+                /// Retrieves the TThreadId field.
+                /// </summary>
+                public uint TThreadId => BitConverter.ToUInt32(_etwEvent.Data[Offset_TThreadId..]);
+
+                /// <summary>
+                /// Retrieves the StackBase field.
+                /// </summary>
+                public ulong StackBase => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_StackBase..]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_StackBase..]);
+
+                /// <summary>
+                /// Retrieves the StackLimit field.
+                /// </summary>
+                public ulong StackLimit => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_StackLimit..]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_StackLimit..]);
+
+                /// <summary>
+                /// Retrieves the UserStackBase field.
+                /// </summary>
+                public ulong UserStackBase => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_UserStackBase..]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_UserStackBase..]);
+
+                /// <summary>
+                /// Retrieves the UserStackLimit field.
+                /// </summary>
+                public ulong UserStackLimit => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_UserStackLimit..]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_UserStackLimit..]);
+
+                /// <summary>
+                /// Retrieves the Affinity field.
+                /// </summary>
+                public ulong Affinity => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_Affinity..]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_Affinity..]);
+
+                /// <summary>
+                /// Retrieves the Win32StartAddr field.
+                /// </summary>
+                public ulong Win32StartAddr => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_Win32StartAddr..]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_Win32StartAddr..]);
+
+                /// <summary>
+                /// Retrieves the TebBase field.
+                /// </summary>
+                public ulong TebBase => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_TebBase..]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_TebBase..]);
+
+                /// <summary>
+                /// Retrieves the SubProcessTag field.
+                /// </summary>
+                public uint SubProcessTag => BitConverter.ToUInt32(_etwEvent.Data[Offset_SubProcessTag..]);
+
+                /// <summary>
+                /// Retrieves the BasePriority field.
+                /// </summary>
+                public byte BasePriority => _etwEvent.Data[Offset_BasePriority];
+
+                /// <summary>
+                /// Retrieves the PagePriority field.
+                /// </summary>
+                public byte PagePriority => _etwEvent.Data[Offset_PagePriority];
+
+                /// <summary>
+                /// Retrieves the IoPriority field.
+                /// </summary>
+                public byte IoPriority => _etwEvent.Data[Offset_IoPriority];
+
+                /// <summary>
+                /// Retrieves the ThreadFlags field.
+                /// </summary>
+                public byte ThreadFlags => _etwEvent.Data[Offset_ThreadFlags];
+
+                /// <summary>
+                /// Creates a new EndData.
+                /// </summary>
+                /// <param name="etwEvent">The event.</param>
+                public EndData(EtwEvent etwEvent)
+                {
+                    _etwEvent = etwEvent;
+                    _offset_ProcessId = -1;
+                    _offset_TThreadId = -1;
+                    _offset_StackBase = -1;
+                    _offset_StackLimit = -1;
+                    _offset_UserStackBase = -1;
+                    _offset_UserStackLimit = -1;
+                    _offset_Affinity = -1;
+                    _offset_Win32StartAddr = -1;
+                    _offset_TebBase = -1;
+                    _offset_SubProcessTag = -1;
+                    _offset_BasePriority = -1;
+                    _offset_PagePriority = -1;
+                    _offset_IoPriority = -1;
+                    _offset_ThreadFlags = -1;
+                }
+            }
+
+        }
+
+        /// <summary>
+        /// An event wrapper for a DCStart event.
+        /// </summary>
+        public readonly ref struct DCStartEventV3
+        {
+            private readonly EtwEvent _etwEvent;
+
+            /// <summary>
+            /// Event name.
+            /// </summary>
+            public const string Name = "DCStart";
+
+            /// <summary>
+            /// The event provider.
+            /// </summary>
+            public static readonly Guid Provider = Id;
+
+            /// <summary>
+            /// Event descriptor.
+            /// </summary>
+            public static EtwEventDescriptor Descriptor { get; } = new EtwEventDescriptor
+            {
+                Id = 0,
+                Version = 3,
+                Channel = 0,
+                Level = EtwTraceLevel.None,
+                Opcode = EtwEventOpcode.DataCollectionStart,
+                Task = 0,
+                Keyword = 0
+            };
+
+            /// <summary>
+            /// The process the event was recorded in.
+            /// </summary>
+            public uint ProcessId => _etwEvent.ProcessId;
+
+            /// <summary>
+            /// The thread the event was recorded on.
+            /// </summary>
+            public uint ThreadId => _etwEvent.ThreadId;
+
+            /// <summary>
+            /// The timestamp of the event.
+            /// </summary>
+            public long Timestamp => _etwEvent.Timestamp;
+
+            /// <summary>
+            /// The processor number the event was recorded on.
+            /// </summary>
+            public byte ProcessorNumber => _etwEvent.ProcessorNumber;
+
+            /// <summary>
+            /// Timing information for the event.
+            /// </summary>
+            public (ulong? KernelTime, ulong? UserTime, ulong? ProcessorTime) Time => _etwEvent.Time;
+
+            /// <summary>
+            /// Data for the event.
+            /// </summary>
+            public DCStartData Data => new(_etwEvent);
+
+            /// <summary>
+            /// Creates a new DCStartEventV3.
+            /// </summary>
+            /// <param name="etwEvent">The event.</param>
+            public DCStartEventV3(EtwEvent etwEvent)
+            {
+                _etwEvent = etwEvent;
+            }
+
+            /// <summary>
+            /// A data wrapper for a DCStart event.
+            /// </summary>
+            public ref struct DCStartData
+            {
+                private readonly EtwEvent _etwEvent;
+
+                private int _offset_ProcessId;
+                private int _offset_TThreadId;
+                private int _offset_StackBase;
+                private int _offset_StackLimit;
+                private int _offset_UserStackBase;
+                private int _offset_UserStackLimit;
+                private int _offset_Affinity;
+                private int _offset_Win32StartAddr;
+                private int _offset_TebBase;
+                private int _offset_SubProcessTag;
+                private int _offset_BasePriority;
+                private int _offset_PagePriority;
+                private int _offset_IoPriority;
+                private int _offset_ThreadFlags;
+
+                private int Offset_ProcessId
+                {
+                    get
+                    {
+                        if (_offset_ProcessId == -1)
+                        {
+                            _offset_ProcessId = 0;
+                        }
+
+                        return _offset_ProcessId;
+                    }
+                }
+
+                private int Offset_TThreadId
+                {
+                    get
+                    {
+                        if (_offset_TThreadId == -1)
+                        {
+                            _offset_TThreadId = Offset_ProcessId + 4;
+                        }
+
+                        return _offset_TThreadId;
+                    }
+                }
+
+                private int Offset_StackBase
+                {
+                    get
+                    {
+                        if (_offset_StackBase == -1)
+                        {
+                            _offset_StackBase = Offset_TThreadId + 4;
+                        }
+
+                        return _offset_StackBase;
+                    }
+                }
+
+                private int Offset_StackLimit
+                {
+                    get
+                    {
+                        if (_offset_StackLimit == -1)
+                        {
+                            _offset_StackLimit = Offset_StackBase + _etwEvent.AddressSize;
+                        }
+
+                        return _offset_StackLimit;
+                    }
+                }
+
+                private int Offset_UserStackBase
+                {
+                    get
+                    {
+                        if (_offset_UserStackBase == -1)
+                        {
+                            _offset_UserStackBase = Offset_StackLimit + _etwEvent.AddressSize;
+                        }
+
+                        return _offset_UserStackBase;
+                    }
+                }
+
+                private int Offset_UserStackLimit
+                {
+                    get
+                    {
+                        if (_offset_UserStackLimit == -1)
+                        {
+                            _offset_UserStackLimit = Offset_UserStackBase + _etwEvent.AddressSize;
+                        }
+
+                        return _offset_UserStackLimit;
+                    }
+                }
+
+                private int Offset_Affinity
+                {
+                    get
+                    {
+                        if (_offset_Affinity == -1)
+                        {
+                            _offset_Affinity = Offset_UserStackLimit + _etwEvent.AddressSize;
+                        }
+
+                        return _offset_Affinity;
+                    }
+                }
+
+                private int Offset_Win32StartAddr
+                {
+                    get
+                    {
+                        if (_offset_Win32StartAddr == -1)
+                        {
+                            _offset_Win32StartAddr = Offset_Affinity + _etwEvent.AddressSize;
+                        }
+
+                        return _offset_Win32StartAddr;
+                    }
+                }
+
+                private int Offset_TebBase
+                {
+                    get
+                    {
+                        if (_offset_TebBase == -1)
+                        {
+                            _offset_TebBase = Offset_Win32StartAddr + _etwEvent.AddressSize;
+                        }
+
+                        return _offset_TebBase;
+                    }
+                }
+
+                private int Offset_SubProcessTag
+                {
+                    get
+                    {
+                        if (_offset_SubProcessTag == -1)
+                        {
+                            _offset_SubProcessTag = Offset_TebBase + _etwEvent.AddressSize;
+                        }
+
+                        return _offset_SubProcessTag;
+                    }
+                }
+
+                private int Offset_BasePriority
+                {
+                    get
+                    {
+                        if (_offset_BasePriority == -1)
+                        {
+                            _offset_BasePriority = Offset_SubProcessTag + 4;
+                        }
+
+                        return _offset_BasePriority;
+                    }
+                }
+
+                private int Offset_PagePriority
+                {
+                    get
+                    {
+                        if (_offset_PagePriority == -1)
+                        {
+                            _offset_PagePriority = Offset_BasePriority + 1;
+                        }
+
+                        return _offset_PagePriority;
+                    }
+                }
+
+                private int Offset_IoPriority
+                {
+                    get
+                    {
+                        if (_offset_IoPriority == -1)
+                        {
+                            _offset_IoPriority = Offset_PagePriority + 1;
+                        }
+
+                        return _offset_IoPriority;
+                    }
+                }
+
+                private int Offset_ThreadFlags
+                {
+                    get
+                    {
+                        if (_offset_ThreadFlags == -1)
+                        {
+                            _offset_ThreadFlags = Offset_IoPriority + 1;
+                        }
+
+                        return _offset_ThreadFlags;
+                    }
+                }
+
+                /// <summary>
+                /// Retrieves the ProcessId field.
+                /// </summary>
+                public uint ProcessId => BitConverter.ToUInt32(_etwEvent.Data[Offset_ProcessId..]);
+
+                /// <summary>
+                /// Retrieves the TThreadId field.
+                /// </summary>
+                public uint TThreadId => BitConverter.ToUInt32(_etwEvent.Data[Offset_TThreadId..]);
+
+                /// <summary>
+                /// Retrieves the StackBase field.
+                /// </summary>
+                public ulong StackBase => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_StackBase..]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_StackBase..]);
+
+                /// <summary>
+                /// Retrieves the StackLimit field.
+                /// </summary>
+                public ulong StackLimit => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_StackLimit..]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_StackLimit..]);
+
+                /// <summary>
+                /// Retrieves the UserStackBase field.
+                /// </summary>
+                public ulong UserStackBase => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_UserStackBase..]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_UserStackBase..]);
+
+                /// <summary>
+                /// Retrieves the UserStackLimit field.
+                /// </summary>
+                public ulong UserStackLimit => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_UserStackLimit..]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_UserStackLimit..]);
+
+                /// <summary>
+                /// Retrieves the Affinity field.
+                /// </summary>
+                public ulong Affinity => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_Affinity..]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_Affinity..]);
+
+                /// <summary>
+                /// Retrieves the Win32StartAddr field.
+                /// </summary>
+                public ulong Win32StartAddr => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_Win32StartAddr..]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_Win32StartAddr..]);
+
+                /// <summary>
+                /// Retrieves the TebBase field.
+                /// </summary>
+                public ulong TebBase => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_TebBase..]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_TebBase..]);
+
+                /// <summary>
+                /// Retrieves the SubProcessTag field.
+                /// </summary>
+                public uint SubProcessTag => BitConverter.ToUInt32(_etwEvent.Data[Offset_SubProcessTag..]);
+
+                /// <summary>
+                /// Retrieves the BasePriority field.
+                /// </summary>
+                public byte BasePriority => _etwEvent.Data[Offset_BasePriority];
+
+                /// <summary>
+                /// Retrieves the PagePriority field.
+                /// </summary>
+                public byte PagePriority => _etwEvent.Data[Offset_PagePriority];
+
+                /// <summary>
+                /// Retrieves the IoPriority field.
+                /// </summary>
+                public byte IoPriority => _etwEvent.Data[Offset_IoPriority];
+
+                /// <summary>
+                /// Retrieves the ThreadFlags field.
+                /// </summary>
+                public byte ThreadFlags => _etwEvent.Data[Offset_ThreadFlags];
+
+                /// <summary>
+                /// Creates a new DCStartData.
+                /// </summary>
+                /// <param name="etwEvent">The event.</param>
+                public DCStartData(EtwEvent etwEvent)
+                {
+                    _etwEvent = etwEvent;
+                    _offset_ProcessId = -1;
+                    _offset_TThreadId = -1;
+                    _offset_StackBase = -1;
+                    _offset_StackLimit = -1;
+                    _offset_UserStackBase = -1;
+                    _offset_UserStackLimit = -1;
+                    _offset_Affinity = -1;
+                    _offset_Win32StartAddr = -1;
+                    _offset_TebBase = -1;
+                    _offset_SubProcessTag = -1;
+                    _offset_BasePriority = -1;
+                    _offset_PagePriority = -1;
+                    _offset_IoPriority = -1;
+                    _offset_ThreadFlags = -1;
+                }
+            }
+
+        }
+
+        /// <summary>
+        /// An event wrapper for a DCEnd event.
+        /// </summary>
+        public readonly ref struct DCEndEventV3
+        {
+            private readonly EtwEvent _etwEvent;
+
+            /// <summary>
+            /// Event name.
+            /// </summary>
+            public const string Name = "DCEnd";
+
+            /// <summary>
+            /// The event provider.
+            /// </summary>
+            public static readonly Guid Provider = Id;
+
+            /// <summary>
+            /// Event descriptor.
+            /// </summary>
+            public static EtwEventDescriptor Descriptor { get; } = new EtwEventDescriptor
+            {
+                Id = 0,
+                Version = 3,
+                Channel = 0,
+                Level = EtwTraceLevel.None,
+                Opcode = EtwEventOpcode.DataCollectionEnd,
+                Task = 0,
+                Keyword = 0
+            };
+
+            /// <summary>
+            /// The process the event was recorded in.
+            /// </summary>
+            public uint ProcessId => _etwEvent.ProcessId;
+
+            /// <summary>
+            /// The thread the event was recorded on.
+            /// </summary>
+            public uint ThreadId => _etwEvent.ThreadId;
+
+            /// <summary>
+            /// The timestamp of the event.
+            /// </summary>
+            public long Timestamp => _etwEvent.Timestamp;
+
+            /// <summary>
+            /// The processor number the event was recorded on.
+            /// </summary>
+            public byte ProcessorNumber => _etwEvent.ProcessorNumber;
+
+            /// <summary>
+            /// Timing information for the event.
+            /// </summary>
+            public (ulong? KernelTime, ulong? UserTime, ulong? ProcessorTime) Time => _etwEvent.Time;
+
+            /// <summary>
+            /// Data for the event.
+            /// </summary>
+            public DCEndData Data => new(_etwEvent);
+
+            /// <summary>
+            /// Creates a new DCEndEventV3.
+            /// </summary>
+            /// <param name="etwEvent">The event.</param>
+            public DCEndEventV3(EtwEvent etwEvent)
+            {
+                _etwEvent = etwEvent;
+            }
+
+            /// <summary>
+            /// A data wrapper for a DCEnd event.
+            /// </summary>
+            public ref struct DCEndData
+            {
+                private readonly EtwEvent _etwEvent;
+
+                private int _offset_ProcessId;
+                private int _offset_TThreadId;
+                private int _offset_StackBase;
+                private int _offset_StackLimit;
+                private int _offset_UserStackBase;
+                private int _offset_UserStackLimit;
+                private int _offset_Affinity;
+                private int _offset_Win32StartAddr;
+                private int _offset_TebBase;
+                private int _offset_SubProcessTag;
+                private int _offset_BasePriority;
+                private int _offset_PagePriority;
+                private int _offset_IoPriority;
+                private int _offset_ThreadFlags;
+
+                private int Offset_ProcessId
+                {
+                    get
+                    {
+                        if (_offset_ProcessId == -1)
+                        {
+                            _offset_ProcessId = 0;
+                        }
+
+                        return _offset_ProcessId;
+                    }
+                }
+
+                private int Offset_TThreadId
+                {
+                    get
+                    {
+                        if (_offset_TThreadId == -1)
+                        {
+                            _offset_TThreadId = Offset_ProcessId + 4;
+                        }
+
+                        return _offset_TThreadId;
+                    }
+                }
+
+                private int Offset_StackBase
+                {
+                    get
+                    {
+                        if (_offset_StackBase == -1)
+                        {
+                            _offset_StackBase = Offset_TThreadId + 4;
+                        }
+
+                        return _offset_StackBase;
+                    }
+                }
+
+                private int Offset_StackLimit
+                {
+                    get
+                    {
+                        if (_offset_StackLimit == -1)
+                        {
+                            _offset_StackLimit = Offset_StackBase + _etwEvent.AddressSize;
+                        }
+
+                        return _offset_StackLimit;
+                    }
+                }
+
+                private int Offset_UserStackBase
+                {
+                    get
+                    {
+                        if (_offset_UserStackBase == -1)
+                        {
+                            _offset_UserStackBase = Offset_StackLimit + _etwEvent.AddressSize;
+                        }
+
+                        return _offset_UserStackBase;
+                    }
+                }
+
+                private int Offset_UserStackLimit
+                {
+                    get
+                    {
+                        if (_offset_UserStackLimit == -1)
+                        {
+                            _offset_UserStackLimit = Offset_UserStackBase + _etwEvent.AddressSize;
+                        }
+
+                        return _offset_UserStackLimit;
+                    }
+                }
+
+                private int Offset_Affinity
+                {
+                    get
+                    {
+                        if (_offset_Affinity == -1)
+                        {
+                            _offset_Affinity = Offset_UserStackLimit + _etwEvent.AddressSize;
+                        }
+
+                        return _offset_Affinity;
+                    }
+                }
+
+                private int Offset_Win32StartAddr
+                {
+                    get
+                    {
+                        if (_offset_Win32StartAddr == -1)
+                        {
+                            _offset_Win32StartAddr = Offset_Affinity + _etwEvent.AddressSize;
+                        }
+
+                        return _offset_Win32StartAddr;
+                    }
+                }
+
+                private int Offset_TebBase
+                {
+                    get
+                    {
+                        if (_offset_TebBase == -1)
+                        {
+                            _offset_TebBase = Offset_Win32StartAddr + _etwEvent.AddressSize;
+                        }
+
+                        return _offset_TebBase;
+                    }
+                }
+
+                private int Offset_SubProcessTag
+                {
+                    get
+                    {
+                        if (_offset_SubProcessTag == -1)
+                        {
+                            _offset_SubProcessTag = Offset_TebBase + _etwEvent.AddressSize;
+                        }
+
+                        return _offset_SubProcessTag;
+                    }
+                }
+
+                private int Offset_BasePriority
+                {
+                    get
+                    {
+                        if (_offset_BasePriority == -1)
+                        {
+                            _offset_BasePriority = Offset_SubProcessTag + 4;
+                        }
+
+                        return _offset_BasePriority;
+                    }
+                }
+
+                private int Offset_PagePriority
+                {
+                    get
+                    {
+                        if (_offset_PagePriority == -1)
+                        {
+                            _offset_PagePriority = Offset_BasePriority + 1;
+                        }
+
+                        return _offset_PagePriority;
+                    }
+                }
+
+                private int Offset_IoPriority
+                {
+                    get
+                    {
+                        if (_offset_IoPriority == -1)
+                        {
+                            _offset_IoPriority = Offset_PagePriority + 1;
+                        }
+
+                        return _offset_IoPriority;
+                    }
+                }
+
+                private int Offset_ThreadFlags
+                {
+                    get
+                    {
+                        if (_offset_ThreadFlags == -1)
+                        {
+                            _offset_ThreadFlags = Offset_IoPriority + 1;
+                        }
+
+                        return _offset_ThreadFlags;
+                    }
+                }
+
+                /// <summary>
+                /// Retrieves the ProcessId field.
+                /// </summary>
+                public uint ProcessId => BitConverter.ToUInt32(_etwEvent.Data[Offset_ProcessId..]);
+
+                /// <summary>
+                /// Retrieves the TThreadId field.
+                /// </summary>
+                public uint TThreadId => BitConverter.ToUInt32(_etwEvent.Data[Offset_TThreadId..]);
+
+                /// <summary>
+                /// Retrieves the StackBase field.
+                /// </summary>
+                public ulong StackBase => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_StackBase..]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_StackBase..]);
+
+                /// <summary>
+                /// Retrieves the StackLimit field.
+                /// </summary>
+                public ulong StackLimit => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_StackLimit..]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_StackLimit..]);
+
+                /// <summary>
+                /// Retrieves the UserStackBase field.
+                /// </summary>
+                public ulong UserStackBase => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_UserStackBase..]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_UserStackBase..]);
+
+                /// <summary>
+                /// Retrieves the UserStackLimit field.
+                /// </summary>
+                public ulong UserStackLimit => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_UserStackLimit..]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_UserStackLimit..]);
+
+                /// <summary>
+                /// Retrieves the Affinity field.
+                /// </summary>
+                public ulong Affinity => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_Affinity..]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_Affinity..]);
+
+                /// <summary>
+                /// Retrieves the Win32StartAddr field.
+                /// </summary>
+                public ulong Win32StartAddr => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_Win32StartAddr..]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_Win32StartAddr..]);
+
+                /// <summary>
+                /// Retrieves the TebBase field.
+                /// </summary>
+                public ulong TebBase => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_TebBase..]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_TebBase..]);
+
+                /// <summary>
+                /// Retrieves the SubProcessTag field.
+                /// </summary>
+                public uint SubProcessTag => BitConverter.ToUInt32(_etwEvent.Data[Offset_SubProcessTag..]);
+
+                /// <summary>
+                /// Retrieves the BasePriority field.
+                /// </summary>
+                public byte BasePriority => _etwEvent.Data[Offset_BasePriority];
+
+                /// <summary>
+                /// Retrieves the PagePriority field.
+                /// </summary>
+                public byte PagePriority => _etwEvent.Data[Offset_PagePriority];
+
+                /// <summary>
+                /// Retrieves the IoPriority field.
+                /// </summary>
+                public byte IoPriority => _etwEvent.Data[Offset_IoPriority];
+
+                /// <summary>
+                /// Retrieves the ThreadFlags field.
+                /// </summary>
+                public byte ThreadFlags => _etwEvent.Data[Offset_ThreadFlags];
+
+                /// <summary>
+                /// Creates a new DCEndData.
+                /// </summary>
+                /// <param name="etwEvent">The event.</param>
+                public DCEndData(EtwEvent etwEvent)
+                {
+                    _etwEvent = etwEvent;
+                    _offset_ProcessId = -1;
+                    _offset_TThreadId = -1;
+                    _offset_StackBase = -1;
+                    _offset_StackLimit = -1;
+                    _offset_UserStackBase = -1;
+                    _offset_UserStackLimit = -1;
+                    _offset_Affinity = -1;
+                    _offset_Win32StartAddr = -1;
+                    _offset_TebBase = -1;
+                    _offset_SubProcessTag = -1;
+                    _offset_BasePriority = -1;
+                    _offset_PagePriority = -1;
+                    _offset_IoPriority = -1;
+                    _offset_ThreadFlags = -1;
+                }
+            }
+
+        }
+
+        /// <summary>
         /// An event wrapper for a SetPriority event.
         /// </summary>
-        public readonly ref struct SetPriorityEvent
+        public readonly ref struct SetPriorityEventV3
         {
             private readonly EtwEvent _etwEvent;
 
@@ -2730,10 +7600,10 @@ namespace EtwTools
             public SetPriorityData Data => new(_etwEvent);
 
             /// <summary>
-            /// Creates a new SetPriorityEvent.
+            /// Creates a new SetPriorityEventV3.
             /// </summary>
             /// <param name="etwEvent">The event.</param>
-            public SetPriorityEvent(EtwEvent etwEvent)
+            public SetPriorityEventV3(EtwEvent etwEvent)
             {
                 _etwEvent = etwEvent;
             }
@@ -2841,7 +7711,7 @@ namespace EtwTools
         /// <summary>
         /// An event wrapper for a SetBasePriority event.
         /// </summary>
-        public readonly ref struct SetBasePriorityEvent
+        public readonly ref struct SetBasePriorityEventV3
         {
             private readonly EtwEvent _etwEvent;
 
@@ -2900,10 +7770,10 @@ namespace EtwTools
             public SetBasePriorityData Data => new(_etwEvent);
 
             /// <summary>
-            /// Creates a new SetBasePriorityEvent.
+            /// Creates a new SetBasePriorityEventV3.
             /// </summary>
             /// <param name="etwEvent">The event.</param>
-            public SetBasePriorityEvent(EtwEvent etwEvent)
+            public SetBasePriorityEventV3(EtwEvent etwEvent)
             {
                 _etwEvent = etwEvent;
             }
@@ -3011,7 +7881,7 @@ namespace EtwTools
         /// <summary>
         /// An event wrapper for a SetPagePriority event.
         /// </summary>
-        public readonly ref struct SetPagePriorityEvent
+        public readonly ref struct SetPagePriorityEventV3
         {
             private readonly EtwEvent _etwEvent;
 
@@ -3070,10 +7940,10 @@ namespace EtwTools
             public SetPagePriorityData Data => new(_etwEvent);
 
             /// <summary>
-            /// Creates a new SetPagePriorityEvent.
+            /// Creates a new SetPagePriorityEventV3.
             /// </summary>
             /// <param name="etwEvent">The event.</param>
-            public SetPagePriorityEvent(EtwEvent etwEvent)
+            public SetPagePriorityEventV3(EtwEvent etwEvent)
             {
                 _etwEvent = etwEvent;
             }
@@ -3181,7 +8051,7 @@ namespace EtwTools
         /// <summary>
         /// An event wrapper for a SetIoPriority event.
         /// </summary>
-        public readonly ref struct SetIoPriorityEvent
+        public readonly ref struct SetIoPriorityEventV3
         {
             private readonly EtwEvent _etwEvent;
 
@@ -3240,10 +8110,10 @@ namespace EtwTools
             public SetIoPriorityData Data => new(_etwEvent);
 
             /// <summary>
-            /// Creates a new SetIoPriorityEvent.
+            /// Creates a new SetIoPriorityEventV3.
             /// </summary>
             /// <param name="etwEvent">The event.</param>
-            public SetIoPriorityEvent(EtwEvent etwEvent)
+            public SetIoPriorityEventV3(EtwEvent etwEvent)
             {
                 _etwEvent = etwEvent;
             }
@@ -3349,16 +8219,346 @@ namespace EtwTools
         }
 
         /// <summary>
-        /// An event wrapper for a ThreadStart event.
+        /// An event wrapper for a CSwitch event.
         /// </summary>
-        public readonly ref struct ThreadStartEvent
+        public readonly ref struct CSwitchEventV3
         {
             private readonly EtwEvent _etwEvent;
 
             /// <summary>
             /// Event name.
             /// </summary>
-            public const string Name = "ThreadStart";
+            public const string Name = "CSwitch";
+
+            /// <summary>
+            /// The event provider.
+            /// </summary>
+            public static readonly Guid Provider = Id;
+
+            /// <summary>
+            /// Event descriptor.
+            /// </summary>
+            public static EtwEventDescriptor Descriptor { get; } = new EtwEventDescriptor
+            {
+                Id = 0,
+                Version = 3,
+                Channel = 0,
+                Level = EtwTraceLevel.None,
+                Opcode = (EtwEventOpcode)Opcodes.CSwitch,
+                Task = 0,
+                Keyword = 0
+            };
+
+            /// <summary>
+            /// The process the event was recorded in.
+            /// </summary>
+            public uint ProcessId => _etwEvent.ProcessId;
+
+            /// <summary>
+            /// The thread the event was recorded on.
+            /// </summary>
+            public uint ThreadId => _etwEvent.ThreadId;
+
+            /// <summary>
+            /// The timestamp of the event.
+            /// </summary>
+            public long Timestamp => _etwEvent.Timestamp;
+
+            /// <summary>
+            /// The processor number the event was recorded on.
+            /// </summary>
+            public byte ProcessorNumber => _etwEvent.ProcessorNumber;
+
+            /// <summary>
+            /// Timing information for the event.
+            /// </summary>
+            public (ulong? KernelTime, ulong? UserTime, ulong? ProcessorTime) Time => _etwEvent.Time;
+
+            /// <summary>
+            /// Data for the event.
+            /// </summary>
+            public CSwitchData Data => new(_etwEvent);
+
+            /// <summary>
+            /// Creates a new CSwitchEventV3.
+            /// </summary>
+            /// <param name="etwEvent">The event.</param>
+            public CSwitchEventV3(EtwEvent etwEvent)
+            {
+                _etwEvent = etwEvent;
+            }
+
+            /// <summary>
+            /// A data wrapper for a CSwitch event.
+            /// </summary>
+            public ref struct CSwitchData
+            {
+                private readonly EtwEvent _etwEvent;
+
+                private int _offset_NewThreadId;
+                private int _offset_OldThreadId;
+                private int _offset_NewThreadPriority;
+                private int _offset_OldThreadPriority;
+                private int _offset_PreviousCState;
+                private int _offset_SpareByte;
+                private int _offset_OldThreadWaitReason;
+                private int _offset_ThreadFlags;
+                private int _offset_OldThreadState;
+                private int _offset_OldThreadWaitIdealProcessor;
+                private int _offset_NewThreadWaitTime;
+                private int _offset_Reserved;
+
+                private int Offset_NewThreadId
+                {
+                    get
+                    {
+                        if (_offset_NewThreadId == -1)
+                        {
+                            _offset_NewThreadId = 0;
+                        }
+
+                        return _offset_NewThreadId;
+                    }
+                }
+
+                private int Offset_OldThreadId
+                {
+                    get
+                    {
+                        if (_offset_OldThreadId == -1)
+                        {
+                            _offset_OldThreadId = Offset_NewThreadId + 4;
+                        }
+
+                        return _offset_OldThreadId;
+                    }
+                }
+
+                private int Offset_NewThreadPriority
+                {
+                    get
+                    {
+                        if (_offset_NewThreadPriority == -1)
+                        {
+                            _offset_NewThreadPriority = Offset_OldThreadId + 4;
+                        }
+
+                        return _offset_NewThreadPriority;
+                    }
+                }
+
+                private int Offset_OldThreadPriority
+                {
+                    get
+                    {
+                        if (_offset_OldThreadPriority == -1)
+                        {
+                            _offset_OldThreadPriority = Offset_NewThreadPriority + 1;
+                        }
+
+                        return _offset_OldThreadPriority;
+                    }
+                }
+
+                private int Offset_PreviousCState
+                {
+                    get
+                    {
+                        if (_offset_PreviousCState == -1)
+                        {
+                            _offset_PreviousCState = Offset_OldThreadPriority + 1;
+                        }
+
+                        return _offset_PreviousCState;
+                    }
+                }
+
+                private int Offset_SpareByte
+                {
+                    get
+                    {
+                        if (_offset_SpareByte == -1)
+                        {
+                            _offset_SpareByte = Offset_PreviousCState + 1;
+                        }
+
+                        return _offset_SpareByte;
+                    }
+                }
+
+                private int Offset_OldThreadWaitReason
+                {
+                    get
+                    {
+                        if (_offset_OldThreadWaitReason == -1)
+                        {
+                            _offset_OldThreadWaitReason = Offset_SpareByte + 1;
+                        }
+
+                        return _offset_OldThreadWaitReason;
+                    }
+                }
+
+                private int Offset_ThreadFlags
+                {
+                    get
+                    {
+                        if (_offset_ThreadFlags == -1)
+                        {
+                            _offset_ThreadFlags = Offset_OldThreadWaitReason + 1;
+                        }
+
+                        return _offset_ThreadFlags;
+                    }
+                }
+
+                private int Offset_OldThreadState
+                {
+                    get
+                    {
+                        if (_offset_OldThreadState == -1)
+                        {
+                            _offset_OldThreadState = Offset_ThreadFlags + 1;
+                        }
+
+                        return _offset_OldThreadState;
+                    }
+                }
+
+                private int Offset_OldThreadWaitIdealProcessor
+                {
+                    get
+                    {
+                        if (_offset_OldThreadWaitIdealProcessor == -1)
+                        {
+                            _offset_OldThreadWaitIdealProcessor = Offset_OldThreadState + 1;
+                        }
+
+                        return _offset_OldThreadWaitIdealProcessor;
+                    }
+                }
+
+                private int Offset_NewThreadWaitTime
+                {
+                    get
+                    {
+                        if (_offset_NewThreadWaitTime == -1)
+                        {
+                            _offset_NewThreadWaitTime = Offset_OldThreadWaitIdealProcessor + 1;
+                        }
+
+                        return _offset_NewThreadWaitTime;
+                    }
+                }
+
+                private int Offset_Reserved
+                {
+                    get
+                    {
+                        if (_offset_Reserved == -1)
+                        {
+                            _offset_Reserved = Offset_NewThreadWaitTime + 4;
+                        }
+
+                        return _offset_Reserved;
+                    }
+                }
+
+                /// <summary>
+                /// Retrieves the NewThreadId field.
+                /// </summary>
+                public uint NewThreadId => BitConverter.ToUInt32(_etwEvent.Data[Offset_NewThreadId..]);
+
+                /// <summary>
+                /// Retrieves the OldThreadId field.
+                /// </summary>
+                public uint OldThreadId => BitConverter.ToUInt32(_etwEvent.Data[Offset_OldThreadId..]);
+
+                /// <summary>
+                /// Retrieves the NewThreadPriority field.
+                /// </summary>
+                public sbyte NewThreadPriority => (sbyte)_etwEvent.Data[Offset_NewThreadPriority];
+
+                /// <summary>
+                /// Retrieves the OldThreadPriority field.
+                /// </summary>
+                public sbyte OldThreadPriority => (sbyte)_etwEvent.Data[Offset_OldThreadPriority];
+
+                /// <summary>
+                /// Retrieves the PreviousCState field.
+                /// </summary>
+                public byte PreviousCState => _etwEvent.Data[Offset_PreviousCState];
+
+                /// <summary>
+                /// Retrieves the SpareByte field.
+                /// </summary>
+                public sbyte SpareByte => (sbyte)_etwEvent.Data[Offset_SpareByte];
+
+                /// <summary>
+                /// Retrieves the OldThreadWaitReason field.
+                /// </summary>
+                public sbyte OldThreadWaitReason => (sbyte)_etwEvent.Data[Offset_OldThreadWaitReason];
+
+                /// <summary>
+                /// Retrieves the ThreadFlags field.
+                /// </summary>
+                public sbyte ThreadFlags => (sbyte)_etwEvent.Data[Offset_ThreadFlags];
+
+                /// <summary>
+                /// Retrieves the OldThreadState field.
+                /// </summary>
+                public sbyte OldThreadState => (sbyte)_etwEvent.Data[Offset_OldThreadState];
+
+                /// <summary>
+                /// Retrieves the OldThreadWaitIdealProcessor field.
+                /// </summary>
+                public sbyte OldThreadWaitIdealProcessor => (sbyte)_etwEvent.Data[Offset_OldThreadWaitIdealProcessor];
+
+                /// <summary>
+                /// Retrieves the NewThreadWaitTime field.
+                /// </summary>
+                public uint NewThreadWaitTime => BitConverter.ToUInt32(_etwEvent.Data[Offset_NewThreadWaitTime..]);
+
+                /// <summary>
+                /// Retrieves the Reserved field.
+                /// </summary>
+                public uint Reserved => BitConverter.ToUInt32(_etwEvent.Data[Offset_Reserved..]);
+
+                /// <summary>
+                /// Creates a new CSwitchData.
+                /// </summary>
+                /// <param name="etwEvent">The event.</param>
+                public CSwitchData(EtwEvent etwEvent)
+                {
+                    _etwEvent = etwEvent;
+                    _offset_NewThreadId = -1;
+                    _offset_OldThreadId = -1;
+                    _offset_NewThreadPriority = -1;
+                    _offset_OldThreadPriority = -1;
+                    _offset_PreviousCState = -1;
+                    _offset_SpareByte = -1;
+                    _offset_OldThreadWaitReason = -1;
+                    _offset_ThreadFlags = -1;
+                    _offset_OldThreadState = -1;
+                    _offset_OldThreadWaitIdealProcessor = -1;
+                    _offset_NewThreadWaitTime = -1;
+                    _offset_Reserved = -1;
+                }
+            }
+
+        }
+
+        /// <summary>
+        /// An event wrapper for a Start event.
+        /// </summary>
+        public readonly ref struct StartEventV4
+        {
+            private readonly EtwEvent _etwEvent;
+
+            /// <summary>
+            /// Event name.
+            /// </summary>
+            public const string Name = "Start";
 
             /// <summary>
             /// The event provider.
@@ -3407,21 +8607,21 @@ namespace EtwTools
             /// <summary>
             /// Data for the event.
             /// </summary>
-            public ThreadStartData Data => new(_etwEvent);
+            public StartData Data => new(_etwEvent);
 
             /// <summary>
-            /// Creates a new ThreadStartEvent.
+            /// Creates a new StartEventV4.
             /// </summary>
             /// <param name="etwEvent">The event.</param>
-            public ThreadStartEvent(EtwEvent etwEvent)
+            public StartEventV4(EtwEvent etwEvent)
             {
                 _etwEvent = etwEvent;
             }
 
             /// <summary>
-            /// A data wrapper for a ThreadStart event.
+            /// A data wrapper for a Start event.
             /// </summary>
-            public ref struct ThreadStartData
+            public ref struct StartData
             {
                 private readonly EtwEvent _etwEvent;
 
@@ -3712,10 +8912,10 @@ namespace EtwTools
                 public string ThreadName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_ThreadName..]);
 
                 /// <summary>
-                /// Creates a new ThreadStartData.
+                /// Creates a new StartData.
                 /// </summary>
                 /// <param name="etwEvent">The event.</param>
-                public ThreadStartData(EtwEvent etwEvent)
+                public StartData(EtwEvent etwEvent)
                 {
                     _etwEvent = etwEvent;
                     _offset_ProcessId = -1;
@@ -3739,16 +8939,16 @@ namespace EtwTools
         }
 
         /// <summary>
-        /// An event wrapper for a ThreadEnd event.
+        /// An event wrapper for a End event.
         /// </summary>
-        public readonly ref struct ThreadEndEvent
+        public readonly ref struct EndEventV4
         {
             private readonly EtwEvent _etwEvent;
 
             /// <summary>
             /// Event name.
             /// </summary>
-            public const string Name = "ThreadEnd";
+            public const string Name = "End";
 
             /// <summary>
             /// The event provider.
@@ -3797,21 +8997,21 @@ namespace EtwTools
             /// <summary>
             /// Data for the event.
             /// </summary>
-            public ThreadEndData Data => new(_etwEvent);
+            public EndData Data => new(_etwEvent);
 
             /// <summary>
-            /// Creates a new ThreadEndEvent.
+            /// Creates a new EndEventV4.
             /// </summary>
             /// <param name="etwEvent">The event.</param>
-            public ThreadEndEvent(EtwEvent etwEvent)
+            public EndEventV4(EtwEvent etwEvent)
             {
                 _etwEvent = etwEvent;
             }
 
             /// <summary>
-            /// A data wrapper for a ThreadEnd event.
+            /// A data wrapper for a End event.
             /// </summary>
-            public ref struct ThreadEndData
+            public ref struct EndData
             {
                 private readonly EtwEvent _etwEvent;
 
@@ -4102,10 +9302,10 @@ namespace EtwTools
                 public string ThreadName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_ThreadName..]);
 
                 /// <summary>
-                /// Creates a new ThreadEndData.
+                /// Creates a new EndData.
                 /// </summary>
                 /// <param name="etwEvent">The event.</param>
-                public ThreadEndData(EtwEvent etwEvent)
+                public EndData(EtwEvent etwEvent)
                 {
                     _etwEvent = etwEvent;
                     _offset_ProcessId = -1;
@@ -4129,16 +9329,16 @@ namespace EtwTools
         }
 
         /// <summary>
-        /// An event wrapper for a DataCollectionStart event.
+        /// An event wrapper for a DCStart event.
         /// </summary>
-        public readonly ref struct DataCollectionStartEvent
+        public readonly ref struct DCStartEventV4
         {
             private readonly EtwEvent _etwEvent;
 
             /// <summary>
             /// Event name.
             /// </summary>
-            public const string Name = "DataCollectionStart";
+            public const string Name = "DCStart";
 
             /// <summary>
             /// The event provider.
@@ -4187,21 +9387,21 @@ namespace EtwTools
             /// <summary>
             /// Data for the event.
             /// </summary>
-            public DataCollectionStartData Data => new(_etwEvent);
+            public DCStartData Data => new(_etwEvent);
 
             /// <summary>
-            /// Creates a new DataCollectionStartEvent.
+            /// Creates a new DCStartEventV4.
             /// </summary>
             /// <param name="etwEvent">The event.</param>
-            public DataCollectionStartEvent(EtwEvent etwEvent)
+            public DCStartEventV4(EtwEvent etwEvent)
             {
                 _etwEvent = etwEvent;
             }
 
             /// <summary>
-            /// A data wrapper for a DataCollectionStart event.
+            /// A data wrapper for a DCStart event.
             /// </summary>
-            public ref struct DataCollectionStartData
+            public ref struct DCStartData
             {
                 private readonly EtwEvent _etwEvent;
 
@@ -4492,10 +9692,10 @@ namespace EtwTools
                 public string ThreadName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_ThreadName..]);
 
                 /// <summary>
-                /// Creates a new DataCollectionStartData.
+                /// Creates a new DCStartData.
                 /// </summary>
                 /// <param name="etwEvent">The event.</param>
-                public DataCollectionStartData(EtwEvent etwEvent)
+                public DCStartData(EtwEvent etwEvent)
                 {
                     _etwEvent = etwEvent;
                     _offset_ProcessId = -1;
@@ -4519,16 +9719,16 @@ namespace EtwTools
         }
 
         /// <summary>
-        /// An event wrapper for a DataCollectionEnd event.
+        /// An event wrapper for a DCEnd event.
         /// </summary>
-        public readonly ref struct DataCollectionEndEvent
+        public readonly ref struct DCEndEventV4
         {
             private readonly EtwEvent _etwEvent;
 
             /// <summary>
             /// Event name.
             /// </summary>
-            public const string Name = "DataCollectionEnd";
+            public const string Name = "DCEnd";
 
             /// <summary>
             /// The event provider.
@@ -4577,21 +9777,21 @@ namespace EtwTools
             /// <summary>
             /// Data for the event.
             /// </summary>
-            public DataCollectionEndData Data => new(_etwEvent);
+            public DCEndData Data => new(_etwEvent);
 
             /// <summary>
-            /// Creates a new DataCollectionEndEvent.
+            /// Creates a new DCEndEventV4.
             /// </summary>
             /// <param name="etwEvent">The event.</param>
-            public DataCollectionEndEvent(EtwEvent etwEvent)
+            public DCEndEventV4(EtwEvent etwEvent)
             {
                 _etwEvent = etwEvent;
             }
 
             /// <summary>
-            /// A data wrapper for a DataCollectionEnd event.
+            /// A data wrapper for a DCEnd event.
             /// </summary>
-            public ref struct DataCollectionEndData
+            public ref struct DCEndData
             {
                 private readonly EtwEvent _etwEvent;
 
@@ -4882,10 +10082,10 @@ namespace EtwTools
                 public string ThreadName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_ThreadName..]);
 
                 /// <summary>
-                /// Creates a new DataCollectionEndData.
+                /// Creates a new DCEndData.
                 /// </summary>
                 /// <param name="etwEvent">The event.</param>
-                public DataCollectionEndData(EtwEvent etwEvent)
+                public DCEndData(EtwEvent etwEvent)
                 {
                     _etwEvent = etwEvent;
                     _offset_ProcessId = -1;
@@ -4911,7 +10111,7 @@ namespace EtwTools
         /// <summary>
         /// An event wrapper for a CSwitch event.
         /// </summary>
-        public readonly ref struct CSwitchEvent
+        public readonly ref struct CSwitchEventV4
         {
             private readonly EtwEvent _etwEvent;
 
@@ -4970,10 +10170,10 @@ namespace EtwTools
             public CSwitchData Data => new(_etwEvent);
 
             /// <summary>
-            /// Creates a new CSwitchEvent.
+            /// Creates a new CSwitchEventV4.
             /// </summary>
             /// <param name="etwEvent">The event.</param>
-            public CSwitchEvent(EtwEvent etwEvent)
+            public CSwitchEventV4(EtwEvent etwEvent)
             {
                 _etwEvent = etwEvent;
             }

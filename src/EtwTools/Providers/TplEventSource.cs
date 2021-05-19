@@ -494,7 +494,7 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the OperationType field.
                 /// </summary>
-                public ForkJoinOperationType OperationType => (ForkJoinOperationType)BitConverter.ToInt32(_etwEvent.Data[Offset_OperationType..]);
+                public ForkJoinOperationType OperationType => (ForkJoinOperationType)BitConverter.ToUInt32(_etwEvent.Data[Offset_OperationType..]);
 
                 /// <summary>
                 /// Retrieves the InclusiveFrom field.
@@ -860,7 +860,7 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the OperationType field.
                 /// </summary>
-                public ForkJoinOperationType OperationType => (ForkJoinOperationType)BitConverter.ToInt32(_etwEvent.Data[Offset_OperationType..]);
+                public ForkJoinOperationType OperationType => (ForkJoinOperationType)BitConverter.ToUInt32(_etwEvent.Data[Offset_OperationType..]);
 
                 /// <summary>
                 /// Retrieves the ActionCount field.
@@ -1337,7 +1337,7 @@ namespace EtwTools
         /// <summary>
         /// An event wrapper for a TaskScheduled event.
         /// </summary>
-        public readonly ref struct TaskScheduledEvent
+        public readonly ref struct TaskScheduledEventV1
         {
             private readonly EtwEvent _etwEvent;
 
@@ -1396,10 +1396,10 @@ namespace EtwTools
             public TaskScheduledData Data => new(_etwEvent);
 
             /// <summary>
-            /// Creates a new TaskScheduledEvent.
+            /// Creates a new TaskScheduledEventV1.
             /// </summary>
             /// <param name="etwEvent">The event.</param>
-            public TaskScheduledEvent(EtwEvent etwEvent)
+            public TaskScheduledEventV1(EtwEvent etwEvent)
             {
                 _etwEvent = etwEvent;
             }
@@ -1697,7 +1697,7 @@ namespace EtwTools
         /// <summary>
         /// An event wrapper for a TaskCompleted event.
         /// </summary>
-        public readonly ref struct TaskCompletedEvent
+        public readonly ref struct TaskCompletedEventV1
         {
             private readonly EtwEvent _etwEvent;
 
@@ -1756,10 +1756,10 @@ namespace EtwTools
             public TaskCompletedData Data => new(_etwEvent);
 
             /// <summary>
-            /// Creates a new TaskCompletedEvent.
+            /// Creates a new TaskCompletedEventV1.
             /// </summary>
             /// <param name="etwEvent">The event.</param>
-            public TaskCompletedEvent(EtwEvent etwEvent)
+            public TaskCompletedEventV1(EtwEvent etwEvent)
             {
                 _etwEvent = etwEvent;
             }
@@ -1867,7 +1867,7 @@ namespace EtwTools
         /// <summary>
         /// An event wrapper for a TaskWaitBegin event.
         /// </summary>
-        public readonly ref struct TaskWaitBeginEvent
+        public readonly ref struct TaskWaitBeginEventV3
         {
             private readonly EtwEvent _etwEvent;
 
@@ -1926,10 +1926,10 @@ namespace EtwTools
             public TaskWaitBeginData Data => new(_etwEvent);
 
             /// <summary>
-            /// Creates a new TaskWaitBeginEvent.
+            /// Creates a new TaskWaitBeginEventV3.
             /// </summary>
             /// <param name="etwEvent">The event.</param>
-            public TaskWaitBeginEvent(EtwEvent etwEvent)
+            public TaskWaitBeginEventV3(EtwEvent etwEvent)
             {
                 _etwEvent = etwEvent;
             }
@@ -2044,7 +2044,7 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the Behavior field.
                 /// </summary>
-                public TaskWaitBehavior Behavior => (TaskWaitBehavior)BitConverter.ToInt32(_etwEvent.Data[Offset_Behavior..]);
+                public TaskWaitBehavior Behavior => (TaskWaitBehavior)BitConverter.ToUInt32(_etwEvent.Data[Offset_Behavior..]);
 
                 /// <summary>
                 /// Retrieves the ContinueWithTaskID field.
@@ -2597,7 +2597,7 @@ namespace EtwTools
         /// <summary>
         /// An event wrapper for a TraceOperationBegin event.
         /// </summary>
-        public readonly ref struct TraceOperationBeginEvent
+        public readonly ref struct TraceOperationBeginEventV1
         {
             private readonly EtwEvent _etwEvent;
 
@@ -2656,10 +2656,10 @@ namespace EtwTools
             public TraceOperationBeginData Data => new(_etwEvent);
 
             /// <summary>
-            /// Creates a new TraceOperationBeginEvent.
+            /// Creates a new TraceOperationBeginEventV1.
             /// </summary>
             /// <param name="etwEvent">The event.</param>
-            public TraceOperationBeginEvent(EtwEvent etwEvent)
+            public TraceOperationBeginEventV1(EtwEvent etwEvent)
             {
                 _etwEvent = etwEvent;
             }
@@ -2747,7 +2747,7 @@ namespace EtwTools
         /// <summary>
         /// An event wrapper for a TraceOperationRelation event.
         /// </summary>
-        public readonly ref struct TraceOperationRelationEvent
+        public readonly ref struct TraceOperationRelationEventV1
         {
             private readonly EtwEvent _etwEvent;
 
@@ -2806,10 +2806,10 @@ namespace EtwTools
             public TraceOperationRelationData Data => new(_etwEvent);
 
             /// <summary>
-            /// Creates a new TraceOperationRelationEvent.
+            /// Creates a new TraceOperationRelationEventV1.
             /// </summary>
             /// <param name="etwEvent">The event.</param>
-            public TraceOperationRelationEvent(EtwEvent etwEvent)
+            public TraceOperationRelationEventV1(EtwEvent etwEvent)
             {
                 _etwEvent = etwEvent;
             }
@@ -2858,7 +2858,7 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the Relation field.
                 /// </summary>
-                public CausalityRelation Relation => (CausalityRelation)BitConverter.ToInt32(_etwEvent.Data[Offset_Relation..]);
+                public CausalityRelation Relation => (CausalityRelation)BitConverter.ToUInt32(_etwEvent.Data[Offset_Relation..]);
 
                 /// <summary>
                 /// Creates a new TraceOperationRelationData.
@@ -2877,7 +2877,7 @@ namespace EtwTools
         /// <summary>
         /// An event wrapper for a TraceOperationEnd event.
         /// </summary>
-        public readonly ref struct TraceOperationEndEvent
+        public readonly ref struct TraceOperationEndEventV1
         {
             private readonly EtwEvent _etwEvent;
 
@@ -2936,10 +2936,10 @@ namespace EtwTools
             public TraceOperationEndData Data => new(_etwEvent);
 
             /// <summary>
-            /// Creates a new TraceOperationEndEvent.
+            /// Creates a new TraceOperationEndEventV1.
             /// </summary>
             /// <param name="etwEvent">The event.</param>
-            public TraceOperationEndEvent(EtwEvent etwEvent)
+            public TraceOperationEndEventV1(EtwEvent etwEvent)
             {
                 _etwEvent = etwEvent;
             }
@@ -2988,7 +2988,7 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the Status field.
                 /// </summary>
-                public AsyncCausalityStatus Status => (AsyncCausalityStatus)BitConverter.ToInt32(_etwEvent.Data[Offset_Status..]);
+                public AsyncCausalityStatus Status => (AsyncCausalityStatus)BitConverter.ToUInt32(_etwEvent.Data[Offset_Status..]);
 
                 /// <summary>
                 /// Creates a new TraceOperationEndData.
@@ -3007,7 +3007,7 @@ namespace EtwTools
         /// <summary>
         /// An event wrapper for a TraceSynchronousWorkBegin event.
         /// </summary>
-        public readonly ref struct TraceSynchronousWorkBeginEvent
+        public readonly ref struct TraceSynchronousWorkBeginEventV1
         {
             private readonly EtwEvent _etwEvent;
 
@@ -3066,10 +3066,10 @@ namespace EtwTools
             public TraceSynchronousWorkBeginData Data => new(_etwEvent);
 
             /// <summary>
-            /// Creates a new TraceSynchronousWorkBeginEvent.
+            /// Creates a new TraceSynchronousWorkBeginEventV1.
             /// </summary>
             /// <param name="etwEvent">The event.</param>
-            public TraceSynchronousWorkBeginEvent(EtwEvent etwEvent)
+            public TraceSynchronousWorkBeginEventV1(EtwEvent etwEvent)
             {
                 _etwEvent = etwEvent;
             }
@@ -3118,7 +3118,7 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the Work field.
                 /// </summary>
-                public CausalitySynchronousWork Work => (CausalitySynchronousWork)BitConverter.ToInt32(_etwEvent.Data[Offset_Work..]);
+                public CausalitySynchronousWork Work => (CausalitySynchronousWork)BitConverter.ToUInt32(_etwEvent.Data[Offset_Work..]);
 
                 /// <summary>
                 /// Creates a new TraceSynchronousWorkBeginData.
@@ -3137,7 +3137,7 @@ namespace EtwTools
         /// <summary>
         /// An event wrapper for a TraceSynchronousWorkEnd event.
         /// </summary>
-        public readonly ref struct TraceSynchronousWorkEndEvent
+        public readonly ref struct TraceSynchronousWorkEndEventV1
         {
             private readonly EtwEvent _etwEvent;
 
@@ -3196,10 +3196,10 @@ namespace EtwTools
             public TraceSynchronousWorkEndData Data => new(_etwEvent);
 
             /// <summary>
-            /// Creates a new TraceSynchronousWorkEndEvent.
+            /// Creates a new TraceSynchronousWorkEndEventV1.
             /// </summary>
             /// <param name="etwEvent">The event.</param>
-            public TraceSynchronousWorkEndEvent(EtwEvent etwEvent)
+            public TraceSynchronousWorkEndEventV1(EtwEvent etwEvent)
             {
                 _etwEvent = etwEvent;
             }
@@ -3229,7 +3229,7 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the Work field.
                 /// </summary>
-                public CausalitySynchronousWork Work => (CausalitySynchronousWork)BitConverter.ToInt32(_etwEvent.Data[Offset_Work..]);
+                public CausalitySynchronousWork Work => (CausalitySynchronousWork)BitConverter.ToUInt32(_etwEvent.Data[Offset_Work..]);
 
                 /// <summary>
                 /// Creates a new TraceSynchronousWorkEndData.

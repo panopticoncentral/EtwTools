@@ -55,7 +55,7 @@ namespace EtwTools
         /// <summary>
         /// An event wrapper for a Stack event.
         /// </summary>
-        public readonly ref struct StackEvent
+        public readonly ref struct StackEventV2
         {
             private readonly EtwEvent _etwEvent;
 
@@ -114,10 +114,10 @@ namespace EtwTools
             public StackData Data => new(_etwEvent);
 
             /// <summary>
-            /// Creates a new StackEvent.
+            /// Creates a new StackEventV2.
             /// </summary>
             /// <param name="etwEvent">The event.</param>
-            public StackEvent(EtwEvent etwEvent)
+            public StackEventV2(EtwEvent etwEvent)
             {
                 _etwEvent = etwEvent;
             }
@@ -225,7 +225,7 @@ namespace EtwTools
         /// <summary>
         /// An event wrapper for a StackKeyCreate event.
         /// </summary>
-        public readonly ref struct StackKeyCreateEvent
+        public readonly ref struct StackKeyCreateEventV2
         {
             private readonly EtwEvent _etwEvent;
 
@@ -284,10 +284,10 @@ namespace EtwTools
             public StackKeyCreateData Data => new(_etwEvent);
 
             /// <summary>
-            /// Creates a new StackKeyCreateEvent.
+            /// Creates a new StackKeyCreateEventV2.
             /// </summary>
             /// <param name="etwEvent">The event.</param>
-            public StackKeyCreateEvent(EtwEvent etwEvent)
+            public StackKeyCreateEventV2(EtwEvent etwEvent)
             {
                 _etwEvent = etwEvent;
             }
@@ -355,7 +355,7 @@ namespace EtwTools
         /// <summary>
         /// An event wrapper for a StackKeyDelete event.
         /// </summary>
-        public readonly ref struct StackKeyDeleteEvent
+        public readonly ref struct StackKeyDeleteEventV2
         {
             private readonly EtwEvent _etwEvent;
 
@@ -414,10 +414,10 @@ namespace EtwTools
             public StackKeyDeleteData Data => new(_etwEvent);
 
             /// <summary>
-            /// Creates a new StackKeyDeleteEvent.
+            /// Creates a new StackKeyDeleteEventV2.
             /// </summary>
             /// <param name="etwEvent">The event.</param>
-            public StackKeyDeleteEvent(EtwEvent etwEvent)
+            public StackKeyDeleteEventV2(EtwEvent etwEvent)
             {
                 _etwEvent = etwEvent;
             }
@@ -485,7 +485,7 @@ namespace EtwTools
         /// <summary>
         /// An event wrapper for a StackKeyRundown event.
         /// </summary>
-        public readonly ref struct StackKeyRundownEvent
+        public readonly ref struct StackKeyRundownEventV2
         {
             private readonly EtwEvent _etwEvent;
 
@@ -544,10 +544,10 @@ namespace EtwTools
             public StackKeyRundownData Data => new(_etwEvent);
 
             /// <summary>
-            /// Creates a new StackKeyRundownEvent.
+            /// Creates a new StackKeyRundownEventV2.
             /// </summary>
             /// <param name="etwEvent">The event.</param>
-            public StackKeyRundownEvent(EtwEvent etwEvent)
+            public StackKeyRundownEventV2(EtwEvent etwEvent)
             {
                 _etwEvent = etwEvent;
             }
@@ -615,7 +615,7 @@ namespace EtwTools
         /// <summary>
         /// An event wrapper for a StackKeyKernel event.
         /// </summary>
-        public readonly ref struct StackKeyKernelEvent
+        public readonly ref struct StackKeyKernelEventV2
         {
             private readonly EtwEvent _etwEvent;
 
@@ -674,10 +674,10 @@ namespace EtwTools
             public StackKeyKernelData Data => new(_etwEvent);
 
             /// <summary>
-            /// Creates a new StackKeyKernelEvent.
+            /// Creates a new StackKeyKernelEventV2.
             /// </summary>
             /// <param name="etwEvent">The event.</param>
-            public StackKeyKernelEvent(EtwEvent etwEvent)
+            public StackKeyKernelEventV2(EtwEvent etwEvent)
             {
                 _etwEvent = etwEvent;
             }
@@ -785,7 +785,7 @@ namespace EtwTools
         /// <summary>
         /// An event wrapper for a StackKeyUser event.
         /// </summary>
-        public readonly ref struct StackKeyUserEvent
+        public readonly ref struct StackKeyUserEventV2
         {
             private readonly EtwEvent _etwEvent;
 
@@ -844,10 +844,10 @@ namespace EtwTools
             public StackKeyUserData Data => new(_etwEvent);
 
             /// <summary>
-            /// Creates a new StackKeyUserEvent.
+            /// Creates a new StackKeyUserEventV2.
             /// </summary>
             /// <param name="etwEvent">The event.</param>
-            public StackKeyUserEvent(EtwEvent etwEvent)
+            public StackKeyUserEventV2(EtwEvent etwEvent)
             {
                 _etwEvent = etwEvent;
             }

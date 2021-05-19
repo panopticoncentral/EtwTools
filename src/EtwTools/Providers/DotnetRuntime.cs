@@ -520,6 +520,1622 @@ namespace EtwTools
         }
 
         /// <summary>
+        /// An event wrapper for a GCStart event.
+        /// </summary>
+        public readonly ref struct GCStartEvent
+        {
+            private readonly EtwEvent _etwEvent;
+
+            /// <summary>
+            /// Event name.
+            /// </summary>
+            public const string Name = "GCStart";
+
+            /// <summary>
+            /// The event provider.
+            /// </summary>
+            public static readonly Guid Provider = Id;
+
+            /// <summary>
+            /// Event descriptor.
+            /// </summary>
+            public static EtwEventDescriptor Descriptor { get; } = new EtwEventDescriptor
+            {
+                Id = 1,
+                Version = 0,
+                Channel = 0,
+                Level = EtwTraceLevel.Information,
+                Opcode = EtwEventOpcode.Start,
+                Task = (ushort)Tasks.GC,
+                Keyword = (ulong)Keywords.GCKeyword
+            };
+
+            /// <summary>
+            /// The process the event was recorded in.
+            /// </summary>
+            public uint ProcessId => _etwEvent.ProcessId;
+
+            /// <summary>
+            /// The thread the event was recorded on.
+            /// </summary>
+            public uint ThreadId => _etwEvent.ThreadId;
+
+            /// <summary>
+            /// The timestamp of the event.
+            /// </summary>
+            public long Timestamp => _etwEvent.Timestamp;
+
+            /// <summary>
+            /// The processor number the event was recorded on.
+            /// </summary>
+            public byte ProcessorNumber => _etwEvent.ProcessorNumber;
+
+            /// <summary>
+            /// Timing information for the event.
+            /// </summary>
+            public (ulong? KernelTime, ulong? UserTime, ulong? ProcessorTime) Time => _etwEvent.Time;
+
+            /// <summary>
+            /// Data for the event.
+            /// </summary>
+            public GCStartData Data => new(_etwEvent);
+
+            /// <summary>
+            /// Creates a new GCStartEvent.
+            /// </summary>
+            /// <param name="etwEvent">The event.</param>
+            public GCStartEvent(EtwEvent etwEvent)
+            {
+                _etwEvent = etwEvent;
+            }
+
+            /// <summary>
+            /// A data wrapper for a GCStart event.
+            /// </summary>
+            public ref struct GCStartData
+            {
+                private readonly EtwEvent _etwEvent;
+
+                private int _offset_Count;
+                private int _offset_Reason;
+
+                private int Offset_Count
+                {
+                    get
+                    {
+                        if (_offset_Count == -1)
+                        {
+                            _offset_Count = 0;
+                        }
+
+                        return _offset_Count;
+                    }
+                }
+
+                private int Offset_Reason
+                {
+                    get
+                    {
+                        if (_offset_Reason == -1)
+                        {
+                            _offset_Reason = Offset_Count + 4;
+                        }
+
+                        return _offset_Reason;
+                    }
+                }
+
+                /// <summary>
+                /// Retrieves the Count field.
+                /// </summary>
+                public uint Count => BitConverter.ToUInt32(_etwEvent.Data[Offset_Count..]);
+
+                /// <summary>
+                /// Retrieves the Reason field.
+                /// </summary>
+                public GCReasonMap Reason => (GCReasonMap)BitConverter.ToUInt32(_etwEvent.Data[Offset_Reason..]);
+
+                /// <summary>
+                /// Creates a new GCStartData.
+                /// </summary>
+                /// <param name="etwEvent">The event.</param>
+                public GCStartData(EtwEvent etwEvent)
+                {
+                    _etwEvent = etwEvent;
+                    _offset_Count = -1;
+                    _offset_Reason = -1;
+                }
+            }
+
+        }
+
+        /// <summary>
+        /// An event wrapper for a GCStop event.
+        /// </summary>
+        public readonly ref struct GCStopEvent
+        {
+            private readonly EtwEvent _etwEvent;
+
+            /// <summary>
+            /// Event name.
+            /// </summary>
+            public const string Name = "GCStop";
+
+            /// <summary>
+            /// The event provider.
+            /// </summary>
+            public static readonly Guid Provider = Id;
+
+            /// <summary>
+            /// Event descriptor.
+            /// </summary>
+            public static EtwEventDescriptor Descriptor { get; } = new EtwEventDescriptor
+            {
+                Id = 2,
+                Version = 0,
+                Channel = 0,
+                Level = EtwTraceLevel.Information,
+                Opcode = EtwEventOpcode.End,
+                Task = (ushort)Tasks.GC,
+                Keyword = (ulong)Keywords.GCKeyword
+            };
+
+            /// <summary>
+            /// The process the event was recorded in.
+            /// </summary>
+            public uint ProcessId => _etwEvent.ProcessId;
+
+            /// <summary>
+            /// The thread the event was recorded on.
+            /// </summary>
+            public uint ThreadId => _etwEvent.ThreadId;
+
+            /// <summary>
+            /// The timestamp of the event.
+            /// </summary>
+            public long Timestamp => _etwEvent.Timestamp;
+
+            /// <summary>
+            /// The processor number the event was recorded on.
+            /// </summary>
+            public byte ProcessorNumber => _etwEvent.ProcessorNumber;
+
+            /// <summary>
+            /// Timing information for the event.
+            /// </summary>
+            public (ulong? KernelTime, ulong? UserTime, ulong? ProcessorTime) Time => _etwEvent.Time;
+
+            /// <summary>
+            /// Data for the event.
+            /// </summary>
+            public GCStopData Data => new(_etwEvent);
+
+            /// <summary>
+            /// Creates a new GCStopEvent.
+            /// </summary>
+            /// <param name="etwEvent">The event.</param>
+            public GCStopEvent(EtwEvent etwEvent)
+            {
+                _etwEvent = etwEvent;
+            }
+
+            /// <summary>
+            /// A data wrapper for a GCStop event.
+            /// </summary>
+            public ref struct GCStopData
+            {
+                private readonly EtwEvent _etwEvent;
+
+                private int _offset_Count;
+                private int _offset_Depth;
+
+                private int Offset_Count
+                {
+                    get
+                    {
+                        if (_offset_Count == -1)
+                        {
+                            _offset_Count = 0;
+                        }
+
+                        return _offset_Count;
+                    }
+                }
+
+                private int Offset_Depth
+                {
+                    get
+                    {
+                        if (_offset_Depth == -1)
+                        {
+                            _offset_Depth = Offset_Count + 4;
+                        }
+
+                        return _offset_Depth;
+                    }
+                }
+
+                /// <summary>
+                /// Retrieves the Count field.
+                /// </summary>
+                public uint Count => BitConverter.ToUInt32(_etwEvent.Data[Offset_Count..]);
+
+                /// <summary>
+                /// Retrieves the Depth field.
+                /// </summary>
+                public ushort Depth => BitConverter.ToUInt16(_etwEvent.Data[Offset_Depth..]);
+
+                /// <summary>
+                /// Creates a new GCStopData.
+                /// </summary>
+                /// <param name="etwEvent">The event.</param>
+                public GCStopData(EtwEvent etwEvent)
+                {
+                    _etwEvent = etwEvent;
+                    _offset_Count = -1;
+                    _offset_Depth = -1;
+                }
+            }
+
+        }
+
+        /// <summary>
+        /// An event wrapper for a GCRestartEEStop event.
+        /// </summary>
+        public readonly ref struct GCRestartEEStopEvent
+        {
+            private readonly EtwEvent _etwEvent;
+
+            /// <summary>
+            /// Event name.
+            /// </summary>
+            public const string Name = "GCRestartEEStop";
+
+            /// <summary>
+            /// The event provider.
+            /// </summary>
+            public static readonly Guid Provider = Id;
+
+            /// <summary>
+            /// Event descriptor.
+            /// </summary>
+            public static EtwEventDescriptor Descriptor { get; } = new EtwEventDescriptor
+            {
+                Id = 3,
+                Version = 0,
+                Channel = 0,
+                Level = EtwTraceLevel.Information,
+                Opcode = (EtwEventOpcode)Opcodes.RestartEEStop,
+                Task = (ushort)Tasks.GC,
+                Keyword = (ulong)Keywords.GCKeyword
+            };
+
+            /// <summary>
+            /// The process the event was recorded in.
+            /// </summary>
+            public uint ProcessId => _etwEvent.ProcessId;
+
+            /// <summary>
+            /// The thread the event was recorded on.
+            /// </summary>
+            public uint ThreadId => _etwEvent.ThreadId;
+
+            /// <summary>
+            /// The timestamp of the event.
+            /// </summary>
+            public long Timestamp => _etwEvent.Timestamp;
+
+            /// <summary>
+            /// The processor number the event was recorded on.
+            /// </summary>
+            public byte ProcessorNumber => _etwEvent.ProcessorNumber;
+
+            /// <summary>
+            /// Timing information for the event.
+            /// </summary>
+            public (ulong? KernelTime, ulong? UserTime, ulong? ProcessorTime) Time => _etwEvent.Time;
+
+            /// <summary>
+            /// Creates a new GCRestartEEStopEvent.
+            /// </summary>
+            /// <param name="etwEvent">The event.</param>
+            public GCRestartEEStopEvent(EtwEvent etwEvent)
+            {
+                _etwEvent = etwEvent;
+            }
+        }
+
+        /// <summary>
+        /// An event wrapper for a GCHeapStats event.
+        /// </summary>
+        public readonly ref struct GCHeapStatsEvent
+        {
+            private readonly EtwEvent _etwEvent;
+
+            /// <summary>
+            /// Event name.
+            /// </summary>
+            public const string Name = "GCHeapStats";
+
+            /// <summary>
+            /// The event provider.
+            /// </summary>
+            public static readonly Guid Provider = Id;
+
+            /// <summary>
+            /// Event descriptor.
+            /// </summary>
+            public static EtwEventDescriptor Descriptor { get; } = new EtwEventDescriptor
+            {
+                Id = 4,
+                Version = 0,
+                Channel = 0,
+                Level = EtwTraceLevel.Information,
+                Opcode = (EtwEventOpcode)Opcodes.HeapStats,
+                Task = (ushort)Tasks.GC,
+                Keyword = (ulong)Keywords.GCKeyword
+            };
+
+            /// <summary>
+            /// The process the event was recorded in.
+            /// </summary>
+            public uint ProcessId => _etwEvent.ProcessId;
+
+            /// <summary>
+            /// The thread the event was recorded on.
+            /// </summary>
+            public uint ThreadId => _etwEvent.ThreadId;
+
+            /// <summary>
+            /// The timestamp of the event.
+            /// </summary>
+            public long Timestamp => _etwEvent.Timestamp;
+
+            /// <summary>
+            /// The processor number the event was recorded on.
+            /// </summary>
+            public byte ProcessorNumber => _etwEvent.ProcessorNumber;
+
+            /// <summary>
+            /// Timing information for the event.
+            /// </summary>
+            public (ulong? KernelTime, ulong? UserTime, ulong? ProcessorTime) Time => _etwEvent.Time;
+
+            /// <summary>
+            /// Data for the event.
+            /// </summary>
+            public GCHeapStatsData Data => new(_etwEvent);
+
+            /// <summary>
+            /// Creates a new GCHeapStatsEvent.
+            /// </summary>
+            /// <param name="etwEvent">The event.</param>
+            public GCHeapStatsEvent(EtwEvent etwEvent)
+            {
+                _etwEvent = etwEvent;
+            }
+
+            /// <summary>
+            /// A data wrapper for a GCHeapStats event.
+            /// </summary>
+            public ref struct GCHeapStatsData
+            {
+                private readonly EtwEvent _etwEvent;
+
+                private int _offset_GenerationSize0;
+                private int _offset_TotalPromotedSize0;
+                private int _offset_GenerationSize1;
+                private int _offset_TotalPromotedSize1;
+                private int _offset_GenerationSize2;
+                private int _offset_TotalPromotedSize2;
+                private int _offset_GenerationSize3;
+                private int _offset_TotalPromotedSize3;
+                private int _offset_FinalizationPromotedSize;
+                private int _offset_FinalizationPromotedCount;
+                private int _offset_PinnedObjectCount;
+                private int _offset_SinkBlockCount;
+                private int _offset_GCHandleCount;
+
+                private int Offset_GenerationSize0
+                {
+                    get
+                    {
+                        if (_offset_GenerationSize0 == -1)
+                        {
+                            _offset_GenerationSize0 = 0;
+                        }
+
+                        return _offset_GenerationSize0;
+                    }
+                }
+
+                private int Offset_TotalPromotedSize0
+                {
+                    get
+                    {
+                        if (_offset_TotalPromotedSize0 == -1)
+                        {
+                            _offset_TotalPromotedSize0 = Offset_GenerationSize0 + 8;
+                        }
+
+                        return _offset_TotalPromotedSize0;
+                    }
+                }
+
+                private int Offset_GenerationSize1
+                {
+                    get
+                    {
+                        if (_offset_GenerationSize1 == -1)
+                        {
+                            _offset_GenerationSize1 = Offset_TotalPromotedSize0 + 8;
+                        }
+
+                        return _offset_GenerationSize1;
+                    }
+                }
+
+                private int Offset_TotalPromotedSize1
+                {
+                    get
+                    {
+                        if (_offset_TotalPromotedSize1 == -1)
+                        {
+                            _offset_TotalPromotedSize1 = Offset_GenerationSize1 + 8;
+                        }
+
+                        return _offset_TotalPromotedSize1;
+                    }
+                }
+
+                private int Offset_GenerationSize2
+                {
+                    get
+                    {
+                        if (_offset_GenerationSize2 == -1)
+                        {
+                            _offset_GenerationSize2 = Offset_TotalPromotedSize1 + 8;
+                        }
+
+                        return _offset_GenerationSize2;
+                    }
+                }
+
+                private int Offset_TotalPromotedSize2
+                {
+                    get
+                    {
+                        if (_offset_TotalPromotedSize2 == -1)
+                        {
+                            _offset_TotalPromotedSize2 = Offset_GenerationSize2 + 8;
+                        }
+
+                        return _offset_TotalPromotedSize2;
+                    }
+                }
+
+                private int Offset_GenerationSize3
+                {
+                    get
+                    {
+                        if (_offset_GenerationSize3 == -1)
+                        {
+                            _offset_GenerationSize3 = Offset_TotalPromotedSize2 + 8;
+                        }
+
+                        return _offset_GenerationSize3;
+                    }
+                }
+
+                private int Offset_TotalPromotedSize3
+                {
+                    get
+                    {
+                        if (_offset_TotalPromotedSize3 == -1)
+                        {
+                            _offset_TotalPromotedSize3 = Offset_GenerationSize3 + 8;
+                        }
+
+                        return _offset_TotalPromotedSize3;
+                    }
+                }
+
+                private int Offset_FinalizationPromotedSize
+                {
+                    get
+                    {
+                        if (_offset_FinalizationPromotedSize == -1)
+                        {
+                            _offset_FinalizationPromotedSize = Offset_TotalPromotedSize3 + 8;
+                        }
+
+                        return _offset_FinalizationPromotedSize;
+                    }
+                }
+
+                private int Offset_FinalizationPromotedCount
+                {
+                    get
+                    {
+                        if (_offset_FinalizationPromotedCount == -1)
+                        {
+                            _offset_FinalizationPromotedCount = Offset_FinalizationPromotedSize + 8;
+                        }
+
+                        return _offset_FinalizationPromotedCount;
+                    }
+                }
+
+                private int Offset_PinnedObjectCount
+                {
+                    get
+                    {
+                        if (_offset_PinnedObjectCount == -1)
+                        {
+                            _offset_PinnedObjectCount = Offset_FinalizationPromotedCount + 8;
+                        }
+
+                        return _offset_PinnedObjectCount;
+                    }
+                }
+
+                private int Offset_SinkBlockCount
+                {
+                    get
+                    {
+                        if (_offset_SinkBlockCount == -1)
+                        {
+                            _offset_SinkBlockCount = Offset_PinnedObjectCount + 4;
+                        }
+
+                        return _offset_SinkBlockCount;
+                    }
+                }
+
+                private int Offset_GCHandleCount
+                {
+                    get
+                    {
+                        if (_offset_GCHandleCount == -1)
+                        {
+                            _offset_GCHandleCount = Offset_SinkBlockCount + 4;
+                        }
+
+                        return _offset_GCHandleCount;
+                    }
+                }
+
+                /// <summary>
+                /// Retrieves the GenerationSize0 field.
+                /// </summary>
+                public ulong GenerationSize0 => BitConverter.ToUInt64(_etwEvent.Data[Offset_GenerationSize0..]);
+
+                /// <summary>
+                /// Retrieves the TotalPromotedSize0 field.
+                /// </summary>
+                public ulong TotalPromotedSize0 => BitConverter.ToUInt64(_etwEvent.Data[Offset_TotalPromotedSize0..]);
+
+                /// <summary>
+                /// Retrieves the GenerationSize1 field.
+                /// </summary>
+                public ulong GenerationSize1 => BitConverter.ToUInt64(_etwEvent.Data[Offset_GenerationSize1..]);
+
+                /// <summary>
+                /// Retrieves the TotalPromotedSize1 field.
+                /// </summary>
+                public ulong TotalPromotedSize1 => BitConverter.ToUInt64(_etwEvent.Data[Offset_TotalPromotedSize1..]);
+
+                /// <summary>
+                /// Retrieves the GenerationSize2 field.
+                /// </summary>
+                public ulong GenerationSize2 => BitConverter.ToUInt64(_etwEvent.Data[Offset_GenerationSize2..]);
+
+                /// <summary>
+                /// Retrieves the TotalPromotedSize2 field.
+                /// </summary>
+                public ulong TotalPromotedSize2 => BitConverter.ToUInt64(_etwEvent.Data[Offset_TotalPromotedSize2..]);
+
+                /// <summary>
+                /// Retrieves the GenerationSize3 field.
+                /// </summary>
+                public ulong GenerationSize3 => BitConverter.ToUInt64(_etwEvent.Data[Offset_GenerationSize3..]);
+
+                /// <summary>
+                /// Retrieves the TotalPromotedSize3 field.
+                /// </summary>
+                public ulong TotalPromotedSize3 => BitConverter.ToUInt64(_etwEvent.Data[Offset_TotalPromotedSize3..]);
+
+                /// <summary>
+                /// Retrieves the FinalizationPromotedSize field.
+                /// </summary>
+                public ulong FinalizationPromotedSize => BitConverter.ToUInt64(_etwEvent.Data[Offset_FinalizationPromotedSize..]);
+
+                /// <summary>
+                /// Retrieves the FinalizationPromotedCount field.
+                /// </summary>
+                public ulong FinalizationPromotedCount => BitConverter.ToUInt64(_etwEvent.Data[Offset_FinalizationPromotedCount..]);
+
+                /// <summary>
+                /// Retrieves the PinnedObjectCount field.
+                /// </summary>
+                public uint PinnedObjectCount => BitConverter.ToUInt32(_etwEvent.Data[Offset_PinnedObjectCount..]);
+
+                /// <summary>
+                /// Retrieves the SinkBlockCount field.
+                /// </summary>
+                public uint SinkBlockCount => BitConverter.ToUInt32(_etwEvent.Data[Offset_SinkBlockCount..]);
+
+                /// <summary>
+                /// Retrieves the GCHandleCount field.
+                /// </summary>
+                public uint GCHandleCount => BitConverter.ToUInt32(_etwEvent.Data[Offset_GCHandleCount..]);
+
+                /// <summary>
+                /// Creates a new GCHeapStatsData.
+                /// </summary>
+                /// <param name="etwEvent">The event.</param>
+                public GCHeapStatsData(EtwEvent etwEvent)
+                {
+                    _etwEvent = etwEvent;
+                    _offset_GenerationSize0 = -1;
+                    _offset_TotalPromotedSize0 = -1;
+                    _offset_GenerationSize1 = -1;
+                    _offset_TotalPromotedSize1 = -1;
+                    _offset_GenerationSize2 = -1;
+                    _offset_TotalPromotedSize2 = -1;
+                    _offset_GenerationSize3 = -1;
+                    _offset_TotalPromotedSize3 = -1;
+                    _offset_FinalizationPromotedSize = -1;
+                    _offset_FinalizationPromotedCount = -1;
+                    _offset_PinnedObjectCount = -1;
+                    _offset_SinkBlockCount = -1;
+                    _offset_GCHandleCount = -1;
+                }
+            }
+
+        }
+
+        /// <summary>
+        /// An event wrapper for a GCCreateSegment event.
+        /// </summary>
+        public readonly ref struct GCCreateSegmentEvent
+        {
+            private readonly EtwEvent _etwEvent;
+
+            /// <summary>
+            /// Event name.
+            /// </summary>
+            public const string Name = "GCCreateSegment";
+
+            /// <summary>
+            /// The event provider.
+            /// </summary>
+            public static readonly Guid Provider = Id;
+
+            /// <summary>
+            /// Event descriptor.
+            /// </summary>
+            public static EtwEventDescriptor Descriptor { get; } = new EtwEventDescriptor
+            {
+                Id = 5,
+                Version = 0,
+                Channel = 0,
+                Level = EtwTraceLevel.Information,
+                Opcode = (EtwEventOpcode)Opcodes.CreateSegment,
+                Task = (ushort)Tasks.GC,
+                Keyword = (ulong)Keywords.GCKeyword
+            };
+
+            /// <summary>
+            /// The process the event was recorded in.
+            /// </summary>
+            public uint ProcessId => _etwEvent.ProcessId;
+
+            /// <summary>
+            /// The thread the event was recorded on.
+            /// </summary>
+            public uint ThreadId => _etwEvent.ThreadId;
+
+            /// <summary>
+            /// The timestamp of the event.
+            /// </summary>
+            public long Timestamp => _etwEvent.Timestamp;
+
+            /// <summary>
+            /// The processor number the event was recorded on.
+            /// </summary>
+            public byte ProcessorNumber => _etwEvent.ProcessorNumber;
+
+            /// <summary>
+            /// Timing information for the event.
+            /// </summary>
+            public (ulong? KernelTime, ulong? UserTime, ulong? ProcessorTime) Time => _etwEvent.Time;
+
+            /// <summary>
+            /// Data for the event.
+            /// </summary>
+            public GCCreateSegmentData Data => new(_etwEvent);
+
+            /// <summary>
+            /// Creates a new GCCreateSegmentEvent.
+            /// </summary>
+            /// <param name="etwEvent">The event.</param>
+            public GCCreateSegmentEvent(EtwEvent etwEvent)
+            {
+                _etwEvent = etwEvent;
+            }
+
+            /// <summary>
+            /// A data wrapper for a GCCreateSegment event.
+            /// </summary>
+            public ref struct GCCreateSegmentData
+            {
+                private readonly EtwEvent _etwEvent;
+
+                private int _offset_Address;
+                private int _offset_Size;
+                private int _offset_Type;
+
+                private int Offset_Address
+                {
+                    get
+                    {
+                        if (_offset_Address == -1)
+                        {
+                            _offset_Address = 0;
+                        }
+
+                        return _offset_Address;
+                    }
+                }
+
+                private int Offset_Size
+                {
+                    get
+                    {
+                        if (_offset_Size == -1)
+                        {
+                            _offset_Size = Offset_Address + 8;
+                        }
+
+                        return _offset_Size;
+                    }
+                }
+
+                private int Offset_Type
+                {
+                    get
+                    {
+                        if (_offset_Type == -1)
+                        {
+                            _offset_Type = Offset_Size + 8;
+                        }
+
+                        return _offset_Type;
+                    }
+                }
+
+                /// <summary>
+                /// Retrieves the Address field.
+                /// </summary>
+                public ulong Address => BitConverter.ToUInt64(_etwEvent.Data[Offset_Address..]);
+
+                /// <summary>
+                /// Retrieves the Size field.
+                /// </summary>
+                public ulong Size => BitConverter.ToUInt64(_etwEvent.Data[Offset_Size..]);
+
+                /// <summary>
+                /// Retrieves the Type field.
+                /// </summary>
+                public GCSegmentTypeMap Type => (GCSegmentTypeMap)BitConverter.ToUInt32(_etwEvent.Data[Offset_Type..]);
+
+                /// <summary>
+                /// Creates a new GCCreateSegmentData.
+                /// </summary>
+                /// <param name="etwEvent">The event.</param>
+                public GCCreateSegmentData(EtwEvent etwEvent)
+                {
+                    _etwEvent = etwEvent;
+                    _offset_Address = -1;
+                    _offset_Size = -1;
+                    _offset_Type = -1;
+                }
+            }
+
+        }
+
+        /// <summary>
+        /// An event wrapper for a GCFreeSegment event.
+        /// </summary>
+        public readonly ref struct GCFreeSegmentEvent
+        {
+            private readonly EtwEvent _etwEvent;
+
+            /// <summary>
+            /// Event name.
+            /// </summary>
+            public const string Name = "GCFreeSegment";
+
+            /// <summary>
+            /// The event provider.
+            /// </summary>
+            public static readonly Guid Provider = Id;
+
+            /// <summary>
+            /// Event descriptor.
+            /// </summary>
+            public static EtwEventDescriptor Descriptor { get; } = new EtwEventDescriptor
+            {
+                Id = 6,
+                Version = 0,
+                Channel = 0,
+                Level = EtwTraceLevel.Information,
+                Opcode = (EtwEventOpcode)Opcodes.FreeSegment,
+                Task = (ushort)Tasks.GC,
+                Keyword = (ulong)Keywords.GCKeyword
+            };
+
+            /// <summary>
+            /// The process the event was recorded in.
+            /// </summary>
+            public uint ProcessId => _etwEvent.ProcessId;
+
+            /// <summary>
+            /// The thread the event was recorded on.
+            /// </summary>
+            public uint ThreadId => _etwEvent.ThreadId;
+
+            /// <summary>
+            /// The timestamp of the event.
+            /// </summary>
+            public long Timestamp => _etwEvent.Timestamp;
+
+            /// <summary>
+            /// The processor number the event was recorded on.
+            /// </summary>
+            public byte ProcessorNumber => _etwEvent.ProcessorNumber;
+
+            /// <summary>
+            /// Timing information for the event.
+            /// </summary>
+            public (ulong? KernelTime, ulong? UserTime, ulong? ProcessorTime) Time => _etwEvent.Time;
+
+            /// <summary>
+            /// Data for the event.
+            /// </summary>
+            public GCFreeSegmentData Data => new(_etwEvent);
+
+            /// <summary>
+            /// Creates a new GCFreeSegmentEvent.
+            /// </summary>
+            /// <param name="etwEvent">The event.</param>
+            public GCFreeSegmentEvent(EtwEvent etwEvent)
+            {
+                _etwEvent = etwEvent;
+            }
+
+            /// <summary>
+            /// A data wrapper for a GCFreeSegment event.
+            /// </summary>
+            public ref struct GCFreeSegmentData
+            {
+                private readonly EtwEvent _etwEvent;
+
+                private int _offset_Address;
+
+                private int Offset_Address
+                {
+                    get
+                    {
+                        if (_offset_Address == -1)
+                        {
+                            _offset_Address = 0;
+                        }
+
+                        return _offset_Address;
+                    }
+                }
+
+                /// <summary>
+                /// Retrieves the Address field.
+                /// </summary>
+                public ulong Address => BitConverter.ToUInt64(_etwEvent.Data[Offset_Address..]);
+
+                /// <summary>
+                /// Creates a new GCFreeSegmentData.
+                /// </summary>
+                /// <param name="etwEvent">The event.</param>
+                public GCFreeSegmentData(EtwEvent etwEvent)
+                {
+                    _etwEvent = etwEvent;
+                    _offset_Address = -1;
+                }
+            }
+
+        }
+
+        /// <summary>
+        /// An event wrapper for a GCRestartEEStart event.
+        /// </summary>
+        public readonly ref struct GCRestartEEStartEvent
+        {
+            private readonly EtwEvent _etwEvent;
+
+            /// <summary>
+            /// Event name.
+            /// </summary>
+            public const string Name = "GCRestartEEStart";
+
+            /// <summary>
+            /// The event provider.
+            /// </summary>
+            public static readonly Guid Provider = Id;
+
+            /// <summary>
+            /// Event descriptor.
+            /// </summary>
+            public static EtwEventDescriptor Descriptor { get; } = new EtwEventDescriptor
+            {
+                Id = 7,
+                Version = 0,
+                Channel = 0,
+                Level = EtwTraceLevel.Information,
+                Opcode = (EtwEventOpcode)Opcodes.RestartEEStart,
+                Task = (ushort)Tasks.GC,
+                Keyword = (ulong)Keywords.GCKeyword
+            };
+
+            /// <summary>
+            /// The process the event was recorded in.
+            /// </summary>
+            public uint ProcessId => _etwEvent.ProcessId;
+
+            /// <summary>
+            /// The thread the event was recorded on.
+            /// </summary>
+            public uint ThreadId => _etwEvent.ThreadId;
+
+            /// <summary>
+            /// The timestamp of the event.
+            /// </summary>
+            public long Timestamp => _etwEvent.Timestamp;
+
+            /// <summary>
+            /// The processor number the event was recorded on.
+            /// </summary>
+            public byte ProcessorNumber => _etwEvent.ProcessorNumber;
+
+            /// <summary>
+            /// Timing information for the event.
+            /// </summary>
+            public (ulong? KernelTime, ulong? UserTime, ulong? ProcessorTime) Time => _etwEvent.Time;
+
+            /// <summary>
+            /// Creates a new GCRestartEEStartEvent.
+            /// </summary>
+            /// <param name="etwEvent">The event.</param>
+            public GCRestartEEStartEvent(EtwEvent etwEvent)
+            {
+                _etwEvent = etwEvent;
+            }
+        }
+
+        /// <summary>
+        /// An event wrapper for a GCSuspendEEStop event.
+        /// </summary>
+        public readonly ref struct GCSuspendEEStopEvent
+        {
+            private readonly EtwEvent _etwEvent;
+
+            /// <summary>
+            /// Event name.
+            /// </summary>
+            public const string Name = "GCSuspendEEStop";
+
+            /// <summary>
+            /// The event provider.
+            /// </summary>
+            public static readonly Guid Provider = Id;
+
+            /// <summary>
+            /// Event descriptor.
+            /// </summary>
+            public static EtwEventDescriptor Descriptor { get; } = new EtwEventDescriptor
+            {
+                Id = 8,
+                Version = 0,
+                Channel = 0,
+                Level = EtwTraceLevel.Information,
+                Opcode = (EtwEventOpcode)Opcodes.SuspendEEStop,
+                Task = (ushort)Tasks.GC,
+                Keyword = (ulong)Keywords.GCKeyword
+            };
+
+            /// <summary>
+            /// The process the event was recorded in.
+            /// </summary>
+            public uint ProcessId => _etwEvent.ProcessId;
+
+            /// <summary>
+            /// The thread the event was recorded on.
+            /// </summary>
+            public uint ThreadId => _etwEvent.ThreadId;
+
+            /// <summary>
+            /// The timestamp of the event.
+            /// </summary>
+            public long Timestamp => _etwEvent.Timestamp;
+
+            /// <summary>
+            /// The processor number the event was recorded on.
+            /// </summary>
+            public byte ProcessorNumber => _etwEvent.ProcessorNumber;
+
+            /// <summary>
+            /// Timing information for the event.
+            /// </summary>
+            public (ulong? KernelTime, ulong? UserTime, ulong? ProcessorTime) Time => _etwEvent.Time;
+
+            /// <summary>
+            /// Creates a new GCSuspendEEStopEvent.
+            /// </summary>
+            /// <param name="etwEvent">The event.</param>
+            public GCSuspendEEStopEvent(EtwEvent etwEvent)
+            {
+                _etwEvent = etwEvent;
+            }
+        }
+
+        /// <summary>
+        /// An event wrapper for a GCSuspendEEStart event.
+        /// </summary>
+        public readonly ref struct GCSuspendEEStartEvent
+        {
+            private readonly EtwEvent _etwEvent;
+
+            /// <summary>
+            /// Event name.
+            /// </summary>
+            public const string Name = "GCSuspendEEStart";
+
+            /// <summary>
+            /// The event provider.
+            /// </summary>
+            public static readonly Guid Provider = Id;
+
+            /// <summary>
+            /// Event descriptor.
+            /// </summary>
+            public static EtwEventDescriptor Descriptor { get; } = new EtwEventDescriptor
+            {
+                Id = 9,
+                Version = 0,
+                Channel = 0,
+                Level = EtwTraceLevel.Information,
+                Opcode = (EtwEventOpcode)Opcodes.SuspendEEStart,
+                Task = (ushort)Tasks.GC,
+                Keyword = (ulong)Keywords.GCKeyword
+            };
+
+            /// <summary>
+            /// The process the event was recorded in.
+            /// </summary>
+            public uint ProcessId => _etwEvent.ProcessId;
+
+            /// <summary>
+            /// The thread the event was recorded on.
+            /// </summary>
+            public uint ThreadId => _etwEvent.ThreadId;
+
+            /// <summary>
+            /// The timestamp of the event.
+            /// </summary>
+            public long Timestamp => _etwEvent.Timestamp;
+
+            /// <summary>
+            /// The processor number the event was recorded on.
+            /// </summary>
+            public byte ProcessorNumber => _etwEvent.ProcessorNumber;
+
+            /// <summary>
+            /// Timing information for the event.
+            /// </summary>
+            public (ulong? KernelTime, ulong? UserTime, ulong? ProcessorTime) Time => _etwEvent.Time;
+
+            /// <summary>
+            /// Data for the event.
+            /// </summary>
+            public GCSuspendEEStartData Data => new(_etwEvent);
+
+            /// <summary>
+            /// Creates a new GCSuspendEEStartEvent.
+            /// </summary>
+            /// <param name="etwEvent">The event.</param>
+            public GCSuspendEEStartEvent(EtwEvent etwEvent)
+            {
+                _etwEvent = etwEvent;
+            }
+
+            /// <summary>
+            /// A data wrapper for a GCSuspendEEStart event.
+            /// </summary>
+            public ref struct GCSuspendEEStartData
+            {
+                private readonly EtwEvent _etwEvent;
+
+                private int _offset_Reason;
+
+                private int Offset_Reason
+                {
+                    get
+                    {
+                        if (_offset_Reason == -1)
+                        {
+                            _offset_Reason = 0;
+                        }
+
+                        return _offset_Reason;
+                    }
+                }
+
+                /// <summary>
+                /// Retrieves the Reason field.
+                /// </summary>
+                public GCSuspendEEReasonMap Reason => (GCSuspendEEReasonMap)BitConverter.ToUInt16(_etwEvent.Data[Offset_Reason..]);
+
+                /// <summary>
+                /// Creates a new GCSuspendEEStartData.
+                /// </summary>
+                /// <param name="etwEvent">The event.</param>
+                public GCSuspendEEStartData(EtwEvent etwEvent)
+                {
+                    _etwEvent = etwEvent;
+                    _offset_Reason = -1;
+                }
+            }
+
+        }
+
+        /// <summary>
+        /// An event wrapper for a GCAllocationTick event.
+        /// </summary>
+        public readonly ref struct GCAllocationTickEvent
+        {
+            private readonly EtwEvent _etwEvent;
+
+            /// <summary>
+            /// Event name.
+            /// </summary>
+            public const string Name = "GCAllocationTick";
+
+            /// <summary>
+            /// The event provider.
+            /// </summary>
+            public static readonly Guid Provider = Id;
+
+            /// <summary>
+            /// Event descriptor.
+            /// </summary>
+            public static EtwEventDescriptor Descriptor { get; } = new EtwEventDescriptor
+            {
+                Id = 10,
+                Version = 0,
+                Channel = 0,
+                Level = EtwTraceLevel.Verbose,
+                Opcode = (EtwEventOpcode)Opcodes.AllocationTick,
+                Task = (ushort)Tasks.GC,
+                Keyword = (ulong)Keywords.GCKeyword
+            };
+
+            /// <summary>
+            /// The process the event was recorded in.
+            /// </summary>
+            public uint ProcessId => _etwEvent.ProcessId;
+
+            /// <summary>
+            /// The thread the event was recorded on.
+            /// </summary>
+            public uint ThreadId => _etwEvent.ThreadId;
+
+            /// <summary>
+            /// The timestamp of the event.
+            /// </summary>
+            public long Timestamp => _etwEvent.Timestamp;
+
+            /// <summary>
+            /// The processor number the event was recorded on.
+            /// </summary>
+            public byte ProcessorNumber => _etwEvent.ProcessorNumber;
+
+            /// <summary>
+            /// Timing information for the event.
+            /// </summary>
+            public (ulong? KernelTime, ulong? UserTime, ulong? ProcessorTime) Time => _etwEvent.Time;
+
+            /// <summary>
+            /// Data for the event.
+            /// </summary>
+            public GCAllocationTickData Data => new(_etwEvent);
+
+            /// <summary>
+            /// Creates a new GCAllocationTickEvent.
+            /// </summary>
+            /// <param name="etwEvent">The event.</param>
+            public GCAllocationTickEvent(EtwEvent etwEvent)
+            {
+                _etwEvent = etwEvent;
+            }
+
+            /// <summary>
+            /// A data wrapper for a GCAllocationTick event.
+            /// </summary>
+            public ref struct GCAllocationTickData
+            {
+                private readonly EtwEvent _etwEvent;
+
+                private int _offset_AllocationAmount;
+                private int _offset_AllocationKind;
+
+                private int Offset_AllocationAmount
+                {
+                    get
+                    {
+                        if (_offset_AllocationAmount == -1)
+                        {
+                            _offset_AllocationAmount = 0;
+                        }
+
+                        return _offset_AllocationAmount;
+                    }
+                }
+
+                private int Offset_AllocationKind
+                {
+                    get
+                    {
+                        if (_offset_AllocationKind == -1)
+                        {
+                            _offset_AllocationKind = Offset_AllocationAmount + 4;
+                        }
+
+                        return _offset_AllocationKind;
+                    }
+                }
+
+                /// <summary>
+                /// Retrieves the AllocationAmount field.
+                /// </summary>
+                public uint AllocationAmount => BitConverter.ToUInt32(_etwEvent.Data[Offset_AllocationAmount..]);
+
+                /// <summary>
+                /// Retrieves the AllocationKind field.
+                /// </summary>
+                public GCAllocationKindMap AllocationKind => (GCAllocationKindMap)BitConverter.ToUInt32(_etwEvent.Data[Offset_AllocationKind..]);
+
+                /// <summary>
+                /// Creates a new GCAllocationTickData.
+                /// </summary>
+                /// <param name="etwEvent">The event.</param>
+                public GCAllocationTickData(EtwEvent etwEvent)
+                {
+                    _etwEvent = etwEvent;
+                    _offset_AllocationAmount = -1;
+                    _offset_AllocationKind = -1;
+                }
+            }
+
+        }
+
+        /// <summary>
+        /// An event wrapper for a GCCreateConcurrentThread event.
+        /// </summary>
+        public readonly ref struct GCCreateConcurrentThreadEvent
+        {
+            private readonly EtwEvent _etwEvent;
+
+            /// <summary>
+            /// Event name.
+            /// </summary>
+            public const string Name = "GCCreateConcurrentThread";
+
+            /// <summary>
+            /// The event provider.
+            /// </summary>
+            public static readonly Guid Provider = Id;
+
+            /// <summary>
+            /// Event descriptor.
+            /// </summary>
+            public static EtwEventDescriptor Descriptor { get; } = new EtwEventDescriptor
+            {
+                Id = 11,
+                Version = 0,
+                Channel = 0,
+                Level = EtwTraceLevel.Information,
+                Opcode = (EtwEventOpcode)Opcodes.CreateConcurrentThread,
+                Task = (ushort)Tasks.GC,
+                Keyword = (ulong)Keywords.GCKeyword
+            };
+
+            /// <summary>
+            /// The process the event was recorded in.
+            /// </summary>
+            public uint ProcessId => _etwEvent.ProcessId;
+
+            /// <summary>
+            /// The thread the event was recorded on.
+            /// </summary>
+            public uint ThreadId => _etwEvent.ThreadId;
+
+            /// <summary>
+            /// The timestamp of the event.
+            /// </summary>
+            public long Timestamp => _etwEvent.Timestamp;
+
+            /// <summary>
+            /// The processor number the event was recorded on.
+            /// </summary>
+            public byte ProcessorNumber => _etwEvent.ProcessorNumber;
+
+            /// <summary>
+            /// Timing information for the event.
+            /// </summary>
+            public (ulong? KernelTime, ulong? UserTime, ulong? ProcessorTime) Time => _etwEvent.Time;
+
+            /// <summary>
+            /// Creates a new GCCreateConcurrentThreadEvent.
+            /// </summary>
+            /// <param name="etwEvent">The event.</param>
+            public GCCreateConcurrentThreadEvent(EtwEvent etwEvent)
+            {
+                _etwEvent = etwEvent;
+            }
+        }
+
+        /// <summary>
+        /// An event wrapper for a GCTerminateConcurrentThread event.
+        /// </summary>
+        public readonly ref struct GCTerminateConcurrentThreadEvent
+        {
+            private readonly EtwEvent _etwEvent;
+
+            /// <summary>
+            /// Event name.
+            /// </summary>
+            public const string Name = "GCTerminateConcurrentThread";
+
+            /// <summary>
+            /// The event provider.
+            /// </summary>
+            public static readonly Guid Provider = Id;
+
+            /// <summary>
+            /// Event descriptor.
+            /// </summary>
+            public static EtwEventDescriptor Descriptor { get; } = new EtwEventDescriptor
+            {
+                Id = 12,
+                Version = 0,
+                Channel = 0,
+                Level = EtwTraceLevel.Information,
+                Opcode = (EtwEventOpcode)Opcodes.TerminateConcurrentThread,
+                Task = (ushort)Tasks.GC,
+                Keyword = (ulong)Keywords.GCKeyword
+            };
+
+            /// <summary>
+            /// The process the event was recorded in.
+            /// </summary>
+            public uint ProcessId => _etwEvent.ProcessId;
+
+            /// <summary>
+            /// The thread the event was recorded on.
+            /// </summary>
+            public uint ThreadId => _etwEvent.ThreadId;
+
+            /// <summary>
+            /// The timestamp of the event.
+            /// </summary>
+            public long Timestamp => _etwEvent.Timestamp;
+
+            /// <summary>
+            /// The processor number the event was recorded on.
+            /// </summary>
+            public byte ProcessorNumber => _etwEvent.ProcessorNumber;
+
+            /// <summary>
+            /// Timing information for the event.
+            /// </summary>
+            public (ulong? KernelTime, ulong? UserTime, ulong? ProcessorTime) Time => _etwEvent.Time;
+
+            /// <summary>
+            /// Creates a new GCTerminateConcurrentThreadEvent.
+            /// </summary>
+            /// <param name="etwEvent">The event.</param>
+            public GCTerminateConcurrentThreadEvent(EtwEvent etwEvent)
+            {
+                _etwEvent = etwEvent;
+            }
+        }
+
+        /// <summary>
+        /// An event wrapper for a GCFinalizersStop event.
+        /// </summary>
+        public readonly ref struct GCFinalizersStopEvent
+        {
+            private readonly EtwEvent _etwEvent;
+
+            /// <summary>
+            /// Event name.
+            /// </summary>
+            public const string Name = "GCFinalizersStop";
+
+            /// <summary>
+            /// The event provider.
+            /// </summary>
+            public static readonly Guid Provider = Id;
+
+            /// <summary>
+            /// Event descriptor.
+            /// </summary>
+            public static EtwEventDescriptor Descriptor { get; } = new EtwEventDescriptor
+            {
+                Id = 13,
+                Version = 0,
+                Channel = 0,
+                Level = EtwTraceLevel.Information,
+                Opcode = (EtwEventOpcode)Opcodes.FinalizersStop,
+                Task = (ushort)Tasks.GC,
+                Keyword = (ulong)Keywords.GCKeyword
+            };
+
+            /// <summary>
+            /// The process the event was recorded in.
+            /// </summary>
+            public uint ProcessId => _etwEvent.ProcessId;
+
+            /// <summary>
+            /// The thread the event was recorded on.
+            /// </summary>
+            public uint ThreadId => _etwEvent.ThreadId;
+
+            /// <summary>
+            /// The timestamp of the event.
+            /// </summary>
+            public long Timestamp => _etwEvent.Timestamp;
+
+            /// <summary>
+            /// The processor number the event was recorded on.
+            /// </summary>
+            public byte ProcessorNumber => _etwEvent.ProcessorNumber;
+
+            /// <summary>
+            /// Timing information for the event.
+            /// </summary>
+            public (ulong? KernelTime, ulong? UserTime, ulong? ProcessorTime) Time => _etwEvent.Time;
+
+            /// <summary>
+            /// Data for the event.
+            /// </summary>
+            public GCFinalizersStopData Data => new(_etwEvent);
+
+            /// <summary>
+            /// Creates a new GCFinalizersStopEvent.
+            /// </summary>
+            /// <param name="etwEvent">The event.</param>
+            public GCFinalizersStopEvent(EtwEvent etwEvent)
+            {
+                _etwEvent = etwEvent;
+            }
+
+            /// <summary>
+            /// A data wrapper for a GCFinalizersStop event.
+            /// </summary>
+            public ref struct GCFinalizersStopData
+            {
+                private readonly EtwEvent _etwEvent;
+
+                private int _offset_Count;
+
+                private int Offset_Count
+                {
+                    get
+                    {
+                        if (_offset_Count == -1)
+                        {
+                            _offset_Count = 0;
+                        }
+
+                        return _offset_Count;
+                    }
+                }
+
+                /// <summary>
+                /// Retrieves the Count field.
+                /// </summary>
+                public uint Count => BitConverter.ToUInt32(_etwEvent.Data[Offset_Count..]);
+
+                /// <summary>
+                /// Creates a new GCFinalizersStopData.
+                /// </summary>
+                /// <param name="etwEvent">The event.</param>
+                public GCFinalizersStopData(EtwEvent etwEvent)
+                {
+                    _etwEvent = etwEvent;
+                    _offset_Count = -1;
+                }
+            }
+
+        }
+
+        /// <summary>
+        /// An event wrapper for a GCFinalizersStart event.
+        /// </summary>
+        public readonly ref struct GCFinalizersStartEvent
+        {
+            private readonly EtwEvent _etwEvent;
+
+            /// <summary>
+            /// Event name.
+            /// </summary>
+            public const string Name = "GCFinalizersStart";
+
+            /// <summary>
+            /// The event provider.
+            /// </summary>
+            public static readonly Guid Provider = Id;
+
+            /// <summary>
+            /// Event descriptor.
+            /// </summary>
+            public static EtwEventDescriptor Descriptor { get; } = new EtwEventDescriptor
+            {
+                Id = 14,
+                Version = 0,
+                Channel = 0,
+                Level = EtwTraceLevel.Information,
+                Opcode = (EtwEventOpcode)Opcodes.FinalizersStart,
+                Task = (ushort)Tasks.GC,
+                Keyword = (ulong)Keywords.GCKeyword
+            };
+
+            /// <summary>
+            /// The process the event was recorded in.
+            /// </summary>
+            public uint ProcessId => _etwEvent.ProcessId;
+
+            /// <summary>
+            /// The thread the event was recorded on.
+            /// </summary>
+            public uint ThreadId => _etwEvent.ThreadId;
+
+            /// <summary>
+            /// The timestamp of the event.
+            /// </summary>
+            public long Timestamp => _etwEvent.Timestamp;
+
+            /// <summary>
+            /// The processor number the event was recorded on.
+            /// </summary>
+            public byte ProcessorNumber => _etwEvent.ProcessorNumber;
+
+            /// <summary>
+            /// Timing information for the event.
+            /// </summary>
+            public (ulong? KernelTime, ulong? UserTime, ulong? ProcessorTime) Time => _etwEvent.Time;
+
+            /// <summary>
+            /// Creates a new GCFinalizersStartEvent.
+            /// </summary>
+            /// <param name="etwEvent">The event.</param>
+            public GCFinalizersStartEvent(EtwEvent etwEvent)
+            {
+                _etwEvent = etwEvent;
+            }
+        }
+
+        /// <summary>
         /// An event wrapper for a TypeBulkType event.
         /// </summary>
         public readonly ref struct TypeBulkTypeEvent
@@ -4750,6 +6366,526 @@ namespace EtwTools
         }
 
         /// <summary>
+        /// An event wrapper for a IOThreadCreationStart event.
+        /// </summary>
+        public readonly ref struct IOThreadCreationStartEvent
+        {
+            private readonly EtwEvent _etwEvent;
+
+            /// <summary>
+            /// Event name.
+            /// </summary>
+            public const string Name = "IOThreadCreationStart";
+
+            /// <summary>
+            /// The event provider.
+            /// </summary>
+            public static readonly Guid Provider = Id;
+
+            /// <summary>
+            /// Event descriptor.
+            /// </summary>
+            public static EtwEventDescriptor Descriptor { get; } = new EtwEventDescriptor
+            {
+                Id = 44,
+                Version = 0,
+                Channel = 0,
+                Level = EtwTraceLevel.Information,
+                Opcode = EtwEventOpcode.Start,
+                Task = (ushort)Tasks.IOThreadCreation,
+                Keyword = (ulong)Keywords.ThreadingKeyword
+            };
+
+            /// <summary>
+            /// The process the event was recorded in.
+            /// </summary>
+            public uint ProcessId => _etwEvent.ProcessId;
+
+            /// <summary>
+            /// The thread the event was recorded on.
+            /// </summary>
+            public uint ThreadId => _etwEvent.ThreadId;
+
+            /// <summary>
+            /// The timestamp of the event.
+            /// </summary>
+            public long Timestamp => _etwEvent.Timestamp;
+
+            /// <summary>
+            /// The processor number the event was recorded on.
+            /// </summary>
+            public byte ProcessorNumber => _etwEvent.ProcessorNumber;
+
+            /// <summary>
+            /// Timing information for the event.
+            /// </summary>
+            public (ulong? KernelTime, ulong? UserTime, ulong? ProcessorTime) Time => _etwEvent.Time;
+
+            /// <summary>
+            /// Data for the event.
+            /// </summary>
+            public IOThreadCreationStartData Data => new(_etwEvent);
+
+            /// <summary>
+            /// Creates a new IOThreadCreationStartEvent.
+            /// </summary>
+            /// <param name="etwEvent">The event.</param>
+            public IOThreadCreationStartEvent(EtwEvent etwEvent)
+            {
+                _etwEvent = etwEvent;
+            }
+
+            /// <summary>
+            /// A data wrapper for a IOThreadCreationStart event.
+            /// </summary>
+            public ref struct IOThreadCreationStartData
+            {
+                private readonly EtwEvent _etwEvent;
+
+                private int _offset_IOThreadCount;
+                private int _offset_RetiredIOThreads;
+
+                private int Offset_IOThreadCount
+                {
+                    get
+                    {
+                        if (_offset_IOThreadCount == -1)
+                        {
+                            _offset_IOThreadCount = 0;
+                        }
+
+                        return _offset_IOThreadCount;
+                    }
+                }
+
+                private int Offset_RetiredIOThreads
+                {
+                    get
+                    {
+                        if (_offset_RetiredIOThreads == -1)
+                        {
+                            _offset_RetiredIOThreads = Offset_IOThreadCount + 4;
+                        }
+
+                        return _offset_RetiredIOThreads;
+                    }
+                }
+
+                /// <summary>
+                /// Retrieves the IOThreadCount field.
+                /// </summary>
+                public uint IOThreadCount => BitConverter.ToUInt32(_etwEvent.Data[Offset_IOThreadCount..]);
+
+                /// <summary>
+                /// Retrieves the RetiredIOThreads field.
+                /// </summary>
+                public uint RetiredIOThreads => BitConverter.ToUInt32(_etwEvent.Data[Offset_RetiredIOThreads..]);
+
+                /// <summary>
+                /// Creates a new IOThreadCreationStartData.
+                /// </summary>
+                /// <param name="etwEvent">The event.</param>
+                public IOThreadCreationStartData(EtwEvent etwEvent)
+                {
+                    _etwEvent = etwEvent;
+                    _offset_IOThreadCount = -1;
+                    _offset_RetiredIOThreads = -1;
+                }
+            }
+
+        }
+
+        /// <summary>
+        /// An event wrapper for a IOThreadCreationStop event.
+        /// </summary>
+        public readonly ref struct IOThreadCreationStopEvent
+        {
+            private readonly EtwEvent _etwEvent;
+
+            /// <summary>
+            /// Event name.
+            /// </summary>
+            public const string Name = "IOThreadCreationStop";
+
+            /// <summary>
+            /// The event provider.
+            /// </summary>
+            public static readonly Guid Provider = Id;
+
+            /// <summary>
+            /// Event descriptor.
+            /// </summary>
+            public static EtwEventDescriptor Descriptor { get; } = new EtwEventDescriptor
+            {
+                Id = 45,
+                Version = 0,
+                Channel = 0,
+                Level = EtwTraceLevel.Information,
+                Opcode = EtwEventOpcode.End,
+                Task = (ushort)Tasks.IOThreadCreation,
+                Keyword = (ulong)Keywords.ThreadingKeyword
+            };
+
+            /// <summary>
+            /// The process the event was recorded in.
+            /// </summary>
+            public uint ProcessId => _etwEvent.ProcessId;
+
+            /// <summary>
+            /// The thread the event was recorded on.
+            /// </summary>
+            public uint ThreadId => _etwEvent.ThreadId;
+
+            /// <summary>
+            /// The timestamp of the event.
+            /// </summary>
+            public long Timestamp => _etwEvent.Timestamp;
+
+            /// <summary>
+            /// The processor number the event was recorded on.
+            /// </summary>
+            public byte ProcessorNumber => _etwEvent.ProcessorNumber;
+
+            /// <summary>
+            /// Timing information for the event.
+            /// </summary>
+            public (ulong? KernelTime, ulong? UserTime, ulong? ProcessorTime) Time => _etwEvent.Time;
+
+            /// <summary>
+            /// Data for the event.
+            /// </summary>
+            public IOThreadCreationStopData Data => new(_etwEvent);
+
+            /// <summary>
+            /// Creates a new IOThreadCreationStopEvent.
+            /// </summary>
+            /// <param name="etwEvent">The event.</param>
+            public IOThreadCreationStopEvent(EtwEvent etwEvent)
+            {
+                _etwEvent = etwEvent;
+            }
+
+            /// <summary>
+            /// A data wrapper for a IOThreadCreationStop event.
+            /// </summary>
+            public ref struct IOThreadCreationStopData
+            {
+                private readonly EtwEvent _etwEvent;
+
+                private int _offset_IOThreadCount;
+                private int _offset_RetiredIOThreads;
+
+                private int Offset_IOThreadCount
+                {
+                    get
+                    {
+                        if (_offset_IOThreadCount == -1)
+                        {
+                            _offset_IOThreadCount = 0;
+                        }
+
+                        return _offset_IOThreadCount;
+                    }
+                }
+
+                private int Offset_RetiredIOThreads
+                {
+                    get
+                    {
+                        if (_offset_RetiredIOThreads == -1)
+                        {
+                            _offset_RetiredIOThreads = Offset_IOThreadCount + 4;
+                        }
+
+                        return _offset_RetiredIOThreads;
+                    }
+                }
+
+                /// <summary>
+                /// Retrieves the IOThreadCount field.
+                /// </summary>
+                public uint IOThreadCount => BitConverter.ToUInt32(_etwEvent.Data[Offset_IOThreadCount..]);
+
+                /// <summary>
+                /// Retrieves the RetiredIOThreads field.
+                /// </summary>
+                public uint RetiredIOThreads => BitConverter.ToUInt32(_etwEvent.Data[Offset_RetiredIOThreads..]);
+
+                /// <summary>
+                /// Creates a new IOThreadCreationStopData.
+                /// </summary>
+                /// <param name="etwEvent">The event.</param>
+                public IOThreadCreationStopData(EtwEvent etwEvent)
+                {
+                    _etwEvent = etwEvent;
+                    _offset_IOThreadCount = -1;
+                    _offset_RetiredIOThreads = -1;
+                }
+            }
+
+        }
+
+        /// <summary>
+        /// An event wrapper for a IOThreadRetirementStart event.
+        /// </summary>
+        public readonly ref struct IOThreadRetirementStartEvent
+        {
+            private readonly EtwEvent _etwEvent;
+
+            /// <summary>
+            /// Event name.
+            /// </summary>
+            public const string Name = "IOThreadRetirementStart";
+
+            /// <summary>
+            /// The event provider.
+            /// </summary>
+            public static readonly Guid Provider = Id;
+
+            /// <summary>
+            /// Event descriptor.
+            /// </summary>
+            public static EtwEventDescriptor Descriptor { get; } = new EtwEventDescriptor
+            {
+                Id = 46,
+                Version = 0,
+                Channel = 0,
+                Level = EtwTraceLevel.Information,
+                Opcode = EtwEventOpcode.Start,
+                Task = (ushort)Tasks.IOThreadRetirement,
+                Keyword = (ulong)Keywords.ThreadingKeyword
+            };
+
+            /// <summary>
+            /// The process the event was recorded in.
+            /// </summary>
+            public uint ProcessId => _etwEvent.ProcessId;
+
+            /// <summary>
+            /// The thread the event was recorded on.
+            /// </summary>
+            public uint ThreadId => _etwEvent.ThreadId;
+
+            /// <summary>
+            /// The timestamp of the event.
+            /// </summary>
+            public long Timestamp => _etwEvent.Timestamp;
+
+            /// <summary>
+            /// The processor number the event was recorded on.
+            /// </summary>
+            public byte ProcessorNumber => _etwEvent.ProcessorNumber;
+
+            /// <summary>
+            /// Timing information for the event.
+            /// </summary>
+            public (ulong? KernelTime, ulong? UserTime, ulong? ProcessorTime) Time => _etwEvent.Time;
+
+            /// <summary>
+            /// Data for the event.
+            /// </summary>
+            public IOThreadRetirementStartData Data => new(_etwEvent);
+
+            /// <summary>
+            /// Creates a new IOThreadRetirementStartEvent.
+            /// </summary>
+            /// <param name="etwEvent">The event.</param>
+            public IOThreadRetirementStartEvent(EtwEvent etwEvent)
+            {
+                _etwEvent = etwEvent;
+            }
+
+            /// <summary>
+            /// A data wrapper for a IOThreadRetirementStart event.
+            /// </summary>
+            public ref struct IOThreadRetirementStartData
+            {
+                private readonly EtwEvent _etwEvent;
+
+                private int _offset_IOThreadCount;
+                private int _offset_RetiredIOThreads;
+
+                private int Offset_IOThreadCount
+                {
+                    get
+                    {
+                        if (_offset_IOThreadCount == -1)
+                        {
+                            _offset_IOThreadCount = 0;
+                        }
+
+                        return _offset_IOThreadCount;
+                    }
+                }
+
+                private int Offset_RetiredIOThreads
+                {
+                    get
+                    {
+                        if (_offset_RetiredIOThreads == -1)
+                        {
+                            _offset_RetiredIOThreads = Offset_IOThreadCount + 4;
+                        }
+
+                        return _offset_RetiredIOThreads;
+                    }
+                }
+
+                /// <summary>
+                /// Retrieves the IOThreadCount field.
+                /// </summary>
+                public uint IOThreadCount => BitConverter.ToUInt32(_etwEvent.Data[Offset_IOThreadCount..]);
+
+                /// <summary>
+                /// Retrieves the RetiredIOThreads field.
+                /// </summary>
+                public uint RetiredIOThreads => BitConverter.ToUInt32(_etwEvent.Data[Offset_RetiredIOThreads..]);
+
+                /// <summary>
+                /// Creates a new IOThreadRetirementStartData.
+                /// </summary>
+                /// <param name="etwEvent">The event.</param>
+                public IOThreadRetirementStartData(EtwEvent etwEvent)
+                {
+                    _etwEvent = etwEvent;
+                    _offset_IOThreadCount = -1;
+                    _offset_RetiredIOThreads = -1;
+                }
+            }
+
+        }
+
+        /// <summary>
+        /// An event wrapper for a IOThreadRetirementStop event.
+        /// </summary>
+        public readonly ref struct IOThreadRetirementStopEvent
+        {
+            private readonly EtwEvent _etwEvent;
+
+            /// <summary>
+            /// Event name.
+            /// </summary>
+            public const string Name = "IOThreadRetirementStop";
+
+            /// <summary>
+            /// The event provider.
+            /// </summary>
+            public static readonly Guid Provider = Id;
+
+            /// <summary>
+            /// Event descriptor.
+            /// </summary>
+            public static EtwEventDescriptor Descriptor { get; } = new EtwEventDescriptor
+            {
+                Id = 47,
+                Version = 0,
+                Channel = 0,
+                Level = EtwTraceLevel.Information,
+                Opcode = EtwEventOpcode.End,
+                Task = (ushort)Tasks.IOThreadRetirement,
+                Keyword = (ulong)Keywords.ThreadingKeyword
+            };
+
+            /// <summary>
+            /// The process the event was recorded in.
+            /// </summary>
+            public uint ProcessId => _etwEvent.ProcessId;
+
+            /// <summary>
+            /// The thread the event was recorded on.
+            /// </summary>
+            public uint ThreadId => _etwEvent.ThreadId;
+
+            /// <summary>
+            /// The timestamp of the event.
+            /// </summary>
+            public long Timestamp => _etwEvent.Timestamp;
+
+            /// <summary>
+            /// The processor number the event was recorded on.
+            /// </summary>
+            public byte ProcessorNumber => _etwEvent.ProcessorNumber;
+
+            /// <summary>
+            /// Timing information for the event.
+            /// </summary>
+            public (ulong? KernelTime, ulong? UserTime, ulong? ProcessorTime) Time => _etwEvent.Time;
+
+            /// <summary>
+            /// Data for the event.
+            /// </summary>
+            public IOThreadRetirementStopData Data => new(_etwEvent);
+
+            /// <summary>
+            /// Creates a new IOThreadRetirementStopEvent.
+            /// </summary>
+            /// <param name="etwEvent">The event.</param>
+            public IOThreadRetirementStopEvent(EtwEvent etwEvent)
+            {
+                _etwEvent = etwEvent;
+            }
+
+            /// <summary>
+            /// A data wrapper for a IOThreadRetirementStop event.
+            /// </summary>
+            public ref struct IOThreadRetirementStopData
+            {
+                private readonly EtwEvent _etwEvent;
+
+                private int _offset_IOThreadCount;
+                private int _offset_RetiredIOThreads;
+
+                private int Offset_IOThreadCount
+                {
+                    get
+                    {
+                        if (_offset_IOThreadCount == -1)
+                        {
+                            _offset_IOThreadCount = 0;
+                        }
+
+                        return _offset_IOThreadCount;
+                    }
+                }
+
+                private int Offset_RetiredIOThreads
+                {
+                    get
+                    {
+                        if (_offset_RetiredIOThreads == -1)
+                        {
+                            _offset_RetiredIOThreads = Offset_IOThreadCount + 4;
+                        }
+
+                        return _offset_RetiredIOThreads;
+                    }
+                }
+
+                /// <summary>
+                /// Retrieves the IOThreadCount field.
+                /// </summary>
+                public uint IOThreadCount => BitConverter.ToUInt32(_etwEvent.Data[Offset_IOThreadCount..]);
+
+                /// <summary>
+                /// Retrieves the RetiredIOThreads field.
+                /// </summary>
+                public uint RetiredIOThreads => BitConverter.ToUInt32(_etwEvent.Data[Offset_RetiredIOThreads..]);
+
+                /// <summary>
+                /// Creates a new IOThreadRetirementStopData.
+                /// </summary>
+                /// <param name="etwEvent">The event.</param>
+                public IOThreadRetirementStopData(EtwEvent etwEvent)
+                {
+                    _etwEvent = etwEvent;
+                    _offset_IOThreadCount = -1;
+                    _offset_RetiredIOThreads = -1;
+                }
+            }
+
+        }
+
+        /// <summary>
         /// An event wrapper for a ThreadpoolSuspensionV2Start event.
         /// </summary>
         public readonly ref struct ThreadpoolSuspensionV2StartEvent
@@ -5740,16 +7876,16 @@ namespace EtwTools
         }
 
         /// <summary>
-        /// An event wrapper for a ThreadPoolWorkerThreadAdjustmentAdjustment event.
+        /// An event wrapper for a ThreadPoolWorkerThreadAdjustment event.
         /// </summary>
-        public readonly ref struct ThreadPoolWorkerThreadAdjustmentAdjustmentEvent
+        public readonly ref struct ThreadPoolWorkerThreadAdjustmentEvent
         {
             private readonly EtwEvent _etwEvent;
 
             /// <summary>
             /// Event name.
             /// </summary>
-            public const string Name = "ThreadPoolWorkerThreadAdjustmentAdjustment";
+            public const string Name = "ThreadPoolWorkerThreadAdjustment";
 
             /// <summary>
             /// The event provider.
@@ -5798,21 +7934,21 @@ namespace EtwTools
             /// <summary>
             /// Data for the event.
             /// </summary>
-            public ThreadPoolWorkerThreadAdjustmentAdjustmentData Data => new(_etwEvent);
+            public ThreadPoolWorkerThreadAdjustmentData Data => new(_etwEvent);
 
             /// <summary>
-            /// Creates a new ThreadPoolWorkerThreadAdjustmentAdjustmentEvent.
+            /// Creates a new ThreadPoolWorkerThreadAdjustmentEvent.
             /// </summary>
             /// <param name="etwEvent">The event.</param>
-            public ThreadPoolWorkerThreadAdjustmentAdjustmentEvent(EtwEvent etwEvent)
+            public ThreadPoolWorkerThreadAdjustmentEvent(EtwEvent etwEvent)
             {
                 _etwEvent = etwEvent;
             }
 
             /// <summary>
-            /// A data wrapper for a ThreadPoolWorkerThreadAdjustmentAdjustment event.
+            /// A data wrapper for a ThreadPoolWorkerThreadAdjustment event.
             /// </summary>
-            public ref struct ThreadPoolWorkerThreadAdjustmentAdjustmentData
+            public ref struct ThreadPoolWorkerThreadAdjustmentData
             {
                 private readonly EtwEvent _etwEvent;
 
@@ -5894,10 +8030,10 @@ namespace EtwTools
                 public ushort ClrInstanceID => BitConverter.ToUInt16(_etwEvent.Data[Offset_ClrInstanceID..]);
 
                 /// <summary>
-                /// Creates a new ThreadPoolWorkerThreadAdjustmentAdjustmentData.
+                /// Creates a new ThreadPoolWorkerThreadAdjustmentData.
                 /// </summary>
                 /// <param name="etwEvent">The event.</param>
-                public ThreadPoolWorkerThreadAdjustmentAdjustmentData(EtwEvent etwEvent)
+                public ThreadPoolWorkerThreadAdjustmentData(EtwEvent etwEvent)
                 {
                     _etwEvent = etwEvent;
                     _offset_AverageThroughput = -1;
@@ -7487,6 +9623,138 @@ namespace EtwTools
                 }
             }
 
+        }
+
+        /// <summary>
+        /// An event wrapper for a ExceptionStart event.
+        /// </summary>
+        public readonly ref struct ExceptionStartEvent
+        {
+            private readonly EtwEvent _etwEvent;
+
+            /// <summary>
+            /// Event name.
+            /// </summary>
+            public const string Name = "ExceptionStart";
+
+            /// <summary>
+            /// The event provider.
+            /// </summary>
+            public static readonly Guid Provider = Id;
+
+            /// <summary>
+            /// Event descriptor.
+            /// </summary>
+            public static EtwEventDescriptor Descriptor { get; } = new EtwEventDescriptor
+            {
+                Id = 80,
+                Version = 0,
+                Channel = 0,
+                Level = EtwTraceLevel.Information,
+                Opcode = EtwEventOpcode.Start,
+                Task = (ushort)Tasks.Exception,
+                Keyword = 0
+            };
+
+            /// <summary>
+            /// The process the event was recorded in.
+            /// </summary>
+            public uint ProcessId => _etwEvent.ProcessId;
+
+            /// <summary>
+            /// The thread the event was recorded on.
+            /// </summary>
+            public uint ThreadId => _etwEvent.ThreadId;
+
+            /// <summary>
+            /// The timestamp of the event.
+            /// </summary>
+            public long Timestamp => _etwEvent.Timestamp;
+
+            /// <summary>
+            /// The processor number the event was recorded on.
+            /// </summary>
+            public byte ProcessorNumber => _etwEvent.ProcessorNumber;
+
+            /// <summary>
+            /// Timing information for the event.
+            /// </summary>
+            public (ulong? KernelTime, ulong? UserTime, ulong? ProcessorTime) Time => _etwEvent.Time;
+
+            /// <summary>
+            /// Creates a new ExceptionStartEvent.
+            /// </summary>
+            /// <param name="etwEvent">The event.</param>
+            public ExceptionStartEvent(EtwEvent etwEvent)
+            {
+                _etwEvent = etwEvent;
+            }
+        }
+
+        /// <summary>
+        /// An event wrapper for a ContentionStart event.
+        /// </summary>
+        public readonly ref struct ContentionStartEvent
+        {
+            private readonly EtwEvent _etwEvent;
+
+            /// <summary>
+            /// Event name.
+            /// </summary>
+            public const string Name = "ContentionStart";
+
+            /// <summary>
+            /// The event provider.
+            /// </summary>
+            public static readonly Guid Provider = Id;
+
+            /// <summary>
+            /// Event descriptor.
+            /// </summary>
+            public static EtwEventDescriptor Descriptor { get; } = new EtwEventDescriptor
+            {
+                Id = 81,
+                Version = 0,
+                Channel = 0,
+                Level = EtwTraceLevel.Information,
+                Opcode = EtwEventOpcode.Start,
+                Task = (ushort)Tasks.Contention,
+                Keyword = 0
+            };
+
+            /// <summary>
+            /// The process the event was recorded in.
+            /// </summary>
+            public uint ProcessId => _etwEvent.ProcessId;
+
+            /// <summary>
+            /// The thread the event was recorded on.
+            /// </summary>
+            public uint ThreadId => _etwEvent.ThreadId;
+
+            /// <summary>
+            /// The timestamp of the event.
+            /// </summary>
+            public long Timestamp => _etwEvent.Timestamp;
+
+            /// <summary>
+            /// The processor number the event was recorded on.
+            /// </summary>
+            public byte ProcessorNumber => _etwEvent.ProcessorNumber;
+
+            /// <summary>
+            /// Timing information for the event.
+            /// </summary>
+            public (ulong? KernelTime, ulong? UserTime, ulong? ProcessorTime) Time => _etwEvent.Time;
+
+            /// <summary>
+            /// Creates a new ContentionStartEvent.
+            /// </summary>
+            /// <param name="etwEvent">The event.</param>
+            public ContentionStartEvent(EtwEvent etwEvent)
+            {
+                _etwEvent = etwEvent;
+            }
         }
 
         /// <summary>
@@ -10272,6 +12540,1196 @@ namespace EtwTools
         }
 
         /// <summary>
+        /// An event wrapper for a MethodLoad event.
+        /// </summary>
+        public readonly ref struct MethodLoadEvent
+        {
+            private readonly EtwEvent _etwEvent;
+
+            /// <summary>
+            /// Event name.
+            /// </summary>
+            public const string Name = "MethodLoad";
+
+            /// <summary>
+            /// The event provider.
+            /// </summary>
+            public static readonly Guid Provider = Id;
+
+            /// <summary>
+            /// Event descriptor.
+            /// </summary>
+            public static EtwEventDescriptor Descriptor { get; } = new EtwEventDescriptor
+            {
+                Id = 141,
+                Version = 0,
+                Channel = 0,
+                Level = EtwTraceLevel.Information,
+                Opcode = (EtwEventOpcode)Opcodes.SetGCHandle,
+                Task = (ushort)Tasks.Method,
+                Keyword = (ulong)Keywords.JitKeyword | (ulong)Keywords.NGenKeyword
+            };
+
+            /// <summary>
+            /// The process the event was recorded in.
+            /// </summary>
+            public uint ProcessId => _etwEvent.ProcessId;
+
+            /// <summary>
+            /// The thread the event was recorded on.
+            /// </summary>
+            public uint ThreadId => _etwEvent.ThreadId;
+
+            /// <summary>
+            /// The timestamp of the event.
+            /// </summary>
+            public long Timestamp => _etwEvent.Timestamp;
+
+            /// <summary>
+            /// The processor number the event was recorded on.
+            /// </summary>
+            public byte ProcessorNumber => _etwEvent.ProcessorNumber;
+
+            /// <summary>
+            /// Timing information for the event.
+            /// </summary>
+            public (ulong? KernelTime, ulong? UserTime, ulong? ProcessorTime) Time => _etwEvent.Time;
+
+            /// <summary>
+            /// Data for the event.
+            /// </summary>
+            public MethodLoadData Data => new(_etwEvent);
+
+            /// <summary>
+            /// Creates a new MethodLoadEvent.
+            /// </summary>
+            /// <param name="etwEvent">The event.</param>
+            public MethodLoadEvent(EtwEvent etwEvent)
+            {
+                _etwEvent = etwEvent;
+            }
+
+            /// <summary>
+            /// A data wrapper for a MethodLoad event.
+            /// </summary>
+            public ref struct MethodLoadData
+            {
+                private readonly EtwEvent _etwEvent;
+
+                private int _offset_MethodID;
+                private int _offset_ModuleID;
+                private int _offset_MethodStartAddress;
+                private int _offset_MethodSize;
+                private int _offset_MethodToken;
+                private int _offset_MethodFlags;
+
+                private int Offset_MethodID
+                {
+                    get
+                    {
+                        if (_offset_MethodID == -1)
+                        {
+                            _offset_MethodID = 0;
+                        }
+
+                        return _offset_MethodID;
+                    }
+                }
+
+                private int Offset_ModuleID
+                {
+                    get
+                    {
+                        if (_offset_ModuleID == -1)
+                        {
+                            _offset_ModuleID = Offset_MethodID + 8;
+                        }
+
+                        return _offset_ModuleID;
+                    }
+                }
+
+                private int Offset_MethodStartAddress
+                {
+                    get
+                    {
+                        if (_offset_MethodStartAddress == -1)
+                        {
+                            _offset_MethodStartAddress = Offset_ModuleID + 8;
+                        }
+
+                        return _offset_MethodStartAddress;
+                    }
+                }
+
+                private int Offset_MethodSize
+                {
+                    get
+                    {
+                        if (_offset_MethodSize == -1)
+                        {
+                            _offset_MethodSize = Offset_MethodStartAddress + 8;
+                        }
+
+                        return _offset_MethodSize;
+                    }
+                }
+
+                private int Offset_MethodToken
+                {
+                    get
+                    {
+                        if (_offset_MethodToken == -1)
+                        {
+                            _offset_MethodToken = Offset_MethodSize + 4;
+                        }
+
+                        return _offset_MethodToken;
+                    }
+                }
+
+                private int Offset_MethodFlags
+                {
+                    get
+                    {
+                        if (_offset_MethodFlags == -1)
+                        {
+                            _offset_MethodFlags = Offset_MethodToken + 4;
+                        }
+
+                        return _offset_MethodFlags;
+                    }
+                }
+
+                /// <summary>
+                /// Retrieves the MethodID field.
+                /// </summary>
+                public ulong MethodID => BitConverter.ToUInt64(_etwEvent.Data[Offset_MethodID..]);
+
+                /// <summary>
+                /// Retrieves the ModuleID field.
+                /// </summary>
+                public ulong ModuleID => BitConverter.ToUInt64(_etwEvent.Data[Offset_ModuleID..]);
+
+                /// <summary>
+                /// Retrieves the MethodStartAddress field.
+                /// </summary>
+                public ulong MethodStartAddress => BitConverter.ToUInt64(_etwEvent.Data[Offset_MethodStartAddress..]);
+
+                /// <summary>
+                /// Retrieves the MethodSize field.
+                /// </summary>
+                public uint MethodSize => BitConverter.ToUInt32(_etwEvent.Data[Offset_MethodSize..]);
+
+                /// <summary>
+                /// Retrieves the MethodToken field.
+                /// </summary>
+                public uint MethodToken => BitConverter.ToUInt32(_etwEvent.Data[Offset_MethodToken..]);
+
+                /// <summary>
+                /// Retrieves the MethodFlags field.
+                /// </summary>
+                public MethodFlagsMap MethodFlags => (MethodFlagsMap)BitConverter.ToUInt32(_etwEvent.Data[Offset_MethodFlags..]);
+
+                /// <summary>
+                /// Creates a new MethodLoadData.
+                /// </summary>
+                /// <param name="etwEvent">The event.</param>
+                public MethodLoadData(EtwEvent etwEvent)
+                {
+                    _etwEvent = etwEvent;
+                    _offset_MethodID = -1;
+                    _offset_ModuleID = -1;
+                    _offset_MethodStartAddress = -1;
+                    _offset_MethodSize = -1;
+                    _offset_MethodToken = -1;
+                    _offset_MethodFlags = -1;
+                }
+            }
+
+        }
+
+        /// <summary>
+        /// An event wrapper for a MethodUnload event.
+        /// </summary>
+        public readonly ref struct MethodUnloadEvent
+        {
+            private readonly EtwEvent _etwEvent;
+
+            /// <summary>
+            /// Event name.
+            /// </summary>
+            public const string Name = "MethodUnload";
+
+            /// <summary>
+            /// The event provider.
+            /// </summary>
+            public static readonly Guid Provider = Id;
+
+            /// <summary>
+            /// Event descriptor.
+            /// </summary>
+            public static EtwEventDescriptor Descriptor { get; } = new EtwEventDescriptor
+            {
+                Id = 142,
+                Version = 0,
+                Channel = 0,
+                Level = EtwTraceLevel.Information,
+                Opcode = (EtwEventOpcode)Opcodes.DestoryGCHandle,
+                Task = (ushort)Tasks.Method,
+                Keyword = (ulong)Keywords.JitKeyword | (ulong)Keywords.NGenKeyword
+            };
+
+            /// <summary>
+            /// The process the event was recorded in.
+            /// </summary>
+            public uint ProcessId => _etwEvent.ProcessId;
+
+            /// <summary>
+            /// The thread the event was recorded on.
+            /// </summary>
+            public uint ThreadId => _etwEvent.ThreadId;
+
+            /// <summary>
+            /// The timestamp of the event.
+            /// </summary>
+            public long Timestamp => _etwEvent.Timestamp;
+
+            /// <summary>
+            /// The processor number the event was recorded on.
+            /// </summary>
+            public byte ProcessorNumber => _etwEvent.ProcessorNumber;
+
+            /// <summary>
+            /// Timing information for the event.
+            /// </summary>
+            public (ulong? KernelTime, ulong? UserTime, ulong? ProcessorTime) Time => _etwEvent.Time;
+
+            /// <summary>
+            /// Data for the event.
+            /// </summary>
+            public MethodUnloadData Data => new(_etwEvent);
+
+            /// <summary>
+            /// Creates a new MethodUnloadEvent.
+            /// </summary>
+            /// <param name="etwEvent">The event.</param>
+            public MethodUnloadEvent(EtwEvent etwEvent)
+            {
+                _etwEvent = etwEvent;
+            }
+
+            /// <summary>
+            /// A data wrapper for a MethodUnload event.
+            /// </summary>
+            public ref struct MethodUnloadData
+            {
+                private readonly EtwEvent _etwEvent;
+
+                private int _offset_MethodID;
+                private int _offset_ModuleID;
+                private int _offset_MethodStartAddress;
+                private int _offset_MethodSize;
+                private int _offset_MethodToken;
+                private int _offset_MethodFlags;
+
+                private int Offset_MethodID
+                {
+                    get
+                    {
+                        if (_offset_MethodID == -1)
+                        {
+                            _offset_MethodID = 0;
+                        }
+
+                        return _offset_MethodID;
+                    }
+                }
+
+                private int Offset_ModuleID
+                {
+                    get
+                    {
+                        if (_offset_ModuleID == -1)
+                        {
+                            _offset_ModuleID = Offset_MethodID + 8;
+                        }
+
+                        return _offset_ModuleID;
+                    }
+                }
+
+                private int Offset_MethodStartAddress
+                {
+                    get
+                    {
+                        if (_offset_MethodStartAddress == -1)
+                        {
+                            _offset_MethodStartAddress = Offset_ModuleID + 8;
+                        }
+
+                        return _offset_MethodStartAddress;
+                    }
+                }
+
+                private int Offset_MethodSize
+                {
+                    get
+                    {
+                        if (_offset_MethodSize == -1)
+                        {
+                            _offset_MethodSize = Offset_MethodStartAddress + 8;
+                        }
+
+                        return _offset_MethodSize;
+                    }
+                }
+
+                private int Offset_MethodToken
+                {
+                    get
+                    {
+                        if (_offset_MethodToken == -1)
+                        {
+                            _offset_MethodToken = Offset_MethodSize + 4;
+                        }
+
+                        return _offset_MethodToken;
+                    }
+                }
+
+                private int Offset_MethodFlags
+                {
+                    get
+                    {
+                        if (_offset_MethodFlags == -1)
+                        {
+                            _offset_MethodFlags = Offset_MethodToken + 4;
+                        }
+
+                        return _offset_MethodFlags;
+                    }
+                }
+
+                /// <summary>
+                /// Retrieves the MethodID field.
+                /// </summary>
+                public ulong MethodID => BitConverter.ToUInt64(_etwEvent.Data[Offset_MethodID..]);
+
+                /// <summary>
+                /// Retrieves the ModuleID field.
+                /// </summary>
+                public ulong ModuleID => BitConverter.ToUInt64(_etwEvent.Data[Offset_ModuleID..]);
+
+                /// <summary>
+                /// Retrieves the MethodStartAddress field.
+                /// </summary>
+                public ulong MethodStartAddress => BitConverter.ToUInt64(_etwEvent.Data[Offset_MethodStartAddress..]);
+
+                /// <summary>
+                /// Retrieves the MethodSize field.
+                /// </summary>
+                public uint MethodSize => BitConverter.ToUInt32(_etwEvent.Data[Offset_MethodSize..]);
+
+                /// <summary>
+                /// Retrieves the MethodToken field.
+                /// </summary>
+                public uint MethodToken => BitConverter.ToUInt32(_etwEvent.Data[Offset_MethodToken..]);
+
+                /// <summary>
+                /// Retrieves the MethodFlags field.
+                /// </summary>
+                public MethodFlagsMap MethodFlags => (MethodFlagsMap)BitConverter.ToUInt32(_etwEvent.Data[Offset_MethodFlags..]);
+
+                /// <summary>
+                /// Creates a new MethodUnloadData.
+                /// </summary>
+                /// <param name="etwEvent">The event.</param>
+                public MethodUnloadData(EtwEvent etwEvent)
+                {
+                    _etwEvent = etwEvent;
+                    _offset_MethodID = -1;
+                    _offset_ModuleID = -1;
+                    _offset_MethodStartAddress = -1;
+                    _offset_MethodSize = -1;
+                    _offset_MethodToken = -1;
+                    _offset_MethodFlags = -1;
+                }
+            }
+
+        }
+
+        /// <summary>
+        /// An event wrapper for a MethodLoadVerbose event.
+        /// </summary>
+        public readonly ref struct MethodLoadVerboseEvent
+        {
+            private readonly EtwEvent _etwEvent;
+
+            /// <summary>
+            /// Event name.
+            /// </summary>
+            public const string Name = "MethodLoadVerbose";
+
+            /// <summary>
+            /// The event provider.
+            /// </summary>
+            public static readonly Guid Provider = Id;
+
+            /// <summary>
+            /// Event descriptor.
+            /// </summary>
+            public static EtwEventDescriptor Descriptor { get; } = new EtwEventDescriptor
+            {
+                Id = 143,
+                Version = 0,
+                Channel = 0,
+                Level = EtwTraceLevel.Information,
+                Opcode = (EtwEventOpcode)Opcodes.LoadVerbose,
+                Task = (ushort)Tasks.Method,
+                Keyword = (ulong)Keywords.JitKeyword | (ulong)Keywords.NGenKeyword
+            };
+
+            /// <summary>
+            /// The process the event was recorded in.
+            /// </summary>
+            public uint ProcessId => _etwEvent.ProcessId;
+
+            /// <summary>
+            /// The thread the event was recorded on.
+            /// </summary>
+            public uint ThreadId => _etwEvent.ThreadId;
+
+            /// <summary>
+            /// The timestamp of the event.
+            /// </summary>
+            public long Timestamp => _etwEvent.Timestamp;
+
+            /// <summary>
+            /// The processor number the event was recorded on.
+            /// </summary>
+            public byte ProcessorNumber => _etwEvent.ProcessorNumber;
+
+            /// <summary>
+            /// Timing information for the event.
+            /// </summary>
+            public (ulong? KernelTime, ulong? UserTime, ulong? ProcessorTime) Time => _etwEvent.Time;
+
+            /// <summary>
+            /// Data for the event.
+            /// </summary>
+            public MethodLoadVerboseData Data => new(_etwEvent);
+
+            /// <summary>
+            /// Creates a new MethodLoadVerboseEvent.
+            /// </summary>
+            /// <param name="etwEvent">The event.</param>
+            public MethodLoadVerboseEvent(EtwEvent etwEvent)
+            {
+                _etwEvent = etwEvent;
+            }
+
+            /// <summary>
+            /// A data wrapper for a MethodLoadVerbose event.
+            /// </summary>
+            public ref struct MethodLoadVerboseData
+            {
+                private readonly EtwEvent _etwEvent;
+
+                private int _offset_MethodID;
+                private int _offset_ModuleID;
+                private int _offset_MethodStartAddress;
+                private int _offset_MethodSize;
+                private int _offset_MethodToken;
+                private int _offset_MethodFlags;
+                private int _offset_MethodNamespace;
+                private int _offset_MethodName;
+                private int _offset_MethodSignature;
+
+                private int Offset_MethodID
+                {
+                    get
+                    {
+                        if (_offset_MethodID == -1)
+                        {
+                            _offset_MethodID = 0;
+                        }
+
+                        return _offset_MethodID;
+                    }
+                }
+
+                private int Offset_ModuleID
+                {
+                    get
+                    {
+                        if (_offset_ModuleID == -1)
+                        {
+                            _offset_ModuleID = Offset_MethodID + 8;
+                        }
+
+                        return _offset_ModuleID;
+                    }
+                }
+
+                private int Offset_MethodStartAddress
+                {
+                    get
+                    {
+                        if (_offset_MethodStartAddress == -1)
+                        {
+                            _offset_MethodStartAddress = Offset_ModuleID + 8;
+                        }
+
+                        return _offset_MethodStartAddress;
+                    }
+                }
+
+                private int Offset_MethodSize
+                {
+                    get
+                    {
+                        if (_offset_MethodSize == -1)
+                        {
+                            _offset_MethodSize = Offset_MethodStartAddress + 8;
+                        }
+
+                        return _offset_MethodSize;
+                    }
+                }
+
+                private int Offset_MethodToken
+                {
+                    get
+                    {
+                        if (_offset_MethodToken == -1)
+                        {
+                            _offset_MethodToken = Offset_MethodSize + 4;
+                        }
+
+                        return _offset_MethodToken;
+                    }
+                }
+
+                private int Offset_MethodFlags
+                {
+                    get
+                    {
+                        if (_offset_MethodFlags == -1)
+                        {
+                            _offset_MethodFlags = Offset_MethodToken + 4;
+                        }
+
+                        return _offset_MethodFlags;
+                    }
+                }
+
+                private int Offset_MethodNamespace
+                {
+                    get
+                    {
+                        if (_offset_MethodNamespace == -1)
+                        {
+                            _offset_MethodNamespace = Offset_MethodFlags + 4;
+                        }
+
+                        return _offset_MethodNamespace;
+                    }
+                }
+
+                private int Offset_MethodName
+                {
+                    get
+                    {
+                        if (_offset_MethodName == -1)
+                        {
+                            _offset_MethodName = Offset_MethodNamespace + EtwEvent.UnicodeStringEnumerable.UnicodeStringEnumerator.StringLength(_etwEvent.Data, Offset_MethodNamespace);
+                        }
+
+                        return _offset_MethodName;
+                    }
+                }
+
+                private int Offset_MethodSignature
+                {
+                    get
+                    {
+                        if (_offset_MethodSignature == -1)
+                        {
+                            _offset_MethodSignature = Offset_MethodName + EtwEvent.UnicodeStringEnumerable.UnicodeStringEnumerator.StringLength(_etwEvent.Data, Offset_MethodName);
+                        }
+
+                        return _offset_MethodSignature;
+                    }
+                }
+
+                /// <summary>
+                /// Retrieves the MethodID field.
+                /// </summary>
+                public ulong MethodID => BitConverter.ToUInt64(_etwEvent.Data[Offset_MethodID..]);
+
+                /// <summary>
+                /// Retrieves the ModuleID field.
+                /// </summary>
+                public ulong ModuleID => BitConverter.ToUInt64(_etwEvent.Data[Offset_ModuleID..]);
+
+                /// <summary>
+                /// Retrieves the MethodStartAddress field.
+                /// </summary>
+                public ulong MethodStartAddress => BitConverter.ToUInt64(_etwEvent.Data[Offset_MethodStartAddress..]);
+
+                /// <summary>
+                /// Retrieves the MethodSize field.
+                /// </summary>
+                public uint MethodSize => BitConverter.ToUInt32(_etwEvent.Data[Offset_MethodSize..]);
+
+                /// <summary>
+                /// Retrieves the MethodToken field.
+                /// </summary>
+                public uint MethodToken => BitConverter.ToUInt32(_etwEvent.Data[Offset_MethodToken..]);
+
+                /// <summary>
+                /// Retrieves the MethodFlags field.
+                /// </summary>
+                public MethodFlagsMap MethodFlags => (MethodFlagsMap)BitConverter.ToUInt32(_etwEvent.Data[Offset_MethodFlags..]);
+
+                /// <summary>
+                /// Retrieves the MethodNamespace field.
+                /// </summary>
+                public string MethodNamespace => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_MethodNamespace..]);
+
+                /// <summary>
+                /// Retrieves the MethodName field.
+                /// </summary>
+                public string MethodName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_MethodName..]);
+
+                /// <summary>
+                /// Retrieves the MethodSignature field.
+                /// </summary>
+                public string MethodSignature => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_MethodSignature..]);
+
+                /// <summary>
+                /// Creates a new MethodLoadVerboseData.
+                /// </summary>
+                /// <param name="etwEvent">The event.</param>
+                public MethodLoadVerboseData(EtwEvent etwEvent)
+                {
+                    _etwEvent = etwEvent;
+                    _offset_MethodID = -1;
+                    _offset_ModuleID = -1;
+                    _offset_MethodStartAddress = -1;
+                    _offset_MethodSize = -1;
+                    _offset_MethodToken = -1;
+                    _offset_MethodFlags = -1;
+                    _offset_MethodNamespace = -1;
+                    _offset_MethodName = -1;
+                    _offset_MethodSignature = -1;
+                }
+            }
+
+        }
+
+        /// <summary>
+        /// An event wrapper for a MethodUnloadVerbose event.
+        /// </summary>
+        public readonly ref struct MethodUnloadVerboseEvent
+        {
+            private readonly EtwEvent _etwEvent;
+
+            /// <summary>
+            /// Event name.
+            /// </summary>
+            public const string Name = "MethodUnloadVerbose";
+
+            /// <summary>
+            /// The event provider.
+            /// </summary>
+            public static readonly Guid Provider = Id;
+
+            /// <summary>
+            /// Event descriptor.
+            /// </summary>
+            public static EtwEventDescriptor Descriptor { get; } = new EtwEventDescriptor
+            {
+                Id = 144,
+                Version = 0,
+                Channel = 0,
+                Level = EtwTraceLevel.Information,
+                Opcode = (EtwEventOpcode)Opcodes.GCBulkRootCCW,
+                Task = (ushort)Tasks.Method,
+                Keyword = (ulong)Keywords.JitKeyword | (ulong)Keywords.NGenKeyword
+            };
+
+            /// <summary>
+            /// The process the event was recorded in.
+            /// </summary>
+            public uint ProcessId => _etwEvent.ProcessId;
+
+            /// <summary>
+            /// The thread the event was recorded on.
+            /// </summary>
+            public uint ThreadId => _etwEvent.ThreadId;
+
+            /// <summary>
+            /// The timestamp of the event.
+            /// </summary>
+            public long Timestamp => _etwEvent.Timestamp;
+
+            /// <summary>
+            /// The processor number the event was recorded on.
+            /// </summary>
+            public byte ProcessorNumber => _etwEvent.ProcessorNumber;
+
+            /// <summary>
+            /// Timing information for the event.
+            /// </summary>
+            public (ulong? KernelTime, ulong? UserTime, ulong? ProcessorTime) Time => _etwEvent.Time;
+
+            /// <summary>
+            /// Data for the event.
+            /// </summary>
+            public MethodUnloadVerboseData Data => new(_etwEvent);
+
+            /// <summary>
+            /// Creates a new MethodUnloadVerboseEvent.
+            /// </summary>
+            /// <param name="etwEvent">The event.</param>
+            public MethodUnloadVerboseEvent(EtwEvent etwEvent)
+            {
+                _etwEvent = etwEvent;
+            }
+
+            /// <summary>
+            /// A data wrapper for a MethodUnloadVerbose event.
+            /// </summary>
+            public ref struct MethodUnloadVerboseData
+            {
+                private readonly EtwEvent _etwEvent;
+
+                private int _offset_MethodID;
+                private int _offset_ModuleID;
+                private int _offset_MethodStartAddress;
+                private int _offset_MethodSize;
+                private int _offset_MethodToken;
+                private int _offset_MethodFlags;
+                private int _offset_MethodNamespace;
+                private int _offset_MethodName;
+                private int _offset_MethodSignature;
+
+                private int Offset_MethodID
+                {
+                    get
+                    {
+                        if (_offset_MethodID == -1)
+                        {
+                            _offset_MethodID = 0;
+                        }
+
+                        return _offset_MethodID;
+                    }
+                }
+
+                private int Offset_ModuleID
+                {
+                    get
+                    {
+                        if (_offset_ModuleID == -1)
+                        {
+                            _offset_ModuleID = Offset_MethodID + 8;
+                        }
+
+                        return _offset_ModuleID;
+                    }
+                }
+
+                private int Offset_MethodStartAddress
+                {
+                    get
+                    {
+                        if (_offset_MethodStartAddress == -1)
+                        {
+                            _offset_MethodStartAddress = Offset_ModuleID + 8;
+                        }
+
+                        return _offset_MethodStartAddress;
+                    }
+                }
+
+                private int Offset_MethodSize
+                {
+                    get
+                    {
+                        if (_offset_MethodSize == -1)
+                        {
+                            _offset_MethodSize = Offset_MethodStartAddress + 8;
+                        }
+
+                        return _offset_MethodSize;
+                    }
+                }
+
+                private int Offset_MethodToken
+                {
+                    get
+                    {
+                        if (_offset_MethodToken == -1)
+                        {
+                            _offset_MethodToken = Offset_MethodSize + 4;
+                        }
+
+                        return _offset_MethodToken;
+                    }
+                }
+
+                private int Offset_MethodFlags
+                {
+                    get
+                    {
+                        if (_offset_MethodFlags == -1)
+                        {
+                            _offset_MethodFlags = Offset_MethodToken + 4;
+                        }
+
+                        return _offset_MethodFlags;
+                    }
+                }
+
+                private int Offset_MethodNamespace
+                {
+                    get
+                    {
+                        if (_offset_MethodNamespace == -1)
+                        {
+                            _offset_MethodNamespace = Offset_MethodFlags + 4;
+                        }
+
+                        return _offset_MethodNamespace;
+                    }
+                }
+
+                private int Offset_MethodName
+                {
+                    get
+                    {
+                        if (_offset_MethodName == -1)
+                        {
+                            _offset_MethodName = Offset_MethodNamespace + EtwEvent.UnicodeStringEnumerable.UnicodeStringEnumerator.StringLength(_etwEvent.Data, Offset_MethodNamespace);
+                        }
+
+                        return _offset_MethodName;
+                    }
+                }
+
+                private int Offset_MethodSignature
+                {
+                    get
+                    {
+                        if (_offset_MethodSignature == -1)
+                        {
+                            _offset_MethodSignature = Offset_MethodName + EtwEvent.UnicodeStringEnumerable.UnicodeStringEnumerator.StringLength(_etwEvent.Data, Offset_MethodName);
+                        }
+
+                        return _offset_MethodSignature;
+                    }
+                }
+
+                /// <summary>
+                /// Retrieves the MethodID field.
+                /// </summary>
+                public ulong MethodID => BitConverter.ToUInt64(_etwEvent.Data[Offset_MethodID..]);
+
+                /// <summary>
+                /// Retrieves the ModuleID field.
+                /// </summary>
+                public ulong ModuleID => BitConverter.ToUInt64(_etwEvent.Data[Offset_ModuleID..]);
+
+                /// <summary>
+                /// Retrieves the MethodStartAddress field.
+                /// </summary>
+                public ulong MethodStartAddress => BitConverter.ToUInt64(_etwEvent.Data[Offset_MethodStartAddress..]);
+
+                /// <summary>
+                /// Retrieves the MethodSize field.
+                /// </summary>
+                public uint MethodSize => BitConverter.ToUInt32(_etwEvent.Data[Offset_MethodSize..]);
+
+                /// <summary>
+                /// Retrieves the MethodToken field.
+                /// </summary>
+                public uint MethodToken => BitConverter.ToUInt32(_etwEvent.Data[Offset_MethodToken..]);
+
+                /// <summary>
+                /// Retrieves the MethodFlags field.
+                /// </summary>
+                public MethodFlagsMap MethodFlags => (MethodFlagsMap)BitConverter.ToUInt32(_etwEvent.Data[Offset_MethodFlags..]);
+
+                /// <summary>
+                /// Retrieves the MethodNamespace field.
+                /// </summary>
+                public string MethodNamespace => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_MethodNamespace..]);
+
+                /// <summary>
+                /// Retrieves the MethodName field.
+                /// </summary>
+                public string MethodName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_MethodName..]);
+
+                /// <summary>
+                /// Retrieves the MethodSignature field.
+                /// </summary>
+                public string MethodSignature => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_MethodSignature..]);
+
+                /// <summary>
+                /// Creates a new MethodUnloadVerboseData.
+                /// </summary>
+                /// <param name="etwEvent">The event.</param>
+                public MethodUnloadVerboseData(EtwEvent etwEvent)
+                {
+                    _etwEvent = etwEvent;
+                    _offset_MethodID = -1;
+                    _offset_ModuleID = -1;
+                    _offset_MethodStartAddress = -1;
+                    _offset_MethodSize = -1;
+                    _offset_MethodToken = -1;
+                    _offset_MethodFlags = -1;
+                    _offset_MethodNamespace = -1;
+                    _offset_MethodName = -1;
+                    _offset_MethodSignature = -1;
+                }
+            }
+
+        }
+
+        /// <summary>
+        /// An event wrapper for a MethodJittingStarted event.
+        /// </summary>
+        public readonly ref struct MethodJittingStartedEvent
+        {
+            private readonly EtwEvent _etwEvent;
+
+            /// <summary>
+            /// Event name.
+            /// </summary>
+            public const string Name = "MethodJittingStarted";
+
+            /// <summary>
+            /// The event provider.
+            /// </summary>
+            public static readonly Guid Provider = Id;
+
+            /// <summary>
+            /// Event descriptor.
+            /// </summary>
+            public static EtwEventDescriptor Descriptor { get; } = new EtwEventDescriptor
+            {
+                Id = 145,
+                Version = 0,
+                Channel = 0,
+                Level = EtwTraceLevel.Verbose,
+                Opcode = (EtwEventOpcode)Opcodes.JittingStarted,
+                Task = (ushort)Tasks.Method,
+                Keyword = (ulong)Keywords.JitKeyword
+            };
+
+            /// <summary>
+            /// The process the event was recorded in.
+            /// </summary>
+            public uint ProcessId => _etwEvent.ProcessId;
+
+            /// <summary>
+            /// The thread the event was recorded on.
+            /// </summary>
+            public uint ThreadId => _etwEvent.ThreadId;
+
+            /// <summary>
+            /// The timestamp of the event.
+            /// </summary>
+            public long Timestamp => _etwEvent.Timestamp;
+
+            /// <summary>
+            /// The processor number the event was recorded on.
+            /// </summary>
+            public byte ProcessorNumber => _etwEvent.ProcessorNumber;
+
+            /// <summary>
+            /// Timing information for the event.
+            /// </summary>
+            public (ulong? KernelTime, ulong? UserTime, ulong? ProcessorTime) Time => _etwEvent.Time;
+
+            /// <summary>
+            /// Data for the event.
+            /// </summary>
+            public MethodJittingStartedData Data => new(_etwEvent);
+
+            /// <summary>
+            /// Creates a new MethodJittingStartedEvent.
+            /// </summary>
+            /// <param name="etwEvent">The event.</param>
+            public MethodJittingStartedEvent(EtwEvent etwEvent)
+            {
+                _etwEvent = etwEvent;
+            }
+
+            /// <summary>
+            /// A data wrapper for a MethodJittingStarted event.
+            /// </summary>
+            public ref struct MethodJittingStartedData
+            {
+                private readonly EtwEvent _etwEvent;
+
+                private int _offset_MethodID;
+                private int _offset_ModuleID;
+                private int _offset_MethodToken;
+                private int _offset_MethodILSize;
+                private int _offset_MethodNamespace;
+                private int _offset_MethodName;
+                private int _offset_MethodSignature;
+
+                private int Offset_MethodID
+                {
+                    get
+                    {
+                        if (_offset_MethodID == -1)
+                        {
+                            _offset_MethodID = 0;
+                        }
+
+                        return _offset_MethodID;
+                    }
+                }
+
+                private int Offset_ModuleID
+                {
+                    get
+                    {
+                        if (_offset_ModuleID == -1)
+                        {
+                            _offset_ModuleID = Offset_MethodID + 8;
+                        }
+
+                        return _offset_ModuleID;
+                    }
+                }
+
+                private int Offset_MethodToken
+                {
+                    get
+                    {
+                        if (_offset_MethodToken == -1)
+                        {
+                            _offset_MethodToken = Offset_ModuleID + 8;
+                        }
+
+                        return _offset_MethodToken;
+                    }
+                }
+
+                private int Offset_MethodILSize
+                {
+                    get
+                    {
+                        if (_offset_MethodILSize == -1)
+                        {
+                            _offset_MethodILSize = Offset_MethodToken + 4;
+                        }
+
+                        return _offset_MethodILSize;
+                    }
+                }
+
+                private int Offset_MethodNamespace
+                {
+                    get
+                    {
+                        if (_offset_MethodNamespace == -1)
+                        {
+                            _offset_MethodNamespace = Offset_MethodILSize + 4;
+                        }
+
+                        return _offset_MethodNamespace;
+                    }
+                }
+
+                private int Offset_MethodName
+                {
+                    get
+                    {
+                        if (_offset_MethodName == -1)
+                        {
+                            _offset_MethodName = Offset_MethodNamespace + EtwEvent.UnicodeStringEnumerable.UnicodeStringEnumerator.StringLength(_etwEvent.Data, Offset_MethodNamespace);
+                        }
+
+                        return _offset_MethodName;
+                    }
+                }
+
+                private int Offset_MethodSignature
+                {
+                    get
+                    {
+                        if (_offset_MethodSignature == -1)
+                        {
+                            _offset_MethodSignature = Offset_MethodName + EtwEvent.UnicodeStringEnumerable.UnicodeStringEnumerator.StringLength(_etwEvent.Data, Offset_MethodName);
+                        }
+
+                        return _offset_MethodSignature;
+                    }
+                }
+
+                /// <summary>
+                /// Retrieves the MethodID field.
+                /// </summary>
+                public ulong MethodID => BitConverter.ToUInt64(_etwEvent.Data[Offset_MethodID..]);
+
+                /// <summary>
+                /// Retrieves the ModuleID field.
+                /// </summary>
+                public ulong ModuleID => BitConverter.ToUInt64(_etwEvent.Data[Offset_ModuleID..]);
+
+                /// <summary>
+                /// Retrieves the MethodToken field.
+                /// </summary>
+                public uint MethodToken => BitConverter.ToUInt32(_etwEvent.Data[Offset_MethodToken..]);
+
+                /// <summary>
+                /// Retrieves the MethodILSize field.
+                /// </summary>
+                public uint MethodILSize => BitConverter.ToUInt32(_etwEvent.Data[Offset_MethodILSize..]);
+
+                /// <summary>
+                /// Retrieves the MethodNamespace field.
+                /// </summary>
+                public string MethodNamespace => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_MethodNamespace..]);
+
+                /// <summary>
+                /// Retrieves the MethodName field.
+                /// </summary>
+                public string MethodName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_MethodName..]);
+
+                /// <summary>
+                /// Retrieves the MethodSignature field.
+                /// </summary>
+                public string MethodSignature => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_MethodSignature..]);
+
+                /// <summary>
+                /// Creates a new MethodJittingStartedData.
+                /// </summary>
+                /// <param name="etwEvent">The event.</param>
+                public MethodJittingStartedData(EtwEvent etwEvent)
+                {
+                    _etwEvent = etwEvent;
+                    _offset_MethodID = -1;
+                    _offset_ModuleID = -1;
+                    _offset_MethodToken = -1;
+                    _offset_MethodILSize = -1;
+                    _offset_MethodNamespace = -1;
+                    _offset_MethodName = -1;
+                    _offset_MethodSignature = -1;
+                }
+            }
+
+        }
+
+        /// <summary>
         /// An event wrapper for a LoaderModuleDCStartV2 event.
         /// </summary>
         public readonly ref struct LoaderModuleDCStartV2Event
@@ -10692,6 +14150,1296 @@ namespace EtwTools
         }
 
         /// <summary>
+        /// An event wrapper for a LoaderDomainModuleLoad event.
+        /// </summary>
+        public readonly ref struct LoaderDomainModuleLoadEvent
+        {
+            private readonly EtwEvent _etwEvent;
+
+            /// <summary>
+            /// Event name.
+            /// </summary>
+            public const string Name = "LoaderDomainModuleLoad";
+
+            /// <summary>
+            /// The event provider.
+            /// </summary>
+            public static readonly Guid Provider = Id;
+
+            /// <summary>
+            /// Event descriptor.
+            /// </summary>
+            public static EtwEventDescriptor Descriptor { get; } = new EtwEventDescriptor
+            {
+                Id = 151,
+                Version = 0,
+                Channel = 0,
+                Level = EtwTraceLevel.Information,
+                Opcode = (EtwEventOpcode)Opcodes.DomainModuleLoad,
+                Task = (ushort)Tasks.Loader,
+                Keyword = (ulong)Keywords.LoaderKeyword
+            };
+
+            /// <summary>
+            /// The process the event was recorded in.
+            /// </summary>
+            public uint ProcessId => _etwEvent.ProcessId;
+
+            /// <summary>
+            /// The thread the event was recorded on.
+            /// </summary>
+            public uint ThreadId => _etwEvent.ThreadId;
+
+            /// <summary>
+            /// The timestamp of the event.
+            /// </summary>
+            public long Timestamp => _etwEvent.Timestamp;
+
+            /// <summary>
+            /// The processor number the event was recorded on.
+            /// </summary>
+            public byte ProcessorNumber => _etwEvent.ProcessorNumber;
+
+            /// <summary>
+            /// Timing information for the event.
+            /// </summary>
+            public (ulong? KernelTime, ulong? UserTime, ulong? ProcessorTime) Time => _etwEvent.Time;
+
+            /// <summary>
+            /// Data for the event.
+            /// </summary>
+            public LoaderDomainModuleLoadData Data => new(_etwEvent);
+
+            /// <summary>
+            /// Creates a new LoaderDomainModuleLoadEvent.
+            /// </summary>
+            /// <param name="etwEvent">The event.</param>
+            public LoaderDomainModuleLoadEvent(EtwEvent etwEvent)
+            {
+                _etwEvent = etwEvent;
+            }
+
+            /// <summary>
+            /// A data wrapper for a LoaderDomainModuleLoad event.
+            /// </summary>
+            public ref struct LoaderDomainModuleLoadData
+            {
+                private readonly EtwEvent _etwEvent;
+
+                private int _offset_ModuleID;
+                private int _offset_AssemblyID;
+                private int _offset_AppDomainID;
+                private int _offset_ModuleFlags;
+                private int _offset_Reserved1;
+                private int _offset_ModuleILPath;
+                private int _offset_ModuleNativePath;
+
+                private int Offset_ModuleID
+                {
+                    get
+                    {
+                        if (_offset_ModuleID == -1)
+                        {
+                            _offset_ModuleID = 0;
+                        }
+
+                        return _offset_ModuleID;
+                    }
+                }
+
+                private int Offset_AssemblyID
+                {
+                    get
+                    {
+                        if (_offset_AssemblyID == -1)
+                        {
+                            _offset_AssemblyID = Offset_ModuleID + 8;
+                        }
+
+                        return _offset_AssemblyID;
+                    }
+                }
+
+                private int Offset_AppDomainID
+                {
+                    get
+                    {
+                        if (_offset_AppDomainID == -1)
+                        {
+                            _offset_AppDomainID = Offset_AssemblyID + 8;
+                        }
+
+                        return _offset_AppDomainID;
+                    }
+                }
+
+                private int Offset_ModuleFlags
+                {
+                    get
+                    {
+                        if (_offset_ModuleFlags == -1)
+                        {
+                            _offset_ModuleFlags = Offset_AppDomainID + 8;
+                        }
+
+                        return _offset_ModuleFlags;
+                    }
+                }
+
+                private int Offset_Reserved1
+                {
+                    get
+                    {
+                        if (_offset_Reserved1 == -1)
+                        {
+                            _offset_Reserved1 = Offset_ModuleFlags + 4;
+                        }
+
+                        return _offset_Reserved1;
+                    }
+                }
+
+                private int Offset_ModuleILPath
+                {
+                    get
+                    {
+                        if (_offset_ModuleILPath == -1)
+                        {
+                            _offset_ModuleILPath = Offset_Reserved1 + 4;
+                        }
+
+                        return _offset_ModuleILPath;
+                    }
+                }
+
+                private int Offset_ModuleNativePath
+                {
+                    get
+                    {
+                        if (_offset_ModuleNativePath == -1)
+                        {
+                            _offset_ModuleNativePath = Offset_ModuleILPath + EtwEvent.UnicodeStringEnumerable.UnicodeStringEnumerator.StringLength(_etwEvent.Data, Offset_ModuleILPath);
+                        }
+
+                        return _offset_ModuleNativePath;
+                    }
+                }
+
+                /// <summary>
+                /// Retrieves the ModuleID field.
+                /// </summary>
+                public ulong ModuleID => BitConverter.ToUInt64(_etwEvent.Data[Offset_ModuleID..]);
+
+                /// <summary>
+                /// Retrieves the AssemblyID field.
+                /// </summary>
+                public ulong AssemblyID => BitConverter.ToUInt64(_etwEvent.Data[Offset_AssemblyID..]);
+
+                /// <summary>
+                /// Retrieves the AppDomainID field.
+                /// </summary>
+                public ulong AppDomainID => BitConverter.ToUInt64(_etwEvent.Data[Offset_AppDomainID..]);
+
+                /// <summary>
+                /// Retrieves the ModuleFlags field.
+                /// </summary>
+                public ModuleFlagsMap ModuleFlags => (ModuleFlagsMap)BitConverter.ToUInt32(_etwEvent.Data[Offset_ModuleFlags..]);
+
+                /// <summary>
+                /// Retrieves the Reserved1 field.
+                /// </summary>
+                public uint Reserved1 => BitConverter.ToUInt32(_etwEvent.Data[Offset_Reserved1..]);
+
+                /// <summary>
+                /// Retrieves the ModuleILPath field.
+                /// </summary>
+                public string ModuleILPath => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_ModuleILPath..]);
+
+                /// <summary>
+                /// Retrieves the ModuleNativePath field.
+                /// </summary>
+                public string ModuleNativePath => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_ModuleNativePath..]);
+
+                /// <summary>
+                /// Creates a new LoaderDomainModuleLoadData.
+                /// </summary>
+                /// <param name="etwEvent">The event.</param>
+                public LoaderDomainModuleLoadData(EtwEvent etwEvent)
+                {
+                    _etwEvent = etwEvent;
+                    _offset_ModuleID = -1;
+                    _offset_AssemblyID = -1;
+                    _offset_AppDomainID = -1;
+                    _offset_ModuleFlags = -1;
+                    _offset_Reserved1 = -1;
+                    _offset_ModuleILPath = -1;
+                    _offset_ModuleNativePath = -1;
+                }
+            }
+
+        }
+
+        /// <summary>
+        /// An event wrapper for a LoaderModuleLoad event.
+        /// </summary>
+        public readonly ref struct LoaderModuleLoadEvent
+        {
+            private readonly EtwEvent _etwEvent;
+
+            /// <summary>
+            /// Event name.
+            /// </summary>
+            public const string Name = "LoaderModuleLoad";
+
+            /// <summary>
+            /// The event provider.
+            /// </summary>
+            public static readonly Guid Provider = Id;
+
+            /// <summary>
+            /// Event descriptor.
+            /// </summary>
+            public static EtwEventDescriptor Descriptor { get; } = new EtwEventDescriptor
+            {
+                Id = 152,
+                Version = 0,
+                Channel = 0,
+                Level = EtwTraceLevel.Information,
+                Opcode = (EtwEventOpcode)Opcodes.SetGCHandle,
+                Task = (ushort)Tasks.Loader,
+                Keyword = (ulong)Keywords.LoaderKeyword
+            };
+
+            /// <summary>
+            /// The process the event was recorded in.
+            /// </summary>
+            public uint ProcessId => _etwEvent.ProcessId;
+
+            /// <summary>
+            /// The thread the event was recorded on.
+            /// </summary>
+            public uint ThreadId => _etwEvent.ThreadId;
+
+            /// <summary>
+            /// The timestamp of the event.
+            /// </summary>
+            public long Timestamp => _etwEvent.Timestamp;
+
+            /// <summary>
+            /// The processor number the event was recorded on.
+            /// </summary>
+            public byte ProcessorNumber => _etwEvent.ProcessorNumber;
+
+            /// <summary>
+            /// Timing information for the event.
+            /// </summary>
+            public (ulong? KernelTime, ulong? UserTime, ulong? ProcessorTime) Time => _etwEvent.Time;
+
+            /// <summary>
+            /// Data for the event.
+            /// </summary>
+            public LoaderModuleLoadData Data => new(_etwEvent);
+
+            /// <summary>
+            /// Creates a new LoaderModuleLoadEvent.
+            /// </summary>
+            /// <param name="etwEvent">The event.</param>
+            public LoaderModuleLoadEvent(EtwEvent etwEvent)
+            {
+                _etwEvent = etwEvent;
+            }
+
+            /// <summary>
+            /// A data wrapper for a LoaderModuleLoad event.
+            /// </summary>
+            public ref struct LoaderModuleLoadData
+            {
+                private readonly EtwEvent _etwEvent;
+
+                private int _offset_ModuleID;
+                private int _offset_AssemblyID;
+                private int _offset_ModuleFlags;
+                private int _offset_Reserved1;
+                private int _offset_ModuleILPath;
+                private int _offset_ModuleNativePath;
+
+                private int Offset_ModuleID
+                {
+                    get
+                    {
+                        if (_offset_ModuleID == -1)
+                        {
+                            _offset_ModuleID = 0;
+                        }
+
+                        return _offset_ModuleID;
+                    }
+                }
+
+                private int Offset_AssemblyID
+                {
+                    get
+                    {
+                        if (_offset_AssemblyID == -1)
+                        {
+                            _offset_AssemblyID = Offset_ModuleID + 8;
+                        }
+
+                        return _offset_AssemblyID;
+                    }
+                }
+
+                private int Offset_ModuleFlags
+                {
+                    get
+                    {
+                        if (_offset_ModuleFlags == -1)
+                        {
+                            _offset_ModuleFlags = Offset_AssemblyID + 8;
+                        }
+
+                        return _offset_ModuleFlags;
+                    }
+                }
+
+                private int Offset_Reserved1
+                {
+                    get
+                    {
+                        if (_offset_Reserved1 == -1)
+                        {
+                            _offset_Reserved1 = Offset_ModuleFlags + 4;
+                        }
+
+                        return _offset_Reserved1;
+                    }
+                }
+
+                private int Offset_ModuleILPath
+                {
+                    get
+                    {
+                        if (_offset_ModuleILPath == -1)
+                        {
+                            _offset_ModuleILPath = Offset_Reserved1 + 4;
+                        }
+
+                        return _offset_ModuleILPath;
+                    }
+                }
+
+                private int Offset_ModuleNativePath
+                {
+                    get
+                    {
+                        if (_offset_ModuleNativePath == -1)
+                        {
+                            _offset_ModuleNativePath = Offset_ModuleILPath + EtwEvent.UnicodeStringEnumerable.UnicodeStringEnumerator.StringLength(_etwEvent.Data, Offset_ModuleILPath);
+                        }
+
+                        return _offset_ModuleNativePath;
+                    }
+                }
+
+                /// <summary>
+                /// Retrieves the ModuleID field.
+                /// </summary>
+                public ulong ModuleID => BitConverter.ToUInt64(_etwEvent.Data[Offset_ModuleID..]);
+
+                /// <summary>
+                /// Retrieves the AssemblyID field.
+                /// </summary>
+                public ulong AssemblyID => BitConverter.ToUInt64(_etwEvent.Data[Offset_AssemblyID..]);
+
+                /// <summary>
+                /// Retrieves the ModuleFlags field.
+                /// </summary>
+                public ModuleFlagsMap ModuleFlags => (ModuleFlagsMap)BitConverter.ToUInt32(_etwEvent.Data[Offset_ModuleFlags..]);
+
+                /// <summary>
+                /// Retrieves the Reserved1 field.
+                /// </summary>
+                public uint Reserved1 => BitConverter.ToUInt32(_etwEvent.Data[Offset_Reserved1..]);
+
+                /// <summary>
+                /// Retrieves the ModuleILPath field.
+                /// </summary>
+                public string ModuleILPath => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_ModuleILPath..]);
+
+                /// <summary>
+                /// Retrieves the ModuleNativePath field.
+                /// </summary>
+                public string ModuleNativePath => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_ModuleNativePath..]);
+
+                /// <summary>
+                /// Creates a new LoaderModuleLoadData.
+                /// </summary>
+                /// <param name="etwEvent">The event.</param>
+                public LoaderModuleLoadData(EtwEvent etwEvent)
+                {
+                    _etwEvent = etwEvent;
+                    _offset_ModuleID = -1;
+                    _offset_AssemblyID = -1;
+                    _offset_ModuleFlags = -1;
+                    _offset_Reserved1 = -1;
+                    _offset_ModuleILPath = -1;
+                    _offset_ModuleNativePath = -1;
+                }
+            }
+
+        }
+
+        /// <summary>
+        /// An event wrapper for a LoaderModuleUnload event.
+        /// </summary>
+        public readonly ref struct LoaderModuleUnloadEvent
+        {
+            private readonly EtwEvent _etwEvent;
+
+            /// <summary>
+            /// Event name.
+            /// </summary>
+            public const string Name = "LoaderModuleUnload";
+
+            /// <summary>
+            /// The event provider.
+            /// </summary>
+            public static readonly Guid Provider = Id;
+
+            /// <summary>
+            /// Event descriptor.
+            /// </summary>
+            public static EtwEventDescriptor Descriptor { get; } = new EtwEventDescriptor
+            {
+                Id = 153,
+                Version = 0,
+                Channel = 0,
+                Level = EtwTraceLevel.Information,
+                Opcode = (EtwEventOpcode)Opcodes.DestoryGCHandle,
+                Task = (ushort)Tasks.Loader,
+                Keyword = (ulong)Keywords.LoaderKeyword
+            };
+
+            /// <summary>
+            /// The process the event was recorded in.
+            /// </summary>
+            public uint ProcessId => _etwEvent.ProcessId;
+
+            /// <summary>
+            /// The thread the event was recorded on.
+            /// </summary>
+            public uint ThreadId => _etwEvent.ThreadId;
+
+            /// <summary>
+            /// The timestamp of the event.
+            /// </summary>
+            public long Timestamp => _etwEvent.Timestamp;
+
+            /// <summary>
+            /// The processor number the event was recorded on.
+            /// </summary>
+            public byte ProcessorNumber => _etwEvent.ProcessorNumber;
+
+            /// <summary>
+            /// Timing information for the event.
+            /// </summary>
+            public (ulong? KernelTime, ulong? UserTime, ulong? ProcessorTime) Time => _etwEvent.Time;
+
+            /// <summary>
+            /// Data for the event.
+            /// </summary>
+            public LoaderModuleUnloadData Data => new(_etwEvent);
+
+            /// <summary>
+            /// Creates a new LoaderModuleUnloadEvent.
+            /// </summary>
+            /// <param name="etwEvent">The event.</param>
+            public LoaderModuleUnloadEvent(EtwEvent etwEvent)
+            {
+                _etwEvent = etwEvent;
+            }
+
+            /// <summary>
+            /// A data wrapper for a LoaderModuleUnload event.
+            /// </summary>
+            public ref struct LoaderModuleUnloadData
+            {
+                private readonly EtwEvent _etwEvent;
+
+                private int _offset_ModuleID;
+                private int _offset_AssemblyID;
+                private int _offset_ModuleFlags;
+                private int _offset_Reserved1;
+                private int _offset_ModuleILPath;
+                private int _offset_ModuleNativePath;
+
+                private int Offset_ModuleID
+                {
+                    get
+                    {
+                        if (_offset_ModuleID == -1)
+                        {
+                            _offset_ModuleID = 0;
+                        }
+
+                        return _offset_ModuleID;
+                    }
+                }
+
+                private int Offset_AssemblyID
+                {
+                    get
+                    {
+                        if (_offset_AssemblyID == -1)
+                        {
+                            _offset_AssemblyID = Offset_ModuleID + 8;
+                        }
+
+                        return _offset_AssemblyID;
+                    }
+                }
+
+                private int Offset_ModuleFlags
+                {
+                    get
+                    {
+                        if (_offset_ModuleFlags == -1)
+                        {
+                            _offset_ModuleFlags = Offset_AssemblyID + 8;
+                        }
+
+                        return _offset_ModuleFlags;
+                    }
+                }
+
+                private int Offset_Reserved1
+                {
+                    get
+                    {
+                        if (_offset_Reserved1 == -1)
+                        {
+                            _offset_Reserved1 = Offset_ModuleFlags + 4;
+                        }
+
+                        return _offset_Reserved1;
+                    }
+                }
+
+                private int Offset_ModuleILPath
+                {
+                    get
+                    {
+                        if (_offset_ModuleILPath == -1)
+                        {
+                            _offset_ModuleILPath = Offset_Reserved1 + 4;
+                        }
+
+                        return _offset_ModuleILPath;
+                    }
+                }
+
+                private int Offset_ModuleNativePath
+                {
+                    get
+                    {
+                        if (_offset_ModuleNativePath == -1)
+                        {
+                            _offset_ModuleNativePath = Offset_ModuleILPath + EtwEvent.UnicodeStringEnumerable.UnicodeStringEnumerator.StringLength(_etwEvent.Data, Offset_ModuleILPath);
+                        }
+
+                        return _offset_ModuleNativePath;
+                    }
+                }
+
+                /// <summary>
+                /// Retrieves the ModuleID field.
+                /// </summary>
+                public ulong ModuleID => BitConverter.ToUInt64(_etwEvent.Data[Offset_ModuleID..]);
+
+                /// <summary>
+                /// Retrieves the AssemblyID field.
+                /// </summary>
+                public ulong AssemblyID => BitConverter.ToUInt64(_etwEvent.Data[Offset_AssemblyID..]);
+
+                /// <summary>
+                /// Retrieves the ModuleFlags field.
+                /// </summary>
+                public ModuleFlagsMap ModuleFlags => (ModuleFlagsMap)BitConverter.ToUInt32(_etwEvent.Data[Offset_ModuleFlags..]);
+
+                /// <summary>
+                /// Retrieves the Reserved1 field.
+                /// </summary>
+                public uint Reserved1 => BitConverter.ToUInt32(_etwEvent.Data[Offset_Reserved1..]);
+
+                /// <summary>
+                /// Retrieves the ModuleILPath field.
+                /// </summary>
+                public string ModuleILPath => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_ModuleILPath..]);
+
+                /// <summary>
+                /// Retrieves the ModuleNativePath field.
+                /// </summary>
+                public string ModuleNativePath => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_ModuleNativePath..]);
+
+                /// <summary>
+                /// Creates a new LoaderModuleUnloadData.
+                /// </summary>
+                /// <param name="etwEvent">The event.</param>
+                public LoaderModuleUnloadData(EtwEvent etwEvent)
+                {
+                    _etwEvent = etwEvent;
+                    _offset_ModuleID = -1;
+                    _offset_AssemblyID = -1;
+                    _offset_ModuleFlags = -1;
+                    _offset_Reserved1 = -1;
+                    _offset_ModuleILPath = -1;
+                    _offset_ModuleNativePath = -1;
+                }
+            }
+
+        }
+
+        /// <summary>
+        /// An event wrapper for a LoaderAssemblyLoad event.
+        /// </summary>
+        public readonly ref struct LoaderAssemblyLoadEvent
+        {
+            private readonly EtwEvent _etwEvent;
+
+            /// <summary>
+            /// Event name.
+            /// </summary>
+            public const string Name = "LoaderAssemblyLoad";
+
+            /// <summary>
+            /// The event provider.
+            /// </summary>
+            public static readonly Guid Provider = Id;
+
+            /// <summary>
+            /// Event descriptor.
+            /// </summary>
+            public static EtwEventDescriptor Descriptor { get; } = new EtwEventDescriptor
+            {
+                Id = 154,
+                Version = 0,
+                Channel = 0,
+                Level = EtwTraceLevel.Information,
+                Opcode = (EtwEventOpcode)Opcodes.LoadVerbose,
+                Task = (ushort)Tasks.Loader,
+                Keyword = (ulong)Keywords.LoaderKeyword
+            };
+
+            /// <summary>
+            /// The process the event was recorded in.
+            /// </summary>
+            public uint ProcessId => _etwEvent.ProcessId;
+
+            /// <summary>
+            /// The thread the event was recorded on.
+            /// </summary>
+            public uint ThreadId => _etwEvent.ThreadId;
+
+            /// <summary>
+            /// The timestamp of the event.
+            /// </summary>
+            public long Timestamp => _etwEvent.Timestamp;
+
+            /// <summary>
+            /// The processor number the event was recorded on.
+            /// </summary>
+            public byte ProcessorNumber => _etwEvent.ProcessorNumber;
+
+            /// <summary>
+            /// Timing information for the event.
+            /// </summary>
+            public (ulong? KernelTime, ulong? UserTime, ulong? ProcessorTime) Time => _etwEvent.Time;
+
+            /// <summary>
+            /// Data for the event.
+            /// </summary>
+            public LoaderAssemblyLoadData Data => new(_etwEvent);
+
+            /// <summary>
+            /// Creates a new LoaderAssemblyLoadEvent.
+            /// </summary>
+            /// <param name="etwEvent">The event.</param>
+            public LoaderAssemblyLoadEvent(EtwEvent etwEvent)
+            {
+                _etwEvent = etwEvent;
+            }
+
+            /// <summary>
+            /// A data wrapper for a LoaderAssemblyLoad event.
+            /// </summary>
+            public ref struct LoaderAssemblyLoadData
+            {
+                private readonly EtwEvent _etwEvent;
+
+                private int _offset_AssemblyID;
+                private int _offset_AppDomainID;
+                private int _offset_AssemblyFlags;
+                private int _offset_FullyQualifiedAssemblyName;
+
+                private int Offset_AssemblyID
+                {
+                    get
+                    {
+                        if (_offset_AssemblyID == -1)
+                        {
+                            _offset_AssemblyID = 0;
+                        }
+
+                        return _offset_AssemblyID;
+                    }
+                }
+
+                private int Offset_AppDomainID
+                {
+                    get
+                    {
+                        if (_offset_AppDomainID == -1)
+                        {
+                            _offset_AppDomainID = Offset_AssemblyID + 8;
+                        }
+
+                        return _offset_AppDomainID;
+                    }
+                }
+
+                private int Offset_AssemblyFlags
+                {
+                    get
+                    {
+                        if (_offset_AssemblyFlags == -1)
+                        {
+                            _offset_AssemblyFlags = Offset_AppDomainID + 8;
+                        }
+
+                        return _offset_AssemblyFlags;
+                    }
+                }
+
+                private int Offset_FullyQualifiedAssemblyName
+                {
+                    get
+                    {
+                        if (_offset_FullyQualifiedAssemblyName == -1)
+                        {
+                            _offset_FullyQualifiedAssemblyName = Offset_AssemblyFlags + 4;
+                        }
+
+                        return _offset_FullyQualifiedAssemblyName;
+                    }
+                }
+
+                /// <summary>
+                /// Retrieves the AssemblyID field.
+                /// </summary>
+                public ulong AssemblyID => BitConverter.ToUInt64(_etwEvent.Data[Offset_AssemblyID..]);
+
+                /// <summary>
+                /// Retrieves the AppDomainID field.
+                /// </summary>
+                public ulong AppDomainID => BitConverter.ToUInt64(_etwEvent.Data[Offset_AppDomainID..]);
+
+                /// <summary>
+                /// Retrieves the AssemblyFlags field.
+                /// </summary>
+                public AssemblyFlagsMap AssemblyFlags => (AssemblyFlagsMap)BitConverter.ToUInt32(_etwEvent.Data[Offset_AssemblyFlags..]);
+
+                /// <summary>
+                /// Retrieves the FullyQualifiedAssemblyName field.
+                /// </summary>
+                public string FullyQualifiedAssemblyName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_FullyQualifiedAssemblyName..]);
+
+                /// <summary>
+                /// Creates a new LoaderAssemblyLoadData.
+                /// </summary>
+                /// <param name="etwEvent">The event.</param>
+                public LoaderAssemblyLoadData(EtwEvent etwEvent)
+                {
+                    _etwEvent = etwEvent;
+                    _offset_AssemblyID = -1;
+                    _offset_AppDomainID = -1;
+                    _offset_AssemblyFlags = -1;
+                    _offset_FullyQualifiedAssemblyName = -1;
+                }
+            }
+
+        }
+
+        /// <summary>
+        /// An event wrapper for a LoaderAssemblyUnload event.
+        /// </summary>
+        public readonly ref struct LoaderAssemblyUnloadEvent
+        {
+            private readonly EtwEvent _etwEvent;
+
+            /// <summary>
+            /// Event name.
+            /// </summary>
+            public const string Name = "LoaderAssemblyUnload";
+
+            /// <summary>
+            /// The event provider.
+            /// </summary>
+            public static readonly Guid Provider = Id;
+
+            /// <summary>
+            /// Event descriptor.
+            /// </summary>
+            public static EtwEventDescriptor Descriptor { get; } = new EtwEventDescriptor
+            {
+                Id = 155,
+                Version = 0,
+                Channel = 0,
+                Level = EtwTraceLevel.Information,
+                Opcode = (EtwEventOpcode)Opcodes.GCBulkRootCCW,
+                Task = (ushort)Tasks.Loader,
+                Keyword = (ulong)Keywords.LoaderKeyword
+            };
+
+            /// <summary>
+            /// The process the event was recorded in.
+            /// </summary>
+            public uint ProcessId => _etwEvent.ProcessId;
+
+            /// <summary>
+            /// The thread the event was recorded on.
+            /// </summary>
+            public uint ThreadId => _etwEvent.ThreadId;
+
+            /// <summary>
+            /// The timestamp of the event.
+            /// </summary>
+            public long Timestamp => _etwEvent.Timestamp;
+
+            /// <summary>
+            /// The processor number the event was recorded on.
+            /// </summary>
+            public byte ProcessorNumber => _etwEvent.ProcessorNumber;
+
+            /// <summary>
+            /// Timing information for the event.
+            /// </summary>
+            public (ulong? KernelTime, ulong? UserTime, ulong? ProcessorTime) Time => _etwEvent.Time;
+
+            /// <summary>
+            /// Data for the event.
+            /// </summary>
+            public LoaderAssemblyUnloadData Data => new(_etwEvent);
+
+            /// <summary>
+            /// Creates a new LoaderAssemblyUnloadEvent.
+            /// </summary>
+            /// <param name="etwEvent">The event.</param>
+            public LoaderAssemblyUnloadEvent(EtwEvent etwEvent)
+            {
+                _etwEvent = etwEvent;
+            }
+
+            /// <summary>
+            /// A data wrapper for a LoaderAssemblyUnload event.
+            /// </summary>
+            public ref struct LoaderAssemblyUnloadData
+            {
+                private readonly EtwEvent _etwEvent;
+
+                private int _offset_AssemblyID;
+                private int _offset_AppDomainID;
+                private int _offset_AssemblyFlags;
+                private int _offset_FullyQualifiedAssemblyName;
+
+                private int Offset_AssemblyID
+                {
+                    get
+                    {
+                        if (_offset_AssemblyID == -1)
+                        {
+                            _offset_AssemblyID = 0;
+                        }
+
+                        return _offset_AssemblyID;
+                    }
+                }
+
+                private int Offset_AppDomainID
+                {
+                    get
+                    {
+                        if (_offset_AppDomainID == -1)
+                        {
+                            _offset_AppDomainID = Offset_AssemblyID + 8;
+                        }
+
+                        return _offset_AppDomainID;
+                    }
+                }
+
+                private int Offset_AssemblyFlags
+                {
+                    get
+                    {
+                        if (_offset_AssemblyFlags == -1)
+                        {
+                            _offset_AssemblyFlags = Offset_AppDomainID + 8;
+                        }
+
+                        return _offset_AssemblyFlags;
+                    }
+                }
+
+                private int Offset_FullyQualifiedAssemblyName
+                {
+                    get
+                    {
+                        if (_offset_FullyQualifiedAssemblyName == -1)
+                        {
+                            _offset_FullyQualifiedAssemblyName = Offset_AssemblyFlags + 4;
+                        }
+
+                        return _offset_FullyQualifiedAssemblyName;
+                    }
+                }
+
+                /// <summary>
+                /// Retrieves the AssemblyID field.
+                /// </summary>
+                public ulong AssemblyID => BitConverter.ToUInt64(_etwEvent.Data[Offset_AssemblyID..]);
+
+                /// <summary>
+                /// Retrieves the AppDomainID field.
+                /// </summary>
+                public ulong AppDomainID => BitConverter.ToUInt64(_etwEvent.Data[Offset_AppDomainID..]);
+
+                /// <summary>
+                /// Retrieves the AssemblyFlags field.
+                /// </summary>
+                public AssemblyFlagsMap AssemblyFlags => (AssemblyFlagsMap)BitConverter.ToUInt32(_etwEvent.Data[Offset_AssemblyFlags..]);
+
+                /// <summary>
+                /// Retrieves the FullyQualifiedAssemblyName field.
+                /// </summary>
+                public string FullyQualifiedAssemblyName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_FullyQualifiedAssemblyName..]);
+
+                /// <summary>
+                /// Creates a new LoaderAssemblyUnloadData.
+                /// </summary>
+                /// <param name="etwEvent">The event.</param>
+                public LoaderAssemblyUnloadData(EtwEvent etwEvent)
+                {
+                    _etwEvent = etwEvent;
+                    _offset_AssemblyID = -1;
+                    _offset_AppDomainID = -1;
+                    _offset_AssemblyFlags = -1;
+                    _offset_FullyQualifiedAssemblyName = -1;
+                }
+            }
+
+        }
+
+        /// <summary>
+        /// An event wrapper for a LoaderAppDomainLoad event.
+        /// </summary>
+        public readonly ref struct LoaderAppDomainLoadEvent
+        {
+            private readonly EtwEvent _etwEvent;
+
+            /// <summary>
+            /// Event name.
+            /// </summary>
+            public const string Name = "LoaderAppDomainLoad";
+
+            /// <summary>
+            /// The event provider.
+            /// </summary>
+            public static readonly Guid Provider = Id;
+
+            /// <summary>
+            /// Event descriptor.
+            /// </summary>
+            public static EtwEventDescriptor Descriptor { get; } = new EtwEventDescriptor
+            {
+                Id = 156,
+                Version = 0,
+                Channel = 0,
+                Level = EtwTraceLevel.Information,
+                Opcode = (EtwEventOpcode)Opcodes.GCDynamicEvent,
+                Task = (ushort)Tasks.Loader,
+                Keyword = (ulong)Keywords.LoaderKeyword
+            };
+
+            /// <summary>
+            /// The process the event was recorded in.
+            /// </summary>
+            public uint ProcessId => _etwEvent.ProcessId;
+
+            /// <summary>
+            /// The thread the event was recorded on.
+            /// </summary>
+            public uint ThreadId => _etwEvent.ThreadId;
+
+            /// <summary>
+            /// The timestamp of the event.
+            /// </summary>
+            public long Timestamp => _etwEvent.Timestamp;
+
+            /// <summary>
+            /// The processor number the event was recorded on.
+            /// </summary>
+            public byte ProcessorNumber => _etwEvent.ProcessorNumber;
+
+            /// <summary>
+            /// Timing information for the event.
+            /// </summary>
+            public (ulong? KernelTime, ulong? UserTime, ulong? ProcessorTime) Time => _etwEvent.Time;
+
+            /// <summary>
+            /// Data for the event.
+            /// </summary>
+            public LoaderAppDomainLoadData Data => new(_etwEvent);
+
+            /// <summary>
+            /// Creates a new LoaderAppDomainLoadEvent.
+            /// </summary>
+            /// <param name="etwEvent">The event.</param>
+            public LoaderAppDomainLoadEvent(EtwEvent etwEvent)
+            {
+                _etwEvent = etwEvent;
+            }
+
+            /// <summary>
+            /// A data wrapper for a LoaderAppDomainLoad event.
+            /// </summary>
+            public ref struct LoaderAppDomainLoadData
+            {
+                private readonly EtwEvent _etwEvent;
+
+                private int _offset_AppDomainID;
+                private int _offset_AppDomainFlags;
+                private int _offset_AppDomainName;
+
+                private int Offset_AppDomainID
+                {
+                    get
+                    {
+                        if (_offset_AppDomainID == -1)
+                        {
+                            _offset_AppDomainID = 0;
+                        }
+
+                        return _offset_AppDomainID;
+                    }
+                }
+
+                private int Offset_AppDomainFlags
+                {
+                    get
+                    {
+                        if (_offset_AppDomainFlags == -1)
+                        {
+                            _offset_AppDomainFlags = Offset_AppDomainID + 8;
+                        }
+
+                        return _offset_AppDomainFlags;
+                    }
+                }
+
+                private int Offset_AppDomainName
+                {
+                    get
+                    {
+                        if (_offset_AppDomainName == -1)
+                        {
+                            _offset_AppDomainName = Offset_AppDomainFlags + 4;
+                        }
+
+                        return _offset_AppDomainName;
+                    }
+                }
+
+                /// <summary>
+                /// Retrieves the AppDomainID field.
+                /// </summary>
+                public ulong AppDomainID => BitConverter.ToUInt64(_etwEvent.Data[Offset_AppDomainID..]);
+
+                /// <summary>
+                /// Retrieves the AppDomainFlags field.
+                /// </summary>
+                public AppDomainFlagsMap AppDomainFlags => (AppDomainFlagsMap)BitConverter.ToUInt32(_etwEvent.Data[Offset_AppDomainFlags..]);
+
+                /// <summary>
+                /// Retrieves the AppDomainName field.
+                /// </summary>
+                public string AppDomainName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_AppDomainName..]);
+
+                /// <summary>
+                /// Creates a new LoaderAppDomainLoadData.
+                /// </summary>
+                /// <param name="etwEvent">The event.</param>
+                public LoaderAppDomainLoadData(EtwEvent etwEvent)
+                {
+                    _etwEvent = etwEvent;
+                    _offset_AppDomainID = -1;
+                    _offset_AppDomainFlags = -1;
+                    _offset_AppDomainName = -1;
+                }
+            }
+
+        }
+
+        /// <summary>
+        /// An event wrapper for a LoaderAppDomainUnload event.
+        /// </summary>
+        public readonly ref struct LoaderAppDomainUnloadEvent
+        {
+            private readonly EtwEvent _etwEvent;
+
+            /// <summary>
+            /// Event name.
+            /// </summary>
+            public const string Name = "LoaderAppDomainUnload";
+
+            /// <summary>
+            /// The event provider.
+            /// </summary>
+            public static readonly Guid Provider = Id;
+
+            /// <summary>
+            /// Event descriptor.
+            /// </summary>
+            public static EtwEventDescriptor Descriptor { get; } = new EtwEventDescriptor
+            {
+                Id = 157,
+                Version = 0,
+                Channel = 0,
+                Level = EtwTraceLevel.Information,
+                Opcode = (EtwEventOpcode)Opcodes.JittingStarted,
+                Task = (ushort)Tasks.Loader,
+                Keyword = (ulong)Keywords.LoaderKeyword
+            };
+
+            /// <summary>
+            /// The process the event was recorded in.
+            /// </summary>
+            public uint ProcessId => _etwEvent.ProcessId;
+
+            /// <summary>
+            /// The thread the event was recorded on.
+            /// </summary>
+            public uint ThreadId => _etwEvent.ThreadId;
+
+            /// <summary>
+            /// The timestamp of the event.
+            /// </summary>
+            public long Timestamp => _etwEvent.Timestamp;
+
+            /// <summary>
+            /// The processor number the event was recorded on.
+            /// </summary>
+            public byte ProcessorNumber => _etwEvent.ProcessorNumber;
+
+            /// <summary>
+            /// Timing information for the event.
+            /// </summary>
+            public (ulong? KernelTime, ulong? UserTime, ulong? ProcessorTime) Time => _etwEvent.Time;
+
+            /// <summary>
+            /// Data for the event.
+            /// </summary>
+            public LoaderAppDomainUnloadData Data => new(_etwEvent);
+
+            /// <summary>
+            /// Creates a new LoaderAppDomainUnloadEvent.
+            /// </summary>
+            /// <param name="etwEvent">The event.</param>
+            public LoaderAppDomainUnloadEvent(EtwEvent etwEvent)
+            {
+                _etwEvent = etwEvent;
+            }
+
+            /// <summary>
+            /// A data wrapper for a LoaderAppDomainUnload event.
+            /// </summary>
+            public ref struct LoaderAppDomainUnloadData
+            {
+                private readonly EtwEvent _etwEvent;
+
+                private int _offset_AppDomainID;
+                private int _offset_AppDomainFlags;
+                private int _offset_AppDomainName;
+
+                private int Offset_AppDomainID
+                {
+                    get
+                    {
+                        if (_offset_AppDomainID == -1)
+                        {
+                            _offset_AppDomainID = 0;
+                        }
+
+                        return _offset_AppDomainID;
+                    }
+                }
+
+                private int Offset_AppDomainFlags
+                {
+                    get
+                    {
+                        if (_offset_AppDomainFlags == -1)
+                        {
+                            _offset_AppDomainFlags = Offset_AppDomainID + 8;
+                        }
+
+                        return _offset_AppDomainFlags;
+                    }
+                }
+
+                private int Offset_AppDomainName
+                {
+                    get
+                    {
+                        if (_offset_AppDomainName == -1)
+                        {
+                            _offset_AppDomainName = Offset_AppDomainFlags + 4;
+                        }
+
+                        return _offset_AppDomainName;
+                    }
+                }
+
+                /// <summary>
+                /// Retrieves the AppDomainID field.
+                /// </summary>
+                public ulong AppDomainID => BitConverter.ToUInt64(_etwEvent.Data[Offset_AppDomainID..]);
+
+                /// <summary>
+                /// Retrieves the AppDomainFlags field.
+                /// </summary>
+                public AppDomainFlagsMap AppDomainFlags => (AppDomainFlagsMap)BitConverter.ToUInt32(_etwEvent.Data[Offset_AppDomainFlags..]);
+
+                /// <summary>
+                /// Retrieves the AppDomainName field.
+                /// </summary>
+                public string AppDomainName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_AppDomainName..]);
+
+                /// <summary>
+                /// Creates a new LoaderAppDomainUnloadData.
+                /// </summary>
+                /// <param name="etwEvent">The event.</param>
+                public LoaderAppDomainUnloadData(EtwEvent etwEvent)
+                {
+                    _etwEvent = etwEvent;
+                    _offset_AppDomainID = -1;
+                    _offset_AppDomainFlags = -1;
+                    _offset_AppDomainName = -1;
+                }
+            }
+
+        }
+
+        /// <summary>
         /// An event wrapper for a ClrPerfTrackModuleRangeLoad event.
         /// </summary>
         public readonly ref struct ClrPerfTrackModuleRangeLoadEvent
@@ -10876,6 +15624,606 @@ namespace EtwTools
                     _offset_RangeBegin = -1;
                     _offset_RangeSize = -1;
                     _offset_RangeType = -1;
+                }
+            }
+
+        }
+
+        /// <summary>
+        /// An event wrapper for a StrongNameVerificationStart event.
+        /// </summary>
+        public readonly ref struct StrongNameVerificationStartEvent
+        {
+            private readonly EtwEvent _etwEvent;
+
+            /// <summary>
+            /// Event name.
+            /// </summary>
+            public const string Name = "StrongNameVerificationStart";
+
+            /// <summary>
+            /// The event provider.
+            /// </summary>
+            public static readonly Guid Provider = Id;
+
+            /// <summary>
+            /// Event descriptor.
+            /// </summary>
+            public static EtwEventDescriptor Descriptor { get; } = new EtwEventDescriptor
+            {
+                Id = 181,
+                Version = 0,
+                Channel = 0,
+                Level = EtwTraceLevel.Verbose,
+                Opcode = EtwEventOpcode.Start,
+                Task = (ushort)Tasks.StrongNameVerification,
+                Keyword = (ulong)Keywords.SecurityKeyword
+            };
+
+            /// <summary>
+            /// The process the event was recorded in.
+            /// </summary>
+            public uint ProcessId => _etwEvent.ProcessId;
+
+            /// <summary>
+            /// The thread the event was recorded on.
+            /// </summary>
+            public uint ThreadId => _etwEvent.ThreadId;
+
+            /// <summary>
+            /// The timestamp of the event.
+            /// </summary>
+            public long Timestamp => _etwEvent.Timestamp;
+
+            /// <summary>
+            /// The processor number the event was recorded on.
+            /// </summary>
+            public byte ProcessorNumber => _etwEvent.ProcessorNumber;
+
+            /// <summary>
+            /// Timing information for the event.
+            /// </summary>
+            public (ulong? KernelTime, ulong? UserTime, ulong? ProcessorTime) Time => _etwEvent.Time;
+
+            /// <summary>
+            /// Data for the event.
+            /// </summary>
+            public StrongNameVerificationStartData Data => new(_etwEvent);
+
+            /// <summary>
+            /// Creates a new StrongNameVerificationStartEvent.
+            /// </summary>
+            /// <param name="etwEvent">The event.</param>
+            public StrongNameVerificationStartEvent(EtwEvent etwEvent)
+            {
+                _etwEvent = etwEvent;
+            }
+
+            /// <summary>
+            /// A data wrapper for a StrongNameVerificationStart event.
+            /// </summary>
+            public ref struct StrongNameVerificationStartData
+            {
+                private readonly EtwEvent _etwEvent;
+
+                private int _offset_VerificationFlags;
+                private int _offset_ErrorCode;
+                private int _offset_FullyQualifiedAssemblyName;
+
+                private int Offset_VerificationFlags
+                {
+                    get
+                    {
+                        if (_offset_VerificationFlags == -1)
+                        {
+                            _offset_VerificationFlags = 0;
+                        }
+
+                        return _offset_VerificationFlags;
+                    }
+                }
+
+                private int Offset_ErrorCode
+                {
+                    get
+                    {
+                        if (_offset_ErrorCode == -1)
+                        {
+                            _offset_ErrorCode = Offset_VerificationFlags + 4;
+                        }
+
+                        return _offset_ErrorCode;
+                    }
+                }
+
+                private int Offset_FullyQualifiedAssemblyName
+                {
+                    get
+                    {
+                        if (_offset_FullyQualifiedAssemblyName == -1)
+                        {
+                            _offset_FullyQualifiedAssemblyName = Offset_ErrorCode + 4;
+                        }
+
+                        return _offset_FullyQualifiedAssemblyName;
+                    }
+                }
+
+                /// <summary>
+                /// Retrieves the VerificationFlags field.
+                /// </summary>
+                public uint VerificationFlags => BitConverter.ToUInt32(_etwEvent.Data[Offset_VerificationFlags..]);
+
+                /// <summary>
+                /// Retrieves the ErrorCode field.
+                /// </summary>
+                public uint ErrorCode => BitConverter.ToUInt32(_etwEvent.Data[Offset_ErrorCode..]);
+
+                /// <summary>
+                /// Retrieves the FullyQualifiedAssemblyName field.
+                /// </summary>
+                public string FullyQualifiedAssemblyName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_FullyQualifiedAssemblyName..]);
+
+                /// <summary>
+                /// Creates a new StrongNameVerificationStartData.
+                /// </summary>
+                /// <param name="etwEvent">The event.</param>
+                public StrongNameVerificationStartData(EtwEvent etwEvent)
+                {
+                    _etwEvent = etwEvent;
+                    _offset_VerificationFlags = -1;
+                    _offset_ErrorCode = -1;
+                    _offset_FullyQualifiedAssemblyName = -1;
+                }
+            }
+
+        }
+
+        /// <summary>
+        /// An event wrapper for a StrongNameVerificationStop event.
+        /// </summary>
+        public readonly ref struct StrongNameVerificationStopEvent
+        {
+            private readonly EtwEvent _etwEvent;
+
+            /// <summary>
+            /// Event name.
+            /// </summary>
+            public const string Name = "StrongNameVerificationStop";
+
+            /// <summary>
+            /// The event provider.
+            /// </summary>
+            public static readonly Guid Provider = Id;
+
+            /// <summary>
+            /// Event descriptor.
+            /// </summary>
+            public static EtwEventDescriptor Descriptor { get; } = new EtwEventDescriptor
+            {
+                Id = 182,
+                Version = 0,
+                Channel = 0,
+                Level = EtwTraceLevel.Information,
+                Opcode = EtwEventOpcode.End,
+                Task = (ushort)Tasks.StrongNameVerification,
+                Keyword = (ulong)Keywords.SecurityKeyword
+            };
+
+            /// <summary>
+            /// The process the event was recorded in.
+            /// </summary>
+            public uint ProcessId => _etwEvent.ProcessId;
+
+            /// <summary>
+            /// The thread the event was recorded on.
+            /// </summary>
+            public uint ThreadId => _etwEvent.ThreadId;
+
+            /// <summary>
+            /// The timestamp of the event.
+            /// </summary>
+            public long Timestamp => _etwEvent.Timestamp;
+
+            /// <summary>
+            /// The processor number the event was recorded on.
+            /// </summary>
+            public byte ProcessorNumber => _etwEvent.ProcessorNumber;
+
+            /// <summary>
+            /// Timing information for the event.
+            /// </summary>
+            public (ulong? KernelTime, ulong? UserTime, ulong? ProcessorTime) Time => _etwEvent.Time;
+
+            /// <summary>
+            /// Data for the event.
+            /// </summary>
+            public StrongNameVerificationStopData Data => new(_etwEvent);
+
+            /// <summary>
+            /// Creates a new StrongNameVerificationStopEvent.
+            /// </summary>
+            /// <param name="etwEvent">The event.</param>
+            public StrongNameVerificationStopEvent(EtwEvent etwEvent)
+            {
+                _etwEvent = etwEvent;
+            }
+
+            /// <summary>
+            /// A data wrapper for a StrongNameVerificationStop event.
+            /// </summary>
+            public ref struct StrongNameVerificationStopData
+            {
+                private readonly EtwEvent _etwEvent;
+
+                private int _offset_VerificationFlags;
+                private int _offset_ErrorCode;
+                private int _offset_FullyQualifiedAssemblyName;
+
+                private int Offset_VerificationFlags
+                {
+                    get
+                    {
+                        if (_offset_VerificationFlags == -1)
+                        {
+                            _offset_VerificationFlags = 0;
+                        }
+
+                        return _offset_VerificationFlags;
+                    }
+                }
+
+                private int Offset_ErrorCode
+                {
+                    get
+                    {
+                        if (_offset_ErrorCode == -1)
+                        {
+                            _offset_ErrorCode = Offset_VerificationFlags + 4;
+                        }
+
+                        return _offset_ErrorCode;
+                    }
+                }
+
+                private int Offset_FullyQualifiedAssemblyName
+                {
+                    get
+                    {
+                        if (_offset_FullyQualifiedAssemblyName == -1)
+                        {
+                            _offset_FullyQualifiedAssemblyName = Offset_ErrorCode + 4;
+                        }
+
+                        return _offset_FullyQualifiedAssemblyName;
+                    }
+                }
+
+                /// <summary>
+                /// Retrieves the VerificationFlags field.
+                /// </summary>
+                public uint VerificationFlags => BitConverter.ToUInt32(_etwEvent.Data[Offset_VerificationFlags..]);
+
+                /// <summary>
+                /// Retrieves the ErrorCode field.
+                /// </summary>
+                public uint ErrorCode => BitConverter.ToUInt32(_etwEvent.Data[Offset_ErrorCode..]);
+
+                /// <summary>
+                /// Retrieves the FullyQualifiedAssemblyName field.
+                /// </summary>
+                public string FullyQualifiedAssemblyName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_FullyQualifiedAssemblyName..]);
+
+                /// <summary>
+                /// Creates a new StrongNameVerificationStopData.
+                /// </summary>
+                /// <param name="etwEvent">The event.</param>
+                public StrongNameVerificationStopData(EtwEvent etwEvent)
+                {
+                    _etwEvent = etwEvent;
+                    _offset_VerificationFlags = -1;
+                    _offset_ErrorCode = -1;
+                    _offset_FullyQualifiedAssemblyName = -1;
+                }
+            }
+
+        }
+
+        /// <summary>
+        /// An event wrapper for a AuthenticodeVerificationStart event.
+        /// </summary>
+        public readonly ref struct AuthenticodeVerificationStartEvent
+        {
+            private readonly EtwEvent _etwEvent;
+
+            /// <summary>
+            /// Event name.
+            /// </summary>
+            public const string Name = "AuthenticodeVerificationStart";
+
+            /// <summary>
+            /// The event provider.
+            /// </summary>
+            public static readonly Guid Provider = Id;
+
+            /// <summary>
+            /// Event descriptor.
+            /// </summary>
+            public static EtwEventDescriptor Descriptor { get; } = new EtwEventDescriptor
+            {
+                Id = 183,
+                Version = 0,
+                Channel = 0,
+                Level = EtwTraceLevel.Verbose,
+                Opcode = EtwEventOpcode.Start,
+                Task = (ushort)Tasks.AuthenticodeVerification,
+                Keyword = (ulong)Keywords.SecurityKeyword
+            };
+
+            /// <summary>
+            /// The process the event was recorded in.
+            /// </summary>
+            public uint ProcessId => _etwEvent.ProcessId;
+
+            /// <summary>
+            /// The thread the event was recorded on.
+            /// </summary>
+            public uint ThreadId => _etwEvent.ThreadId;
+
+            /// <summary>
+            /// The timestamp of the event.
+            /// </summary>
+            public long Timestamp => _etwEvent.Timestamp;
+
+            /// <summary>
+            /// The processor number the event was recorded on.
+            /// </summary>
+            public byte ProcessorNumber => _etwEvent.ProcessorNumber;
+
+            /// <summary>
+            /// Timing information for the event.
+            /// </summary>
+            public (ulong? KernelTime, ulong? UserTime, ulong? ProcessorTime) Time => _etwEvent.Time;
+
+            /// <summary>
+            /// Data for the event.
+            /// </summary>
+            public AuthenticodeVerificationStartData Data => new(_etwEvent);
+
+            /// <summary>
+            /// Creates a new AuthenticodeVerificationStartEvent.
+            /// </summary>
+            /// <param name="etwEvent">The event.</param>
+            public AuthenticodeVerificationStartEvent(EtwEvent etwEvent)
+            {
+                _etwEvent = etwEvent;
+            }
+
+            /// <summary>
+            /// A data wrapper for a AuthenticodeVerificationStart event.
+            /// </summary>
+            public ref struct AuthenticodeVerificationStartData
+            {
+                private readonly EtwEvent _etwEvent;
+
+                private int _offset_VerificationFlags;
+                private int _offset_ErrorCode;
+                private int _offset_ModulePath;
+
+                private int Offset_VerificationFlags
+                {
+                    get
+                    {
+                        if (_offset_VerificationFlags == -1)
+                        {
+                            _offset_VerificationFlags = 0;
+                        }
+
+                        return _offset_VerificationFlags;
+                    }
+                }
+
+                private int Offset_ErrorCode
+                {
+                    get
+                    {
+                        if (_offset_ErrorCode == -1)
+                        {
+                            _offset_ErrorCode = Offset_VerificationFlags + 4;
+                        }
+
+                        return _offset_ErrorCode;
+                    }
+                }
+
+                private int Offset_ModulePath
+                {
+                    get
+                    {
+                        if (_offset_ModulePath == -1)
+                        {
+                            _offset_ModulePath = Offset_ErrorCode + 4;
+                        }
+
+                        return _offset_ModulePath;
+                    }
+                }
+
+                /// <summary>
+                /// Retrieves the VerificationFlags field.
+                /// </summary>
+                public uint VerificationFlags => BitConverter.ToUInt32(_etwEvent.Data[Offset_VerificationFlags..]);
+
+                /// <summary>
+                /// Retrieves the ErrorCode field.
+                /// </summary>
+                public uint ErrorCode => BitConverter.ToUInt32(_etwEvent.Data[Offset_ErrorCode..]);
+
+                /// <summary>
+                /// Retrieves the ModulePath field.
+                /// </summary>
+                public string ModulePath => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_ModulePath..]);
+
+                /// <summary>
+                /// Creates a new AuthenticodeVerificationStartData.
+                /// </summary>
+                /// <param name="etwEvent">The event.</param>
+                public AuthenticodeVerificationStartData(EtwEvent etwEvent)
+                {
+                    _etwEvent = etwEvent;
+                    _offset_VerificationFlags = -1;
+                    _offset_ErrorCode = -1;
+                    _offset_ModulePath = -1;
+                }
+            }
+
+        }
+
+        /// <summary>
+        /// An event wrapper for a AuthenticodeVerificationStop event.
+        /// </summary>
+        public readonly ref struct AuthenticodeVerificationStopEvent
+        {
+            private readonly EtwEvent _etwEvent;
+
+            /// <summary>
+            /// Event name.
+            /// </summary>
+            public const string Name = "AuthenticodeVerificationStop";
+
+            /// <summary>
+            /// The event provider.
+            /// </summary>
+            public static readonly Guid Provider = Id;
+
+            /// <summary>
+            /// Event descriptor.
+            /// </summary>
+            public static EtwEventDescriptor Descriptor { get; } = new EtwEventDescriptor
+            {
+                Id = 184,
+                Version = 0,
+                Channel = 0,
+                Level = EtwTraceLevel.Information,
+                Opcode = EtwEventOpcode.End,
+                Task = (ushort)Tasks.AuthenticodeVerification,
+                Keyword = (ulong)Keywords.SecurityKeyword
+            };
+
+            /// <summary>
+            /// The process the event was recorded in.
+            /// </summary>
+            public uint ProcessId => _etwEvent.ProcessId;
+
+            /// <summary>
+            /// The thread the event was recorded on.
+            /// </summary>
+            public uint ThreadId => _etwEvent.ThreadId;
+
+            /// <summary>
+            /// The timestamp of the event.
+            /// </summary>
+            public long Timestamp => _etwEvent.Timestamp;
+
+            /// <summary>
+            /// The processor number the event was recorded on.
+            /// </summary>
+            public byte ProcessorNumber => _etwEvent.ProcessorNumber;
+
+            /// <summary>
+            /// Timing information for the event.
+            /// </summary>
+            public (ulong? KernelTime, ulong? UserTime, ulong? ProcessorTime) Time => _etwEvent.Time;
+
+            /// <summary>
+            /// Data for the event.
+            /// </summary>
+            public AuthenticodeVerificationStopData Data => new(_etwEvent);
+
+            /// <summary>
+            /// Creates a new AuthenticodeVerificationStopEvent.
+            /// </summary>
+            /// <param name="etwEvent">The event.</param>
+            public AuthenticodeVerificationStopEvent(EtwEvent etwEvent)
+            {
+                _etwEvent = etwEvent;
+            }
+
+            /// <summary>
+            /// A data wrapper for a AuthenticodeVerificationStop event.
+            /// </summary>
+            public ref struct AuthenticodeVerificationStopData
+            {
+                private readonly EtwEvent _etwEvent;
+
+                private int _offset_VerificationFlags;
+                private int _offset_ErrorCode;
+                private int _offset_ModulePath;
+
+                private int Offset_VerificationFlags
+                {
+                    get
+                    {
+                        if (_offset_VerificationFlags == -1)
+                        {
+                            _offset_VerificationFlags = 0;
+                        }
+
+                        return _offset_VerificationFlags;
+                    }
+                }
+
+                private int Offset_ErrorCode
+                {
+                    get
+                    {
+                        if (_offset_ErrorCode == -1)
+                        {
+                            _offset_ErrorCode = Offset_VerificationFlags + 4;
+                        }
+
+                        return _offset_ErrorCode;
+                    }
+                }
+
+                private int Offset_ModulePath
+                {
+                    get
+                    {
+                        if (_offset_ModulePath == -1)
+                        {
+                            _offset_ModulePath = Offset_ErrorCode + 4;
+                        }
+
+                        return _offset_ModulePath;
+                    }
+                }
+
+                /// <summary>
+                /// Retrieves the VerificationFlags field.
+                /// </summary>
+                public uint VerificationFlags => BitConverter.ToUInt32(_etwEvent.Data[Offset_VerificationFlags..]);
+
+                /// <summary>
+                /// Retrieves the ErrorCode field.
+                /// </summary>
+                public uint ErrorCode => BitConverter.ToUInt32(_etwEvent.Data[Offset_ErrorCode..]);
+
+                /// <summary>
+                /// Retrieves the ModulePath field.
+                /// </summary>
+                public string ModulePath => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_ModulePath..]);
+
+                /// <summary>
+                /// Creates a new AuthenticodeVerificationStopData.
+                /// </summary>
+                /// <param name="etwEvent">The event.</param>
+                public AuthenticodeVerificationStopData(EtwEvent etwEvent)
+                {
+                    _etwEvent = etwEvent;
+                    _offset_VerificationFlags = -1;
+                    _offset_ErrorCode = -1;
+                    _offset_ModulePath = -1;
                 }
             }
 
@@ -14380,9 +19728,199 @@ namespace EtwTools
         }
 
         /// <summary>
+        /// An event wrapper for a GCStart event.
+        /// </summary>
+        public readonly ref struct GCStartEventV1
+        {
+            private readonly EtwEvent _etwEvent;
+
+            /// <summary>
+            /// Event name.
+            /// </summary>
+            public const string Name = "GCStart";
+
+            /// <summary>
+            /// The event provider.
+            /// </summary>
+            public static readonly Guid Provider = Id;
+
+            /// <summary>
+            /// Event descriptor.
+            /// </summary>
+            public static EtwEventDescriptor Descriptor { get; } = new EtwEventDescriptor
+            {
+                Id = 1,
+                Version = 1,
+                Channel = 0,
+                Level = EtwTraceLevel.Information,
+                Opcode = EtwEventOpcode.Start,
+                Task = (ushort)Tasks.GC,
+                Keyword = (ulong)Keywords.GCKeyword
+            };
+
+            /// <summary>
+            /// The process the event was recorded in.
+            /// </summary>
+            public uint ProcessId => _etwEvent.ProcessId;
+
+            /// <summary>
+            /// The thread the event was recorded on.
+            /// </summary>
+            public uint ThreadId => _etwEvent.ThreadId;
+
+            /// <summary>
+            /// The timestamp of the event.
+            /// </summary>
+            public long Timestamp => _etwEvent.Timestamp;
+
+            /// <summary>
+            /// The processor number the event was recorded on.
+            /// </summary>
+            public byte ProcessorNumber => _etwEvent.ProcessorNumber;
+
+            /// <summary>
+            /// Timing information for the event.
+            /// </summary>
+            public (ulong? KernelTime, ulong? UserTime, ulong? ProcessorTime) Time => _etwEvent.Time;
+
+            /// <summary>
+            /// Data for the event.
+            /// </summary>
+            public GCStartData Data => new(_etwEvent);
+
+            /// <summary>
+            /// Creates a new GCStartEventV1.
+            /// </summary>
+            /// <param name="etwEvent">The event.</param>
+            public GCStartEventV1(EtwEvent etwEvent)
+            {
+                _etwEvent = etwEvent;
+            }
+
+            /// <summary>
+            /// A data wrapper for a GCStart event.
+            /// </summary>
+            public ref struct GCStartData
+            {
+                private readonly EtwEvent _etwEvent;
+
+                private int _offset_Count;
+                private int _offset_Depth;
+                private int _offset_Reason;
+                private int _offset_Type;
+                private int _offset_ClrInstanceID;
+
+                private int Offset_Count
+                {
+                    get
+                    {
+                        if (_offset_Count == -1)
+                        {
+                            _offset_Count = 0;
+                        }
+
+                        return _offset_Count;
+                    }
+                }
+
+                private int Offset_Depth
+                {
+                    get
+                    {
+                        if (_offset_Depth == -1)
+                        {
+                            _offset_Depth = Offset_Count + 4;
+                        }
+
+                        return _offset_Depth;
+                    }
+                }
+
+                private int Offset_Reason
+                {
+                    get
+                    {
+                        if (_offset_Reason == -1)
+                        {
+                            _offset_Reason = Offset_Depth + 4;
+                        }
+
+                        return _offset_Reason;
+                    }
+                }
+
+                private int Offset_Type
+                {
+                    get
+                    {
+                        if (_offset_Type == -1)
+                        {
+                            _offset_Type = Offset_Reason + 4;
+                        }
+
+                        return _offset_Type;
+                    }
+                }
+
+                private int Offset_ClrInstanceID
+                {
+                    get
+                    {
+                        if (_offset_ClrInstanceID == -1)
+                        {
+                            _offset_ClrInstanceID = Offset_Type + 4;
+                        }
+
+                        return _offset_ClrInstanceID;
+                    }
+                }
+
+                /// <summary>
+                /// Retrieves the Count field.
+                /// </summary>
+                public uint Count => BitConverter.ToUInt32(_etwEvent.Data[Offset_Count..]);
+
+                /// <summary>
+                /// Retrieves the Depth field.
+                /// </summary>
+                public uint Depth => BitConverter.ToUInt32(_etwEvent.Data[Offset_Depth..]);
+
+                /// <summary>
+                /// Retrieves the Reason field.
+                /// </summary>
+                public GCReasonMap Reason => (GCReasonMap)BitConverter.ToUInt32(_etwEvent.Data[Offset_Reason..]);
+
+                /// <summary>
+                /// Retrieves the Type field.
+                /// </summary>
+                public GCTypeMap Type => (GCTypeMap)BitConverter.ToUInt32(_etwEvent.Data[Offset_Type..]);
+
+                /// <summary>
+                /// Retrieves the ClrInstanceID field.
+                /// </summary>
+                public ushort ClrInstanceID => BitConverter.ToUInt16(_etwEvent.Data[Offset_ClrInstanceID..]);
+
+                /// <summary>
+                /// Creates a new GCStartData.
+                /// </summary>
+                /// <param name="etwEvent">The event.</param>
+                public GCStartData(EtwEvent etwEvent)
+                {
+                    _etwEvent = etwEvent;
+                    _offset_Count = -1;
+                    _offset_Depth = -1;
+                    _offset_Reason = -1;
+                    _offset_Type = -1;
+                    _offset_ClrInstanceID = -1;
+                }
+            }
+
+        }
+
+        /// <summary>
         /// An event wrapper for a GCStop event.
         /// </summary>
-        public readonly ref struct GCStopEvent
+        public readonly ref struct GCStopEventV1
         {
             private readonly EtwEvent _etwEvent;
 
@@ -14441,10 +19979,10 @@ namespace EtwTools
             public GCStopData Data => new(_etwEvent);
 
             /// <summary>
-            /// Creates a new GCStopEvent.
+            /// Creates a new GCStopEventV1.
             /// </summary>
             /// <param name="etwEvent">The event.</param>
-            public GCStopEvent(EtwEvent etwEvent)
+            public GCStopEventV1(EtwEvent etwEvent)
             {
                 _etwEvent = etwEvent;
             }
@@ -14532,7 +20070,7 @@ namespace EtwTools
         /// <summary>
         /// An event wrapper for a GCRestartEEStop event.
         /// </summary>
-        public readonly ref struct GCRestartEEStopEvent
+        public readonly ref struct GCRestartEEStopEventV1
         {
             private readonly EtwEvent _etwEvent;
 
@@ -14591,10 +20129,10 @@ namespace EtwTools
             public GCRestartEEStopData Data => new(_etwEvent);
 
             /// <summary>
-            /// Creates a new GCRestartEEStopEvent.
+            /// Creates a new GCRestartEEStopEventV1.
             /// </summary>
             /// <param name="etwEvent">The event.</param>
-            public GCRestartEEStopEvent(EtwEvent etwEvent)
+            public GCRestartEEStopEventV1(EtwEvent etwEvent)
             {
                 _etwEvent = etwEvent;
             }
@@ -14642,7 +20180,7 @@ namespace EtwTools
         /// <summary>
         /// An event wrapper for a GCHeapStats event.
         /// </summary>
-        public readonly ref struct GCHeapStatsEvent
+        public readonly ref struct GCHeapStatsEventV1
         {
             private readonly EtwEvent _etwEvent;
 
@@ -14701,10 +20239,10 @@ namespace EtwTools
             public GCHeapStatsData Data => new(_etwEvent);
 
             /// <summary>
-            /// Creates a new GCHeapStatsEvent.
+            /// Creates a new GCHeapStatsEventV1.
             /// </summary>
             /// <param name="etwEvent">The event.</param>
-            public GCHeapStatsEvent(EtwEvent etwEvent)
+            public GCHeapStatsEventV1(EtwEvent etwEvent)
             {
                 _etwEvent = etwEvent;
             }
@@ -15012,7 +20550,7 @@ namespace EtwTools
         /// <summary>
         /// An event wrapper for a GCCreateSegment event.
         /// </summary>
-        public readonly ref struct GCCreateSegmentEvent
+        public readonly ref struct GCCreateSegmentEventV1
         {
             private readonly EtwEvent _etwEvent;
 
@@ -15071,10 +20609,10 @@ namespace EtwTools
             public GCCreateSegmentData Data => new(_etwEvent);
 
             /// <summary>
-            /// Creates a new GCCreateSegmentEvent.
+            /// Creates a new GCCreateSegmentEventV1.
             /// </summary>
             /// <param name="etwEvent">The event.</param>
-            public GCCreateSegmentEvent(EtwEvent etwEvent)
+            public GCCreateSegmentEventV1(EtwEvent etwEvent)
             {
                 _etwEvent = etwEvent;
             }
@@ -15182,7 +20720,7 @@ namespace EtwTools
         /// <summary>
         /// An event wrapper for a GCFreeSegment event.
         /// </summary>
-        public readonly ref struct GCFreeSegmentEvent
+        public readonly ref struct GCFreeSegmentEventV1
         {
             private readonly EtwEvent _etwEvent;
 
@@ -15241,10 +20779,10 @@ namespace EtwTools
             public GCFreeSegmentData Data => new(_etwEvent);
 
             /// <summary>
-            /// Creates a new GCFreeSegmentEvent.
+            /// Creates a new GCFreeSegmentEventV1.
             /// </summary>
             /// <param name="etwEvent">The event.</param>
-            public GCFreeSegmentEvent(EtwEvent etwEvent)
+            public GCFreeSegmentEventV1(EtwEvent etwEvent)
             {
                 _etwEvent = etwEvent;
             }
@@ -15312,7 +20850,7 @@ namespace EtwTools
         /// <summary>
         /// An event wrapper for a GCRestartEEStart event.
         /// </summary>
-        public readonly ref struct GCRestartEEStartEvent
+        public readonly ref struct GCRestartEEStartEventV1
         {
             private readonly EtwEvent _etwEvent;
 
@@ -15371,10 +20909,10 @@ namespace EtwTools
             public GCRestartEEStartData Data => new(_etwEvent);
 
             /// <summary>
-            /// Creates a new GCRestartEEStartEvent.
+            /// Creates a new GCRestartEEStartEventV1.
             /// </summary>
             /// <param name="etwEvent">The event.</param>
-            public GCRestartEEStartEvent(EtwEvent etwEvent)
+            public GCRestartEEStartEventV1(EtwEvent etwEvent)
             {
                 _etwEvent = etwEvent;
             }
@@ -15422,7 +20960,7 @@ namespace EtwTools
         /// <summary>
         /// An event wrapper for a GCSuspendEEStop event.
         /// </summary>
-        public readonly ref struct GCSuspendEEStopEvent
+        public readonly ref struct GCSuspendEEStopEventV1
         {
             private readonly EtwEvent _etwEvent;
 
@@ -15481,10 +21019,10 @@ namespace EtwTools
             public GCSuspendEEStopData Data => new(_etwEvent);
 
             /// <summary>
-            /// Creates a new GCSuspendEEStopEvent.
+            /// Creates a new GCSuspendEEStopEventV1.
             /// </summary>
             /// <param name="etwEvent">The event.</param>
-            public GCSuspendEEStopEvent(EtwEvent etwEvent)
+            public GCSuspendEEStopEventV1(EtwEvent etwEvent)
             {
                 _etwEvent = etwEvent;
             }
@@ -15532,7 +21070,7 @@ namespace EtwTools
         /// <summary>
         /// An event wrapper for a GCSuspendEEStart event.
         /// </summary>
-        public readonly ref struct GCSuspendEEStartEvent
+        public readonly ref struct GCSuspendEEStartEventV1
         {
             private readonly EtwEvent _etwEvent;
 
@@ -15591,10 +21129,10 @@ namespace EtwTools
             public GCSuspendEEStartData Data => new(_etwEvent);
 
             /// <summary>
-            /// Creates a new GCSuspendEEStartEvent.
+            /// Creates a new GCSuspendEEStartEventV1.
             /// </summary>
             /// <param name="etwEvent">The event.</param>
-            public GCSuspendEEStartEvent(EtwEvent etwEvent)
+            public GCSuspendEEStartEventV1(EtwEvent etwEvent)
             {
                 _etwEvent = etwEvent;
             }
@@ -15680,9 +21218,159 @@ namespace EtwTools
         }
 
         /// <summary>
+        /// An event wrapper for a GCAllocationTick event.
+        /// </summary>
+        public readonly ref struct GCAllocationTickEventV1
+        {
+            private readonly EtwEvent _etwEvent;
+
+            /// <summary>
+            /// Event name.
+            /// </summary>
+            public const string Name = "GCAllocationTick";
+
+            /// <summary>
+            /// The event provider.
+            /// </summary>
+            public static readonly Guid Provider = Id;
+
+            /// <summary>
+            /// Event descriptor.
+            /// </summary>
+            public static EtwEventDescriptor Descriptor { get; } = new EtwEventDescriptor
+            {
+                Id = 10,
+                Version = 1,
+                Channel = 0,
+                Level = EtwTraceLevel.Verbose,
+                Opcode = (EtwEventOpcode)Opcodes.AllocationTick,
+                Task = (ushort)Tasks.GC,
+                Keyword = (ulong)Keywords.GCKeyword
+            };
+
+            /// <summary>
+            /// The process the event was recorded in.
+            /// </summary>
+            public uint ProcessId => _etwEvent.ProcessId;
+
+            /// <summary>
+            /// The thread the event was recorded on.
+            /// </summary>
+            public uint ThreadId => _etwEvent.ThreadId;
+
+            /// <summary>
+            /// The timestamp of the event.
+            /// </summary>
+            public long Timestamp => _etwEvent.Timestamp;
+
+            /// <summary>
+            /// The processor number the event was recorded on.
+            /// </summary>
+            public byte ProcessorNumber => _etwEvent.ProcessorNumber;
+
+            /// <summary>
+            /// Timing information for the event.
+            /// </summary>
+            public (ulong? KernelTime, ulong? UserTime, ulong? ProcessorTime) Time => _etwEvent.Time;
+
+            /// <summary>
+            /// Data for the event.
+            /// </summary>
+            public GCAllocationTickData Data => new(_etwEvent);
+
+            /// <summary>
+            /// Creates a new GCAllocationTickEventV1.
+            /// </summary>
+            /// <param name="etwEvent">The event.</param>
+            public GCAllocationTickEventV1(EtwEvent etwEvent)
+            {
+                _etwEvent = etwEvent;
+            }
+
+            /// <summary>
+            /// A data wrapper for a GCAllocationTick event.
+            /// </summary>
+            public ref struct GCAllocationTickData
+            {
+                private readonly EtwEvent _etwEvent;
+
+                private int _offset_AllocationAmount;
+                private int _offset_AllocationKind;
+                private int _offset_ClrInstanceID;
+
+                private int Offset_AllocationAmount
+                {
+                    get
+                    {
+                        if (_offset_AllocationAmount == -1)
+                        {
+                            _offset_AllocationAmount = 0;
+                        }
+
+                        return _offset_AllocationAmount;
+                    }
+                }
+
+                private int Offset_AllocationKind
+                {
+                    get
+                    {
+                        if (_offset_AllocationKind == -1)
+                        {
+                            _offset_AllocationKind = Offset_AllocationAmount + 4;
+                        }
+
+                        return _offset_AllocationKind;
+                    }
+                }
+
+                private int Offset_ClrInstanceID
+                {
+                    get
+                    {
+                        if (_offset_ClrInstanceID == -1)
+                        {
+                            _offset_ClrInstanceID = Offset_AllocationKind + 4;
+                        }
+
+                        return _offset_ClrInstanceID;
+                    }
+                }
+
+                /// <summary>
+                /// Retrieves the AllocationAmount field.
+                /// </summary>
+                public uint AllocationAmount => BitConverter.ToUInt32(_etwEvent.Data[Offset_AllocationAmount..]);
+
+                /// <summary>
+                /// Retrieves the AllocationKind field.
+                /// </summary>
+                public GCAllocationKindMap AllocationKind => (GCAllocationKindMap)BitConverter.ToUInt32(_etwEvent.Data[Offset_AllocationKind..]);
+
+                /// <summary>
+                /// Retrieves the ClrInstanceID field.
+                /// </summary>
+                public ushort ClrInstanceID => BitConverter.ToUInt16(_etwEvent.Data[Offset_ClrInstanceID..]);
+
+                /// <summary>
+                /// Creates a new GCAllocationTickData.
+                /// </summary>
+                /// <param name="etwEvent">The event.</param>
+                public GCAllocationTickData(EtwEvent etwEvent)
+                {
+                    _etwEvent = etwEvent;
+                    _offset_AllocationAmount = -1;
+                    _offset_AllocationKind = -1;
+                    _offset_ClrInstanceID = -1;
+                }
+            }
+
+        }
+
+        /// <summary>
         /// An event wrapper for a GCCreateConcurrentThread event.
         /// </summary>
-        public readonly ref struct GCCreateConcurrentThreadEvent
+        public readonly ref struct GCCreateConcurrentThreadEventV1
         {
             private readonly EtwEvent _etwEvent;
 
@@ -15741,10 +21429,10 @@ namespace EtwTools
             public GCCreateConcurrentThreadData Data => new(_etwEvent);
 
             /// <summary>
-            /// Creates a new GCCreateConcurrentThreadEvent.
+            /// Creates a new GCCreateConcurrentThreadEventV1.
             /// </summary>
             /// <param name="etwEvent">The event.</param>
-            public GCCreateConcurrentThreadEvent(EtwEvent etwEvent)
+            public GCCreateConcurrentThreadEventV1(EtwEvent etwEvent)
             {
                 _etwEvent = etwEvent;
             }
@@ -15792,7 +21480,7 @@ namespace EtwTools
         /// <summary>
         /// An event wrapper for a GCTerminateConcurrentThread event.
         /// </summary>
-        public readonly ref struct GCTerminateConcurrentThreadEvent
+        public readonly ref struct GCTerminateConcurrentThreadEventV1
         {
             private readonly EtwEvent _etwEvent;
 
@@ -15851,10 +21539,10 @@ namespace EtwTools
             public GCTerminateConcurrentThreadData Data => new(_etwEvent);
 
             /// <summary>
-            /// Creates a new GCTerminateConcurrentThreadEvent.
+            /// Creates a new GCTerminateConcurrentThreadEventV1.
             /// </summary>
             /// <param name="etwEvent">The event.</param>
-            public GCTerminateConcurrentThreadEvent(EtwEvent etwEvent)
+            public GCTerminateConcurrentThreadEventV1(EtwEvent etwEvent)
             {
                 _etwEvent = etwEvent;
             }
@@ -15902,7 +21590,7 @@ namespace EtwTools
         /// <summary>
         /// An event wrapper for a GCFinalizersStop event.
         /// </summary>
-        public readonly ref struct GCFinalizersStopEvent
+        public readonly ref struct GCFinalizersStopEventV1
         {
             private readonly EtwEvent _etwEvent;
 
@@ -15961,10 +21649,10 @@ namespace EtwTools
             public GCFinalizersStopData Data => new(_etwEvent);
 
             /// <summary>
-            /// Creates a new GCFinalizersStopEvent.
+            /// Creates a new GCFinalizersStopEventV1.
             /// </summary>
             /// <param name="etwEvent">The event.</param>
-            public GCFinalizersStopEvent(EtwEvent etwEvent)
+            public GCFinalizersStopEventV1(EtwEvent etwEvent)
             {
                 _etwEvent = etwEvent;
             }
@@ -16032,7 +21720,7 @@ namespace EtwTools
         /// <summary>
         /// An event wrapper for a GCFinalizersStart event.
         /// </summary>
-        public readonly ref struct GCFinalizersStartEvent
+        public readonly ref struct GCFinalizersStartEventV1
         {
             private readonly EtwEvent _etwEvent;
 
@@ -16091,10 +21779,10 @@ namespace EtwTools
             public GCFinalizersStartData Data => new(_etwEvent);
 
             /// <summary>
-            /// Creates a new GCFinalizersStartEvent.
+            /// Creates a new GCFinalizersStartEventV1.
             /// </summary>
             /// <param name="etwEvent">The event.</param>
-            public GCFinalizersStartEvent(EtwEvent etwEvent)
+            public GCFinalizersStartEventV1(EtwEvent etwEvent)
             {
                 _etwEvent = etwEvent;
             }
@@ -16142,7 +21830,7 @@ namespace EtwTools
         /// <summary>
         /// An event wrapper for a IOThreadCreationStart event.
         /// </summary>
-        public readonly ref struct IOThreadCreationStartEvent
+        public readonly ref struct IOThreadCreationStartEventV1
         {
             private readonly EtwEvent _etwEvent;
 
@@ -16201,10 +21889,10 @@ namespace EtwTools
             public IOThreadCreationStartData Data => new(_etwEvent);
 
             /// <summary>
-            /// Creates a new IOThreadCreationStartEvent.
+            /// Creates a new IOThreadCreationStartEventV1.
             /// </summary>
             /// <param name="etwEvent">The event.</param>
-            public IOThreadCreationStartEvent(EtwEvent etwEvent)
+            public IOThreadCreationStartEventV1(EtwEvent etwEvent)
             {
                 _etwEvent = etwEvent;
             }
@@ -16292,7 +21980,7 @@ namespace EtwTools
         /// <summary>
         /// An event wrapper for a IOThreadCreationStop event.
         /// </summary>
-        public readonly ref struct IOThreadCreationStopEvent
+        public readonly ref struct IOThreadCreationStopEventV1
         {
             private readonly EtwEvent _etwEvent;
 
@@ -16351,10 +22039,10 @@ namespace EtwTools
             public IOThreadCreationStopData Data => new(_etwEvent);
 
             /// <summary>
-            /// Creates a new IOThreadCreationStopEvent.
+            /// Creates a new IOThreadCreationStopEventV1.
             /// </summary>
             /// <param name="etwEvent">The event.</param>
-            public IOThreadCreationStopEvent(EtwEvent etwEvent)
+            public IOThreadCreationStopEventV1(EtwEvent etwEvent)
             {
                 _etwEvent = etwEvent;
             }
@@ -16442,7 +22130,7 @@ namespace EtwTools
         /// <summary>
         /// An event wrapper for a IOThreadRetirementStart event.
         /// </summary>
-        public readonly ref struct IOThreadRetirementStartEvent
+        public readonly ref struct IOThreadRetirementStartEventV1
         {
             private readonly EtwEvent _etwEvent;
 
@@ -16501,10 +22189,10 @@ namespace EtwTools
             public IOThreadRetirementStartData Data => new(_etwEvent);
 
             /// <summary>
-            /// Creates a new IOThreadRetirementStartEvent.
+            /// Creates a new IOThreadRetirementStartEventV1.
             /// </summary>
             /// <param name="etwEvent">The event.</param>
-            public IOThreadRetirementStartEvent(EtwEvent etwEvent)
+            public IOThreadRetirementStartEventV1(EtwEvent etwEvent)
             {
                 _etwEvent = etwEvent;
             }
@@ -16592,7 +22280,7 @@ namespace EtwTools
         /// <summary>
         /// An event wrapper for a IOThreadRetirementStop event.
         /// </summary>
-        public readonly ref struct IOThreadRetirementStopEvent
+        public readonly ref struct IOThreadRetirementStopEventV1
         {
             private readonly EtwEvent _etwEvent;
 
@@ -16651,10 +22339,10 @@ namespace EtwTools
             public IOThreadRetirementStopData Data => new(_etwEvent);
 
             /// <summary>
-            /// Creates a new IOThreadRetirementStopEvent.
+            /// Creates a new IOThreadRetirementStopEventV1.
             /// </summary>
             /// <param name="etwEvent">The event.</param>
-            public IOThreadRetirementStopEvent(EtwEvent etwEvent)
+            public IOThreadRetirementStopEventV1(EtwEvent etwEvent)
             {
                 _etwEvent = etwEvent;
             }
@@ -16742,7 +22430,7 @@ namespace EtwTools
         /// <summary>
         /// An event wrapper for a ExceptionStart event.
         /// </summary>
-        public readonly ref struct ExceptionStartEvent
+        public readonly ref struct ExceptionStartEventV1
         {
             private readonly EtwEvent _etwEvent;
 
@@ -16801,10 +22489,10 @@ namespace EtwTools
             public ExceptionStartData Data => new(_etwEvent);
 
             /// <summary>
-            /// Creates a new ExceptionStartEvent.
+            /// Creates a new ExceptionStartEventV1.
             /// </summary>
             /// <param name="etwEvent">The event.</param>
-            public ExceptionStartEvent(EtwEvent etwEvent)
+            public ExceptionStartEventV1(EtwEvent etwEvent)
             {
                 _etwEvent = etwEvent;
             }
@@ -16952,7 +22640,7 @@ namespace EtwTools
         /// <summary>
         /// An event wrapper for a ContentionStart event.
         /// </summary>
-        public readonly ref struct ContentionStartEvent
+        public readonly ref struct ContentionStartEventV1
         {
             private readonly EtwEvent _etwEvent;
 
@@ -17011,10 +22699,10 @@ namespace EtwTools
             public ContentionStartData Data => new(_etwEvent);
 
             /// <summary>
-            /// Creates a new ContentionStartEvent.
+            /// Creates a new ContentionStartEventV1.
             /// </summary>
             /// <param name="etwEvent">The event.</param>
-            public ContentionStartEvent(EtwEvent etwEvent)
+            public ContentionStartEventV1(EtwEvent etwEvent)
             {
                 _etwEvent = etwEvent;
             }
@@ -17080,9 +22768,1049 @@ namespace EtwTools
         }
 
         /// <summary>
+        /// An event wrapper for a MethodLoad event.
+        /// </summary>
+        public readonly ref struct MethodLoadEventV1
+        {
+            private readonly EtwEvent _etwEvent;
+
+            /// <summary>
+            /// Event name.
+            /// </summary>
+            public const string Name = "MethodLoad";
+
+            /// <summary>
+            /// The event provider.
+            /// </summary>
+            public static readonly Guid Provider = Id;
+
+            /// <summary>
+            /// Event descriptor.
+            /// </summary>
+            public static EtwEventDescriptor Descriptor { get; } = new EtwEventDescriptor
+            {
+                Id = 141,
+                Version = 1,
+                Channel = 0,
+                Level = EtwTraceLevel.Information,
+                Opcode = (EtwEventOpcode)Opcodes.SetGCHandle,
+                Task = (ushort)Tasks.Method,
+                Keyword = (ulong)Keywords.JitKeyword | (ulong)Keywords.NGenKeyword
+            };
+
+            /// <summary>
+            /// The process the event was recorded in.
+            /// </summary>
+            public uint ProcessId => _etwEvent.ProcessId;
+
+            /// <summary>
+            /// The thread the event was recorded on.
+            /// </summary>
+            public uint ThreadId => _etwEvent.ThreadId;
+
+            /// <summary>
+            /// The timestamp of the event.
+            /// </summary>
+            public long Timestamp => _etwEvent.Timestamp;
+
+            /// <summary>
+            /// The processor number the event was recorded on.
+            /// </summary>
+            public byte ProcessorNumber => _etwEvent.ProcessorNumber;
+
+            /// <summary>
+            /// Timing information for the event.
+            /// </summary>
+            public (ulong? KernelTime, ulong? UserTime, ulong? ProcessorTime) Time => _etwEvent.Time;
+
+            /// <summary>
+            /// Data for the event.
+            /// </summary>
+            public MethodLoadData Data => new(_etwEvent);
+
+            /// <summary>
+            /// Creates a new MethodLoadEventV1.
+            /// </summary>
+            /// <param name="etwEvent">The event.</param>
+            public MethodLoadEventV1(EtwEvent etwEvent)
+            {
+                _etwEvent = etwEvent;
+            }
+
+            /// <summary>
+            /// A data wrapper for a MethodLoad event.
+            /// </summary>
+            public ref struct MethodLoadData
+            {
+                private readonly EtwEvent _etwEvent;
+
+                private int _offset_MethodID;
+                private int _offset_ModuleID;
+                private int _offset_MethodStartAddress;
+                private int _offset_MethodSize;
+                private int _offset_MethodToken;
+                private int _offset_MethodFlags;
+                private int _offset_ClrInstanceID;
+
+                private int Offset_MethodID
+                {
+                    get
+                    {
+                        if (_offset_MethodID == -1)
+                        {
+                            _offset_MethodID = 0;
+                        }
+
+                        return _offset_MethodID;
+                    }
+                }
+
+                private int Offset_ModuleID
+                {
+                    get
+                    {
+                        if (_offset_ModuleID == -1)
+                        {
+                            _offset_ModuleID = Offset_MethodID + 8;
+                        }
+
+                        return _offset_ModuleID;
+                    }
+                }
+
+                private int Offset_MethodStartAddress
+                {
+                    get
+                    {
+                        if (_offset_MethodStartAddress == -1)
+                        {
+                            _offset_MethodStartAddress = Offset_ModuleID + 8;
+                        }
+
+                        return _offset_MethodStartAddress;
+                    }
+                }
+
+                private int Offset_MethodSize
+                {
+                    get
+                    {
+                        if (_offset_MethodSize == -1)
+                        {
+                            _offset_MethodSize = Offset_MethodStartAddress + 8;
+                        }
+
+                        return _offset_MethodSize;
+                    }
+                }
+
+                private int Offset_MethodToken
+                {
+                    get
+                    {
+                        if (_offset_MethodToken == -1)
+                        {
+                            _offset_MethodToken = Offset_MethodSize + 4;
+                        }
+
+                        return _offset_MethodToken;
+                    }
+                }
+
+                private int Offset_MethodFlags
+                {
+                    get
+                    {
+                        if (_offset_MethodFlags == -1)
+                        {
+                            _offset_MethodFlags = Offset_MethodToken + 4;
+                        }
+
+                        return _offset_MethodFlags;
+                    }
+                }
+
+                private int Offset_ClrInstanceID
+                {
+                    get
+                    {
+                        if (_offset_ClrInstanceID == -1)
+                        {
+                            _offset_ClrInstanceID = Offset_MethodFlags + 4;
+                        }
+
+                        return _offset_ClrInstanceID;
+                    }
+                }
+
+                /// <summary>
+                /// Retrieves the MethodID field.
+                /// </summary>
+                public ulong MethodID => BitConverter.ToUInt64(_etwEvent.Data[Offset_MethodID..]);
+
+                /// <summary>
+                /// Retrieves the ModuleID field.
+                /// </summary>
+                public ulong ModuleID => BitConverter.ToUInt64(_etwEvent.Data[Offset_ModuleID..]);
+
+                /// <summary>
+                /// Retrieves the MethodStartAddress field.
+                /// </summary>
+                public ulong MethodStartAddress => BitConverter.ToUInt64(_etwEvent.Data[Offset_MethodStartAddress..]);
+
+                /// <summary>
+                /// Retrieves the MethodSize field.
+                /// </summary>
+                public uint MethodSize => BitConverter.ToUInt32(_etwEvent.Data[Offset_MethodSize..]);
+
+                /// <summary>
+                /// Retrieves the MethodToken field.
+                /// </summary>
+                public uint MethodToken => BitConverter.ToUInt32(_etwEvent.Data[Offset_MethodToken..]);
+
+                /// <summary>
+                /// Retrieves the MethodFlags field.
+                /// </summary>
+                public MethodFlagsMap MethodFlags => (MethodFlagsMap)BitConverter.ToUInt32(_etwEvent.Data[Offset_MethodFlags..]);
+
+                /// <summary>
+                /// Retrieves the ClrInstanceID field.
+                /// </summary>
+                public ushort ClrInstanceID => BitConverter.ToUInt16(_etwEvent.Data[Offset_ClrInstanceID..]);
+
+                /// <summary>
+                /// Creates a new MethodLoadData.
+                /// </summary>
+                /// <param name="etwEvent">The event.</param>
+                public MethodLoadData(EtwEvent etwEvent)
+                {
+                    _etwEvent = etwEvent;
+                    _offset_MethodID = -1;
+                    _offset_ModuleID = -1;
+                    _offset_MethodStartAddress = -1;
+                    _offset_MethodSize = -1;
+                    _offset_MethodToken = -1;
+                    _offset_MethodFlags = -1;
+                    _offset_ClrInstanceID = -1;
+                }
+            }
+
+        }
+
+        /// <summary>
+        /// An event wrapper for a MethodUnload event.
+        /// </summary>
+        public readonly ref struct MethodUnloadEventV1
+        {
+            private readonly EtwEvent _etwEvent;
+
+            /// <summary>
+            /// Event name.
+            /// </summary>
+            public const string Name = "MethodUnload";
+
+            /// <summary>
+            /// The event provider.
+            /// </summary>
+            public static readonly Guid Provider = Id;
+
+            /// <summary>
+            /// Event descriptor.
+            /// </summary>
+            public static EtwEventDescriptor Descriptor { get; } = new EtwEventDescriptor
+            {
+                Id = 142,
+                Version = 1,
+                Channel = 0,
+                Level = EtwTraceLevel.Information,
+                Opcode = (EtwEventOpcode)Opcodes.DestoryGCHandle,
+                Task = (ushort)Tasks.Method,
+                Keyword = (ulong)Keywords.JitKeyword | (ulong)Keywords.NGenKeyword
+            };
+
+            /// <summary>
+            /// The process the event was recorded in.
+            /// </summary>
+            public uint ProcessId => _etwEvent.ProcessId;
+
+            /// <summary>
+            /// The thread the event was recorded on.
+            /// </summary>
+            public uint ThreadId => _etwEvent.ThreadId;
+
+            /// <summary>
+            /// The timestamp of the event.
+            /// </summary>
+            public long Timestamp => _etwEvent.Timestamp;
+
+            /// <summary>
+            /// The processor number the event was recorded on.
+            /// </summary>
+            public byte ProcessorNumber => _etwEvent.ProcessorNumber;
+
+            /// <summary>
+            /// Timing information for the event.
+            /// </summary>
+            public (ulong? KernelTime, ulong? UserTime, ulong? ProcessorTime) Time => _etwEvent.Time;
+
+            /// <summary>
+            /// Data for the event.
+            /// </summary>
+            public MethodUnloadData Data => new(_etwEvent);
+
+            /// <summary>
+            /// Creates a new MethodUnloadEventV1.
+            /// </summary>
+            /// <param name="etwEvent">The event.</param>
+            public MethodUnloadEventV1(EtwEvent etwEvent)
+            {
+                _etwEvent = etwEvent;
+            }
+
+            /// <summary>
+            /// A data wrapper for a MethodUnload event.
+            /// </summary>
+            public ref struct MethodUnloadData
+            {
+                private readonly EtwEvent _etwEvent;
+
+                private int _offset_MethodID;
+                private int _offset_ModuleID;
+                private int _offset_MethodStartAddress;
+                private int _offset_MethodSize;
+                private int _offset_MethodToken;
+                private int _offset_MethodFlags;
+                private int _offset_ClrInstanceID;
+
+                private int Offset_MethodID
+                {
+                    get
+                    {
+                        if (_offset_MethodID == -1)
+                        {
+                            _offset_MethodID = 0;
+                        }
+
+                        return _offset_MethodID;
+                    }
+                }
+
+                private int Offset_ModuleID
+                {
+                    get
+                    {
+                        if (_offset_ModuleID == -1)
+                        {
+                            _offset_ModuleID = Offset_MethodID + 8;
+                        }
+
+                        return _offset_ModuleID;
+                    }
+                }
+
+                private int Offset_MethodStartAddress
+                {
+                    get
+                    {
+                        if (_offset_MethodStartAddress == -1)
+                        {
+                            _offset_MethodStartAddress = Offset_ModuleID + 8;
+                        }
+
+                        return _offset_MethodStartAddress;
+                    }
+                }
+
+                private int Offset_MethodSize
+                {
+                    get
+                    {
+                        if (_offset_MethodSize == -1)
+                        {
+                            _offset_MethodSize = Offset_MethodStartAddress + 8;
+                        }
+
+                        return _offset_MethodSize;
+                    }
+                }
+
+                private int Offset_MethodToken
+                {
+                    get
+                    {
+                        if (_offset_MethodToken == -1)
+                        {
+                            _offset_MethodToken = Offset_MethodSize + 4;
+                        }
+
+                        return _offset_MethodToken;
+                    }
+                }
+
+                private int Offset_MethodFlags
+                {
+                    get
+                    {
+                        if (_offset_MethodFlags == -1)
+                        {
+                            _offset_MethodFlags = Offset_MethodToken + 4;
+                        }
+
+                        return _offset_MethodFlags;
+                    }
+                }
+
+                private int Offset_ClrInstanceID
+                {
+                    get
+                    {
+                        if (_offset_ClrInstanceID == -1)
+                        {
+                            _offset_ClrInstanceID = Offset_MethodFlags + 4;
+                        }
+
+                        return _offset_ClrInstanceID;
+                    }
+                }
+
+                /// <summary>
+                /// Retrieves the MethodID field.
+                /// </summary>
+                public ulong MethodID => BitConverter.ToUInt64(_etwEvent.Data[Offset_MethodID..]);
+
+                /// <summary>
+                /// Retrieves the ModuleID field.
+                /// </summary>
+                public ulong ModuleID => BitConverter.ToUInt64(_etwEvent.Data[Offset_ModuleID..]);
+
+                /// <summary>
+                /// Retrieves the MethodStartAddress field.
+                /// </summary>
+                public ulong MethodStartAddress => BitConverter.ToUInt64(_etwEvent.Data[Offset_MethodStartAddress..]);
+
+                /// <summary>
+                /// Retrieves the MethodSize field.
+                /// </summary>
+                public uint MethodSize => BitConverter.ToUInt32(_etwEvent.Data[Offset_MethodSize..]);
+
+                /// <summary>
+                /// Retrieves the MethodToken field.
+                /// </summary>
+                public uint MethodToken => BitConverter.ToUInt32(_etwEvent.Data[Offset_MethodToken..]);
+
+                /// <summary>
+                /// Retrieves the MethodFlags field.
+                /// </summary>
+                public MethodFlagsMap MethodFlags => (MethodFlagsMap)BitConverter.ToUInt32(_etwEvent.Data[Offset_MethodFlags..]);
+
+                /// <summary>
+                /// Retrieves the ClrInstanceID field.
+                /// </summary>
+                public ushort ClrInstanceID => BitConverter.ToUInt16(_etwEvent.Data[Offset_ClrInstanceID..]);
+
+                /// <summary>
+                /// Creates a new MethodUnloadData.
+                /// </summary>
+                /// <param name="etwEvent">The event.</param>
+                public MethodUnloadData(EtwEvent etwEvent)
+                {
+                    _etwEvent = etwEvent;
+                    _offset_MethodID = -1;
+                    _offset_ModuleID = -1;
+                    _offset_MethodStartAddress = -1;
+                    _offset_MethodSize = -1;
+                    _offset_MethodToken = -1;
+                    _offset_MethodFlags = -1;
+                    _offset_ClrInstanceID = -1;
+                }
+            }
+
+        }
+
+        /// <summary>
+        /// An event wrapper for a MethodLoadVerbose event.
+        /// </summary>
+        public readonly ref struct MethodLoadVerboseEventV1
+        {
+            private readonly EtwEvent _etwEvent;
+
+            /// <summary>
+            /// Event name.
+            /// </summary>
+            public const string Name = "MethodLoadVerbose";
+
+            /// <summary>
+            /// The event provider.
+            /// </summary>
+            public static readonly Guid Provider = Id;
+
+            /// <summary>
+            /// Event descriptor.
+            /// </summary>
+            public static EtwEventDescriptor Descriptor { get; } = new EtwEventDescriptor
+            {
+                Id = 143,
+                Version = 1,
+                Channel = 0,
+                Level = EtwTraceLevel.Information,
+                Opcode = (EtwEventOpcode)Opcodes.LoadVerbose,
+                Task = (ushort)Tasks.Method,
+                Keyword = (ulong)Keywords.JitKeyword | (ulong)Keywords.NGenKeyword
+            };
+
+            /// <summary>
+            /// The process the event was recorded in.
+            /// </summary>
+            public uint ProcessId => _etwEvent.ProcessId;
+
+            /// <summary>
+            /// The thread the event was recorded on.
+            /// </summary>
+            public uint ThreadId => _etwEvent.ThreadId;
+
+            /// <summary>
+            /// The timestamp of the event.
+            /// </summary>
+            public long Timestamp => _etwEvent.Timestamp;
+
+            /// <summary>
+            /// The processor number the event was recorded on.
+            /// </summary>
+            public byte ProcessorNumber => _etwEvent.ProcessorNumber;
+
+            /// <summary>
+            /// Timing information for the event.
+            /// </summary>
+            public (ulong? KernelTime, ulong? UserTime, ulong? ProcessorTime) Time => _etwEvent.Time;
+
+            /// <summary>
+            /// Data for the event.
+            /// </summary>
+            public MethodLoadVerboseData Data => new(_etwEvent);
+
+            /// <summary>
+            /// Creates a new MethodLoadVerboseEventV1.
+            /// </summary>
+            /// <param name="etwEvent">The event.</param>
+            public MethodLoadVerboseEventV1(EtwEvent etwEvent)
+            {
+                _etwEvent = etwEvent;
+            }
+
+            /// <summary>
+            /// A data wrapper for a MethodLoadVerbose event.
+            /// </summary>
+            public ref struct MethodLoadVerboseData
+            {
+                private readonly EtwEvent _etwEvent;
+
+                private int _offset_MethodID;
+                private int _offset_ModuleID;
+                private int _offset_MethodStartAddress;
+                private int _offset_MethodSize;
+                private int _offset_MethodToken;
+                private int _offset_MethodFlags;
+                private int _offset_MethodNamespace;
+                private int _offset_MethodName;
+                private int _offset_MethodSignature;
+                private int _offset_ClrInstanceID;
+
+                private int Offset_MethodID
+                {
+                    get
+                    {
+                        if (_offset_MethodID == -1)
+                        {
+                            _offset_MethodID = 0;
+                        }
+
+                        return _offset_MethodID;
+                    }
+                }
+
+                private int Offset_ModuleID
+                {
+                    get
+                    {
+                        if (_offset_ModuleID == -1)
+                        {
+                            _offset_ModuleID = Offset_MethodID + 8;
+                        }
+
+                        return _offset_ModuleID;
+                    }
+                }
+
+                private int Offset_MethodStartAddress
+                {
+                    get
+                    {
+                        if (_offset_MethodStartAddress == -1)
+                        {
+                            _offset_MethodStartAddress = Offset_ModuleID + 8;
+                        }
+
+                        return _offset_MethodStartAddress;
+                    }
+                }
+
+                private int Offset_MethodSize
+                {
+                    get
+                    {
+                        if (_offset_MethodSize == -1)
+                        {
+                            _offset_MethodSize = Offset_MethodStartAddress + 8;
+                        }
+
+                        return _offset_MethodSize;
+                    }
+                }
+
+                private int Offset_MethodToken
+                {
+                    get
+                    {
+                        if (_offset_MethodToken == -1)
+                        {
+                            _offset_MethodToken = Offset_MethodSize + 4;
+                        }
+
+                        return _offset_MethodToken;
+                    }
+                }
+
+                private int Offset_MethodFlags
+                {
+                    get
+                    {
+                        if (_offset_MethodFlags == -1)
+                        {
+                            _offset_MethodFlags = Offset_MethodToken + 4;
+                        }
+
+                        return _offset_MethodFlags;
+                    }
+                }
+
+                private int Offset_MethodNamespace
+                {
+                    get
+                    {
+                        if (_offset_MethodNamespace == -1)
+                        {
+                            _offset_MethodNamespace = Offset_MethodFlags + 4;
+                        }
+
+                        return _offset_MethodNamespace;
+                    }
+                }
+
+                private int Offset_MethodName
+                {
+                    get
+                    {
+                        if (_offset_MethodName == -1)
+                        {
+                            _offset_MethodName = Offset_MethodNamespace + EtwEvent.UnicodeStringEnumerable.UnicodeStringEnumerator.StringLength(_etwEvent.Data, Offset_MethodNamespace);
+                        }
+
+                        return _offset_MethodName;
+                    }
+                }
+
+                private int Offset_MethodSignature
+                {
+                    get
+                    {
+                        if (_offset_MethodSignature == -1)
+                        {
+                            _offset_MethodSignature = Offset_MethodName + EtwEvent.UnicodeStringEnumerable.UnicodeStringEnumerator.StringLength(_etwEvent.Data, Offset_MethodName);
+                        }
+
+                        return _offset_MethodSignature;
+                    }
+                }
+
+                private int Offset_ClrInstanceID
+                {
+                    get
+                    {
+                        if (_offset_ClrInstanceID == -1)
+                        {
+                            _offset_ClrInstanceID = Offset_MethodSignature + EtwEvent.UnicodeStringEnumerable.UnicodeStringEnumerator.StringLength(_etwEvent.Data, Offset_MethodSignature);
+                        }
+
+                        return _offset_ClrInstanceID;
+                    }
+                }
+
+                /// <summary>
+                /// Retrieves the MethodID field.
+                /// </summary>
+                public ulong MethodID => BitConverter.ToUInt64(_etwEvent.Data[Offset_MethodID..]);
+
+                /// <summary>
+                /// Retrieves the ModuleID field.
+                /// </summary>
+                public ulong ModuleID => BitConverter.ToUInt64(_etwEvent.Data[Offset_ModuleID..]);
+
+                /// <summary>
+                /// Retrieves the MethodStartAddress field.
+                /// </summary>
+                public ulong MethodStartAddress => BitConverter.ToUInt64(_etwEvent.Data[Offset_MethodStartAddress..]);
+
+                /// <summary>
+                /// Retrieves the MethodSize field.
+                /// </summary>
+                public uint MethodSize => BitConverter.ToUInt32(_etwEvent.Data[Offset_MethodSize..]);
+
+                /// <summary>
+                /// Retrieves the MethodToken field.
+                /// </summary>
+                public uint MethodToken => BitConverter.ToUInt32(_etwEvent.Data[Offset_MethodToken..]);
+
+                /// <summary>
+                /// Retrieves the MethodFlags field.
+                /// </summary>
+                public MethodFlagsMap MethodFlags => (MethodFlagsMap)BitConverter.ToUInt32(_etwEvent.Data[Offset_MethodFlags..]);
+
+                /// <summary>
+                /// Retrieves the MethodNamespace field.
+                /// </summary>
+                public string MethodNamespace => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_MethodNamespace..]);
+
+                /// <summary>
+                /// Retrieves the MethodName field.
+                /// </summary>
+                public string MethodName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_MethodName..]);
+
+                /// <summary>
+                /// Retrieves the MethodSignature field.
+                /// </summary>
+                public string MethodSignature => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_MethodSignature..]);
+
+                /// <summary>
+                /// Retrieves the ClrInstanceID field.
+                /// </summary>
+                public ushort ClrInstanceID => BitConverter.ToUInt16(_etwEvent.Data[Offset_ClrInstanceID..]);
+
+                /// <summary>
+                /// Creates a new MethodLoadVerboseData.
+                /// </summary>
+                /// <param name="etwEvent">The event.</param>
+                public MethodLoadVerboseData(EtwEvent etwEvent)
+                {
+                    _etwEvent = etwEvent;
+                    _offset_MethodID = -1;
+                    _offset_ModuleID = -1;
+                    _offset_MethodStartAddress = -1;
+                    _offset_MethodSize = -1;
+                    _offset_MethodToken = -1;
+                    _offset_MethodFlags = -1;
+                    _offset_MethodNamespace = -1;
+                    _offset_MethodName = -1;
+                    _offset_MethodSignature = -1;
+                    _offset_ClrInstanceID = -1;
+                }
+            }
+
+        }
+
+        /// <summary>
+        /// An event wrapper for a MethodUnloadVerbose event.
+        /// </summary>
+        public readonly ref struct MethodUnloadVerboseEventV1
+        {
+            private readonly EtwEvent _etwEvent;
+
+            /// <summary>
+            /// Event name.
+            /// </summary>
+            public const string Name = "MethodUnloadVerbose";
+
+            /// <summary>
+            /// The event provider.
+            /// </summary>
+            public static readonly Guid Provider = Id;
+
+            /// <summary>
+            /// Event descriptor.
+            /// </summary>
+            public static EtwEventDescriptor Descriptor { get; } = new EtwEventDescriptor
+            {
+                Id = 144,
+                Version = 1,
+                Channel = 0,
+                Level = EtwTraceLevel.Information,
+                Opcode = (EtwEventOpcode)Opcodes.GCBulkRootCCW,
+                Task = (ushort)Tasks.Method,
+                Keyword = (ulong)Keywords.JitKeyword | (ulong)Keywords.NGenKeyword
+            };
+
+            /// <summary>
+            /// The process the event was recorded in.
+            /// </summary>
+            public uint ProcessId => _etwEvent.ProcessId;
+
+            /// <summary>
+            /// The thread the event was recorded on.
+            /// </summary>
+            public uint ThreadId => _etwEvent.ThreadId;
+
+            /// <summary>
+            /// The timestamp of the event.
+            /// </summary>
+            public long Timestamp => _etwEvent.Timestamp;
+
+            /// <summary>
+            /// The processor number the event was recorded on.
+            /// </summary>
+            public byte ProcessorNumber => _etwEvent.ProcessorNumber;
+
+            /// <summary>
+            /// Timing information for the event.
+            /// </summary>
+            public (ulong? KernelTime, ulong? UserTime, ulong? ProcessorTime) Time => _etwEvent.Time;
+
+            /// <summary>
+            /// Data for the event.
+            /// </summary>
+            public MethodUnloadVerboseData Data => new(_etwEvent);
+
+            /// <summary>
+            /// Creates a new MethodUnloadVerboseEventV1.
+            /// </summary>
+            /// <param name="etwEvent">The event.</param>
+            public MethodUnloadVerboseEventV1(EtwEvent etwEvent)
+            {
+                _etwEvent = etwEvent;
+            }
+
+            /// <summary>
+            /// A data wrapper for a MethodUnloadVerbose event.
+            /// </summary>
+            public ref struct MethodUnloadVerboseData
+            {
+                private readonly EtwEvent _etwEvent;
+
+                private int _offset_MethodID;
+                private int _offset_ModuleID;
+                private int _offset_MethodStartAddress;
+                private int _offset_MethodSize;
+                private int _offset_MethodToken;
+                private int _offset_MethodFlags;
+                private int _offset_MethodNamespace;
+                private int _offset_MethodName;
+                private int _offset_MethodSignature;
+                private int _offset_ClrInstanceID;
+
+                private int Offset_MethodID
+                {
+                    get
+                    {
+                        if (_offset_MethodID == -1)
+                        {
+                            _offset_MethodID = 0;
+                        }
+
+                        return _offset_MethodID;
+                    }
+                }
+
+                private int Offset_ModuleID
+                {
+                    get
+                    {
+                        if (_offset_ModuleID == -1)
+                        {
+                            _offset_ModuleID = Offset_MethodID + 8;
+                        }
+
+                        return _offset_ModuleID;
+                    }
+                }
+
+                private int Offset_MethodStartAddress
+                {
+                    get
+                    {
+                        if (_offset_MethodStartAddress == -1)
+                        {
+                            _offset_MethodStartAddress = Offset_ModuleID + 8;
+                        }
+
+                        return _offset_MethodStartAddress;
+                    }
+                }
+
+                private int Offset_MethodSize
+                {
+                    get
+                    {
+                        if (_offset_MethodSize == -1)
+                        {
+                            _offset_MethodSize = Offset_MethodStartAddress + 8;
+                        }
+
+                        return _offset_MethodSize;
+                    }
+                }
+
+                private int Offset_MethodToken
+                {
+                    get
+                    {
+                        if (_offset_MethodToken == -1)
+                        {
+                            _offset_MethodToken = Offset_MethodSize + 4;
+                        }
+
+                        return _offset_MethodToken;
+                    }
+                }
+
+                private int Offset_MethodFlags
+                {
+                    get
+                    {
+                        if (_offset_MethodFlags == -1)
+                        {
+                            _offset_MethodFlags = Offset_MethodToken + 4;
+                        }
+
+                        return _offset_MethodFlags;
+                    }
+                }
+
+                private int Offset_MethodNamespace
+                {
+                    get
+                    {
+                        if (_offset_MethodNamespace == -1)
+                        {
+                            _offset_MethodNamespace = Offset_MethodFlags + 4;
+                        }
+
+                        return _offset_MethodNamespace;
+                    }
+                }
+
+                private int Offset_MethodName
+                {
+                    get
+                    {
+                        if (_offset_MethodName == -1)
+                        {
+                            _offset_MethodName = Offset_MethodNamespace + EtwEvent.UnicodeStringEnumerable.UnicodeStringEnumerator.StringLength(_etwEvent.Data, Offset_MethodNamespace);
+                        }
+
+                        return _offset_MethodName;
+                    }
+                }
+
+                private int Offset_MethodSignature
+                {
+                    get
+                    {
+                        if (_offset_MethodSignature == -1)
+                        {
+                            _offset_MethodSignature = Offset_MethodName + EtwEvent.UnicodeStringEnumerable.UnicodeStringEnumerator.StringLength(_etwEvent.Data, Offset_MethodName);
+                        }
+
+                        return _offset_MethodSignature;
+                    }
+                }
+
+                private int Offset_ClrInstanceID
+                {
+                    get
+                    {
+                        if (_offset_ClrInstanceID == -1)
+                        {
+                            _offset_ClrInstanceID = Offset_MethodSignature + EtwEvent.UnicodeStringEnumerable.UnicodeStringEnumerator.StringLength(_etwEvent.Data, Offset_MethodSignature);
+                        }
+
+                        return _offset_ClrInstanceID;
+                    }
+                }
+
+                /// <summary>
+                /// Retrieves the MethodID field.
+                /// </summary>
+                public ulong MethodID => BitConverter.ToUInt64(_etwEvent.Data[Offset_MethodID..]);
+
+                /// <summary>
+                /// Retrieves the ModuleID field.
+                /// </summary>
+                public ulong ModuleID => BitConverter.ToUInt64(_etwEvent.Data[Offset_ModuleID..]);
+
+                /// <summary>
+                /// Retrieves the MethodStartAddress field.
+                /// </summary>
+                public ulong MethodStartAddress => BitConverter.ToUInt64(_etwEvent.Data[Offset_MethodStartAddress..]);
+
+                /// <summary>
+                /// Retrieves the MethodSize field.
+                /// </summary>
+                public uint MethodSize => BitConverter.ToUInt32(_etwEvent.Data[Offset_MethodSize..]);
+
+                /// <summary>
+                /// Retrieves the MethodToken field.
+                /// </summary>
+                public uint MethodToken => BitConverter.ToUInt32(_etwEvent.Data[Offset_MethodToken..]);
+
+                /// <summary>
+                /// Retrieves the MethodFlags field.
+                /// </summary>
+                public MethodFlagsMap MethodFlags => (MethodFlagsMap)BitConverter.ToUInt32(_etwEvent.Data[Offset_MethodFlags..]);
+
+                /// <summary>
+                /// Retrieves the MethodNamespace field.
+                /// </summary>
+                public string MethodNamespace => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_MethodNamespace..]);
+
+                /// <summary>
+                /// Retrieves the MethodName field.
+                /// </summary>
+                public string MethodName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_MethodName..]);
+
+                /// <summary>
+                /// Retrieves the MethodSignature field.
+                /// </summary>
+                public string MethodSignature => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_MethodSignature..]);
+
+                /// <summary>
+                /// Retrieves the ClrInstanceID field.
+                /// </summary>
+                public ushort ClrInstanceID => BitConverter.ToUInt16(_etwEvent.Data[Offset_ClrInstanceID..]);
+
+                /// <summary>
+                /// Creates a new MethodUnloadVerboseData.
+                /// </summary>
+                /// <param name="etwEvent">The event.</param>
+                public MethodUnloadVerboseData(EtwEvent etwEvent)
+                {
+                    _etwEvent = etwEvent;
+                    _offset_MethodID = -1;
+                    _offset_ModuleID = -1;
+                    _offset_MethodStartAddress = -1;
+                    _offset_MethodSize = -1;
+                    _offset_MethodToken = -1;
+                    _offset_MethodFlags = -1;
+                    _offset_MethodNamespace = -1;
+                    _offset_MethodName = -1;
+                    _offset_MethodSignature = -1;
+                    _offset_ClrInstanceID = -1;
+                }
+            }
+
+        }
+
+        /// <summary>
         /// An event wrapper for a MethodJittingStarted event.
         /// </summary>
-        public readonly ref struct MethodJittingStartedEvent
+        public readonly ref struct MethodJittingStartedEventV1
         {
             private readonly EtwEvent _etwEvent;
 
@@ -17141,10 +23869,10 @@ namespace EtwTools
             public MethodJittingStartedData Data => new(_etwEvent);
 
             /// <summary>
-            /// Creates a new MethodJittingStartedEvent.
+            /// Creates a new MethodJittingStartedEventV1.
             /// </summary>
             /// <param name="etwEvent">The event.</param>
-            public MethodJittingStartedEvent(EtwEvent etwEvent)
+            public MethodJittingStartedEventV1(EtwEvent etwEvent)
             {
                 _etwEvent = etwEvent;
             }
@@ -17332,7 +24060,7 @@ namespace EtwTools
         /// <summary>
         /// An event wrapper for a LoaderDomainModuleLoad event.
         /// </summary>
-        public readonly ref struct LoaderDomainModuleLoadEvent
+        public readonly ref struct LoaderDomainModuleLoadEventV1
         {
             private readonly EtwEvent _etwEvent;
 
@@ -17391,10 +24119,10 @@ namespace EtwTools
             public LoaderDomainModuleLoadData Data => new(_etwEvent);
 
             /// <summary>
-            /// Creates a new LoaderDomainModuleLoadEvent.
+            /// Creates a new LoaderDomainModuleLoadEventV1.
             /// </summary>
             /// <param name="etwEvent">The event.</param>
-            public LoaderDomainModuleLoadEvent(EtwEvent etwEvent)
+            public LoaderDomainModuleLoadEventV1(EtwEvent etwEvent)
             {
                 _etwEvent = etwEvent;
             }
@@ -17580,9 +24308,469 @@ namespace EtwTools
         }
 
         /// <summary>
+        /// An event wrapper for a LoaderModuleLoad event.
+        /// </summary>
+        public readonly ref struct LoaderModuleLoadEventV1
+        {
+            private readonly EtwEvent _etwEvent;
+
+            /// <summary>
+            /// Event name.
+            /// </summary>
+            public const string Name = "LoaderModuleLoad";
+
+            /// <summary>
+            /// The event provider.
+            /// </summary>
+            public static readonly Guid Provider = Id;
+
+            /// <summary>
+            /// Event descriptor.
+            /// </summary>
+            public static EtwEventDescriptor Descriptor { get; } = new EtwEventDescriptor
+            {
+                Id = 152,
+                Version = 1,
+                Channel = 0,
+                Level = EtwTraceLevel.Information,
+                Opcode = (EtwEventOpcode)Opcodes.SetGCHandle,
+                Task = (ushort)Tasks.Loader,
+                Keyword = (ulong)Keywords.LoaderKeyword | (ulong)Keywords.PerfTrackKeyword
+            };
+
+            /// <summary>
+            /// The process the event was recorded in.
+            /// </summary>
+            public uint ProcessId => _etwEvent.ProcessId;
+
+            /// <summary>
+            /// The thread the event was recorded on.
+            /// </summary>
+            public uint ThreadId => _etwEvent.ThreadId;
+
+            /// <summary>
+            /// The timestamp of the event.
+            /// </summary>
+            public long Timestamp => _etwEvent.Timestamp;
+
+            /// <summary>
+            /// The processor number the event was recorded on.
+            /// </summary>
+            public byte ProcessorNumber => _etwEvent.ProcessorNumber;
+
+            /// <summary>
+            /// Timing information for the event.
+            /// </summary>
+            public (ulong? KernelTime, ulong? UserTime, ulong? ProcessorTime) Time => _etwEvent.Time;
+
+            /// <summary>
+            /// Data for the event.
+            /// </summary>
+            public LoaderModuleLoadData Data => new(_etwEvent);
+
+            /// <summary>
+            /// Creates a new LoaderModuleLoadEventV1.
+            /// </summary>
+            /// <param name="etwEvent">The event.</param>
+            public LoaderModuleLoadEventV1(EtwEvent etwEvent)
+            {
+                _etwEvent = etwEvent;
+            }
+
+            /// <summary>
+            /// A data wrapper for a LoaderModuleLoad event.
+            /// </summary>
+            public ref struct LoaderModuleLoadData
+            {
+                private readonly EtwEvent _etwEvent;
+
+                private int _offset_ModuleID;
+                private int _offset_AssemblyID;
+                private int _offset_ModuleFlags;
+                private int _offset_Reserved1;
+                private int _offset_ModuleILPath;
+                private int _offset_ModuleNativePath;
+                private int _offset_ClrInstanceID;
+
+                private int Offset_ModuleID
+                {
+                    get
+                    {
+                        if (_offset_ModuleID == -1)
+                        {
+                            _offset_ModuleID = 0;
+                        }
+
+                        return _offset_ModuleID;
+                    }
+                }
+
+                private int Offset_AssemblyID
+                {
+                    get
+                    {
+                        if (_offset_AssemblyID == -1)
+                        {
+                            _offset_AssemblyID = Offset_ModuleID + 8;
+                        }
+
+                        return _offset_AssemblyID;
+                    }
+                }
+
+                private int Offset_ModuleFlags
+                {
+                    get
+                    {
+                        if (_offset_ModuleFlags == -1)
+                        {
+                            _offset_ModuleFlags = Offset_AssemblyID + 8;
+                        }
+
+                        return _offset_ModuleFlags;
+                    }
+                }
+
+                private int Offset_Reserved1
+                {
+                    get
+                    {
+                        if (_offset_Reserved1 == -1)
+                        {
+                            _offset_Reserved1 = Offset_ModuleFlags + 4;
+                        }
+
+                        return _offset_Reserved1;
+                    }
+                }
+
+                private int Offset_ModuleILPath
+                {
+                    get
+                    {
+                        if (_offset_ModuleILPath == -1)
+                        {
+                            _offset_ModuleILPath = Offset_Reserved1 + 4;
+                        }
+
+                        return _offset_ModuleILPath;
+                    }
+                }
+
+                private int Offset_ModuleNativePath
+                {
+                    get
+                    {
+                        if (_offset_ModuleNativePath == -1)
+                        {
+                            _offset_ModuleNativePath = Offset_ModuleILPath + EtwEvent.UnicodeStringEnumerable.UnicodeStringEnumerator.StringLength(_etwEvent.Data, Offset_ModuleILPath);
+                        }
+
+                        return _offset_ModuleNativePath;
+                    }
+                }
+
+                private int Offset_ClrInstanceID
+                {
+                    get
+                    {
+                        if (_offset_ClrInstanceID == -1)
+                        {
+                            _offset_ClrInstanceID = Offset_ModuleNativePath + EtwEvent.UnicodeStringEnumerable.UnicodeStringEnumerator.StringLength(_etwEvent.Data, Offset_ModuleNativePath);
+                        }
+
+                        return _offset_ClrInstanceID;
+                    }
+                }
+
+                /// <summary>
+                /// Retrieves the ModuleID field.
+                /// </summary>
+                public ulong ModuleID => BitConverter.ToUInt64(_etwEvent.Data[Offset_ModuleID..]);
+
+                /// <summary>
+                /// Retrieves the AssemblyID field.
+                /// </summary>
+                public ulong AssemblyID => BitConverter.ToUInt64(_etwEvent.Data[Offset_AssemblyID..]);
+
+                /// <summary>
+                /// Retrieves the ModuleFlags field.
+                /// </summary>
+                public ModuleFlagsMap ModuleFlags => (ModuleFlagsMap)BitConverter.ToUInt32(_etwEvent.Data[Offset_ModuleFlags..]);
+
+                /// <summary>
+                /// Retrieves the Reserved1 field.
+                /// </summary>
+                public uint Reserved1 => BitConverter.ToUInt32(_etwEvent.Data[Offset_Reserved1..]);
+
+                /// <summary>
+                /// Retrieves the ModuleILPath field.
+                /// </summary>
+                public string ModuleILPath => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_ModuleILPath..]);
+
+                /// <summary>
+                /// Retrieves the ModuleNativePath field.
+                /// </summary>
+                public string ModuleNativePath => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_ModuleNativePath..]);
+
+                /// <summary>
+                /// Retrieves the ClrInstanceID field.
+                /// </summary>
+                public ushort ClrInstanceID => BitConverter.ToUInt16(_etwEvent.Data[Offset_ClrInstanceID..]);
+
+                /// <summary>
+                /// Creates a new LoaderModuleLoadData.
+                /// </summary>
+                /// <param name="etwEvent">The event.</param>
+                public LoaderModuleLoadData(EtwEvent etwEvent)
+                {
+                    _etwEvent = etwEvent;
+                    _offset_ModuleID = -1;
+                    _offset_AssemblyID = -1;
+                    _offset_ModuleFlags = -1;
+                    _offset_Reserved1 = -1;
+                    _offset_ModuleILPath = -1;
+                    _offset_ModuleNativePath = -1;
+                    _offset_ClrInstanceID = -1;
+                }
+            }
+
+        }
+
+        /// <summary>
+        /// An event wrapper for a LoaderModuleUnload event.
+        /// </summary>
+        public readonly ref struct LoaderModuleUnloadEventV1
+        {
+            private readonly EtwEvent _etwEvent;
+
+            /// <summary>
+            /// Event name.
+            /// </summary>
+            public const string Name = "LoaderModuleUnload";
+
+            /// <summary>
+            /// The event provider.
+            /// </summary>
+            public static readonly Guid Provider = Id;
+
+            /// <summary>
+            /// Event descriptor.
+            /// </summary>
+            public static EtwEventDescriptor Descriptor { get; } = new EtwEventDescriptor
+            {
+                Id = 153,
+                Version = 1,
+                Channel = 0,
+                Level = EtwTraceLevel.Information,
+                Opcode = (EtwEventOpcode)Opcodes.DestoryGCHandle,
+                Task = (ushort)Tasks.Loader,
+                Keyword = (ulong)Keywords.LoaderKeyword | (ulong)Keywords.PerfTrackKeyword
+            };
+
+            /// <summary>
+            /// The process the event was recorded in.
+            /// </summary>
+            public uint ProcessId => _etwEvent.ProcessId;
+
+            /// <summary>
+            /// The thread the event was recorded on.
+            /// </summary>
+            public uint ThreadId => _etwEvent.ThreadId;
+
+            /// <summary>
+            /// The timestamp of the event.
+            /// </summary>
+            public long Timestamp => _etwEvent.Timestamp;
+
+            /// <summary>
+            /// The processor number the event was recorded on.
+            /// </summary>
+            public byte ProcessorNumber => _etwEvent.ProcessorNumber;
+
+            /// <summary>
+            /// Timing information for the event.
+            /// </summary>
+            public (ulong? KernelTime, ulong? UserTime, ulong? ProcessorTime) Time => _etwEvent.Time;
+
+            /// <summary>
+            /// Data for the event.
+            /// </summary>
+            public LoaderModuleUnloadData Data => new(_etwEvent);
+
+            /// <summary>
+            /// Creates a new LoaderModuleUnloadEventV1.
+            /// </summary>
+            /// <param name="etwEvent">The event.</param>
+            public LoaderModuleUnloadEventV1(EtwEvent etwEvent)
+            {
+                _etwEvent = etwEvent;
+            }
+
+            /// <summary>
+            /// A data wrapper for a LoaderModuleUnload event.
+            /// </summary>
+            public ref struct LoaderModuleUnloadData
+            {
+                private readonly EtwEvent _etwEvent;
+
+                private int _offset_ModuleID;
+                private int _offset_AssemblyID;
+                private int _offset_ModuleFlags;
+                private int _offset_Reserved1;
+                private int _offset_ModuleILPath;
+                private int _offset_ModuleNativePath;
+                private int _offset_ClrInstanceID;
+
+                private int Offset_ModuleID
+                {
+                    get
+                    {
+                        if (_offset_ModuleID == -1)
+                        {
+                            _offset_ModuleID = 0;
+                        }
+
+                        return _offset_ModuleID;
+                    }
+                }
+
+                private int Offset_AssemblyID
+                {
+                    get
+                    {
+                        if (_offset_AssemblyID == -1)
+                        {
+                            _offset_AssemblyID = Offset_ModuleID + 8;
+                        }
+
+                        return _offset_AssemblyID;
+                    }
+                }
+
+                private int Offset_ModuleFlags
+                {
+                    get
+                    {
+                        if (_offset_ModuleFlags == -1)
+                        {
+                            _offset_ModuleFlags = Offset_AssemblyID + 8;
+                        }
+
+                        return _offset_ModuleFlags;
+                    }
+                }
+
+                private int Offset_Reserved1
+                {
+                    get
+                    {
+                        if (_offset_Reserved1 == -1)
+                        {
+                            _offset_Reserved1 = Offset_ModuleFlags + 4;
+                        }
+
+                        return _offset_Reserved1;
+                    }
+                }
+
+                private int Offset_ModuleILPath
+                {
+                    get
+                    {
+                        if (_offset_ModuleILPath == -1)
+                        {
+                            _offset_ModuleILPath = Offset_Reserved1 + 4;
+                        }
+
+                        return _offset_ModuleILPath;
+                    }
+                }
+
+                private int Offset_ModuleNativePath
+                {
+                    get
+                    {
+                        if (_offset_ModuleNativePath == -1)
+                        {
+                            _offset_ModuleNativePath = Offset_ModuleILPath + EtwEvent.UnicodeStringEnumerable.UnicodeStringEnumerator.StringLength(_etwEvent.Data, Offset_ModuleILPath);
+                        }
+
+                        return _offset_ModuleNativePath;
+                    }
+                }
+
+                private int Offset_ClrInstanceID
+                {
+                    get
+                    {
+                        if (_offset_ClrInstanceID == -1)
+                        {
+                            _offset_ClrInstanceID = Offset_ModuleNativePath + EtwEvent.UnicodeStringEnumerable.UnicodeStringEnumerator.StringLength(_etwEvent.Data, Offset_ModuleNativePath);
+                        }
+
+                        return _offset_ClrInstanceID;
+                    }
+                }
+
+                /// <summary>
+                /// Retrieves the ModuleID field.
+                /// </summary>
+                public ulong ModuleID => BitConverter.ToUInt64(_etwEvent.Data[Offset_ModuleID..]);
+
+                /// <summary>
+                /// Retrieves the AssemblyID field.
+                /// </summary>
+                public ulong AssemblyID => BitConverter.ToUInt64(_etwEvent.Data[Offset_AssemblyID..]);
+
+                /// <summary>
+                /// Retrieves the ModuleFlags field.
+                /// </summary>
+                public ModuleFlagsMap ModuleFlags => (ModuleFlagsMap)BitConverter.ToUInt32(_etwEvent.Data[Offset_ModuleFlags..]);
+
+                /// <summary>
+                /// Retrieves the Reserved1 field.
+                /// </summary>
+                public uint Reserved1 => BitConverter.ToUInt32(_etwEvent.Data[Offset_Reserved1..]);
+
+                /// <summary>
+                /// Retrieves the ModuleILPath field.
+                /// </summary>
+                public string ModuleILPath => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_ModuleILPath..]);
+
+                /// <summary>
+                /// Retrieves the ModuleNativePath field.
+                /// </summary>
+                public string ModuleNativePath => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_ModuleNativePath..]);
+
+                /// <summary>
+                /// Retrieves the ClrInstanceID field.
+                /// </summary>
+                public ushort ClrInstanceID => BitConverter.ToUInt16(_etwEvent.Data[Offset_ClrInstanceID..]);
+
+                /// <summary>
+                /// Creates a new LoaderModuleUnloadData.
+                /// </summary>
+                /// <param name="etwEvent">The event.</param>
+                public LoaderModuleUnloadData(EtwEvent etwEvent)
+                {
+                    _etwEvent = etwEvent;
+                    _offset_ModuleID = -1;
+                    _offset_AssemblyID = -1;
+                    _offset_ModuleFlags = -1;
+                    _offset_Reserved1 = -1;
+                    _offset_ModuleILPath = -1;
+                    _offset_ModuleNativePath = -1;
+                    _offset_ClrInstanceID = -1;
+                }
+            }
+
+        }
+
+        /// <summary>
         /// An event wrapper for a LoaderAssemblyLoad event.
         /// </summary>
-        public readonly ref struct LoaderAssemblyLoadEvent
+        public readonly ref struct LoaderAssemblyLoadEventV1
         {
             private readonly EtwEvent _etwEvent;
 
@@ -17641,10 +24829,10 @@ namespace EtwTools
             public LoaderAssemblyLoadData Data => new(_etwEvent);
 
             /// <summary>
-            /// Creates a new LoaderAssemblyLoadEvent.
+            /// Creates a new LoaderAssemblyLoadEventV1.
             /// </summary>
             /// <param name="etwEvent">The event.</param>
-            public LoaderAssemblyLoadEvent(EtwEvent etwEvent)
+            public LoaderAssemblyLoadEventV1(EtwEvent etwEvent)
             {
                 _etwEvent = etwEvent;
             }
@@ -17792,7 +24980,7 @@ namespace EtwTools
         /// <summary>
         /// An event wrapper for a LoaderAssemblyUnload event.
         /// </summary>
-        public readonly ref struct LoaderAssemblyUnloadEvent
+        public readonly ref struct LoaderAssemblyUnloadEventV1
         {
             private readonly EtwEvent _etwEvent;
 
@@ -17851,10 +25039,10 @@ namespace EtwTools
             public LoaderAssemblyUnloadData Data => new(_etwEvent);
 
             /// <summary>
-            /// Creates a new LoaderAssemblyUnloadEvent.
+            /// Creates a new LoaderAssemblyUnloadEventV1.
             /// </summary>
             /// <param name="etwEvent">The event.</param>
-            public LoaderAssemblyUnloadEvent(EtwEvent etwEvent)
+            public LoaderAssemblyUnloadEventV1(EtwEvent etwEvent)
             {
                 _etwEvent = etwEvent;
             }
@@ -18002,7 +25190,7 @@ namespace EtwTools
         /// <summary>
         /// An event wrapper for a LoaderAppDomainLoad event.
         /// </summary>
-        public readonly ref struct LoaderAppDomainLoadEvent
+        public readonly ref struct LoaderAppDomainLoadEventV1
         {
             private readonly EtwEvent _etwEvent;
 
@@ -18061,10 +25249,10 @@ namespace EtwTools
             public LoaderAppDomainLoadData Data => new(_etwEvent);
 
             /// <summary>
-            /// Creates a new LoaderAppDomainLoadEvent.
+            /// Creates a new LoaderAppDomainLoadEventV1.
             /// </summary>
             /// <param name="etwEvent">The event.</param>
-            public LoaderAppDomainLoadEvent(EtwEvent etwEvent)
+            public LoaderAppDomainLoadEventV1(EtwEvent etwEvent)
             {
                 _etwEvent = etwEvent;
             }
@@ -18192,7 +25380,7 @@ namespace EtwTools
         /// <summary>
         /// An event wrapper for a LoaderAppDomainUnload event.
         /// </summary>
-        public readonly ref struct LoaderAppDomainUnloadEvent
+        public readonly ref struct LoaderAppDomainUnloadEventV1
         {
             private readonly EtwEvent _etwEvent;
 
@@ -18251,10 +25439,10 @@ namespace EtwTools
             public LoaderAppDomainUnloadData Data => new(_etwEvent);
 
             /// <summary>
-            /// Creates a new LoaderAppDomainUnloadEvent.
+            /// Creates a new LoaderAppDomainUnloadEventV1.
             /// </summary>
             /// <param name="etwEvent">The event.</param>
-            public LoaderAppDomainUnloadEvent(EtwEvent etwEvent)
+            public LoaderAppDomainUnloadEventV1(EtwEvent etwEvent)
             {
                 _etwEvent = etwEvent;
             }
@@ -18382,7 +25570,7 @@ namespace EtwTools
         /// <summary>
         /// An event wrapper for a StrongNameVerificationStart event.
         /// </summary>
-        public readonly ref struct StrongNameVerificationStartEvent
+        public readonly ref struct StrongNameVerificationStartEventV1
         {
             private readonly EtwEvent _etwEvent;
 
@@ -18441,10 +25629,10 @@ namespace EtwTools
             public StrongNameVerificationStartData Data => new(_etwEvent);
 
             /// <summary>
-            /// Creates a new StrongNameVerificationStartEvent.
+            /// Creates a new StrongNameVerificationStartEventV1.
             /// </summary>
             /// <param name="etwEvent">The event.</param>
-            public StrongNameVerificationStartEvent(EtwEvent etwEvent)
+            public StrongNameVerificationStartEventV1(EtwEvent etwEvent)
             {
                 _etwEvent = etwEvent;
             }
@@ -18552,7 +25740,7 @@ namespace EtwTools
         /// <summary>
         /// An event wrapper for a StrongNameVerificationStop event.
         /// </summary>
-        public readonly ref struct StrongNameVerificationStopEvent
+        public readonly ref struct StrongNameVerificationStopEventV1
         {
             private readonly EtwEvent _etwEvent;
 
@@ -18611,10 +25799,10 @@ namespace EtwTools
             public StrongNameVerificationStopData Data => new(_etwEvent);
 
             /// <summary>
-            /// Creates a new StrongNameVerificationStopEvent.
+            /// Creates a new StrongNameVerificationStopEventV1.
             /// </summary>
             /// <param name="etwEvent">The event.</param>
-            public StrongNameVerificationStopEvent(EtwEvent etwEvent)
+            public StrongNameVerificationStopEventV1(EtwEvent etwEvent)
             {
                 _etwEvent = etwEvent;
             }
@@ -18722,7 +25910,7 @@ namespace EtwTools
         /// <summary>
         /// An event wrapper for a AuthenticodeVerificationStart event.
         /// </summary>
-        public readonly ref struct AuthenticodeVerificationStartEvent
+        public readonly ref struct AuthenticodeVerificationStartEventV1
         {
             private readonly EtwEvent _etwEvent;
 
@@ -18781,10 +25969,10 @@ namespace EtwTools
             public AuthenticodeVerificationStartData Data => new(_etwEvent);
 
             /// <summary>
-            /// Creates a new AuthenticodeVerificationStartEvent.
+            /// Creates a new AuthenticodeVerificationStartEventV1.
             /// </summary>
             /// <param name="etwEvent">The event.</param>
-            public AuthenticodeVerificationStartEvent(EtwEvent etwEvent)
+            public AuthenticodeVerificationStartEventV1(EtwEvent etwEvent)
             {
                 _etwEvent = etwEvent;
             }
@@ -18892,7 +26080,7 @@ namespace EtwTools
         /// <summary>
         /// An event wrapper for a AuthenticodeVerificationStop event.
         /// </summary>
-        public readonly ref struct AuthenticodeVerificationStopEvent
+        public readonly ref struct AuthenticodeVerificationStopEventV1
         {
             private readonly EtwEvent _etwEvent;
 
@@ -18951,10 +26139,10 @@ namespace EtwTools
             public AuthenticodeVerificationStopData Data => new(_etwEvent);
 
             /// <summary>
-            /// Creates a new AuthenticodeVerificationStopEvent.
+            /// Creates a new AuthenticodeVerificationStopEventV1.
             /// </summary>
             /// <param name="etwEvent">The event.</param>
-            public AuthenticodeVerificationStopEvent(EtwEvent etwEvent)
+            public AuthenticodeVerificationStopEventV1(EtwEvent etwEvent)
             {
                 _etwEvent = etwEvent;
             }
@@ -19062,7 +26250,7 @@ namespace EtwTools
         /// <summary>
         /// An event wrapper for a GCStart event.
         /// </summary>
-        public readonly ref struct GCStartEvent
+        public readonly ref struct GCStartEventV2
         {
             private readonly EtwEvent _etwEvent;
 
@@ -19121,10 +26309,10 @@ namespace EtwTools
             public GCStartData Data => new(_etwEvent);
 
             /// <summary>
-            /// Creates a new GCStartEvent.
+            /// Creates a new GCStartEventV2.
             /// </summary>
             /// <param name="etwEvent">The event.</param>
-            public GCStartEvent(EtwEvent etwEvent)
+            public GCStartEventV2(EtwEvent etwEvent)
             {
                 _etwEvent = etwEvent;
             }
@@ -19270,9 +26458,239 @@ namespace EtwTools
         }
 
         /// <summary>
+        /// An event wrapper for a GCAllocationTick event.
+        /// </summary>
+        public readonly ref struct GCAllocationTickEventV2
+        {
+            private readonly EtwEvent _etwEvent;
+
+            /// <summary>
+            /// Event name.
+            /// </summary>
+            public const string Name = "GCAllocationTick";
+
+            /// <summary>
+            /// The event provider.
+            /// </summary>
+            public static readonly Guid Provider = Id;
+
+            /// <summary>
+            /// Event descriptor.
+            /// </summary>
+            public static EtwEventDescriptor Descriptor { get; } = new EtwEventDescriptor
+            {
+                Id = 10,
+                Version = 2,
+                Channel = 0,
+                Level = EtwTraceLevel.Verbose,
+                Opcode = (EtwEventOpcode)Opcodes.AllocationTick,
+                Task = (ushort)Tasks.GC,
+                Keyword = (ulong)Keywords.GCKeyword
+            };
+
+            /// <summary>
+            /// The process the event was recorded in.
+            /// </summary>
+            public uint ProcessId => _etwEvent.ProcessId;
+
+            /// <summary>
+            /// The thread the event was recorded on.
+            /// </summary>
+            public uint ThreadId => _etwEvent.ThreadId;
+
+            /// <summary>
+            /// The timestamp of the event.
+            /// </summary>
+            public long Timestamp => _etwEvent.Timestamp;
+
+            /// <summary>
+            /// The processor number the event was recorded on.
+            /// </summary>
+            public byte ProcessorNumber => _etwEvent.ProcessorNumber;
+
+            /// <summary>
+            /// Timing information for the event.
+            /// </summary>
+            public (ulong? KernelTime, ulong? UserTime, ulong? ProcessorTime) Time => _etwEvent.Time;
+
+            /// <summary>
+            /// Data for the event.
+            /// </summary>
+            public GCAllocationTickData Data => new(_etwEvent);
+
+            /// <summary>
+            /// Creates a new GCAllocationTickEventV2.
+            /// </summary>
+            /// <param name="etwEvent">The event.</param>
+            public GCAllocationTickEventV2(EtwEvent etwEvent)
+            {
+                _etwEvent = etwEvent;
+            }
+
+            /// <summary>
+            /// A data wrapper for a GCAllocationTick event.
+            /// </summary>
+            public ref struct GCAllocationTickData
+            {
+                private readonly EtwEvent _etwEvent;
+
+                private int _offset_AllocationAmount;
+                private int _offset_AllocationKind;
+                private int _offset_ClrInstanceID;
+                private int _offset_AllocationAmount64;
+                private int _offset_TypeID;
+                private int _offset_TypeName;
+                private int _offset_HeapIndex;
+
+                private int Offset_AllocationAmount
+                {
+                    get
+                    {
+                        if (_offset_AllocationAmount == -1)
+                        {
+                            _offset_AllocationAmount = 0;
+                        }
+
+                        return _offset_AllocationAmount;
+                    }
+                }
+
+                private int Offset_AllocationKind
+                {
+                    get
+                    {
+                        if (_offset_AllocationKind == -1)
+                        {
+                            _offset_AllocationKind = Offset_AllocationAmount + 4;
+                        }
+
+                        return _offset_AllocationKind;
+                    }
+                }
+
+                private int Offset_ClrInstanceID
+                {
+                    get
+                    {
+                        if (_offset_ClrInstanceID == -1)
+                        {
+                            _offset_ClrInstanceID = Offset_AllocationKind + 4;
+                        }
+
+                        return _offset_ClrInstanceID;
+                    }
+                }
+
+                private int Offset_AllocationAmount64
+                {
+                    get
+                    {
+                        if (_offset_AllocationAmount64 == -1)
+                        {
+                            _offset_AllocationAmount64 = Offset_ClrInstanceID + 2;
+                        }
+
+                        return _offset_AllocationAmount64;
+                    }
+                }
+
+                private int Offset_TypeID
+                {
+                    get
+                    {
+                        if (_offset_TypeID == -1)
+                        {
+                            _offset_TypeID = Offset_AllocationAmount64 + 8;
+                        }
+
+                        return _offset_TypeID;
+                    }
+                }
+
+                private int Offset_TypeName
+                {
+                    get
+                    {
+                        if (_offset_TypeName == -1)
+                        {
+                            _offset_TypeName = Offset_TypeID + _etwEvent.AddressSize;
+                        }
+
+                        return _offset_TypeName;
+                    }
+                }
+
+                private int Offset_HeapIndex
+                {
+                    get
+                    {
+                        if (_offset_HeapIndex == -1)
+                        {
+                            _offset_HeapIndex = Offset_TypeName + EtwEvent.UnicodeStringEnumerable.UnicodeStringEnumerator.StringLength(_etwEvent.Data, Offset_TypeName);
+                        }
+
+                        return _offset_HeapIndex;
+                    }
+                }
+
+                /// <summary>
+                /// Retrieves the AllocationAmount field.
+                /// </summary>
+                public uint AllocationAmount => BitConverter.ToUInt32(_etwEvent.Data[Offset_AllocationAmount..]);
+
+                /// <summary>
+                /// Retrieves the AllocationKind field.
+                /// </summary>
+                public GCAllocationKindMap AllocationKind => (GCAllocationKindMap)BitConverter.ToUInt32(_etwEvent.Data[Offset_AllocationKind..]);
+
+                /// <summary>
+                /// Retrieves the ClrInstanceID field.
+                /// </summary>
+                public ushort ClrInstanceID => BitConverter.ToUInt16(_etwEvent.Data[Offset_ClrInstanceID..]);
+
+                /// <summary>
+                /// Retrieves the AllocationAmount64 field.
+                /// </summary>
+                public ulong AllocationAmount64 => BitConverter.ToUInt64(_etwEvent.Data[Offset_AllocationAmount64..]);
+
+                /// <summary>
+                /// Retrieves the TypeID field.
+                /// </summary>
+                public ulong TypeID => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_TypeID..]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_TypeID..]);
+
+                /// <summary>
+                /// Retrieves the TypeName field.
+                /// </summary>
+                public string TypeName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_TypeName..]);
+
+                /// <summary>
+                /// Retrieves the HeapIndex field.
+                /// </summary>
+                public uint HeapIndex => BitConverter.ToUInt32(_etwEvent.Data[Offset_HeapIndex..]);
+
+                /// <summary>
+                /// Creates a new GCAllocationTickData.
+                /// </summary>
+                /// <param name="etwEvent">The event.</param>
+                public GCAllocationTickData(EtwEvent etwEvent)
+                {
+                    _etwEvent = etwEvent;
+                    _offset_AllocationAmount = -1;
+                    _offset_AllocationKind = -1;
+                    _offset_ClrInstanceID = -1;
+                    _offset_AllocationAmount64 = -1;
+                    _offset_TypeID = -1;
+                    _offset_TypeName = -1;
+                    _offset_HeapIndex = -1;
+                }
+            }
+
+        }
+
+        /// <summary>
         /// An event wrapper for a MethodLoad event.
         /// </summary>
-        public readonly ref struct MethodLoadEvent
+        public readonly ref struct MethodLoadEventV2
         {
             private readonly EtwEvent _etwEvent;
 
@@ -19331,10 +26749,10 @@ namespace EtwTools
             public MethodLoadData Data => new(_etwEvent);
 
             /// <summary>
-            /// Creates a new MethodLoadEvent.
+            /// Creates a new MethodLoadEventV2.
             /// </summary>
             /// <param name="etwEvent">The event.</param>
-            public MethodLoadEvent(EtwEvent etwEvent)
+            public MethodLoadEventV2(EtwEvent etwEvent)
             {
                 _etwEvent = etwEvent;
             }
@@ -19522,7 +26940,7 @@ namespace EtwTools
         /// <summary>
         /// An event wrapper for a MethodUnload event.
         /// </summary>
-        public readonly ref struct MethodUnloadEvent
+        public readonly ref struct MethodUnloadEventV2
         {
             private readonly EtwEvent _etwEvent;
 
@@ -19581,10 +26999,10 @@ namespace EtwTools
             public MethodUnloadData Data => new(_etwEvent);
 
             /// <summary>
-            /// Creates a new MethodUnloadEvent.
+            /// Creates a new MethodUnloadEventV2.
             /// </summary>
             /// <param name="etwEvent">The event.</param>
-            public MethodUnloadEvent(EtwEvent etwEvent)
+            public MethodUnloadEventV2(EtwEvent etwEvent)
             {
                 _etwEvent = etwEvent;
             }
@@ -19772,7 +27190,7 @@ namespace EtwTools
         /// <summary>
         /// An event wrapper for a MethodLoadVerbose event.
         /// </summary>
-        public readonly ref struct MethodLoadVerboseEvent
+        public readonly ref struct MethodLoadVerboseEventV2
         {
             private readonly EtwEvent _etwEvent;
 
@@ -19831,10 +27249,10 @@ namespace EtwTools
             public MethodLoadVerboseData Data => new(_etwEvent);
 
             /// <summary>
-            /// Creates a new MethodLoadVerboseEvent.
+            /// Creates a new MethodLoadVerboseEventV2.
             /// </summary>
             /// <param name="etwEvent">The event.</param>
-            public MethodLoadVerboseEvent(EtwEvent etwEvent)
+            public MethodLoadVerboseEventV2(EtwEvent etwEvent)
             {
                 _etwEvent = etwEvent;
             }
@@ -20082,7 +27500,7 @@ namespace EtwTools
         /// <summary>
         /// An event wrapper for a MethodUnloadVerbose event.
         /// </summary>
-        public readonly ref struct MethodUnloadVerboseEvent
+        public readonly ref struct MethodUnloadVerboseEventV2
         {
             private readonly EtwEvent _etwEvent;
 
@@ -20141,10 +27559,10 @@ namespace EtwTools
             public MethodUnloadVerboseData Data => new(_etwEvent);
 
             /// <summary>
-            /// Creates a new MethodUnloadVerboseEvent.
+            /// Creates a new MethodUnloadVerboseEventV2.
             /// </summary>
             /// <param name="etwEvent">The event.</param>
-            public MethodUnloadVerboseEvent(EtwEvent etwEvent)
+            public MethodUnloadVerboseEventV2(EtwEvent etwEvent)
             {
                 _etwEvent = etwEvent;
             }
@@ -20392,7 +27810,7 @@ namespace EtwTools
         /// <summary>
         /// An event wrapper for a LoaderModuleLoad event.
         /// </summary>
-        public readonly ref struct LoaderModuleLoadEvent
+        public readonly ref struct LoaderModuleLoadEventV2
         {
             private readonly EtwEvent _etwEvent;
 
@@ -20451,10 +27869,10 @@ namespace EtwTools
             public LoaderModuleLoadData Data => new(_etwEvent);
 
             /// <summary>
-            /// Creates a new LoaderModuleLoadEvent.
+            /// Creates a new LoaderModuleLoadEventV2.
             /// </summary>
             /// <param name="etwEvent">The event.</param>
-            public LoaderModuleLoadEvent(EtwEvent etwEvent)
+            public LoaderModuleLoadEventV2(EtwEvent etwEvent)
             {
                 _etwEvent = etwEvent;
             }
@@ -20742,7 +28160,7 @@ namespace EtwTools
         /// <summary>
         /// An event wrapper for a LoaderModuleUnload event.
         /// </summary>
-        public readonly ref struct LoaderModuleUnloadEvent
+        public readonly ref struct LoaderModuleUnloadEventV2
         {
             private readonly EtwEvent _etwEvent;
 
@@ -20801,10 +28219,10 @@ namespace EtwTools
             public LoaderModuleUnloadData Data => new(_etwEvent);
 
             /// <summary>
-            /// Creates a new LoaderModuleUnloadEvent.
+            /// Creates a new LoaderModuleUnloadEventV2.
             /// </summary>
             /// <param name="etwEvent">The event.</param>
-            public LoaderModuleUnloadEvent(EtwEvent etwEvent)
+            public LoaderModuleUnloadEventV2(EtwEvent etwEvent)
             {
                 _etwEvent = etwEvent;
             }
@@ -21092,7 +28510,7 @@ namespace EtwTools
         /// <summary>
         /// An event wrapper for a GCJoin event.
         /// </summary>
-        public readonly ref struct GCJoinEvent
+        public readonly ref struct GCJoinEventV2
         {
             private readonly EtwEvent _etwEvent;
 
@@ -21151,10 +28569,10 @@ namespace EtwTools
             public GCJoinData Data => new(_etwEvent);
 
             /// <summary>
-            /// Creates a new GCJoinEvent.
+            /// Creates a new GCJoinEventV2.
             /// </summary>
             /// <param name="etwEvent">The event.</param>
-            public GCJoinEvent(EtwEvent etwEvent)
+            public GCJoinEventV2(EtwEvent etwEvent)
             {
                 _etwEvent = etwEvent;
             }
@@ -21282,7 +28700,7 @@ namespace EtwTools
         /// <summary>
         /// An event wrapper for a GCGlobalHeapHistory event.
         /// </summary>
-        public readonly ref struct GCGlobalHeapHistoryEvent
+        public readonly ref struct GCGlobalHeapHistoryEventV2
         {
             private readonly EtwEvent _etwEvent;
 
@@ -21341,10 +28759,10 @@ namespace EtwTools
             public GCGlobalHeapHistoryData Data => new(_etwEvent);
 
             /// <summary>
-            /// Creates a new GCGlobalHeapHistoryEvent.
+            /// Creates a new GCGlobalHeapHistoryEventV2.
             /// </summary>
             /// <param name="etwEvent">The event.</param>
-            public GCGlobalHeapHistoryEvent(EtwEvent etwEvent)
+            public GCGlobalHeapHistoryEventV2(EtwEvent etwEvent)
             {
                 _etwEvent = etwEvent;
             }
@@ -21552,7 +28970,7 @@ namespace EtwTools
         /// <summary>
         /// An event wrapper for a GCAllocationTick event.
         /// </summary>
-        public readonly ref struct GCAllocationTickEvent
+        public readonly ref struct GCAllocationTickEventV3
         {
             private readonly EtwEvent _etwEvent;
 
@@ -21611,10 +29029,10 @@ namespace EtwTools
             public GCAllocationTickData Data => new(_etwEvent);
 
             /// <summary>
-            /// Creates a new GCAllocationTickEvent.
+            /// Creates a new GCAllocationTickEventV3.
             /// </summary>
             /// <param name="etwEvent">The event.</param>
-            public GCAllocationTickEvent(EtwEvent etwEvent)
+            public GCAllocationTickEventV3(EtwEvent etwEvent)
             {
                 _etwEvent = etwEvent;
             }
@@ -21802,7 +29220,7 @@ namespace EtwTools
         /// <summary>
         /// An event wrapper for a GCPerHeapHistory event.
         /// </summary>
-        public readonly ref struct GCPerHeapHistoryEvent
+        public readonly ref struct GCPerHeapHistoryEventV3
         {
             private readonly EtwEvent _etwEvent;
 
@@ -21861,10 +29279,10 @@ namespace EtwTools
             public GCPerHeapHistoryData Data => new(_etwEvent);
 
             /// <summary>
-            /// Creates a new GCPerHeapHistoryEvent.
+            /// Creates a new GCPerHeapHistoryEventV3.
             /// </summary>
             /// <param name="etwEvent">The event.</param>
-            public GCPerHeapHistoryEvent(EtwEvent etwEvent)
+            public GCPerHeapHistoryEventV3(EtwEvent etwEvent)
             {
                 _etwEvent = etwEvent;
             }
@@ -22402,6 +29820,46 @@ namespace EtwTools
         }
 
         /// <summary>
+        /// GCRootCCWFlagsMap.
+        /// </summary>
+        [Flags]
+        public enum GCRootCCWFlagsMap : ulong
+        {
+            /// <summary>
+            /// Strong.
+            /// </summary>
+            Strong = 0x0000000000000001,
+            /// <summary>
+            /// Pegged.
+            /// </summary>
+            Pegged = 0x0000000000000002,
+        }
+
+        /// <summary>
+        /// GCRootFlagsMap.
+        /// </summary>
+        [Flags]
+        public enum GCRootFlagsMap : ulong
+        {
+            /// <summary>
+            /// Pinning.
+            /// </summary>
+            Pinning = 0x0000000000000001,
+            /// <summary>
+            /// WeakRef.
+            /// </summary>
+            WeakRef = 0x0000000000000002,
+            /// <summary>
+            /// Interior.
+            /// </summary>
+            Interior = 0x0000000000000004,
+            /// <summary>
+            /// RefCounted.
+            /// </summary>
+            RefCounted = 0x0000000000000008,
+        }
+
+        /// <summary>
         /// GCRootKindMap.
         /// </summary>
         public enum GCRootKindMap : ulong
@@ -22430,6 +29888,18 @@ namespace EtwTools
             /// Overflow.
             /// </summary>
             Overflow = 5,
+        }
+
+        /// <summary>
+        /// GCRootStaticVarFlagsMap.
+        /// </summary>
+        [Flags]
+        public enum GCRootStaticVarFlagsMap : ulong
+        {
+            /// <summary>
+            /// ThreadLocal.
+            /// </summary>
+            ThreadLocal = 0x0000000000000001,
         }
 
         /// <summary>
@@ -22789,58 +30259,6 @@ namespace EtwTools
             /// ThreadPoolWorker.
             /// </summary>
             ThreadPoolWorker = 0x0000000000000004,
-        }
-
-        /// <summary>
-        /// GCRootCCWFlagsMap.
-        /// </summary>
-        [Flags]
-        public enum GCRootCCWFlagsMap : ulong
-        {
-            /// <summary>
-            /// Strong.
-            /// </summary>
-            Strong = 0x0000000000000001,
-            /// <summary>
-            /// Pegged.
-            /// </summary>
-            Pegged = 0x0000000000000002,
-        }
-
-        /// <summary>
-        /// GCRootFlagsMap.
-        /// </summary>
-        [Flags]
-        public enum GCRootFlagsMap : ulong
-        {
-            /// <summary>
-            /// Pinning.
-            /// </summary>
-            Pinning = 0x0000000000000001,
-            /// <summary>
-            /// WeakRef.
-            /// </summary>
-            WeakRef = 0x0000000000000002,
-            /// <summary>
-            /// Interior.
-            /// </summary>
-            Interior = 0x0000000000000004,
-            /// <summary>
-            /// RefCounted.
-            /// </summary>
-            RefCounted = 0x0000000000000008,
-        }
-
-        /// <summary>
-        /// GCRootStaticVarFlagsMap.
-        /// </summary>
-        [Flags]
-        public enum GCRootStaticVarFlagsMap : ulong
-        {
-            /// <summary>
-            /// ThreadLocal.
-            /// </summary>
-            ThreadLocal = 0x0000000000000001,
         }
 
         /// <summary>

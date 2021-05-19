@@ -33,6 +33,146 @@
       "displayName": "SampleProf",
       "descriptor": {
         "id": 0,
+        "version": 1,
+        "channel": 0,
+        "level": "None",
+        "opcode": 46,
+        "task": 0,
+        "keyword": 0
+      },
+      "fields": [
+        {
+          "name": "InstructionPointer",
+          "datatype": "pointer",
+          "map": null
+        },
+        {
+          "name": "ThreadId",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "Count",
+          "datatype": "ushort",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "DPC",
+      "displayName": "DPC",
+      "descriptor": {
+        "id": 0,
+        "version": 1,
+        "channel": 0,
+        "level": "None",
+        "opcode": 68,
+        "task": 0,
+        "keyword": 0
+      },
+      "fields": [
+        {
+          "name": "InitialTime",
+          "datatype": "ulong",
+          "map": null
+        },
+        {
+          "name": "Routine",
+          "datatype": "pointer",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "TimerDPC",
+      "displayName": "TimerDPC",
+      "descriptor": {
+        "id": 0,
+        "version": 1,
+        "channel": 0,
+        "level": "None",
+        "opcode": 69,
+        "task": 0,
+        "keyword": 0
+      },
+      "fields": [
+        {
+          "name": "InitialTime",
+          "datatype": "ulong",
+          "map": null
+        },
+        {
+          "name": "Routine",
+          "datatype": "pointer",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "ISR",
+      "displayName": "ISR",
+      "descriptor": {
+        "id": 0,
+        "version": 1,
+        "channel": 0,
+        "level": "None",
+        "opcode": 67,
+        "task": 0,
+        "keyword": 0
+      },
+      "fields": [
+        {
+          "name": "InitialTime",
+          "datatype": "ulong",
+          "map": null
+        },
+        {
+          "name": "Routine",
+          "datatype": "pointer",
+          "map": null
+        },
+        {
+          "name": "ReturnValue",
+          "datatype": "uint",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "ISR_PASS",
+      "displayName": "ISR-PASS",
+      "descriptor": {
+        "id": 0,
+        "version": 1,
+        "channel": 0,
+        "level": "None",
+        "opcode": 95,
+        "task": 0,
+        "keyword": 0
+      },
+      "fields": [
+        {
+          "name": "InitialTime",
+          "datatype": "ulong",
+          "map": null
+        },
+        {
+          "name": "Routine",
+          "datatype": "pointer",
+          "map": null
+        },
+        {
+          "name": "ReturnValue",
+          "datatype": "uint",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "SampleProf",
+      "displayName": "SampleProf",
+      "descriptor": {
+        "id": 0,
         "version": 2,
         "channel": 0,
         "level": "None",
@@ -129,6 +269,66 @@
       ]
     },
     {
+      "name": "SampledProfileIntervalCollectionStart",
+      "displayName": "SampledProfileIntervalCollectionStart",
+      "descriptor": {
+        "id": 0,
+        "version": 2,
+        "channel": 0,
+        "level": "None",
+        "opcode": 73,
+        "task": 0,
+        "keyword": 0
+      },
+      "fields": [
+        {
+          "name": "Source",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "NewInterval",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "OldInterval",
+          "datatype": "uint",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "SampledProfileIntervalCollectionEnd",
+      "displayName": "SampledProfileIntervalCollectionEnd",
+      "descriptor": {
+        "id": 0,
+        "version": 2,
+        "channel": 0,
+        "level": "None",
+        "opcode": 74,
+        "task": 0,
+        "keyword": 0
+      },
+      "fields": [
+        {
+          "name": "Source",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "NewInterval",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "OldInterval",
+          "datatype": "uint",
+          "map": null
+        }
+      ]
+    },
+    {
       "name": "PmcCtrConfig",
       "displayName": "PmcCtrConfig",
       "descriptor": {
@@ -149,6 +349,66 @@
         {
           "name": "CounterName",
           "datatype": "string[CounterCount]",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "SpinlockConfigureCollectionStart",
+      "displayName": "SpinlockConfigureCollectionStart",
+      "descriptor": {
+        "id": 0,
+        "version": 2,
+        "channel": 0,
+        "level": "None",
+        "opcode": 75,
+        "task": 0,
+        "keyword": 0
+      },
+      "fields": [
+        {
+          "name": "SpinLockSpinThreshold",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "SpinLockContentionSampleRate",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "SpinLockAcquireSampleRate",
+          "datatype": "uint",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "SpinlockConfigureCollectionEnd",
+      "displayName": "SpinlockConfigureCollectionEnd",
+      "descriptor": {
+        "id": 0,
+        "version": 2,
+        "channel": 0,
+        "level": "None",
+        "opcode": 76,
+        "task": 0,
+        "keyword": 0
+      },
+      "fields": [
+        {
+          "name": "SpinLockSpinThreshold",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "SpinLockContentionSampleRate",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "SpinLockAcquireSampleRate",
+          "datatype": "uint",
           "map": null
         }
       ]
@@ -235,7 +495,7 @@
     },
     {
       "name": "ISR_PASS",
-      "displayName": "ISR_PASS",
+      "displayName": "ISR-PASS",
       "descriptor": {
         "id": 0,
         "version": 2,
@@ -275,7 +535,7 @@
     },
     {
       "name": "ISR_MSI",
-      "displayName": "ISR_MSI",
+      "displayName": "ISR-MSI",
       "descriptor": {
         "id": 0,
         "version": 2,
@@ -320,7 +580,7 @@
     },
     {
       "name": "ISR_Unexpected",
-      "displayName": "ISR_Unexpected",
+      "displayName": "ISR-Unexpected",
       "descriptor": {
         "id": 0,
         "version": 2,

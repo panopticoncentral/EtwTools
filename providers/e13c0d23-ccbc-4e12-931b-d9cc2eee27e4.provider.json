@@ -4,6 +4,335 @@
   "id": "e13c0d23-ccbc-4e12-931b-d9cc2eee27e4",
   "events": [
     {
+      "name": "GCStart",
+      "displayName": "GCStart",
+      "descriptor": {
+        "id": 1,
+        "version": 0,
+        "channel": 0,
+        "level": "Information",
+        "opcode": "Start",
+        "task": 1,
+        "keyword": 1
+      },
+      "fields": [
+        {
+          "name": "Count",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "Reason",
+          "datatype": "uint",
+          "map": "GCReasonMap"
+        }
+      ]
+    },
+    {
+      "name": "GCStop",
+      "displayName": "GCStop",
+      "descriptor": {
+        "id": 2,
+        "version": 0,
+        "channel": 0,
+        "level": "Information",
+        "opcode": "End",
+        "task": 1,
+        "keyword": 1
+      },
+      "fields": [
+        {
+          "name": "Count",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "Depth",
+          "datatype": "ushort",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "GCRestartEEStop",
+      "displayName": "GCRestartEEStop",
+      "descriptor": {
+        "id": 3,
+        "version": 0,
+        "channel": 0,
+        "level": "Information",
+        "opcode": 132,
+        "task": 1,
+        "keyword": 1
+      },
+      "fields": []
+    },
+    {
+      "name": "GCHeapStats",
+      "displayName": "GCHeapStats",
+      "descriptor": {
+        "id": 4,
+        "version": 0,
+        "channel": 0,
+        "level": "Information",
+        "opcode": 133,
+        "task": 1,
+        "keyword": 1
+      },
+      "fields": [
+        {
+          "name": "GenerationSize0",
+          "datatype": "ulong",
+          "map": null
+        },
+        {
+          "name": "TotalPromotedSize0",
+          "datatype": "ulong",
+          "map": null
+        },
+        {
+          "name": "GenerationSize1",
+          "datatype": "ulong",
+          "map": null
+        },
+        {
+          "name": "TotalPromotedSize1",
+          "datatype": "ulong",
+          "map": null
+        },
+        {
+          "name": "GenerationSize2",
+          "datatype": "ulong",
+          "map": null
+        },
+        {
+          "name": "TotalPromotedSize2",
+          "datatype": "ulong",
+          "map": null
+        },
+        {
+          "name": "GenerationSize3",
+          "datatype": "ulong",
+          "map": null
+        },
+        {
+          "name": "TotalPromotedSize3",
+          "datatype": "ulong",
+          "map": null
+        },
+        {
+          "name": "FinalizationPromotedSize",
+          "datatype": "ulong",
+          "map": null
+        },
+        {
+          "name": "FinalizationPromotedCount",
+          "datatype": "ulong",
+          "map": null
+        },
+        {
+          "name": "PinnedObjectCount",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "SinkBlockCount",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "GCHandleCount",
+          "datatype": "uint",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "GCCreateSegment",
+      "displayName": "GCCreateSegment",
+      "descriptor": {
+        "id": 5,
+        "version": 0,
+        "channel": 0,
+        "level": "Information",
+        "opcode": 134,
+        "task": 1,
+        "keyword": 1
+      },
+      "fields": [
+        {
+          "name": "Address",
+          "datatype": "ulong",
+          "map": null
+        },
+        {
+          "name": "Size",
+          "datatype": "ulong",
+          "map": null
+        },
+        {
+          "name": "Type",
+          "datatype": "uint",
+          "map": "GCSegmentTypeMap"
+        }
+      ]
+    },
+    {
+      "name": "GCFreeSegment",
+      "displayName": "GCFreeSegment",
+      "descriptor": {
+        "id": 6,
+        "version": 0,
+        "channel": 0,
+        "level": "Information",
+        "opcode": 135,
+        "task": 1,
+        "keyword": 1
+      },
+      "fields": [
+        {
+          "name": "Address",
+          "datatype": "ulong",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "GCRestartEEStart",
+      "displayName": "GCRestartEEStart",
+      "descriptor": {
+        "id": 7,
+        "version": 0,
+        "channel": 0,
+        "level": "Information",
+        "opcode": 136,
+        "task": 1,
+        "keyword": 1
+      },
+      "fields": []
+    },
+    {
+      "name": "GCSuspendEEStop",
+      "displayName": "GCSuspendEEStop",
+      "descriptor": {
+        "id": 8,
+        "version": 0,
+        "channel": 0,
+        "level": "Information",
+        "opcode": 137,
+        "task": 1,
+        "keyword": 1
+      },
+      "fields": []
+    },
+    {
+      "name": "GCSuspendEEStart",
+      "displayName": "GCSuspendEEStart",
+      "descriptor": {
+        "id": 9,
+        "version": 0,
+        "channel": 0,
+        "level": "Information",
+        "opcode": 10,
+        "task": 1,
+        "keyword": 1
+      },
+      "fields": [
+        {
+          "name": "Reason",
+          "datatype": "ushort",
+          "map": "GCSuspendEEReasonMap"
+        }
+      ]
+    },
+    {
+      "name": "GCAllocationTick",
+      "displayName": "GCAllocationTick",
+      "descriptor": {
+        "id": 10,
+        "version": 0,
+        "channel": 0,
+        "level": "Verbose",
+        "opcode": 11,
+        "task": 1,
+        "keyword": 1
+      },
+      "fields": [
+        {
+          "name": "AllocationAmount",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "AllocationKind",
+          "datatype": "uint",
+          "map": "GCAllocationKindMap"
+        }
+      ]
+    },
+    {
+      "name": "GCCreateConcurrentThread",
+      "displayName": "GCCreateConcurrentThread",
+      "descriptor": {
+        "id": 11,
+        "version": 0,
+        "channel": 0,
+        "level": "Information",
+        "opcode": 12,
+        "task": 1,
+        "keyword": 1
+      },
+      "fields": []
+    },
+    {
+      "name": "GCTerminateConcurrentThread",
+      "displayName": "GCTerminateConcurrentThread",
+      "descriptor": {
+        "id": 12,
+        "version": 0,
+        "channel": 0,
+        "level": "Information",
+        "opcode": 13,
+        "task": 1,
+        "keyword": 1
+      },
+      "fields": []
+    },
+    {
+      "name": "GCFinalizersStop",
+      "displayName": "GCFinalizersStop",
+      "descriptor": {
+        "id": 13,
+        "version": 0,
+        "channel": 0,
+        "level": "Information",
+        "opcode": 15,
+        "task": 1,
+        "keyword": 1
+      },
+      "fields": [
+        {
+          "name": "Count",
+          "datatype": "uint",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "GCFinalizersStart",
+      "displayName": "GCFinalizersStart",
+      "descriptor": {
+        "id": 14,
+        "version": 0,
+        "channel": 0,
+        "level": "Information",
+        "opcode": 19,
+        "task": 1,
+        "keyword": 1
+      },
+      "fields": []
+    },
+    {
       "name": "TypeBulkType",
       "displayName": "TypeBulkType",
       "descriptor": {
@@ -859,6 +1188,106 @@
       ]
     },
     {
+      "name": "IOThreadCreationStart",
+      "displayName": "IOThreadCreationStart",
+      "descriptor": {
+        "id": 44,
+        "version": 0,
+        "channel": 0,
+        "level": "Information",
+        "opcode": "Start",
+        "task": 3,
+        "keyword": 65536
+      },
+      "fields": [
+        {
+          "name": "IOThreadCount",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "RetiredIOThreads",
+          "datatype": "uint",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "IOThreadCreationStop",
+      "displayName": "IOThreadCreationStop",
+      "descriptor": {
+        "id": 45,
+        "version": 0,
+        "channel": 0,
+        "level": "Information",
+        "opcode": "End",
+        "task": 3,
+        "keyword": 65536
+      },
+      "fields": [
+        {
+          "name": "IOThreadCount",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "RetiredIOThreads",
+          "datatype": "uint",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "IOThreadRetirementStart",
+      "displayName": "IOThreadRetirementStart",
+      "descriptor": {
+        "id": 46,
+        "version": 0,
+        "channel": 0,
+        "level": "Information",
+        "opcode": "Start",
+        "task": 5,
+        "keyword": 65536
+      },
+      "fields": [
+        {
+          "name": "IOThreadCount",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "RetiredIOThreads",
+          "datatype": "uint",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "IOThreadRetirementStop",
+      "displayName": "IOThreadRetirementStop",
+      "descriptor": {
+        "id": 47,
+        "version": 0,
+        "channel": 0,
+        "level": "Information",
+        "opcode": "End",
+        "task": 5,
+        "keyword": 65536
+      },
+      "fields": [
+        {
+          "name": "IOThreadCount",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "RetiredIOThreads",
+          "datatype": "uint",
+          "map": null
+        }
+      ]
+    },
+    {
       "name": "ThreadpoolSuspensionV2Start",
       "displayName": "ThreadpoolSuspensionV2Start",
       "descriptor": {
@@ -1054,8 +1483,8 @@
       ]
     },
     {
-      "name": "ThreadPoolWorkerThreadAdjustmentAdjustment",
-      "displayName": "ThreadPoolWorkerThreadAdjustmentAdjustment",
+      "name": "ThreadPoolWorkerThreadAdjustment",
+      "displayName": "ThreadPoolWorkerThreadAdjustment",
       "descriptor": {
         "id": 55,
         "version": 0,
@@ -1407,6 +1836,34 @@
           "map": null
         }
       ]
+    },
+    {
+      "name": "ExceptionStart",
+      "displayName": "ExceptionStart",
+      "descriptor": {
+        "id": 80,
+        "version": 0,
+        "channel": 0,
+        "level": "Information",
+        "opcode": "Start",
+        "task": 7,
+        "keyword": 0
+      },
+      "fields": []
+    },
+    {
+      "name": "ContentionStart",
+      "displayName": "ContentionStart",
+      "descriptor": {
+        "id": 81,
+        "version": 0,
+        "channel": 0,
+        "level": "Information",
+        "opcode": "Start",
+        "task": 8,
+        "keyword": 0
+      },
+      "fields": []
     },
     {
       "name": "ClrStackWalk",
@@ -2002,6 +2459,266 @@
       ]
     },
     {
+      "name": "MethodLoad",
+      "displayName": "MethodLoad",
+      "descriptor": {
+        "id": 141,
+        "version": 0,
+        "channel": 0,
+        "level": "Information",
+        "opcode": 33,
+        "task": 9,
+        "keyword": 48
+      },
+      "fields": [
+        {
+          "name": "MethodID",
+          "datatype": "ulong",
+          "map": null
+        },
+        {
+          "name": "ModuleID",
+          "datatype": "ulong",
+          "map": null
+        },
+        {
+          "name": "MethodStartAddress",
+          "datatype": "ulong",
+          "map": null
+        },
+        {
+          "name": "MethodSize",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "MethodToken",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "MethodFlags",
+          "datatype": "uint",
+          "map": "MethodFlagsMap"
+        }
+      ]
+    },
+    {
+      "name": "MethodUnload",
+      "displayName": "MethodUnload",
+      "descriptor": {
+        "id": 142,
+        "version": 0,
+        "channel": 0,
+        "level": "Information",
+        "opcode": 34,
+        "task": 9,
+        "keyword": 48
+      },
+      "fields": [
+        {
+          "name": "MethodID",
+          "datatype": "ulong",
+          "map": null
+        },
+        {
+          "name": "ModuleID",
+          "datatype": "ulong",
+          "map": null
+        },
+        {
+          "name": "MethodStartAddress",
+          "datatype": "ulong",
+          "map": null
+        },
+        {
+          "name": "MethodSize",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "MethodToken",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "MethodFlags",
+          "datatype": "uint",
+          "map": "MethodFlagsMap"
+        }
+      ]
+    },
+    {
+      "name": "MethodLoadVerbose",
+      "displayName": "MethodLoadVerbose",
+      "descriptor": {
+        "id": 143,
+        "version": 0,
+        "channel": 0,
+        "level": "Information",
+        "opcode": 37,
+        "task": 9,
+        "keyword": 48
+      },
+      "fields": [
+        {
+          "name": "MethodID",
+          "datatype": "ulong",
+          "map": null
+        },
+        {
+          "name": "ModuleID",
+          "datatype": "ulong",
+          "map": null
+        },
+        {
+          "name": "MethodStartAddress",
+          "datatype": "ulong",
+          "map": null
+        },
+        {
+          "name": "MethodSize",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "MethodToken",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "MethodFlags",
+          "datatype": "uint",
+          "map": "MethodFlagsMap"
+        },
+        {
+          "name": "MethodNamespace",
+          "datatype": "string",
+          "map": null
+        },
+        {
+          "name": "MethodName",
+          "datatype": "string",
+          "map": null
+        },
+        {
+          "name": "MethodSignature",
+          "datatype": "string",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "MethodUnloadVerbose",
+      "displayName": "MethodUnloadVerbose",
+      "descriptor": {
+        "id": 144,
+        "version": 0,
+        "channel": 0,
+        "level": "Information",
+        "opcode": 38,
+        "task": 9,
+        "keyword": 48
+      },
+      "fields": [
+        {
+          "name": "MethodID",
+          "datatype": "ulong",
+          "map": null
+        },
+        {
+          "name": "ModuleID",
+          "datatype": "ulong",
+          "map": null
+        },
+        {
+          "name": "MethodStartAddress",
+          "datatype": "ulong",
+          "map": null
+        },
+        {
+          "name": "MethodSize",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "MethodToken",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "MethodFlags",
+          "datatype": "uint",
+          "map": "MethodFlagsMap"
+        },
+        {
+          "name": "MethodNamespace",
+          "datatype": "string",
+          "map": null
+        },
+        {
+          "name": "MethodName",
+          "datatype": "string",
+          "map": null
+        },
+        {
+          "name": "MethodSignature",
+          "datatype": "string",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "MethodJittingStarted",
+      "displayName": "MethodJittingStarted",
+      "descriptor": {
+        "id": 145,
+        "version": 0,
+        "channel": 0,
+        "level": "Verbose",
+        "opcode": 42,
+        "task": 9,
+        "keyword": 16
+      },
+      "fields": [
+        {
+          "name": "MethodID",
+          "datatype": "ulong",
+          "map": null
+        },
+        {
+          "name": "ModuleID",
+          "datatype": "ulong",
+          "map": null
+        },
+        {
+          "name": "MethodToken",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "MethodILSize",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "MethodNamespace",
+          "datatype": "string",
+          "map": null
+        },
+        {
+          "name": "MethodName",
+          "datatype": "string",
+          "map": null
+        },
+        {
+          "name": "MethodSignature",
+          "datatype": "string",
+          "map": null
+        }
+      ]
+    },
+    {
       "name": "LoaderModuleDCStartV2",
       "displayName": "LoaderModuleDCStartV2",
       "descriptor": {
@@ -2092,6 +2809,276 @@
       ]
     },
     {
+      "name": "LoaderDomainModuleLoad",
+      "displayName": "LoaderDomainModuleLoad",
+      "descriptor": {
+        "id": 151,
+        "version": 0,
+        "channel": 0,
+        "level": "Information",
+        "opcode": 45,
+        "task": 10,
+        "keyword": 8
+      },
+      "fields": [
+        {
+          "name": "ModuleID",
+          "datatype": "ulong",
+          "map": null
+        },
+        {
+          "name": "AssemblyID",
+          "datatype": "ulong",
+          "map": null
+        },
+        {
+          "name": "AppDomainID",
+          "datatype": "ulong",
+          "map": null
+        },
+        {
+          "name": "ModuleFlags",
+          "datatype": "uint",
+          "map": "ModuleFlagsMap"
+        },
+        {
+          "name": "Reserved1",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "ModuleILPath",
+          "datatype": "string",
+          "map": null
+        },
+        {
+          "name": "ModuleNativePath",
+          "datatype": "string",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "LoaderModuleLoad",
+      "displayName": "LoaderModuleLoad",
+      "descriptor": {
+        "id": 152,
+        "version": 0,
+        "channel": 0,
+        "level": "Information",
+        "opcode": 33,
+        "task": 10,
+        "keyword": 8
+      },
+      "fields": [
+        {
+          "name": "ModuleID",
+          "datatype": "ulong",
+          "map": null
+        },
+        {
+          "name": "AssemblyID",
+          "datatype": "ulong",
+          "map": null
+        },
+        {
+          "name": "ModuleFlags",
+          "datatype": "uint",
+          "map": "ModuleFlagsMap"
+        },
+        {
+          "name": "Reserved1",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "ModuleILPath",
+          "datatype": "string",
+          "map": null
+        },
+        {
+          "name": "ModuleNativePath",
+          "datatype": "string",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "LoaderModuleUnload",
+      "displayName": "LoaderModuleUnload",
+      "descriptor": {
+        "id": 153,
+        "version": 0,
+        "channel": 0,
+        "level": "Information",
+        "opcode": 34,
+        "task": 10,
+        "keyword": 8
+      },
+      "fields": [
+        {
+          "name": "ModuleID",
+          "datatype": "ulong",
+          "map": null
+        },
+        {
+          "name": "AssemblyID",
+          "datatype": "ulong",
+          "map": null
+        },
+        {
+          "name": "ModuleFlags",
+          "datatype": "uint",
+          "map": "ModuleFlagsMap"
+        },
+        {
+          "name": "Reserved1",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "ModuleILPath",
+          "datatype": "string",
+          "map": null
+        },
+        {
+          "name": "ModuleNativePath",
+          "datatype": "string",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "LoaderAssemblyLoad",
+      "displayName": "LoaderAssemblyLoad",
+      "descriptor": {
+        "id": 154,
+        "version": 0,
+        "channel": 0,
+        "level": "Information",
+        "opcode": 37,
+        "task": 10,
+        "keyword": 8
+      },
+      "fields": [
+        {
+          "name": "AssemblyID",
+          "datatype": "ulong",
+          "map": null
+        },
+        {
+          "name": "AppDomainID",
+          "datatype": "ulong",
+          "map": null
+        },
+        {
+          "name": "AssemblyFlags",
+          "datatype": "uint",
+          "map": "AssemblyFlagsMap"
+        },
+        {
+          "name": "FullyQualifiedAssemblyName",
+          "datatype": "string",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "LoaderAssemblyUnload",
+      "displayName": "LoaderAssemblyUnload",
+      "descriptor": {
+        "id": 155,
+        "version": 0,
+        "channel": 0,
+        "level": "Information",
+        "opcode": 38,
+        "task": 10,
+        "keyword": 8
+      },
+      "fields": [
+        {
+          "name": "AssemblyID",
+          "datatype": "ulong",
+          "map": null
+        },
+        {
+          "name": "AppDomainID",
+          "datatype": "ulong",
+          "map": null
+        },
+        {
+          "name": "AssemblyFlags",
+          "datatype": "uint",
+          "map": "AssemblyFlagsMap"
+        },
+        {
+          "name": "FullyQualifiedAssemblyName",
+          "datatype": "string",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "LoaderAppDomainLoad",
+      "displayName": "LoaderAppDomainLoad",
+      "descriptor": {
+        "id": 156,
+        "version": 0,
+        "channel": 0,
+        "level": "Information",
+        "opcode": 41,
+        "task": 10,
+        "keyword": 8
+      },
+      "fields": [
+        {
+          "name": "AppDomainID",
+          "datatype": "ulong",
+          "map": null
+        },
+        {
+          "name": "AppDomainFlags",
+          "datatype": "uint",
+          "map": "AppDomainFlagsMap"
+        },
+        {
+          "name": "AppDomainName",
+          "datatype": "string",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "LoaderAppDomainUnload",
+      "displayName": "LoaderAppDomainUnload",
+      "descriptor": {
+        "id": 157,
+        "version": 0,
+        "channel": 0,
+        "level": "Information",
+        "opcode": 42,
+        "task": 10,
+        "keyword": 8
+      },
+      "fields": [
+        {
+          "name": "AppDomainID",
+          "datatype": "ulong",
+          "map": null
+        },
+        {
+          "name": "AppDomainFlags",
+          "datatype": "uint",
+          "map": "AppDomainFlagsMap"
+        },
+        {
+          "name": "AppDomainName",
+          "datatype": "string",
+          "map": null
+        }
+      ]
+    },
+    {
       "name": "ClrPerfTrackModuleRangeLoad",
       "displayName": "ClrPerfTrackModuleRangeLoad",
       "descriptor": {
@@ -2128,6 +3115,126 @@
           "name": "RangeType",
           "datatype": "byte",
           "map": "ModuleRangeTypeMap"
+        }
+      ]
+    },
+    {
+      "name": "StrongNameVerificationStart",
+      "displayName": "StrongNameVerificationStart",
+      "descriptor": {
+        "id": 181,
+        "version": 0,
+        "channel": 0,
+        "level": "Verbose",
+        "opcode": "Start",
+        "task": 12,
+        "keyword": 1024
+      },
+      "fields": [
+        {
+          "name": "VerificationFlags",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "ErrorCode",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "FullyQualifiedAssemblyName",
+          "datatype": "string",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "StrongNameVerificationStop",
+      "displayName": "StrongNameVerificationStop",
+      "descriptor": {
+        "id": 182,
+        "version": 0,
+        "channel": 0,
+        "level": "Information",
+        "opcode": "End",
+        "task": 12,
+        "keyword": 1024
+      },
+      "fields": [
+        {
+          "name": "VerificationFlags",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "ErrorCode",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "FullyQualifiedAssemblyName",
+          "datatype": "string",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "AuthenticodeVerificationStart",
+      "displayName": "AuthenticodeVerificationStart",
+      "descriptor": {
+        "id": 183,
+        "version": 0,
+        "channel": 0,
+        "level": "Verbose",
+        "opcode": "Start",
+        "task": 13,
+        "keyword": 1024
+      },
+      "fields": [
+        {
+          "name": "VerificationFlags",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "ErrorCode",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "ModulePath",
+          "datatype": "string",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "AuthenticodeVerificationStop",
+      "displayName": "AuthenticodeVerificationStop",
+      "descriptor": {
+        "id": 184,
+        "version": 0,
+        "channel": 0,
+        "level": "Information",
+        "opcode": "End",
+        "task": 13,
+        "keyword": 1024
+      },
+      "fields": [
+        {
+          "name": "VerificationFlags",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "ErrorCode",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "ModulePath",
+          "datatype": "string",
+          "map": null
         }
       ]
     },
@@ -2889,6 +3996,46 @@
       "fields": []
     },
     {
+      "name": "GCStart",
+      "displayName": "GCStart",
+      "descriptor": {
+        "id": 1,
+        "version": 1,
+        "channel": 0,
+        "level": "Information",
+        "opcode": "Start",
+        "task": 1,
+        "keyword": 1
+      },
+      "fields": [
+        {
+          "name": "Count",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "Depth",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "Reason",
+          "datatype": "uint",
+          "map": "GCReasonMap"
+        },
+        {
+          "name": "Type",
+          "datatype": "uint",
+          "map": "GCTypeMap"
+        },
+        {
+          "name": "ClrInstanceID",
+          "datatype": "ushort",
+          "map": null
+        }
+      ]
+    },
+    {
       "name": "GCStop",
       "displayName": "GCStop",
       "descriptor": {
@@ -3145,6 +4292,36 @@
           "name": "Count",
           "datatype": "uint",
           "map": null
+        },
+        {
+          "name": "ClrInstanceID",
+          "datatype": "ushort",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "GCAllocationTick",
+      "displayName": "GCAllocationTick",
+      "descriptor": {
+        "id": 10,
+        "version": 1,
+        "channel": 0,
+        "level": "Verbose",
+        "opcode": 11,
+        "task": 1,
+        "keyword": 1
+      },
+      "fields": [
+        {
+          "name": "AllocationAmount",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "AllocationKind",
+          "datatype": "uint",
+          "map": "GCAllocationKindMap"
         },
         {
           "name": "ClrInstanceID",
@@ -3429,6 +4606,236 @@
       ]
     },
     {
+      "name": "MethodLoad",
+      "displayName": "MethodLoad",
+      "descriptor": {
+        "id": 141,
+        "version": 1,
+        "channel": 0,
+        "level": "Information",
+        "opcode": 33,
+        "task": 9,
+        "keyword": 48
+      },
+      "fields": [
+        {
+          "name": "MethodID",
+          "datatype": "ulong",
+          "map": null
+        },
+        {
+          "name": "ModuleID",
+          "datatype": "ulong",
+          "map": null
+        },
+        {
+          "name": "MethodStartAddress",
+          "datatype": "ulong",
+          "map": null
+        },
+        {
+          "name": "MethodSize",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "MethodToken",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "MethodFlags",
+          "datatype": "uint",
+          "map": "MethodFlagsMap"
+        },
+        {
+          "name": "ClrInstanceID",
+          "datatype": "ushort",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "MethodUnload",
+      "displayName": "MethodUnload",
+      "descriptor": {
+        "id": 142,
+        "version": 1,
+        "channel": 0,
+        "level": "Information",
+        "opcode": 34,
+        "task": 9,
+        "keyword": 48
+      },
+      "fields": [
+        {
+          "name": "MethodID",
+          "datatype": "ulong",
+          "map": null
+        },
+        {
+          "name": "ModuleID",
+          "datatype": "ulong",
+          "map": null
+        },
+        {
+          "name": "MethodStartAddress",
+          "datatype": "ulong",
+          "map": null
+        },
+        {
+          "name": "MethodSize",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "MethodToken",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "MethodFlags",
+          "datatype": "uint",
+          "map": "MethodFlagsMap"
+        },
+        {
+          "name": "ClrInstanceID",
+          "datatype": "ushort",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "MethodLoadVerbose",
+      "displayName": "MethodLoadVerbose",
+      "descriptor": {
+        "id": 143,
+        "version": 1,
+        "channel": 0,
+        "level": "Information",
+        "opcode": 37,
+        "task": 9,
+        "keyword": 48
+      },
+      "fields": [
+        {
+          "name": "MethodID",
+          "datatype": "ulong",
+          "map": null
+        },
+        {
+          "name": "ModuleID",
+          "datatype": "ulong",
+          "map": null
+        },
+        {
+          "name": "MethodStartAddress",
+          "datatype": "ulong",
+          "map": null
+        },
+        {
+          "name": "MethodSize",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "MethodToken",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "MethodFlags",
+          "datatype": "uint",
+          "map": "MethodFlagsMap"
+        },
+        {
+          "name": "MethodNamespace",
+          "datatype": "string",
+          "map": null
+        },
+        {
+          "name": "MethodName",
+          "datatype": "string",
+          "map": null
+        },
+        {
+          "name": "MethodSignature",
+          "datatype": "string",
+          "map": null
+        },
+        {
+          "name": "ClrInstanceID",
+          "datatype": "ushort",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "MethodUnloadVerbose",
+      "displayName": "MethodUnloadVerbose",
+      "descriptor": {
+        "id": 144,
+        "version": 1,
+        "channel": 0,
+        "level": "Information",
+        "opcode": 38,
+        "task": 9,
+        "keyword": 48
+      },
+      "fields": [
+        {
+          "name": "MethodID",
+          "datatype": "ulong",
+          "map": null
+        },
+        {
+          "name": "ModuleID",
+          "datatype": "ulong",
+          "map": null
+        },
+        {
+          "name": "MethodStartAddress",
+          "datatype": "ulong",
+          "map": null
+        },
+        {
+          "name": "MethodSize",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "MethodToken",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "MethodFlags",
+          "datatype": "uint",
+          "map": "MethodFlagsMap"
+        },
+        {
+          "name": "MethodNamespace",
+          "datatype": "string",
+          "map": null
+        },
+        {
+          "name": "MethodName",
+          "datatype": "string",
+          "map": null
+        },
+        {
+          "name": "MethodSignature",
+          "datatype": "string",
+          "map": null
+        },
+        {
+          "name": "ClrInstanceID",
+          "datatype": "ushort",
+          "map": null
+        }
+      ]
+    },
+    {
       "name": "MethodJittingStarted",
       "displayName": "MethodJittingStarted",
       "descriptor": {
@@ -3508,6 +4915,106 @@
         },
         {
           "name": "AppDomainID",
+          "datatype": "ulong",
+          "map": null
+        },
+        {
+          "name": "ModuleFlags",
+          "datatype": "uint",
+          "map": "ModuleFlagsMap"
+        },
+        {
+          "name": "Reserved1",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "ModuleILPath",
+          "datatype": "string",
+          "map": null
+        },
+        {
+          "name": "ModuleNativePath",
+          "datatype": "string",
+          "map": null
+        },
+        {
+          "name": "ClrInstanceID",
+          "datatype": "ushort",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "LoaderModuleLoad",
+      "displayName": "LoaderModuleLoad",
+      "descriptor": {
+        "id": 152,
+        "version": 1,
+        "channel": 0,
+        "level": "Information",
+        "opcode": 33,
+        "task": 10,
+        "keyword": 536870920
+      },
+      "fields": [
+        {
+          "name": "ModuleID",
+          "datatype": "ulong",
+          "map": null
+        },
+        {
+          "name": "AssemblyID",
+          "datatype": "ulong",
+          "map": null
+        },
+        {
+          "name": "ModuleFlags",
+          "datatype": "uint",
+          "map": "ModuleFlagsMap"
+        },
+        {
+          "name": "Reserved1",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "ModuleILPath",
+          "datatype": "string",
+          "map": null
+        },
+        {
+          "name": "ModuleNativePath",
+          "datatype": "string",
+          "map": null
+        },
+        {
+          "name": "ClrInstanceID",
+          "datatype": "ushort",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "LoaderModuleUnload",
+      "displayName": "LoaderModuleUnload",
+      "descriptor": {
+        "id": 153,
+        "version": 1,
+        "channel": 0,
+        "level": "Information",
+        "opcode": 34,
+        "task": 10,
+        "keyword": 536870920
+      },
+      "fields": [
+        {
+          "name": "ModuleID",
+          "datatype": "ulong",
+          "map": null
+        },
+        {
+          "name": "AssemblyID",
           "datatype": "ulong",
           "map": null
         },
@@ -3889,6 +5396,56 @@
         {
           "name": "ClientSequenceNumber",
           "datatype": "ulong",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "GCAllocationTick",
+      "displayName": "GCAllocationTick",
+      "descriptor": {
+        "id": 10,
+        "version": 2,
+        "channel": 0,
+        "level": "Verbose",
+        "opcode": 11,
+        "task": 1,
+        "keyword": 1
+      },
+      "fields": [
+        {
+          "name": "AllocationAmount",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "AllocationKind",
+          "datatype": "uint",
+          "map": "GCAllocationKindMap"
+        },
+        {
+          "name": "ClrInstanceID",
+          "datatype": "ushort",
+          "map": null
+        },
+        {
+          "name": "AllocationAmount64",
+          "datatype": "ulong",
+          "map": null
+        },
+        {
+          "name": "TypeID",
+          "datatype": "pointer",
+          "map": null
+        },
+        {
+          "name": "TypeName",
+          "datatype": "string",
+          "map": null
+        },
+        {
+          "name": "HeapIndex",
+          "datatype": "uint",
           "map": null
         }
       ]
@@ -4758,6 +6315,24 @@
       }
     },
     {
+      "name": "GCRootCCWFlagsMap",
+      "flags": true,
+      "values": {
+        "1": "Strong",
+        "2": "Pegged"
+      }
+    },
+    {
+      "name": "GCRootFlagsMap",
+      "flags": true,
+      "values": {
+        "1": "Pinning",
+        "2": "WeakRef",
+        "4": "Interior",
+        "8": "RefCounted"
+      }
+    },
+    {
       "name": "GCRootKindMap",
       "flags": false,
       "values": {
@@ -4767,6 +6342,13 @@
         "3": "Older",
         "4": "SizedRef",
         "5": "Overflow"
+      }
+    },
+    {
+      "name": "GCRootStaticVarFlagsMap",
+      "flags": true,
+      "values": {
+        "1": "ThreadLocal"
       }
     },
     {
@@ -4910,31 +6492,6 @@
         "1": "GCSpecial",
         "2": "Finalizer",
         "4": "ThreadPoolWorker"
-      }
-    },
-    {
-      "name": "GCRootCCWFlagsMap",
-      "flags": true,
-      "values": {
-        "1": "Strong",
-        "2": "Pegged"
-      }
-    },
-    {
-      "name": "GCRootFlagsMap",
-      "flags": true,
-      "values": {
-        "1": "Pinning",
-        "2": "WeakRef",
-        "4": "Interior",
-        "8": "RefCounted"
-      }
-    },
-    {
-      "name": "GCRootStaticVarFlagsMap",
-      "flags": true,
-      "values": {
-        "1": "ThreadLocal"
       }
     },
     {
