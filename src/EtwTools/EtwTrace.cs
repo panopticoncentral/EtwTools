@@ -32,19 +32,26 @@ namespace EtwTools
         public delegate bool BufferCallback(BufferStatistics statistics);
 
         /// <summary>
-        /// The path of the trace.
+        /// The name of the trace (file name or real-time session name).
         /// </summary>
-        public string Path { get; }
+        public string Name { get; }
 
         /// <summary>
-        /// Constructs a trace from a log file.
+        /// Whether the trace is of a real-time session.
         /// </summary>
-        /// <param name="path">The path of the log file.</param>
-        public EtwTrace(string path)
+        public bool IsRealTime { get; }
+
+        /// <summary>
+        /// Constructs a trace.
+        /// </summary>
+        /// <param name="name">The name of the log file or real-time session.</param>
+        /// <param name="isRealTime">Whether the name is of a lof file or real-time session.</param>
+        public EtwTrace(string name, bool isRealTime)
         {
             _id = Interlocked.Increment(ref s_nextId);
             _ = s_instances.TryAdd(_id, new(this));
-            Path = path;
+            Name = name;
+            IsRealTime = isRealTime;
         }
 
         /// <summary>
@@ -98,9 +105,11 @@ namespace EtwTools
 
             _bufferCallback = bufferCallback;
             _eventCallback = eventCallback;
-            fixed (char* pathPointer = Path)
+            fixed (char* namePointer = Name)
             {
-                Native.EventTraceLogFile logFile = new(pathPointer, null, Native.ProcessTraceMode.EventRecord, &NativeBufferCallback, &NativeEventCallback, _id);
+                Native.EventTraceLogFile logFile = !IsRealTime
+                    ? new(namePointer, null, Native.ProcessTraceMode.EventRecord, &NativeBufferCallback, &NativeEventCallback, _id)
+                    : new(null, namePointer, Native.ProcessTraceMode.RealTime | Native.ProcessTraceMode.EventRecord, &NativeBufferCallback, &NativeEventCallback, _id);
                 _traceHandle = Native.OpenTrace(&logFile);
                 return _traceHandle.IsInvalid
                     ? throw new InvalidOperationException()

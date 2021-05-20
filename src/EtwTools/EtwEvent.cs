@@ -357,7 +357,7 @@ namespace EtwTools
 
             fixed (byte* buffer = Data)
             {
-                return new((nint)(buffer + (AddressSize * 2)));
+                return new((nint)(buffer + offset + (AddressSize * 2)));
             }
         }
 
