@@ -1,0 +1,2129 @@
+{
+  "name": "KernelTcpip",
+  "displayName": "Kernel-Tcpip",
+  "id": "9a280ac0-c8e0-11d1-84e2-00c04fb998a2",
+  "events": [
+    {
+      "name": "Send",
+      "displayName": "Send",
+      "descriptor": {
+        "id": 0,
+        "version": 0,
+        "channel": 0,
+        "level": "None",
+        "opcode": 10,
+        "task": 0,
+        "keyword": 0
+      },
+      "fields": [
+        {
+          "name": "daddr",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "saddr",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "dport",
+          "datatype": "ushort",
+          "map": null
+        },
+        {
+          "name": "sport",
+          "datatype": "ushort",
+          "map": null
+        },
+        {
+          "name": "size",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "PID",
+          "datatype": "uint",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "Recv",
+      "displayName": "Recv",
+      "descriptor": {
+        "id": 0,
+        "version": 0,
+        "channel": 0,
+        "level": "None",
+        "opcode": 11,
+        "task": 0,
+        "keyword": 0
+      },
+      "fields": [
+        {
+          "name": "daddr",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "saddr",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "dport",
+          "datatype": "ushort",
+          "map": null
+        },
+        {
+          "name": "sport",
+          "datatype": "ushort",
+          "map": null
+        },
+        {
+          "name": "size",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "PID",
+          "datatype": "uint",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "Connect",
+      "displayName": "Connect",
+      "descriptor": {
+        "id": 0,
+        "version": 0,
+        "channel": 0,
+        "level": "None",
+        "opcode": 12,
+        "task": 0,
+        "keyword": 0
+      },
+      "fields": [
+        {
+          "name": "daddr",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "saddr",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "dport",
+          "datatype": "ushort",
+          "map": null
+        },
+        {
+          "name": "sport",
+          "datatype": "ushort",
+          "map": null
+        },
+        {
+          "name": "size",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "PID",
+          "datatype": "uint",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "Disconnect",
+      "displayName": "Disconnect",
+      "descriptor": {
+        "id": 0,
+        "version": 0,
+        "channel": 0,
+        "level": "None",
+        "opcode": 13,
+        "task": 0,
+        "keyword": 0
+      },
+      "fields": [
+        {
+          "name": "daddr",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "saddr",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "dport",
+          "datatype": "ushort",
+          "map": null
+        },
+        {
+          "name": "sport",
+          "datatype": "ushort",
+          "map": null
+        },
+        {
+          "name": "size",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "PID",
+          "datatype": "uint",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "Retransmit",
+      "displayName": "Retransmit",
+      "descriptor": {
+        "id": 0,
+        "version": 0,
+        "channel": 0,
+        "level": "None",
+        "opcode": 14,
+        "task": 0,
+        "keyword": 0
+      },
+      "fields": [
+        {
+          "name": "daddr",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "saddr",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "dport",
+          "datatype": "ushort",
+          "map": null
+        },
+        {
+          "name": "sport",
+          "datatype": "ushort",
+          "map": null
+        },
+        {
+          "name": "size",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "PID",
+          "datatype": "uint",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "Accept",
+      "displayName": "Accept",
+      "descriptor": {
+        "id": 0,
+        "version": 0,
+        "channel": 0,
+        "level": "None",
+        "opcode": 15,
+        "task": 0,
+        "keyword": 0
+      },
+      "fields": [
+        {
+          "name": "daddr",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "saddr",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "dport",
+          "datatype": "ushort",
+          "map": null
+        },
+        {
+          "name": "sport",
+          "datatype": "ushort",
+          "map": null
+        },
+        {
+          "name": "size",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "PID",
+          "datatype": "uint",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "Fail",
+      "displayName": "Fail",
+      "descriptor": {
+        "id": 0,
+        "version": 1,
+        "channel": 0,
+        "level": "None",
+        "opcode": 17,
+        "task": 0,
+        "keyword": 0
+      },
+      "fields": [
+        {
+          "name": "Proto",
+          "datatype": "uint",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "TCPCopy",
+      "displayName": "TCPCopy",
+      "descriptor": {
+        "id": 0,
+        "version": 1,
+        "channel": 0,
+        "level": "None",
+        "opcode": 18,
+        "task": 0,
+        "keyword": 0
+      },
+      "fields": [
+        {
+          "name": "PID",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "size",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "daddr",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "saddr",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "dport",
+          "datatype": "ushort",
+          "map": null
+        },
+        {
+          "name": "sport",
+          "datatype": "ushort",
+          "map": null
+        },
+        {
+          "name": "connid",
+          "datatype": "pointer",
+          "map": null
+        },
+        {
+          "name": "seqnum",
+          "datatype": "uint",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "ARPCopy",
+      "displayName": "ARPCopy",
+      "descriptor": {
+        "id": 0,
+        "version": 1,
+        "channel": 0,
+        "level": "None",
+        "opcode": 19,
+        "task": 0,
+        "keyword": 0
+      },
+      "fields": [
+        {
+          "name": "PID",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "size",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "daddr",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "saddr",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "dport",
+          "datatype": "ushort",
+          "map": null
+        },
+        {
+          "name": "sport",
+          "datatype": "ushort",
+          "map": null
+        },
+        {
+          "name": "connid",
+          "datatype": "pointer",
+          "map": null
+        },
+        {
+          "name": "seqnum",
+          "datatype": "uint",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "FullACK",
+      "displayName": "FullACK",
+      "descriptor": {
+        "id": 0,
+        "version": 1,
+        "channel": 0,
+        "level": "None",
+        "opcode": 20,
+        "task": 0,
+        "keyword": 0
+      },
+      "fields": [
+        {
+          "name": "PID",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "size",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "daddr",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "saddr",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "dport",
+          "datatype": "ushort",
+          "map": null
+        },
+        {
+          "name": "sport",
+          "datatype": "ushort",
+          "map": null
+        },
+        {
+          "name": "connid",
+          "datatype": "pointer",
+          "map": null
+        },
+        {
+          "name": "seqnum",
+          "datatype": "uint",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "PartACK",
+      "displayName": "PartACK",
+      "descriptor": {
+        "id": 0,
+        "version": 1,
+        "channel": 0,
+        "level": "None",
+        "opcode": 21,
+        "task": 0,
+        "keyword": 0
+      },
+      "fields": [
+        {
+          "name": "PID",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "size",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "daddr",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "saddr",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "dport",
+          "datatype": "ushort",
+          "map": null
+        },
+        {
+          "name": "sport",
+          "datatype": "ushort",
+          "map": null
+        },
+        {
+          "name": "connid",
+          "datatype": "pointer",
+          "map": null
+        },
+        {
+          "name": "seqnum",
+          "datatype": "uint",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "DupACK",
+      "displayName": "DupACK",
+      "descriptor": {
+        "id": 0,
+        "version": 1,
+        "channel": 0,
+        "level": "None",
+        "opcode": 22,
+        "task": 0,
+        "keyword": 0
+      },
+      "fields": [
+        {
+          "name": "PID",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "size",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "daddr",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "saddr",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "dport",
+          "datatype": "ushort",
+          "map": null
+        },
+        {
+          "name": "sport",
+          "datatype": "ushort",
+          "map": null
+        },
+        {
+          "name": "connid",
+          "datatype": "pointer",
+          "map": null
+        },
+        {
+          "name": "seqnum",
+          "datatype": "uint",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "Send",
+      "displayName": "Send",
+      "descriptor": {
+        "id": 0,
+        "version": 1,
+        "channel": 0,
+        "level": "None",
+        "opcode": 10,
+        "task": 0,
+        "keyword": 0
+      },
+      "fields": [
+        {
+          "name": "PID",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "size",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "daddr",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "saddr",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "dport",
+          "datatype": "ushort",
+          "map": null
+        },
+        {
+          "name": "sport",
+          "datatype": "ushort",
+          "map": null
+        },
+        {
+          "name": "startime",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "endtime",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "connid",
+          "datatype": "pointer",
+          "map": null
+        },
+        {
+          "name": "seqnum",
+          "datatype": "uint",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "Disconnect",
+      "displayName": "Disconnect",
+      "descriptor": {
+        "id": 0,
+        "version": 1,
+        "channel": 0,
+        "level": "None",
+        "opcode": 13,
+        "task": 0,
+        "keyword": 0
+      },
+      "fields": [
+        {
+          "name": "PID",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "size",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "daddr",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "saddr",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "dport",
+          "datatype": "ushort",
+          "map": null
+        },
+        {
+          "name": "sport",
+          "datatype": "ushort",
+          "map": null
+        },
+        {
+          "name": "connid",
+          "datatype": "pointer",
+          "map": null
+        },
+        {
+          "name": "seqnum",
+          "datatype": "uint",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "Retransmit",
+      "displayName": "Retransmit",
+      "descriptor": {
+        "id": 0,
+        "version": 1,
+        "channel": 0,
+        "level": "None",
+        "opcode": 14,
+        "task": 0,
+        "keyword": 0
+      },
+      "fields": [
+        {
+          "name": "PID",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "size",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "daddr",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "saddr",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "dport",
+          "datatype": "ushort",
+          "map": null
+        },
+        {
+          "name": "sport",
+          "datatype": "ushort",
+          "map": null
+        },
+        {
+          "name": "connid",
+          "datatype": "pointer",
+          "map": null
+        },
+        {
+          "name": "seqnum",
+          "datatype": "uint",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "Reconnect",
+      "displayName": "Reconnect",
+      "descriptor": {
+        "id": 0,
+        "version": 1,
+        "channel": 0,
+        "level": "None",
+        "opcode": 16,
+        "task": 0,
+        "keyword": 0
+      },
+      "fields": [
+        {
+          "name": "PID",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "size",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "daddr",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "saddr",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "dport",
+          "datatype": "ushort",
+          "map": null
+        },
+        {
+          "name": "sport",
+          "datatype": "ushort",
+          "map": null
+        },
+        {
+          "name": "connid",
+          "datatype": "pointer",
+          "map": null
+        },
+        {
+          "name": "seqnum",
+          "datatype": "uint",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "Connect",
+      "displayName": "Connect",
+      "descriptor": {
+        "id": 0,
+        "version": 1,
+        "channel": 0,
+        "level": "None",
+        "opcode": 12,
+        "task": 0,
+        "keyword": 0
+      },
+      "fields": [
+        {
+          "name": "PID",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "size",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "daddr",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "saddr",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "dport",
+          "datatype": "ushort",
+          "map": null
+        },
+        {
+          "name": "sport",
+          "datatype": "ushort",
+          "map": null
+        },
+        {
+          "name": "mss",
+          "datatype": "ushort",
+          "map": null
+        },
+        {
+          "name": "sackopt",
+          "datatype": "ushort",
+          "map": null
+        },
+        {
+          "name": "tsopt",
+          "datatype": "ushort",
+          "map": null
+        },
+        {
+          "name": "wsopt",
+          "datatype": "ushort",
+          "map": null
+        },
+        {
+          "name": "rcvwin",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "rcvwinscale",
+          "datatype": "short",
+          "map": null
+        },
+        {
+          "name": "sndwinscale",
+          "datatype": "short",
+          "map": null
+        },
+        {
+          "name": "connid",
+          "datatype": "pointer",
+          "map": null
+        },
+        {
+          "name": "seqnum",
+          "datatype": "uint",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "Accept",
+      "displayName": "Accept",
+      "descriptor": {
+        "id": 0,
+        "version": 1,
+        "channel": 0,
+        "level": "None",
+        "opcode": 15,
+        "task": 0,
+        "keyword": 0
+      },
+      "fields": [
+        {
+          "name": "PID",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "size",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "daddr",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "saddr",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "dport",
+          "datatype": "ushort",
+          "map": null
+        },
+        {
+          "name": "sport",
+          "datatype": "ushort",
+          "map": null
+        },
+        {
+          "name": "mss",
+          "datatype": "ushort",
+          "map": null
+        },
+        {
+          "name": "sackopt",
+          "datatype": "ushort",
+          "map": null
+        },
+        {
+          "name": "tsopt",
+          "datatype": "ushort",
+          "map": null
+        },
+        {
+          "name": "wsopt",
+          "datatype": "ushort",
+          "map": null
+        },
+        {
+          "name": "rcvwin",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "rcvwinscale",
+          "datatype": "short",
+          "map": null
+        },
+        {
+          "name": "sndwinscale",
+          "datatype": "short",
+          "map": null
+        },
+        {
+          "name": "connid",
+          "datatype": "pointer",
+          "map": null
+        },
+        {
+          "name": "seqnum",
+          "datatype": "uint",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "Recv",
+      "displayName": "Recv",
+      "descriptor": {
+        "id": 0,
+        "version": 1,
+        "channel": 0,
+        "level": "None",
+        "opcode": 11,
+        "task": 0,
+        "keyword": 0
+      },
+      "fields": [
+        {
+          "name": "PID",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "size",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "daddr",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "saddr",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "dport",
+          "datatype": "ushort",
+          "map": null
+        },
+        {
+          "name": "sport",
+          "datatype": "ushort",
+          "map": null
+        },
+        {
+          "name": "connid",
+          "datatype": "pointer",
+          "map": null
+        },
+        {
+          "name": "seqnum",
+          "datatype": "uint",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "RecvIPV6",
+      "displayName": "RecvIPV6",
+      "descriptor": {
+        "id": 0,
+        "version": 2,
+        "channel": 0,
+        "level": "None",
+        "opcode": 27,
+        "task": 0,
+        "keyword": 0
+      },
+      "fields": [
+        {
+          "name": "PID",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "size",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "daddr",
+          "datatype": "byte",
+          "map": null
+        },
+        {
+          "name": "saddr",
+          "datatype": "byte",
+          "map": null
+        },
+        {
+          "name": "dport",
+          "datatype": "ushort",
+          "map": null
+        },
+        {
+          "name": "sport",
+          "datatype": "ushort",
+          "map": null
+        },
+        {
+          "name": "seqnum",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "connid",
+          "datatype": "pointer",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "DisconnectIPV6",
+      "displayName": "DisconnectIPV6",
+      "descriptor": {
+        "id": 0,
+        "version": 2,
+        "channel": 0,
+        "level": "None",
+        "opcode": 29,
+        "task": 0,
+        "keyword": 0
+      },
+      "fields": [
+        {
+          "name": "PID",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "size",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "daddr",
+          "datatype": "byte",
+          "map": null
+        },
+        {
+          "name": "saddr",
+          "datatype": "byte",
+          "map": null
+        },
+        {
+          "name": "dport",
+          "datatype": "ushort",
+          "map": null
+        },
+        {
+          "name": "sport",
+          "datatype": "ushort",
+          "map": null
+        },
+        {
+          "name": "seqnum",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "connid",
+          "datatype": "pointer",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "RetransmitIPV6",
+      "displayName": "RetransmitIPV6",
+      "descriptor": {
+        "id": 0,
+        "version": 2,
+        "channel": 0,
+        "level": "None",
+        "opcode": 30,
+        "task": 0,
+        "keyword": 0
+      },
+      "fields": [
+        {
+          "name": "PID",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "size",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "daddr",
+          "datatype": "byte",
+          "map": null
+        },
+        {
+          "name": "saddr",
+          "datatype": "byte",
+          "map": null
+        },
+        {
+          "name": "dport",
+          "datatype": "ushort",
+          "map": null
+        },
+        {
+          "name": "sport",
+          "datatype": "ushort",
+          "map": null
+        },
+        {
+          "name": "seqnum",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "connid",
+          "datatype": "pointer",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "ReconnectIPV6",
+      "displayName": "ReconnectIPV6",
+      "descriptor": {
+        "id": 0,
+        "version": 2,
+        "channel": 0,
+        "level": "None",
+        "opcode": 32,
+        "task": 0,
+        "keyword": 0
+      },
+      "fields": [
+        {
+          "name": "PID",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "size",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "daddr",
+          "datatype": "byte",
+          "map": null
+        },
+        {
+          "name": "saddr",
+          "datatype": "byte",
+          "map": null
+        },
+        {
+          "name": "dport",
+          "datatype": "ushort",
+          "map": null
+        },
+        {
+          "name": "sport",
+          "datatype": "ushort",
+          "map": null
+        },
+        {
+          "name": "seqnum",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "connid",
+          "datatype": "pointer",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "TCPCopyIPV6",
+      "displayName": "TCPCopyIPV6",
+      "descriptor": {
+        "id": 0,
+        "version": 2,
+        "channel": 0,
+        "level": "None",
+        "opcode": 34,
+        "task": 0,
+        "keyword": 0
+      },
+      "fields": [
+        {
+          "name": "PID",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "size",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "daddr",
+          "datatype": "byte",
+          "map": null
+        },
+        {
+          "name": "saddr",
+          "datatype": "byte",
+          "map": null
+        },
+        {
+          "name": "dport",
+          "datatype": "ushort",
+          "map": null
+        },
+        {
+          "name": "sport",
+          "datatype": "ushort",
+          "map": null
+        },
+        {
+          "name": "seqnum",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "connid",
+          "datatype": "pointer",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "SendIPV4",
+      "displayName": "SendIPV4",
+      "descriptor": {
+        "id": 0,
+        "version": 2,
+        "channel": 0,
+        "level": "None",
+        "opcode": 10,
+        "task": 0,
+        "keyword": 0
+      },
+      "fields": [
+        {
+          "name": "PID",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "size",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "daddr",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "saddr",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "dport",
+          "datatype": "ushort",
+          "map": null
+        },
+        {
+          "name": "sport",
+          "datatype": "ushort",
+          "map": null
+        },
+        {
+          "name": "startime",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "endtime",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "seqnum",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "connid",
+          "datatype": "pointer",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "Fail",
+      "displayName": "Fail",
+      "descriptor": {
+        "id": 0,
+        "version": 2,
+        "channel": 0,
+        "level": "None",
+        "opcode": 17,
+        "task": 0,
+        "keyword": 0
+      },
+      "fields": [
+        {
+          "name": "Proto",
+          "datatype": "ushort",
+          "map": null
+        },
+        {
+          "name": "FailureCode",
+          "datatype": "ushort",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "ConnectIPV4",
+      "displayName": "ConnectIPV4",
+      "descriptor": {
+        "id": 0,
+        "version": 2,
+        "channel": 0,
+        "level": "None",
+        "opcode": 12,
+        "task": 0,
+        "keyword": 0
+      },
+      "fields": [
+        {
+          "name": "PID",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "size",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "daddr",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "saddr",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "dport",
+          "datatype": "ushort",
+          "map": null
+        },
+        {
+          "name": "sport",
+          "datatype": "ushort",
+          "map": null
+        },
+        {
+          "name": "mss",
+          "datatype": "ushort",
+          "map": null
+        },
+        {
+          "name": "sackopt",
+          "datatype": "ushort",
+          "map": null
+        },
+        {
+          "name": "tsopt",
+          "datatype": "ushort",
+          "map": null
+        },
+        {
+          "name": "wsopt",
+          "datatype": "ushort",
+          "map": null
+        },
+        {
+          "name": "rcvwin",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "rcvwinscale",
+          "datatype": "short",
+          "map": null
+        },
+        {
+          "name": "sndwinscale",
+          "datatype": "short",
+          "map": null
+        },
+        {
+          "name": "seqnum",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "connid",
+          "datatype": "pointer",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "AcceptIPV4",
+      "displayName": "AcceptIPV4",
+      "descriptor": {
+        "id": 0,
+        "version": 2,
+        "channel": 0,
+        "level": "None",
+        "opcode": 15,
+        "task": 0,
+        "keyword": 0
+      },
+      "fields": [
+        {
+          "name": "PID",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "size",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "daddr",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "saddr",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "dport",
+          "datatype": "ushort",
+          "map": null
+        },
+        {
+          "name": "sport",
+          "datatype": "ushort",
+          "map": null
+        },
+        {
+          "name": "mss",
+          "datatype": "ushort",
+          "map": null
+        },
+        {
+          "name": "sackopt",
+          "datatype": "ushort",
+          "map": null
+        },
+        {
+          "name": "tsopt",
+          "datatype": "ushort",
+          "map": null
+        },
+        {
+          "name": "wsopt",
+          "datatype": "ushort",
+          "map": null
+        },
+        {
+          "name": "rcvwin",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "rcvwinscale",
+          "datatype": "short",
+          "map": null
+        },
+        {
+          "name": "sndwinscale",
+          "datatype": "short",
+          "map": null
+        },
+        {
+          "name": "seqnum",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "connid",
+          "datatype": "pointer",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "SendIPV6",
+      "displayName": "SendIPV6",
+      "descriptor": {
+        "id": 0,
+        "version": 2,
+        "channel": 0,
+        "level": "None",
+        "opcode": 26,
+        "task": 0,
+        "keyword": 0
+      },
+      "fields": [
+        {
+          "name": "PID",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "size",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "daddr",
+          "datatype": "byte",
+          "map": null
+        },
+        {
+          "name": "saddr",
+          "datatype": "byte",
+          "map": null
+        },
+        {
+          "name": "dport",
+          "datatype": "ushort",
+          "map": null
+        },
+        {
+          "name": "sport",
+          "datatype": "ushort",
+          "map": null
+        },
+        {
+          "name": "startime",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "endtime",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "seqnum",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "connid",
+          "datatype": "pointer",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "RecvIPV4",
+      "displayName": "RecvIPV4",
+      "descriptor": {
+        "id": 0,
+        "version": 2,
+        "channel": 0,
+        "level": "None",
+        "opcode": 11,
+        "task": 0,
+        "keyword": 0
+      },
+      "fields": [
+        {
+          "name": "PID",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "size",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "daddr",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "saddr",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "dport",
+          "datatype": "ushort",
+          "map": null
+        },
+        {
+          "name": "sport",
+          "datatype": "ushort",
+          "map": null
+        },
+        {
+          "name": "seqnum",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "connid",
+          "datatype": "pointer",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "DisconnectIPV4",
+      "displayName": "DisconnectIPV4",
+      "descriptor": {
+        "id": 0,
+        "version": 2,
+        "channel": 0,
+        "level": "None",
+        "opcode": 13,
+        "task": 0,
+        "keyword": 0
+      },
+      "fields": [
+        {
+          "name": "PID",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "size",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "daddr",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "saddr",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "dport",
+          "datatype": "ushort",
+          "map": null
+        },
+        {
+          "name": "sport",
+          "datatype": "ushort",
+          "map": null
+        },
+        {
+          "name": "seqnum",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "connid",
+          "datatype": "pointer",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "RetransmitIPV4",
+      "displayName": "RetransmitIPV4",
+      "descriptor": {
+        "id": 0,
+        "version": 2,
+        "channel": 0,
+        "level": "None",
+        "opcode": 14,
+        "task": 0,
+        "keyword": 0
+      },
+      "fields": [
+        {
+          "name": "PID",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "size",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "daddr",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "saddr",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "dport",
+          "datatype": "ushort",
+          "map": null
+        },
+        {
+          "name": "sport",
+          "datatype": "ushort",
+          "map": null
+        },
+        {
+          "name": "seqnum",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "connid",
+          "datatype": "pointer",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "ReconnectIPV4",
+      "displayName": "ReconnectIPV4",
+      "descriptor": {
+        "id": 0,
+        "version": 2,
+        "channel": 0,
+        "level": "None",
+        "opcode": 16,
+        "task": 0,
+        "keyword": 0
+      },
+      "fields": [
+        {
+          "name": "PID",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "size",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "daddr",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "saddr",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "dport",
+          "datatype": "ushort",
+          "map": null
+        },
+        {
+          "name": "sport",
+          "datatype": "ushort",
+          "map": null
+        },
+        {
+          "name": "seqnum",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "connid",
+          "datatype": "pointer",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "TCPCopyIPV4",
+      "displayName": "TCPCopyIPV4",
+      "descriptor": {
+        "id": 0,
+        "version": 2,
+        "channel": 0,
+        "level": "None",
+        "opcode": 18,
+        "task": 0,
+        "keyword": 0
+      },
+      "fields": [
+        {
+          "name": "PID",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "size",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "daddr",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "saddr",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "dport",
+          "datatype": "ushort",
+          "map": null
+        },
+        {
+          "name": "sport",
+          "datatype": "ushort",
+          "map": null
+        },
+        {
+          "name": "seqnum",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "connid",
+          "datatype": "pointer",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "ConnectIPV6",
+      "displayName": "ConnectIPV6",
+      "descriptor": {
+        "id": 0,
+        "version": 2,
+        "channel": 0,
+        "level": "None",
+        "opcode": 28,
+        "task": 0,
+        "keyword": 0
+      },
+      "fields": [
+        {
+          "name": "PID",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "size",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "daddr",
+          "datatype": "byte",
+          "map": null
+        },
+        {
+          "name": "saddr",
+          "datatype": "byte",
+          "map": null
+        },
+        {
+          "name": "dport",
+          "datatype": "ushort",
+          "map": null
+        },
+        {
+          "name": "sport",
+          "datatype": "ushort",
+          "map": null
+        },
+        {
+          "name": "mss",
+          "datatype": "ushort",
+          "map": null
+        },
+        {
+          "name": "sackopt",
+          "datatype": "ushort",
+          "map": null
+        },
+        {
+          "name": "tsopt",
+          "datatype": "ushort",
+          "map": null
+        },
+        {
+          "name": "wsopt",
+          "datatype": "ushort",
+          "map": null
+        },
+        {
+          "name": "rcvwin",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "rcvwinscale",
+          "datatype": "short",
+          "map": null
+        },
+        {
+          "name": "sndwinscale",
+          "datatype": "short",
+          "map": null
+        },
+        {
+          "name": "seqnum",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "connid",
+          "datatype": "pointer",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "AcceptIPV6",
+      "displayName": "AcceptIPV6",
+      "descriptor": {
+        "id": 0,
+        "version": 2,
+        "channel": 0,
+        "level": "None",
+        "opcode": 31,
+        "task": 0,
+        "keyword": 0
+      },
+      "fields": [
+        {
+          "name": "PID",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "size",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "daddr",
+          "datatype": "byte",
+          "map": null
+        },
+        {
+          "name": "saddr",
+          "datatype": "byte",
+          "map": null
+        },
+        {
+          "name": "dport",
+          "datatype": "ushort",
+          "map": null
+        },
+        {
+          "name": "sport",
+          "datatype": "ushort",
+          "map": null
+        },
+        {
+          "name": "mss",
+          "datatype": "ushort",
+          "map": null
+        },
+        {
+          "name": "sackopt",
+          "datatype": "ushort",
+          "map": null
+        },
+        {
+          "name": "tsopt",
+          "datatype": "ushort",
+          "map": null
+        },
+        {
+          "name": "wsopt",
+          "datatype": "ushort",
+          "map": null
+        },
+        {
+          "name": "rcvwin",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "rcvwinscale",
+          "datatype": "short",
+          "map": null
+        },
+        {
+          "name": "sndwinscale",
+          "datatype": "short",
+          "map": null
+        },
+        {
+          "name": "seqnum",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "connid",
+          "datatype": "pointer",
+          "map": null
+        }
+      ]
+    }
+  ],
+  "tasks": {},
+  "opcodes": {
+    "10": "Send",
+    "11": "Recv",
+    "12": "Connect",
+    "13": "Disconnect",
+    "14": "Retransmit",
+    "15": "Accept",
+    "16": "Reconnect",
+    "17": "Fail",
+    "18": "TCPCopy",
+    "19": "ARPCopy",
+    "20": "FullACK",
+    "21": "PartACK",
+    "22": "DupACK",
+    "26": "SendIPV6",
+    "27": "RecvIPV6",
+    "28": "ConnectIPV6",
+    "29": "DisconnectIPV6",
+    "30": "RetransmitIPV6",
+    "31": "AcceptIPV6",
+    "32": "ReconnectIPV6",
+    "34": "TCPCopyIPV6"
+  },
+  "keywords": {},
+  "maps": [],
+  "structs": []
+}

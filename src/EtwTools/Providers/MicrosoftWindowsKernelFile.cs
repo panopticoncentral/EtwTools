@@ -1,6 +1,9 @@
 using System;
 
+#pragma warning disable IDE0079 // Remove unnecessary suppression
 #pragma warning disable IDE0004 // Remove Unnecessary Cast
+#pragma warning disable IDE1006 // Naming Styles
+#pragma warning disable CA1416 // Validate platform compatibility
 #pragma warning disable CA1707 // Identifiers should not contain underscores
 #pragma warning disable CA1720 // Identifier contains type name
 
@@ -9,7 +12,7 @@ namespace EtwTools
     /// <summary>
     /// Provider for Microsoft-Windows-Kernel-File (edd08927-9cc4-4e65-b970-c2560fb5c289)
     /// </summary>
-    public sealed class KernelFileProvider
+    public sealed class MicrosoftWindowsKernelFileProvider
     {
         /// <summary>s
         /// Provider ID.
@@ -125,7 +128,7 @@ namespace EtwTools
         }
 
         /// <summary>
-        /// Keywords supported by KernelFile.
+        /// Keywords supported by MicrosoftWindowsKernelFile.
         /// </summary>
         [Flags]
         public enum Keywords : ulong

@@ -1,6 +1,9 @@
 using System;
 
+#pragma warning disable IDE0079 // Remove unnecessary suppression
 #pragma warning disable IDE0004 // Remove Unnecessary Cast
+#pragma warning disable IDE1006 // Naming Styles
+#pragma warning disable CA1416 // Validate platform compatibility
 #pragma warning disable CA1707 // Identifiers should not contain underscores
 #pragma warning disable CA1720 // Identifier contains type name
 
@@ -9,7 +12,7 @@ namespace EtwTools
     /// <summary>
     /// Provider for Microsoft-ApplicationInsights-Core (74af9f20-af6a-5582-9382-f21f674fb271)
     /// </summary>
-    public sealed class ApplicationInsightsCoreProvider
+    public sealed class MicrosoftApplicationInsightsCoreProvider
     {
         /// <summary>s
         /// Provider ID.
@@ -85,7 +88,7 @@ namespace EtwTools
         }
 
         /// <summary>
-        /// Keywords supported by ApplicationInsightsCore.
+        /// Keywords supported by MicrosoftApplicationInsightsCore.
         /// </summary>
         [Flags]
         public enum Keywords : ulong
@@ -333,7 +336,7 @@ namespace EtwTools
                     {
                         if (_offset_AppDomainName == -1)
                         {
-                            _offset_AppDomainName = Offset_Msg + EtwEvent.UnicodeStringEnumerable.UnicodeStringEnumerator.StringLength(_etwEvent.Data, Offset_Msg);
+                            _offset_AppDomainName = Offset_Msg + _etwEvent.UnicodeStringLength(Offset_Msg);
                         }
 
                         return _offset_AppDomainName;
@@ -743,7 +746,7 @@ namespace EtwTools
                     {
                         if (_offset_AppDomainName == -1)
                         {
-                            _offset_AppDomainName = Offset_Exception + EtwEvent.UnicodeStringEnumerable.UnicodeStringEnumerator.StringLength(_etwEvent.Data, Offset_Exception);
+                            _offset_AppDomainName = Offset_Exception + _etwEvent.UnicodeStringLength(Offset_Exception);
                         }
 
                         return _offset_AppDomainName;
@@ -1224,7 +1227,7 @@ namespace EtwTools
                     {
                         if (_offset_TelemetryType == -1)
                         {
-                            _offset_TelemetryType = Offset_ParameterName + EtwEvent.UnicodeStringEnumerable.UnicodeStringEnumerator.StringLength(_etwEvent.Data, Offset_ParameterName);
+                            _offset_TelemetryType = Offset_ParameterName + _etwEvent.UnicodeStringLength(Offset_ParameterName);
                         }
 
                         return _offset_TelemetryType;
@@ -1237,7 +1240,7 @@ namespace EtwTools
                     {
                         if (_offset_AppDomainName == -1)
                         {
-                            _offset_AppDomainName = Offset_TelemetryType + EtwEvent.UnicodeStringEnumerable.UnicodeStringEnumerator.StringLength(_etwEvent.Data, Offset_TelemetryType);
+                            _offset_AppDomainName = Offset_TelemetryType + _etwEvent.UnicodeStringLength(Offset_TelemetryType);
                         }
 
                         return _offset_AppDomainName;
@@ -1703,7 +1706,7 @@ namespace EtwTools
                     {
                         if (_offset_AppDomainName == -1)
                         {
-                            _offset_AppDomainName = Offset_Msg + EtwEvent.UnicodeStringEnumerable.UnicodeStringEnumerator.StringLength(_etwEvent.Data, Offset_Msg);
+                            _offset_AppDomainName = Offset_Msg + _etwEvent.UnicodeStringLength(Offset_Msg);
                         }
 
                         return _offset_AppDomainName;
@@ -1833,7 +1836,7 @@ namespace EtwTools
                     {
                         if (_offset_AppDomainName == -1)
                         {
-                            _offset_AppDomainName = Offset_Msg + EtwEvent.UnicodeStringEnumerable.UnicodeStringEnumerator.StringLength(_etwEvent.Data, Offset_Msg);
+                            _offset_AppDomainName = Offset_Msg + _etwEvent.UnicodeStringLength(Offset_Msg);
                         }
 
                         return _offset_AppDomainName;

@@ -1,6 +1,9 @@
 using System;
 
+#pragma warning disable IDE0079 // Remove unnecessary suppression
 #pragma warning disable IDE0004 // Remove Unnecessary Cast
+#pragma warning disable IDE1006 // Naming Styles
+#pragma warning disable CA1416 // Validate platform compatibility
 #pragma warning disable CA1707 // Identifiers should not contain underscores
 #pragma warning disable CA1720 // Identifier contains type name
 
@@ -8209,7 +8212,7 @@ namespace EtwTools
                     {
                         if (_offset_String2 == -1)
                         {
-                            _offset_String2 = Offset_String1 + EtwEvent.UnicodeStringEnumerable.UnicodeStringEnumerator.StringLength(_etwEvent.Data, Offset_String1);
+                            _offset_String2 = Offset_String1 + _etwEvent.UnicodeStringLength(Offset_String1);
                         }
 
                         return _offset_String2;
@@ -8399,7 +8402,7 @@ namespace EtwTools
                     {
                         if (_offset_String2 == -1)
                         {
-                            _offset_String2 = Offset_String1 + EtwEvent.UnicodeStringEnumerable.UnicodeStringEnumerator.StringLength(_etwEvent.Data, Offset_String1);
+                            _offset_String2 = Offset_String1 + _etwEvent.UnicodeStringLength(Offset_String1);
                         }
 
                         return _offset_String2;
@@ -9093,7 +9096,7 @@ namespace EtwTools
                     {
                         if (_offset_AppDir == -1)
                         {
-                            _offset_AppDir = Offset_Cwd + EtwEvent.UnicodeStringEnumerable.UnicodeStringEnumerator.StringLength(_etwEvent.Data, Offset_Cwd);
+                            _offset_AppDir = Offset_Cwd + _etwEvent.UnicodeStringLength(Offset_Cwd);
                         }
 
                         return _offset_AppDir;
@@ -9106,7 +9109,7 @@ namespace EtwTools
                     {
                         if (_offset_DllDir == -1)
                         {
-                            _offset_DllDir = Offset_AppDir + EtwEvent.UnicodeStringEnumerable.UnicodeStringEnumerator.StringLength(_etwEvent.Data, Offset_AppDir);
+                            _offset_DllDir = Offset_AppDir + _etwEvent.UnicodeStringLength(Offset_AppDir);
                         }
 
                         return _offset_DllDir;
@@ -9119,7 +9122,7 @@ namespace EtwTools
                     {
                         if (_offset_DllLoadDir == -1)
                         {
-                            _offset_DllLoadDir = Offset_DllDir + EtwEvent.UnicodeStringEnumerable.UnicodeStringEnumerator.StringLength(_etwEvent.Data, Offset_DllDir);
+                            _offset_DllLoadDir = Offset_DllDir + _etwEvent.UnicodeStringLength(Offset_DllDir);
                         }
 
                         return _offset_DllLoadDir;

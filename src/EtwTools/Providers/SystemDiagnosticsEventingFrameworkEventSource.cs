@@ -1,6 +1,9 @@
 using System;
 
+#pragma warning disable IDE0079 // Remove unnecessary suppression
 #pragma warning disable IDE0004 // Remove Unnecessary Cast
+#pragma warning disable IDE1006 // Naming Styles
+#pragma warning disable CA1416 // Validate platform compatibility
 #pragma warning disable CA1707 // Identifiers should not contain underscores
 #pragma warning disable CA1720 // Identifier contains type name
 
@@ -9,7 +12,7 @@ namespace EtwTools
     /// <summary>
     /// Provider for System.Diagnostics.Eventing.FrameworkEventSource (8e9f5090-2d75-4d03-8a81-e5afbf85daf1)
     /// </summary>
-    public sealed class FrameworkEventSourceProvider
+    public sealed class SystemDiagnosticsEventingFrameworkEventSourceProvider
     {
         /// <summary>s
         /// Provider ID.
@@ -141,7 +144,7 @@ namespace EtwTools
         }
 
         /// <summary>
-        /// Opcodes supported by FrameworkEventSource.
+        /// Opcodes supported by SystemDiagnosticsEventingFrameworkEventSource.
         /// </summary>
         public enum Opcodes
         {
@@ -152,7 +155,7 @@ namespace EtwTools
         }
 
         /// <summary>
-        /// Keywords supported by FrameworkEventSource.
+        /// Keywords supported by SystemDiagnosticsEventingFrameworkEventSource.
         /// </summary>
         [Flags]
         public enum Keywords : ulong
@@ -405,7 +408,7 @@ namespace EtwTools
                     {
                         if (_offset_MainAssemblyName == -1)
                         {
-                            _offset_MainAssemblyName = Offset_BaseName + EtwEvent.UnicodeStringEnumerable.UnicodeStringEnumerator.StringLength(_etwEvent.Data, Offset_BaseName);
+                            _offset_MainAssemblyName = Offset_BaseName + _etwEvent.UnicodeStringLength(Offset_BaseName);
                         }
 
                         return _offset_MainAssemblyName;
@@ -418,7 +421,7 @@ namespace EtwTools
                     {
                         if (_offset_CultureName == -1)
                         {
-                            _offset_CultureName = Offset_MainAssemblyName + EtwEvent.UnicodeStringEnumerable.UnicodeStringEnumerator.StringLength(_etwEvent.Data, Offset_MainAssemblyName);
+                            _offset_CultureName = Offset_MainAssemblyName + _etwEvent.UnicodeStringLength(Offset_MainAssemblyName);
                         }
 
                         return _offset_CultureName;
@@ -555,7 +558,7 @@ namespace EtwTools
                     {
                         if (_offset_MainAssemblyName == -1)
                         {
-                            _offset_MainAssemblyName = Offset_BaseName + EtwEvent.UnicodeStringEnumerable.UnicodeStringEnumerator.StringLength(_etwEvent.Data, Offset_BaseName);
+                            _offset_MainAssemblyName = Offset_BaseName + _etwEvent.UnicodeStringLength(Offset_BaseName);
                         }
 
                         return _offset_MainAssemblyName;
@@ -568,7 +571,7 @@ namespace EtwTools
                     {
                         if (_offset_CultureName == -1)
                         {
-                            _offset_CultureName = Offset_MainAssemblyName + EtwEvent.UnicodeStringEnumerable.UnicodeStringEnumerator.StringLength(_etwEvent.Data, Offset_MainAssemblyName);
+                            _offset_CultureName = Offset_MainAssemblyName + _etwEvent.UnicodeStringLength(Offset_MainAssemblyName);
                         }
 
                         return _offset_CultureName;
@@ -705,7 +708,7 @@ namespace EtwTools
                     {
                         if (_offset_MainAssemblyName == -1)
                         {
-                            _offset_MainAssemblyName = Offset_BaseName + EtwEvent.UnicodeStringEnumerable.UnicodeStringEnumerator.StringLength(_etwEvent.Data, Offset_BaseName);
+                            _offset_MainAssemblyName = Offset_BaseName + _etwEvent.UnicodeStringLength(Offset_BaseName);
                         }
 
                         return _offset_MainAssemblyName;
@@ -718,7 +721,7 @@ namespace EtwTools
                     {
                         if (_offset_CultureName == -1)
                         {
-                            _offset_CultureName = Offset_MainAssemblyName + EtwEvent.UnicodeStringEnumerable.UnicodeStringEnumerator.StringLength(_etwEvent.Data, Offset_MainAssemblyName);
+                            _offset_CultureName = Offset_MainAssemblyName + _etwEvent.UnicodeStringLength(Offset_MainAssemblyName);
                         }
 
                         return _offset_CultureName;
@@ -855,7 +858,7 @@ namespace EtwTools
                     {
                         if (_offset_MainAssemblyName == -1)
                         {
-                            _offset_MainAssemblyName = Offset_BaseName + EtwEvent.UnicodeStringEnumerable.UnicodeStringEnumerator.StringLength(_etwEvent.Data, Offset_BaseName);
+                            _offset_MainAssemblyName = Offset_BaseName + _etwEvent.UnicodeStringLength(Offset_BaseName);
                         }
 
                         return _offset_MainAssemblyName;
@@ -868,7 +871,7 @@ namespace EtwTools
                     {
                         if (_offset_CultureName == -1)
                         {
-                            _offset_CultureName = Offset_MainAssemblyName + EtwEvent.UnicodeStringEnumerable.UnicodeStringEnumerator.StringLength(_etwEvent.Data, Offset_MainAssemblyName);
+                            _offset_CultureName = Offset_MainAssemblyName + _etwEvent.UnicodeStringLength(Offset_MainAssemblyName);
                         }
 
                         return _offset_CultureName;
@@ -1007,7 +1010,7 @@ namespace EtwTools
                     {
                         if (_offset_MainAssemblyName == -1)
                         {
-                            _offset_MainAssemblyName = Offset_BaseName + EtwEvent.UnicodeStringEnumerable.UnicodeStringEnumerator.StringLength(_etwEvent.Data, Offset_BaseName);
+                            _offset_MainAssemblyName = Offset_BaseName + _etwEvent.UnicodeStringLength(Offset_BaseName);
                         }
 
                         return _offset_MainAssemblyName;
@@ -1020,7 +1023,7 @@ namespace EtwTools
                     {
                         if (_offset_CultureName == -1)
                         {
-                            _offset_CultureName = Offset_MainAssemblyName + EtwEvent.UnicodeStringEnumerable.UnicodeStringEnumerator.StringLength(_etwEvent.Data, Offset_MainAssemblyName);
+                            _offset_CultureName = Offset_MainAssemblyName + _etwEvent.UnicodeStringLength(Offset_MainAssemblyName);
                         }
 
                         return _offset_CultureName;
@@ -1033,7 +1036,7 @@ namespace EtwTools
                     {
                         if (_offset_LoadedAssemblyName == -1)
                         {
-                            _offset_LoadedAssemblyName = Offset_CultureName + EtwEvent.UnicodeStringEnumerable.UnicodeStringEnumerator.StringLength(_etwEvent.Data, Offset_CultureName);
+                            _offset_LoadedAssemblyName = Offset_CultureName + _etwEvent.UnicodeStringLength(Offset_CultureName);
                         }
 
                         return _offset_LoadedAssemblyName;
@@ -1046,7 +1049,7 @@ namespace EtwTools
                     {
                         if (_offset_ResourceFileName == -1)
                         {
-                            _offset_ResourceFileName = Offset_LoadedAssemblyName + EtwEvent.UnicodeStringEnumerable.UnicodeStringEnumerator.StringLength(_etwEvent.Data, Offset_LoadedAssemblyName);
+                            _offset_ResourceFileName = Offset_LoadedAssemblyName + _etwEvent.UnicodeStringLength(Offset_LoadedAssemblyName);
                         }
 
                         return _offset_ResourceFileName;
@@ -1197,7 +1200,7 @@ namespace EtwTools
                     {
                         if (_offset_MainAssemblyName == -1)
                         {
-                            _offset_MainAssemblyName = Offset_BaseName + EtwEvent.UnicodeStringEnumerable.UnicodeStringEnumerator.StringLength(_etwEvent.Data, Offset_BaseName);
+                            _offset_MainAssemblyName = Offset_BaseName + _etwEvent.UnicodeStringLength(Offset_BaseName);
                         }
 
                         return _offset_MainAssemblyName;
@@ -1210,7 +1213,7 @@ namespace EtwTools
                     {
                         if (_offset_CultureName == -1)
                         {
-                            _offset_CultureName = Offset_MainAssemblyName + EtwEvent.UnicodeStringEnumerable.UnicodeStringEnumerator.StringLength(_etwEvent.Data, Offset_MainAssemblyName);
+                            _offset_CultureName = Offset_MainAssemblyName + _etwEvent.UnicodeStringLength(Offset_MainAssemblyName);
                         }
 
                         return _offset_CultureName;
@@ -1223,7 +1226,7 @@ namespace EtwTools
                     {
                         if (_offset_LoadedAssemblyName == -1)
                         {
-                            _offset_LoadedAssemblyName = Offset_CultureName + EtwEvent.UnicodeStringEnumerable.UnicodeStringEnumerator.StringLength(_etwEvent.Data, Offset_CultureName);
+                            _offset_LoadedAssemblyName = Offset_CultureName + _etwEvent.UnicodeStringLength(Offset_CultureName);
                         }
 
                         return _offset_LoadedAssemblyName;
@@ -1236,7 +1239,7 @@ namespace EtwTools
                     {
                         if (_offset_ResourceFileName == -1)
                         {
-                            _offset_ResourceFileName = Offset_LoadedAssemblyName + EtwEvent.UnicodeStringEnumerable.UnicodeStringEnumerator.StringLength(_etwEvent.Data, Offset_LoadedAssemblyName);
+                            _offset_ResourceFileName = Offset_LoadedAssemblyName + _etwEvent.UnicodeStringLength(Offset_LoadedAssemblyName);
                         }
 
                         return _offset_ResourceFileName;
@@ -1386,7 +1389,7 @@ namespace EtwTools
                     {
                         if (_offset_MainAssemblyName == -1)
                         {
-                            _offset_MainAssemblyName = Offset_BaseName + EtwEvent.UnicodeStringEnumerable.UnicodeStringEnumerator.StringLength(_etwEvent.Data, Offset_BaseName);
+                            _offset_MainAssemblyName = Offset_BaseName + _etwEvent.UnicodeStringLength(Offset_BaseName);
                         }
 
                         return _offset_MainAssemblyName;
@@ -1399,7 +1402,7 @@ namespace EtwTools
                     {
                         if (_offset_CultureName == -1)
                         {
-                            _offset_CultureName = Offset_MainAssemblyName + EtwEvent.UnicodeStringEnumerable.UnicodeStringEnumerator.StringLength(_etwEvent.Data, Offset_MainAssemblyName);
+                            _offset_CultureName = Offset_MainAssemblyName + _etwEvent.UnicodeStringLength(Offset_MainAssemblyName);
                         }
 
                         return _offset_CultureName;
@@ -1412,7 +1415,7 @@ namespace EtwTools
                     {
                         if (_offset_AssemblyName == -1)
                         {
-                            _offset_AssemblyName = Offset_CultureName + EtwEvent.UnicodeStringEnumerable.UnicodeStringEnumerator.StringLength(_etwEvent.Data, Offset_CultureName);
+                            _offset_AssemblyName = Offset_CultureName + _etwEvent.UnicodeStringLength(Offset_CultureName);
                         }
 
                         return _offset_AssemblyName;
@@ -1556,7 +1559,7 @@ namespace EtwTools
                     {
                         if (_offset_MainAssemblyName == -1)
                         {
-                            _offset_MainAssemblyName = Offset_BaseName + EtwEvent.UnicodeStringEnumerable.UnicodeStringEnumerator.StringLength(_etwEvent.Data, Offset_BaseName);
+                            _offset_MainAssemblyName = Offset_BaseName + _etwEvent.UnicodeStringLength(Offset_BaseName);
                         }
 
                         return _offset_MainAssemblyName;
@@ -1569,7 +1572,7 @@ namespace EtwTools
                     {
                         if (_offset_CultureName == -1)
                         {
-                            _offset_CultureName = Offset_MainAssemblyName + EtwEvent.UnicodeStringEnumerable.UnicodeStringEnumerator.StringLength(_etwEvent.Data, Offset_MainAssemblyName);
+                            _offset_CultureName = Offset_MainAssemblyName + _etwEvent.UnicodeStringLength(Offset_MainAssemblyName);
                         }
 
                         return _offset_CultureName;
@@ -1582,7 +1585,7 @@ namespace EtwTools
                     {
                         if (_offset_AssemblyName == -1)
                         {
-                            _offset_AssemblyName = Offset_CultureName + EtwEvent.UnicodeStringEnumerable.UnicodeStringEnumerator.StringLength(_etwEvent.Data, Offset_CultureName);
+                            _offset_AssemblyName = Offset_CultureName + _etwEvent.UnicodeStringLength(Offset_CultureName);
                         }
 
                         return _offset_AssemblyName;
@@ -1726,7 +1729,7 @@ namespace EtwTools
                     {
                         if (_offset_MainAssemblyName == -1)
                         {
-                            _offset_MainAssemblyName = Offset_BaseName + EtwEvent.UnicodeStringEnumerable.UnicodeStringEnumerator.StringLength(_etwEvent.Data, Offset_BaseName);
+                            _offset_MainAssemblyName = Offset_BaseName + _etwEvent.UnicodeStringLength(Offset_BaseName);
                         }
 
                         return _offset_MainAssemblyName;
@@ -1739,7 +1742,7 @@ namespace EtwTools
                     {
                         if (_offset_AssemblyName == -1)
                         {
-                            _offset_AssemblyName = Offset_MainAssemblyName + EtwEvent.UnicodeStringEnumerable.UnicodeStringEnumerator.StringLength(_etwEvent.Data, Offset_MainAssemblyName);
+                            _offset_AssemblyName = Offset_MainAssemblyName + _etwEvent.UnicodeStringLength(Offset_MainAssemblyName);
                         }
 
                         return _offset_AssemblyName;
@@ -1752,7 +1755,7 @@ namespace EtwTools
                     {
                         if (_offset_ResourceFileName == -1)
                         {
-                            _offset_ResourceFileName = Offset_AssemblyName + EtwEvent.UnicodeStringEnumerable.UnicodeStringEnumerator.StringLength(_etwEvent.Data, Offset_AssemblyName);
+                            _offset_ResourceFileName = Offset_AssemblyName + _etwEvent.UnicodeStringLength(Offset_AssemblyName);
                         }
 
                         return _offset_ResourceFileName;
@@ -1896,7 +1899,7 @@ namespace EtwTools
                     {
                         if (_offset_MainAssemblyName == -1)
                         {
-                            _offset_MainAssemblyName = Offset_BaseName + EtwEvent.UnicodeStringEnumerable.UnicodeStringEnumerator.StringLength(_etwEvent.Data, Offset_BaseName);
+                            _offset_MainAssemblyName = Offset_BaseName + _etwEvent.UnicodeStringLength(Offset_BaseName);
                         }
 
                         return _offset_MainAssemblyName;
@@ -1909,7 +1912,7 @@ namespace EtwTools
                     {
                         if (_offset_AssemblyName == -1)
                         {
-                            _offset_AssemblyName = Offset_MainAssemblyName + EtwEvent.UnicodeStringEnumerable.UnicodeStringEnumerator.StringLength(_etwEvent.Data, Offset_MainAssemblyName);
+                            _offset_AssemblyName = Offset_MainAssemblyName + _etwEvent.UnicodeStringLength(Offset_MainAssemblyName);
                         }
 
                         return _offset_AssemblyName;
@@ -1922,7 +1925,7 @@ namespace EtwTools
                     {
                         if (_offset_ResourceFileName == -1)
                         {
-                            _offset_ResourceFileName = Offset_AssemblyName + EtwEvent.UnicodeStringEnumerable.UnicodeStringEnumerator.StringLength(_etwEvent.Data, Offset_AssemblyName);
+                            _offset_ResourceFileName = Offset_AssemblyName + _etwEvent.UnicodeStringLength(Offset_AssemblyName);
                         }
 
                         return _offset_ResourceFileName;
@@ -2066,7 +2069,7 @@ namespace EtwTools
                     {
                         if (_offset_MainAssemblyName == -1)
                         {
-                            _offset_MainAssemblyName = Offset_BaseName + EtwEvent.UnicodeStringEnumerable.UnicodeStringEnumerator.StringLength(_etwEvent.Data, Offset_BaseName);
+                            _offset_MainAssemblyName = Offset_BaseName + _etwEvent.UnicodeStringLength(Offset_BaseName);
                         }
 
                         return _offset_MainAssemblyName;
@@ -2079,7 +2082,7 @@ namespace EtwTools
                     {
                         if (_offset_AssemblyName == -1)
                         {
-                            _offset_AssemblyName = Offset_MainAssemblyName + EtwEvent.UnicodeStringEnumerable.UnicodeStringEnumerator.StringLength(_etwEvent.Data, Offset_MainAssemblyName);
+                            _offset_AssemblyName = Offset_MainAssemblyName + _etwEvent.UnicodeStringLength(Offset_MainAssemblyName);
                         }
 
                         return _offset_AssemblyName;
@@ -2092,7 +2095,7 @@ namespace EtwTools
                     {
                         if (_offset_CanonicalName == -1)
                         {
-                            _offset_CanonicalName = Offset_AssemblyName + EtwEvent.UnicodeStringEnumerable.UnicodeStringEnumerator.StringLength(_etwEvent.Data, Offset_AssemblyName);
+                            _offset_CanonicalName = Offset_AssemblyName + _etwEvent.UnicodeStringLength(Offset_AssemblyName);
                         }
 
                         return _offset_CanonicalName;
@@ -2235,7 +2238,7 @@ namespace EtwTools
                     {
                         if (_offset_MainAssemblyName == -1)
                         {
-                            _offset_MainAssemblyName = Offset_BaseName + EtwEvent.UnicodeStringEnumerable.UnicodeStringEnumerator.StringLength(_etwEvent.Data, Offset_BaseName);
+                            _offset_MainAssemblyName = Offset_BaseName + _etwEvent.UnicodeStringLength(Offset_BaseName);
                         }
 
                         return _offset_MainAssemblyName;
@@ -2248,7 +2251,7 @@ namespace EtwTools
                     {
                         if (_offset_CultureName == -1)
                         {
-                            _offset_CultureName = Offset_MainAssemblyName + EtwEvent.UnicodeStringEnumerable.UnicodeStringEnumerator.StringLength(_etwEvent.Data, Offset_MainAssemblyName);
+                            _offset_CultureName = Offset_MainAssemblyName + _etwEvent.UnicodeStringLength(Offset_MainAssemblyName);
                         }
 
                         return _offset_CultureName;
@@ -2496,7 +2499,7 @@ namespace EtwTools
                     {
                         if (_offset_MainAssemblyName == -1)
                         {
-                            _offset_MainAssemblyName = Offset_BaseName + EtwEvent.UnicodeStringEnumerable.UnicodeStringEnumerator.StringLength(_etwEvent.Data, Offset_BaseName);
+                            _offset_MainAssemblyName = Offset_BaseName + _etwEvent.UnicodeStringLength(Offset_BaseName);
                         }
 
                         return _offset_MainAssemblyName;
@@ -2509,7 +2512,7 @@ namespace EtwTools
                     {
                         if (_offset_CultureName == -1)
                         {
-                            _offset_CultureName = Offset_MainAssemblyName + EtwEvent.UnicodeStringEnumerable.UnicodeStringEnumerator.StringLength(_etwEvent.Data, Offset_MainAssemblyName);
+                            _offset_CultureName = Offset_MainAssemblyName + _etwEvent.UnicodeStringLength(Offset_MainAssemblyName);
                         }
 
                         return _offset_CultureName;
@@ -2522,7 +2525,7 @@ namespace EtwTools
                     {
                         if (_offset_FileName == -1)
                         {
-                            _offset_FileName = Offset_CultureName + EtwEvent.UnicodeStringEnumerable.UnicodeStringEnumerator.StringLength(_etwEvent.Data, Offset_CultureName);
+                            _offset_FileName = Offset_CultureName + _etwEvent.UnicodeStringLength(Offset_CultureName);
                         }
 
                         return _offset_FileName;
@@ -2665,7 +2668,7 @@ namespace EtwTools
                     {
                         if (_offset_MainAssemblyName == -1)
                         {
-                            _offset_MainAssemblyName = Offset_BaseName + EtwEvent.UnicodeStringEnumerable.UnicodeStringEnumerator.StringLength(_etwEvent.Data, Offset_BaseName);
+                            _offset_MainAssemblyName = Offset_BaseName + _etwEvent.UnicodeStringLength(Offset_BaseName);
                         }
 
                         return _offset_MainAssemblyName;
@@ -2678,7 +2681,7 @@ namespace EtwTools
                     {
                         if (_offset_CultureName == -1)
                         {
-                            _offset_CultureName = Offset_MainAssemblyName + EtwEvent.UnicodeStringEnumerable.UnicodeStringEnumerator.StringLength(_etwEvent.Data, Offset_MainAssemblyName);
+                            _offset_CultureName = Offset_MainAssemblyName + _etwEvent.UnicodeStringLength(Offset_MainAssemblyName);
                         }
 
                         return _offset_CultureName;
@@ -2815,7 +2818,7 @@ namespace EtwTools
                     {
                         if (_offset_MainAssemblyName == -1)
                         {
-                            _offset_MainAssemblyName = Offset_BaseName + EtwEvent.UnicodeStringEnumerable.UnicodeStringEnumerator.StringLength(_etwEvent.Data, Offset_BaseName);
+                            _offset_MainAssemblyName = Offset_BaseName + _etwEvent.UnicodeStringLength(Offset_BaseName);
                         }
 
                         return _offset_MainAssemblyName;
@@ -2828,7 +2831,7 @@ namespace EtwTools
                     {
                         if (_offset_CultureName == -1)
                         {
-                            _offset_CultureName = Offset_MainAssemblyName + EtwEvent.UnicodeStringEnumerable.UnicodeStringEnumerator.StringLength(_etwEvent.Data, Offset_MainAssemblyName);
+                            _offset_CultureName = Offset_MainAssemblyName + _etwEvent.UnicodeStringLength(Offset_MainAssemblyName);
                         }
 
                         return _offset_CultureName;
@@ -2964,7 +2967,7 @@ namespace EtwTools
                     {
                         if (_offset_MainAssemblyName == -1)
                         {
-                            _offset_MainAssemblyName = Offset_BaseName + EtwEvent.UnicodeStringEnumerable.UnicodeStringEnumerator.StringLength(_etwEvent.Data, Offset_BaseName);
+                            _offset_MainAssemblyName = Offset_BaseName + _etwEvent.UnicodeStringLength(Offset_BaseName);
                         }
 
                         return _offset_MainAssemblyName;
@@ -3095,7 +3098,7 @@ namespace EtwTools
                     {
                         if (_offset_MainAssemblyName == -1)
                         {
-                            _offset_MainAssemblyName = Offset_BaseName + EtwEvent.UnicodeStringEnumerable.UnicodeStringEnumerator.StringLength(_etwEvent.Data, Offset_BaseName);
+                            _offset_MainAssemblyName = Offset_BaseName + _etwEvent.UnicodeStringLength(Offset_BaseName);
                         }
 
                         return _offset_MainAssemblyName;
@@ -3108,7 +3111,7 @@ namespace EtwTools
                     {
                         if (_offset_ResName == -1)
                         {
-                            _offset_ResName = Offset_MainAssemblyName + EtwEvent.UnicodeStringEnumerable.UnicodeStringEnumerator.StringLength(_etwEvent.Data, Offset_MainAssemblyName);
+                            _offset_ResName = Offset_MainAssemblyName + _etwEvent.UnicodeStringLength(Offset_MainAssemblyName);
                         }
 
                         return _offset_ResName;
@@ -3245,7 +3248,7 @@ namespace EtwTools
                     {
                         if (_offset_MainAssemblyName == -1)
                         {
-                            _offset_MainAssemblyName = Offset_BaseName + EtwEvent.UnicodeStringEnumerable.UnicodeStringEnumerator.StringLength(_etwEvent.Data, Offset_BaseName);
+                            _offset_MainAssemblyName = Offset_BaseName + _etwEvent.UnicodeStringLength(Offset_BaseName);
                         }
 
                         return _offset_MainAssemblyName;
@@ -3258,7 +3261,7 @@ namespace EtwTools
                     {
                         if (_offset_ResName == -1)
                         {
-                            _offset_ResName = Offset_MainAssemblyName + EtwEvent.UnicodeStringEnumerable.UnicodeStringEnumerator.StringLength(_etwEvent.Data, Offset_MainAssemblyName);
+                            _offset_ResName = Offset_MainAssemblyName + _etwEvent.UnicodeStringLength(Offset_MainAssemblyName);
                         }
 
                         return _offset_ResName;
@@ -3395,7 +3398,7 @@ namespace EtwTools
                     {
                         if (_offset_MainAssemblyName == -1)
                         {
-                            _offset_MainAssemblyName = Offset_BaseName + EtwEvent.UnicodeStringEnumerable.UnicodeStringEnumerator.StringLength(_etwEvent.Data, Offset_BaseName);
+                            _offset_MainAssemblyName = Offset_BaseName + _etwEvent.UnicodeStringLength(Offset_BaseName);
                         }
 
                         return _offset_MainAssemblyName;
@@ -3408,7 +3411,7 @@ namespace EtwTools
                     {
                         if (_offset_CultureName == -1)
                         {
-                            _offset_CultureName = Offset_MainAssemblyName + EtwEvent.UnicodeStringEnumerable.UnicodeStringEnumerator.StringLength(_etwEvent.Data, Offset_MainAssemblyName);
+                            _offset_CultureName = Offset_MainAssemblyName + _etwEvent.UnicodeStringLength(Offset_MainAssemblyName);
                         }
 
                         return _offset_CultureName;
@@ -3545,7 +3548,7 @@ namespace EtwTools
                     {
                         if (_offset_MainAssemblyName == -1)
                         {
-                            _offset_MainAssemblyName = Offset_BaseName + EtwEvent.UnicodeStringEnumerable.UnicodeStringEnumerator.StringLength(_etwEvent.Data, Offset_BaseName);
+                            _offset_MainAssemblyName = Offset_BaseName + _etwEvent.UnicodeStringLength(Offset_BaseName);
                         }
 
                         return _offset_MainAssemblyName;
@@ -3558,7 +3561,7 @@ namespace EtwTools
                     {
                         if (_offset_CultureName == -1)
                         {
-                            _offset_CultureName = Offset_MainAssemblyName + EtwEvent.UnicodeStringEnumerable.UnicodeStringEnumerator.StringLength(_etwEvent.Data, Offset_MainAssemblyName);
+                            _offset_CultureName = Offset_MainAssemblyName + _etwEvent.UnicodeStringLength(Offset_MainAssemblyName);
                         }
 
                         return _offset_CultureName;
@@ -3695,7 +3698,7 @@ namespace EtwTools
                     {
                         if (_offset_MainAssemblyName == -1)
                         {
-                            _offset_MainAssemblyName = Offset_BaseName + EtwEvent.UnicodeStringEnumerable.UnicodeStringEnumerator.StringLength(_etwEvent.Data, Offset_BaseName);
+                            _offset_MainAssemblyName = Offset_BaseName + _etwEvent.UnicodeStringLength(Offset_BaseName);
                         }
 
                         return _offset_MainAssemblyName;
@@ -3708,7 +3711,7 @@ namespace EtwTools
                     {
                         if (_offset_CultureName == -1)
                         {
-                            _offset_CultureName = Offset_MainAssemblyName + EtwEvent.UnicodeStringEnumerable.UnicodeStringEnumerator.StringLength(_etwEvent.Data, Offset_MainAssemblyName);
+                            _offset_CultureName = Offset_MainAssemblyName + _etwEvent.UnicodeStringLength(Offset_MainAssemblyName);
                         }
 
                         return _offset_CultureName;
@@ -4079,7 +4082,7 @@ namespace EtwTools
                     {
                         if (_offset_Success == -1)
                         {
-                            _offset_Success = Offset_Uri + EtwEvent.UnicodeStringEnumerable.UnicodeStringEnumerator.StringLength(_etwEvent.Data, Offset_Uri);
+                            _offset_Success = Offset_Uri + _etwEvent.UnicodeStringLength(Offset_Uri);
                         }
 
                         return _offset_Success;
@@ -4419,7 +4422,7 @@ namespace EtwTools
                     {
                         if (_offset_Success == -1)
                         {
-                            _offset_Success = Offset_Uri + EtwEvent.UnicodeStringEnumerable.UnicodeStringEnumerator.StringLength(_etwEvent.Data, Offset_Uri);
+                            _offset_Success = Offset_Uri + _etwEvent.UnicodeStringLength(Offset_Uri);
                         }
 
                         return _offset_Success;
@@ -4752,7 +4755,7 @@ namespace EtwTools
                     {
                         if (_offset_MultiDequeues == -1)
                         {
-                            _offset_MultiDequeues = Offset_Info + EtwEvent.UnicodeStringEnumerable.UnicodeStringEnumerator.StringLength(_etwEvent.Data, Offset_Info);
+                            _offset_MultiDequeues = Offset_Info + _etwEvent.UnicodeStringLength(Offset_Info);
                         }
 
                         return _offset_MultiDequeues;

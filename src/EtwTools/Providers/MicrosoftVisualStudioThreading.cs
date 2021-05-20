@@ -1,6 +1,9 @@
 using System;
 
+#pragma warning disable IDE0079 // Remove unnecessary suppression
 #pragma warning disable IDE0004 // Remove Unnecessary Cast
+#pragma warning disable IDE1006 // Naming Styles
+#pragma warning disable CA1416 // Validate platform compatibility
 #pragma warning disable CA1707 // Identifiers should not contain underscores
 #pragma warning disable CA1720 // Identifier contains type name
 
@@ -9,7 +12,7 @@ namespace EtwTools
     /// <summary>
     /// Provider for Microsoft-VisualStudio-Threading (589491ba-4f15-53fe-c376-db7f020f5204)
     /// </summary>
-    public sealed class VisualStudioThreadingProvider
+    public sealed class MicrosoftVisualStudioThreadingProvider
     {
         /// <summary>s
         /// Provider ID.
@@ -65,7 +68,7 @@ namespace EtwTools
         }
 
         /// <summary>
-        /// Opcodes supported by VisualStudioThreading.
+        /// Opcodes supported by MicrosoftVisualStudioThreading.
         /// </summary>
         public enum Opcodes
         {
@@ -84,7 +87,7 @@ namespace EtwTools
         }
 
         /// <summary>
-        /// Keywords supported by VisualStudioThreading.
+        /// Keywords supported by MicrosoftVisualStudioThreading.
         /// </summary>
         [Flags]
         public enum Keywords : ulong

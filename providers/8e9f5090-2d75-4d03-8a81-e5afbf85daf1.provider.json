@@ -1,5 +1,5 @@
 {
-  "name": "FrameworkEventSource",
+  "name": "SystemDiagnosticsEventingFrameworkEventSource",
   "displayName": "System.Diagnostics.Eventing.FrameworkEventSource",
   "id": "8e9f5090-2d75-4d03-8a81-e5afbf85daf1",
   "events": [

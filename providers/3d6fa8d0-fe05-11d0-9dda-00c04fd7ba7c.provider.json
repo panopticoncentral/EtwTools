@@ -1,0 +1,2237 @@
+{
+  "name": "KernelProcess",
+  "displayName": "Kernel-Process",
+  "id": "3d6fa8d0-fe05-11d0-9dda-00c04fd7ba7c",
+  "events": [
+    {
+      "name": "Start",
+      "displayName": "Start",
+      "descriptor": {
+        "id": 0,
+        "version": 0,
+        "channel": 0,
+        "level": "None",
+        "opcode": "Start",
+        "task": 0,
+        "keyword": 0
+      },
+      "fields": [
+        {
+          "name": "ProcessId",
+          "datatype": "pointer",
+          "map": null
+        },
+        {
+          "name": "ParentId",
+          "datatype": "pointer",
+          "map": null
+        },
+        {
+          "name": "UserSID",
+          "datatype": "wbemsid",
+          "map": null
+        },
+        {
+          "name": "ImageFileName",
+          "datatype": "ansistring",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "End",
+      "displayName": "End",
+      "descriptor": {
+        "id": 0,
+        "version": 0,
+        "channel": 0,
+        "level": "None",
+        "opcode": "End",
+        "task": 0,
+        "keyword": 0
+      },
+      "fields": [
+        {
+          "name": "ProcessId",
+          "datatype": "pointer",
+          "map": null
+        },
+        {
+          "name": "ParentId",
+          "datatype": "pointer",
+          "map": null
+        },
+        {
+          "name": "UserSID",
+          "datatype": "wbemsid",
+          "map": null
+        },
+        {
+          "name": "ImageFileName",
+          "datatype": "ansistring",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "DCStart",
+      "displayName": "DCStart",
+      "descriptor": {
+        "id": 0,
+        "version": 0,
+        "channel": 0,
+        "level": "None",
+        "opcode": "DataCollectionStart",
+        "task": 0,
+        "keyword": 0
+      },
+      "fields": [
+        {
+          "name": "ProcessId",
+          "datatype": "pointer",
+          "map": null
+        },
+        {
+          "name": "ParentId",
+          "datatype": "pointer",
+          "map": null
+        },
+        {
+          "name": "UserSID",
+          "datatype": "wbemsid",
+          "map": null
+        },
+        {
+          "name": "ImageFileName",
+          "datatype": "ansistring",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "DCEnd",
+      "displayName": "DCEnd",
+      "descriptor": {
+        "id": 0,
+        "version": 0,
+        "channel": 0,
+        "level": "None",
+        "opcode": "DataCollectionEnd",
+        "task": 0,
+        "keyword": 0
+      },
+      "fields": [
+        {
+          "name": "ProcessId",
+          "datatype": "pointer",
+          "map": null
+        },
+        {
+          "name": "ParentId",
+          "datatype": "pointer",
+          "map": null
+        },
+        {
+          "name": "UserSID",
+          "datatype": "wbemsid",
+          "map": null
+        },
+        {
+          "name": "ImageFileName",
+          "datatype": "ansistring",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "Start",
+      "displayName": "Start",
+      "descriptor": {
+        "id": 0,
+        "version": 1,
+        "channel": 0,
+        "level": "None",
+        "opcode": "Start",
+        "task": 0,
+        "keyword": 0
+      },
+      "fields": [
+        {
+          "name": "PageDirectoryBase",
+          "datatype": "pointer",
+          "map": null
+        },
+        {
+          "name": "ProcessId",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "ParentId",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "SessionId",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "ExitStatus",
+          "datatype": "int",
+          "map": null
+        },
+        {
+          "name": "UserSID",
+          "datatype": "wbemsid",
+          "map": null
+        },
+        {
+          "name": "ImageFileName",
+          "datatype": "ansistring",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "End",
+      "displayName": "End",
+      "descriptor": {
+        "id": 0,
+        "version": 1,
+        "channel": 0,
+        "level": "None",
+        "opcode": "End",
+        "task": 0,
+        "keyword": 0
+      },
+      "fields": [
+        {
+          "name": "PageDirectoryBase",
+          "datatype": "pointer",
+          "map": null
+        },
+        {
+          "name": "ProcessId",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "ParentId",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "SessionId",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "ExitStatus",
+          "datatype": "int",
+          "map": null
+        },
+        {
+          "name": "UserSID",
+          "datatype": "wbemsid",
+          "map": null
+        },
+        {
+          "name": "ImageFileName",
+          "datatype": "ansistring",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "DCStart",
+      "displayName": "DCStart",
+      "descriptor": {
+        "id": 0,
+        "version": 1,
+        "channel": 0,
+        "level": "None",
+        "opcode": "DataCollectionStart",
+        "task": 0,
+        "keyword": 0
+      },
+      "fields": [
+        {
+          "name": "PageDirectoryBase",
+          "datatype": "pointer",
+          "map": null
+        },
+        {
+          "name": "ProcessId",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "ParentId",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "SessionId",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "ExitStatus",
+          "datatype": "int",
+          "map": null
+        },
+        {
+          "name": "UserSID",
+          "datatype": "wbemsid",
+          "map": null
+        },
+        {
+          "name": "ImageFileName",
+          "datatype": "ansistring",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "DCEnd",
+      "displayName": "DCEnd",
+      "descriptor": {
+        "id": 0,
+        "version": 1,
+        "channel": 0,
+        "level": "None",
+        "opcode": "DataCollectionEnd",
+        "task": 0,
+        "keyword": 0
+      },
+      "fields": [
+        {
+          "name": "PageDirectoryBase",
+          "datatype": "pointer",
+          "map": null
+        },
+        {
+          "name": "ProcessId",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "ParentId",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "SessionId",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "ExitStatus",
+          "datatype": "int",
+          "map": null
+        },
+        {
+          "name": "UserSID",
+          "datatype": "wbemsid",
+          "map": null
+        },
+        {
+          "name": "ImageFileName",
+          "datatype": "ansistring",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "Start",
+      "displayName": "Start",
+      "descriptor": {
+        "id": 0,
+        "version": 2,
+        "channel": 0,
+        "level": "None",
+        "opcode": "Start",
+        "task": 0,
+        "keyword": 0
+      },
+      "fields": [
+        {
+          "name": "UniqueProcessKey",
+          "datatype": "pointer",
+          "map": null
+        },
+        {
+          "name": "ProcessId",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "ParentId",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "SessionId",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "ExitStatus",
+          "datatype": "int",
+          "map": null
+        },
+        {
+          "name": "UserSID",
+          "datatype": "wbemsid",
+          "map": null
+        },
+        {
+          "name": "ImageFileName",
+          "datatype": "ansistring",
+          "map": null
+        },
+        {
+          "name": "CommandLine",
+          "datatype": "string",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "End",
+      "displayName": "End",
+      "descriptor": {
+        "id": 0,
+        "version": 2,
+        "channel": 0,
+        "level": "None",
+        "opcode": "End",
+        "task": 0,
+        "keyword": 0
+      },
+      "fields": [
+        {
+          "name": "UniqueProcessKey",
+          "datatype": "pointer",
+          "map": null
+        },
+        {
+          "name": "ProcessId",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "ParentId",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "SessionId",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "ExitStatus",
+          "datatype": "int",
+          "map": null
+        },
+        {
+          "name": "UserSID",
+          "datatype": "wbemsid",
+          "map": null
+        },
+        {
+          "name": "ImageFileName",
+          "datatype": "ansistring",
+          "map": null
+        },
+        {
+          "name": "CommandLine",
+          "datatype": "string",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "DCStart",
+      "displayName": "DCStart",
+      "descriptor": {
+        "id": 0,
+        "version": 2,
+        "channel": 0,
+        "level": "None",
+        "opcode": "DataCollectionStart",
+        "task": 0,
+        "keyword": 0
+      },
+      "fields": [
+        {
+          "name": "UniqueProcessKey",
+          "datatype": "pointer",
+          "map": null
+        },
+        {
+          "name": "ProcessId",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "ParentId",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "SessionId",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "ExitStatus",
+          "datatype": "int",
+          "map": null
+        },
+        {
+          "name": "UserSID",
+          "datatype": "wbemsid",
+          "map": null
+        },
+        {
+          "name": "ImageFileName",
+          "datatype": "ansistring",
+          "map": null
+        },
+        {
+          "name": "CommandLine",
+          "datatype": "string",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "DCEnd",
+      "displayName": "DCEnd",
+      "descriptor": {
+        "id": 0,
+        "version": 2,
+        "channel": 0,
+        "level": "None",
+        "opcode": "DataCollectionEnd",
+        "task": 0,
+        "keyword": 0
+      },
+      "fields": [
+        {
+          "name": "UniqueProcessKey",
+          "datatype": "pointer",
+          "map": null
+        },
+        {
+          "name": "ProcessId",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "ParentId",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "SessionId",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "ExitStatus",
+          "datatype": "int",
+          "map": null
+        },
+        {
+          "name": "UserSID",
+          "datatype": "wbemsid",
+          "map": null
+        },
+        {
+          "name": "ImageFileName",
+          "datatype": "ansistring",
+          "map": null
+        },
+        {
+          "name": "CommandLine",
+          "datatype": "string",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "Defunct",
+      "displayName": "Defunct",
+      "descriptor": {
+        "id": 0,
+        "version": 2,
+        "channel": 0,
+        "level": "None",
+        "opcode": 39,
+        "task": 0,
+        "keyword": 0
+      },
+      "fields": [
+        {
+          "name": "UniqueProcessKey",
+          "datatype": "pointer",
+          "map": null
+        },
+        {
+          "name": "ProcessId",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "ParentId",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "SessionId",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "ExitStatus",
+          "datatype": "int",
+          "map": null
+        },
+        {
+          "name": "UserSID",
+          "datatype": "wbemsid",
+          "map": null
+        },
+        {
+          "name": "ImageFileName",
+          "datatype": "ansistring",
+          "map": null
+        },
+        {
+          "name": "CommandLine",
+          "datatype": "string",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "Terminate",
+      "displayName": "Terminate",
+      "descriptor": {
+        "id": 0,
+        "version": 2,
+        "channel": 0,
+        "level": "None",
+        "opcode": 11,
+        "task": 0,
+        "keyword": 0
+      },
+      "fields": [
+        {
+          "name": "ProcessId",
+          "datatype": "uint",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "PerfCtr",
+      "displayName": "PerfCtr",
+      "descriptor": {
+        "id": 0,
+        "version": 2,
+        "channel": 0,
+        "level": "None",
+        "opcode": 32,
+        "task": 0,
+        "keyword": 0
+      },
+      "fields": [
+        {
+          "name": "ProcessId",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "PageFaultCount",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "HandleCount",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "Reserved",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "PeakVirtualSize",
+          "datatype": "pointer",
+          "map": null
+        },
+        {
+          "name": "PeakWorkingSetSize",
+          "datatype": "pointer",
+          "map": null
+        },
+        {
+          "name": "PeakPagefileUsage",
+          "datatype": "pointer",
+          "map": null
+        },
+        {
+          "name": "QuotaPeakPagedPoolUsage",
+          "datatype": "pointer",
+          "map": null
+        },
+        {
+          "name": "QuotaPeakNonPagedPoolUsage",
+          "datatype": "pointer",
+          "map": null
+        },
+        {
+          "name": "VirtualSize",
+          "datatype": "pointer",
+          "map": null
+        },
+        {
+          "name": "WorkingSetSize",
+          "datatype": "pointer",
+          "map": null
+        },
+        {
+          "name": "PagefileUsage",
+          "datatype": "pointer",
+          "map": null
+        },
+        {
+          "name": "QuotaPagedPoolUsage",
+          "datatype": "pointer",
+          "map": null
+        },
+        {
+          "name": "QuotaNonPagedPoolUsage",
+          "datatype": "pointer",
+          "map": null
+        },
+        {
+          "name": "PrivatePageCount",
+          "datatype": "pointer",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "PerfCtrRundown",
+      "displayName": "PerfCtrRundown",
+      "descriptor": {
+        "id": 0,
+        "version": 2,
+        "channel": 0,
+        "level": "None",
+        "opcode": 33,
+        "task": 0,
+        "keyword": 0
+      },
+      "fields": [
+        {
+          "name": "ProcessId",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "PageFaultCount",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "HandleCount",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "Reserved",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "PeakVirtualSize",
+          "datatype": "pointer",
+          "map": null
+        },
+        {
+          "name": "PeakWorkingSetSize",
+          "datatype": "pointer",
+          "map": null
+        },
+        {
+          "name": "PeakPagefileUsage",
+          "datatype": "pointer",
+          "map": null
+        },
+        {
+          "name": "QuotaPeakPagedPoolUsage",
+          "datatype": "pointer",
+          "map": null
+        },
+        {
+          "name": "QuotaPeakNonPagedPoolUsage",
+          "datatype": "pointer",
+          "map": null
+        },
+        {
+          "name": "VirtualSize",
+          "datatype": "pointer",
+          "map": null
+        },
+        {
+          "name": "WorkingSetSize",
+          "datatype": "pointer",
+          "map": null
+        },
+        {
+          "name": "PagefileUsage",
+          "datatype": "pointer",
+          "map": null
+        },
+        {
+          "name": "QuotaPagedPoolUsage",
+          "datatype": "pointer",
+          "map": null
+        },
+        {
+          "name": "QuotaNonPagedPoolUsage",
+          "datatype": "pointer",
+          "map": null
+        },
+        {
+          "name": "PrivatePageCount",
+          "datatype": "pointer",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "InSwap",
+      "displayName": "InSwap",
+      "descriptor": {
+        "id": 0,
+        "version": 2,
+        "channel": 0,
+        "level": "None",
+        "opcode": 35,
+        "task": 0,
+        "keyword": 0
+      },
+      "fields": [
+        {
+          "name": "DirectoryTableBase",
+          "datatype": "pointer",
+          "map": null
+        },
+        {
+          "name": "ProcessId",
+          "datatype": "uint",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "WakeChargeUser",
+      "displayName": "WakeChargeUser",
+      "descriptor": {
+        "id": 0,
+        "version": 2,
+        "channel": 0,
+        "level": "None",
+        "opcode": 48,
+        "task": 0,
+        "keyword": 0
+      },
+      "fields": [
+        {
+          "name": "Object",
+          "datatype": "pointer",
+          "map": null
+        },
+        {
+          "name": "Tag",
+          "datatype": "pointer",
+          "map": null
+        },
+        {
+          "name": "ProcessId",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "Count",
+          "datatype": "uint",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "WakeChargeExecution",
+      "displayName": "WakeChargeExecution",
+      "descriptor": {
+        "id": 0,
+        "version": 2,
+        "channel": 0,
+        "level": "None",
+        "opcode": 49,
+        "task": 0,
+        "keyword": 0
+      },
+      "fields": [
+        {
+          "name": "Object",
+          "datatype": "pointer",
+          "map": null
+        },
+        {
+          "name": "Tag",
+          "datatype": "pointer",
+          "map": null
+        },
+        {
+          "name": "ProcessId",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "Count",
+          "datatype": "uint",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "WakeChargeKernel",
+      "displayName": "WakeChargeKernel",
+      "descriptor": {
+        "id": 0,
+        "version": 2,
+        "channel": 0,
+        "level": "None",
+        "opcode": 50,
+        "task": 0,
+        "keyword": 0
+      },
+      "fields": [
+        {
+          "name": "Object",
+          "datatype": "pointer",
+          "map": null
+        },
+        {
+          "name": "Tag",
+          "datatype": "pointer",
+          "map": null
+        },
+        {
+          "name": "ProcessId",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "Count",
+          "datatype": "uint",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "WakeChargeInstrumentation",
+      "displayName": "WakeChargeInstrumentation",
+      "descriptor": {
+        "id": 0,
+        "version": 2,
+        "channel": 0,
+        "level": "None",
+        "opcode": 51,
+        "task": 0,
+        "keyword": 0
+      },
+      "fields": [
+        {
+          "name": "Object",
+          "datatype": "pointer",
+          "map": null
+        },
+        {
+          "name": "Tag",
+          "datatype": "pointer",
+          "map": null
+        },
+        {
+          "name": "ProcessId",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "Count",
+          "datatype": "uint",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "WakeChargePreserveProcess",
+      "displayName": "WakeChargePreserveProcess",
+      "descriptor": {
+        "id": 0,
+        "version": 2,
+        "channel": 0,
+        "level": "None",
+        "opcode": 52,
+        "task": 0,
+        "keyword": 0
+      },
+      "fields": [
+        {
+          "name": "Object",
+          "datatype": "pointer",
+          "map": null
+        },
+        {
+          "name": "Tag",
+          "datatype": "pointer",
+          "map": null
+        },
+        {
+          "name": "ProcessId",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "Count",
+          "datatype": "uint",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "WakeReleaseUser",
+      "displayName": "WakeReleaseUser",
+      "descriptor": {
+        "id": 0,
+        "version": 2,
+        "channel": 0,
+        "level": "None",
+        "opcode": 64,
+        "task": 0,
+        "keyword": 0
+      },
+      "fields": [
+        {
+          "name": "Object",
+          "datatype": "pointer",
+          "map": null
+        },
+        {
+          "name": "Tag",
+          "datatype": "pointer",
+          "map": null
+        },
+        {
+          "name": "ProcessId",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "Count",
+          "datatype": "uint",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "WakeReleaseExecution",
+      "displayName": "WakeReleaseExecution",
+      "descriptor": {
+        "id": 0,
+        "version": 2,
+        "channel": 0,
+        "level": "None",
+        "opcode": 65,
+        "task": 0,
+        "keyword": 0
+      },
+      "fields": [
+        {
+          "name": "Object",
+          "datatype": "pointer",
+          "map": null
+        },
+        {
+          "name": "Tag",
+          "datatype": "pointer",
+          "map": null
+        },
+        {
+          "name": "ProcessId",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "Count",
+          "datatype": "uint",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "WakeReleaseKernel",
+      "displayName": "WakeReleaseKernel",
+      "descriptor": {
+        "id": 0,
+        "version": 2,
+        "channel": 0,
+        "level": "None",
+        "opcode": 66,
+        "task": 0,
+        "keyword": 0
+      },
+      "fields": [
+        {
+          "name": "Object",
+          "datatype": "pointer",
+          "map": null
+        },
+        {
+          "name": "Tag",
+          "datatype": "pointer",
+          "map": null
+        },
+        {
+          "name": "ProcessId",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "Count",
+          "datatype": "uint",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "WakeReleaseInstrumentation",
+      "displayName": "WakeReleaseInstrumentation",
+      "descriptor": {
+        "id": 0,
+        "version": 2,
+        "channel": 0,
+        "level": "None",
+        "opcode": 67,
+        "task": 0,
+        "keyword": 0
+      },
+      "fields": [
+        {
+          "name": "Object",
+          "datatype": "pointer",
+          "map": null
+        },
+        {
+          "name": "Tag",
+          "datatype": "pointer",
+          "map": null
+        },
+        {
+          "name": "ProcessId",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "Count",
+          "datatype": "uint",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "WakeReleasePreserveProcess",
+      "displayName": "WakeReleasePreserveProcess",
+      "descriptor": {
+        "id": 0,
+        "version": 2,
+        "channel": 0,
+        "level": "None",
+        "opcode": 68,
+        "task": 0,
+        "keyword": 0
+      },
+      "fields": [
+        {
+          "name": "Object",
+          "datatype": "pointer",
+          "map": null
+        },
+        {
+          "name": "Tag",
+          "datatype": "pointer",
+          "map": null
+        },
+        {
+          "name": "ProcessId",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "Count",
+          "datatype": "uint",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "WakeDropUser",
+      "displayName": "WakeDropUser",
+      "descriptor": {
+        "id": 0,
+        "version": 2,
+        "channel": 0,
+        "level": "None",
+        "opcode": 80,
+        "task": 0,
+        "keyword": 0
+      },
+      "fields": [
+        {
+          "name": "Object",
+          "datatype": "pointer",
+          "map": null
+        },
+        {
+          "name": "Tag",
+          "datatype": "pointer",
+          "map": null
+        },
+        {
+          "name": "ProcessId",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "Count",
+          "datatype": "uint",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "WakeDropExecution",
+      "displayName": "WakeDropExecution",
+      "descriptor": {
+        "id": 0,
+        "version": 2,
+        "channel": 0,
+        "level": "None",
+        "opcode": 81,
+        "task": 0,
+        "keyword": 0
+      },
+      "fields": [
+        {
+          "name": "Object",
+          "datatype": "pointer",
+          "map": null
+        },
+        {
+          "name": "Tag",
+          "datatype": "pointer",
+          "map": null
+        },
+        {
+          "name": "ProcessId",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "Count",
+          "datatype": "uint",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "WakeDropKernel",
+      "displayName": "WakeDropKernel",
+      "descriptor": {
+        "id": 0,
+        "version": 2,
+        "channel": 0,
+        "level": "None",
+        "opcode": 82,
+        "task": 0,
+        "keyword": 0
+      },
+      "fields": [
+        {
+          "name": "Object",
+          "datatype": "pointer",
+          "map": null
+        },
+        {
+          "name": "Tag",
+          "datatype": "pointer",
+          "map": null
+        },
+        {
+          "name": "ProcessId",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "Count",
+          "datatype": "uint",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "WakeDropInstrumentation",
+      "displayName": "WakeDropInstrumentation",
+      "descriptor": {
+        "id": 0,
+        "version": 2,
+        "channel": 0,
+        "level": "None",
+        "opcode": 83,
+        "task": 0,
+        "keyword": 0
+      },
+      "fields": [
+        {
+          "name": "Object",
+          "datatype": "pointer",
+          "map": null
+        },
+        {
+          "name": "Tag",
+          "datatype": "pointer",
+          "map": null
+        },
+        {
+          "name": "ProcessId",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "Count",
+          "datatype": "uint",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "WakeDropPreserveProcess",
+      "displayName": "WakeDropPreserveProcess",
+      "descriptor": {
+        "id": 0,
+        "version": 2,
+        "channel": 0,
+        "level": "None",
+        "opcode": 84,
+        "task": 0,
+        "keyword": 0
+      },
+      "fields": [
+        {
+          "name": "Object",
+          "datatype": "pointer",
+          "map": null
+        },
+        {
+          "name": "Tag",
+          "datatype": "pointer",
+          "map": null
+        },
+        {
+          "name": "ProcessId",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "Count",
+          "datatype": "uint",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "WakeEventUser",
+      "displayName": "WakeEventUser",
+      "descriptor": {
+        "id": 0,
+        "version": 2,
+        "channel": 0,
+        "level": "None",
+        "opcode": 96,
+        "task": 0,
+        "keyword": 0
+      },
+      "fields": [
+        {
+          "name": "Object",
+          "datatype": "pointer",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "WakeEventExecution",
+      "displayName": "WakeEventExecution",
+      "descriptor": {
+        "id": 0,
+        "version": 2,
+        "channel": 0,
+        "level": "None",
+        "opcode": 97,
+        "task": 0,
+        "keyword": 0
+      },
+      "fields": [
+        {
+          "name": "Object",
+          "datatype": "pointer",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "WakeEventKernel",
+      "displayName": "WakeEventKernel",
+      "descriptor": {
+        "id": 0,
+        "version": 2,
+        "channel": 0,
+        "level": "None",
+        "opcode": 98,
+        "task": 0,
+        "keyword": 0
+      },
+      "fields": [
+        {
+          "name": "Object",
+          "datatype": "pointer",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "WakeEventInstrumentation",
+      "displayName": "WakeEventInstrumentation",
+      "descriptor": {
+        "id": 0,
+        "version": 2,
+        "channel": 0,
+        "level": "None",
+        "opcode": 99,
+        "task": 0,
+        "keyword": 0
+      },
+      "fields": [
+        {
+          "name": "Object",
+          "datatype": "pointer",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "Start",
+      "displayName": "Start",
+      "descriptor": {
+        "id": 0,
+        "version": 3,
+        "channel": 0,
+        "level": "None",
+        "opcode": "Start",
+        "task": 0,
+        "keyword": 0
+      },
+      "fields": [
+        {
+          "name": "UniqueProcessKey",
+          "datatype": "pointer",
+          "map": null
+        },
+        {
+          "name": "ProcessId",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "ParentId",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "SessionId",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "ExitStatus",
+          "datatype": "int",
+          "map": null
+        },
+        {
+          "name": "DirectoryTableBase",
+          "datatype": "pointer",
+          "map": null
+        },
+        {
+          "name": "UserSID",
+          "datatype": "wbemsid",
+          "map": null
+        },
+        {
+          "name": "ImageFileName",
+          "datatype": "ansistring",
+          "map": null
+        },
+        {
+          "name": "CommandLine",
+          "datatype": "string",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "End",
+      "displayName": "End",
+      "descriptor": {
+        "id": 0,
+        "version": 3,
+        "channel": 0,
+        "level": "None",
+        "opcode": "End",
+        "task": 0,
+        "keyword": 0
+      },
+      "fields": [
+        {
+          "name": "UniqueProcessKey",
+          "datatype": "pointer",
+          "map": null
+        },
+        {
+          "name": "ProcessId",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "ParentId",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "SessionId",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "ExitStatus",
+          "datatype": "int",
+          "map": null
+        },
+        {
+          "name": "DirectoryTableBase",
+          "datatype": "pointer",
+          "map": null
+        },
+        {
+          "name": "UserSID",
+          "datatype": "wbemsid",
+          "map": null
+        },
+        {
+          "name": "ImageFileName",
+          "datatype": "ansistring",
+          "map": null
+        },
+        {
+          "name": "CommandLine",
+          "datatype": "string",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "DCStart",
+      "displayName": "DCStart",
+      "descriptor": {
+        "id": 0,
+        "version": 3,
+        "channel": 0,
+        "level": "None",
+        "opcode": "DataCollectionStart",
+        "task": 0,
+        "keyword": 0
+      },
+      "fields": [
+        {
+          "name": "UniqueProcessKey",
+          "datatype": "pointer",
+          "map": null
+        },
+        {
+          "name": "ProcessId",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "ParentId",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "SessionId",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "ExitStatus",
+          "datatype": "int",
+          "map": null
+        },
+        {
+          "name": "DirectoryTableBase",
+          "datatype": "pointer",
+          "map": null
+        },
+        {
+          "name": "UserSID",
+          "datatype": "wbemsid",
+          "map": null
+        },
+        {
+          "name": "ImageFileName",
+          "datatype": "ansistring",
+          "map": null
+        },
+        {
+          "name": "CommandLine",
+          "datatype": "string",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "DCEnd",
+      "displayName": "DCEnd",
+      "descriptor": {
+        "id": 0,
+        "version": 3,
+        "channel": 0,
+        "level": "None",
+        "opcode": "DataCollectionEnd",
+        "task": 0,
+        "keyword": 0
+      },
+      "fields": [
+        {
+          "name": "UniqueProcessKey",
+          "datatype": "pointer",
+          "map": null
+        },
+        {
+          "name": "ProcessId",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "ParentId",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "SessionId",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "ExitStatus",
+          "datatype": "int",
+          "map": null
+        },
+        {
+          "name": "DirectoryTableBase",
+          "datatype": "pointer",
+          "map": null
+        },
+        {
+          "name": "UserSID",
+          "datatype": "wbemsid",
+          "map": null
+        },
+        {
+          "name": "ImageFileName",
+          "datatype": "ansistring",
+          "map": null
+        },
+        {
+          "name": "CommandLine",
+          "datatype": "string",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "Defunct",
+      "displayName": "Defunct",
+      "descriptor": {
+        "id": 0,
+        "version": 3,
+        "channel": 0,
+        "level": "None",
+        "opcode": 39,
+        "task": 0,
+        "keyword": 0
+      },
+      "fields": [
+        {
+          "name": "UniqueProcessKey",
+          "datatype": "pointer",
+          "map": null
+        },
+        {
+          "name": "ProcessId",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "ParentId",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "SessionId",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "ExitStatus",
+          "datatype": "int",
+          "map": null
+        },
+        {
+          "name": "DirectoryTableBase",
+          "datatype": "pointer",
+          "map": null
+        },
+        {
+          "name": "UserSID",
+          "datatype": "wbemsid",
+          "map": null
+        },
+        {
+          "name": "ImageFileName",
+          "datatype": "ansistring",
+          "map": null
+        },
+        {
+          "name": "CommandLine",
+          "datatype": "string",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "Start",
+      "displayName": "Start",
+      "descriptor": {
+        "id": 0,
+        "version": 4,
+        "channel": 0,
+        "level": "None",
+        "opcode": "Start",
+        "task": 0,
+        "keyword": 0
+      },
+      "fields": [
+        {
+          "name": "UniqueProcessKey",
+          "datatype": "pointer",
+          "map": null
+        },
+        {
+          "name": "ProcessId",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "ParentId",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "SessionId",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "ExitStatus",
+          "datatype": "int",
+          "map": null
+        },
+        {
+          "name": "DirectoryTableBase",
+          "datatype": "pointer",
+          "map": null
+        },
+        {
+          "name": "Flags",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "UserSID",
+          "datatype": "wbemsid",
+          "map": null
+        },
+        {
+          "name": "ImageFileName",
+          "datatype": "ansistring",
+          "map": null
+        },
+        {
+          "name": "CommandLine",
+          "datatype": "string",
+          "map": null
+        },
+        {
+          "name": "PackageFullName",
+          "datatype": "string",
+          "map": null
+        },
+        {
+          "name": "ApplicationId",
+          "datatype": "string",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "End",
+      "displayName": "End",
+      "descriptor": {
+        "id": 0,
+        "version": 4,
+        "channel": 0,
+        "level": "None",
+        "opcode": "End",
+        "task": 0,
+        "keyword": 0
+      },
+      "fields": [
+        {
+          "name": "UniqueProcessKey",
+          "datatype": "pointer",
+          "map": null
+        },
+        {
+          "name": "ProcessId",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "ParentId",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "SessionId",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "ExitStatus",
+          "datatype": "int",
+          "map": null
+        },
+        {
+          "name": "DirectoryTableBase",
+          "datatype": "pointer",
+          "map": null
+        },
+        {
+          "name": "Flags",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "UserSID",
+          "datatype": "wbemsid",
+          "map": null
+        },
+        {
+          "name": "ImageFileName",
+          "datatype": "ansistring",
+          "map": null
+        },
+        {
+          "name": "CommandLine",
+          "datatype": "string",
+          "map": null
+        },
+        {
+          "name": "PackageFullName",
+          "datatype": "string",
+          "map": null
+        },
+        {
+          "name": "ApplicationId",
+          "datatype": "string",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "DCStart",
+      "displayName": "DCStart",
+      "descriptor": {
+        "id": 0,
+        "version": 4,
+        "channel": 0,
+        "level": "None",
+        "opcode": "DataCollectionStart",
+        "task": 0,
+        "keyword": 0
+      },
+      "fields": [
+        {
+          "name": "UniqueProcessKey",
+          "datatype": "pointer",
+          "map": null
+        },
+        {
+          "name": "ProcessId",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "ParentId",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "SessionId",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "ExitStatus",
+          "datatype": "int",
+          "map": null
+        },
+        {
+          "name": "DirectoryTableBase",
+          "datatype": "pointer",
+          "map": null
+        },
+        {
+          "name": "Flags",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "UserSID",
+          "datatype": "wbemsid",
+          "map": null
+        },
+        {
+          "name": "ImageFileName",
+          "datatype": "ansistring",
+          "map": null
+        },
+        {
+          "name": "CommandLine",
+          "datatype": "string",
+          "map": null
+        },
+        {
+          "name": "PackageFullName",
+          "datatype": "string",
+          "map": null
+        },
+        {
+          "name": "ApplicationId",
+          "datatype": "string",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "DCEnd",
+      "displayName": "DCEnd",
+      "descriptor": {
+        "id": 0,
+        "version": 4,
+        "channel": 0,
+        "level": "None",
+        "opcode": "DataCollectionEnd",
+        "task": 0,
+        "keyword": 0
+      },
+      "fields": [
+        {
+          "name": "UniqueProcessKey",
+          "datatype": "pointer",
+          "map": null
+        },
+        {
+          "name": "ProcessId",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "ParentId",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "SessionId",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "ExitStatus",
+          "datatype": "int",
+          "map": null
+        },
+        {
+          "name": "DirectoryTableBase",
+          "datatype": "pointer",
+          "map": null
+        },
+        {
+          "name": "Flags",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "UserSID",
+          "datatype": "wbemsid",
+          "map": null
+        },
+        {
+          "name": "ImageFileName",
+          "datatype": "ansistring",
+          "map": null
+        },
+        {
+          "name": "CommandLine",
+          "datatype": "string",
+          "map": null
+        },
+        {
+          "name": "PackageFullName",
+          "datatype": "string",
+          "map": null
+        },
+        {
+          "name": "ApplicationId",
+          "datatype": "string",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "Defunct",
+      "displayName": "Defunct",
+      "descriptor": {
+        "id": 0,
+        "version": 4,
+        "channel": 0,
+        "level": "None",
+        "opcode": 39,
+        "task": 0,
+        "keyword": 0
+      },
+      "fields": [
+        {
+          "name": "UniqueProcessKey",
+          "datatype": "pointer",
+          "map": null
+        },
+        {
+          "name": "ProcessId",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "ParentId",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "SessionId",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "ExitStatus",
+          "datatype": "int",
+          "map": null
+        },
+        {
+          "name": "DirectoryTableBase",
+          "datatype": "pointer",
+          "map": null
+        },
+        {
+          "name": "Flags",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "UserSID",
+          "datatype": "wbemsid",
+          "map": null
+        },
+        {
+          "name": "ImageFileName",
+          "datatype": "ansistring",
+          "map": null
+        },
+        {
+          "name": "CommandLine",
+          "datatype": "string",
+          "map": null
+        },
+        {
+          "name": "PackageFullName",
+          "datatype": "string",
+          "map": null
+        },
+        {
+          "name": "ApplicationId",
+          "datatype": "string",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "Defunct",
+      "displayName": "Defunct",
+      "descriptor": {
+        "id": 0,
+        "version": 5,
+        "channel": 0,
+        "level": "None",
+        "opcode": 39,
+        "task": 0,
+        "keyword": 0
+      },
+      "fields": [
+        {
+          "name": "UniqueProcessKey",
+          "datatype": "pointer",
+          "map": null
+        },
+        {
+          "name": "ProcessId",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "ParentId",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "SessionId",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "ExitStatus",
+          "datatype": "int",
+          "map": null
+        },
+        {
+          "name": "DirectoryTableBase",
+          "datatype": "pointer",
+          "map": null
+        },
+        {
+          "name": "Flags",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "UserSID",
+          "datatype": "wbemsid",
+          "map": null
+        },
+        {
+          "name": "ImageFileName",
+          "datatype": "ansistring",
+          "map": null
+        },
+        {
+          "name": "CommandLine",
+          "datatype": "string",
+          "map": null
+        },
+        {
+          "name": "PackageFullName",
+          "datatype": "string",
+          "map": null
+        },
+        {
+          "name": "ApplicationId",
+          "datatype": "string",
+          "map": null
+        },
+        {
+          "name": "ExitTime",
+          "datatype": "ulong",
+          "map": null
+        }
+      ]
+    }
+  ],
+  "tasks": {},
+  "opcodes": {
+    "11": "Terminate",
+    "32": "PerfCtr",
+    "33": "PerfCtrRundown",
+    "35": "InSwap",
+    "39": "Defunct",
+    "48": "WakeChargeUser",
+    "49": "WakeChargeExecution",
+    "50": "WakeChargeKernel",
+    "51": "WakeChargeInstrumentation",
+    "52": "WakeChargePreserveProcess",
+    "64": "WakeReleaseUser",
+    "65": "WakeReleaseExecution",
+    "66": "WakeReleaseKernel",
+    "67": "WakeReleaseInstrumentation",
+    "68": "WakeReleasePreserveProcess",
+    "80": "WakeDropUser",
+    "81": "WakeDropExecution",
+    "82": "WakeDropKernel",
+    "83": "WakeDropInstrumentation",
+    "84": "WakeDropPreserveProcess",
+    "96": "WakeEventUser",
+    "97": "WakeEventExecution",
+    "98": "WakeEventKernel",
+    "99": "WakeEventInstrumentation"
+  },
+  "keywords": {},
+  "maps": [],
+  "structs": []
+}

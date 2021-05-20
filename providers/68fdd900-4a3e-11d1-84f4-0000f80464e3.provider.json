@@ -1,0 +1,946 @@
+{
+  "name": "KernelEventTrace",
+  "displayName": "Kernel-EventTrace",
+  "id": "68fdd900-4a3e-11d1-84f4-0000f80464e3",
+  "events": [
+    {
+      "name": "RDComplete",
+      "displayName": "RDComplete",
+      "descriptor": {
+        "id": 0,
+        "version": 0,
+        "channel": 0,
+        "level": "None",
+        "opcode": "Checkpoint",
+        "task": 0,
+        "keyword": 0
+      },
+      "fields": []
+    },
+    {
+      "name": "Extension",
+      "displayName": "Extension",
+      "descriptor": {
+        "id": 0,
+        "version": 0,
+        "channel": 0,
+        "level": "None",
+        "opcode": "Extension",
+        "task": 0,
+        "keyword": 0
+      },
+      "fields": [
+        {
+          "name": "GroupMask1",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "GroupMask2",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "GroupMask3",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "GroupMask4",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "GroupMask5",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "GroupMask6",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "GroupMask7",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "GroupMask8",
+          "datatype": "uint",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "EndExtension",
+      "displayName": "EndExtension",
+      "descriptor": {
+        "id": 0,
+        "version": 0,
+        "channel": 0,
+        "level": "None",
+        "opcode": 32,
+        "task": 0,
+        "keyword": 0
+      },
+      "fields": [
+        {
+          "name": "GroupMask1",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "GroupMask2",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "GroupMask3",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "GroupMask4",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "GroupMask5",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "GroupMask6",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "GroupMask7",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "GroupMask8",
+          "datatype": "uint",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "Header",
+      "displayName": "Header",
+      "descriptor": {
+        "id": 0,
+        "version": 0,
+        "channel": 0,
+        "level": "None",
+        "opcode": "Info",
+        "task": 0,
+        "keyword": 0
+      },
+      "fields": [
+        {
+          "name": "BufferSize",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "Version",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "ProviderVersion",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "NumberOfProcessors",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "EndTime",
+          "datatype": "ulong",
+          "map": null
+        },
+        {
+          "name": "TimerResolution",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "MaxFileSize",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "LogFileMode",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "BuffersWritten",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "StartBuffers",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "PointerSize",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "EventsLost",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "CPUSpeed",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "LoggerName",
+          "datatype": "pointer",
+          "map": null
+        },
+        {
+          "name": "LogFileName",
+          "datatype": "pointer",
+          "map": null
+        },
+        {
+          "name": "TimeZoneInformation",
+          "datatype": "byte",
+          "map": null
+        },
+        {
+          "name": "BootTime",
+          "datatype": "ulong",
+          "map": null
+        },
+        {
+          "name": "PerfFreq",
+          "datatype": "ulong",
+          "map": null
+        },
+        {
+          "name": "StartTime",
+          "datatype": "ulong",
+          "map": null
+        },
+        {
+          "name": "ReservedFlags",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "BuffersLost",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "SessionNameString",
+          "datatype": "string",
+          "map": null
+        },
+        {
+          "name": "LogFileNameString",
+          "datatype": "string",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "Header",
+      "displayName": "Header",
+      "descriptor": {
+        "id": 0,
+        "version": 1,
+        "channel": 0,
+        "level": "None",
+        "opcode": "Info",
+        "task": 0,
+        "keyword": 0
+      },
+      "fields": [
+        {
+          "name": "BufferSize",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "Version",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "ProviderVersion",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "NumberOfProcessors",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "EndTime",
+          "datatype": "ulong",
+          "map": null
+        },
+        {
+          "name": "TimerResolution",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "MaxFileSize",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "LogFileMode",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "BuffersWritten",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "StartBuffers",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "PointerSize",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "EventsLost",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "CPUSpeed",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "LoggerName",
+          "datatype": "pointer",
+          "map": null
+        },
+        {
+          "name": "LogFileName",
+          "datatype": "pointer",
+          "map": null
+        },
+        {
+          "name": "TimeZoneInformation",
+          "datatype": "byte",
+          "map": null
+        },
+        {
+          "name": "BootTime",
+          "datatype": "ulong",
+          "map": null
+        },
+        {
+          "name": "PerfFreq",
+          "datatype": "ulong",
+          "map": null
+        },
+        {
+          "name": "StartTime",
+          "datatype": "ulong",
+          "map": null
+        },
+        {
+          "name": "ReservedFlags",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "BuffersLost",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "SessionNameString",
+          "datatype": "string",
+          "map": null
+        },
+        {
+          "name": "LogFileNameString",
+          "datatype": "string",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "RDComplete",
+      "displayName": "RDComplete",
+      "descriptor": {
+        "id": 0,
+        "version": 1,
+        "channel": 0,
+        "level": "None",
+        "opcode": "Checkpoint",
+        "task": 0,
+        "keyword": 0
+      },
+      "fields": []
+    },
+    {
+      "name": "Extension",
+      "displayName": "Extension",
+      "descriptor": {
+        "id": 0,
+        "version": 1,
+        "channel": 0,
+        "level": "None",
+        "opcode": "Extension",
+        "task": 0,
+        "keyword": 0
+      },
+      "fields": [
+        {
+          "name": "GroupMask1",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "GroupMask2",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "GroupMask3",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "GroupMask4",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "GroupMask5",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "GroupMask6",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "GroupMask7",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "GroupMask8",
+          "datatype": "uint",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "EndExtension",
+      "displayName": "EndExtension",
+      "descriptor": {
+        "id": 0,
+        "version": 1,
+        "channel": 0,
+        "level": "None",
+        "opcode": 32,
+        "task": 0,
+        "keyword": 0
+      },
+      "fields": [
+        {
+          "name": "GroupMask1",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "GroupMask2",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "GroupMask3",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "GroupMask4",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "GroupMask5",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "GroupMask6",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "GroupMask7",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "GroupMask8",
+          "datatype": "uint",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "Header",
+      "displayName": "Header",
+      "descriptor": {
+        "id": 0,
+        "version": 2,
+        "channel": 0,
+        "level": "None",
+        "opcode": "Info",
+        "task": 0,
+        "keyword": 0
+      },
+      "fields": [
+        {
+          "name": "BufferSize",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "Version",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "ProviderVersion",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "NumberOfProcessors",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "EndTime",
+          "datatype": "ulong",
+          "map": null
+        },
+        {
+          "name": "TimerResolution",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "MaxFileSize",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "LogFileMode",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "BuffersWritten",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "StartBuffers",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "PointerSize",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "EventsLost",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "CPUSpeed",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "LoggerName",
+          "datatype": "pointer",
+          "map": null
+        },
+        {
+          "name": "LogFileName",
+          "datatype": "pointer",
+          "map": null
+        },
+        {
+          "name": "TimeZoneInformation",
+          "datatype": "byte",
+          "map": null
+        },
+        {
+          "name": "BootTime",
+          "datatype": "ulong",
+          "map": null
+        },
+        {
+          "name": "PerfFreq",
+          "datatype": "ulong",
+          "map": null
+        },
+        {
+          "name": "StartTime",
+          "datatype": "ulong",
+          "map": null
+        },
+        {
+          "name": "ReservedFlags",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "BuffersLost",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "SessionNameString",
+          "datatype": "string",
+          "map": null
+        },
+        {
+          "name": "LogFileNameString",
+          "datatype": "string",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "Extension",
+      "displayName": "Extension",
+      "descriptor": {
+        "id": 0,
+        "version": 2,
+        "channel": 0,
+        "level": "None",
+        "opcode": "Extension",
+        "task": 0,
+        "keyword": 0
+      },
+      "fields": [
+        {
+          "name": "GroupMask1",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "GroupMask2",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "GroupMask3",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "GroupMask4",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "GroupMask5",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "GroupMask6",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "GroupMask7",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "GroupMask8",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "KernelEventVersion",
+          "datatype": "uint",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "EndExtension",
+      "displayName": "EndExtension",
+      "descriptor": {
+        "id": 0,
+        "version": 2,
+        "channel": 0,
+        "level": "None",
+        "opcode": 32,
+        "task": 0,
+        "keyword": 0
+      },
+      "fields": [
+        {
+          "name": "GroupMask1",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "GroupMask2",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "GroupMask3",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "GroupMask4",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "GroupMask5",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "GroupMask6",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "GroupMask7",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "GroupMask8",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "KernelEventVersion",
+          "datatype": "uint",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "RDComplete",
+      "displayName": "RDComplete",
+      "descriptor": {
+        "id": 0,
+        "version": 2,
+        "channel": 0,
+        "level": "None",
+        "opcode": "Checkpoint",
+        "task": 0,
+        "keyword": 0
+      },
+      "fields": []
+    },
+    {
+      "name": "DbgIdRSDS",
+      "displayName": "DbgIdRSDS",
+      "descriptor": {
+        "id": 0,
+        "version": 2,
+        "channel": 0,
+        "level": "None",
+        "opcode": 64,
+        "task": 0,
+        "keyword": 0
+      },
+      "fields": [
+        {
+          "name": "Guid",
+          "datatype": "guid",
+          "map": null
+        },
+        {
+          "name": "Age",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "PdbName",
+          "datatype": "ansistring",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "BuildInfo",
+      "displayName": "BuildInfo",
+      "descriptor": {
+        "id": 0,
+        "version": 2,
+        "channel": 0,
+        "level": "None",
+        "opcode": 66,
+        "task": 0,
+        "keyword": 0
+      },
+      "fields": [
+        {
+          "name": "BuildString",
+          "datatype": "ansistring",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "ProviderBinaryPath",
+      "displayName": "ProviderBinaryPath",
+      "descriptor": {
+        "id": 0,
+        "version": 2,
+        "channel": 0,
+        "level": "None",
+        "opcode": 67,
+        "task": 0,
+        "keyword": 0
+      },
+      "fields": [
+        {
+          "name": "GuidCount",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "Guid",
+          "datatype": "guid[GuidCount]",
+          "map": null
+        },
+        {
+          "name": "BinaryPath",
+          "datatype": "string",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "PartitionInfoExtension",
+      "displayName": "PartitionInfoExtension",
+      "descriptor": {
+        "id": 0,
+        "version": 2,
+        "channel": 0,
+        "level": "None",
+        "opcode": 80,
+        "task": 0,
+        "keyword": 0
+      },
+      "fields": [
+        {
+          "name": "EventVersion",
+          "datatype": "ushort",
+          "map": null
+        },
+        {
+          "name": "Reserved",
+          "datatype": "ushort",
+          "map": null
+        },
+        {
+          "name": "PartitionType",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "QpcOffsetFromRoot",
+          "datatype": "long",
+          "map": null
+        },
+        {
+          "name": "PartitionId",
+          "datatype": "guid",
+          "map": null
+        },
+        {
+          "name": "ParentId",
+          "datatype": "guid",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "LastDroppedTimes",
+      "displayName": "LastDroppedTimes",
+      "descriptor": {
+        "id": 0,
+        "version": 2,
+        "channel": 0,
+        "level": "None",
+        "opcode": 82,
+        "task": 0,
+        "keyword": 0
+      },
+      "fields": [
+        {
+          "name": "TimeStampCount",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "Padding",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "TimeStamp",
+          "datatype": "ulong[TimeStampCount]",
+          "map": null
+        }
+      ]
+    }
+  ],
+  "tasks": {},
+  "opcodes": {
+    "32": "EndExtension",
+    "64": "DbgIdRSDS",
+    "66": "BuildInfo",
+    "67": "ProviderBinaryPath",
+    "80": "PartitionInfoExtension",
+    "82": "LastDroppedTimes"
+  },
+  "keywords": {},
+  "maps": [],
+  "structs": []
+}

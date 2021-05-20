@@ -1,0 +1,2199 @@
+{
+  "name": "KernelRegistry",
+  "displayName": "Kernel-Registry",
+  "id": "ae53722e-c863-11d2-8659-00c04fa321a1",
+  "events": [
+    {
+      "name": "Create",
+      "displayName": "Create",
+      "descriptor": {
+        "id": 0,
+        "version": 0,
+        "channel": 0,
+        "level": "None",
+        "opcode": 10,
+        "task": 0,
+        "keyword": 0
+      },
+      "fields": [
+        {
+          "name": "Status",
+          "datatype": "pointer",
+          "map": null
+        },
+        {
+          "name": "KeyHandle",
+          "datatype": "pointer",
+          "map": null
+        },
+        {
+          "name": "ElapsedTime",
+          "datatype": "long",
+          "map": null
+        },
+        {
+          "name": "KeyName",
+          "datatype": "string",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "Open",
+      "displayName": "Open",
+      "descriptor": {
+        "id": 0,
+        "version": 0,
+        "channel": 0,
+        "level": "None",
+        "opcode": 11,
+        "task": 0,
+        "keyword": 0
+      },
+      "fields": [
+        {
+          "name": "Status",
+          "datatype": "pointer",
+          "map": null
+        },
+        {
+          "name": "KeyHandle",
+          "datatype": "pointer",
+          "map": null
+        },
+        {
+          "name": "ElapsedTime",
+          "datatype": "long",
+          "map": null
+        },
+        {
+          "name": "KeyName",
+          "datatype": "string",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "Delete",
+      "displayName": "Delete",
+      "descriptor": {
+        "id": 0,
+        "version": 0,
+        "channel": 0,
+        "level": "None",
+        "opcode": 12,
+        "task": 0,
+        "keyword": 0
+      },
+      "fields": [
+        {
+          "name": "Status",
+          "datatype": "pointer",
+          "map": null
+        },
+        {
+          "name": "KeyHandle",
+          "datatype": "pointer",
+          "map": null
+        },
+        {
+          "name": "ElapsedTime",
+          "datatype": "long",
+          "map": null
+        },
+        {
+          "name": "KeyName",
+          "datatype": "string",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "Query",
+      "displayName": "Query",
+      "descriptor": {
+        "id": 0,
+        "version": 0,
+        "channel": 0,
+        "level": "None",
+        "opcode": 13,
+        "task": 0,
+        "keyword": 0
+      },
+      "fields": [
+        {
+          "name": "Status",
+          "datatype": "pointer",
+          "map": null
+        },
+        {
+          "name": "KeyHandle",
+          "datatype": "pointer",
+          "map": null
+        },
+        {
+          "name": "ElapsedTime",
+          "datatype": "long",
+          "map": null
+        },
+        {
+          "name": "KeyName",
+          "datatype": "string",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "SetValue",
+      "displayName": "SetValue",
+      "descriptor": {
+        "id": 0,
+        "version": 0,
+        "channel": 0,
+        "level": "None",
+        "opcode": 14,
+        "task": 0,
+        "keyword": 0
+      },
+      "fields": [
+        {
+          "name": "Status",
+          "datatype": "pointer",
+          "map": null
+        },
+        {
+          "name": "KeyHandle",
+          "datatype": "pointer",
+          "map": null
+        },
+        {
+          "name": "ElapsedTime",
+          "datatype": "long",
+          "map": null
+        },
+        {
+          "name": "KeyName",
+          "datatype": "string",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "DeleteValue",
+      "displayName": "DeleteValue",
+      "descriptor": {
+        "id": 0,
+        "version": 0,
+        "channel": 0,
+        "level": "None",
+        "opcode": 15,
+        "task": 0,
+        "keyword": 0
+      },
+      "fields": [
+        {
+          "name": "Status",
+          "datatype": "pointer",
+          "map": null
+        },
+        {
+          "name": "KeyHandle",
+          "datatype": "pointer",
+          "map": null
+        },
+        {
+          "name": "ElapsedTime",
+          "datatype": "long",
+          "map": null
+        },
+        {
+          "name": "KeyName",
+          "datatype": "string",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "QueryValue",
+      "displayName": "QueryValue",
+      "descriptor": {
+        "id": 0,
+        "version": 0,
+        "channel": 0,
+        "level": "None",
+        "opcode": 16,
+        "task": 0,
+        "keyword": 0
+      },
+      "fields": [
+        {
+          "name": "Status",
+          "datatype": "pointer",
+          "map": null
+        },
+        {
+          "name": "KeyHandle",
+          "datatype": "pointer",
+          "map": null
+        },
+        {
+          "name": "ElapsedTime",
+          "datatype": "long",
+          "map": null
+        },
+        {
+          "name": "KeyName",
+          "datatype": "string",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "EnumerateKey",
+      "displayName": "EnumerateKey",
+      "descriptor": {
+        "id": 0,
+        "version": 0,
+        "channel": 0,
+        "level": "None",
+        "opcode": 17,
+        "task": 0,
+        "keyword": 0
+      },
+      "fields": [
+        {
+          "name": "Status",
+          "datatype": "pointer",
+          "map": null
+        },
+        {
+          "name": "KeyHandle",
+          "datatype": "pointer",
+          "map": null
+        },
+        {
+          "name": "ElapsedTime",
+          "datatype": "long",
+          "map": null
+        },
+        {
+          "name": "KeyName",
+          "datatype": "string",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "EnumerateValueKey",
+      "displayName": "EnumerateValueKey",
+      "descriptor": {
+        "id": 0,
+        "version": 0,
+        "channel": 0,
+        "level": "None",
+        "opcode": 18,
+        "task": 0,
+        "keyword": 0
+      },
+      "fields": [
+        {
+          "name": "Status",
+          "datatype": "pointer",
+          "map": null
+        },
+        {
+          "name": "KeyHandle",
+          "datatype": "pointer",
+          "map": null
+        },
+        {
+          "name": "ElapsedTime",
+          "datatype": "long",
+          "map": null
+        },
+        {
+          "name": "KeyName",
+          "datatype": "string",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "QueryMultipleValue",
+      "displayName": "QueryMultipleValue",
+      "descriptor": {
+        "id": 0,
+        "version": 0,
+        "channel": 0,
+        "level": "None",
+        "opcode": 19,
+        "task": 0,
+        "keyword": 0
+      },
+      "fields": [
+        {
+          "name": "Status",
+          "datatype": "pointer",
+          "map": null
+        },
+        {
+          "name": "KeyHandle",
+          "datatype": "pointer",
+          "map": null
+        },
+        {
+          "name": "ElapsedTime",
+          "datatype": "long",
+          "map": null
+        },
+        {
+          "name": "KeyName",
+          "datatype": "string",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "SetInformation",
+      "displayName": "SetInformation",
+      "descriptor": {
+        "id": 0,
+        "version": 0,
+        "channel": 0,
+        "level": "None",
+        "opcode": 20,
+        "task": 0,
+        "keyword": 0
+      },
+      "fields": [
+        {
+          "name": "Status",
+          "datatype": "pointer",
+          "map": null
+        },
+        {
+          "name": "KeyHandle",
+          "datatype": "pointer",
+          "map": null
+        },
+        {
+          "name": "ElapsedTime",
+          "datatype": "long",
+          "map": null
+        },
+        {
+          "name": "KeyName",
+          "datatype": "string",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "Flush",
+      "displayName": "Flush",
+      "descriptor": {
+        "id": 0,
+        "version": 0,
+        "channel": 0,
+        "level": "None",
+        "opcode": 21,
+        "task": 0,
+        "keyword": 0
+      },
+      "fields": [
+        {
+          "name": "Status",
+          "datatype": "pointer",
+          "map": null
+        },
+        {
+          "name": "KeyHandle",
+          "datatype": "pointer",
+          "map": null
+        },
+        {
+          "name": "ElapsedTime",
+          "datatype": "long",
+          "map": null
+        },
+        {
+          "name": "KeyName",
+          "datatype": "string",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "Create",
+      "displayName": "Create",
+      "descriptor": {
+        "id": 0,
+        "version": 1,
+        "channel": 0,
+        "level": "None",
+        "opcode": 10,
+        "task": 0,
+        "keyword": 0
+      },
+      "fields": [
+        {
+          "name": "Status",
+          "datatype": "pointer",
+          "map": null
+        },
+        {
+          "name": "KeyHandle",
+          "datatype": "pointer",
+          "map": null
+        },
+        {
+          "name": "ElapsedTime",
+          "datatype": "long",
+          "map": null
+        },
+        {
+          "name": "Index",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "KeyName",
+          "datatype": "string",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "Open",
+      "displayName": "Open",
+      "descriptor": {
+        "id": 0,
+        "version": 1,
+        "channel": 0,
+        "level": "None",
+        "opcode": 11,
+        "task": 0,
+        "keyword": 0
+      },
+      "fields": [
+        {
+          "name": "Status",
+          "datatype": "pointer",
+          "map": null
+        },
+        {
+          "name": "KeyHandle",
+          "datatype": "pointer",
+          "map": null
+        },
+        {
+          "name": "ElapsedTime",
+          "datatype": "long",
+          "map": null
+        },
+        {
+          "name": "Index",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "KeyName",
+          "datatype": "string",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "Delete",
+      "displayName": "Delete",
+      "descriptor": {
+        "id": 0,
+        "version": 1,
+        "channel": 0,
+        "level": "None",
+        "opcode": 12,
+        "task": 0,
+        "keyword": 0
+      },
+      "fields": [
+        {
+          "name": "Status",
+          "datatype": "pointer",
+          "map": null
+        },
+        {
+          "name": "KeyHandle",
+          "datatype": "pointer",
+          "map": null
+        },
+        {
+          "name": "ElapsedTime",
+          "datatype": "long",
+          "map": null
+        },
+        {
+          "name": "Index",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "KeyName",
+          "datatype": "string",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "Query",
+      "displayName": "Query",
+      "descriptor": {
+        "id": 0,
+        "version": 1,
+        "channel": 0,
+        "level": "None",
+        "opcode": 13,
+        "task": 0,
+        "keyword": 0
+      },
+      "fields": [
+        {
+          "name": "Status",
+          "datatype": "pointer",
+          "map": null
+        },
+        {
+          "name": "KeyHandle",
+          "datatype": "pointer",
+          "map": null
+        },
+        {
+          "name": "ElapsedTime",
+          "datatype": "long",
+          "map": null
+        },
+        {
+          "name": "Index",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "KeyName",
+          "datatype": "string",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "SetValue",
+      "displayName": "SetValue",
+      "descriptor": {
+        "id": 0,
+        "version": 1,
+        "channel": 0,
+        "level": "None",
+        "opcode": 14,
+        "task": 0,
+        "keyword": 0
+      },
+      "fields": [
+        {
+          "name": "Status",
+          "datatype": "pointer",
+          "map": null
+        },
+        {
+          "name": "KeyHandle",
+          "datatype": "pointer",
+          "map": null
+        },
+        {
+          "name": "ElapsedTime",
+          "datatype": "long",
+          "map": null
+        },
+        {
+          "name": "Index",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "KeyName",
+          "datatype": "string",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "DeleteValue",
+      "displayName": "DeleteValue",
+      "descriptor": {
+        "id": 0,
+        "version": 1,
+        "channel": 0,
+        "level": "None",
+        "opcode": 15,
+        "task": 0,
+        "keyword": 0
+      },
+      "fields": [
+        {
+          "name": "Status",
+          "datatype": "pointer",
+          "map": null
+        },
+        {
+          "name": "KeyHandle",
+          "datatype": "pointer",
+          "map": null
+        },
+        {
+          "name": "ElapsedTime",
+          "datatype": "long",
+          "map": null
+        },
+        {
+          "name": "Index",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "KeyName",
+          "datatype": "string",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "QueryValue",
+      "displayName": "QueryValue",
+      "descriptor": {
+        "id": 0,
+        "version": 1,
+        "channel": 0,
+        "level": "None",
+        "opcode": 16,
+        "task": 0,
+        "keyword": 0
+      },
+      "fields": [
+        {
+          "name": "Status",
+          "datatype": "pointer",
+          "map": null
+        },
+        {
+          "name": "KeyHandle",
+          "datatype": "pointer",
+          "map": null
+        },
+        {
+          "name": "ElapsedTime",
+          "datatype": "long",
+          "map": null
+        },
+        {
+          "name": "Index",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "KeyName",
+          "datatype": "string",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "EnumerateKey",
+      "displayName": "EnumerateKey",
+      "descriptor": {
+        "id": 0,
+        "version": 1,
+        "channel": 0,
+        "level": "None",
+        "opcode": 17,
+        "task": 0,
+        "keyword": 0
+      },
+      "fields": [
+        {
+          "name": "Status",
+          "datatype": "pointer",
+          "map": null
+        },
+        {
+          "name": "KeyHandle",
+          "datatype": "pointer",
+          "map": null
+        },
+        {
+          "name": "ElapsedTime",
+          "datatype": "long",
+          "map": null
+        },
+        {
+          "name": "Index",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "KeyName",
+          "datatype": "string",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "EnumerateValueKey",
+      "displayName": "EnumerateValueKey",
+      "descriptor": {
+        "id": 0,
+        "version": 1,
+        "channel": 0,
+        "level": "None",
+        "opcode": 18,
+        "task": 0,
+        "keyword": 0
+      },
+      "fields": [
+        {
+          "name": "Status",
+          "datatype": "pointer",
+          "map": null
+        },
+        {
+          "name": "KeyHandle",
+          "datatype": "pointer",
+          "map": null
+        },
+        {
+          "name": "ElapsedTime",
+          "datatype": "long",
+          "map": null
+        },
+        {
+          "name": "Index",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "KeyName",
+          "datatype": "string",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "QueryMultipleValue",
+      "displayName": "QueryMultipleValue",
+      "descriptor": {
+        "id": 0,
+        "version": 1,
+        "channel": 0,
+        "level": "None",
+        "opcode": 19,
+        "task": 0,
+        "keyword": 0
+      },
+      "fields": [
+        {
+          "name": "Status",
+          "datatype": "pointer",
+          "map": null
+        },
+        {
+          "name": "KeyHandle",
+          "datatype": "pointer",
+          "map": null
+        },
+        {
+          "name": "ElapsedTime",
+          "datatype": "long",
+          "map": null
+        },
+        {
+          "name": "Index",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "KeyName",
+          "datatype": "string",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "SetInformation",
+      "displayName": "SetInformation",
+      "descriptor": {
+        "id": 0,
+        "version": 1,
+        "channel": 0,
+        "level": "None",
+        "opcode": 20,
+        "task": 0,
+        "keyword": 0
+      },
+      "fields": [
+        {
+          "name": "Status",
+          "datatype": "pointer",
+          "map": null
+        },
+        {
+          "name": "KeyHandle",
+          "datatype": "pointer",
+          "map": null
+        },
+        {
+          "name": "ElapsedTime",
+          "datatype": "long",
+          "map": null
+        },
+        {
+          "name": "Index",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "KeyName",
+          "datatype": "string",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "Flush",
+      "displayName": "Flush",
+      "descriptor": {
+        "id": 0,
+        "version": 1,
+        "channel": 0,
+        "level": "None",
+        "opcode": 21,
+        "task": 0,
+        "keyword": 0
+      },
+      "fields": [
+        {
+          "name": "Status",
+          "datatype": "pointer",
+          "map": null
+        },
+        {
+          "name": "KeyHandle",
+          "datatype": "pointer",
+          "map": null
+        },
+        {
+          "name": "ElapsedTime",
+          "datatype": "long",
+          "map": null
+        },
+        {
+          "name": "Index",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "KeyName",
+          "datatype": "string",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "RunDown",
+      "displayName": "RunDown",
+      "descriptor": {
+        "id": 0,
+        "version": 1,
+        "channel": 0,
+        "level": "None",
+        "opcode": 22,
+        "task": 0,
+        "keyword": 0
+      },
+      "fields": [
+        {
+          "name": "Status",
+          "datatype": "pointer",
+          "map": null
+        },
+        {
+          "name": "KeyHandle",
+          "datatype": "pointer",
+          "map": null
+        },
+        {
+          "name": "ElapsedTime",
+          "datatype": "long",
+          "map": null
+        },
+        {
+          "name": "Index",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "KeyName",
+          "datatype": "string",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "HiveDirty",
+      "displayName": "HiveDirty",
+      "descriptor": {
+        "id": 0,
+        "version": 2,
+        "channel": 0,
+        "level": "None",
+        "opcode": 40,
+        "task": 0,
+        "keyword": 0
+      },
+      "fields": [
+        {
+          "name": "Hive",
+          "datatype": "pointer",
+          "map": null
+        },
+        {
+          "name": "LinkPath",
+          "datatype": "string",
+          "map": null
+        },
+        {
+          "name": "DirtyReason",
+          "datatype": "uint",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "Config",
+      "displayName": "Config",
+      "descriptor": {
+        "id": 0,
+        "version": 2,
+        "channel": 0,
+        "level": "None",
+        "opcode": 35,
+        "task": 0,
+        "keyword": 0
+      },
+      "fields": [
+        {
+          "name": "CurrentControlSet",
+          "datatype": "uint",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "HiveDestroy",
+      "displayName": "HiveDestroy",
+      "descriptor": {
+        "id": 0,
+        "version": 2,
+        "channel": 0,
+        "level": "None",
+        "opcode": 37,
+        "task": 0,
+        "keyword": 0
+      },
+      "fields": [
+        {
+          "name": "Hive",
+          "datatype": "pointer",
+          "map": null
+        },
+        {
+          "name": "FileName",
+          "datatype": "string",
+          "map": null
+        },
+        {
+          "name": "Path",
+          "datatype": "string",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "Counters",
+      "displayName": "Counters",
+      "descriptor": {
+        "id": 0,
+        "version": 2,
+        "channel": 0,
+        "level": "None",
+        "opcode": 34,
+        "task": 0,
+        "keyword": 0
+      },
+      "fields": [
+        {
+          "name": "Counter1",
+          "datatype": "ulong",
+          "map": null
+        },
+        {
+          "name": "Counter2",
+          "datatype": "ulong",
+          "map": null
+        },
+        {
+          "name": "Counter3",
+          "datatype": "ulong",
+          "map": null
+        },
+        {
+          "name": "Counter4",
+          "datatype": "ulong",
+          "map": null
+        },
+        {
+          "name": "Counter5",
+          "datatype": "ulong",
+          "map": null
+        },
+        {
+          "name": "Counter6",
+          "datatype": "ulong",
+          "map": null
+        },
+        {
+          "name": "Counter7",
+          "datatype": "ulong",
+          "map": null
+        },
+        {
+          "name": "Counter8",
+          "datatype": "ulong",
+          "map": null
+        },
+        {
+          "name": "Counter9",
+          "datatype": "ulong",
+          "map": null
+        },
+        {
+          "name": "Counter10",
+          "datatype": "ulong",
+          "map": null
+        },
+        {
+          "name": "Counter11",
+          "datatype": "ulong",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "Create",
+      "displayName": "Create",
+      "descriptor": {
+        "id": 0,
+        "version": 2,
+        "channel": 0,
+        "level": "None",
+        "opcode": 10,
+        "task": 0,
+        "keyword": 0
+      },
+      "fields": [
+        {
+          "name": "InitialTime",
+          "datatype": "long",
+          "map": null
+        },
+        {
+          "name": "Status",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "Index",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "KeyHandle",
+          "datatype": "pointer",
+          "map": null
+        },
+        {
+          "name": "KeyName",
+          "datatype": "string",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "Open",
+      "displayName": "Open",
+      "descriptor": {
+        "id": 0,
+        "version": 2,
+        "channel": 0,
+        "level": "None",
+        "opcode": 11,
+        "task": 0,
+        "keyword": 0
+      },
+      "fields": [
+        {
+          "name": "InitialTime",
+          "datatype": "long",
+          "map": null
+        },
+        {
+          "name": "Status",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "Index",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "KeyHandle",
+          "datatype": "pointer",
+          "map": null
+        },
+        {
+          "name": "KeyName",
+          "datatype": "string",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "Delete",
+      "displayName": "Delete",
+      "descriptor": {
+        "id": 0,
+        "version": 2,
+        "channel": 0,
+        "level": "None",
+        "opcode": 12,
+        "task": 0,
+        "keyword": 0
+      },
+      "fields": [
+        {
+          "name": "InitialTime",
+          "datatype": "long",
+          "map": null
+        },
+        {
+          "name": "Status",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "Index",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "KeyHandle",
+          "datatype": "pointer",
+          "map": null
+        },
+        {
+          "name": "KeyName",
+          "datatype": "string",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "Query",
+      "displayName": "Query",
+      "descriptor": {
+        "id": 0,
+        "version": 2,
+        "channel": 0,
+        "level": "None",
+        "opcode": 13,
+        "task": 0,
+        "keyword": 0
+      },
+      "fields": [
+        {
+          "name": "InitialTime",
+          "datatype": "long",
+          "map": null
+        },
+        {
+          "name": "Status",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "Index",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "KeyHandle",
+          "datatype": "pointer",
+          "map": null
+        },
+        {
+          "name": "KeyName",
+          "datatype": "string",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "SetValue",
+      "displayName": "SetValue",
+      "descriptor": {
+        "id": 0,
+        "version": 2,
+        "channel": 0,
+        "level": "None",
+        "opcode": 14,
+        "task": 0,
+        "keyword": 0
+      },
+      "fields": [
+        {
+          "name": "InitialTime",
+          "datatype": "long",
+          "map": null
+        },
+        {
+          "name": "Status",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "Index",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "KeyHandle",
+          "datatype": "pointer",
+          "map": null
+        },
+        {
+          "name": "KeyName",
+          "datatype": "string",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "DeleteValue",
+      "displayName": "DeleteValue",
+      "descriptor": {
+        "id": 0,
+        "version": 2,
+        "channel": 0,
+        "level": "None",
+        "opcode": 15,
+        "task": 0,
+        "keyword": 0
+      },
+      "fields": [
+        {
+          "name": "InitialTime",
+          "datatype": "long",
+          "map": null
+        },
+        {
+          "name": "Status",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "Index",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "KeyHandle",
+          "datatype": "pointer",
+          "map": null
+        },
+        {
+          "name": "KeyName",
+          "datatype": "string",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "QueryValue",
+      "displayName": "QueryValue",
+      "descriptor": {
+        "id": 0,
+        "version": 2,
+        "channel": 0,
+        "level": "None",
+        "opcode": 16,
+        "task": 0,
+        "keyword": 0
+      },
+      "fields": [
+        {
+          "name": "InitialTime",
+          "datatype": "long",
+          "map": null
+        },
+        {
+          "name": "Status",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "Index",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "KeyHandle",
+          "datatype": "pointer",
+          "map": null
+        },
+        {
+          "name": "KeyName",
+          "datatype": "string",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "EnumerateKey",
+      "displayName": "EnumerateKey",
+      "descriptor": {
+        "id": 0,
+        "version": 2,
+        "channel": 0,
+        "level": "None",
+        "opcode": 17,
+        "task": 0,
+        "keyword": 0
+      },
+      "fields": [
+        {
+          "name": "InitialTime",
+          "datatype": "long",
+          "map": null
+        },
+        {
+          "name": "Status",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "Index",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "KeyHandle",
+          "datatype": "pointer",
+          "map": null
+        },
+        {
+          "name": "KeyName",
+          "datatype": "string",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "EnumerateValueKey",
+      "displayName": "EnumerateValueKey",
+      "descriptor": {
+        "id": 0,
+        "version": 2,
+        "channel": 0,
+        "level": "None",
+        "opcode": 18,
+        "task": 0,
+        "keyword": 0
+      },
+      "fields": [
+        {
+          "name": "InitialTime",
+          "datatype": "long",
+          "map": null
+        },
+        {
+          "name": "Status",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "Index",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "KeyHandle",
+          "datatype": "pointer",
+          "map": null
+        },
+        {
+          "name": "KeyName",
+          "datatype": "string",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "QueryMultipleValue",
+      "displayName": "QueryMultipleValue",
+      "descriptor": {
+        "id": 0,
+        "version": 2,
+        "channel": 0,
+        "level": "None",
+        "opcode": 19,
+        "task": 0,
+        "keyword": 0
+      },
+      "fields": [
+        {
+          "name": "InitialTime",
+          "datatype": "long",
+          "map": null
+        },
+        {
+          "name": "Status",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "Index",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "KeyHandle",
+          "datatype": "pointer",
+          "map": null
+        },
+        {
+          "name": "KeyName",
+          "datatype": "string",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "SetInformation",
+      "displayName": "SetInformation",
+      "descriptor": {
+        "id": 0,
+        "version": 2,
+        "channel": 0,
+        "level": "None",
+        "opcode": 20,
+        "task": 0,
+        "keyword": 0
+      },
+      "fields": [
+        {
+          "name": "InitialTime",
+          "datatype": "long",
+          "map": null
+        },
+        {
+          "name": "Status",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "Index",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "KeyHandle",
+          "datatype": "pointer",
+          "map": null
+        },
+        {
+          "name": "KeyName",
+          "datatype": "string",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "Flush",
+      "displayName": "Flush",
+      "descriptor": {
+        "id": 0,
+        "version": 2,
+        "channel": 0,
+        "level": "None",
+        "opcode": 21,
+        "task": 0,
+        "keyword": 0
+      },
+      "fields": [
+        {
+          "name": "InitialTime",
+          "datatype": "long",
+          "map": null
+        },
+        {
+          "name": "Status",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "Index",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "KeyHandle",
+          "datatype": "pointer",
+          "map": null
+        },
+        {
+          "name": "KeyName",
+          "datatype": "string",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "KCBCreate",
+      "displayName": "KCBCreate",
+      "descriptor": {
+        "id": 0,
+        "version": 2,
+        "channel": 0,
+        "level": "None",
+        "opcode": 22,
+        "task": 0,
+        "keyword": 0
+      },
+      "fields": [
+        {
+          "name": "InitialTime",
+          "datatype": "long",
+          "map": null
+        },
+        {
+          "name": "Status",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "Index",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "KeyHandle",
+          "datatype": "pointer",
+          "map": null
+        },
+        {
+          "name": "KeyName",
+          "datatype": "string",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "KCBDelete",
+      "displayName": "KCBDelete",
+      "descriptor": {
+        "id": 0,
+        "version": 2,
+        "channel": 0,
+        "level": "None",
+        "opcode": 23,
+        "task": 0,
+        "keyword": 0
+      },
+      "fields": [
+        {
+          "name": "InitialTime",
+          "datatype": "long",
+          "map": null
+        },
+        {
+          "name": "Status",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "Index",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "KeyHandle",
+          "datatype": "pointer",
+          "map": null
+        },
+        {
+          "name": "KeyName",
+          "datatype": "string",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "KCBRundownBegin",
+      "displayName": "KCBRundownBegin",
+      "descriptor": {
+        "id": 0,
+        "version": 2,
+        "channel": 0,
+        "level": "None",
+        "opcode": 24,
+        "task": 0,
+        "keyword": 0
+      },
+      "fields": [
+        {
+          "name": "InitialTime",
+          "datatype": "long",
+          "map": null
+        },
+        {
+          "name": "Status",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "Index",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "KeyHandle",
+          "datatype": "pointer",
+          "map": null
+        },
+        {
+          "name": "KeyName",
+          "datatype": "string",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "KCBRundownEnd",
+      "displayName": "KCBRundownEnd",
+      "descriptor": {
+        "id": 0,
+        "version": 2,
+        "channel": 0,
+        "level": "None",
+        "opcode": 25,
+        "task": 0,
+        "keyword": 0
+      },
+      "fields": [
+        {
+          "name": "InitialTime",
+          "datatype": "long",
+          "map": null
+        },
+        {
+          "name": "Status",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "Index",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "KeyHandle",
+          "datatype": "pointer",
+          "map": null
+        },
+        {
+          "name": "KeyName",
+          "datatype": "string",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "Virtualize",
+      "displayName": "Virtualize",
+      "descriptor": {
+        "id": 0,
+        "version": 2,
+        "channel": 0,
+        "level": "None",
+        "opcode": 26,
+        "task": 0,
+        "keyword": 0
+      },
+      "fields": [
+        {
+          "name": "InitialTime",
+          "datatype": "long",
+          "map": null
+        },
+        {
+          "name": "Status",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "Index",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "KeyHandle",
+          "datatype": "pointer",
+          "map": null
+        },
+        {
+          "name": "KeyName",
+          "datatype": "string",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "Close",
+      "displayName": "Close",
+      "descriptor": {
+        "id": 0,
+        "version": 2,
+        "channel": 0,
+        "level": "None",
+        "opcode": 27,
+        "task": 0,
+        "keyword": 0
+      },
+      "fields": [
+        {
+          "name": "InitialTime",
+          "datatype": "long",
+          "map": null
+        },
+        {
+          "name": "Status",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "Index",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "KeyHandle",
+          "datatype": "pointer",
+          "map": null
+        },
+        {
+          "name": "KeyName",
+          "datatype": "string",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "SetSecurity",
+      "displayName": "SetSecurity",
+      "descriptor": {
+        "id": 0,
+        "version": 2,
+        "channel": 0,
+        "level": "None",
+        "opcode": 28,
+        "task": 0,
+        "keyword": 0
+      },
+      "fields": [
+        {
+          "name": "InitialTime",
+          "datatype": "long",
+          "map": null
+        },
+        {
+          "name": "Status",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "Index",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "KeyHandle",
+          "datatype": "pointer",
+          "map": null
+        },
+        {
+          "name": "KeyName",
+          "datatype": "string",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "QuerySecurity",
+      "displayName": "QuerySecurity",
+      "descriptor": {
+        "id": 0,
+        "version": 2,
+        "channel": 0,
+        "level": "None",
+        "opcode": 29,
+        "task": 0,
+        "keyword": 0
+      },
+      "fields": [
+        {
+          "name": "InitialTime",
+          "datatype": "long",
+          "map": null
+        },
+        {
+          "name": "Status",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "Index",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "KeyHandle",
+          "datatype": "pointer",
+          "map": null
+        },
+        {
+          "name": "KeyName",
+          "datatype": "string",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "HiveInit",
+      "displayName": "HiveInit",
+      "descriptor": {
+        "id": 0,
+        "version": 2,
+        "channel": 0,
+        "level": "None",
+        "opcode": 36,
+        "task": 0,
+        "keyword": 0
+      },
+      "fields": [
+        {
+          "name": "Hive",
+          "datatype": "pointer",
+          "map": null
+        },
+        {
+          "name": "OperationType",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "PoolTag",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "Size",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "FileName",
+          "datatype": "string",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "TxRCommit",
+      "displayName": "TxRCommit",
+      "descriptor": {
+        "id": 0,
+        "version": 2,
+        "channel": 0,
+        "level": "None",
+        "opcode": 30,
+        "task": 0,
+        "keyword": 0
+      },
+      "fields": [
+        {
+          "name": "TxrGUID",
+          "datatype": "guid",
+          "map": null
+        },
+        {
+          "name": "Status",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "UowCount",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "OperationTime",
+          "datatype": "ulong",
+          "map": null
+        },
+        {
+          "name": "Hive",
+          "datatype": "string",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "TxRPrepare",
+      "displayName": "TxRPrepare",
+      "descriptor": {
+        "id": 0,
+        "version": 2,
+        "channel": 0,
+        "level": "None",
+        "opcode": 31,
+        "task": 0,
+        "keyword": 0
+      },
+      "fields": [
+        {
+          "name": "TxrGUID",
+          "datatype": "guid",
+          "map": null
+        },
+        {
+          "name": "Status",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "UowCount",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "OperationTime",
+          "datatype": "ulong",
+          "map": null
+        },
+        {
+          "name": "Hive",
+          "datatype": "string",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "TxRRollback",
+      "displayName": "TxRRollback",
+      "descriptor": {
+        "id": 0,
+        "version": 2,
+        "channel": 0,
+        "level": "None",
+        "opcode": 32,
+        "task": 0,
+        "keyword": 0
+      },
+      "fields": [
+        {
+          "name": "TxrGUID",
+          "datatype": "guid",
+          "map": null
+        },
+        {
+          "name": "Status",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "UowCount",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "OperationTime",
+          "datatype": "ulong",
+          "map": null
+        },
+        {
+          "name": "Hive",
+          "datatype": "string",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "HiveDCEnd",
+      "displayName": "HiveDCEnd",
+      "descriptor": {
+        "id": 0,
+        "version": 2,
+        "channel": 0,
+        "level": "None",
+        "opcode": 39,
+        "task": 0,
+        "keyword": 0
+      },
+      "fields": [
+        {
+          "name": "Size",
+          "datatype": "ulong",
+          "map": null
+        },
+        {
+          "name": "Hive",
+          "datatype": "pointer",
+          "map": null
+        },
+        {
+          "name": "LoadedKeyCount",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "FileName",
+          "datatype": "string",
+          "map": null
+        },
+        {
+          "name": "LinkPath",
+          "datatype": "string",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "ChangeNotify",
+      "displayName": "ChangeNotify",
+      "descriptor": {
+        "id": 0,
+        "version": 2,
+        "channel": 0,
+        "level": "None",
+        "opcode": 48,
+        "task": 0,
+        "keyword": 0
+      },
+      "fields": [
+        {
+          "name": "Notification",
+          "datatype": "pointer",
+          "map": null
+        },
+        {
+          "name": "KeyHandle",
+          "datatype": "pointer",
+          "map": null
+        },
+        {
+          "name": "Type",
+          "datatype": "byte",
+          "map": null
+        },
+        {
+          "name": "WatchSubtree",
+          "datatype": "byte",
+          "map": null
+        },
+        {
+          "name": "Primary",
+          "datatype": "byte",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "HiveLink",
+      "displayName": "HiveLink",
+      "descriptor": {
+        "id": 0,
+        "version": 2,
+        "channel": 0,
+        "level": "None",
+        "opcode": 38,
+        "task": 0,
+        "keyword": 0
+      },
+      "fields": [
+        {
+          "name": "Hive",
+          "datatype": "pointer",
+          "map": null
+        },
+        {
+          "name": "Path",
+          "datatype": "string",
+          "map": null
+        }
+      ]
+    }
+  ],
+  "tasks": {},
+  "opcodes": {
+    "10": "Create",
+    "11": "Open",
+    "12": "Delete",
+    "13": "Query",
+    "14": "SetValue",
+    "15": "DeleteValue",
+    "16": "QueryValue",
+    "17": "EnumerateKey",
+    "18": "EnumerateValueKey",
+    "19": "QueryMultipleValue",
+    "20": "SetInformation",
+    "21": "Flush",
+    "22": "RunDown",
+    "23": "KCBDelete",
+    "24": "KCBRundownBegin",
+    "25": "KCBRundownEnd",
+    "26": "Virtualize",
+    "27": "Close",
+    "28": "SetSecurity",
+    "29": "QuerySecurity",
+    "30": "TxRCommit",
+    "31": "TxRPrepare",
+    "32": "TxRRollback",
+    "34": "Counters",
+    "35": "Config",
+    "36": "HiveInit",
+    "37": "HiveDestroy",
+    "38": "HiveLink",
+    "39": "HiveDCEnd",
+    "40": "HiveDirty",
+    "48": "ChangeNotify"
+  },
+  "keywords": {},
+  "maps": [],
+  "structs": []
+}

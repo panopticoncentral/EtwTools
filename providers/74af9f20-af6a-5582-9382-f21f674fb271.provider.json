@@ -1,5 +1,5 @@
 {
-  "name": "ApplicationInsightsCore",
+  "name": "MicrosoftApplicationInsightsCore",
   "displayName": "Microsoft-ApplicationInsights-Core",
   "id": "74af9f20-af6a-5582-9382-f21f674fb271",
   "events": [

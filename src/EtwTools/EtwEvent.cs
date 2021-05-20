@@ -348,6 +348,72 @@ namespace EtwTools
             return true;
         }
 
+        internal SecurityIdentifier GetWbemSid(int offset)
+        {
+            if (!RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
+            {
+                throw new InvalidOperationException();
+            }
+
+            fixed (byte* buffer = Data)
+            {
+                return new((nint)(buffer + (AddressSize * 2)));
+            }
+        }
+
+        internal int AnsiStringLength(int offset)
+        {
+            var start = offset;
+            while ((offset < Data.Length) && (Data[offset] != 0x00))
+            {
+                offset++;
+            }
+            offset++;
+
+            return offset - start;
+        }
+
+        internal int AnsiStringArrayLength(int offset, uint count)
+        {
+            var start = offset;
+
+            for (var i = 0; i < count; i++)
+            {
+                offset += AnsiStringLength(offset);
+            }
+
+            return offset - start;
+        }
+
+        internal int UnicodeStringLength(int offset)
+        {
+            var start = offset;
+            while ((offset < Data.Length) && ((Data[offset] != 0x00) || (Data[offset + 1] != 0x00)))
+            {
+                offset += 2;
+            }
+            offset += 2;
+
+            return offset - start;
+        }
+
+        internal int UnicodeStringArrayLength(int offset, uint count)
+        {
+            var start = offset;
+
+            for (var i = 0; i < count; i++)
+            {
+                offset += UnicodeStringLength(offset);
+            }
+
+            return offset - start;
+        }
+
+        internal int GetWbemSidLength(int offset) =>
+            !RuntimeInformation.IsOSPlatform(OSPlatform.Windows)
+                ? throw new InvalidOperationException()
+                : GetWbemSid(offset).BinaryLength + (AddressSize * 2);
+
         /// <summary>
         /// Relationship information for an event.
         /// </summary>
@@ -526,18 +592,6 @@ namespace EtwTools
                     _index = 0;
                 }
 
-                internal static int StringLength(Span<byte> span, int offset)
-                {
-                    var start = offset;
-                    while ((offset < span.Length) && ((span[offset] != 0x00) || (span[offset + 1] != 0x00)))
-                    {
-                        offset += 2;
-                    }
-                    offset += 2;
-
-                    return offset - start;
-                }
-
                 /// <summary>
                 /// Moves to the next address.
                 /// </summary>
@@ -551,7 +605,7 @@ namespace EtwTools
                         return true;
                     }
 
-                    _offset += StringLength(_enumerable._event.Data, _offset);
+                    _offset += _enumerable._event.UnicodeStringLength(_offset);
                     _index++;
                     return (_offset < _enumerable._event.Data.Length) && (_index <= _enumerable._count);
                 }
@@ -608,18 +662,6 @@ namespace EtwTools
                     _index = 0;
                 }
 
-                internal static int StringLength(Span<byte> span, int offset)
-                {
-                    var start = offset;
-                    while ((offset < span.Length) && (span[offset] != 0x00))
-                    {
-                        offset++;
-                    }
-                    offset++;
-
-                    return offset - start;
-                }
-
                 /// <summary>
                 /// Moves to the next address.
                 /// </summary>
@@ -633,7 +675,7 @@ namespace EtwTools
                         return true;
                     }
 
-                    _offset += StringLength(_enumerable._event.Data, _offset);
+                    _offset += _enumerable._event.AnsiStringLength(_offset);
                     _index++;
                     return (_offset < _enumerable._event.Data.Length) && (_index <= _enumerable._count);
                 }

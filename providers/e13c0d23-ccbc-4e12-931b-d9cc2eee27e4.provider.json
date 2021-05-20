@@ -1,5 +1,5 @@
 {
-  "name": "DotnetRuntime",
+  "name": "MicrosoftWindowsDotNETRuntime",
   "displayName": "Microsoft-Windows-DotNETRuntime",
   "id": "e13c0d23-ccbc-4e12-931b-d9cc2eee27e4",
   "events": [

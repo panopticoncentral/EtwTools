@@ -1,6 +1,9 @@
 using System;
 
+#pragma warning disable IDE0079 // Remove unnecessary suppression
 #pragma warning disable IDE0004 // Remove Unnecessary Cast
+#pragma warning disable IDE1006 // Naming Styles
+#pragma warning disable CA1416 // Validate platform compatibility
 #pragma warning disable CA1707 // Identifiers should not contain underscores
 #pragma warning disable CA1720 // Identifier contains type name
 
@@ -9,7 +12,7 @@ namespace EtwTools
     /// <summary>
     /// Provider for System.Threading.Tasks.TplEventSource (2e5dba47-a3d2-4d16-8ee0-6671ffdcd7b5)
     /// </summary>
-    public sealed class TplEventSourceProvider
+    public sealed class SystemThreadingTasksTplEventSourceProvider
     {
         /// <summary>s
         /// Provider ID.
@@ -137,7 +140,7 @@ namespace EtwTools
         }
 
         /// <summary>
-        /// Keywords supported by TplEventSource.
+        /// Keywords supported by SystemThreadingTasksTplEventSource.
         /// </summary>
         [Flags]
         public enum Keywords : ulong
@@ -2707,7 +2710,7 @@ namespace EtwTools
                     {
                         if (_offset_RelatedContext == -1)
                         {
-                            _offset_RelatedContext = Offset_OperationName + EtwEvent.UnicodeStringEnumerable.UnicodeStringEnumerator.StringLength(_etwEvent.Data, Offset_OperationName);
+                            _offset_RelatedContext = Offset_OperationName + _etwEvent.UnicodeStringLength(Offset_OperationName);
                         }
 
                         return _offset_RelatedContext;
@@ -3733,7 +3736,7 @@ namespace EtwTools
                     {
                         if (_offset_Message == -1)
                         {
-                            _offset_Message = Offset_Facility + EtwEvent.UnicodeStringEnumerable.UnicodeStringEnumerator.StringLength(_etwEvent.Data, Offset_Facility);
+                            _offset_Message = Offset_Facility + _etwEvent.UnicodeStringLength(Offset_Facility);
                         }
 
                         return _offset_Message;
@@ -3864,7 +3867,7 @@ namespace EtwTools
                     {
                         if (_offset_Message == -1)
                         {
-                            _offset_Message = Offset_Facility + EtwEvent.UnicodeStringEnumerable.UnicodeStringEnumerator.StringLength(_etwEvent.Data, Offset_Facility);
+                            _offset_Message = Offset_Facility + _etwEvent.UnicodeStringLength(Offset_Facility);
                         }
 
                         return _offset_Message;
@@ -3877,7 +3880,7 @@ namespace EtwTools
                     {
                         if (_offset_Value1 == -1)
                         {
-                            _offset_Value1 = Offset_Message + EtwEvent.UnicodeStringEnumerable.UnicodeStringEnumerator.StringLength(_etwEvent.Data, Offset_Message);
+                            _offset_Value1 = Offset_Message + _etwEvent.UnicodeStringLength(Offset_Message);
                         }
 
                         return _offset_Value1;

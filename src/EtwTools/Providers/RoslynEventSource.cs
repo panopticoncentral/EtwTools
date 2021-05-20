@@ -1,6 +1,9 @@
 using System;
 
+#pragma warning disable IDE0079 // Remove unnecessary suppression
 #pragma warning disable IDE0004 // Remove Unnecessary Cast
+#pragma warning disable IDE1006 // Naming Styles
+#pragma warning disable CA1416 // Validate platform compatibility
 #pragma warning disable CA1707 // Identifiers should not contain underscores
 #pragma warning disable CA1720 // Identifier contains type name
 
@@ -285,7 +288,7 @@ namespace EtwTools
                     {
                         if (_offset_FunctionId == -1)
                         {
-                            _offset_FunctionId = Offset_Message + EtwEvent.UnicodeStringEnumerable.UnicodeStringEnumerator.StringLength(_etwEvent.Data, Offset_Message);
+                            _offset_FunctionId = Offset_Message + _etwEvent.UnicodeStringLength(Offset_Message);
                         }
 
                         return _offset_FunctionId;
@@ -416,7 +419,7 @@ namespace EtwTools
                     {
                         if (_offset_FunctionId == -1)
                         {
-                            _offset_FunctionId = Offset_Message + EtwEvent.UnicodeStringEnumerable.UnicodeStringEnumerator.StringLength(_etwEvent.Data, Offset_Message);
+                            _offset_FunctionId = Offset_Message + _etwEvent.UnicodeStringLength(Offset_Message);
                         }
 
                         return _offset_FunctionId;

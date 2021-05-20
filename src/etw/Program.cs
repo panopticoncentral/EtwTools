@@ -501,6 +501,7 @@ string GetDatatype(EtwPropertyInfo p, Dictionary<string, Struct> providerStructs
         EtwInputType.Guid => "guid",
         EtwInputType.Pointer => "pointer",
         EtwInputType.SizeT => "pointer",
+        EtwInputType.WbemSid => "wbemsid",
         _ => "unknown"
     };
 
@@ -1139,35 +1140,15 @@ static string CreateProviderStructs(Provider provider, Dictionary<string, Struct
     return builder.ToString();
 }
 
-static string ConverterMethod(Field f, string location, Dictionary<string, Struct> structs) =>
-    $@"{(f.Map == null ? string.Empty : $"({f.Map})")}{f.Datatype switch
+static string ReturnType(string type) =>
+    type switch
     {
-        "byte" => location,
-        "sbyte" => $"(sbyte){location}",
-        "bool" => $"{location} != 0",
-        "ushort" => $"BitConverter.ToUInt16({location})",
-        "short" => $"BitConverter.ToInt16({location})",
-        "uint" => $"BitConverter.ToUInt32({location})",
-        "int" => $"BitConverter.ToInt32({location})",
-        "ulong" => $"BitConverter.ToUInt64({location})",
-        "long" => $"BitConverter.ToInt64({location})",
-        "char" => $"BitConverter.ToChar({location})",
-        "double" => $"BitConverter.ToDouble({location})",
-        "string" => $"System.Text.Encoding.Unicode.GetString({location})",
-        "ansistring" => $"System.Text.Encoding.ASCII.GetString({location})",
-        "pointer" => $"_etwEvent.AddressSize == 4 ? BitConverter.ToUInt32({location}) : BitConverter.ToUInt64({location})",
-        "guid" => $"new({location})",
-        _ => "unknown",
-    }}";
-
-static string ReturnType(Field f) =>
-    f.Map ?? f.Datatype switch
-    {
-        "bool" or "byte" or "sbyte" or "ushort" or "short" or "uint" or "int" or "ulong" or "long" or "char" => f.Datatype,
+        "bool" or "byte" or "sbyte" or "ushort" or "short" or "uint" or "int" or "ulong" or "long" or "char" => type,
         "string" or "ansistring" => "string",
         "guid" => "Guid",
+        "wbemsid" => "System.Security.Principal.SecurityIdentifier",
         "pointer" => "ulong",
-        _ => f.Datatype
+        _ => type
     };
 
 static string VariableSize(string type, string offset, Dictionary<string, Struct> structs)
@@ -1184,15 +1165,21 @@ static string VariableSize(string type, string offset, Dictionary<string, Struct
     if (count != null)
     {
         var size = Size(type, structs);
-        return size != -1 ? $"({size} * (int){count})" : "unknown";
+        return size != -1 ? $"({size} * (int){count})" : type switch
+        {
+            "ansistring" => $"_etwEvent.AnsiStringArrayLength({offset}, {count})",
+            "string" => $"_etwEvent.UnicodeStringArrayLength({offset}, {count})",
+            _ => "unknown"
+        };
     }
     else
     {
         return type switch
         {
             "pointer" => "_etwEvent.AddressSize",
-            "ansistring" => $"EtwEvent.AnsiStringEnumerable.AnsiStringEnumerator.StringLength(_etwEvent.Data, {offset})",
-            "string" => $"EtwEvent.UnicodeStringEnumerable.UnicodeStringEnumerator.StringLength(_etwEvent.Data, {offset})",
+            "ansistring" => $"_etwEvent.AnsiStringLength({offset})",
+            "string" => $"_etwEvent.UnicodeStringLength({offset})",
+            "wbemsid" => $"_etwEvent.GetWbemSidLength({offset})",
             _ => "unknown"
         };
     }
@@ -1290,7 +1277,7 @@ static void CreateEventField(int indent, IReadOnlyList<Field> fields, int i, Str
 {indentString}/// <summary>
 {indentString}/// Retrieves the {name} field.
 {indentString}/// </summary>
-{indentString}public EtwEvent.StructEnumerable<{type}> {name} => new(_etwEvent, {fieldOffsetName}{(count == "..." ? string.Empty : $", {count}")});",
+{indentString}public EtwEvent.StructEnumerable<{ReturnType(type)}> {name} => new(_etwEvent, {fieldOffsetName}{(count == "..." ? string.Empty : $", {count}")});",
             _ => $@"
 
 {indentString}/// <summary>
@@ -1301,13 +1288,33 @@ static void CreateEventField(int indent, IReadOnlyList<Field> fields, int i, Str
     }
     else
     {
-        var location = $"_etwEvent.Data[{fieldOffsetName}{(Size(type, structs) == 1 ? string.Empty : $"..")}]";
+        var conversion = $@"{(field.Map == null ? string.Empty : $"({field.Map})")}{field.Datatype switch
+        {
+            "byte" => $"_etwEvent.Data[{fieldOffsetName}]",
+            "sbyte" => $"(sbyte)_etwEvent.Data[{fieldOffsetName}]",
+            "bool" => $"_etwEvent.Data[{fieldOffsetName}] != 0",
+            "ushort" => $"BitConverter.ToUInt16(_etwEvent.Data[{fieldOffsetName}..])",
+            "short" => $"BitConverter.ToInt16(_etwEvent.Data[{fieldOffsetName}..])",
+            "uint" => $"BitConverter.ToUInt32(_etwEvent.Data[{fieldOffsetName}..])",
+            "int" => $"BitConverter.ToInt32(_etwEvent.Data[{fieldOffsetName}..])",
+            "ulong" => $"BitConverter.ToUInt64(_etwEvent.Data[{fieldOffsetName}..])",
+            "long" => $"BitConverter.ToInt64(_etwEvent.Data[{fieldOffsetName}..])",
+            "char" => $"BitConverter.ToChar(_etwEvent.Data[{fieldOffsetName}..])",
+            "double" => $"BitConverter.ToDouble(_etwEvent.Data[{fieldOffsetName}..])",
+            "string" => $"System.Text.Encoding.Unicode.GetString(_etwEvent.Data[{fieldOffsetName}..])",
+            "ansistring" => $"System.Text.Encoding.ASCII.GetString(_etwEvent.Data[{fieldOffsetName}..])",
+            "pointer" => $"_etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[{fieldOffsetName}..]) : BitConverter.ToUInt64(_etwEvent.Data[{fieldOffsetName}..])",
+            "wbemsid" => $"_etwEvent.GetWbemSid({fieldOffsetName})",
+            "guid" => $"new(_etwEvent.Data[{fieldOffsetName}..])",
+            _ => "unknown",
+        }}";
+
         _ = builder.Append($@"
 
 {indentString}/// <summary>
 {indentString}/// Retrieves the {name} field.
 {indentString}/// </summary>
-{indentString}public {ReturnType(field)} {name} => {ConverterMethod(field, location, structs)};");
+{indentString}public {field.Map ?? ReturnType(field.Datatype)} {name} => {conversion};");
     }
 }
 
@@ -1551,7 +1558,10 @@ static void CreateProvider(Provider provider)
 
     var builder = new StringBuilder(@$"using System;
 
+#pragma warning disable IDE0079 // Remove unnecessary suppression
 #pragma warning disable IDE0004 // Remove Unnecessary Cast
+#pragma warning disable IDE1006 // Naming Styles
+#pragma warning disable CA1416 // Validate platform compatibility
 #pragma warning disable CA1707 // Identifiers should not contain underscores
 #pragma warning disable CA1720 // Identifier contains type name
 

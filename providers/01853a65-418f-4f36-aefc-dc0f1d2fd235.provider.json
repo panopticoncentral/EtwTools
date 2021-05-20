@@ -1,0 +1,3009 @@
+{
+  "name": "KernelSystemConfig",
+  "displayName": "Kernel-SystemConfig",
+  "id": "01853a65-418f-4f36-aefc-dc0f1d2fd235",
+  "events": [
+    {
+      "name": "CPU",
+      "displayName": "CPU",
+      "descriptor": {
+        "id": 0,
+        "version": 0,
+        "channel": 0,
+        "level": "None",
+        "opcode": 10,
+        "task": 0,
+        "keyword": 0
+      },
+      "fields": [
+        {
+          "name": "MHz",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "NumberOfProcessors",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "MemSize",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "PageSize",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "AllocationGranularity",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "ComputerName",
+          "datatype": "char",
+          "map": null
+        },
+        {
+          "name": "DomainName",
+          "datatype": "char",
+          "map": null
+        },
+        {
+          "name": "HyperThreadingFlag",
+          "datatype": "pointer",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "PhyDisk",
+      "displayName": "PhyDisk",
+      "descriptor": {
+        "id": 0,
+        "version": 0,
+        "channel": 0,
+        "level": "None",
+        "opcode": 11,
+        "task": 0,
+        "keyword": 0
+      },
+      "fields": [
+        {
+          "name": "DiskNumber",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "BytesPerSector",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "SectorsPerTrack",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "TracksPerCylinder",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "Cylinders",
+          "datatype": "ulong",
+          "map": null
+        },
+        {
+          "name": "SCSIPort",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "SCSIPath",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "SCSITarget",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "SCSILun",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "Manufacturer",
+          "datatype": "char",
+          "map": null
+        },
+        {
+          "name": "PartitionCount",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "WriteCacheEnabled",
+          "datatype": "byte",
+          "map": null
+        },
+        {
+          "name": "Pad",
+          "datatype": "byte",
+          "map": null
+        },
+        {
+          "name": "BootDriveLetter",
+          "datatype": "char",
+          "map": null
+        },
+        {
+          "name": "Spare",
+          "datatype": "char",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "LogDisk",
+      "displayName": "LogDisk",
+      "descriptor": {
+        "id": 0,
+        "version": 0,
+        "channel": 0,
+        "level": "None",
+        "opcode": 12,
+        "task": 0,
+        "keyword": 0
+      },
+      "fields": [
+        {
+          "name": "StartOffset",
+          "datatype": "ulong",
+          "map": null
+        },
+        {
+          "name": "PartitionSize",
+          "datatype": "ulong",
+          "map": null
+        },
+        {
+          "name": "DiskNumber",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "Size",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "DriveType",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "DriveLetterString",
+          "datatype": "char",
+          "map": null
+        },
+        {
+          "name": "Pad1",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "PartitionNumber",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "SectorsPerCluster",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "BytesPerSector",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "Pad2",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "NumberOfFreeClusters",
+          "datatype": "long",
+          "map": null
+        },
+        {
+          "name": "TotalNumberOfClusters",
+          "datatype": "long",
+          "map": null
+        },
+        {
+          "name": "FileSystem",
+          "datatype": "char",
+          "map": null
+        },
+        {
+          "name": "VolumeExt",
+          "datatype": "uint",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "NIC",
+      "displayName": "NIC",
+      "descriptor": {
+        "id": 0,
+        "version": 0,
+        "channel": 0,
+        "level": "None",
+        "opcode": 13,
+        "task": 0,
+        "keyword": 0
+      },
+      "fields": [
+        {
+          "name": "NICName",
+          "datatype": "char",
+          "map": null
+        },
+        {
+          "name": "Index",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "PhysicalAddrLen",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "PhysicalAddr",
+          "datatype": "char",
+          "map": null
+        },
+        {
+          "name": "Size",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "IpAddress",
+          "datatype": "int",
+          "map": null
+        },
+        {
+          "name": "SubnetMask",
+          "datatype": "int",
+          "map": null
+        },
+        {
+          "name": "DhcpServer",
+          "datatype": "int",
+          "map": null
+        },
+        {
+          "name": "Gateway",
+          "datatype": "int",
+          "map": null
+        },
+        {
+          "name": "PrimaryWinsServer",
+          "datatype": "int",
+          "map": null
+        },
+        {
+          "name": "SecondaryWinsServer",
+          "datatype": "int",
+          "map": null
+        },
+        {
+          "name": "DnsServer1",
+          "datatype": "int",
+          "map": null
+        },
+        {
+          "name": "DnsServer2",
+          "datatype": "int",
+          "map": null
+        },
+        {
+          "name": "DnsServer3",
+          "datatype": "int",
+          "map": null
+        },
+        {
+          "name": "DnsServer4",
+          "datatype": "int",
+          "map": null
+        },
+        {
+          "name": "Data",
+          "datatype": "uint",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "Video",
+      "displayName": "Video",
+      "descriptor": {
+        "id": 0,
+        "version": 0,
+        "channel": 0,
+        "level": "None",
+        "opcode": 14,
+        "task": 0,
+        "keyword": 0
+      },
+      "fields": [
+        {
+          "name": "MemorySize",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "XResolution",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "YResolution",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "BitsPerPixel",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "VRefresh",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "ChipType",
+          "datatype": "char",
+          "map": null
+        },
+        {
+          "name": "DACType",
+          "datatype": "char",
+          "map": null
+        },
+        {
+          "name": "AdapterString",
+          "datatype": "char",
+          "map": null
+        },
+        {
+          "name": "BiosString",
+          "datatype": "char",
+          "map": null
+        },
+        {
+          "name": "DeviceId",
+          "datatype": "char",
+          "map": null
+        },
+        {
+          "name": "StateFlags",
+          "datatype": "uint",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "Services",
+      "displayName": "Services",
+      "descriptor": {
+        "id": 0,
+        "version": 0,
+        "channel": 0,
+        "level": "None",
+        "opcode": 15,
+        "task": 0,
+        "keyword": 0
+      },
+      "fields": [
+        {
+          "name": "ServiceName",
+          "datatype": "char",
+          "map": null
+        },
+        {
+          "name": "DisplayName",
+          "datatype": "char",
+          "map": null
+        },
+        {
+          "name": "ProcessName",
+          "datatype": "char",
+          "map": null
+        },
+        {
+          "name": "ProcessId",
+          "datatype": "uint",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "Power",
+      "displayName": "Power",
+      "descriptor": {
+        "id": 0,
+        "version": 0,
+        "channel": 0,
+        "level": "None",
+        "opcode": 16,
+        "task": 0,
+        "keyword": 0
+      },
+      "fields": [
+        {
+          "name": "S1",
+          "datatype": "byte",
+          "map": null
+        },
+        {
+          "name": "S2",
+          "datatype": "byte",
+          "map": null
+        },
+        {
+          "name": "S3",
+          "datatype": "byte",
+          "map": null
+        },
+        {
+          "name": "S4",
+          "datatype": "byte",
+          "map": null
+        },
+        {
+          "name": "S5",
+          "datatype": "byte",
+          "map": null
+        },
+        {
+          "name": "Pad1",
+          "datatype": "byte",
+          "map": null
+        },
+        {
+          "name": "Pad2",
+          "datatype": "byte",
+          "map": null
+        },
+        {
+          "name": "Pad3",
+          "datatype": "byte",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "IRQ",
+      "displayName": "IRQ",
+      "descriptor": {
+        "id": 0,
+        "version": 0,
+        "channel": 0,
+        "level": "None",
+        "opcode": 21,
+        "task": 0,
+        "keyword": 0
+      },
+      "fields": [
+        {
+          "name": "IRQAffinity",
+          "datatype": "ulong",
+          "map": null
+        },
+        {
+          "name": "IRQNum",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "DeviceDescriptionLen",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "DeviceDescription",
+          "datatype": "string",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "PnP",
+      "displayName": "PnP",
+      "descriptor": {
+        "id": 0,
+        "version": 0,
+        "channel": 0,
+        "level": "None",
+        "opcode": 22,
+        "task": 0,
+        "keyword": 0
+      },
+      "fields": [
+        {
+          "name": "IDLength",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "DescriptionLength",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "FriendlyNameLength",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "DeviceID",
+          "datatype": "string",
+          "map": null
+        },
+        {
+          "name": "DeviceDescription",
+          "datatype": "string",
+          "map": null
+        },
+        {
+          "name": "FriendlyName",
+          "datatype": "string",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "CPU",
+      "displayName": "CPU",
+      "descriptor": {
+        "id": 0,
+        "version": 1,
+        "channel": 0,
+        "level": "None",
+        "opcode": 10,
+        "task": 0,
+        "keyword": 0
+      },
+      "fields": [
+        {
+          "name": "MHz",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "NumberOfProcessors",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "MemSize",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "PageSize",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "AllocationGranularity",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "ComputerName",
+          "datatype": "char",
+          "map": null
+        },
+        {
+          "name": "DomainName",
+          "datatype": "char",
+          "map": null
+        },
+        {
+          "name": "HyperThreadingFlag",
+          "datatype": "pointer",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "PhyDisk",
+      "displayName": "PhyDisk",
+      "descriptor": {
+        "id": 0,
+        "version": 1,
+        "channel": 0,
+        "level": "None",
+        "opcode": 11,
+        "task": 0,
+        "keyword": 0
+      },
+      "fields": [
+        {
+          "name": "DiskNumber",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "BytesPerSector",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "SectorsPerTrack",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "TracksPerCylinder",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "Cylinders",
+          "datatype": "ulong",
+          "map": null
+        },
+        {
+          "name": "SCSIPort",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "SCSIPath",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "SCSITarget",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "SCSILun",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "Manufacturer",
+          "datatype": "char",
+          "map": null
+        },
+        {
+          "name": "PartitionCount",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "WriteCacheEnabled",
+          "datatype": "byte",
+          "map": null
+        },
+        {
+          "name": "Pad",
+          "datatype": "byte",
+          "map": null
+        },
+        {
+          "name": "BootDriveLetter",
+          "datatype": "char",
+          "map": null
+        },
+        {
+          "name": "Spare",
+          "datatype": "char",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "LogDisk",
+      "displayName": "LogDisk",
+      "descriptor": {
+        "id": 0,
+        "version": 1,
+        "channel": 0,
+        "level": "None",
+        "opcode": 12,
+        "task": 0,
+        "keyword": 0
+      },
+      "fields": [
+        {
+          "name": "StartOffset",
+          "datatype": "ulong",
+          "map": null
+        },
+        {
+          "name": "PartitionSize",
+          "datatype": "ulong",
+          "map": null
+        },
+        {
+          "name": "DiskNumber",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "Size",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "DriveType",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "DriveLetterString",
+          "datatype": "char",
+          "map": null
+        },
+        {
+          "name": "Pad1",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "PartitionNumber",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "SectorsPerCluster",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "BytesPerSector",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "Pad2",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "NumberOfFreeClusters",
+          "datatype": "long",
+          "map": null
+        },
+        {
+          "name": "TotalNumberOfClusters",
+          "datatype": "long",
+          "map": null
+        },
+        {
+          "name": "FileSystem",
+          "datatype": "char",
+          "map": null
+        },
+        {
+          "name": "VolumeExt",
+          "datatype": "uint",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "NIC",
+      "displayName": "NIC",
+      "descriptor": {
+        "id": 0,
+        "version": 1,
+        "channel": 0,
+        "level": "None",
+        "opcode": 13,
+        "task": 0,
+        "keyword": 0
+      },
+      "fields": [
+        {
+          "name": "NICName",
+          "datatype": "char",
+          "map": null
+        },
+        {
+          "name": "Index",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "PhysicalAddrLen",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "PhysicalAddr",
+          "datatype": "char",
+          "map": null
+        },
+        {
+          "name": "Size",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "IpAddress",
+          "datatype": "int",
+          "map": null
+        },
+        {
+          "name": "SubnetMask",
+          "datatype": "int",
+          "map": null
+        },
+        {
+          "name": "DhcpServer",
+          "datatype": "int",
+          "map": null
+        },
+        {
+          "name": "Gateway",
+          "datatype": "int",
+          "map": null
+        },
+        {
+          "name": "PrimaryWinsServer",
+          "datatype": "int",
+          "map": null
+        },
+        {
+          "name": "SecondaryWinsServer",
+          "datatype": "int",
+          "map": null
+        },
+        {
+          "name": "DnsServer1",
+          "datatype": "int",
+          "map": null
+        },
+        {
+          "name": "DnsServer2",
+          "datatype": "int",
+          "map": null
+        },
+        {
+          "name": "DnsServer3",
+          "datatype": "int",
+          "map": null
+        },
+        {
+          "name": "DnsServer4",
+          "datatype": "int",
+          "map": null
+        },
+        {
+          "name": "Data",
+          "datatype": "uint",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "Video",
+      "displayName": "Video",
+      "descriptor": {
+        "id": 0,
+        "version": 1,
+        "channel": 0,
+        "level": "None",
+        "opcode": 14,
+        "task": 0,
+        "keyword": 0
+      },
+      "fields": [
+        {
+          "name": "MemorySize",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "XResolution",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "YResolution",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "BitsPerPixel",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "VRefresh",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "ChipType",
+          "datatype": "char",
+          "map": null
+        },
+        {
+          "name": "DACType",
+          "datatype": "char",
+          "map": null
+        },
+        {
+          "name": "AdapterString",
+          "datatype": "char",
+          "map": null
+        },
+        {
+          "name": "BiosString",
+          "datatype": "char",
+          "map": null
+        },
+        {
+          "name": "DeviceId",
+          "datatype": "char",
+          "map": null
+        },
+        {
+          "name": "StateFlags",
+          "datatype": "uint",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "Services",
+      "displayName": "Services",
+      "descriptor": {
+        "id": 0,
+        "version": 1,
+        "channel": 0,
+        "level": "None",
+        "opcode": 15,
+        "task": 0,
+        "keyword": 0
+      },
+      "fields": [
+        {
+          "name": "ServiceName",
+          "datatype": "char",
+          "map": null
+        },
+        {
+          "name": "DisplayName",
+          "datatype": "char",
+          "map": null
+        },
+        {
+          "name": "ProcessName",
+          "datatype": "char",
+          "map": null
+        },
+        {
+          "name": "ProcessId",
+          "datatype": "uint",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "Power",
+      "displayName": "Power",
+      "descriptor": {
+        "id": 0,
+        "version": 1,
+        "channel": 0,
+        "level": "None",
+        "opcode": 16,
+        "task": 0,
+        "keyword": 0
+      },
+      "fields": [
+        {
+          "name": "S1",
+          "datatype": "byte",
+          "map": null
+        },
+        {
+          "name": "S2",
+          "datatype": "byte",
+          "map": null
+        },
+        {
+          "name": "S3",
+          "datatype": "byte",
+          "map": null
+        },
+        {
+          "name": "S4",
+          "datatype": "byte",
+          "map": null
+        },
+        {
+          "name": "S5",
+          "datatype": "byte",
+          "map": null
+        },
+        {
+          "name": "Pad1",
+          "datatype": "byte",
+          "map": null
+        },
+        {
+          "name": "Pad2",
+          "datatype": "byte",
+          "map": null
+        },
+        {
+          "name": "Pad3",
+          "datatype": "byte",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "IRQ",
+      "displayName": "IRQ",
+      "descriptor": {
+        "id": 0,
+        "version": 1,
+        "channel": 0,
+        "level": "None",
+        "opcode": 21,
+        "task": 0,
+        "keyword": 0
+      },
+      "fields": [
+        {
+          "name": "IRQAffinity",
+          "datatype": "ulong",
+          "map": null
+        },
+        {
+          "name": "IRQNum",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "DeviceDescriptionLen",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "DeviceDescription",
+          "datatype": "string",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "PnP",
+      "displayName": "PnP",
+      "descriptor": {
+        "id": 0,
+        "version": 1,
+        "channel": 0,
+        "level": "None",
+        "opcode": 22,
+        "task": 0,
+        "keyword": 0
+      },
+      "fields": [
+        {
+          "name": "IDLength",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "DescriptionLength",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "FriendlyNameLength",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "DeviceID",
+          "datatype": "string",
+          "map": null
+        },
+        {
+          "name": "DeviceDescription",
+          "datatype": "string",
+          "map": null
+        },
+        {
+          "name": "FriendlyName",
+          "datatype": "string",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "CPU",
+      "displayName": "CPU",
+      "descriptor": {
+        "id": 0,
+        "version": 2,
+        "channel": 0,
+        "level": "None",
+        "opcode": 10,
+        "task": 0,
+        "keyword": 0
+      },
+      "fields": [
+        {
+          "name": "MHz",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "NumberOfProcessors",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "MemSize",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "PageSize",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "AllocationGranularity",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "ComputerName",
+          "datatype": "char",
+          "map": null
+        },
+        {
+          "name": "DomainName",
+          "datatype": "char",
+          "map": null
+        },
+        {
+          "name": "HyperThreadingFlag",
+          "datatype": "pointer",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "PhyDisk",
+      "displayName": "PhyDisk",
+      "descriptor": {
+        "id": 0,
+        "version": 2,
+        "channel": 0,
+        "level": "None",
+        "opcode": 11,
+        "task": 0,
+        "keyword": 0
+      },
+      "fields": [
+        {
+          "name": "DiskNumber",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "BytesPerSector",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "SectorsPerTrack",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "TracksPerCylinder",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "Cylinders",
+          "datatype": "ulong",
+          "map": null
+        },
+        {
+          "name": "SCSIPort",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "SCSIPath",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "SCSITarget",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "SCSILun",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "Manufacturer",
+          "datatype": "char",
+          "map": null
+        },
+        {
+          "name": "PartitionCount",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "WriteCacheEnabled",
+          "datatype": "byte",
+          "map": null
+        },
+        {
+          "name": "Pad",
+          "datatype": "byte",
+          "map": null
+        },
+        {
+          "name": "BootDriveLetter",
+          "datatype": "char",
+          "map": null
+        },
+        {
+          "name": "Spare",
+          "datatype": "char",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "LogDisk",
+      "displayName": "LogDisk",
+      "descriptor": {
+        "id": 0,
+        "version": 2,
+        "channel": 0,
+        "level": "None",
+        "opcode": 12,
+        "task": 0,
+        "keyword": 0
+      },
+      "fields": [
+        {
+          "name": "StartOffset",
+          "datatype": "ulong",
+          "map": null
+        },
+        {
+          "name": "PartitionSize",
+          "datatype": "ulong",
+          "map": null
+        },
+        {
+          "name": "DiskNumber",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "Size",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "DriveType",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "DriveLetterString",
+          "datatype": "char",
+          "map": null
+        },
+        {
+          "name": "Pad1",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "PartitionNumber",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "SectorsPerCluster",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "BytesPerSector",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "Pad2",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "NumberOfFreeClusters",
+          "datatype": "long",
+          "map": null
+        },
+        {
+          "name": "TotalNumberOfClusters",
+          "datatype": "long",
+          "map": null
+        },
+        {
+          "name": "FileSystem",
+          "datatype": "char",
+          "map": null
+        },
+        {
+          "name": "VolumeExt",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "Pad3",
+          "datatype": "uint",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "NIC",
+      "displayName": "NIC",
+      "descriptor": {
+        "id": 0,
+        "version": 2,
+        "channel": 0,
+        "level": "None",
+        "opcode": 13,
+        "task": 0,
+        "keyword": 0
+      },
+      "fields": [
+        {
+          "name": "PhysicalAddr",
+          "datatype": "ulong",
+          "map": null
+        },
+        {
+          "name": "PhysicalAddrLen",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "Ipv4Index",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "Ipv6Index",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "NICDescription",
+          "datatype": "string",
+          "map": null
+        },
+        {
+          "name": "IpAddresses",
+          "datatype": "string",
+          "map": null
+        },
+        {
+          "name": "DnsServerAddresses",
+          "datatype": "string",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "Video",
+      "displayName": "Video",
+      "descriptor": {
+        "id": 0,
+        "version": 2,
+        "channel": 0,
+        "level": "None",
+        "opcode": 14,
+        "task": 0,
+        "keyword": 0
+      },
+      "fields": [
+        {
+          "name": "MemorySize",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "XResolution",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "YResolution",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "BitsPerPixel",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "VRefresh",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "ChipType",
+          "datatype": "char",
+          "map": null
+        },
+        {
+          "name": "DACType",
+          "datatype": "char",
+          "map": null
+        },
+        {
+          "name": "AdapterString",
+          "datatype": "char",
+          "map": null
+        },
+        {
+          "name": "BiosString",
+          "datatype": "char",
+          "map": null
+        },
+        {
+          "name": "DeviceId",
+          "datatype": "char",
+          "map": null
+        },
+        {
+          "name": "StateFlags",
+          "datatype": "uint",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "Services",
+      "displayName": "Services",
+      "descriptor": {
+        "id": 0,
+        "version": 2,
+        "channel": 0,
+        "level": "None",
+        "opcode": 15,
+        "task": 0,
+        "keyword": 0
+      },
+      "fields": [
+        {
+          "name": "ProcessId",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "ServiceState",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "SubProcessTag",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "ServiceName",
+          "datatype": "string",
+          "map": null
+        },
+        {
+          "name": "DisplayName",
+          "datatype": "string",
+          "map": null
+        },
+        {
+          "name": "ProcessName",
+          "datatype": "string",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "Power",
+      "displayName": "Power",
+      "descriptor": {
+        "id": 0,
+        "version": 2,
+        "channel": 0,
+        "level": "None",
+        "opcode": 16,
+        "task": 0,
+        "keyword": 0
+      },
+      "fields": [
+        {
+          "name": "S1",
+          "datatype": "byte",
+          "map": null
+        },
+        {
+          "name": "S2",
+          "datatype": "byte",
+          "map": null
+        },
+        {
+          "name": "S3",
+          "datatype": "byte",
+          "map": null
+        },
+        {
+          "name": "S4",
+          "datatype": "byte",
+          "map": null
+        },
+        {
+          "name": "S5",
+          "datatype": "byte",
+          "map": null
+        },
+        {
+          "name": "Pad1",
+          "datatype": "byte",
+          "map": null
+        },
+        {
+          "name": "Pad2",
+          "datatype": "byte",
+          "map": null
+        },
+        {
+          "name": "Pad3",
+          "datatype": "byte",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "Network",
+      "displayName": "Network",
+      "descriptor": {
+        "id": 0,
+        "version": 2,
+        "channel": 0,
+        "level": "None",
+        "opcode": 17,
+        "task": 0,
+        "keyword": 0
+      },
+      "fields": [
+        {
+          "name": "TcbTablePartitions",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "MaxHashTableSize",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "MaxUserPort",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "TcpTimedWaitDelay",
+          "datatype": "uint",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "OpticalDisk",
+      "displayName": "OpticalDisk",
+      "descriptor": {
+        "id": 0,
+        "version": 2,
+        "channel": 0,
+        "level": "None",
+        "opcode": 18,
+        "task": 0,
+        "keyword": 0
+      },
+      "fields": [
+        {
+          "name": "DiskNumber",
+          "datatype": "ushort",
+          "map": null
+        },
+        {
+          "name": "BusType",
+          "datatype": "ushort",
+          "map": null
+        },
+        {
+          "name": "DeviceType",
+          "datatype": "ushort",
+          "map": null
+        },
+        {
+          "name": "MediaType",
+          "datatype": "ushort",
+          "map": null
+        },
+        {
+          "name": "StartingOffset",
+          "datatype": "ulong",
+          "map": null
+        },
+        {
+          "name": "Size",
+          "datatype": "ulong",
+          "map": null
+        },
+        {
+          "name": "NumberOfFreeBlocks",
+          "datatype": "ulong",
+          "map": null
+        },
+        {
+          "name": "TotalNumberOfBlocks",
+          "datatype": "ulong",
+          "map": null
+        },
+        {
+          "name": "NextWritableAddress",
+          "datatype": "ulong",
+          "map": null
+        },
+        {
+          "name": "NumberOfSessions",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "NumberOfTracks",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "BytesPerSector",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "DiscStatus",
+          "datatype": "ushort",
+          "map": null
+        },
+        {
+          "name": "LastSessionStatus",
+          "datatype": "ushort",
+          "map": null
+        },
+        {
+          "name": "DriveLetter",
+          "datatype": "string",
+          "map": null
+        },
+        {
+          "name": "FileSystemName",
+          "datatype": "string",
+          "map": null
+        },
+        {
+          "name": "DeviceName",
+          "datatype": "ansistring",
+          "map": null
+        },
+        {
+          "name": "ManufacturerName",
+          "datatype": "ansistring",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "IRQ",
+      "displayName": "IRQ",
+      "descriptor": {
+        "id": 0,
+        "version": 2,
+        "channel": 0,
+        "level": "None",
+        "opcode": 21,
+        "task": 0,
+        "keyword": 0
+      },
+      "fields": [
+        {
+          "name": "IRQAffinity",
+          "datatype": "ulong",
+          "map": null
+        },
+        {
+          "name": "IRQNum",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "DeviceDescriptionLen",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "DeviceDescription",
+          "datatype": "string",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "PnP",
+      "displayName": "PnP",
+      "descriptor": {
+        "id": 0,
+        "version": 2,
+        "channel": 0,
+        "level": "None",
+        "opcode": 22,
+        "task": 0,
+        "keyword": 0
+      },
+      "fields": [
+        {
+          "name": "IDLength",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "DescriptionLength",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "FriendlyNameLength",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "DeviceID",
+          "datatype": "string",
+          "map": null
+        },
+        {
+          "name": "DeviceDescription",
+          "datatype": "string",
+          "map": null
+        },
+        {
+          "name": "FriendlyName",
+          "datatype": "string",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "IDEChannel",
+      "displayName": "IDEChannel",
+      "descriptor": {
+        "id": 0,
+        "version": 2,
+        "channel": 0,
+        "level": "None",
+        "opcode": 23,
+        "task": 0,
+        "keyword": 0
+      },
+      "fields": [
+        {
+          "name": "TargetId",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "DeviceType",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "DeviceTimingMode",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "LocationInformationLen",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "LocationInformation",
+          "datatype": "string",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "NumaNode",
+      "displayName": "NumaNode",
+      "descriptor": {
+        "id": 0,
+        "version": 2,
+        "channel": 0,
+        "level": "None",
+        "opcode": 24,
+        "task": 0,
+        "keyword": 0
+      },
+      "fields": [
+        {
+          "name": "NodeCount",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "NodeMap",
+          "datatype": "ulong[NodeCount]",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "Platform",
+      "displayName": "Platform",
+      "descriptor": {
+        "id": 0,
+        "version": 2,
+        "channel": 0,
+        "level": "None",
+        "opcode": 25,
+        "task": 0,
+        "keyword": 0
+      },
+      "fields": [
+        {
+          "name": "SystemManufacturer",
+          "datatype": "string",
+          "map": null
+        },
+        {
+          "name": "SystemProductName",
+          "datatype": "string",
+          "map": null
+        },
+        {
+          "name": "BiosDate",
+          "datatype": "string",
+          "map": null
+        },
+        {
+          "name": "BiosVersion",
+          "datatype": "string",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "ProcessorGroup",
+      "displayName": "ProcessorGroup",
+      "descriptor": {
+        "id": 0,
+        "version": 2,
+        "channel": 0,
+        "level": "None",
+        "opcode": 26,
+        "task": 0,
+        "keyword": 0
+      },
+      "fields": [
+        {
+          "name": "GroupCount",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "Affinity",
+          "datatype": "pointer[GroupCount]",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "ProcessorNumber",
+      "displayName": "ProcessorNumber",
+      "descriptor": {
+        "id": 0,
+        "version": 2,
+        "channel": 0,
+        "level": "None",
+        "opcode": 27,
+        "task": 0,
+        "keyword": 0
+      },
+      "fields": [
+        {
+          "name": "ProcessorCount",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "ProcessorNumber",
+          "datatype": "uint[ProcessorCount]",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "DPI",
+      "displayName": "DPI",
+      "descriptor": {
+        "id": 0,
+        "version": 2,
+        "channel": 0,
+        "level": "None",
+        "opcode": 28,
+        "task": 0,
+        "keyword": 0
+      },
+      "fields": [
+        {
+          "name": "MachineDPI",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "UserDPI",
+          "datatype": "uint",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "CodeIntegrity",
+      "displayName": "CodeIntegrity",
+      "descriptor": {
+        "id": 0,
+        "version": 2,
+        "channel": 0,
+        "level": "None",
+        "opcode": 29,
+        "task": 0,
+        "keyword": 0
+      },
+      "fields": [
+        {
+          "name": "CodeIntegrityInfo",
+          "datatype": "uint",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "TelemetryConfiguration",
+      "displayName": "TelemetryConfiguration",
+      "descriptor": {
+        "id": 0,
+        "version": 2,
+        "channel": 0,
+        "level": "None",
+        "opcode": 30,
+        "task": 0,
+        "keyword": 0
+      },
+      "fields": [
+        {
+          "name": "MachineId",
+          "datatype": "guid",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "Defragmentation",
+      "displayName": "Defragmentation",
+      "descriptor": {
+        "id": 0,
+        "version": 2,
+        "channel": 0,
+        "level": "None",
+        "opcode": 31,
+        "task": 0,
+        "keyword": 0
+      },
+      "fields": [
+        {
+          "name": "AlignmentClusters",
+          "datatype": "ulong",
+          "map": null
+        },
+        {
+          "name": "AvgFreeSpaceSize",
+          "datatype": "ulong",
+          "map": null
+        },
+        {
+          "name": "ClustersPerSlab",
+          "datatype": "ulong",
+          "map": null
+        },
+        {
+          "name": "FragmentedDirectoryExtents",
+          "datatype": "ulong",
+          "map": null
+        },
+        {
+          "name": "FragmentedExtents",
+          "datatype": "ulong",
+          "map": null
+        },
+        {
+          "name": "FreeSpaceCount",
+          "datatype": "ulong",
+          "map": null
+        },
+        {
+          "name": "LargestFreeSpaceSize",
+          "datatype": "ulong",
+          "map": null
+        },
+        {
+          "name": "LastRunActualPurgeClusters",
+          "datatype": "ulong",
+          "map": null
+        },
+        {
+          "name": "LastRunClustersTrimmed",
+          "datatype": "ulong",
+          "map": null
+        },
+        {
+          "name": "LastRunFullDefragTime",
+          "datatype": "ulong",
+          "map": null
+        },
+        {
+          "name": "LastRunTime",
+          "datatype": "ulong",
+          "map": null
+        },
+        {
+          "name": "MFTSize",
+          "datatype": "ulong",
+          "map": null
+        },
+        {
+          "name": "TotalClusters",
+          "datatype": "ulong",
+          "map": null
+        },
+        {
+          "name": "TotalUsedClusters",
+          "datatype": "ulong",
+          "map": null
+        },
+        {
+          "name": "AvgFragmentsPerFile",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "BytesPerCluster",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "DirectoryCount",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "FragmentedDirectories",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "FragmentedFiles",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "FragmentedSpace",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "HardwareIssue",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "InUseMFTRecords",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "InUseSlabs",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "LastRunActualPurgeSlabs",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "LastRunInitialBackedSlabs",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "LastRunPercentFragmentation",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "LastRunPinnedSlabs",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "LastRunPotentialPurgeSlabs",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "LastRunSpaceInefficientSlabs",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "LastRunTrimmedSlabs",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "LastRunUnknownEvictFailSlabs",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "LastRunVolsnapPinnedSlabs",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "MFTFragmentCount",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "MovableFiles",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "TotalMFTRecords",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "TotalSlabs",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "UnmovableFiles",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "VolumeId",
+          "datatype": "guid",
+          "map": null
+        },
+        {
+          "name": "VolumePathNames",
+          "datatype": "string",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "MobilePlatform",
+      "displayName": "MobilePlatform",
+      "descriptor": {
+        "id": 0,
+        "version": 2,
+        "channel": 0,
+        "level": "None",
+        "opcode": 32,
+        "task": 0,
+        "keyword": 0
+      },
+      "fields": [
+        {
+          "name": "BootLoaderVersion",
+          "datatype": "string",
+          "map": null
+        },
+        {
+          "name": "FirmwareRevision",
+          "datatype": "string",
+          "map": null
+        },
+        {
+          "name": "FriendlyName",
+          "datatype": "string",
+          "map": null
+        },
+        {
+          "name": "HardwareRevision",
+          "datatype": "string",
+          "map": null
+        },
+        {
+          "name": "Manufacturer",
+          "datatype": "string",
+          "map": null
+        },
+        {
+          "name": "ManufacturerDisplayName",
+          "datatype": "string",
+          "map": null
+        },
+        {
+          "name": "ManufacturerModelName",
+          "datatype": "string",
+          "map": null
+        },
+        {
+          "name": "MobileOperatorDisplayName",
+          "datatype": "string",
+          "map": null
+        },
+        {
+          "name": "MobileOperatorName",
+          "datatype": "string",
+          "map": null
+        },
+        {
+          "name": "ModelName",
+          "datatype": "string",
+          "map": null
+        },
+        {
+          "name": "RadioHardwareRevision",
+          "datatype": "string",
+          "map": null
+        },
+        {
+          "name": "RadioSoftwareRevision",
+          "datatype": "string",
+          "map": null
+        },
+        {
+          "name": "ROMVersion",
+          "datatype": "string",
+          "map": null
+        },
+        {
+          "name": "SOCVersion",
+          "datatype": "string",
+          "map": null
+        },
+        {
+          "name": "HardwareVariant",
+          "datatype": "string",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "DeviceFamily",
+      "displayName": "DeviceFamily",
+      "descriptor": {
+        "id": 0,
+        "version": 2,
+        "channel": 0,
+        "level": "None",
+        "opcode": 33,
+        "task": 0,
+        "keyword": 0
+      },
+      "fields": [
+        {
+          "name": "UAPInfo",
+          "datatype": "ulong",
+          "map": null
+        },
+        {
+          "name": "DeviceFamily",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "DeviceForm",
+          "datatype": "uint",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "FlightIds",
+      "displayName": "FlightIds",
+      "descriptor": {
+        "id": 0,
+        "version": 2,
+        "channel": 0,
+        "level": "None",
+        "opcode": 34,
+        "task": 0,
+        "keyword": 0
+      },
+      "fields": [
+        {
+          "name": "UpdateId",
+          "datatype": "string",
+          "map": null
+        },
+        {
+          "name": "FlightIdList",
+          "datatype": "string",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "Processors",
+      "displayName": "Processors",
+      "descriptor": {
+        "id": 0,
+        "version": 2,
+        "channel": 0,
+        "level": "None",
+        "opcode": 35,
+        "task": 0,
+        "keyword": 0
+      },
+      "fields": [
+        {
+          "name": "ProcessorIndex",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "FeatureSet",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "ProcessorSpeed",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "ProcessorName",
+          "datatype": "char",
+          "map": null
+        },
+        {
+          "name": "VendorIdentifier",
+          "datatype": "char",
+          "map": null
+        },
+        {
+          "name": "ProcessorIdentifier",
+          "datatype": "char",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "VirtualizationConfigInfo",
+      "displayName": "VirtualizationConfigInfo",
+      "descriptor": {
+        "id": 0,
+        "version": 2,
+        "channel": 0,
+        "level": "None",
+        "opcode": 36,
+        "task": 0,
+        "keyword": 0
+      },
+      "fields": [
+        {
+          "name": "VbsEnabled",
+          "datatype": "byte",
+          "map": null
+        },
+        {
+          "name": "HvciEnabled",
+          "datatype": "byte",
+          "map": null
+        },
+        {
+          "name": "HyperVisorEnabled",
+          "datatype": "byte",
+          "map": null
+        },
+        {
+          "name": "Reserved",
+          "datatype": "byte",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "BootConfigInfo",
+      "displayName": "BootConfigInfo",
+      "descriptor": {
+        "id": 0,
+        "version": 2,
+        "channel": 0,
+        "level": "None",
+        "opcode": 37,
+        "task": 0,
+        "keyword": 0
+      },
+      "fields": [
+        {
+          "name": "BootFlags",
+          "datatype": "ulong",
+          "map": null
+        },
+        {
+          "name": "FirmwareType",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "SecureBootEnabled",
+          "datatype": "byte",
+          "map": null
+        },
+        {
+          "name": "SecureBootCapable",
+          "datatype": "byte",
+          "map": null
+        },
+        {
+          "name": "Reserved1",
+          "datatype": "byte",
+          "map": null
+        },
+        {
+          "name": "Reserved2",
+          "datatype": "byte",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "CPU",
+      "displayName": "CPU",
+      "descriptor": {
+        "id": 0,
+        "version": 3,
+        "channel": 0,
+        "level": "None",
+        "opcode": 10,
+        "task": 0,
+        "keyword": 0
+      },
+      "fields": [
+        {
+          "name": "MHz",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "NumberOfProcessors",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "MemSize",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "PageSize",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "AllocationGranularity",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "ComputerName",
+          "datatype": "char",
+          "map": null
+        },
+        {
+          "name": "DomainName",
+          "datatype": "char",
+          "map": null
+        },
+        {
+          "name": "HyperThreadingFlag",
+          "datatype": "pointer",
+          "map": null
+        },
+        {
+          "name": "HighestUserAddress",
+          "datatype": "pointer",
+          "map": null
+        },
+        {
+          "name": "ProcessorArchitecture",
+          "datatype": "ushort",
+          "map": null
+        },
+        {
+          "name": "ProcessorLevel",
+          "datatype": "ushort",
+          "map": null
+        },
+        {
+          "name": "ProcessorRevision",
+          "datatype": "ushort",
+          "map": null
+        },
+        {
+          "name": "PaeEnabled",
+          "datatype": "byte",
+          "map": null
+        },
+        {
+          "name": "NxEnabled",
+          "datatype": "byte",
+          "map": null
+        },
+        {
+          "name": "MemorySpeed",
+          "datatype": "uint",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "IRQ",
+      "displayName": "IRQ",
+      "descriptor": {
+        "id": 0,
+        "version": 3,
+        "channel": 0,
+        "level": "None",
+        "opcode": 21,
+        "task": 0,
+        "keyword": 0
+      },
+      "fields": [
+        {
+          "name": "IRQAffinity",
+          "datatype": "ulong",
+          "map": null
+        },
+        {
+          "name": "IRQGroup",
+          "datatype": "ushort",
+          "map": null
+        },
+        {
+          "name": "Reserved",
+          "datatype": "ushort",
+          "map": null
+        },
+        {
+          "name": "IRQNum",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "DeviceDescriptionLen",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "DeviceDescription",
+          "datatype": "string",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "Services",
+      "displayName": "Services",
+      "descriptor": {
+        "id": 0,
+        "version": 3,
+        "channel": 0,
+        "level": "None",
+        "opcode": 15,
+        "task": 0,
+        "keyword": 0
+      },
+      "fields": [
+        {
+          "name": "ProcessId",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "ServiceState",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "SubProcessTag",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "ServiceName",
+          "datatype": "string",
+          "map": null
+        },
+        {
+          "name": "DisplayName",
+          "datatype": "string",
+          "map": null
+        },
+        {
+          "name": "ProcessName",
+          "datatype": "string",
+          "map": null
+        },
+        {
+          "name": "LoadOrderGroup",
+          "datatype": "string",
+          "map": null
+        },
+        {
+          "name": "SvchostGroup",
+          "datatype": "string",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "PnP",
+      "displayName": "PnP",
+      "descriptor": {
+        "id": 0,
+        "version": 3,
+        "channel": 0,
+        "level": "None",
+        "opcode": 22,
+        "task": 0,
+        "keyword": 0
+      },
+      "fields": [
+        {
+          "name": "IDLength",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "DescriptionLength",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "FriendlyNameLength",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "DeviceID",
+          "datatype": "string",
+          "map": null
+        },
+        {
+          "name": "DeviceDescription",
+          "datatype": "string",
+          "map": null
+        },
+        {
+          "name": "FriendlyName",
+          "datatype": "string",
+          "map": null
+        },
+        {
+          "name": "PdoName",
+          "datatype": "string",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "MobilePlatform",
+      "displayName": "MobilePlatform",
+      "descriptor": {
+        "id": 0,
+        "version": 3,
+        "channel": 0,
+        "level": "None",
+        "opcode": 32,
+        "task": 0,
+        "keyword": 0
+      },
+      "fields": [
+        {
+          "name": "DeviceManufacturer",
+          "datatype": "string",
+          "map": null
+        },
+        {
+          "name": "DeviceManufacturerDisplayName",
+          "datatype": "string",
+          "map": null
+        },
+        {
+          "name": "DeviceModel",
+          "datatype": "string",
+          "map": null
+        },
+        {
+          "name": "DeviceModelDisplayName",
+          "datatype": "string",
+          "map": null
+        },
+        {
+          "name": "MobileOperator",
+          "datatype": "string",
+          "map": null
+        },
+        {
+          "name": "MobileOperatorDisplayName",
+          "datatype": "string",
+          "map": null
+        },
+        {
+          "name": "HardwareVersion",
+          "datatype": "string",
+          "map": null
+        },
+        {
+          "name": "SocVersion",
+          "datatype": "string",
+          "map": null
+        },
+        {
+          "name": "RadioHardwareVersion",
+          "datatype": "string",
+          "map": null
+        },
+        {
+          "name": "RadioSoftwareVersion",
+          "datatype": "string",
+          "map": null
+        },
+        {
+          "name": "BspVersion",
+          "datatype": "string",
+          "map": null
+        },
+        {
+          "name": "OemSoftwareVersion",
+          "datatype": "string",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "PnP",
+      "displayName": "PnP",
+      "descriptor": {
+        "id": 0,
+        "version": 4,
+        "channel": 0,
+        "level": "None",
+        "opcode": 22,
+        "task": 0,
+        "keyword": 0
+      },
+      "fields": [
+        {
+          "name": "ClassGuid",
+          "datatype": "guid",
+          "map": null
+        },
+        {
+          "name": "UpperFiltersCount",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "LowerFiltersCount",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "DeviceID",
+          "datatype": "string",
+          "map": null
+        },
+        {
+          "name": "DeviceDescription",
+          "datatype": "string",
+          "map": null
+        },
+        {
+          "name": "FriendlyName",
+          "datatype": "string",
+          "map": null
+        },
+        {
+          "name": "PdoName",
+          "datatype": "string",
+          "map": null
+        },
+        {
+          "name": "ServiceName",
+          "datatype": "string",
+          "map": null
+        },
+        {
+          "name": "UpperFilters",
+          "datatype": "string[UpperFiltersCount]",
+          "map": null
+        },
+        {
+          "name": "LowerFilters",
+          "datatype": "string[LowerFiltersCount]",
+          "map": null
+        }
+      ]
+    },
+    {
+      "name": "PnP",
+      "displayName": "PnP",
+      "descriptor": {
+        "id": 0,
+        "version": 5,
+        "channel": 0,
+        "level": "None",
+        "opcode": 22,
+        "task": 0,
+        "keyword": 0
+      },
+      "fields": [
+        {
+          "name": "ClassGuid",
+          "datatype": "guid",
+          "map": null
+        },
+        {
+          "name": "UpperFiltersCount",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "LowerFiltersCount",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "DevStatus",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "DevProblem",
+          "datatype": "uint",
+          "map": null
+        },
+        {
+          "name": "DeviceID",
+          "datatype": "string",
+          "map": null
+        },
+        {
+          "name": "DeviceDescription",
+          "datatype": "string",
+          "map": null
+        },
+        {
+          "name": "FriendlyName",
+          "datatype": "string",
+          "map": null
+        },
+        {
+          "name": "PdoName",
+          "datatype": "string",
+          "map": null
+        },
+        {
+          "name": "ServiceName",
+          "datatype": "string",
+          "map": null
+        },
+        {
+          "name": "UpperFilters",
+          "datatype": "string[UpperFiltersCount]",
+          "map": null
+        },
+        {
+          "name": "LowerFilters",
+          "datatype": "string[LowerFiltersCount]",
+          "map": null
+        }
+      ]
+    }
+  ],
+  "tasks": {},
+  "opcodes": {
+    "10": "CPU",
+    "11": "PhyDisk",
+    "12": "LogDisk",
+    "13": "NIC",
+    "14": "Video",
+    "15": "Services",
+    "16": "Power",
+    "17": "Network",
+    "18": "OpticalDisk",
+    "21": "IRQ",
+    "22": "PnP",
+    "23": "IDEChannel",
+    "24": "NumaNode",
+    "25": "Platform",
+    "26": "ProcessorGroup",
+    "27": "ProcessorNumber",
+    "28": "DPI",
+    "29": "CodeIntegrity",
+    "30": "TelemetryConfiguration",
+    "31": "Defragmentation",
+    "32": "MobilePlatform",
+    "33": "DeviceFamily",
+    "34": "FlightIds",
+    "35": "Processors",
+    "36": "VirtualizationConfigInfo",
+    "37": "BootConfigInfo"
+  },
+  "keywords": {},
+  "maps": [],
+  "structs": []
+}

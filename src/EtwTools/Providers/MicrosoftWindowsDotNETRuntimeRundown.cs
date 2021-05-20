@@ -1,6 +1,9 @@
 using System;
 
+#pragma warning disable IDE0079 // Remove unnecessary suppression
 #pragma warning disable IDE0004 // Remove Unnecessary Cast
+#pragma warning disable IDE1006 // Naming Styles
+#pragma warning disable CA1416 // Validate platform compatibility
 #pragma warning disable CA1707 // Identifiers should not contain underscores
 #pragma warning disable CA1720 // Identifier contains type name
 
@@ -9,7 +12,7 @@ namespace EtwTools
     /// <summary>
     /// Provider for Microsoft-Windows-DotNETRuntimeRundown (a669021c-c450-4609-a035-5af59af4df18)
     /// </summary>
-    public sealed class DotnetRuntimeRundownProvider
+    public sealed class MicrosoftWindowsDotNETRuntimeRundownProvider
     {
         /// <summary>s
         /// Provider ID.
@@ -49,7 +52,7 @@ namespace EtwTools
         }
 
         /// <summary>
-        /// Opcodes supported by DotnetRuntimeRundown.
+        /// Opcodes supported by MicrosoftWindowsDotNETRuntimeRundown.
         /// </summary>
         public enum Opcodes
         {
@@ -128,7 +131,7 @@ namespace EtwTools
         }
 
         /// <summary>
-        /// Keywords supported by DotnetRuntimeRundown.
+        /// Keywords supported by MicrosoftWindowsDotNETRuntimeRundown.
         /// </summary>
         [Flags]
         public enum Keywords : ulong
@@ -973,7 +976,7 @@ namespace EtwTools
                     {
                         if (_offset_MethodName == -1)
                         {
-                            _offset_MethodName = Offset_MethodNamespace + EtwEvent.UnicodeStringEnumerable.UnicodeStringEnumerator.StringLength(_etwEvent.Data, Offset_MethodNamespace);
+                            _offset_MethodName = Offset_MethodNamespace + _etwEvent.UnicodeStringLength(Offset_MethodNamespace);
                         }
 
                         return _offset_MethodName;
@@ -986,7 +989,7 @@ namespace EtwTools
                     {
                         if (_offset_MethodSignature == -1)
                         {
-                            _offset_MethodSignature = Offset_MethodName + EtwEvent.UnicodeStringEnumerable.UnicodeStringEnumerator.StringLength(_etwEvent.Data, Offset_MethodName);
+                            _offset_MethodSignature = Offset_MethodName + _etwEvent.UnicodeStringLength(Offset_MethodName);
                         }
 
                         return _offset_MethodSignature;
@@ -1243,7 +1246,7 @@ namespace EtwTools
                     {
                         if (_offset_MethodName == -1)
                         {
-                            _offset_MethodName = Offset_MethodNamespace + EtwEvent.UnicodeStringEnumerable.UnicodeStringEnumerator.StringLength(_etwEvent.Data, Offset_MethodNamespace);
+                            _offset_MethodName = Offset_MethodNamespace + _etwEvent.UnicodeStringLength(Offset_MethodNamespace);
                         }
 
                         return _offset_MethodName;
@@ -1256,7 +1259,7 @@ namespace EtwTools
                     {
                         if (_offset_MethodSignature == -1)
                         {
-                            _offset_MethodSignature = Offset_MethodName + EtwEvent.UnicodeStringEnumerable.UnicodeStringEnumerator.StringLength(_etwEvent.Data, Offset_MethodName);
+                            _offset_MethodSignature = Offset_MethodName + _etwEvent.UnicodeStringLength(Offset_MethodName);
                         }
 
                         return _offset_MethodSignature;
@@ -2222,7 +2225,7 @@ namespace EtwTools
                     {
                         if (_offset_ModuleNativePath == -1)
                         {
-                            _offset_ModuleNativePath = Offset_ModuleILPath + EtwEvent.UnicodeStringEnumerable.UnicodeStringEnumerator.StringLength(_etwEvent.Data, Offset_ModuleILPath);
+                            _offset_ModuleNativePath = Offset_ModuleILPath + _etwEvent.UnicodeStringLength(Offset_ModuleILPath);
                         }
 
                         return _offset_ModuleNativePath;
@@ -2452,7 +2455,7 @@ namespace EtwTools
                     {
                         if (_offset_ModuleNativePath == -1)
                         {
-                            _offset_ModuleNativePath = Offset_ModuleILPath + EtwEvent.UnicodeStringEnumerable.UnicodeStringEnumerator.StringLength(_etwEvent.Data, Offset_ModuleILPath);
+                            _offset_ModuleNativePath = Offset_ModuleILPath + _etwEvent.UnicodeStringLength(Offset_ModuleILPath);
                         }
 
                         return _offset_ModuleNativePath;
@@ -2668,7 +2671,7 @@ namespace EtwTools
                     {
                         if (_offset_ModuleNativePath == -1)
                         {
-                            _offset_ModuleNativePath = Offset_ModuleILPath + EtwEvent.UnicodeStringEnumerable.UnicodeStringEnumerator.StringLength(_etwEvent.Data, Offset_ModuleILPath);
+                            _offset_ModuleNativePath = Offset_ModuleILPath + _etwEvent.UnicodeStringLength(Offset_ModuleILPath);
                         }
 
                         return _offset_ModuleNativePath;
@@ -2878,7 +2881,7 @@ namespace EtwTools
                     {
                         if (_offset_ModuleNativePath == -1)
                         {
-                            _offset_ModuleNativePath = Offset_ModuleILPath + EtwEvent.UnicodeStringEnumerable.UnicodeStringEnumerator.StringLength(_etwEvent.Data, Offset_ModuleILPath);
+                            _offset_ModuleNativePath = Offset_ModuleILPath + _etwEvent.UnicodeStringLength(Offset_ModuleILPath);
                         }
 
                         return _offset_ModuleNativePath;
@@ -4431,7 +4434,7 @@ namespace EtwTools
                     {
                         if (_offset_ComObjectGuid == -1)
                         {
-                            _offset_ComObjectGuid = Offset_CommandLine + EtwEvent.UnicodeStringEnumerable.UnicodeStringEnumerator.StringLength(_etwEvent.Data, Offset_CommandLine);
+                            _offset_ComObjectGuid = Offset_CommandLine + _etwEvent.UnicodeStringLength(Offset_CommandLine);
                         }
 
                         return _offset_ComObjectGuid;
@@ -5198,7 +5201,7 @@ namespace EtwTools
                     {
                         if (_offset_MethodName == -1)
                         {
-                            _offset_MethodName = Offset_MethodNamespace + EtwEvent.UnicodeStringEnumerable.UnicodeStringEnumerator.StringLength(_etwEvent.Data, Offset_MethodNamespace);
+                            _offset_MethodName = Offset_MethodNamespace + _etwEvent.UnicodeStringLength(Offset_MethodNamespace);
                         }
 
                         return _offset_MethodName;
@@ -5211,7 +5214,7 @@ namespace EtwTools
                     {
                         if (_offset_MethodSignature == -1)
                         {
-                            _offset_MethodSignature = Offset_MethodName + EtwEvent.UnicodeStringEnumerable.UnicodeStringEnumerator.StringLength(_etwEvent.Data, Offset_MethodName);
+                            _offset_MethodSignature = Offset_MethodName + _etwEvent.UnicodeStringLength(Offset_MethodName);
                         }
 
                         return _offset_MethodSignature;
@@ -5224,7 +5227,7 @@ namespace EtwTools
                     {
                         if (_offset_ClrInstanceID == -1)
                         {
-                            _offset_ClrInstanceID = Offset_MethodSignature + EtwEvent.UnicodeStringEnumerable.UnicodeStringEnumerator.StringLength(_etwEvent.Data, Offset_MethodSignature);
+                            _offset_ClrInstanceID = Offset_MethodSignature + _etwEvent.UnicodeStringLength(Offset_MethodSignature);
                         }
 
                         return _offset_ClrInstanceID;
@@ -5488,7 +5491,7 @@ namespace EtwTools
                     {
                         if (_offset_MethodName == -1)
                         {
-                            _offset_MethodName = Offset_MethodNamespace + EtwEvent.UnicodeStringEnumerable.UnicodeStringEnumerator.StringLength(_etwEvent.Data, Offset_MethodNamespace);
+                            _offset_MethodName = Offset_MethodNamespace + _etwEvent.UnicodeStringLength(Offset_MethodNamespace);
                         }
 
                         return _offset_MethodName;
@@ -5501,7 +5504,7 @@ namespace EtwTools
                     {
                         if (_offset_MethodSignature == -1)
                         {
-                            _offset_MethodSignature = Offset_MethodName + EtwEvent.UnicodeStringEnumerable.UnicodeStringEnumerator.StringLength(_etwEvent.Data, Offset_MethodName);
+                            _offset_MethodSignature = Offset_MethodName + _etwEvent.UnicodeStringLength(Offset_MethodName);
                         }
 
                         return _offset_MethodSignature;
@@ -5514,7 +5517,7 @@ namespace EtwTools
                     {
                         if (_offset_ClrInstanceID == -1)
                         {
-                            _offset_ClrInstanceID = Offset_MethodSignature + EtwEvent.UnicodeStringEnumerable.UnicodeStringEnumerator.StringLength(_etwEvent.Data, Offset_MethodSignature);
+                            _offset_ClrInstanceID = Offset_MethodSignature + _etwEvent.UnicodeStringLength(Offset_MethodSignature);
                         }
 
                         return _offset_ClrInstanceID;
@@ -6203,7 +6206,7 @@ namespace EtwTools
                     {
                         if (_offset_ModuleNativePath == -1)
                         {
-                            _offset_ModuleNativePath = Offset_ModuleILPath + EtwEvent.UnicodeStringEnumerable.UnicodeStringEnumerator.StringLength(_etwEvent.Data, Offset_ModuleILPath);
+                            _offset_ModuleNativePath = Offset_ModuleILPath + _etwEvent.UnicodeStringLength(Offset_ModuleILPath);
                         }
 
                         return _offset_ModuleNativePath;
@@ -6216,7 +6219,7 @@ namespace EtwTools
                     {
                         if (_offset_ClrInstanceID == -1)
                         {
-                            _offset_ClrInstanceID = Offset_ModuleNativePath + EtwEvent.UnicodeStringEnumerable.UnicodeStringEnumerator.StringLength(_etwEvent.Data, Offset_ModuleNativePath);
+                            _offset_ClrInstanceID = Offset_ModuleNativePath + _etwEvent.UnicodeStringLength(Offset_ModuleNativePath);
                         }
 
                         return _offset_ClrInstanceID;
@@ -6453,7 +6456,7 @@ namespace EtwTools
                     {
                         if (_offset_ModuleNativePath == -1)
                         {
-                            _offset_ModuleNativePath = Offset_ModuleILPath + EtwEvent.UnicodeStringEnumerable.UnicodeStringEnumerator.StringLength(_etwEvent.Data, Offset_ModuleILPath);
+                            _offset_ModuleNativePath = Offset_ModuleILPath + _etwEvent.UnicodeStringLength(Offset_ModuleILPath);
                         }
 
                         return _offset_ModuleNativePath;
@@ -6466,7 +6469,7 @@ namespace EtwTools
                     {
                         if (_offset_ClrInstanceID == -1)
                         {
-                            _offset_ClrInstanceID = Offset_ModuleNativePath + EtwEvent.UnicodeStringEnumerable.UnicodeStringEnumerator.StringLength(_etwEvent.Data, Offset_ModuleNativePath);
+                            _offset_ClrInstanceID = Offset_ModuleNativePath + _etwEvent.UnicodeStringLength(Offset_ModuleNativePath);
                         }
 
                         return _offset_ClrInstanceID;
@@ -6689,7 +6692,7 @@ namespace EtwTools
                     {
                         if (_offset_ModuleNativePath == -1)
                         {
-                            _offset_ModuleNativePath = Offset_ModuleILPath + EtwEvent.UnicodeStringEnumerable.UnicodeStringEnumerator.StringLength(_etwEvent.Data, Offset_ModuleILPath);
+                            _offset_ModuleNativePath = Offset_ModuleILPath + _etwEvent.UnicodeStringLength(Offset_ModuleILPath);
                         }
 
                         return _offset_ModuleNativePath;
@@ -6702,7 +6705,7 @@ namespace EtwTools
                     {
                         if (_offset_ClrInstanceID == -1)
                         {
-                            _offset_ClrInstanceID = Offset_ModuleNativePath + EtwEvent.UnicodeStringEnumerable.UnicodeStringEnumerator.StringLength(_etwEvent.Data, Offset_ModuleNativePath);
+                            _offset_ClrInstanceID = Offset_ModuleNativePath + _etwEvent.UnicodeStringLength(Offset_ModuleNativePath);
                         }
 
                         return _offset_ClrInstanceID;
@@ -6919,7 +6922,7 @@ namespace EtwTools
                     {
                         if (_offset_ModuleNativePath == -1)
                         {
-                            _offset_ModuleNativePath = Offset_ModuleILPath + EtwEvent.UnicodeStringEnumerable.UnicodeStringEnumerator.StringLength(_etwEvent.Data, Offset_ModuleILPath);
+                            _offset_ModuleNativePath = Offset_ModuleILPath + _etwEvent.UnicodeStringLength(Offset_ModuleILPath);
                         }
 
                         return _offset_ModuleNativePath;
@@ -6932,7 +6935,7 @@ namespace EtwTools
                     {
                         if (_offset_ClrInstanceID == -1)
                         {
-                            _offset_ClrInstanceID = Offset_ModuleNativePath + EtwEvent.UnicodeStringEnumerable.UnicodeStringEnumerator.StringLength(_etwEvent.Data, Offset_ModuleNativePath);
+                            _offset_ClrInstanceID = Offset_ModuleNativePath + _etwEvent.UnicodeStringLength(Offset_ModuleNativePath);
                         }
 
                         return _offset_ClrInstanceID;
@@ -7148,7 +7151,7 @@ namespace EtwTools
                     {
                         if (_offset_ClrInstanceID == -1)
                         {
-                            _offset_ClrInstanceID = Offset_FullyQualifiedAssemblyName + EtwEvent.UnicodeStringEnumerable.UnicodeStringEnumerator.StringLength(_etwEvent.Data, Offset_FullyQualifiedAssemblyName);
+                            _offset_ClrInstanceID = Offset_FullyQualifiedAssemblyName + _etwEvent.UnicodeStringLength(Offset_FullyQualifiedAssemblyName);
                         }
 
                         return _offset_ClrInstanceID;
@@ -7358,7 +7361,7 @@ namespace EtwTools
                     {
                         if (_offset_ClrInstanceID == -1)
                         {
-                            _offset_ClrInstanceID = Offset_FullyQualifiedAssemblyName + EtwEvent.UnicodeStringEnumerable.UnicodeStringEnumerator.StringLength(_etwEvent.Data, Offset_FullyQualifiedAssemblyName);
+                            _offset_ClrInstanceID = Offset_FullyQualifiedAssemblyName + _etwEvent.UnicodeStringLength(Offset_FullyQualifiedAssemblyName);
                         }
 
                         return _offset_ClrInstanceID;
@@ -7541,7 +7544,7 @@ namespace EtwTools
                     {
                         if (_offset_AppDomainIndex == -1)
                         {
-                            _offset_AppDomainIndex = Offset_AppDomainName + EtwEvent.UnicodeStringEnumerable.UnicodeStringEnumerator.StringLength(_etwEvent.Data, Offset_AppDomainName);
+                            _offset_AppDomainIndex = Offset_AppDomainName + _etwEvent.UnicodeStringLength(Offset_AppDomainName);
                         }
 
                         return _offset_AppDomainIndex;
@@ -7731,7 +7734,7 @@ namespace EtwTools
                     {
                         if (_offset_AppDomainIndex == -1)
                         {
-                            _offset_AppDomainIndex = Offset_AppDomainName + EtwEvent.UnicodeStringEnumerable.UnicodeStringEnumerator.StringLength(_etwEvent.Data, Offset_AppDomainName);
+                            _offset_AppDomainIndex = Offset_AppDomainName + _etwEvent.UnicodeStringLength(Offset_AppDomainName);
                         }
 
                         return _offset_AppDomainIndex;
@@ -8479,7 +8482,7 @@ namespace EtwTools
                     {
                         if (_offset_MethodName == -1)
                         {
-                            _offset_MethodName = Offset_MethodNamespace + EtwEvent.UnicodeStringEnumerable.UnicodeStringEnumerator.StringLength(_etwEvent.Data, Offset_MethodNamespace);
+                            _offset_MethodName = Offset_MethodNamespace + _etwEvent.UnicodeStringLength(Offset_MethodNamespace);
                         }
 
                         return _offset_MethodName;
@@ -8492,7 +8495,7 @@ namespace EtwTools
                     {
                         if (_offset_MethodSignature == -1)
                         {
-                            _offset_MethodSignature = Offset_MethodName + EtwEvent.UnicodeStringEnumerable.UnicodeStringEnumerator.StringLength(_etwEvent.Data, Offset_MethodName);
+                            _offset_MethodSignature = Offset_MethodName + _etwEvent.UnicodeStringLength(Offset_MethodName);
                         }
 
                         return _offset_MethodSignature;
@@ -8505,7 +8508,7 @@ namespace EtwTools
                     {
                         if (_offset_ClrInstanceID == -1)
                         {
-                            _offset_ClrInstanceID = Offset_MethodSignature + EtwEvent.UnicodeStringEnumerable.UnicodeStringEnumerator.StringLength(_etwEvent.Data, Offset_MethodSignature);
+                            _offset_ClrInstanceID = Offset_MethodSignature + _etwEvent.UnicodeStringLength(Offset_MethodSignature);
                         }
 
                         return _offset_ClrInstanceID;
@@ -8789,7 +8792,7 @@ namespace EtwTools
                     {
                         if (_offset_MethodName == -1)
                         {
-                            _offset_MethodName = Offset_MethodNamespace + EtwEvent.UnicodeStringEnumerable.UnicodeStringEnumerator.StringLength(_etwEvent.Data, Offset_MethodNamespace);
+                            _offset_MethodName = Offset_MethodNamespace + _etwEvent.UnicodeStringLength(Offset_MethodNamespace);
                         }
 
                         return _offset_MethodName;
@@ -8802,7 +8805,7 @@ namespace EtwTools
                     {
                         if (_offset_MethodSignature == -1)
                         {
-                            _offset_MethodSignature = Offset_MethodName + EtwEvent.UnicodeStringEnumerable.UnicodeStringEnumerator.StringLength(_etwEvent.Data, Offset_MethodName);
+                            _offset_MethodSignature = Offset_MethodName + _etwEvent.UnicodeStringLength(Offset_MethodName);
                         }
 
                         return _offset_MethodSignature;
@@ -8815,7 +8818,7 @@ namespace EtwTools
                     {
                         if (_offset_ClrInstanceID == -1)
                         {
-                            _offset_ClrInstanceID = Offset_MethodSignature + EtwEvent.UnicodeStringEnumerable.UnicodeStringEnumerator.StringLength(_etwEvent.Data, Offset_MethodSignature);
+                            _offset_ClrInstanceID = Offset_MethodSignature + _etwEvent.UnicodeStringLength(Offset_MethodSignature);
                         }
 
                         return _offset_ClrInstanceID;
@@ -9075,7 +9078,7 @@ namespace EtwTools
                     {
                         if (_offset_ModuleNativePath == -1)
                         {
-                            _offset_ModuleNativePath = Offset_ModuleILPath + EtwEvent.UnicodeStringEnumerable.UnicodeStringEnumerator.StringLength(_etwEvent.Data, Offset_ModuleILPath);
+                            _offset_ModuleNativePath = Offset_ModuleILPath + _etwEvent.UnicodeStringLength(Offset_ModuleILPath);
                         }
 
                         return _offset_ModuleNativePath;
@@ -9088,7 +9091,7 @@ namespace EtwTools
                     {
                         if (_offset_ClrInstanceID == -1)
                         {
-                            _offset_ClrInstanceID = Offset_ModuleNativePath + EtwEvent.UnicodeStringEnumerable.UnicodeStringEnumerator.StringLength(_etwEvent.Data, Offset_ModuleNativePath);
+                            _offset_ClrInstanceID = Offset_ModuleNativePath + _etwEvent.UnicodeStringLength(Offset_ModuleNativePath);
                         }
 
                         return _offset_ClrInstanceID;
@@ -9140,7 +9143,7 @@ namespace EtwTools
                     {
                         if (_offset_NativePdbSignature == -1)
                         {
-                            _offset_NativePdbSignature = Offset_ManagedPdbBuildPath + EtwEvent.UnicodeStringEnumerable.UnicodeStringEnumerator.StringLength(_etwEvent.Data, Offset_ManagedPdbBuildPath);
+                            _offset_NativePdbSignature = Offset_ManagedPdbBuildPath + _etwEvent.UnicodeStringLength(Offset_ManagedPdbBuildPath);
                         }
 
                         return _offset_NativePdbSignature;
@@ -9425,7 +9428,7 @@ namespace EtwTools
                     {
                         if (_offset_ModuleNativePath == -1)
                         {
-                            _offset_ModuleNativePath = Offset_ModuleILPath + EtwEvent.UnicodeStringEnumerable.UnicodeStringEnumerator.StringLength(_etwEvent.Data, Offset_ModuleILPath);
+                            _offset_ModuleNativePath = Offset_ModuleILPath + _etwEvent.UnicodeStringLength(Offset_ModuleILPath);
                         }
 
                         return _offset_ModuleNativePath;
@@ -9438,7 +9441,7 @@ namespace EtwTools
                     {
                         if (_offset_ClrInstanceID == -1)
                         {
-                            _offset_ClrInstanceID = Offset_ModuleNativePath + EtwEvent.UnicodeStringEnumerable.UnicodeStringEnumerator.StringLength(_etwEvent.Data, Offset_ModuleNativePath);
+                            _offset_ClrInstanceID = Offset_ModuleNativePath + _etwEvent.UnicodeStringLength(Offset_ModuleNativePath);
                         }
 
                         return _offset_ClrInstanceID;
@@ -9490,7 +9493,7 @@ namespace EtwTools
                     {
                         if (_offset_NativePdbSignature == -1)
                         {
-                            _offset_NativePdbSignature = Offset_ManagedPdbBuildPath + EtwEvent.UnicodeStringEnumerable.UnicodeStringEnumerator.StringLength(_etwEvent.Data, Offset_ManagedPdbBuildPath);
+                            _offset_NativePdbSignature = Offset_ManagedPdbBuildPath + _etwEvent.UnicodeStringLength(Offset_ManagedPdbBuildPath);
                         }
 
                         return _offset_NativePdbSignature;

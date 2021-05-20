@@ -1,6 +1,9 @@
 using System;
 
+#pragma warning disable IDE0079 // Remove unnecessary suppression
 #pragma warning disable IDE0004 // Remove Unnecessary Cast
+#pragma warning disable IDE1006 // Naming Styles
+#pragma warning disable CA1416 // Validate platform compatibility
 #pragma warning disable CA1707 // Identifiers should not contain underscores
 #pragma warning disable CA1720 // Identifier contains type name
 
@@ -9,7 +12,7 @@ namespace EtwTools
     /// <summary>
     /// Provider for Microsoft-VisualStudio-CpsVs (2bf0e3de-e8a7-5821-ee81-ad9385d138a4)
     /// </summary>
-    public sealed class VisualStudioCpsVsProvider
+    public sealed class MicrosoftVisualStudioCpsVsProvider
     {
         /// <summary>s
         /// Provider ID.
@@ -145,7 +148,7 @@ namespace EtwTools
         }
 
         /// <summary>
-        /// Keywords supported by VisualStudioCpsVs.
+        /// Keywords supported by MicrosoftVisualStudioCpsVs.
         /// </summary>
         [Flags]
         public enum Keywords : ulong
@@ -378,7 +381,7 @@ namespace EtwTools
                     {
                         if (_offset_Location == -1)
                         {
-                            _offset_Location = Offset_ProjectFileName + EtwEvent.UnicodeStringEnumerable.UnicodeStringEnumerator.StringLength(_etwEvent.Data, Offset_ProjectFileName);
+                            _offset_Location = Offset_ProjectFileName + _etwEvent.UnicodeStringLength(Offset_ProjectFileName);
                         }
 
                         return _offset_Location;
@@ -391,7 +394,7 @@ namespace EtwTools
                     {
                         if (_offset_IsNew == -1)
                         {
-                            _offset_IsNew = Offset_Location + EtwEvent.UnicodeStringEnumerable.UnicodeStringEnumerator.StringLength(_etwEvent.Data, Offset_Location);
+                            _offset_IsNew = Offset_Location + _etwEvent.UnicodeStringLength(Offset_Location);
                         }
 
                         return _offset_IsNew;
@@ -858,7 +861,7 @@ namespace EtwTools
                     {
                         if (_offset_Location == -1)
                         {
-                            _offset_Location = Offset_ProjectFileName + EtwEvent.UnicodeStringEnumerable.UnicodeStringEnumerator.StringLength(_etwEvent.Data, Offset_ProjectFileName);
+                            _offset_Location = Offset_ProjectFileName + _etwEvent.UnicodeStringLength(Offset_ProjectFileName);
                         }
 
                         return _offset_Location;
@@ -871,7 +874,7 @@ namespace EtwTools
                     {
                         if (_offset_Configuration == -1)
                         {
-                            _offset_Configuration = Offset_Location + EtwEvent.UnicodeStringEnumerable.UnicodeStringEnumerator.StringLength(_etwEvent.Data, Offset_Location);
+                            _offset_Configuration = Offset_Location + _etwEvent.UnicodeStringLength(Offset_Location);
                         }
 
                         return _offset_Configuration;
@@ -1118,7 +1121,7 @@ namespace EtwTools
                     {
                         if (_offset_ProjectPath == -1)
                         {
-                            _offset_ProjectPath = Offset_StageId + EtwEvent.UnicodeStringEnumerable.UnicodeStringEnumerator.StringLength(_etwEvent.Data, Offset_StageId);
+                            _offset_ProjectPath = Offset_StageId + _etwEvent.UnicodeStringLength(Offset_StageId);
                         }
 
                         return _offset_ProjectPath;
@@ -1131,7 +1134,7 @@ namespace EtwTools
                     {
                         if (_offset_Name == -1)
                         {
-                            _offset_Name = Offset_ProjectPath + EtwEvent.UnicodeStringEnumerable.UnicodeStringEnumerator.StringLength(_etwEvent.Data, Offset_ProjectPath);
+                            _offset_Name = Offset_ProjectPath + _etwEvent.UnicodeStringLength(Offset_ProjectPath);
                         }
 
                         return _offset_Name;
@@ -1267,7 +1270,7 @@ namespace EtwTools
                     {
                         if (_offset_Location == -1)
                         {
-                            _offset_Location = Offset_ProjectFileName + EtwEvent.UnicodeStringEnumerable.UnicodeStringEnumerator.StringLength(_etwEvent.Data, Offset_ProjectFileName);
+                            _offset_Location = Offset_ProjectFileName + _etwEvent.UnicodeStringLength(Offset_ProjectFileName);
                         }
 
                         return _offset_Location;
@@ -1398,7 +1401,7 @@ namespace EtwTools
                     {
                         if (_offset_Location == -1)
                         {
-                            _offset_Location = Offset_ProjectFileName + EtwEvent.UnicodeStringEnumerable.UnicodeStringEnumerator.StringLength(_etwEvent.Data, Offset_ProjectFileName);
+                            _offset_Location = Offset_ProjectFileName + _etwEvent.UnicodeStringLength(Offset_ProjectFileName);
                         }
 
                         return _offset_Location;
@@ -1411,7 +1414,7 @@ namespace EtwTools
                     {
                         if (_offset_Capabilities == -1)
                         {
-                            _offset_Capabilities = Offset_Location + EtwEvent.UnicodeStringEnumerable.UnicodeStringEnumerator.StringLength(_etwEvent.Data, Offset_Location);
+                            _offset_Capabilities = Offset_Location + _etwEvent.UnicodeStringLength(Offset_Location);
                         }
 
                         return _offset_Capabilities;
@@ -1547,7 +1550,7 @@ namespace EtwTools
                     {
                         if (_offset_ConfigurationName == -1)
                         {
-                            _offset_ConfigurationName = Offset_ProjectPath + EtwEvent.UnicodeStringEnumerable.UnicodeStringEnumerator.StringLength(_etwEvent.Data, Offset_ProjectPath);
+                            _offset_ConfigurationName = Offset_ProjectPath + _etwEvent.UnicodeStringLength(Offset_ProjectPath);
                         }
 
                         return _offset_ConfigurationName;
@@ -2118,7 +2121,7 @@ namespace EtwTools
                     {
                         if (_offset_Location == -1)
                         {
-                            _offset_Location = Offset_ProjectFileName + EtwEvent.UnicodeStringEnumerable.UnicodeStringEnumerator.StringLength(_etwEvent.Data, Offset_ProjectFileName);
+                            _offset_Location = Offset_ProjectFileName + _etwEvent.UnicodeStringLength(Offset_ProjectFileName);
                         }
 
                         return _offset_Location;
@@ -2131,7 +2134,7 @@ namespace EtwTools
                     {
                         if (_offset_IsNew == -1)
                         {
-                            _offset_IsNew = Offset_Location + EtwEvent.UnicodeStringEnumerable.UnicodeStringEnumerator.StringLength(_etwEvent.Data, Offset_Location);
+                            _offset_IsNew = Offset_Location + _etwEvent.UnicodeStringLength(Offset_Location);
                         }
 
                         return _offset_IsNew;
@@ -2377,7 +2380,7 @@ namespace EtwTools
                     {
                         if (_offset_Size == -1)
                         {
-                            _offset_Size = Offset_ProjectPath + EtwEvent.UnicodeStringEnumerable.UnicodeStringEnumerator.StringLength(_etwEvent.Data, Offset_ProjectPath);
+                            _offset_Size = Offset_ProjectPath + _etwEvent.UnicodeStringLength(Offset_ProjectPath);
                         }
 
                         return _offset_Size;
@@ -2509,7 +2512,7 @@ namespace EtwTools
                     {
                         if (_offset_Rule == -1)
                         {
-                            _offset_Rule = Offset_ProjectFileName + EtwEvent.UnicodeStringEnumerable.UnicodeStringEnumerator.StringLength(_etwEvent.Data, Offset_ProjectFileName);
+                            _offset_Rule = Offset_ProjectFileName + _etwEvent.UnicodeStringLength(Offset_ProjectFileName);
                         }
 
                         return _offset_Rule;
@@ -2522,7 +2525,7 @@ namespace EtwTools
                     {
                         if (_offset_CategoryName == -1)
                         {
-                            _offset_CategoryName = Offset_Rule + EtwEvent.UnicodeStringEnumerable.UnicodeStringEnumerator.StringLength(_etwEvent.Data, Offset_Rule);
+                            _offset_CategoryName = Offset_Rule + _etwEvent.UnicodeStringLength(Offset_Rule);
                         }
 
                         return _offset_CategoryName;
@@ -2535,7 +2538,7 @@ namespace EtwTools
                     {
                         if (_offset_CreateBrowserObject == -1)
                         {
-                            _offset_CreateBrowserObject = Offset_CategoryName + EtwEvent.UnicodeStringEnumerable.UnicodeStringEnumerator.StringLength(_etwEvent.Data, Offset_CategoryName);
+                            _offset_CreateBrowserObject = Offset_CategoryName + _etwEvent.UnicodeStringLength(Offset_CategoryName);
                         }
 
                         return _offset_CreateBrowserObject;
@@ -2787,7 +2790,7 @@ namespace EtwTools
                     {
                         if (_offset_ConfiguredVersion == -1)
                         {
-                            _offset_ConfiguredVersion = Offset_ProjectFileName + EtwEvent.UnicodeStringEnumerable.UnicodeStringEnumerator.StringLength(_etwEvent.Data, Offset_ProjectFileName);
+                            _offset_ConfiguredVersion = Offset_ProjectFileName + _etwEvent.UnicodeStringLength(Offset_ProjectFileName);
                         }
 
                         return _offset_ConfiguredVersion;
@@ -2917,7 +2920,7 @@ namespace EtwTools
                     {
                         if (_offset_ConfiguredVersion == -1)
                         {
-                            _offset_ConfiguredVersion = Offset_ProjectFileName + EtwEvent.UnicodeStringEnumerable.UnicodeStringEnumerator.StringLength(_etwEvent.Data, Offset_ProjectFileName);
+                            _offset_ConfiguredVersion = Offset_ProjectFileName + _etwEvent.UnicodeStringLength(Offset_ProjectFileName);
                         }
 
                         return _offset_ConfiguredVersion;
@@ -3661,7 +3664,7 @@ namespace EtwTools
                     {
                         if (_offset_CommandId == -1)
                         {
-                            _offset_CommandId = Offset_CommandGroup + EtwEvent.UnicodeStringEnumerable.UnicodeStringEnumerator.StringLength(_etwEvent.Data, Offset_CommandGroup);
+                            _offset_CommandId = Offset_CommandGroup + _etwEvent.UnicodeStringLength(Offset_CommandGroup);
                         }
 
                         return _offset_CommandId;
@@ -3687,7 +3690,7 @@ namespace EtwTools
                     {
                         if (_offset_DelayTicket == -1)
                         {
-                            _offset_DelayTicket = Offset_Handler + EtwEvent.UnicodeStringEnumerable.UnicodeStringEnumerator.StringLength(_etwEvent.Data, Offset_Handler);
+                            _offset_DelayTicket = Offset_Handler + _etwEvent.UnicodeStringLength(Offset_Handler);
                         }
 
                         return _offset_DelayTicket;
@@ -4468,7 +4471,7 @@ namespace EtwTools
                     {
                         if (_offset_Configuration == -1)
                         {
-                            _offset_Configuration = Offset_Project + EtwEvent.UnicodeStringEnumerable.UnicodeStringEnumerator.StringLength(_etwEvent.Data, Offset_Project);
+                            _offset_Configuration = Offset_Project + _etwEvent.UnicodeStringLength(Offset_Project);
                         }
 
                         return _offset_Configuration;
@@ -4481,7 +4484,7 @@ namespace EtwTools
                     {
                         if (_offset_ResetId == -1)
                         {
-                            _offset_ResetId = Offset_Configuration + EtwEvent.UnicodeStringEnumerable.UnicodeStringEnumerator.StringLength(_etwEvent.Data, Offset_Configuration);
+                            _offset_ResetId = Offset_Configuration + _etwEvent.UnicodeStringLength(Offset_Configuration);
                         }
 
                         return _offset_ResetId;
@@ -4750,7 +4753,7 @@ namespace EtwTools
                     {
                         if (_offset_ProjectPath == -1)
                         {
-                            _offset_ProjectPath = Offset_StageId + EtwEvent.UnicodeStringEnumerable.UnicodeStringEnumerator.StringLength(_etwEvent.Data, Offset_StageId);
+                            _offset_ProjectPath = Offset_StageId + _etwEvent.UnicodeStringLength(Offset_StageId);
                         }
 
                         return _offset_ProjectPath;
@@ -4763,7 +4766,7 @@ namespace EtwTools
                     {
                         if (_offset_Name == -1)
                         {
-                            _offset_Name = Offset_ProjectPath + EtwEvent.UnicodeStringEnumerable.UnicodeStringEnumerator.StringLength(_etwEvent.Data, Offset_ProjectPath);
+                            _offset_Name = Offset_ProjectPath + _etwEvent.UnicodeStringLength(Offset_ProjectPath);
                         }
 
                         return _offset_Name;
@@ -5011,7 +5014,7 @@ namespace EtwTools
                     {
                         if (_offset_Count == -1)
                         {
-                            _offset_Count = Offset_ProjectPath + EtwEvent.UnicodeStringEnumerable.UnicodeStringEnumerator.StringLength(_etwEvent.Data, Offset_ProjectPath);
+                            _offset_Count = Offset_ProjectPath + _etwEvent.UnicodeStringLength(Offset_ProjectPath);
                         }
 
                         return _offset_Count;
@@ -5179,7 +5182,7 @@ namespace EtwTools
                     {
                         if (_offset_ConfiguredVersion == -1)
                         {
-                            _offset_ConfiguredVersion = Offset_Project + EtwEvent.UnicodeStringEnumerable.UnicodeStringEnumerator.StringLength(_etwEvent.Data, Offset_Project);
+                            _offset_ConfiguredVersion = Offset_Project + _etwEvent.UnicodeStringLength(Offset_Project);
                         }
 
                         return _offset_ConfiguredVersion;

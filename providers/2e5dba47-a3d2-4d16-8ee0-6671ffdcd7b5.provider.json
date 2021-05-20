@@ -1,5 +1,5 @@
 {
-  "name": "TplEventSource",
+  "name": "SystemThreadingTasksTplEventSource",
   "displayName": "System.Threading.Tasks.TplEventSource",
   "id": "2e5dba47-a3d2-4d16-8ee0-6671ffdcd7b5",
   "events": [

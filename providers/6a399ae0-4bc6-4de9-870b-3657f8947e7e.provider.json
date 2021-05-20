@@ -1,0 +1,58 @@
+{
+  "name": "KernelLostEvent",
+  "displayName": "Kernel-LostEvent",
+  "id": "6a399ae0-4bc6-4de9-870b-3657f8947e7e",
+  "events": [
+    {
+      "name": "RTLostEvent",
+      "displayName": "RTLostEvent",
+      "descriptor": {
+        "id": 0,
+        "version": 0,
+        "channel": 0,
+        "level": "None",
+        "opcode": 32,
+        "task": 0,
+        "keyword": 0
+      },
+      "fields": []
+    },
+    {
+      "name": "RTLostBuffer",
+      "displayName": "RTLostBuffer",
+      "descriptor": {
+        "id": 0,
+        "version": 0,
+        "channel": 0,
+        "level": "None",
+        "opcode": 33,
+        "task": 0,
+        "keyword": 0
+      },
+      "fields": []
+    },
+    {
+      "name": "RTLostFile",
+      "displayName": "RTLostFile",
+      "descriptor": {
+        "id": 0,
+        "version": 0,
+        "channel": 0,
+        "level": "None",
+        "opcode": 34,
+        "task": 0,
+        "keyword": 0
+      },
+      "fields": []
+    }
+  ],
+  "tasks": {},
+  "opcodes": {
+    "32": "RTLostEvent",
+    "33": "RTLostBuffer",
+    "34": "RTLostFile"
+  },
+  "keywords": {},
+  "maps": [],
+  "structs": []
+}
