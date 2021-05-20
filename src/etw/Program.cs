@@ -168,11 +168,12 @@ void ListSessions(bool json)
 
     if (!json)
     {
-        var table = new Table().AddColumn("Name").AddColumn("ID").AddColumn("Clock");
+        var table = new Table().AddColumn("Name").AddColumn("ID").AddColumn("System").AddColumn("Realtime");
 
         foreach (var session in sessions.OrderBy(s => s.Name))
         {
-            _ = table.AddRow(session.Name, session.Id.ToString(), session.ClockResolution.ToString());
+            var properties = session.GetProperties();
+            _ = table.AddRow(session.Name, session.Id.ToString(), ((properties.LogFileMode & EtwLogFileMode.SystemLogger) != 0).ToString(), ((properties.LogFileMode & EtwLogFileMode.RealTime) != 0).ToString());
         }
 
         AnsiConsole.Render(table);
@@ -365,7 +366,7 @@ async Task StartSessionAsync(string session, string spec, string output, bool wa
     etwSession.Stop();
 }
 
-static void StopSession(string name)
+static void StopSession(string session)
 {
     if (!IsElevated())
     {
@@ -375,9 +376,9 @@ static void StopSession(string name)
         return;
     }
 
-    var session = EtwSession.GetSession(name);
+    var etwSession = EtwSession.GetSession(session);
 
-    if (session == null)
+    if (etwSession == null)
     {
         AnsiConsole.WriteLine();
         AnsiConsole.WriteLine("Unable to find session.");
@@ -386,7 +387,7 @@ static void StopSession(string name)
     }
 
     // TODO
-    session.Stop();
+    etwSession.Stop();
 }
 
 void ListPublishedProviders(PublishedSort sort, bool json, bool unknown)
@@ -1236,7 +1237,7 @@ static int Size(string type, Dictionary<string, Struct> structs)
 static void CreateEventField(int indent, IReadOnlyList<Field> fields, int i, StringBuilder builder, Dictionary<string, Struct> structs)
 {
     var field = fields[i];
-    var nextField = i + 1 < fields.Count ? fields[i + 1] : null;
+    var nextFieldOffsetName = i + 1 < fields.Count ? $"Offset_{fields[i + 1].Name}" : string.Empty;
     var indentString = new string(' ', indent * 4);
     var name = field.Name;
     if (name.StartsWith('_'))
@@ -1293,19 +1294,19 @@ static void CreateEventField(int indent, IReadOnlyList<Field> fields, int i, Str
             "byte" => $"_etwEvent.Data[{fieldOffsetName}]",
             "sbyte" => $"(sbyte)_etwEvent.Data[{fieldOffsetName}]",
             "bool" => $"_etwEvent.Data[{fieldOffsetName}] != 0",
-            "ushort" => $"BitConverter.ToUInt16(_etwEvent.Data[{fieldOffsetName}..])",
-            "short" => $"BitConverter.ToInt16(_etwEvent.Data[{fieldOffsetName}..])",
-            "uint" => $"BitConverter.ToUInt32(_etwEvent.Data[{fieldOffsetName}..])",
-            "int" => $"BitConverter.ToInt32(_etwEvent.Data[{fieldOffsetName}..])",
-            "ulong" => $"BitConverter.ToUInt64(_etwEvent.Data[{fieldOffsetName}..])",
-            "long" => $"BitConverter.ToInt64(_etwEvent.Data[{fieldOffsetName}..])",
-            "char" => $"BitConverter.ToChar(_etwEvent.Data[{fieldOffsetName}..])",
-            "double" => $"BitConverter.ToDouble(_etwEvent.Data[{fieldOffsetName}..])",
-            "string" => $"System.Text.Encoding.Unicode.GetString(_etwEvent.Data[{fieldOffsetName}..])",
-            "ansistring" => $"System.Text.Encoding.ASCII.GetString(_etwEvent.Data[{fieldOffsetName}..])",
-            "pointer" => $"_etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[{fieldOffsetName}..]) : BitConverter.ToUInt64(_etwEvent.Data[{fieldOffsetName}..])",
+            "ushort" => $"BitConverter.ToUInt16(_etwEvent.Data[{fieldOffsetName}..{nextFieldOffsetName}])",
+            "short" => $"BitConverter.ToInt16(_etwEvent.Data[{fieldOffsetName}..{nextFieldOffsetName}])",
+            "uint" => $"BitConverter.ToUInt32(_etwEvent.Data[{fieldOffsetName}..{nextFieldOffsetName}])",
+            "int" => $"BitConverter.ToInt32(_etwEvent.Data[{fieldOffsetName}..{nextFieldOffsetName}])",
+            "ulong" => $"BitConverter.ToUInt64(_etwEvent.Data[{fieldOffsetName}..{nextFieldOffsetName}])",
+            "long" => $"BitConverter.ToInt64(_etwEvent.Data[{fieldOffsetName}..{nextFieldOffsetName}])",
+            "char" => $"BitConverter.ToChar(_etwEvent.Data[{fieldOffsetName}..{nextFieldOffsetName}])",
+            "double" => $"BitConverter.ToDouble(_etwEvent.Data[{fieldOffsetName}..{nextFieldOffsetName}])",
+            "string" => $"System.Text.Encoding.Unicode.GetString(_etwEvent.Data[{fieldOffsetName}..{nextFieldOffsetName}])",
+            "ansistring" => $"System.Text.Encoding.ASCII.GetString(_etwEvent.Data[{fieldOffsetName}..{nextFieldOffsetName}])",
+            "pointer" => $"_etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[{fieldOffsetName}..{nextFieldOffsetName}]) : BitConverter.ToUInt64(_etwEvent.Data[{fieldOffsetName}..{nextFieldOffsetName}])",
             "wbemsid" => $"_etwEvent.GetWbemSid({fieldOffsetName})",
-            "guid" => $"new(_etwEvent.Data[{fieldOffsetName}..])",
+            "guid" => $"new(_etwEvent.Data[{fieldOffsetName}..{nextFieldOffsetName}])",
             _ => "unknown",
         }}";
 
@@ -1527,7 +1528,13 @@ static string CreateProviderEvents(Provider provider, Dictionary<string, Struct>
             public {EventName(e)}(EtwEvent etwEvent)
             {{
                 _etwEvent = etwEvent;
-            }}{(e.Fields == null || !e.Fields.Any() ? string.Empty : $@"
+            }}
+
+            /// <summary>
+            /// Converts a generic ETW event to a {EventName(e)}.
+            /// </summary>
+            /// <param name=""etwEvent""></param>
+            public static explicit operator {EventName(e)}(EtwEvent etwEvent) => new(etwEvent);{ (e.Fields == null || !e.Fields.Any() ? string.Empty : $@"
 
             /// <summary>
             /// A data wrapper for a {e.Name} event.

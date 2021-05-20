@@ -150,6 +150,12 @@ namespace EtwTools
             }
 
             /// <summary>
+            /// Converts a generic ETW event to a EventSourceMessageEvent.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator EventSourceMessageEvent(EtwEvent etwEvent) => new(etwEvent);
+
+            /// <summary>
             /// A data wrapper for a EventSourceMessage event.
             /// </summary>
             public ref struct EventSourceMessageData
@@ -260,6 +266,12 @@ namespace EtwTools
             }
 
             /// <summary>
+            /// Converts a generic ETW event to a LogEvent.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator LogEvent(EtwEvent etwEvent) => new(etwEvent);
+
+            /// <summary>
             /// A data wrapper for a Log event.
             /// </summary>
             public ref struct LogData
@@ -298,7 +310,7 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the Message field.
                 /// </summary>
-                public string Message => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_Message..]);
+                public string Message => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_Message..Offset_FunctionId]);
 
                 /// <summary>
                 /// Retrieves the FunctionId field.
@@ -390,6 +402,12 @@ namespace EtwTools
             }
 
             /// <summary>
+            /// Converts a generic ETW event to a BlockStartEvent.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator BlockStartEvent(EtwEvent etwEvent) => new(etwEvent);
+
+            /// <summary>
             /// A data wrapper for a BlockStart event.
             /// </summary>
             public ref struct BlockStartData
@@ -442,12 +460,12 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the Message field.
                 /// </summary>
-                public string Message => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_Message..]);
+                public string Message => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_Message..Offset_FunctionId]);
 
                 /// <summary>
                 /// Retrieves the FunctionId field.
                 /// </summary>
-                public FunctionId FunctionId => (FunctionId)BitConverter.ToUInt32(_etwEvent.Data[Offset_FunctionId..]);
+                public FunctionId FunctionId => (FunctionId)BitConverter.ToUInt32(_etwEvent.Data[Offset_FunctionId..Offset_BlockId]);
 
                 /// <summary>
                 /// Retrieves the BlockId field.
@@ -540,6 +558,12 @@ namespace EtwTools
             }
 
             /// <summary>
+            /// Converts a generic ETW event to a BlockStopEvent.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator BlockStopEvent(EtwEvent etwEvent) => new(etwEvent);
+
+            /// <summary>
             /// A data wrapper for a BlockStop event.
             /// </summary>
             public ref struct BlockStopData
@@ -592,12 +616,12 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the FunctionId field.
                 /// </summary>
-                public FunctionId FunctionId => (FunctionId)BitConverter.ToUInt32(_etwEvent.Data[Offset_FunctionId..]);
+                public FunctionId FunctionId => (FunctionId)BitConverter.ToUInt32(_etwEvent.Data[Offset_FunctionId..Offset_Tick]);
 
                 /// <summary>
                 /// Retrieves the Tick field.
                 /// </summary>
-                public int Tick => BitConverter.ToInt32(_etwEvent.Data[Offset_Tick..]);
+                public int Tick => BitConverter.ToInt32(_etwEvent.Data[Offset_Tick..Offset_BlockId]);
 
                 /// <summary>
                 /// Retrieves the BlockId field.
@@ -688,6 +712,12 @@ namespace EtwTools
             {
                 _etwEvent = etwEvent;
             }
+
+            /// <summary>
+            /// Converts a generic ETW event to a SendFunctionDefinitionsEvent.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator SendFunctionDefinitionsEvent(EtwEvent etwEvent) => new(etwEvent);
 
             /// <summary>
             /// A data wrapper for a SendFunctionDefinitions event.
@@ -800,6 +830,12 @@ namespace EtwTools
             }
 
             /// <summary>
+            /// Converts a generic ETW event to a BlockCanceledEvent.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator BlockCanceledEvent(EtwEvent etwEvent) => new(etwEvent);
+
+            /// <summary>
             /// A data wrapper for a BlockCanceled event.
             /// </summary>
             public ref struct BlockCanceledData
@@ -852,12 +888,12 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the FunctionId field.
                 /// </summary>
-                public FunctionId FunctionId => (FunctionId)BitConverter.ToUInt32(_etwEvent.Data[Offset_FunctionId..]);
+                public FunctionId FunctionId => (FunctionId)BitConverter.ToUInt32(_etwEvent.Data[Offset_FunctionId..Offset_Tick]);
 
                 /// <summary>
                 /// Retrieves the Tick field.
                 /// </summary>
-                public int Tick => BitConverter.ToInt32(_etwEvent.Data[Offset_Tick..]);
+                public int Tick => BitConverter.ToInt32(_etwEvent.Data[Offset_Tick..Offset_BlockId]);
 
                 /// <summary>
                 /// Retrieves the BlockId field.
@@ -943,6 +979,12 @@ namespace EtwTools
             {
                 _etwEvent = etwEvent;
             }
+
+            /// <summary>
+            /// Converts a generic ETW event to a OnEventCommandEvent.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator OnEventCommandEvent(EtwEvent etwEvent) => new(etwEvent);
         }
 
         /// <summary>

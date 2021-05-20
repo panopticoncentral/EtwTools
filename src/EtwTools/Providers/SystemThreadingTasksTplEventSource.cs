@@ -278,6 +278,12 @@ namespace EtwTools
             }
 
             /// <summary>
+            /// Converts a generic ETW event to a EventSourceMessageEvent.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator EventSourceMessageEvent(EtwEvent etwEvent) => new(etwEvent);
+
+            /// <summary>
             /// A data wrapper for a EventSourceMessage event.
             /// </summary>
             public ref struct EventSourceMessageData
@@ -388,6 +394,12 @@ namespace EtwTools
             }
 
             /// <summary>
+            /// Converts a generic ETW event to a ParallelLoopBeginEvent.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator ParallelLoopBeginEvent(EtwEvent etwEvent) => new(etwEvent);
+
+            /// <summary>
             /// A data wrapper for a ParallelLoopBegin event.
             /// </summary>
             public ref struct ParallelLoopBeginData
@@ -482,27 +494,27 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the OriginatingTaskSchedulerID field.
                 /// </summary>
-                public int OriginatingTaskSchedulerID => BitConverter.ToInt32(_etwEvent.Data[Offset_OriginatingTaskSchedulerID..]);
+                public int OriginatingTaskSchedulerID => BitConverter.ToInt32(_etwEvent.Data[Offset_OriginatingTaskSchedulerID..Offset_OriginatingTaskID]);
 
                 /// <summary>
                 /// Retrieves the OriginatingTaskID field.
                 /// </summary>
-                public int OriginatingTaskID => BitConverter.ToInt32(_etwEvent.Data[Offset_OriginatingTaskID..]);
+                public int OriginatingTaskID => BitConverter.ToInt32(_etwEvent.Data[Offset_OriginatingTaskID..Offset_ForkJoinContextID]);
 
                 /// <summary>
                 /// Retrieves the ForkJoinContextID field.
                 /// </summary>
-                public int ForkJoinContextID => BitConverter.ToInt32(_etwEvent.Data[Offset_ForkJoinContextID..]);
+                public int ForkJoinContextID => BitConverter.ToInt32(_etwEvent.Data[Offset_ForkJoinContextID..Offset_OperationType]);
 
                 /// <summary>
                 /// Retrieves the OperationType field.
                 /// </summary>
-                public ForkJoinOperationType OperationType => (ForkJoinOperationType)BitConverter.ToUInt32(_etwEvent.Data[Offset_OperationType..]);
+                public ForkJoinOperationType OperationType => (ForkJoinOperationType)BitConverter.ToUInt32(_etwEvent.Data[Offset_OperationType..Offset_InclusiveFrom]);
 
                 /// <summary>
                 /// Retrieves the InclusiveFrom field.
                 /// </summary>
-                public long InclusiveFrom => BitConverter.ToInt64(_etwEvent.Data[Offset_InclusiveFrom..]);
+                public long InclusiveFrom => BitConverter.ToInt64(_etwEvent.Data[Offset_InclusiveFrom..Offset_ExclusiveTo]);
 
                 /// <summary>
                 /// Retrieves the ExclusiveTo field.
@@ -598,6 +610,12 @@ namespace EtwTools
             }
 
             /// <summary>
+            /// Converts a generic ETW event to a ParallelLoopEndEvent.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator ParallelLoopEndEvent(EtwEvent etwEvent) => new(etwEvent);
+
+            /// <summary>
             /// A data wrapper for a ParallelLoopEnd event.
             /// </summary>
             public ref struct ParallelLoopEndData
@@ -664,17 +682,17 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the OriginatingTaskSchedulerID field.
                 /// </summary>
-                public int OriginatingTaskSchedulerID => BitConverter.ToInt32(_etwEvent.Data[Offset_OriginatingTaskSchedulerID..]);
+                public int OriginatingTaskSchedulerID => BitConverter.ToInt32(_etwEvent.Data[Offset_OriginatingTaskSchedulerID..Offset_OriginatingTaskID]);
 
                 /// <summary>
                 /// Retrieves the OriginatingTaskID field.
                 /// </summary>
-                public int OriginatingTaskID => BitConverter.ToInt32(_etwEvent.Data[Offset_OriginatingTaskID..]);
+                public int OriginatingTaskID => BitConverter.ToInt32(_etwEvent.Data[Offset_OriginatingTaskID..Offset_ForkJoinContextID]);
 
                 /// <summary>
                 /// Retrieves the ForkJoinContextID field.
                 /// </summary>
-                public int ForkJoinContextID => BitConverter.ToInt32(_etwEvent.Data[Offset_ForkJoinContextID..]);
+                public int ForkJoinContextID => BitConverter.ToInt32(_etwEvent.Data[Offset_ForkJoinContextID..Offset_TotalIterations]);
 
                 /// <summary>
                 /// Retrieves the TotalIterations field.
@@ -768,6 +786,12 @@ namespace EtwTools
             }
 
             /// <summary>
+            /// Converts a generic ETW event to a ParallelInvokeBeginEvent.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator ParallelInvokeBeginEvent(EtwEvent etwEvent) => new(etwEvent);
+
+            /// <summary>
             /// A data wrapper for a ParallelInvokeBegin event.
             /// </summary>
             public ref struct ParallelInvokeBeginData
@@ -848,22 +872,22 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the OriginatingTaskSchedulerID field.
                 /// </summary>
-                public int OriginatingTaskSchedulerID => BitConverter.ToInt32(_etwEvent.Data[Offset_OriginatingTaskSchedulerID..]);
+                public int OriginatingTaskSchedulerID => BitConverter.ToInt32(_etwEvent.Data[Offset_OriginatingTaskSchedulerID..Offset_OriginatingTaskID]);
 
                 /// <summary>
                 /// Retrieves the OriginatingTaskID field.
                 /// </summary>
-                public int OriginatingTaskID => BitConverter.ToInt32(_etwEvent.Data[Offset_OriginatingTaskID..]);
+                public int OriginatingTaskID => BitConverter.ToInt32(_etwEvent.Data[Offset_OriginatingTaskID..Offset_ForkJoinContextID]);
 
                 /// <summary>
                 /// Retrieves the ForkJoinContextID field.
                 /// </summary>
-                public int ForkJoinContextID => BitConverter.ToInt32(_etwEvent.Data[Offset_ForkJoinContextID..]);
+                public int ForkJoinContextID => BitConverter.ToInt32(_etwEvent.Data[Offset_ForkJoinContextID..Offset_OperationType]);
 
                 /// <summary>
                 /// Retrieves the OperationType field.
                 /// </summary>
-                public ForkJoinOperationType OperationType => (ForkJoinOperationType)BitConverter.ToUInt32(_etwEvent.Data[Offset_OperationType..]);
+                public ForkJoinOperationType OperationType => (ForkJoinOperationType)BitConverter.ToUInt32(_etwEvent.Data[Offset_OperationType..Offset_ActionCount]);
 
                 /// <summary>
                 /// Retrieves the ActionCount field.
@@ -958,6 +982,12 @@ namespace EtwTools
             }
 
             /// <summary>
+            /// Converts a generic ETW event to a ParallelInvokeEndEvent.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator ParallelInvokeEndEvent(EtwEvent etwEvent) => new(etwEvent);
+
+            /// <summary>
             /// A data wrapper for a ParallelInvokeEnd event.
             /// </summary>
             public ref struct ParallelInvokeEndData
@@ -1010,12 +1040,12 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the OriginatingTaskSchedulerID field.
                 /// </summary>
-                public int OriginatingTaskSchedulerID => BitConverter.ToInt32(_etwEvent.Data[Offset_OriginatingTaskSchedulerID..]);
+                public int OriginatingTaskSchedulerID => BitConverter.ToInt32(_etwEvent.Data[Offset_OriginatingTaskSchedulerID..Offset_OriginatingTaskID]);
 
                 /// <summary>
                 /// Retrieves the OriginatingTaskID field.
                 /// </summary>
-                public int OriginatingTaskID => BitConverter.ToInt32(_etwEvent.Data[Offset_OriginatingTaskID..]);
+                public int OriginatingTaskID => BitConverter.ToInt32(_etwEvent.Data[Offset_OriginatingTaskID..Offset_ForkJoinContextID]);
 
                 /// <summary>
                 /// Retrieves the ForkJoinContextID field.
@@ -1108,6 +1138,12 @@ namespace EtwTools
             }
 
             /// <summary>
+            /// Converts a generic ETW event to a ParallelForkEvent.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator ParallelForkEvent(EtwEvent etwEvent) => new(etwEvent);
+
+            /// <summary>
             /// A data wrapper for a ParallelFork event.
             /// </summary>
             public ref struct ParallelForkData
@@ -1160,12 +1196,12 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the OriginatingTaskSchedulerID field.
                 /// </summary>
-                public int OriginatingTaskSchedulerID => BitConverter.ToInt32(_etwEvent.Data[Offset_OriginatingTaskSchedulerID..]);
+                public int OriginatingTaskSchedulerID => BitConverter.ToInt32(_etwEvent.Data[Offset_OriginatingTaskSchedulerID..Offset_OriginatingTaskID]);
 
                 /// <summary>
                 /// Retrieves the OriginatingTaskID field.
                 /// </summary>
-                public int OriginatingTaskID => BitConverter.ToInt32(_etwEvent.Data[Offset_OriginatingTaskID..]);
+                public int OriginatingTaskID => BitConverter.ToInt32(_etwEvent.Data[Offset_OriginatingTaskID..Offset_ForkJoinContextID]);
 
                 /// <summary>
                 /// Retrieves the ForkJoinContextID field.
@@ -1258,6 +1294,12 @@ namespace EtwTools
             }
 
             /// <summary>
+            /// Converts a generic ETW event to a ParallelJoinEvent.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator ParallelJoinEvent(EtwEvent etwEvent) => new(etwEvent);
+
+            /// <summary>
             /// A data wrapper for a ParallelJoin event.
             /// </summary>
             public ref struct ParallelJoinData
@@ -1310,12 +1352,12 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the OriginatingTaskSchedulerID field.
                 /// </summary>
-                public int OriginatingTaskSchedulerID => BitConverter.ToInt32(_etwEvent.Data[Offset_OriginatingTaskSchedulerID..]);
+                public int OriginatingTaskSchedulerID => BitConverter.ToInt32(_etwEvent.Data[Offset_OriginatingTaskSchedulerID..Offset_OriginatingTaskID]);
 
                 /// <summary>
                 /// Retrieves the OriginatingTaskID field.
                 /// </summary>
-                public int OriginatingTaskID => BitConverter.ToInt32(_etwEvent.Data[Offset_OriginatingTaskID..]);
+                public int OriginatingTaskID => BitConverter.ToInt32(_etwEvent.Data[Offset_OriginatingTaskID..Offset_ForkJoinContextID]);
 
                 /// <summary>
                 /// Retrieves the ForkJoinContextID field.
@@ -1406,6 +1448,12 @@ namespace EtwTools
             {
                 _etwEvent = etwEvent;
             }
+
+            /// <summary>
+            /// Converts a generic ETW event to a TaskScheduledEventV1.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator TaskScheduledEventV1(EtwEvent etwEvent) => new(etwEvent);
 
             /// <summary>
             /// A data wrapper for a TaskScheduled event.
@@ -1502,27 +1550,27 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the OriginatingTaskSchedulerID field.
                 /// </summary>
-                public int OriginatingTaskSchedulerID => BitConverter.ToInt32(_etwEvent.Data[Offset_OriginatingTaskSchedulerID..]);
+                public int OriginatingTaskSchedulerID => BitConverter.ToInt32(_etwEvent.Data[Offset_OriginatingTaskSchedulerID..Offset_OriginatingTaskID]);
 
                 /// <summary>
                 /// Retrieves the OriginatingTaskID field.
                 /// </summary>
-                public int OriginatingTaskID => BitConverter.ToInt32(_etwEvent.Data[Offset_OriginatingTaskID..]);
+                public int OriginatingTaskID => BitConverter.ToInt32(_etwEvent.Data[Offset_OriginatingTaskID..Offset_TaskID]);
 
                 /// <summary>
                 /// Retrieves the TaskID field.
                 /// </summary>
-                public int TaskID => BitConverter.ToInt32(_etwEvent.Data[Offset_TaskID..]);
+                public int TaskID => BitConverter.ToInt32(_etwEvent.Data[Offset_TaskID..Offset_CreatingTaskID]);
 
                 /// <summary>
                 /// Retrieves the CreatingTaskID field.
                 /// </summary>
-                public int CreatingTaskID => BitConverter.ToInt32(_etwEvent.Data[Offset_CreatingTaskID..]);
+                public int CreatingTaskID => BitConverter.ToInt32(_etwEvent.Data[Offset_CreatingTaskID..Offset_TaskCreationOptions]);
 
                 /// <summary>
                 /// Retrieves the TaskCreationOptions field.
                 /// </summary>
-                public int TaskCreationOptions => BitConverter.ToInt32(_etwEvent.Data[Offset_TaskCreationOptions..]);
+                public int TaskCreationOptions => BitConverter.ToInt32(_etwEvent.Data[Offset_TaskCreationOptions..Offset_AppDomain]);
 
                 /// <summary>
                 /// Retrieves the AppDomain field.
@@ -1618,6 +1666,12 @@ namespace EtwTools
             }
 
             /// <summary>
+            /// Converts a generic ETW event to a TaskStartedEvent.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator TaskStartedEvent(EtwEvent etwEvent) => new(etwEvent);
+
+            /// <summary>
             /// A data wrapper for a TaskStarted event.
             /// </summary>
             public ref struct TaskStartedData
@@ -1670,12 +1724,12 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the OriginatingTaskSchedulerID field.
                 /// </summary>
-                public int OriginatingTaskSchedulerID => BitConverter.ToInt32(_etwEvent.Data[Offset_OriginatingTaskSchedulerID..]);
+                public int OriginatingTaskSchedulerID => BitConverter.ToInt32(_etwEvent.Data[Offset_OriginatingTaskSchedulerID..Offset_OriginatingTaskID]);
 
                 /// <summary>
                 /// Retrieves the OriginatingTaskID field.
                 /// </summary>
-                public int OriginatingTaskID => BitConverter.ToInt32(_etwEvent.Data[Offset_OriginatingTaskID..]);
+                public int OriginatingTaskID => BitConverter.ToInt32(_etwEvent.Data[Offset_OriginatingTaskID..Offset_TaskID]);
 
                 /// <summary>
                 /// Retrieves the TaskID field.
@@ -1768,6 +1822,12 @@ namespace EtwTools
             }
 
             /// <summary>
+            /// Converts a generic ETW event to a TaskCompletedEventV1.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator TaskCompletedEventV1(EtwEvent etwEvent) => new(etwEvent);
+
+            /// <summary>
             /// A data wrapper for a TaskCompleted event.
             /// </summary>
             public ref struct TaskCompletedData
@@ -1834,17 +1894,17 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the OriginatingTaskSchedulerID field.
                 /// </summary>
-                public int OriginatingTaskSchedulerID => BitConverter.ToInt32(_etwEvent.Data[Offset_OriginatingTaskSchedulerID..]);
+                public int OriginatingTaskSchedulerID => BitConverter.ToInt32(_etwEvent.Data[Offset_OriginatingTaskSchedulerID..Offset_OriginatingTaskID]);
 
                 /// <summary>
                 /// Retrieves the OriginatingTaskID field.
                 /// </summary>
-                public int OriginatingTaskID => BitConverter.ToInt32(_etwEvent.Data[Offset_OriginatingTaskID..]);
+                public int OriginatingTaskID => BitConverter.ToInt32(_etwEvent.Data[Offset_OriginatingTaskID..Offset_TaskID]);
 
                 /// <summary>
                 /// Retrieves the TaskID field.
                 /// </summary>
-                public int TaskID => BitConverter.ToInt32(_etwEvent.Data[Offset_TaskID..]);
+                public int TaskID => BitConverter.ToInt32(_etwEvent.Data[Offset_TaskID..Offset_IsExceptional]);
 
                 /// <summary>
                 /// Retrieves the IsExceptional field.
@@ -1936,6 +1996,12 @@ namespace EtwTools
             {
                 _etwEvent = etwEvent;
             }
+
+            /// <summary>
+            /// Converts a generic ETW event to a TaskWaitBeginEventV3.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator TaskWaitBeginEventV3(EtwEvent etwEvent) => new(etwEvent);
 
             /// <summary>
             /// A data wrapper for a TaskWaitBegin event.
@@ -2032,27 +2098,27 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the OriginatingTaskSchedulerID field.
                 /// </summary>
-                public int OriginatingTaskSchedulerID => BitConverter.ToInt32(_etwEvent.Data[Offset_OriginatingTaskSchedulerID..]);
+                public int OriginatingTaskSchedulerID => BitConverter.ToInt32(_etwEvent.Data[Offset_OriginatingTaskSchedulerID..Offset_OriginatingTaskID]);
 
                 /// <summary>
                 /// Retrieves the OriginatingTaskID field.
                 /// </summary>
-                public int OriginatingTaskID => BitConverter.ToInt32(_etwEvent.Data[Offset_OriginatingTaskID..]);
+                public int OriginatingTaskID => BitConverter.ToInt32(_etwEvent.Data[Offset_OriginatingTaskID..Offset_TaskID]);
 
                 /// <summary>
                 /// Retrieves the TaskID field.
                 /// </summary>
-                public int TaskID => BitConverter.ToInt32(_etwEvent.Data[Offset_TaskID..]);
+                public int TaskID => BitConverter.ToInt32(_etwEvent.Data[Offset_TaskID..Offset_Behavior]);
 
                 /// <summary>
                 /// Retrieves the Behavior field.
                 /// </summary>
-                public TaskWaitBehavior Behavior => (TaskWaitBehavior)BitConverter.ToUInt32(_etwEvent.Data[Offset_Behavior..]);
+                public TaskWaitBehavior Behavior => (TaskWaitBehavior)BitConverter.ToUInt32(_etwEvent.Data[Offset_Behavior..Offset_ContinueWithTaskID]);
 
                 /// <summary>
                 /// Retrieves the ContinueWithTaskID field.
                 /// </summary>
-                public int ContinueWithTaskID => BitConverter.ToInt32(_etwEvent.Data[Offset_ContinueWithTaskID..]);
+                public int ContinueWithTaskID => BitConverter.ToInt32(_etwEvent.Data[Offset_ContinueWithTaskID..Offset_AppDomain]);
 
                 /// <summary>
                 /// Retrieves the AppDomain field.
@@ -2148,6 +2214,12 @@ namespace EtwTools
             }
 
             /// <summary>
+            /// Converts a generic ETW event to a TaskWaitEndEvent.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator TaskWaitEndEvent(EtwEvent etwEvent) => new(etwEvent);
+
+            /// <summary>
             /// A data wrapper for a TaskWaitEnd event.
             /// </summary>
             public ref struct TaskWaitEndData
@@ -2200,12 +2272,12 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the OriginatingTaskSchedulerID field.
                 /// </summary>
-                public int OriginatingTaskSchedulerID => BitConverter.ToInt32(_etwEvent.Data[Offset_OriginatingTaskSchedulerID..]);
+                public int OriginatingTaskSchedulerID => BitConverter.ToInt32(_etwEvent.Data[Offset_OriginatingTaskSchedulerID..Offset_OriginatingTaskID]);
 
                 /// <summary>
                 /// Retrieves the OriginatingTaskID field.
                 /// </summary>
-                public int OriginatingTaskID => BitConverter.ToInt32(_etwEvent.Data[Offset_OriginatingTaskID..]);
+                public int OriginatingTaskID => BitConverter.ToInt32(_etwEvent.Data[Offset_OriginatingTaskID..Offset_TaskID]);
 
                 /// <summary>
                 /// Retrieves the TaskID field.
@@ -2296,6 +2368,12 @@ namespace EtwTools
             {
                 _etwEvent = etwEvent;
             }
+
+            /// <summary>
+            /// Converts a generic ETW event to a TaskWaitContinuationCompleteEvent.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator TaskWaitContinuationCompleteEvent(EtwEvent etwEvent) => new(etwEvent);
 
             /// <summary>
             /// A data wrapper for a TaskWaitContinuationComplete event.
@@ -2408,6 +2486,12 @@ namespace EtwTools
             }
 
             /// <summary>
+            /// Converts a generic ETW event to a TaskWaitContinuationStartedEvent.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator TaskWaitContinuationStartedEvent(EtwEvent etwEvent) => new(etwEvent);
+
+            /// <summary>
             /// A data wrapper for a TaskWaitContinuationStarted event.
             /// </summary>
             public ref struct TaskWaitContinuationStartedData
@@ -2518,6 +2602,12 @@ namespace EtwTools
             }
 
             /// <summary>
+            /// Converts a generic ETW event to a AwaitTaskContinuationScheduledEvent.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator AwaitTaskContinuationScheduledEvent(EtwEvent etwEvent) => new(etwEvent);
+
+            /// <summary>
             /// A data wrapper for a AwaitTaskContinuationScheduled event.
             /// </summary>
             public ref struct AwaitTaskContinuationScheduledData
@@ -2570,12 +2660,12 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the OriginatingTaskSchedulerID field.
                 /// </summary>
-                public int OriginatingTaskSchedulerID => BitConverter.ToInt32(_etwEvent.Data[Offset_OriginatingTaskSchedulerID..]);
+                public int OriginatingTaskSchedulerID => BitConverter.ToInt32(_etwEvent.Data[Offset_OriginatingTaskSchedulerID..Offset_OriginatingTaskID]);
 
                 /// <summary>
                 /// Retrieves the OriginatingTaskID field.
                 /// </summary>
-                public int OriginatingTaskID => BitConverter.ToInt32(_etwEvent.Data[Offset_OriginatingTaskID..]);
+                public int OriginatingTaskID => BitConverter.ToInt32(_etwEvent.Data[Offset_OriginatingTaskID..Offset_ContinuwWithTaskId]);
 
                 /// <summary>
                 /// Retrieves the ContinuwWithTaskId field.
@@ -2668,6 +2758,12 @@ namespace EtwTools
             }
 
             /// <summary>
+            /// Converts a generic ETW event to a TraceOperationBeginEventV1.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator TraceOperationBeginEventV1(EtwEvent etwEvent) => new(etwEvent);
+
+            /// <summary>
             /// A data wrapper for a TraceOperationBegin event.
             /// </summary>
             public ref struct TraceOperationBeginData
@@ -2720,12 +2816,12 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the TaskID field.
                 /// </summary>
-                public int TaskID => BitConverter.ToInt32(_etwEvent.Data[Offset_TaskID..]);
+                public int TaskID => BitConverter.ToInt32(_etwEvent.Data[Offset_TaskID..Offset_OperationName]);
 
                 /// <summary>
                 /// Retrieves the OperationName field.
                 /// </summary>
-                public string OperationName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_OperationName..]);
+                public string OperationName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_OperationName..Offset_RelatedContext]);
 
                 /// <summary>
                 /// Retrieves the RelatedContext field.
@@ -2818,6 +2914,12 @@ namespace EtwTools
             }
 
             /// <summary>
+            /// Converts a generic ETW event to a TraceOperationRelationEventV1.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator TraceOperationRelationEventV1(EtwEvent etwEvent) => new(etwEvent);
+
+            /// <summary>
             /// A data wrapper for a TraceOperationRelation event.
             /// </summary>
             public ref struct TraceOperationRelationData
@@ -2856,7 +2958,7 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the TaskID field.
                 /// </summary>
-                public int TaskID => BitConverter.ToInt32(_etwEvent.Data[Offset_TaskID..]);
+                public int TaskID => BitConverter.ToInt32(_etwEvent.Data[Offset_TaskID..Offset_Relation]);
 
                 /// <summary>
                 /// Retrieves the Relation field.
@@ -2948,6 +3050,12 @@ namespace EtwTools
             }
 
             /// <summary>
+            /// Converts a generic ETW event to a TraceOperationEndEventV1.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator TraceOperationEndEventV1(EtwEvent etwEvent) => new(etwEvent);
+
+            /// <summary>
             /// A data wrapper for a TraceOperationEnd event.
             /// </summary>
             public ref struct TraceOperationEndData
@@ -2986,7 +3094,7 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the TaskID field.
                 /// </summary>
-                public int TaskID => BitConverter.ToInt32(_etwEvent.Data[Offset_TaskID..]);
+                public int TaskID => BitConverter.ToInt32(_etwEvent.Data[Offset_TaskID..Offset_Status]);
 
                 /// <summary>
                 /// Retrieves the Status field.
@@ -3078,6 +3186,12 @@ namespace EtwTools
             }
 
             /// <summary>
+            /// Converts a generic ETW event to a TraceSynchronousWorkBeginEventV1.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator TraceSynchronousWorkBeginEventV1(EtwEvent etwEvent) => new(etwEvent);
+
+            /// <summary>
             /// A data wrapper for a TraceSynchronousWorkBegin event.
             /// </summary>
             public ref struct TraceSynchronousWorkBeginData
@@ -3116,7 +3230,7 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the TaskID field.
                 /// </summary>
-                public int TaskID => BitConverter.ToInt32(_etwEvent.Data[Offset_TaskID..]);
+                public int TaskID => BitConverter.ToInt32(_etwEvent.Data[Offset_TaskID..Offset_Work]);
 
                 /// <summary>
                 /// Retrieves the Work field.
@@ -3206,6 +3320,12 @@ namespace EtwTools
             {
                 _etwEvent = etwEvent;
             }
+
+            /// <summary>
+            /// Converts a generic ETW event to a TraceSynchronousWorkEndEventV1.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator TraceSynchronousWorkEndEventV1(EtwEvent etwEvent) => new(etwEvent);
 
             /// <summary>
             /// A data wrapper for a TraceSynchronousWorkEnd event.
@@ -3318,6 +3438,12 @@ namespace EtwTools
             }
 
             /// <summary>
+            /// Converts a generic ETW event to a RunningContinuationEvent.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator RunningContinuationEvent(EtwEvent etwEvent) => new(etwEvent);
+
+            /// <summary>
             /// A data wrapper for a RunningContinuation event.
             /// </summary>
             public ref struct RunningContinuationData
@@ -3356,7 +3482,7 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the TaskID field.
                 /// </summary>
-                public int TaskID => BitConverter.ToInt32(_etwEvent.Data[Offset_TaskID..]);
+                public int TaskID => BitConverter.ToInt32(_etwEvent.Data[Offset_TaskID..Offset_Object]);
 
                 /// <summary>
                 /// Retrieves the Object field.
@@ -3448,6 +3574,12 @@ namespace EtwTools
             }
 
             /// <summary>
+            /// Converts a generic ETW event to a RunningContinuationListEvent.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator RunningContinuationListEvent(EtwEvent etwEvent) => new(etwEvent);
+
+            /// <summary>
             /// A data wrapper for a RunningContinuationList event.
             /// </summary>
             public ref struct RunningContinuationListData
@@ -3500,12 +3632,12 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the TaskID field.
                 /// </summary>
-                public int TaskID => BitConverter.ToInt32(_etwEvent.Data[Offset_TaskID..]);
+                public int TaskID => BitConverter.ToInt32(_etwEvent.Data[Offset_TaskID..Offset_Index]);
 
                 /// <summary>
                 /// Retrieves the Index field.
                 /// </summary>
-                public int Index => BitConverter.ToInt32(_etwEvent.Data[Offset_Index..]);
+                public int Index => BitConverter.ToInt32(_etwEvent.Data[Offset_Index..Offset_Object]);
 
                 /// <summary>
                 /// Retrieves the Object field.
@@ -3596,6 +3728,12 @@ namespace EtwTools
             {
                 _etwEvent = etwEvent;
             }
+
+            /// <summary>
+            /// Converts a generic ETW event to a DebugMessageEvent.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator DebugMessageEvent(EtwEvent etwEvent) => new(etwEvent);
 
             /// <summary>
             /// A data wrapper for a DebugMessage event.
@@ -3708,6 +3846,12 @@ namespace EtwTools
             }
 
             /// <summary>
+            /// Converts a generic ETW event to a DebugFacilityMessageEvent.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator DebugFacilityMessageEvent(EtwEvent etwEvent) => new(etwEvent);
+
+            /// <summary>
             /// A data wrapper for a DebugFacilityMessage event.
             /// </summary>
             public ref struct DebugFacilityMessageData
@@ -3746,7 +3890,7 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the Facility field.
                 /// </summary>
-                public string Facility => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_Facility..]);
+                public string Facility => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_Facility..Offset_Message]);
 
                 /// <summary>
                 /// Retrieves the Message field.
@@ -3838,6 +3982,12 @@ namespace EtwTools
             }
 
             /// <summary>
+            /// Converts a generic ETW event to a DebugFacilityMessage1Event.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator DebugFacilityMessage1Event(EtwEvent etwEvent) => new(etwEvent);
+
+            /// <summary>
             /// A data wrapper for a DebugFacilityMessage1 event.
             /// </summary>
             public ref struct DebugFacilityMessage1Data
@@ -3890,12 +4040,12 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the Facility field.
                 /// </summary>
-                public string Facility => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_Facility..]);
+                public string Facility => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_Facility..Offset_Message]);
 
                 /// <summary>
                 /// Retrieves the Message field.
                 /// </summary>
-                public string Message => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_Message..]);
+                public string Message => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_Message..Offset_Value1]);
 
                 /// <summary>
                 /// Retrieves the Value1 field.
@@ -3986,6 +4136,12 @@ namespace EtwTools
             {
                 _etwEvent = etwEvent;
             }
+
+            /// <summary>
+            /// Converts a generic ETW event to a SetActivityIdEvent.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator SetActivityIdEvent(EtwEvent etwEvent) => new(etwEvent);
 
             /// <summary>
             /// A data wrapper for a SetActivityId event.
@@ -4096,6 +4252,12 @@ namespace EtwTools
             {
                 _etwEvent = etwEvent;
             }
+
+            /// <summary>
+            /// Converts a generic ETW event to a NewIDEvent.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator NewIDEvent(EtwEvent etwEvent) => new(etwEvent);
 
             /// <summary>
             /// A data wrapper for a NewID event.

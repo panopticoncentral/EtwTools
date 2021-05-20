@@ -582,7 +582,7 @@ namespace EtwTools
                 /// The current value, if any.
                 /// </summary>
                 public string Current => ((_offset < _enumerable._event.Data.Length) && (_index <= _enumerable._count))
-                    ? Encoding.Unicode.GetString(_enumerable._event.Data[_offset..])
+                    ? Encoding.Unicode.GetString(_enumerable._event.Data[_offset..(_offset + _enumerable._event.UnicodeStringLength(_offset))])
                     : throw new InvalidOperationException();
 
                 internal UnicodeStringEnumerator(UnicodeStringEnumerable enumerable)
@@ -652,7 +652,7 @@ namespace EtwTools
                 /// The current value, if any.
                 /// </summary>
                 public string Current => ((_offset < _enumerable._event.Data.Length) && (_index <= _enumerable._count))
-                    ? Encoding.ASCII.GetString(_enumerable._event.Data[_offset..])
+                    ? Encoding.ASCII.GetString(_enumerable._event.Data[_offset..(_offset + _enumerable._event.AnsiStringLength(_offset))])
                     : throw new InvalidOperationException();
 
                 internal AnsiStringEnumerator(AnsiStringEnumerable enumerable)

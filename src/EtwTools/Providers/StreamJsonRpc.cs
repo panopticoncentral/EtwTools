@@ -154,6 +154,12 @@ namespace EtwTools
             }
 
             /// <summary>
+            /// Converts a generic ETW event to a EventSourceMessageEvent.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator EventSourceMessageEvent(EtwEvent etwEvent) => new(etwEvent);
+
+            /// <summary>
             /// A data wrapper for a EventSourceMessage event.
             /// </summary>
             public ref struct EventSourceMessageData
@@ -264,6 +270,12 @@ namespace EtwTools
             }
 
             /// <summary>
+            /// Converts a generic ETW event to a SendingNotificationEvent.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator SendingNotificationEvent(EtwEvent etwEvent) => new(etwEvent);
+
+            /// <summary>
             /// A data wrapper for a SendingNotification event.
             /// </summary>
             public ref struct SendingNotificationData
@@ -302,7 +314,7 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the Method field.
                 /// </summary>
-                public string Method => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_Method..]);
+                public string Method => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_Method..Offset_Args]);
 
                 /// <summary>
                 /// Retrieves the Args field.
@@ -392,6 +404,12 @@ namespace EtwTools
             {
                 _etwEvent = etwEvent;
             }
+
+            /// <summary>
+            /// Converts a generic ETW event to a ReceivedResultEvent.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator ReceivedResultEvent(EtwEvent etwEvent) => new(etwEvent);
 
             /// <summary>
             /// A data wrapper for a ReceivedResult event.
@@ -504,6 +522,12 @@ namespace EtwTools
             }
 
             /// <summary>
+            /// Converts a generic ETW event to a ReceivedErrorEvent.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator ReceivedErrorEvent(EtwEvent etwEvent) => new(etwEvent);
+
+            /// <summary>
             /// A data wrapper for a ReceivedError event.
             /// </summary>
             public ref struct ReceivedErrorData
@@ -542,7 +566,7 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the RequestId field.
                 /// </summary>
-                public long RequestId => BitConverter.ToInt64(_etwEvent.Data[Offset_RequestId..]);
+                public long RequestId => BitConverter.ToInt64(_etwEvent.Data[Offset_RequestId..Offset_ErrorCode]);
 
                 /// <summary>
                 /// Retrieves the ErrorCode field.
@@ -632,6 +656,12 @@ namespace EtwTools
             {
                 _etwEvent = etwEvent;
             }
+
+            /// <summary>
+            /// Converts a generic ETW event to a ReceivedNoResponseEvent.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator ReceivedNoResponseEvent(EtwEvent etwEvent) => new(etwEvent);
 
             /// <summary>
             /// A data wrapper for a ReceivedNoResponse event.
@@ -744,6 +774,12 @@ namespace EtwTools
             }
 
             /// <summary>
+            /// Converts a generic ETW event to a SendingCancellationRequestEvent.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator SendingCancellationRequestEvent(EtwEvent etwEvent) => new(etwEvent);
+
+            /// <summary>
             /// A data wrapper for a SendingCancellationRequest event.
             /// </summary>
             public ref struct SendingCancellationRequestData
@@ -854,6 +890,12 @@ namespace EtwTools
             }
 
             /// <summary>
+            /// Converts a generic ETW event to a ReceivedNotificationEvent.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator ReceivedNotificationEvent(EtwEvent etwEvent) => new(etwEvent);
+
+            /// <summary>
             /// A data wrapper for a ReceivedNotification event.
             /// </summary>
             public ref struct ReceivedNotificationData
@@ -892,7 +934,7 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the Method field.
                 /// </summary>
-                public string Method => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_Method..]);
+                public string Method => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_Method..Offset_Args]);
 
                 /// <summary>
                 /// Retrieves the Args field.
@@ -982,6 +1024,12 @@ namespace EtwTools
             {
                 _etwEvent = etwEvent;
             }
+
+            /// <summary>
+            /// Converts a generic ETW event to a SendingResultEvent.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator SendingResultEvent(EtwEvent etwEvent) => new(etwEvent);
 
             /// <summary>
             /// A data wrapper for a SendingResult event.
@@ -1094,6 +1142,12 @@ namespace EtwTools
             }
 
             /// <summary>
+            /// Converts a generic ETW event to a SendingErrorEvent.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator SendingErrorEvent(EtwEvent etwEvent) => new(etwEvent);
+
+            /// <summary>
             /// A data wrapper for a SendingError event.
             /// </summary>
             public ref struct SendingErrorData
@@ -1132,7 +1186,7 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the RequestId field.
                 /// </summary>
-                public long RequestId => BitConverter.ToInt64(_etwEvent.Data[Offset_RequestId..]);
+                public long RequestId => BitConverter.ToInt64(_etwEvent.Data[Offset_RequestId..Offset_ErrorCode]);
 
                 /// <summary>
                 /// Retrieves the ErrorCode field.
@@ -1222,6 +1276,12 @@ namespace EtwTools
             {
                 _etwEvent = etwEvent;
             }
+
+            /// <summary>
+            /// Converts a generic ETW event to a ReceivedCancellationRequestEvent.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator ReceivedCancellationRequestEvent(EtwEvent etwEvent) => new(etwEvent);
 
             /// <summary>
             /// A data wrapper for a ReceivedCancellationRequest event.
@@ -1327,6 +1387,12 @@ namespace EtwTools
             {
                 _etwEvent = etwEvent;
             }
+
+            /// <summary>
+            /// Converts a generic ETW event to a TransmissionQueuedEvent.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator TransmissionQueuedEvent(EtwEvent etwEvent) => new(etwEvent);
         }
 
         /// <summary>
@@ -1393,6 +1459,12 @@ namespace EtwTools
             {
                 _etwEvent = etwEvent;
             }
+
+            /// <summary>
+            /// Converts a generic ETW event to a TransmissionCompletedEvent.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator TransmissionCompletedEvent(EtwEvent etwEvent) => new(etwEvent);
         }
 
         /// <summary>
@@ -1464,6 +1536,12 @@ namespace EtwTools
             {
                 _etwEvent = etwEvent;
             }
+
+            /// <summary>
+            /// Converts a generic ETW event to a HandlerTransmittedEvent.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator HandlerTransmittedEvent(EtwEvent etwEvent) => new(etwEvent);
 
             /// <summary>
             /// A data wrapper for a HandlerTransmitted event.
@@ -1576,6 +1654,12 @@ namespace EtwTools
             }
 
             /// <summary>
+            /// Converts a generic ETW event to a HandlerReceivedEvent.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator HandlerReceivedEvent(EtwEvent etwEvent) => new(etwEvent);
+
+            /// <summary>
             /// A data wrapper for a HandlerReceived event.
             /// </summary>
             public ref struct HandlerReceivedData
@@ -1686,6 +1770,12 @@ namespace EtwTools
             }
 
             /// <summary>
+            /// Converts a generic ETW event to a SendingRequestEvent.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator SendingRequestEvent(EtwEvent etwEvent) => new(etwEvent);
+
+            /// <summary>
             /// A data wrapper for a SendingRequest event.
             /// </summary>
             public ref struct SendingRequestData
@@ -1738,12 +1828,12 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the RequestId field.
                 /// </summary>
-                public long RequestId => BitConverter.ToInt64(_etwEvent.Data[Offset_RequestId..]);
+                public long RequestId => BitConverter.ToInt64(_etwEvent.Data[Offset_RequestId..Offset_Method]);
 
                 /// <summary>
                 /// Retrieves the Method field.
                 /// </summary>
-                public string Method => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_Method..]);
+                public string Method => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_Method..Offset_Args]);
 
                 /// <summary>
                 /// Retrieves the Args field.
@@ -1836,6 +1926,12 @@ namespace EtwTools
             }
 
             /// <summary>
+            /// Converts a generic ETW event to a ReceivedRequestEvent.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator ReceivedRequestEvent(EtwEvent etwEvent) => new(etwEvent);
+
+            /// <summary>
             /// A data wrapper for a ReceivedRequest event.
             /// </summary>
             public ref struct ReceivedRequestData
@@ -1888,12 +1984,12 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the RequestId field.
                 /// </summary>
-                public long RequestId => BitConverter.ToInt64(_etwEvent.Data[Offset_RequestId..]);
+                public long RequestId => BitConverter.ToInt64(_etwEvent.Data[Offset_RequestId..Offset_Method]);
 
                 /// <summary>
                 /// Retrieves the Method field.
                 /// </summary>
-                public string Method => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_Method..]);
+                public string Method => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_Method..Offset_Args]);
 
                 /// <summary>
                 /// Retrieves the Args field.

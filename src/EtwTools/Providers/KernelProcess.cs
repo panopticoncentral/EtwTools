@@ -198,6 +198,12 @@ namespace EtwTools
             }
 
             /// <summary>
+            /// Converts a generic ETW event to a StartEvent.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator StartEvent(EtwEvent etwEvent) => new(etwEvent);
+
+            /// <summary>
             /// A data wrapper for a Start event.
             /// </summary>
             public ref struct StartData
@@ -264,12 +270,12 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the ProcessId field.
                 /// </summary>
-                public ulong ProcessId => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_ProcessId..]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_ProcessId..]);
+                public ulong ProcessId => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_ProcessId..Offset_ParentId]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_ProcessId..Offset_ParentId]);
 
                 /// <summary>
                 /// Retrieves the ParentId field.
                 /// </summary>
-                public ulong ParentId => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_ParentId..]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_ParentId..]);
+                public ulong ParentId => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_ParentId..Offset_UserSID]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_ParentId..Offset_UserSID]);
 
                 /// <summary>
                 /// Retrieves the UserSID field.
@@ -368,6 +374,12 @@ namespace EtwTools
             }
 
             /// <summary>
+            /// Converts a generic ETW event to a EndEvent.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator EndEvent(EtwEvent etwEvent) => new(etwEvent);
+
+            /// <summary>
             /// A data wrapper for a End event.
             /// </summary>
             public ref struct EndData
@@ -434,12 +446,12 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the ProcessId field.
                 /// </summary>
-                public ulong ProcessId => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_ProcessId..]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_ProcessId..]);
+                public ulong ProcessId => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_ProcessId..Offset_ParentId]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_ProcessId..Offset_ParentId]);
 
                 /// <summary>
                 /// Retrieves the ParentId field.
                 /// </summary>
-                public ulong ParentId => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_ParentId..]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_ParentId..]);
+                public ulong ParentId => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_ParentId..Offset_UserSID]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_ParentId..Offset_UserSID]);
 
                 /// <summary>
                 /// Retrieves the UserSID field.
@@ -538,6 +550,12 @@ namespace EtwTools
             }
 
             /// <summary>
+            /// Converts a generic ETW event to a DCStartEvent.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator DCStartEvent(EtwEvent etwEvent) => new(etwEvent);
+
+            /// <summary>
             /// A data wrapper for a DCStart event.
             /// </summary>
             public ref struct DCStartData
@@ -604,12 +622,12 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the ProcessId field.
                 /// </summary>
-                public ulong ProcessId => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_ProcessId..]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_ProcessId..]);
+                public ulong ProcessId => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_ProcessId..Offset_ParentId]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_ProcessId..Offset_ParentId]);
 
                 /// <summary>
                 /// Retrieves the ParentId field.
                 /// </summary>
-                public ulong ParentId => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_ParentId..]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_ParentId..]);
+                public ulong ParentId => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_ParentId..Offset_UserSID]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_ParentId..Offset_UserSID]);
 
                 /// <summary>
                 /// Retrieves the UserSID field.
@@ -708,6 +726,12 @@ namespace EtwTools
             }
 
             /// <summary>
+            /// Converts a generic ETW event to a DCEndEvent.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator DCEndEvent(EtwEvent etwEvent) => new(etwEvent);
+
+            /// <summary>
             /// A data wrapper for a DCEnd event.
             /// </summary>
             public ref struct DCEndData
@@ -774,12 +798,12 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the ProcessId field.
                 /// </summary>
-                public ulong ProcessId => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_ProcessId..]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_ProcessId..]);
+                public ulong ProcessId => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_ProcessId..Offset_ParentId]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_ProcessId..Offset_ParentId]);
 
                 /// <summary>
                 /// Retrieves the ParentId field.
                 /// </summary>
-                public ulong ParentId => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_ParentId..]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_ParentId..]);
+                public ulong ParentId => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_ParentId..Offset_UserSID]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_ParentId..Offset_UserSID]);
 
                 /// <summary>
                 /// Retrieves the UserSID field.
@@ -876,6 +900,12 @@ namespace EtwTools
             {
                 _etwEvent = etwEvent;
             }
+
+            /// <summary>
+            /// Converts a generic ETW event to a StartEventV1.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator StartEventV1(EtwEvent etwEvent) => new(etwEvent);
 
             /// <summary>
             /// A data wrapper for a Start event.
@@ -986,27 +1016,27 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the PageDirectoryBase field.
                 /// </summary>
-                public ulong PageDirectoryBase => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_PageDirectoryBase..]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_PageDirectoryBase..]);
+                public ulong PageDirectoryBase => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_PageDirectoryBase..Offset_ProcessId]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_PageDirectoryBase..Offset_ProcessId]);
 
                 /// <summary>
                 /// Retrieves the ProcessId field.
                 /// </summary>
-                public uint ProcessId => BitConverter.ToUInt32(_etwEvent.Data[Offset_ProcessId..]);
+                public uint ProcessId => BitConverter.ToUInt32(_etwEvent.Data[Offset_ProcessId..Offset_ParentId]);
 
                 /// <summary>
                 /// Retrieves the ParentId field.
                 /// </summary>
-                public uint ParentId => BitConverter.ToUInt32(_etwEvent.Data[Offset_ParentId..]);
+                public uint ParentId => BitConverter.ToUInt32(_etwEvent.Data[Offset_ParentId..Offset_SessionId]);
 
                 /// <summary>
                 /// Retrieves the SessionId field.
                 /// </summary>
-                public uint SessionId => BitConverter.ToUInt32(_etwEvent.Data[Offset_SessionId..]);
+                public uint SessionId => BitConverter.ToUInt32(_etwEvent.Data[Offset_SessionId..Offset_ExitStatus]);
 
                 /// <summary>
                 /// Retrieves the ExitStatus field.
                 /// </summary>
-                public int ExitStatus => BitConverter.ToInt32(_etwEvent.Data[Offset_ExitStatus..]);
+                public int ExitStatus => BitConverter.ToInt32(_etwEvent.Data[Offset_ExitStatus..Offset_UserSID]);
 
                 /// <summary>
                 /// Retrieves the UserSID field.
@@ -1108,6 +1138,12 @@ namespace EtwTools
             }
 
             /// <summary>
+            /// Converts a generic ETW event to a EndEventV1.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator EndEventV1(EtwEvent etwEvent) => new(etwEvent);
+
+            /// <summary>
             /// A data wrapper for a End event.
             /// </summary>
             public ref struct EndData
@@ -1216,27 +1252,27 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the PageDirectoryBase field.
                 /// </summary>
-                public ulong PageDirectoryBase => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_PageDirectoryBase..]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_PageDirectoryBase..]);
+                public ulong PageDirectoryBase => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_PageDirectoryBase..Offset_ProcessId]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_PageDirectoryBase..Offset_ProcessId]);
 
                 /// <summary>
                 /// Retrieves the ProcessId field.
                 /// </summary>
-                public uint ProcessId => BitConverter.ToUInt32(_etwEvent.Data[Offset_ProcessId..]);
+                public uint ProcessId => BitConverter.ToUInt32(_etwEvent.Data[Offset_ProcessId..Offset_ParentId]);
 
                 /// <summary>
                 /// Retrieves the ParentId field.
                 /// </summary>
-                public uint ParentId => BitConverter.ToUInt32(_etwEvent.Data[Offset_ParentId..]);
+                public uint ParentId => BitConverter.ToUInt32(_etwEvent.Data[Offset_ParentId..Offset_SessionId]);
 
                 /// <summary>
                 /// Retrieves the SessionId field.
                 /// </summary>
-                public uint SessionId => BitConverter.ToUInt32(_etwEvent.Data[Offset_SessionId..]);
+                public uint SessionId => BitConverter.ToUInt32(_etwEvent.Data[Offset_SessionId..Offset_ExitStatus]);
 
                 /// <summary>
                 /// Retrieves the ExitStatus field.
                 /// </summary>
-                public int ExitStatus => BitConverter.ToInt32(_etwEvent.Data[Offset_ExitStatus..]);
+                public int ExitStatus => BitConverter.ToInt32(_etwEvent.Data[Offset_ExitStatus..Offset_UserSID]);
 
                 /// <summary>
                 /// Retrieves the UserSID field.
@@ -1336,6 +1372,12 @@ namespace EtwTools
             {
                 _etwEvent = etwEvent;
             }
+
+            /// <summary>
+            /// Converts a generic ETW event to a DCStartEventV1.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator DCStartEventV1(EtwEvent etwEvent) => new(etwEvent);
 
             /// <summary>
             /// A data wrapper for a DCStart event.
@@ -1446,27 +1488,27 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the PageDirectoryBase field.
                 /// </summary>
-                public ulong PageDirectoryBase => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_PageDirectoryBase..]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_PageDirectoryBase..]);
+                public ulong PageDirectoryBase => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_PageDirectoryBase..Offset_ProcessId]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_PageDirectoryBase..Offset_ProcessId]);
 
                 /// <summary>
                 /// Retrieves the ProcessId field.
                 /// </summary>
-                public uint ProcessId => BitConverter.ToUInt32(_etwEvent.Data[Offset_ProcessId..]);
+                public uint ProcessId => BitConverter.ToUInt32(_etwEvent.Data[Offset_ProcessId..Offset_ParentId]);
 
                 /// <summary>
                 /// Retrieves the ParentId field.
                 /// </summary>
-                public uint ParentId => BitConverter.ToUInt32(_etwEvent.Data[Offset_ParentId..]);
+                public uint ParentId => BitConverter.ToUInt32(_etwEvent.Data[Offset_ParentId..Offset_SessionId]);
 
                 /// <summary>
                 /// Retrieves the SessionId field.
                 /// </summary>
-                public uint SessionId => BitConverter.ToUInt32(_etwEvent.Data[Offset_SessionId..]);
+                public uint SessionId => BitConverter.ToUInt32(_etwEvent.Data[Offset_SessionId..Offset_ExitStatus]);
 
                 /// <summary>
                 /// Retrieves the ExitStatus field.
                 /// </summary>
-                public int ExitStatus => BitConverter.ToInt32(_etwEvent.Data[Offset_ExitStatus..]);
+                public int ExitStatus => BitConverter.ToInt32(_etwEvent.Data[Offset_ExitStatus..Offset_UserSID]);
 
                 /// <summary>
                 /// Retrieves the UserSID field.
@@ -1566,6 +1608,12 @@ namespace EtwTools
             {
                 _etwEvent = etwEvent;
             }
+
+            /// <summary>
+            /// Converts a generic ETW event to a DCEndEventV1.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator DCEndEventV1(EtwEvent etwEvent) => new(etwEvent);
 
             /// <summary>
             /// A data wrapper for a DCEnd event.
@@ -1676,27 +1724,27 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the PageDirectoryBase field.
                 /// </summary>
-                public ulong PageDirectoryBase => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_PageDirectoryBase..]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_PageDirectoryBase..]);
+                public ulong PageDirectoryBase => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_PageDirectoryBase..Offset_ProcessId]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_PageDirectoryBase..Offset_ProcessId]);
 
                 /// <summary>
                 /// Retrieves the ProcessId field.
                 /// </summary>
-                public uint ProcessId => BitConverter.ToUInt32(_etwEvent.Data[Offset_ProcessId..]);
+                public uint ProcessId => BitConverter.ToUInt32(_etwEvent.Data[Offset_ProcessId..Offset_ParentId]);
 
                 /// <summary>
                 /// Retrieves the ParentId field.
                 /// </summary>
-                public uint ParentId => BitConverter.ToUInt32(_etwEvent.Data[Offset_ParentId..]);
+                public uint ParentId => BitConverter.ToUInt32(_etwEvent.Data[Offset_ParentId..Offset_SessionId]);
 
                 /// <summary>
                 /// Retrieves the SessionId field.
                 /// </summary>
-                public uint SessionId => BitConverter.ToUInt32(_etwEvent.Data[Offset_SessionId..]);
+                public uint SessionId => BitConverter.ToUInt32(_etwEvent.Data[Offset_SessionId..Offset_ExitStatus]);
 
                 /// <summary>
                 /// Retrieves the ExitStatus field.
                 /// </summary>
-                public int ExitStatus => BitConverter.ToInt32(_etwEvent.Data[Offset_ExitStatus..]);
+                public int ExitStatus => BitConverter.ToInt32(_etwEvent.Data[Offset_ExitStatus..Offset_UserSID]);
 
                 /// <summary>
                 /// Retrieves the UserSID field.
@@ -1796,6 +1844,12 @@ namespace EtwTools
             {
                 _etwEvent = etwEvent;
             }
+
+            /// <summary>
+            /// Converts a generic ETW event to a StartEventV2.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator StartEventV2(EtwEvent etwEvent) => new(etwEvent);
 
             /// <summary>
             /// A data wrapper for a Start event.
@@ -1920,27 +1974,27 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the UniqueProcessKey field.
                 /// </summary>
-                public ulong UniqueProcessKey => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_UniqueProcessKey..]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_UniqueProcessKey..]);
+                public ulong UniqueProcessKey => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_UniqueProcessKey..Offset_ProcessId]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_UniqueProcessKey..Offset_ProcessId]);
 
                 /// <summary>
                 /// Retrieves the ProcessId field.
                 /// </summary>
-                public uint ProcessId => BitConverter.ToUInt32(_etwEvent.Data[Offset_ProcessId..]);
+                public uint ProcessId => BitConverter.ToUInt32(_etwEvent.Data[Offset_ProcessId..Offset_ParentId]);
 
                 /// <summary>
                 /// Retrieves the ParentId field.
                 /// </summary>
-                public uint ParentId => BitConverter.ToUInt32(_etwEvent.Data[Offset_ParentId..]);
+                public uint ParentId => BitConverter.ToUInt32(_etwEvent.Data[Offset_ParentId..Offset_SessionId]);
 
                 /// <summary>
                 /// Retrieves the SessionId field.
                 /// </summary>
-                public uint SessionId => BitConverter.ToUInt32(_etwEvent.Data[Offset_SessionId..]);
+                public uint SessionId => BitConverter.ToUInt32(_etwEvent.Data[Offset_SessionId..Offset_ExitStatus]);
 
                 /// <summary>
                 /// Retrieves the ExitStatus field.
                 /// </summary>
-                public int ExitStatus => BitConverter.ToInt32(_etwEvent.Data[Offset_ExitStatus..]);
+                public int ExitStatus => BitConverter.ToInt32(_etwEvent.Data[Offset_ExitStatus..Offset_UserSID]);
 
                 /// <summary>
                 /// Retrieves the UserSID field.
@@ -1950,7 +2004,7 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the ImageFileName field.
                 /// </summary>
-                public string ImageFileName => System.Text.Encoding.ASCII.GetString(_etwEvent.Data[Offset_ImageFileName..]);
+                public string ImageFileName => System.Text.Encoding.ASCII.GetString(_etwEvent.Data[Offset_ImageFileName..Offset_CommandLine]);
 
                 /// <summary>
                 /// Retrieves the CommandLine field.
@@ -2046,6 +2100,12 @@ namespace EtwTools
             {
                 _etwEvent = etwEvent;
             }
+
+            /// <summary>
+            /// Converts a generic ETW event to a EndEventV2.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator EndEventV2(EtwEvent etwEvent) => new(etwEvent);
 
             /// <summary>
             /// A data wrapper for a End event.
@@ -2170,27 +2230,27 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the UniqueProcessKey field.
                 /// </summary>
-                public ulong UniqueProcessKey => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_UniqueProcessKey..]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_UniqueProcessKey..]);
+                public ulong UniqueProcessKey => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_UniqueProcessKey..Offset_ProcessId]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_UniqueProcessKey..Offset_ProcessId]);
 
                 /// <summary>
                 /// Retrieves the ProcessId field.
                 /// </summary>
-                public uint ProcessId => BitConverter.ToUInt32(_etwEvent.Data[Offset_ProcessId..]);
+                public uint ProcessId => BitConverter.ToUInt32(_etwEvent.Data[Offset_ProcessId..Offset_ParentId]);
 
                 /// <summary>
                 /// Retrieves the ParentId field.
                 /// </summary>
-                public uint ParentId => BitConverter.ToUInt32(_etwEvent.Data[Offset_ParentId..]);
+                public uint ParentId => BitConverter.ToUInt32(_etwEvent.Data[Offset_ParentId..Offset_SessionId]);
 
                 /// <summary>
                 /// Retrieves the SessionId field.
                 /// </summary>
-                public uint SessionId => BitConverter.ToUInt32(_etwEvent.Data[Offset_SessionId..]);
+                public uint SessionId => BitConverter.ToUInt32(_etwEvent.Data[Offset_SessionId..Offset_ExitStatus]);
 
                 /// <summary>
                 /// Retrieves the ExitStatus field.
                 /// </summary>
-                public int ExitStatus => BitConverter.ToInt32(_etwEvent.Data[Offset_ExitStatus..]);
+                public int ExitStatus => BitConverter.ToInt32(_etwEvent.Data[Offset_ExitStatus..Offset_UserSID]);
 
                 /// <summary>
                 /// Retrieves the UserSID field.
@@ -2200,7 +2260,7 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the ImageFileName field.
                 /// </summary>
-                public string ImageFileName => System.Text.Encoding.ASCII.GetString(_etwEvent.Data[Offset_ImageFileName..]);
+                public string ImageFileName => System.Text.Encoding.ASCII.GetString(_etwEvent.Data[Offset_ImageFileName..Offset_CommandLine]);
 
                 /// <summary>
                 /// Retrieves the CommandLine field.
@@ -2296,6 +2356,12 @@ namespace EtwTools
             {
                 _etwEvent = etwEvent;
             }
+
+            /// <summary>
+            /// Converts a generic ETW event to a DCStartEventV2.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator DCStartEventV2(EtwEvent etwEvent) => new(etwEvent);
 
             /// <summary>
             /// A data wrapper for a DCStart event.
@@ -2420,27 +2486,27 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the UniqueProcessKey field.
                 /// </summary>
-                public ulong UniqueProcessKey => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_UniqueProcessKey..]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_UniqueProcessKey..]);
+                public ulong UniqueProcessKey => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_UniqueProcessKey..Offset_ProcessId]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_UniqueProcessKey..Offset_ProcessId]);
 
                 /// <summary>
                 /// Retrieves the ProcessId field.
                 /// </summary>
-                public uint ProcessId => BitConverter.ToUInt32(_etwEvent.Data[Offset_ProcessId..]);
+                public uint ProcessId => BitConverter.ToUInt32(_etwEvent.Data[Offset_ProcessId..Offset_ParentId]);
 
                 /// <summary>
                 /// Retrieves the ParentId field.
                 /// </summary>
-                public uint ParentId => BitConverter.ToUInt32(_etwEvent.Data[Offset_ParentId..]);
+                public uint ParentId => BitConverter.ToUInt32(_etwEvent.Data[Offset_ParentId..Offset_SessionId]);
 
                 /// <summary>
                 /// Retrieves the SessionId field.
                 /// </summary>
-                public uint SessionId => BitConverter.ToUInt32(_etwEvent.Data[Offset_SessionId..]);
+                public uint SessionId => BitConverter.ToUInt32(_etwEvent.Data[Offset_SessionId..Offset_ExitStatus]);
 
                 /// <summary>
                 /// Retrieves the ExitStatus field.
                 /// </summary>
-                public int ExitStatus => BitConverter.ToInt32(_etwEvent.Data[Offset_ExitStatus..]);
+                public int ExitStatus => BitConverter.ToInt32(_etwEvent.Data[Offset_ExitStatus..Offset_UserSID]);
 
                 /// <summary>
                 /// Retrieves the UserSID field.
@@ -2450,7 +2516,7 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the ImageFileName field.
                 /// </summary>
-                public string ImageFileName => System.Text.Encoding.ASCII.GetString(_etwEvent.Data[Offset_ImageFileName..]);
+                public string ImageFileName => System.Text.Encoding.ASCII.GetString(_etwEvent.Data[Offset_ImageFileName..Offset_CommandLine]);
 
                 /// <summary>
                 /// Retrieves the CommandLine field.
@@ -2546,6 +2612,12 @@ namespace EtwTools
             {
                 _etwEvent = etwEvent;
             }
+
+            /// <summary>
+            /// Converts a generic ETW event to a DCEndEventV2.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator DCEndEventV2(EtwEvent etwEvent) => new(etwEvent);
 
             /// <summary>
             /// A data wrapper for a DCEnd event.
@@ -2670,27 +2742,27 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the UniqueProcessKey field.
                 /// </summary>
-                public ulong UniqueProcessKey => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_UniqueProcessKey..]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_UniqueProcessKey..]);
+                public ulong UniqueProcessKey => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_UniqueProcessKey..Offset_ProcessId]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_UniqueProcessKey..Offset_ProcessId]);
 
                 /// <summary>
                 /// Retrieves the ProcessId field.
                 /// </summary>
-                public uint ProcessId => BitConverter.ToUInt32(_etwEvent.Data[Offset_ProcessId..]);
+                public uint ProcessId => BitConverter.ToUInt32(_etwEvent.Data[Offset_ProcessId..Offset_ParentId]);
 
                 /// <summary>
                 /// Retrieves the ParentId field.
                 /// </summary>
-                public uint ParentId => BitConverter.ToUInt32(_etwEvent.Data[Offset_ParentId..]);
+                public uint ParentId => BitConverter.ToUInt32(_etwEvent.Data[Offset_ParentId..Offset_SessionId]);
 
                 /// <summary>
                 /// Retrieves the SessionId field.
                 /// </summary>
-                public uint SessionId => BitConverter.ToUInt32(_etwEvent.Data[Offset_SessionId..]);
+                public uint SessionId => BitConverter.ToUInt32(_etwEvent.Data[Offset_SessionId..Offset_ExitStatus]);
 
                 /// <summary>
                 /// Retrieves the ExitStatus field.
                 /// </summary>
-                public int ExitStatus => BitConverter.ToInt32(_etwEvent.Data[Offset_ExitStatus..]);
+                public int ExitStatus => BitConverter.ToInt32(_etwEvent.Data[Offset_ExitStatus..Offset_UserSID]);
 
                 /// <summary>
                 /// Retrieves the UserSID field.
@@ -2700,7 +2772,7 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the ImageFileName field.
                 /// </summary>
-                public string ImageFileName => System.Text.Encoding.ASCII.GetString(_etwEvent.Data[Offset_ImageFileName..]);
+                public string ImageFileName => System.Text.Encoding.ASCII.GetString(_etwEvent.Data[Offset_ImageFileName..Offset_CommandLine]);
 
                 /// <summary>
                 /// Retrieves the CommandLine field.
@@ -2796,6 +2868,12 @@ namespace EtwTools
             {
                 _etwEvent = etwEvent;
             }
+
+            /// <summary>
+            /// Converts a generic ETW event to a DefunctEventV2.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator DefunctEventV2(EtwEvent etwEvent) => new(etwEvent);
 
             /// <summary>
             /// A data wrapper for a Defunct event.
@@ -2920,27 +2998,27 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the UniqueProcessKey field.
                 /// </summary>
-                public ulong UniqueProcessKey => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_UniqueProcessKey..]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_UniqueProcessKey..]);
+                public ulong UniqueProcessKey => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_UniqueProcessKey..Offset_ProcessId]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_UniqueProcessKey..Offset_ProcessId]);
 
                 /// <summary>
                 /// Retrieves the ProcessId field.
                 /// </summary>
-                public uint ProcessId => BitConverter.ToUInt32(_etwEvent.Data[Offset_ProcessId..]);
+                public uint ProcessId => BitConverter.ToUInt32(_etwEvent.Data[Offset_ProcessId..Offset_ParentId]);
 
                 /// <summary>
                 /// Retrieves the ParentId field.
                 /// </summary>
-                public uint ParentId => BitConverter.ToUInt32(_etwEvent.Data[Offset_ParentId..]);
+                public uint ParentId => BitConverter.ToUInt32(_etwEvent.Data[Offset_ParentId..Offset_SessionId]);
 
                 /// <summary>
                 /// Retrieves the SessionId field.
                 /// </summary>
-                public uint SessionId => BitConverter.ToUInt32(_etwEvent.Data[Offset_SessionId..]);
+                public uint SessionId => BitConverter.ToUInt32(_etwEvent.Data[Offset_SessionId..Offset_ExitStatus]);
 
                 /// <summary>
                 /// Retrieves the ExitStatus field.
                 /// </summary>
-                public int ExitStatus => BitConverter.ToInt32(_etwEvent.Data[Offset_ExitStatus..]);
+                public int ExitStatus => BitConverter.ToInt32(_etwEvent.Data[Offset_ExitStatus..Offset_UserSID]);
 
                 /// <summary>
                 /// Retrieves the UserSID field.
@@ -2950,7 +3028,7 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the ImageFileName field.
                 /// </summary>
-                public string ImageFileName => System.Text.Encoding.ASCII.GetString(_etwEvent.Data[Offset_ImageFileName..]);
+                public string ImageFileName => System.Text.Encoding.ASCII.GetString(_etwEvent.Data[Offset_ImageFileName..Offset_CommandLine]);
 
                 /// <summary>
                 /// Retrieves the CommandLine field.
@@ -3046,6 +3124,12 @@ namespace EtwTools
             {
                 _etwEvent = etwEvent;
             }
+
+            /// <summary>
+            /// Converts a generic ETW event to a TerminateEventV2.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator TerminateEventV2(EtwEvent etwEvent) => new(etwEvent);
 
             /// <summary>
             /// A data wrapper for a Terminate event.
@@ -3156,6 +3240,12 @@ namespace EtwTools
             {
                 _etwEvent = etwEvent;
             }
+
+            /// <summary>
+            /// Converts a generic ETW event to a PerfCtrEventV2.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator PerfCtrEventV2(EtwEvent etwEvent) => new(etwEvent);
 
             /// <summary>
             /// A data wrapper for a PerfCtr event.
@@ -3378,72 +3468,72 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the ProcessId field.
                 /// </summary>
-                public uint ProcessId => BitConverter.ToUInt32(_etwEvent.Data[Offset_ProcessId..]);
+                public uint ProcessId => BitConverter.ToUInt32(_etwEvent.Data[Offset_ProcessId..Offset_PageFaultCount]);
 
                 /// <summary>
                 /// Retrieves the PageFaultCount field.
                 /// </summary>
-                public uint PageFaultCount => BitConverter.ToUInt32(_etwEvent.Data[Offset_PageFaultCount..]);
+                public uint PageFaultCount => BitConverter.ToUInt32(_etwEvent.Data[Offset_PageFaultCount..Offset_HandleCount]);
 
                 /// <summary>
                 /// Retrieves the HandleCount field.
                 /// </summary>
-                public uint HandleCount => BitConverter.ToUInt32(_etwEvent.Data[Offset_HandleCount..]);
+                public uint HandleCount => BitConverter.ToUInt32(_etwEvent.Data[Offset_HandleCount..Offset_Reserved]);
 
                 /// <summary>
                 /// Retrieves the Reserved field.
                 /// </summary>
-                public uint Reserved => BitConverter.ToUInt32(_etwEvent.Data[Offset_Reserved..]);
+                public uint Reserved => BitConverter.ToUInt32(_etwEvent.Data[Offset_Reserved..Offset_PeakVirtualSize]);
 
                 /// <summary>
                 /// Retrieves the PeakVirtualSize field.
                 /// </summary>
-                public ulong PeakVirtualSize => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_PeakVirtualSize..]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_PeakVirtualSize..]);
+                public ulong PeakVirtualSize => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_PeakVirtualSize..Offset_PeakWorkingSetSize]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_PeakVirtualSize..Offset_PeakWorkingSetSize]);
 
                 /// <summary>
                 /// Retrieves the PeakWorkingSetSize field.
                 /// </summary>
-                public ulong PeakWorkingSetSize => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_PeakWorkingSetSize..]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_PeakWorkingSetSize..]);
+                public ulong PeakWorkingSetSize => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_PeakWorkingSetSize..Offset_PeakPagefileUsage]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_PeakWorkingSetSize..Offset_PeakPagefileUsage]);
 
                 /// <summary>
                 /// Retrieves the PeakPagefileUsage field.
                 /// </summary>
-                public ulong PeakPagefileUsage => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_PeakPagefileUsage..]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_PeakPagefileUsage..]);
+                public ulong PeakPagefileUsage => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_PeakPagefileUsage..Offset_QuotaPeakPagedPoolUsage]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_PeakPagefileUsage..Offset_QuotaPeakPagedPoolUsage]);
 
                 /// <summary>
                 /// Retrieves the QuotaPeakPagedPoolUsage field.
                 /// </summary>
-                public ulong QuotaPeakPagedPoolUsage => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_QuotaPeakPagedPoolUsage..]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_QuotaPeakPagedPoolUsage..]);
+                public ulong QuotaPeakPagedPoolUsage => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_QuotaPeakPagedPoolUsage..Offset_QuotaPeakNonPagedPoolUsage]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_QuotaPeakPagedPoolUsage..Offset_QuotaPeakNonPagedPoolUsage]);
 
                 /// <summary>
                 /// Retrieves the QuotaPeakNonPagedPoolUsage field.
                 /// </summary>
-                public ulong QuotaPeakNonPagedPoolUsage => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_QuotaPeakNonPagedPoolUsage..]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_QuotaPeakNonPagedPoolUsage..]);
+                public ulong QuotaPeakNonPagedPoolUsage => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_QuotaPeakNonPagedPoolUsage..Offset_VirtualSize]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_QuotaPeakNonPagedPoolUsage..Offset_VirtualSize]);
 
                 /// <summary>
                 /// Retrieves the VirtualSize field.
                 /// </summary>
-                public ulong VirtualSize => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_VirtualSize..]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_VirtualSize..]);
+                public ulong VirtualSize => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_VirtualSize..Offset_WorkingSetSize]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_VirtualSize..Offset_WorkingSetSize]);
 
                 /// <summary>
                 /// Retrieves the WorkingSetSize field.
                 /// </summary>
-                public ulong WorkingSetSize => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_WorkingSetSize..]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_WorkingSetSize..]);
+                public ulong WorkingSetSize => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_WorkingSetSize..Offset_PagefileUsage]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_WorkingSetSize..Offset_PagefileUsage]);
 
                 /// <summary>
                 /// Retrieves the PagefileUsage field.
                 /// </summary>
-                public ulong PagefileUsage => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_PagefileUsage..]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_PagefileUsage..]);
+                public ulong PagefileUsage => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_PagefileUsage..Offset_QuotaPagedPoolUsage]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_PagefileUsage..Offset_QuotaPagedPoolUsage]);
 
                 /// <summary>
                 /// Retrieves the QuotaPagedPoolUsage field.
                 /// </summary>
-                public ulong QuotaPagedPoolUsage => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_QuotaPagedPoolUsage..]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_QuotaPagedPoolUsage..]);
+                public ulong QuotaPagedPoolUsage => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_QuotaPagedPoolUsage..Offset_QuotaNonPagedPoolUsage]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_QuotaPagedPoolUsage..Offset_QuotaNonPagedPoolUsage]);
 
                 /// <summary>
                 /// Retrieves the QuotaNonPagedPoolUsage field.
                 /// </summary>
-                public ulong QuotaNonPagedPoolUsage => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_QuotaNonPagedPoolUsage..]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_QuotaNonPagedPoolUsage..]);
+                public ulong QuotaNonPagedPoolUsage => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_QuotaNonPagedPoolUsage..Offset_PrivatePageCount]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_QuotaNonPagedPoolUsage..Offset_PrivatePageCount]);
 
                 /// <summary>
                 /// Retrieves the PrivatePageCount field.
@@ -3546,6 +3636,12 @@ namespace EtwTools
             {
                 _etwEvent = etwEvent;
             }
+
+            /// <summary>
+            /// Converts a generic ETW event to a PerfCtrRundownEventV2.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator PerfCtrRundownEventV2(EtwEvent etwEvent) => new(etwEvent);
 
             /// <summary>
             /// A data wrapper for a PerfCtrRundown event.
@@ -3768,72 +3864,72 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the ProcessId field.
                 /// </summary>
-                public uint ProcessId => BitConverter.ToUInt32(_etwEvent.Data[Offset_ProcessId..]);
+                public uint ProcessId => BitConverter.ToUInt32(_etwEvent.Data[Offset_ProcessId..Offset_PageFaultCount]);
 
                 /// <summary>
                 /// Retrieves the PageFaultCount field.
                 /// </summary>
-                public uint PageFaultCount => BitConverter.ToUInt32(_etwEvent.Data[Offset_PageFaultCount..]);
+                public uint PageFaultCount => BitConverter.ToUInt32(_etwEvent.Data[Offset_PageFaultCount..Offset_HandleCount]);
 
                 /// <summary>
                 /// Retrieves the HandleCount field.
                 /// </summary>
-                public uint HandleCount => BitConverter.ToUInt32(_etwEvent.Data[Offset_HandleCount..]);
+                public uint HandleCount => BitConverter.ToUInt32(_etwEvent.Data[Offset_HandleCount..Offset_Reserved]);
 
                 /// <summary>
                 /// Retrieves the Reserved field.
                 /// </summary>
-                public uint Reserved => BitConverter.ToUInt32(_etwEvent.Data[Offset_Reserved..]);
+                public uint Reserved => BitConverter.ToUInt32(_etwEvent.Data[Offset_Reserved..Offset_PeakVirtualSize]);
 
                 /// <summary>
                 /// Retrieves the PeakVirtualSize field.
                 /// </summary>
-                public ulong PeakVirtualSize => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_PeakVirtualSize..]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_PeakVirtualSize..]);
+                public ulong PeakVirtualSize => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_PeakVirtualSize..Offset_PeakWorkingSetSize]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_PeakVirtualSize..Offset_PeakWorkingSetSize]);
 
                 /// <summary>
                 /// Retrieves the PeakWorkingSetSize field.
                 /// </summary>
-                public ulong PeakWorkingSetSize => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_PeakWorkingSetSize..]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_PeakWorkingSetSize..]);
+                public ulong PeakWorkingSetSize => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_PeakWorkingSetSize..Offset_PeakPagefileUsage]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_PeakWorkingSetSize..Offset_PeakPagefileUsage]);
 
                 /// <summary>
                 /// Retrieves the PeakPagefileUsage field.
                 /// </summary>
-                public ulong PeakPagefileUsage => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_PeakPagefileUsage..]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_PeakPagefileUsage..]);
+                public ulong PeakPagefileUsage => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_PeakPagefileUsage..Offset_QuotaPeakPagedPoolUsage]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_PeakPagefileUsage..Offset_QuotaPeakPagedPoolUsage]);
 
                 /// <summary>
                 /// Retrieves the QuotaPeakPagedPoolUsage field.
                 /// </summary>
-                public ulong QuotaPeakPagedPoolUsage => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_QuotaPeakPagedPoolUsage..]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_QuotaPeakPagedPoolUsage..]);
+                public ulong QuotaPeakPagedPoolUsage => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_QuotaPeakPagedPoolUsage..Offset_QuotaPeakNonPagedPoolUsage]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_QuotaPeakPagedPoolUsage..Offset_QuotaPeakNonPagedPoolUsage]);
 
                 /// <summary>
                 /// Retrieves the QuotaPeakNonPagedPoolUsage field.
                 /// </summary>
-                public ulong QuotaPeakNonPagedPoolUsage => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_QuotaPeakNonPagedPoolUsage..]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_QuotaPeakNonPagedPoolUsage..]);
+                public ulong QuotaPeakNonPagedPoolUsage => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_QuotaPeakNonPagedPoolUsage..Offset_VirtualSize]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_QuotaPeakNonPagedPoolUsage..Offset_VirtualSize]);
 
                 /// <summary>
                 /// Retrieves the VirtualSize field.
                 /// </summary>
-                public ulong VirtualSize => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_VirtualSize..]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_VirtualSize..]);
+                public ulong VirtualSize => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_VirtualSize..Offset_WorkingSetSize]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_VirtualSize..Offset_WorkingSetSize]);
 
                 /// <summary>
                 /// Retrieves the WorkingSetSize field.
                 /// </summary>
-                public ulong WorkingSetSize => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_WorkingSetSize..]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_WorkingSetSize..]);
+                public ulong WorkingSetSize => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_WorkingSetSize..Offset_PagefileUsage]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_WorkingSetSize..Offset_PagefileUsage]);
 
                 /// <summary>
                 /// Retrieves the PagefileUsage field.
                 /// </summary>
-                public ulong PagefileUsage => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_PagefileUsage..]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_PagefileUsage..]);
+                public ulong PagefileUsage => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_PagefileUsage..Offset_QuotaPagedPoolUsage]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_PagefileUsage..Offset_QuotaPagedPoolUsage]);
 
                 /// <summary>
                 /// Retrieves the QuotaPagedPoolUsage field.
                 /// </summary>
-                public ulong QuotaPagedPoolUsage => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_QuotaPagedPoolUsage..]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_QuotaPagedPoolUsage..]);
+                public ulong QuotaPagedPoolUsage => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_QuotaPagedPoolUsage..Offset_QuotaNonPagedPoolUsage]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_QuotaPagedPoolUsage..Offset_QuotaNonPagedPoolUsage]);
 
                 /// <summary>
                 /// Retrieves the QuotaNonPagedPoolUsage field.
                 /// </summary>
-                public ulong QuotaNonPagedPoolUsage => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_QuotaNonPagedPoolUsage..]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_QuotaNonPagedPoolUsage..]);
+                public ulong QuotaNonPagedPoolUsage => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_QuotaNonPagedPoolUsage..Offset_PrivatePageCount]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_QuotaNonPagedPoolUsage..Offset_PrivatePageCount]);
 
                 /// <summary>
                 /// Retrieves the PrivatePageCount field.
@@ -3938,6 +4034,12 @@ namespace EtwTools
             }
 
             /// <summary>
+            /// Converts a generic ETW event to a InSwapEventV2.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator InSwapEventV2(EtwEvent etwEvent) => new(etwEvent);
+
+            /// <summary>
             /// A data wrapper for a InSwap event.
             /// </summary>
             public ref struct InSwapData
@@ -3976,7 +4078,7 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the DirectoryTableBase field.
                 /// </summary>
-                public ulong DirectoryTableBase => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_DirectoryTableBase..]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_DirectoryTableBase..]);
+                public ulong DirectoryTableBase => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_DirectoryTableBase..Offset_ProcessId]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_DirectoryTableBase..Offset_ProcessId]);
 
                 /// <summary>
                 /// Retrieves the ProcessId field.
@@ -4068,6 +4170,12 @@ namespace EtwTools
             }
 
             /// <summary>
+            /// Converts a generic ETW event to a WakeChargeUserEventV2.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator WakeChargeUserEventV2(EtwEvent etwEvent) => new(etwEvent);
+
+            /// <summary>
             /// A data wrapper for a WakeChargeUser event.
             /// </summary>
             public ref struct WakeChargeUserData
@@ -4134,17 +4242,17 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the Object field.
                 /// </summary>
-                public ulong Object => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_Object..]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_Object..]);
+                public ulong Object => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_Object..Offset_Tag]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_Object..Offset_Tag]);
 
                 /// <summary>
                 /// Retrieves the Tag field.
                 /// </summary>
-                public ulong Tag => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_Tag..]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_Tag..]);
+                public ulong Tag => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_Tag..Offset_ProcessId]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_Tag..Offset_ProcessId]);
 
                 /// <summary>
                 /// Retrieves the ProcessId field.
                 /// </summary>
-                public uint ProcessId => BitConverter.ToUInt32(_etwEvent.Data[Offset_ProcessId..]);
+                public uint ProcessId => BitConverter.ToUInt32(_etwEvent.Data[Offset_ProcessId..Offset_Count]);
 
                 /// <summary>
                 /// Retrieves the Count field.
@@ -4238,6 +4346,12 @@ namespace EtwTools
             }
 
             /// <summary>
+            /// Converts a generic ETW event to a WakeChargeExecutionEventV2.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator WakeChargeExecutionEventV2(EtwEvent etwEvent) => new(etwEvent);
+
+            /// <summary>
             /// A data wrapper for a WakeChargeExecution event.
             /// </summary>
             public ref struct WakeChargeExecutionData
@@ -4304,17 +4418,17 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the Object field.
                 /// </summary>
-                public ulong Object => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_Object..]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_Object..]);
+                public ulong Object => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_Object..Offset_Tag]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_Object..Offset_Tag]);
 
                 /// <summary>
                 /// Retrieves the Tag field.
                 /// </summary>
-                public ulong Tag => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_Tag..]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_Tag..]);
+                public ulong Tag => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_Tag..Offset_ProcessId]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_Tag..Offset_ProcessId]);
 
                 /// <summary>
                 /// Retrieves the ProcessId field.
                 /// </summary>
-                public uint ProcessId => BitConverter.ToUInt32(_etwEvent.Data[Offset_ProcessId..]);
+                public uint ProcessId => BitConverter.ToUInt32(_etwEvent.Data[Offset_ProcessId..Offset_Count]);
 
                 /// <summary>
                 /// Retrieves the Count field.
@@ -4408,6 +4522,12 @@ namespace EtwTools
             }
 
             /// <summary>
+            /// Converts a generic ETW event to a WakeChargeKernelEventV2.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator WakeChargeKernelEventV2(EtwEvent etwEvent) => new(etwEvent);
+
+            /// <summary>
             /// A data wrapper for a WakeChargeKernel event.
             /// </summary>
             public ref struct WakeChargeKernelData
@@ -4474,17 +4594,17 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the Object field.
                 /// </summary>
-                public ulong Object => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_Object..]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_Object..]);
+                public ulong Object => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_Object..Offset_Tag]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_Object..Offset_Tag]);
 
                 /// <summary>
                 /// Retrieves the Tag field.
                 /// </summary>
-                public ulong Tag => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_Tag..]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_Tag..]);
+                public ulong Tag => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_Tag..Offset_ProcessId]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_Tag..Offset_ProcessId]);
 
                 /// <summary>
                 /// Retrieves the ProcessId field.
                 /// </summary>
-                public uint ProcessId => BitConverter.ToUInt32(_etwEvent.Data[Offset_ProcessId..]);
+                public uint ProcessId => BitConverter.ToUInt32(_etwEvent.Data[Offset_ProcessId..Offset_Count]);
 
                 /// <summary>
                 /// Retrieves the Count field.
@@ -4578,6 +4698,12 @@ namespace EtwTools
             }
 
             /// <summary>
+            /// Converts a generic ETW event to a WakeChargeInstrumentationEventV2.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator WakeChargeInstrumentationEventV2(EtwEvent etwEvent) => new(etwEvent);
+
+            /// <summary>
             /// A data wrapper for a WakeChargeInstrumentation event.
             /// </summary>
             public ref struct WakeChargeInstrumentationData
@@ -4644,17 +4770,17 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the Object field.
                 /// </summary>
-                public ulong Object => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_Object..]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_Object..]);
+                public ulong Object => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_Object..Offset_Tag]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_Object..Offset_Tag]);
 
                 /// <summary>
                 /// Retrieves the Tag field.
                 /// </summary>
-                public ulong Tag => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_Tag..]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_Tag..]);
+                public ulong Tag => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_Tag..Offset_ProcessId]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_Tag..Offset_ProcessId]);
 
                 /// <summary>
                 /// Retrieves the ProcessId field.
                 /// </summary>
-                public uint ProcessId => BitConverter.ToUInt32(_etwEvent.Data[Offset_ProcessId..]);
+                public uint ProcessId => BitConverter.ToUInt32(_etwEvent.Data[Offset_ProcessId..Offset_Count]);
 
                 /// <summary>
                 /// Retrieves the Count field.
@@ -4748,6 +4874,12 @@ namespace EtwTools
             }
 
             /// <summary>
+            /// Converts a generic ETW event to a WakeChargePreserveProcessEventV2.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator WakeChargePreserveProcessEventV2(EtwEvent etwEvent) => new(etwEvent);
+
+            /// <summary>
             /// A data wrapper for a WakeChargePreserveProcess event.
             /// </summary>
             public ref struct WakeChargePreserveProcessData
@@ -4814,17 +4946,17 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the Object field.
                 /// </summary>
-                public ulong Object => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_Object..]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_Object..]);
+                public ulong Object => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_Object..Offset_Tag]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_Object..Offset_Tag]);
 
                 /// <summary>
                 /// Retrieves the Tag field.
                 /// </summary>
-                public ulong Tag => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_Tag..]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_Tag..]);
+                public ulong Tag => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_Tag..Offset_ProcessId]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_Tag..Offset_ProcessId]);
 
                 /// <summary>
                 /// Retrieves the ProcessId field.
                 /// </summary>
-                public uint ProcessId => BitConverter.ToUInt32(_etwEvent.Data[Offset_ProcessId..]);
+                public uint ProcessId => BitConverter.ToUInt32(_etwEvent.Data[Offset_ProcessId..Offset_Count]);
 
                 /// <summary>
                 /// Retrieves the Count field.
@@ -4918,6 +5050,12 @@ namespace EtwTools
             }
 
             /// <summary>
+            /// Converts a generic ETW event to a WakeReleaseUserEventV2.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator WakeReleaseUserEventV2(EtwEvent etwEvent) => new(etwEvent);
+
+            /// <summary>
             /// A data wrapper for a WakeReleaseUser event.
             /// </summary>
             public ref struct WakeReleaseUserData
@@ -4984,17 +5122,17 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the Object field.
                 /// </summary>
-                public ulong Object => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_Object..]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_Object..]);
+                public ulong Object => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_Object..Offset_Tag]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_Object..Offset_Tag]);
 
                 /// <summary>
                 /// Retrieves the Tag field.
                 /// </summary>
-                public ulong Tag => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_Tag..]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_Tag..]);
+                public ulong Tag => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_Tag..Offset_ProcessId]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_Tag..Offset_ProcessId]);
 
                 /// <summary>
                 /// Retrieves the ProcessId field.
                 /// </summary>
-                public uint ProcessId => BitConverter.ToUInt32(_etwEvent.Data[Offset_ProcessId..]);
+                public uint ProcessId => BitConverter.ToUInt32(_etwEvent.Data[Offset_ProcessId..Offset_Count]);
 
                 /// <summary>
                 /// Retrieves the Count field.
@@ -5088,6 +5226,12 @@ namespace EtwTools
             }
 
             /// <summary>
+            /// Converts a generic ETW event to a WakeReleaseExecutionEventV2.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator WakeReleaseExecutionEventV2(EtwEvent etwEvent) => new(etwEvent);
+
+            /// <summary>
             /// A data wrapper for a WakeReleaseExecution event.
             /// </summary>
             public ref struct WakeReleaseExecutionData
@@ -5154,17 +5298,17 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the Object field.
                 /// </summary>
-                public ulong Object => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_Object..]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_Object..]);
+                public ulong Object => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_Object..Offset_Tag]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_Object..Offset_Tag]);
 
                 /// <summary>
                 /// Retrieves the Tag field.
                 /// </summary>
-                public ulong Tag => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_Tag..]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_Tag..]);
+                public ulong Tag => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_Tag..Offset_ProcessId]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_Tag..Offset_ProcessId]);
 
                 /// <summary>
                 /// Retrieves the ProcessId field.
                 /// </summary>
-                public uint ProcessId => BitConverter.ToUInt32(_etwEvent.Data[Offset_ProcessId..]);
+                public uint ProcessId => BitConverter.ToUInt32(_etwEvent.Data[Offset_ProcessId..Offset_Count]);
 
                 /// <summary>
                 /// Retrieves the Count field.
@@ -5258,6 +5402,12 @@ namespace EtwTools
             }
 
             /// <summary>
+            /// Converts a generic ETW event to a WakeReleaseKernelEventV2.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator WakeReleaseKernelEventV2(EtwEvent etwEvent) => new(etwEvent);
+
+            /// <summary>
             /// A data wrapper for a WakeReleaseKernel event.
             /// </summary>
             public ref struct WakeReleaseKernelData
@@ -5324,17 +5474,17 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the Object field.
                 /// </summary>
-                public ulong Object => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_Object..]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_Object..]);
+                public ulong Object => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_Object..Offset_Tag]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_Object..Offset_Tag]);
 
                 /// <summary>
                 /// Retrieves the Tag field.
                 /// </summary>
-                public ulong Tag => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_Tag..]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_Tag..]);
+                public ulong Tag => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_Tag..Offset_ProcessId]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_Tag..Offset_ProcessId]);
 
                 /// <summary>
                 /// Retrieves the ProcessId field.
                 /// </summary>
-                public uint ProcessId => BitConverter.ToUInt32(_etwEvent.Data[Offset_ProcessId..]);
+                public uint ProcessId => BitConverter.ToUInt32(_etwEvent.Data[Offset_ProcessId..Offset_Count]);
 
                 /// <summary>
                 /// Retrieves the Count field.
@@ -5428,6 +5578,12 @@ namespace EtwTools
             }
 
             /// <summary>
+            /// Converts a generic ETW event to a WakeReleaseInstrumentationEventV2.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator WakeReleaseInstrumentationEventV2(EtwEvent etwEvent) => new(etwEvent);
+
+            /// <summary>
             /// A data wrapper for a WakeReleaseInstrumentation event.
             /// </summary>
             public ref struct WakeReleaseInstrumentationData
@@ -5494,17 +5650,17 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the Object field.
                 /// </summary>
-                public ulong Object => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_Object..]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_Object..]);
+                public ulong Object => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_Object..Offset_Tag]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_Object..Offset_Tag]);
 
                 /// <summary>
                 /// Retrieves the Tag field.
                 /// </summary>
-                public ulong Tag => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_Tag..]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_Tag..]);
+                public ulong Tag => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_Tag..Offset_ProcessId]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_Tag..Offset_ProcessId]);
 
                 /// <summary>
                 /// Retrieves the ProcessId field.
                 /// </summary>
-                public uint ProcessId => BitConverter.ToUInt32(_etwEvent.Data[Offset_ProcessId..]);
+                public uint ProcessId => BitConverter.ToUInt32(_etwEvent.Data[Offset_ProcessId..Offset_Count]);
 
                 /// <summary>
                 /// Retrieves the Count field.
@@ -5598,6 +5754,12 @@ namespace EtwTools
             }
 
             /// <summary>
+            /// Converts a generic ETW event to a WakeReleasePreserveProcessEventV2.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator WakeReleasePreserveProcessEventV2(EtwEvent etwEvent) => new(etwEvent);
+
+            /// <summary>
             /// A data wrapper for a WakeReleasePreserveProcess event.
             /// </summary>
             public ref struct WakeReleasePreserveProcessData
@@ -5664,17 +5826,17 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the Object field.
                 /// </summary>
-                public ulong Object => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_Object..]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_Object..]);
+                public ulong Object => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_Object..Offset_Tag]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_Object..Offset_Tag]);
 
                 /// <summary>
                 /// Retrieves the Tag field.
                 /// </summary>
-                public ulong Tag => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_Tag..]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_Tag..]);
+                public ulong Tag => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_Tag..Offset_ProcessId]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_Tag..Offset_ProcessId]);
 
                 /// <summary>
                 /// Retrieves the ProcessId field.
                 /// </summary>
-                public uint ProcessId => BitConverter.ToUInt32(_etwEvent.Data[Offset_ProcessId..]);
+                public uint ProcessId => BitConverter.ToUInt32(_etwEvent.Data[Offset_ProcessId..Offset_Count]);
 
                 /// <summary>
                 /// Retrieves the Count field.
@@ -5768,6 +5930,12 @@ namespace EtwTools
             }
 
             /// <summary>
+            /// Converts a generic ETW event to a WakeDropUserEventV2.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator WakeDropUserEventV2(EtwEvent etwEvent) => new(etwEvent);
+
+            /// <summary>
             /// A data wrapper for a WakeDropUser event.
             /// </summary>
             public ref struct WakeDropUserData
@@ -5834,17 +6002,17 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the Object field.
                 /// </summary>
-                public ulong Object => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_Object..]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_Object..]);
+                public ulong Object => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_Object..Offset_Tag]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_Object..Offset_Tag]);
 
                 /// <summary>
                 /// Retrieves the Tag field.
                 /// </summary>
-                public ulong Tag => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_Tag..]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_Tag..]);
+                public ulong Tag => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_Tag..Offset_ProcessId]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_Tag..Offset_ProcessId]);
 
                 /// <summary>
                 /// Retrieves the ProcessId field.
                 /// </summary>
-                public uint ProcessId => BitConverter.ToUInt32(_etwEvent.Data[Offset_ProcessId..]);
+                public uint ProcessId => BitConverter.ToUInt32(_etwEvent.Data[Offset_ProcessId..Offset_Count]);
 
                 /// <summary>
                 /// Retrieves the Count field.
@@ -5938,6 +6106,12 @@ namespace EtwTools
             }
 
             /// <summary>
+            /// Converts a generic ETW event to a WakeDropExecutionEventV2.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator WakeDropExecutionEventV2(EtwEvent etwEvent) => new(etwEvent);
+
+            /// <summary>
             /// A data wrapper for a WakeDropExecution event.
             /// </summary>
             public ref struct WakeDropExecutionData
@@ -6004,17 +6178,17 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the Object field.
                 /// </summary>
-                public ulong Object => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_Object..]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_Object..]);
+                public ulong Object => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_Object..Offset_Tag]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_Object..Offset_Tag]);
 
                 /// <summary>
                 /// Retrieves the Tag field.
                 /// </summary>
-                public ulong Tag => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_Tag..]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_Tag..]);
+                public ulong Tag => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_Tag..Offset_ProcessId]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_Tag..Offset_ProcessId]);
 
                 /// <summary>
                 /// Retrieves the ProcessId field.
                 /// </summary>
-                public uint ProcessId => BitConverter.ToUInt32(_etwEvent.Data[Offset_ProcessId..]);
+                public uint ProcessId => BitConverter.ToUInt32(_etwEvent.Data[Offset_ProcessId..Offset_Count]);
 
                 /// <summary>
                 /// Retrieves the Count field.
@@ -6108,6 +6282,12 @@ namespace EtwTools
             }
 
             /// <summary>
+            /// Converts a generic ETW event to a WakeDropKernelEventV2.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator WakeDropKernelEventV2(EtwEvent etwEvent) => new(etwEvent);
+
+            /// <summary>
             /// A data wrapper for a WakeDropKernel event.
             /// </summary>
             public ref struct WakeDropKernelData
@@ -6174,17 +6354,17 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the Object field.
                 /// </summary>
-                public ulong Object => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_Object..]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_Object..]);
+                public ulong Object => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_Object..Offset_Tag]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_Object..Offset_Tag]);
 
                 /// <summary>
                 /// Retrieves the Tag field.
                 /// </summary>
-                public ulong Tag => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_Tag..]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_Tag..]);
+                public ulong Tag => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_Tag..Offset_ProcessId]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_Tag..Offset_ProcessId]);
 
                 /// <summary>
                 /// Retrieves the ProcessId field.
                 /// </summary>
-                public uint ProcessId => BitConverter.ToUInt32(_etwEvent.Data[Offset_ProcessId..]);
+                public uint ProcessId => BitConverter.ToUInt32(_etwEvent.Data[Offset_ProcessId..Offset_Count]);
 
                 /// <summary>
                 /// Retrieves the Count field.
@@ -6278,6 +6458,12 @@ namespace EtwTools
             }
 
             /// <summary>
+            /// Converts a generic ETW event to a WakeDropInstrumentationEventV2.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator WakeDropInstrumentationEventV2(EtwEvent etwEvent) => new(etwEvent);
+
+            /// <summary>
             /// A data wrapper for a WakeDropInstrumentation event.
             /// </summary>
             public ref struct WakeDropInstrumentationData
@@ -6344,17 +6530,17 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the Object field.
                 /// </summary>
-                public ulong Object => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_Object..]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_Object..]);
+                public ulong Object => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_Object..Offset_Tag]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_Object..Offset_Tag]);
 
                 /// <summary>
                 /// Retrieves the Tag field.
                 /// </summary>
-                public ulong Tag => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_Tag..]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_Tag..]);
+                public ulong Tag => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_Tag..Offset_ProcessId]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_Tag..Offset_ProcessId]);
 
                 /// <summary>
                 /// Retrieves the ProcessId field.
                 /// </summary>
-                public uint ProcessId => BitConverter.ToUInt32(_etwEvent.Data[Offset_ProcessId..]);
+                public uint ProcessId => BitConverter.ToUInt32(_etwEvent.Data[Offset_ProcessId..Offset_Count]);
 
                 /// <summary>
                 /// Retrieves the Count field.
@@ -6448,6 +6634,12 @@ namespace EtwTools
             }
 
             /// <summary>
+            /// Converts a generic ETW event to a WakeDropPreserveProcessEventV2.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator WakeDropPreserveProcessEventV2(EtwEvent etwEvent) => new(etwEvent);
+
+            /// <summary>
             /// A data wrapper for a WakeDropPreserveProcess event.
             /// </summary>
             public ref struct WakeDropPreserveProcessData
@@ -6514,17 +6706,17 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the Object field.
                 /// </summary>
-                public ulong Object => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_Object..]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_Object..]);
+                public ulong Object => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_Object..Offset_Tag]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_Object..Offset_Tag]);
 
                 /// <summary>
                 /// Retrieves the Tag field.
                 /// </summary>
-                public ulong Tag => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_Tag..]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_Tag..]);
+                public ulong Tag => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_Tag..Offset_ProcessId]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_Tag..Offset_ProcessId]);
 
                 /// <summary>
                 /// Retrieves the ProcessId field.
                 /// </summary>
-                public uint ProcessId => BitConverter.ToUInt32(_etwEvent.Data[Offset_ProcessId..]);
+                public uint ProcessId => BitConverter.ToUInt32(_etwEvent.Data[Offset_ProcessId..Offset_Count]);
 
                 /// <summary>
                 /// Retrieves the Count field.
@@ -6616,6 +6808,12 @@ namespace EtwTools
             {
                 _etwEvent = etwEvent;
             }
+
+            /// <summary>
+            /// Converts a generic ETW event to a WakeEventUserEventV2.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator WakeEventUserEventV2(EtwEvent etwEvent) => new(etwEvent);
 
             /// <summary>
             /// A data wrapper for a WakeEventUser event.
@@ -6728,6 +6926,12 @@ namespace EtwTools
             }
 
             /// <summary>
+            /// Converts a generic ETW event to a WakeEventExecutionEventV2.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator WakeEventExecutionEventV2(EtwEvent etwEvent) => new(etwEvent);
+
+            /// <summary>
             /// A data wrapper for a WakeEventExecution event.
             /// </summary>
             public ref struct WakeEventExecutionData
@@ -6836,6 +7040,12 @@ namespace EtwTools
             {
                 _etwEvent = etwEvent;
             }
+
+            /// <summary>
+            /// Converts a generic ETW event to a WakeEventKernelEventV2.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator WakeEventKernelEventV2(EtwEvent etwEvent) => new(etwEvent);
 
             /// <summary>
             /// A data wrapper for a WakeEventKernel event.
@@ -6948,6 +7158,12 @@ namespace EtwTools
             }
 
             /// <summary>
+            /// Converts a generic ETW event to a WakeEventInstrumentationEventV2.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator WakeEventInstrumentationEventV2(EtwEvent etwEvent) => new(etwEvent);
+
+            /// <summary>
             /// A data wrapper for a WakeEventInstrumentation event.
             /// </summary>
             public ref struct WakeEventInstrumentationData
@@ -7058,6 +7274,12 @@ namespace EtwTools
             }
 
             /// <summary>
+            /// Converts a generic ETW event to a StartEventV3.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator StartEventV3(EtwEvent etwEvent) => new(etwEvent);
+
+            /// <summary>
             /// A data wrapper for a Start event.
             /// </summary>
             public ref struct StartData
@@ -7194,32 +7416,32 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the UniqueProcessKey field.
                 /// </summary>
-                public ulong UniqueProcessKey => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_UniqueProcessKey..]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_UniqueProcessKey..]);
+                public ulong UniqueProcessKey => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_UniqueProcessKey..Offset_ProcessId]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_UniqueProcessKey..Offset_ProcessId]);
 
                 /// <summary>
                 /// Retrieves the ProcessId field.
                 /// </summary>
-                public uint ProcessId => BitConverter.ToUInt32(_etwEvent.Data[Offset_ProcessId..]);
+                public uint ProcessId => BitConverter.ToUInt32(_etwEvent.Data[Offset_ProcessId..Offset_ParentId]);
 
                 /// <summary>
                 /// Retrieves the ParentId field.
                 /// </summary>
-                public uint ParentId => BitConverter.ToUInt32(_etwEvent.Data[Offset_ParentId..]);
+                public uint ParentId => BitConverter.ToUInt32(_etwEvent.Data[Offset_ParentId..Offset_SessionId]);
 
                 /// <summary>
                 /// Retrieves the SessionId field.
                 /// </summary>
-                public uint SessionId => BitConverter.ToUInt32(_etwEvent.Data[Offset_SessionId..]);
+                public uint SessionId => BitConverter.ToUInt32(_etwEvent.Data[Offset_SessionId..Offset_ExitStatus]);
 
                 /// <summary>
                 /// Retrieves the ExitStatus field.
                 /// </summary>
-                public int ExitStatus => BitConverter.ToInt32(_etwEvent.Data[Offset_ExitStatus..]);
+                public int ExitStatus => BitConverter.ToInt32(_etwEvent.Data[Offset_ExitStatus..Offset_DirectoryTableBase]);
 
                 /// <summary>
                 /// Retrieves the DirectoryTableBase field.
                 /// </summary>
-                public ulong DirectoryTableBase => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_DirectoryTableBase..]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_DirectoryTableBase..]);
+                public ulong DirectoryTableBase => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_DirectoryTableBase..Offset_UserSID]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_DirectoryTableBase..Offset_UserSID]);
 
                 /// <summary>
                 /// Retrieves the UserSID field.
@@ -7229,7 +7451,7 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the ImageFileName field.
                 /// </summary>
-                public string ImageFileName => System.Text.Encoding.ASCII.GetString(_etwEvent.Data[Offset_ImageFileName..]);
+                public string ImageFileName => System.Text.Encoding.ASCII.GetString(_etwEvent.Data[Offset_ImageFileName..Offset_CommandLine]);
 
                 /// <summary>
                 /// Retrieves the CommandLine field.
@@ -7326,6 +7548,12 @@ namespace EtwTools
             {
                 _etwEvent = etwEvent;
             }
+
+            /// <summary>
+            /// Converts a generic ETW event to a EndEventV3.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator EndEventV3(EtwEvent etwEvent) => new(etwEvent);
 
             /// <summary>
             /// A data wrapper for a End event.
@@ -7464,32 +7692,32 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the UniqueProcessKey field.
                 /// </summary>
-                public ulong UniqueProcessKey => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_UniqueProcessKey..]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_UniqueProcessKey..]);
+                public ulong UniqueProcessKey => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_UniqueProcessKey..Offset_ProcessId]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_UniqueProcessKey..Offset_ProcessId]);
 
                 /// <summary>
                 /// Retrieves the ProcessId field.
                 /// </summary>
-                public uint ProcessId => BitConverter.ToUInt32(_etwEvent.Data[Offset_ProcessId..]);
+                public uint ProcessId => BitConverter.ToUInt32(_etwEvent.Data[Offset_ProcessId..Offset_ParentId]);
 
                 /// <summary>
                 /// Retrieves the ParentId field.
                 /// </summary>
-                public uint ParentId => BitConverter.ToUInt32(_etwEvent.Data[Offset_ParentId..]);
+                public uint ParentId => BitConverter.ToUInt32(_etwEvent.Data[Offset_ParentId..Offset_SessionId]);
 
                 /// <summary>
                 /// Retrieves the SessionId field.
                 /// </summary>
-                public uint SessionId => BitConverter.ToUInt32(_etwEvent.Data[Offset_SessionId..]);
+                public uint SessionId => BitConverter.ToUInt32(_etwEvent.Data[Offset_SessionId..Offset_ExitStatus]);
 
                 /// <summary>
                 /// Retrieves the ExitStatus field.
                 /// </summary>
-                public int ExitStatus => BitConverter.ToInt32(_etwEvent.Data[Offset_ExitStatus..]);
+                public int ExitStatus => BitConverter.ToInt32(_etwEvent.Data[Offset_ExitStatus..Offset_DirectoryTableBase]);
 
                 /// <summary>
                 /// Retrieves the DirectoryTableBase field.
                 /// </summary>
-                public ulong DirectoryTableBase => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_DirectoryTableBase..]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_DirectoryTableBase..]);
+                public ulong DirectoryTableBase => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_DirectoryTableBase..Offset_UserSID]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_DirectoryTableBase..Offset_UserSID]);
 
                 /// <summary>
                 /// Retrieves the UserSID field.
@@ -7499,7 +7727,7 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the ImageFileName field.
                 /// </summary>
-                public string ImageFileName => System.Text.Encoding.ASCII.GetString(_etwEvent.Data[Offset_ImageFileName..]);
+                public string ImageFileName => System.Text.Encoding.ASCII.GetString(_etwEvent.Data[Offset_ImageFileName..Offset_CommandLine]);
 
                 /// <summary>
                 /// Retrieves the CommandLine field.
@@ -7596,6 +7824,12 @@ namespace EtwTools
             {
                 _etwEvent = etwEvent;
             }
+
+            /// <summary>
+            /// Converts a generic ETW event to a DCStartEventV3.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator DCStartEventV3(EtwEvent etwEvent) => new(etwEvent);
 
             /// <summary>
             /// A data wrapper for a DCStart event.
@@ -7734,32 +7968,32 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the UniqueProcessKey field.
                 /// </summary>
-                public ulong UniqueProcessKey => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_UniqueProcessKey..]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_UniqueProcessKey..]);
+                public ulong UniqueProcessKey => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_UniqueProcessKey..Offset_ProcessId]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_UniqueProcessKey..Offset_ProcessId]);
 
                 /// <summary>
                 /// Retrieves the ProcessId field.
                 /// </summary>
-                public uint ProcessId => BitConverter.ToUInt32(_etwEvent.Data[Offset_ProcessId..]);
+                public uint ProcessId => BitConverter.ToUInt32(_etwEvent.Data[Offset_ProcessId..Offset_ParentId]);
 
                 /// <summary>
                 /// Retrieves the ParentId field.
                 /// </summary>
-                public uint ParentId => BitConverter.ToUInt32(_etwEvent.Data[Offset_ParentId..]);
+                public uint ParentId => BitConverter.ToUInt32(_etwEvent.Data[Offset_ParentId..Offset_SessionId]);
 
                 /// <summary>
                 /// Retrieves the SessionId field.
                 /// </summary>
-                public uint SessionId => BitConverter.ToUInt32(_etwEvent.Data[Offset_SessionId..]);
+                public uint SessionId => BitConverter.ToUInt32(_etwEvent.Data[Offset_SessionId..Offset_ExitStatus]);
 
                 /// <summary>
                 /// Retrieves the ExitStatus field.
                 /// </summary>
-                public int ExitStatus => BitConverter.ToInt32(_etwEvent.Data[Offset_ExitStatus..]);
+                public int ExitStatus => BitConverter.ToInt32(_etwEvent.Data[Offset_ExitStatus..Offset_DirectoryTableBase]);
 
                 /// <summary>
                 /// Retrieves the DirectoryTableBase field.
                 /// </summary>
-                public ulong DirectoryTableBase => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_DirectoryTableBase..]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_DirectoryTableBase..]);
+                public ulong DirectoryTableBase => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_DirectoryTableBase..Offset_UserSID]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_DirectoryTableBase..Offset_UserSID]);
 
                 /// <summary>
                 /// Retrieves the UserSID field.
@@ -7769,7 +8003,7 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the ImageFileName field.
                 /// </summary>
-                public string ImageFileName => System.Text.Encoding.ASCII.GetString(_etwEvent.Data[Offset_ImageFileName..]);
+                public string ImageFileName => System.Text.Encoding.ASCII.GetString(_etwEvent.Data[Offset_ImageFileName..Offset_CommandLine]);
 
                 /// <summary>
                 /// Retrieves the CommandLine field.
@@ -7866,6 +8100,12 @@ namespace EtwTools
             {
                 _etwEvent = etwEvent;
             }
+
+            /// <summary>
+            /// Converts a generic ETW event to a DCEndEventV3.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator DCEndEventV3(EtwEvent etwEvent) => new(etwEvent);
 
             /// <summary>
             /// A data wrapper for a DCEnd event.
@@ -8004,32 +8244,32 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the UniqueProcessKey field.
                 /// </summary>
-                public ulong UniqueProcessKey => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_UniqueProcessKey..]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_UniqueProcessKey..]);
+                public ulong UniqueProcessKey => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_UniqueProcessKey..Offset_ProcessId]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_UniqueProcessKey..Offset_ProcessId]);
 
                 /// <summary>
                 /// Retrieves the ProcessId field.
                 /// </summary>
-                public uint ProcessId => BitConverter.ToUInt32(_etwEvent.Data[Offset_ProcessId..]);
+                public uint ProcessId => BitConverter.ToUInt32(_etwEvent.Data[Offset_ProcessId..Offset_ParentId]);
 
                 /// <summary>
                 /// Retrieves the ParentId field.
                 /// </summary>
-                public uint ParentId => BitConverter.ToUInt32(_etwEvent.Data[Offset_ParentId..]);
+                public uint ParentId => BitConverter.ToUInt32(_etwEvent.Data[Offset_ParentId..Offset_SessionId]);
 
                 /// <summary>
                 /// Retrieves the SessionId field.
                 /// </summary>
-                public uint SessionId => BitConverter.ToUInt32(_etwEvent.Data[Offset_SessionId..]);
+                public uint SessionId => BitConverter.ToUInt32(_etwEvent.Data[Offset_SessionId..Offset_ExitStatus]);
 
                 /// <summary>
                 /// Retrieves the ExitStatus field.
                 /// </summary>
-                public int ExitStatus => BitConverter.ToInt32(_etwEvent.Data[Offset_ExitStatus..]);
+                public int ExitStatus => BitConverter.ToInt32(_etwEvent.Data[Offset_ExitStatus..Offset_DirectoryTableBase]);
 
                 /// <summary>
                 /// Retrieves the DirectoryTableBase field.
                 /// </summary>
-                public ulong DirectoryTableBase => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_DirectoryTableBase..]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_DirectoryTableBase..]);
+                public ulong DirectoryTableBase => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_DirectoryTableBase..Offset_UserSID]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_DirectoryTableBase..Offset_UserSID]);
 
                 /// <summary>
                 /// Retrieves the UserSID field.
@@ -8039,7 +8279,7 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the ImageFileName field.
                 /// </summary>
-                public string ImageFileName => System.Text.Encoding.ASCII.GetString(_etwEvent.Data[Offset_ImageFileName..]);
+                public string ImageFileName => System.Text.Encoding.ASCII.GetString(_etwEvent.Data[Offset_ImageFileName..Offset_CommandLine]);
 
                 /// <summary>
                 /// Retrieves the CommandLine field.
@@ -8136,6 +8376,12 @@ namespace EtwTools
             {
                 _etwEvent = etwEvent;
             }
+
+            /// <summary>
+            /// Converts a generic ETW event to a DefunctEventV3.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator DefunctEventV3(EtwEvent etwEvent) => new(etwEvent);
 
             /// <summary>
             /// A data wrapper for a Defunct event.
@@ -8274,32 +8520,32 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the UniqueProcessKey field.
                 /// </summary>
-                public ulong UniqueProcessKey => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_UniqueProcessKey..]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_UniqueProcessKey..]);
+                public ulong UniqueProcessKey => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_UniqueProcessKey..Offset_ProcessId]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_UniqueProcessKey..Offset_ProcessId]);
 
                 /// <summary>
                 /// Retrieves the ProcessId field.
                 /// </summary>
-                public uint ProcessId => BitConverter.ToUInt32(_etwEvent.Data[Offset_ProcessId..]);
+                public uint ProcessId => BitConverter.ToUInt32(_etwEvent.Data[Offset_ProcessId..Offset_ParentId]);
 
                 /// <summary>
                 /// Retrieves the ParentId field.
                 /// </summary>
-                public uint ParentId => BitConverter.ToUInt32(_etwEvent.Data[Offset_ParentId..]);
+                public uint ParentId => BitConverter.ToUInt32(_etwEvent.Data[Offset_ParentId..Offset_SessionId]);
 
                 /// <summary>
                 /// Retrieves the SessionId field.
                 /// </summary>
-                public uint SessionId => BitConverter.ToUInt32(_etwEvent.Data[Offset_SessionId..]);
+                public uint SessionId => BitConverter.ToUInt32(_etwEvent.Data[Offset_SessionId..Offset_ExitStatus]);
 
                 /// <summary>
                 /// Retrieves the ExitStatus field.
                 /// </summary>
-                public int ExitStatus => BitConverter.ToInt32(_etwEvent.Data[Offset_ExitStatus..]);
+                public int ExitStatus => BitConverter.ToInt32(_etwEvent.Data[Offset_ExitStatus..Offset_DirectoryTableBase]);
 
                 /// <summary>
                 /// Retrieves the DirectoryTableBase field.
                 /// </summary>
-                public ulong DirectoryTableBase => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_DirectoryTableBase..]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_DirectoryTableBase..]);
+                public ulong DirectoryTableBase => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_DirectoryTableBase..Offset_UserSID]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_DirectoryTableBase..Offset_UserSID]);
 
                 /// <summary>
                 /// Retrieves the UserSID field.
@@ -8309,7 +8555,7 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the ImageFileName field.
                 /// </summary>
-                public string ImageFileName => System.Text.Encoding.ASCII.GetString(_etwEvent.Data[Offset_ImageFileName..]);
+                public string ImageFileName => System.Text.Encoding.ASCII.GetString(_etwEvent.Data[Offset_ImageFileName..Offset_CommandLine]);
 
                 /// <summary>
                 /// Retrieves the CommandLine field.
@@ -8406,6 +8652,12 @@ namespace EtwTools
             {
                 _etwEvent = etwEvent;
             }
+
+            /// <summary>
+            /// Converts a generic ETW event to a StartEventV4.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator StartEventV4(EtwEvent etwEvent) => new(etwEvent);
 
             /// <summary>
             /// A data wrapper for a Start event.
@@ -8586,37 +8838,37 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the UniqueProcessKey field.
                 /// </summary>
-                public ulong UniqueProcessKey => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_UniqueProcessKey..]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_UniqueProcessKey..]);
+                public ulong UniqueProcessKey => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_UniqueProcessKey..Offset_ProcessId]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_UniqueProcessKey..Offset_ProcessId]);
 
                 /// <summary>
                 /// Retrieves the ProcessId field.
                 /// </summary>
-                public uint ProcessId => BitConverter.ToUInt32(_etwEvent.Data[Offset_ProcessId..]);
+                public uint ProcessId => BitConverter.ToUInt32(_etwEvent.Data[Offset_ProcessId..Offset_ParentId]);
 
                 /// <summary>
                 /// Retrieves the ParentId field.
                 /// </summary>
-                public uint ParentId => BitConverter.ToUInt32(_etwEvent.Data[Offset_ParentId..]);
+                public uint ParentId => BitConverter.ToUInt32(_etwEvent.Data[Offset_ParentId..Offset_SessionId]);
 
                 /// <summary>
                 /// Retrieves the SessionId field.
                 /// </summary>
-                public uint SessionId => BitConverter.ToUInt32(_etwEvent.Data[Offset_SessionId..]);
+                public uint SessionId => BitConverter.ToUInt32(_etwEvent.Data[Offset_SessionId..Offset_ExitStatus]);
 
                 /// <summary>
                 /// Retrieves the ExitStatus field.
                 /// </summary>
-                public int ExitStatus => BitConverter.ToInt32(_etwEvent.Data[Offset_ExitStatus..]);
+                public int ExitStatus => BitConverter.ToInt32(_etwEvent.Data[Offset_ExitStatus..Offset_DirectoryTableBase]);
 
                 /// <summary>
                 /// Retrieves the DirectoryTableBase field.
                 /// </summary>
-                public ulong DirectoryTableBase => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_DirectoryTableBase..]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_DirectoryTableBase..]);
+                public ulong DirectoryTableBase => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_DirectoryTableBase..Offset_Flags]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_DirectoryTableBase..Offset_Flags]);
 
                 /// <summary>
                 /// Retrieves the Flags field.
                 /// </summary>
-                public uint Flags => BitConverter.ToUInt32(_etwEvent.Data[Offset_Flags..]);
+                public uint Flags => BitConverter.ToUInt32(_etwEvent.Data[Offset_Flags..Offset_UserSID]);
 
                 /// <summary>
                 /// Retrieves the UserSID field.
@@ -8626,17 +8878,17 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the ImageFileName field.
                 /// </summary>
-                public string ImageFileName => System.Text.Encoding.ASCII.GetString(_etwEvent.Data[Offset_ImageFileName..]);
+                public string ImageFileName => System.Text.Encoding.ASCII.GetString(_etwEvent.Data[Offset_ImageFileName..Offset_CommandLine]);
 
                 /// <summary>
                 /// Retrieves the CommandLine field.
                 /// </summary>
-                public string CommandLine => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_CommandLine..]);
+                public string CommandLine => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_CommandLine..Offset_PackageFullName]);
 
                 /// <summary>
                 /// Retrieves the PackageFullName field.
                 /// </summary>
-                public string PackageFullName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_PackageFullName..]);
+                public string PackageFullName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_PackageFullName..Offset_ApplicationId]);
 
                 /// <summary>
                 /// Retrieves the ApplicationId field.
@@ -8738,6 +8990,12 @@ namespace EtwTools
             }
 
             /// <summary>
+            /// Converts a generic ETW event to a EndEventV4.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator EndEventV4(EtwEvent etwEvent) => new(etwEvent);
+
+            /// <summary>
             /// A data wrapper for a End event.
             /// </summary>
             public ref struct EndData
@@ -8916,37 +9174,37 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the UniqueProcessKey field.
                 /// </summary>
-                public ulong UniqueProcessKey => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_UniqueProcessKey..]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_UniqueProcessKey..]);
+                public ulong UniqueProcessKey => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_UniqueProcessKey..Offset_ProcessId]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_UniqueProcessKey..Offset_ProcessId]);
 
                 /// <summary>
                 /// Retrieves the ProcessId field.
                 /// </summary>
-                public uint ProcessId => BitConverter.ToUInt32(_etwEvent.Data[Offset_ProcessId..]);
+                public uint ProcessId => BitConverter.ToUInt32(_etwEvent.Data[Offset_ProcessId..Offset_ParentId]);
 
                 /// <summary>
                 /// Retrieves the ParentId field.
                 /// </summary>
-                public uint ParentId => BitConverter.ToUInt32(_etwEvent.Data[Offset_ParentId..]);
+                public uint ParentId => BitConverter.ToUInt32(_etwEvent.Data[Offset_ParentId..Offset_SessionId]);
 
                 /// <summary>
                 /// Retrieves the SessionId field.
                 /// </summary>
-                public uint SessionId => BitConverter.ToUInt32(_etwEvent.Data[Offset_SessionId..]);
+                public uint SessionId => BitConverter.ToUInt32(_etwEvent.Data[Offset_SessionId..Offset_ExitStatus]);
 
                 /// <summary>
                 /// Retrieves the ExitStatus field.
                 /// </summary>
-                public int ExitStatus => BitConverter.ToInt32(_etwEvent.Data[Offset_ExitStatus..]);
+                public int ExitStatus => BitConverter.ToInt32(_etwEvent.Data[Offset_ExitStatus..Offset_DirectoryTableBase]);
 
                 /// <summary>
                 /// Retrieves the DirectoryTableBase field.
                 /// </summary>
-                public ulong DirectoryTableBase => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_DirectoryTableBase..]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_DirectoryTableBase..]);
+                public ulong DirectoryTableBase => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_DirectoryTableBase..Offset_Flags]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_DirectoryTableBase..Offset_Flags]);
 
                 /// <summary>
                 /// Retrieves the Flags field.
                 /// </summary>
-                public uint Flags => BitConverter.ToUInt32(_etwEvent.Data[Offset_Flags..]);
+                public uint Flags => BitConverter.ToUInt32(_etwEvent.Data[Offset_Flags..Offset_UserSID]);
 
                 /// <summary>
                 /// Retrieves the UserSID field.
@@ -8956,17 +9214,17 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the ImageFileName field.
                 /// </summary>
-                public string ImageFileName => System.Text.Encoding.ASCII.GetString(_etwEvent.Data[Offset_ImageFileName..]);
+                public string ImageFileName => System.Text.Encoding.ASCII.GetString(_etwEvent.Data[Offset_ImageFileName..Offset_CommandLine]);
 
                 /// <summary>
                 /// Retrieves the CommandLine field.
                 /// </summary>
-                public string CommandLine => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_CommandLine..]);
+                public string CommandLine => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_CommandLine..Offset_PackageFullName]);
 
                 /// <summary>
                 /// Retrieves the PackageFullName field.
                 /// </summary>
-                public string PackageFullName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_PackageFullName..]);
+                public string PackageFullName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_PackageFullName..Offset_ApplicationId]);
 
                 /// <summary>
                 /// Retrieves the ApplicationId field.
@@ -9066,6 +9324,12 @@ namespace EtwTools
             {
                 _etwEvent = etwEvent;
             }
+
+            /// <summary>
+            /// Converts a generic ETW event to a DCStartEventV4.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator DCStartEventV4(EtwEvent etwEvent) => new(etwEvent);
 
             /// <summary>
             /// A data wrapper for a DCStart event.
@@ -9246,37 +9510,37 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the UniqueProcessKey field.
                 /// </summary>
-                public ulong UniqueProcessKey => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_UniqueProcessKey..]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_UniqueProcessKey..]);
+                public ulong UniqueProcessKey => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_UniqueProcessKey..Offset_ProcessId]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_UniqueProcessKey..Offset_ProcessId]);
 
                 /// <summary>
                 /// Retrieves the ProcessId field.
                 /// </summary>
-                public uint ProcessId => BitConverter.ToUInt32(_etwEvent.Data[Offset_ProcessId..]);
+                public uint ProcessId => BitConverter.ToUInt32(_etwEvent.Data[Offset_ProcessId..Offset_ParentId]);
 
                 /// <summary>
                 /// Retrieves the ParentId field.
                 /// </summary>
-                public uint ParentId => BitConverter.ToUInt32(_etwEvent.Data[Offset_ParentId..]);
+                public uint ParentId => BitConverter.ToUInt32(_etwEvent.Data[Offset_ParentId..Offset_SessionId]);
 
                 /// <summary>
                 /// Retrieves the SessionId field.
                 /// </summary>
-                public uint SessionId => BitConverter.ToUInt32(_etwEvent.Data[Offset_SessionId..]);
+                public uint SessionId => BitConverter.ToUInt32(_etwEvent.Data[Offset_SessionId..Offset_ExitStatus]);
 
                 /// <summary>
                 /// Retrieves the ExitStatus field.
                 /// </summary>
-                public int ExitStatus => BitConverter.ToInt32(_etwEvent.Data[Offset_ExitStatus..]);
+                public int ExitStatus => BitConverter.ToInt32(_etwEvent.Data[Offset_ExitStatus..Offset_DirectoryTableBase]);
 
                 /// <summary>
                 /// Retrieves the DirectoryTableBase field.
                 /// </summary>
-                public ulong DirectoryTableBase => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_DirectoryTableBase..]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_DirectoryTableBase..]);
+                public ulong DirectoryTableBase => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_DirectoryTableBase..Offset_Flags]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_DirectoryTableBase..Offset_Flags]);
 
                 /// <summary>
                 /// Retrieves the Flags field.
                 /// </summary>
-                public uint Flags => BitConverter.ToUInt32(_etwEvent.Data[Offset_Flags..]);
+                public uint Flags => BitConverter.ToUInt32(_etwEvent.Data[Offset_Flags..Offset_UserSID]);
 
                 /// <summary>
                 /// Retrieves the UserSID field.
@@ -9286,17 +9550,17 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the ImageFileName field.
                 /// </summary>
-                public string ImageFileName => System.Text.Encoding.ASCII.GetString(_etwEvent.Data[Offset_ImageFileName..]);
+                public string ImageFileName => System.Text.Encoding.ASCII.GetString(_etwEvent.Data[Offset_ImageFileName..Offset_CommandLine]);
 
                 /// <summary>
                 /// Retrieves the CommandLine field.
                 /// </summary>
-                public string CommandLine => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_CommandLine..]);
+                public string CommandLine => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_CommandLine..Offset_PackageFullName]);
 
                 /// <summary>
                 /// Retrieves the PackageFullName field.
                 /// </summary>
-                public string PackageFullName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_PackageFullName..]);
+                public string PackageFullName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_PackageFullName..Offset_ApplicationId]);
 
                 /// <summary>
                 /// Retrieves the ApplicationId field.
@@ -9396,6 +9660,12 @@ namespace EtwTools
             {
                 _etwEvent = etwEvent;
             }
+
+            /// <summary>
+            /// Converts a generic ETW event to a DCEndEventV4.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator DCEndEventV4(EtwEvent etwEvent) => new(etwEvent);
 
             /// <summary>
             /// A data wrapper for a DCEnd event.
@@ -9576,37 +9846,37 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the UniqueProcessKey field.
                 /// </summary>
-                public ulong UniqueProcessKey => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_UniqueProcessKey..]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_UniqueProcessKey..]);
+                public ulong UniqueProcessKey => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_UniqueProcessKey..Offset_ProcessId]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_UniqueProcessKey..Offset_ProcessId]);
 
                 /// <summary>
                 /// Retrieves the ProcessId field.
                 /// </summary>
-                public uint ProcessId => BitConverter.ToUInt32(_etwEvent.Data[Offset_ProcessId..]);
+                public uint ProcessId => BitConverter.ToUInt32(_etwEvent.Data[Offset_ProcessId..Offset_ParentId]);
 
                 /// <summary>
                 /// Retrieves the ParentId field.
                 /// </summary>
-                public uint ParentId => BitConverter.ToUInt32(_etwEvent.Data[Offset_ParentId..]);
+                public uint ParentId => BitConverter.ToUInt32(_etwEvent.Data[Offset_ParentId..Offset_SessionId]);
 
                 /// <summary>
                 /// Retrieves the SessionId field.
                 /// </summary>
-                public uint SessionId => BitConverter.ToUInt32(_etwEvent.Data[Offset_SessionId..]);
+                public uint SessionId => BitConverter.ToUInt32(_etwEvent.Data[Offset_SessionId..Offset_ExitStatus]);
 
                 /// <summary>
                 /// Retrieves the ExitStatus field.
                 /// </summary>
-                public int ExitStatus => BitConverter.ToInt32(_etwEvent.Data[Offset_ExitStatus..]);
+                public int ExitStatus => BitConverter.ToInt32(_etwEvent.Data[Offset_ExitStatus..Offset_DirectoryTableBase]);
 
                 /// <summary>
                 /// Retrieves the DirectoryTableBase field.
                 /// </summary>
-                public ulong DirectoryTableBase => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_DirectoryTableBase..]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_DirectoryTableBase..]);
+                public ulong DirectoryTableBase => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_DirectoryTableBase..Offset_Flags]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_DirectoryTableBase..Offset_Flags]);
 
                 /// <summary>
                 /// Retrieves the Flags field.
                 /// </summary>
-                public uint Flags => BitConverter.ToUInt32(_etwEvent.Data[Offset_Flags..]);
+                public uint Flags => BitConverter.ToUInt32(_etwEvent.Data[Offset_Flags..Offset_UserSID]);
 
                 /// <summary>
                 /// Retrieves the UserSID field.
@@ -9616,17 +9886,17 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the ImageFileName field.
                 /// </summary>
-                public string ImageFileName => System.Text.Encoding.ASCII.GetString(_etwEvent.Data[Offset_ImageFileName..]);
+                public string ImageFileName => System.Text.Encoding.ASCII.GetString(_etwEvent.Data[Offset_ImageFileName..Offset_CommandLine]);
 
                 /// <summary>
                 /// Retrieves the CommandLine field.
                 /// </summary>
-                public string CommandLine => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_CommandLine..]);
+                public string CommandLine => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_CommandLine..Offset_PackageFullName]);
 
                 /// <summary>
                 /// Retrieves the PackageFullName field.
                 /// </summary>
-                public string PackageFullName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_PackageFullName..]);
+                public string PackageFullName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_PackageFullName..Offset_ApplicationId]);
 
                 /// <summary>
                 /// Retrieves the ApplicationId field.
@@ -9726,6 +9996,12 @@ namespace EtwTools
             {
                 _etwEvent = etwEvent;
             }
+
+            /// <summary>
+            /// Converts a generic ETW event to a DefunctEventV4.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator DefunctEventV4(EtwEvent etwEvent) => new(etwEvent);
 
             /// <summary>
             /// A data wrapper for a Defunct event.
@@ -9906,37 +10182,37 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the UniqueProcessKey field.
                 /// </summary>
-                public ulong UniqueProcessKey => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_UniqueProcessKey..]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_UniqueProcessKey..]);
+                public ulong UniqueProcessKey => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_UniqueProcessKey..Offset_ProcessId]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_UniqueProcessKey..Offset_ProcessId]);
 
                 /// <summary>
                 /// Retrieves the ProcessId field.
                 /// </summary>
-                public uint ProcessId => BitConverter.ToUInt32(_etwEvent.Data[Offset_ProcessId..]);
+                public uint ProcessId => BitConverter.ToUInt32(_etwEvent.Data[Offset_ProcessId..Offset_ParentId]);
 
                 /// <summary>
                 /// Retrieves the ParentId field.
                 /// </summary>
-                public uint ParentId => BitConverter.ToUInt32(_etwEvent.Data[Offset_ParentId..]);
+                public uint ParentId => BitConverter.ToUInt32(_etwEvent.Data[Offset_ParentId..Offset_SessionId]);
 
                 /// <summary>
                 /// Retrieves the SessionId field.
                 /// </summary>
-                public uint SessionId => BitConverter.ToUInt32(_etwEvent.Data[Offset_SessionId..]);
+                public uint SessionId => BitConverter.ToUInt32(_etwEvent.Data[Offset_SessionId..Offset_ExitStatus]);
 
                 /// <summary>
                 /// Retrieves the ExitStatus field.
                 /// </summary>
-                public int ExitStatus => BitConverter.ToInt32(_etwEvent.Data[Offset_ExitStatus..]);
+                public int ExitStatus => BitConverter.ToInt32(_etwEvent.Data[Offset_ExitStatus..Offset_DirectoryTableBase]);
 
                 /// <summary>
                 /// Retrieves the DirectoryTableBase field.
                 /// </summary>
-                public ulong DirectoryTableBase => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_DirectoryTableBase..]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_DirectoryTableBase..]);
+                public ulong DirectoryTableBase => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_DirectoryTableBase..Offset_Flags]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_DirectoryTableBase..Offset_Flags]);
 
                 /// <summary>
                 /// Retrieves the Flags field.
                 /// </summary>
-                public uint Flags => BitConverter.ToUInt32(_etwEvent.Data[Offset_Flags..]);
+                public uint Flags => BitConverter.ToUInt32(_etwEvent.Data[Offset_Flags..Offset_UserSID]);
 
                 /// <summary>
                 /// Retrieves the UserSID field.
@@ -9946,17 +10222,17 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the ImageFileName field.
                 /// </summary>
-                public string ImageFileName => System.Text.Encoding.ASCII.GetString(_etwEvent.Data[Offset_ImageFileName..]);
+                public string ImageFileName => System.Text.Encoding.ASCII.GetString(_etwEvent.Data[Offset_ImageFileName..Offset_CommandLine]);
 
                 /// <summary>
                 /// Retrieves the CommandLine field.
                 /// </summary>
-                public string CommandLine => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_CommandLine..]);
+                public string CommandLine => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_CommandLine..Offset_PackageFullName]);
 
                 /// <summary>
                 /// Retrieves the PackageFullName field.
                 /// </summary>
-                public string PackageFullName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_PackageFullName..]);
+                public string PackageFullName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_PackageFullName..Offset_ApplicationId]);
 
                 /// <summary>
                 /// Retrieves the ApplicationId field.
@@ -10056,6 +10332,12 @@ namespace EtwTools
             {
                 _etwEvent = etwEvent;
             }
+
+            /// <summary>
+            /// Converts a generic ETW event to a DefunctEventV5.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator DefunctEventV5(EtwEvent etwEvent) => new(etwEvent);
 
             /// <summary>
             /// A data wrapper for a Defunct event.
@@ -10250,37 +10532,37 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the UniqueProcessKey field.
                 /// </summary>
-                public ulong UniqueProcessKey => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_UniqueProcessKey..]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_UniqueProcessKey..]);
+                public ulong UniqueProcessKey => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_UniqueProcessKey..Offset_ProcessId]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_UniqueProcessKey..Offset_ProcessId]);
 
                 /// <summary>
                 /// Retrieves the ProcessId field.
                 /// </summary>
-                public uint ProcessId => BitConverter.ToUInt32(_etwEvent.Data[Offset_ProcessId..]);
+                public uint ProcessId => BitConverter.ToUInt32(_etwEvent.Data[Offset_ProcessId..Offset_ParentId]);
 
                 /// <summary>
                 /// Retrieves the ParentId field.
                 /// </summary>
-                public uint ParentId => BitConverter.ToUInt32(_etwEvent.Data[Offset_ParentId..]);
+                public uint ParentId => BitConverter.ToUInt32(_etwEvent.Data[Offset_ParentId..Offset_SessionId]);
 
                 /// <summary>
                 /// Retrieves the SessionId field.
                 /// </summary>
-                public uint SessionId => BitConverter.ToUInt32(_etwEvent.Data[Offset_SessionId..]);
+                public uint SessionId => BitConverter.ToUInt32(_etwEvent.Data[Offset_SessionId..Offset_ExitStatus]);
 
                 /// <summary>
                 /// Retrieves the ExitStatus field.
                 /// </summary>
-                public int ExitStatus => BitConverter.ToInt32(_etwEvent.Data[Offset_ExitStatus..]);
+                public int ExitStatus => BitConverter.ToInt32(_etwEvent.Data[Offset_ExitStatus..Offset_DirectoryTableBase]);
 
                 /// <summary>
                 /// Retrieves the DirectoryTableBase field.
                 /// </summary>
-                public ulong DirectoryTableBase => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_DirectoryTableBase..]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_DirectoryTableBase..]);
+                public ulong DirectoryTableBase => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_DirectoryTableBase..Offset_Flags]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_DirectoryTableBase..Offset_Flags]);
 
                 /// <summary>
                 /// Retrieves the Flags field.
                 /// </summary>
-                public uint Flags => BitConverter.ToUInt32(_etwEvent.Data[Offset_Flags..]);
+                public uint Flags => BitConverter.ToUInt32(_etwEvent.Data[Offset_Flags..Offset_UserSID]);
 
                 /// <summary>
                 /// Retrieves the UserSID field.
@@ -10290,22 +10572,22 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the ImageFileName field.
                 /// </summary>
-                public string ImageFileName => System.Text.Encoding.ASCII.GetString(_etwEvent.Data[Offset_ImageFileName..]);
+                public string ImageFileName => System.Text.Encoding.ASCII.GetString(_etwEvent.Data[Offset_ImageFileName..Offset_CommandLine]);
 
                 /// <summary>
                 /// Retrieves the CommandLine field.
                 /// </summary>
-                public string CommandLine => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_CommandLine..]);
+                public string CommandLine => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_CommandLine..Offset_PackageFullName]);
 
                 /// <summary>
                 /// Retrieves the PackageFullName field.
                 /// </summary>
-                public string PackageFullName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_PackageFullName..]);
+                public string PackageFullName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_PackageFullName..Offset_ApplicationId]);
 
                 /// <summary>
                 /// Retrieves the ApplicationId field.
                 /// </summary>
-                public string ApplicationId => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_ApplicationId..]);
+                public string ApplicationId => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_ApplicationId..Offset_ExitTime]);
 
                 /// <summary>
                 /// Retrieves the ExitTime field.

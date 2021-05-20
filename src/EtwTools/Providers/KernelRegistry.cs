@@ -226,6 +226,12 @@ namespace EtwTools
             }
 
             /// <summary>
+            /// Converts a generic ETW event to a CreateEvent.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator CreateEvent(EtwEvent etwEvent) => new(etwEvent);
+
+            /// <summary>
             /// A data wrapper for a Create event.
             /// </summary>
             public ref struct CreateData
@@ -292,17 +298,17 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the Status field.
                 /// </summary>
-                public ulong Status => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_Status..]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_Status..]);
+                public ulong Status => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_Status..Offset_KeyHandle]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_Status..Offset_KeyHandle]);
 
                 /// <summary>
                 /// Retrieves the KeyHandle field.
                 /// </summary>
-                public ulong KeyHandle => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_KeyHandle..]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_KeyHandle..]);
+                public ulong KeyHandle => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_KeyHandle..Offset_ElapsedTime]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_KeyHandle..Offset_ElapsedTime]);
 
                 /// <summary>
                 /// Retrieves the ElapsedTime field.
                 /// </summary>
-                public long ElapsedTime => BitConverter.ToInt64(_etwEvent.Data[Offset_ElapsedTime..]);
+                public long ElapsedTime => BitConverter.ToInt64(_etwEvent.Data[Offset_ElapsedTime..Offset_KeyName]);
 
                 /// <summary>
                 /// Retrieves the KeyName field.
@@ -396,6 +402,12 @@ namespace EtwTools
             }
 
             /// <summary>
+            /// Converts a generic ETW event to a OpenEvent.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator OpenEvent(EtwEvent etwEvent) => new(etwEvent);
+
+            /// <summary>
             /// A data wrapper for a Open event.
             /// </summary>
             public ref struct OpenData
@@ -462,17 +474,17 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the Status field.
                 /// </summary>
-                public ulong Status => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_Status..]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_Status..]);
+                public ulong Status => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_Status..Offset_KeyHandle]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_Status..Offset_KeyHandle]);
 
                 /// <summary>
                 /// Retrieves the KeyHandle field.
                 /// </summary>
-                public ulong KeyHandle => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_KeyHandle..]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_KeyHandle..]);
+                public ulong KeyHandle => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_KeyHandle..Offset_ElapsedTime]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_KeyHandle..Offset_ElapsedTime]);
 
                 /// <summary>
                 /// Retrieves the ElapsedTime field.
                 /// </summary>
-                public long ElapsedTime => BitConverter.ToInt64(_etwEvent.Data[Offset_ElapsedTime..]);
+                public long ElapsedTime => BitConverter.ToInt64(_etwEvent.Data[Offset_ElapsedTime..Offset_KeyName]);
 
                 /// <summary>
                 /// Retrieves the KeyName field.
@@ -566,6 +578,12 @@ namespace EtwTools
             }
 
             /// <summary>
+            /// Converts a generic ETW event to a DeleteEvent.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator DeleteEvent(EtwEvent etwEvent) => new(etwEvent);
+
+            /// <summary>
             /// A data wrapper for a Delete event.
             /// </summary>
             public ref struct DeleteData
@@ -632,17 +650,17 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the Status field.
                 /// </summary>
-                public ulong Status => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_Status..]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_Status..]);
+                public ulong Status => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_Status..Offset_KeyHandle]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_Status..Offset_KeyHandle]);
 
                 /// <summary>
                 /// Retrieves the KeyHandle field.
                 /// </summary>
-                public ulong KeyHandle => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_KeyHandle..]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_KeyHandle..]);
+                public ulong KeyHandle => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_KeyHandle..Offset_ElapsedTime]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_KeyHandle..Offset_ElapsedTime]);
 
                 /// <summary>
                 /// Retrieves the ElapsedTime field.
                 /// </summary>
-                public long ElapsedTime => BitConverter.ToInt64(_etwEvent.Data[Offset_ElapsedTime..]);
+                public long ElapsedTime => BitConverter.ToInt64(_etwEvent.Data[Offset_ElapsedTime..Offset_KeyName]);
 
                 /// <summary>
                 /// Retrieves the KeyName field.
@@ -736,6 +754,12 @@ namespace EtwTools
             }
 
             /// <summary>
+            /// Converts a generic ETW event to a QueryEvent.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator QueryEvent(EtwEvent etwEvent) => new(etwEvent);
+
+            /// <summary>
             /// A data wrapper for a Query event.
             /// </summary>
             public ref struct QueryData
@@ -802,17 +826,17 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the Status field.
                 /// </summary>
-                public ulong Status => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_Status..]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_Status..]);
+                public ulong Status => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_Status..Offset_KeyHandle]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_Status..Offset_KeyHandle]);
 
                 /// <summary>
                 /// Retrieves the KeyHandle field.
                 /// </summary>
-                public ulong KeyHandle => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_KeyHandle..]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_KeyHandle..]);
+                public ulong KeyHandle => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_KeyHandle..Offset_ElapsedTime]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_KeyHandle..Offset_ElapsedTime]);
 
                 /// <summary>
                 /// Retrieves the ElapsedTime field.
                 /// </summary>
-                public long ElapsedTime => BitConverter.ToInt64(_etwEvent.Data[Offset_ElapsedTime..]);
+                public long ElapsedTime => BitConverter.ToInt64(_etwEvent.Data[Offset_ElapsedTime..Offset_KeyName]);
 
                 /// <summary>
                 /// Retrieves the KeyName field.
@@ -906,6 +930,12 @@ namespace EtwTools
             }
 
             /// <summary>
+            /// Converts a generic ETW event to a SetValueEvent.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator SetValueEvent(EtwEvent etwEvent) => new(etwEvent);
+
+            /// <summary>
             /// A data wrapper for a SetValue event.
             /// </summary>
             public ref struct SetValueData
@@ -972,17 +1002,17 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the Status field.
                 /// </summary>
-                public ulong Status => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_Status..]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_Status..]);
+                public ulong Status => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_Status..Offset_KeyHandle]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_Status..Offset_KeyHandle]);
 
                 /// <summary>
                 /// Retrieves the KeyHandle field.
                 /// </summary>
-                public ulong KeyHandle => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_KeyHandle..]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_KeyHandle..]);
+                public ulong KeyHandle => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_KeyHandle..Offset_ElapsedTime]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_KeyHandle..Offset_ElapsedTime]);
 
                 /// <summary>
                 /// Retrieves the ElapsedTime field.
                 /// </summary>
-                public long ElapsedTime => BitConverter.ToInt64(_etwEvent.Data[Offset_ElapsedTime..]);
+                public long ElapsedTime => BitConverter.ToInt64(_etwEvent.Data[Offset_ElapsedTime..Offset_KeyName]);
 
                 /// <summary>
                 /// Retrieves the KeyName field.
@@ -1076,6 +1106,12 @@ namespace EtwTools
             }
 
             /// <summary>
+            /// Converts a generic ETW event to a DeleteValueEvent.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator DeleteValueEvent(EtwEvent etwEvent) => new(etwEvent);
+
+            /// <summary>
             /// A data wrapper for a DeleteValue event.
             /// </summary>
             public ref struct DeleteValueData
@@ -1142,17 +1178,17 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the Status field.
                 /// </summary>
-                public ulong Status => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_Status..]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_Status..]);
+                public ulong Status => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_Status..Offset_KeyHandle]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_Status..Offset_KeyHandle]);
 
                 /// <summary>
                 /// Retrieves the KeyHandle field.
                 /// </summary>
-                public ulong KeyHandle => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_KeyHandle..]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_KeyHandle..]);
+                public ulong KeyHandle => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_KeyHandle..Offset_ElapsedTime]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_KeyHandle..Offset_ElapsedTime]);
 
                 /// <summary>
                 /// Retrieves the ElapsedTime field.
                 /// </summary>
-                public long ElapsedTime => BitConverter.ToInt64(_etwEvent.Data[Offset_ElapsedTime..]);
+                public long ElapsedTime => BitConverter.ToInt64(_etwEvent.Data[Offset_ElapsedTime..Offset_KeyName]);
 
                 /// <summary>
                 /// Retrieves the KeyName field.
@@ -1246,6 +1282,12 @@ namespace EtwTools
             }
 
             /// <summary>
+            /// Converts a generic ETW event to a QueryValueEvent.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator QueryValueEvent(EtwEvent etwEvent) => new(etwEvent);
+
+            /// <summary>
             /// A data wrapper for a QueryValue event.
             /// </summary>
             public ref struct QueryValueData
@@ -1312,17 +1354,17 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the Status field.
                 /// </summary>
-                public ulong Status => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_Status..]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_Status..]);
+                public ulong Status => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_Status..Offset_KeyHandle]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_Status..Offset_KeyHandle]);
 
                 /// <summary>
                 /// Retrieves the KeyHandle field.
                 /// </summary>
-                public ulong KeyHandle => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_KeyHandle..]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_KeyHandle..]);
+                public ulong KeyHandle => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_KeyHandle..Offset_ElapsedTime]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_KeyHandle..Offset_ElapsedTime]);
 
                 /// <summary>
                 /// Retrieves the ElapsedTime field.
                 /// </summary>
-                public long ElapsedTime => BitConverter.ToInt64(_etwEvent.Data[Offset_ElapsedTime..]);
+                public long ElapsedTime => BitConverter.ToInt64(_etwEvent.Data[Offset_ElapsedTime..Offset_KeyName]);
 
                 /// <summary>
                 /// Retrieves the KeyName field.
@@ -1416,6 +1458,12 @@ namespace EtwTools
             }
 
             /// <summary>
+            /// Converts a generic ETW event to a EnumerateKeyEvent.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator EnumerateKeyEvent(EtwEvent etwEvent) => new(etwEvent);
+
+            /// <summary>
             /// A data wrapper for a EnumerateKey event.
             /// </summary>
             public ref struct EnumerateKeyData
@@ -1482,17 +1530,17 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the Status field.
                 /// </summary>
-                public ulong Status => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_Status..]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_Status..]);
+                public ulong Status => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_Status..Offset_KeyHandle]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_Status..Offset_KeyHandle]);
 
                 /// <summary>
                 /// Retrieves the KeyHandle field.
                 /// </summary>
-                public ulong KeyHandle => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_KeyHandle..]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_KeyHandle..]);
+                public ulong KeyHandle => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_KeyHandle..Offset_ElapsedTime]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_KeyHandle..Offset_ElapsedTime]);
 
                 /// <summary>
                 /// Retrieves the ElapsedTime field.
                 /// </summary>
-                public long ElapsedTime => BitConverter.ToInt64(_etwEvent.Data[Offset_ElapsedTime..]);
+                public long ElapsedTime => BitConverter.ToInt64(_etwEvent.Data[Offset_ElapsedTime..Offset_KeyName]);
 
                 /// <summary>
                 /// Retrieves the KeyName field.
@@ -1586,6 +1634,12 @@ namespace EtwTools
             }
 
             /// <summary>
+            /// Converts a generic ETW event to a EnumerateValueKeyEvent.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator EnumerateValueKeyEvent(EtwEvent etwEvent) => new(etwEvent);
+
+            /// <summary>
             /// A data wrapper for a EnumerateValueKey event.
             /// </summary>
             public ref struct EnumerateValueKeyData
@@ -1652,17 +1706,17 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the Status field.
                 /// </summary>
-                public ulong Status => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_Status..]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_Status..]);
+                public ulong Status => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_Status..Offset_KeyHandle]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_Status..Offset_KeyHandle]);
 
                 /// <summary>
                 /// Retrieves the KeyHandle field.
                 /// </summary>
-                public ulong KeyHandle => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_KeyHandle..]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_KeyHandle..]);
+                public ulong KeyHandle => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_KeyHandle..Offset_ElapsedTime]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_KeyHandle..Offset_ElapsedTime]);
 
                 /// <summary>
                 /// Retrieves the ElapsedTime field.
                 /// </summary>
-                public long ElapsedTime => BitConverter.ToInt64(_etwEvent.Data[Offset_ElapsedTime..]);
+                public long ElapsedTime => BitConverter.ToInt64(_etwEvent.Data[Offset_ElapsedTime..Offset_KeyName]);
 
                 /// <summary>
                 /// Retrieves the KeyName field.
@@ -1756,6 +1810,12 @@ namespace EtwTools
             }
 
             /// <summary>
+            /// Converts a generic ETW event to a QueryMultipleValueEvent.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator QueryMultipleValueEvent(EtwEvent etwEvent) => new(etwEvent);
+
+            /// <summary>
             /// A data wrapper for a QueryMultipleValue event.
             /// </summary>
             public ref struct QueryMultipleValueData
@@ -1822,17 +1882,17 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the Status field.
                 /// </summary>
-                public ulong Status => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_Status..]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_Status..]);
+                public ulong Status => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_Status..Offset_KeyHandle]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_Status..Offset_KeyHandle]);
 
                 /// <summary>
                 /// Retrieves the KeyHandle field.
                 /// </summary>
-                public ulong KeyHandle => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_KeyHandle..]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_KeyHandle..]);
+                public ulong KeyHandle => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_KeyHandle..Offset_ElapsedTime]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_KeyHandle..Offset_ElapsedTime]);
 
                 /// <summary>
                 /// Retrieves the ElapsedTime field.
                 /// </summary>
-                public long ElapsedTime => BitConverter.ToInt64(_etwEvent.Data[Offset_ElapsedTime..]);
+                public long ElapsedTime => BitConverter.ToInt64(_etwEvent.Data[Offset_ElapsedTime..Offset_KeyName]);
 
                 /// <summary>
                 /// Retrieves the KeyName field.
@@ -1926,6 +1986,12 @@ namespace EtwTools
             }
 
             /// <summary>
+            /// Converts a generic ETW event to a SetInformationEvent.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator SetInformationEvent(EtwEvent etwEvent) => new(etwEvent);
+
+            /// <summary>
             /// A data wrapper for a SetInformation event.
             /// </summary>
             public ref struct SetInformationData
@@ -1992,17 +2058,17 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the Status field.
                 /// </summary>
-                public ulong Status => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_Status..]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_Status..]);
+                public ulong Status => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_Status..Offset_KeyHandle]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_Status..Offset_KeyHandle]);
 
                 /// <summary>
                 /// Retrieves the KeyHandle field.
                 /// </summary>
-                public ulong KeyHandle => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_KeyHandle..]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_KeyHandle..]);
+                public ulong KeyHandle => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_KeyHandle..Offset_ElapsedTime]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_KeyHandle..Offset_ElapsedTime]);
 
                 /// <summary>
                 /// Retrieves the ElapsedTime field.
                 /// </summary>
-                public long ElapsedTime => BitConverter.ToInt64(_etwEvent.Data[Offset_ElapsedTime..]);
+                public long ElapsedTime => BitConverter.ToInt64(_etwEvent.Data[Offset_ElapsedTime..Offset_KeyName]);
 
                 /// <summary>
                 /// Retrieves the KeyName field.
@@ -2096,6 +2162,12 @@ namespace EtwTools
             }
 
             /// <summary>
+            /// Converts a generic ETW event to a FlushEvent.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator FlushEvent(EtwEvent etwEvent) => new(etwEvent);
+
+            /// <summary>
             /// A data wrapper for a Flush event.
             /// </summary>
             public ref struct FlushData
@@ -2162,17 +2234,17 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the Status field.
                 /// </summary>
-                public ulong Status => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_Status..]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_Status..]);
+                public ulong Status => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_Status..Offset_KeyHandle]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_Status..Offset_KeyHandle]);
 
                 /// <summary>
                 /// Retrieves the KeyHandle field.
                 /// </summary>
-                public ulong KeyHandle => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_KeyHandle..]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_KeyHandle..]);
+                public ulong KeyHandle => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_KeyHandle..Offset_ElapsedTime]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_KeyHandle..Offset_ElapsedTime]);
 
                 /// <summary>
                 /// Retrieves the ElapsedTime field.
                 /// </summary>
-                public long ElapsedTime => BitConverter.ToInt64(_etwEvent.Data[Offset_ElapsedTime..]);
+                public long ElapsedTime => BitConverter.ToInt64(_etwEvent.Data[Offset_ElapsedTime..Offset_KeyName]);
 
                 /// <summary>
                 /// Retrieves the KeyName field.
@@ -2266,6 +2338,12 @@ namespace EtwTools
             }
 
             /// <summary>
+            /// Converts a generic ETW event to a CreateEventV1.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator CreateEventV1(EtwEvent etwEvent) => new(etwEvent);
+
+            /// <summary>
             /// A data wrapper for a Create event.
             /// </summary>
             public ref struct CreateData
@@ -2346,22 +2424,22 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the Status field.
                 /// </summary>
-                public ulong Status => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_Status..]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_Status..]);
+                public ulong Status => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_Status..Offset_KeyHandle]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_Status..Offset_KeyHandle]);
 
                 /// <summary>
                 /// Retrieves the KeyHandle field.
                 /// </summary>
-                public ulong KeyHandle => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_KeyHandle..]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_KeyHandle..]);
+                public ulong KeyHandle => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_KeyHandle..Offset_ElapsedTime]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_KeyHandle..Offset_ElapsedTime]);
 
                 /// <summary>
                 /// Retrieves the ElapsedTime field.
                 /// </summary>
-                public long ElapsedTime => BitConverter.ToInt64(_etwEvent.Data[Offset_ElapsedTime..]);
+                public long ElapsedTime => BitConverter.ToInt64(_etwEvent.Data[Offset_ElapsedTime..Offset_Index]);
 
                 /// <summary>
                 /// Retrieves the Index field.
                 /// </summary>
-                public uint Index => BitConverter.ToUInt32(_etwEvent.Data[Offset_Index..]);
+                public uint Index => BitConverter.ToUInt32(_etwEvent.Data[Offset_Index..Offset_KeyName]);
 
                 /// <summary>
                 /// Retrieves the KeyName field.
@@ -2456,6 +2534,12 @@ namespace EtwTools
             }
 
             /// <summary>
+            /// Converts a generic ETW event to a OpenEventV1.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator OpenEventV1(EtwEvent etwEvent) => new(etwEvent);
+
+            /// <summary>
             /// A data wrapper for a Open event.
             /// </summary>
             public ref struct OpenData
@@ -2536,22 +2620,22 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the Status field.
                 /// </summary>
-                public ulong Status => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_Status..]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_Status..]);
+                public ulong Status => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_Status..Offset_KeyHandle]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_Status..Offset_KeyHandle]);
 
                 /// <summary>
                 /// Retrieves the KeyHandle field.
                 /// </summary>
-                public ulong KeyHandle => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_KeyHandle..]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_KeyHandle..]);
+                public ulong KeyHandle => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_KeyHandle..Offset_ElapsedTime]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_KeyHandle..Offset_ElapsedTime]);
 
                 /// <summary>
                 /// Retrieves the ElapsedTime field.
                 /// </summary>
-                public long ElapsedTime => BitConverter.ToInt64(_etwEvent.Data[Offset_ElapsedTime..]);
+                public long ElapsedTime => BitConverter.ToInt64(_etwEvent.Data[Offset_ElapsedTime..Offset_Index]);
 
                 /// <summary>
                 /// Retrieves the Index field.
                 /// </summary>
-                public uint Index => BitConverter.ToUInt32(_etwEvent.Data[Offset_Index..]);
+                public uint Index => BitConverter.ToUInt32(_etwEvent.Data[Offset_Index..Offset_KeyName]);
 
                 /// <summary>
                 /// Retrieves the KeyName field.
@@ -2646,6 +2730,12 @@ namespace EtwTools
             }
 
             /// <summary>
+            /// Converts a generic ETW event to a DeleteEventV1.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator DeleteEventV1(EtwEvent etwEvent) => new(etwEvent);
+
+            /// <summary>
             /// A data wrapper for a Delete event.
             /// </summary>
             public ref struct DeleteData
@@ -2726,22 +2816,22 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the Status field.
                 /// </summary>
-                public ulong Status => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_Status..]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_Status..]);
+                public ulong Status => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_Status..Offset_KeyHandle]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_Status..Offset_KeyHandle]);
 
                 /// <summary>
                 /// Retrieves the KeyHandle field.
                 /// </summary>
-                public ulong KeyHandle => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_KeyHandle..]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_KeyHandle..]);
+                public ulong KeyHandle => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_KeyHandle..Offset_ElapsedTime]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_KeyHandle..Offset_ElapsedTime]);
 
                 /// <summary>
                 /// Retrieves the ElapsedTime field.
                 /// </summary>
-                public long ElapsedTime => BitConverter.ToInt64(_etwEvent.Data[Offset_ElapsedTime..]);
+                public long ElapsedTime => BitConverter.ToInt64(_etwEvent.Data[Offset_ElapsedTime..Offset_Index]);
 
                 /// <summary>
                 /// Retrieves the Index field.
                 /// </summary>
-                public uint Index => BitConverter.ToUInt32(_etwEvent.Data[Offset_Index..]);
+                public uint Index => BitConverter.ToUInt32(_etwEvent.Data[Offset_Index..Offset_KeyName]);
 
                 /// <summary>
                 /// Retrieves the KeyName field.
@@ -2836,6 +2926,12 @@ namespace EtwTools
             }
 
             /// <summary>
+            /// Converts a generic ETW event to a QueryEventV1.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator QueryEventV1(EtwEvent etwEvent) => new(etwEvent);
+
+            /// <summary>
             /// A data wrapper for a Query event.
             /// </summary>
             public ref struct QueryData
@@ -2916,22 +3012,22 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the Status field.
                 /// </summary>
-                public ulong Status => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_Status..]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_Status..]);
+                public ulong Status => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_Status..Offset_KeyHandle]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_Status..Offset_KeyHandle]);
 
                 /// <summary>
                 /// Retrieves the KeyHandle field.
                 /// </summary>
-                public ulong KeyHandle => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_KeyHandle..]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_KeyHandle..]);
+                public ulong KeyHandle => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_KeyHandle..Offset_ElapsedTime]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_KeyHandle..Offset_ElapsedTime]);
 
                 /// <summary>
                 /// Retrieves the ElapsedTime field.
                 /// </summary>
-                public long ElapsedTime => BitConverter.ToInt64(_etwEvent.Data[Offset_ElapsedTime..]);
+                public long ElapsedTime => BitConverter.ToInt64(_etwEvent.Data[Offset_ElapsedTime..Offset_Index]);
 
                 /// <summary>
                 /// Retrieves the Index field.
                 /// </summary>
-                public uint Index => BitConverter.ToUInt32(_etwEvent.Data[Offset_Index..]);
+                public uint Index => BitConverter.ToUInt32(_etwEvent.Data[Offset_Index..Offset_KeyName]);
 
                 /// <summary>
                 /// Retrieves the KeyName field.
@@ -3026,6 +3122,12 @@ namespace EtwTools
             }
 
             /// <summary>
+            /// Converts a generic ETW event to a SetValueEventV1.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator SetValueEventV1(EtwEvent etwEvent) => new(etwEvent);
+
+            /// <summary>
             /// A data wrapper for a SetValue event.
             /// </summary>
             public ref struct SetValueData
@@ -3106,22 +3208,22 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the Status field.
                 /// </summary>
-                public ulong Status => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_Status..]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_Status..]);
+                public ulong Status => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_Status..Offset_KeyHandle]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_Status..Offset_KeyHandle]);
 
                 /// <summary>
                 /// Retrieves the KeyHandle field.
                 /// </summary>
-                public ulong KeyHandle => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_KeyHandle..]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_KeyHandle..]);
+                public ulong KeyHandle => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_KeyHandle..Offset_ElapsedTime]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_KeyHandle..Offset_ElapsedTime]);
 
                 /// <summary>
                 /// Retrieves the ElapsedTime field.
                 /// </summary>
-                public long ElapsedTime => BitConverter.ToInt64(_etwEvent.Data[Offset_ElapsedTime..]);
+                public long ElapsedTime => BitConverter.ToInt64(_etwEvent.Data[Offset_ElapsedTime..Offset_Index]);
 
                 /// <summary>
                 /// Retrieves the Index field.
                 /// </summary>
-                public uint Index => BitConverter.ToUInt32(_etwEvent.Data[Offset_Index..]);
+                public uint Index => BitConverter.ToUInt32(_etwEvent.Data[Offset_Index..Offset_KeyName]);
 
                 /// <summary>
                 /// Retrieves the KeyName field.
@@ -3216,6 +3318,12 @@ namespace EtwTools
             }
 
             /// <summary>
+            /// Converts a generic ETW event to a DeleteValueEventV1.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator DeleteValueEventV1(EtwEvent etwEvent) => new(etwEvent);
+
+            /// <summary>
             /// A data wrapper for a DeleteValue event.
             /// </summary>
             public ref struct DeleteValueData
@@ -3296,22 +3404,22 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the Status field.
                 /// </summary>
-                public ulong Status => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_Status..]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_Status..]);
+                public ulong Status => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_Status..Offset_KeyHandle]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_Status..Offset_KeyHandle]);
 
                 /// <summary>
                 /// Retrieves the KeyHandle field.
                 /// </summary>
-                public ulong KeyHandle => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_KeyHandle..]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_KeyHandle..]);
+                public ulong KeyHandle => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_KeyHandle..Offset_ElapsedTime]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_KeyHandle..Offset_ElapsedTime]);
 
                 /// <summary>
                 /// Retrieves the ElapsedTime field.
                 /// </summary>
-                public long ElapsedTime => BitConverter.ToInt64(_etwEvent.Data[Offset_ElapsedTime..]);
+                public long ElapsedTime => BitConverter.ToInt64(_etwEvent.Data[Offset_ElapsedTime..Offset_Index]);
 
                 /// <summary>
                 /// Retrieves the Index field.
                 /// </summary>
-                public uint Index => BitConverter.ToUInt32(_etwEvent.Data[Offset_Index..]);
+                public uint Index => BitConverter.ToUInt32(_etwEvent.Data[Offset_Index..Offset_KeyName]);
 
                 /// <summary>
                 /// Retrieves the KeyName field.
@@ -3406,6 +3514,12 @@ namespace EtwTools
             }
 
             /// <summary>
+            /// Converts a generic ETW event to a QueryValueEventV1.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator QueryValueEventV1(EtwEvent etwEvent) => new(etwEvent);
+
+            /// <summary>
             /// A data wrapper for a QueryValue event.
             /// </summary>
             public ref struct QueryValueData
@@ -3486,22 +3600,22 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the Status field.
                 /// </summary>
-                public ulong Status => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_Status..]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_Status..]);
+                public ulong Status => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_Status..Offset_KeyHandle]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_Status..Offset_KeyHandle]);
 
                 /// <summary>
                 /// Retrieves the KeyHandle field.
                 /// </summary>
-                public ulong KeyHandle => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_KeyHandle..]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_KeyHandle..]);
+                public ulong KeyHandle => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_KeyHandle..Offset_ElapsedTime]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_KeyHandle..Offset_ElapsedTime]);
 
                 /// <summary>
                 /// Retrieves the ElapsedTime field.
                 /// </summary>
-                public long ElapsedTime => BitConverter.ToInt64(_etwEvent.Data[Offset_ElapsedTime..]);
+                public long ElapsedTime => BitConverter.ToInt64(_etwEvent.Data[Offset_ElapsedTime..Offset_Index]);
 
                 /// <summary>
                 /// Retrieves the Index field.
                 /// </summary>
-                public uint Index => BitConverter.ToUInt32(_etwEvent.Data[Offset_Index..]);
+                public uint Index => BitConverter.ToUInt32(_etwEvent.Data[Offset_Index..Offset_KeyName]);
 
                 /// <summary>
                 /// Retrieves the KeyName field.
@@ -3596,6 +3710,12 @@ namespace EtwTools
             }
 
             /// <summary>
+            /// Converts a generic ETW event to a EnumerateKeyEventV1.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator EnumerateKeyEventV1(EtwEvent etwEvent) => new(etwEvent);
+
+            /// <summary>
             /// A data wrapper for a EnumerateKey event.
             /// </summary>
             public ref struct EnumerateKeyData
@@ -3676,22 +3796,22 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the Status field.
                 /// </summary>
-                public ulong Status => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_Status..]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_Status..]);
+                public ulong Status => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_Status..Offset_KeyHandle]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_Status..Offset_KeyHandle]);
 
                 /// <summary>
                 /// Retrieves the KeyHandle field.
                 /// </summary>
-                public ulong KeyHandle => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_KeyHandle..]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_KeyHandle..]);
+                public ulong KeyHandle => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_KeyHandle..Offset_ElapsedTime]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_KeyHandle..Offset_ElapsedTime]);
 
                 /// <summary>
                 /// Retrieves the ElapsedTime field.
                 /// </summary>
-                public long ElapsedTime => BitConverter.ToInt64(_etwEvent.Data[Offset_ElapsedTime..]);
+                public long ElapsedTime => BitConverter.ToInt64(_etwEvent.Data[Offset_ElapsedTime..Offset_Index]);
 
                 /// <summary>
                 /// Retrieves the Index field.
                 /// </summary>
-                public uint Index => BitConverter.ToUInt32(_etwEvent.Data[Offset_Index..]);
+                public uint Index => BitConverter.ToUInt32(_etwEvent.Data[Offset_Index..Offset_KeyName]);
 
                 /// <summary>
                 /// Retrieves the KeyName field.
@@ -3786,6 +3906,12 @@ namespace EtwTools
             }
 
             /// <summary>
+            /// Converts a generic ETW event to a EnumerateValueKeyEventV1.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator EnumerateValueKeyEventV1(EtwEvent etwEvent) => new(etwEvent);
+
+            /// <summary>
             /// A data wrapper for a EnumerateValueKey event.
             /// </summary>
             public ref struct EnumerateValueKeyData
@@ -3866,22 +3992,22 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the Status field.
                 /// </summary>
-                public ulong Status => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_Status..]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_Status..]);
+                public ulong Status => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_Status..Offset_KeyHandle]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_Status..Offset_KeyHandle]);
 
                 /// <summary>
                 /// Retrieves the KeyHandle field.
                 /// </summary>
-                public ulong KeyHandle => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_KeyHandle..]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_KeyHandle..]);
+                public ulong KeyHandle => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_KeyHandle..Offset_ElapsedTime]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_KeyHandle..Offset_ElapsedTime]);
 
                 /// <summary>
                 /// Retrieves the ElapsedTime field.
                 /// </summary>
-                public long ElapsedTime => BitConverter.ToInt64(_etwEvent.Data[Offset_ElapsedTime..]);
+                public long ElapsedTime => BitConverter.ToInt64(_etwEvent.Data[Offset_ElapsedTime..Offset_Index]);
 
                 /// <summary>
                 /// Retrieves the Index field.
                 /// </summary>
-                public uint Index => BitConverter.ToUInt32(_etwEvent.Data[Offset_Index..]);
+                public uint Index => BitConverter.ToUInt32(_etwEvent.Data[Offset_Index..Offset_KeyName]);
 
                 /// <summary>
                 /// Retrieves the KeyName field.
@@ -3976,6 +4102,12 @@ namespace EtwTools
             }
 
             /// <summary>
+            /// Converts a generic ETW event to a QueryMultipleValueEventV1.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator QueryMultipleValueEventV1(EtwEvent etwEvent) => new(etwEvent);
+
+            /// <summary>
             /// A data wrapper for a QueryMultipleValue event.
             /// </summary>
             public ref struct QueryMultipleValueData
@@ -4056,22 +4188,22 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the Status field.
                 /// </summary>
-                public ulong Status => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_Status..]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_Status..]);
+                public ulong Status => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_Status..Offset_KeyHandle]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_Status..Offset_KeyHandle]);
 
                 /// <summary>
                 /// Retrieves the KeyHandle field.
                 /// </summary>
-                public ulong KeyHandle => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_KeyHandle..]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_KeyHandle..]);
+                public ulong KeyHandle => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_KeyHandle..Offset_ElapsedTime]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_KeyHandle..Offset_ElapsedTime]);
 
                 /// <summary>
                 /// Retrieves the ElapsedTime field.
                 /// </summary>
-                public long ElapsedTime => BitConverter.ToInt64(_etwEvent.Data[Offset_ElapsedTime..]);
+                public long ElapsedTime => BitConverter.ToInt64(_etwEvent.Data[Offset_ElapsedTime..Offset_Index]);
 
                 /// <summary>
                 /// Retrieves the Index field.
                 /// </summary>
-                public uint Index => BitConverter.ToUInt32(_etwEvent.Data[Offset_Index..]);
+                public uint Index => BitConverter.ToUInt32(_etwEvent.Data[Offset_Index..Offset_KeyName]);
 
                 /// <summary>
                 /// Retrieves the KeyName field.
@@ -4166,6 +4298,12 @@ namespace EtwTools
             }
 
             /// <summary>
+            /// Converts a generic ETW event to a SetInformationEventV1.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator SetInformationEventV1(EtwEvent etwEvent) => new(etwEvent);
+
+            /// <summary>
             /// A data wrapper for a SetInformation event.
             /// </summary>
             public ref struct SetInformationData
@@ -4246,22 +4384,22 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the Status field.
                 /// </summary>
-                public ulong Status => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_Status..]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_Status..]);
+                public ulong Status => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_Status..Offset_KeyHandle]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_Status..Offset_KeyHandle]);
 
                 /// <summary>
                 /// Retrieves the KeyHandle field.
                 /// </summary>
-                public ulong KeyHandle => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_KeyHandle..]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_KeyHandle..]);
+                public ulong KeyHandle => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_KeyHandle..Offset_ElapsedTime]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_KeyHandle..Offset_ElapsedTime]);
 
                 /// <summary>
                 /// Retrieves the ElapsedTime field.
                 /// </summary>
-                public long ElapsedTime => BitConverter.ToInt64(_etwEvent.Data[Offset_ElapsedTime..]);
+                public long ElapsedTime => BitConverter.ToInt64(_etwEvent.Data[Offset_ElapsedTime..Offset_Index]);
 
                 /// <summary>
                 /// Retrieves the Index field.
                 /// </summary>
-                public uint Index => BitConverter.ToUInt32(_etwEvent.Data[Offset_Index..]);
+                public uint Index => BitConverter.ToUInt32(_etwEvent.Data[Offset_Index..Offset_KeyName]);
 
                 /// <summary>
                 /// Retrieves the KeyName field.
@@ -4356,6 +4494,12 @@ namespace EtwTools
             }
 
             /// <summary>
+            /// Converts a generic ETW event to a FlushEventV1.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator FlushEventV1(EtwEvent etwEvent) => new(etwEvent);
+
+            /// <summary>
             /// A data wrapper for a Flush event.
             /// </summary>
             public ref struct FlushData
@@ -4436,22 +4580,22 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the Status field.
                 /// </summary>
-                public ulong Status => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_Status..]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_Status..]);
+                public ulong Status => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_Status..Offset_KeyHandle]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_Status..Offset_KeyHandle]);
 
                 /// <summary>
                 /// Retrieves the KeyHandle field.
                 /// </summary>
-                public ulong KeyHandle => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_KeyHandle..]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_KeyHandle..]);
+                public ulong KeyHandle => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_KeyHandle..Offset_ElapsedTime]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_KeyHandle..Offset_ElapsedTime]);
 
                 /// <summary>
                 /// Retrieves the ElapsedTime field.
                 /// </summary>
-                public long ElapsedTime => BitConverter.ToInt64(_etwEvent.Data[Offset_ElapsedTime..]);
+                public long ElapsedTime => BitConverter.ToInt64(_etwEvent.Data[Offset_ElapsedTime..Offset_Index]);
 
                 /// <summary>
                 /// Retrieves the Index field.
                 /// </summary>
-                public uint Index => BitConverter.ToUInt32(_etwEvent.Data[Offset_Index..]);
+                public uint Index => BitConverter.ToUInt32(_etwEvent.Data[Offset_Index..Offset_KeyName]);
 
                 /// <summary>
                 /// Retrieves the KeyName field.
@@ -4546,6 +4690,12 @@ namespace EtwTools
             }
 
             /// <summary>
+            /// Converts a generic ETW event to a RunDownEventV1.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator RunDownEventV1(EtwEvent etwEvent) => new(etwEvent);
+
+            /// <summary>
             /// A data wrapper for a RunDown event.
             /// </summary>
             public ref struct RunDownData
@@ -4626,22 +4776,22 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the Status field.
                 /// </summary>
-                public ulong Status => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_Status..]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_Status..]);
+                public ulong Status => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_Status..Offset_KeyHandle]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_Status..Offset_KeyHandle]);
 
                 /// <summary>
                 /// Retrieves the KeyHandle field.
                 /// </summary>
-                public ulong KeyHandle => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_KeyHandle..]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_KeyHandle..]);
+                public ulong KeyHandle => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_KeyHandle..Offset_ElapsedTime]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_KeyHandle..Offset_ElapsedTime]);
 
                 /// <summary>
                 /// Retrieves the ElapsedTime field.
                 /// </summary>
-                public long ElapsedTime => BitConverter.ToInt64(_etwEvent.Data[Offset_ElapsedTime..]);
+                public long ElapsedTime => BitConverter.ToInt64(_etwEvent.Data[Offset_ElapsedTime..Offset_Index]);
 
                 /// <summary>
                 /// Retrieves the Index field.
                 /// </summary>
-                public uint Index => BitConverter.ToUInt32(_etwEvent.Data[Offset_Index..]);
+                public uint Index => BitConverter.ToUInt32(_etwEvent.Data[Offset_Index..Offset_KeyName]);
 
                 /// <summary>
                 /// Retrieves the KeyName field.
@@ -4736,6 +4886,12 @@ namespace EtwTools
             }
 
             /// <summary>
+            /// Converts a generic ETW event to a HiveDirtyEventV2.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator HiveDirtyEventV2(EtwEvent etwEvent) => new(etwEvent);
+
+            /// <summary>
             /// A data wrapper for a HiveDirty event.
             /// </summary>
             public ref struct HiveDirtyData
@@ -4788,12 +4944,12 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the Hive field.
                 /// </summary>
-                public ulong Hive => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_Hive..]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_Hive..]);
+                public ulong Hive => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_Hive..Offset_LinkPath]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_Hive..Offset_LinkPath]);
 
                 /// <summary>
                 /// Retrieves the LinkPath field.
                 /// </summary>
-                public string LinkPath => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_LinkPath..]);
+                public string LinkPath => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_LinkPath..Offset_DirtyReason]);
 
                 /// <summary>
                 /// Retrieves the DirtyReason field.
@@ -4884,6 +5040,12 @@ namespace EtwTools
             {
                 _etwEvent = etwEvent;
             }
+
+            /// <summary>
+            /// Converts a generic ETW event to a ConfigEventV2.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator ConfigEventV2(EtwEvent etwEvent) => new(etwEvent);
 
             /// <summary>
             /// A data wrapper for a Config event.
@@ -4996,6 +5158,12 @@ namespace EtwTools
             }
 
             /// <summary>
+            /// Converts a generic ETW event to a HiveDestroyEventV2.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator HiveDestroyEventV2(EtwEvent etwEvent) => new(etwEvent);
+
+            /// <summary>
             /// A data wrapper for a HiveDestroy event.
             /// </summary>
             public ref struct HiveDestroyData
@@ -5048,12 +5216,12 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the Hive field.
                 /// </summary>
-                public ulong Hive => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_Hive..]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_Hive..]);
+                public ulong Hive => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_Hive..Offset_FileName]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_Hive..Offset_FileName]);
 
                 /// <summary>
                 /// Retrieves the FileName field.
                 /// </summary>
-                public string FileName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_FileName..]);
+                public string FileName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_FileName..Offset_Path]);
 
                 /// <summary>
                 /// Retrieves the Path field.
@@ -5144,6 +5312,12 @@ namespace EtwTools
             {
                 _etwEvent = etwEvent;
             }
+
+            /// <summary>
+            /// Converts a generic ETW event to a CountersEventV2.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator CountersEventV2(EtwEvent etwEvent) => new(etwEvent);
 
             /// <summary>
             /// A data wrapper for a Counters event.
@@ -5310,52 +5484,52 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the Counter1 field.
                 /// </summary>
-                public ulong Counter1 => BitConverter.ToUInt64(_etwEvent.Data[Offset_Counter1..]);
+                public ulong Counter1 => BitConverter.ToUInt64(_etwEvent.Data[Offset_Counter1..Offset_Counter2]);
 
                 /// <summary>
                 /// Retrieves the Counter2 field.
                 /// </summary>
-                public ulong Counter2 => BitConverter.ToUInt64(_etwEvent.Data[Offset_Counter2..]);
+                public ulong Counter2 => BitConverter.ToUInt64(_etwEvent.Data[Offset_Counter2..Offset_Counter3]);
 
                 /// <summary>
                 /// Retrieves the Counter3 field.
                 /// </summary>
-                public ulong Counter3 => BitConverter.ToUInt64(_etwEvent.Data[Offset_Counter3..]);
+                public ulong Counter3 => BitConverter.ToUInt64(_etwEvent.Data[Offset_Counter3..Offset_Counter4]);
 
                 /// <summary>
                 /// Retrieves the Counter4 field.
                 /// </summary>
-                public ulong Counter4 => BitConverter.ToUInt64(_etwEvent.Data[Offset_Counter4..]);
+                public ulong Counter4 => BitConverter.ToUInt64(_etwEvent.Data[Offset_Counter4..Offset_Counter5]);
 
                 /// <summary>
                 /// Retrieves the Counter5 field.
                 /// </summary>
-                public ulong Counter5 => BitConverter.ToUInt64(_etwEvent.Data[Offset_Counter5..]);
+                public ulong Counter5 => BitConverter.ToUInt64(_etwEvent.Data[Offset_Counter5..Offset_Counter6]);
 
                 /// <summary>
                 /// Retrieves the Counter6 field.
                 /// </summary>
-                public ulong Counter6 => BitConverter.ToUInt64(_etwEvent.Data[Offset_Counter6..]);
+                public ulong Counter6 => BitConverter.ToUInt64(_etwEvent.Data[Offset_Counter6..Offset_Counter7]);
 
                 /// <summary>
                 /// Retrieves the Counter7 field.
                 /// </summary>
-                public ulong Counter7 => BitConverter.ToUInt64(_etwEvent.Data[Offset_Counter7..]);
+                public ulong Counter7 => BitConverter.ToUInt64(_etwEvent.Data[Offset_Counter7..Offset_Counter8]);
 
                 /// <summary>
                 /// Retrieves the Counter8 field.
                 /// </summary>
-                public ulong Counter8 => BitConverter.ToUInt64(_etwEvent.Data[Offset_Counter8..]);
+                public ulong Counter8 => BitConverter.ToUInt64(_etwEvent.Data[Offset_Counter8..Offset_Counter9]);
 
                 /// <summary>
                 /// Retrieves the Counter9 field.
                 /// </summary>
-                public ulong Counter9 => BitConverter.ToUInt64(_etwEvent.Data[Offset_Counter9..]);
+                public ulong Counter9 => BitConverter.ToUInt64(_etwEvent.Data[Offset_Counter9..Offset_Counter10]);
 
                 /// <summary>
                 /// Retrieves the Counter10 field.
                 /// </summary>
-                public ulong Counter10 => BitConverter.ToUInt64(_etwEvent.Data[Offset_Counter10..]);
+                public ulong Counter10 => BitConverter.ToUInt64(_etwEvent.Data[Offset_Counter10..Offset_Counter11]);
 
                 /// <summary>
                 /// Retrieves the Counter11 field.
@@ -5456,6 +5630,12 @@ namespace EtwTools
             }
 
             /// <summary>
+            /// Converts a generic ETW event to a CreateEventV2.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator CreateEventV2(EtwEvent etwEvent) => new(etwEvent);
+
+            /// <summary>
             /// A data wrapper for a Create event.
             /// </summary>
             public ref struct CreateData
@@ -5536,22 +5716,22 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the InitialTime field.
                 /// </summary>
-                public long InitialTime => BitConverter.ToInt64(_etwEvent.Data[Offset_InitialTime..]);
+                public long InitialTime => BitConverter.ToInt64(_etwEvent.Data[Offset_InitialTime..Offset_Status]);
 
                 /// <summary>
                 /// Retrieves the Status field.
                 /// </summary>
-                public uint Status => BitConverter.ToUInt32(_etwEvent.Data[Offset_Status..]);
+                public uint Status => BitConverter.ToUInt32(_etwEvent.Data[Offset_Status..Offset_Index]);
 
                 /// <summary>
                 /// Retrieves the Index field.
                 /// </summary>
-                public uint Index => BitConverter.ToUInt32(_etwEvent.Data[Offset_Index..]);
+                public uint Index => BitConverter.ToUInt32(_etwEvent.Data[Offset_Index..Offset_KeyHandle]);
 
                 /// <summary>
                 /// Retrieves the KeyHandle field.
                 /// </summary>
-                public ulong KeyHandle => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_KeyHandle..]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_KeyHandle..]);
+                public ulong KeyHandle => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_KeyHandle..Offset_KeyName]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_KeyHandle..Offset_KeyName]);
 
                 /// <summary>
                 /// Retrieves the KeyName field.
@@ -5646,6 +5826,12 @@ namespace EtwTools
             }
 
             /// <summary>
+            /// Converts a generic ETW event to a OpenEventV2.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator OpenEventV2(EtwEvent etwEvent) => new(etwEvent);
+
+            /// <summary>
             /// A data wrapper for a Open event.
             /// </summary>
             public ref struct OpenData
@@ -5726,22 +5912,22 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the InitialTime field.
                 /// </summary>
-                public long InitialTime => BitConverter.ToInt64(_etwEvent.Data[Offset_InitialTime..]);
+                public long InitialTime => BitConverter.ToInt64(_etwEvent.Data[Offset_InitialTime..Offset_Status]);
 
                 /// <summary>
                 /// Retrieves the Status field.
                 /// </summary>
-                public uint Status => BitConverter.ToUInt32(_etwEvent.Data[Offset_Status..]);
+                public uint Status => BitConverter.ToUInt32(_etwEvent.Data[Offset_Status..Offset_Index]);
 
                 /// <summary>
                 /// Retrieves the Index field.
                 /// </summary>
-                public uint Index => BitConverter.ToUInt32(_etwEvent.Data[Offset_Index..]);
+                public uint Index => BitConverter.ToUInt32(_etwEvent.Data[Offset_Index..Offset_KeyHandle]);
 
                 /// <summary>
                 /// Retrieves the KeyHandle field.
                 /// </summary>
-                public ulong KeyHandle => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_KeyHandle..]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_KeyHandle..]);
+                public ulong KeyHandle => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_KeyHandle..Offset_KeyName]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_KeyHandle..Offset_KeyName]);
 
                 /// <summary>
                 /// Retrieves the KeyName field.
@@ -5836,6 +6022,12 @@ namespace EtwTools
             }
 
             /// <summary>
+            /// Converts a generic ETW event to a DeleteEventV2.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator DeleteEventV2(EtwEvent etwEvent) => new(etwEvent);
+
+            /// <summary>
             /// A data wrapper for a Delete event.
             /// </summary>
             public ref struct DeleteData
@@ -5916,22 +6108,22 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the InitialTime field.
                 /// </summary>
-                public long InitialTime => BitConverter.ToInt64(_etwEvent.Data[Offset_InitialTime..]);
+                public long InitialTime => BitConverter.ToInt64(_etwEvent.Data[Offset_InitialTime..Offset_Status]);
 
                 /// <summary>
                 /// Retrieves the Status field.
                 /// </summary>
-                public uint Status => BitConverter.ToUInt32(_etwEvent.Data[Offset_Status..]);
+                public uint Status => BitConverter.ToUInt32(_etwEvent.Data[Offset_Status..Offset_Index]);
 
                 /// <summary>
                 /// Retrieves the Index field.
                 /// </summary>
-                public uint Index => BitConverter.ToUInt32(_etwEvent.Data[Offset_Index..]);
+                public uint Index => BitConverter.ToUInt32(_etwEvent.Data[Offset_Index..Offset_KeyHandle]);
 
                 /// <summary>
                 /// Retrieves the KeyHandle field.
                 /// </summary>
-                public ulong KeyHandle => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_KeyHandle..]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_KeyHandle..]);
+                public ulong KeyHandle => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_KeyHandle..Offset_KeyName]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_KeyHandle..Offset_KeyName]);
 
                 /// <summary>
                 /// Retrieves the KeyName field.
@@ -6026,6 +6218,12 @@ namespace EtwTools
             }
 
             /// <summary>
+            /// Converts a generic ETW event to a QueryEventV2.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator QueryEventV2(EtwEvent etwEvent) => new(etwEvent);
+
+            /// <summary>
             /// A data wrapper for a Query event.
             /// </summary>
             public ref struct QueryData
@@ -6106,22 +6304,22 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the InitialTime field.
                 /// </summary>
-                public long InitialTime => BitConverter.ToInt64(_etwEvent.Data[Offset_InitialTime..]);
+                public long InitialTime => BitConverter.ToInt64(_etwEvent.Data[Offset_InitialTime..Offset_Status]);
 
                 /// <summary>
                 /// Retrieves the Status field.
                 /// </summary>
-                public uint Status => BitConverter.ToUInt32(_etwEvent.Data[Offset_Status..]);
+                public uint Status => BitConverter.ToUInt32(_etwEvent.Data[Offset_Status..Offset_Index]);
 
                 /// <summary>
                 /// Retrieves the Index field.
                 /// </summary>
-                public uint Index => BitConverter.ToUInt32(_etwEvent.Data[Offset_Index..]);
+                public uint Index => BitConverter.ToUInt32(_etwEvent.Data[Offset_Index..Offset_KeyHandle]);
 
                 /// <summary>
                 /// Retrieves the KeyHandle field.
                 /// </summary>
-                public ulong KeyHandle => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_KeyHandle..]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_KeyHandle..]);
+                public ulong KeyHandle => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_KeyHandle..Offset_KeyName]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_KeyHandle..Offset_KeyName]);
 
                 /// <summary>
                 /// Retrieves the KeyName field.
@@ -6216,6 +6414,12 @@ namespace EtwTools
             }
 
             /// <summary>
+            /// Converts a generic ETW event to a SetValueEventV2.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator SetValueEventV2(EtwEvent etwEvent) => new(etwEvent);
+
+            /// <summary>
             /// A data wrapper for a SetValue event.
             /// </summary>
             public ref struct SetValueData
@@ -6296,22 +6500,22 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the InitialTime field.
                 /// </summary>
-                public long InitialTime => BitConverter.ToInt64(_etwEvent.Data[Offset_InitialTime..]);
+                public long InitialTime => BitConverter.ToInt64(_etwEvent.Data[Offset_InitialTime..Offset_Status]);
 
                 /// <summary>
                 /// Retrieves the Status field.
                 /// </summary>
-                public uint Status => BitConverter.ToUInt32(_etwEvent.Data[Offset_Status..]);
+                public uint Status => BitConverter.ToUInt32(_etwEvent.Data[Offset_Status..Offset_Index]);
 
                 /// <summary>
                 /// Retrieves the Index field.
                 /// </summary>
-                public uint Index => BitConverter.ToUInt32(_etwEvent.Data[Offset_Index..]);
+                public uint Index => BitConverter.ToUInt32(_etwEvent.Data[Offset_Index..Offset_KeyHandle]);
 
                 /// <summary>
                 /// Retrieves the KeyHandle field.
                 /// </summary>
-                public ulong KeyHandle => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_KeyHandle..]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_KeyHandle..]);
+                public ulong KeyHandle => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_KeyHandle..Offset_KeyName]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_KeyHandle..Offset_KeyName]);
 
                 /// <summary>
                 /// Retrieves the KeyName field.
@@ -6406,6 +6610,12 @@ namespace EtwTools
             }
 
             /// <summary>
+            /// Converts a generic ETW event to a DeleteValueEventV2.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator DeleteValueEventV2(EtwEvent etwEvent) => new(etwEvent);
+
+            /// <summary>
             /// A data wrapper for a DeleteValue event.
             /// </summary>
             public ref struct DeleteValueData
@@ -6486,22 +6696,22 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the InitialTime field.
                 /// </summary>
-                public long InitialTime => BitConverter.ToInt64(_etwEvent.Data[Offset_InitialTime..]);
+                public long InitialTime => BitConverter.ToInt64(_etwEvent.Data[Offset_InitialTime..Offset_Status]);
 
                 /// <summary>
                 /// Retrieves the Status field.
                 /// </summary>
-                public uint Status => BitConverter.ToUInt32(_etwEvent.Data[Offset_Status..]);
+                public uint Status => BitConverter.ToUInt32(_etwEvent.Data[Offset_Status..Offset_Index]);
 
                 /// <summary>
                 /// Retrieves the Index field.
                 /// </summary>
-                public uint Index => BitConverter.ToUInt32(_etwEvent.Data[Offset_Index..]);
+                public uint Index => BitConverter.ToUInt32(_etwEvent.Data[Offset_Index..Offset_KeyHandle]);
 
                 /// <summary>
                 /// Retrieves the KeyHandle field.
                 /// </summary>
-                public ulong KeyHandle => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_KeyHandle..]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_KeyHandle..]);
+                public ulong KeyHandle => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_KeyHandle..Offset_KeyName]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_KeyHandle..Offset_KeyName]);
 
                 /// <summary>
                 /// Retrieves the KeyName field.
@@ -6596,6 +6806,12 @@ namespace EtwTools
             }
 
             /// <summary>
+            /// Converts a generic ETW event to a QueryValueEventV2.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator QueryValueEventV2(EtwEvent etwEvent) => new(etwEvent);
+
+            /// <summary>
             /// A data wrapper for a QueryValue event.
             /// </summary>
             public ref struct QueryValueData
@@ -6676,22 +6892,22 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the InitialTime field.
                 /// </summary>
-                public long InitialTime => BitConverter.ToInt64(_etwEvent.Data[Offset_InitialTime..]);
+                public long InitialTime => BitConverter.ToInt64(_etwEvent.Data[Offset_InitialTime..Offset_Status]);
 
                 /// <summary>
                 /// Retrieves the Status field.
                 /// </summary>
-                public uint Status => BitConverter.ToUInt32(_etwEvent.Data[Offset_Status..]);
+                public uint Status => BitConverter.ToUInt32(_etwEvent.Data[Offset_Status..Offset_Index]);
 
                 /// <summary>
                 /// Retrieves the Index field.
                 /// </summary>
-                public uint Index => BitConverter.ToUInt32(_etwEvent.Data[Offset_Index..]);
+                public uint Index => BitConverter.ToUInt32(_etwEvent.Data[Offset_Index..Offset_KeyHandle]);
 
                 /// <summary>
                 /// Retrieves the KeyHandle field.
                 /// </summary>
-                public ulong KeyHandle => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_KeyHandle..]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_KeyHandle..]);
+                public ulong KeyHandle => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_KeyHandle..Offset_KeyName]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_KeyHandle..Offset_KeyName]);
 
                 /// <summary>
                 /// Retrieves the KeyName field.
@@ -6786,6 +7002,12 @@ namespace EtwTools
             }
 
             /// <summary>
+            /// Converts a generic ETW event to a EnumerateKeyEventV2.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator EnumerateKeyEventV2(EtwEvent etwEvent) => new(etwEvent);
+
+            /// <summary>
             /// A data wrapper for a EnumerateKey event.
             /// </summary>
             public ref struct EnumerateKeyData
@@ -6866,22 +7088,22 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the InitialTime field.
                 /// </summary>
-                public long InitialTime => BitConverter.ToInt64(_etwEvent.Data[Offset_InitialTime..]);
+                public long InitialTime => BitConverter.ToInt64(_etwEvent.Data[Offset_InitialTime..Offset_Status]);
 
                 /// <summary>
                 /// Retrieves the Status field.
                 /// </summary>
-                public uint Status => BitConverter.ToUInt32(_etwEvent.Data[Offset_Status..]);
+                public uint Status => BitConverter.ToUInt32(_etwEvent.Data[Offset_Status..Offset_Index]);
 
                 /// <summary>
                 /// Retrieves the Index field.
                 /// </summary>
-                public uint Index => BitConverter.ToUInt32(_etwEvent.Data[Offset_Index..]);
+                public uint Index => BitConverter.ToUInt32(_etwEvent.Data[Offset_Index..Offset_KeyHandle]);
 
                 /// <summary>
                 /// Retrieves the KeyHandle field.
                 /// </summary>
-                public ulong KeyHandle => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_KeyHandle..]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_KeyHandle..]);
+                public ulong KeyHandle => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_KeyHandle..Offset_KeyName]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_KeyHandle..Offset_KeyName]);
 
                 /// <summary>
                 /// Retrieves the KeyName field.
@@ -6976,6 +7198,12 @@ namespace EtwTools
             }
 
             /// <summary>
+            /// Converts a generic ETW event to a EnumerateValueKeyEventV2.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator EnumerateValueKeyEventV2(EtwEvent etwEvent) => new(etwEvent);
+
+            /// <summary>
             /// A data wrapper for a EnumerateValueKey event.
             /// </summary>
             public ref struct EnumerateValueKeyData
@@ -7056,22 +7284,22 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the InitialTime field.
                 /// </summary>
-                public long InitialTime => BitConverter.ToInt64(_etwEvent.Data[Offset_InitialTime..]);
+                public long InitialTime => BitConverter.ToInt64(_etwEvent.Data[Offset_InitialTime..Offset_Status]);
 
                 /// <summary>
                 /// Retrieves the Status field.
                 /// </summary>
-                public uint Status => BitConverter.ToUInt32(_etwEvent.Data[Offset_Status..]);
+                public uint Status => BitConverter.ToUInt32(_etwEvent.Data[Offset_Status..Offset_Index]);
 
                 /// <summary>
                 /// Retrieves the Index field.
                 /// </summary>
-                public uint Index => BitConverter.ToUInt32(_etwEvent.Data[Offset_Index..]);
+                public uint Index => BitConverter.ToUInt32(_etwEvent.Data[Offset_Index..Offset_KeyHandle]);
 
                 /// <summary>
                 /// Retrieves the KeyHandle field.
                 /// </summary>
-                public ulong KeyHandle => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_KeyHandle..]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_KeyHandle..]);
+                public ulong KeyHandle => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_KeyHandle..Offset_KeyName]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_KeyHandle..Offset_KeyName]);
 
                 /// <summary>
                 /// Retrieves the KeyName field.
@@ -7166,6 +7394,12 @@ namespace EtwTools
             }
 
             /// <summary>
+            /// Converts a generic ETW event to a QueryMultipleValueEventV2.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator QueryMultipleValueEventV2(EtwEvent etwEvent) => new(etwEvent);
+
+            /// <summary>
             /// A data wrapper for a QueryMultipleValue event.
             /// </summary>
             public ref struct QueryMultipleValueData
@@ -7246,22 +7480,22 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the InitialTime field.
                 /// </summary>
-                public long InitialTime => BitConverter.ToInt64(_etwEvent.Data[Offset_InitialTime..]);
+                public long InitialTime => BitConverter.ToInt64(_etwEvent.Data[Offset_InitialTime..Offset_Status]);
 
                 /// <summary>
                 /// Retrieves the Status field.
                 /// </summary>
-                public uint Status => BitConverter.ToUInt32(_etwEvent.Data[Offset_Status..]);
+                public uint Status => BitConverter.ToUInt32(_etwEvent.Data[Offset_Status..Offset_Index]);
 
                 /// <summary>
                 /// Retrieves the Index field.
                 /// </summary>
-                public uint Index => BitConverter.ToUInt32(_etwEvent.Data[Offset_Index..]);
+                public uint Index => BitConverter.ToUInt32(_etwEvent.Data[Offset_Index..Offset_KeyHandle]);
 
                 /// <summary>
                 /// Retrieves the KeyHandle field.
                 /// </summary>
-                public ulong KeyHandle => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_KeyHandle..]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_KeyHandle..]);
+                public ulong KeyHandle => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_KeyHandle..Offset_KeyName]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_KeyHandle..Offset_KeyName]);
 
                 /// <summary>
                 /// Retrieves the KeyName field.
@@ -7356,6 +7590,12 @@ namespace EtwTools
             }
 
             /// <summary>
+            /// Converts a generic ETW event to a SetInformationEventV2.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator SetInformationEventV2(EtwEvent etwEvent) => new(etwEvent);
+
+            /// <summary>
             /// A data wrapper for a SetInformation event.
             /// </summary>
             public ref struct SetInformationData
@@ -7436,22 +7676,22 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the InitialTime field.
                 /// </summary>
-                public long InitialTime => BitConverter.ToInt64(_etwEvent.Data[Offset_InitialTime..]);
+                public long InitialTime => BitConverter.ToInt64(_etwEvent.Data[Offset_InitialTime..Offset_Status]);
 
                 /// <summary>
                 /// Retrieves the Status field.
                 /// </summary>
-                public uint Status => BitConverter.ToUInt32(_etwEvent.Data[Offset_Status..]);
+                public uint Status => BitConverter.ToUInt32(_etwEvent.Data[Offset_Status..Offset_Index]);
 
                 /// <summary>
                 /// Retrieves the Index field.
                 /// </summary>
-                public uint Index => BitConverter.ToUInt32(_etwEvent.Data[Offset_Index..]);
+                public uint Index => BitConverter.ToUInt32(_etwEvent.Data[Offset_Index..Offset_KeyHandle]);
 
                 /// <summary>
                 /// Retrieves the KeyHandle field.
                 /// </summary>
-                public ulong KeyHandle => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_KeyHandle..]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_KeyHandle..]);
+                public ulong KeyHandle => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_KeyHandle..Offset_KeyName]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_KeyHandle..Offset_KeyName]);
 
                 /// <summary>
                 /// Retrieves the KeyName field.
@@ -7546,6 +7786,12 @@ namespace EtwTools
             }
 
             /// <summary>
+            /// Converts a generic ETW event to a FlushEventV2.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator FlushEventV2(EtwEvent etwEvent) => new(etwEvent);
+
+            /// <summary>
             /// A data wrapper for a Flush event.
             /// </summary>
             public ref struct FlushData
@@ -7626,22 +7872,22 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the InitialTime field.
                 /// </summary>
-                public long InitialTime => BitConverter.ToInt64(_etwEvent.Data[Offset_InitialTime..]);
+                public long InitialTime => BitConverter.ToInt64(_etwEvent.Data[Offset_InitialTime..Offset_Status]);
 
                 /// <summary>
                 /// Retrieves the Status field.
                 /// </summary>
-                public uint Status => BitConverter.ToUInt32(_etwEvent.Data[Offset_Status..]);
+                public uint Status => BitConverter.ToUInt32(_etwEvent.Data[Offset_Status..Offset_Index]);
 
                 /// <summary>
                 /// Retrieves the Index field.
                 /// </summary>
-                public uint Index => BitConverter.ToUInt32(_etwEvent.Data[Offset_Index..]);
+                public uint Index => BitConverter.ToUInt32(_etwEvent.Data[Offset_Index..Offset_KeyHandle]);
 
                 /// <summary>
                 /// Retrieves the KeyHandle field.
                 /// </summary>
-                public ulong KeyHandle => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_KeyHandle..]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_KeyHandle..]);
+                public ulong KeyHandle => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_KeyHandle..Offset_KeyName]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_KeyHandle..Offset_KeyName]);
 
                 /// <summary>
                 /// Retrieves the KeyName field.
@@ -7736,6 +7982,12 @@ namespace EtwTools
             }
 
             /// <summary>
+            /// Converts a generic ETW event to a KCBCreateEventV2.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator KCBCreateEventV2(EtwEvent etwEvent) => new(etwEvent);
+
+            /// <summary>
             /// A data wrapper for a KCBCreate event.
             /// </summary>
             public ref struct KCBCreateData
@@ -7816,22 +8068,22 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the InitialTime field.
                 /// </summary>
-                public long InitialTime => BitConverter.ToInt64(_etwEvent.Data[Offset_InitialTime..]);
+                public long InitialTime => BitConverter.ToInt64(_etwEvent.Data[Offset_InitialTime..Offset_Status]);
 
                 /// <summary>
                 /// Retrieves the Status field.
                 /// </summary>
-                public uint Status => BitConverter.ToUInt32(_etwEvent.Data[Offset_Status..]);
+                public uint Status => BitConverter.ToUInt32(_etwEvent.Data[Offset_Status..Offset_Index]);
 
                 /// <summary>
                 /// Retrieves the Index field.
                 /// </summary>
-                public uint Index => BitConverter.ToUInt32(_etwEvent.Data[Offset_Index..]);
+                public uint Index => BitConverter.ToUInt32(_etwEvent.Data[Offset_Index..Offset_KeyHandle]);
 
                 /// <summary>
                 /// Retrieves the KeyHandle field.
                 /// </summary>
-                public ulong KeyHandle => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_KeyHandle..]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_KeyHandle..]);
+                public ulong KeyHandle => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_KeyHandle..Offset_KeyName]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_KeyHandle..Offset_KeyName]);
 
                 /// <summary>
                 /// Retrieves the KeyName field.
@@ -7926,6 +8178,12 @@ namespace EtwTools
             }
 
             /// <summary>
+            /// Converts a generic ETW event to a KCBDeleteEventV2.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator KCBDeleteEventV2(EtwEvent etwEvent) => new(etwEvent);
+
+            /// <summary>
             /// A data wrapper for a KCBDelete event.
             /// </summary>
             public ref struct KCBDeleteData
@@ -8006,22 +8264,22 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the InitialTime field.
                 /// </summary>
-                public long InitialTime => BitConverter.ToInt64(_etwEvent.Data[Offset_InitialTime..]);
+                public long InitialTime => BitConverter.ToInt64(_etwEvent.Data[Offset_InitialTime..Offset_Status]);
 
                 /// <summary>
                 /// Retrieves the Status field.
                 /// </summary>
-                public uint Status => BitConverter.ToUInt32(_etwEvent.Data[Offset_Status..]);
+                public uint Status => BitConverter.ToUInt32(_etwEvent.Data[Offset_Status..Offset_Index]);
 
                 /// <summary>
                 /// Retrieves the Index field.
                 /// </summary>
-                public uint Index => BitConverter.ToUInt32(_etwEvent.Data[Offset_Index..]);
+                public uint Index => BitConverter.ToUInt32(_etwEvent.Data[Offset_Index..Offset_KeyHandle]);
 
                 /// <summary>
                 /// Retrieves the KeyHandle field.
                 /// </summary>
-                public ulong KeyHandle => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_KeyHandle..]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_KeyHandle..]);
+                public ulong KeyHandle => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_KeyHandle..Offset_KeyName]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_KeyHandle..Offset_KeyName]);
 
                 /// <summary>
                 /// Retrieves the KeyName field.
@@ -8116,6 +8374,12 @@ namespace EtwTools
             }
 
             /// <summary>
+            /// Converts a generic ETW event to a KCBRundownBeginEventV2.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator KCBRundownBeginEventV2(EtwEvent etwEvent) => new(etwEvent);
+
+            /// <summary>
             /// A data wrapper for a KCBRundownBegin event.
             /// </summary>
             public ref struct KCBRundownBeginData
@@ -8196,22 +8460,22 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the InitialTime field.
                 /// </summary>
-                public long InitialTime => BitConverter.ToInt64(_etwEvent.Data[Offset_InitialTime..]);
+                public long InitialTime => BitConverter.ToInt64(_etwEvent.Data[Offset_InitialTime..Offset_Status]);
 
                 /// <summary>
                 /// Retrieves the Status field.
                 /// </summary>
-                public uint Status => BitConverter.ToUInt32(_etwEvent.Data[Offset_Status..]);
+                public uint Status => BitConverter.ToUInt32(_etwEvent.Data[Offset_Status..Offset_Index]);
 
                 /// <summary>
                 /// Retrieves the Index field.
                 /// </summary>
-                public uint Index => BitConverter.ToUInt32(_etwEvent.Data[Offset_Index..]);
+                public uint Index => BitConverter.ToUInt32(_etwEvent.Data[Offset_Index..Offset_KeyHandle]);
 
                 /// <summary>
                 /// Retrieves the KeyHandle field.
                 /// </summary>
-                public ulong KeyHandle => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_KeyHandle..]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_KeyHandle..]);
+                public ulong KeyHandle => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_KeyHandle..Offset_KeyName]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_KeyHandle..Offset_KeyName]);
 
                 /// <summary>
                 /// Retrieves the KeyName field.
@@ -8306,6 +8570,12 @@ namespace EtwTools
             }
 
             /// <summary>
+            /// Converts a generic ETW event to a KCBRundownEndEventV2.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator KCBRundownEndEventV2(EtwEvent etwEvent) => new(etwEvent);
+
+            /// <summary>
             /// A data wrapper for a KCBRundownEnd event.
             /// </summary>
             public ref struct KCBRundownEndData
@@ -8386,22 +8656,22 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the InitialTime field.
                 /// </summary>
-                public long InitialTime => BitConverter.ToInt64(_etwEvent.Data[Offset_InitialTime..]);
+                public long InitialTime => BitConverter.ToInt64(_etwEvent.Data[Offset_InitialTime..Offset_Status]);
 
                 /// <summary>
                 /// Retrieves the Status field.
                 /// </summary>
-                public uint Status => BitConverter.ToUInt32(_etwEvent.Data[Offset_Status..]);
+                public uint Status => BitConverter.ToUInt32(_etwEvent.Data[Offset_Status..Offset_Index]);
 
                 /// <summary>
                 /// Retrieves the Index field.
                 /// </summary>
-                public uint Index => BitConverter.ToUInt32(_etwEvent.Data[Offset_Index..]);
+                public uint Index => BitConverter.ToUInt32(_etwEvent.Data[Offset_Index..Offset_KeyHandle]);
 
                 /// <summary>
                 /// Retrieves the KeyHandle field.
                 /// </summary>
-                public ulong KeyHandle => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_KeyHandle..]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_KeyHandle..]);
+                public ulong KeyHandle => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_KeyHandle..Offset_KeyName]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_KeyHandle..Offset_KeyName]);
 
                 /// <summary>
                 /// Retrieves the KeyName field.
@@ -8496,6 +8766,12 @@ namespace EtwTools
             }
 
             /// <summary>
+            /// Converts a generic ETW event to a VirtualizeEventV2.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator VirtualizeEventV2(EtwEvent etwEvent) => new(etwEvent);
+
+            /// <summary>
             /// A data wrapper for a Virtualize event.
             /// </summary>
             public ref struct VirtualizeData
@@ -8576,22 +8852,22 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the InitialTime field.
                 /// </summary>
-                public long InitialTime => BitConverter.ToInt64(_etwEvent.Data[Offset_InitialTime..]);
+                public long InitialTime => BitConverter.ToInt64(_etwEvent.Data[Offset_InitialTime..Offset_Status]);
 
                 /// <summary>
                 /// Retrieves the Status field.
                 /// </summary>
-                public uint Status => BitConverter.ToUInt32(_etwEvent.Data[Offset_Status..]);
+                public uint Status => BitConverter.ToUInt32(_etwEvent.Data[Offset_Status..Offset_Index]);
 
                 /// <summary>
                 /// Retrieves the Index field.
                 /// </summary>
-                public uint Index => BitConverter.ToUInt32(_etwEvent.Data[Offset_Index..]);
+                public uint Index => BitConverter.ToUInt32(_etwEvent.Data[Offset_Index..Offset_KeyHandle]);
 
                 /// <summary>
                 /// Retrieves the KeyHandle field.
                 /// </summary>
-                public ulong KeyHandle => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_KeyHandle..]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_KeyHandle..]);
+                public ulong KeyHandle => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_KeyHandle..Offset_KeyName]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_KeyHandle..Offset_KeyName]);
 
                 /// <summary>
                 /// Retrieves the KeyName field.
@@ -8686,6 +8962,12 @@ namespace EtwTools
             }
 
             /// <summary>
+            /// Converts a generic ETW event to a CloseEventV2.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator CloseEventV2(EtwEvent etwEvent) => new(etwEvent);
+
+            /// <summary>
             /// A data wrapper for a Close event.
             /// </summary>
             public ref struct CloseData
@@ -8766,22 +9048,22 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the InitialTime field.
                 /// </summary>
-                public long InitialTime => BitConverter.ToInt64(_etwEvent.Data[Offset_InitialTime..]);
+                public long InitialTime => BitConverter.ToInt64(_etwEvent.Data[Offset_InitialTime..Offset_Status]);
 
                 /// <summary>
                 /// Retrieves the Status field.
                 /// </summary>
-                public uint Status => BitConverter.ToUInt32(_etwEvent.Data[Offset_Status..]);
+                public uint Status => BitConverter.ToUInt32(_etwEvent.Data[Offset_Status..Offset_Index]);
 
                 /// <summary>
                 /// Retrieves the Index field.
                 /// </summary>
-                public uint Index => BitConverter.ToUInt32(_etwEvent.Data[Offset_Index..]);
+                public uint Index => BitConverter.ToUInt32(_etwEvent.Data[Offset_Index..Offset_KeyHandle]);
 
                 /// <summary>
                 /// Retrieves the KeyHandle field.
                 /// </summary>
-                public ulong KeyHandle => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_KeyHandle..]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_KeyHandle..]);
+                public ulong KeyHandle => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_KeyHandle..Offset_KeyName]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_KeyHandle..Offset_KeyName]);
 
                 /// <summary>
                 /// Retrieves the KeyName field.
@@ -8876,6 +9158,12 @@ namespace EtwTools
             }
 
             /// <summary>
+            /// Converts a generic ETW event to a SetSecurityEventV2.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator SetSecurityEventV2(EtwEvent etwEvent) => new(etwEvent);
+
+            /// <summary>
             /// A data wrapper for a SetSecurity event.
             /// </summary>
             public ref struct SetSecurityData
@@ -8956,22 +9244,22 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the InitialTime field.
                 /// </summary>
-                public long InitialTime => BitConverter.ToInt64(_etwEvent.Data[Offset_InitialTime..]);
+                public long InitialTime => BitConverter.ToInt64(_etwEvent.Data[Offset_InitialTime..Offset_Status]);
 
                 /// <summary>
                 /// Retrieves the Status field.
                 /// </summary>
-                public uint Status => BitConverter.ToUInt32(_etwEvent.Data[Offset_Status..]);
+                public uint Status => BitConverter.ToUInt32(_etwEvent.Data[Offset_Status..Offset_Index]);
 
                 /// <summary>
                 /// Retrieves the Index field.
                 /// </summary>
-                public uint Index => BitConverter.ToUInt32(_etwEvent.Data[Offset_Index..]);
+                public uint Index => BitConverter.ToUInt32(_etwEvent.Data[Offset_Index..Offset_KeyHandle]);
 
                 /// <summary>
                 /// Retrieves the KeyHandle field.
                 /// </summary>
-                public ulong KeyHandle => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_KeyHandle..]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_KeyHandle..]);
+                public ulong KeyHandle => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_KeyHandle..Offset_KeyName]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_KeyHandle..Offset_KeyName]);
 
                 /// <summary>
                 /// Retrieves the KeyName field.
@@ -9066,6 +9354,12 @@ namespace EtwTools
             }
 
             /// <summary>
+            /// Converts a generic ETW event to a QuerySecurityEventV2.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator QuerySecurityEventV2(EtwEvent etwEvent) => new(etwEvent);
+
+            /// <summary>
             /// A data wrapper for a QuerySecurity event.
             /// </summary>
             public ref struct QuerySecurityData
@@ -9146,22 +9440,22 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the InitialTime field.
                 /// </summary>
-                public long InitialTime => BitConverter.ToInt64(_etwEvent.Data[Offset_InitialTime..]);
+                public long InitialTime => BitConverter.ToInt64(_etwEvent.Data[Offset_InitialTime..Offset_Status]);
 
                 /// <summary>
                 /// Retrieves the Status field.
                 /// </summary>
-                public uint Status => BitConverter.ToUInt32(_etwEvent.Data[Offset_Status..]);
+                public uint Status => BitConverter.ToUInt32(_etwEvent.Data[Offset_Status..Offset_Index]);
 
                 /// <summary>
                 /// Retrieves the Index field.
                 /// </summary>
-                public uint Index => BitConverter.ToUInt32(_etwEvent.Data[Offset_Index..]);
+                public uint Index => BitConverter.ToUInt32(_etwEvent.Data[Offset_Index..Offset_KeyHandle]);
 
                 /// <summary>
                 /// Retrieves the KeyHandle field.
                 /// </summary>
-                public ulong KeyHandle => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_KeyHandle..]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_KeyHandle..]);
+                public ulong KeyHandle => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_KeyHandle..Offset_KeyName]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_KeyHandle..Offset_KeyName]);
 
                 /// <summary>
                 /// Retrieves the KeyName field.
@@ -9256,6 +9550,12 @@ namespace EtwTools
             }
 
             /// <summary>
+            /// Converts a generic ETW event to a HiveInitEventV2.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator HiveInitEventV2(EtwEvent etwEvent) => new(etwEvent);
+
+            /// <summary>
             /// A data wrapper for a HiveInit event.
             /// </summary>
             public ref struct HiveInitData
@@ -9336,22 +9636,22 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the Hive field.
                 /// </summary>
-                public ulong Hive => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_Hive..]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_Hive..]);
+                public ulong Hive => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_Hive..Offset_OperationType]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_Hive..Offset_OperationType]);
 
                 /// <summary>
                 /// Retrieves the OperationType field.
                 /// </summary>
-                public uint OperationType => BitConverter.ToUInt32(_etwEvent.Data[Offset_OperationType..]);
+                public uint OperationType => BitConverter.ToUInt32(_etwEvent.Data[Offset_OperationType..Offset_PoolTag]);
 
                 /// <summary>
                 /// Retrieves the PoolTag field.
                 /// </summary>
-                public uint PoolTag => BitConverter.ToUInt32(_etwEvent.Data[Offset_PoolTag..]);
+                public uint PoolTag => BitConverter.ToUInt32(_etwEvent.Data[Offset_PoolTag..Offset_Size]);
 
                 /// <summary>
                 /// Retrieves the Size field.
                 /// </summary>
-                public uint Size => BitConverter.ToUInt32(_etwEvent.Data[Offset_Size..]);
+                public uint Size => BitConverter.ToUInt32(_etwEvent.Data[Offset_Size..Offset_FileName]);
 
                 /// <summary>
                 /// Retrieves the FileName field.
@@ -9446,6 +9746,12 @@ namespace EtwTools
             }
 
             /// <summary>
+            /// Converts a generic ETW event to a TxRCommitEventV2.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator TxRCommitEventV2(EtwEvent etwEvent) => new(etwEvent);
+
+            /// <summary>
             /// A data wrapper for a TxRCommit event.
             /// </summary>
             public ref struct TxRCommitData
@@ -9526,22 +9832,22 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the TxrGUID field.
                 /// </summary>
-                public Guid TxrGUID => new(_etwEvent.Data[Offset_TxrGUID..]);
+                public Guid TxrGUID => new(_etwEvent.Data[Offset_TxrGUID..Offset_Status]);
 
                 /// <summary>
                 /// Retrieves the Status field.
                 /// </summary>
-                public uint Status => BitConverter.ToUInt32(_etwEvent.Data[Offset_Status..]);
+                public uint Status => BitConverter.ToUInt32(_etwEvent.Data[Offset_Status..Offset_UowCount]);
 
                 /// <summary>
                 /// Retrieves the UowCount field.
                 /// </summary>
-                public uint UowCount => BitConverter.ToUInt32(_etwEvent.Data[Offset_UowCount..]);
+                public uint UowCount => BitConverter.ToUInt32(_etwEvent.Data[Offset_UowCount..Offset_OperationTime]);
 
                 /// <summary>
                 /// Retrieves the OperationTime field.
                 /// </summary>
-                public ulong OperationTime => BitConverter.ToUInt64(_etwEvent.Data[Offset_OperationTime..]);
+                public ulong OperationTime => BitConverter.ToUInt64(_etwEvent.Data[Offset_OperationTime..Offset_Hive]);
 
                 /// <summary>
                 /// Retrieves the Hive field.
@@ -9636,6 +9942,12 @@ namespace EtwTools
             }
 
             /// <summary>
+            /// Converts a generic ETW event to a TxRPrepareEventV2.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator TxRPrepareEventV2(EtwEvent etwEvent) => new(etwEvent);
+
+            /// <summary>
             /// A data wrapper for a TxRPrepare event.
             /// </summary>
             public ref struct TxRPrepareData
@@ -9716,22 +10028,22 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the TxrGUID field.
                 /// </summary>
-                public Guid TxrGUID => new(_etwEvent.Data[Offset_TxrGUID..]);
+                public Guid TxrGUID => new(_etwEvent.Data[Offset_TxrGUID..Offset_Status]);
 
                 /// <summary>
                 /// Retrieves the Status field.
                 /// </summary>
-                public uint Status => BitConverter.ToUInt32(_etwEvent.Data[Offset_Status..]);
+                public uint Status => BitConverter.ToUInt32(_etwEvent.Data[Offset_Status..Offset_UowCount]);
 
                 /// <summary>
                 /// Retrieves the UowCount field.
                 /// </summary>
-                public uint UowCount => BitConverter.ToUInt32(_etwEvent.Data[Offset_UowCount..]);
+                public uint UowCount => BitConverter.ToUInt32(_etwEvent.Data[Offset_UowCount..Offset_OperationTime]);
 
                 /// <summary>
                 /// Retrieves the OperationTime field.
                 /// </summary>
-                public ulong OperationTime => BitConverter.ToUInt64(_etwEvent.Data[Offset_OperationTime..]);
+                public ulong OperationTime => BitConverter.ToUInt64(_etwEvent.Data[Offset_OperationTime..Offset_Hive]);
 
                 /// <summary>
                 /// Retrieves the Hive field.
@@ -9826,6 +10138,12 @@ namespace EtwTools
             }
 
             /// <summary>
+            /// Converts a generic ETW event to a TxRRollbackEventV2.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator TxRRollbackEventV2(EtwEvent etwEvent) => new(etwEvent);
+
+            /// <summary>
             /// A data wrapper for a TxRRollback event.
             /// </summary>
             public ref struct TxRRollbackData
@@ -9906,22 +10224,22 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the TxrGUID field.
                 /// </summary>
-                public Guid TxrGUID => new(_etwEvent.Data[Offset_TxrGUID..]);
+                public Guid TxrGUID => new(_etwEvent.Data[Offset_TxrGUID..Offset_Status]);
 
                 /// <summary>
                 /// Retrieves the Status field.
                 /// </summary>
-                public uint Status => BitConverter.ToUInt32(_etwEvent.Data[Offset_Status..]);
+                public uint Status => BitConverter.ToUInt32(_etwEvent.Data[Offset_Status..Offset_UowCount]);
 
                 /// <summary>
                 /// Retrieves the UowCount field.
                 /// </summary>
-                public uint UowCount => BitConverter.ToUInt32(_etwEvent.Data[Offset_UowCount..]);
+                public uint UowCount => BitConverter.ToUInt32(_etwEvent.Data[Offset_UowCount..Offset_OperationTime]);
 
                 /// <summary>
                 /// Retrieves the OperationTime field.
                 /// </summary>
-                public ulong OperationTime => BitConverter.ToUInt64(_etwEvent.Data[Offset_OperationTime..]);
+                public ulong OperationTime => BitConverter.ToUInt64(_etwEvent.Data[Offset_OperationTime..Offset_Hive]);
 
                 /// <summary>
                 /// Retrieves the Hive field.
@@ -10016,6 +10334,12 @@ namespace EtwTools
             }
 
             /// <summary>
+            /// Converts a generic ETW event to a HiveDCEndEventV2.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator HiveDCEndEventV2(EtwEvent etwEvent) => new(etwEvent);
+
+            /// <summary>
             /// A data wrapper for a HiveDCEnd event.
             /// </summary>
             public ref struct HiveDCEndData
@@ -10096,22 +10420,22 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the Size field.
                 /// </summary>
-                public ulong Size => BitConverter.ToUInt64(_etwEvent.Data[Offset_Size..]);
+                public ulong Size => BitConverter.ToUInt64(_etwEvent.Data[Offset_Size..Offset_Hive]);
 
                 /// <summary>
                 /// Retrieves the Hive field.
                 /// </summary>
-                public ulong Hive => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_Hive..]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_Hive..]);
+                public ulong Hive => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_Hive..Offset_LoadedKeyCount]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_Hive..Offset_LoadedKeyCount]);
 
                 /// <summary>
                 /// Retrieves the LoadedKeyCount field.
                 /// </summary>
-                public uint LoadedKeyCount => BitConverter.ToUInt32(_etwEvent.Data[Offset_LoadedKeyCount..]);
+                public uint LoadedKeyCount => BitConverter.ToUInt32(_etwEvent.Data[Offset_LoadedKeyCount..Offset_FileName]);
 
                 /// <summary>
                 /// Retrieves the FileName field.
                 /// </summary>
-                public string FileName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_FileName..]);
+                public string FileName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_FileName..Offset_LinkPath]);
 
                 /// <summary>
                 /// Retrieves the LinkPath field.
@@ -10206,6 +10530,12 @@ namespace EtwTools
             }
 
             /// <summary>
+            /// Converts a generic ETW event to a ChangeNotifyEventV2.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator ChangeNotifyEventV2(EtwEvent etwEvent) => new(etwEvent);
+
+            /// <summary>
             /// A data wrapper for a ChangeNotify event.
             /// </summary>
             public ref struct ChangeNotifyData
@@ -10286,12 +10616,12 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the Notification field.
                 /// </summary>
-                public ulong Notification => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_Notification..]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_Notification..]);
+                public ulong Notification => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_Notification..Offset_KeyHandle]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_Notification..Offset_KeyHandle]);
 
                 /// <summary>
                 /// Retrieves the KeyHandle field.
                 /// </summary>
-                public ulong KeyHandle => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_KeyHandle..]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_KeyHandle..]);
+                public ulong KeyHandle => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_KeyHandle..Offset_Type]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_KeyHandle..Offset_Type]);
 
                 /// <summary>
                 /// Retrieves the Type field.
@@ -10396,6 +10726,12 @@ namespace EtwTools
             }
 
             /// <summary>
+            /// Converts a generic ETW event to a HiveLinkEventV2.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator HiveLinkEventV2(EtwEvent etwEvent) => new(etwEvent);
+
+            /// <summary>
             /// A data wrapper for a HiveLink event.
             /// </summary>
             public ref struct HiveLinkData
@@ -10434,7 +10770,7 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the Hive field.
                 /// </summary>
-                public ulong Hive => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_Hive..]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_Hive..]);
+                public ulong Hive => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_Hive..Offset_Path]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_Hive..Offset_Path]);
 
                 /// <summary>
                 /// Retrieves the Path field.

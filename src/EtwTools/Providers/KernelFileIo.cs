@@ -222,6 +222,12 @@ namespace EtwTools
             }
 
             /// <summary>
+            /// Converts a generic ETW event to a NameEvent.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator NameEvent(EtwEvent etwEvent) => new(etwEvent);
+
+            /// <summary>
             /// A data wrapper for a Name event.
             /// </summary>
             public ref struct NameData
@@ -260,7 +266,7 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the FileObject field.
                 /// </summary>
-                public ulong FileObject => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_FileObject..]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_FileObject..]);
+                public ulong FileObject => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_FileObject..Offset_FileName]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_FileObject..Offset_FileName]);
 
                 /// <summary>
                 /// Retrieves the FileName field.
@@ -352,6 +358,12 @@ namespace EtwTools
             }
 
             /// <summary>
+            /// Converts a generic ETW event to a NameEventV1.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator NameEventV1(EtwEvent etwEvent) => new(etwEvent);
+
+            /// <summary>
             /// A data wrapper for a Name event.
             /// </summary>
             public ref struct NameData
@@ -390,7 +402,7 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the FileObject field.
                 /// </summary>
-                public ulong FileObject => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_FileObject..]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_FileObject..]);
+                public ulong FileObject => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_FileObject..Offset_FileName]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_FileObject..Offset_FileName]);
 
                 /// <summary>
                 /// Retrieves the FileName field.
@@ -482,6 +494,12 @@ namespace EtwTools
             }
 
             /// <summary>
+            /// Converts a generic ETW event to a FileCreateEventV1.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator FileCreateEventV1(EtwEvent etwEvent) => new(etwEvent);
+
+            /// <summary>
             /// A data wrapper for a FileCreate event.
             /// </summary>
             public ref struct FileCreateData
@@ -520,7 +538,7 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the FileObject field.
                 /// </summary>
-                public ulong FileObject => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_FileObject..]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_FileObject..]);
+                public ulong FileObject => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_FileObject..Offset_FileName]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_FileObject..Offset_FileName]);
 
                 /// <summary>
                 /// Retrieves the FileName field.
@@ -612,6 +630,12 @@ namespace EtwTools
             }
 
             /// <summary>
+            /// Converts a generic ETW event to a NameEventV2.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator NameEventV2(EtwEvent etwEvent) => new(etwEvent);
+
+            /// <summary>
             /// A data wrapper for a Name event.
             /// </summary>
             public ref struct NameData
@@ -650,7 +674,7 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the FileObject field.
                 /// </summary>
-                public ulong FileObject => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_FileObject..]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_FileObject..]);
+                public ulong FileObject => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_FileObject..Offset_FileName]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_FileObject..Offset_FileName]);
 
                 /// <summary>
                 /// Retrieves the FileName field.
@@ -742,6 +766,12 @@ namespace EtwTools
             }
 
             /// <summary>
+            /// Converts a generic ETW event to a FileCreateEventV2.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator FileCreateEventV2(EtwEvent etwEvent) => new(etwEvent);
+
+            /// <summary>
             /// A data wrapper for a FileCreate event.
             /// </summary>
             public ref struct FileCreateData
@@ -780,7 +810,7 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the FileObject field.
                 /// </summary>
-                public ulong FileObject => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_FileObject..]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_FileObject..]);
+                public ulong FileObject => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_FileObject..Offset_FileName]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_FileObject..Offset_FileName]);
 
                 /// <summary>
                 /// Retrieves the FileName field.
@@ -872,6 +902,12 @@ namespace EtwTools
             }
 
             /// <summary>
+            /// Converts a generic ETW event to a FileDeleteEventV2.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator FileDeleteEventV2(EtwEvent etwEvent) => new(etwEvent);
+
+            /// <summary>
             /// A data wrapper for a FileDelete event.
             /// </summary>
             public ref struct FileDeleteData
@@ -910,7 +946,7 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the FileObject field.
                 /// </summary>
-                public ulong FileObject => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_FileObject..]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_FileObject..]);
+                public ulong FileObject => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_FileObject..Offset_FileName]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_FileObject..Offset_FileName]);
 
                 /// <summary>
                 /// Retrieves the FileName field.
@@ -1002,6 +1038,12 @@ namespace EtwTools
             }
 
             /// <summary>
+            /// Converts a generic ETW event to a FileRundownEventV2.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator FileRundownEventV2(EtwEvent etwEvent) => new(etwEvent);
+
+            /// <summary>
             /// A data wrapper for a FileRundown event.
             /// </summary>
             public ref struct FileRundownData
@@ -1040,7 +1082,7 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the FileObject field.
                 /// </summary>
-                public ulong FileObject => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_FileObject..]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_FileObject..]);
+                public ulong FileObject => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_FileObject..Offset_FileName]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_FileObject..Offset_FileName]);
 
                 /// <summary>
                 /// Retrieves the FileName field.
@@ -1130,6 +1172,12 @@ namespace EtwTools
             {
                 _etwEvent = etwEvent;
             }
+
+            /// <summary>
+            /// Converts a generic ETW event to a CreateEventV2.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator CreateEventV2(EtwEvent etwEvent) => new(etwEvent);
 
             /// <summary>
             /// A data wrapper for a Create event.
@@ -1240,32 +1288,32 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the IrpPtr field.
                 /// </summary>
-                public ulong IrpPtr => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_IrpPtr..]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_IrpPtr..]);
+                public ulong IrpPtr => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_IrpPtr..Offset_TTID]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_IrpPtr..Offset_TTID]);
 
                 /// <summary>
                 /// Retrieves the TTID field.
                 /// </summary>
-                public ulong TTID => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_TTID..]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_TTID..]);
+                public ulong TTID => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_TTID..Offset_FileObject]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_TTID..Offset_FileObject]);
 
                 /// <summary>
                 /// Retrieves the FileObject field.
                 /// </summary>
-                public ulong FileObject => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_FileObject..]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_FileObject..]);
+                public ulong FileObject => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_FileObject..Offset_CreateOptions]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_FileObject..Offset_CreateOptions]);
 
                 /// <summary>
                 /// Retrieves the CreateOptions field.
                 /// </summary>
-                public uint CreateOptions => BitConverter.ToUInt32(_etwEvent.Data[Offset_CreateOptions..]);
+                public uint CreateOptions => BitConverter.ToUInt32(_etwEvent.Data[Offset_CreateOptions..Offset_FileAttributes]);
 
                 /// <summary>
                 /// Retrieves the FileAttributes field.
                 /// </summary>
-                public uint FileAttributes => BitConverter.ToUInt32(_etwEvent.Data[Offset_FileAttributes..]);
+                public uint FileAttributes => BitConverter.ToUInt32(_etwEvent.Data[Offset_FileAttributes..Offset_ShareAccess]);
 
                 /// <summary>
                 /// Retrieves the ShareAccess field.
                 /// </summary>
-                public uint ShareAccess => BitConverter.ToUInt32(_etwEvent.Data[Offset_ShareAccess..]);
+                public uint ShareAccess => BitConverter.ToUInt32(_etwEvent.Data[Offset_ShareAccess..Offset_OpenPath]);
 
                 /// <summary>
                 /// Retrieves the OpenPath field.
@@ -1362,6 +1410,12 @@ namespace EtwTools
             }
 
             /// <summary>
+            /// Converts a generic ETW event to a CleanupEventV2.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator CleanupEventV2(EtwEvent etwEvent) => new(etwEvent);
+
+            /// <summary>
             /// A data wrapper for a Cleanup event.
             /// </summary>
             public ref struct CleanupData
@@ -1428,17 +1482,17 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the IrpPtr field.
                 /// </summary>
-                public ulong IrpPtr => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_IrpPtr..]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_IrpPtr..]);
+                public ulong IrpPtr => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_IrpPtr..Offset_TTID]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_IrpPtr..Offset_TTID]);
 
                 /// <summary>
                 /// Retrieves the TTID field.
                 /// </summary>
-                public ulong TTID => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_TTID..]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_TTID..]);
+                public ulong TTID => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_TTID..Offset_FileObject]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_TTID..Offset_FileObject]);
 
                 /// <summary>
                 /// Retrieves the FileObject field.
                 /// </summary>
-                public ulong FileObject => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_FileObject..]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_FileObject..]);
+                public ulong FileObject => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_FileObject..Offset_FileKey]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_FileObject..Offset_FileKey]);
 
                 /// <summary>
                 /// Retrieves the FileKey field.
@@ -1532,6 +1586,12 @@ namespace EtwTools
             }
 
             /// <summary>
+            /// Converts a generic ETW event to a CloseEventV2.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator CloseEventV2(EtwEvent etwEvent) => new(etwEvent);
+
+            /// <summary>
             /// A data wrapper for a Close event.
             /// </summary>
             public ref struct CloseData
@@ -1598,17 +1658,17 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the IrpPtr field.
                 /// </summary>
-                public ulong IrpPtr => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_IrpPtr..]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_IrpPtr..]);
+                public ulong IrpPtr => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_IrpPtr..Offset_TTID]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_IrpPtr..Offset_TTID]);
 
                 /// <summary>
                 /// Retrieves the TTID field.
                 /// </summary>
-                public ulong TTID => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_TTID..]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_TTID..]);
+                public ulong TTID => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_TTID..Offset_FileObject]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_TTID..Offset_FileObject]);
 
                 /// <summary>
                 /// Retrieves the FileObject field.
                 /// </summary>
-                public ulong FileObject => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_FileObject..]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_FileObject..]);
+                public ulong FileObject => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_FileObject..Offset_FileKey]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_FileObject..Offset_FileKey]);
 
                 /// <summary>
                 /// Retrieves the FileKey field.
@@ -1702,6 +1762,12 @@ namespace EtwTools
             }
 
             /// <summary>
+            /// Converts a generic ETW event to a FlushEventV2.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator FlushEventV2(EtwEvent etwEvent) => new(etwEvent);
+
+            /// <summary>
             /// A data wrapper for a Flush event.
             /// </summary>
             public ref struct FlushData
@@ -1768,17 +1834,17 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the IrpPtr field.
                 /// </summary>
-                public ulong IrpPtr => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_IrpPtr..]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_IrpPtr..]);
+                public ulong IrpPtr => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_IrpPtr..Offset_TTID]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_IrpPtr..Offset_TTID]);
 
                 /// <summary>
                 /// Retrieves the TTID field.
                 /// </summary>
-                public ulong TTID => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_TTID..]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_TTID..]);
+                public ulong TTID => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_TTID..Offset_FileObject]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_TTID..Offset_FileObject]);
 
                 /// <summary>
                 /// Retrieves the FileObject field.
                 /// </summary>
-                public ulong FileObject => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_FileObject..]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_FileObject..]);
+                public ulong FileObject => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_FileObject..Offset_FileKey]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_FileObject..Offset_FileKey]);
 
                 /// <summary>
                 /// Retrieves the FileKey field.
@@ -1870,6 +1936,12 @@ namespace EtwTools
             {
                 _etwEvent = etwEvent;
             }
+
+            /// <summary>
+            /// Converts a generic ETW event to a ReadEventV2.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator ReadEventV2(EtwEvent etwEvent) => new(etwEvent);
 
             /// <summary>
             /// A data wrapper for a Read event.
@@ -1980,32 +2052,32 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the Offset field.
                 /// </summary>
-                public ulong Offset => BitConverter.ToUInt64(_etwEvent.Data[Offset_Offset..]);
+                public ulong Offset => BitConverter.ToUInt64(_etwEvent.Data[Offset_Offset..Offset_IrpPtr]);
 
                 /// <summary>
                 /// Retrieves the IrpPtr field.
                 /// </summary>
-                public ulong IrpPtr => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_IrpPtr..]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_IrpPtr..]);
+                public ulong IrpPtr => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_IrpPtr..Offset_TTID]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_IrpPtr..Offset_TTID]);
 
                 /// <summary>
                 /// Retrieves the TTID field.
                 /// </summary>
-                public ulong TTID => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_TTID..]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_TTID..]);
+                public ulong TTID => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_TTID..Offset_FileObject]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_TTID..Offset_FileObject]);
 
                 /// <summary>
                 /// Retrieves the FileObject field.
                 /// </summary>
-                public ulong FileObject => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_FileObject..]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_FileObject..]);
+                public ulong FileObject => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_FileObject..Offset_FileKey]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_FileObject..Offset_FileKey]);
 
                 /// <summary>
                 /// Retrieves the FileKey field.
                 /// </summary>
-                public ulong FileKey => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_FileKey..]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_FileKey..]);
+                public ulong FileKey => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_FileKey..Offset_IoSize]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_FileKey..Offset_IoSize]);
 
                 /// <summary>
                 /// Retrieves the IoSize field.
                 /// </summary>
-                public uint IoSize => BitConverter.ToUInt32(_etwEvent.Data[Offset_IoSize..]);
+                public uint IoSize => BitConverter.ToUInt32(_etwEvent.Data[Offset_IoSize..Offset_IoFlags]);
 
                 /// <summary>
                 /// Retrieves the IoFlags field.
@@ -2100,6 +2172,12 @@ namespace EtwTools
             {
                 _etwEvent = etwEvent;
             }
+
+            /// <summary>
+            /// Converts a generic ETW event to a WriteEventV2.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator WriteEventV2(EtwEvent etwEvent) => new(etwEvent);
 
             /// <summary>
             /// A data wrapper for a Write event.
@@ -2210,32 +2288,32 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the Offset field.
                 /// </summary>
-                public ulong Offset => BitConverter.ToUInt64(_etwEvent.Data[Offset_Offset..]);
+                public ulong Offset => BitConverter.ToUInt64(_etwEvent.Data[Offset_Offset..Offset_IrpPtr]);
 
                 /// <summary>
                 /// Retrieves the IrpPtr field.
                 /// </summary>
-                public ulong IrpPtr => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_IrpPtr..]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_IrpPtr..]);
+                public ulong IrpPtr => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_IrpPtr..Offset_TTID]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_IrpPtr..Offset_TTID]);
 
                 /// <summary>
                 /// Retrieves the TTID field.
                 /// </summary>
-                public ulong TTID => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_TTID..]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_TTID..]);
+                public ulong TTID => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_TTID..Offset_FileObject]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_TTID..Offset_FileObject]);
 
                 /// <summary>
                 /// Retrieves the FileObject field.
                 /// </summary>
-                public ulong FileObject => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_FileObject..]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_FileObject..]);
+                public ulong FileObject => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_FileObject..Offset_FileKey]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_FileObject..Offset_FileKey]);
 
                 /// <summary>
                 /// Retrieves the FileKey field.
                 /// </summary>
-                public ulong FileKey => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_FileKey..]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_FileKey..]);
+                public ulong FileKey => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_FileKey..Offset_IoSize]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_FileKey..Offset_IoSize]);
 
                 /// <summary>
                 /// Retrieves the IoSize field.
                 /// </summary>
-                public uint IoSize => BitConverter.ToUInt32(_etwEvent.Data[Offset_IoSize..]);
+                public uint IoSize => BitConverter.ToUInt32(_etwEvent.Data[Offset_IoSize..Offset_IoFlags]);
 
                 /// <summary>
                 /// Retrieves the IoFlags field.
@@ -2332,6 +2410,12 @@ namespace EtwTools
             }
 
             /// <summary>
+            /// Converts a generic ETW event to a SetInfoEventV2.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator SetInfoEventV2(EtwEvent etwEvent) => new(etwEvent);
+
+            /// <summary>
             /// A data wrapper for a SetInfo event.
             /// </summary>
             public ref struct SetInfoData
@@ -2426,27 +2510,27 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the IrpPtr field.
                 /// </summary>
-                public ulong IrpPtr => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_IrpPtr..]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_IrpPtr..]);
+                public ulong IrpPtr => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_IrpPtr..Offset_TTID]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_IrpPtr..Offset_TTID]);
 
                 /// <summary>
                 /// Retrieves the TTID field.
                 /// </summary>
-                public ulong TTID => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_TTID..]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_TTID..]);
+                public ulong TTID => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_TTID..Offset_FileObject]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_TTID..Offset_FileObject]);
 
                 /// <summary>
                 /// Retrieves the FileObject field.
                 /// </summary>
-                public ulong FileObject => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_FileObject..]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_FileObject..]);
+                public ulong FileObject => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_FileObject..Offset_FileKey]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_FileObject..Offset_FileKey]);
 
                 /// <summary>
                 /// Retrieves the FileKey field.
                 /// </summary>
-                public ulong FileKey => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_FileKey..]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_FileKey..]);
+                public ulong FileKey => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_FileKey..Offset_ExtraInfo]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_FileKey..Offset_ExtraInfo]);
 
                 /// <summary>
                 /// Retrieves the ExtraInfo field.
                 /// </summary>
-                public ulong ExtraInfo => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_ExtraInfo..]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_ExtraInfo..]);
+                public ulong ExtraInfo => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_ExtraInfo..Offset_InfoClass]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_ExtraInfo..Offset_InfoClass]);
 
                 /// <summary>
                 /// Retrieves the InfoClass field.
@@ -2540,6 +2624,12 @@ namespace EtwTools
             {
                 _etwEvent = etwEvent;
             }
+
+            /// <summary>
+            /// Converts a generic ETW event to a DeleteEventV2.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator DeleteEventV2(EtwEvent etwEvent) => new(etwEvent);
 
             /// <summary>
             /// A data wrapper for a Delete event.
@@ -2636,27 +2726,27 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the IrpPtr field.
                 /// </summary>
-                public ulong IrpPtr => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_IrpPtr..]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_IrpPtr..]);
+                public ulong IrpPtr => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_IrpPtr..Offset_TTID]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_IrpPtr..Offset_TTID]);
 
                 /// <summary>
                 /// Retrieves the TTID field.
                 /// </summary>
-                public ulong TTID => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_TTID..]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_TTID..]);
+                public ulong TTID => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_TTID..Offset_FileObject]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_TTID..Offset_FileObject]);
 
                 /// <summary>
                 /// Retrieves the FileObject field.
                 /// </summary>
-                public ulong FileObject => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_FileObject..]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_FileObject..]);
+                public ulong FileObject => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_FileObject..Offset_FileKey]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_FileObject..Offset_FileKey]);
 
                 /// <summary>
                 /// Retrieves the FileKey field.
                 /// </summary>
-                public ulong FileKey => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_FileKey..]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_FileKey..]);
+                public ulong FileKey => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_FileKey..Offset_ExtraInfo]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_FileKey..Offset_ExtraInfo]);
 
                 /// <summary>
                 /// Retrieves the ExtraInfo field.
                 /// </summary>
-                public ulong ExtraInfo => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_ExtraInfo..]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_ExtraInfo..]);
+                public ulong ExtraInfo => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_ExtraInfo..Offset_InfoClass]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_ExtraInfo..Offset_InfoClass]);
 
                 /// <summary>
                 /// Retrieves the InfoClass field.
@@ -2750,6 +2840,12 @@ namespace EtwTools
             {
                 _etwEvent = etwEvent;
             }
+
+            /// <summary>
+            /// Converts a generic ETW event to a RenameEventV2.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator RenameEventV2(EtwEvent etwEvent) => new(etwEvent);
 
             /// <summary>
             /// A data wrapper for a Rename event.
@@ -2846,27 +2942,27 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the IrpPtr field.
                 /// </summary>
-                public ulong IrpPtr => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_IrpPtr..]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_IrpPtr..]);
+                public ulong IrpPtr => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_IrpPtr..Offset_TTID]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_IrpPtr..Offset_TTID]);
 
                 /// <summary>
                 /// Retrieves the TTID field.
                 /// </summary>
-                public ulong TTID => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_TTID..]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_TTID..]);
+                public ulong TTID => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_TTID..Offset_FileObject]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_TTID..Offset_FileObject]);
 
                 /// <summary>
                 /// Retrieves the FileObject field.
                 /// </summary>
-                public ulong FileObject => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_FileObject..]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_FileObject..]);
+                public ulong FileObject => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_FileObject..Offset_FileKey]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_FileObject..Offset_FileKey]);
 
                 /// <summary>
                 /// Retrieves the FileKey field.
                 /// </summary>
-                public ulong FileKey => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_FileKey..]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_FileKey..]);
+                public ulong FileKey => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_FileKey..Offset_ExtraInfo]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_FileKey..Offset_ExtraInfo]);
 
                 /// <summary>
                 /// Retrieves the ExtraInfo field.
                 /// </summary>
-                public ulong ExtraInfo => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_ExtraInfo..]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_ExtraInfo..]);
+                public ulong ExtraInfo => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_ExtraInfo..Offset_InfoClass]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_ExtraInfo..Offset_InfoClass]);
 
                 /// <summary>
                 /// Retrieves the InfoClass field.
@@ -2960,6 +3056,12 @@ namespace EtwTools
             {
                 _etwEvent = etwEvent;
             }
+
+            /// <summary>
+            /// Converts a generic ETW event to a QueryInfoEventV2.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator QueryInfoEventV2(EtwEvent etwEvent) => new(etwEvent);
 
             /// <summary>
             /// A data wrapper for a QueryInfo event.
@@ -3056,27 +3158,27 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the IrpPtr field.
                 /// </summary>
-                public ulong IrpPtr => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_IrpPtr..]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_IrpPtr..]);
+                public ulong IrpPtr => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_IrpPtr..Offset_TTID]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_IrpPtr..Offset_TTID]);
 
                 /// <summary>
                 /// Retrieves the TTID field.
                 /// </summary>
-                public ulong TTID => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_TTID..]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_TTID..]);
+                public ulong TTID => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_TTID..Offset_FileObject]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_TTID..Offset_FileObject]);
 
                 /// <summary>
                 /// Retrieves the FileObject field.
                 /// </summary>
-                public ulong FileObject => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_FileObject..]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_FileObject..]);
+                public ulong FileObject => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_FileObject..Offset_FileKey]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_FileObject..Offset_FileKey]);
 
                 /// <summary>
                 /// Retrieves the FileKey field.
                 /// </summary>
-                public ulong FileKey => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_FileKey..]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_FileKey..]);
+                public ulong FileKey => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_FileKey..Offset_ExtraInfo]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_FileKey..Offset_ExtraInfo]);
 
                 /// <summary>
                 /// Retrieves the ExtraInfo field.
                 /// </summary>
-                public ulong ExtraInfo => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_ExtraInfo..]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_ExtraInfo..]);
+                public ulong ExtraInfo => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_ExtraInfo..Offset_InfoClass]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_ExtraInfo..Offset_InfoClass]);
 
                 /// <summary>
                 /// Retrieves the InfoClass field.
@@ -3170,6 +3272,12 @@ namespace EtwTools
             {
                 _etwEvent = etwEvent;
             }
+
+            /// <summary>
+            /// Converts a generic ETW event to a FSControlEventV2.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator FSControlEventV2(EtwEvent etwEvent) => new(etwEvent);
 
             /// <summary>
             /// A data wrapper for a FSControl event.
@@ -3266,27 +3374,27 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the IrpPtr field.
                 /// </summary>
-                public ulong IrpPtr => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_IrpPtr..]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_IrpPtr..]);
+                public ulong IrpPtr => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_IrpPtr..Offset_TTID]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_IrpPtr..Offset_TTID]);
 
                 /// <summary>
                 /// Retrieves the TTID field.
                 /// </summary>
-                public ulong TTID => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_TTID..]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_TTID..]);
+                public ulong TTID => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_TTID..Offset_FileObject]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_TTID..Offset_FileObject]);
 
                 /// <summary>
                 /// Retrieves the FileObject field.
                 /// </summary>
-                public ulong FileObject => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_FileObject..]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_FileObject..]);
+                public ulong FileObject => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_FileObject..Offset_FileKey]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_FileObject..Offset_FileKey]);
 
                 /// <summary>
                 /// Retrieves the FileKey field.
                 /// </summary>
-                public ulong FileKey => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_FileKey..]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_FileKey..]);
+                public ulong FileKey => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_FileKey..Offset_ExtraInfo]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_FileKey..Offset_ExtraInfo]);
 
                 /// <summary>
                 /// Retrieves the ExtraInfo field.
                 /// </summary>
-                public ulong ExtraInfo => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_ExtraInfo..]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_ExtraInfo..]);
+                public ulong ExtraInfo => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_ExtraInfo..Offset_InfoClass]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_ExtraInfo..Offset_InfoClass]);
 
                 /// <summary>
                 /// Retrieves the InfoClass field.
@@ -3380,6 +3488,12 @@ namespace EtwTools
             {
                 _etwEvent = etwEvent;
             }
+
+            /// <summary>
+            /// Converts a generic ETW event to a DirEnumEventV2.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator DirEnumEventV2(EtwEvent etwEvent) => new(etwEvent);
 
             /// <summary>
             /// A data wrapper for a DirEnum event.
@@ -3504,37 +3618,37 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the IrpPtr field.
                 /// </summary>
-                public ulong IrpPtr => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_IrpPtr..]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_IrpPtr..]);
+                public ulong IrpPtr => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_IrpPtr..Offset_TTID]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_IrpPtr..Offset_TTID]);
 
                 /// <summary>
                 /// Retrieves the TTID field.
                 /// </summary>
-                public ulong TTID => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_TTID..]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_TTID..]);
+                public ulong TTID => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_TTID..Offset_FileObject]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_TTID..Offset_FileObject]);
 
                 /// <summary>
                 /// Retrieves the FileObject field.
                 /// </summary>
-                public ulong FileObject => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_FileObject..]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_FileObject..]);
+                public ulong FileObject => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_FileObject..Offset_FileKey]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_FileObject..Offset_FileKey]);
 
                 /// <summary>
                 /// Retrieves the FileKey field.
                 /// </summary>
-                public ulong FileKey => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_FileKey..]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_FileKey..]);
+                public ulong FileKey => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_FileKey..Offset_Length]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_FileKey..Offset_Length]);
 
                 /// <summary>
                 /// Retrieves the Length field.
                 /// </summary>
-                public uint Length => BitConverter.ToUInt32(_etwEvent.Data[Offset_Length..]);
+                public uint Length => BitConverter.ToUInt32(_etwEvent.Data[Offset_Length..Offset_InfoClass]);
 
                 /// <summary>
                 /// Retrieves the InfoClass field.
                 /// </summary>
-                public uint InfoClass => BitConverter.ToUInt32(_etwEvent.Data[Offset_InfoClass..]);
+                public uint InfoClass => BitConverter.ToUInt32(_etwEvent.Data[Offset_InfoClass..Offset_FileIndex]);
 
                 /// <summary>
                 /// Retrieves the FileIndex field.
                 /// </summary>
-                public uint FileIndex => BitConverter.ToUInt32(_etwEvent.Data[Offset_FileIndex..]);
+                public uint FileIndex => BitConverter.ToUInt32(_etwEvent.Data[Offset_FileIndex..Offset_FileName]);
 
                 /// <summary>
                 /// Retrieves the FileName field.
@@ -3630,6 +3744,12 @@ namespace EtwTools
             {
                 _etwEvent = etwEvent;
             }
+
+            /// <summary>
+            /// Converts a generic ETW event to a DirNotifyEventV2.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator DirNotifyEventV2(EtwEvent etwEvent) => new(etwEvent);
 
             /// <summary>
             /// A data wrapper for a DirNotify event.
@@ -3754,37 +3874,37 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the IrpPtr field.
                 /// </summary>
-                public ulong IrpPtr => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_IrpPtr..]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_IrpPtr..]);
+                public ulong IrpPtr => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_IrpPtr..Offset_TTID]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_IrpPtr..Offset_TTID]);
 
                 /// <summary>
                 /// Retrieves the TTID field.
                 /// </summary>
-                public ulong TTID => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_TTID..]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_TTID..]);
+                public ulong TTID => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_TTID..Offset_FileObject]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_TTID..Offset_FileObject]);
 
                 /// <summary>
                 /// Retrieves the FileObject field.
                 /// </summary>
-                public ulong FileObject => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_FileObject..]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_FileObject..]);
+                public ulong FileObject => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_FileObject..Offset_FileKey]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_FileObject..Offset_FileKey]);
 
                 /// <summary>
                 /// Retrieves the FileKey field.
                 /// </summary>
-                public ulong FileKey => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_FileKey..]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_FileKey..]);
+                public ulong FileKey => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_FileKey..Offset_Length]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_FileKey..Offset_Length]);
 
                 /// <summary>
                 /// Retrieves the Length field.
                 /// </summary>
-                public uint Length => BitConverter.ToUInt32(_etwEvent.Data[Offset_Length..]);
+                public uint Length => BitConverter.ToUInt32(_etwEvent.Data[Offset_Length..Offset_InfoClass]);
 
                 /// <summary>
                 /// Retrieves the InfoClass field.
                 /// </summary>
-                public uint InfoClass => BitConverter.ToUInt32(_etwEvent.Data[Offset_InfoClass..]);
+                public uint InfoClass => BitConverter.ToUInt32(_etwEvent.Data[Offset_InfoClass..Offset_FileIndex]);
 
                 /// <summary>
                 /// Retrieves the FileIndex field.
                 /// </summary>
-                public uint FileIndex => BitConverter.ToUInt32(_etwEvent.Data[Offset_FileIndex..]);
+                public uint FileIndex => BitConverter.ToUInt32(_etwEvent.Data[Offset_FileIndex..Offset_FileName]);
 
                 /// <summary>
                 /// Retrieves the FileName field.
@@ -3882,6 +4002,12 @@ namespace EtwTools
             }
 
             /// <summary>
+            /// Converts a generic ETW event to a OperationEndEventV2.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator OperationEndEventV2(EtwEvent etwEvent) => new(etwEvent);
+
+            /// <summary>
             /// A data wrapper for a OperationEnd event.
             /// </summary>
             public ref struct OperationEndData
@@ -3934,12 +4060,12 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the IrpPtr field.
                 /// </summary>
-                public ulong IrpPtr => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_IrpPtr..]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_IrpPtr..]);
+                public ulong IrpPtr => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_IrpPtr..Offset_ExtraInfo]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_IrpPtr..Offset_ExtraInfo]);
 
                 /// <summary>
                 /// Retrieves the ExtraInfo field.
                 /// </summary>
-                public ulong ExtraInfo => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_ExtraInfo..]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_ExtraInfo..]);
+                public ulong ExtraInfo => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_ExtraInfo..Offset_NtStatus]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_ExtraInfo..Offset_NtStatus]);
 
                 /// <summary>
                 /// Retrieves the NtStatus field.
@@ -4032,6 +4158,12 @@ namespace EtwTools
             }
 
             /// <summary>
+            /// Converts a generic ETW event to a MapFileEventV2.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator MapFileEventV2(EtwEvent etwEvent) => new(etwEvent);
+
+            /// <summary>
             /// A data wrapper for a MapFile event.
             /// </summary>
             public ref struct MapFileData
@@ -4112,22 +4244,22 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the ViewBase field.
                 /// </summary>
-                public ulong ViewBase => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_ViewBase..]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_ViewBase..]);
+                public ulong ViewBase => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_ViewBase..Offset_FileObject]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_ViewBase..Offset_FileObject]);
 
                 /// <summary>
                 /// Retrieves the FileObject field.
                 /// </summary>
-                public ulong FileObject => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_FileObject..]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_FileObject..]);
+                public ulong FileObject => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_FileObject..Offset_MiscInfo]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_FileObject..Offset_MiscInfo]);
 
                 /// <summary>
                 /// Retrieves the MiscInfo field.
                 /// </summary>
-                public ulong MiscInfo => BitConverter.ToUInt64(_etwEvent.Data[Offset_MiscInfo..]);
+                public ulong MiscInfo => BitConverter.ToUInt64(_etwEvent.Data[Offset_MiscInfo..Offset_ViewSize]);
 
                 /// <summary>
                 /// Retrieves the ViewSize field.
                 /// </summary>
-                public ulong ViewSize => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_ViewSize..]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_ViewSize..]);
+                public ulong ViewSize => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_ViewSize..Offset_ProcessId]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_ViewSize..Offset_ProcessId]);
 
                 /// <summary>
                 /// Retrieves the ProcessId field.
@@ -4222,6 +4354,12 @@ namespace EtwTools
             }
 
             /// <summary>
+            /// Converts a generic ETW event to a UnmapFileEventV2.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator UnmapFileEventV2(EtwEvent etwEvent) => new(etwEvent);
+
+            /// <summary>
             /// A data wrapper for a UnmapFile event.
             /// </summary>
             public ref struct UnmapFileData
@@ -4302,22 +4440,22 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the ViewBase field.
                 /// </summary>
-                public ulong ViewBase => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_ViewBase..]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_ViewBase..]);
+                public ulong ViewBase => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_ViewBase..Offset_FileObject]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_ViewBase..Offset_FileObject]);
 
                 /// <summary>
                 /// Retrieves the FileObject field.
                 /// </summary>
-                public ulong FileObject => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_FileObject..]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_FileObject..]);
+                public ulong FileObject => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_FileObject..Offset_MiscInfo]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_FileObject..Offset_MiscInfo]);
 
                 /// <summary>
                 /// Retrieves the MiscInfo field.
                 /// </summary>
-                public ulong MiscInfo => BitConverter.ToUInt64(_etwEvent.Data[Offset_MiscInfo..]);
+                public ulong MiscInfo => BitConverter.ToUInt64(_etwEvent.Data[Offset_MiscInfo..Offset_ViewSize]);
 
                 /// <summary>
                 /// Retrieves the ViewSize field.
                 /// </summary>
-                public ulong ViewSize => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_ViewSize..]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_ViewSize..]);
+                public ulong ViewSize => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_ViewSize..Offset_ProcessId]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_ViewSize..Offset_ProcessId]);
 
                 /// <summary>
                 /// Retrieves the ProcessId field.
@@ -4412,6 +4550,12 @@ namespace EtwTools
             }
 
             /// <summary>
+            /// Converts a generic ETW event to a MapFileDCStartEventV2.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator MapFileDCStartEventV2(EtwEvent etwEvent) => new(etwEvent);
+
+            /// <summary>
             /// A data wrapper for a MapFileDCStart event.
             /// </summary>
             public ref struct MapFileDCStartData
@@ -4492,22 +4636,22 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the ViewBase field.
                 /// </summary>
-                public ulong ViewBase => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_ViewBase..]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_ViewBase..]);
+                public ulong ViewBase => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_ViewBase..Offset_FileObject]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_ViewBase..Offset_FileObject]);
 
                 /// <summary>
                 /// Retrieves the FileObject field.
                 /// </summary>
-                public ulong FileObject => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_FileObject..]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_FileObject..]);
+                public ulong FileObject => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_FileObject..Offset_MiscInfo]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_FileObject..Offset_MiscInfo]);
 
                 /// <summary>
                 /// Retrieves the MiscInfo field.
                 /// </summary>
-                public ulong MiscInfo => BitConverter.ToUInt64(_etwEvent.Data[Offset_MiscInfo..]);
+                public ulong MiscInfo => BitConverter.ToUInt64(_etwEvent.Data[Offset_MiscInfo..Offset_ViewSize]);
 
                 /// <summary>
                 /// Retrieves the ViewSize field.
                 /// </summary>
-                public ulong ViewSize => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_ViewSize..]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_ViewSize..]);
+                public ulong ViewSize => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_ViewSize..Offset_ProcessId]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_ViewSize..Offset_ProcessId]);
 
                 /// <summary>
                 /// Retrieves the ProcessId field.
@@ -4602,6 +4746,12 @@ namespace EtwTools
             }
 
             /// <summary>
+            /// Converts a generic ETW event to a MapFileDCEndEventV2.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator MapFileDCEndEventV2(EtwEvent etwEvent) => new(etwEvent);
+
+            /// <summary>
             /// A data wrapper for a MapFileDCEnd event.
             /// </summary>
             public ref struct MapFileDCEndData
@@ -4682,22 +4832,22 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the ViewBase field.
                 /// </summary>
-                public ulong ViewBase => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_ViewBase..]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_ViewBase..]);
+                public ulong ViewBase => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_ViewBase..Offset_FileObject]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_ViewBase..Offset_FileObject]);
 
                 /// <summary>
                 /// Retrieves the FileObject field.
                 /// </summary>
-                public ulong FileObject => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_FileObject..]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_FileObject..]);
+                public ulong FileObject => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_FileObject..Offset_MiscInfo]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_FileObject..Offset_MiscInfo]);
 
                 /// <summary>
                 /// Retrieves the MiscInfo field.
                 /// </summary>
-                public ulong MiscInfo => BitConverter.ToUInt64(_etwEvent.Data[Offset_MiscInfo..]);
+                public ulong MiscInfo => BitConverter.ToUInt64(_etwEvent.Data[Offset_MiscInfo..Offset_ViewSize]);
 
                 /// <summary>
                 /// Retrieves the ViewSize field.
                 /// </summary>
-                public ulong ViewSize => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_ViewSize..]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_ViewSize..]);
+                public ulong ViewSize => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_ViewSize..Offset_ProcessId]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_ViewSize..Offset_ProcessId]);
 
                 /// <summary>
                 /// Retrieves the ProcessId field.
@@ -4792,6 +4942,12 @@ namespace EtwTools
             }
 
             /// <summary>
+            /// Converts a generic ETW event to a NameEventV3.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator NameEventV3(EtwEvent etwEvent) => new(etwEvent);
+
+            /// <summary>
             /// A data wrapper for a Name event.
             /// </summary>
             public ref struct NameData
@@ -4830,7 +4986,7 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the FileObject field.
                 /// </summary>
-                public ulong FileObject => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_FileObject..]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_FileObject..]);
+                public ulong FileObject => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_FileObject..Offset_FileName]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_FileObject..Offset_FileName]);
 
                 /// <summary>
                 /// Retrieves the FileName field.
@@ -4922,6 +5078,12 @@ namespace EtwTools
             }
 
             /// <summary>
+            /// Converts a generic ETW event to a FileCreateEventV3.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator FileCreateEventV3(EtwEvent etwEvent) => new(etwEvent);
+
+            /// <summary>
             /// A data wrapper for a FileCreate event.
             /// </summary>
             public ref struct FileCreateData
@@ -4960,7 +5122,7 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the FileObject field.
                 /// </summary>
-                public ulong FileObject => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_FileObject..]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_FileObject..]);
+                public ulong FileObject => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_FileObject..Offset_FileName]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_FileObject..Offset_FileName]);
 
                 /// <summary>
                 /// Retrieves the FileName field.
@@ -5052,6 +5214,12 @@ namespace EtwTools
             }
 
             /// <summary>
+            /// Converts a generic ETW event to a FileDeleteEventV3.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator FileDeleteEventV3(EtwEvent etwEvent) => new(etwEvent);
+
+            /// <summary>
             /// A data wrapper for a FileDelete event.
             /// </summary>
             public ref struct FileDeleteData
@@ -5090,7 +5258,7 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the FileObject field.
                 /// </summary>
-                public ulong FileObject => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_FileObject..]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_FileObject..]);
+                public ulong FileObject => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_FileObject..Offset_FileName]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_FileObject..Offset_FileName]);
 
                 /// <summary>
                 /// Retrieves the FileName field.
@@ -5182,6 +5350,12 @@ namespace EtwTools
             }
 
             /// <summary>
+            /// Converts a generic ETW event to a FileRundownEventV3.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator FileRundownEventV3(EtwEvent etwEvent) => new(etwEvent);
+
+            /// <summary>
             /// A data wrapper for a FileRundown event.
             /// </summary>
             public ref struct FileRundownData
@@ -5220,7 +5394,7 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the FileObject field.
                 /// </summary>
-                public ulong FileObject => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_FileObject..]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_FileObject..]);
+                public ulong FileObject => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_FileObject..Offset_FileName]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_FileObject..Offset_FileName]);
 
                 /// <summary>
                 /// Retrieves the FileName field.
@@ -5310,6 +5484,12 @@ namespace EtwTools
             {
                 _etwEvent = etwEvent;
             }
+
+            /// <summary>
+            /// Converts a generic ETW event to a CreateEventV3.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator CreateEventV3(EtwEvent etwEvent) => new(etwEvent);
 
             /// <summary>
             /// A data wrapper for a Create event.
@@ -5420,32 +5600,32 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the IrpPtr field.
                 /// </summary>
-                public ulong IrpPtr => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_IrpPtr..]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_IrpPtr..]);
+                public ulong IrpPtr => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_IrpPtr..Offset_FileObject]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_IrpPtr..Offset_FileObject]);
 
                 /// <summary>
                 /// Retrieves the FileObject field.
                 /// </summary>
-                public ulong FileObject => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_FileObject..]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_FileObject..]);
+                public ulong FileObject => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_FileObject..Offset_TTID]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_FileObject..Offset_TTID]);
 
                 /// <summary>
                 /// Retrieves the TTID field.
                 /// </summary>
-                public uint TTID => BitConverter.ToUInt32(_etwEvent.Data[Offset_TTID..]);
+                public uint TTID => BitConverter.ToUInt32(_etwEvent.Data[Offset_TTID..Offset_CreateOptions]);
 
                 /// <summary>
                 /// Retrieves the CreateOptions field.
                 /// </summary>
-                public uint CreateOptions => BitConverter.ToUInt32(_etwEvent.Data[Offset_CreateOptions..]);
+                public uint CreateOptions => BitConverter.ToUInt32(_etwEvent.Data[Offset_CreateOptions..Offset_FileAttributes]);
 
                 /// <summary>
                 /// Retrieves the FileAttributes field.
                 /// </summary>
-                public uint FileAttributes => BitConverter.ToUInt32(_etwEvent.Data[Offset_FileAttributes..]);
+                public uint FileAttributes => BitConverter.ToUInt32(_etwEvent.Data[Offset_FileAttributes..Offset_ShareAccess]);
 
                 /// <summary>
                 /// Retrieves the ShareAccess field.
                 /// </summary>
-                public uint ShareAccess => BitConverter.ToUInt32(_etwEvent.Data[Offset_ShareAccess..]);
+                public uint ShareAccess => BitConverter.ToUInt32(_etwEvent.Data[Offset_ShareAccess..Offset_OpenPath]);
 
                 /// <summary>
                 /// Retrieves the OpenPath field.
@@ -5542,6 +5722,12 @@ namespace EtwTools
             }
 
             /// <summary>
+            /// Converts a generic ETW event to a CleanupEventV3.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator CleanupEventV3(EtwEvent etwEvent) => new(etwEvent);
+
+            /// <summary>
             /// A data wrapper for a Cleanup event.
             /// </summary>
             public ref struct CleanupData
@@ -5608,17 +5794,17 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the IrpPtr field.
                 /// </summary>
-                public ulong IrpPtr => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_IrpPtr..]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_IrpPtr..]);
+                public ulong IrpPtr => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_IrpPtr..Offset_FileObject]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_IrpPtr..Offset_FileObject]);
 
                 /// <summary>
                 /// Retrieves the FileObject field.
                 /// </summary>
-                public ulong FileObject => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_FileObject..]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_FileObject..]);
+                public ulong FileObject => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_FileObject..Offset_FileKey]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_FileObject..Offset_FileKey]);
 
                 /// <summary>
                 /// Retrieves the FileKey field.
                 /// </summary>
-                public ulong FileKey => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_FileKey..]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_FileKey..]);
+                public ulong FileKey => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_FileKey..Offset_TTID]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_FileKey..Offset_TTID]);
 
                 /// <summary>
                 /// Retrieves the TTID field.
@@ -5712,6 +5898,12 @@ namespace EtwTools
             }
 
             /// <summary>
+            /// Converts a generic ETW event to a CloseEventV3.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator CloseEventV3(EtwEvent etwEvent) => new(etwEvent);
+
+            /// <summary>
             /// A data wrapper for a Close event.
             /// </summary>
             public ref struct CloseData
@@ -5778,17 +5970,17 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the IrpPtr field.
                 /// </summary>
-                public ulong IrpPtr => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_IrpPtr..]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_IrpPtr..]);
+                public ulong IrpPtr => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_IrpPtr..Offset_FileObject]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_IrpPtr..Offset_FileObject]);
 
                 /// <summary>
                 /// Retrieves the FileObject field.
                 /// </summary>
-                public ulong FileObject => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_FileObject..]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_FileObject..]);
+                public ulong FileObject => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_FileObject..Offset_FileKey]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_FileObject..Offset_FileKey]);
 
                 /// <summary>
                 /// Retrieves the FileKey field.
                 /// </summary>
-                public ulong FileKey => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_FileKey..]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_FileKey..]);
+                public ulong FileKey => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_FileKey..Offset_TTID]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_FileKey..Offset_TTID]);
 
                 /// <summary>
                 /// Retrieves the TTID field.
@@ -5882,6 +6074,12 @@ namespace EtwTools
             }
 
             /// <summary>
+            /// Converts a generic ETW event to a FlushEventV3.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator FlushEventV3(EtwEvent etwEvent) => new(etwEvent);
+
+            /// <summary>
             /// A data wrapper for a Flush event.
             /// </summary>
             public ref struct FlushData
@@ -5948,17 +6146,17 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the IrpPtr field.
                 /// </summary>
-                public ulong IrpPtr => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_IrpPtr..]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_IrpPtr..]);
+                public ulong IrpPtr => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_IrpPtr..Offset_FileObject]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_IrpPtr..Offset_FileObject]);
 
                 /// <summary>
                 /// Retrieves the FileObject field.
                 /// </summary>
-                public ulong FileObject => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_FileObject..]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_FileObject..]);
+                public ulong FileObject => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_FileObject..Offset_FileKey]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_FileObject..Offset_FileKey]);
 
                 /// <summary>
                 /// Retrieves the FileKey field.
                 /// </summary>
-                public ulong FileKey => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_FileKey..]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_FileKey..]);
+                public ulong FileKey => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_FileKey..Offset_TTID]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_FileKey..Offset_TTID]);
 
                 /// <summary>
                 /// Retrieves the TTID field.
@@ -6050,6 +6248,12 @@ namespace EtwTools
             {
                 _etwEvent = etwEvent;
             }
+
+            /// <summary>
+            /// Converts a generic ETW event to a ReadEventV3.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator ReadEventV3(EtwEvent etwEvent) => new(etwEvent);
 
             /// <summary>
             /// A data wrapper for a Read event.
@@ -6160,32 +6364,32 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the Offset field.
                 /// </summary>
-                public ulong Offset => BitConverter.ToUInt64(_etwEvent.Data[Offset_Offset..]);
+                public ulong Offset => BitConverter.ToUInt64(_etwEvent.Data[Offset_Offset..Offset_IrpPtr]);
 
                 /// <summary>
                 /// Retrieves the IrpPtr field.
                 /// </summary>
-                public ulong IrpPtr => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_IrpPtr..]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_IrpPtr..]);
+                public ulong IrpPtr => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_IrpPtr..Offset_FileObject]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_IrpPtr..Offset_FileObject]);
 
                 /// <summary>
                 /// Retrieves the FileObject field.
                 /// </summary>
-                public ulong FileObject => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_FileObject..]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_FileObject..]);
+                public ulong FileObject => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_FileObject..Offset_FileKey]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_FileObject..Offset_FileKey]);
 
                 /// <summary>
                 /// Retrieves the FileKey field.
                 /// </summary>
-                public ulong FileKey => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_FileKey..]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_FileKey..]);
+                public ulong FileKey => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_FileKey..Offset_TTID]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_FileKey..Offset_TTID]);
 
                 /// <summary>
                 /// Retrieves the TTID field.
                 /// </summary>
-                public uint TTID => BitConverter.ToUInt32(_etwEvent.Data[Offset_TTID..]);
+                public uint TTID => BitConverter.ToUInt32(_etwEvent.Data[Offset_TTID..Offset_IoSize]);
 
                 /// <summary>
                 /// Retrieves the IoSize field.
                 /// </summary>
-                public uint IoSize => BitConverter.ToUInt32(_etwEvent.Data[Offset_IoSize..]);
+                public uint IoSize => BitConverter.ToUInt32(_etwEvent.Data[Offset_IoSize..Offset_IoFlags]);
 
                 /// <summary>
                 /// Retrieves the IoFlags field.
@@ -6280,6 +6484,12 @@ namespace EtwTools
             {
                 _etwEvent = etwEvent;
             }
+
+            /// <summary>
+            /// Converts a generic ETW event to a WriteEventV3.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator WriteEventV3(EtwEvent etwEvent) => new(etwEvent);
 
             /// <summary>
             /// A data wrapper for a Write event.
@@ -6390,32 +6600,32 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the Offset field.
                 /// </summary>
-                public ulong Offset => BitConverter.ToUInt64(_etwEvent.Data[Offset_Offset..]);
+                public ulong Offset => BitConverter.ToUInt64(_etwEvent.Data[Offset_Offset..Offset_IrpPtr]);
 
                 /// <summary>
                 /// Retrieves the IrpPtr field.
                 /// </summary>
-                public ulong IrpPtr => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_IrpPtr..]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_IrpPtr..]);
+                public ulong IrpPtr => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_IrpPtr..Offset_FileObject]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_IrpPtr..Offset_FileObject]);
 
                 /// <summary>
                 /// Retrieves the FileObject field.
                 /// </summary>
-                public ulong FileObject => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_FileObject..]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_FileObject..]);
+                public ulong FileObject => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_FileObject..Offset_FileKey]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_FileObject..Offset_FileKey]);
 
                 /// <summary>
                 /// Retrieves the FileKey field.
                 /// </summary>
-                public ulong FileKey => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_FileKey..]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_FileKey..]);
+                public ulong FileKey => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_FileKey..Offset_TTID]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_FileKey..Offset_TTID]);
 
                 /// <summary>
                 /// Retrieves the TTID field.
                 /// </summary>
-                public uint TTID => BitConverter.ToUInt32(_etwEvent.Data[Offset_TTID..]);
+                public uint TTID => BitConverter.ToUInt32(_etwEvent.Data[Offset_TTID..Offset_IoSize]);
 
                 /// <summary>
                 /// Retrieves the IoSize field.
                 /// </summary>
-                public uint IoSize => BitConverter.ToUInt32(_etwEvent.Data[Offset_IoSize..]);
+                public uint IoSize => BitConverter.ToUInt32(_etwEvent.Data[Offset_IoSize..Offset_IoFlags]);
 
                 /// <summary>
                 /// Retrieves the IoFlags field.
@@ -6512,6 +6722,12 @@ namespace EtwTools
             }
 
             /// <summary>
+            /// Converts a generic ETW event to a SetInfoEventV3.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator SetInfoEventV3(EtwEvent etwEvent) => new(etwEvent);
+
+            /// <summary>
             /// A data wrapper for a SetInfo event.
             /// </summary>
             public ref struct SetInfoData
@@ -6606,27 +6822,27 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the IrpPtr field.
                 /// </summary>
-                public ulong IrpPtr => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_IrpPtr..]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_IrpPtr..]);
+                public ulong IrpPtr => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_IrpPtr..Offset_FileObject]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_IrpPtr..Offset_FileObject]);
 
                 /// <summary>
                 /// Retrieves the FileObject field.
                 /// </summary>
-                public ulong FileObject => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_FileObject..]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_FileObject..]);
+                public ulong FileObject => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_FileObject..Offset_FileKey]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_FileObject..Offset_FileKey]);
 
                 /// <summary>
                 /// Retrieves the FileKey field.
                 /// </summary>
-                public ulong FileKey => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_FileKey..]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_FileKey..]);
+                public ulong FileKey => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_FileKey..Offset_ExtraInfo]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_FileKey..Offset_ExtraInfo]);
 
                 /// <summary>
                 /// Retrieves the ExtraInfo field.
                 /// </summary>
-                public ulong ExtraInfo => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_ExtraInfo..]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_ExtraInfo..]);
+                public ulong ExtraInfo => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_ExtraInfo..Offset_TTID]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_ExtraInfo..Offset_TTID]);
 
                 /// <summary>
                 /// Retrieves the TTID field.
                 /// </summary>
-                public uint TTID => BitConverter.ToUInt32(_etwEvent.Data[Offset_TTID..]);
+                public uint TTID => BitConverter.ToUInt32(_etwEvent.Data[Offset_TTID..Offset_InfoClass]);
 
                 /// <summary>
                 /// Retrieves the InfoClass field.
@@ -6720,6 +6936,12 @@ namespace EtwTools
             {
                 _etwEvent = etwEvent;
             }
+
+            /// <summary>
+            /// Converts a generic ETW event to a DeleteEventV3.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator DeleteEventV3(EtwEvent etwEvent) => new(etwEvent);
 
             /// <summary>
             /// A data wrapper for a Delete event.
@@ -6816,27 +7038,27 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the IrpPtr field.
                 /// </summary>
-                public ulong IrpPtr => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_IrpPtr..]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_IrpPtr..]);
+                public ulong IrpPtr => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_IrpPtr..Offset_FileObject]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_IrpPtr..Offset_FileObject]);
 
                 /// <summary>
                 /// Retrieves the FileObject field.
                 /// </summary>
-                public ulong FileObject => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_FileObject..]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_FileObject..]);
+                public ulong FileObject => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_FileObject..Offset_FileKey]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_FileObject..Offset_FileKey]);
 
                 /// <summary>
                 /// Retrieves the FileKey field.
                 /// </summary>
-                public ulong FileKey => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_FileKey..]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_FileKey..]);
+                public ulong FileKey => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_FileKey..Offset_ExtraInfo]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_FileKey..Offset_ExtraInfo]);
 
                 /// <summary>
                 /// Retrieves the ExtraInfo field.
                 /// </summary>
-                public ulong ExtraInfo => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_ExtraInfo..]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_ExtraInfo..]);
+                public ulong ExtraInfo => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_ExtraInfo..Offset_TTID]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_ExtraInfo..Offset_TTID]);
 
                 /// <summary>
                 /// Retrieves the TTID field.
                 /// </summary>
-                public uint TTID => BitConverter.ToUInt32(_etwEvent.Data[Offset_TTID..]);
+                public uint TTID => BitConverter.ToUInt32(_etwEvent.Data[Offset_TTID..Offset_InfoClass]);
 
                 /// <summary>
                 /// Retrieves the InfoClass field.
@@ -6930,6 +7152,12 @@ namespace EtwTools
             {
                 _etwEvent = etwEvent;
             }
+
+            /// <summary>
+            /// Converts a generic ETW event to a RenameEventV3.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator RenameEventV3(EtwEvent etwEvent) => new(etwEvent);
 
             /// <summary>
             /// A data wrapper for a Rename event.
@@ -7026,27 +7254,27 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the IrpPtr field.
                 /// </summary>
-                public ulong IrpPtr => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_IrpPtr..]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_IrpPtr..]);
+                public ulong IrpPtr => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_IrpPtr..Offset_FileObject]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_IrpPtr..Offset_FileObject]);
 
                 /// <summary>
                 /// Retrieves the FileObject field.
                 /// </summary>
-                public ulong FileObject => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_FileObject..]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_FileObject..]);
+                public ulong FileObject => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_FileObject..Offset_FileKey]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_FileObject..Offset_FileKey]);
 
                 /// <summary>
                 /// Retrieves the FileKey field.
                 /// </summary>
-                public ulong FileKey => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_FileKey..]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_FileKey..]);
+                public ulong FileKey => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_FileKey..Offset_ExtraInfo]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_FileKey..Offset_ExtraInfo]);
 
                 /// <summary>
                 /// Retrieves the ExtraInfo field.
                 /// </summary>
-                public ulong ExtraInfo => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_ExtraInfo..]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_ExtraInfo..]);
+                public ulong ExtraInfo => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_ExtraInfo..Offset_TTID]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_ExtraInfo..Offset_TTID]);
 
                 /// <summary>
                 /// Retrieves the TTID field.
                 /// </summary>
-                public uint TTID => BitConverter.ToUInt32(_etwEvent.Data[Offset_TTID..]);
+                public uint TTID => BitConverter.ToUInt32(_etwEvent.Data[Offset_TTID..Offset_InfoClass]);
 
                 /// <summary>
                 /// Retrieves the InfoClass field.
@@ -7140,6 +7368,12 @@ namespace EtwTools
             {
                 _etwEvent = etwEvent;
             }
+
+            /// <summary>
+            /// Converts a generic ETW event to a QueryInfoEventV3.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator QueryInfoEventV3(EtwEvent etwEvent) => new(etwEvent);
 
             /// <summary>
             /// A data wrapper for a QueryInfo event.
@@ -7236,27 +7470,27 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the IrpPtr field.
                 /// </summary>
-                public ulong IrpPtr => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_IrpPtr..]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_IrpPtr..]);
+                public ulong IrpPtr => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_IrpPtr..Offset_FileObject]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_IrpPtr..Offset_FileObject]);
 
                 /// <summary>
                 /// Retrieves the FileObject field.
                 /// </summary>
-                public ulong FileObject => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_FileObject..]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_FileObject..]);
+                public ulong FileObject => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_FileObject..Offset_FileKey]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_FileObject..Offset_FileKey]);
 
                 /// <summary>
                 /// Retrieves the FileKey field.
                 /// </summary>
-                public ulong FileKey => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_FileKey..]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_FileKey..]);
+                public ulong FileKey => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_FileKey..Offset_ExtraInfo]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_FileKey..Offset_ExtraInfo]);
 
                 /// <summary>
                 /// Retrieves the ExtraInfo field.
                 /// </summary>
-                public ulong ExtraInfo => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_ExtraInfo..]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_ExtraInfo..]);
+                public ulong ExtraInfo => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_ExtraInfo..Offset_TTID]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_ExtraInfo..Offset_TTID]);
 
                 /// <summary>
                 /// Retrieves the TTID field.
                 /// </summary>
-                public uint TTID => BitConverter.ToUInt32(_etwEvent.Data[Offset_TTID..]);
+                public uint TTID => BitConverter.ToUInt32(_etwEvent.Data[Offset_TTID..Offset_InfoClass]);
 
                 /// <summary>
                 /// Retrieves the InfoClass field.
@@ -7350,6 +7584,12 @@ namespace EtwTools
             {
                 _etwEvent = etwEvent;
             }
+
+            /// <summary>
+            /// Converts a generic ETW event to a FSControlEventV3.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator FSControlEventV3(EtwEvent etwEvent) => new(etwEvent);
 
             /// <summary>
             /// A data wrapper for a FSControl event.
@@ -7446,27 +7686,27 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the IrpPtr field.
                 /// </summary>
-                public ulong IrpPtr => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_IrpPtr..]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_IrpPtr..]);
+                public ulong IrpPtr => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_IrpPtr..Offset_FileObject]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_IrpPtr..Offset_FileObject]);
 
                 /// <summary>
                 /// Retrieves the FileObject field.
                 /// </summary>
-                public ulong FileObject => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_FileObject..]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_FileObject..]);
+                public ulong FileObject => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_FileObject..Offset_FileKey]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_FileObject..Offset_FileKey]);
 
                 /// <summary>
                 /// Retrieves the FileKey field.
                 /// </summary>
-                public ulong FileKey => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_FileKey..]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_FileKey..]);
+                public ulong FileKey => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_FileKey..Offset_ExtraInfo]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_FileKey..Offset_ExtraInfo]);
 
                 /// <summary>
                 /// Retrieves the ExtraInfo field.
                 /// </summary>
-                public ulong ExtraInfo => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_ExtraInfo..]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_ExtraInfo..]);
+                public ulong ExtraInfo => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_ExtraInfo..Offset_TTID]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_ExtraInfo..Offset_TTID]);
 
                 /// <summary>
                 /// Retrieves the TTID field.
                 /// </summary>
-                public uint TTID => BitConverter.ToUInt32(_etwEvent.Data[Offset_TTID..]);
+                public uint TTID => BitConverter.ToUInt32(_etwEvent.Data[Offset_TTID..Offset_InfoClass]);
 
                 /// <summary>
                 /// Retrieves the InfoClass field.
@@ -7560,6 +7800,12 @@ namespace EtwTools
             {
                 _etwEvent = etwEvent;
             }
+
+            /// <summary>
+            /// Converts a generic ETW event to a DirEnumEventV3.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator DirEnumEventV3(EtwEvent etwEvent) => new(etwEvent);
 
             /// <summary>
             /// A data wrapper for a DirEnum event.
@@ -7684,37 +7930,37 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the IrpPtr field.
                 /// </summary>
-                public ulong IrpPtr => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_IrpPtr..]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_IrpPtr..]);
+                public ulong IrpPtr => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_IrpPtr..Offset_FileObject]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_IrpPtr..Offset_FileObject]);
 
                 /// <summary>
                 /// Retrieves the FileObject field.
                 /// </summary>
-                public ulong FileObject => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_FileObject..]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_FileObject..]);
+                public ulong FileObject => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_FileObject..Offset_FileKey]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_FileObject..Offset_FileKey]);
 
                 /// <summary>
                 /// Retrieves the FileKey field.
                 /// </summary>
-                public ulong FileKey => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_FileKey..]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_FileKey..]);
+                public ulong FileKey => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_FileKey..Offset_TTID]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_FileKey..Offset_TTID]);
 
                 /// <summary>
                 /// Retrieves the TTID field.
                 /// </summary>
-                public uint TTID => BitConverter.ToUInt32(_etwEvent.Data[Offset_TTID..]);
+                public uint TTID => BitConverter.ToUInt32(_etwEvent.Data[Offset_TTID..Offset_Length]);
 
                 /// <summary>
                 /// Retrieves the Length field.
                 /// </summary>
-                public uint Length => BitConverter.ToUInt32(_etwEvent.Data[Offset_Length..]);
+                public uint Length => BitConverter.ToUInt32(_etwEvent.Data[Offset_Length..Offset_InfoClass]);
 
                 /// <summary>
                 /// Retrieves the InfoClass field.
                 /// </summary>
-                public uint InfoClass => BitConverter.ToUInt32(_etwEvent.Data[Offset_InfoClass..]);
+                public uint InfoClass => BitConverter.ToUInt32(_etwEvent.Data[Offset_InfoClass..Offset_FileIndex]);
 
                 /// <summary>
                 /// Retrieves the FileIndex field.
                 /// </summary>
-                public uint FileIndex => BitConverter.ToUInt32(_etwEvent.Data[Offset_FileIndex..]);
+                public uint FileIndex => BitConverter.ToUInt32(_etwEvent.Data[Offset_FileIndex..Offset_FileName]);
 
                 /// <summary>
                 /// Retrieves the FileName field.
@@ -7810,6 +8056,12 @@ namespace EtwTools
             {
                 _etwEvent = etwEvent;
             }
+
+            /// <summary>
+            /// Converts a generic ETW event to a DirNotifyEventV3.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator DirNotifyEventV3(EtwEvent etwEvent) => new(etwEvent);
 
             /// <summary>
             /// A data wrapper for a DirNotify event.
@@ -7934,37 +8186,37 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the IrpPtr field.
                 /// </summary>
-                public ulong IrpPtr => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_IrpPtr..]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_IrpPtr..]);
+                public ulong IrpPtr => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_IrpPtr..Offset_FileObject]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_IrpPtr..Offset_FileObject]);
 
                 /// <summary>
                 /// Retrieves the FileObject field.
                 /// </summary>
-                public ulong FileObject => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_FileObject..]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_FileObject..]);
+                public ulong FileObject => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_FileObject..Offset_FileKey]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_FileObject..Offset_FileKey]);
 
                 /// <summary>
                 /// Retrieves the FileKey field.
                 /// </summary>
-                public ulong FileKey => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_FileKey..]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_FileKey..]);
+                public ulong FileKey => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_FileKey..Offset_TTID]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_FileKey..Offset_TTID]);
 
                 /// <summary>
                 /// Retrieves the TTID field.
                 /// </summary>
-                public uint TTID => BitConverter.ToUInt32(_etwEvent.Data[Offset_TTID..]);
+                public uint TTID => BitConverter.ToUInt32(_etwEvent.Data[Offset_TTID..Offset_Length]);
 
                 /// <summary>
                 /// Retrieves the Length field.
                 /// </summary>
-                public uint Length => BitConverter.ToUInt32(_etwEvent.Data[Offset_Length..]);
+                public uint Length => BitConverter.ToUInt32(_etwEvent.Data[Offset_Length..Offset_InfoClass]);
 
                 /// <summary>
                 /// Retrieves the InfoClass field.
                 /// </summary>
-                public uint InfoClass => BitConverter.ToUInt32(_etwEvent.Data[Offset_InfoClass..]);
+                public uint InfoClass => BitConverter.ToUInt32(_etwEvent.Data[Offset_InfoClass..Offset_FileIndex]);
 
                 /// <summary>
                 /// Retrieves the FileIndex field.
                 /// </summary>
-                public uint FileIndex => BitConverter.ToUInt32(_etwEvent.Data[Offset_FileIndex..]);
+                public uint FileIndex => BitConverter.ToUInt32(_etwEvent.Data[Offset_FileIndex..Offset_FileName]);
 
                 /// <summary>
                 /// Retrieves the FileName field.
@@ -8062,6 +8314,12 @@ namespace EtwTools
             }
 
             /// <summary>
+            /// Converts a generic ETW event to a OperationEndEventV3.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator OperationEndEventV3(EtwEvent etwEvent) => new(etwEvent);
+
+            /// <summary>
             /// A data wrapper for a OperationEnd event.
             /// </summary>
             public ref struct OperationEndData
@@ -8114,12 +8372,12 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the IrpPtr field.
                 /// </summary>
-                public ulong IrpPtr => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_IrpPtr..]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_IrpPtr..]);
+                public ulong IrpPtr => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_IrpPtr..Offset_ExtraInfo]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_IrpPtr..Offset_ExtraInfo]);
 
                 /// <summary>
                 /// Retrieves the ExtraInfo field.
                 /// </summary>
-                public ulong ExtraInfo => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_ExtraInfo..]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_ExtraInfo..]);
+                public ulong ExtraInfo => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_ExtraInfo..Offset_NtStatus]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_ExtraInfo..Offset_NtStatus]);
 
                 /// <summary>
                 /// Retrieves the NtStatus field.
@@ -8210,6 +8468,12 @@ namespace EtwTools
             {
                 _etwEvent = etwEvent;
             }
+
+            /// <summary>
+            /// Converts a generic ETW event to a DletePathEventV3.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator DletePathEventV3(EtwEvent etwEvent) => new(etwEvent);
 
             /// <summary>
             /// A data wrapper for a DletePath event.
@@ -8320,32 +8584,32 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the IrpPtr field.
                 /// </summary>
-                public ulong IrpPtr => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_IrpPtr..]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_IrpPtr..]);
+                public ulong IrpPtr => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_IrpPtr..Offset_FileObject]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_IrpPtr..Offset_FileObject]);
 
                 /// <summary>
                 /// Retrieves the FileObject field.
                 /// </summary>
-                public ulong FileObject => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_FileObject..]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_FileObject..]);
+                public ulong FileObject => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_FileObject..Offset_FileKey]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_FileObject..Offset_FileKey]);
 
                 /// <summary>
                 /// Retrieves the FileKey field.
                 /// </summary>
-                public ulong FileKey => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_FileKey..]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_FileKey..]);
+                public ulong FileKey => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_FileKey..Offset_ExtraInfo]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_FileKey..Offset_ExtraInfo]);
 
                 /// <summary>
                 /// Retrieves the ExtraInfo field.
                 /// </summary>
-                public ulong ExtraInfo => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_ExtraInfo..]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_ExtraInfo..]);
+                public ulong ExtraInfo => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_ExtraInfo..Offset_TTID]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_ExtraInfo..Offset_TTID]);
 
                 /// <summary>
                 /// Retrieves the TTID field.
                 /// </summary>
-                public uint TTID => BitConverter.ToUInt32(_etwEvent.Data[Offset_TTID..]);
+                public uint TTID => BitConverter.ToUInt32(_etwEvent.Data[Offset_TTID..Offset_InfoClass]);
 
                 /// <summary>
                 /// Retrieves the InfoClass field.
                 /// </summary>
-                public uint InfoClass => BitConverter.ToUInt32(_etwEvent.Data[Offset_InfoClass..]);
+                public uint InfoClass => BitConverter.ToUInt32(_etwEvent.Data[Offset_InfoClass..Offset_FileName]);
 
                 /// <summary>
                 /// Retrieves the FileName field.
@@ -8440,6 +8704,12 @@ namespace EtwTools
             {
                 _etwEvent = etwEvent;
             }
+
+            /// <summary>
+            /// Converts a generic ETW event to a RenamePathEventV3.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator RenamePathEventV3(EtwEvent etwEvent) => new(etwEvent);
 
             /// <summary>
             /// A data wrapper for a RenamePath event.
@@ -8550,32 +8820,32 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the IrpPtr field.
                 /// </summary>
-                public ulong IrpPtr => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_IrpPtr..]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_IrpPtr..]);
+                public ulong IrpPtr => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_IrpPtr..Offset_FileObject]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_IrpPtr..Offset_FileObject]);
 
                 /// <summary>
                 /// Retrieves the FileObject field.
                 /// </summary>
-                public ulong FileObject => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_FileObject..]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_FileObject..]);
+                public ulong FileObject => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_FileObject..Offset_FileKey]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_FileObject..Offset_FileKey]);
 
                 /// <summary>
                 /// Retrieves the FileKey field.
                 /// </summary>
-                public ulong FileKey => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_FileKey..]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_FileKey..]);
+                public ulong FileKey => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_FileKey..Offset_ExtraInfo]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_FileKey..Offset_ExtraInfo]);
 
                 /// <summary>
                 /// Retrieves the ExtraInfo field.
                 /// </summary>
-                public ulong ExtraInfo => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_ExtraInfo..]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_ExtraInfo..]);
+                public ulong ExtraInfo => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_ExtraInfo..Offset_TTID]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_ExtraInfo..Offset_TTID]);
 
                 /// <summary>
                 /// Retrieves the TTID field.
                 /// </summary>
-                public uint TTID => BitConverter.ToUInt32(_etwEvent.Data[Offset_TTID..]);
+                public uint TTID => BitConverter.ToUInt32(_etwEvent.Data[Offset_TTID..Offset_InfoClass]);
 
                 /// <summary>
                 /// Retrieves the InfoClass field.
                 /// </summary>
-                public uint InfoClass => BitConverter.ToUInt32(_etwEvent.Data[Offset_InfoClass..]);
+                public uint InfoClass => BitConverter.ToUInt32(_etwEvent.Data[Offset_InfoClass..Offset_FileName]);
 
                 /// <summary>
                 /// Retrieves the FileName field.
@@ -8670,6 +8940,12 @@ namespace EtwTools
             {
                 _etwEvent = etwEvent;
             }
+
+            /// <summary>
+            /// Converts a generic ETW event to a SetLinkPathEventV3.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator SetLinkPathEventV3(EtwEvent etwEvent) => new(etwEvent);
 
             /// <summary>
             /// A data wrapper for a SetLinkPath event.
@@ -8780,32 +9056,32 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the IrpPtr field.
                 /// </summary>
-                public ulong IrpPtr => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_IrpPtr..]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_IrpPtr..]);
+                public ulong IrpPtr => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_IrpPtr..Offset_FileObject]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_IrpPtr..Offset_FileObject]);
 
                 /// <summary>
                 /// Retrieves the FileObject field.
                 /// </summary>
-                public ulong FileObject => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_FileObject..]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_FileObject..]);
+                public ulong FileObject => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_FileObject..Offset_FileKey]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_FileObject..Offset_FileKey]);
 
                 /// <summary>
                 /// Retrieves the FileKey field.
                 /// </summary>
-                public ulong FileKey => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_FileKey..]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_FileKey..]);
+                public ulong FileKey => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_FileKey..Offset_ExtraInfo]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_FileKey..Offset_ExtraInfo]);
 
                 /// <summary>
                 /// Retrieves the ExtraInfo field.
                 /// </summary>
-                public ulong ExtraInfo => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_ExtraInfo..]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_ExtraInfo..]);
+                public ulong ExtraInfo => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_ExtraInfo..Offset_TTID]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_ExtraInfo..Offset_TTID]);
 
                 /// <summary>
                 /// Retrieves the TTID field.
                 /// </summary>
-                public uint TTID => BitConverter.ToUInt32(_etwEvent.Data[Offset_TTID..]);
+                public uint TTID => BitConverter.ToUInt32(_etwEvent.Data[Offset_TTID..Offset_InfoClass]);
 
                 /// <summary>
                 /// Retrieves the InfoClass field.
                 /// </summary>
-                public uint InfoClass => BitConverter.ToUInt32(_etwEvent.Data[Offset_InfoClass..]);
+                public uint InfoClass => BitConverter.ToUInt32(_etwEvent.Data[Offset_InfoClass..Offset_FileName]);
 
                 /// <summary>
                 /// Retrieves the FileName field.
@@ -8902,6 +9178,12 @@ namespace EtwTools
             }
 
             /// <summary>
+            /// Converts a generic ETW event to a PreOpInitEventV3.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator PreOpInitEventV3(EtwEvent etwEvent) => new(etwEvent);
+
+            /// <summary>
             /// A data wrapper for a PreOpInit event.
             /// </summary>
             public ref struct PreOpInitData
@@ -8996,27 +9278,27 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the RoutineAddr field.
                 /// </summary>
-                public ulong RoutineAddr => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_RoutineAddr..]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_RoutineAddr..]);
+                public ulong RoutineAddr => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_RoutineAddr..Offset_FileObject]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_RoutineAddr..Offset_FileObject]);
 
                 /// <summary>
                 /// Retrieves the FileObject field.
                 /// </summary>
-                public ulong FileObject => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_FileObject..]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_FileObject..]);
+                public ulong FileObject => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_FileObject..Offset_FileContext]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_FileObject..Offset_FileContext]);
 
                 /// <summary>
                 /// Retrieves the FileContext field.
                 /// </summary>
-                public ulong FileContext => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_FileContext..]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_FileContext..]);
+                public ulong FileContext => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_FileContext..Offset_IrpPtr]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_FileContext..Offset_IrpPtr]);
 
                 /// <summary>
                 /// Retrieves the IrpPtr field.
                 /// </summary>
-                public ulong IrpPtr => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_IrpPtr..]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_IrpPtr..]);
+                public ulong IrpPtr => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_IrpPtr..Offset_CallbackDataPtr]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_IrpPtr..Offset_CallbackDataPtr]);
 
                 /// <summary>
                 /// Retrieves the CallbackDataPtr field.
                 /// </summary>
-                public ulong CallbackDataPtr => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_CallbackDataPtr..]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_CallbackDataPtr..]);
+                public ulong CallbackDataPtr => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_CallbackDataPtr..Offset_MajorFunction]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_CallbackDataPtr..Offset_MajorFunction]);
 
                 /// <summary>
                 /// Retrieves the MajorFunction field.
@@ -9110,6 +9392,12 @@ namespace EtwTools
             {
                 _etwEvent = etwEvent;
             }
+
+            /// <summary>
+            /// Converts a generic ETW event to a PostOpInitEventV3.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator PostOpInitEventV3(EtwEvent etwEvent) => new(etwEvent);
 
             /// <summary>
             /// A data wrapper for a PostOpInit event.
@@ -9206,27 +9494,27 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the RoutineAddr field.
                 /// </summary>
-                public ulong RoutineAddr => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_RoutineAddr..]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_RoutineAddr..]);
+                public ulong RoutineAddr => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_RoutineAddr..Offset_FileObject]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_RoutineAddr..Offset_FileObject]);
 
                 /// <summary>
                 /// Retrieves the FileObject field.
                 /// </summary>
-                public ulong FileObject => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_FileObject..]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_FileObject..]);
+                public ulong FileObject => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_FileObject..Offset_FileContext]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_FileObject..Offset_FileContext]);
 
                 /// <summary>
                 /// Retrieves the FileContext field.
                 /// </summary>
-                public ulong FileContext => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_FileContext..]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_FileContext..]);
+                public ulong FileContext => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_FileContext..Offset_IrpPtr]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_FileContext..Offset_IrpPtr]);
 
                 /// <summary>
                 /// Retrieves the IrpPtr field.
                 /// </summary>
-                public ulong IrpPtr => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_IrpPtr..]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_IrpPtr..]);
+                public ulong IrpPtr => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_IrpPtr..Offset_CallbackDataPtr]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_IrpPtr..Offset_CallbackDataPtr]);
 
                 /// <summary>
                 /// Retrieves the CallbackDataPtr field.
                 /// </summary>
-                public ulong CallbackDataPtr => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_CallbackDataPtr..]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_CallbackDataPtr..]);
+                public ulong CallbackDataPtr => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_CallbackDataPtr..Offset_MajorFunction]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_CallbackDataPtr..Offset_MajorFunction]);
 
                 /// <summary>
                 /// Retrieves the MajorFunction field.
@@ -9320,6 +9608,12 @@ namespace EtwTools
             {
                 _etwEvent = etwEvent;
             }
+
+            /// <summary>
+            /// Converts a generic ETW event to a PreOpCompletionEventV3.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator PreOpCompletionEventV3(EtwEvent etwEvent) => new(etwEvent);
 
             /// <summary>
             /// A data wrapper for a PreOpCompletion event.
@@ -9430,32 +9724,32 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the InitialTime field.
                 /// </summary>
-                public ulong InitialTime => BitConverter.ToUInt64(_etwEvent.Data[Offset_InitialTime..]);
+                public ulong InitialTime => BitConverter.ToUInt64(_etwEvent.Data[Offset_InitialTime..Offset_RoutineAddr]);
 
                 /// <summary>
                 /// Retrieves the RoutineAddr field.
                 /// </summary>
-                public ulong RoutineAddr => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_RoutineAddr..]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_RoutineAddr..]);
+                public ulong RoutineAddr => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_RoutineAddr..Offset_FileObject]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_RoutineAddr..Offset_FileObject]);
 
                 /// <summary>
                 /// Retrieves the FileObject field.
                 /// </summary>
-                public ulong FileObject => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_FileObject..]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_FileObject..]);
+                public ulong FileObject => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_FileObject..Offset_FileContext]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_FileObject..Offset_FileContext]);
 
                 /// <summary>
                 /// Retrieves the FileContext field.
                 /// </summary>
-                public ulong FileContext => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_FileContext..]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_FileContext..]);
+                public ulong FileContext => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_FileContext..Offset_IrpPtr]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_FileContext..Offset_IrpPtr]);
 
                 /// <summary>
                 /// Retrieves the IrpPtr field.
                 /// </summary>
-                public ulong IrpPtr => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_IrpPtr..]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_IrpPtr..]);
+                public ulong IrpPtr => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_IrpPtr..Offset_CallbackDataPtr]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_IrpPtr..Offset_CallbackDataPtr]);
 
                 /// <summary>
                 /// Retrieves the CallbackDataPtr field.
                 /// </summary>
-                public ulong CallbackDataPtr => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_CallbackDataPtr..]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_CallbackDataPtr..]);
+                public ulong CallbackDataPtr => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_CallbackDataPtr..Offset_MajorFunction]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_CallbackDataPtr..Offset_MajorFunction]);
 
                 /// <summary>
                 /// Retrieves the MajorFunction field.
@@ -9550,6 +9844,12 @@ namespace EtwTools
             {
                 _etwEvent = etwEvent;
             }
+
+            /// <summary>
+            /// Converts a generic ETW event to a PostOpCompletionEventV3.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator PostOpCompletionEventV3(EtwEvent etwEvent) => new(etwEvent);
 
             /// <summary>
             /// A data wrapper for a PostOpCompletion event.
@@ -9660,32 +9960,32 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the InitialTime field.
                 /// </summary>
-                public ulong InitialTime => BitConverter.ToUInt64(_etwEvent.Data[Offset_InitialTime..]);
+                public ulong InitialTime => BitConverter.ToUInt64(_etwEvent.Data[Offset_InitialTime..Offset_RoutineAddr]);
 
                 /// <summary>
                 /// Retrieves the RoutineAddr field.
                 /// </summary>
-                public ulong RoutineAddr => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_RoutineAddr..]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_RoutineAddr..]);
+                public ulong RoutineAddr => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_RoutineAddr..Offset_FileObject]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_RoutineAddr..Offset_FileObject]);
 
                 /// <summary>
                 /// Retrieves the FileObject field.
                 /// </summary>
-                public ulong FileObject => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_FileObject..]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_FileObject..]);
+                public ulong FileObject => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_FileObject..Offset_FileContext]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_FileObject..Offset_FileContext]);
 
                 /// <summary>
                 /// Retrieves the FileContext field.
                 /// </summary>
-                public ulong FileContext => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_FileContext..]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_FileContext..]);
+                public ulong FileContext => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_FileContext..Offset_IrpPtr]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_FileContext..Offset_IrpPtr]);
 
                 /// <summary>
                 /// Retrieves the IrpPtr field.
                 /// </summary>
-                public ulong IrpPtr => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_IrpPtr..]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_IrpPtr..]);
+                public ulong IrpPtr => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_IrpPtr..Offset_CallbackDataPtr]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_IrpPtr..Offset_CallbackDataPtr]);
 
                 /// <summary>
                 /// Retrieves the CallbackDataPtr field.
                 /// </summary>
-                public ulong CallbackDataPtr => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_CallbackDataPtr..]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_CallbackDataPtr..]);
+                public ulong CallbackDataPtr => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_CallbackDataPtr..Offset_MajorFunction]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_CallbackDataPtr..Offset_MajorFunction]);
 
                 /// <summary>
                 /// Retrieves the MajorFunction field.
@@ -9780,6 +10080,12 @@ namespace EtwTools
             {
                 _etwEvent = etwEvent;
             }
+
+            /// <summary>
+            /// Converts a generic ETW event to a PreOpFailureEventV3.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator PreOpFailureEventV3(EtwEvent etwEvent) => new(etwEvent);
 
             /// <summary>
             /// A data wrapper for a PreOpFailure event.
@@ -9890,32 +10196,32 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the RoutineAddr field.
                 /// </summary>
-                public ulong RoutineAddr => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_RoutineAddr..]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_RoutineAddr..]);
+                public ulong RoutineAddr => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_RoutineAddr..Offset_FileObject]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_RoutineAddr..Offset_FileObject]);
 
                 /// <summary>
                 /// Retrieves the FileObject field.
                 /// </summary>
-                public ulong FileObject => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_FileObject..]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_FileObject..]);
+                public ulong FileObject => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_FileObject..Offset_FileContext]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_FileObject..Offset_FileContext]);
 
                 /// <summary>
                 /// Retrieves the FileContext field.
                 /// </summary>
-                public ulong FileContext => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_FileContext..]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_FileContext..]);
+                public ulong FileContext => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_FileContext..Offset_IrpPtr]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_FileContext..Offset_IrpPtr]);
 
                 /// <summary>
                 /// Retrieves the IrpPtr field.
                 /// </summary>
-                public ulong IrpPtr => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_IrpPtr..]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_IrpPtr..]);
+                public ulong IrpPtr => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_IrpPtr..Offset_CallbackDataPtr]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_IrpPtr..Offset_CallbackDataPtr]);
 
                 /// <summary>
                 /// Retrieves the CallbackDataPtr field.
                 /// </summary>
-                public ulong CallbackDataPtr => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_CallbackDataPtr..]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_CallbackDataPtr..]);
+                public ulong CallbackDataPtr => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_CallbackDataPtr..Offset_MajorFunction]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_CallbackDataPtr..Offset_MajorFunction]);
 
                 /// <summary>
                 /// Retrieves the MajorFunction field.
                 /// </summary>
-                public uint MajorFunction => BitConverter.ToUInt32(_etwEvent.Data[Offset_MajorFunction..]);
+                public uint MajorFunction => BitConverter.ToUInt32(_etwEvent.Data[Offset_MajorFunction..Offset_Status]);
 
                 /// <summary>
                 /// Retrieves the Status field.
@@ -10010,6 +10316,12 @@ namespace EtwTools
             {
                 _etwEvent = etwEvent;
             }
+
+            /// <summary>
+            /// Converts a generic ETW event to a PostOpFailureEventV3.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator PostOpFailureEventV3(EtwEvent etwEvent) => new(etwEvent);
 
             /// <summary>
             /// A data wrapper for a PostOpFailure event.
@@ -10120,32 +10432,32 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the RoutineAddr field.
                 /// </summary>
-                public ulong RoutineAddr => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_RoutineAddr..]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_RoutineAddr..]);
+                public ulong RoutineAddr => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_RoutineAddr..Offset_FileObject]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_RoutineAddr..Offset_FileObject]);
 
                 /// <summary>
                 /// Retrieves the FileObject field.
                 /// </summary>
-                public ulong FileObject => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_FileObject..]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_FileObject..]);
+                public ulong FileObject => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_FileObject..Offset_FileContext]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_FileObject..Offset_FileContext]);
 
                 /// <summary>
                 /// Retrieves the FileContext field.
                 /// </summary>
-                public ulong FileContext => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_FileContext..]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_FileContext..]);
+                public ulong FileContext => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_FileContext..Offset_IrpPtr]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_FileContext..Offset_IrpPtr]);
 
                 /// <summary>
                 /// Retrieves the IrpPtr field.
                 /// </summary>
-                public ulong IrpPtr => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_IrpPtr..]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_IrpPtr..]);
+                public ulong IrpPtr => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_IrpPtr..Offset_CallbackDataPtr]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_IrpPtr..Offset_CallbackDataPtr]);
 
                 /// <summary>
                 /// Retrieves the CallbackDataPtr field.
                 /// </summary>
-                public ulong CallbackDataPtr => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_CallbackDataPtr..]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_CallbackDataPtr..]);
+                public ulong CallbackDataPtr => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_CallbackDataPtr..Offset_MajorFunction]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_CallbackDataPtr..Offset_MajorFunction]);
 
                 /// <summary>
                 /// Retrieves the MajorFunction field.
                 /// </summary>
-                public uint MajorFunction => BitConverter.ToUInt32(_etwEvent.Data[Offset_MajorFunction..]);
+                public uint MajorFunction => BitConverter.ToUInt32(_etwEvent.Data[Offset_MajorFunction..Offset_Status]);
 
                 /// <summary>
                 /// Retrieves the Status field.

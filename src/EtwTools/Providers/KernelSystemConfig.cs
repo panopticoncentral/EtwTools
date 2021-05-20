@@ -206,6 +206,12 @@ namespace EtwTools
             }
 
             /// <summary>
+            /// Converts a generic ETW event to a CPUEvent.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator CPUEvent(EtwEvent etwEvent) => new(etwEvent);
+
+            /// <summary>
             /// A data wrapper for a CPU event.
             /// </summary>
             public ref struct CPUData
@@ -328,37 +334,37 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the MHz field.
                 /// </summary>
-                public uint MHz => BitConverter.ToUInt32(_etwEvent.Data[Offset_MHz..]);
+                public uint MHz => BitConverter.ToUInt32(_etwEvent.Data[Offset_MHz..Offset_NumberOfProcessors]);
 
                 /// <summary>
                 /// Retrieves the NumberOfProcessors field.
                 /// </summary>
-                public uint NumberOfProcessors => BitConverter.ToUInt32(_etwEvent.Data[Offset_NumberOfProcessors..]);
+                public uint NumberOfProcessors => BitConverter.ToUInt32(_etwEvent.Data[Offset_NumberOfProcessors..Offset_MemSize]);
 
                 /// <summary>
                 /// Retrieves the MemSize field.
                 /// </summary>
-                public uint MemSize => BitConverter.ToUInt32(_etwEvent.Data[Offset_MemSize..]);
+                public uint MemSize => BitConverter.ToUInt32(_etwEvent.Data[Offset_MemSize..Offset_PageSize]);
 
                 /// <summary>
                 /// Retrieves the PageSize field.
                 /// </summary>
-                public uint PageSize => BitConverter.ToUInt32(_etwEvent.Data[Offset_PageSize..]);
+                public uint PageSize => BitConverter.ToUInt32(_etwEvent.Data[Offset_PageSize..Offset_AllocationGranularity]);
 
                 /// <summary>
                 /// Retrieves the AllocationGranularity field.
                 /// </summary>
-                public uint AllocationGranularity => BitConverter.ToUInt32(_etwEvent.Data[Offset_AllocationGranularity..]);
+                public uint AllocationGranularity => BitConverter.ToUInt32(_etwEvent.Data[Offset_AllocationGranularity..Offset_ComputerName]);
 
                 /// <summary>
                 /// Retrieves the ComputerName field.
                 /// </summary>
-                public char ComputerName => BitConverter.ToChar(_etwEvent.Data[Offset_ComputerName..]);
+                public char ComputerName => BitConverter.ToChar(_etwEvent.Data[Offset_ComputerName..Offset_DomainName]);
 
                 /// <summary>
                 /// Retrieves the DomainName field.
                 /// </summary>
-                public char DomainName => BitConverter.ToChar(_etwEvent.Data[Offset_DomainName..]);
+                public char DomainName => BitConverter.ToChar(_etwEvent.Data[Offset_DomainName..Offset_HyperThreadingFlag]);
 
                 /// <summary>
                 /// Retrieves the HyperThreadingFlag field.
@@ -454,6 +460,12 @@ namespace EtwTools
             {
                 _etwEvent = etwEvent;
             }
+
+            /// <summary>
+            /// Converts a generic ETW event to a PhyDiskEvent.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator PhyDiskEvent(EtwEvent etwEvent) => new(etwEvent);
 
             /// <summary>
             /// A data wrapper for a PhyDisk event.
@@ -676,57 +688,57 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the DiskNumber field.
                 /// </summary>
-                public uint DiskNumber => BitConverter.ToUInt32(_etwEvent.Data[Offset_DiskNumber..]);
+                public uint DiskNumber => BitConverter.ToUInt32(_etwEvent.Data[Offset_DiskNumber..Offset_BytesPerSector]);
 
                 /// <summary>
                 /// Retrieves the BytesPerSector field.
                 /// </summary>
-                public uint BytesPerSector => BitConverter.ToUInt32(_etwEvent.Data[Offset_BytesPerSector..]);
+                public uint BytesPerSector => BitConverter.ToUInt32(_etwEvent.Data[Offset_BytesPerSector..Offset_SectorsPerTrack]);
 
                 /// <summary>
                 /// Retrieves the SectorsPerTrack field.
                 /// </summary>
-                public uint SectorsPerTrack => BitConverter.ToUInt32(_etwEvent.Data[Offset_SectorsPerTrack..]);
+                public uint SectorsPerTrack => BitConverter.ToUInt32(_etwEvent.Data[Offset_SectorsPerTrack..Offset_TracksPerCylinder]);
 
                 /// <summary>
                 /// Retrieves the TracksPerCylinder field.
                 /// </summary>
-                public uint TracksPerCylinder => BitConverter.ToUInt32(_etwEvent.Data[Offset_TracksPerCylinder..]);
+                public uint TracksPerCylinder => BitConverter.ToUInt32(_etwEvent.Data[Offset_TracksPerCylinder..Offset_Cylinders]);
 
                 /// <summary>
                 /// Retrieves the Cylinders field.
                 /// </summary>
-                public ulong Cylinders => BitConverter.ToUInt64(_etwEvent.Data[Offset_Cylinders..]);
+                public ulong Cylinders => BitConverter.ToUInt64(_etwEvent.Data[Offset_Cylinders..Offset_SCSIPort]);
 
                 /// <summary>
                 /// Retrieves the SCSIPort field.
                 /// </summary>
-                public uint SCSIPort => BitConverter.ToUInt32(_etwEvent.Data[Offset_SCSIPort..]);
+                public uint SCSIPort => BitConverter.ToUInt32(_etwEvent.Data[Offset_SCSIPort..Offset_SCSIPath]);
 
                 /// <summary>
                 /// Retrieves the SCSIPath field.
                 /// </summary>
-                public uint SCSIPath => BitConverter.ToUInt32(_etwEvent.Data[Offset_SCSIPath..]);
+                public uint SCSIPath => BitConverter.ToUInt32(_etwEvent.Data[Offset_SCSIPath..Offset_SCSITarget]);
 
                 /// <summary>
                 /// Retrieves the SCSITarget field.
                 /// </summary>
-                public uint SCSITarget => BitConverter.ToUInt32(_etwEvent.Data[Offset_SCSITarget..]);
+                public uint SCSITarget => BitConverter.ToUInt32(_etwEvent.Data[Offset_SCSITarget..Offset_SCSILun]);
 
                 /// <summary>
                 /// Retrieves the SCSILun field.
                 /// </summary>
-                public uint SCSILun => BitConverter.ToUInt32(_etwEvent.Data[Offset_SCSILun..]);
+                public uint SCSILun => BitConverter.ToUInt32(_etwEvent.Data[Offset_SCSILun..Offset_Manufacturer]);
 
                 /// <summary>
                 /// Retrieves the Manufacturer field.
                 /// </summary>
-                public char Manufacturer => BitConverter.ToChar(_etwEvent.Data[Offset_Manufacturer..]);
+                public char Manufacturer => BitConverter.ToChar(_etwEvent.Data[Offset_Manufacturer..Offset_PartitionCount]);
 
                 /// <summary>
                 /// Retrieves the PartitionCount field.
                 /// </summary>
-                public uint PartitionCount => BitConverter.ToUInt32(_etwEvent.Data[Offset_PartitionCount..]);
+                public uint PartitionCount => BitConverter.ToUInt32(_etwEvent.Data[Offset_PartitionCount..Offset_WriteCacheEnabled]);
 
                 /// <summary>
                 /// Retrieves the WriteCacheEnabled field.
@@ -741,7 +753,7 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the BootDriveLetter field.
                 /// </summary>
-                public char BootDriveLetter => BitConverter.ToChar(_etwEvent.Data[Offset_BootDriveLetter..]);
+                public char BootDriveLetter => BitConverter.ToChar(_etwEvent.Data[Offset_BootDriveLetter..Offset_Spare]);
 
                 /// <summary>
                 /// Retrieves the Spare field.
@@ -844,6 +856,12 @@ namespace EtwTools
             {
                 _etwEvent = etwEvent;
             }
+
+            /// <summary>
+            /// Converts a generic ETW event to a LogDiskEvent.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator LogDiskEvent(EtwEvent etwEvent) => new(etwEvent);
 
             /// <summary>
             /// A data wrapper for a LogDisk event.
@@ -1066,72 +1084,72 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the StartOffset field.
                 /// </summary>
-                public ulong StartOffset => BitConverter.ToUInt64(_etwEvent.Data[Offset_StartOffset..]);
+                public ulong StartOffset => BitConverter.ToUInt64(_etwEvent.Data[Offset_StartOffset..Offset_PartitionSize]);
 
                 /// <summary>
                 /// Retrieves the PartitionSize field.
                 /// </summary>
-                public ulong PartitionSize => BitConverter.ToUInt64(_etwEvent.Data[Offset_PartitionSize..]);
+                public ulong PartitionSize => BitConverter.ToUInt64(_etwEvent.Data[Offset_PartitionSize..Offset_DiskNumber]);
 
                 /// <summary>
                 /// Retrieves the DiskNumber field.
                 /// </summary>
-                public uint DiskNumber => BitConverter.ToUInt32(_etwEvent.Data[Offset_DiskNumber..]);
+                public uint DiskNumber => BitConverter.ToUInt32(_etwEvent.Data[Offset_DiskNumber..Offset_Size]);
 
                 /// <summary>
                 /// Retrieves the Size field.
                 /// </summary>
-                public uint Size => BitConverter.ToUInt32(_etwEvent.Data[Offset_Size..]);
+                public uint Size => BitConverter.ToUInt32(_etwEvent.Data[Offset_Size..Offset_DriveType]);
 
                 /// <summary>
                 /// Retrieves the DriveType field.
                 /// </summary>
-                public uint DriveType => BitConverter.ToUInt32(_etwEvent.Data[Offset_DriveType..]);
+                public uint DriveType => BitConverter.ToUInt32(_etwEvent.Data[Offset_DriveType..Offset_DriveLetterString]);
 
                 /// <summary>
                 /// Retrieves the DriveLetterString field.
                 /// </summary>
-                public char DriveLetterString => BitConverter.ToChar(_etwEvent.Data[Offset_DriveLetterString..]);
+                public char DriveLetterString => BitConverter.ToChar(_etwEvent.Data[Offset_DriveLetterString..Offset_Pad1]);
 
                 /// <summary>
                 /// Retrieves the Pad1 field.
                 /// </summary>
-                public uint Pad1 => BitConverter.ToUInt32(_etwEvent.Data[Offset_Pad1..]);
+                public uint Pad1 => BitConverter.ToUInt32(_etwEvent.Data[Offset_Pad1..Offset_PartitionNumber]);
 
                 /// <summary>
                 /// Retrieves the PartitionNumber field.
                 /// </summary>
-                public uint PartitionNumber => BitConverter.ToUInt32(_etwEvent.Data[Offset_PartitionNumber..]);
+                public uint PartitionNumber => BitConverter.ToUInt32(_etwEvent.Data[Offset_PartitionNumber..Offset_SectorsPerCluster]);
 
                 /// <summary>
                 /// Retrieves the SectorsPerCluster field.
                 /// </summary>
-                public uint SectorsPerCluster => BitConverter.ToUInt32(_etwEvent.Data[Offset_SectorsPerCluster..]);
+                public uint SectorsPerCluster => BitConverter.ToUInt32(_etwEvent.Data[Offset_SectorsPerCluster..Offset_BytesPerSector]);
 
                 /// <summary>
                 /// Retrieves the BytesPerSector field.
                 /// </summary>
-                public uint BytesPerSector => BitConverter.ToUInt32(_etwEvent.Data[Offset_BytesPerSector..]);
+                public uint BytesPerSector => BitConverter.ToUInt32(_etwEvent.Data[Offset_BytesPerSector..Offset_Pad2]);
 
                 /// <summary>
                 /// Retrieves the Pad2 field.
                 /// </summary>
-                public uint Pad2 => BitConverter.ToUInt32(_etwEvent.Data[Offset_Pad2..]);
+                public uint Pad2 => BitConverter.ToUInt32(_etwEvent.Data[Offset_Pad2..Offset_NumberOfFreeClusters]);
 
                 /// <summary>
                 /// Retrieves the NumberOfFreeClusters field.
                 /// </summary>
-                public long NumberOfFreeClusters => BitConverter.ToInt64(_etwEvent.Data[Offset_NumberOfFreeClusters..]);
+                public long NumberOfFreeClusters => BitConverter.ToInt64(_etwEvent.Data[Offset_NumberOfFreeClusters..Offset_TotalNumberOfClusters]);
 
                 /// <summary>
                 /// Retrieves the TotalNumberOfClusters field.
                 /// </summary>
-                public long TotalNumberOfClusters => BitConverter.ToInt64(_etwEvent.Data[Offset_TotalNumberOfClusters..]);
+                public long TotalNumberOfClusters => BitConverter.ToInt64(_etwEvent.Data[Offset_TotalNumberOfClusters..Offset_FileSystem]);
 
                 /// <summary>
                 /// Retrieves the FileSystem field.
                 /// </summary>
-                public char FileSystem => BitConverter.ToChar(_etwEvent.Data[Offset_FileSystem..]);
+                public char FileSystem => BitConverter.ToChar(_etwEvent.Data[Offset_FileSystem..Offset_VolumeExt]);
 
                 /// <summary>
                 /// Retrieves the VolumeExt field.
@@ -1234,6 +1252,12 @@ namespace EtwTools
             {
                 _etwEvent = etwEvent;
             }
+
+            /// <summary>
+            /// Converts a generic ETW event to a NICEvent.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator NICEvent(EtwEvent etwEvent) => new(etwEvent);
 
             /// <summary>
             /// A data wrapper for a NIC event.
@@ -1470,77 +1494,77 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the NICName field.
                 /// </summary>
-                public char NICName => BitConverter.ToChar(_etwEvent.Data[Offset_NICName..]);
+                public char NICName => BitConverter.ToChar(_etwEvent.Data[Offset_NICName..Offset_Index]);
 
                 /// <summary>
                 /// Retrieves the Index field.
                 /// </summary>
-                public uint Index => BitConverter.ToUInt32(_etwEvent.Data[Offset_Index..]);
+                public uint Index => BitConverter.ToUInt32(_etwEvent.Data[Offset_Index..Offset_PhysicalAddrLen]);
 
                 /// <summary>
                 /// Retrieves the PhysicalAddrLen field.
                 /// </summary>
-                public uint PhysicalAddrLen => BitConverter.ToUInt32(_etwEvent.Data[Offset_PhysicalAddrLen..]);
+                public uint PhysicalAddrLen => BitConverter.ToUInt32(_etwEvent.Data[Offset_PhysicalAddrLen..Offset_PhysicalAddr]);
 
                 /// <summary>
                 /// Retrieves the PhysicalAddr field.
                 /// </summary>
-                public char PhysicalAddr => BitConverter.ToChar(_etwEvent.Data[Offset_PhysicalAddr..]);
+                public char PhysicalAddr => BitConverter.ToChar(_etwEvent.Data[Offset_PhysicalAddr..Offset_Size]);
 
                 /// <summary>
                 /// Retrieves the Size field.
                 /// </summary>
-                public uint Size => BitConverter.ToUInt32(_etwEvent.Data[Offset_Size..]);
+                public uint Size => BitConverter.ToUInt32(_etwEvent.Data[Offset_Size..Offset_IpAddress]);
 
                 /// <summary>
                 /// Retrieves the IpAddress field.
                 /// </summary>
-                public int IpAddress => BitConverter.ToInt32(_etwEvent.Data[Offset_IpAddress..]);
+                public int IpAddress => BitConverter.ToInt32(_etwEvent.Data[Offset_IpAddress..Offset_SubnetMask]);
 
                 /// <summary>
                 /// Retrieves the SubnetMask field.
                 /// </summary>
-                public int SubnetMask => BitConverter.ToInt32(_etwEvent.Data[Offset_SubnetMask..]);
+                public int SubnetMask => BitConverter.ToInt32(_etwEvent.Data[Offset_SubnetMask..Offset_DhcpServer]);
 
                 /// <summary>
                 /// Retrieves the DhcpServer field.
                 /// </summary>
-                public int DhcpServer => BitConverter.ToInt32(_etwEvent.Data[Offset_DhcpServer..]);
+                public int DhcpServer => BitConverter.ToInt32(_etwEvent.Data[Offset_DhcpServer..Offset_Gateway]);
 
                 /// <summary>
                 /// Retrieves the Gateway field.
                 /// </summary>
-                public int Gateway => BitConverter.ToInt32(_etwEvent.Data[Offset_Gateway..]);
+                public int Gateway => BitConverter.ToInt32(_etwEvent.Data[Offset_Gateway..Offset_PrimaryWinsServer]);
 
                 /// <summary>
                 /// Retrieves the PrimaryWinsServer field.
                 /// </summary>
-                public int PrimaryWinsServer => BitConverter.ToInt32(_etwEvent.Data[Offset_PrimaryWinsServer..]);
+                public int PrimaryWinsServer => BitConverter.ToInt32(_etwEvent.Data[Offset_PrimaryWinsServer..Offset_SecondaryWinsServer]);
 
                 /// <summary>
                 /// Retrieves the SecondaryWinsServer field.
                 /// </summary>
-                public int SecondaryWinsServer => BitConverter.ToInt32(_etwEvent.Data[Offset_SecondaryWinsServer..]);
+                public int SecondaryWinsServer => BitConverter.ToInt32(_etwEvent.Data[Offset_SecondaryWinsServer..Offset_DnsServer1]);
 
                 /// <summary>
                 /// Retrieves the DnsServer1 field.
                 /// </summary>
-                public int DnsServer1 => BitConverter.ToInt32(_etwEvent.Data[Offset_DnsServer1..]);
+                public int DnsServer1 => BitConverter.ToInt32(_etwEvent.Data[Offset_DnsServer1..Offset_DnsServer2]);
 
                 /// <summary>
                 /// Retrieves the DnsServer2 field.
                 /// </summary>
-                public int DnsServer2 => BitConverter.ToInt32(_etwEvent.Data[Offset_DnsServer2..]);
+                public int DnsServer2 => BitConverter.ToInt32(_etwEvent.Data[Offset_DnsServer2..Offset_DnsServer3]);
 
                 /// <summary>
                 /// Retrieves the DnsServer3 field.
                 /// </summary>
-                public int DnsServer3 => BitConverter.ToInt32(_etwEvent.Data[Offset_DnsServer3..]);
+                public int DnsServer3 => BitConverter.ToInt32(_etwEvent.Data[Offset_DnsServer3..Offset_DnsServer4]);
 
                 /// <summary>
                 /// Retrieves the DnsServer4 field.
                 /// </summary>
-                public int DnsServer4 => BitConverter.ToInt32(_etwEvent.Data[Offset_DnsServer4..]);
+                public int DnsServer4 => BitConverter.ToInt32(_etwEvent.Data[Offset_DnsServer4..Offset_Data]);
 
                 /// <summary>
                 /// Retrieves the Data field.
@@ -1644,6 +1668,12 @@ namespace EtwTools
             {
                 _etwEvent = etwEvent;
             }
+
+            /// <summary>
+            /// Converts a generic ETW event to a VideoEvent.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator VideoEvent(EtwEvent etwEvent) => new(etwEvent);
 
             /// <summary>
             /// A data wrapper for a Video event.
@@ -1810,52 +1840,52 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the MemorySize field.
                 /// </summary>
-                public uint MemorySize => BitConverter.ToUInt32(_etwEvent.Data[Offset_MemorySize..]);
+                public uint MemorySize => BitConverter.ToUInt32(_etwEvent.Data[Offset_MemorySize..Offset_XResolution]);
 
                 /// <summary>
                 /// Retrieves the XResolution field.
                 /// </summary>
-                public uint XResolution => BitConverter.ToUInt32(_etwEvent.Data[Offset_XResolution..]);
+                public uint XResolution => BitConverter.ToUInt32(_etwEvent.Data[Offset_XResolution..Offset_YResolution]);
 
                 /// <summary>
                 /// Retrieves the YResolution field.
                 /// </summary>
-                public uint YResolution => BitConverter.ToUInt32(_etwEvent.Data[Offset_YResolution..]);
+                public uint YResolution => BitConverter.ToUInt32(_etwEvent.Data[Offset_YResolution..Offset_BitsPerPixel]);
 
                 /// <summary>
                 /// Retrieves the BitsPerPixel field.
                 /// </summary>
-                public uint BitsPerPixel => BitConverter.ToUInt32(_etwEvent.Data[Offset_BitsPerPixel..]);
+                public uint BitsPerPixel => BitConverter.ToUInt32(_etwEvent.Data[Offset_BitsPerPixel..Offset_VRefresh]);
 
                 /// <summary>
                 /// Retrieves the VRefresh field.
                 /// </summary>
-                public uint VRefresh => BitConverter.ToUInt32(_etwEvent.Data[Offset_VRefresh..]);
+                public uint VRefresh => BitConverter.ToUInt32(_etwEvent.Data[Offset_VRefresh..Offset_ChipType]);
 
                 /// <summary>
                 /// Retrieves the ChipType field.
                 /// </summary>
-                public char ChipType => BitConverter.ToChar(_etwEvent.Data[Offset_ChipType..]);
+                public char ChipType => BitConverter.ToChar(_etwEvent.Data[Offset_ChipType..Offset_DACType]);
 
                 /// <summary>
                 /// Retrieves the DACType field.
                 /// </summary>
-                public char DACType => BitConverter.ToChar(_etwEvent.Data[Offset_DACType..]);
+                public char DACType => BitConverter.ToChar(_etwEvent.Data[Offset_DACType..Offset_AdapterString]);
 
                 /// <summary>
                 /// Retrieves the AdapterString field.
                 /// </summary>
-                public char AdapterString => BitConverter.ToChar(_etwEvent.Data[Offset_AdapterString..]);
+                public char AdapterString => BitConverter.ToChar(_etwEvent.Data[Offset_AdapterString..Offset_BiosString]);
 
                 /// <summary>
                 /// Retrieves the BiosString field.
                 /// </summary>
-                public char BiosString => BitConverter.ToChar(_etwEvent.Data[Offset_BiosString..]);
+                public char BiosString => BitConverter.ToChar(_etwEvent.Data[Offset_BiosString..Offset_DeviceId]);
 
                 /// <summary>
                 /// Retrieves the DeviceId field.
                 /// </summary>
-                public char DeviceId => BitConverter.ToChar(_etwEvent.Data[Offset_DeviceId..]);
+                public char DeviceId => BitConverter.ToChar(_etwEvent.Data[Offset_DeviceId..Offset_StateFlags]);
 
                 /// <summary>
                 /// Retrieves the StateFlags field.
@@ -1956,6 +1986,12 @@ namespace EtwTools
             }
 
             /// <summary>
+            /// Converts a generic ETW event to a ServicesEvent.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator ServicesEvent(EtwEvent etwEvent) => new(etwEvent);
+
+            /// <summary>
             /// A data wrapper for a Services event.
             /// </summary>
             public ref struct ServicesData
@@ -2022,17 +2058,17 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the ServiceName field.
                 /// </summary>
-                public char ServiceName => BitConverter.ToChar(_etwEvent.Data[Offset_ServiceName..]);
+                public char ServiceName => BitConverter.ToChar(_etwEvent.Data[Offset_ServiceName..Offset_DisplayName]);
 
                 /// <summary>
                 /// Retrieves the DisplayName field.
                 /// </summary>
-                public char DisplayName => BitConverter.ToChar(_etwEvent.Data[Offset_DisplayName..]);
+                public char DisplayName => BitConverter.ToChar(_etwEvent.Data[Offset_DisplayName..Offset_ProcessName]);
 
                 /// <summary>
                 /// Retrieves the ProcessName field.
                 /// </summary>
-                public char ProcessName => BitConverter.ToChar(_etwEvent.Data[Offset_ProcessName..]);
+                public char ProcessName => BitConverter.ToChar(_etwEvent.Data[Offset_ProcessName..Offset_ProcessId]);
 
                 /// <summary>
                 /// Retrieves the ProcessId field.
@@ -2124,6 +2160,12 @@ namespace EtwTools
             {
                 _etwEvent = etwEvent;
             }
+
+            /// <summary>
+            /// Converts a generic ETW event to a PowerEvent.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator PowerEvent(EtwEvent etwEvent) => new(etwEvent);
 
             /// <summary>
             /// A data wrapper for a Power event.
@@ -2376,6 +2418,12 @@ namespace EtwTools
             }
 
             /// <summary>
+            /// Converts a generic ETW event to a IRQEvent.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator IRQEvent(EtwEvent etwEvent) => new(etwEvent);
+
+            /// <summary>
             /// A data wrapper for a IRQ event.
             /// </summary>
             public ref struct IRQData
@@ -2442,17 +2490,17 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the IRQAffinity field.
                 /// </summary>
-                public ulong IRQAffinity => BitConverter.ToUInt64(_etwEvent.Data[Offset_IRQAffinity..]);
+                public ulong IRQAffinity => BitConverter.ToUInt64(_etwEvent.Data[Offset_IRQAffinity..Offset_IRQNum]);
 
                 /// <summary>
                 /// Retrieves the IRQNum field.
                 /// </summary>
-                public uint IRQNum => BitConverter.ToUInt32(_etwEvent.Data[Offset_IRQNum..]);
+                public uint IRQNum => BitConverter.ToUInt32(_etwEvent.Data[Offset_IRQNum..Offset_DeviceDescriptionLen]);
 
                 /// <summary>
                 /// Retrieves the DeviceDescriptionLen field.
                 /// </summary>
-                public uint DeviceDescriptionLen => BitConverter.ToUInt32(_etwEvent.Data[Offset_DeviceDescriptionLen..]);
+                public uint DeviceDescriptionLen => BitConverter.ToUInt32(_etwEvent.Data[Offset_DeviceDescriptionLen..Offset_DeviceDescription]);
 
                 /// <summary>
                 /// Retrieves the DeviceDescription field.
@@ -2544,6 +2592,12 @@ namespace EtwTools
             {
                 _etwEvent = etwEvent;
             }
+
+            /// <summary>
+            /// Converts a generic ETW event to a PnPEvent.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator PnPEvent(EtwEvent etwEvent) => new(etwEvent);
 
             /// <summary>
             /// A data wrapper for a PnP event.
@@ -2640,27 +2694,27 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the IDLength field.
                 /// </summary>
-                public uint IDLength => BitConverter.ToUInt32(_etwEvent.Data[Offset_IDLength..]);
+                public uint IDLength => BitConverter.ToUInt32(_etwEvent.Data[Offset_IDLength..Offset_DescriptionLength]);
 
                 /// <summary>
                 /// Retrieves the DescriptionLength field.
                 /// </summary>
-                public uint DescriptionLength => BitConverter.ToUInt32(_etwEvent.Data[Offset_DescriptionLength..]);
+                public uint DescriptionLength => BitConverter.ToUInt32(_etwEvent.Data[Offset_DescriptionLength..Offset_FriendlyNameLength]);
 
                 /// <summary>
                 /// Retrieves the FriendlyNameLength field.
                 /// </summary>
-                public uint FriendlyNameLength => BitConverter.ToUInt32(_etwEvent.Data[Offset_FriendlyNameLength..]);
+                public uint FriendlyNameLength => BitConverter.ToUInt32(_etwEvent.Data[Offset_FriendlyNameLength..Offset_DeviceID]);
 
                 /// <summary>
                 /// Retrieves the DeviceID field.
                 /// </summary>
-                public string DeviceID => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_DeviceID..]);
+                public string DeviceID => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_DeviceID..Offset_DeviceDescription]);
 
                 /// <summary>
                 /// Retrieves the DeviceDescription field.
                 /// </summary>
-                public string DeviceDescription => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_DeviceDescription..]);
+                public string DeviceDescription => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_DeviceDescription..Offset_FriendlyName]);
 
                 /// <summary>
                 /// Retrieves the FriendlyName field.
@@ -2754,6 +2808,12 @@ namespace EtwTools
             {
                 _etwEvent = etwEvent;
             }
+
+            /// <summary>
+            /// Converts a generic ETW event to a CPUEventV1.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator CPUEventV1(EtwEvent etwEvent) => new(etwEvent);
 
             /// <summary>
             /// A data wrapper for a CPU event.
@@ -2878,37 +2938,37 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the MHz field.
                 /// </summary>
-                public uint MHz => BitConverter.ToUInt32(_etwEvent.Data[Offset_MHz..]);
+                public uint MHz => BitConverter.ToUInt32(_etwEvent.Data[Offset_MHz..Offset_NumberOfProcessors]);
 
                 /// <summary>
                 /// Retrieves the NumberOfProcessors field.
                 /// </summary>
-                public uint NumberOfProcessors => BitConverter.ToUInt32(_etwEvent.Data[Offset_NumberOfProcessors..]);
+                public uint NumberOfProcessors => BitConverter.ToUInt32(_etwEvent.Data[Offset_NumberOfProcessors..Offset_MemSize]);
 
                 /// <summary>
                 /// Retrieves the MemSize field.
                 /// </summary>
-                public uint MemSize => BitConverter.ToUInt32(_etwEvent.Data[Offset_MemSize..]);
+                public uint MemSize => BitConverter.ToUInt32(_etwEvent.Data[Offset_MemSize..Offset_PageSize]);
 
                 /// <summary>
                 /// Retrieves the PageSize field.
                 /// </summary>
-                public uint PageSize => BitConverter.ToUInt32(_etwEvent.Data[Offset_PageSize..]);
+                public uint PageSize => BitConverter.ToUInt32(_etwEvent.Data[Offset_PageSize..Offset_AllocationGranularity]);
 
                 /// <summary>
                 /// Retrieves the AllocationGranularity field.
                 /// </summary>
-                public uint AllocationGranularity => BitConverter.ToUInt32(_etwEvent.Data[Offset_AllocationGranularity..]);
+                public uint AllocationGranularity => BitConverter.ToUInt32(_etwEvent.Data[Offset_AllocationGranularity..Offset_ComputerName]);
 
                 /// <summary>
                 /// Retrieves the ComputerName field.
                 /// </summary>
-                public char ComputerName => BitConverter.ToChar(_etwEvent.Data[Offset_ComputerName..]);
+                public char ComputerName => BitConverter.ToChar(_etwEvent.Data[Offset_ComputerName..Offset_DomainName]);
 
                 /// <summary>
                 /// Retrieves the DomainName field.
                 /// </summary>
-                public char DomainName => BitConverter.ToChar(_etwEvent.Data[Offset_DomainName..]);
+                public char DomainName => BitConverter.ToChar(_etwEvent.Data[Offset_DomainName..Offset_HyperThreadingFlag]);
 
                 /// <summary>
                 /// Retrieves the HyperThreadingFlag field.
@@ -3004,6 +3064,12 @@ namespace EtwTools
             {
                 _etwEvent = etwEvent;
             }
+
+            /// <summary>
+            /// Converts a generic ETW event to a PhyDiskEventV1.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator PhyDiskEventV1(EtwEvent etwEvent) => new(etwEvent);
 
             /// <summary>
             /// A data wrapper for a PhyDisk event.
@@ -3226,57 +3292,57 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the DiskNumber field.
                 /// </summary>
-                public uint DiskNumber => BitConverter.ToUInt32(_etwEvent.Data[Offset_DiskNumber..]);
+                public uint DiskNumber => BitConverter.ToUInt32(_etwEvent.Data[Offset_DiskNumber..Offset_BytesPerSector]);
 
                 /// <summary>
                 /// Retrieves the BytesPerSector field.
                 /// </summary>
-                public uint BytesPerSector => BitConverter.ToUInt32(_etwEvent.Data[Offset_BytesPerSector..]);
+                public uint BytesPerSector => BitConverter.ToUInt32(_etwEvent.Data[Offset_BytesPerSector..Offset_SectorsPerTrack]);
 
                 /// <summary>
                 /// Retrieves the SectorsPerTrack field.
                 /// </summary>
-                public uint SectorsPerTrack => BitConverter.ToUInt32(_etwEvent.Data[Offset_SectorsPerTrack..]);
+                public uint SectorsPerTrack => BitConverter.ToUInt32(_etwEvent.Data[Offset_SectorsPerTrack..Offset_TracksPerCylinder]);
 
                 /// <summary>
                 /// Retrieves the TracksPerCylinder field.
                 /// </summary>
-                public uint TracksPerCylinder => BitConverter.ToUInt32(_etwEvent.Data[Offset_TracksPerCylinder..]);
+                public uint TracksPerCylinder => BitConverter.ToUInt32(_etwEvent.Data[Offset_TracksPerCylinder..Offset_Cylinders]);
 
                 /// <summary>
                 /// Retrieves the Cylinders field.
                 /// </summary>
-                public ulong Cylinders => BitConverter.ToUInt64(_etwEvent.Data[Offset_Cylinders..]);
+                public ulong Cylinders => BitConverter.ToUInt64(_etwEvent.Data[Offset_Cylinders..Offset_SCSIPort]);
 
                 /// <summary>
                 /// Retrieves the SCSIPort field.
                 /// </summary>
-                public uint SCSIPort => BitConverter.ToUInt32(_etwEvent.Data[Offset_SCSIPort..]);
+                public uint SCSIPort => BitConverter.ToUInt32(_etwEvent.Data[Offset_SCSIPort..Offset_SCSIPath]);
 
                 /// <summary>
                 /// Retrieves the SCSIPath field.
                 /// </summary>
-                public uint SCSIPath => BitConverter.ToUInt32(_etwEvent.Data[Offset_SCSIPath..]);
+                public uint SCSIPath => BitConverter.ToUInt32(_etwEvent.Data[Offset_SCSIPath..Offset_SCSITarget]);
 
                 /// <summary>
                 /// Retrieves the SCSITarget field.
                 /// </summary>
-                public uint SCSITarget => BitConverter.ToUInt32(_etwEvent.Data[Offset_SCSITarget..]);
+                public uint SCSITarget => BitConverter.ToUInt32(_etwEvent.Data[Offset_SCSITarget..Offset_SCSILun]);
 
                 /// <summary>
                 /// Retrieves the SCSILun field.
                 /// </summary>
-                public uint SCSILun => BitConverter.ToUInt32(_etwEvent.Data[Offset_SCSILun..]);
+                public uint SCSILun => BitConverter.ToUInt32(_etwEvent.Data[Offset_SCSILun..Offset_Manufacturer]);
 
                 /// <summary>
                 /// Retrieves the Manufacturer field.
                 /// </summary>
-                public char Manufacturer => BitConverter.ToChar(_etwEvent.Data[Offset_Manufacturer..]);
+                public char Manufacturer => BitConverter.ToChar(_etwEvent.Data[Offset_Manufacturer..Offset_PartitionCount]);
 
                 /// <summary>
                 /// Retrieves the PartitionCount field.
                 /// </summary>
-                public uint PartitionCount => BitConverter.ToUInt32(_etwEvent.Data[Offset_PartitionCount..]);
+                public uint PartitionCount => BitConverter.ToUInt32(_etwEvent.Data[Offset_PartitionCount..Offset_WriteCacheEnabled]);
 
                 /// <summary>
                 /// Retrieves the WriteCacheEnabled field.
@@ -3291,7 +3357,7 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the BootDriveLetter field.
                 /// </summary>
-                public char BootDriveLetter => BitConverter.ToChar(_etwEvent.Data[Offset_BootDriveLetter..]);
+                public char BootDriveLetter => BitConverter.ToChar(_etwEvent.Data[Offset_BootDriveLetter..Offset_Spare]);
 
                 /// <summary>
                 /// Retrieves the Spare field.
@@ -3394,6 +3460,12 @@ namespace EtwTools
             {
                 _etwEvent = etwEvent;
             }
+
+            /// <summary>
+            /// Converts a generic ETW event to a LogDiskEventV1.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator LogDiskEventV1(EtwEvent etwEvent) => new(etwEvent);
 
             /// <summary>
             /// A data wrapper for a LogDisk event.
@@ -3616,72 +3688,72 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the StartOffset field.
                 /// </summary>
-                public ulong StartOffset => BitConverter.ToUInt64(_etwEvent.Data[Offset_StartOffset..]);
+                public ulong StartOffset => BitConverter.ToUInt64(_etwEvent.Data[Offset_StartOffset..Offset_PartitionSize]);
 
                 /// <summary>
                 /// Retrieves the PartitionSize field.
                 /// </summary>
-                public ulong PartitionSize => BitConverter.ToUInt64(_etwEvent.Data[Offset_PartitionSize..]);
+                public ulong PartitionSize => BitConverter.ToUInt64(_etwEvent.Data[Offset_PartitionSize..Offset_DiskNumber]);
 
                 /// <summary>
                 /// Retrieves the DiskNumber field.
                 /// </summary>
-                public uint DiskNumber => BitConverter.ToUInt32(_etwEvent.Data[Offset_DiskNumber..]);
+                public uint DiskNumber => BitConverter.ToUInt32(_etwEvent.Data[Offset_DiskNumber..Offset_Size]);
 
                 /// <summary>
                 /// Retrieves the Size field.
                 /// </summary>
-                public uint Size => BitConverter.ToUInt32(_etwEvent.Data[Offset_Size..]);
+                public uint Size => BitConverter.ToUInt32(_etwEvent.Data[Offset_Size..Offset_DriveType]);
 
                 /// <summary>
                 /// Retrieves the DriveType field.
                 /// </summary>
-                public uint DriveType => BitConverter.ToUInt32(_etwEvent.Data[Offset_DriveType..]);
+                public uint DriveType => BitConverter.ToUInt32(_etwEvent.Data[Offset_DriveType..Offset_DriveLetterString]);
 
                 /// <summary>
                 /// Retrieves the DriveLetterString field.
                 /// </summary>
-                public char DriveLetterString => BitConverter.ToChar(_etwEvent.Data[Offset_DriveLetterString..]);
+                public char DriveLetterString => BitConverter.ToChar(_etwEvent.Data[Offset_DriveLetterString..Offset_Pad1]);
 
                 /// <summary>
                 /// Retrieves the Pad1 field.
                 /// </summary>
-                public uint Pad1 => BitConverter.ToUInt32(_etwEvent.Data[Offset_Pad1..]);
+                public uint Pad1 => BitConverter.ToUInt32(_etwEvent.Data[Offset_Pad1..Offset_PartitionNumber]);
 
                 /// <summary>
                 /// Retrieves the PartitionNumber field.
                 /// </summary>
-                public uint PartitionNumber => BitConverter.ToUInt32(_etwEvent.Data[Offset_PartitionNumber..]);
+                public uint PartitionNumber => BitConverter.ToUInt32(_etwEvent.Data[Offset_PartitionNumber..Offset_SectorsPerCluster]);
 
                 /// <summary>
                 /// Retrieves the SectorsPerCluster field.
                 /// </summary>
-                public uint SectorsPerCluster => BitConverter.ToUInt32(_etwEvent.Data[Offset_SectorsPerCluster..]);
+                public uint SectorsPerCluster => BitConverter.ToUInt32(_etwEvent.Data[Offset_SectorsPerCluster..Offset_BytesPerSector]);
 
                 /// <summary>
                 /// Retrieves the BytesPerSector field.
                 /// </summary>
-                public uint BytesPerSector => BitConverter.ToUInt32(_etwEvent.Data[Offset_BytesPerSector..]);
+                public uint BytesPerSector => BitConverter.ToUInt32(_etwEvent.Data[Offset_BytesPerSector..Offset_Pad2]);
 
                 /// <summary>
                 /// Retrieves the Pad2 field.
                 /// </summary>
-                public uint Pad2 => BitConverter.ToUInt32(_etwEvent.Data[Offset_Pad2..]);
+                public uint Pad2 => BitConverter.ToUInt32(_etwEvent.Data[Offset_Pad2..Offset_NumberOfFreeClusters]);
 
                 /// <summary>
                 /// Retrieves the NumberOfFreeClusters field.
                 /// </summary>
-                public long NumberOfFreeClusters => BitConverter.ToInt64(_etwEvent.Data[Offset_NumberOfFreeClusters..]);
+                public long NumberOfFreeClusters => BitConverter.ToInt64(_etwEvent.Data[Offset_NumberOfFreeClusters..Offset_TotalNumberOfClusters]);
 
                 /// <summary>
                 /// Retrieves the TotalNumberOfClusters field.
                 /// </summary>
-                public long TotalNumberOfClusters => BitConverter.ToInt64(_etwEvent.Data[Offset_TotalNumberOfClusters..]);
+                public long TotalNumberOfClusters => BitConverter.ToInt64(_etwEvent.Data[Offset_TotalNumberOfClusters..Offset_FileSystem]);
 
                 /// <summary>
                 /// Retrieves the FileSystem field.
                 /// </summary>
-                public char FileSystem => BitConverter.ToChar(_etwEvent.Data[Offset_FileSystem..]);
+                public char FileSystem => BitConverter.ToChar(_etwEvent.Data[Offset_FileSystem..Offset_VolumeExt]);
 
                 /// <summary>
                 /// Retrieves the VolumeExt field.
@@ -3784,6 +3856,12 @@ namespace EtwTools
             {
                 _etwEvent = etwEvent;
             }
+
+            /// <summary>
+            /// Converts a generic ETW event to a NICEventV1.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator NICEventV1(EtwEvent etwEvent) => new(etwEvent);
 
             /// <summary>
             /// A data wrapper for a NIC event.
@@ -4020,77 +4098,77 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the NICName field.
                 /// </summary>
-                public char NICName => BitConverter.ToChar(_etwEvent.Data[Offset_NICName..]);
+                public char NICName => BitConverter.ToChar(_etwEvent.Data[Offset_NICName..Offset_Index]);
 
                 /// <summary>
                 /// Retrieves the Index field.
                 /// </summary>
-                public uint Index => BitConverter.ToUInt32(_etwEvent.Data[Offset_Index..]);
+                public uint Index => BitConverter.ToUInt32(_etwEvent.Data[Offset_Index..Offset_PhysicalAddrLen]);
 
                 /// <summary>
                 /// Retrieves the PhysicalAddrLen field.
                 /// </summary>
-                public uint PhysicalAddrLen => BitConverter.ToUInt32(_etwEvent.Data[Offset_PhysicalAddrLen..]);
+                public uint PhysicalAddrLen => BitConverter.ToUInt32(_etwEvent.Data[Offset_PhysicalAddrLen..Offset_PhysicalAddr]);
 
                 /// <summary>
                 /// Retrieves the PhysicalAddr field.
                 /// </summary>
-                public char PhysicalAddr => BitConverter.ToChar(_etwEvent.Data[Offset_PhysicalAddr..]);
+                public char PhysicalAddr => BitConverter.ToChar(_etwEvent.Data[Offset_PhysicalAddr..Offset_Size]);
 
                 /// <summary>
                 /// Retrieves the Size field.
                 /// </summary>
-                public uint Size => BitConverter.ToUInt32(_etwEvent.Data[Offset_Size..]);
+                public uint Size => BitConverter.ToUInt32(_etwEvent.Data[Offset_Size..Offset_IpAddress]);
 
                 /// <summary>
                 /// Retrieves the IpAddress field.
                 /// </summary>
-                public int IpAddress => BitConverter.ToInt32(_etwEvent.Data[Offset_IpAddress..]);
+                public int IpAddress => BitConverter.ToInt32(_etwEvent.Data[Offset_IpAddress..Offset_SubnetMask]);
 
                 /// <summary>
                 /// Retrieves the SubnetMask field.
                 /// </summary>
-                public int SubnetMask => BitConverter.ToInt32(_etwEvent.Data[Offset_SubnetMask..]);
+                public int SubnetMask => BitConverter.ToInt32(_etwEvent.Data[Offset_SubnetMask..Offset_DhcpServer]);
 
                 /// <summary>
                 /// Retrieves the DhcpServer field.
                 /// </summary>
-                public int DhcpServer => BitConverter.ToInt32(_etwEvent.Data[Offset_DhcpServer..]);
+                public int DhcpServer => BitConverter.ToInt32(_etwEvent.Data[Offset_DhcpServer..Offset_Gateway]);
 
                 /// <summary>
                 /// Retrieves the Gateway field.
                 /// </summary>
-                public int Gateway => BitConverter.ToInt32(_etwEvent.Data[Offset_Gateway..]);
+                public int Gateway => BitConverter.ToInt32(_etwEvent.Data[Offset_Gateway..Offset_PrimaryWinsServer]);
 
                 /// <summary>
                 /// Retrieves the PrimaryWinsServer field.
                 /// </summary>
-                public int PrimaryWinsServer => BitConverter.ToInt32(_etwEvent.Data[Offset_PrimaryWinsServer..]);
+                public int PrimaryWinsServer => BitConverter.ToInt32(_etwEvent.Data[Offset_PrimaryWinsServer..Offset_SecondaryWinsServer]);
 
                 /// <summary>
                 /// Retrieves the SecondaryWinsServer field.
                 /// </summary>
-                public int SecondaryWinsServer => BitConverter.ToInt32(_etwEvent.Data[Offset_SecondaryWinsServer..]);
+                public int SecondaryWinsServer => BitConverter.ToInt32(_etwEvent.Data[Offset_SecondaryWinsServer..Offset_DnsServer1]);
 
                 /// <summary>
                 /// Retrieves the DnsServer1 field.
                 /// </summary>
-                public int DnsServer1 => BitConverter.ToInt32(_etwEvent.Data[Offset_DnsServer1..]);
+                public int DnsServer1 => BitConverter.ToInt32(_etwEvent.Data[Offset_DnsServer1..Offset_DnsServer2]);
 
                 /// <summary>
                 /// Retrieves the DnsServer2 field.
                 /// </summary>
-                public int DnsServer2 => BitConverter.ToInt32(_etwEvent.Data[Offset_DnsServer2..]);
+                public int DnsServer2 => BitConverter.ToInt32(_etwEvent.Data[Offset_DnsServer2..Offset_DnsServer3]);
 
                 /// <summary>
                 /// Retrieves the DnsServer3 field.
                 /// </summary>
-                public int DnsServer3 => BitConverter.ToInt32(_etwEvent.Data[Offset_DnsServer3..]);
+                public int DnsServer3 => BitConverter.ToInt32(_etwEvent.Data[Offset_DnsServer3..Offset_DnsServer4]);
 
                 /// <summary>
                 /// Retrieves the DnsServer4 field.
                 /// </summary>
-                public int DnsServer4 => BitConverter.ToInt32(_etwEvent.Data[Offset_DnsServer4..]);
+                public int DnsServer4 => BitConverter.ToInt32(_etwEvent.Data[Offset_DnsServer4..Offset_Data]);
 
                 /// <summary>
                 /// Retrieves the Data field.
@@ -4194,6 +4272,12 @@ namespace EtwTools
             {
                 _etwEvent = etwEvent;
             }
+
+            /// <summary>
+            /// Converts a generic ETW event to a VideoEventV1.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator VideoEventV1(EtwEvent etwEvent) => new(etwEvent);
 
             /// <summary>
             /// A data wrapper for a Video event.
@@ -4360,52 +4444,52 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the MemorySize field.
                 /// </summary>
-                public uint MemorySize => BitConverter.ToUInt32(_etwEvent.Data[Offset_MemorySize..]);
+                public uint MemorySize => BitConverter.ToUInt32(_etwEvent.Data[Offset_MemorySize..Offset_XResolution]);
 
                 /// <summary>
                 /// Retrieves the XResolution field.
                 /// </summary>
-                public uint XResolution => BitConverter.ToUInt32(_etwEvent.Data[Offset_XResolution..]);
+                public uint XResolution => BitConverter.ToUInt32(_etwEvent.Data[Offset_XResolution..Offset_YResolution]);
 
                 /// <summary>
                 /// Retrieves the YResolution field.
                 /// </summary>
-                public uint YResolution => BitConverter.ToUInt32(_etwEvent.Data[Offset_YResolution..]);
+                public uint YResolution => BitConverter.ToUInt32(_etwEvent.Data[Offset_YResolution..Offset_BitsPerPixel]);
 
                 /// <summary>
                 /// Retrieves the BitsPerPixel field.
                 /// </summary>
-                public uint BitsPerPixel => BitConverter.ToUInt32(_etwEvent.Data[Offset_BitsPerPixel..]);
+                public uint BitsPerPixel => BitConverter.ToUInt32(_etwEvent.Data[Offset_BitsPerPixel..Offset_VRefresh]);
 
                 /// <summary>
                 /// Retrieves the VRefresh field.
                 /// </summary>
-                public uint VRefresh => BitConverter.ToUInt32(_etwEvent.Data[Offset_VRefresh..]);
+                public uint VRefresh => BitConverter.ToUInt32(_etwEvent.Data[Offset_VRefresh..Offset_ChipType]);
 
                 /// <summary>
                 /// Retrieves the ChipType field.
                 /// </summary>
-                public char ChipType => BitConverter.ToChar(_etwEvent.Data[Offset_ChipType..]);
+                public char ChipType => BitConverter.ToChar(_etwEvent.Data[Offset_ChipType..Offset_DACType]);
 
                 /// <summary>
                 /// Retrieves the DACType field.
                 /// </summary>
-                public char DACType => BitConverter.ToChar(_etwEvent.Data[Offset_DACType..]);
+                public char DACType => BitConverter.ToChar(_etwEvent.Data[Offset_DACType..Offset_AdapterString]);
 
                 /// <summary>
                 /// Retrieves the AdapterString field.
                 /// </summary>
-                public char AdapterString => BitConverter.ToChar(_etwEvent.Data[Offset_AdapterString..]);
+                public char AdapterString => BitConverter.ToChar(_etwEvent.Data[Offset_AdapterString..Offset_BiosString]);
 
                 /// <summary>
                 /// Retrieves the BiosString field.
                 /// </summary>
-                public char BiosString => BitConverter.ToChar(_etwEvent.Data[Offset_BiosString..]);
+                public char BiosString => BitConverter.ToChar(_etwEvent.Data[Offset_BiosString..Offset_DeviceId]);
 
                 /// <summary>
                 /// Retrieves the DeviceId field.
                 /// </summary>
-                public char DeviceId => BitConverter.ToChar(_etwEvent.Data[Offset_DeviceId..]);
+                public char DeviceId => BitConverter.ToChar(_etwEvent.Data[Offset_DeviceId..Offset_StateFlags]);
 
                 /// <summary>
                 /// Retrieves the StateFlags field.
@@ -4506,6 +4590,12 @@ namespace EtwTools
             }
 
             /// <summary>
+            /// Converts a generic ETW event to a ServicesEventV1.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator ServicesEventV1(EtwEvent etwEvent) => new(etwEvent);
+
+            /// <summary>
             /// A data wrapper for a Services event.
             /// </summary>
             public ref struct ServicesData
@@ -4572,17 +4662,17 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the ServiceName field.
                 /// </summary>
-                public char ServiceName => BitConverter.ToChar(_etwEvent.Data[Offset_ServiceName..]);
+                public char ServiceName => BitConverter.ToChar(_etwEvent.Data[Offset_ServiceName..Offset_DisplayName]);
 
                 /// <summary>
                 /// Retrieves the DisplayName field.
                 /// </summary>
-                public char DisplayName => BitConverter.ToChar(_etwEvent.Data[Offset_DisplayName..]);
+                public char DisplayName => BitConverter.ToChar(_etwEvent.Data[Offset_DisplayName..Offset_ProcessName]);
 
                 /// <summary>
                 /// Retrieves the ProcessName field.
                 /// </summary>
-                public char ProcessName => BitConverter.ToChar(_etwEvent.Data[Offset_ProcessName..]);
+                public char ProcessName => BitConverter.ToChar(_etwEvent.Data[Offset_ProcessName..Offset_ProcessId]);
 
                 /// <summary>
                 /// Retrieves the ProcessId field.
@@ -4674,6 +4764,12 @@ namespace EtwTools
             {
                 _etwEvent = etwEvent;
             }
+
+            /// <summary>
+            /// Converts a generic ETW event to a PowerEventV1.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator PowerEventV1(EtwEvent etwEvent) => new(etwEvent);
 
             /// <summary>
             /// A data wrapper for a Power event.
@@ -4926,6 +5022,12 @@ namespace EtwTools
             }
 
             /// <summary>
+            /// Converts a generic ETW event to a IRQEventV1.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator IRQEventV1(EtwEvent etwEvent) => new(etwEvent);
+
+            /// <summary>
             /// A data wrapper for a IRQ event.
             /// </summary>
             public ref struct IRQData
@@ -4992,17 +5094,17 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the IRQAffinity field.
                 /// </summary>
-                public ulong IRQAffinity => BitConverter.ToUInt64(_etwEvent.Data[Offset_IRQAffinity..]);
+                public ulong IRQAffinity => BitConverter.ToUInt64(_etwEvent.Data[Offset_IRQAffinity..Offset_IRQNum]);
 
                 /// <summary>
                 /// Retrieves the IRQNum field.
                 /// </summary>
-                public uint IRQNum => BitConverter.ToUInt32(_etwEvent.Data[Offset_IRQNum..]);
+                public uint IRQNum => BitConverter.ToUInt32(_etwEvent.Data[Offset_IRQNum..Offset_DeviceDescriptionLen]);
 
                 /// <summary>
                 /// Retrieves the DeviceDescriptionLen field.
                 /// </summary>
-                public uint DeviceDescriptionLen => BitConverter.ToUInt32(_etwEvent.Data[Offset_DeviceDescriptionLen..]);
+                public uint DeviceDescriptionLen => BitConverter.ToUInt32(_etwEvent.Data[Offset_DeviceDescriptionLen..Offset_DeviceDescription]);
 
                 /// <summary>
                 /// Retrieves the DeviceDescription field.
@@ -5094,6 +5196,12 @@ namespace EtwTools
             {
                 _etwEvent = etwEvent;
             }
+
+            /// <summary>
+            /// Converts a generic ETW event to a PnPEventV1.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator PnPEventV1(EtwEvent etwEvent) => new(etwEvent);
 
             /// <summary>
             /// A data wrapper for a PnP event.
@@ -5190,27 +5298,27 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the IDLength field.
                 /// </summary>
-                public uint IDLength => BitConverter.ToUInt32(_etwEvent.Data[Offset_IDLength..]);
+                public uint IDLength => BitConverter.ToUInt32(_etwEvent.Data[Offset_IDLength..Offset_DescriptionLength]);
 
                 /// <summary>
                 /// Retrieves the DescriptionLength field.
                 /// </summary>
-                public uint DescriptionLength => BitConverter.ToUInt32(_etwEvent.Data[Offset_DescriptionLength..]);
+                public uint DescriptionLength => BitConverter.ToUInt32(_etwEvent.Data[Offset_DescriptionLength..Offset_FriendlyNameLength]);
 
                 /// <summary>
                 /// Retrieves the FriendlyNameLength field.
                 /// </summary>
-                public uint FriendlyNameLength => BitConverter.ToUInt32(_etwEvent.Data[Offset_FriendlyNameLength..]);
+                public uint FriendlyNameLength => BitConverter.ToUInt32(_etwEvent.Data[Offset_FriendlyNameLength..Offset_DeviceID]);
 
                 /// <summary>
                 /// Retrieves the DeviceID field.
                 /// </summary>
-                public string DeviceID => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_DeviceID..]);
+                public string DeviceID => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_DeviceID..Offset_DeviceDescription]);
 
                 /// <summary>
                 /// Retrieves the DeviceDescription field.
                 /// </summary>
-                public string DeviceDescription => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_DeviceDescription..]);
+                public string DeviceDescription => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_DeviceDescription..Offset_FriendlyName]);
 
                 /// <summary>
                 /// Retrieves the FriendlyName field.
@@ -5304,6 +5412,12 @@ namespace EtwTools
             {
                 _etwEvent = etwEvent;
             }
+
+            /// <summary>
+            /// Converts a generic ETW event to a CPUEventV2.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator CPUEventV2(EtwEvent etwEvent) => new(etwEvent);
 
             /// <summary>
             /// A data wrapper for a CPU event.
@@ -5428,37 +5542,37 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the MHz field.
                 /// </summary>
-                public uint MHz => BitConverter.ToUInt32(_etwEvent.Data[Offset_MHz..]);
+                public uint MHz => BitConverter.ToUInt32(_etwEvent.Data[Offset_MHz..Offset_NumberOfProcessors]);
 
                 /// <summary>
                 /// Retrieves the NumberOfProcessors field.
                 /// </summary>
-                public uint NumberOfProcessors => BitConverter.ToUInt32(_etwEvent.Data[Offset_NumberOfProcessors..]);
+                public uint NumberOfProcessors => BitConverter.ToUInt32(_etwEvent.Data[Offset_NumberOfProcessors..Offset_MemSize]);
 
                 /// <summary>
                 /// Retrieves the MemSize field.
                 /// </summary>
-                public uint MemSize => BitConverter.ToUInt32(_etwEvent.Data[Offset_MemSize..]);
+                public uint MemSize => BitConverter.ToUInt32(_etwEvent.Data[Offset_MemSize..Offset_PageSize]);
 
                 /// <summary>
                 /// Retrieves the PageSize field.
                 /// </summary>
-                public uint PageSize => BitConverter.ToUInt32(_etwEvent.Data[Offset_PageSize..]);
+                public uint PageSize => BitConverter.ToUInt32(_etwEvent.Data[Offset_PageSize..Offset_AllocationGranularity]);
 
                 /// <summary>
                 /// Retrieves the AllocationGranularity field.
                 /// </summary>
-                public uint AllocationGranularity => BitConverter.ToUInt32(_etwEvent.Data[Offset_AllocationGranularity..]);
+                public uint AllocationGranularity => BitConverter.ToUInt32(_etwEvent.Data[Offset_AllocationGranularity..Offset_ComputerName]);
 
                 /// <summary>
                 /// Retrieves the ComputerName field.
                 /// </summary>
-                public char ComputerName => BitConverter.ToChar(_etwEvent.Data[Offset_ComputerName..]);
+                public char ComputerName => BitConverter.ToChar(_etwEvent.Data[Offset_ComputerName..Offset_DomainName]);
 
                 /// <summary>
                 /// Retrieves the DomainName field.
                 /// </summary>
-                public char DomainName => BitConverter.ToChar(_etwEvent.Data[Offset_DomainName..]);
+                public char DomainName => BitConverter.ToChar(_etwEvent.Data[Offset_DomainName..Offset_HyperThreadingFlag]);
 
                 /// <summary>
                 /// Retrieves the HyperThreadingFlag field.
@@ -5554,6 +5668,12 @@ namespace EtwTools
             {
                 _etwEvent = etwEvent;
             }
+
+            /// <summary>
+            /// Converts a generic ETW event to a PhyDiskEventV2.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator PhyDiskEventV2(EtwEvent etwEvent) => new(etwEvent);
 
             /// <summary>
             /// A data wrapper for a PhyDisk event.
@@ -5776,57 +5896,57 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the DiskNumber field.
                 /// </summary>
-                public uint DiskNumber => BitConverter.ToUInt32(_etwEvent.Data[Offset_DiskNumber..]);
+                public uint DiskNumber => BitConverter.ToUInt32(_etwEvent.Data[Offset_DiskNumber..Offset_BytesPerSector]);
 
                 /// <summary>
                 /// Retrieves the BytesPerSector field.
                 /// </summary>
-                public uint BytesPerSector => BitConverter.ToUInt32(_etwEvent.Data[Offset_BytesPerSector..]);
+                public uint BytesPerSector => BitConverter.ToUInt32(_etwEvent.Data[Offset_BytesPerSector..Offset_SectorsPerTrack]);
 
                 /// <summary>
                 /// Retrieves the SectorsPerTrack field.
                 /// </summary>
-                public uint SectorsPerTrack => BitConverter.ToUInt32(_etwEvent.Data[Offset_SectorsPerTrack..]);
+                public uint SectorsPerTrack => BitConverter.ToUInt32(_etwEvent.Data[Offset_SectorsPerTrack..Offset_TracksPerCylinder]);
 
                 /// <summary>
                 /// Retrieves the TracksPerCylinder field.
                 /// </summary>
-                public uint TracksPerCylinder => BitConverter.ToUInt32(_etwEvent.Data[Offset_TracksPerCylinder..]);
+                public uint TracksPerCylinder => BitConverter.ToUInt32(_etwEvent.Data[Offset_TracksPerCylinder..Offset_Cylinders]);
 
                 /// <summary>
                 /// Retrieves the Cylinders field.
                 /// </summary>
-                public ulong Cylinders => BitConverter.ToUInt64(_etwEvent.Data[Offset_Cylinders..]);
+                public ulong Cylinders => BitConverter.ToUInt64(_etwEvent.Data[Offset_Cylinders..Offset_SCSIPort]);
 
                 /// <summary>
                 /// Retrieves the SCSIPort field.
                 /// </summary>
-                public uint SCSIPort => BitConverter.ToUInt32(_etwEvent.Data[Offset_SCSIPort..]);
+                public uint SCSIPort => BitConverter.ToUInt32(_etwEvent.Data[Offset_SCSIPort..Offset_SCSIPath]);
 
                 /// <summary>
                 /// Retrieves the SCSIPath field.
                 /// </summary>
-                public uint SCSIPath => BitConverter.ToUInt32(_etwEvent.Data[Offset_SCSIPath..]);
+                public uint SCSIPath => BitConverter.ToUInt32(_etwEvent.Data[Offset_SCSIPath..Offset_SCSITarget]);
 
                 /// <summary>
                 /// Retrieves the SCSITarget field.
                 /// </summary>
-                public uint SCSITarget => BitConverter.ToUInt32(_etwEvent.Data[Offset_SCSITarget..]);
+                public uint SCSITarget => BitConverter.ToUInt32(_etwEvent.Data[Offset_SCSITarget..Offset_SCSILun]);
 
                 /// <summary>
                 /// Retrieves the SCSILun field.
                 /// </summary>
-                public uint SCSILun => BitConverter.ToUInt32(_etwEvent.Data[Offset_SCSILun..]);
+                public uint SCSILun => BitConverter.ToUInt32(_etwEvent.Data[Offset_SCSILun..Offset_Manufacturer]);
 
                 /// <summary>
                 /// Retrieves the Manufacturer field.
                 /// </summary>
-                public char Manufacturer => BitConverter.ToChar(_etwEvent.Data[Offset_Manufacturer..]);
+                public char Manufacturer => BitConverter.ToChar(_etwEvent.Data[Offset_Manufacturer..Offset_PartitionCount]);
 
                 /// <summary>
                 /// Retrieves the PartitionCount field.
                 /// </summary>
-                public uint PartitionCount => BitConverter.ToUInt32(_etwEvent.Data[Offset_PartitionCount..]);
+                public uint PartitionCount => BitConverter.ToUInt32(_etwEvent.Data[Offset_PartitionCount..Offset_WriteCacheEnabled]);
 
                 /// <summary>
                 /// Retrieves the WriteCacheEnabled field.
@@ -5841,7 +5961,7 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the BootDriveLetter field.
                 /// </summary>
-                public char BootDriveLetter => BitConverter.ToChar(_etwEvent.Data[Offset_BootDriveLetter..]);
+                public char BootDriveLetter => BitConverter.ToChar(_etwEvent.Data[Offset_BootDriveLetter..Offset_Spare]);
 
                 /// <summary>
                 /// Retrieves the Spare field.
@@ -5944,6 +6064,12 @@ namespace EtwTools
             {
                 _etwEvent = etwEvent;
             }
+
+            /// <summary>
+            /// Converts a generic ETW event to a LogDiskEventV2.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator LogDiskEventV2(EtwEvent etwEvent) => new(etwEvent);
 
             /// <summary>
             /// A data wrapper for a LogDisk event.
@@ -6180,77 +6306,77 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the StartOffset field.
                 /// </summary>
-                public ulong StartOffset => BitConverter.ToUInt64(_etwEvent.Data[Offset_StartOffset..]);
+                public ulong StartOffset => BitConverter.ToUInt64(_etwEvent.Data[Offset_StartOffset..Offset_PartitionSize]);
 
                 /// <summary>
                 /// Retrieves the PartitionSize field.
                 /// </summary>
-                public ulong PartitionSize => BitConverter.ToUInt64(_etwEvent.Data[Offset_PartitionSize..]);
+                public ulong PartitionSize => BitConverter.ToUInt64(_etwEvent.Data[Offset_PartitionSize..Offset_DiskNumber]);
 
                 /// <summary>
                 /// Retrieves the DiskNumber field.
                 /// </summary>
-                public uint DiskNumber => BitConverter.ToUInt32(_etwEvent.Data[Offset_DiskNumber..]);
+                public uint DiskNumber => BitConverter.ToUInt32(_etwEvent.Data[Offset_DiskNumber..Offset_Size]);
 
                 /// <summary>
                 /// Retrieves the Size field.
                 /// </summary>
-                public uint Size => BitConverter.ToUInt32(_etwEvent.Data[Offset_Size..]);
+                public uint Size => BitConverter.ToUInt32(_etwEvent.Data[Offset_Size..Offset_DriveType]);
 
                 /// <summary>
                 /// Retrieves the DriveType field.
                 /// </summary>
-                public uint DriveType => BitConverter.ToUInt32(_etwEvent.Data[Offset_DriveType..]);
+                public uint DriveType => BitConverter.ToUInt32(_etwEvent.Data[Offset_DriveType..Offset_DriveLetterString]);
 
                 /// <summary>
                 /// Retrieves the DriveLetterString field.
                 /// </summary>
-                public char DriveLetterString => BitConverter.ToChar(_etwEvent.Data[Offset_DriveLetterString..]);
+                public char DriveLetterString => BitConverter.ToChar(_etwEvent.Data[Offset_DriveLetterString..Offset_Pad1]);
 
                 /// <summary>
                 /// Retrieves the Pad1 field.
                 /// </summary>
-                public uint Pad1 => BitConverter.ToUInt32(_etwEvent.Data[Offset_Pad1..]);
+                public uint Pad1 => BitConverter.ToUInt32(_etwEvent.Data[Offset_Pad1..Offset_PartitionNumber]);
 
                 /// <summary>
                 /// Retrieves the PartitionNumber field.
                 /// </summary>
-                public uint PartitionNumber => BitConverter.ToUInt32(_etwEvent.Data[Offset_PartitionNumber..]);
+                public uint PartitionNumber => BitConverter.ToUInt32(_etwEvent.Data[Offset_PartitionNumber..Offset_SectorsPerCluster]);
 
                 /// <summary>
                 /// Retrieves the SectorsPerCluster field.
                 /// </summary>
-                public uint SectorsPerCluster => BitConverter.ToUInt32(_etwEvent.Data[Offset_SectorsPerCluster..]);
+                public uint SectorsPerCluster => BitConverter.ToUInt32(_etwEvent.Data[Offset_SectorsPerCluster..Offset_BytesPerSector]);
 
                 /// <summary>
                 /// Retrieves the BytesPerSector field.
                 /// </summary>
-                public uint BytesPerSector => BitConverter.ToUInt32(_etwEvent.Data[Offset_BytesPerSector..]);
+                public uint BytesPerSector => BitConverter.ToUInt32(_etwEvent.Data[Offset_BytesPerSector..Offset_Pad2]);
 
                 /// <summary>
                 /// Retrieves the Pad2 field.
                 /// </summary>
-                public uint Pad2 => BitConverter.ToUInt32(_etwEvent.Data[Offset_Pad2..]);
+                public uint Pad2 => BitConverter.ToUInt32(_etwEvent.Data[Offset_Pad2..Offset_NumberOfFreeClusters]);
 
                 /// <summary>
                 /// Retrieves the NumberOfFreeClusters field.
                 /// </summary>
-                public long NumberOfFreeClusters => BitConverter.ToInt64(_etwEvent.Data[Offset_NumberOfFreeClusters..]);
+                public long NumberOfFreeClusters => BitConverter.ToInt64(_etwEvent.Data[Offset_NumberOfFreeClusters..Offset_TotalNumberOfClusters]);
 
                 /// <summary>
                 /// Retrieves the TotalNumberOfClusters field.
                 /// </summary>
-                public long TotalNumberOfClusters => BitConverter.ToInt64(_etwEvent.Data[Offset_TotalNumberOfClusters..]);
+                public long TotalNumberOfClusters => BitConverter.ToInt64(_etwEvent.Data[Offset_TotalNumberOfClusters..Offset_FileSystem]);
 
                 /// <summary>
                 /// Retrieves the FileSystem field.
                 /// </summary>
-                public char FileSystem => BitConverter.ToChar(_etwEvent.Data[Offset_FileSystem..]);
+                public char FileSystem => BitConverter.ToChar(_etwEvent.Data[Offset_FileSystem..Offset_VolumeExt]);
 
                 /// <summary>
                 /// Retrieves the VolumeExt field.
                 /// </summary>
-                public uint VolumeExt => BitConverter.ToUInt32(_etwEvent.Data[Offset_VolumeExt..]);
+                public uint VolumeExt => BitConverter.ToUInt32(_etwEvent.Data[Offset_VolumeExt..Offset_Pad3]);
 
                 /// <summary>
                 /// Retrieves the Pad3 field.
@@ -6354,6 +6480,12 @@ namespace EtwTools
             {
                 _etwEvent = etwEvent;
             }
+
+            /// <summary>
+            /// Converts a generic ETW event to a NICEventV2.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator NICEventV2(EtwEvent etwEvent) => new(etwEvent);
 
             /// <summary>
             /// A data wrapper for a NIC event.
@@ -6464,32 +6596,32 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the PhysicalAddr field.
                 /// </summary>
-                public ulong PhysicalAddr => BitConverter.ToUInt64(_etwEvent.Data[Offset_PhysicalAddr..]);
+                public ulong PhysicalAddr => BitConverter.ToUInt64(_etwEvent.Data[Offset_PhysicalAddr..Offset_PhysicalAddrLen]);
 
                 /// <summary>
                 /// Retrieves the PhysicalAddrLen field.
                 /// </summary>
-                public uint PhysicalAddrLen => BitConverter.ToUInt32(_etwEvent.Data[Offset_PhysicalAddrLen..]);
+                public uint PhysicalAddrLen => BitConverter.ToUInt32(_etwEvent.Data[Offset_PhysicalAddrLen..Offset_Ipv4Index]);
 
                 /// <summary>
                 /// Retrieves the Ipv4Index field.
                 /// </summary>
-                public uint Ipv4Index => BitConverter.ToUInt32(_etwEvent.Data[Offset_Ipv4Index..]);
+                public uint Ipv4Index => BitConverter.ToUInt32(_etwEvent.Data[Offset_Ipv4Index..Offset_Ipv6Index]);
 
                 /// <summary>
                 /// Retrieves the Ipv6Index field.
                 /// </summary>
-                public uint Ipv6Index => BitConverter.ToUInt32(_etwEvent.Data[Offset_Ipv6Index..]);
+                public uint Ipv6Index => BitConverter.ToUInt32(_etwEvent.Data[Offset_Ipv6Index..Offset_NICDescription]);
 
                 /// <summary>
                 /// Retrieves the NICDescription field.
                 /// </summary>
-                public string NICDescription => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_NICDescription..]);
+                public string NICDescription => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_NICDescription..Offset_IpAddresses]);
 
                 /// <summary>
                 /// Retrieves the IpAddresses field.
                 /// </summary>
-                public string IpAddresses => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_IpAddresses..]);
+                public string IpAddresses => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_IpAddresses..Offset_DnsServerAddresses]);
 
                 /// <summary>
                 /// Retrieves the DnsServerAddresses field.
@@ -6584,6 +6716,12 @@ namespace EtwTools
             {
                 _etwEvent = etwEvent;
             }
+
+            /// <summary>
+            /// Converts a generic ETW event to a VideoEventV2.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator VideoEventV2(EtwEvent etwEvent) => new(etwEvent);
 
             /// <summary>
             /// A data wrapper for a Video event.
@@ -6750,52 +6888,52 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the MemorySize field.
                 /// </summary>
-                public uint MemorySize => BitConverter.ToUInt32(_etwEvent.Data[Offset_MemorySize..]);
+                public uint MemorySize => BitConverter.ToUInt32(_etwEvent.Data[Offset_MemorySize..Offset_XResolution]);
 
                 /// <summary>
                 /// Retrieves the XResolution field.
                 /// </summary>
-                public uint XResolution => BitConverter.ToUInt32(_etwEvent.Data[Offset_XResolution..]);
+                public uint XResolution => BitConverter.ToUInt32(_etwEvent.Data[Offset_XResolution..Offset_YResolution]);
 
                 /// <summary>
                 /// Retrieves the YResolution field.
                 /// </summary>
-                public uint YResolution => BitConverter.ToUInt32(_etwEvent.Data[Offset_YResolution..]);
+                public uint YResolution => BitConverter.ToUInt32(_etwEvent.Data[Offset_YResolution..Offset_BitsPerPixel]);
 
                 /// <summary>
                 /// Retrieves the BitsPerPixel field.
                 /// </summary>
-                public uint BitsPerPixel => BitConverter.ToUInt32(_etwEvent.Data[Offset_BitsPerPixel..]);
+                public uint BitsPerPixel => BitConverter.ToUInt32(_etwEvent.Data[Offset_BitsPerPixel..Offset_VRefresh]);
 
                 /// <summary>
                 /// Retrieves the VRefresh field.
                 /// </summary>
-                public uint VRefresh => BitConverter.ToUInt32(_etwEvent.Data[Offset_VRefresh..]);
+                public uint VRefresh => BitConverter.ToUInt32(_etwEvent.Data[Offset_VRefresh..Offset_ChipType]);
 
                 /// <summary>
                 /// Retrieves the ChipType field.
                 /// </summary>
-                public char ChipType => BitConverter.ToChar(_etwEvent.Data[Offset_ChipType..]);
+                public char ChipType => BitConverter.ToChar(_etwEvent.Data[Offset_ChipType..Offset_DACType]);
 
                 /// <summary>
                 /// Retrieves the DACType field.
                 /// </summary>
-                public char DACType => BitConverter.ToChar(_etwEvent.Data[Offset_DACType..]);
+                public char DACType => BitConverter.ToChar(_etwEvent.Data[Offset_DACType..Offset_AdapterString]);
 
                 /// <summary>
                 /// Retrieves the AdapterString field.
                 /// </summary>
-                public char AdapterString => BitConverter.ToChar(_etwEvent.Data[Offset_AdapterString..]);
+                public char AdapterString => BitConverter.ToChar(_etwEvent.Data[Offset_AdapterString..Offset_BiosString]);
 
                 /// <summary>
                 /// Retrieves the BiosString field.
                 /// </summary>
-                public char BiosString => BitConverter.ToChar(_etwEvent.Data[Offset_BiosString..]);
+                public char BiosString => BitConverter.ToChar(_etwEvent.Data[Offset_BiosString..Offset_DeviceId]);
 
                 /// <summary>
                 /// Retrieves the DeviceId field.
                 /// </summary>
-                public char DeviceId => BitConverter.ToChar(_etwEvent.Data[Offset_DeviceId..]);
+                public char DeviceId => BitConverter.ToChar(_etwEvent.Data[Offset_DeviceId..Offset_StateFlags]);
 
                 /// <summary>
                 /// Retrieves the StateFlags field.
@@ -6896,6 +7034,12 @@ namespace EtwTools
             }
 
             /// <summary>
+            /// Converts a generic ETW event to a ServicesEventV2.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator ServicesEventV2(EtwEvent etwEvent) => new(etwEvent);
+
+            /// <summary>
             /// A data wrapper for a Services event.
             /// </summary>
             public ref struct ServicesData
@@ -6990,27 +7134,27 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the ProcessId field.
                 /// </summary>
-                public uint ProcessId => BitConverter.ToUInt32(_etwEvent.Data[Offset_ProcessId..]);
+                public uint ProcessId => BitConverter.ToUInt32(_etwEvent.Data[Offset_ProcessId..Offset_ServiceState]);
 
                 /// <summary>
                 /// Retrieves the ServiceState field.
                 /// </summary>
-                public uint ServiceState => BitConverter.ToUInt32(_etwEvent.Data[Offset_ServiceState..]);
+                public uint ServiceState => BitConverter.ToUInt32(_etwEvent.Data[Offset_ServiceState..Offset_SubProcessTag]);
 
                 /// <summary>
                 /// Retrieves the SubProcessTag field.
                 /// </summary>
-                public uint SubProcessTag => BitConverter.ToUInt32(_etwEvent.Data[Offset_SubProcessTag..]);
+                public uint SubProcessTag => BitConverter.ToUInt32(_etwEvent.Data[Offset_SubProcessTag..Offset_ServiceName]);
 
                 /// <summary>
                 /// Retrieves the ServiceName field.
                 /// </summary>
-                public string ServiceName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_ServiceName..]);
+                public string ServiceName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_ServiceName..Offset_DisplayName]);
 
                 /// <summary>
                 /// Retrieves the DisplayName field.
                 /// </summary>
-                public string DisplayName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_DisplayName..]);
+                public string DisplayName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_DisplayName..Offset_ProcessName]);
 
                 /// <summary>
                 /// Retrieves the ProcessName field.
@@ -7104,6 +7248,12 @@ namespace EtwTools
             {
                 _etwEvent = etwEvent;
             }
+
+            /// <summary>
+            /// Converts a generic ETW event to a PowerEventV2.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator PowerEventV2(EtwEvent etwEvent) => new(etwEvent);
 
             /// <summary>
             /// A data wrapper for a Power event.
@@ -7356,6 +7506,12 @@ namespace EtwTools
             }
 
             /// <summary>
+            /// Converts a generic ETW event to a NetworkEventV2.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator NetworkEventV2(EtwEvent etwEvent) => new(etwEvent);
+
+            /// <summary>
             /// A data wrapper for a Network event.
             /// </summary>
             public ref struct NetworkData
@@ -7422,17 +7578,17 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the TcbTablePartitions field.
                 /// </summary>
-                public uint TcbTablePartitions => BitConverter.ToUInt32(_etwEvent.Data[Offset_TcbTablePartitions..]);
+                public uint TcbTablePartitions => BitConverter.ToUInt32(_etwEvent.Data[Offset_TcbTablePartitions..Offset_MaxHashTableSize]);
 
                 /// <summary>
                 /// Retrieves the MaxHashTableSize field.
                 /// </summary>
-                public uint MaxHashTableSize => BitConverter.ToUInt32(_etwEvent.Data[Offset_MaxHashTableSize..]);
+                public uint MaxHashTableSize => BitConverter.ToUInt32(_etwEvent.Data[Offset_MaxHashTableSize..Offset_MaxUserPort]);
 
                 /// <summary>
                 /// Retrieves the MaxUserPort field.
                 /// </summary>
-                public uint MaxUserPort => BitConverter.ToUInt32(_etwEvent.Data[Offset_MaxUserPort..]);
+                public uint MaxUserPort => BitConverter.ToUInt32(_etwEvent.Data[Offset_MaxUserPort..Offset_TcpTimedWaitDelay]);
 
                 /// <summary>
                 /// Retrieves the TcpTimedWaitDelay field.
@@ -7524,6 +7680,12 @@ namespace EtwTools
             {
                 _etwEvent = etwEvent;
             }
+
+            /// <summary>
+            /// Converts a generic ETW event to a OpticalDiskEventV2.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator OpticalDiskEventV2(EtwEvent etwEvent) => new(etwEvent);
 
             /// <summary>
             /// A data wrapper for a OpticalDisk event.
@@ -7788,87 +7950,87 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the DiskNumber field.
                 /// </summary>
-                public ushort DiskNumber => BitConverter.ToUInt16(_etwEvent.Data[Offset_DiskNumber..]);
+                public ushort DiskNumber => BitConverter.ToUInt16(_etwEvent.Data[Offset_DiskNumber..Offset_BusType]);
 
                 /// <summary>
                 /// Retrieves the BusType field.
                 /// </summary>
-                public ushort BusType => BitConverter.ToUInt16(_etwEvent.Data[Offset_BusType..]);
+                public ushort BusType => BitConverter.ToUInt16(_etwEvent.Data[Offset_BusType..Offset_DeviceType]);
 
                 /// <summary>
                 /// Retrieves the DeviceType field.
                 /// </summary>
-                public ushort DeviceType => BitConverter.ToUInt16(_etwEvent.Data[Offset_DeviceType..]);
+                public ushort DeviceType => BitConverter.ToUInt16(_etwEvent.Data[Offset_DeviceType..Offset_MediaType]);
 
                 /// <summary>
                 /// Retrieves the MediaType field.
                 /// </summary>
-                public ushort MediaType => BitConverter.ToUInt16(_etwEvent.Data[Offset_MediaType..]);
+                public ushort MediaType => BitConverter.ToUInt16(_etwEvent.Data[Offset_MediaType..Offset_StartingOffset]);
 
                 /// <summary>
                 /// Retrieves the StartingOffset field.
                 /// </summary>
-                public ulong StartingOffset => BitConverter.ToUInt64(_etwEvent.Data[Offset_StartingOffset..]);
+                public ulong StartingOffset => BitConverter.ToUInt64(_etwEvent.Data[Offset_StartingOffset..Offset_Size]);
 
                 /// <summary>
                 /// Retrieves the Size field.
                 /// </summary>
-                public ulong Size => BitConverter.ToUInt64(_etwEvent.Data[Offset_Size..]);
+                public ulong Size => BitConverter.ToUInt64(_etwEvent.Data[Offset_Size..Offset_NumberOfFreeBlocks]);
 
                 /// <summary>
                 /// Retrieves the NumberOfFreeBlocks field.
                 /// </summary>
-                public ulong NumberOfFreeBlocks => BitConverter.ToUInt64(_etwEvent.Data[Offset_NumberOfFreeBlocks..]);
+                public ulong NumberOfFreeBlocks => BitConverter.ToUInt64(_etwEvent.Data[Offset_NumberOfFreeBlocks..Offset_TotalNumberOfBlocks]);
 
                 /// <summary>
                 /// Retrieves the TotalNumberOfBlocks field.
                 /// </summary>
-                public ulong TotalNumberOfBlocks => BitConverter.ToUInt64(_etwEvent.Data[Offset_TotalNumberOfBlocks..]);
+                public ulong TotalNumberOfBlocks => BitConverter.ToUInt64(_etwEvent.Data[Offset_TotalNumberOfBlocks..Offset_NextWritableAddress]);
 
                 /// <summary>
                 /// Retrieves the NextWritableAddress field.
                 /// </summary>
-                public ulong NextWritableAddress => BitConverter.ToUInt64(_etwEvent.Data[Offset_NextWritableAddress..]);
+                public ulong NextWritableAddress => BitConverter.ToUInt64(_etwEvent.Data[Offset_NextWritableAddress..Offset_NumberOfSessions]);
 
                 /// <summary>
                 /// Retrieves the NumberOfSessions field.
                 /// </summary>
-                public uint NumberOfSessions => BitConverter.ToUInt32(_etwEvent.Data[Offset_NumberOfSessions..]);
+                public uint NumberOfSessions => BitConverter.ToUInt32(_etwEvent.Data[Offset_NumberOfSessions..Offset_NumberOfTracks]);
 
                 /// <summary>
                 /// Retrieves the NumberOfTracks field.
                 /// </summary>
-                public uint NumberOfTracks => BitConverter.ToUInt32(_etwEvent.Data[Offset_NumberOfTracks..]);
+                public uint NumberOfTracks => BitConverter.ToUInt32(_etwEvent.Data[Offset_NumberOfTracks..Offset_BytesPerSector]);
 
                 /// <summary>
                 /// Retrieves the BytesPerSector field.
                 /// </summary>
-                public uint BytesPerSector => BitConverter.ToUInt32(_etwEvent.Data[Offset_BytesPerSector..]);
+                public uint BytesPerSector => BitConverter.ToUInt32(_etwEvent.Data[Offset_BytesPerSector..Offset_DiscStatus]);
 
                 /// <summary>
                 /// Retrieves the DiscStatus field.
                 /// </summary>
-                public ushort DiscStatus => BitConverter.ToUInt16(_etwEvent.Data[Offset_DiscStatus..]);
+                public ushort DiscStatus => BitConverter.ToUInt16(_etwEvent.Data[Offset_DiscStatus..Offset_LastSessionStatus]);
 
                 /// <summary>
                 /// Retrieves the LastSessionStatus field.
                 /// </summary>
-                public ushort LastSessionStatus => BitConverter.ToUInt16(_etwEvent.Data[Offset_LastSessionStatus..]);
+                public ushort LastSessionStatus => BitConverter.ToUInt16(_etwEvent.Data[Offset_LastSessionStatus..Offset_DriveLetter]);
 
                 /// <summary>
                 /// Retrieves the DriveLetter field.
                 /// </summary>
-                public string DriveLetter => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_DriveLetter..]);
+                public string DriveLetter => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_DriveLetter..Offset_FileSystemName]);
 
                 /// <summary>
                 /// Retrieves the FileSystemName field.
                 /// </summary>
-                public string FileSystemName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_FileSystemName..]);
+                public string FileSystemName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_FileSystemName..Offset_DeviceName]);
 
                 /// <summary>
                 /// Retrieves the DeviceName field.
                 /// </summary>
-                public string DeviceName => System.Text.Encoding.ASCII.GetString(_etwEvent.Data[Offset_DeviceName..]);
+                public string DeviceName => System.Text.Encoding.ASCII.GetString(_etwEvent.Data[Offset_DeviceName..Offset_ManufacturerName]);
 
                 /// <summary>
                 /// Retrieves the ManufacturerName field.
@@ -7976,6 +8138,12 @@ namespace EtwTools
             }
 
             /// <summary>
+            /// Converts a generic ETW event to a IRQEventV2.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator IRQEventV2(EtwEvent etwEvent) => new(etwEvent);
+
+            /// <summary>
             /// A data wrapper for a IRQ event.
             /// </summary>
             public ref struct IRQData
@@ -8042,17 +8210,17 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the IRQAffinity field.
                 /// </summary>
-                public ulong IRQAffinity => BitConverter.ToUInt64(_etwEvent.Data[Offset_IRQAffinity..]);
+                public ulong IRQAffinity => BitConverter.ToUInt64(_etwEvent.Data[Offset_IRQAffinity..Offset_IRQNum]);
 
                 /// <summary>
                 /// Retrieves the IRQNum field.
                 /// </summary>
-                public uint IRQNum => BitConverter.ToUInt32(_etwEvent.Data[Offset_IRQNum..]);
+                public uint IRQNum => BitConverter.ToUInt32(_etwEvent.Data[Offset_IRQNum..Offset_DeviceDescriptionLen]);
 
                 /// <summary>
                 /// Retrieves the DeviceDescriptionLen field.
                 /// </summary>
-                public uint DeviceDescriptionLen => BitConverter.ToUInt32(_etwEvent.Data[Offset_DeviceDescriptionLen..]);
+                public uint DeviceDescriptionLen => BitConverter.ToUInt32(_etwEvent.Data[Offset_DeviceDescriptionLen..Offset_DeviceDescription]);
 
                 /// <summary>
                 /// Retrieves the DeviceDescription field.
@@ -8144,6 +8312,12 @@ namespace EtwTools
             {
                 _etwEvent = etwEvent;
             }
+
+            /// <summary>
+            /// Converts a generic ETW event to a PnPEventV2.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator PnPEventV2(EtwEvent etwEvent) => new(etwEvent);
 
             /// <summary>
             /// A data wrapper for a PnP event.
@@ -8240,27 +8414,27 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the IDLength field.
                 /// </summary>
-                public uint IDLength => BitConverter.ToUInt32(_etwEvent.Data[Offset_IDLength..]);
+                public uint IDLength => BitConverter.ToUInt32(_etwEvent.Data[Offset_IDLength..Offset_DescriptionLength]);
 
                 /// <summary>
                 /// Retrieves the DescriptionLength field.
                 /// </summary>
-                public uint DescriptionLength => BitConverter.ToUInt32(_etwEvent.Data[Offset_DescriptionLength..]);
+                public uint DescriptionLength => BitConverter.ToUInt32(_etwEvent.Data[Offset_DescriptionLength..Offset_FriendlyNameLength]);
 
                 /// <summary>
                 /// Retrieves the FriendlyNameLength field.
                 /// </summary>
-                public uint FriendlyNameLength => BitConverter.ToUInt32(_etwEvent.Data[Offset_FriendlyNameLength..]);
+                public uint FriendlyNameLength => BitConverter.ToUInt32(_etwEvent.Data[Offset_FriendlyNameLength..Offset_DeviceID]);
 
                 /// <summary>
                 /// Retrieves the DeviceID field.
                 /// </summary>
-                public string DeviceID => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_DeviceID..]);
+                public string DeviceID => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_DeviceID..Offset_DeviceDescription]);
 
                 /// <summary>
                 /// Retrieves the DeviceDescription field.
                 /// </summary>
-                public string DeviceDescription => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_DeviceDescription..]);
+                public string DeviceDescription => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_DeviceDescription..Offset_FriendlyName]);
 
                 /// <summary>
                 /// Retrieves the FriendlyName field.
@@ -8356,6 +8530,12 @@ namespace EtwTools
             }
 
             /// <summary>
+            /// Converts a generic ETW event to a IDEChannelEventV2.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator IDEChannelEventV2(EtwEvent etwEvent) => new(etwEvent);
+
+            /// <summary>
             /// A data wrapper for a IDEChannel event.
             /// </summary>
             public ref struct IDEChannelData
@@ -8436,22 +8616,22 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the TargetId field.
                 /// </summary>
-                public uint TargetId => BitConverter.ToUInt32(_etwEvent.Data[Offset_TargetId..]);
+                public uint TargetId => BitConverter.ToUInt32(_etwEvent.Data[Offset_TargetId..Offset_DeviceType]);
 
                 /// <summary>
                 /// Retrieves the DeviceType field.
                 /// </summary>
-                public uint DeviceType => BitConverter.ToUInt32(_etwEvent.Data[Offset_DeviceType..]);
+                public uint DeviceType => BitConverter.ToUInt32(_etwEvent.Data[Offset_DeviceType..Offset_DeviceTimingMode]);
 
                 /// <summary>
                 /// Retrieves the DeviceTimingMode field.
                 /// </summary>
-                public uint DeviceTimingMode => BitConverter.ToUInt32(_etwEvent.Data[Offset_DeviceTimingMode..]);
+                public uint DeviceTimingMode => BitConverter.ToUInt32(_etwEvent.Data[Offset_DeviceTimingMode..Offset_LocationInformationLen]);
 
                 /// <summary>
                 /// Retrieves the LocationInformationLen field.
                 /// </summary>
-                public uint LocationInformationLen => BitConverter.ToUInt32(_etwEvent.Data[Offset_LocationInformationLen..]);
+                public uint LocationInformationLen => BitConverter.ToUInt32(_etwEvent.Data[Offset_LocationInformationLen..Offset_LocationInformation]);
 
                 /// <summary>
                 /// Retrieves the LocationInformation field.
@@ -8546,6 +8726,12 @@ namespace EtwTools
             }
 
             /// <summary>
+            /// Converts a generic ETW event to a NumaNodeEventV2.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator NumaNodeEventV2(EtwEvent etwEvent) => new(etwEvent);
+
+            /// <summary>
             /// A data wrapper for a NumaNode event.
             /// </summary>
             public ref struct NumaNodeData
@@ -8584,7 +8770,7 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the NodeCount field.
                 /// </summary>
-                public uint NodeCount => BitConverter.ToUInt32(_etwEvent.Data[Offset_NodeCount..]);
+                public uint NodeCount => BitConverter.ToUInt32(_etwEvent.Data[Offset_NodeCount..Offset_NodeMap]);
 
                 /// <summary>
                 /// Retrieves the NodeMap field.
@@ -8676,6 +8862,12 @@ namespace EtwTools
             }
 
             /// <summary>
+            /// Converts a generic ETW event to a PlatformEventV2.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator PlatformEventV2(EtwEvent etwEvent) => new(etwEvent);
+
+            /// <summary>
             /// A data wrapper for a Platform event.
             /// </summary>
             public ref struct PlatformData
@@ -8742,17 +8934,17 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the SystemManufacturer field.
                 /// </summary>
-                public string SystemManufacturer => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_SystemManufacturer..]);
+                public string SystemManufacturer => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_SystemManufacturer..Offset_SystemProductName]);
 
                 /// <summary>
                 /// Retrieves the SystemProductName field.
                 /// </summary>
-                public string SystemProductName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_SystemProductName..]);
+                public string SystemProductName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_SystemProductName..Offset_BiosDate]);
 
                 /// <summary>
                 /// Retrieves the BiosDate field.
                 /// </summary>
-                public string BiosDate => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_BiosDate..]);
+                public string BiosDate => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_BiosDate..Offset_BiosVersion]);
 
                 /// <summary>
                 /// Retrieves the BiosVersion field.
@@ -8846,6 +9038,12 @@ namespace EtwTools
             }
 
             /// <summary>
+            /// Converts a generic ETW event to a ProcessorGroupEventV2.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator ProcessorGroupEventV2(EtwEvent etwEvent) => new(etwEvent);
+
+            /// <summary>
             /// A data wrapper for a ProcessorGroup event.
             /// </summary>
             public ref struct ProcessorGroupData
@@ -8884,7 +9082,7 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the GroupCount field.
                 /// </summary>
-                public uint GroupCount => BitConverter.ToUInt32(_etwEvent.Data[Offset_GroupCount..]);
+                public uint GroupCount => BitConverter.ToUInt32(_etwEvent.Data[Offset_GroupCount..Offset_Affinity]);
 
                 /// <summary>
                 /// Retrieves the Affinity field.
@@ -8976,6 +9174,12 @@ namespace EtwTools
             }
 
             /// <summary>
+            /// Converts a generic ETW event to a ProcessorNumberEventV2.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator ProcessorNumberEventV2(EtwEvent etwEvent) => new(etwEvent);
+
+            /// <summary>
             /// A data wrapper for a ProcessorNumber event.
             /// </summary>
             public ref struct ProcessorNumberData
@@ -9014,7 +9218,7 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the ProcessorCount field.
                 /// </summary>
-                public uint ProcessorCount => BitConverter.ToUInt32(_etwEvent.Data[Offset_ProcessorCount..]);
+                public uint ProcessorCount => BitConverter.ToUInt32(_etwEvent.Data[Offset_ProcessorCount..Offset_ProcessorNumber]);
 
                 /// <summary>
                 /// Retrieves the ProcessorNumber field.
@@ -9106,6 +9310,12 @@ namespace EtwTools
             }
 
             /// <summary>
+            /// Converts a generic ETW event to a DPIEventV2.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator DPIEventV2(EtwEvent etwEvent) => new(etwEvent);
+
+            /// <summary>
             /// A data wrapper for a DPI event.
             /// </summary>
             public ref struct DPIData
@@ -9144,7 +9354,7 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the MachineDPI field.
                 /// </summary>
-                public uint MachineDPI => BitConverter.ToUInt32(_etwEvent.Data[Offset_MachineDPI..]);
+                public uint MachineDPI => BitConverter.ToUInt32(_etwEvent.Data[Offset_MachineDPI..Offset_UserDPI]);
 
                 /// <summary>
                 /// Retrieves the UserDPI field.
@@ -9234,6 +9444,12 @@ namespace EtwTools
             {
                 _etwEvent = etwEvent;
             }
+
+            /// <summary>
+            /// Converts a generic ETW event to a CodeIntegrityEventV2.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator CodeIntegrityEventV2(EtwEvent etwEvent) => new(etwEvent);
 
             /// <summary>
             /// A data wrapper for a CodeIntegrity event.
@@ -9346,6 +9562,12 @@ namespace EtwTools
             }
 
             /// <summary>
+            /// Converts a generic ETW event to a TelemetryConfigurationEventV2.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator TelemetryConfigurationEventV2(EtwEvent etwEvent) => new(etwEvent);
+
+            /// <summary>
             /// A data wrapper for a TelemetryConfiguration event.
             /// </summary>
             public ref struct TelemetryConfigurationData
@@ -9454,6 +9676,12 @@ namespace EtwTools
             {
                 _etwEvent = etwEvent;
             }
+
+            /// <summary>
+            /// Converts a generic ETW event to a DefragmentationEventV2.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator DefragmentationEventV2(EtwEvent etwEvent) => new(etwEvent);
 
             /// <summary>
             /// A data wrapper for a Defragmentation event.
@@ -10012,192 +10240,192 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the AlignmentClusters field.
                 /// </summary>
-                public ulong AlignmentClusters => BitConverter.ToUInt64(_etwEvent.Data[Offset_AlignmentClusters..]);
+                public ulong AlignmentClusters => BitConverter.ToUInt64(_etwEvent.Data[Offset_AlignmentClusters..Offset_AvgFreeSpaceSize]);
 
                 /// <summary>
                 /// Retrieves the AvgFreeSpaceSize field.
                 /// </summary>
-                public ulong AvgFreeSpaceSize => BitConverter.ToUInt64(_etwEvent.Data[Offset_AvgFreeSpaceSize..]);
+                public ulong AvgFreeSpaceSize => BitConverter.ToUInt64(_etwEvent.Data[Offset_AvgFreeSpaceSize..Offset_ClustersPerSlab]);
 
                 /// <summary>
                 /// Retrieves the ClustersPerSlab field.
                 /// </summary>
-                public ulong ClustersPerSlab => BitConverter.ToUInt64(_etwEvent.Data[Offset_ClustersPerSlab..]);
+                public ulong ClustersPerSlab => BitConverter.ToUInt64(_etwEvent.Data[Offset_ClustersPerSlab..Offset_FragmentedDirectoryExtents]);
 
                 /// <summary>
                 /// Retrieves the FragmentedDirectoryExtents field.
                 /// </summary>
-                public ulong FragmentedDirectoryExtents => BitConverter.ToUInt64(_etwEvent.Data[Offset_FragmentedDirectoryExtents..]);
+                public ulong FragmentedDirectoryExtents => BitConverter.ToUInt64(_etwEvent.Data[Offset_FragmentedDirectoryExtents..Offset_FragmentedExtents]);
 
                 /// <summary>
                 /// Retrieves the FragmentedExtents field.
                 /// </summary>
-                public ulong FragmentedExtents => BitConverter.ToUInt64(_etwEvent.Data[Offset_FragmentedExtents..]);
+                public ulong FragmentedExtents => BitConverter.ToUInt64(_etwEvent.Data[Offset_FragmentedExtents..Offset_FreeSpaceCount]);
 
                 /// <summary>
                 /// Retrieves the FreeSpaceCount field.
                 /// </summary>
-                public ulong FreeSpaceCount => BitConverter.ToUInt64(_etwEvent.Data[Offset_FreeSpaceCount..]);
+                public ulong FreeSpaceCount => BitConverter.ToUInt64(_etwEvent.Data[Offset_FreeSpaceCount..Offset_LargestFreeSpaceSize]);
 
                 /// <summary>
                 /// Retrieves the LargestFreeSpaceSize field.
                 /// </summary>
-                public ulong LargestFreeSpaceSize => BitConverter.ToUInt64(_etwEvent.Data[Offset_LargestFreeSpaceSize..]);
+                public ulong LargestFreeSpaceSize => BitConverter.ToUInt64(_etwEvent.Data[Offset_LargestFreeSpaceSize..Offset_LastRunActualPurgeClusters]);
 
                 /// <summary>
                 /// Retrieves the LastRunActualPurgeClusters field.
                 /// </summary>
-                public ulong LastRunActualPurgeClusters => BitConverter.ToUInt64(_etwEvent.Data[Offset_LastRunActualPurgeClusters..]);
+                public ulong LastRunActualPurgeClusters => BitConverter.ToUInt64(_etwEvent.Data[Offset_LastRunActualPurgeClusters..Offset_LastRunClustersTrimmed]);
 
                 /// <summary>
                 /// Retrieves the LastRunClustersTrimmed field.
                 /// </summary>
-                public ulong LastRunClustersTrimmed => BitConverter.ToUInt64(_etwEvent.Data[Offset_LastRunClustersTrimmed..]);
+                public ulong LastRunClustersTrimmed => BitConverter.ToUInt64(_etwEvent.Data[Offset_LastRunClustersTrimmed..Offset_LastRunFullDefragTime]);
 
                 /// <summary>
                 /// Retrieves the LastRunFullDefragTime field.
                 /// </summary>
-                public ulong LastRunFullDefragTime => BitConverter.ToUInt64(_etwEvent.Data[Offset_LastRunFullDefragTime..]);
+                public ulong LastRunFullDefragTime => BitConverter.ToUInt64(_etwEvent.Data[Offset_LastRunFullDefragTime..Offset_LastRunTime]);
 
                 /// <summary>
                 /// Retrieves the LastRunTime field.
                 /// </summary>
-                public ulong LastRunTime => BitConverter.ToUInt64(_etwEvent.Data[Offset_LastRunTime..]);
+                public ulong LastRunTime => BitConverter.ToUInt64(_etwEvent.Data[Offset_LastRunTime..Offset_MFTSize]);
 
                 /// <summary>
                 /// Retrieves the MFTSize field.
                 /// </summary>
-                public ulong MFTSize => BitConverter.ToUInt64(_etwEvent.Data[Offset_MFTSize..]);
+                public ulong MFTSize => BitConverter.ToUInt64(_etwEvent.Data[Offset_MFTSize..Offset_TotalClusters]);
 
                 /// <summary>
                 /// Retrieves the TotalClusters field.
                 /// </summary>
-                public ulong TotalClusters => BitConverter.ToUInt64(_etwEvent.Data[Offset_TotalClusters..]);
+                public ulong TotalClusters => BitConverter.ToUInt64(_etwEvent.Data[Offset_TotalClusters..Offset_TotalUsedClusters]);
 
                 /// <summary>
                 /// Retrieves the TotalUsedClusters field.
                 /// </summary>
-                public ulong TotalUsedClusters => BitConverter.ToUInt64(_etwEvent.Data[Offset_TotalUsedClusters..]);
+                public ulong TotalUsedClusters => BitConverter.ToUInt64(_etwEvent.Data[Offset_TotalUsedClusters..Offset_AvgFragmentsPerFile]);
 
                 /// <summary>
                 /// Retrieves the AvgFragmentsPerFile field.
                 /// </summary>
-                public uint AvgFragmentsPerFile => BitConverter.ToUInt32(_etwEvent.Data[Offset_AvgFragmentsPerFile..]);
+                public uint AvgFragmentsPerFile => BitConverter.ToUInt32(_etwEvent.Data[Offset_AvgFragmentsPerFile..Offset_BytesPerCluster]);
 
                 /// <summary>
                 /// Retrieves the BytesPerCluster field.
                 /// </summary>
-                public uint BytesPerCluster => BitConverter.ToUInt32(_etwEvent.Data[Offset_BytesPerCluster..]);
+                public uint BytesPerCluster => BitConverter.ToUInt32(_etwEvent.Data[Offset_BytesPerCluster..Offset_DirectoryCount]);
 
                 /// <summary>
                 /// Retrieves the DirectoryCount field.
                 /// </summary>
-                public uint DirectoryCount => BitConverter.ToUInt32(_etwEvent.Data[Offset_DirectoryCount..]);
+                public uint DirectoryCount => BitConverter.ToUInt32(_etwEvent.Data[Offset_DirectoryCount..Offset_FragmentedDirectories]);
 
                 /// <summary>
                 /// Retrieves the FragmentedDirectories field.
                 /// </summary>
-                public uint FragmentedDirectories => BitConverter.ToUInt32(_etwEvent.Data[Offset_FragmentedDirectories..]);
+                public uint FragmentedDirectories => BitConverter.ToUInt32(_etwEvent.Data[Offset_FragmentedDirectories..Offset_FragmentedFiles]);
 
                 /// <summary>
                 /// Retrieves the FragmentedFiles field.
                 /// </summary>
-                public uint FragmentedFiles => BitConverter.ToUInt32(_etwEvent.Data[Offset_FragmentedFiles..]);
+                public uint FragmentedFiles => BitConverter.ToUInt32(_etwEvent.Data[Offset_FragmentedFiles..Offset_FragmentedSpace]);
 
                 /// <summary>
                 /// Retrieves the FragmentedSpace field.
                 /// </summary>
-                public uint FragmentedSpace => BitConverter.ToUInt32(_etwEvent.Data[Offset_FragmentedSpace..]);
+                public uint FragmentedSpace => BitConverter.ToUInt32(_etwEvent.Data[Offset_FragmentedSpace..Offset_HardwareIssue]);
 
                 /// <summary>
                 /// Retrieves the HardwareIssue field.
                 /// </summary>
-                public uint HardwareIssue => BitConverter.ToUInt32(_etwEvent.Data[Offset_HardwareIssue..]);
+                public uint HardwareIssue => BitConverter.ToUInt32(_etwEvent.Data[Offset_HardwareIssue..Offset_InUseMFTRecords]);
 
                 /// <summary>
                 /// Retrieves the InUseMFTRecords field.
                 /// </summary>
-                public uint InUseMFTRecords => BitConverter.ToUInt32(_etwEvent.Data[Offset_InUseMFTRecords..]);
+                public uint InUseMFTRecords => BitConverter.ToUInt32(_etwEvent.Data[Offset_InUseMFTRecords..Offset_InUseSlabs]);
 
                 /// <summary>
                 /// Retrieves the InUseSlabs field.
                 /// </summary>
-                public uint InUseSlabs => BitConverter.ToUInt32(_etwEvent.Data[Offset_InUseSlabs..]);
+                public uint InUseSlabs => BitConverter.ToUInt32(_etwEvent.Data[Offset_InUseSlabs..Offset_LastRunActualPurgeSlabs]);
 
                 /// <summary>
                 /// Retrieves the LastRunActualPurgeSlabs field.
                 /// </summary>
-                public uint LastRunActualPurgeSlabs => BitConverter.ToUInt32(_etwEvent.Data[Offset_LastRunActualPurgeSlabs..]);
+                public uint LastRunActualPurgeSlabs => BitConverter.ToUInt32(_etwEvent.Data[Offset_LastRunActualPurgeSlabs..Offset_LastRunInitialBackedSlabs]);
 
                 /// <summary>
                 /// Retrieves the LastRunInitialBackedSlabs field.
                 /// </summary>
-                public uint LastRunInitialBackedSlabs => BitConverter.ToUInt32(_etwEvent.Data[Offset_LastRunInitialBackedSlabs..]);
+                public uint LastRunInitialBackedSlabs => BitConverter.ToUInt32(_etwEvent.Data[Offset_LastRunInitialBackedSlabs..Offset_LastRunPercentFragmentation]);
 
                 /// <summary>
                 /// Retrieves the LastRunPercentFragmentation field.
                 /// </summary>
-                public uint LastRunPercentFragmentation => BitConverter.ToUInt32(_etwEvent.Data[Offset_LastRunPercentFragmentation..]);
+                public uint LastRunPercentFragmentation => BitConverter.ToUInt32(_etwEvent.Data[Offset_LastRunPercentFragmentation..Offset_LastRunPinnedSlabs]);
 
                 /// <summary>
                 /// Retrieves the LastRunPinnedSlabs field.
                 /// </summary>
-                public uint LastRunPinnedSlabs => BitConverter.ToUInt32(_etwEvent.Data[Offset_LastRunPinnedSlabs..]);
+                public uint LastRunPinnedSlabs => BitConverter.ToUInt32(_etwEvent.Data[Offset_LastRunPinnedSlabs..Offset_LastRunPotentialPurgeSlabs]);
 
                 /// <summary>
                 /// Retrieves the LastRunPotentialPurgeSlabs field.
                 /// </summary>
-                public uint LastRunPotentialPurgeSlabs => BitConverter.ToUInt32(_etwEvent.Data[Offset_LastRunPotentialPurgeSlabs..]);
+                public uint LastRunPotentialPurgeSlabs => BitConverter.ToUInt32(_etwEvent.Data[Offset_LastRunPotentialPurgeSlabs..Offset_LastRunSpaceInefficientSlabs]);
 
                 /// <summary>
                 /// Retrieves the LastRunSpaceInefficientSlabs field.
                 /// </summary>
-                public uint LastRunSpaceInefficientSlabs => BitConverter.ToUInt32(_etwEvent.Data[Offset_LastRunSpaceInefficientSlabs..]);
+                public uint LastRunSpaceInefficientSlabs => BitConverter.ToUInt32(_etwEvent.Data[Offset_LastRunSpaceInefficientSlabs..Offset_LastRunTrimmedSlabs]);
 
                 /// <summary>
                 /// Retrieves the LastRunTrimmedSlabs field.
                 /// </summary>
-                public uint LastRunTrimmedSlabs => BitConverter.ToUInt32(_etwEvent.Data[Offset_LastRunTrimmedSlabs..]);
+                public uint LastRunTrimmedSlabs => BitConverter.ToUInt32(_etwEvent.Data[Offset_LastRunTrimmedSlabs..Offset_LastRunUnknownEvictFailSlabs]);
 
                 /// <summary>
                 /// Retrieves the LastRunUnknownEvictFailSlabs field.
                 /// </summary>
-                public uint LastRunUnknownEvictFailSlabs => BitConverter.ToUInt32(_etwEvent.Data[Offset_LastRunUnknownEvictFailSlabs..]);
+                public uint LastRunUnknownEvictFailSlabs => BitConverter.ToUInt32(_etwEvent.Data[Offset_LastRunUnknownEvictFailSlabs..Offset_LastRunVolsnapPinnedSlabs]);
 
                 /// <summary>
                 /// Retrieves the LastRunVolsnapPinnedSlabs field.
                 /// </summary>
-                public uint LastRunVolsnapPinnedSlabs => BitConverter.ToUInt32(_etwEvent.Data[Offset_LastRunVolsnapPinnedSlabs..]);
+                public uint LastRunVolsnapPinnedSlabs => BitConverter.ToUInt32(_etwEvent.Data[Offset_LastRunVolsnapPinnedSlabs..Offset_MFTFragmentCount]);
 
                 /// <summary>
                 /// Retrieves the MFTFragmentCount field.
                 /// </summary>
-                public uint MFTFragmentCount => BitConverter.ToUInt32(_etwEvent.Data[Offset_MFTFragmentCount..]);
+                public uint MFTFragmentCount => BitConverter.ToUInt32(_etwEvent.Data[Offset_MFTFragmentCount..Offset_MovableFiles]);
 
                 /// <summary>
                 /// Retrieves the MovableFiles field.
                 /// </summary>
-                public uint MovableFiles => BitConverter.ToUInt32(_etwEvent.Data[Offset_MovableFiles..]);
+                public uint MovableFiles => BitConverter.ToUInt32(_etwEvent.Data[Offset_MovableFiles..Offset_TotalMFTRecords]);
 
                 /// <summary>
                 /// Retrieves the TotalMFTRecords field.
                 /// </summary>
-                public uint TotalMFTRecords => BitConverter.ToUInt32(_etwEvent.Data[Offset_TotalMFTRecords..]);
+                public uint TotalMFTRecords => BitConverter.ToUInt32(_etwEvent.Data[Offset_TotalMFTRecords..Offset_TotalSlabs]);
 
                 /// <summary>
                 /// Retrieves the TotalSlabs field.
                 /// </summary>
-                public uint TotalSlabs => BitConverter.ToUInt32(_etwEvent.Data[Offset_TotalSlabs..]);
+                public uint TotalSlabs => BitConverter.ToUInt32(_etwEvent.Data[Offset_TotalSlabs..Offset_UnmovableFiles]);
 
                 /// <summary>
                 /// Retrieves the UnmovableFiles field.
                 /// </summary>
-                public uint UnmovableFiles => BitConverter.ToUInt32(_etwEvent.Data[Offset_UnmovableFiles..]);
+                public uint UnmovableFiles => BitConverter.ToUInt32(_etwEvent.Data[Offset_UnmovableFiles..Offset_VolumeId]);
 
                 /// <summary>
                 /// Retrieves the VolumeId field.
                 /// </summary>
-                public Guid VolumeId => new(_etwEvent.Data[Offset_VolumeId..]);
+                public Guid VolumeId => new(_etwEvent.Data[Offset_VolumeId..Offset_VolumePathNames]);
 
                 /// <summary>
                 /// Retrieves the VolumePathNames field.
@@ -10324,6 +10552,12 @@ namespace EtwTools
             {
                 _etwEvent = etwEvent;
             }
+
+            /// <summary>
+            /// Converts a generic ETW event to a MobilePlatformEventV2.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator MobilePlatformEventV2(EtwEvent etwEvent) => new(etwEvent);
 
             /// <summary>
             /// A data wrapper for a MobilePlatform event.
@@ -10546,72 +10780,72 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the BootLoaderVersion field.
                 /// </summary>
-                public string BootLoaderVersion => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_BootLoaderVersion..]);
+                public string BootLoaderVersion => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_BootLoaderVersion..Offset_FirmwareRevision]);
 
                 /// <summary>
                 /// Retrieves the FirmwareRevision field.
                 /// </summary>
-                public string FirmwareRevision => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_FirmwareRevision..]);
+                public string FirmwareRevision => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_FirmwareRevision..Offset_FriendlyName]);
 
                 /// <summary>
                 /// Retrieves the FriendlyName field.
                 /// </summary>
-                public string FriendlyName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_FriendlyName..]);
+                public string FriendlyName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_FriendlyName..Offset_HardwareRevision]);
 
                 /// <summary>
                 /// Retrieves the HardwareRevision field.
                 /// </summary>
-                public string HardwareRevision => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_HardwareRevision..]);
+                public string HardwareRevision => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_HardwareRevision..Offset_Manufacturer]);
 
                 /// <summary>
                 /// Retrieves the Manufacturer field.
                 /// </summary>
-                public string Manufacturer => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_Manufacturer..]);
+                public string Manufacturer => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_Manufacturer..Offset_ManufacturerDisplayName]);
 
                 /// <summary>
                 /// Retrieves the ManufacturerDisplayName field.
                 /// </summary>
-                public string ManufacturerDisplayName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_ManufacturerDisplayName..]);
+                public string ManufacturerDisplayName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_ManufacturerDisplayName..Offset_ManufacturerModelName]);
 
                 /// <summary>
                 /// Retrieves the ManufacturerModelName field.
                 /// </summary>
-                public string ManufacturerModelName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_ManufacturerModelName..]);
+                public string ManufacturerModelName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_ManufacturerModelName..Offset_MobileOperatorDisplayName]);
 
                 /// <summary>
                 /// Retrieves the MobileOperatorDisplayName field.
                 /// </summary>
-                public string MobileOperatorDisplayName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_MobileOperatorDisplayName..]);
+                public string MobileOperatorDisplayName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_MobileOperatorDisplayName..Offset_MobileOperatorName]);
 
                 /// <summary>
                 /// Retrieves the MobileOperatorName field.
                 /// </summary>
-                public string MobileOperatorName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_MobileOperatorName..]);
+                public string MobileOperatorName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_MobileOperatorName..Offset_ModelName]);
 
                 /// <summary>
                 /// Retrieves the ModelName field.
                 /// </summary>
-                public string ModelName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_ModelName..]);
+                public string ModelName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_ModelName..Offset_RadioHardwareRevision]);
 
                 /// <summary>
                 /// Retrieves the RadioHardwareRevision field.
                 /// </summary>
-                public string RadioHardwareRevision => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_RadioHardwareRevision..]);
+                public string RadioHardwareRevision => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_RadioHardwareRevision..Offset_RadioSoftwareRevision]);
 
                 /// <summary>
                 /// Retrieves the RadioSoftwareRevision field.
                 /// </summary>
-                public string RadioSoftwareRevision => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_RadioSoftwareRevision..]);
+                public string RadioSoftwareRevision => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_RadioSoftwareRevision..Offset_ROMVersion]);
 
                 /// <summary>
                 /// Retrieves the ROMVersion field.
                 /// </summary>
-                public string ROMVersion => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_ROMVersion..]);
+                public string ROMVersion => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_ROMVersion..Offset_SOCVersion]);
 
                 /// <summary>
                 /// Retrieves the SOCVersion field.
                 /// </summary>
-                public string SOCVersion => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_SOCVersion..]);
+                public string SOCVersion => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_SOCVersion..Offset_HardwareVariant]);
 
                 /// <summary>
                 /// Retrieves the HardwareVariant field.
@@ -10716,6 +10950,12 @@ namespace EtwTools
             }
 
             /// <summary>
+            /// Converts a generic ETW event to a DeviceFamilyEventV2.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator DeviceFamilyEventV2(EtwEvent etwEvent) => new(etwEvent);
+
+            /// <summary>
             /// A data wrapper for a DeviceFamily event.
             /// </summary>
             public ref struct DeviceFamilyData
@@ -10768,12 +11008,12 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the UAPInfo field.
                 /// </summary>
-                public ulong UAPInfo => BitConverter.ToUInt64(_etwEvent.Data[Offset_UAPInfo..]);
+                public ulong UAPInfo => BitConverter.ToUInt64(_etwEvent.Data[Offset_UAPInfo..Offset_DeviceFamily]);
 
                 /// <summary>
                 /// Retrieves the DeviceFamily field.
                 /// </summary>
-                public uint DeviceFamily => BitConverter.ToUInt32(_etwEvent.Data[Offset_DeviceFamily..]);
+                public uint DeviceFamily => BitConverter.ToUInt32(_etwEvent.Data[Offset_DeviceFamily..Offset_DeviceForm]);
 
                 /// <summary>
                 /// Retrieves the DeviceForm field.
@@ -10866,6 +11106,12 @@ namespace EtwTools
             }
 
             /// <summary>
+            /// Converts a generic ETW event to a FlightIdsEventV2.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator FlightIdsEventV2(EtwEvent etwEvent) => new(etwEvent);
+
+            /// <summary>
             /// A data wrapper for a FlightIds event.
             /// </summary>
             public ref struct FlightIdsData
@@ -10904,7 +11150,7 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the UpdateId field.
                 /// </summary>
-                public string UpdateId => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_UpdateId..]);
+                public string UpdateId => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_UpdateId..Offset_FlightIdList]);
 
                 /// <summary>
                 /// Retrieves the FlightIdList field.
@@ -10994,6 +11240,12 @@ namespace EtwTools
             {
                 _etwEvent = etwEvent;
             }
+
+            /// <summary>
+            /// Converts a generic ETW event to a ProcessorsEventV2.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator ProcessorsEventV2(EtwEvent etwEvent) => new(etwEvent);
 
             /// <summary>
             /// A data wrapper for a Processors event.
@@ -11090,27 +11342,27 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the ProcessorIndex field.
                 /// </summary>
-                public uint ProcessorIndex => BitConverter.ToUInt32(_etwEvent.Data[Offset_ProcessorIndex..]);
+                public uint ProcessorIndex => BitConverter.ToUInt32(_etwEvent.Data[Offset_ProcessorIndex..Offset_FeatureSet]);
 
                 /// <summary>
                 /// Retrieves the FeatureSet field.
                 /// </summary>
-                public uint FeatureSet => BitConverter.ToUInt32(_etwEvent.Data[Offset_FeatureSet..]);
+                public uint FeatureSet => BitConverter.ToUInt32(_etwEvent.Data[Offset_FeatureSet..Offset_ProcessorSpeed]);
 
                 /// <summary>
                 /// Retrieves the ProcessorSpeed field.
                 /// </summary>
-                public uint ProcessorSpeed => BitConverter.ToUInt32(_etwEvent.Data[Offset_ProcessorSpeed..]);
+                public uint ProcessorSpeed => BitConverter.ToUInt32(_etwEvent.Data[Offset_ProcessorSpeed..Offset_ProcessorName]);
 
                 /// <summary>
                 /// Retrieves the ProcessorName field.
                 /// </summary>
-                public char ProcessorName => BitConverter.ToChar(_etwEvent.Data[Offset_ProcessorName..]);
+                public char ProcessorName => BitConverter.ToChar(_etwEvent.Data[Offset_ProcessorName..Offset_VendorIdentifier]);
 
                 /// <summary>
                 /// Retrieves the VendorIdentifier field.
                 /// </summary>
-                public char VendorIdentifier => BitConverter.ToChar(_etwEvent.Data[Offset_VendorIdentifier..]);
+                public char VendorIdentifier => BitConverter.ToChar(_etwEvent.Data[Offset_VendorIdentifier..Offset_ProcessorIdentifier]);
 
                 /// <summary>
                 /// Retrieves the ProcessorIdentifier field.
@@ -11204,6 +11456,12 @@ namespace EtwTools
             {
                 _etwEvent = etwEvent;
             }
+
+            /// <summary>
+            /// Converts a generic ETW event to a VirtualizationConfigInfoEventV2.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator VirtualizationConfigInfoEventV2(EtwEvent etwEvent) => new(etwEvent);
 
             /// <summary>
             /// A data wrapper for a VirtualizationConfigInfo event.
@@ -11376,6 +11634,12 @@ namespace EtwTools
             }
 
             /// <summary>
+            /// Converts a generic ETW event to a BootConfigInfoEventV2.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator BootConfigInfoEventV2(EtwEvent etwEvent) => new(etwEvent);
+
+            /// <summary>
             /// A data wrapper for a BootConfigInfo event.
             /// </summary>
             public ref struct BootConfigInfoData
@@ -11470,12 +11734,12 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the BootFlags field.
                 /// </summary>
-                public ulong BootFlags => BitConverter.ToUInt64(_etwEvent.Data[Offset_BootFlags..]);
+                public ulong BootFlags => BitConverter.ToUInt64(_etwEvent.Data[Offset_BootFlags..Offset_FirmwareType]);
 
                 /// <summary>
                 /// Retrieves the FirmwareType field.
                 /// </summary>
-                public uint FirmwareType => BitConverter.ToUInt32(_etwEvent.Data[Offset_FirmwareType..]);
+                public uint FirmwareType => BitConverter.ToUInt32(_etwEvent.Data[Offset_FirmwareType..Offset_SecureBootEnabled]);
 
                 /// <summary>
                 /// Retrieves the SecureBootEnabled field.
@@ -11584,6 +11848,12 @@ namespace EtwTools
             {
                 _etwEvent = etwEvent;
             }
+
+            /// <summary>
+            /// Converts a generic ETW event to a CPUEventV3.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator CPUEventV3(EtwEvent etwEvent) => new(etwEvent);
 
             /// <summary>
             /// A data wrapper for a CPU event.
@@ -11806,62 +12076,62 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the MHz field.
                 /// </summary>
-                public uint MHz => BitConverter.ToUInt32(_etwEvent.Data[Offset_MHz..]);
+                public uint MHz => BitConverter.ToUInt32(_etwEvent.Data[Offset_MHz..Offset_NumberOfProcessors]);
 
                 /// <summary>
                 /// Retrieves the NumberOfProcessors field.
                 /// </summary>
-                public uint NumberOfProcessors => BitConverter.ToUInt32(_etwEvent.Data[Offset_NumberOfProcessors..]);
+                public uint NumberOfProcessors => BitConverter.ToUInt32(_etwEvent.Data[Offset_NumberOfProcessors..Offset_MemSize]);
 
                 /// <summary>
                 /// Retrieves the MemSize field.
                 /// </summary>
-                public uint MemSize => BitConverter.ToUInt32(_etwEvent.Data[Offset_MemSize..]);
+                public uint MemSize => BitConverter.ToUInt32(_etwEvent.Data[Offset_MemSize..Offset_PageSize]);
 
                 /// <summary>
                 /// Retrieves the PageSize field.
                 /// </summary>
-                public uint PageSize => BitConverter.ToUInt32(_etwEvent.Data[Offset_PageSize..]);
+                public uint PageSize => BitConverter.ToUInt32(_etwEvent.Data[Offset_PageSize..Offset_AllocationGranularity]);
 
                 /// <summary>
                 /// Retrieves the AllocationGranularity field.
                 /// </summary>
-                public uint AllocationGranularity => BitConverter.ToUInt32(_etwEvent.Data[Offset_AllocationGranularity..]);
+                public uint AllocationGranularity => BitConverter.ToUInt32(_etwEvent.Data[Offset_AllocationGranularity..Offset_ComputerName]);
 
                 /// <summary>
                 /// Retrieves the ComputerName field.
                 /// </summary>
-                public char ComputerName => BitConverter.ToChar(_etwEvent.Data[Offset_ComputerName..]);
+                public char ComputerName => BitConverter.ToChar(_etwEvent.Data[Offset_ComputerName..Offset_DomainName]);
 
                 /// <summary>
                 /// Retrieves the DomainName field.
                 /// </summary>
-                public char DomainName => BitConverter.ToChar(_etwEvent.Data[Offset_DomainName..]);
+                public char DomainName => BitConverter.ToChar(_etwEvent.Data[Offset_DomainName..Offset_HyperThreadingFlag]);
 
                 /// <summary>
                 /// Retrieves the HyperThreadingFlag field.
                 /// </summary>
-                public ulong HyperThreadingFlag => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_HyperThreadingFlag..]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_HyperThreadingFlag..]);
+                public ulong HyperThreadingFlag => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_HyperThreadingFlag..Offset_HighestUserAddress]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_HyperThreadingFlag..Offset_HighestUserAddress]);
 
                 /// <summary>
                 /// Retrieves the HighestUserAddress field.
                 /// </summary>
-                public ulong HighestUserAddress => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_HighestUserAddress..]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_HighestUserAddress..]);
+                public ulong HighestUserAddress => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_HighestUserAddress..Offset_ProcessorArchitecture]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_HighestUserAddress..Offset_ProcessorArchitecture]);
 
                 /// <summary>
                 /// Retrieves the ProcessorArchitecture field.
                 /// </summary>
-                public ushort ProcessorArchitecture => BitConverter.ToUInt16(_etwEvent.Data[Offset_ProcessorArchitecture..]);
+                public ushort ProcessorArchitecture => BitConverter.ToUInt16(_etwEvent.Data[Offset_ProcessorArchitecture..Offset_ProcessorLevel]);
 
                 /// <summary>
                 /// Retrieves the ProcessorLevel field.
                 /// </summary>
-                public ushort ProcessorLevel => BitConverter.ToUInt16(_etwEvent.Data[Offset_ProcessorLevel..]);
+                public ushort ProcessorLevel => BitConverter.ToUInt16(_etwEvent.Data[Offset_ProcessorLevel..Offset_ProcessorRevision]);
 
                 /// <summary>
                 /// Retrieves the ProcessorRevision field.
                 /// </summary>
-                public ushort ProcessorRevision => BitConverter.ToUInt16(_etwEvent.Data[Offset_ProcessorRevision..]);
+                public ushort ProcessorRevision => BitConverter.ToUInt16(_etwEvent.Data[Offset_ProcessorRevision..Offset_PaeEnabled]);
 
                 /// <summary>
                 /// Retrieves the PaeEnabled field.
@@ -11976,6 +12246,12 @@ namespace EtwTools
             }
 
             /// <summary>
+            /// Converts a generic ETW event to a IRQEventV3.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator IRQEventV3(EtwEvent etwEvent) => new(etwEvent);
+
+            /// <summary>
             /// A data wrapper for a IRQ event.
             /// </summary>
             public ref struct IRQData
@@ -12070,27 +12346,27 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the IRQAffinity field.
                 /// </summary>
-                public ulong IRQAffinity => BitConverter.ToUInt64(_etwEvent.Data[Offset_IRQAffinity..]);
+                public ulong IRQAffinity => BitConverter.ToUInt64(_etwEvent.Data[Offset_IRQAffinity..Offset_IRQGroup]);
 
                 /// <summary>
                 /// Retrieves the IRQGroup field.
                 /// </summary>
-                public ushort IRQGroup => BitConverter.ToUInt16(_etwEvent.Data[Offset_IRQGroup..]);
+                public ushort IRQGroup => BitConverter.ToUInt16(_etwEvent.Data[Offset_IRQGroup..Offset_Reserved]);
 
                 /// <summary>
                 /// Retrieves the Reserved field.
                 /// </summary>
-                public ushort Reserved => BitConverter.ToUInt16(_etwEvent.Data[Offset_Reserved..]);
+                public ushort Reserved => BitConverter.ToUInt16(_etwEvent.Data[Offset_Reserved..Offset_IRQNum]);
 
                 /// <summary>
                 /// Retrieves the IRQNum field.
                 /// </summary>
-                public uint IRQNum => BitConverter.ToUInt32(_etwEvent.Data[Offset_IRQNum..]);
+                public uint IRQNum => BitConverter.ToUInt32(_etwEvent.Data[Offset_IRQNum..Offset_DeviceDescriptionLen]);
 
                 /// <summary>
                 /// Retrieves the DeviceDescriptionLen field.
                 /// </summary>
-                public uint DeviceDescriptionLen => BitConverter.ToUInt32(_etwEvent.Data[Offset_DeviceDescriptionLen..]);
+                public uint DeviceDescriptionLen => BitConverter.ToUInt32(_etwEvent.Data[Offset_DeviceDescriptionLen..Offset_DeviceDescription]);
 
                 /// <summary>
                 /// Retrieves the DeviceDescription field.
@@ -12184,6 +12460,12 @@ namespace EtwTools
             {
                 _etwEvent = etwEvent;
             }
+
+            /// <summary>
+            /// Converts a generic ETW event to a ServicesEventV3.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator ServicesEventV3(EtwEvent etwEvent) => new(etwEvent);
 
             /// <summary>
             /// A data wrapper for a Services event.
@@ -12308,37 +12590,37 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the ProcessId field.
                 /// </summary>
-                public uint ProcessId => BitConverter.ToUInt32(_etwEvent.Data[Offset_ProcessId..]);
+                public uint ProcessId => BitConverter.ToUInt32(_etwEvent.Data[Offset_ProcessId..Offset_ServiceState]);
 
                 /// <summary>
                 /// Retrieves the ServiceState field.
                 /// </summary>
-                public uint ServiceState => BitConverter.ToUInt32(_etwEvent.Data[Offset_ServiceState..]);
+                public uint ServiceState => BitConverter.ToUInt32(_etwEvent.Data[Offset_ServiceState..Offset_SubProcessTag]);
 
                 /// <summary>
                 /// Retrieves the SubProcessTag field.
                 /// </summary>
-                public uint SubProcessTag => BitConverter.ToUInt32(_etwEvent.Data[Offset_SubProcessTag..]);
+                public uint SubProcessTag => BitConverter.ToUInt32(_etwEvent.Data[Offset_SubProcessTag..Offset_ServiceName]);
 
                 /// <summary>
                 /// Retrieves the ServiceName field.
                 /// </summary>
-                public string ServiceName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_ServiceName..]);
+                public string ServiceName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_ServiceName..Offset_DisplayName]);
 
                 /// <summary>
                 /// Retrieves the DisplayName field.
                 /// </summary>
-                public string DisplayName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_DisplayName..]);
+                public string DisplayName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_DisplayName..Offset_ProcessName]);
 
                 /// <summary>
                 /// Retrieves the ProcessName field.
                 /// </summary>
-                public string ProcessName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_ProcessName..]);
+                public string ProcessName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_ProcessName..Offset_LoadOrderGroup]);
 
                 /// <summary>
                 /// Retrieves the LoadOrderGroup field.
                 /// </summary>
-                public string LoadOrderGroup => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_LoadOrderGroup..]);
+                public string LoadOrderGroup => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_LoadOrderGroup..Offset_SvchostGroup]);
 
                 /// <summary>
                 /// Retrieves the SvchostGroup field.
@@ -12434,6 +12716,12 @@ namespace EtwTools
             {
                 _etwEvent = etwEvent;
             }
+
+            /// <summary>
+            /// Converts a generic ETW event to a PnPEventV3.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator PnPEventV3(EtwEvent etwEvent) => new(etwEvent);
 
             /// <summary>
             /// A data wrapper for a PnP event.
@@ -12544,32 +12832,32 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the IDLength field.
                 /// </summary>
-                public uint IDLength => BitConverter.ToUInt32(_etwEvent.Data[Offset_IDLength..]);
+                public uint IDLength => BitConverter.ToUInt32(_etwEvent.Data[Offset_IDLength..Offset_DescriptionLength]);
 
                 /// <summary>
                 /// Retrieves the DescriptionLength field.
                 /// </summary>
-                public uint DescriptionLength => BitConverter.ToUInt32(_etwEvent.Data[Offset_DescriptionLength..]);
+                public uint DescriptionLength => BitConverter.ToUInt32(_etwEvent.Data[Offset_DescriptionLength..Offset_FriendlyNameLength]);
 
                 /// <summary>
                 /// Retrieves the FriendlyNameLength field.
                 /// </summary>
-                public uint FriendlyNameLength => BitConverter.ToUInt32(_etwEvent.Data[Offset_FriendlyNameLength..]);
+                public uint FriendlyNameLength => BitConverter.ToUInt32(_etwEvent.Data[Offset_FriendlyNameLength..Offset_DeviceID]);
 
                 /// <summary>
                 /// Retrieves the DeviceID field.
                 /// </summary>
-                public string DeviceID => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_DeviceID..]);
+                public string DeviceID => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_DeviceID..Offset_DeviceDescription]);
 
                 /// <summary>
                 /// Retrieves the DeviceDescription field.
                 /// </summary>
-                public string DeviceDescription => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_DeviceDescription..]);
+                public string DeviceDescription => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_DeviceDescription..Offset_FriendlyName]);
 
                 /// <summary>
                 /// Retrieves the FriendlyName field.
                 /// </summary>
-                public string FriendlyName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_FriendlyName..]);
+                public string FriendlyName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_FriendlyName..Offset_PdoName]);
 
                 /// <summary>
                 /// Retrieves the PdoName field.
@@ -12664,6 +12952,12 @@ namespace EtwTools
             {
                 _etwEvent = etwEvent;
             }
+
+            /// <summary>
+            /// Converts a generic ETW event to a MobilePlatformEventV3.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator MobilePlatformEventV3(EtwEvent etwEvent) => new(etwEvent);
 
             /// <summary>
             /// A data wrapper for a MobilePlatform event.
@@ -12844,57 +13138,57 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the DeviceManufacturer field.
                 /// </summary>
-                public string DeviceManufacturer => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_DeviceManufacturer..]);
+                public string DeviceManufacturer => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_DeviceManufacturer..Offset_DeviceManufacturerDisplayName]);
 
                 /// <summary>
                 /// Retrieves the DeviceManufacturerDisplayName field.
                 /// </summary>
-                public string DeviceManufacturerDisplayName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_DeviceManufacturerDisplayName..]);
+                public string DeviceManufacturerDisplayName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_DeviceManufacturerDisplayName..Offset_DeviceModel]);
 
                 /// <summary>
                 /// Retrieves the DeviceModel field.
                 /// </summary>
-                public string DeviceModel => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_DeviceModel..]);
+                public string DeviceModel => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_DeviceModel..Offset_DeviceModelDisplayName]);
 
                 /// <summary>
                 /// Retrieves the DeviceModelDisplayName field.
                 /// </summary>
-                public string DeviceModelDisplayName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_DeviceModelDisplayName..]);
+                public string DeviceModelDisplayName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_DeviceModelDisplayName..Offset_MobileOperator]);
 
                 /// <summary>
                 /// Retrieves the MobileOperator field.
                 /// </summary>
-                public string MobileOperator => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_MobileOperator..]);
+                public string MobileOperator => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_MobileOperator..Offset_MobileOperatorDisplayName]);
 
                 /// <summary>
                 /// Retrieves the MobileOperatorDisplayName field.
                 /// </summary>
-                public string MobileOperatorDisplayName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_MobileOperatorDisplayName..]);
+                public string MobileOperatorDisplayName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_MobileOperatorDisplayName..Offset_HardwareVersion]);
 
                 /// <summary>
                 /// Retrieves the HardwareVersion field.
                 /// </summary>
-                public string HardwareVersion => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_HardwareVersion..]);
+                public string HardwareVersion => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_HardwareVersion..Offset_SocVersion]);
 
                 /// <summary>
                 /// Retrieves the SocVersion field.
                 /// </summary>
-                public string SocVersion => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_SocVersion..]);
+                public string SocVersion => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_SocVersion..Offset_RadioHardwareVersion]);
 
                 /// <summary>
                 /// Retrieves the RadioHardwareVersion field.
                 /// </summary>
-                public string RadioHardwareVersion => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_RadioHardwareVersion..]);
+                public string RadioHardwareVersion => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_RadioHardwareVersion..Offset_RadioSoftwareVersion]);
 
                 /// <summary>
                 /// Retrieves the RadioSoftwareVersion field.
                 /// </summary>
-                public string RadioSoftwareVersion => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_RadioSoftwareVersion..]);
+                public string RadioSoftwareVersion => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_RadioSoftwareVersion..Offset_BspVersion]);
 
                 /// <summary>
                 /// Retrieves the BspVersion field.
                 /// </summary>
-                public string BspVersion => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_BspVersion..]);
+                public string BspVersion => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_BspVersion..Offset_OemSoftwareVersion]);
 
                 /// <summary>
                 /// Retrieves the OemSoftwareVersion field.
@@ -12994,6 +13288,12 @@ namespace EtwTools
             {
                 _etwEvent = etwEvent;
             }
+
+            /// <summary>
+            /// Converts a generic ETW event to a PnPEventV4.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator PnPEventV4(EtwEvent etwEvent) => new(etwEvent);
 
             /// <summary>
             /// A data wrapper for a PnP event.
@@ -13146,42 +13446,42 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the ClassGuid field.
                 /// </summary>
-                public Guid ClassGuid => new(_etwEvent.Data[Offset_ClassGuid..]);
+                public Guid ClassGuid => new(_etwEvent.Data[Offset_ClassGuid..Offset_UpperFiltersCount]);
 
                 /// <summary>
                 /// Retrieves the UpperFiltersCount field.
                 /// </summary>
-                public uint UpperFiltersCount => BitConverter.ToUInt32(_etwEvent.Data[Offset_UpperFiltersCount..]);
+                public uint UpperFiltersCount => BitConverter.ToUInt32(_etwEvent.Data[Offset_UpperFiltersCount..Offset_LowerFiltersCount]);
 
                 /// <summary>
                 /// Retrieves the LowerFiltersCount field.
                 /// </summary>
-                public uint LowerFiltersCount => BitConverter.ToUInt32(_etwEvent.Data[Offset_LowerFiltersCount..]);
+                public uint LowerFiltersCount => BitConverter.ToUInt32(_etwEvent.Data[Offset_LowerFiltersCount..Offset_DeviceID]);
 
                 /// <summary>
                 /// Retrieves the DeviceID field.
                 /// </summary>
-                public string DeviceID => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_DeviceID..]);
+                public string DeviceID => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_DeviceID..Offset_DeviceDescription]);
 
                 /// <summary>
                 /// Retrieves the DeviceDescription field.
                 /// </summary>
-                public string DeviceDescription => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_DeviceDescription..]);
+                public string DeviceDescription => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_DeviceDescription..Offset_FriendlyName]);
 
                 /// <summary>
                 /// Retrieves the FriendlyName field.
                 /// </summary>
-                public string FriendlyName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_FriendlyName..]);
+                public string FriendlyName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_FriendlyName..Offset_PdoName]);
 
                 /// <summary>
                 /// Retrieves the PdoName field.
                 /// </summary>
-                public string PdoName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_PdoName..]);
+                public string PdoName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_PdoName..Offset_ServiceName]);
 
                 /// <summary>
                 /// Retrieves the ServiceName field.
                 /// </summary>
-                public string ServiceName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_ServiceName..]);
+                public string ServiceName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_ServiceName..Offset_UpperFilters]);
 
                 /// <summary>
                 /// Retrieves the UpperFilters field.
@@ -13284,6 +13584,12 @@ namespace EtwTools
             {
                 _etwEvent = etwEvent;
             }
+
+            /// <summary>
+            /// Converts a generic ETW event to a PnPEventV5.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator PnPEventV5(EtwEvent etwEvent) => new(etwEvent);
 
             /// <summary>
             /// A data wrapper for a PnP event.
@@ -13464,52 +13770,52 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the ClassGuid field.
                 /// </summary>
-                public Guid ClassGuid => new(_etwEvent.Data[Offset_ClassGuid..]);
+                public Guid ClassGuid => new(_etwEvent.Data[Offset_ClassGuid..Offset_UpperFiltersCount]);
 
                 /// <summary>
                 /// Retrieves the UpperFiltersCount field.
                 /// </summary>
-                public uint UpperFiltersCount => BitConverter.ToUInt32(_etwEvent.Data[Offset_UpperFiltersCount..]);
+                public uint UpperFiltersCount => BitConverter.ToUInt32(_etwEvent.Data[Offset_UpperFiltersCount..Offset_LowerFiltersCount]);
 
                 /// <summary>
                 /// Retrieves the LowerFiltersCount field.
                 /// </summary>
-                public uint LowerFiltersCount => BitConverter.ToUInt32(_etwEvent.Data[Offset_LowerFiltersCount..]);
+                public uint LowerFiltersCount => BitConverter.ToUInt32(_etwEvent.Data[Offset_LowerFiltersCount..Offset_DevStatus]);
 
                 /// <summary>
                 /// Retrieves the DevStatus field.
                 /// </summary>
-                public uint DevStatus => BitConverter.ToUInt32(_etwEvent.Data[Offset_DevStatus..]);
+                public uint DevStatus => BitConverter.ToUInt32(_etwEvent.Data[Offset_DevStatus..Offset_DevProblem]);
 
                 /// <summary>
                 /// Retrieves the DevProblem field.
                 /// </summary>
-                public uint DevProblem => BitConverter.ToUInt32(_etwEvent.Data[Offset_DevProblem..]);
+                public uint DevProblem => BitConverter.ToUInt32(_etwEvent.Data[Offset_DevProblem..Offset_DeviceID]);
 
                 /// <summary>
                 /// Retrieves the DeviceID field.
                 /// </summary>
-                public string DeviceID => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_DeviceID..]);
+                public string DeviceID => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_DeviceID..Offset_DeviceDescription]);
 
                 /// <summary>
                 /// Retrieves the DeviceDescription field.
                 /// </summary>
-                public string DeviceDescription => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_DeviceDescription..]);
+                public string DeviceDescription => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_DeviceDescription..Offset_FriendlyName]);
 
                 /// <summary>
                 /// Retrieves the FriendlyName field.
                 /// </summary>
-                public string FriendlyName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_FriendlyName..]);
+                public string FriendlyName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_FriendlyName..Offset_PdoName]);
 
                 /// <summary>
                 /// Retrieves the PdoName field.
                 /// </summary>
-                public string PdoName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_PdoName..]);
+                public string PdoName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_PdoName..Offset_ServiceName]);
 
                 /// <summary>
                 /// Retrieves the ServiceName field.
                 /// </summary>
-                public string ServiceName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_ServiceName..]);
+                public string ServiceName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_ServiceName..Offset_UpperFilters]);
 
                 /// <summary>
                 /// Retrieves the UpperFilters field.

@@ -126,6 +126,12 @@ namespace EtwTools
             }
 
             /// <summary>
+            /// Converts a generic ETW event to a StackEventV2.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator StackEventV2(EtwEvent etwEvent) => new(etwEvent);
+
+            /// <summary>
             /// A data wrapper for a Stack event.
             /// </summary>
             public ref struct StackData
@@ -192,17 +198,17 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the Timestamp field.
                 /// </summary>
-                public ulong Timestamp => BitConverter.ToUInt64(_etwEvent.Data[Offset_Timestamp..]);
+                public ulong Timestamp => BitConverter.ToUInt64(_etwEvent.Data[Offset_Timestamp..Offset_ProcessId]);
 
                 /// <summary>
                 /// Retrieves the ProcessId field.
                 /// </summary>
-                public uint ProcessId => BitConverter.ToUInt32(_etwEvent.Data[Offset_ProcessId..]);
+                public uint ProcessId => BitConverter.ToUInt32(_etwEvent.Data[Offset_ProcessId..Offset_ThreadId]);
 
                 /// <summary>
                 /// Retrieves the ThreadId field.
                 /// </summary>
-                public uint ThreadId => BitConverter.ToUInt32(_etwEvent.Data[Offset_ThreadId..]);
+                public uint ThreadId => BitConverter.ToUInt32(_etwEvent.Data[Offset_ThreadId..Offset_Stack]);
 
                 /// <summary>
                 /// Retrieves the Stack field.
@@ -296,6 +302,12 @@ namespace EtwTools
             }
 
             /// <summary>
+            /// Converts a generic ETW event to a StackKeyCreateEventV2.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator StackKeyCreateEventV2(EtwEvent etwEvent) => new(etwEvent);
+
+            /// <summary>
             /// A data wrapper for a StackKeyCreate event.
             /// </summary>
             public ref struct StackKeyCreateData
@@ -334,7 +346,7 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the StackKey field.
                 /// </summary>
-                public ulong StackKey => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_StackKey..]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_StackKey..]);
+                public ulong StackKey => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_StackKey..Offset_StackFrames]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_StackKey..Offset_StackFrames]);
 
                 /// <summary>
                 /// Retrieves the StackFrames field.
@@ -426,6 +438,12 @@ namespace EtwTools
             }
 
             /// <summary>
+            /// Converts a generic ETW event to a StackKeyDeleteEventV2.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator StackKeyDeleteEventV2(EtwEvent etwEvent) => new(etwEvent);
+
+            /// <summary>
             /// A data wrapper for a StackKeyDelete event.
             /// </summary>
             public ref struct StackKeyDeleteData
@@ -464,7 +482,7 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the StackKey field.
                 /// </summary>
-                public ulong StackKey => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_StackKey..]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_StackKey..]);
+                public ulong StackKey => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_StackKey..Offset_StackFrames]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_StackKey..Offset_StackFrames]);
 
                 /// <summary>
                 /// Retrieves the StackFrames field.
@@ -556,6 +574,12 @@ namespace EtwTools
             }
 
             /// <summary>
+            /// Converts a generic ETW event to a StackKeyRundownEventV2.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator StackKeyRundownEventV2(EtwEvent etwEvent) => new(etwEvent);
+
+            /// <summary>
             /// A data wrapper for a StackKeyRundown event.
             /// </summary>
             public ref struct StackKeyRundownData
@@ -594,7 +618,7 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the StackKey field.
                 /// </summary>
-                public ulong StackKey => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_StackKey..]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_StackKey..]);
+                public ulong StackKey => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_StackKey..Offset_StackFrames]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_StackKey..Offset_StackFrames]);
 
                 /// <summary>
                 /// Retrieves the StackFrames field.
@@ -686,6 +710,12 @@ namespace EtwTools
             }
 
             /// <summary>
+            /// Converts a generic ETW event to a StackKeyKernelEventV2.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator StackKeyKernelEventV2(EtwEvent etwEvent) => new(etwEvent);
+
+            /// <summary>
             /// A data wrapper for a StackKeyKernel event.
             /// </summary>
             public ref struct StackKeyKernelData
@@ -752,17 +782,17 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the Timestamp field.
                 /// </summary>
-                public ulong Timestamp => BitConverter.ToUInt64(_etwEvent.Data[Offset_Timestamp..]);
+                public ulong Timestamp => BitConverter.ToUInt64(_etwEvent.Data[Offset_Timestamp..Offset_ProcessId]);
 
                 /// <summary>
                 /// Retrieves the ProcessId field.
                 /// </summary>
-                public uint ProcessId => BitConverter.ToUInt32(_etwEvent.Data[Offset_ProcessId..]);
+                public uint ProcessId => BitConverter.ToUInt32(_etwEvent.Data[Offset_ProcessId..Offset_ThreadId]);
 
                 /// <summary>
                 /// Retrieves the ThreadId field.
                 /// </summary>
-                public uint ThreadId => BitConverter.ToUInt32(_etwEvent.Data[Offset_ThreadId..]);
+                public uint ThreadId => BitConverter.ToUInt32(_etwEvent.Data[Offset_ThreadId..Offset_StackKey]);
 
                 /// <summary>
                 /// Retrieves the StackKey field.
@@ -856,6 +886,12 @@ namespace EtwTools
             }
 
             /// <summary>
+            /// Converts a generic ETW event to a StackKeyUserEventV2.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator StackKeyUserEventV2(EtwEvent etwEvent) => new(etwEvent);
+
+            /// <summary>
             /// A data wrapper for a StackKeyUser event.
             /// </summary>
             public ref struct StackKeyUserData
@@ -922,17 +958,17 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the Timestamp field.
                 /// </summary>
-                public ulong Timestamp => BitConverter.ToUInt64(_etwEvent.Data[Offset_Timestamp..]);
+                public ulong Timestamp => BitConverter.ToUInt64(_etwEvent.Data[Offset_Timestamp..Offset_ProcessId]);
 
                 /// <summary>
                 /// Retrieves the ProcessId field.
                 /// </summary>
-                public uint ProcessId => BitConverter.ToUInt32(_etwEvent.Data[Offset_ProcessId..]);
+                public uint ProcessId => BitConverter.ToUInt32(_etwEvent.Data[Offset_ProcessId..Offset_ThreadId]);
 
                 /// <summary>
                 /// Retrieves the ThreadId field.
                 /// </summary>
-                public uint ThreadId => BitConverter.ToUInt32(_etwEvent.Data[Offset_ThreadId..]);
+                public uint ThreadId => BitConverter.ToUInt32(_etwEvent.Data[Offset_ThreadId..Offset_StackKey]);
 
                 /// <summary>
                 /// Retrieves the StackKey field.

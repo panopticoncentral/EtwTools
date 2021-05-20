@@ -269,6 +269,12 @@ namespace EtwTools
             }
 
             /// <summary>
+            /// Converts a generic ETW event to a EventSourceMessageEvent.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator EventSourceMessageEvent(EtwEvent etwEvent) => new(etwEvent);
+
+            /// <summary>
             /// A data wrapper for a EventSourceMessage event.
             /// </summary>
             public ref struct EventSourceMessageData
@@ -379,6 +385,12 @@ namespace EtwTools
             }
 
             /// <summary>
+            /// Converts a generic ETW event to a ResourceManagerLookupStartedEvent.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator ResourceManagerLookupStartedEvent(EtwEvent etwEvent) => new(etwEvent);
+
+            /// <summary>
             /// A data wrapper for a ResourceManagerLookupStarted event.
             /// </summary>
             public ref struct ResourceManagerLookupStartedData
@@ -431,12 +443,12 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the BaseName field.
                 /// </summary>
-                public string BaseName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_BaseName..]);
+                public string BaseName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_BaseName..Offset_MainAssemblyName]);
 
                 /// <summary>
                 /// Retrieves the MainAssemblyName field.
                 /// </summary>
-                public string MainAssemblyName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_MainAssemblyName..]);
+                public string MainAssemblyName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_MainAssemblyName..Offset_CultureName]);
 
                 /// <summary>
                 /// Retrieves the CultureName field.
@@ -529,6 +541,12 @@ namespace EtwTools
             }
 
             /// <summary>
+            /// Converts a generic ETW event to a ResourceManagerLookingForResourceSetEvent.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator ResourceManagerLookingForResourceSetEvent(EtwEvent etwEvent) => new(etwEvent);
+
+            /// <summary>
             /// A data wrapper for a ResourceManagerLookingForResourceSet event.
             /// </summary>
             public ref struct ResourceManagerLookingForResourceSetData
@@ -581,12 +599,12 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the BaseName field.
                 /// </summary>
-                public string BaseName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_BaseName..]);
+                public string BaseName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_BaseName..Offset_MainAssemblyName]);
 
                 /// <summary>
                 /// Retrieves the MainAssemblyName field.
                 /// </summary>
-                public string MainAssemblyName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_MainAssemblyName..]);
+                public string MainAssemblyName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_MainAssemblyName..Offset_CultureName]);
 
                 /// <summary>
                 /// Retrieves the CultureName field.
@@ -679,6 +697,12 @@ namespace EtwTools
             }
 
             /// <summary>
+            /// Converts a generic ETW event to a ResourceManagerFoundResourceSetInCacheEvent.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator ResourceManagerFoundResourceSetInCacheEvent(EtwEvent etwEvent) => new(etwEvent);
+
+            /// <summary>
             /// A data wrapper for a ResourceManagerFoundResourceSetInCache event.
             /// </summary>
             public ref struct ResourceManagerFoundResourceSetInCacheData
@@ -731,12 +755,12 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the BaseName field.
                 /// </summary>
-                public string BaseName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_BaseName..]);
+                public string BaseName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_BaseName..Offset_MainAssemblyName]);
 
                 /// <summary>
                 /// Retrieves the MainAssemblyName field.
                 /// </summary>
-                public string MainAssemblyName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_MainAssemblyName..]);
+                public string MainAssemblyName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_MainAssemblyName..Offset_CultureName]);
 
                 /// <summary>
                 /// Retrieves the CultureName field.
@@ -829,6 +853,12 @@ namespace EtwTools
             }
 
             /// <summary>
+            /// Converts a generic ETW event to a ResourceManagerFoundResourceSetInCacheUnexpectedEvent.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator ResourceManagerFoundResourceSetInCacheUnexpectedEvent(EtwEvent etwEvent) => new(etwEvent);
+
+            /// <summary>
             /// A data wrapper for a ResourceManagerFoundResourceSetInCacheUnexpected event.
             /// </summary>
             public ref struct ResourceManagerFoundResourceSetInCacheUnexpectedData
@@ -881,12 +911,12 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the BaseName field.
                 /// </summary>
-                public string BaseName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_BaseName..]);
+                public string BaseName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_BaseName..Offset_MainAssemblyName]);
 
                 /// <summary>
                 /// Retrieves the MainAssemblyName field.
                 /// </summary>
-                public string MainAssemblyName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_MainAssemblyName..]);
+                public string MainAssemblyName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_MainAssemblyName..Offset_CultureName]);
 
                 /// <summary>
                 /// Retrieves the CultureName field.
@@ -979,6 +1009,12 @@ namespace EtwTools
             }
 
             /// <summary>
+            /// Converts a generic ETW event to a ResourceManagerStreamFoundEvent.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator ResourceManagerStreamFoundEvent(EtwEvent etwEvent) => new(etwEvent);
+
+            /// <summary>
             /// A data wrapper for a ResourceManagerStreamFound event.
             /// </summary>
             public ref struct ResourceManagerStreamFoundData
@@ -1059,22 +1095,22 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the BaseName field.
                 /// </summary>
-                public string BaseName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_BaseName..]);
+                public string BaseName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_BaseName..Offset_MainAssemblyName]);
 
                 /// <summary>
                 /// Retrieves the MainAssemblyName field.
                 /// </summary>
-                public string MainAssemblyName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_MainAssemblyName..]);
+                public string MainAssemblyName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_MainAssemblyName..Offset_CultureName]);
 
                 /// <summary>
                 /// Retrieves the CultureName field.
                 /// </summary>
-                public string CultureName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_CultureName..]);
+                public string CultureName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_CultureName..Offset_LoadedAssemblyName]);
 
                 /// <summary>
                 /// Retrieves the LoadedAssemblyName field.
                 /// </summary>
-                public string LoadedAssemblyName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_LoadedAssemblyName..]);
+                public string LoadedAssemblyName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_LoadedAssemblyName..Offset_ResourceFileName]);
 
                 /// <summary>
                 /// Retrieves the ResourceFileName field.
@@ -1169,6 +1205,12 @@ namespace EtwTools
             }
 
             /// <summary>
+            /// Converts a generic ETW event to a ResourceManagerStreamNotFoundEvent.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator ResourceManagerStreamNotFoundEvent(EtwEvent etwEvent) => new(etwEvent);
+
+            /// <summary>
             /// A data wrapper for a ResourceManagerStreamNotFound event.
             /// </summary>
             public ref struct ResourceManagerStreamNotFoundData
@@ -1249,22 +1291,22 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the BaseName field.
                 /// </summary>
-                public string BaseName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_BaseName..]);
+                public string BaseName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_BaseName..Offset_MainAssemblyName]);
 
                 /// <summary>
                 /// Retrieves the MainAssemblyName field.
                 /// </summary>
-                public string MainAssemblyName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_MainAssemblyName..]);
+                public string MainAssemblyName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_MainAssemblyName..Offset_CultureName]);
 
                 /// <summary>
                 /// Retrieves the CultureName field.
                 /// </summary>
-                public string CultureName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_CultureName..]);
+                public string CultureName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_CultureName..Offset_LoadedAssemblyName]);
 
                 /// <summary>
                 /// Retrieves the LoadedAssemblyName field.
                 /// </summary>
-                public string LoadedAssemblyName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_LoadedAssemblyName..]);
+                public string LoadedAssemblyName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_LoadedAssemblyName..Offset_ResourceFileName]);
 
                 /// <summary>
                 /// Retrieves the ResourceFileName field.
@@ -1359,6 +1401,12 @@ namespace EtwTools
             }
 
             /// <summary>
+            /// Converts a generic ETW event to a ResourceManagerGetSatelliteAssemblySucceededEvent.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator ResourceManagerGetSatelliteAssemblySucceededEvent(EtwEvent etwEvent) => new(etwEvent);
+
+            /// <summary>
             /// A data wrapper for a ResourceManagerGetSatelliteAssemblySucceeded event.
             /// </summary>
             public ref struct ResourceManagerGetSatelliteAssemblySucceededData
@@ -1425,17 +1473,17 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the BaseName field.
                 /// </summary>
-                public string BaseName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_BaseName..]);
+                public string BaseName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_BaseName..Offset_MainAssemblyName]);
 
                 /// <summary>
                 /// Retrieves the MainAssemblyName field.
                 /// </summary>
-                public string MainAssemblyName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_MainAssemblyName..]);
+                public string MainAssemblyName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_MainAssemblyName..Offset_CultureName]);
 
                 /// <summary>
                 /// Retrieves the CultureName field.
                 /// </summary>
-                public string CultureName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_CultureName..]);
+                public string CultureName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_CultureName..Offset_AssemblyName]);
 
                 /// <summary>
                 /// Retrieves the AssemblyName field.
@@ -1529,6 +1577,12 @@ namespace EtwTools
             }
 
             /// <summary>
+            /// Converts a generic ETW event to a ResourceManagerGetSatelliteAssemblyFailedEvent.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator ResourceManagerGetSatelliteAssemblyFailedEvent(EtwEvent etwEvent) => new(etwEvent);
+
+            /// <summary>
             /// A data wrapper for a ResourceManagerGetSatelliteAssemblyFailed event.
             /// </summary>
             public ref struct ResourceManagerGetSatelliteAssemblyFailedData
@@ -1595,17 +1649,17 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the BaseName field.
                 /// </summary>
-                public string BaseName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_BaseName..]);
+                public string BaseName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_BaseName..Offset_MainAssemblyName]);
 
                 /// <summary>
                 /// Retrieves the MainAssemblyName field.
                 /// </summary>
-                public string MainAssemblyName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_MainAssemblyName..]);
+                public string MainAssemblyName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_MainAssemblyName..Offset_CultureName]);
 
                 /// <summary>
                 /// Retrieves the CultureName field.
                 /// </summary>
-                public string CultureName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_CultureName..]);
+                public string CultureName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_CultureName..Offset_AssemblyName]);
 
                 /// <summary>
                 /// Retrieves the AssemblyName field.
@@ -1699,6 +1753,12 @@ namespace EtwTools
             }
 
             /// <summary>
+            /// Converts a generic ETW event to a ResourceManagerCaseInsensitiveResourceStreamLookupSucceededEvent.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator ResourceManagerCaseInsensitiveResourceStreamLookupSucceededEvent(EtwEvent etwEvent) => new(etwEvent);
+
+            /// <summary>
             /// A data wrapper for a ResourceManagerCaseInsensitiveResourceStreamLookupSucceeded event.
             /// </summary>
             public ref struct ResourceManagerCaseInsensitiveResourceStreamLookupSucceededData
@@ -1765,17 +1825,17 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the BaseName field.
                 /// </summary>
-                public string BaseName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_BaseName..]);
+                public string BaseName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_BaseName..Offset_MainAssemblyName]);
 
                 /// <summary>
                 /// Retrieves the MainAssemblyName field.
                 /// </summary>
-                public string MainAssemblyName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_MainAssemblyName..]);
+                public string MainAssemblyName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_MainAssemblyName..Offset_AssemblyName]);
 
                 /// <summary>
                 /// Retrieves the AssemblyName field.
                 /// </summary>
-                public string AssemblyName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_AssemblyName..]);
+                public string AssemblyName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_AssemblyName..Offset_ResourceFileName]);
 
                 /// <summary>
                 /// Retrieves the ResourceFileName field.
@@ -1869,6 +1929,12 @@ namespace EtwTools
             }
 
             /// <summary>
+            /// Converts a generic ETW event to a ResourceManagerCaseInsensitiveResourceStreamLookupFailedEvent.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator ResourceManagerCaseInsensitiveResourceStreamLookupFailedEvent(EtwEvent etwEvent) => new(etwEvent);
+
+            /// <summary>
             /// A data wrapper for a ResourceManagerCaseInsensitiveResourceStreamLookupFailed event.
             /// </summary>
             public ref struct ResourceManagerCaseInsensitiveResourceStreamLookupFailedData
@@ -1935,17 +2001,17 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the BaseName field.
                 /// </summary>
-                public string BaseName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_BaseName..]);
+                public string BaseName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_BaseName..Offset_MainAssemblyName]);
 
                 /// <summary>
                 /// Retrieves the MainAssemblyName field.
                 /// </summary>
-                public string MainAssemblyName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_MainAssemblyName..]);
+                public string MainAssemblyName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_MainAssemblyName..Offset_AssemblyName]);
 
                 /// <summary>
                 /// Retrieves the AssemblyName field.
                 /// </summary>
-                public string AssemblyName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_AssemblyName..]);
+                public string AssemblyName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_AssemblyName..Offset_ResourceFileName]);
 
                 /// <summary>
                 /// Retrieves the ResourceFileName field.
@@ -2039,6 +2105,12 @@ namespace EtwTools
             }
 
             /// <summary>
+            /// Converts a generic ETW event to a ResourceManagerManifestResourceAccessDeniedEvent.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator ResourceManagerManifestResourceAccessDeniedEvent(EtwEvent etwEvent) => new(etwEvent);
+
+            /// <summary>
             /// A data wrapper for a ResourceManagerManifestResourceAccessDenied event.
             /// </summary>
             public ref struct ResourceManagerManifestResourceAccessDeniedData
@@ -2105,17 +2177,17 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the BaseName field.
                 /// </summary>
-                public string BaseName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_BaseName..]);
+                public string BaseName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_BaseName..Offset_MainAssemblyName]);
 
                 /// <summary>
                 /// Retrieves the MainAssemblyName field.
                 /// </summary>
-                public string MainAssemblyName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_MainAssemblyName..]);
+                public string MainAssemblyName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_MainAssemblyName..Offset_AssemblyName]);
 
                 /// <summary>
                 /// Retrieves the AssemblyName field.
                 /// </summary>
-                public string AssemblyName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_AssemblyName..]);
+                public string AssemblyName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_AssemblyName..Offset_CanonicalName]);
 
                 /// <summary>
                 /// Retrieves the CanonicalName field.
@@ -2209,6 +2281,12 @@ namespace EtwTools
             }
 
             /// <summary>
+            /// Converts a generic ETW event to a ResourceManagerNeutralResourcesSufficientEvent.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator ResourceManagerNeutralResourcesSufficientEvent(EtwEvent etwEvent) => new(etwEvent);
+
+            /// <summary>
             /// A data wrapper for a ResourceManagerNeutralResourcesSufficient event.
             /// </summary>
             public ref struct ResourceManagerNeutralResourcesSufficientData
@@ -2261,12 +2339,12 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the BaseName field.
                 /// </summary>
-                public string BaseName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_BaseName..]);
+                public string BaseName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_BaseName..Offset_MainAssemblyName]);
 
                 /// <summary>
                 /// Retrieves the MainAssemblyName field.
                 /// </summary>
-                public string MainAssemblyName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_MainAssemblyName..]);
+                public string MainAssemblyName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_MainAssemblyName..Offset_CultureName]);
 
                 /// <summary>
                 /// Retrieves the CultureName field.
@@ -2357,6 +2435,12 @@ namespace EtwTools
             {
                 _etwEvent = etwEvent;
             }
+
+            /// <summary>
+            /// Converts a generic ETW event to a ResourceManagerNeutralResourceAttributeMissingEvent.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator ResourceManagerNeutralResourceAttributeMissingEvent(EtwEvent etwEvent) => new(etwEvent);
 
             /// <summary>
             /// A data wrapper for a ResourceManagerNeutralResourceAttributeMissing event.
@@ -2469,6 +2553,12 @@ namespace EtwTools
             }
 
             /// <summary>
+            /// Converts a generic ETW event to a ResourceManagerCreatingResourceSetEvent.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator ResourceManagerCreatingResourceSetEvent(EtwEvent etwEvent) => new(etwEvent);
+
+            /// <summary>
             /// A data wrapper for a ResourceManagerCreatingResourceSet event.
             /// </summary>
             public ref struct ResourceManagerCreatingResourceSetData
@@ -2535,17 +2625,17 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the BaseName field.
                 /// </summary>
-                public string BaseName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_BaseName..]);
+                public string BaseName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_BaseName..Offset_MainAssemblyName]);
 
                 /// <summary>
                 /// Retrieves the MainAssemblyName field.
                 /// </summary>
-                public string MainAssemblyName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_MainAssemblyName..]);
+                public string MainAssemblyName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_MainAssemblyName..Offset_CultureName]);
 
                 /// <summary>
                 /// Retrieves the CultureName field.
                 /// </summary>
-                public string CultureName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_CultureName..]);
+                public string CultureName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_CultureName..Offset_FileName]);
 
                 /// <summary>
                 /// Retrieves the FileName field.
@@ -2639,6 +2729,12 @@ namespace EtwTools
             }
 
             /// <summary>
+            /// Converts a generic ETW event to a ResourceManagerNotCreatingResourceSetEvent.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator ResourceManagerNotCreatingResourceSetEvent(EtwEvent etwEvent) => new(etwEvent);
+
+            /// <summary>
             /// A data wrapper for a ResourceManagerNotCreatingResourceSet event.
             /// </summary>
             public ref struct ResourceManagerNotCreatingResourceSetData
@@ -2691,12 +2787,12 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the BaseName field.
                 /// </summary>
-                public string BaseName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_BaseName..]);
+                public string BaseName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_BaseName..Offset_MainAssemblyName]);
 
                 /// <summary>
                 /// Retrieves the MainAssemblyName field.
                 /// </summary>
-                public string MainAssemblyName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_MainAssemblyName..]);
+                public string MainAssemblyName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_MainAssemblyName..Offset_CultureName]);
 
                 /// <summary>
                 /// Retrieves the CultureName field.
@@ -2789,6 +2885,12 @@ namespace EtwTools
             }
 
             /// <summary>
+            /// Converts a generic ETW event to a ResourceManagerLookupFailedEvent.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator ResourceManagerLookupFailedEvent(EtwEvent etwEvent) => new(etwEvent);
+
+            /// <summary>
             /// A data wrapper for a ResourceManagerLookupFailed event.
             /// </summary>
             public ref struct ResourceManagerLookupFailedData
@@ -2841,12 +2943,12 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the BaseName field.
                 /// </summary>
-                public string BaseName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_BaseName..]);
+                public string BaseName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_BaseName..Offset_MainAssemblyName]);
 
                 /// <summary>
                 /// Retrieves the MainAssemblyName field.
                 /// </summary>
-                public string MainAssemblyName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_MainAssemblyName..]);
+                public string MainAssemblyName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_MainAssemblyName..Offset_CultureName]);
 
                 /// <summary>
                 /// Retrieves the CultureName field.
@@ -2939,6 +3041,12 @@ namespace EtwTools
             }
 
             /// <summary>
+            /// Converts a generic ETW event to a ResourceManagerReleasingResourcesEvent.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator ResourceManagerReleasingResourcesEvent(EtwEvent etwEvent) => new(etwEvent);
+
+            /// <summary>
             /// A data wrapper for a ResourceManagerReleasingResources event.
             /// </summary>
             public ref struct ResourceManagerReleasingResourcesData
@@ -2977,7 +3085,7 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the BaseName field.
                 /// </summary>
-                public string BaseName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_BaseName..]);
+                public string BaseName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_BaseName..Offset_MainAssemblyName]);
 
                 /// <summary>
                 /// Retrieves the MainAssemblyName field.
@@ -3069,6 +3177,12 @@ namespace EtwTools
             }
 
             /// <summary>
+            /// Converts a generic ETW event to a ResourceManagerNeutralResourcesNotFoundEvent.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator ResourceManagerNeutralResourcesNotFoundEvent(EtwEvent etwEvent) => new(etwEvent);
+
+            /// <summary>
             /// A data wrapper for a ResourceManagerNeutralResourcesNotFound event.
             /// </summary>
             public ref struct ResourceManagerNeutralResourcesNotFoundData
@@ -3121,12 +3235,12 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the BaseName field.
                 /// </summary>
-                public string BaseName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_BaseName..]);
+                public string BaseName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_BaseName..Offset_MainAssemblyName]);
 
                 /// <summary>
                 /// Retrieves the MainAssemblyName field.
                 /// </summary>
-                public string MainAssemblyName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_MainAssemblyName..]);
+                public string MainAssemblyName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_MainAssemblyName..Offset_ResName]);
 
                 /// <summary>
                 /// Retrieves the ResName field.
@@ -3219,6 +3333,12 @@ namespace EtwTools
             }
 
             /// <summary>
+            /// Converts a generic ETW event to a ResourceManagerNeutralResourcesFoundEvent.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator ResourceManagerNeutralResourcesFoundEvent(EtwEvent etwEvent) => new(etwEvent);
+
+            /// <summary>
             /// A data wrapper for a ResourceManagerNeutralResourcesFound event.
             /// </summary>
             public ref struct ResourceManagerNeutralResourcesFoundData
@@ -3271,12 +3391,12 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the BaseName field.
                 /// </summary>
-                public string BaseName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_BaseName..]);
+                public string BaseName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_BaseName..Offset_MainAssemblyName]);
 
                 /// <summary>
                 /// Retrieves the MainAssemblyName field.
                 /// </summary>
-                public string MainAssemblyName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_MainAssemblyName..]);
+                public string MainAssemblyName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_MainAssemblyName..Offset_ResName]);
 
                 /// <summary>
                 /// Retrieves the ResName field.
@@ -3369,6 +3489,12 @@ namespace EtwTools
             }
 
             /// <summary>
+            /// Converts a generic ETW event to a ResourceManagerAddingCultureFromConfigFileEvent.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator ResourceManagerAddingCultureFromConfigFileEvent(EtwEvent etwEvent) => new(etwEvent);
+
+            /// <summary>
             /// A data wrapper for a ResourceManagerAddingCultureFromConfigFile event.
             /// </summary>
             public ref struct ResourceManagerAddingCultureFromConfigFileData
@@ -3421,12 +3547,12 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the BaseName field.
                 /// </summary>
-                public string BaseName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_BaseName..]);
+                public string BaseName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_BaseName..Offset_MainAssemblyName]);
 
                 /// <summary>
                 /// Retrieves the MainAssemblyName field.
                 /// </summary>
-                public string MainAssemblyName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_MainAssemblyName..]);
+                public string MainAssemblyName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_MainAssemblyName..Offset_CultureName]);
 
                 /// <summary>
                 /// Retrieves the CultureName field.
@@ -3519,6 +3645,12 @@ namespace EtwTools
             }
 
             /// <summary>
+            /// Converts a generic ETW event to a ResourceManagerCultureNotFoundInConfigFileEvent.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator ResourceManagerCultureNotFoundInConfigFileEvent(EtwEvent etwEvent) => new(etwEvent);
+
+            /// <summary>
             /// A data wrapper for a ResourceManagerCultureNotFoundInConfigFile event.
             /// </summary>
             public ref struct ResourceManagerCultureNotFoundInConfigFileData
@@ -3571,12 +3703,12 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the BaseName field.
                 /// </summary>
-                public string BaseName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_BaseName..]);
+                public string BaseName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_BaseName..Offset_MainAssemblyName]);
 
                 /// <summary>
                 /// Retrieves the MainAssemblyName field.
                 /// </summary>
-                public string MainAssemblyName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_MainAssemblyName..]);
+                public string MainAssemblyName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_MainAssemblyName..Offset_CultureName]);
 
                 /// <summary>
                 /// Retrieves the CultureName field.
@@ -3669,6 +3801,12 @@ namespace EtwTools
             }
 
             /// <summary>
+            /// Converts a generic ETW event to a ResourceManagerCultureFoundInConfigFileEvent.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator ResourceManagerCultureFoundInConfigFileEvent(EtwEvent etwEvent) => new(etwEvent);
+
+            /// <summary>
             /// A data wrapper for a ResourceManagerCultureFoundInConfigFile event.
             /// </summary>
             public ref struct ResourceManagerCultureFoundInConfigFileData
@@ -3721,12 +3859,12 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the BaseName field.
                 /// </summary>
-                public string BaseName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_BaseName..]);
+                public string BaseName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_BaseName..Offset_MainAssemblyName]);
 
                 /// <summary>
                 /// Retrieves the MainAssemblyName field.
                 /// </summary>
-                public string MainAssemblyName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_MainAssemblyName..]);
+                public string MainAssemblyName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_MainAssemblyName..Offset_CultureName]);
 
                 /// <summary>
                 /// Retrieves the CultureName field.
@@ -3817,6 +3955,12 @@ namespace EtwTools
             {
                 _etwEvent = etwEvent;
             }
+
+            /// <summary>
+            /// Converts a generic ETW event to a ThreadPoolEnqueueWorkEvent.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator ThreadPoolEnqueueWorkEvent(EtwEvent etwEvent) => new(etwEvent);
 
             /// <summary>
             /// A data wrapper for a ThreadPoolEnqueueWork event.
@@ -3929,6 +4073,12 @@ namespace EtwTools
             }
 
             /// <summary>
+            /// Converts a generic ETW event to a ThreadPoolDequeueWorkEvent.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator ThreadPoolDequeueWorkEvent(EtwEvent etwEvent) => new(etwEvent);
+
+            /// <summary>
             /// A data wrapper for a ThreadPoolDequeueWork event.
             /// </summary>
             public ref struct ThreadPoolDequeueWorkData
@@ -4039,6 +4189,12 @@ namespace EtwTools
             }
 
             /// <summary>
+            /// Converts a generic ETW event to a GetResponseStartEventV1.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator GetResponseStartEventV1(EtwEvent etwEvent) => new(etwEvent);
+
+            /// <summary>
             /// A data wrapper for a GetResponseStart event.
             /// </summary>
             public ref struct GetResponseStartData
@@ -4105,12 +4261,12 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the Id field.
                 /// </summary>
-                public long Id => BitConverter.ToInt64(_etwEvent.Data[Offset_Id..]);
+                public long Id => BitConverter.ToInt64(_etwEvent.Data[Offset_Id..Offset_Uri]);
 
                 /// <summary>
                 /// Retrieves the Uri field.
                 /// </summary>
-                public string Uri => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_Uri..]);
+                public string Uri => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_Uri..Offset_Success]);
 
                 /// <summary>
                 /// Retrieves the Success field.
@@ -4209,6 +4365,12 @@ namespace EtwTools
             }
 
             /// <summary>
+            /// Converts a generic ETW event to a GetResponseStopEventV1.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator GetResponseStopEventV1(EtwEvent etwEvent) => new(etwEvent);
+
+            /// <summary>
             /// A data wrapper for a GetResponseStop event.
             /// </summary>
             public ref struct GetResponseStopData
@@ -4275,7 +4437,7 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the Id field.
                 /// </summary>
-                public long Id => BitConverter.ToInt64(_etwEvent.Data[Offset_Id..]);
+                public long Id => BitConverter.ToInt64(_etwEvent.Data[Offset_Id..Offset_Success]);
 
                 /// <summary>
                 /// Retrieves the Success field.
@@ -4379,6 +4541,12 @@ namespace EtwTools
             }
 
             /// <summary>
+            /// Converts a generic ETW event to a GetRequestStreamStartEventV1.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator GetRequestStreamStartEventV1(EtwEvent etwEvent) => new(etwEvent);
+
+            /// <summary>
             /// A data wrapper for a GetRequestStreamStart event.
             /// </summary>
             public ref struct GetRequestStreamStartData
@@ -4445,12 +4613,12 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the Id field.
                 /// </summary>
-                public long Id => BitConverter.ToInt64(_etwEvent.Data[Offset_Id..]);
+                public long Id => BitConverter.ToInt64(_etwEvent.Data[Offset_Id..Offset_Uri]);
 
                 /// <summary>
                 /// Retrieves the Uri field.
                 /// </summary>
-                public string Uri => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_Uri..]);
+                public string Uri => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_Uri..Offset_Success]);
 
                 /// <summary>
                 /// Retrieves the Success field.
@@ -4549,6 +4717,12 @@ namespace EtwTools
             }
 
             /// <summary>
+            /// Converts a generic ETW event to a GetRequestStreamStopEventV1.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator GetRequestStreamStopEventV1(EtwEvent etwEvent) => new(etwEvent);
+
+            /// <summary>
             /// A data wrapper for a GetRequestStreamStop event.
             /// </summary>
             public ref struct GetRequestStreamStopData
@@ -4601,7 +4775,7 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the Id field.
                 /// </summary>
-                public long Id => BitConverter.ToInt64(_etwEvent.Data[Offset_Id..]);
+                public long Id => BitConverter.ToInt64(_etwEvent.Data[Offset_Id..Offset_Success]);
 
                 /// <summary>
                 /// Retrieves the Success field.
@@ -4699,6 +4873,12 @@ namespace EtwTools
             }
 
             /// <summary>
+            /// Converts a generic ETW event to a ThreadTransferSendEvent.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator ThreadTransferSendEvent(EtwEvent etwEvent) => new(etwEvent);
+
+            /// <summary>
             /// A data wrapper for a ThreadTransferSend event.
             /// </summary>
             public ref struct ThreadTransferSendData
@@ -4765,17 +4945,17 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the Id field.
                 /// </summary>
-                public long Id => BitConverter.ToInt64(_etwEvent.Data[Offset_Id..]);
+                public long Id => BitConverter.ToInt64(_etwEvent.Data[Offset_Id..Offset_Kind]);
 
                 /// <summary>
                 /// Retrieves the Kind field.
                 /// </summary>
-                public int Kind => BitConverter.ToInt32(_etwEvent.Data[Offset_Kind..]);
+                public int Kind => BitConverter.ToInt32(_etwEvent.Data[Offset_Kind..Offset_Info]);
 
                 /// <summary>
                 /// Retrieves the Info field.
                 /// </summary>
-                public string Info => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_Info..]);
+                public string Info => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_Info..Offset_MultiDequeues]);
 
                 /// <summary>
                 /// Retrieves the MultiDequeues field.
@@ -4869,6 +5049,12 @@ namespace EtwTools
             }
 
             /// <summary>
+            /// Converts a generic ETW event to a ThreadTransferReceiveEvent.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator ThreadTransferReceiveEvent(EtwEvent etwEvent) => new(etwEvent);
+
+            /// <summary>
             /// A data wrapper for a ThreadTransferReceive event.
             /// </summary>
             public ref struct ThreadTransferReceiveData
@@ -4921,12 +5107,12 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the Id field.
                 /// </summary>
-                public long Id => BitConverter.ToInt64(_etwEvent.Data[Offset_Id..]);
+                public long Id => BitConverter.ToInt64(_etwEvent.Data[Offset_Id..Offset_Kind]);
 
                 /// <summary>
                 /// Retrieves the Kind field.
                 /// </summary>
-                public int Kind => BitConverter.ToInt32(_etwEvent.Data[Offset_Kind..]);
+                public int Kind => BitConverter.ToInt32(_etwEvent.Data[Offset_Kind..Offset_Info]);
 
                 /// <summary>
                 /// Retrieves the Info field.
@@ -5019,6 +5205,12 @@ namespace EtwTools
             }
 
             /// <summary>
+            /// Converts a generic ETW event to a ThreadTransferReceiveHandledEvent.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator ThreadTransferReceiveHandledEvent(EtwEvent etwEvent) => new(etwEvent);
+
+            /// <summary>
             /// A data wrapper for a ThreadTransferReceiveHandled event.
             /// </summary>
             public ref struct ThreadTransferReceiveHandledData
@@ -5071,12 +5263,12 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the Id field.
                 /// </summary>
-                public long Id => BitConverter.ToInt64(_etwEvent.Data[Offset_Id..]);
+                public long Id => BitConverter.ToInt64(_etwEvent.Data[Offset_Id..Offset_Kind]);
 
                 /// <summary>
                 /// Retrieves the Kind field.
                 /// </summary>
-                public int Kind => BitConverter.ToInt32(_etwEvent.Data[Offset_Kind..]);
+                public int Kind => BitConverter.ToInt32(_etwEvent.Data[Offset_Kind..Offset_Info]);
 
                 /// <summary>
                 /// Retrieves the Info field.

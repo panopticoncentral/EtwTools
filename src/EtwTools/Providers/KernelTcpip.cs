@@ -186,6 +186,12 @@ namespace EtwTools
             }
 
             /// <summary>
+            /// Converts a generic ETW event to a SendEvent.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator SendEvent(EtwEvent etwEvent) => new(etwEvent);
+
+            /// <summary>
             /// A data wrapper for a Send event.
             /// </summary>
             public ref struct SendData
@@ -280,27 +286,27 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the daddr field.
                 /// </summary>
-                public uint daddr => BitConverter.ToUInt32(_etwEvent.Data[Offset_daddr..]);
+                public uint daddr => BitConverter.ToUInt32(_etwEvent.Data[Offset_daddr..Offset_saddr]);
 
                 /// <summary>
                 /// Retrieves the saddr field.
                 /// </summary>
-                public uint saddr => BitConverter.ToUInt32(_etwEvent.Data[Offset_saddr..]);
+                public uint saddr => BitConverter.ToUInt32(_etwEvent.Data[Offset_saddr..Offset_dport]);
 
                 /// <summary>
                 /// Retrieves the dport field.
                 /// </summary>
-                public ushort dport => BitConverter.ToUInt16(_etwEvent.Data[Offset_dport..]);
+                public ushort dport => BitConverter.ToUInt16(_etwEvent.Data[Offset_dport..Offset_sport]);
 
                 /// <summary>
                 /// Retrieves the sport field.
                 /// </summary>
-                public ushort sport => BitConverter.ToUInt16(_etwEvent.Data[Offset_sport..]);
+                public ushort sport => BitConverter.ToUInt16(_etwEvent.Data[Offset_sport..Offset_size]);
 
                 /// <summary>
                 /// Retrieves the size field.
                 /// </summary>
-                public uint size => BitConverter.ToUInt32(_etwEvent.Data[Offset_size..]);
+                public uint size => BitConverter.ToUInt32(_etwEvent.Data[Offset_size..Offset_PID]);
 
                 /// <summary>
                 /// Retrieves the PID field.
@@ -394,6 +400,12 @@ namespace EtwTools
             {
                 _etwEvent = etwEvent;
             }
+
+            /// <summary>
+            /// Converts a generic ETW event to a RecvEvent.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator RecvEvent(EtwEvent etwEvent) => new(etwEvent);
 
             /// <summary>
             /// A data wrapper for a Recv event.
@@ -490,27 +502,27 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the daddr field.
                 /// </summary>
-                public uint daddr => BitConverter.ToUInt32(_etwEvent.Data[Offset_daddr..]);
+                public uint daddr => BitConverter.ToUInt32(_etwEvent.Data[Offset_daddr..Offset_saddr]);
 
                 /// <summary>
                 /// Retrieves the saddr field.
                 /// </summary>
-                public uint saddr => BitConverter.ToUInt32(_etwEvent.Data[Offset_saddr..]);
+                public uint saddr => BitConverter.ToUInt32(_etwEvent.Data[Offset_saddr..Offset_dport]);
 
                 /// <summary>
                 /// Retrieves the dport field.
                 /// </summary>
-                public ushort dport => BitConverter.ToUInt16(_etwEvent.Data[Offset_dport..]);
+                public ushort dport => BitConverter.ToUInt16(_etwEvent.Data[Offset_dport..Offset_sport]);
 
                 /// <summary>
                 /// Retrieves the sport field.
                 /// </summary>
-                public ushort sport => BitConverter.ToUInt16(_etwEvent.Data[Offset_sport..]);
+                public ushort sport => BitConverter.ToUInt16(_etwEvent.Data[Offset_sport..Offset_size]);
 
                 /// <summary>
                 /// Retrieves the size field.
                 /// </summary>
-                public uint size => BitConverter.ToUInt32(_etwEvent.Data[Offset_size..]);
+                public uint size => BitConverter.ToUInt32(_etwEvent.Data[Offset_size..Offset_PID]);
 
                 /// <summary>
                 /// Retrieves the PID field.
@@ -604,6 +616,12 @@ namespace EtwTools
             {
                 _etwEvent = etwEvent;
             }
+
+            /// <summary>
+            /// Converts a generic ETW event to a ConnectEvent.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator ConnectEvent(EtwEvent etwEvent) => new(etwEvent);
 
             /// <summary>
             /// A data wrapper for a Connect event.
@@ -700,27 +718,27 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the daddr field.
                 /// </summary>
-                public uint daddr => BitConverter.ToUInt32(_etwEvent.Data[Offset_daddr..]);
+                public uint daddr => BitConverter.ToUInt32(_etwEvent.Data[Offset_daddr..Offset_saddr]);
 
                 /// <summary>
                 /// Retrieves the saddr field.
                 /// </summary>
-                public uint saddr => BitConverter.ToUInt32(_etwEvent.Data[Offset_saddr..]);
+                public uint saddr => BitConverter.ToUInt32(_etwEvent.Data[Offset_saddr..Offset_dport]);
 
                 /// <summary>
                 /// Retrieves the dport field.
                 /// </summary>
-                public ushort dport => BitConverter.ToUInt16(_etwEvent.Data[Offset_dport..]);
+                public ushort dport => BitConverter.ToUInt16(_etwEvent.Data[Offset_dport..Offset_sport]);
 
                 /// <summary>
                 /// Retrieves the sport field.
                 /// </summary>
-                public ushort sport => BitConverter.ToUInt16(_etwEvent.Data[Offset_sport..]);
+                public ushort sport => BitConverter.ToUInt16(_etwEvent.Data[Offset_sport..Offset_size]);
 
                 /// <summary>
                 /// Retrieves the size field.
                 /// </summary>
-                public uint size => BitConverter.ToUInt32(_etwEvent.Data[Offset_size..]);
+                public uint size => BitConverter.ToUInt32(_etwEvent.Data[Offset_size..Offset_PID]);
 
                 /// <summary>
                 /// Retrieves the PID field.
@@ -814,6 +832,12 @@ namespace EtwTools
             {
                 _etwEvent = etwEvent;
             }
+
+            /// <summary>
+            /// Converts a generic ETW event to a DisconnectEvent.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator DisconnectEvent(EtwEvent etwEvent) => new(etwEvent);
 
             /// <summary>
             /// A data wrapper for a Disconnect event.
@@ -910,27 +934,27 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the daddr field.
                 /// </summary>
-                public uint daddr => BitConverter.ToUInt32(_etwEvent.Data[Offset_daddr..]);
+                public uint daddr => BitConverter.ToUInt32(_etwEvent.Data[Offset_daddr..Offset_saddr]);
 
                 /// <summary>
                 /// Retrieves the saddr field.
                 /// </summary>
-                public uint saddr => BitConverter.ToUInt32(_etwEvent.Data[Offset_saddr..]);
+                public uint saddr => BitConverter.ToUInt32(_etwEvent.Data[Offset_saddr..Offset_dport]);
 
                 /// <summary>
                 /// Retrieves the dport field.
                 /// </summary>
-                public ushort dport => BitConverter.ToUInt16(_etwEvent.Data[Offset_dport..]);
+                public ushort dport => BitConverter.ToUInt16(_etwEvent.Data[Offset_dport..Offset_sport]);
 
                 /// <summary>
                 /// Retrieves the sport field.
                 /// </summary>
-                public ushort sport => BitConverter.ToUInt16(_etwEvent.Data[Offset_sport..]);
+                public ushort sport => BitConverter.ToUInt16(_etwEvent.Data[Offset_sport..Offset_size]);
 
                 /// <summary>
                 /// Retrieves the size field.
                 /// </summary>
-                public uint size => BitConverter.ToUInt32(_etwEvent.Data[Offset_size..]);
+                public uint size => BitConverter.ToUInt32(_etwEvent.Data[Offset_size..Offset_PID]);
 
                 /// <summary>
                 /// Retrieves the PID field.
@@ -1024,6 +1048,12 @@ namespace EtwTools
             {
                 _etwEvent = etwEvent;
             }
+
+            /// <summary>
+            /// Converts a generic ETW event to a RetransmitEvent.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator RetransmitEvent(EtwEvent etwEvent) => new(etwEvent);
 
             /// <summary>
             /// A data wrapper for a Retransmit event.
@@ -1120,27 +1150,27 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the daddr field.
                 /// </summary>
-                public uint daddr => BitConverter.ToUInt32(_etwEvent.Data[Offset_daddr..]);
+                public uint daddr => BitConverter.ToUInt32(_etwEvent.Data[Offset_daddr..Offset_saddr]);
 
                 /// <summary>
                 /// Retrieves the saddr field.
                 /// </summary>
-                public uint saddr => BitConverter.ToUInt32(_etwEvent.Data[Offset_saddr..]);
+                public uint saddr => BitConverter.ToUInt32(_etwEvent.Data[Offset_saddr..Offset_dport]);
 
                 /// <summary>
                 /// Retrieves the dport field.
                 /// </summary>
-                public ushort dport => BitConverter.ToUInt16(_etwEvent.Data[Offset_dport..]);
+                public ushort dport => BitConverter.ToUInt16(_etwEvent.Data[Offset_dport..Offset_sport]);
 
                 /// <summary>
                 /// Retrieves the sport field.
                 /// </summary>
-                public ushort sport => BitConverter.ToUInt16(_etwEvent.Data[Offset_sport..]);
+                public ushort sport => BitConverter.ToUInt16(_etwEvent.Data[Offset_sport..Offset_size]);
 
                 /// <summary>
                 /// Retrieves the size field.
                 /// </summary>
-                public uint size => BitConverter.ToUInt32(_etwEvent.Data[Offset_size..]);
+                public uint size => BitConverter.ToUInt32(_etwEvent.Data[Offset_size..Offset_PID]);
 
                 /// <summary>
                 /// Retrieves the PID field.
@@ -1234,6 +1264,12 @@ namespace EtwTools
             {
                 _etwEvent = etwEvent;
             }
+
+            /// <summary>
+            /// Converts a generic ETW event to a AcceptEvent.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator AcceptEvent(EtwEvent etwEvent) => new(etwEvent);
 
             /// <summary>
             /// A data wrapper for a Accept event.
@@ -1330,27 +1366,27 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the daddr field.
                 /// </summary>
-                public uint daddr => BitConverter.ToUInt32(_etwEvent.Data[Offset_daddr..]);
+                public uint daddr => BitConverter.ToUInt32(_etwEvent.Data[Offset_daddr..Offset_saddr]);
 
                 /// <summary>
                 /// Retrieves the saddr field.
                 /// </summary>
-                public uint saddr => BitConverter.ToUInt32(_etwEvent.Data[Offset_saddr..]);
+                public uint saddr => BitConverter.ToUInt32(_etwEvent.Data[Offset_saddr..Offset_dport]);
 
                 /// <summary>
                 /// Retrieves the dport field.
                 /// </summary>
-                public ushort dport => BitConverter.ToUInt16(_etwEvent.Data[Offset_dport..]);
+                public ushort dport => BitConverter.ToUInt16(_etwEvent.Data[Offset_dport..Offset_sport]);
 
                 /// <summary>
                 /// Retrieves the sport field.
                 /// </summary>
-                public ushort sport => BitConverter.ToUInt16(_etwEvent.Data[Offset_sport..]);
+                public ushort sport => BitConverter.ToUInt16(_etwEvent.Data[Offset_sport..Offset_size]);
 
                 /// <summary>
                 /// Retrieves the size field.
                 /// </summary>
-                public uint size => BitConverter.ToUInt32(_etwEvent.Data[Offset_size..]);
+                public uint size => BitConverter.ToUInt32(_etwEvent.Data[Offset_size..Offset_PID]);
 
                 /// <summary>
                 /// Retrieves the PID field.
@@ -1444,6 +1480,12 @@ namespace EtwTools
             {
                 _etwEvent = etwEvent;
             }
+
+            /// <summary>
+            /// Converts a generic ETW event to a FailEventV1.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator FailEventV1(EtwEvent etwEvent) => new(etwEvent);
 
             /// <summary>
             /// A data wrapper for a Fail event.
@@ -1554,6 +1596,12 @@ namespace EtwTools
             {
                 _etwEvent = etwEvent;
             }
+
+            /// <summary>
+            /// Converts a generic ETW event to a TCPCopyEventV1.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator TCPCopyEventV1(EtwEvent etwEvent) => new(etwEvent);
 
             /// <summary>
             /// A data wrapper for a TCPCopy event.
@@ -1678,37 +1726,37 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the PID field.
                 /// </summary>
-                public uint PID => BitConverter.ToUInt32(_etwEvent.Data[Offset_PID..]);
+                public uint PID => BitConverter.ToUInt32(_etwEvent.Data[Offset_PID..Offset_size]);
 
                 /// <summary>
                 /// Retrieves the size field.
                 /// </summary>
-                public uint size => BitConverter.ToUInt32(_etwEvent.Data[Offset_size..]);
+                public uint size => BitConverter.ToUInt32(_etwEvent.Data[Offset_size..Offset_daddr]);
 
                 /// <summary>
                 /// Retrieves the daddr field.
                 /// </summary>
-                public uint daddr => BitConverter.ToUInt32(_etwEvent.Data[Offset_daddr..]);
+                public uint daddr => BitConverter.ToUInt32(_etwEvent.Data[Offset_daddr..Offset_saddr]);
 
                 /// <summary>
                 /// Retrieves the saddr field.
                 /// </summary>
-                public uint saddr => BitConverter.ToUInt32(_etwEvent.Data[Offset_saddr..]);
+                public uint saddr => BitConverter.ToUInt32(_etwEvent.Data[Offset_saddr..Offset_dport]);
 
                 /// <summary>
                 /// Retrieves the dport field.
                 /// </summary>
-                public ushort dport => BitConverter.ToUInt16(_etwEvent.Data[Offset_dport..]);
+                public ushort dport => BitConverter.ToUInt16(_etwEvent.Data[Offset_dport..Offset_sport]);
 
                 /// <summary>
                 /// Retrieves the sport field.
                 /// </summary>
-                public ushort sport => BitConverter.ToUInt16(_etwEvent.Data[Offset_sport..]);
+                public ushort sport => BitConverter.ToUInt16(_etwEvent.Data[Offset_sport..Offset_connid]);
 
                 /// <summary>
                 /// Retrieves the connid field.
                 /// </summary>
-                public ulong connid => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_connid..]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_connid..]);
+                public ulong connid => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_connid..Offset_seqnum]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_connid..Offset_seqnum]);
 
                 /// <summary>
                 /// Retrieves the seqnum field.
@@ -1804,6 +1852,12 @@ namespace EtwTools
             {
                 _etwEvent = etwEvent;
             }
+
+            /// <summary>
+            /// Converts a generic ETW event to a ARPCopyEventV1.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator ARPCopyEventV1(EtwEvent etwEvent) => new(etwEvent);
 
             /// <summary>
             /// A data wrapper for a ARPCopy event.
@@ -1928,37 +1982,37 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the PID field.
                 /// </summary>
-                public uint PID => BitConverter.ToUInt32(_etwEvent.Data[Offset_PID..]);
+                public uint PID => BitConverter.ToUInt32(_etwEvent.Data[Offset_PID..Offset_size]);
 
                 /// <summary>
                 /// Retrieves the size field.
                 /// </summary>
-                public uint size => BitConverter.ToUInt32(_etwEvent.Data[Offset_size..]);
+                public uint size => BitConverter.ToUInt32(_etwEvent.Data[Offset_size..Offset_daddr]);
 
                 /// <summary>
                 /// Retrieves the daddr field.
                 /// </summary>
-                public uint daddr => BitConverter.ToUInt32(_etwEvent.Data[Offset_daddr..]);
+                public uint daddr => BitConverter.ToUInt32(_etwEvent.Data[Offset_daddr..Offset_saddr]);
 
                 /// <summary>
                 /// Retrieves the saddr field.
                 /// </summary>
-                public uint saddr => BitConverter.ToUInt32(_etwEvent.Data[Offset_saddr..]);
+                public uint saddr => BitConverter.ToUInt32(_etwEvent.Data[Offset_saddr..Offset_dport]);
 
                 /// <summary>
                 /// Retrieves the dport field.
                 /// </summary>
-                public ushort dport => BitConverter.ToUInt16(_etwEvent.Data[Offset_dport..]);
+                public ushort dport => BitConverter.ToUInt16(_etwEvent.Data[Offset_dport..Offset_sport]);
 
                 /// <summary>
                 /// Retrieves the sport field.
                 /// </summary>
-                public ushort sport => BitConverter.ToUInt16(_etwEvent.Data[Offset_sport..]);
+                public ushort sport => BitConverter.ToUInt16(_etwEvent.Data[Offset_sport..Offset_connid]);
 
                 /// <summary>
                 /// Retrieves the connid field.
                 /// </summary>
-                public ulong connid => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_connid..]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_connid..]);
+                public ulong connid => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_connid..Offset_seqnum]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_connid..Offset_seqnum]);
 
                 /// <summary>
                 /// Retrieves the seqnum field.
@@ -2054,6 +2108,12 @@ namespace EtwTools
             {
                 _etwEvent = etwEvent;
             }
+
+            /// <summary>
+            /// Converts a generic ETW event to a FullACKEventV1.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator FullACKEventV1(EtwEvent etwEvent) => new(etwEvent);
 
             /// <summary>
             /// A data wrapper for a FullACK event.
@@ -2178,37 +2238,37 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the PID field.
                 /// </summary>
-                public uint PID => BitConverter.ToUInt32(_etwEvent.Data[Offset_PID..]);
+                public uint PID => BitConverter.ToUInt32(_etwEvent.Data[Offset_PID..Offset_size]);
 
                 /// <summary>
                 /// Retrieves the size field.
                 /// </summary>
-                public uint size => BitConverter.ToUInt32(_etwEvent.Data[Offset_size..]);
+                public uint size => BitConverter.ToUInt32(_etwEvent.Data[Offset_size..Offset_daddr]);
 
                 /// <summary>
                 /// Retrieves the daddr field.
                 /// </summary>
-                public uint daddr => BitConverter.ToUInt32(_etwEvent.Data[Offset_daddr..]);
+                public uint daddr => BitConverter.ToUInt32(_etwEvent.Data[Offset_daddr..Offset_saddr]);
 
                 /// <summary>
                 /// Retrieves the saddr field.
                 /// </summary>
-                public uint saddr => BitConverter.ToUInt32(_etwEvent.Data[Offset_saddr..]);
+                public uint saddr => BitConverter.ToUInt32(_etwEvent.Data[Offset_saddr..Offset_dport]);
 
                 /// <summary>
                 /// Retrieves the dport field.
                 /// </summary>
-                public ushort dport => BitConverter.ToUInt16(_etwEvent.Data[Offset_dport..]);
+                public ushort dport => BitConverter.ToUInt16(_etwEvent.Data[Offset_dport..Offset_sport]);
 
                 /// <summary>
                 /// Retrieves the sport field.
                 /// </summary>
-                public ushort sport => BitConverter.ToUInt16(_etwEvent.Data[Offset_sport..]);
+                public ushort sport => BitConverter.ToUInt16(_etwEvent.Data[Offset_sport..Offset_connid]);
 
                 /// <summary>
                 /// Retrieves the connid field.
                 /// </summary>
-                public ulong connid => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_connid..]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_connid..]);
+                public ulong connid => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_connid..Offset_seqnum]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_connid..Offset_seqnum]);
 
                 /// <summary>
                 /// Retrieves the seqnum field.
@@ -2304,6 +2364,12 @@ namespace EtwTools
             {
                 _etwEvent = etwEvent;
             }
+
+            /// <summary>
+            /// Converts a generic ETW event to a PartACKEventV1.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator PartACKEventV1(EtwEvent etwEvent) => new(etwEvent);
 
             /// <summary>
             /// A data wrapper for a PartACK event.
@@ -2428,37 +2494,37 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the PID field.
                 /// </summary>
-                public uint PID => BitConverter.ToUInt32(_etwEvent.Data[Offset_PID..]);
+                public uint PID => BitConverter.ToUInt32(_etwEvent.Data[Offset_PID..Offset_size]);
 
                 /// <summary>
                 /// Retrieves the size field.
                 /// </summary>
-                public uint size => BitConverter.ToUInt32(_etwEvent.Data[Offset_size..]);
+                public uint size => BitConverter.ToUInt32(_etwEvent.Data[Offset_size..Offset_daddr]);
 
                 /// <summary>
                 /// Retrieves the daddr field.
                 /// </summary>
-                public uint daddr => BitConverter.ToUInt32(_etwEvent.Data[Offset_daddr..]);
+                public uint daddr => BitConverter.ToUInt32(_etwEvent.Data[Offset_daddr..Offset_saddr]);
 
                 /// <summary>
                 /// Retrieves the saddr field.
                 /// </summary>
-                public uint saddr => BitConverter.ToUInt32(_etwEvent.Data[Offset_saddr..]);
+                public uint saddr => BitConverter.ToUInt32(_etwEvent.Data[Offset_saddr..Offset_dport]);
 
                 /// <summary>
                 /// Retrieves the dport field.
                 /// </summary>
-                public ushort dport => BitConverter.ToUInt16(_etwEvent.Data[Offset_dport..]);
+                public ushort dport => BitConverter.ToUInt16(_etwEvent.Data[Offset_dport..Offset_sport]);
 
                 /// <summary>
                 /// Retrieves the sport field.
                 /// </summary>
-                public ushort sport => BitConverter.ToUInt16(_etwEvent.Data[Offset_sport..]);
+                public ushort sport => BitConverter.ToUInt16(_etwEvent.Data[Offset_sport..Offset_connid]);
 
                 /// <summary>
                 /// Retrieves the connid field.
                 /// </summary>
-                public ulong connid => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_connid..]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_connid..]);
+                public ulong connid => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_connid..Offset_seqnum]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_connid..Offset_seqnum]);
 
                 /// <summary>
                 /// Retrieves the seqnum field.
@@ -2554,6 +2620,12 @@ namespace EtwTools
             {
                 _etwEvent = etwEvent;
             }
+
+            /// <summary>
+            /// Converts a generic ETW event to a DupACKEventV1.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator DupACKEventV1(EtwEvent etwEvent) => new(etwEvent);
 
             /// <summary>
             /// A data wrapper for a DupACK event.
@@ -2678,37 +2750,37 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the PID field.
                 /// </summary>
-                public uint PID => BitConverter.ToUInt32(_etwEvent.Data[Offset_PID..]);
+                public uint PID => BitConverter.ToUInt32(_etwEvent.Data[Offset_PID..Offset_size]);
 
                 /// <summary>
                 /// Retrieves the size field.
                 /// </summary>
-                public uint size => BitConverter.ToUInt32(_etwEvent.Data[Offset_size..]);
+                public uint size => BitConverter.ToUInt32(_etwEvent.Data[Offset_size..Offset_daddr]);
 
                 /// <summary>
                 /// Retrieves the daddr field.
                 /// </summary>
-                public uint daddr => BitConverter.ToUInt32(_etwEvent.Data[Offset_daddr..]);
+                public uint daddr => BitConverter.ToUInt32(_etwEvent.Data[Offset_daddr..Offset_saddr]);
 
                 /// <summary>
                 /// Retrieves the saddr field.
                 /// </summary>
-                public uint saddr => BitConverter.ToUInt32(_etwEvent.Data[Offset_saddr..]);
+                public uint saddr => BitConverter.ToUInt32(_etwEvent.Data[Offset_saddr..Offset_dport]);
 
                 /// <summary>
                 /// Retrieves the dport field.
                 /// </summary>
-                public ushort dport => BitConverter.ToUInt16(_etwEvent.Data[Offset_dport..]);
+                public ushort dport => BitConverter.ToUInt16(_etwEvent.Data[Offset_dport..Offset_sport]);
 
                 /// <summary>
                 /// Retrieves the sport field.
                 /// </summary>
-                public ushort sport => BitConverter.ToUInt16(_etwEvent.Data[Offset_sport..]);
+                public ushort sport => BitConverter.ToUInt16(_etwEvent.Data[Offset_sport..Offset_connid]);
 
                 /// <summary>
                 /// Retrieves the connid field.
                 /// </summary>
-                public ulong connid => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_connid..]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_connid..]);
+                public ulong connid => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_connid..Offset_seqnum]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_connid..Offset_seqnum]);
 
                 /// <summary>
                 /// Retrieves the seqnum field.
@@ -2804,6 +2876,12 @@ namespace EtwTools
             {
                 _etwEvent = etwEvent;
             }
+
+            /// <summary>
+            /// Converts a generic ETW event to a SendEventV1.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator SendEventV1(EtwEvent etwEvent) => new(etwEvent);
 
             /// <summary>
             /// A data wrapper for a Send event.
@@ -2956,47 +3034,47 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the PID field.
                 /// </summary>
-                public uint PID => BitConverter.ToUInt32(_etwEvent.Data[Offset_PID..]);
+                public uint PID => BitConverter.ToUInt32(_etwEvent.Data[Offset_PID..Offset_size]);
 
                 /// <summary>
                 /// Retrieves the size field.
                 /// </summary>
-                public uint size => BitConverter.ToUInt32(_etwEvent.Data[Offset_size..]);
+                public uint size => BitConverter.ToUInt32(_etwEvent.Data[Offset_size..Offset_daddr]);
 
                 /// <summary>
                 /// Retrieves the daddr field.
                 /// </summary>
-                public uint daddr => BitConverter.ToUInt32(_etwEvent.Data[Offset_daddr..]);
+                public uint daddr => BitConverter.ToUInt32(_etwEvent.Data[Offset_daddr..Offset_saddr]);
 
                 /// <summary>
                 /// Retrieves the saddr field.
                 /// </summary>
-                public uint saddr => BitConverter.ToUInt32(_etwEvent.Data[Offset_saddr..]);
+                public uint saddr => BitConverter.ToUInt32(_etwEvent.Data[Offset_saddr..Offset_dport]);
 
                 /// <summary>
                 /// Retrieves the dport field.
                 /// </summary>
-                public ushort dport => BitConverter.ToUInt16(_etwEvent.Data[Offset_dport..]);
+                public ushort dport => BitConverter.ToUInt16(_etwEvent.Data[Offset_dport..Offset_sport]);
 
                 /// <summary>
                 /// Retrieves the sport field.
                 /// </summary>
-                public ushort sport => BitConverter.ToUInt16(_etwEvent.Data[Offset_sport..]);
+                public ushort sport => BitConverter.ToUInt16(_etwEvent.Data[Offset_sport..Offset_startime]);
 
                 /// <summary>
                 /// Retrieves the startime field.
                 /// </summary>
-                public uint startime => BitConverter.ToUInt32(_etwEvent.Data[Offset_startime..]);
+                public uint startime => BitConverter.ToUInt32(_etwEvent.Data[Offset_startime..Offset_endtime]);
 
                 /// <summary>
                 /// Retrieves the endtime field.
                 /// </summary>
-                public uint endtime => BitConverter.ToUInt32(_etwEvent.Data[Offset_endtime..]);
+                public uint endtime => BitConverter.ToUInt32(_etwEvent.Data[Offset_endtime..Offset_connid]);
 
                 /// <summary>
                 /// Retrieves the connid field.
                 /// </summary>
-                public ulong connid => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_connid..]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_connid..]);
+                public ulong connid => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_connid..Offset_seqnum]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_connid..Offset_seqnum]);
 
                 /// <summary>
                 /// Retrieves the seqnum field.
@@ -3094,6 +3172,12 @@ namespace EtwTools
             {
                 _etwEvent = etwEvent;
             }
+
+            /// <summary>
+            /// Converts a generic ETW event to a DisconnectEventV1.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator DisconnectEventV1(EtwEvent etwEvent) => new(etwEvent);
 
             /// <summary>
             /// A data wrapper for a Disconnect event.
@@ -3218,37 +3302,37 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the PID field.
                 /// </summary>
-                public uint PID => BitConverter.ToUInt32(_etwEvent.Data[Offset_PID..]);
+                public uint PID => BitConverter.ToUInt32(_etwEvent.Data[Offset_PID..Offset_size]);
 
                 /// <summary>
                 /// Retrieves the size field.
                 /// </summary>
-                public uint size => BitConverter.ToUInt32(_etwEvent.Data[Offset_size..]);
+                public uint size => BitConverter.ToUInt32(_etwEvent.Data[Offset_size..Offset_daddr]);
 
                 /// <summary>
                 /// Retrieves the daddr field.
                 /// </summary>
-                public uint daddr => BitConverter.ToUInt32(_etwEvent.Data[Offset_daddr..]);
+                public uint daddr => BitConverter.ToUInt32(_etwEvent.Data[Offset_daddr..Offset_saddr]);
 
                 /// <summary>
                 /// Retrieves the saddr field.
                 /// </summary>
-                public uint saddr => BitConverter.ToUInt32(_etwEvent.Data[Offset_saddr..]);
+                public uint saddr => BitConverter.ToUInt32(_etwEvent.Data[Offset_saddr..Offset_dport]);
 
                 /// <summary>
                 /// Retrieves the dport field.
                 /// </summary>
-                public ushort dport => BitConverter.ToUInt16(_etwEvent.Data[Offset_dport..]);
+                public ushort dport => BitConverter.ToUInt16(_etwEvent.Data[Offset_dport..Offset_sport]);
 
                 /// <summary>
                 /// Retrieves the sport field.
                 /// </summary>
-                public ushort sport => BitConverter.ToUInt16(_etwEvent.Data[Offset_sport..]);
+                public ushort sport => BitConverter.ToUInt16(_etwEvent.Data[Offset_sport..Offset_connid]);
 
                 /// <summary>
                 /// Retrieves the connid field.
                 /// </summary>
-                public ulong connid => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_connid..]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_connid..]);
+                public ulong connid => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_connid..Offset_seqnum]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_connid..Offset_seqnum]);
 
                 /// <summary>
                 /// Retrieves the seqnum field.
@@ -3344,6 +3428,12 @@ namespace EtwTools
             {
                 _etwEvent = etwEvent;
             }
+
+            /// <summary>
+            /// Converts a generic ETW event to a RetransmitEventV1.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator RetransmitEventV1(EtwEvent etwEvent) => new(etwEvent);
 
             /// <summary>
             /// A data wrapper for a Retransmit event.
@@ -3468,37 +3558,37 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the PID field.
                 /// </summary>
-                public uint PID => BitConverter.ToUInt32(_etwEvent.Data[Offset_PID..]);
+                public uint PID => BitConverter.ToUInt32(_etwEvent.Data[Offset_PID..Offset_size]);
 
                 /// <summary>
                 /// Retrieves the size field.
                 /// </summary>
-                public uint size => BitConverter.ToUInt32(_etwEvent.Data[Offset_size..]);
+                public uint size => BitConverter.ToUInt32(_etwEvent.Data[Offset_size..Offset_daddr]);
 
                 /// <summary>
                 /// Retrieves the daddr field.
                 /// </summary>
-                public uint daddr => BitConverter.ToUInt32(_etwEvent.Data[Offset_daddr..]);
+                public uint daddr => BitConverter.ToUInt32(_etwEvent.Data[Offset_daddr..Offset_saddr]);
 
                 /// <summary>
                 /// Retrieves the saddr field.
                 /// </summary>
-                public uint saddr => BitConverter.ToUInt32(_etwEvent.Data[Offset_saddr..]);
+                public uint saddr => BitConverter.ToUInt32(_etwEvent.Data[Offset_saddr..Offset_dport]);
 
                 /// <summary>
                 /// Retrieves the dport field.
                 /// </summary>
-                public ushort dport => BitConverter.ToUInt16(_etwEvent.Data[Offset_dport..]);
+                public ushort dport => BitConverter.ToUInt16(_etwEvent.Data[Offset_dport..Offset_sport]);
 
                 /// <summary>
                 /// Retrieves the sport field.
                 /// </summary>
-                public ushort sport => BitConverter.ToUInt16(_etwEvent.Data[Offset_sport..]);
+                public ushort sport => BitConverter.ToUInt16(_etwEvent.Data[Offset_sport..Offset_connid]);
 
                 /// <summary>
                 /// Retrieves the connid field.
                 /// </summary>
-                public ulong connid => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_connid..]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_connid..]);
+                public ulong connid => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_connid..Offset_seqnum]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_connid..Offset_seqnum]);
 
                 /// <summary>
                 /// Retrieves the seqnum field.
@@ -3594,6 +3684,12 @@ namespace EtwTools
             {
                 _etwEvent = etwEvent;
             }
+
+            /// <summary>
+            /// Converts a generic ETW event to a ReconnectEventV1.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator ReconnectEventV1(EtwEvent etwEvent) => new(etwEvent);
 
             /// <summary>
             /// A data wrapper for a Reconnect event.
@@ -3718,37 +3814,37 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the PID field.
                 /// </summary>
-                public uint PID => BitConverter.ToUInt32(_etwEvent.Data[Offset_PID..]);
+                public uint PID => BitConverter.ToUInt32(_etwEvent.Data[Offset_PID..Offset_size]);
 
                 /// <summary>
                 /// Retrieves the size field.
                 /// </summary>
-                public uint size => BitConverter.ToUInt32(_etwEvent.Data[Offset_size..]);
+                public uint size => BitConverter.ToUInt32(_etwEvent.Data[Offset_size..Offset_daddr]);
 
                 /// <summary>
                 /// Retrieves the daddr field.
                 /// </summary>
-                public uint daddr => BitConverter.ToUInt32(_etwEvent.Data[Offset_daddr..]);
+                public uint daddr => BitConverter.ToUInt32(_etwEvent.Data[Offset_daddr..Offset_saddr]);
 
                 /// <summary>
                 /// Retrieves the saddr field.
                 /// </summary>
-                public uint saddr => BitConverter.ToUInt32(_etwEvent.Data[Offset_saddr..]);
+                public uint saddr => BitConverter.ToUInt32(_etwEvent.Data[Offset_saddr..Offset_dport]);
 
                 /// <summary>
                 /// Retrieves the dport field.
                 /// </summary>
-                public ushort dport => BitConverter.ToUInt16(_etwEvent.Data[Offset_dport..]);
+                public ushort dport => BitConverter.ToUInt16(_etwEvent.Data[Offset_dport..Offset_sport]);
 
                 /// <summary>
                 /// Retrieves the sport field.
                 /// </summary>
-                public ushort sport => BitConverter.ToUInt16(_etwEvent.Data[Offset_sport..]);
+                public ushort sport => BitConverter.ToUInt16(_etwEvent.Data[Offset_sport..Offset_connid]);
 
                 /// <summary>
                 /// Retrieves the connid field.
                 /// </summary>
-                public ulong connid => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_connid..]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_connid..]);
+                public ulong connid => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_connid..Offset_seqnum]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_connid..Offset_seqnum]);
 
                 /// <summary>
                 /// Retrieves the seqnum field.
@@ -3844,6 +3940,12 @@ namespace EtwTools
             {
                 _etwEvent = etwEvent;
             }
+
+            /// <summary>
+            /// Converts a generic ETW event to a ConnectEventV1.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator ConnectEventV1(EtwEvent etwEvent) => new(etwEvent);
 
             /// <summary>
             /// A data wrapper for a Connect event.
@@ -4066,72 +4168,72 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the PID field.
                 /// </summary>
-                public uint PID => BitConverter.ToUInt32(_etwEvent.Data[Offset_PID..]);
+                public uint PID => BitConverter.ToUInt32(_etwEvent.Data[Offset_PID..Offset_size]);
 
                 /// <summary>
                 /// Retrieves the size field.
                 /// </summary>
-                public uint size => BitConverter.ToUInt32(_etwEvent.Data[Offset_size..]);
+                public uint size => BitConverter.ToUInt32(_etwEvent.Data[Offset_size..Offset_daddr]);
 
                 /// <summary>
                 /// Retrieves the daddr field.
                 /// </summary>
-                public uint daddr => BitConverter.ToUInt32(_etwEvent.Data[Offset_daddr..]);
+                public uint daddr => BitConverter.ToUInt32(_etwEvent.Data[Offset_daddr..Offset_saddr]);
 
                 /// <summary>
                 /// Retrieves the saddr field.
                 /// </summary>
-                public uint saddr => BitConverter.ToUInt32(_etwEvent.Data[Offset_saddr..]);
+                public uint saddr => BitConverter.ToUInt32(_etwEvent.Data[Offset_saddr..Offset_dport]);
 
                 /// <summary>
                 /// Retrieves the dport field.
                 /// </summary>
-                public ushort dport => BitConverter.ToUInt16(_etwEvent.Data[Offset_dport..]);
+                public ushort dport => BitConverter.ToUInt16(_etwEvent.Data[Offset_dport..Offset_sport]);
 
                 /// <summary>
                 /// Retrieves the sport field.
                 /// </summary>
-                public ushort sport => BitConverter.ToUInt16(_etwEvent.Data[Offset_sport..]);
+                public ushort sport => BitConverter.ToUInt16(_etwEvent.Data[Offset_sport..Offset_mss]);
 
                 /// <summary>
                 /// Retrieves the mss field.
                 /// </summary>
-                public ushort mss => BitConverter.ToUInt16(_etwEvent.Data[Offset_mss..]);
+                public ushort mss => BitConverter.ToUInt16(_etwEvent.Data[Offset_mss..Offset_sackopt]);
 
                 /// <summary>
                 /// Retrieves the sackopt field.
                 /// </summary>
-                public ushort sackopt => BitConverter.ToUInt16(_etwEvent.Data[Offset_sackopt..]);
+                public ushort sackopt => BitConverter.ToUInt16(_etwEvent.Data[Offset_sackopt..Offset_tsopt]);
 
                 /// <summary>
                 /// Retrieves the tsopt field.
                 /// </summary>
-                public ushort tsopt => BitConverter.ToUInt16(_etwEvent.Data[Offset_tsopt..]);
+                public ushort tsopt => BitConverter.ToUInt16(_etwEvent.Data[Offset_tsopt..Offset_wsopt]);
 
                 /// <summary>
                 /// Retrieves the wsopt field.
                 /// </summary>
-                public ushort wsopt => BitConverter.ToUInt16(_etwEvent.Data[Offset_wsopt..]);
+                public ushort wsopt => BitConverter.ToUInt16(_etwEvent.Data[Offset_wsopt..Offset_rcvwin]);
 
                 /// <summary>
                 /// Retrieves the rcvwin field.
                 /// </summary>
-                public uint rcvwin => BitConverter.ToUInt32(_etwEvent.Data[Offset_rcvwin..]);
+                public uint rcvwin => BitConverter.ToUInt32(_etwEvent.Data[Offset_rcvwin..Offset_rcvwinscale]);
 
                 /// <summary>
                 /// Retrieves the rcvwinscale field.
                 /// </summary>
-                public short rcvwinscale => BitConverter.ToInt16(_etwEvent.Data[Offset_rcvwinscale..]);
+                public short rcvwinscale => BitConverter.ToInt16(_etwEvent.Data[Offset_rcvwinscale..Offset_sndwinscale]);
 
                 /// <summary>
                 /// Retrieves the sndwinscale field.
                 /// </summary>
-                public short sndwinscale => BitConverter.ToInt16(_etwEvent.Data[Offset_sndwinscale..]);
+                public short sndwinscale => BitConverter.ToInt16(_etwEvent.Data[Offset_sndwinscale..Offset_connid]);
 
                 /// <summary>
                 /// Retrieves the connid field.
                 /// </summary>
-                public ulong connid => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_connid..]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_connid..]);
+                public ulong connid => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_connid..Offset_seqnum]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_connid..Offset_seqnum]);
 
                 /// <summary>
                 /// Retrieves the seqnum field.
@@ -4234,6 +4336,12 @@ namespace EtwTools
             {
                 _etwEvent = etwEvent;
             }
+
+            /// <summary>
+            /// Converts a generic ETW event to a AcceptEventV1.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator AcceptEventV1(EtwEvent etwEvent) => new(etwEvent);
 
             /// <summary>
             /// A data wrapper for a Accept event.
@@ -4456,72 +4564,72 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the PID field.
                 /// </summary>
-                public uint PID => BitConverter.ToUInt32(_etwEvent.Data[Offset_PID..]);
+                public uint PID => BitConverter.ToUInt32(_etwEvent.Data[Offset_PID..Offset_size]);
 
                 /// <summary>
                 /// Retrieves the size field.
                 /// </summary>
-                public uint size => BitConverter.ToUInt32(_etwEvent.Data[Offset_size..]);
+                public uint size => BitConverter.ToUInt32(_etwEvent.Data[Offset_size..Offset_daddr]);
 
                 /// <summary>
                 /// Retrieves the daddr field.
                 /// </summary>
-                public uint daddr => BitConverter.ToUInt32(_etwEvent.Data[Offset_daddr..]);
+                public uint daddr => BitConverter.ToUInt32(_etwEvent.Data[Offset_daddr..Offset_saddr]);
 
                 /// <summary>
                 /// Retrieves the saddr field.
                 /// </summary>
-                public uint saddr => BitConverter.ToUInt32(_etwEvent.Data[Offset_saddr..]);
+                public uint saddr => BitConverter.ToUInt32(_etwEvent.Data[Offset_saddr..Offset_dport]);
 
                 /// <summary>
                 /// Retrieves the dport field.
                 /// </summary>
-                public ushort dport => BitConverter.ToUInt16(_etwEvent.Data[Offset_dport..]);
+                public ushort dport => BitConverter.ToUInt16(_etwEvent.Data[Offset_dport..Offset_sport]);
 
                 /// <summary>
                 /// Retrieves the sport field.
                 /// </summary>
-                public ushort sport => BitConverter.ToUInt16(_etwEvent.Data[Offset_sport..]);
+                public ushort sport => BitConverter.ToUInt16(_etwEvent.Data[Offset_sport..Offset_mss]);
 
                 /// <summary>
                 /// Retrieves the mss field.
                 /// </summary>
-                public ushort mss => BitConverter.ToUInt16(_etwEvent.Data[Offset_mss..]);
+                public ushort mss => BitConverter.ToUInt16(_etwEvent.Data[Offset_mss..Offset_sackopt]);
 
                 /// <summary>
                 /// Retrieves the sackopt field.
                 /// </summary>
-                public ushort sackopt => BitConverter.ToUInt16(_etwEvent.Data[Offset_sackopt..]);
+                public ushort sackopt => BitConverter.ToUInt16(_etwEvent.Data[Offset_sackopt..Offset_tsopt]);
 
                 /// <summary>
                 /// Retrieves the tsopt field.
                 /// </summary>
-                public ushort tsopt => BitConverter.ToUInt16(_etwEvent.Data[Offset_tsopt..]);
+                public ushort tsopt => BitConverter.ToUInt16(_etwEvent.Data[Offset_tsopt..Offset_wsopt]);
 
                 /// <summary>
                 /// Retrieves the wsopt field.
                 /// </summary>
-                public ushort wsopt => BitConverter.ToUInt16(_etwEvent.Data[Offset_wsopt..]);
+                public ushort wsopt => BitConverter.ToUInt16(_etwEvent.Data[Offset_wsopt..Offset_rcvwin]);
 
                 /// <summary>
                 /// Retrieves the rcvwin field.
                 /// </summary>
-                public uint rcvwin => BitConverter.ToUInt32(_etwEvent.Data[Offset_rcvwin..]);
+                public uint rcvwin => BitConverter.ToUInt32(_etwEvent.Data[Offset_rcvwin..Offset_rcvwinscale]);
 
                 /// <summary>
                 /// Retrieves the rcvwinscale field.
                 /// </summary>
-                public short rcvwinscale => BitConverter.ToInt16(_etwEvent.Data[Offset_rcvwinscale..]);
+                public short rcvwinscale => BitConverter.ToInt16(_etwEvent.Data[Offset_rcvwinscale..Offset_sndwinscale]);
 
                 /// <summary>
                 /// Retrieves the sndwinscale field.
                 /// </summary>
-                public short sndwinscale => BitConverter.ToInt16(_etwEvent.Data[Offset_sndwinscale..]);
+                public short sndwinscale => BitConverter.ToInt16(_etwEvent.Data[Offset_sndwinscale..Offset_connid]);
 
                 /// <summary>
                 /// Retrieves the connid field.
                 /// </summary>
-                public ulong connid => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_connid..]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_connid..]);
+                public ulong connid => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_connid..Offset_seqnum]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_connid..Offset_seqnum]);
 
                 /// <summary>
                 /// Retrieves the seqnum field.
@@ -4624,6 +4732,12 @@ namespace EtwTools
             {
                 _etwEvent = etwEvent;
             }
+
+            /// <summary>
+            /// Converts a generic ETW event to a RecvEventV1.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator RecvEventV1(EtwEvent etwEvent) => new(etwEvent);
 
             /// <summary>
             /// A data wrapper for a Recv event.
@@ -4748,37 +4862,37 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the PID field.
                 /// </summary>
-                public uint PID => BitConverter.ToUInt32(_etwEvent.Data[Offset_PID..]);
+                public uint PID => BitConverter.ToUInt32(_etwEvent.Data[Offset_PID..Offset_size]);
 
                 /// <summary>
                 /// Retrieves the size field.
                 /// </summary>
-                public uint size => BitConverter.ToUInt32(_etwEvent.Data[Offset_size..]);
+                public uint size => BitConverter.ToUInt32(_etwEvent.Data[Offset_size..Offset_daddr]);
 
                 /// <summary>
                 /// Retrieves the daddr field.
                 /// </summary>
-                public uint daddr => BitConverter.ToUInt32(_etwEvent.Data[Offset_daddr..]);
+                public uint daddr => BitConverter.ToUInt32(_etwEvent.Data[Offset_daddr..Offset_saddr]);
 
                 /// <summary>
                 /// Retrieves the saddr field.
                 /// </summary>
-                public uint saddr => BitConverter.ToUInt32(_etwEvent.Data[Offset_saddr..]);
+                public uint saddr => BitConverter.ToUInt32(_etwEvent.Data[Offset_saddr..Offset_dport]);
 
                 /// <summary>
                 /// Retrieves the dport field.
                 /// </summary>
-                public ushort dport => BitConverter.ToUInt16(_etwEvent.Data[Offset_dport..]);
+                public ushort dport => BitConverter.ToUInt16(_etwEvent.Data[Offset_dport..Offset_sport]);
 
                 /// <summary>
                 /// Retrieves the sport field.
                 /// </summary>
-                public ushort sport => BitConverter.ToUInt16(_etwEvent.Data[Offset_sport..]);
+                public ushort sport => BitConverter.ToUInt16(_etwEvent.Data[Offset_sport..Offset_connid]);
 
                 /// <summary>
                 /// Retrieves the connid field.
                 /// </summary>
-                public ulong connid => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_connid..]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_connid..]);
+                public ulong connid => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_connid..Offset_seqnum]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_connid..Offset_seqnum]);
 
                 /// <summary>
                 /// Retrieves the seqnum field.
@@ -4874,6 +4988,12 @@ namespace EtwTools
             {
                 _etwEvent = etwEvent;
             }
+
+            /// <summary>
+            /// Converts a generic ETW event to a RecvIPV6EventV2.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator RecvIPV6EventV2(EtwEvent etwEvent) => new(etwEvent);
 
             /// <summary>
             /// A data wrapper for a RecvIPV6 event.
@@ -4998,12 +5118,12 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the PID field.
                 /// </summary>
-                public uint PID => BitConverter.ToUInt32(_etwEvent.Data[Offset_PID..]);
+                public uint PID => BitConverter.ToUInt32(_etwEvent.Data[Offset_PID..Offset_size]);
 
                 /// <summary>
                 /// Retrieves the size field.
                 /// </summary>
-                public uint size => BitConverter.ToUInt32(_etwEvent.Data[Offset_size..]);
+                public uint size => BitConverter.ToUInt32(_etwEvent.Data[Offset_size..Offset_daddr]);
 
                 /// <summary>
                 /// Retrieves the daddr field.
@@ -5018,17 +5138,17 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the dport field.
                 /// </summary>
-                public ushort dport => BitConverter.ToUInt16(_etwEvent.Data[Offset_dport..]);
+                public ushort dport => BitConverter.ToUInt16(_etwEvent.Data[Offset_dport..Offset_sport]);
 
                 /// <summary>
                 /// Retrieves the sport field.
                 /// </summary>
-                public ushort sport => BitConverter.ToUInt16(_etwEvent.Data[Offset_sport..]);
+                public ushort sport => BitConverter.ToUInt16(_etwEvent.Data[Offset_sport..Offset_seqnum]);
 
                 /// <summary>
                 /// Retrieves the seqnum field.
                 /// </summary>
-                public uint seqnum => BitConverter.ToUInt32(_etwEvent.Data[Offset_seqnum..]);
+                public uint seqnum => BitConverter.ToUInt32(_etwEvent.Data[Offset_seqnum..Offset_connid]);
 
                 /// <summary>
                 /// Retrieves the connid field.
@@ -5124,6 +5244,12 @@ namespace EtwTools
             {
                 _etwEvent = etwEvent;
             }
+
+            /// <summary>
+            /// Converts a generic ETW event to a DisconnectIPV6EventV2.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator DisconnectIPV6EventV2(EtwEvent etwEvent) => new(etwEvent);
 
             /// <summary>
             /// A data wrapper for a DisconnectIPV6 event.
@@ -5248,12 +5374,12 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the PID field.
                 /// </summary>
-                public uint PID => BitConverter.ToUInt32(_etwEvent.Data[Offset_PID..]);
+                public uint PID => BitConverter.ToUInt32(_etwEvent.Data[Offset_PID..Offset_size]);
 
                 /// <summary>
                 /// Retrieves the size field.
                 /// </summary>
-                public uint size => BitConverter.ToUInt32(_etwEvent.Data[Offset_size..]);
+                public uint size => BitConverter.ToUInt32(_etwEvent.Data[Offset_size..Offset_daddr]);
 
                 /// <summary>
                 /// Retrieves the daddr field.
@@ -5268,17 +5394,17 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the dport field.
                 /// </summary>
-                public ushort dport => BitConverter.ToUInt16(_etwEvent.Data[Offset_dport..]);
+                public ushort dport => BitConverter.ToUInt16(_etwEvent.Data[Offset_dport..Offset_sport]);
 
                 /// <summary>
                 /// Retrieves the sport field.
                 /// </summary>
-                public ushort sport => BitConverter.ToUInt16(_etwEvent.Data[Offset_sport..]);
+                public ushort sport => BitConverter.ToUInt16(_etwEvent.Data[Offset_sport..Offset_seqnum]);
 
                 /// <summary>
                 /// Retrieves the seqnum field.
                 /// </summary>
-                public uint seqnum => BitConverter.ToUInt32(_etwEvent.Data[Offset_seqnum..]);
+                public uint seqnum => BitConverter.ToUInt32(_etwEvent.Data[Offset_seqnum..Offset_connid]);
 
                 /// <summary>
                 /// Retrieves the connid field.
@@ -5374,6 +5500,12 @@ namespace EtwTools
             {
                 _etwEvent = etwEvent;
             }
+
+            /// <summary>
+            /// Converts a generic ETW event to a RetransmitIPV6EventV2.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator RetransmitIPV6EventV2(EtwEvent etwEvent) => new(etwEvent);
 
             /// <summary>
             /// A data wrapper for a RetransmitIPV6 event.
@@ -5498,12 +5630,12 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the PID field.
                 /// </summary>
-                public uint PID => BitConverter.ToUInt32(_etwEvent.Data[Offset_PID..]);
+                public uint PID => BitConverter.ToUInt32(_etwEvent.Data[Offset_PID..Offset_size]);
 
                 /// <summary>
                 /// Retrieves the size field.
                 /// </summary>
-                public uint size => BitConverter.ToUInt32(_etwEvent.Data[Offset_size..]);
+                public uint size => BitConverter.ToUInt32(_etwEvent.Data[Offset_size..Offset_daddr]);
 
                 /// <summary>
                 /// Retrieves the daddr field.
@@ -5518,17 +5650,17 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the dport field.
                 /// </summary>
-                public ushort dport => BitConverter.ToUInt16(_etwEvent.Data[Offset_dport..]);
+                public ushort dport => BitConverter.ToUInt16(_etwEvent.Data[Offset_dport..Offset_sport]);
 
                 /// <summary>
                 /// Retrieves the sport field.
                 /// </summary>
-                public ushort sport => BitConverter.ToUInt16(_etwEvent.Data[Offset_sport..]);
+                public ushort sport => BitConverter.ToUInt16(_etwEvent.Data[Offset_sport..Offset_seqnum]);
 
                 /// <summary>
                 /// Retrieves the seqnum field.
                 /// </summary>
-                public uint seqnum => BitConverter.ToUInt32(_etwEvent.Data[Offset_seqnum..]);
+                public uint seqnum => BitConverter.ToUInt32(_etwEvent.Data[Offset_seqnum..Offset_connid]);
 
                 /// <summary>
                 /// Retrieves the connid field.
@@ -5624,6 +5756,12 @@ namespace EtwTools
             {
                 _etwEvent = etwEvent;
             }
+
+            /// <summary>
+            /// Converts a generic ETW event to a ReconnectIPV6EventV2.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator ReconnectIPV6EventV2(EtwEvent etwEvent) => new(etwEvent);
 
             /// <summary>
             /// A data wrapper for a ReconnectIPV6 event.
@@ -5748,12 +5886,12 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the PID field.
                 /// </summary>
-                public uint PID => BitConverter.ToUInt32(_etwEvent.Data[Offset_PID..]);
+                public uint PID => BitConverter.ToUInt32(_etwEvent.Data[Offset_PID..Offset_size]);
 
                 /// <summary>
                 /// Retrieves the size field.
                 /// </summary>
-                public uint size => BitConverter.ToUInt32(_etwEvent.Data[Offset_size..]);
+                public uint size => BitConverter.ToUInt32(_etwEvent.Data[Offset_size..Offset_daddr]);
 
                 /// <summary>
                 /// Retrieves the daddr field.
@@ -5768,17 +5906,17 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the dport field.
                 /// </summary>
-                public ushort dport => BitConverter.ToUInt16(_etwEvent.Data[Offset_dport..]);
+                public ushort dport => BitConverter.ToUInt16(_etwEvent.Data[Offset_dport..Offset_sport]);
 
                 /// <summary>
                 /// Retrieves the sport field.
                 /// </summary>
-                public ushort sport => BitConverter.ToUInt16(_etwEvent.Data[Offset_sport..]);
+                public ushort sport => BitConverter.ToUInt16(_etwEvent.Data[Offset_sport..Offset_seqnum]);
 
                 /// <summary>
                 /// Retrieves the seqnum field.
                 /// </summary>
-                public uint seqnum => BitConverter.ToUInt32(_etwEvent.Data[Offset_seqnum..]);
+                public uint seqnum => BitConverter.ToUInt32(_etwEvent.Data[Offset_seqnum..Offset_connid]);
 
                 /// <summary>
                 /// Retrieves the connid field.
@@ -5874,6 +6012,12 @@ namespace EtwTools
             {
                 _etwEvent = etwEvent;
             }
+
+            /// <summary>
+            /// Converts a generic ETW event to a TCPCopyIPV6EventV2.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator TCPCopyIPV6EventV2(EtwEvent etwEvent) => new(etwEvent);
 
             /// <summary>
             /// A data wrapper for a TCPCopyIPV6 event.
@@ -5998,12 +6142,12 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the PID field.
                 /// </summary>
-                public uint PID => BitConverter.ToUInt32(_etwEvent.Data[Offset_PID..]);
+                public uint PID => BitConverter.ToUInt32(_etwEvent.Data[Offset_PID..Offset_size]);
 
                 /// <summary>
                 /// Retrieves the size field.
                 /// </summary>
-                public uint size => BitConverter.ToUInt32(_etwEvent.Data[Offset_size..]);
+                public uint size => BitConverter.ToUInt32(_etwEvent.Data[Offset_size..Offset_daddr]);
 
                 /// <summary>
                 /// Retrieves the daddr field.
@@ -6018,17 +6162,17 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the dport field.
                 /// </summary>
-                public ushort dport => BitConverter.ToUInt16(_etwEvent.Data[Offset_dport..]);
+                public ushort dport => BitConverter.ToUInt16(_etwEvent.Data[Offset_dport..Offset_sport]);
 
                 /// <summary>
                 /// Retrieves the sport field.
                 /// </summary>
-                public ushort sport => BitConverter.ToUInt16(_etwEvent.Data[Offset_sport..]);
+                public ushort sport => BitConverter.ToUInt16(_etwEvent.Data[Offset_sport..Offset_seqnum]);
 
                 /// <summary>
                 /// Retrieves the seqnum field.
                 /// </summary>
-                public uint seqnum => BitConverter.ToUInt32(_etwEvent.Data[Offset_seqnum..]);
+                public uint seqnum => BitConverter.ToUInt32(_etwEvent.Data[Offset_seqnum..Offset_connid]);
 
                 /// <summary>
                 /// Retrieves the connid field.
@@ -6124,6 +6268,12 @@ namespace EtwTools
             {
                 _etwEvent = etwEvent;
             }
+
+            /// <summary>
+            /// Converts a generic ETW event to a SendIPV4EventV2.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator SendIPV4EventV2(EtwEvent etwEvent) => new(etwEvent);
 
             /// <summary>
             /// A data wrapper for a SendIPV4 event.
@@ -6276,47 +6426,47 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the PID field.
                 /// </summary>
-                public uint PID => BitConverter.ToUInt32(_etwEvent.Data[Offset_PID..]);
+                public uint PID => BitConverter.ToUInt32(_etwEvent.Data[Offset_PID..Offset_size]);
 
                 /// <summary>
                 /// Retrieves the size field.
                 /// </summary>
-                public uint size => BitConverter.ToUInt32(_etwEvent.Data[Offset_size..]);
+                public uint size => BitConverter.ToUInt32(_etwEvent.Data[Offset_size..Offset_daddr]);
 
                 /// <summary>
                 /// Retrieves the daddr field.
                 /// </summary>
-                public uint daddr => BitConverter.ToUInt32(_etwEvent.Data[Offset_daddr..]);
+                public uint daddr => BitConverter.ToUInt32(_etwEvent.Data[Offset_daddr..Offset_saddr]);
 
                 /// <summary>
                 /// Retrieves the saddr field.
                 /// </summary>
-                public uint saddr => BitConverter.ToUInt32(_etwEvent.Data[Offset_saddr..]);
+                public uint saddr => BitConverter.ToUInt32(_etwEvent.Data[Offset_saddr..Offset_dport]);
 
                 /// <summary>
                 /// Retrieves the dport field.
                 /// </summary>
-                public ushort dport => BitConverter.ToUInt16(_etwEvent.Data[Offset_dport..]);
+                public ushort dport => BitConverter.ToUInt16(_etwEvent.Data[Offset_dport..Offset_sport]);
 
                 /// <summary>
                 /// Retrieves the sport field.
                 /// </summary>
-                public ushort sport => BitConverter.ToUInt16(_etwEvent.Data[Offset_sport..]);
+                public ushort sport => BitConverter.ToUInt16(_etwEvent.Data[Offset_sport..Offset_startime]);
 
                 /// <summary>
                 /// Retrieves the startime field.
                 /// </summary>
-                public uint startime => BitConverter.ToUInt32(_etwEvent.Data[Offset_startime..]);
+                public uint startime => BitConverter.ToUInt32(_etwEvent.Data[Offset_startime..Offset_endtime]);
 
                 /// <summary>
                 /// Retrieves the endtime field.
                 /// </summary>
-                public uint endtime => BitConverter.ToUInt32(_etwEvent.Data[Offset_endtime..]);
+                public uint endtime => BitConverter.ToUInt32(_etwEvent.Data[Offset_endtime..Offset_seqnum]);
 
                 /// <summary>
                 /// Retrieves the seqnum field.
                 /// </summary>
-                public uint seqnum => BitConverter.ToUInt32(_etwEvent.Data[Offset_seqnum..]);
+                public uint seqnum => BitConverter.ToUInt32(_etwEvent.Data[Offset_seqnum..Offset_connid]);
 
                 /// <summary>
                 /// Retrieves the connid field.
@@ -6416,6 +6566,12 @@ namespace EtwTools
             }
 
             /// <summary>
+            /// Converts a generic ETW event to a FailEventV2.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator FailEventV2(EtwEvent etwEvent) => new(etwEvent);
+
+            /// <summary>
             /// A data wrapper for a Fail event.
             /// </summary>
             public ref struct FailData
@@ -6454,7 +6610,7 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the Proto field.
                 /// </summary>
-                public ushort Proto => BitConverter.ToUInt16(_etwEvent.Data[Offset_Proto..]);
+                public ushort Proto => BitConverter.ToUInt16(_etwEvent.Data[Offset_Proto..Offset_FailureCode]);
 
                 /// <summary>
                 /// Retrieves the FailureCode field.
@@ -6544,6 +6700,12 @@ namespace EtwTools
             {
                 _etwEvent = etwEvent;
             }
+
+            /// <summary>
+            /// Converts a generic ETW event to a ConnectIPV4EventV2.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator ConnectIPV4EventV2(EtwEvent etwEvent) => new(etwEvent);
 
             /// <summary>
             /// A data wrapper for a ConnectIPV4 event.
@@ -6766,72 +6928,72 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the PID field.
                 /// </summary>
-                public uint PID => BitConverter.ToUInt32(_etwEvent.Data[Offset_PID..]);
+                public uint PID => BitConverter.ToUInt32(_etwEvent.Data[Offset_PID..Offset_size]);
 
                 /// <summary>
                 /// Retrieves the size field.
                 /// </summary>
-                public uint size => BitConverter.ToUInt32(_etwEvent.Data[Offset_size..]);
+                public uint size => BitConverter.ToUInt32(_etwEvent.Data[Offset_size..Offset_daddr]);
 
                 /// <summary>
                 /// Retrieves the daddr field.
                 /// </summary>
-                public uint daddr => BitConverter.ToUInt32(_etwEvent.Data[Offset_daddr..]);
+                public uint daddr => BitConverter.ToUInt32(_etwEvent.Data[Offset_daddr..Offset_saddr]);
 
                 /// <summary>
                 /// Retrieves the saddr field.
                 /// </summary>
-                public uint saddr => BitConverter.ToUInt32(_etwEvent.Data[Offset_saddr..]);
+                public uint saddr => BitConverter.ToUInt32(_etwEvent.Data[Offset_saddr..Offset_dport]);
 
                 /// <summary>
                 /// Retrieves the dport field.
                 /// </summary>
-                public ushort dport => BitConverter.ToUInt16(_etwEvent.Data[Offset_dport..]);
+                public ushort dport => BitConverter.ToUInt16(_etwEvent.Data[Offset_dport..Offset_sport]);
 
                 /// <summary>
                 /// Retrieves the sport field.
                 /// </summary>
-                public ushort sport => BitConverter.ToUInt16(_etwEvent.Data[Offset_sport..]);
+                public ushort sport => BitConverter.ToUInt16(_etwEvent.Data[Offset_sport..Offset_mss]);
 
                 /// <summary>
                 /// Retrieves the mss field.
                 /// </summary>
-                public ushort mss => BitConverter.ToUInt16(_etwEvent.Data[Offset_mss..]);
+                public ushort mss => BitConverter.ToUInt16(_etwEvent.Data[Offset_mss..Offset_sackopt]);
 
                 /// <summary>
                 /// Retrieves the sackopt field.
                 /// </summary>
-                public ushort sackopt => BitConverter.ToUInt16(_etwEvent.Data[Offset_sackopt..]);
+                public ushort sackopt => BitConverter.ToUInt16(_etwEvent.Data[Offset_sackopt..Offset_tsopt]);
 
                 /// <summary>
                 /// Retrieves the tsopt field.
                 /// </summary>
-                public ushort tsopt => BitConverter.ToUInt16(_etwEvent.Data[Offset_tsopt..]);
+                public ushort tsopt => BitConverter.ToUInt16(_etwEvent.Data[Offset_tsopt..Offset_wsopt]);
 
                 /// <summary>
                 /// Retrieves the wsopt field.
                 /// </summary>
-                public ushort wsopt => BitConverter.ToUInt16(_etwEvent.Data[Offset_wsopt..]);
+                public ushort wsopt => BitConverter.ToUInt16(_etwEvent.Data[Offset_wsopt..Offset_rcvwin]);
 
                 /// <summary>
                 /// Retrieves the rcvwin field.
                 /// </summary>
-                public uint rcvwin => BitConverter.ToUInt32(_etwEvent.Data[Offset_rcvwin..]);
+                public uint rcvwin => BitConverter.ToUInt32(_etwEvent.Data[Offset_rcvwin..Offset_rcvwinscale]);
 
                 /// <summary>
                 /// Retrieves the rcvwinscale field.
                 /// </summary>
-                public short rcvwinscale => BitConverter.ToInt16(_etwEvent.Data[Offset_rcvwinscale..]);
+                public short rcvwinscale => BitConverter.ToInt16(_etwEvent.Data[Offset_rcvwinscale..Offset_sndwinscale]);
 
                 /// <summary>
                 /// Retrieves the sndwinscale field.
                 /// </summary>
-                public short sndwinscale => BitConverter.ToInt16(_etwEvent.Data[Offset_sndwinscale..]);
+                public short sndwinscale => BitConverter.ToInt16(_etwEvent.Data[Offset_sndwinscale..Offset_seqnum]);
 
                 /// <summary>
                 /// Retrieves the seqnum field.
                 /// </summary>
-                public uint seqnum => BitConverter.ToUInt32(_etwEvent.Data[Offset_seqnum..]);
+                public uint seqnum => BitConverter.ToUInt32(_etwEvent.Data[Offset_seqnum..Offset_connid]);
 
                 /// <summary>
                 /// Retrieves the connid field.
@@ -6934,6 +7096,12 @@ namespace EtwTools
             {
                 _etwEvent = etwEvent;
             }
+
+            /// <summary>
+            /// Converts a generic ETW event to a AcceptIPV4EventV2.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator AcceptIPV4EventV2(EtwEvent etwEvent) => new(etwEvent);
 
             /// <summary>
             /// A data wrapper for a AcceptIPV4 event.
@@ -7156,72 +7324,72 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the PID field.
                 /// </summary>
-                public uint PID => BitConverter.ToUInt32(_etwEvent.Data[Offset_PID..]);
+                public uint PID => BitConverter.ToUInt32(_etwEvent.Data[Offset_PID..Offset_size]);
 
                 /// <summary>
                 /// Retrieves the size field.
                 /// </summary>
-                public uint size => BitConverter.ToUInt32(_etwEvent.Data[Offset_size..]);
+                public uint size => BitConverter.ToUInt32(_etwEvent.Data[Offset_size..Offset_daddr]);
 
                 /// <summary>
                 /// Retrieves the daddr field.
                 /// </summary>
-                public uint daddr => BitConverter.ToUInt32(_etwEvent.Data[Offset_daddr..]);
+                public uint daddr => BitConverter.ToUInt32(_etwEvent.Data[Offset_daddr..Offset_saddr]);
 
                 /// <summary>
                 /// Retrieves the saddr field.
                 /// </summary>
-                public uint saddr => BitConverter.ToUInt32(_etwEvent.Data[Offset_saddr..]);
+                public uint saddr => BitConverter.ToUInt32(_etwEvent.Data[Offset_saddr..Offset_dport]);
 
                 /// <summary>
                 /// Retrieves the dport field.
                 /// </summary>
-                public ushort dport => BitConverter.ToUInt16(_etwEvent.Data[Offset_dport..]);
+                public ushort dport => BitConverter.ToUInt16(_etwEvent.Data[Offset_dport..Offset_sport]);
 
                 /// <summary>
                 /// Retrieves the sport field.
                 /// </summary>
-                public ushort sport => BitConverter.ToUInt16(_etwEvent.Data[Offset_sport..]);
+                public ushort sport => BitConverter.ToUInt16(_etwEvent.Data[Offset_sport..Offset_mss]);
 
                 /// <summary>
                 /// Retrieves the mss field.
                 /// </summary>
-                public ushort mss => BitConverter.ToUInt16(_etwEvent.Data[Offset_mss..]);
+                public ushort mss => BitConverter.ToUInt16(_etwEvent.Data[Offset_mss..Offset_sackopt]);
 
                 /// <summary>
                 /// Retrieves the sackopt field.
                 /// </summary>
-                public ushort sackopt => BitConverter.ToUInt16(_etwEvent.Data[Offset_sackopt..]);
+                public ushort sackopt => BitConverter.ToUInt16(_etwEvent.Data[Offset_sackopt..Offset_tsopt]);
 
                 /// <summary>
                 /// Retrieves the tsopt field.
                 /// </summary>
-                public ushort tsopt => BitConverter.ToUInt16(_etwEvent.Data[Offset_tsopt..]);
+                public ushort tsopt => BitConverter.ToUInt16(_etwEvent.Data[Offset_tsopt..Offset_wsopt]);
 
                 /// <summary>
                 /// Retrieves the wsopt field.
                 /// </summary>
-                public ushort wsopt => BitConverter.ToUInt16(_etwEvent.Data[Offset_wsopt..]);
+                public ushort wsopt => BitConverter.ToUInt16(_etwEvent.Data[Offset_wsopt..Offset_rcvwin]);
 
                 /// <summary>
                 /// Retrieves the rcvwin field.
                 /// </summary>
-                public uint rcvwin => BitConverter.ToUInt32(_etwEvent.Data[Offset_rcvwin..]);
+                public uint rcvwin => BitConverter.ToUInt32(_etwEvent.Data[Offset_rcvwin..Offset_rcvwinscale]);
 
                 /// <summary>
                 /// Retrieves the rcvwinscale field.
                 /// </summary>
-                public short rcvwinscale => BitConverter.ToInt16(_etwEvent.Data[Offset_rcvwinscale..]);
+                public short rcvwinscale => BitConverter.ToInt16(_etwEvent.Data[Offset_rcvwinscale..Offset_sndwinscale]);
 
                 /// <summary>
                 /// Retrieves the sndwinscale field.
                 /// </summary>
-                public short sndwinscale => BitConverter.ToInt16(_etwEvent.Data[Offset_sndwinscale..]);
+                public short sndwinscale => BitConverter.ToInt16(_etwEvent.Data[Offset_sndwinscale..Offset_seqnum]);
 
                 /// <summary>
                 /// Retrieves the seqnum field.
                 /// </summary>
-                public uint seqnum => BitConverter.ToUInt32(_etwEvent.Data[Offset_seqnum..]);
+                public uint seqnum => BitConverter.ToUInt32(_etwEvent.Data[Offset_seqnum..Offset_connid]);
 
                 /// <summary>
                 /// Retrieves the connid field.
@@ -7324,6 +7492,12 @@ namespace EtwTools
             {
                 _etwEvent = etwEvent;
             }
+
+            /// <summary>
+            /// Converts a generic ETW event to a SendIPV6EventV2.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator SendIPV6EventV2(EtwEvent etwEvent) => new(etwEvent);
 
             /// <summary>
             /// A data wrapper for a SendIPV6 event.
@@ -7476,12 +7650,12 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the PID field.
                 /// </summary>
-                public uint PID => BitConverter.ToUInt32(_etwEvent.Data[Offset_PID..]);
+                public uint PID => BitConverter.ToUInt32(_etwEvent.Data[Offset_PID..Offset_size]);
 
                 /// <summary>
                 /// Retrieves the size field.
                 /// </summary>
-                public uint size => BitConverter.ToUInt32(_etwEvent.Data[Offset_size..]);
+                public uint size => BitConverter.ToUInt32(_etwEvent.Data[Offset_size..Offset_daddr]);
 
                 /// <summary>
                 /// Retrieves the daddr field.
@@ -7496,27 +7670,27 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the dport field.
                 /// </summary>
-                public ushort dport => BitConverter.ToUInt16(_etwEvent.Data[Offset_dport..]);
+                public ushort dport => BitConverter.ToUInt16(_etwEvent.Data[Offset_dport..Offset_sport]);
 
                 /// <summary>
                 /// Retrieves the sport field.
                 /// </summary>
-                public ushort sport => BitConverter.ToUInt16(_etwEvent.Data[Offset_sport..]);
+                public ushort sport => BitConverter.ToUInt16(_etwEvent.Data[Offset_sport..Offset_startime]);
 
                 /// <summary>
                 /// Retrieves the startime field.
                 /// </summary>
-                public uint startime => BitConverter.ToUInt32(_etwEvent.Data[Offset_startime..]);
+                public uint startime => BitConverter.ToUInt32(_etwEvent.Data[Offset_startime..Offset_endtime]);
 
                 /// <summary>
                 /// Retrieves the endtime field.
                 /// </summary>
-                public uint endtime => BitConverter.ToUInt32(_etwEvent.Data[Offset_endtime..]);
+                public uint endtime => BitConverter.ToUInt32(_etwEvent.Data[Offset_endtime..Offset_seqnum]);
 
                 /// <summary>
                 /// Retrieves the seqnum field.
                 /// </summary>
-                public uint seqnum => BitConverter.ToUInt32(_etwEvent.Data[Offset_seqnum..]);
+                public uint seqnum => BitConverter.ToUInt32(_etwEvent.Data[Offset_seqnum..Offset_connid]);
 
                 /// <summary>
                 /// Retrieves the connid field.
@@ -7614,6 +7788,12 @@ namespace EtwTools
             {
                 _etwEvent = etwEvent;
             }
+
+            /// <summary>
+            /// Converts a generic ETW event to a RecvIPV4EventV2.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator RecvIPV4EventV2(EtwEvent etwEvent) => new(etwEvent);
 
             /// <summary>
             /// A data wrapper for a RecvIPV4 event.
@@ -7738,37 +7918,37 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the PID field.
                 /// </summary>
-                public uint PID => BitConverter.ToUInt32(_etwEvent.Data[Offset_PID..]);
+                public uint PID => BitConverter.ToUInt32(_etwEvent.Data[Offset_PID..Offset_size]);
 
                 /// <summary>
                 /// Retrieves the size field.
                 /// </summary>
-                public uint size => BitConverter.ToUInt32(_etwEvent.Data[Offset_size..]);
+                public uint size => BitConverter.ToUInt32(_etwEvent.Data[Offset_size..Offset_daddr]);
 
                 /// <summary>
                 /// Retrieves the daddr field.
                 /// </summary>
-                public uint daddr => BitConverter.ToUInt32(_etwEvent.Data[Offset_daddr..]);
+                public uint daddr => BitConverter.ToUInt32(_etwEvent.Data[Offset_daddr..Offset_saddr]);
 
                 /// <summary>
                 /// Retrieves the saddr field.
                 /// </summary>
-                public uint saddr => BitConverter.ToUInt32(_etwEvent.Data[Offset_saddr..]);
+                public uint saddr => BitConverter.ToUInt32(_etwEvent.Data[Offset_saddr..Offset_dport]);
 
                 /// <summary>
                 /// Retrieves the dport field.
                 /// </summary>
-                public ushort dport => BitConverter.ToUInt16(_etwEvent.Data[Offset_dport..]);
+                public ushort dport => BitConverter.ToUInt16(_etwEvent.Data[Offset_dport..Offset_sport]);
 
                 /// <summary>
                 /// Retrieves the sport field.
                 /// </summary>
-                public ushort sport => BitConverter.ToUInt16(_etwEvent.Data[Offset_sport..]);
+                public ushort sport => BitConverter.ToUInt16(_etwEvent.Data[Offset_sport..Offset_seqnum]);
 
                 /// <summary>
                 /// Retrieves the seqnum field.
                 /// </summary>
-                public uint seqnum => BitConverter.ToUInt32(_etwEvent.Data[Offset_seqnum..]);
+                public uint seqnum => BitConverter.ToUInt32(_etwEvent.Data[Offset_seqnum..Offset_connid]);
 
                 /// <summary>
                 /// Retrieves the connid field.
@@ -7864,6 +8044,12 @@ namespace EtwTools
             {
                 _etwEvent = etwEvent;
             }
+
+            /// <summary>
+            /// Converts a generic ETW event to a DisconnectIPV4EventV2.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator DisconnectIPV4EventV2(EtwEvent etwEvent) => new(etwEvent);
 
             /// <summary>
             /// A data wrapper for a DisconnectIPV4 event.
@@ -7988,37 +8174,37 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the PID field.
                 /// </summary>
-                public uint PID => BitConverter.ToUInt32(_etwEvent.Data[Offset_PID..]);
+                public uint PID => BitConverter.ToUInt32(_etwEvent.Data[Offset_PID..Offset_size]);
 
                 /// <summary>
                 /// Retrieves the size field.
                 /// </summary>
-                public uint size => BitConverter.ToUInt32(_etwEvent.Data[Offset_size..]);
+                public uint size => BitConverter.ToUInt32(_etwEvent.Data[Offset_size..Offset_daddr]);
 
                 /// <summary>
                 /// Retrieves the daddr field.
                 /// </summary>
-                public uint daddr => BitConverter.ToUInt32(_etwEvent.Data[Offset_daddr..]);
+                public uint daddr => BitConverter.ToUInt32(_etwEvent.Data[Offset_daddr..Offset_saddr]);
 
                 /// <summary>
                 /// Retrieves the saddr field.
                 /// </summary>
-                public uint saddr => BitConverter.ToUInt32(_etwEvent.Data[Offset_saddr..]);
+                public uint saddr => BitConverter.ToUInt32(_etwEvent.Data[Offset_saddr..Offset_dport]);
 
                 /// <summary>
                 /// Retrieves the dport field.
                 /// </summary>
-                public ushort dport => BitConverter.ToUInt16(_etwEvent.Data[Offset_dport..]);
+                public ushort dport => BitConverter.ToUInt16(_etwEvent.Data[Offset_dport..Offset_sport]);
 
                 /// <summary>
                 /// Retrieves the sport field.
                 /// </summary>
-                public ushort sport => BitConverter.ToUInt16(_etwEvent.Data[Offset_sport..]);
+                public ushort sport => BitConverter.ToUInt16(_etwEvent.Data[Offset_sport..Offset_seqnum]);
 
                 /// <summary>
                 /// Retrieves the seqnum field.
                 /// </summary>
-                public uint seqnum => BitConverter.ToUInt32(_etwEvent.Data[Offset_seqnum..]);
+                public uint seqnum => BitConverter.ToUInt32(_etwEvent.Data[Offset_seqnum..Offset_connid]);
 
                 /// <summary>
                 /// Retrieves the connid field.
@@ -8114,6 +8300,12 @@ namespace EtwTools
             {
                 _etwEvent = etwEvent;
             }
+
+            /// <summary>
+            /// Converts a generic ETW event to a RetransmitIPV4EventV2.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator RetransmitIPV4EventV2(EtwEvent etwEvent) => new(etwEvent);
 
             /// <summary>
             /// A data wrapper for a RetransmitIPV4 event.
@@ -8238,37 +8430,37 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the PID field.
                 /// </summary>
-                public uint PID => BitConverter.ToUInt32(_etwEvent.Data[Offset_PID..]);
+                public uint PID => BitConverter.ToUInt32(_etwEvent.Data[Offset_PID..Offset_size]);
 
                 /// <summary>
                 /// Retrieves the size field.
                 /// </summary>
-                public uint size => BitConverter.ToUInt32(_etwEvent.Data[Offset_size..]);
+                public uint size => BitConverter.ToUInt32(_etwEvent.Data[Offset_size..Offset_daddr]);
 
                 /// <summary>
                 /// Retrieves the daddr field.
                 /// </summary>
-                public uint daddr => BitConverter.ToUInt32(_etwEvent.Data[Offset_daddr..]);
+                public uint daddr => BitConverter.ToUInt32(_etwEvent.Data[Offset_daddr..Offset_saddr]);
 
                 /// <summary>
                 /// Retrieves the saddr field.
                 /// </summary>
-                public uint saddr => BitConverter.ToUInt32(_etwEvent.Data[Offset_saddr..]);
+                public uint saddr => BitConverter.ToUInt32(_etwEvent.Data[Offset_saddr..Offset_dport]);
 
                 /// <summary>
                 /// Retrieves the dport field.
                 /// </summary>
-                public ushort dport => BitConverter.ToUInt16(_etwEvent.Data[Offset_dport..]);
+                public ushort dport => BitConverter.ToUInt16(_etwEvent.Data[Offset_dport..Offset_sport]);
 
                 /// <summary>
                 /// Retrieves the sport field.
                 /// </summary>
-                public ushort sport => BitConverter.ToUInt16(_etwEvent.Data[Offset_sport..]);
+                public ushort sport => BitConverter.ToUInt16(_etwEvent.Data[Offset_sport..Offset_seqnum]);
 
                 /// <summary>
                 /// Retrieves the seqnum field.
                 /// </summary>
-                public uint seqnum => BitConverter.ToUInt32(_etwEvent.Data[Offset_seqnum..]);
+                public uint seqnum => BitConverter.ToUInt32(_etwEvent.Data[Offset_seqnum..Offset_connid]);
 
                 /// <summary>
                 /// Retrieves the connid field.
@@ -8364,6 +8556,12 @@ namespace EtwTools
             {
                 _etwEvent = etwEvent;
             }
+
+            /// <summary>
+            /// Converts a generic ETW event to a ReconnectIPV4EventV2.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator ReconnectIPV4EventV2(EtwEvent etwEvent) => new(etwEvent);
 
             /// <summary>
             /// A data wrapper for a ReconnectIPV4 event.
@@ -8488,37 +8686,37 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the PID field.
                 /// </summary>
-                public uint PID => BitConverter.ToUInt32(_etwEvent.Data[Offset_PID..]);
+                public uint PID => BitConverter.ToUInt32(_etwEvent.Data[Offset_PID..Offset_size]);
 
                 /// <summary>
                 /// Retrieves the size field.
                 /// </summary>
-                public uint size => BitConverter.ToUInt32(_etwEvent.Data[Offset_size..]);
+                public uint size => BitConverter.ToUInt32(_etwEvent.Data[Offset_size..Offset_daddr]);
 
                 /// <summary>
                 /// Retrieves the daddr field.
                 /// </summary>
-                public uint daddr => BitConverter.ToUInt32(_etwEvent.Data[Offset_daddr..]);
+                public uint daddr => BitConverter.ToUInt32(_etwEvent.Data[Offset_daddr..Offset_saddr]);
 
                 /// <summary>
                 /// Retrieves the saddr field.
                 /// </summary>
-                public uint saddr => BitConverter.ToUInt32(_etwEvent.Data[Offset_saddr..]);
+                public uint saddr => BitConverter.ToUInt32(_etwEvent.Data[Offset_saddr..Offset_dport]);
 
                 /// <summary>
                 /// Retrieves the dport field.
                 /// </summary>
-                public ushort dport => BitConverter.ToUInt16(_etwEvent.Data[Offset_dport..]);
+                public ushort dport => BitConverter.ToUInt16(_etwEvent.Data[Offset_dport..Offset_sport]);
 
                 /// <summary>
                 /// Retrieves the sport field.
                 /// </summary>
-                public ushort sport => BitConverter.ToUInt16(_etwEvent.Data[Offset_sport..]);
+                public ushort sport => BitConverter.ToUInt16(_etwEvent.Data[Offset_sport..Offset_seqnum]);
 
                 /// <summary>
                 /// Retrieves the seqnum field.
                 /// </summary>
-                public uint seqnum => BitConverter.ToUInt32(_etwEvent.Data[Offset_seqnum..]);
+                public uint seqnum => BitConverter.ToUInt32(_etwEvent.Data[Offset_seqnum..Offset_connid]);
 
                 /// <summary>
                 /// Retrieves the connid field.
@@ -8614,6 +8812,12 @@ namespace EtwTools
             {
                 _etwEvent = etwEvent;
             }
+
+            /// <summary>
+            /// Converts a generic ETW event to a TCPCopyIPV4EventV2.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator TCPCopyIPV4EventV2(EtwEvent etwEvent) => new(etwEvent);
 
             /// <summary>
             /// A data wrapper for a TCPCopyIPV4 event.
@@ -8738,37 +8942,37 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the PID field.
                 /// </summary>
-                public uint PID => BitConverter.ToUInt32(_etwEvent.Data[Offset_PID..]);
+                public uint PID => BitConverter.ToUInt32(_etwEvent.Data[Offset_PID..Offset_size]);
 
                 /// <summary>
                 /// Retrieves the size field.
                 /// </summary>
-                public uint size => BitConverter.ToUInt32(_etwEvent.Data[Offset_size..]);
+                public uint size => BitConverter.ToUInt32(_etwEvent.Data[Offset_size..Offset_daddr]);
 
                 /// <summary>
                 /// Retrieves the daddr field.
                 /// </summary>
-                public uint daddr => BitConverter.ToUInt32(_etwEvent.Data[Offset_daddr..]);
+                public uint daddr => BitConverter.ToUInt32(_etwEvent.Data[Offset_daddr..Offset_saddr]);
 
                 /// <summary>
                 /// Retrieves the saddr field.
                 /// </summary>
-                public uint saddr => BitConverter.ToUInt32(_etwEvent.Data[Offset_saddr..]);
+                public uint saddr => BitConverter.ToUInt32(_etwEvent.Data[Offset_saddr..Offset_dport]);
 
                 /// <summary>
                 /// Retrieves the dport field.
                 /// </summary>
-                public ushort dport => BitConverter.ToUInt16(_etwEvent.Data[Offset_dport..]);
+                public ushort dport => BitConverter.ToUInt16(_etwEvent.Data[Offset_dport..Offset_sport]);
 
                 /// <summary>
                 /// Retrieves the sport field.
                 /// </summary>
-                public ushort sport => BitConverter.ToUInt16(_etwEvent.Data[Offset_sport..]);
+                public ushort sport => BitConverter.ToUInt16(_etwEvent.Data[Offset_sport..Offset_seqnum]);
 
                 /// <summary>
                 /// Retrieves the seqnum field.
                 /// </summary>
-                public uint seqnum => BitConverter.ToUInt32(_etwEvent.Data[Offset_seqnum..]);
+                public uint seqnum => BitConverter.ToUInt32(_etwEvent.Data[Offset_seqnum..Offset_connid]);
 
                 /// <summary>
                 /// Retrieves the connid field.
@@ -8864,6 +9068,12 @@ namespace EtwTools
             {
                 _etwEvent = etwEvent;
             }
+
+            /// <summary>
+            /// Converts a generic ETW event to a ConnectIPV6EventV2.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator ConnectIPV6EventV2(EtwEvent etwEvent) => new(etwEvent);
 
             /// <summary>
             /// A data wrapper for a ConnectIPV6 event.
@@ -9086,12 +9296,12 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the PID field.
                 /// </summary>
-                public uint PID => BitConverter.ToUInt32(_etwEvent.Data[Offset_PID..]);
+                public uint PID => BitConverter.ToUInt32(_etwEvent.Data[Offset_PID..Offset_size]);
 
                 /// <summary>
                 /// Retrieves the size field.
                 /// </summary>
-                public uint size => BitConverter.ToUInt32(_etwEvent.Data[Offset_size..]);
+                public uint size => BitConverter.ToUInt32(_etwEvent.Data[Offset_size..Offset_daddr]);
 
                 /// <summary>
                 /// Retrieves the daddr field.
@@ -9106,52 +9316,52 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the dport field.
                 /// </summary>
-                public ushort dport => BitConverter.ToUInt16(_etwEvent.Data[Offset_dport..]);
+                public ushort dport => BitConverter.ToUInt16(_etwEvent.Data[Offset_dport..Offset_sport]);
 
                 /// <summary>
                 /// Retrieves the sport field.
                 /// </summary>
-                public ushort sport => BitConverter.ToUInt16(_etwEvent.Data[Offset_sport..]);
+                public ushort sport => BitConverter.ToUInt16(_etwEvent.Data[Offset_sport..Offset_mss]);
 
                 /// <summary>
                 /// Retrieves the mss field.
                 /// </summary>
-                public ushort mss => BitConverter.ToUInt16(_etwEvent.Data[Offset_mss..]);
+                public ushort mss => BitConverter.ToUInt16(_etwEvent.Data[Offset_mss..Offset_sackopt]);
 
                 /// <summary>
                 /// Retrieves the sackopt field.
                 /// </summary>
-                public ushort sackopt => BitConverter.ToUInt16(_etwEvent.Data[Offset_sackopt..]);
+                public ushort sackopt => BitConverter.ToUInt16(_etwEvent.Data[Offset_sackopt..Offset_tsopt]);
 
                 /// <summary>
                 /// Retrieves the tsopt field.
                 /// </summary>
-                public ushort tsopt => BitConverter.ToUInt16(_etwEvent.Data[Offset_tsopt..]);
+                public ushort tsopt => BitConverter.ToUInt16(_etwEvent.Data[Offset_tsopt..Offset_wsopt]);
 
                 /// <summary>
                 /// Retrieves the wsopt field.
                 /// </summary>
-                public ushort wsopt => BitConverter.ToUInt16(_etwEvent.Data[Offset_wsopt..]);
+                public ushort wsopt => BitConverter.ToUInt16(_etwEvent.Data[Offset_wsopt..Offset_rcvwin]);
 
                 /// <summary>
                 /// Retrieves the rcvwin field.
                 /// </summary>
-                public uint rcvwin => BitConverter.ToUInt32(_etwEvent.Data[Offset_rcvwin..]);
+                public uint rcvwin => BitConverter.ToUInt32(_etwEvent.Data[Offset_rcvwin..Offset_rcvwinscale]);
 
                 /// <summary>
                 /// Retrieves the rcvwinscale field.
                 /// </summary>
-                public short rcvwinscale => BitConverter.ToInt16(_etwEvent.Data[Offset_rcvwinscale..]);
+                public short rcvwinscale => BitConverter.ToInt16(_etwEvent.Data[Offset_rcvwinscale..Offset_sndwinscale]);
 
                 /// <summary>
                 /// Retrieves the sndwinscale field.
                 /// </summary>
-                public short sndwinscale => BitConverter.ToInt16(_etwEvent.Data[Offset_sndwinscale..]);
+                public short sndwinscale => BitConverter.ToInt16(_etwEvent.Data[Offset_sndwinscale..Offset_seqnum]);
 
                 /// <summary>
                 /// Retrieves the seqnum field.
                 /// </summary>
-                public uint seqnum => BitConverter.ToUInt32(_etwEvent.Data[Offset_seqnum..]);
+                public uint seqnum => BitConverter.ToUInt32(_etwEvent.Data[Offset_seqnum..Offset_connid]);
 
                 /// <summary>
                 /// Retrieves the connid field.
@@ -9254,6 +9464,12 @@ namespace EtwTools
             {
                 _etwEvent = etwEvent;
             }
+
+            /// <summary>
+            /// Converts a generic ETW event to a AcceptIPV6EventV2.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator AcceptIPV6EventV2(EtwEvent etwEvent) => new(etwEvent);
 
             /// <summary>
             /// A data wrapper for a AcceptIPV6 event.
@@ -9476,12 +9692,12 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the PID field.
                 /// </summary>
-                public uint PID => BitConverter.ToUInt32(_etwEvent.Data[Offset_PID..]);
+                public uint PID => BitConverter.ToUInt32(_etwEvent.Data[Offset_PID..Offset_size]);
 
                 /// <summary>
                 /// Retrieves the size field.
                 /// </summary>
-                public uint size => BitConverter.ToUInt32(_etwEvent.Data[Offset_size..]);
+                public uint size => BitConverter.ToUInt32(_etwEvent.Data[Offset_size..Offset_daddr]);
 
                 /// <summary>
                 /// Retrieves the daddr field.
@@ -9496,52 +9712,52 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the dport field.
                 /// </summary>
-                public ushort dport => BitConverter.ToUInt16(_etwEvent.Data[Offset_dport..]);
+                public ushort dport => BitConverter.ToUInt16(_etwEvent.Data[Offset_dport..Offset_sport]);
 
                 /// <summary>
                 /// Retrieves the sport field.
                 /// </summary>
-                public ushort sport => BitConverter.ToUInt16(_etwEvent.Data[Offset_sport..]);
+                public ushort sport => BitConverter.ToUInt16(_etwEvent.Data[Offset_sport..Offset_mss]);
 
                 /// <summary>
                 /// Retrieves the mss field.
                 /// </summary>
-                public ushort mss => BitConverter.ToUInt16(_etwEvent.Data[Offset_mss..]);
+                public ushort mss => BitConverter.ToUInt16(_etwEvent.Data[Offset_mss..Offset_sackopt]);
 
                 /// <summary>
                 /// Retrieves the sackopt field.
                 /// </summary>
-                public ushort sackopt => BitConverter.ToUInt16(_etwEvent.Data[Offset_sackopt..]);
+                public ushort sackopt => BitConverter.ToUInt16(_etwEvent.Data[Offset_sackopt..Offset_tsopt]);
 
                 /// <summary>
                 /// Retrieves the tsopt field.
                 /// </summary>
-                public ushort tsopt => BitConverter.ToUInt16(_etwEvent.Data[Offset_tsopt..]);
+                public ushort tsopt => BitConverter.ToUInt16(_etwEvent.Data[Offset_tsopt..Offset_wsopt]);
 
                 /// <summary>
                 /// Retrieves the wsopt field.
                 /// </summary>
-                public ushort wsopt => BitConverter.ToUInt16(_etwEvent.Data[Offset_wsopt..]);
+                public ushort wsopt => BitConverter.ToUInt16(_etwEvent.Data[Offset_wsopt..Offset_rcvwin]);
 
                 /// <summary>
                 /// Retrieves the rcvwin field.
                 /// </summary>
-                public uint rcvwin => BitConverter.ToUInt32(_etwEvent.Data[Offset_rcvwin..]);
+                public uint rcvwin => BitConverter.ToUInt32(_etwEvent.Data[Offset_rcvwin..Offset_rcvwinscale]);
 
                 /// <summary>
                 /// Retrieves the rcvwinscale field.
                 /// </summary>
-                public short rcvwinscale => BitConverter.ToInt16(_etwEvent.Data[Offset_rcvwinscale..]);
+                public short rcvwinscale => BitConverter.ToInt16(_etwEvent.Data[Offset_rcvwinscale..Offset_sndwinscale]);
 
                 /// <summary>
                 /// Retrieves the sndwinscale field.
                 /// </summary>
-                public short sndwinscale => BitConverter.ToInt16(_etwEvent.Data[Offset_sndwinscale..]);
+                public short sndwinscale => BitConverter.ToInt16(_etwEvent.Data[Offset_sndwinscale..Offset_seqnum]);
 
                 /// <summary>
                 /// Retrieves the seqnum field.
                 /// </summary>
-                public uint seqnum => BitConverter.ToUInt32(_etwEvent.Data[Offset_seqnum..]);
+                public uint seqnum => BitConverter.ToUInt32(_etwEvent.Data[Offset_seqnum..Offset_connid]);
 
                 /// <summary>
                 /// Retrieves the connid field.

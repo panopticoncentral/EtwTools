@@ -198,6 +198,12 @@ namespace EtwTools
             }
 
             /// <summary>
+            /// Converts a generic ETW event to a EventSourceMessageEvent.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator EventSourceMessageEvent(EtwEvent etwEvent) => new(etwEvent);
+
+            /// <summary>
             /// A data wrapper for a EventSourceMessage event.
             /// </summary>
             public ref struct EventSourceMessageData
@@ -308,6 +314,12 @@ namespace EtwTools
             }
 
             /// <summary>
+            /// Converts a generic ETW event to a LogVerboseEvent.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator LogVerboseEvent(EtwEvent etwEvent) => new(etwEvent);
+
+            /// <summary>
             /// A data wrapper for a LogVerbose event.
             /// </summary>
             public ref struct LogVerboseData
@@ -346,7 +358,7 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the Msg field.
                 /// </summary>
-                public string Msg => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_Msg..]);
+                public string Msg => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_Msg..Offset_AppDomainName]);
 
                 /// <summary>
                 /// Retrieves the AppDomainName field.
@@ -438,6 +450,12 @@ namespace EtwTools
             }
 
             /// <summary>
+            /// Converts a generic ETW event to a DiagnosticsEventThrottlingHasBeenStartedForTheEventEvent.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator DiagnosticsEventThrottlingHasBeenStartedForTheEventEvent(EtwEvent etwEvent) => new(etwEvent);
+
+            /// <summary>
             /// A data wrapper for a DiagnosticsEventThrottlingHasBeenStartedForTheEvent event.
             /// </summary>
             public ref struct DiagnosticsEventThrottlingHasBeenStartedForTheEventData
@@ -476,7 +494,7 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the EventId field.
                 /// </summary>
-                public int EventId => BitConverter.ToInt32(_etwEvent.Data[Offset_EventId..]);
+                public int EventId => BitConverter.ToInt32(_etwEvent.Data[Offset_EventId..Offset_AppDomainName]);
 
                 /// <summary>
                 /// Retrieves the AppDomainName field.
@@ -568,6 +586,12 @@ namespace EtwTools
             }
 
             /// <summary>
+            /// Converts a generic ETW event to a DiagnosticsEventThrottlingHasBeenResetForTheEventEvent.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator DiagnosticsEventThrottlingHasBeenResetForTheEventEvent(EtwEvent etwEvent) => new(etwEvent);
+
+            /// <summary>
             /// A data wrapper for a DiagnosticsEventThrottlingHasBeenResetForTheEvent event.
             /// </summary>
             public ref struct DiagnosticsEventThrottlingHasBeenResetForTheEventData
@@ -620,12 +644,12 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the EventId field.
                 /// </summary>
-                public int EventId => BitConverter.ToInt32(_etwEvent.Data[Offset_EventId..]);
+                public int EventId => BitConverter.ToInt32(_etwEvent.Data[Offset_EventId..Offset_ExecutionCount]);
 
                 /// <summary>
                 /// Retrieves the ExecutionCount field.
                 /// </summary>
-                public int ExecutionCount => BitConverter.ToInt32(_etwEvent.Data[Offset_ExecutionCount..]);
+                public int ExecutionCount => BitConverter.ToInt32(_etwEvent.Data[Offset_ExecutionCount..Offset_AppDomainName]);
 
                 /// <summary>
                 /// Retrieves the AppDomainName field.
@@ -718,6 +742,12 @@ namespace EtwTools
             }
 
             /// <summary>
+            /// Converts a generic ETW event to a DiagnoisticsEventThrottlingSchedulerDisposeTimerFailureEvent.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator DiagnoisticsEventThrottlingSchedulerDisposeTimerFailureEvent(EtwEvent etwEvent) => new(etwEvent);
+
+            /// <summary>
             /// A data wrapper for a DiagnoisticsEventThrottlingSchedulerDisposeTimerFailure event.
             /// </summary>
             public ref struct DiagnoisticsEventThrottlingSchedulerDisposeTimerFailureData
@@ -756,7 +786,7 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the Exception field.
                 /// </summary>
-                public string Exception => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_Exception..]);
+                public string Exception => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_Exception..Offset_AppDomainName]);
 
                 /// <summary>
                 /// Retrieves the AppDomainName field.
@@ -848,6 +878,12 @@ namespace EtwTools
             }
 
             /// <summary>
+            /// Converts a generic ETW event to a DiagnoisticsEventThrottlingSchedulerTimerWasCreatedEvent.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator DiagnoisticsEventThrottlingSchedulerTimerWasCreatedEvent(EtwEvent etwEvent) => new(etwEvent);
+
+            /// <summary>
             /// A data wrapper for a DiagnoisticsEventThrottlingSchedulerTimerWasCreated event.
             /// </summary>
             public ref struct DiagnoisticsEventThrottlingSchedulerTimerWasCreatedData
@@ -886,7 +922,7 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the IntervalInMilliseconds field.
                 /// </summary>
-                public int IntervalInMilliseconds => BitConverter.ToInt32(_etwEvent.Data[Offset_IntervalInMilliseconds..]);
+                public int IntervalInMilliseconds => BitConverter.ToInt32(_etwEvent.Data[Offset_IntervalInMilliseconds..Offset_AppDomainName]);
 
                 /// <summary>
                 /// Retrieves the AppDomainName field.
@@ -976,6 +1012,12 @@ namespace EtwTools
             {
                 _etwEvent = etwEvent;
             }
+
+            /// <summary>
+            /// Converts a generic ETW event to a DiagnoisticsEventThrottlingSchedulerTimerWasRemovedEvent.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator DiagnoisticsEventThrottlingSchedulerTimerWasRemovedEvent(EtwEvent etwEvent) => new(etwEvent);
 
             /// <summary>
             /// A data wrapper for a DiagnoisticsEventThrottlingSchedulerTimerWasRemoved event.
@@ -1088,6 +1130,12 @@ namespace EtwTools
             }
 
             /// <summary>
+            /// Converts a generic ETW event to a TelemetryClientConstructorWithNoTelemetryConfigurationEvent.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator TelemetryClientConstructorWithNoTelemetryConfigurationEvent(EtwEvent etwEvent) => new(etwEvent);
+
+            /// <summary>
             /// A data wrapper for a TelemetryClientConstructorWithNoTelemetryConfiguration event.
             /// </summary>
             public ref struct TelemetryClientConstructorWithNoTelemetryConfigurationData
@@ -1198,6 +1246,12 @@ namespace EtwTools
             }
 
             /// <summary>
+            /// Converts a generic ETW event to a PopulateRequiredStringWithValueEvent.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator PopulateRequiredStringWithValueEvent(EtwEvent etwEvent) => new(etwEvent);
+
+            /// <summary>
             /// A data wrapper for a PopulateRequiredStringWithValue event.
             /// </summary>
             public ref struct PopulateRequiredStringWithValueData
@@ -1250,12 +1304,12 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the ParameterName field.
                 /// </summary>
-                public string ParameterName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_ParameterName..]);
+                public string ParameterName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_ParameterName..Offset_TelemetryType]);
 
                 /// <summary>
                 /// Retrieves the TelemetryType field.
                 /// </summary>
-                public string TelemetryType => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_TelemetryType..]);
+                public string TelemetryType => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_TelemetryType..Offset_AppDomainName]);
 
                 /// <summary>
                 /// Retrieves the AppDomainName field.
@@ -1346,6 +1400,12 @@ namespace EtwTools
             {
                 _etwEvent = etwEvent;
             }
+
+            /// <summary>
+            /// Converts a generic ETW event to a RequestTelemetryIncorrectDurationEvent.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator RequestTelemetryIncorrectDurationEvent(EtwEvent etwEvent) => new(etwEvent);
 
             /// <summary>
             /// A data wrapper for a RequestTelemetryIncorrectDuration event.
@@ -1458,6 +1518,12 @@ namespace EtwTools
             }
 
             /// <summary>
+            /// Converts a generic ETW event to a TrackingWasDisabledEvent.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator TrackingWasDisabledEvent(EtwEvent etwEvent) => new(etwEvent);
+
+            /// <summary>
             /// A data wrapper for a TrackingWasDisabled event.
             /// </summary>
             public ref struct TrackingWasDisabledData
@@ -1566,6 +1632,12 @@ namespace EtwTools
             {
                 _etwEvent = etwEvent;
             }
+
+            /// <summary>
+            /// Converts a generic ETW event to a TrackingWasEnabledEvent.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator TrackingWasEnabledEvent(EtwEvent etwEvent) => new(etwEvent);
 
             /// <summary>
             /// A data wrapper for a TrackingWasEnabled event.
@@ -1678,6 +1750,12 @@ namespace EtwTools
             }
 
             /// <summary>
+            /// Converts a generic ETW event to a LogErrorEvent.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator LogErrorEvent(EtwEvent etwEvent) => new(etwEvent);
+
+            /// <summary>
             /// A data wrapper for a LogError event.
             /// </summary>
             public ref struct LogErrorData
@@ -1716,7 +1794,7 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the Msg field.
                 /// </summary>
-                public string Msg => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_Msg..]);
+                public string Msg => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_Msg..Offset_AppDomainName]);
 
                 /// <summary>
                 /// Retrieves the AppDomainName field.
@@ -1808,6 +1886,12 @@ namespace EtwTools
             }
 
             /// <summary>
+            /// Converts a generic ETW event to a BuildInfoConfigBrokenXmlErrorEvent.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator BuildInfoConfigBrokenXmlErrorEvent(EtwEvent etwEvent) => new(etwEvent);
+
+            /// <summary>
             /// A data wrapper for a BuildInfoConfigBrokenXmlError event.
             /// </summary>
             public ref struct BuildInfoConfigBrokenXmlErrorData
@@ -1846,7 +1930,7 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the Msg field.
                 /// </summary>
-                public string Msg => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_Msg..]);
+                public string Msg => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_Msg..Offset_AppDomainName]);
 
                 /// <summary>
                 /// Retrieves the AppDomainName field.

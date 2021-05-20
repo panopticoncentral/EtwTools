@@ -2,7 +2,7 @@
   "profiles": {
     "trace": {
       "commandName": "Project",
-      "commandLineArgs": "provider published -a C:\\dev\\etwtools\\providers\\ 3d6fa8d0-fe05-11d0-9dda-00c04fd7ba7c",
+      "commandLineArgs": "session stop VSInspector",
       "nativeDebugging": true
     }
   }

@@ -119,6 +119,12 @@ namespace EtwTools
             {
                 _etwEvent = etwEvent;
             }
+
+            /// <summary>
+            /// Converts a generic ETW event to a RDCompleteEvent.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator RDCompleteEvent(EtwEvent etwEvent) => new(etwEvent);
         }
 
         /// <summary>
@@ -190,6 +196,12 @@ namespace EtwTools
             {
                 _etwEvent = etwEvent;
             }
+
+            /// <summary>
+            /// Converts a generic ETW event to a ExtensionEvent.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator ExtensionEvent(EtwEvent etwEvent) => new(etwEvent);
 
             /// <summary>
             /// A data wrapper for a Extension event.
@@ -314,37 +326,37 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the GroupMask1 field.
                 /// </summary>
-                public uint GroupMask1 => BitConverter.ToUInt32(_etwEvent.Data[Offset_GroupMask1..]);
+                public uint GroupMask1 => BitConverter.ToUInt32(_etwEvent.Data[Offset_GroupMask1..Offset_GroupMask2]);
 
                 /// <summary>
                 /// Retrieves the GroupMask2 field.
                 /// </summary>
-                public uint GroupMask2 => BitConverter.ToUInt32(_etwEvent.Data[Offset_GroupMask2..]);
+                public uint GroupMask2 => BitConverter.ToUInt32(_etwEvent.Data[Offset_GroupMask2..Offset_GroupMask3]);
 
                 /// <summary>
                 /// Retrieves the GroupMask3 field.
                 /// </summary>
-                public uint GroupMask3 => BitConverter.ToUInt32(_etwEvent.Data[Offset_GroupMask3..]);
+                public uint GroupMask3 => BitConverter.ToUInt32(_etwEvent.Data[Offset_GroupMask3..Offset_GroupMask4]);
 
                 /// <summary>
                 /// Retrieves the GroupMask4 field.
                 /// </summary>
-                public uint GroupMask4 => BitConverter.ToUInt32(_etwEvent.Data[Offset_GroupMask4..]);
+                public uint GroupMask4 => BitConverter.ToUInt32(_etwEvent.Data[Offset_GroupMask4..Offset_GroupMask5]);
 
                 /// <summary>
                 /// Retrieves the GroupMask5 field.
                 /// </summary>
-                public uint GroupMask5 => BitConverter.ToUInt32(_etwEvent.Data[Offset_GroupMask5..]);
+                public uint GroupMask5 => BitConverter.ToUInt32(_etwEvent.Data[Offset_GroupMask5..Offset_GroupMask6]);
 
                 /// <summary>
                 /// Retrieves the GroupMask6 field.
                 /// </summary>
-                public uint GroupMask6 => BitConverter.ToUInt32(_etwEvent.Data[Offset_GroupMask6..]);
+                public uint GroupMask6 => BitConverter.ToUInt32(_etwEvent.Data[Offset_GroupMask6..Offset_GroupMask7]);
 
                 /// <summary>
                 /// Retrieves the GroupMask7 field.
                 /// </summary>
-                public uint GroupMask7 => BitConverter.ToUInt32(_etwEvent.Data[Offset_GroupMask7..]);
+                public uint GroupMask7 => BitConverter.ToUInt32(_etwEvent.Data[Offset_GroupMask7..Offset_GroupMask8]);
 
                 /// <summary>
                 /// Retrieves the GroupMask8 field.
@@ -440,6 +452,12 @@ namespace EtwTools
             {
                 _etwEvent = etwEvent;
             }
+
+            /// <summary>
+            /// Converts a generic ETW event to a EndExtensionEvent.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator EndExtensionEvent(EtwEvent etwEvent) => new(etwEvent);
 
             /// <summary>
             /// A data wrapper for a EndExtension event.
@@ -564,37 +582,37 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the GroupMask1 field.
                 /// </summary>
-                public uint GroupMask1 => BitConverter.ToUInt32(_etwEvent.Data[Offset_GroupMask1..]);
+                public uint GroupMask1 => BitConverter.ToUInt32(_etwEvent.Data[Offset_GroupMask1..Offset_GroupMask2]);
 
                 /// <summary>
                 /// Retrieves the GroupMask2 field.
                 /// </summary>
-                public uint GroupMask2 => BitConverter.ToUInt32(_etwEvent.Data[Offset_GroupMask2..]);
+                public uint GroupMask2 => BitConverter.ToUInt32(_etwEvent.Data[Offset_GroupMask2..Offset_GroupMask3]);
 
                 /// <summary>
                 /// Retrieves the GroupMask3 field.
                 /// </summary>
-                public uint GroupMask3 => BitConverter.ToUInt32(_etwEvent.Data[Offset_GroupMask3..]);
+                public uint GroupMask3 => BitConverter.ToUInt32(_etwEvent.Data[Offset_GroupMask3..Offset_GroupMask4]);
 
                 /// <summary>
                 /// Retrieves the GroupMask4 field.
                 /// </summary>
-                public uint GroupMask4 => BitConverter.ToUInt32(_etwEvent.Data[Offset_GroupMask4..]);
+                public uint GroupMask4 => BitConverter.ToUInt32(_etwEvent.Data[Offset_GroupMask4..Offset_GroupMask5]);
 
                 /// <summary>
                 /// Retrieves the GroupMask5 field.
                 /// </summary>
-                public uint GroupMask5 => BitConverter.ToUInt32(_etwEvent.Data[Offset_GroupMask5..]);
+                public uint GroupMask5 => BitConverter.ToUInt32(_etwEvent.Data[Offset_GroupMask5..Offset_GroupMask6]);
 
                 /// <summary>
                 /// Retrieves the GroupMask6 field.
                 /// </summary>
-                public uint GroupMask6 => BitConverter.ToUInt32(_etwEvent.Data[Offset_GroupMask6..]);
+                public uint GroupMask6 => BitConverter.ToUInt32(_etwEvent.Data[Offset_GroupMask6..Offset_GroupMask7]);
 
                 /// <summary>
                 /// Retrieves the GroupMask7 field.
                 /// </summary>
-                public uint GroupMask7 => BitConverter.ToUInt32(_etwEvent.Data[Offset_GroupMask7..]);
+                public uint GroupMask7 => BitConverter.ToUInt32(_etwEvent.Data[Offset_GroupMask7..Offset_GroupMask8]);
 
                 /// <summary>
                 /// Retrieves the GroupMask8 field.
@@ -690,6 +708,12 @@ namespace EtwTools
             {
                 _etwEvent = etwEvent;
             }
+
+            /// <summary>
+            /// Converts a generic ETW event to a HeaderEvent.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator HeaderEvent(EtwEvent etwEvent) => new(etwEvent);
 
             /// <summary>
             /// A data wrapper for a Header event.
@@ -1024,77 +1048,77 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the BufferSize field.
                 /// </summary>
-                public uint BufferSize => BitConverter.ToUInt32(_etwEvent.Data[Offset_BufferSize..]);
+                public uint BufferSize => BitConverter.ToUInt32(_etwEvent.Data[Offset_BufferSize..Offset_Version]);
 
                 /// <summary>
                 /// Retrieves the Version field.
                 /// </summary>
-                public uint Version => BitConverter.ToUInt32(_etwEvent.Data[Offset_Version..]);
+                public uint Version => BitConverter.ToUInt32(_etwEvent.Data[Offset_Version..Offset_ProviderVersion]);
 
                 /// <summary>
                 /// Retrieves the ProviderVersion field.
                 /// </summary>
-                public uint ProviderVersion => BitConverter.ToUInt32(_etwEvent.Data[Offset_ProviderVersion..]);
+                public uint ProviderVersion => BitConverter.ToUInt32(_etwEvent.Data[Offset_ProviderVersion..Offset_NumberOfProcessors]);
 
                 /// <summary>
                 /// Retrieves the NumberOfProcessors field.
                 /// </summary>
-                public uint NumberOfProcessors => BitConverter.ToUInt32(_etwEvent.Data[Offset_NumberOfProcessors..]);
+                public uint NumberOfProcessors => BitConverter.ToUInt32(_etwEvent.Data[Offset_NumberOfProcessors..Offset_EndTime]);
 
                 /// <summary>
                 /// Retrieves the EndTime field.
                 /// </summary>
-                public ulong EndTime => BitConverter.ToUInt64(_etwEvent.Data[Offset_EndTime..]);
+                public ulong EndTime => BitConverter.ToUInt64(_etwEvent.Data[Offset_EndTime..Offset_TimerResolution]);
 
                 /// <summary>
                 /// Retrieves the TimerResolution field.
                 /// </summary>
-                public uint TimerResolution => BitConverter.ToUInt32(_etwEvent.Data[Offset_TimerResolution..]);
+                public uint TimerResolution => BitConverter.ToUInt32(_etwEvent.Data[Offset_TimerResolution..Offset_MaxFileSize]);
 
                 /// <summary>
                 /// Retrieves the MaxFileSize field.
                 /// </summary>
-                public uint MaxFileSize => BitConverter.ToUInt32(_etwEvent.Data[Offset_MaxFileSize..]);
+                public uint MaxFileSize => BitConverter.ToUInt32(_etwEvent.Data[Offset_MaxFileSize..Offset_LogFileMode]);
 
                 /// <summary>
                 /// Retrieves the LogFileMode field.
                 /// </summary>
-                public uint LogFileMode => BitConverter.ToUInt32(_etwEvent.Data[Offset_LogFileMode..]);
+                public uint LogFileMode => BitConverter.ToUInt32(_etwEvent.Data[Offset_LogFileMode..Offset_BuffersWritten]);
 
                 /// <summary>
                 /// Retrieves the BuffersWritten field.
                 /// </summary>
-                public uint BuffersWritten => BitConverter.ToUInt32(_etwEvent.Data[Offset_BuffersWritten..]);
+                public uint BuffersWritten => BitConverter.ToUInt32(_etwEvent.Data[Offset_BuffersWritten..Offset_StartBuffers]);
 
                 /// <summary>
                 /// Retrieves the StartBuffers field.
                 /// </summary>
-                public uint StartBuffers => BitConverter.ToUInt32(_etwEvent.Data[Offset_StartBuffers..]);
+                public uint StartBuffers => BitConverter.ToUInt32(_etwEvent.Data[Offset_StartBuffers..Offset_PointerSize]);
 
                 /// <summary>
                 /// Retrieves the PointerSize field.
                 /// </summary>
-                public uint PointerSize => BitConverter.ToUInt32(_etwEvent.Data[Offset_PointerSize..]);
+                public uint PointerSize => BitConverter.ToUInt32(_etwEvent.Data[Offset_PointerSize..Offset_EventsLost]);
 
                 /// <summary>
                 /// Retrieves the EventsLost field.
                 /// </summary>
-                public uint EventsLost => BitConverter.ToUInt32(_etwEvent.Data[Offset_EventsLost..]);
+                public uint EventsLost => BitConverter.ToUInt32(_etwEvent.Data[Offset_EventsLost..Offset_CPUSpeed]);
 
                 /// <summary>
                 /// Retrieves the CPUSpeed field.
                 /// </summary>
-                public uint CPUSpeed => BitConverter.ToUInt32(_etwEvent.Data[Offset_CPUSpeed..]);
+                public uint CPUSpeed => BitConverter.ToUInt32(_etwEvent.Data[Offset_CPUSpeed..Offset_LoggerName]);
 
                 /// <summary>
                 /// Retrieves the LoggerName field.
                 /// </summary>
-                public ulong LoggerName => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_LoggerName..]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_LoggerName..]);
+                public ulong LoggerName => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_LoggerName..Offset_LogFileName]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_LoggerName..Offset_LogFileName]);
 
                 /// <summary>
                 /// Retrieves the LogFileName field.
                 /// </summary>
-                public ulong LogFileName => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_LogFileName..]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_LogFileName..]);
+                public ulong LogFileName => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_LogFileName..Offset_TimeZoneInformation]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_LogFileName..Offset_TimeZoneInformation]);
 
                 /// <summary>
                 /// Retrieves the TimeZoneInformation field.
@@ -1104,32 +1128,32 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the BootTime field.
                 /// </summary>
-                public ulong BootTime => BitConverter.ToUInt64(_etwEvent.Data[Offset_BootTime..]);
+                public ulong BootTime => BitConverter.ToUInt64(_etwEvent.Data[Offset_BootTime..Offset_PerfFreq]);
 
                 /// <summary>
                 /// Retrieves the PerfFreq field.
                 /// </summary>
-                public ulong PerfFreq => BitConverter.ToUInt64(_etwEvent.Data[Offset_PerfFreq..]);
+                public ulong PerfFreq => BitConverter.ToUInt64(_etwEvent.Data[Offset_PerfFreq..Offset_StartTime]);
 
                 /// <summary>
                 /// Retrieves the StartTime field.
                 /// </summary>
-                public ulong StartTime => BitConverter.ToUInt64(_etwEvent.Data[Offset_StartTime..]);
+                public ulong StartTime => BitConverter.ToUInt64(_etwEvent.Data[Offset_StartTime..Offset_ReservedFlags]);
 
                 /// <summary>
                 /// Retrieves the ReservedFlags field.
                 /// </summary>
-                public uint ReservedFlags => BitConverter.ToUInt32(_etwEvent.Data[Offset_ReservedFlags..]);
+                public uint ReservedFlags => BitConverter.ToUInt32(_etwEvent.Data[Offset_ReservedFlags..Offset_BuffersLost]);
 
                 /// <summary>
                 /// Retrieves the BuffersLost field.
                 /// </summary>
-                public uint BuffersLost => BitConverter.ToUInt32(_etwEvent.Data[Offset_BuffersLost..]);
+                public uint BuffersLost => BitConverter.ToUInt32(_etwEvent.Data[Offset_BuffersLost..Offset_SessionNameString]);
 
                 /// <summary>
                 /// Retrieves the SessionNameString field.
                 /// </summary>
-                public string SessionNameString => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_SessionNameString..]);
+                public string SessionNameString => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_SessionNameString..Offset_LogFileNameString]);
 
                 /// <summary>
                 /// Retrieves the LogFileNameString field.
@@ -1242,6 +1266,12 @@ namespace EtwTools
             }
 
             /// <summary>
+            /// Converts a generic ETW event to a HeaderEventV1.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator HeaderEventV1(EtwEvent etwEvent) => new(etwEvent);
+
+            /// <summary>
             /// A data wrapper for a Header event.
             /// </summary>
             public ref struct HeaderData
@@ -1574,77 +1604,77 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the BufferSize field.
                 /// </summary>
-                public uint BufferSize => BitConverter.ToUInt32(_etwEvent.Data[Offset_BufferSize..]);
+                public uint BufferSize => BitConverter.ToUInt32(_etwEvent.Data[Offset_BufferSize..Offset_Version]);
 
                 /// <summary>
                 /// Retrieves the Version field.
                 /// </summary>
-                public uint Version => BitConverter.ToUInt32(_etwEvent.Data[Offset_Version..]);
+                public uint Version => BitConverter.ToUInt32(_etwEvent.Data[Offset_Version..Offset_ProviderVersion]);
 
                 /// <summary>
                 /// Retrieves the ProviderVersion field.
                 /// </summary>
-                public uint ProviderVersion => BitConverter.ToUInt32(_etwEvent.Data[Offset_ProviderVersion..]);
+                public uint ProviderVersion => BitConverter.ToUInt32(_etwEvent.Data[Offset_ProviderVersion..Offset_NumberOfProcessors]);
 
                 /// <summary>
                 /// Retrieves the NumberOfProcessors field.
                 /// </summary>
-                public uint NumberOfProcessors => BitConverter.ToUInt32(_etwEvent.Data[Offset_NumberOfProcessors..]);
+                public uint NumberOfProcessors => BitConverter.ToUInt32(_etwEvent.Data[Offset_NumberOfProcessors..Offset_EndTime]);
 
                 /// <summary>
                 /// Retrieves the EndTime field.
                 /// </summary>
-                public ulong EndTime => BitConverter.ToUInt64(_etwEvent.Data[Offset_EndTime..]);
+                public ulong EndTime => BitConverter.ToUInt64(_etwEvent.Data[Offset_EndTime..Offset_TimerResolution]);
 
                 /// <summary>
                 /// Retrieves the TimerResolution field.
                 /// </summary>
-                public uint TimerResolution => BitConverter.ToUInt32(_etwEvent.Data[Offset_TimerResolution..]);
+                public uint TimerResolution => BitConverter.ToUInt32(_etwEvent.Data[Offset_TimerResolution..Offset_MaxFileSize]);
 
                 /// <summary>
                 /// Retrieves the MaxFileSize field.
                 /// </summary>
-                public uint MaxFileSize => BitConverter.ToUInt32(_etwEvent.Data[Offset_MaxFileSize..]);
+                public uint MaxFileSize => BitConverter.ToUInt32(_etwEvent.Data[Offset_MaxFileSize..Offset_LogFileMode]);
 
                 /// <summary>
                 /// Retrieves the LogFileMode field.
                 /// </summary>
-                public uint LogFileMode => BitConverter.ToUInt32(_etwEvent.Data[Offset_LogFileMode..]);
+                public uint LogFileMode => BitConverter.ToUInt32(_etwEvent.Data[Offset_LogFileMode..Offset_BuffersWritten]);
 
                 /// <summary>
                 /// Retrieves the BuffersWritten field.
                 /// </summary>
-                public uint BuffersWritten => BitConverter.ToUInt32(_etwEvent.Data[Offset_BuffersWritten..]);
+                public uint BuffersWritten => BitConverter.ToUInt32(_etwEvent.Data[Offset_BuffersWritten..Offset_StartBuffers]);
 
                 /// <summary>
                 /// Retrieves the StartBuffers field.
                 /// </summary>
-                public uint StartBuffers => BitConverter.ToUInt32(_etwEvent.Data[Offset_StartBuffers..]);
+                public uint StartBuffers => BitConverter.ToUInt32(_etwEvent.Data[Offset_StartBuffers..Offset_PointerSize]);
 
                 /// <summary>
                 /// Retrieves the PointerSize field.
                 /// </summary>
-                public uint PointerSize => BitConverter.ToUInt32(_etwEvent.Data[Offset_PointerSize..]);
+                public uint PointerSize => BitConverter.ToUInt32(_etwEvent.Data[Offset_PointerSize..Offset_EventsLost]);
 
                 /// <summary>
                 /// Retrieves the EventsLost field.
                 /// </summary>
-                public uint EventsLost => BitConverter.ToUInt32(_etwEvent.Data[Offset_EventsLost..]);
+                public uint EventsLost => BitConverter.ToUInt32(_etwEvent.Data[Offset_EventsLost..Offset_CPUSpeed]);
 
                 /// <summary>
                 /// Retrieves the CPUSpeed field.
                 /// </summary>
-                public uint CPUSpeed => BitConverter.ToUInt32(_etwEvent.Data[Offset_CPUSpeed..]);
+                public uint CPUSpeed => BitConverter.ToUInt32(_etwEvent.Data[Offset_CPUSpeed..Offset_LoggerName]);
 
                 /// <summary>
                 /// Retrieves the LoggerName field.
                 /// </summary>
-                public ulong LoggerName => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_LoggerName..]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_LoggerName..]);
+                public ulong LoggerName => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_LoggerName..Offset_LogFileName]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_LoggerName..Offset_LogFileName]);
 
                 /// <summary>
                 /// Retrieves the LogFileName field.
                 /// </summary>
-                public ulong LogFileName => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_LogFileName..]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_LogFileName..]);
+                public ulong LogFileName => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_LogFileName..Offset_TimeZoneInformation]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_LogFileName..Offset_TimeZoneInformation]);
 
                 /// <summary>
                 /// Retrieves the TimeZoneInformation field.
@@ -1654,32 +1684,32 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the BootTime field.
                 /// </summary>
-                public ulong BootTime => BitConverter.ToUInt64(_etwEvent.Data[Offset_BootTime..]);
+                public ulong BootTime => BitConverter.ToUInt64(_etwEvent.Data[Offset_BootTime..Offset_PerfFreq]);
 
                 /// <summary>
                 /// Retrieves the PerfFreq field.
                 /// </summary>
-                public ulong PerfFreq => BitConverter.ToUInt64(_etwEvent.Data[Offset_PerfFreq..]);
+                public ulong PerfFreq => BitConverter.ToUInt64(_etwEvent.Data[Offset_PerfFreq..Offset_StartTime]);
 
                 /// <summary>
                 /// Retrieves the StartTime field.
                 /// </summary>
-                public ulong StartTime => BitConverter.ToUInt64(_etwEvent.Data[Offset_StartTime..]);
+                public ulong StartTime => BitConverter.ToUInt64(_etwEvent.Data[Offset_StartTime..Offset_ReservedFlags]);
 
                 /// <summary>
                 /// Retrieves the ReservedFlags field.
                 /// </summary>
-                public uint ReservedFlags => BitConverter.ToUInt32(_etwEvent.Data[Offset_ReservedFlags..]);
+                public uint ReservedFlags => BitConverter.ToUInt32(_etwEvent.Data[Offset_ReservedFlags..Offset_BuffersLost]);
 
                 /// <summary>
                 /// Retrieves the BuffersLost field.
                 /// </summary>
-                public uint BuffersLost => BitConverter.ToUInt32(_etwEvent.Data[Offset_BuffersLost..]);
+                public uint BuffersLost => BitConverter.ToUInt32(_etwEvent.Data[Offset_BuffersLost..Offset_SessionNameString]);
 
                 /// <summary>
                 /// Retrieves the SessionNameString field.
                 /// </summary>
-                public string SessionNameString => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_SessionNameString..]);
+                public string SessionNameString => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_SessionNameString..Offset_LogFileNameString]);
 
                 /// <summary>
                 /// Retrieves the LogFileNameString field.
@@ -1785,6 +1815,12 @@ namespace EtwTools
             {
                 _etwEvent = etwEvent;
             }
+
+            /// <summary>
+            /// Converts a generic ETW event to a RDCompleteEventV1.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator RDCompleteEventV1(EtwEvent etwEvent) => new(etwEvent);
         }
 
         /// <summary>
@@ -1856,6 +1892,12 @@ namespace EtwTools
             {
                 _etwEvent = etwEvent;
             }
+
+            /// <summary>
+            /// Converts a generic ETW event to a ExtensionEventV1.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator ExtensionEventV1(EtwEvent etwEvent) => new(etwEvent);
 
             /// <summary>
             /// A data wrapper for a Extension event.
@@ -1980,37 +2022,37 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the GroupMask1 field.
                 /// </summary>
-                public uint GroupMask1 => BitConverter.ToUInt32(_etwEvent.Data[Offset_GroupMask1..]);
+                public uint GroupMask1 => BitConverter.ToUInt32(_etwEvent.Data[Offset_GroupMask1..Offset_GroupMask2]);
 
                 /// <summary>
                 /// Retrieves the GroupMask2 field.
                 /// </summary>
-                public uint GroupMask2 => BitConverter.ToUInt32(_etwEvent.Data[Offset_GroupMask2..]);
+                public uint GroupMask2 => BitConverter.ToUInt32(_etwEvent.Data[Offset_GroupMask2..Offset_GroupMask3]);
 
                 /// <summary>
                 /// Retrieves the GroupMask3 field.
                 /// </summary>
-                public uint GroupMask3 => BitConverter.ToUInt32(_etwEvent.Data[Offset_GroupMask3..]);
+                public uint GroupMask3 => BitConverter.ToUInt32(_etwEvent.Data[Offset_GroupMask3..Offset_GroupMask4]);
 
                 /// <summary>
                 /// Retrieves the GroupMask4 field.
                 /// </summary>
-                public uint GroupMask4 => BitConverter.ToUInt32(_etwEvent.Data[Offset_GroupMask4..]);
+                public uint GroupMask4 => BitConverter.ToUInt32(_etwEvent.Data[Offset_GroupMask4..Offset_GroupMask5]);
 
                 /// <summary>
                 /// Retrieves the GroupMask5 field.
                 /// </summary>
-                public uint GroupMask5 => BitConverter.ToUInt32(_etwEvent.Data[Offset_GroupMask5..]);
+                public uint GroupMask5 => BitConverter.ToUInt32(_etwEvent.Data[Offset_GroupMask5..Offset_GroupMask6]);
 
                 /// <summary>
                 /// Retrieves the GroupMask6 field.
                 /// </summary>
-                public uint GroupMask6 => BitConverter.ToUInt32(_etwEvent.Data[Offset_GroupMask6..]);
+                public uint GroupMask6 => BitConverter.ToUInt32(_etwEvent.Data[Offset_GroupMask6..Offset_GroupMask7]);
 
                 /// <summary>
                 /// Retrieves the GroupMask7 field.
                 /// </summary>
-                public uint GroupMask7 => BitConverter.ToUInt32(_etwEvent.Data[Offset_GroupMask7..]);
+                public uint GroupMask7 => BitConverter.ToUInt32(_etwEvent.Data[Offset_GroupMask7..Offset_GroupMask8]);
 
                 /// <summary>
                 /// Retrieves the GroupMask8 field.
@@ -2106,6 +2148,12 @@ namespace EtwTools
             {
                 _etwEvent = etwEvent;
             }
+
+            /// <summary>
+            /// Converts a generic ETW event to a EndExtensionEventV1.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator EndExtensionEventV1(EtwEvent etwEvent) => new(etwEvent);
 
             /// <summary>
             /// A data wrapper for a EndExtension event.
@@ -2230,37 +2278,37 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the GroupMask1 field.
                 /// </summary>
-                public uint GroupMask1 => BitConverter.ToUInt32(_etwEvent.Data[Offset_GroupMask1..]);
+                public uint GroupMask1 => BitConverter.ToUInt32(_etwEvent.Data[Offset_GroupMask1..Offset_GroupMask2]);
 
                 /// <summary>
                 /// Retrieves the GroupMask2 field.
                 /// </summary>
-                public uint GroupMask2 => BitConverter.ToUInt32(_etwEvent.Data[Offset_GroupMask2..]);
+                public uint GroupMask2 => BitConverter.ToUInt32(_etwEvent.Data[Offset_GroupMask2..Offset_GroupMask3]);
 
                 /// <summary>
                 /// Retrieves the GroupMask3 field.
                 /// </summary>
-                public uint GroupMask3 => BitConverter.ToUInt32(_etwEvent.Data[Offset_GroupMask3..]);
+                public uint GroupMask3 => BitConverter.ToUInt32(_etwEvent.Data[Offset_GroupMask3..Offset_GroupMask4]);
 
                 /// <summary>
                 /// Retrieves the GroupMask4 field.
                 /// </summary>
-                public uint GroupMask4 => BitConverter.ToUInt32(_etwEvent.Data[Offset_GroupMask4..]);
+                public uint GroupMask4 => BitConverter.ToUInt32(_etwEvent.Data[Offset_GroupMask4..Offset_GroupMask5]);
 
                 /// <summary>
                 /// Retrieves the GroupMask5 field.
                 /// </summary>
-                public uint GroupMask5 => BitConverter.ToUInt32(_etwEvent.Data[Offset_GroupMask5..]);
+                public uint GroupMask5 => BitConverter.ToUInt32(_etwEvent.Data[Offset_GroupMask5..Offset_GroupMask6]);
 
                 /// <summary>
                 /// Retrieves the GroupMask6 field.
                 /// </summary>
-                public uint GroupMask6 => BitConverter.ToUInt32(_etwEvent.Data[Offset_GroupMask6..]);
+                public uint GroupMask6 => BitConverter.ToUInt32(_etwEvent.Data[Offset_GroupMask6..Offset_GroupMask7]);
 
                 /// <summary>
                 /// Retrieves the GroupMask7 field.
                 /// </summary>
-                public uint GroupMask7 => BitConverter.ToUInt32(_etwEvent.Data[Offset_GroupMask7..]);
+                public uint GroupMask7 => BitConverter.ToUInt32(_etwEvent.Data[Offset_GroupMask7..Offset_GroupMask8]);
 
                 /// <summary>
                 /// Retrieves the GroupMask8 field.
@@ -2356,6 +2404,12 @@ namespace EtwTools
             {
                 _etwEvent = etwEvent;
             }
+
+            /// <summary>
+            /// Converts a generic ETW event to a HeaderEventV2.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator HeaderEventV2(EtwEvent etwEvent) => new(etwEvent);
 
             /// <summary>
             /// A data wrapper for a Header event.
@@ -2690,77 +2744,77 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the BufferSize field.
                 /// </summary>
-                public uint BufferSize => BitConverter.ToUInt32(_etwEvent.Data[Offset_BufferSize..]);
+                public uint BufferSize => BitConverter.ToUInt32(_etwEvent.Data[Offset_BufferSize..Offset_Version]);
 
                 /// <summary>
                 /// Retrieves the Version field.
                 /// </summary>
-                public uint Version => BitConverter.ToUInt32(_etwEvent.Data[Offset_Version..]);
+                public uint Version => BitConverter.ToUInt32(_etwEvent.Data[Offset_Version..Offset_ProviderVersion]);
 
                 /// <summary>
                 /// Retrieves the ProviderVersion field.
                 /// </summary>
-                public uint ProviderVersion => BitConverter.ToUInt32(_etwEvent.Data[Offset_ProviderVersion..]);
+                public uint ProviderVersion => BitConverter.ToUInt32(_etwEvent.Data[Offset_ProviderVersion..Offset_NumberOfProcessors]);
 
                 /// <summary>
                 /// Retrieves the NumberOfProcessors field.
                 /// </summary>
-                public uint NumberOfProcessors => BitConverter.ToUInt32(_etwEvent.Data[Offset_NumberOfProcessors..]);
+                public uint NumberOfProcessors => BitConverter.ToUInt32(_etwEvent.Data[Offset_NumberOfProcessors..Offset_EndTime]);
 
                 /// <summary>
                 /// Retrieves the EndTime field.
                 /// </summary>
-                public ulong EndTime => BitConverter.ToUInt64(_etwEvent.Data[Offset_EndTime..]);
+                public ulong EndTime => BitConverter.ToUInt64(_etwEvent.Data[Offset_EndTime..Offset_TimerResolution]);
 
                 /// <summary>
                 /// Retrieves the TimerResolution field.
                 /// </summary>
-                public uint TimerResolution => BitConverter.ToUInt32(_etwEvent.Data[Offset_TimerResolution..]);
+                public uint TimerResolution => BitConverter.ToUInt32(_etwEvent.Data[Offset_TimerResolution..Offset_MaxFileSize]);
 
                 /// <summary>
                 /// Retrieves the MaxFileSize field.
                 /// </summary>
-                public uint MaxFileSize => BitConverter.ToUInt32(_etwEvent.Data[Offset_MaxFileSize..]);
+                public uint MaxFileSize => BitConverter.ToUInt32(_etwEvent.Data[Offset_MaxFileSize..Offset_LogFileMode]);
 
                 /// <summary>
                 /// Retrieves the LogFileMode field.
                 /// </summary>
-                public uint LogFileMode => BitConverter.ToUInt32(_etwEvent.Data[Offset_LogFileMode..]);
+                public uint LogFileMode => BitConverter.ToUInt32(_etwEvent.Data[Offset_LogFileMode..Offset_BuffersWritten]);
 
                 /// <summary>
                 /// Retrieves the BuffersWritten field.
                 /// </summary>
-                public uint BuffersWritten => BitConverter.ToUInt32(_etwEvent.Data[Offset_BuffersWritten..]);
+                public uint BuffersWritten => BitConverter.ToUInt32(_etwEvent.Data[Offset_BuffersWritten..Offset_StartBuffers]);
 
                 /// <summary>
                 /// Retrieves the StartBuffers field.
                 /// </summary>
-                public uint StartBuffers => BitConverter.ToUInt32(_etwEvent.Data[Offset_StartBuffers..]);
+                public uint StartBuffers => BitConverter.ToUInt32(_etwEvent.Data[Offset_StartBuffers..Offset_PointerSize]);
 
                 /// <summary>
                 /// Retrieves the PointerSize field.
                 /// </summary>
-                public uint PointerSize => BitConverter.ToUInt32(_etwEvent.Data[Offset_PointerSize..]);
+                public uint PointerSize => BitConverter.ToUInt32(_etwEvent.Data[Offset_PointerSize..Offset_EventsLost]);
 
                 /// <summary>
                 /// Retrieves the EventsLost field.
                 /// </summary>
-                public uint EventsLost => BitConverter.ToUInt32(_etwEvent.Data[Offset_EventsLost..]);
+                public uint EventsLost => BitConverter.ToUInt32(_etwEvent.Data[Offset_EventsLost..Offset_CPUSpeed]);
 
                 /// <summary>
                 /// Retrieves the CPUSpeed field.
                 /// </summary>
-                public uint CPUSpeed => BitConverter.ToUInt32(_etwEvent.Data[Offset_CPUSpeed..]);
+                public uint CPUSpeed => BitConverter.ToUInt32(_etwEvent.Data[Offset_CPUSpeed..Offset_LoggerName]);
 
                 /// <summary>
                 /// Retrieves the LoggerName field.
                 /// </summary>
-                public ulong LoggerName => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_LoggerName..]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_LoggerName..]);
+                public ulong LoggerName => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_LoggerName..Offset_LogFileName]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_LoggerName..Offset_LogFileName]);
 
                 /// <summary>
                 /// Retrieves the LogFileName field.
                 /// </summary>
-                public ulong LogFileName => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_LogFileName..]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_LogFileName..]);
+                public ulong LogFileName => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_LogFileName..Offset_TimeZoneInformation]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_LogFileName..Offset_TimeZoneInformation]);
 
                 /// <summary>
                 /// Retrieves the TimeZoneInformation field.
@@ -2770,32 +2824,32 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the BootTime field.
                 /// </summary>
-                public ulong BootTime => BitConverter.ToUInt64(_etwEvent.Data[Offset_BootTime..]);
+                public ulong BootTime => BitConverter.ToUInt64(_etwEvent.Data[Offset_BootTime..Offset_PerfFreq]);
 
                 /// <summary>
                 /// Retrieves the PerfFreq field.
                 /// </summary>
-                public ulong PerfFreq => BitConverter.ToUInt64(_etwEvent.Data[Offset_PerfFreq..]);
+                public ulong PerfFreq => BitConverter.ToUInt64(_etwEvent.Data[Offset_PerfFreq..Offset_StartTime]);
 
                 /// <summary>
                 /// Retrieves the StartTime field.
                 /// </summary>
-                public ulong StartTime => BitConverter.ToUInt64(_etwEvent.Data[Offset_StartTime..]);
+                public ulong StartTime => BitConverter.ToUInt64(_etwEvent.Data[Offset_StartTime..Offset_ReservedFlags]);
 
                 /// <summary>
                 /// Retrieves the ReservedFlags field.
                 /// </summary>
-                public uint ReservedFlags => BitConverter.ToUInt32(_etwEvent.Data[Offset_ReservedFlags..]);
+                public uint ReservedFlags => BitConverter.ToUInt32(_etwEvent.Data[Offset_ReservedFlags..Offset_BuffersLost]);
 
                 /// <summary>
                 /// Retrieves the BuffersLost field.
                 /// </summary>
-                public uint BuffersLost => BitConverter.ToUInt32(_etwEvent.Data[Offset_BuffersLost..]);
+                public uint BuffersLost => BitConverter.ToUInt32(_etwEvent.Data[Offset_BuffersLost..Offset_SessionNameString]);
 
                 /// <summary>
                 /// Retrieves the SessionNameString field.
                 /// </summary>
-                public string SessionNameString => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_SessionNameString..]);
+                public string SessionNameString => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_SessionNameString..Offset_LogFileNameString]);
 
                 /// <summary>
                 /// Retrieves the LogFileNameString field.
@@ -2908,6 +2962,12 @@ namespace EtwTools
             }
 
             /// <summary>
+            /// Converts a generic ETW event to a ExtensionEventV2.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator ExtensionEventV2(EtwEvent etwEvent) => new(etwEvent);
+
+            /// <summary>
             /// A data wrapper for a Extension event.
             /// </summary>
             public ref struct ExtensionData
@@ -3044,42 +3104,42 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the GroupMask1 field.
                 /// </summary>
-                public uint GroupMask1 => BitConverter.ToUInt32(_etwEvent.Data[Offset_GroupMask1..]);
+                public uint GroupMask1 => BitConverter.ToUInt32(_etwEvent.Data[Offset_GroupMask1..Offset_GroupMask2]);
 
                 /// <summary>
                 /// Retrieves the GroupMask2 field.
                 /// </summary>
-                public uint GroupMask2 => BitConverter.ToUInt32(_etwEvent.Data[Offset_GroupMask2..]);
+                public uint GroupMask2 => BitConverter.ToUInt32(_etwEvent.Data[Offset_GroupMask2..Offset_GroupMask3]);
 
                 /// <summary>
                 /// Retrieves the GroupMask3 field.
                 /// </summary>
-                public uint GroupMask3 => BitConverter.ToUInt32(_etwEvent.Data[Offset_GroupMask3..]);
+                public uint GroupMask3 => BitConverter.ToUInt32(_etwEvent.Data[Offset_GroupMask3..Offset_GroupMask4]);
 
                 /// <summary>
                 /// Retrieves the GroupMask4 field.
                 /// </summary>
-                public uint GroupMask4 => BitConverter.ToUInt32(_etwEvent.Data[Offset_GroupMask4..]);
+                public uint GroupMask4 => BitConverter.ToUInt32(_etwEvent.Data[Offset_GroupMask4..Offset_GroupMask5]);
 
                 /// <summary>
                 /// Retrieves the GroupMask5 field.
                 /// </summary>
-                public uint GroupMask5 => BitConverter.ToUInt32(_etwEvent.Data[Offset_GroupMask5..]);
+                public uint GroupMask5 => BitConverter.ToUInt32(_etwEvent.Data[Offset_GroupMask5..Offset_GroupMask6]);
 
                 /// <summary>
                 /// Retrieves the GroupMask6 field.
                 /// </summary>
-                public uint GroupMask6 => BitConverter.ToUInt32(_etwEvent.Data[Offset_GroupMask6..]);
+                public uint GroupMask6 => BitConverter.ToUInt32(_etwEvent.Data[Offset_GroupMask6..Offset_GroupMask7]);
 
                 /// <summary>
                 /// Retrieves the GroupMask7 field.
                 /// </summary>
-                public uint GroupMask7 => BitConverter.ToUInt32(_etwEvent.Data[Offset_GroupMask7..]);
+                public uint GroupMask7 => BitConverter.ToUInt32(_etwEvent.Data[Offset_GroupMask7..Offset_GroupMask8]);
 
                 /// <summary>
                 /// Retrieves the GroupMask8 field.
                 /// </summary>
-                public uint GroupMask8 => BitConverter.ToUInt32(_etwEvent.Data[Offset_GroupMask8..]);
+                public uint GroupMask8 => BitConverter.ToUInt32(_etwEvent.Data[Offset_GroupMask8..Offset_KernelEventVersion]);
 
                 /// <summary>
                 /// Retrieves the KernelEventVersion field.
@@ -3176,6 +3236,12 @@ namespace EtwTools
             {
                 _etwEvent = etwEvent;
             }
+
+            /// <summary>
+            /// Converts a generic ETW event to a EndExtensionEventV2.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator EndExtensionEventV2(EtwEvent etwEvent) => new(etwEvent);
 
             /// <summary>
             /// A data wrapper for a EndExtension event.
@@ -3314,42 +3380,42 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the GroupMask1 field.
                 /// </summary>
-                public uint GroupMask1 => BitConverter.ToUInt32(_etwEvent.Data[Offset_GroupMask1..]);
+                public uint GroupMask1 => BitConverter.ToUInt32(_etwEvent.Data[Offset_GroupMask1..Offset_GroupMask2]);
 
                 /// <summary>
                 /// Retrieves the GroupMask2 field.
                 /// </summary>
-                public uint GroupMask2 => BitConverter.ToUInt32(_etwEvent.Data[Offset_GroupMask2..]);
+                public uint GroupMask2 => BitConverter.ToUInt32(_etwEvent.Data[Offset_GroupMask2..Offset_GroupMask3]);
 
                 /// <summary>
                 /// Retrieves the GroupMask3 field.
                 /// </summary>
-                public uint GroupMask3 => BitConverter.ToUInt32(_etwEvent.Data[Offset_GroupMask3..]);
+                public uint GroupMask3 => BitConverter.ToUInt32(_etwEvent.Data[Offset_GroupMask3..Offset_GroupMask4]);
 
                 /// <summary>
                 /// Retrieves the GroupMask4 field.
                 /// </summary>
-                public uint GroupMask4 => BitConverter.ToUInt32(_etwEvent.Data[Offset_GroupMask4..]);
+                public uint GroupMask4 => BitConverter.ToUInt32(_etwEvent.Data[Offset_GroupMask4..Offset_GroupMask5]);
 
                 /// <summary>
                 /// Retrieves the GroupMask5 field.
                 /// </summary>
-                public uint GroupMask5 => BitConverter.ToUInt32(_etwEvent.Data[Offset_GroupMask5..]);
+                public uint GroupMask5 => BitConverter.ToUInt32(_etwEvent.Data[Offset_GroupMask5..Offset_GroupMask6]);
 
                 /// <summary>
                 /// Retrieves the GroupMask6 field.
                 /// </summary>
-                public uint GroupMask6 => BitConverter.ToUInt32(_etwEvent.Data[Offset_GroupMask6..]);
+                public uint GroupMask6 => BitConverter.ToUInt32(_etwEvent.Data[Offset_GroupMask6..Offset_GroupMask7]);
 
                 /// <summary>
                 /// Retrieves the GroupMask7 field.
                 /// </summary>
-                public uint GroupMask7 => BitConverter.ToUInt32(_etwEvent.Data[Offset_GroupMask7..]);
+                public uint GroupMask7 => BitConverter.ToUInt32(_etwEvent.Data[Offset_GroupMask7..Offset_GroupMask8]);
 
                 /// <summary>
                 /// Retrieves the GroupMask8 field.
                 /// </summary>
-                public uint GroupMask8 => BitConverter.ToUInt32(_etwEvent.Data[Offset_GroupMask8..]);
+                public uint GroupMask8 => BitConverter.ToUInt32(_etwEvent.Data[Offset_GroupMask8..Offset_KernelEventVersion]);
 
                 /// <summary>
                 /// Retrieves the KernelEventVersion field.
@@ -3441,6 +3507,12 @@ namespace EtwTools
             {
                 _etwEvent = etwEvent;
             }
+
+            /// <summary>
+            /// Converts a generic ETW event to a RDCompleteEventV2.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator RDCompleteEventV2(EtwEvent etwEvent) => new(etwEvent);
         }
 
         /// <summary>
@@ -3514,6 +3586,12 @@ namespace EtwTools
             }
 
             /// <summary>
+            /// Converts a generic ETW event to a DbgIdRSDSEventV2.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator DbgIdRSDSEventV2(EtwEvent etwEvent) => new(etwEvent);
+
+            /// <summary>
             /// A data wrapper for a DbgIdRSDS event.
             /// </summary>
             public ref struct DbgIdRSDSData
@@ -3566,12 +3644,12 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the Guid field.
                 /// </summary>
-                public Guid Guid => new(_etwEvent.Data[Offset_Guid..]);
+                public Guid Guid => new(_etwEvent.Data[Offset_Guid..Offset_Age]);
 
                 /// <summary>
                 /// Retrieves the Age field.
                 /// </summary>
-                public uint Age => BitConverter.ToUInt32(_etwEvent.Data[Offset_Age..]);
+                public uint Age => BitConverter.ToUInt32(_etwEvent.Data[Offset_Age..Offset_PdbName]);
 
                 /// <summary>
                 /// Retrieves the PdbName field.
@@ -3662,6 +3740,12 @@ namespace EtwTools
             {
                 _etwEvent = etwEvent;
             }
+
+            /// <summary>
+            /// Converts a generic ETW event to a BuildInfoEventV2.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator BuildInfoEventV2(EtwEvent etwEvent) => new(etwEvent);
 
             /// <summary>
             /// A data wrapper for a BuildInfo event.
@@ -3774,6 +3858,12 @@ namespace EtwTools
             }
 
             /// <summary>
+            /// Converts a generic ETW event to a ProviderBinaryPathEventV2.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator ProviderBinaryPathEventV2(EtwEvent etwEvent) => new(etwEvent);
+
+            /// <summary>
             /// A data wrapper for a ProviderBinaryPath event.
             /// </summary>
             public ref struct ProviderBinaryPathData
@@ -3826,7 +3916,7 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the GuidCount field.
                 /// </summary>
-                public uint GuidCount => BitConverter.ToUInt32(_etwEvent.Data[Offset_GuidCount..]);
+                public uint GuidCount => BitConverter.ToUInt32(_etwEvent.Data[Offset_GuidCount..Offset_Guid]);
 
                 /// <summary>
                 /// Retrieves the Guid field.
@@ -3924,6 +4014,12 @@ namespace EtwTools
             }
 
             /// <summary>
+            /// Converts a generic ETW event to a PartitionInfoExtensionEventV2.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator PartitionInfoExtensionEventV2(EtwEvent etwEvent) => new(etwEvent);
+
+            /// <summary>
             /// A data wrapper for a PartitionInfoExtension event.
             /// </summary>
             public ref struct PartitionInfoExtensionData
@@ -4018,27 +4114,27 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the EventVersion field.
                 /// </summary>
-                public ushort EventVersion => BitConverter.ToUInt16(_etwEvent.Data[Offset_EventVersion..]);
+                public ushort EventVersion => BitConverter.ToUInt16(_etwEvent.Data[Offset_EventVersion..Offset_Reserved]);
 
                 /// <summary>
                 /// Retrieves the Reserved field.
                 /// </summary>
-                public ushort Reserved => BitConverter.ToUInt16(_etwEvent.Data[Offset_Reserved..]);
+                public ushort Reserved => BitConverter.ToUInt16(_etwEvent.Data[Offset_Reserved..Offset_PartitionType]);
 
                 /// <summary>
                 /// Retrieves the PartitionType field.
                 /// </summary>
-                public uint PartitionType => BitConverter.ToUInt32(_etwEvent.Data[Offset_PartitionType..]);
+                public uint PartitionType => BitConverter.ToUInt32(_etwEvent.Data[Offset_PartitionType..Offset_QpcOffsetFromRoot]);
 
                 /// <summary>
                 /// Retrieves the QpcOffsetFromRoot field.
                 /// </summary>
-                public long QpcOffsetFromRoot => BitConverter.ToInt64(_etwEvent.Data[Offset_QpcOffsetFromRoot..]);
+                public long QpcOffsetFromRoot => BitConverter.ToInt64(_etwEvent.Data[Offset_QpcOffsetFromRoot..Offset_PartitionId]);
 
                 /// <summary>
                 /// Retrieves the PartitionId field.
                 /// </summary>
-                public Guid PartitionId => new(_etwEvent.Data[Offset_PartitionId..]);
+                public Guid PartitionId => new(_etwEvent.Data[Offset_PartitionId..Offset_ParentId]);
 
                 /// <summary>
                 /// Retrieves the ParentId field.
@@ -4134,6 +4230,12 @@ namespace EtwTools
             }
 
             /// <summary>
+            /// Converts a generic ETW event to a LastDroppedTimesEventV2.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator LastDroppedTimesEventV2(EtwEvent etwEvent) => new(etwEvent);
+
+            /// <summary>
             /// A data wrapper for a LastDroppedTimes event.
             /// </summary>
             public ref struct LastDroppedTimesData
@@ -4186,12 +4288,12 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the TimeStampCount field.
                 /// </summary>
-                public uint TimeStampCount => BitConverter.ToUInt32(_etwEvent.Data[Offset_TimeStampCount..]);
+                public uint TimeStampCount => BitConverter.ToUInt32(_etwEvent.Data[Offset_TimeStampCount..Offset_Padding]);
 
                 /// <summary>
                 /// Retrieves the Padding field.
                 /// </summary>
-                public uint Padding => BitConverter.ToUInt32(_etwEvent.Data[Offset_Padding..]);
+                public uint Padding => BitConverter.ToUInt32(_etwEvent.Data[Offset_Padding..Offset_TimeStamp]);
 
                 /// <summary>
                 /// Retrieves the TimeStamp field.

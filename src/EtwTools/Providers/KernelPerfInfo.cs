@@ -230,6 +230,12 @@ namespace EtwTools
             }
 
             /// <summary>
+            /// Converts a generic ETW event to a MarkEvent.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator MarkEvent(EtwEvent etwEvent) => new(etwEvent);
+
+            /// <summary>
             /// A data wrapper for a Mark event.
             /// </summary>
             public ref struct MarkData
@@ -268,7 +274,7 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the Message field.
                 /// </summary>
-                public string Message => System.Text.Encoding.ASCII.GetString(_etwEvent.Data[Offset_Message..]);
+                public string Message => System.Text.Encoding.ASCII.GetString(_etwEvent.Data[Offset_Message..Offset_Padding]);
 
                 /// <summary>
                 /// Retrieves the Padding field.
@@ -360,6 +366,12 @@ namespace EtwTools
             }
 
             /// <summary>
+            /// Converts a generic ETW event to a SampleProfEventV1.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator SampleProfEventV1(EtwEvent etwEvent) => new(etwEvent);
+
+            /// <summary>
             /// A data wrapper for a SampleProf event.
             /// </summary>
             public ref struct SampleProfData
@@ -412,12 +424,12 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the InstructionPointer field.
                 /// </summary>
-                public ulong InstructionPointer => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_InstructionPointer..]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_InstructionPointer..]);
+                public ulong InstructionPointer => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_InstructionPointer..Offset_ThreadId]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_InstructionPointer..Offset_ThreadId]);
 
                 /// <summary>
                 /// Retrieves the ThreadId field.
                 /// </summary>
-                public uint ThreadId => BitConverter.ToUInt32(_etwEvent.Data[Offset_ThreadId..]);
+                public uint ThreadId => BitConverter.ToUInt32(_etwEvent.Data[Offset_ThreadId..Offset_Count]);
 
                 /// <summary>
                 /// Retrieves the Count field.
@@ -510,6 +522,12 @@ namespace EtwTools
             }
 
             /// <summary>
+            /// Converts a generic ETW event to a DPCEventV1.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator DPCEventV1(EtwEvent etwEvent) => new(etwEvent);
+
+            /// <summary>
             /// A data wrapper for a DPC event.
             /// </summary>
             public ref struct DPCData
@@ -548,7 +566,7 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the InitialTime field.
                 /// </summary>
-                public ulong InitialTime => BitConverter.ToUInt64(_etwEvent.Data[Offset_InitialTime..]);
+                public ulong InitialTime => BitConverter.ToUInt64(_etwEvent.Data[Offset_InitialTime..Offset_Routine]);
 
                 /// <summary>
                 /// Retrieves the Routine field.
@@ -640,6 +658,12 @@ namespace EtwTools
             }
 
             /// <summary>
+            /// Converts a generic ETW event to a TimerDPCEventV1.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator TimerDPCEventV1(EtwEvent etwEvent) => new(etwEvent);
+
+            /// <summary>
             /// A data wrapper for a TimerDPC event.
             /// </summary>
             public ref struct TimerDPCData
@@ -678,7 +702,7 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the InitialTime field.
                 /// </summary>
-                public ulong InitialTime => BitConverter.ToUInt64(_etwEvent.Data[Offset_InitialTime..]);
+                public ulong InitialTime => BitConverter.ToUInt64(_etwEvent.Data[Offset_InitialTime..Offset_Routine]);
 
                 /// <summary>
                 /// Retrieves the Routine field.
@@ -770,6 +794,12 @@ namespace EtwTools
             }
 
             /// <summary>
+            /// Converts a generic ETW event to a ISREventV1.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator ISREventV1(EtwEvent etwEvent) => new(etwEvent);
+
+            /// <summary>
             /// A data wrapper for a ISR event.
             /// </summary>
             public ref struct ISRData
@@ -822,12 +852,12 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the InitialTime field.
                 /// </summary>
-                public ulong InitialTime => BitConverter.ToUInt64(_etwEvent.Data[Offset_InitialTime..]);
+                public ulong InitialTime => BitConverter.ToUInt64(_etwEvent.Data[Offset_InitialTime..Offset_Routine]);
 
                 /// <summary>
                 /// Retrieves the Routine field.
                 /// </summary>
-                public ulong Routine => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_Routine..]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_Routine..]);
+                public ulong Routine => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_Routine..Offset_ReturnValue]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_Routine..Offset_ReturnValue]);
 
                 /// <summary>
                 /// Retrieves the ReturnValue field.
@@ -920,6 +950,12 @@ namespace EtwTools
             }
 
             /// <summary>
+            /// Converts a generic ETW event to a ISR_PASSEventV1.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator ISR_PASSEventV1(EtwEvent etwEvent) => new(etwEvent);
+
+            /// <summary>
             /// A data wrapper for a ISR_PASS event.
             /// </summary>
             public ref struct ISR_PASSData
@@ -972,12 +1008,12 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the InitialTime field.
                 /// </summary>
-                public ulong InitialTime => BitConverter.ToUInt64(_etwEvent.Data[Offset_InitialTime..]);
+                public ulong InitialTime => BitConverter.ToUInt64(_etwEvent.Data[Offset_InitialTime..Offset_Routine]);
 
                 /// <summary>
                 /// Retrieves the Routine field.
                 /// </summary>
-                public ulong Routine => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_Routine..]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_Routine..]);
+                public ulong Routine => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_Routine..Offset_ReturnValue]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_Routine..Offset_ReturnValue]);
 
                 /// <summary>
                 /// Retrieves the ReturnValue field.
@@ -1070,6 +1106,12 @@ namespace EtwTools
             }
 
             /// <summary>
+            /// Converts a generic ETW event to a SampleProfEventV2.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator SampleProfEventV2(EtwEvent etwEvent) => new(etwEvent);
+
+            /// <summary>
             /// A data wrapper for a SampleProf event.
             /// </summary>
             public ref struct SampleProfData
@@ -1136,17 +1178,17 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the InstructionPointer field.
                 /// </summary>
-                public ulong InstructionPointer => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_InstructionPointer..]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_InstructionPointer..]);
+                public ulong InstructionPointer => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_InstructionPointer..Offset_ThreadId]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_InstructionPointer..Offset_ThreadId]);
 
                 /// <summary>
                 /// Retrieves the ThreadId field.
                 /// </summary>
-                public uint ThreadId => BitConverter.ToUInt32(_etwEvent.Data[Offset_ThreadId..]);
+                public uint ThreadId => BitConverter.ToUInt32(_etwEvent.Data[Offset_ThreadId..Offset_Count]);
 
                 /// <summary>
                 /// Retrieves the Count field.
                 /// </summary>
-                public ushort Count => BitConverter.ToUInt16(_etwEvent.Data[Offset_Count..]);
+                public ushort Count => BitConverter.ToUInt16(_etwEvent.Data[Offset_Count..Offset_Reserved]);
 
                 /// <summary>
                 /// Retrieves the Reserved field.
@@ -1240,6 +1282,12 @@ namespace EtwTools
             }
 
             /// <summary>
+            /// Converts a generic ETW event to a PmcCounterProfEventV2.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator PmcCounterProfEventV2(EtwEvent etwEvent) => new(etwEvent);
+
+            /// <summary>
             /// A data wrapper for a PmcCounterProf event.
             /// </summary>
             public ref struct PmcCounterProfData
@@ -1306,17 +1354,17 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the InstructionPointer field.
                 /// </summary>
-                public ulong InstructionPointer => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_InstructionPointer..]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_InstructionPointer..]);
+                public ulong InstructionPointer => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_InstructionPointer..Offset_ThreadId]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_InstructionPointer..Offset_ThreadId]);
 
                 /// <summary>
                 /// Retrieves the ThreadId field.
                 /// </summary>
-                public uint ThreadId => BitConverter.ToUInt32(_etwEvent.Data[Offset_ThreadId..]);
+                public uint ThreadId => BitConverter.ToUInt32(_etwEvent.Data[Offset_ThreadId..Offset_ProfileSource]);
 
                 /// <summary>
                 /// Retrieves the ProfileSource field.
                 /// </summary>
-                public ushort ProfileSource => BitConverter.ToUInt16(_etwEvent.Data[Offset_ProfileSource..]);
+                public ushort ProfileSource => BitConverter.ToUInt16(_etwEvent.Data[Offset_ProfileSource..Offset_Reserved]);
 
                 /// <summary>
                 /// Retrieves the Reserved field.
@@ -1410,6 +1458,12 @@ namespace EtwTools
             }
 
             /// <summary>
+            /// Converts a generic ETW event to a SetIntervalEventV2.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator SetIntervalEventV2(EtwEvent etwEvent) => new(etwEvent);
+
+            /// <summary>
             /// A data wrapper for a SetInterval event.
             /// </summary>
             public ref struct SetIntervalData
@@ -1462,12 +1516,12 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the Source field.
                 /// </summary>
-                public uint Source => BitConverter.ToUInt32(_etwEvent.Data[Offset_Source..]);
+                public uint Source => BitConverter.ToUInt32(_etwEvent.Data[Offset_Source..Offset_NewInterval]);
 
                 /// <summary>
                 /// Retrieves the NewInterval field.
                 /// </summary>
-                public uint NewInterval => BitConverter.ToUInt32(_etwEvent.Data[Offset_NewInterval..]);
+                public uint NewInterval => BitConverter.ToUInt32(_etwEvent.Data[Offset_NewInterval..Offset_OldInterval]);
 
                 /// <summary>
                 /// Retrieves the OldInterval field.
@@ -1560,6 +1614,12 @@ namespace EtwTools
             }
 
             /// <summary>
+            /// Converts a generic ETW event to a SampledProfileIntervalCollectionStartEventV2.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator SampledProfileIntervalCollectionStartEventV2(EtwEvent etwEvent) => new(etwEvent);
+
+            /// <summary>
             /// A data wrapper for a SampledProfileIntervalCollectionStart event.
             /// </summary>
             public ref struct SampledProfileIntervalCollectionStartData
@@ -1612,12 +1672,12 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the Source field.
                 /// </summary>
-                public uint Source => BitConverter.ToUInt32(_etwEvent.Data[Offset_Source..]);
+                public uint Source => BitConverter.ToUInt32(_etwEvent.Data[Offset_Source..Offset_NewInterval]);
 
                 /// <summary>
                 /// Retrieves the NewInterval field.
                 /// </summary>
-                public uint NewInterval => BitConverter.ToUInt32(_etwEvent.Data[Offset_NewInterval..]);
+                public uint NewInterval => BitConverter.ToUInt32(_etwEvent.Data[Offset_NewInterval..Offset_OldInterval]);
 
                 /// <summary>
                 /// Retrieves the OldInterval field.
@@ -1710,6 +1770,12 @@ namespace EtwTools
             }
 
             /// <summary>
+            /// Converts a generic ETW event to a SampledProfileIntervalCollectionEndEventV2.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator SampledProfileIntervalCollectionEndEventV2(EtwEvent etwEvent) => new(etwEvent);
+
+            /// <summary>
             /// A data wrapper for a SampledProfileIntervalCollectionEnd event.
             /// </summary>
             public ref struct SampledProfileIntervalCollectionEndData
@@ -1762,12 +1828,12 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the Source field.
                 /// </summary>
-                public uint Source => BitConverter.ToUInt32(_etwEvent.Data[Offset_Source..]);
+                public uint Source => BitConverter.ToUInt32(_etwEvent.Data[Offset_Source..Offset_NewInterval]);
 
                 /// <summary>
                 /// Retrieves the NewInterval field.
                 /// </summary>
-                public uint NewInterval => BitConverter.ToUInt32(_etwEvent.Data[Offset_NewInterval..]);
+                public uint NewInterval => BitConverter.ToUInt32(_etwEvent.Data[Offset_NewInterval..Offset_OldInterval]);
 
                 /// <summary>
                 /// Retrieves the OldInterval field.
@@ -1860,6 +1926,12 @@ namespace EtwTools
             }
 
             /// <summary>
+            /// Converts a generic ETW event to a PmcCtrConfigEventV2.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator PmcCtrConfigEventV2(EtwEvent etwEvent) => new(etwEvent);
+
+            /// <summary>
             /// A data wrapper for a PmcCtrConfig event.
             /// </summary>
             public ref struct PmcCtrConfigData
@@ -1898,7 +1970,7 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the CounterCount field.
                 /// </summary>
-                public uint CounterCount => BitConverter.ToUInt32(_etwEvent.Data[Offset_CounterCount..]);
+                public uint CounterCount => BitConverter.ToUInt32(_etwEvent.Data[Offset_CounterCount..Offset_CounterName]);
 
                 /// <summary>
                 /// Retrieves the CounterName field.
@@ -1990,6 +2062,12 @@ namespace EtwTools
             }
 
             /// <summary>
+            /// Converts a generic ETW event to a SpinlockConfigureCollectionStartEventV2.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator SpinlockConfigureCollectionStartEventV2(EtwEvent etwEvent) => new(etwEvent);
+
+            /// <summary>
             /// A data wrapper for a SpinlockConfigureCollectionStart event.
             /// </summary>
             public ref struct SpinlockConfigureCollectionStartData
@@ -2042,12 +2120,12 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the SpinLockSpinThreshold field.
                 /// </summary>
-                public uint SpinLockSpinThreshold => BitConverter.ToUInt32(_etwEvent.Data[Offset_SpinLockSpinThreshold..]);
+                public uint SpinLockSpinThreshold => BitConverter.ToUInt32(_etwEvent.Data[Offset_SpinLockSpinThreshold..Offset_SpinLockContentionSampleRate]);
 
                 /// <summary>
                 /// Retrieves the SpinLockContentionSampleRate field.
                 /// </summary>
-                public uint SpinLockContentionSampleRate => BitConverter.ToUInt32(_etwEvent.Data[Offset_SpinLockContentionSampleRate..]);
+                public uint SpinLockContentionSampleRate => BitConverter.ToUInt32(_etwEvent.Data[Offset_SpinLockContentionSampleRate..Offset_SpinLockAcquireSampleRate]);
 
                 /// <summary>
                 /// Retrieves the SpinLockAcquireSampleRate field.
@@ -2140,6 +2218,12 @@ namespace EtwTools
             }
 
             /// <summary>
+            /// Converts a generic ETW event to a SpinlockConfigureCollectionEndEventV2.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator SpinlockConfigureCollectionEndEventV2(EtwEvent etwEvent) => new(etwEvent);
+
+            /// <summary>
             /// A data wrapper for a SpinlockConfigureCollectionEnd event.
             /// </summary>
             public ref struct SpinlockConfigureCollectionEndData
@@ -2192,12 +2276,12 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the SpinLockSpinThreshold field.
                 /// </summary>
-                public uint SpinLockSpinThreshold => BitConverter.ToUInt32(_etwEvent.Data[Offset_SpinLockSpinThreshold..]);
+                public uint SpinLockSpinThreshold => BitConverter.ToUInt32(_etwEvent.Data[Offset_SpinLockSpinThreshold..Offset_SpinLockContentionSampleRate]);
 
                 /// <summary>
                 /// Retrieves the SpinLockContentionSampleRate field.
                 /// </summary>
-                public uint SpinLockContentionSampleRate => BitConverter.ToUInt32(_etwEvent.Data[Offset_SpinLockContentionSampleRate..]);
+                public uint SpinLockContentionSampleRate => BitConverter.ToUInt32(_etwEvent.Data[Offset_SpinLockContentionSampleRate..Offset_SpinLockAcquireSampleRate]);
 
                 /// <summary>
                 /// Retrieves the SpinLockAcquireSampleRate field.
@@ -2288,6 +2372,12 @@ namespace EtwTools
             {
                 _etwEvent = etwEvent;
             }
+
+            /// <summary>
+            /// Converts a generic ETW event to a SysClEnterEventV2.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator SysClEnterEventV2(EtwEvent etwEvent) => new(etwEvent);
 
             /// <summary>
             /// A data wrapper for a SysClEnter event.
@@ -2400,6 +2490,12 @@ namespace EtwTools
             }
 
             /// <summary>
+            /// Converts a generic ETW event to a SysClExitEventV2.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator SysClExitEventV2(EtwEvent etwEvent) => new(etwEvent);
+
+            /// <summary>
             /// A data wrapper for a SysClExit event.
             /// </summary>
             public ref struct SysClExitData
@@ -2510,6 +2606,12 @@ namespace EtwTools
             }
 
             /// <summary>
+            /// Converts a generic ETW event to a ISREventV2.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator ISREventV2(EtwEvent etwEvent) => new(etwEvent);
+
+            /// <summary>
             /// A data wrapper for a ISR event.
             /// </summary>
             public ref struct ISRData
@@ -2590,12 +2692,12 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the InitialTime field.
                 /// </summary>
-                public ulong InitialTime => BitConverter.ToUInt64(_etwEvent.Data[Offset_InitialTime..]);
+                public ulong InitialTime => BitConverter.ToUInt64(_etwEvent.Data[Offset_InitialTime..Offset_Routine]);
 
                 /// <summary>
                 /// Retrieves the Routine field.
                 /// </summary>
-                public ulong Routine => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_Routine..]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_Routine..]);
+                public ulong Routine => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_Routine..Offset_ReturnValue]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_Routine..Offset_ReturnValue]);
 
                 /// <summary>
                 /// Retrieves the ReturnValue field.
@@ -2605,7 +2707,7 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the Vector field.
                 /// </summary>
-                public ushort Vector => BitConverter.ToUInt16(_etwEvent.Data[Offset_Vector..]);
+                public ushort Vector => BitConverter.ToUInt16(_etwEvent.Data[Offset_Vector..Offset_Reserved]);
 
                 /// <summary>
                 /// Retrieves the Reserved field.
@@ -2700,6 +2802,12 @@ namespace EtwTools
             }
 
             /// <summary>
+            /// Converts a generic ETW event to a ISR_PASSEventV2.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator ISR_PASSEventV2(EtwEvent etwEvent) => new(etwEvent);
+
+            /// <summary>
             /// A data wrapper for a ISR_PASS event.
             /// </summary>
             public ref struct ISR_PASSData
@@ -2780,12 +2888,12 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the InitialTime field.
                 /// </summary>
-                public ulong InitialTime => BitConverter.ToUInt64(_etwEvent.Data[Offset_InitialTime..]);
+                public ulong InitialTime => BitConverter.ToUInt64(_etwEvent.Data[Offset_InitialTime..Offset_Routine]);
 
                 /// <summary>
                 /// Retrieves the Routine field.
                 /// </summary>
-                public ulong Routine => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_Routine..]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_Routine..]);
+                public ulong Routine => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_Routine..Offset_ReturnValue]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_Routine..Offset_ReturnValue]);
 
                 /// <summary>
                 /// Retrieves the ReturnValue field.
@@ -2795,7 +2903,7 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the Vector field.
                 /// </summary>
-                public ushort Vector => BitConverter.ToUInt16(_etwEvent.Data[Offset_Vector..]);
+                public ushort Vector => BitConverter.ToUInt16(_etwEvent.Data[Offset_Vector..Offset_Reserved]);
 
                 /// <summary>
                 /// Retrieves the Reserved field.
@@ -2888,6 +2996,12 @@ namespace EtwTools
             {
                 _etwEvent = etwEvent;
             }
+
+            /// <summary>
+            /// Converts a generic ETW event to a ISR_MSIEventV2.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator ISR_MSIEventV2(EtwEvent etwEvent) => new(etwEvent);
 
             /// <summary>
             /// A data wrapper for a ISR_MSI event.
@@ -2984,12 +3098,12 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the InitialTime field.
                 /// </summary>
-                public ulong InitialTime => BitConverter.ToUInt64(_etwEvent.Data[Offset_InitialTime..]);
+                public ulong InitialTime => BitConverter.ToUInt64(_etwEvent.Data[Offset_InitialTime..Offset_Routine]);
 
                 /// <summary>
                 /// Retrieves the Routine field.
                 /// </summary>
-                public ulong Routine => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_Routine..]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_Routine..]);
+                public ulong Routine => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_Routine..Offset_ReturnValue]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_Routine..Offset_ReturnValue]);
 
                 /// <summary>
                 /// Retrieves the ReturnValue field.
@@ -2999,7 +3113,7 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the Vector field.
                 /// </summary>
-                public ushort Vector => BitConverter.ToUInt16(_etwEvent.Data[Offset_Vector..]);
+                public ushort Vector => BitConverter.ToUInt16(_etwEvent.Data[Offset_Vector..Offset_Reserved]);
 
                 /// <summary>
                 /// Retrieves the Reserved field.
@@ -3098,6 +3212,12 @@ namespace EtwTools
             {
                 _etwEvent = etwEvent;
             }
+
+            /// <summary>
+            /// Converts a generic ETW event to a ISR_UnexpectedEventV2.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator ISR_UnexpectedEventV2(EtwEvent etwEvent) => new(etwEvent);
 
             /// <summary>
             /// A data wrapper for a ISR_Unexpected event.
@@ -3210,6 +3330,12 @@ namespace EtwTools
             }
 
             /// <summary>
+            /// Converts a generic ETW event to a ThreadedDPCEventV2.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator ThreadedDPCEventV2(EtwEvent etwEvent) => new(etwEvent);
+
+            /// <summary>
             /// A data wrapper for a ThreadedDPC event.
             /// </summary>
             public ref struct ThreadedDPCData
@@ -3248,7 +3374,7 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the InitialTime field.
                 /// </summary>
-                public ulong InitialTime => BitConverter.ToUInt64(_etwEvent.Data[Offset_InitialTime..]);
+                public ulong InitialTime => BitConverter.ToUInt64(_etwEvent.Data[Offset_InitialTime..Offset_Routine]);
 
                 /// <summary>
                 /// Retrieves the Routine field.
@@ -3340,6 +3466,12 @@ namespace EtwTools
             }
 
             /// <summary>
+            /// Converts a generic ETW event to a DPCEventV2.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator DPCEventV2(EtwEvent etwEvent) => new(etwEvent);
+
+            /// <summary>
             /// A data wrapper for a DPC event.
             /// </summary>
             public ref struct DPCData
@@ -3378,7 +3510,7 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the InitialTime field.
                 /// </summary>
-                public ulong InitialTime => BitConverter.ToUInt64(_etwEvent.Data[Offset_InitialTime..]);
+                public ulong InitialTime => BitConverter.ToUInt64(_etwEvent.Data[Offset_InitialTime..Offset_Routine]);
 
                 /// <summary>
                 /// Retrieves the Routine field.
@@ -3470,6 +3602,12 @@ namespace EtwTools
             }
 
             /// <summary>
+            /// Converts a generic ETW event to a TimerDPCEventV2.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator TimerDPCEventV2(EtwEvent etwEvent) => new(etwEvent);
+
+            /// <summary>
             /// A data wrapper for a TimerDPC event.
             /// </summary>
             public ref struct TimerDPCData
@@ -3508,7 +3646,7 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the InitialTime field.
                 /// </summary>
-                public ulong InitialTime => BitConverter.ToUInt64(_etwEvent.Data[Offset_InitialTime..]);
+                public ulong InitialTime => BitConverter.ToUInt64(_etwEvent.Data[Offset_InitialTime..Offset_Routine]);
 
                 /// <summary>
                 /// Retrieves the Routine field.
@@ -3600,6 +3738,12 @@ namespace EtwTools
             }
 
             /// <summary>
+            /// Converts a generic ETW event to a IOTimerEventV2.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator IOTimerEventV2(EtwEvent etwEvent) => new(etwEvent);
+
+            /// <summary>
             /// A data wrapper for a IOTimer event.
             /// </summary>
             public ref struct IOTimerData
@@ -3638,7 +3782,7 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the InitialTime field.
                 /// </summary>
-                public ulong InitialTime => BitConverter.ToUInt64(_etwEvent.Data[Offset_InitialTime..]);
+                public ulong InitialTime => BitConverter.ToUInt64(_etwEvent.Data[Offset_InitialTime..Offset_Routine]);
 
                 /// <summary>
                 /// Retrieves the Routine field.
@@ -3728,6 +3872,12 @@ namespace EtwTools
             {
                 _etwEvent = etwEvent;
             }
+
+            /// <summary>
+            /// Converts a generic ETW event to a WdfDPCEventV2.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator WdfDPCEventV2(EtwEvent etwEvent) => new(etwEvent);
 
             /// <summary>
             /// A data wrapper for a WdfDPC event.
@@ -3840,6 +3990,12 @@ namespace EtwTools
             }
 
             /// <summary>
+            /// Converts a generic ETW event to a WdfISREventV2.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator WdfISREventV2(EtwEvent etwEvent) => new(etwEvent);
+
+            /// <summary>
             /// A data wrapper for a WdfISR event.
             /// </summary>
             public ref struct WdfISRData
@@ -3948,6 +4104,12 @@ namespace EtwTools
             {
                 _etwEvent = etwEvent;
             }
+
+            /// <summary>
+            /// Converts a generic ETW event to a WdfPassiveISREventV2.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator WdfPassiveISREventV2(EtwEvent etwEvent) => new(etwEvent);
 
             /// <summary>
             /// A data wrapper for a WdfPassiveISR event.
@@ -4060,6 +4222,12 @@ namespace EtwTools
             }
 
             /// <summary>
+            /// Converts a generic ETW event to a WdfWorkItemEventV2.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator WdfWorkItemEventV2(EtwEvent etwEvent) => new(etwEvent);
+
+            /// <summary>
             /// A data wrapper for a WdfWorkItem event.
             /// </summary>
             public ref struct WdfWorkItemData
@@ -4163,6 +4331,12 @@ namespace EtwTools
             {
                 _etwEvent = etwEvent;
             }
+
+            /// <summary>
+            /// Converts a generic ETW event to a DebuggerEnabledEventV2.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator DebuggerEnabledEventV2(EtwEvent etwEvent) => new(etwEvent);
         }
 
         /// <summary>
@@ -4236,6 +4410,12 @@ namespace EtwTools
             }
 
             /// <summary>
+            /// Converts a generic ETW event to a IoStartTimerEventV2.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator IoStartTimerEventV2(EtwEvent etwEvent) => new(etwEvent);
+
+            /// <summary>
             /// A data wrapper for a IoStartTimer event.
             /// </summary>
             public ref struct IoStartTimerData
@@ -4274,7 +4454,7 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the DeviceObject field.
                 /// </summary>
-                public ulong DeviceObject => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_DeviceObject..]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_DeviceObject..]);
+                public ulong DeviceObject => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_DeviceObject..Offset_TimerRoutine]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_DeviceObject..Offset_TimerRoutine]);
 
                 /// <summary>
                 /// Retrieves the TimerRoutine field.
@@ -4366,6 +4546,12 @@ namespace EtwTools
             }
 
             /// <summary>
+            /// Converts a generic ETW event to a IoStopTimerEventV2.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator IoStopTimerEventV2(EtwEvent etwEvent) => new(etwEvent);
+
+            /// <summary>
             /// A data wrapper for a IoStopTimer event.
             /// </summary>
             public ref struct IoStopTimerData
@@ -4404,7 +4590,7 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the DeviceObject field.
                 /// </summary>
-                public ulong DeviceObject => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_DeviceObject..]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_DeviceObject..]);
+                public ulong DeviceObject => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_DeviceObject..Offset_TimerRoutine]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_DeviceObject..Offset_TimerRoutine]);
 
                 /// <summary>
                 /// Retrieves the TimerRoutine field.
@@ -4494,6 +4680,12 @@ namespace EtwTools
             {
                 _etwEvent = etwEvent;
             }
+
+            /// <summary>
+            /// Converts a generic ETW event to a SetKTimer2EventV2.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator SetKTimer2EventV2(EtwEvent etwEvent) => new(etwEvent);
 
             /// <summary>
             /// A data wrapper for a SetKTimer2 event.
@@ -4604,32 +4796,32 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the DueTime field.
                 /// </summary>
-                public ulong DueTime => BitConverter.ToUInt64(_etwEvent.Data[Offset_DueTime..]);
+                public ulong DueTime => BitConverter.ToUInt64(_etwEvent.Data[Offset_DueTime..Offset_MaximumDueTime]);
 
                 /// <summary>
                 /// Retrieves the MaximumDueTime field.
                 /// </summary>
-                public ulong MaximumDueTime => BitConverter.ToUInt64(_etwEvent.Data[Offset_MaximumDueTime..]);
+                public ulong MaximumDueTime => BitConverter.ToUInt64(_etwEvent.Data[Offset_MaximumDueTime..Offset_Period]);
 
                 /// <summary>
                 /// Retrieves the Period field.
                 /// </summary>
-                public ulong Period => BitConverter.ToUInt64(_etwEvent.Data[Offset_Period..]);
+                public ulong Period => BitConverter.ToUInt64(_etwEvent.Data[Offset_Period..Offset_Timer]);
 
                 /// <summary>
                 /// Retrieves the Timer field.
                 /// </summary>
-                public ulong Timer => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_Timer..]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_Timer..]);
+                public ulong Timer => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_Timer..Offset_Callback]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_Timer..Offset_Callback]);
 
                 /// <summary>
                 /// Retrieves the Callback field.
                 /// </summary>
-                public ulong Callback => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_Callback..]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_Callback..]);
+                public ulong Callback => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_Callback..Offset_CallbackContext]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_Callback..Offset_CallbackContext]);
 
                 /// <summary>
                 /// Retrieves the CallbackContext field.
                 /// </summary>
-                public ulong CallbackContext => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_CallbackContext..]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_CallbackContext..]);
+                public ulong CallbackContext => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_CallbackContext..Offset_TimerFlags]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_CallbackContext..Offset_TimerFlags]);
 
                 /// <summary>
                 /// Retrieves the TimerFlags field.
@@ -4724,6 +4916,12 @@ namespace EtwTools
             {
                 _etwEvent = etwEvent;
             }
+
+            /// <summary>
+            /// Converts a generic ETW event to a ExpireKTimer2EventV2.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator ExpireKTimer2EventV2(EtwEvent etwEvent) => new(etwEvent);
 
             /// <summary>
             /// A data wrapper for a ExpireKTimer2 event.
@@ -4834,32 +5032,32 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the DueTime field.
                 /// </summary>
-                public ulong DueTime => BitConverter.ToUInt64(_etwEvent.Data[Offset_DueTime..]);
+                public ulong DueTime => BitConverter.ToUInt64(_etwEvent.Data[Offset_DueTime..Offset_MaximumDueTime]);
 
                 /// <summary>
                 /// Retrieves the MaximumDueTime field.
                 /// </summary>
-                public ulong MaximumDueTime => BitConverter.ToUInt64(_etwEvent.Data[Offset_MaximumDueTime..]);
+                public ulong MaximumDueTime => BitConverter.ToUInt64(_etwEvent.Data[Offset_MaximumDueTime..Offset_Period]);
 
                 /// <summary>
                 /// Retrieves the Period field.
                 /// </summary>
-                public ulong Period => BitConverter.ToUInt64(_etwEvent.Data[Offset_Period..]);
+                public ulong Period => BitConverter.ToUInt64(_etwEvent.Data[Offset_Period..Offset_Timer]);
 
                 /// <summary>
                 /// Retrieves the Timer field.
                 /// </summary>
-                public ulong Timer => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_Timer..]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_Timer..]);
+                public ulong Timer => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_Timer..Offset_Callback]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_Timer..Offset_Callback]);
 
                 /// <summary>
                 /// Retrieves the Callback field.
                 /// </summary>
-                public ulong Callback => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_Callback..]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_Callback..]);
+                public ulong Callback => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_Callback..Offset_CallbackContext]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_Callback..Offset_CallbackContext]);
 
                 /// <summary>
                 /// Retrieves the CallbackContext field.
                 /// </summary>
-                public ulong CallbackContext => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_CallbackContext..]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_CallbackContext..]);
+                public ulong CallbackContext => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_CallbackContext..Offset_TimerFlags]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_CallbackContext..Offset_TimerFlags]);
 
                 /// <summary>
                 /// Retrieves the TimerFlags field.
@@ -4954,6 +5152,12 @@ namespace EtwTools
             {
                 _etwEvent = etwEvent;
             }
+
+            /// <summary>
+            /// Converts a generic ETW event to a CancelKTimer2EventV2.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator CancelKTimer2EventV2(EtwEvent etwEvent) => new(etwEvent);
 
             /// <summary>
             /// A data wrapper for a CancelKTimer2 event.
@@ -5066,6 +5270,12 @@ namespace EtwTools
             }
 
             /// <summary>
+            /// Converts a generic ETW event to a DisableKTimer2EventV2.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator DisableKTimer2EventV2(EtwEvent etwEvent) => new(etwEvent);
+
+            /// <summary>
             /// A data wrapper for a DisableKTimer2 event.
             /// </summary>
             public ref struct DisableKTimer2Data
@@ -5132,17 +5342,17 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the Timer field.
                 /// </summary>
-                public ulong Timer => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_Timer..]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_Timer..]);
+                public ulong Timer => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_Timer..Offset_DisableCallback]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_Timer..Offset_DisableCallback]);
 
                 /// <summary>
                 /// Retrieves the DisableCallback field.
                 /// </summary>
-                public ulong DisableCallback => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_DisableCallback..]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_DisableCallback..]);
+                public ulong DisableCallback => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_DisableCallback..Offset_DisableContext]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_DisableCallback..Offset_DisableContext]);
 
                 /// <summary>
                 /// Retrieves the DisableContext field.
                 /// </summary>
-                public ulong DisableContext => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_DisableContext..]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_DisableContext..]);
+                public ulong DisableContext => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_DisableContext..Offset_TimerFlags]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_DisableContext..Offset_TimerFlags]);
 
                 /// <summary>
                 /// Retrieves the TimerFlags field.
@@ -5236,6 +5446,12 @@ namespace EtwTools
             }
 
             /// <summary>
+            /// Converts a generic ETW event to a FinalizeKTimer2EventV2.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator FinalizeKTimer2EventV2(EtwEvent etwEvent) => new(etwEvent);
+
+            /// <summary>
             /// A data wrapper for a FinalizeKTimer2 event.
             /// </summary>
             public ref struct FinalizeKTimer2Data
@@ -5288,12 +5504,12 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the Timer field.
                 /// </summary>
-                public ulong Timer => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_Timer..]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_Timer..]);
+                public ulong Timer => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_Timer..Offset_DisableCallback]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_Timer..Offset_DisableCallback]);
 
                 /// <summary>
                 /// Retrieves the DisableCallback field.
                 /// </summary>
-                public ulong DisableCallback => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_DisableCallback..]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_DisableCallback..]);
+                public ulong DisableCallback => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_DisableCallback..Offset_DisableContext]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_DisableCallback..Offset_DisableContext]);
 
                 /// <summary>
                 /// Retrieves the DisableContext field.
@@ -5386,6 +5602,12 @@ namespace EtwTools
             }
 
             /// <summary>
+            /// Converts a generic ETW event to a KernelHypercallEventV2.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator KernelHypercallEventV2(EtwEvent etwEvent) => new(etwEvent);
+
+            /// <summary>
             /// A data wrapper for a KernelHypercall event.
             /// </summary>
             public ref struct KernelHypercallData
@@ -5438,7 +5660,7 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the CallCode field.
                 /// </summary>
-                public uint CallCode => BitConverter.ToUInt32(_etwEvent.Data[Offset_CallCode..]);
+                public uint CallCode => BitConverter.ToUInt32(_etwEvent.Data[Offset_CallCode..Offset_IsFast]);
 
                 /// <summary>
                 /// Retrieves the IsFast field.
@@ -5536,6 +5758,12 @@ namespace EtwTools
             }
 
             /// <summary>
+            /// Converts a generic ETW event to a SampledProfileIntervalCollectionStartEventV3.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator SampledProfileIntervalCollectionStartEventV3(EtwEvent etwEvent) => new(etwEvent);
+
+            /// <summary>
             /// A data wrapper for a SampledProfileIntervalCollectionStart event.
             /// </summary>
             public ref struct SampledProfileIntervalCollectionStartData
@@ -5602,17 +5830,17 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the Source field.
                 /// </summary>
-                public uint Source => BitConverter.ToUInt32(_etwEvent.Data[Offset_Source..]);
+                public uint Source => BitConverter.ToUInt32(_etwEvent.Data[Offset_Source..Offset_NewInterval]);
 
                 /// <summary>
                 /// Retrieves the NewInterval field.
                 /// </summary>
-                public uint NewInterval => BitConverter.ToUInt32(_etwEvent.Data[Offset_NewInterval..]);
+                public uint NewInterval => BitConverter.ToUInt32(_etwEvent.Data[Offset_NewInterval..Offset_OldInterval]);
 
                 /// <summary>
                 /// Retrieves the OldInterval field.
                 /// </summary>
-                public uint OldInterval => BitConverter.ToUInt32(_etwEvent.Data[Offset_OldInterval..]);
+                public uint OldInterval => BitConverter.ToUInt32(_etwEvent.Data[Offset_OldInterval..Offset_SourceName]);
 
                 /// <summary>
                 /// Retrieves the SourceName field.
@@ -5706,6 +5934,12 @@ namespace EtwTools
             }
 
             /// <summary>
+            /// Converts a generic ETW event to a SampledProfileIntervalCollectionEndEventV3.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator SampledProfileIntervalCollectionEndEventV3(EtwEvent etwEvent) => new(etwEvent);
+
+            /// <summary>
             /// A data wrapper for a SampledProfileIntervalCollectionEnd event.
             /// </summary>
             public ref struct SampledProfileIntervalCollectionEndData
@@ -5772,17 +6006,17 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the Source field.
                 /// </summary>
-                public uint Source => BitConverter.ToUInt32(_etwEvent.Data[Offset_Source..]);
+                public uint Source => BitConverter.ToUInt32(_etwEvent.Data[Offset_Source..Offset_NewInterval]);
 
                 /// <summary>
                 /// Retrieves the NewInterval field.
                 /// </summary>
-                public uint NewInterval => BitConverter.ToUInt32(_etwEvent.Data[Offset_NewInterval..]);
+                public uint NewInterval => BitConverter.ToUInt32(_etwEvent.Data[Offset_NewInterval..Offset_OldInterval]);
 
                 /// <summary>
                 /// Retrieves the OldInterval field.
                 /// </summary>
-                public uint OldInterval => BitConverter.ToUInt32(_etwEvent.Data[Offset_OldInterval..]);
+                public uint OldInterval => BitConverter.ToUInt32(_etwEvent.Data[Offset_OldInterval..Offset_SourceName]);
 
                 /// <summary>
                 /// Retrieves the SourceName field.
@@ -5876,6 +6110,12 @@ namespace EtwTools
             }
 
             /// <summary>
+            /// Converts a generic ETW event to a SpinlockConfigureCollectionStartEventV3.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator SpinlockConfigureCollectionStartEventV3(EtwEvent etwEvent) => new(etwEvent);
+
+            /// <summary>
             /// A data wrapper for a SpinlockConfigureCollectionStart event.
             /// </summary>
             public ref struct SpinlockConfigureCollectionStartData
@@ -5942,17 +6182,17 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the SpinLockSpinThreshold field.
                 /// </summary>
-                public uint SpinLockSpinThreshold => BitConverter.ToUInt32(_etwEvent.Data[Offset_SpinLockSpinThreshold..]);
+                public uint SpinLockSpinThreshold => BitConverter.ToUInt32(_etwEvent.Data[Offset_SpinLockSpinThreshold..Offset_SpinLockContentionSampleRate]);
 
                 /// <summary>
                 /// Retrieves the SpinLockContentionSampleRate field.
                 /// </summary>
-                public uint SpinLockContentionSampleRate => BitConverter.ToUInt32(_etwEvent.Data[Offset_SpinLockContentionSampleRate..]);
+                public uint SpinLockContentionSampleRate => BitConverter.ToUInt32(_etwEvent.Data[Offset_SpinLockContentionSampleRate..Offset_SpinLockAcquireSampleRate]);
 
                 /// <summary>
                 /// Retrieves the SpinLockAcquireSampleRate field.
                 /// </summary>
-                public uint SpinLockAcquireSampleRate => BitConverter.ToUInt32(_etwEvent.Data[Offset_SpinLockAcquireSampleRate..]);
+                public uint SpinLockAcquireSampleRate => BitConverter.ToUInt32(_etwEvent.Data[Offset_SpinLockAcquireSampleRate..Offset_SpinLockHoldThreshold]);
 
                 /// <summary>
                 /// Retrieves the SpinLockHoldThreshold field.
@@ -6046,6 +6286,12 @@ namespace EtwTools
             }
 
             /// <summary>
+            /// Converts a generic ETW event to a SpinlockConfigureCollectionEndEventV3.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator SpinlockConfigureCollectionEndEventV3(EtwEvent etwEvent) => new(etwEvent);
+
+            /// <summary>
             /// A data wrapper for a SpinlockConfigureCollectionEnd event.
             /// </summary>
             public ref struct SpinlockConfigureCollectionEndData
@@ -6112,17 +6358,17 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the SpinLockSpinThreshold field.
                 /// </summary>
-                public uint SpinLockSpinThreshold => BitConverter.ToUInt32(_etwEvent.Data[Offset_SpinLockSpinThreshold..]);
+                public uint SpinLockSpinThreshold => BitConverter.ToUInt32(_etwEvent.Data[Offset_SpinLockSpinThreshold..Offset_SpinLockContentionSampleRate]);
 
                 /// <summary>
                 /// Retrieves the SpinLockContentionSampleRate field.
                 /// </summary>
-                public uint SpinLockContentionSampleRate => BitConverter.ToUInt32(_etwEvent.Data[Offset_SpinLockContentionSampleRate..]);
+                public uint SpinLockContentionSampleRate => BitConverter.ToUInt32(_etwEvent.Data[Offset_SpinLockContentionSampleRate..Offset_SpinLockAcquireSampleRate]);
 
                 /// <summary>
                 /// Retrieves the SpinLockAcquireSampleRate field.
                 /// </summary>
-                public uint SpinLockAcquireSampleRate => BitConverter.ToUInt32(_etwEvent.Data[Offset_SpinLockAcquireSampleRate..]);
+                public uint SpinLockAcquireSampleRate => BitConverter.ToUInt32(_etwEvent.Data[Offset_SpinLockAcquireSampleRate..Offset_SpinLockHoldThreshold]);
 
                 /// <summary>
                 /// Retrieves the SpinLockHoldThreshold field.

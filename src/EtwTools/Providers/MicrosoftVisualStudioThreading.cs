@@ -181,6 +181,12 @@ namespace EtwTools
             }
 
             /// <summary>
+            /// Converts a generic ETW event to a EventSourceMessageEvent.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator EventSourceMessageEvent(EtwEvent etwEvent) => new(etwEvent);
+
+            /// <summary>
             /// A data wrapper for a EventSourceMessage event.
             /// </summary>
             public ref struct EventSourceMessageData
@@ -291,6 +297,12 @@ namespace EtwTools
             }
 
             /// <summary>
+            /// Converts a generic ETW event to a CompleteOnCurrentThreadStopEvent.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator CompleteOnCurrentThreadStopEvent(EtwEvent etwEvent) => new(etwEvent);
+
+            /// <summary>
             /// A data wrapper for a CompleteOnCurrentThreadStop event.
             /// </summary>
             public ref struct CompleteOnCurrentThreadStopData
@@ -394,6 +406,12 @@ namespace EtwTools
             {
                 _etwEvent = etwEvent;
             }
+
+            /// <summary>
+            /// Converts a generic ETW event to a WaitSynchronouslyStartEvent.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator WaitSynchronouslyStartEvent(EtwEvent etwEvent) => new(etwEvent);
         }
 
         /// <summary>
@@ -460,6 +478,12 @@ namespace EtwTools
             {
                 _etwEvent = etwEvent;
             }
+
+            /// <summary>
+            /// Converts a generic ETW event to a WaitSynchronouslyStopEvent.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator WaitSynchronouslyStopEvent(EtwEvent etwEvent) => new(etwEvent);
         }
 
         /// <summary>
@@ -531,6 +555,12 @@ namespace EtwTools
             {
                 _etwEvent = etwEvent;
             }
+
+            /// <summary>
+            /// Converts a generic ETW event to a PostExecutionStopEvent.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator PostExecutionStopEvent(EtwEvent etwEvent) => new(etwEvent);
 
             /// <summary>
             /// A data wrapper for a PostExecutionStop event.
@@ -643,6 +673,12 @@ namespace EtwTools
             }
 
             /// <summary>
+            /// Converts a generic ETW event to a CircularJoinableTaskDependencyDetectedEvent.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator CircularJoinableTaskDependencyDetectedEvent(EtwEvent etwEvent) => new(etwEvent);
+
+            /// <summary>
             /// A data wrapper for a CircularJoinableTaskDependencyDetected event.
             /// </summary>
             public ref struct CircularJoinableTaskDependencyDetectedData
@@ -681,7 +717,7 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the InitUnreachableCount field.
                 /// </summary>
-                public int InitUnreachableCount => BitConverter.ToInt32(_etwEvent.Data[Offset_InitUnreachableCount..]);
+                public int InitUnreachableCount => BitConverter.ToInt32(_etwEvent.Data[Offset_InitUnreachableCount..Offset_ReachableCount]);
 
                 /// <summary>
                 /// Retrieves the ReachableCount field.
@@ -773,6 +809,12 @@ namespace EtwTools
             }
 
             /// <summary>
+            /// Converts a generic ETW event to a ReaderWriterLockIssuedEvent.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator ReaderWriterLockIssuedEvent(EtwEvent etwEvent) => new(etwEvent);
+
+            /// <summary>
             /// A data wrapper for a ReaderWriterLockIssued event.
             /// </summary>
             public ref struct ReaderWriterLockIssuedData
@@ -839,17 +881,17 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the LockId field.
                 /// </summary>
-                public int LockId => BitConverter.ToInt32(_etwEvent.Data[Offset_LockId..]);
+                public int LockId => BitConverter.ToInt32(_etwEvent.Data[Offset_LockId..Offset_Kind]);
 
                 /// <summary>
                 /// Retrieves the Kind field.
                 /// </summary>
-                public LockKind Kind => (LockKind)BitConverter.ToUInt32(_etwEvent.Data[Offset_Kind..]);
+                public LockKind Kind => (LockKind)BitConverter.ToUInt32(_etwEvent.Data[Offset_Kind..Offset_IssuedUpgradeableReadCount]);
 
                 /// <summary>
                 /// Retrieves the IssuedUpgradeableReadCount field.
                 /// </summary>
-                public int IssuedUpgradeableReadCount => BitConverter.ToInt32(_etwEvent.Data[Offset_IssuedUpgradeableReadCount..]);
+                public int IssuedUpgradeableReadCount => BitConverter.ToInt32(_etwEvent.Data[Offset_IssuedUpgradeableReadCount..Offset_IssuedReadCount]);
 
                 /// <summary>
                 /// Retrieves the IssuedReadCount field.
@@ -943,6 +985,12 @@ namespace EtwTools
             }
 
             /// <summary>
+            /// Converts a generic ETW event to a WaitReaderWriterLockStartEvent.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator WaitReaderWriterLockStartEvent(EtwEvent etwEvent) => new(etwEvent);
+
+            /// <summary>
             /// A data wrapper for a WaitReaderWriterLockStart event.
             /// </summary>
             public ref struct WaitReaderWriterLockStartData
@@ -1023,22 +1071,22 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the LockId field.
                 /// </summary>
-                public int LockId => BitConverter.ToInt32(_etwEvent.Data[Offset_LockId..]);
+                public int LockId => BitConverter.ToInt32(_etwEvent.Data[Offset_LockId..Offset_Kind]);
 
                 /// <summary>
                 /// Retrieves the Kind field.
                 /// </summary>
-                public LockKind Kind => (LockKind)BitConverter.ToUInt32(_etwEvent.Data[Offset_Kind..]);
+                public LockKind Kind => (LockKind)BitConverter.ToUInt32(_etwEvent.Data[Offset_Kind..Offset_IssuedWriteCount]);
 
                 /// <summary>
                 /// Retrieves the IssuedWriteCount field.
                 /// </summary>
-                public int IssuedWriteCount => BitConverter.ToInt32(_etwEvent.Data[Offset_IssuedWriteCount..]);
+                public int IssuedWriteCount => BitConverter.ToInt32(_etwEvent.Data[Offset_IssuedWriteCount..Offset_IssuedUpgradeableReadCount]);
 
                 /// <summary>
                 /// Retrieves the IssuedUpgradeableReadCount field.
                 /// </summary>
-                public int IssuedUpgradeableReadCount => BitConverter.ToInt32(_etwEvent.Data[Offset_IssuedUpgradeableReadCount..]);
+                public int IssuedUpgradeableReadCount => BitConverter.ToInt32(_etwEvent.Data[Offset_IssuedUpgradeableReadCount..Offset_IssuedReadCount]);
 
                 /// <summary>
                 /// Retrieves the IssuedReadCount field.
@@ -1133,6 +1181,12 @@ namespace EtwTools
             }
 
             /// <summary>
+            /// Converts a generic ETW event to a WaitReaderWriterLockStopEvent.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator WaitReaderWriterLockStopEvent(EtwEvent etwEvent) => new(etwEvent);
+
+            /// <summary>
             /// A data wrapper for a WaitReaderWriterLockStop event.
             /// </summary>
             public ref struct WaitReaderWriterLockStopData
@@ -1171,7 +1225,7 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the LockId field.
                 /// </summary>
-                public int LockId => BitConverter.ToInt32(_etwEvent.Data[Offset_LockId..]);
+                public int LockId => BitConverter.ToInt32(_etwEvent.Data[Offset_LockId..Offset_Kind]);
 
                 /// <summary>
                 /// Retrieves the Kind field.
@@ -1263,6 +1317,12 @@ namespace EtwTools
             }
 
             /// <summary>
+            /// Converts a generic ETW event to a CompleteOnCurrentThreadStartEvent.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator CompleteOnCurrentThreadStartEvent(EtwEvent etwEvent) => new(etwEvent);
+
+            /// <summary>
             /// A data wrapper for a CompleteOnCurrentThreadStart event.
             /// </summary>
             public ref struct CompleteOnCurrentThreadStartData
@@ -1301,7 +1361,7 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the TaskId field.
                 /// </summary>
-                public int TaskId => BitConverter.ToInt32(_etwEvent.Data[Offset_TaskId..]);
+                public int TaskId => BitConverter.ToInt32(_etwEvent.Data[Offset_TaskId..Offset_IsOnMainThread]);
 
                 /// <summary>
                 /// Retrieves the IsOnMainThread field.
@@ -1393,6 +1453,12 @@ namespace EtwTools
             }
 
             /// <summary>
+            /// Converts a generic ETW event to a PostExecutionStartEvent.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator PostExecutionStartEvent(EtwEvent etwEvent) => new(etwEvent);
+
+            /// <summary>
             /// A data wrapper for a PostExecutionStart event.
             /// </summary>
             public ref struct PostExecutionStartData
@@ -1431,7 +1497,7 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the RequestId field.
                 /// </summary>
-                public int RequestId => BitConverter.ToInt32(_etwEvent.Data[Offset_RequestId..]);
+                public int RequestId => BitConverter.ToInt32(_etwEvent.Data[Offset_RequestId..Offset_MainThreadAffinitized]);
 
                 /// <summary>
                 /// Retrieves the MainThreadAffinitized field.

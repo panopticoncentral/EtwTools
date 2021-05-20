@@ -107,6 +107,12 @@ namespace EtwTools
             {
                 _etwEvent = etwEvent;
             }
+
+            /// <summary>
+            /// Converts a generic ETW event to a RTLostEventEvent.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator RTLostEventEvent(EtwEvent etwEvent) => new(etwEvent);
         }
 
         /// <summary>
@@ -173,6 +179,12 @@ namespace EtwTools
             {
                 _etwEvent = etwEvent;
             }
+
+            /// <summary>
+            /// Converts a generic ETW event to a RTLostBufferEvent.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator RTLostBufferEvent(EtwEvent etwEvent) => new(etwEvent);
         }
 
         /// <summary>
@@ -239,6 +251,12 @@ namespace EtwTools
             {
                 _etwEvent = etwEvent;
             }
+
+            /// <summary>
+            /// Converts a generic ETW event to a RTLostFileEvent.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator RTLostFileEvent(EtwEvent etwEvent) => new(etwEvent);
         }
     }
 }

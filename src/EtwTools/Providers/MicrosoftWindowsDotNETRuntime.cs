@@ -593,6 +593,12 @@ namespace EtwTools
             }
 
             /// <summary>
+            /// Converts a generic ETW event to a GCStartEvent.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator GCStartEvent(EtwEvent etwEvent) => new(etwEvent);
+
+            /// <summary>
             /// A data wrapper for a GCStart event.
             /// </summary>
             public ref struct GCStartData
@@ -631,7 +637,7 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the Count field.
                 /// </summary>
-                public uint Count => BitConverter.ToUInt32(_etwEvent.Data[Offset_Count..]);
+                public uint Count => BitConverter.ToUInt32(_etwEvent.Data[Offset_Count..Offset_Reason]);
 
                 /// <summary>
                 /// Retrieves the Reason field.
@@ -723,6 +729,12 @@ namespace EtwTools
             }
 
             /// <summary>
+            /// Converts a generic ETW event to a GCStopEvent.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator GCStopEvent(EtwEvent etwEvent) => new(etwEvent);
+
+            /// <summary>
             /// A data wrapper for a GCStop event.
             /// </summary>
             public ref struct GCStopData
@@ -761,7 +773,7 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the Count field.
                 /// </summary>
-                public uint Count => BitConverter.ToUInt32(_etwEvent.Data[Offset_Count..]);
+                public uint Count => BitConverter.ToUInt32(_etwEvent.Data[Offset_Count..Offset_Depth]);
 
                 /// <summary>
                 /// Retrieves the Depth field.
@@ -846,6 +858,12 @@ namespace EtwTools
             {
                 _etwEvent = etwEvent;
             }
+
+            /// <summary>
+            /// Converts a generic ETW event to a GCRestartEEStopEvent.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator GCRestartEEStopEvent(EtwEvent etwEvent) => new(etwEvent);
         }
 
         /// <summary>
@@ -917,6 +935,12 @@ namespace EtwTools
             {
                 _etwEvent = etwEvent;
             }
+
+            /// <summary>
+            /// Converts a generic ETW event to a GCHeapStatsEvent.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator GCHeapStatsEvent(EtwEvent etwEvent) => new(etwEvent);
 
             /// <summary>
             /// A data wrapper for a GCHeapStats event.
@@ -1111,62 +1135,62 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the GenerationSize0 field.
                 /// </summary>
-                public ulong GenerationSize0 => BitConverter.ToUInt64(_etwEvent.Data[Offset_GenerationSize0..]);
+                public ulong GenerationSize0 => BitConverter.ToUInt64(_etwEvent.Data[Offset_GenerationSize0..Offset_TotalPromotedSize0]);
 
                 /// <summary>
                 /// Retrieves the TotalPromotedSize0 field.
                 /// </summary>
-                public ulong TotalPromotedSize0 => BitConverter.ToUInt64(_etwEvent.Data[Offset_TotalPromotedSize0..]);
+                public ulong TotalPromotedSize0 => BitConverter.ToUInt64(_etwEvent.Data[Offset_TotalPromotedSize0..Offset_GenerationSize1]);
 
                 /// <summary>
                 /// Retrieves the GenerationSize1 field.
                 /// </summary>
-                public ulong GenerationSize1 => BitConverter.ToUInt64(_etwEvent.Data[Offset_GenerationSize1..]);
+                public ulong GenerationSize1 => BitConverter.ToUInt64(_etwEvent.Data[Offset_GenerationSize1..Offset_TotalPromotedSize1]);
 
                 /// <summary>
                 /// Retrieves the TotalPromotedSize1 field.
                 /// </summary>
-                public ulong TotalPromotedSize1 => BitConverter.ToUInt64(_etwEvent.Data[Offset_TotalPromotedSize1..]);
+                public ulong TotalPromotedSize1 => BitConverter.ToUInt64(_etwEvent.Data[Offset_TotalPromotedSize1..Offset_GenerationSize2]);
 
                 /// <summary>
                 /// Retrieves the GenerationSize2 field.
                 /// </summary>
-                public ulong GenerationSize2 => BitConverter.ToUInt64(_etwEvent.Data[Offset_GenerationSize2..]);
+                public ulong GenerationSize2 => BitConverter.ToUInt64(_etwEvent.Data[Offset_GenerationSize2..Offset_TotalPromotedSize2]);
 
                 /// <summary>
                 /// Retrieves the TotalPromotedSize2 field.
                 /// </summary>
-                public ulong TotalPromotedSize2 => BitConverter.ToUInt64(_etwEvent.Data[Offset_TotalPromotedSize2..]);
+                public ulong TotalPromotedSize2 => BitConverter.ToUInt64(_etwEvent.Data[Offset_TotalPromotedSize2..Offset_GenerationSize3]);
 
                 /// <summary>
                 /// Retrieves the GenerationSize3 field.
                 /// </summary>
-                public ulong GenerationSize3 => BitConverter.ToUInt64(_etwEvent.Data[Offset_GenerationSize3..]);
+                public ulong GenerationSize3 => BitConverter.ToUInt64(_etwEvent.Data[Offset_GenerationSize3..Offset_TotalPromotedSize3]);
 
                 /// <summary>
                 /// Retrieves the TotalPromotedSize3 field.
                 /// </summary>
-                public ulong TotalPromotedSize3 => BitConverter.ToUInt64(_etwEvent.Data[Offset_TotalPromotedSize3..]);
+                public ulong TotalPromotedSize3 => BitConverter.ToUInt64(_etwEvent.Data[Offset_TotalPromotedSize3..Offset_FinalizationPromotedSize]);
 
                 /// <summary>
                 /// Retrieves the FinalizationPromotedSize field.
                 /// </summary>
-                public ulong FinalizationPromotedSize => BitConverter.ToUInt64(_etwEvent.Data[Offset_FinalizationPromotedSize..]);
+                public ulong FinalizationPromotedSize => BitConverter.ToUInt64(_etwEvent.Data[Offset_FinalizationPromotedSize..Offset_FinalizationPromotedCount]);
 
                 /// <summary>
                 /// Retrieves the FinalizationPromotedCount field.
                 /// </summary>
-                public ulong FinalizationPromotedCount => BitConverter.ToUInt64(_etwEvent.Data[Offset_FinalizationPromotedCount..]);
+                public ulong FinalizationPromotedCount => BitConverter.ToUInt64(_etwEvent.Data[Offset_FinalizationPromotedCount..Offset_PinnedObjectCount]);
 
                 /// <summary>
                 /// Retrieves the PinnedObjectCount field.
                 /// </summary>
-                public uint PinnedObjectCount => BitConverter.ToUInt32(_etwEvent.Data[Offset_PinnedObjectCount..]);
+                public uint PinnedObjectCount => BitConverter.ToUInt32(_etwEvent.Data[Offset_PinnedObjectCount..Offset_SinkBlockCount]);
 
                 /// <summary>
                 /// Retrieves the SinkBlockCount field.
                 /// </summary>
-                public uint SinkBlockCount => BitConverter.ToUInt32(_etwEvent.Data[Offset_SinkBlockCount..]);
+                public uint SinkBlockCount => BitConverter.ToUInt32(_etwEvent.Data[Offset_SinkBlockCount..Offset_GCHandleCount]);
 
                 /// <summary>
                 /// Retrieves the GCHandleCount field.
@@ -1269,6 +1293,12 @@ namespace EtwTools
             }
 
             /// <summary>
+            /// Converts a generic ETW event to a GCCreateSegmentEvent.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator GCCreateSegmentEvent(EtwEvent etwEvent) => new(etwEvent);
+
+            /// <summary>
             /// A data wrapper for a GCCreateSegment event.
             /// </summary>
             public ref struct GCCreateSegmentData
@@ -1321,12 +1351,12 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the Address field.
                 /// </summary>
-                public ulong Address => BitConverter.ToUInt64(_etwEvent.Data[Offset_Address..]);
+                public ulong Address => BitConverter.ToUInt64(_etwEvent.Data[Offset_Address..Offset_Size]);
 
                 /// <summary>
                 /// Retrieves the Size field.
                 /// </summary>
-                public ulong Size => BitConverter.ToUInt64(_etwEvent.Data[Offset_Size..]);
+                public ulong Size => BitConverter.ToUInt64(_etwEvent.Data[Offset_Size..Offset_Type]);
 
                 /// <summary>
                 /// Retrieves the Type field.
@@ -1417,6 +1447,12 @@ namespace EtwTools
             {
                 _etwEvent = etwEvent;
             }
+
+            /// <summary>
+            /// Converts a generic ETW event to a GCFreeSegmentEvent.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator GCFreeSegmentEvent(EtwEvent etwEvent) => new(etwEvent);
 
             /// <summary>
             /// A data wrapper for a GCFreeSegment event.
@@ -1522,6 +1558,12 @@ namespace EtwTools
             {
                 _etwEvent = etwEvent;
             }
+
+            /// <summary>
+            /// Converts a generic ETW event to a GCRestartEEStartEvent.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator GCRestartEEStartEvent(EtwEvent etwEvent) => new(etwEvent);
         }
 
         /// <summary>
@@ -1588,6 +1630,12 @@ namespace EtwTools
             {
                 _etwEvent = etwEvent;
             }
+
+            /// <summary>
+            /// Converts a generic ETW event to a GCSuspendEEStopEvent.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator GCSuspendEEStopEvent(EtwEvent etwEvent) => new(etwEvent);
         }
 
         /// <summary>
@@ -1659,6 +1707,12 @@ namespace EtwTools
             {
                 _etwEvent = etwEvent;
             }
+
+            /// <summary>
+            /// Converts a generic ETW event to a GCSuspendEEStartEvent.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator GCSuspendEEStartEvent(EtwEvent etwEvent) => new(etwEvent);
 
             /// <summary>
             /// A data wrapper for a GCSuspendEEStart event.
@@ -1771,6 +1825,12 @@ namespace EtwTools
             }
 
             /// <summary>
+            /// Converts a generic ETW event to a GCAllocationTickEvent.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator GCAllocationTickEvent(EtwEvent etwEvent) => new(etwEvent);
+
+            /// <summary>
             /// A data wrapper for a GCAllocationTick event.
             /// </summary>
             public ref struct GCAllocationTickData
@@ -1809,7 +1869,7 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the AllocationAmount field.
                 /// </summary>
-                public uint AllocationAmount => BitConverter.ToUInt32(_etwEvent.Data[Offset_AllocationAmount..]);
+                public uint AllocationAmount => BitConverter.ToUInt32(_etwEvent.Data[Offset_AllocationAmount..Offset_AllocationKind]);
 
                 /// <summary>
                 /// Retrieves the AllocationKind field.
@@ -1894,6 +1954,12 @@ namespace EtwTools
             {
                 _etwEvent = etwEvent;
             }
+
+            /// <summary>
+            /// Converts a generic ETW event to a GCCreateConcurrentThreadEvent.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator GCCreateConcurrentThreadEvent(EtwEvent etwEvent) => new(etwEvent);
         }
 
         /// <summary>
@@ -1960,6 +2026,12 @@ namespace EtwTools
             {
                 _etwEvent = etwEvent;
             }
+
+            /// <summary>
+            /// Converts a generic ETW event to a GCTerminateConcurrentThreadEvent.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator GCTerminateConcurrentThreadEvent(EtwEvent etwEvent) => new(etwEvent);
         }
 
         /// <summary>
@@ -2031,6 +2103,12 @@ namespace EtwTools
             {
                 _etwEvent = etwEvent;
             }
+
+            /// <summary>
+            /// Converts a generic ETW event to a GCFinalizersStopEvent.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator GCFinalizersStopEvent(EtwEvent etwEvent) => new(etwEvent);
 
             /// <summary>
             /// A data wrapper for a GCFinalizersStop event.
@@ -2136,6 +2214,12 @@ namespace EtwTools
             {
                 _etwEvent = etwEvent;
             }
+
+            /// <summary>
+            /// Converts a generic ETW event to a GCFinalizersStartEvent.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator GCFinalizersStartEvent(EtwEvent etwEvent) => new(etwEvent);
         }
 
         /// <summary>
@@ -2209,6 +2293,12 @@ namespace EtwTools
             }
 
             /// <summary>
+            /// Converts a generic ETW event to a TypeBulkTypeEvent.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator TypeBulkTypeEvent(EtwEvent etwEvent) => new(etwEvent);
+
+            /// <summary>
             /// A data wrapper for a TypeBulkType event.
             /// </summary>
             public ref struct TypeBulkTypeData
@@ -2261,12 +2351,12 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the Count field.
                 /// </summary>
-                public uint Count => BitConverter.ToUInt32(_etwEvent.Data[Offset_Count..]);
+                public uint Count => BitConverter.ToUInt32(_etwEvent.Data[Offset_Count..Offset_ClrInstanceID]);
 
                 /// <summary>
                 /// Retrieves the ClrInstanceID field.
                 /// </summary>
-                public ushort ClrInstanceID => BitConverter.ToUInt16(_etwEvent.Data[Offset_ClrInstanceID..]);
+                public ushort ClrInstanceID => BitConverter.ToUInt16(_etwEvent.Data[Offset_ClrInstanceID..Offset_Values]);
 
                 /// <summary>
                 /// Retrieves the Values field.
@@ -2359,6 +2449,12 @@ namespace EtwTools
             }
 
             /// <summary>
+            /// Converts a generic ETW event to a GCBulkRootEdgeEvent.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator GCBulkRootEdgeEvent(EtwEvent etwEvent) => new(etwEvent);
+
+            /// <summary>
             /// A data wrapper for a GCBulkRootEdge event.
             /// </summary>
             public ref struct GCBulkRootEdgeData
@@ -2425,17 +2521,17 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the Index field.
                 /// </summary>
-                public uint Index => BitConverter.ToUInt32(_etwEvent.Data[Offset_Index..]);
+                public uint Index => BitConverter.ToUInt32(_etwEvent.Data[Offset_Index..Offset_Count]);
 
                 /// <summary>
                 /// Retrieves the Count field.
                 /// </summary>
-                public uint Count => BitConverter.ToUInt32(_etwEvent.Data[Offset_Count..]);
+                public uint Count => BitConverter.ToUInt32(_etwEvent.Data[Offset_Count..Offset_ClrInstanceID]);
 
                 /// <summary>
                 /// Retrieves the ClrInstanceID field.
                 /// </summary>
-                public ushort ClrInstanceID => BitConverter.ToUInt16(_etwEvent.Data[Offset_ClrInstanceID..]);
+                public ushort ClrInstanceID => BitConverter.ToUInt16(_etwEvent.Data[Offset_ClrInstanceID..Offset_Values]);
 
                 /// <summary>
                 /// Retrieves the Values field.
@@ -2529,6 +2625,12 @@ namespace EtwTools
             }
 
             /// <summary>
+            /// Converts a generic ETW event to a GCBulkRootConditionalWeakTableElementEdgeEvent.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator GCBulkRootConditionalWeakTableElementEdgeEvent(EtwEvent etwEvent) => new(etwEvent);
+
+            /// <summary>
             /// A data wrapper for a GCBulkRootConditionalWeakTableElementEdge event.
             /// </summary>
             public ref struct GCBulkRootConditionalWeakTableElementEdgeData
@@ -2595,17 +2697,17 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the Index field.
                 /// </summary>
-                public uint Index => BitConverter.ToUInt32(_etwEvent.Data[Offset_Index..]);
+                public uint Index => BitConverter.ToUInt32(_etwEvent.Data[Offset_Index..Offset_Count]);
 
                 /// <summary>
                 /// Retrieves the Count field.
                 /// </summary>
-                public uint Count => BitConverter.ToUInt32(_etwEvent.Data[Offset_Count..]);
+                public uint Count => BitConverter.ToUInt32(_etwEvent.Data[Offset_Count..Offset_ClrInstanceID]);
 
                 /// <summary>
                 /// Retrieves the ClrInstanceID field.
                 /// </summary>
-                public ushort ClrInstanceID => BitConverter.ToUInt16(_etwEvent.Data[Offset_ClrInstanceID..]);
+                public ushort ClrInstanceID => BitConverter.ToUInt16(_etwEvent.Data[Offset_ClrInstanceID..Offset_Values]);
 
                 /// <summary>
                 /// Retrieves the Values field.
@@ -2699,6 +2801,12 @@ namespace EtwTools
             }
 
             /// <summary>
+            /// Converts a generic ETW event to a GCBulkNodeEvent.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator GCBulkNodeEvent(EtwEvent etwEvent) => new(etwEvent);
+
+            /// <summary>
             /// A data wrapper for a GCBulkNode event.
             /// </summary>
             public ref struct GCBulkNodeData
@@ -2765,17 +2873,17 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the Index field.
                 /// </summary>
-                public uint Index => BitConverter.ToUInt32(_etwEvent.Data[Offset_Index..]);
+                public uint Index => BitConverter.ToUInt32(_etwEvent.Data[Offset_Index..Offset_Count]);
 
                 /// <summary>
                 /// Retrieves the Count field.
                 /// </summary>
-                public uint Count => BitConverter.ToUInt32(_etwEvent.Data[Offset_Count..]);
+                public uint Count => BitConverter.ToUInt32(_etwEvent.Data[Offset_Count..Offset_ClrInstanceID]);
 
                 /// <summary>
                 /// Retrieves the ClrInstanceID field.
                 /// </summary>
-                public ushort ClrInstanceID => BitConverter.ToUInt16(_etwEvent.Data[Offset_ClrInstanceID..]);
+                public ushort ClrInstanceID => BitConverter.ToUInt16(_etwEvent.Data[Offset_ClrInstanceID..Offset_Values]);
 
                 /// <summary>
                 /// Retrieves the Values field.
@@ -2869,6 +2977,12 @@ namespace EtwTools
             }
 
             /// <summary>
+            /// Converts a generic ETW event to a GCBulkEdgeEvent.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator GCBulkEdgeEvent(EtwEvent etwEvent) => new(etwEvent);
+
+            /// <summary>
             /// A data wrapper for a GCBulkEdge event.
             /// </summary>
             public ref struct GCBulkEdgeData
@@ -2935,17 +3049,17 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the Index field.
                 /// </summary>
-                public uint Index => BitConverter.ToUInt32(_etwEvent.Data[Offset_Index..]);
+                public uint Index => BitConverter.ToUInt32(_etwEvent.Data[Offset_Index..Offset_Count]);
 
                 /// <summary>
                 /// Retrieves the Count field.
                 /// </summary>
-                public uint Count => BitConverter.ToUInt32(_etwEvent.Data[Offset_Count..]);
+                public uint Count => BitConverter.ToUInt32(_etwEvent.Data[Offset_Count..Offset_ClrInstanceID]);
 
                 /// <summary>
                 /// Retrieves the ClrInstanceID field.
                 /// </summary>
-                public ushort ClrInstanceID => BitConverter.ToUInt16(_etwEvent.Data[Offset_ClrInstanceID..]);
+                public ushort ClrInstanceID => BitConverter.ToUInt16(_etwEvent.Data[Offset_ClrInstanceID..Offset_Values]);
 
                 /// <summary>
                 /// Retrieves the Values field.
@@ -3039,6 +3153,12 @@ namespace EtwTools
             }
 
             /// <summary>
+            /// Converts a generic ETW event to a GCSampledObjectAllocationHighEvent.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator GCSampledObjectAllocationHighEvent(EtwEvent etwEvent) => new(etwEvent);
+
+            /// <summary>
             /// A data wrapper for a GCSampledObjectAllocationHigh event.
             /// </summary>
             public ref struct GCSampledObjectAllocationHighData
@@ -3119,22 +3239,22 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the Address field.
                 /// </summary>
-                public ulong Address => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_Address..]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_Address..]);
+                public ulong Address => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_Address..Offset_TypeID]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_Address..Offset_TypeID]);
 
                 /// <summary>
                 /// Retrieves the TypeID field.
                 /// </summary>
-                public ulong TypeID => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_TypeID..]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_TypeID..]);
+                public ulong TypeID => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_TypeID..Offset_ObjectCountForTypeSample]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_TypeID..Offset_ObjectCountForTypeSample]);
 
                 /// <summary>
                 /// Retrieves the ObjectCountForTypeSample field.
                 /// </summary>
-                public uint ObjectCountForTypeSample => BitConverter.ToUInt32(_etwEvent.Data[Offset_ObjectCountForTypeSample..]);
+                public uint ObjectCountForTypeSample => BitConverter.ToUInt32(_etwEvent.Data[Offset_ObjectCountForTypeSample..Offset_TotalSizeForTypeSample]);
 
                 /// <summary>
                 /// Retrieves the TotalSizeForTypeSample field.
                 /// </summary>
-                public ulong TotalSizeForTypeSample => BitConverter.ToUInt64(_etwEvent.Data[Offset_TotalSizeForTypeSample..]);
+                public ulong TotalSizeForTypeSample => BitConverter.ToUInt64(_etwEvent.Data[Offset_TotalSizeForTypeSample..Offset_ClrInstanceID]);
 
                 /// <summary>
                 /// Retrieves the ClrInstanceID field.
@@ -3229,6 +3349,12 @@ namespace EtwTools
             }
 
             /// <summary>
+            /// Converts a generic ETW event to a GCBulkSurvivingObjectRangesEvent.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator GCBulkSurvivingObjectRangesEvent(EtwEvent etwEvent) => new(etwEvent);
+
+            /// <summary>
             /// A data wrapper for a GCBulkSurvivingObjectRanges event.
             /// </summary>
             public ref struct GCBulkSurvivingObjectRangesData
@@ -3295,17 +3421,17 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the Index field.
                 /// </summary>
-                public uint Index => BitConverter.ToUInt32(_etwEvent.Data[Offset_Index..]);
+                public uint Index => BitConverter.ToUInt32(_etwEvent.Data[Offset_Index..Offset_Count]);
 
                 /// <summary>
                 /// Retrieves the Count field.
                 /// </summary>
-                public uint Count => BitConverter.ToUInt32(_etwEvent.Data[Offset_Count..]);
+                public uint Count => BitConverter.ToUInt32(_etwEvent.Data[Offset_Count..Offset_ClrInstanceID]);
 
                 /// <summary>
                 /// Retrieves the ClrInstanceID field.
                 /// </summary>
-                public ushort ClrInstanceID => BitConverter.ToUInt16(_etwEvent.Data[Offset_ClrInstanceID..]);
+                public ushort ClrInstanceID => BitConverter.ToUInt16(_etwEvent.Data[Offset_ClrInstanceID..Offset_Values]);
 
                 /// <summary>
                 /// Retrieves the Values field.
@@ -3399,6 +3525,12 @@ namespace EtwTools
             }
 
             /// <summary>
+            /// Converts a generic ETW event to a GCBulkMovedObjectRangesEvent.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator GCBulkMovedObjectRangesEvent(EtwEvent etwEvent) => new(etwEvent);
+
+            /// <summary>
             /// A data wrapper for a GCBulkMovedObjectRanges event.
             /// </summary>
             public ref struct GCBulkMovedObjectRangesData
@@ -3465,17 +3597,17 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the Index field.
                 /// </summary>
-                public uint Index => BitConverter.ToUInt32(_etwEvent.Data[Offset_Index..]);
+                public uint Index => BitConverter.ToUInt32(_etwEvent.Data[Offset_Index..Offset_Count]);
 
                 /// <summary>
                 /// Retrieves the Count field.
                 /// </summary>
-                public uint Count => BitConverter.ToUInt32(_etwEvent.Data[Offset_Count..]);
+                public uint Count => BitConverter.ToUInt32(_etwEvent.Data[Offset_Count..Offset_ClrInstanceID]);
 
                 /// <summary>
                 /// Retrieves the ClrInstanceID field.
                 /// </summary>
-                public ushort ClrInstanceID => BitConverter.ToUInt16(_etwEvent.Data[Offset_ClrInstanceID..]);
+                public ushort ClrInstanceID => BitConverter.ToUInt16(_etwEvent.Data[Offset_ClrInstanceID..Offset_Values]);
 
                 /// <summary>
                 /// Retrieves the Values field.
@@ -3569,6 +3701,12 @@ namespace EtwTools
             }
 
             /// <summary>
+            /// Converts a generic ETW event to a GCGenerationRangeEvent.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator GCGenerationRangeEvent(EtwEvent etwEvent) => new(etwEvent);
+
+            /// <summary>
             /// A data wrapper for a GCGenerationRange event.
             /// </summary>
             public ref struct GCGenerationRangeData
@@ -3654,17 +3792,17 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the RangeStart field.
                 /// </summary>
-                public ulong RangeStart => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_RangeStart..]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_RangeStart..]);
+                public ulong RangeStart => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_RangeStart..Offset_RangeUsedLength]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_RangeStart..Offset_RangeUsedLength]);
 
                 /// <summary>
                 /// Retrieves the RangeUsedLength field.
                 /// </summary>
-                public ulong RangeUsedLength => BitConverter.ToUInt64(_etwEvent.Data[Offset_RangeUsedLength..]);
+                public ulong RangeUsedLength => BitConverter.ToUInt64(_etwEvent.Data[Offset_RangeUsedLength..Offset_RangeReservedLength]);
 
                 /// <summary>
                 /// Retrieves the RangeReservedLength field.
                 /// </summary>
-                public ulong RangeReservedLength => BitConverter.ToUInt64(_etwEvent.Data[Offset_RangeReservedLength..]);
+                public ulong RangeReservedLength => BitConverter.ToUInt64(_etwEvent.Data[Offset_RangeReservedLength..Offset_ClrInstanceID]);
 
                 /// <summary>
                 /// Retrieves the ClrInstanceID field.
@@ -3759,6 +3897,12 @@ namespace EtwTools
             }
 
             /// <summary>
+            /// Converts a generic ETW event to a GCMarkStackRootsEvent.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator GCMarkStackRootsEvent(EtwEvent etwEvent) => new(etwEvent);
+
+            /// <summary>
             /// A data wrapper for a GCMarkStackRoots event.
             /// </summary>
             public ref struct GCMarkStackRootsData
@@ -3797,7 +3941,7 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the HeapNum field.
                 /// </summary>
-                public uint HeapNum => BitConverter.ToUInt32(_etwEvent.Data[Offset_HeapNum..]);
+                public uint HeapNum => BitConverter.ToUInt32(_etwEvent.Data[Offset_HeapNum..Offset_ClrInstanceID]);
 
                 /// <summary>
                 /// Retrieves the ClrInstanceID field.
@@ -3889,6 +4033,12 @@ namespace EtwTools
             }
 
             /// <summary>
+            /// Converts a generic ETW event to a GCMarkFinalizeQueueRootsEvent.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator GCMarkFinalizeQueueRootsEvent(EtwEvent etwEvent) => new(etwEvent);
+
+            /// <summary>
             /// A data wrapper for a GCMarkFinalizeQueueRoots event.
             /// </summary>
             public ref struct GCMarkFinalizeQueueRootsData
@@ -3927,7 +4077,7 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the HeapNum field.
                 /// </summary>
-                public uint HeapNum => BitConverter.ToUInt32(_etwEvent.Data[Offset_HeapNum..]);
+                public uint HeapNum => BitConverter.ToUInt32(_etwEvent.Data[Offset_HeapNum..Offset_ClrInstanceID]);
 
                 /// <summary>
                 /// Retrieves the ClrInstanceID field.
@@ -4019,6 +4169,12 @@ namespace EtwTools
             }
 
             /// <summary>
+            /// Converts a generic ETW event to a GCMarkHandlesEvent.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator GCMarkHandlesEvent(EtwEvent etwEvent) => new(etwEvent);
+
+            /// <summary>
             /// A data wrapper for a GCMarkHandles event.
             /// </summary>
             public ref struct GCMarkHandlesData
@@ -4057,7 +4213,7 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the HeapNum field.
                 /// </summary>
-                public uint HeapNum => BitConverter.ToUInt32(_etwEvent.Data[Offset_HeapNum..]);
+                public uint HeapNum => BitConverter.ToUInt32(_etwEvent.Data[Offset_HeapNum..Offset_ClrInstanceID]);
 
                 /// <summary>
                 /// Retrieves the ClrInstanceID field.
@@ -4149,6 +4305,12 @@ namespace EtwTools
             }
 
             /// <summary>
+            /// Converts a generic ETW event to a GCMarkCardsEvent.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator GCMarkCardsEvent(EtwEvent etwEvent) => new(etwEvent);
+
+            /// <summary>
             /// A data wrapper for a GCMarkCards event.
             /// </summary>
             public ref struct GCMarkCardsData
@@ -4187,7 +4349,7 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the HeapNum field.
                 /// </summary>
-                public uint HeapNum => BitConverter.ToUInt32(_etwEvent.Data[Offset_HeapNum..]);
+                public uint HeapNum => BitConverter.ToUInt32(_etwEvent.Data[Offset_HeapNum..Offset_ClrInstanceID]);
 
                 /// <summary>
                 /// Retrieves the ClrInstanceID field.
@@ -4279,6 +4441,12 @@ namespace EtwTools
             }
 
             /// <summary>
+            /// Converts a generic ETW event to a GCFinalizeObjectEvent.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator GCFinalizeObjectEvent(EtwEvent etwEvent) => new(etwEvent);
+
+            /// <summary>
             /// A data wrapper for a GCFinalizeObject event.
             /// </summary>
             public ref struct GCFinalizeObjectData
@@ -4331,12 +4499,12 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the TypeID field.
                 /// </summary>
-                public ulong TypeID => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_TypeID..]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_TypeID..]);
+                public ulong TypeID => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_TypeID..Offset_ObjectID]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_TypeID..Offset_ObjectID]);
 
                 /// <summary>
                 /// Retrieves the ObjectID field.
                 /// </summary>
-                public ulong ObjectID => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_ObjectID..]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_ObjectID..]);
+                public ulong ObjectID => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_ObjectID..Offset_ClrInstanceID]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_ObjectID..Offset_ClrInstanceID]);
 
                 /// <summary>
                 /// Retrieves the ClrInstanceID field.
@@ -4427,6 +4595,12 @@ namespace EtwTools
             {
                 _etwEvent = etwEvent;
             }
+
+            /// <summary>
+            /// Converts a generic ETW event to a GCSetGCHandleEvent.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator GCSetGCHandleEvent(EtwEvent etwEvent) => new(etwEvent);
 
             /// <summary>
             /// A data wrapper for a GCSetGCHandle event.
@@ -4523,27 +4697,27 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the HandleID field.
                 /// </summary>
-                public ulong HandleID => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_HandleID..]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_HandleID..]);
+                public ulong HandleID => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_HandleID..Offset_ObjectID]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_HandleID..Offset_ObjectID]);
 
                 /// <summary>
                 /// Retrieves the ObjectID field.
                 /// </summary>
-                public ulong ObjectID => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_ObjectID..]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_ObjectID..]);
+                public ulong ObjectID => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_ObjectID..Offset_Kind]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_ObjectID..Offset_Kind]);
 
                 /// <summary>
                 /// Retrieves the Kind field.
                 /// </summary>
-                public GCHandleKindMap Kind => (GCHandleKindMap)BitConverter.ToUInt32(_etwEvent.Data[Offset_Kind..]);
+                public GCHandleKindMap Kind => (GCHandleKindMap)BitConverter.ToUInt32(_etwEvent.Data[Offset_Kind..Offset_Generation]);
 
                 /// <summary>
                 /// Retrieves the Generation field.
                 /// </summary>
-                public uint Generation => BitConverter.ToUInt32(_etwEvent.Data[Offset_Generation..]);
+                public uint Generation => BitConverter.ToUInt32(_etwEvent.Data[Offset_Generation..Offset_AppDomainID]);
 
                 /// <summary>
                 /// Retrieves the AppDomainID field.
                 /// </summary>
-                public ulong AppDomainID => BitConverter.ToUInt64(_etwEvent.Data[Offset_AppDomainID..]);
+                public ulong AppDomainID => BitConverter.ToUInt64(_etwEvent.Data[Offset_AppDomainID..Offset_ClrInstanceID]);
 
                 /// <summary>
                 /// Retrieves the ClrInstanceID field.
@@ -4639,6 +4813,12 @@ namespace EtwTools
             }
 
             /// <summary>
+            /// Converts a generic ETW event to a GCDestoryGCHandleEvent.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator GCDestoryGCHandleEvent(EtwEvent etwEvent) => new(etwEvent);
+
+            /// <summary>
             /// A data wrapper for a GCDestoryGCHandle event.
             /// </summary>
             public ref struct GCDestoryGCHandleData
@@ -4677,7 +4857,7 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the HandleID field.
                 /// </summary>
-                public ulong HandleID => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_HandleID..]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_HandleID..]);
+                public ulong HandleID => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_HandleID..Offset_ClrInstanceID]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_HandleID..Offset_ClrInstanceID]);
 
                 /// <summary>
                 /// Retrieves the ClrInstanceID field.
@@ -4769,6 +4949,12 @@ namespace EtwTools
             }
 
             /// <summary>
+            /// Converts a generic ETW event to a GCSampledObjectAllocationLowEvent.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator GCSampledObjectAllocationLowEvent(EtwEvent etwEvent) => new(etwEvent);
+
+            /// <summary>
             /// A data wrapper for a GCSampledObjectAllocationLow event.
             /// </summary>
             public ref struct GCSampledObjectAllocationLowData
@@ -4849,22 +5035,22 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the Address field.
                 /// </summary>
-                public ulong Address => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_Address..]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_Address..]);
+                public ulong Address => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_Address..Offset_TypeID]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_Address..Offset_TypeID]);
 
                 /// <summary>
                 /// Retrieves the TypeID field.
                 /// </summary>
-                public ulong TypeID => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_TypeID..]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_TypeID..]);
+                public ulong TypeID => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_TypeID..Offset_ObjectCountForTypeSample]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_TypeID..Offset_ObjectCountForTypeSample]);
 
                 /// <summary>
                 /// Retrieves the ObjectCountForTypeSample field.
                 /// </summary>
-                public uint ObjectCountForTypeSample => BitConverter.ToUInt32(_etwEvent.Data[Offset_ObjectCountForTypeSample..]);
+                public uint ObjectCountForTypeSample => BitConverter.ToUInt32(_etwEvent.Data[Offset_ObjectCountForTypeSample..Offset_TotalSizeForTypeSample]);
 
                 /// <summary>
                 /// Retrieves the TotalSizeForTypeSample field.
                 /// </summary>
-                public ulong TotalSizeForTypeSample => BitConverter.ToUInt64(_etwEvent.Data[Offset_TotalSizeForTypeSample..]);
+                public ulong TotalSizeForTypeSample => BitConverter.ToUInt64(_etwEvent.Data[Offset_TotalSizeForTypeSample..Offset_ClrInstanceID]);
 
                 /// <summary>
                 /// Retrieves the ClrInstanceID field.
@@ -4959,6 +5145,12 @@ namespace EtwTools
             }
 
             /// <summary>
+            /// Converts a generic ETW event to a GCPinObjectAtGCTimeEvent.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator GCPinObjectAtGCTimeEvent(EtwEvent etwEvent) => new(etwEvent);
+
+            /// <summary>
             /// A data wrapper for a GCPinObjectAtGCTime event.
             /// </summary>
             public ref struct GCPinObjectAtGCTimeData
@@ -5039,22 +5231,22 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the HandleID field.
                 /// </summary>
-                public ulong HandleID => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_HandleID..]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_HandleID..]);
+                public ulong HandleID => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_HandleID..Offset_ObjectID]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_HandleID..Offset_ObjectID]);
 
                 /// <summary>
                 /// Retrieves the ObjectID field.
                 /// </summary>
-                public ulong ObjectID => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_ObjectID..]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_ObjectID..]);
+                public ulong ObjectID => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_ObjectID..Offset_ObjectSize]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_ObjectID..Offset_ObjectSize]);
 
                 /// <summary>
                 /// Retrieves the ObjectSize field.
                 /// </summary>
-                public ulong ObjectSize => BitConverter.ToUInt64(_etwEvent.Data[Offset_ObjectSize..]);
+                public ulong ObjectSize => BitConverter.ToUInt64(_etwEvent.Data[Offset_ObjectSize..Offset_TypeName]);
 
                 /// <summary>
                 /// Retrieves the TypeName field.
                 /// </summary>
-                public string TypeName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_TypeName..]);
+                public string TypeName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_TypeName..Offset_ClrInstanceID]);
 
                 /// <summary>
                 /// Retrieves the ClrInstanceID field.
@@ -5149,6 +5341,12 @@ namespace EtwTools
             }
 
             /// <summary>
+            /// Converts a generic ETW event to a GCTriggeredEvent.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator GCTriggeredEvent(EtwEvent etwEvent) => new(etwEvent);
+
+            /// <summary>
             /// A data wrapper for a GCTriggered event.
             /// </summary>
             public ref struct GCTriggeredData
@@ -5187,7 +5385,7 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the Reason field.
                 /// </summary>
-                public GCReasonMap Reason => (GCReasonMap)BitConverter.ToUInt32(_etwEvent.Data[Offset_Reason..]);
+                public GCReasonMap Reason => (GCReasonMap)BitConverter.ToUInt32(_etwEvent.Data[Offset_Reason..Offset_ClrInstanceID]);
 
                 /// <summary>
                 /// Retrieves the ClrInstanceID field.
@@ -5279,6 +5477,12 @@ namespace EtwTools
             }
 
             /// <summary>
+            /// Converts a generic ETW event to a GCBulkRootCCWEvent.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator GCBulkRootCCWEvent(EtwEvent etwEvent) => new(etwEvent);
+
+            /// <summary>
             /// A data wrapper for a GCBulkRootCCW event.
             /// </summary>
             public ref struct GCBulkRootCCWData
@@ -5331,12 +5535,12 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the Count field.
                 /// </summary>
-                public uint Count => BitConverter.ToUInt32(_etwEvent.Data[Offset_Count..]);
+                public uint Count => BitConverter.ToUInt32(_etwEvent.Data[Offset_Count..Offset_ClrInstanceID]);
 
                 /// <summary>
                 /// Retrieves the ClrInstanceID field.
                 /// </summary>
-                public ushort ClrInstanceID => BitConverter.ToUInt16(_etwEvent.Data[Offset_ClrInstanceID..]);
+                public ushort ClrInstanceID => BitConverter.ToUInt16(_etwEvent.Data[Offset_ClrInstanceID..Offset_Values]);
 
                 /// <summary>
                 /// Retrieves the Values field.
@@ -5429,6 +5633,12 @@ namespace EtwTools
             }
 
             /// <summary>
+            /// Converts a generic ETW event to a GCBulkRCWEvent.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator GCBulkRCWEvent(EtwEvent etwEvent) => new(etwEvent);
+
+            /// <summary>
             /// A data wrapper for a GCBulkRCW event.
             /// </summary>
             public ref struct GCBulkRCWData
@@ -5481,12 +5691,12 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the Count field.
                 /// </summary>
-                public uint Count => BitConverter.ToUInt32(_etwEvent.Data[Offset_Count..]);
+                public uint Count => BitConverter.ToUInt32(_etwEvent.Data[Offset_Count..Offset_ClrInstanceID]);
 
                 /// <summary>
                 /// Retrieves the ClrInstanceID field.
                 /// </summary>
-                public ushort ClrInstanceID => BitConverter.ToUInt16(_etwEvent.Data[Offset_ClrInstanceID..]);
+                public ushort ClrInstanceID => BitConverter.ToUInt16(_etwEvent.Data[Offset_ClrInstanceID..Offset_Values]);
 
                 /// <summary>
                 /// Retrieves the Values field.
@@ -5579,6 +5789,12 @@ namespace EtwTools
             }
 
             /// <summary>
+            /// Converts a generic ETW event to a GCBulkRootStaticVarEvent.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator GCBulkRootStaticVarEvent(EtwEvent etwEvent) => new(etwEvent);
+
+            /// <summary>
             /// A data wrapper for a GCBulkRootStaticVar event.
             /// </summary>
             public ref struct GCBulkRootStaticVarData
@@ -5645,17 +5861,17 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the Count field.
                 /// </summary>
-                public uint Count => BitConverter.ToUInt32(_etwEvent.Data[Offset_Count..]);
+                public uint Count => BitConverter.ToUInt32(_etwEvent.Data[Offset_Count..Offset_AppDomainID]);
 
                 /// <summary>
                 /// Retrieves the AppDomainID field.
                 /// </summary>
-                public ulong AppDomainID => BitConverter.ToUInt64(_etwEvent.Data[Offset_AppDomainID..]);
+                public ulong AppDomainID => BitConverter.ToUInt64(_etwEvent.Data[Offset_AppDomainID..Offset_ClrInstanceID]);
 
                 /// <summary>
                 /// Retrieves the ClrInstanceID field.
                 /// </summary>
-                public ushort ClrInstanceID => BitConverter.ToUInt16(_etwEvent.Data[Offset_ClrInstanceID..]);
+                public ushort ClrInstanceID => BitConverter.ToUInt16(_etwEvent.Data[Offset_ClrInstanceID..Offset_Values]);
 
                 /// <summary>
                 /// Retrieves the Values field.
@@ -5749,6 +5965,12 @@ namespace EtwTools
             }
 
             /// <summary>
+            /// Converts a generic ETW event to a GCDynamicEventEvent.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator GCDynamicEventEvent(EtwEvent etwEvent) => new(etwEvent);
+
+            /// <summary>
             /// A data wrapper for a GCDynamicEvent event.
             /// </summary>
             public ref struct GCDynamicEventData
@@ -5815,12 +6037,12 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the Name field.
                 /// </summary>
-                public string Name => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_Name..]);
+                public string Name => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_Name..Offset_DataSize]);
 
                 /// <summary>
                 /// Retrieves the DataSize field.
                 /// </summary>
-                public uint DataSize => BitConverter.ToUInt32(_etwEvent.Data[Offset_DataSize..]);
+                public uint DataSize => BitConverter.ToUInt32(_etwEvent.Data[Offset_DataSize..Offset_Data]);
 
                 /// <summary>
                 /// Retrieves the Data field.
@@ -5919,6 +6141,12 @@ namespace EtwTools
             }
 
             /// <summary>
+            /// Converts a generic ETW event to a WorkerThreadCreationV2StartEvent.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator WorkerThreadCreationV2StartEvent(EtwEvent etwEvent) => new(etwEvent);
+
+            /// <summary>
             /// A data wrapper for a WorkerThreadCreationV2Start event.
             /// </summary>
             public ref struct WorkerThreadCreationV2StartData
@@ -5957,7 +6185,7 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the WorkerThreadCount field.
                 /// </summary>
-                public uint WorkerThreadCount => BitConverter.ToUInt32(_etwEvent.Data[Offset_WorkerThreadCount..]);
+                public uint WorkerThreadCount => BitConverter.ToUInt32(_etwEvent.Data[Offset_WorkerThreadCount..Offset_RetiredWorkerThreads]);
 
                 /// <summary>
                 /// Retrieves the RetiredWorkerThreads field.
@@ -6049,6 +6277,12 @@ namespace EtwTools
             }
 
             /// <summary>
+            /// Converts a generic ETW event to a WorkerThreadCreationV2StopEvent.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator WorkerThreadCreationV2StopEvent(EtwEvent etwEvent) => new(etwEvent);
+
+            /// <summary>
             /// A data wrapper for a WorkerThreadCreationV2Stop event.
             /// </summary>
             public ref struct WorkerThreadCreationV2StopData
@@ -6087,7 +6321,7 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the WorkerThreadCount field.
                 /// </summary>
-                public uint WorkerThreadCount => BitConverter.ToUInt32(_etwEvent.Data[Offset_WorkerThreadCount..]);
+                public uint WorkerThreadCount => BitConverter.ToUInt32(_etwEvent.Data[Offset_WorkerThreadCount..Offset_RetiredWorkerThreads]);
 
                 /// <summary>
                 /// Retrieves the RetiredWorkerThreads field.
@@ -6179,6 +6413,12 @@ namespace EtwTools
             }
 
             /// <summary>
+            /// Converts a generic ETW event to a WorkerThreadRetirementV2StartEvent.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator WorkerThreadRetirementV2StartEvent(EtwEvent etwEvent) => new(etwEvent);
+
+            /// <summary>
             /// A data wrapper for a WorkerThreadRetirementV2Start event.
             /// </summary>
             public ref struct WorkerThreadRetirementV2StartData
@@ -6217,7 +6457,7 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the WorkerThreadCount field.
                 /// </summary>
-                public uint WorkerThreadCount => BitConverter.ToUInt32(_etwEvent.Data[Offset_WorkerThreadCount..]);
+                public uint WorkerThreadCount => BitConverter.ToUInt32(_etwEvent.Data[Offset_WorkerThreadCount..Offset_RetiredWorkerThreads]);
 
                 /// <summary>
                 /// Retrieves the RetiredWorkerThreads field.
@@ -6309,6 +6549,12 @@ namespace EtwTools
             }
 
             /// <summary>
+            /// Converts a generic ETW event to a WorkerThreadRetirementV2StopEvent.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator WorkerThreadRetirementV2StopEvent(EtwEvent etwEvent) => new(etwEvent);
+
+            /// <summary>
             /// A data wrapper for a WorkerThreadRetirementV2Stop event.
             /// </summary>
             public ref struct WorkerThreadRetirementV2StopData
@@ -6347,7 +6593,7 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the WorkerThreadCount field.
                 /// </summary>
-                public uint WorkerThreadCount => BitConverter.ToUInt32(_etwEvent.Data[Offset_WorkerThreadCount..]);
+                public uint WorkerThreadCount => BitConverter.ToUInt32(_etwEvent.Data[Offset_WorkerThreadCount..Offset_RetiredWorkerThreads]);
 
                 /// <summary>
                 /// Retrieves the RetiredWorkerThreads field.
@@ -6439,6 +6685,12 @@ namespace EtwTools
             }
 
             /// <summary>
+            /// Converts a generic ETW event to a IOThreadCreationStartEvent.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator IOThreadCreationStartEvent(EtwEvent etwEvent) => new(etwEvent);
+
+            /// <summary>
             /// A data wrapper for a IOThreadCreationStart event.
             /// </summary>
             public ref struct IOThreadCreationStartData
@@ -6477,7 +6729,7 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the IOThreadCount field.
                 /// </summary>
-                public uint IOThreadCount => BitConverter.ToUInt32(_etwEvent.Data[Offset_IOThreadCount..]);
+                public uint IOThreadCount => BitConverter.ToUInt32(_etwEvent.Data[Offset_IOThreadCount..Offset_RetiredIOThreads]);
 
                 /// <summary>
                 /// Retrieves the RetiredIOThreads field.
@@ -6569,6 +6821,12 @@ namespace EtwTools
             }
 
             /// <summary>
+            /// Converts a generic ETW event to a IOThreadCreationStopEvent.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator IOThreadCreationStopEvent(EtwEvent etwEvent) => new(etwEvent);
+
+            /// <summary>
             /// A data wrapper for a IOThreadCreationStop event.
             /// </summary>
             public ref struct IOThreadCreationStopData
@@ -6607,7 +6865,7 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the IOThreadCount field.
                 /// </summary>
-                public uint IOThreadCount => BitConverter.ToUInt32(_etwEvent.Data[Offset_IOThreadCount..]);
+                public uint IOThreadCount => BitConverter.ToUInt32(_etwEvent.Data[Offset_IOThreadCount..Offset_RetiredIOThreads]);
 
                 /// <summary>
                 /// Retrieves the RetiredIOThreads field.
@@ -6699,6 +6957,12 @@ namespace EtwTools
             }
 
             /// <summary>
+            /// Converts a generic ETW event to a IOThreadRetirementStartEvent.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator IOThreadRetirementStartEvent(EtwEvent etwEvent) => new(etwEvent);
+
+            /// <summary>
             /// A data wrapper for a IOThreadRetirementStart event.
             /// </summary>
             public ref struct IOThreadRetirementStartData
@@ -6737,7 +7001,7 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the IOThreadCount field.
                 /// </summary>
-                public uint IOThreadCount => BitConverter.ToUInt32(_etwEvent.Data[Offset_IOThreadCount..]);
+                public uint IOThreadCount => BitConverter.ToUInt32(_etwEvent.Data[Offset_IOThreadCount..Offset_RetiredIOThreads]);
 
                 /// <summary>
                 /// Retrieves the RetiredIOThreads field.
@@ -6829,6 +7093,12 @@ namespace EtwTools
             }
 
             /// <summary>
+            /// Converts a generic ETW event to a IOThreadRetirementStopEvent.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator IOThreadRetirementStopEvent(EtwEvent etwEvent) => new(etwEvent);
+
+            /// <summary>
             /// A data wrapper for a IOThreadRetirementStop event.
             /// </summary>
             public ref struct IOThreadRetirementStopData
@@ -6867,7 +7137,7 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the IOThreadCount field.
                 /// </summary>
-                public uint IOThreadCount => BitConverter.ToUInt32(_etwEvent.Data[Offset_IOThreadCount..]);
+                public uint IOThreadCount => BitConverter.ToUInt32(_etwEvent.Data[Offset_IOThreadCount..Offset_RetiredIOThreads]);
 
                 /// <summary>
                 /// Retrieves the RetiredIOThreads field.
@@ -6959,6 +7229,12 @@ namespace EtwTools
             }
 
             /// <summary>
+            /// Converts a generic ETW event to a ThreadpoolSuspensionV2StartEvent.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator ThreadpoolSuspensionV2StartEvent(EtwEvent etwEvent) => new(etwEvent);
+
+            /// <summary>
             /// A data wrapper for a ThreadpoolSuspensionV2Start event.
             /// </summary>
             public ref struct ThreadpoolSuspensionV2StartData
@@ -6997,7 +7273,7 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the ClrThreadID field.
                 /// </summary>
-                public uint ClrThreadID => BitConverter.ToUInt32(_etwEvent.Data[Offset_ClrThreadID..]);
+                public uint ClrThreadID => BitConverter.ToUInt32(_etwEvent.Data[Offset_ClrThreadID..Offset_CpuUtilization]);
 
                 /// <summary>
                 /// Retrieves the CpuUtilization field.
@@ -7089,6 +7365,12 @@ namespace EtwTools
             }
 
             /// <summary>
+            /// Converts a generic ETW event to a ThreadpoolSuspensionV2StopEvent.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator ThreadpoolSuspensionV2StopEvent(EtwEvent etwEvent) => new(etwEvent);
+
+            /// <summary>
             /// A data wrapper for a ThreadpoolSuspensionV2Stop event.
             /// </summary>
             public ref struct ThreadpoolSuspensionV2StopData
@@ -7127,7 +7409,7 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the ClrThreadID field.
                 /// </summary>
-                public uint ClrThreadID => BitConverter.ToUInt32(_etwEvent.Data[Offset_ClrThreadID..]);
+                public uint ClrThreadID => BitConverter.ToUInt32(_etwEvent.Data[Offset_ClrThreadID..Offset_CpuUtilization]);
 
                 /// <summary>
                 /// Retrieves the CpuUtilization field.
@@ -7219,6 +7501,12 @@ namespace EtwTools
             }
 
             /// <summary>
+            /// Converts a generic ETW event to a ThreadPoolWorkerThreadStartEvent.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator ThreadPoolWorkerThreadStartEvent(EtwEvent etwEvent) => new(etwEvent);
+
+            /// <summary>
             /// A data wrapper for a ThreadPoolWorkerThreadStart event.
             /// </summary>
             public ref struct ThreadPoolWorkerThreadStartData
@@ -7271,12 +7559,12 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the ActiveWorkerThreadCount field.
                 /// </summary>
-                public uint ActiveWorkerThreadCount => BitConverter.ToUInt32(_etwEvent.Data[Offset_ActiveWorkerThreadCount..]);
+                public uint ActiveWorkerThreadCount => BitConverter.ToUInt32(_etwEvent.Data[Offset_ActiveWorkerThreadCount..Offset_RetiredWorkerThreadCount]);
 
                 /// <summary>
                 /// Retrieves the RetiredWorkerThreadCount field.
                 /// </summary>
-                public uint RetiredWorkerThreadCount => BitConverter.ToUInt32(_etwEvent.Data[Offset_RetiredWorkerThreadCount..]);
+                public uint RetiredWorkerThreadCount => BitConverter.ToUInt32(_etwEvent.Data[Offset_RetiredWorkerThreadCount..Offset_ClrInstanceID]);
 
                 /// <summary>
                 /// Retrieves the ClrInstanceID field.
@@ -7369,6 +7657,12 @@ namespace EtwTools
             }
 
             /// <summary>
+            /// Converts a generic ETW event to a ThreadPoolWorkerThreadStopEvent.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator ThreadPoolWorkerThreadStopEvent(EtwEvent etwEvent) => new(etwEvent);
+
+            /// <summary>
             /// A data wrapper for a ThreadPoolWorkerThreadStop event.
             /// </summary>
             public ref struct ThreadPoolWorkerThreadStopData
@@ -7421,12 +7715,12 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the ActiveWorkerThreadCount field.
                 /// </summary>
-                public uint ActiveWorkerThreadCount => BitConverter.ToUInt32(_etwEvent.Data[Offset_ActiveWorkerThreadCount..]);
+                public uint ActiveWorkerThreadCount => BitConverter.ToUInt32(_etwEvent.Data[Offset_ActiveWorkerThreadCount..Offset_RetiredWorkerThreadCount]);
 
                 /// <summary>
                 /// Retrieves the RetiredWorkerThreadCount field.
                 /// </summary>
-                public uint RetiredWorkerThreadCount => BitConverter.ToUInt32(_etwEvent.Data[Offset_RetiredWorkerThreadCount..]);
+                public uint RetiredWorkerThreadCount => BitConverter.ToUInt32(_etwEvent.Data[Offset_RetiredWorkerThreadCount..Offset_ClrInstanceID]);
 
                 /// <summary>
                 /// Retrieves the ClrInstanceID field.
@@ -7519,6 +7813,12 @@ namespace EtwTools
             }
 
             /// <summary>
+            /// Converts a generic ETW event to a ThreadPoolWorkerThreadRetirementStartEvent.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator ThreadPoolWorkerThreadRetirementStartEvent(EtwEvent etwEvent) => new(etwEvent);
+
+            /// <summary>
             /// A data wrapper for a ThreadPoolWorkerThreadRetirementStart event.
             /// </summary>
             public ref struct ThreadPoolWorkerThreadRetirementStartData
@@ -7571,12 +7871,12 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the ActiveWorkerThreadCount field.
                 /// </summary>
-                public uint ActiveWorkerThreadCount => BitConverter.ToUInt32(_etwEvent.Data[Offset_ActiveWorkerThreadCount..]);
+                public uint ActiveWorkerThreadCount => BitConverter.ToUInt32(_etwEvent.Data[Offset_ActiveWorkerThreadCount..Offset_RetiredWorkerThreadCount]);
 
                 /// <summary>
                 /// Retrieves the RetiredWorkerThreadCount field.
                 /// </summary>
-                public uint RetiredWorkerThreadCount => BitConverter.ToUInt32(_etwEvent.Data[Offset_RetiredWorkerThreadCount..]);
+                public uint RetiredWorkerThreadCount => BitConverter.ToUInt32(_etwEvent.Data[Offset_RetiredWorkerThreadCount..Offset_ClrInstanceID]);
 
                 /// <summary>
                 /// Retrieves the ClrInstanceID field.
@@ -7669,6 +7969,12 @@ namespace EtwTools
             }
 
             /// <summary>
+            /// Converts a generic ETW event to a ThreadPoolWorkerThreadRetirementStopEvent.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator ThreadPoolWorkerThreadRetirementStopEvent(EtwEvent etwEvent) => new(etwEvent);
+
+            /// <summary>
             /// A data wrapper for a ThreadPoolWorkerThreadRetirementStop event.
             /// </summary>
             public ref struct ThreadPoolWorkerThreadRetirementStopData
@@ -7721,12 +8027,12 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the ActiveWorkerThreadCount field.
                 /// </summary>
-                public uint ActiveWorkerThreadCount => BitConverter.ToUInt32(_etwEvent.Data[Offset_ActiveWorkerThreadCount..]);
+                public uint ActiveWorkerThreadCount => BitConverter.ToUInt32(_etwEvent.Data[Offset_ActiveWorkerThreadCount..Offset_RetiredWorkerThreadCount]);
 
                 /// <summary>
                 /// Retrieves the RetiredWorkerThreadCount field.
                 /// </summary>
-                public uint RetiredWorkerThreadCount => BitConverter.ToUInt32(_etwEvent.Data[Offset_RetiredWorkerThreadCount..]);
+                public uint RetiredWorkerThreadCount => BitConverter.ToUInt32(_etwEvent.Data[Offset_RetiredWorkerThreadCount..Offset_ClrInstanceID]);
 
                 /// <summary>
                 /// Retrieves the ClrInstanceID field.
@@ -7819,6 +8125,12 @@ namespace EtwTools
             }
 
             /// <summary>
+            /// Converts a generic ETW event to a ThreadPoolWorkerThreadAdjustmentSampleEvent.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator ThreadPoolWorkerThreadAdjustmentSampleEvent(EtwEvent etwEvent) => new(etwEvent);
+
+            /// <summary>
             /// A data wrapper for a ThreadPoolWorkerThreadAdjustmentSample event.
             /// </summary>
             public ref struct ThreadPoolWorkerThreadAdjustmentSampleData
@@ -7857,7 +8169,7 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the Throughput field.
                 /// </summary>
-                public double Throughput => BitConverter.ToDouble(_etwEvent.Data[Offset_Throughput..]);
+                public double Throughput => BitConverter.ToDouble(_etwEvent.Data[Offset_Throughput..Offset_ClrInstanceID]);
 
                 /// <summary>
                 /// Retrieves the ClrInstanceID field.
@@ -7949,6 +8261,12 @@ namespace EtwTools
             }
 
             /// <summary>
+            /// Converts a generic ETW event to a ThreadPoolWorkerThreadAdjustmentEvent.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator ThreadPoolWorkerThreadAdjustmentEvent(EtwEvent etwEvent) => new(etwEvent);
+
+            /// <summary>
             /// A data wrapper for a ThreadPoolWorkerThreadAdjustment event.
             /// </summary>
             public ref struct ThreadPoolWorkerThreadAdjustmentData
@@ -8015,17 +8333,17 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the AverageThroughput field.
                 /// </summary>
-                public double AverageThroughput => BitConverter.ToDouble(_etwEvent.Data[Offset_AverageThroughput..]);
+                public double AverageThroughput => BitConverter.ToDouble(_etwEvent.Data[Offset_AverageThroughput..Offset_NewWorkerThreadCount]);
 
                 /// <summary>
                 /// Retrieves the NewWorkerThreadCount field.
                 /// </summary>
-                public uint NewWorkerThreadCount => BitConverter.ToUInt32(_etwEvent.Data[Offset_NewWorkerThreadCount..]);
+                public uint NewWorkerThreadCount => BitConverter.ToUInt32(_etwEvent.Data[Offset_NewWorkerThreadCount..Offset_Reason]);
 
                 /// <summary>
                 /// Retrieves the Reason field.
                 /// </summary>
-                public ThreadAdjustmentReasonMap Reason => (ThreadAdjustmentReasonMap)BitConverter.ToUInt32(_etwEvent.Data[Offset_Reason..]);
+                public ThreadAdjustmentReasonMap Reason => (ThreadAdjustmentReasonMap)BitConverter.ToUInt32(_etwEvent.Data[Offset_Reason..Offset_ClrInstanceID]);
 
                 /// <summary>
                 /// Retrieves the ClrInstanceID field.
@@ -8117,6 +8435,12 @@ namespace EtwTools
             {
                 _etwEvent = etwEvent;
             }
+
+            /// <summary>
+            /// Converts a generic ETW event to a ThreadPoolWorkerThreadAdjustmentStatsEvent.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator ThreadPoolWorkerThreadAdjustmentStatsEvent(EtwEvent etwEvent) => new(etwEvent);
 
             /// <summary>
             /// A data wrapper for a ThreadPoolWorkerThreadAdjustmentStats event.
@@ -8283,52 +8607,52 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the Duration field.
                 /// </summary>
-                public double Duration => BitConverter.ToDouble(_etwEvent.Data[Offset_Duration..]);
+                public double Duration => BitConverter.ToDouble(_etwEvent.Data[Offset_Duration..Offset_Throughput]);
 
                 /// <summary>
                 /// Retrieves the Throughput field.
                 /// </summary>
-                public double Throughput => BitConverter.ToDouble(_etwEvent.Data[Offset_Throughput..]);
+                public double Throughput => BitConverter.ToDouble(_etwEvent.Data[Offset_Throughput..Offset_ThreadWave]);
 
                 /// <summary>
                 /// Retrieves the ThreadWave field.
                 /// </summary>
-                public double ThreadWave => BitConverter.ToDouble(_etwEvent.Data[Offset_ThreadWave..]);
+                public double ThreadWave => BitConverter.ToDouble(_etwEvent.Data[Offset_ThreadWave..Offset_ThroughputWave]);
 
                 /// <summary>
                 /// Retrieves the ThroughputWave field.
                 /// </summary>
-                public double ThroughputWave => BitConverter.ToDouble(_etwEvent.Data[Offset_ThroughputWave..]);
+                public double ThroughputWave => BitConverter.ToDouble(_etwEvent.Data[Offset_ThroughputWave..Offset_ThroughputErrorEstimate]);
 
                 /// <summary>
                 /// Retrieves the ThroughputErrorEstimate field.
                 /// </summary>
-                public double ThroughputErrorEstimate => BitConverter.ToDouble(_etwEvent.Data[Offset_ThroughputErrorEstimate..]);
+                public double ThroughputErrorEstimate => BitConverter.ToDouble(_etwEvent.Data[Offset_ThroughputErrorEstimate..Offset_AverageThroughputErrorEstimate]);
 
                 /// <summary>
                 /// Retrieves the AverageThroughputErrorEstimate field.
                 /// </summary>
-                public double AverageThroughputErrorEstimate => BitConverter.ToDouble(_etwEvent.Data[Offset_AverageThroughputErrorEstimate..]);
+                public double AverageThroughputErrorEstimate => BitConverter.ToDouble(_etwEvent.Data[Offset_AverageThroughputErrorEstimate..Offset_ThroughputRatio]);
 
                 /// <summary>
                 /// Retrieves the ThroughputRatio field.
                 /// </summary>
-                public double ThroughputRatio => BitConverter.ToDouble(_etwEvent.Data[Offset_ThroughputRatio..]);
+                public double ThroughputRatio => BitConverter.ToDouble(_etwEvent.Data[Offset_ThroughputRatio..Offset_Confidence]);
 
                 /// <summary>
                 /// Retrieves the Confidence field.
                 /// </summary>
-                public double Confidence => BitConverter.ToDouble(_etwEvent.Data[Offset_Confidence..]);
+                public double Confidence => BitConverter.ToDouble(_etwEvent.Data[Offset_Confidence..Offset_NewControlSetting]);
 
                 /// <summary>
                 /// Retrieves the NewControlSetting field.
                 /// </summary>
-                public double NewControlSetting => BitConverter.ToDouble(_etwEvent.Data[Offset_NewControlSetting..]);
+                public double NewControlSetting => BitConverter.ToDouble(_etwEvent.Data[Offset_NewControlSetting..Offset_NewThreadWaveMagnitude]);
 
                 /// <summary>
                 /// Retrieves the NewThreadWaveMagnitude field.
                 /// </summary>
-                public ushort NewThreadWaveMagnitude => BitConverter.ToUInt16(_etwEvent.Data[Offset_NewThreadWaveMagnitude..]);
+                public ushort NewThreadWaveMagnitude => BitConverter.ToUInt16(_etwEvent.Data[Offset_NewThreadWaveMagnitude..Offset_ClrInstanceID]);
 
                 /// <summary>
                 /// Retrieves the ClrInstanceID field.
@@ -8429,6 +8753,12 @@ namespace EtwTools
             }
 
             /// <summary>
+            /// Converts a generic ETW event to a ThreadPoolWorkerThreadWaitEvent.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator ThreadPoolWorkerThreadWaitEvent(EtwEvent etwEvent) => new(etwEvent);
+
+            /// <summary>
             /// A data wrapper for a ThreadPoolWorkerThreadWait event.
             /// </summary>
             public ref struct ThreadPoolWorkerThreadWaitData
@@ -8481,12 +8811,12 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the ActiveWorkerThreadCount field.
                 /// </summary>
-                public uint ActiveWorkerThreadCount => BitConverter.ToUInt32(_etwEvent.Data[Offset_ActiveWorkerThreadCount..]);
+                public uint ActiveWorkerThreadCount => BitConverter.ToUInt32(_etwEvent.Data[Offset_ActiveWorkerThreadCount..Offset_RetiredWorkerThreadCount]);
 
                 /// <summary>
                 /// Retrieves the RetiredWorkerThreadCount field.
                 /// </summary>
-                public uint RetiredWorkerThreadCount => BitConverter.ToUInt32(_etwEvent.Data[Offset_RetiredWorkerThreadCount..]);
+                public uint RetiredWorkerThreadCount => BitConverter.ToUInt32(_etwEvent.Data[Offset_RetiredWorkerThreadCount..Offset_ClrInstanceID]);
 
                 /// <summary>
                 /// Retrieves the ClrInstanceID field.
@@ -8579,6 +8909,12 @@ namespace EtwTools
             }
 
             /// <summary>
+            /// Converts a generic ETW event to a ThreadPoolWorkingThreadCountStartEvent.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator ThreadPoolWorkingThreadCountStartEvent(EtwEvent etwEvent) => new(etwEvent);
+
+            /// <summary>
             /// A data wrapper for a ThreadPoolWorkingThreadCountStart event.
             /// </summary>
             public ref struct ThreadPoolWorkingThreadCountStartData
@@ -8617,7 +8953,7 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the Count field.
                 /// </summary>
-                public uint Count => BitConverter.ToUInt32(_etwEvent.Data[Offset_Count..]);
+                public uint Count => BitConverter.ToUInt32(_etwEvent.Data[Offset_Count..Offset_ClrInstanceID]);
 
                 /// <summary>
                 /// Retrieves the ClrInstanceID field.
@@ -8709,6 +9045,12 @@ namespace EtwTools
             }
 
             /// <summary>
+            /// Converts a generic ETW event to a ThreadPoolEnqueueEvent.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator ThreadPoolEnqueueEvent(EtwEvent etwEvent) => new(etwEvent);
+
+            /// <summary>
             /// A data wrapper for a ThreadPoolEnqueue event.
             /// </summary>
             public ref struct ThreadPoolEnqueueData
@@ -8747,7 +9089,7 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the WorkID field.
                 /// </summary>
-                public ulong WorkID => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_WorkID..]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_WorkID..]);
+                public ulong WorkID => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_WorkID..Offset_ClrInstanceID]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_WorkID..Offset_ClrInstanceID]);
 
                 /// <summary>
                 /// Retrieves the ClrInstanceID field.
@@ -8839,6 +9181,12 @@ namespace EtwTools
             }
 
             /// <summary>
+            /// Converts a generic ETW event to a ThreadPoolDequeueEvent.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator ThreadPoolDequeueEvent(EtwEvent etwEvent) => new(etwEvent);
+
+            /// <summary>
             /// A data wrapper for a ThreadPoolDequeue event.
             /// </summary>
             public ref struct ThreadPoolDequeueData
@@ -8877,7 +9225,7 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the WorkID field.
                 /// </summary>
-                public ulong WorkID => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_WorkID..]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_WorkID..]);
+                public ulong WorkID => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_WorkID..Offset_ClrInstanceID]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_WorkID..Offset_ClrInstanceID]);
 
                 /// <summary>
                 /// Retrieves the ClrInstanceID field.
@@ -8969,6 +9317,12 @@ namespace EtwTools
             }
 
             /// <summary>
+            /// Converts a generic ETW event to a ThreadPoolIOEnqueueEvent.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator ThreadPoolIOEnqueueEvent(EtwEvent etwEvent) => new(etwEvent);
+
+            /// <summary>
             /// A data wrapper for a ThreadPoolIOEnqueue event.
             /// </summary>
             public ref struct ThreadPoolIOEnqueueData
@@ -9035,12 +9389,12 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the NativeOverlapped field.
                 /// </summary>
-                public ulong NativeOverlapped => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_NativeOverlapped..]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_NativeOverlapped..]);
+                public ulong NativeOverlapped => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_NativeOverlapped..Offset_Overlapped]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_NativeOverlapped..Offset_Overlapped]);
 
                 /// <summary>
                 /// Retrieves the Overlapped field.
                 /// </summary>
-                public ulong Overlapped => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_Overlapped..]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_Overlapped..]);
+                public ulong Overlapped => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_Overlapped..Offset_MultiDequeues]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_Overlapped..Offset_MultiDequeues]);
 
                 /// <summary>
                 /// Retrieves the MultiDequeues field.
@@ -9139,6 +9493,12 @@ namespace EtwTools
             }
 
             /// <summary>
+            /// Converts a generic ETW event to a ThreadPoolIODequeueEvent.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator ThreadPoolIODequeueEvent(EtwEvent etwEvent) => new(etwEvent);
+
+            /// <summary>
             /// A data wrapper for a ThreadPoolIODequeue event.
             /// </summary>
             public ref struct ThreadPoolIODequeueData
@@ -9191,12 +9551,12 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the NativeOverlapped field.
                 /// </summary>
-                public ulong NativeOverlapped => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_NativeOverlapped..]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_NativeOverlapped..]);
+                public ulong NativeOverlapped => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_NativeOverlapped..Offset_Overlapped]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_NativeOverlapped..Offset_Overlapped]);
 
                 /// <summary>
                 /// Retrieves the Overlapped field.
                 /// </summary>
-                public ulong Overlapped => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_Overlapped..]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_Overlapped..]);
+                public ulong Overlapped => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_Overlapped..Offset_ClrInstanceID]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_Overlapped..Offset_ClrInstanceID]);
 
                 /// <summary>
                 /// Retrieves the ClrInstanceID field.
@@ -9289,6 +9649,12 @@ namespace EtwTools
             }
 
             /// <summary>
+            /// Converts a generic ETW event to a ThreadPoolIOPackEvent.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator ThreadPoolIOPackEvent(EtwEvent etwEvent) => new(etwEvent);
+
+            /// <summary>
             /// A data wrapper for a ThreadPoolIOPack event.
             /// </summary>
             public ref struct ThreadPoolIOPackData
@@ -9341,12 +9707,12 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the NativeOverlapped field.
                 /// </summary>
-                public ulong NativeOverlapped => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_NativeOverlapped..]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_NativeOverlapped..]);
+                public ulong NativeOverlapped => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_NativeOverlapped..Offset_Overlapped]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_NativeOverlapped..Offset_Overlapped]);
 
                 /// <summary>
                 /// Retrieves the Overlapped field.
                 /// </summary>
-                public ulong Overlapped => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_Overlapped..]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_Overlapped..]);
+                public ulong Overlapped => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_Overlapped..Offset_ClrInstanceID]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_Overlapped..Offset_ClrInstanceID]);
 
                 /// <summary>
                 /// Retrieves the ClrInstanceID field.
@@ -9439,6 +9805,12 @@ namespace EtwTools
             }
 
             /// <summary>
+            /// Converts a generic ETW event to a ThreadCreatingEvent.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator ThreadCreatingEvent(EtwEvent etwEvent) => new(etwEvent);
+
+            /// <summary>
             /// A data wrapper for a ThreadCreating event.
             /// </summary>
             public ref struct ThreadCreatingData
@@ -9477,7 +9849,7 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the ID field.
                 /// </summary>
-                public ulong ID => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_ID..]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_ID..]);
+                public ulong ID => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_ID..Offset_ClrInstanceID]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_ID..Offset_ClrInstanceID]);
 
                 /// <summary>
                 /// Retrieves the ClrInstanceID field.
@@ -9569,6 +9941,12 @@ namespace EtwTools
             }
 
             /// <summary>
+            /// Converts a generic ETW event to a ThreadRunningEvent.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator ThreadRunningEvent(EtwEvent etwEvent) => new(etwEvent);
+
+            /// <summary>
             /// A data wrapper for a ThreadRunning event.
             /// </summary>
             public ref struct ThreadRunningData
@@ -9607,7 +9985,7 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the ID field.
                 /// </summary>
-                public ulong ID => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_ID..]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_ID..]);
+                public ulong ID => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_ID..Offset_ClrInstanceID]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_ID..Offset_ClrInstanceID]);
 
                 /// <summary>
                 /// Retrieves the ClrInstanceID field.
@@ -9692,6 +10070,12 @@ namespace EtwTools
             {
                 _etwEvent = etwEvent;
             }
+
+            /// <summary>
+            /// Converts a generic ETW event to a ExceptionStartEvent.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator ExceptionStartEvent(EtwEvent etwEvent) => new(etwEvent);
         }
 
         /// <summary>
@@ -9758,6 +10142,12 @@ namespace EtwTools
             {
                 _etwEvent = etwEvent;
             }
+
+            /// <summary>
+            /// Converts a generic ETW event to a ContentionStartEvent.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator ContentionStartEvent(EtwEvent etwEvent) => new(etwEvent);
         }
 
         /// <summary>
@@ -9829,6 +10219,12 @@ namespace EtwTools
             {
                 _etwEvent = etwEvent;
             }
+
+            /// <summary>
+            /// Converts a generic ETW event to a ClrStackWalkEvent.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator ClrStackWalkEvent(EtwEvent etwEvent) => new(etwEvent);
 
             /// <summary>
             /// A data wrapper for a ClrStackWalk event.
@@ -9911,7 +10307,7 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the ClrInstanceID field.
                 /// </summary>
-                public ushort ClrInstanceID => BitConverter.ToUInt16(_etwEvent.Data[Offset_ClrInstanceID..]);
+                public ushort ClrInstanceID => BitConverter.ToUInt16(_etwEvent.Data[Offset_ClrInstanceID..Offset_Reserved1]);
 
                 /// <summary>
                 /// Retrieves the Reserved1 field.
@@ -9926,7 +10322,7 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the FrameCount field.
                 /// </summary>
-                public uint FrameCount => BitConverter.ToUInt32(_etwEvent.Data[Offset_FrameCount..]);
+                public uint FrameCount => BitConverter.ToUInt32(_etwEvent.Data[Offset_FrameCount..Offset_Stack]);
 
                 /// <summary>
                 /// Retrieves the Stack field.
@@ -10021,6 +10417,12 @@ namespace EtwTools
             }
 
             /// <summary>
+            /// Converts a generic ETW event to a AppDomainResourceManagementMemAllocatedEvent.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator AppDomainResourceManagementMemAllocatedEvent(EtwEvent etwEvent) => new(etwEvent);
+
+            /// <summary>
             /// A data wrapper for a AppDomainResourceManagementMemAllocated event.
             /// </summary>
             public ref struct AppDomainResourceManagementMemAllocatedData
@@ -10073,12 +10475,12 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the AppDomainID field.
                 /// </summary>
-                public ulong AppDomainID => BitConverter.ToUInt64(_etwEvent.Data[Offset_AppDomainID..]);
+                public ulong AppDomainID => BitConverter.ToUInt64(_etwEvent.Data[Offset_AppDomainID..Offset_Allocated]);
 
                 /// <summary>
                 /// Retrieves the Allocated field.
                 /// </summary>
-                public ulong Allocated => BitConverter.ToUInt64(_etwEvent.Data[Offset_Allocated..]);
+                public ulong Allocated => BitConverter.ToUInt64(_etwEvent.Data[Offset_Allocated..Offset_ClrInstanceID]);
 
                 /// <summary>
                 /// Retrieves the ClrInstanceID field.
@@ -10171,6 +10573,12 @@ namespace EtwTools
             }
 
             /// <summary>
+            /// Converts a generic ETW event to a AppDomainResourceManagementMemSurvivedEvent.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator AppDomainResourceManagementMemSurvivedEvent(EtwEvent etwEvent) => new(etwEvent);
+
+            /// <summary>
             /// A data wrapper for a AppDomainResourceManagementMemSurvived event.
             /// </summary>
             public ref struct AppDomainResourceManagementMemSurvivedData
@@ -10237,17 +10645,17 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the AppDomainID field.
                 /// </summary>
-                public ulong AppDomainID => BitConverter.ToUInt64(_etwEvent.Data[Offset_AppDomainID..]);
+                public ulong AppDomainID => BitConverter.ToUInt64(_etwEvent.Data[Offset_AppDomainID..Offset_Survived]);
 
                 /// <summary>
                 /// Retrieves the Survived field.
                 /// </summary>
-                public ulong Survived => BitConverter.ToUInt64(_etwEvent.Data[Offset_Survived..]);
+                public ulong Survived => BitConverter.ToUInt64(_etwEvent.Data[Offset_Survived..Offset_ProcessSurvived]);
 
                 /// <summary>
                 /// Retrieves the ProcessSurvived field.
                 /// </summary>
-                public ulong ProcessSurvived => BitConverter.ToUInt64(_etwEvent.Data[Offset_ProcessSurvived..]);
+                public ulong ProcessSurvived => BitConverter.ToUInt64(_etwEvent.Data[Offset_ProcessSurvived..Offset_ClrInstanceID]);
 
                 /// <summary>
                 /// Retrieves the ClrInstanceID field.
@@ -10339,6 +10747,12 @@ namespace EtwTools
             {
                 _etwEvent = etwEvent;
             }
+
+            /// <summary>
+            /// Converts a generic ETW event to a AppDomainResourceManagementThreadCreatedEvent.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator AppDomainResourceManagementThreadCreatedEvent(EtwEvent etwEvent) => new(etwEvent);
 
             /// <summary>
             /// A data wrapper for a AppDomainResourceManagementThreadCreated event.
@@ -10435,27 +10849,27 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the ManagedThreadID field.
                 /// </summary>
-                public ulong ManagedThreadID => BitConverter.ToUInt64(_etwEvent.Data[Offset_ManagedThreadID..]);
+                public ulong ManagedThreadID => BitConverter.ToUInt64(_etwEvent.Data[Offset_ManagedThreadID..Offset_AppDomainID]);
 
                 /// <summary>
                 /// Retrieves the AppDomainID field.
                 /// </summary>
-                public ulong AppDomainID => BitConverter.ToUInt64(_etwEvent.Data[Offset_AppDomainID..]);
+                public ulong AppDomainID => BitConverter.ToUInt64(_etwEvent.Data[Offset_AppDomainID..Offset_Flags]);
 
                 /// <summary>
                 /// Retrieves the Flags field.
                 /// </summary>
-                public ThreadFlagsMap Flags => (ThreadFlagsMap)BitConverter.ToUInt32(_etwEvent.Data[Offset_Flags..]);
+                public ThreadFlagsMap Flags => (ThreadFlagsMap)BitConverter.ToUInt32(_etwEvent.Data[Offset_Flags..Offset_ManagedThreadIndex]);
 
                 /// <summary>
                 /// Retrieves the ManagedThreadIndex field.
                 /// </summary>
-                public uint ManagedThreadIndex => BitConverter.ToUInt32(_etwEvent.Data[Offset_ManagedThreadIndex..]);
+                public uint ManagedThreadIndex => BitConverter.ToUInt32(_etwEvent.Data[Offset_ManagedThreadIndex..Offset_OSThreadID]);
 
                 /// <summary>
                 /// Retrieves the OSThreadID field.
                 /// </summary>
-                public uint OSThreadID => BitConverter.ToUInt32(_etwEvent.Data[Offset_OSThreadID..]);
+                public uint OSThreadID => BitConverter.ToUInt32(_etwEvent.Data[Offset_OSThreadID..Offset_ClrInstanceID]);
 
                 /// <summary>
                 /// Retrieves the ClrInstanceID field.
@@ -10551,6 +10965,12 @@ namespace EtwTools
             }
 
             /// <summary>
+            /// Converts a generic ETW event to a AppDomainResourceManagementThreadTerminatedEvent.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator AppDomainResourceManagementThreadTerminatedEvent(EtwEvent etwEvent) => new(etwEvent);
+
+            /// <summary>
             /// A data wrapper for a AppDomainResourceManagementThreadTerminated event.
             /// </summary>
             public ref struct AppDomainResourceManagementThreadTerminatedData
@@ -10603,12 +11023,12 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the ManagedThreadID field.
                 /// </summary>
-                public ulong ManagedThreadID => BitConverter.ToUInt64(_etwEvent.Data[Offset_ManagedThreadID..]);
+                public ulong ManagedThreadID => BitConverter.ToUInt64(_etwEvent.Data[Offset_ManagedThreadID..Offset_AppDomainID]);
 
                 /// <summary>
                 /// Retrieves the AppDomainID field.
                 /// </summary>
-                public ulong AppDomainID => BitConverter.ToUInt64(_etwEvent.Data[Offset_AppDomainID..]);
+                public ulong AppDomainID => BitConverter.ToUInt64(_etwEvent.Data[Offset_AppDomainID..Offset_ClrInstanceID]);
 
                 /// <summary>
                 /// Retrieves the ClrInstanceID field.
@@ -10701,6 +11121,12 @@ namespace EtwTools
             }
 
             /// <summary>
+            /// Converts a generic ETW event to a AppDomainResourceManagementDomainEnterEvent.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator AppDomainResourceManagementDomainEnterEvent(EtwEvent etwEvent) => new(etwEvent);
+
+            /// <summary>
             /// A data wrapper for a AppDomainResourceManagementDomainEnter event.
             /// </summary>
             public ref struct AppDomainResourceManagementDomainEnterData
@@ -10753,12 +11179,12 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the ManagedThreadID field.
                 /// </summary>
-                public ulong ManagedThreadID => BitConverter.ToUInt64(_etwEvent.Data[Offset_ManagedThreadID..]);
+                public ulong ManagedThreadID => BitConverter.ToUInt64(_etwEvent.Data[Offset_ManagedThreadID..Offset_AppDomainID]);
 
                 /// <summary>
                 /// Retrieves the AppDomainID field.
                 /// </summary>
-                public ulong AppDomainID => BitConverter.ToUInt64(_etwEvent.Data[Offset_AppDomainID..]);
+                public ulong AppDomainID => BitConverter.ToUInt64(_etwEvent.Data[Offset_AppDomainID..Offset_ClrInstanceID]);
 
                 /// <summary>
                 /// Retrieves the ClrInstanceID field.
@@ -10849,6 +11275,12 @@ namespace EtwTools
             {
                 _etwEvent = etwEvent;
             }
+
+            /// <summary>
+            /// Converts a generic ETW event to a ILStubStubGeneratedEvent.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator ILStubStubGeneratedEvent(EtwEvent etwEvent) => new(etwEvent);
 
             /// <summary>
             /// A data wrapper for a ILStubStubGenerated event.
@@ -11015,52 +11447,52 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the ClrInstanceID field.
                 /// </summary>
-                public ushort ClrInstanceID => BitConverter.ToUInt16(_etwEvent.Data[Offset_ClrInstanceID..]);
+                public ushort ClrInstanceID => BitConverter.ToUInt16(_etwEvent.Data[Offset_ClrInstanceID..Offset_ModuleID]);
 
                 /// <summary>
                 /// Retrieves the ModuleID field.
                 /// </summary>
-                public ulong ModuleID => BitConverter.ToUInt64(_etwEvent.Data[Offset_ModuleID..]);
+                public ulong ModuleID => BitConverter.ToUInt64(_etwEvent.Data[Offset_ModuleID..Offset_StubMethodID]);
 
                 /// <summary>
                 /// Retrieves the StubMethodID field.
                 /// </summary>
-                public ulong StubMethodID => BitConverter.ToUInt64(_etwEvent.Data[Offset_StubMethodID..]);
+                public ulong StubMethodID => BitConverter.ToUInt64(_etwEvent.Data[Offset_StubMethodID..Offset_StubFlags]);
 
                 /// <summary>
                 /// Retrieves the StubFlags field.
                 /// </summary>
-                public ILStubGeneratedFlagsMap StubFlags => (ILStubGeneratedFlagsMap)BitConverter.ToUInt32(_etwEvent.Data[Offset_StubFlags..]);
+                public ILStubGeneratedFlagsMap StubFlags => (ILStubGeneratedFlagsMap)BitConverter.ToUInt32(_etwEvent.Data[Offset_StubFlags..Offset_ManagedInteropMethodToken]);
 
                 /// <summary>
                 /// Retrieves the ManagedInteropMethodToken field.
                 /// </summary>
-                public uint ManagedInteropMethodToken => BitConverter.ToUInt32(_etwEvent.Data[Offset_ManagedInteropMethodToken..]);
+                public uint ManagedInteropMethodToken => BitConverter.ToUInt32(_etwEvent.Data[Offset_ManagedInteropMethodToken..Offset_ManagedInteropMethodNamespace]);
 
                 /// <summary>
                 /// Retrieves the ManagedInteropMethodNamespace field.
                 /// </summary>
-                public string ManagedInteropMethodNamespace => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_ManagedInteropMethodNamespace..]);
+                public string ManagedInteropMethodNamespace => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_ManagedInteropMethodNamespace..Offset_ManagedInteropMethodName]);
 
                 /// <summary>
                 /// Retrieves the ManagedInteropMethodName field.
                 /// </summary>
-                public string ManagedInteropMethodName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_ManagedInteropMethodName..]);
+                public string ManagedInteropMethodName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_ManagedInteropMethodName..Offset_ManagedInteropMethodSignature]);
 
                 /// <summary>
                 /// Retrieves the ManagedInteropMethodSignature field.
                 /// </summary>
-                public string ManagedInteropMethodSignature => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_ManagedInteropMethodSignature..]);
+                public string ManagedInteropMethodSignature => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_ManagedInteropMethodSignature..Offset_NativeMethodSignature]);
 
                 /// <summary>
                 /// Retrieves the NativeMethodSignature field.
                 /// </summary>
-                public string NativeMethodSignature => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_NativeMethodSignature..]);
+                public string NativeMethodSignature => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_NativeMethodSignature..Offset_StubMethodSignature]);
 
                 /// <summary>
                 /// Retrieves the StubMethodSignature field.
                 /// </summary>
-                public string StubMethodSignature => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_StubMethodSignature..]);
+                public string StubMethodSignature => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_StubMethodSignature..Offset_StubMethodILCode]);
 
                 /// <summary>
                 /// Retrieves the StubMethodILCode field.
@@ -11159,6 +11591,12 @@ namespace EtwTools
             {
                 _etwEvent = etwEvent;
             }
+
+            /// <summary>
+            /// Converts a generic ETW event to a ILStubStubCacheHitEvent.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator ILStubStubCacheHitEvent(EtwEvent etwEvent) => new(etwEvent);
 
             /// <summary>
             /// A data wrapper for a ILStubStubCacheHit event.
@@ -11269,32 +11707,32 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the ClrInstanceID field.
                 /// </summary>
-                public ushort ClrInstanceID => BitConverter.ToUInt16(_etwEvent.Data[Offset_ClrInstanceID..]);
+                public ushort ClrInstanceID => BitConverter.ToUInt16(_etwEvent.Data[Offset_ClrInstanceID..Offset_ModuleID]);
 
                 /// <summary>
                 /// Retrieves the ModuleID field.
                 /// </summary>
-                public ulong ModuleID => BitConverter.ToUInt64(_etwEvent.Data[Offset_ModuleID..]);
+                public ulong ModuleID => BitConverter.ToUInt64(_etwEvent.Data[Offset_ModuleID..Offset_StubMethodID]);
 
                 /// <summary>
                 /// Retrieves the StubMethodID field.
                 /// </summary>
-                public ulong StubMethodID => BitConverter.ToUInt64(_etwEvent.Data[Offset_StubMethodID..]);
+                public ulong StubMethodID => BitConverter.ToUInt64(_etwEvent.Data[Offset_StubMethodID..Offset_ManagedInteropMethodToken]);
 
                 /// <summary>
                 /// Retrieves the ManagedInteropMethodToken field.
                 /// </summary>
-                public uint ManagedInteropMethodToken => BitConverter.ToUInt32(_etwEvent.Data[Offset_ManagedInteropMethodToken..]);
+                public uint ManagedInteropMethodToken => BitConverter.ToUInt32(_etwEvent.Data[Offset_ManagedInteropMethodToken..Offset_ManagedInteropMethodNamespace]);
 
                 /// <summary>
                 /// Retrieves the ManagedInteropMethodNamespace field.
                 /// </summary>
-                public string ManagedInteropMethodNamespace => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_ManagedInteropMethodNamespace..]);
+                public string ManagedInteropMethodNamespace => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_ManagedInteropMethodNamespace..Offset_ManagedInteropMethodName]);
 
                 /// <summary>
                 /// Retrieves the ManagedInteropMethodName field.
                 /// </summary>
-                public string ManagedInteropMethodName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_ManagedInteropMethodName..]);
+                public string ManagedInteropMethodName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_ManagedInteropMethodName..Offset_ManagedInteropMethodSignature]);
 
                 /// <summary>
                 /// Retrieves the ManagedInteropMethodSignature field.
@@ -11389,6 +11827,12 @@ namespace EtwTools
             {
                 _etwEvent = etwEvent;
             }
+
+            /// <summary>
+            /// Converts a generic ETW event to a ContentionStopEvent.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator ContentionStopEvent(EtwEvent etwEvent) => new(etwEvent);
 
             /// <summary>
             /// A data wrapper for a ContentionStop event.
@@ -11514,6 +11958,12 @@ namespace EtwTools
             {
                 _etwEvent = etwEvent;
             }
+
+            /// <summary>
+            /// Converts a generic ETW event to a MethodDCStartCompleteV2Event.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator MethodDCStartCompleteV2Event(EtwEvent etwEvent) => new(etwEvent);
         }
 
         /// <summary>
@@ -11580,6 +12030,12 @@ namespace EtwTools
             {
                 _etwEvent = etwEvent;
             }
+
+            /// <summary>
+            /// Converts a generic ETW event to a MethodDCEndCompleteV2Event.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator MethodDCEndCompleteV2Event(EtwEvent etwEvent) => new(etwEvent);
         }
 
         /// <summary>
@@ -11651,6 +12107,12 @@ namespace EtwTools
             {
                 _etwEvent = etwEvent;
             }
+
+            /// <summary>
+            /// Converts a generic ETW event to a MethodDCStartV2Event.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator MethodDCStartV2Event(EtwEvent etwEvent) => new(etwEvent);
 
             /// <summary>
             /// A data wrapper for a MethodDCStartV2 event.
@@ -11747,27 +12209,27 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the MethodID field.
                 /// </summary>
-                public ulong MethodID => BitConverter.ToUInt64(_etwEvent.Data[Offset_MethodID..]);
+                public ulong MethodID => BitConverter.ToUInt64(_etwEvent.Data[Offset_MethodID..Offset_ModuleID]);
 
                 /// <summary>
                 /// Retrieves the ModuleID field.
                 /// </summary>
-                public ulong ModuleID => BitConverter.ToUInt64(_etwEvent.Data[Offset_ModuleID..]);
+                public ulong ModuleID => BitConverter.ToUInt64(_etwEvent.Data[Offset_ModuleID..Offset_MethodStartAddress]);
 
                 /// <summary>
                 /// Retrieves the MethodStartAddress field.
                 /// </summary>
-                public ulong MethodStartAddress => BitConverter.ToUInt64(_etwEvent.Data[Offset_MethodStartAddress..]);
+                public ulong MethodStartAddress => BitConverter.ToUInt64(_etwEvent.Data[Offset_MethodStartAddress..Offset_MethodSize]);
 
                 /// <summary>
                 /// Retrieves the MethodSize field.
                 /// </summary>
-                public uint MethodSize => BitConverter.ToUInt32(_etwEvent.Data[Offset_MethodSize..]);
+                public uint MethodSize => BitConverter.ToUInt32(_etwEvent.Data[Offset_MethodSize..Offset_MethodToken]);
 
                 /// <summary>
                 /// Retrieves the MethodToken field.
                 /// </summary>
-                public uint MethodToken => BitConverter.ToUInt32(_etwEvent.Data[Offset_MethodToken..]);
+                public uint MethodToken => BitConverter.ToUInt32(_etwEvent.Data[Offset_MethodToken..Offset_MethodFlags]);
 
                 /// <summary>
                 /// Retrieves the MethodFlags field.
@@ -11861,6 +12323,12 @@ namespace EtwTools
             {
                 _etwEvent = etwEvent;
             }
+
+            /// <summary>
+            /// Converts a generic ETW event to a MethodDCStopV2Event.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator MethodDCStopV2Event(EtwEvent etwEvent) => new(etwEvent);
 
             /// <summary>
             /// A data wrapper for a MethodDCStopV2 event.
@@ -11957,27 +12425,27 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the MethodID field.
                 /// </summary>
-                public ulong MethodID => BitConverter.ToUInt64(_etwEvent.Data[Offset_MethodID..]);
+                public ulong MethodID => BitConverter.ToUInt64(_etwEvent.Data[Offset_MethodID..Offset_ModuleID]);
 
                 /// <summary>
                 /// Retrieves the ModuleID field.
                 /// </summary>
-                public ulong ModuleID => BitConverter.ToUInt64(_etwEvent.Data[Offset_ModuleID..]);
+                public ulong ModuleID => BitConverter.ToUInt64(_etwEvent.Data[Offset_ModuleID..Offset_MethodStartAddress]);
 
                 /// <summary>
                 /// Retrieves the MethodStartAddress field.
                 /// </summary>
-                public ulong MethodStartAddress => BitConverter.ToUInt64(_etwEvent.Data[Offset_MethodStartAddress..]);
+                public ulong MethodStartAddress => BitConverter.ToUInt64(_etwEvent.Data[Offset_MethodStartAddress..Offset_MethodSize]);
 
                 /// <summary>
                 /// Retrieves the MethodSize field.
                 /// </summary>
-                public uint MethodSize => BitConverter.ToUInt32(_etwEvent.Data[Offset_MethodSize..]);
+                public uint MethodSize => BitConverter.ToUInt32(_etwEvent.Data[Offset_MethodSize..Offset_MethodToken]);
 
                 /// <summary>
                 /// Retrieves the MethodToken field.
                 /// </summary>
-                public uint MethodToken => BitConverter.ToUInt32(_etwEvent.Data[Offset_MethodToken..]);
+                public uint MethodToken => BitConverter.ToUInt32(_etwEvent.Data[Offset_MethodToken..Offset_MethodFlags]);
 
                 /// <summary>
                 /// Retrieves the MethodFlags field.
@@ -12071,6 +12539,12 @@ namespace EtwTools
             {
                 _etwEvent = etwEvent;
             }
+
+            /// <summary>
+            /// Converts a generic ETW event to a MethodDCStartVerboseV2Event.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator MethodDCStartVerboseV2Event(EtwEvent etwEvent) => new(etwEvent);
 
             /// <summary>
             /// A data wrapper for a MethodDCStartVerboseV2 event.
@@ -12209,42 +12683,42 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the MethodID field.
                 /// </summary>
-                public ulong MethodID => BitConverter.ToUInt64(_etwEvent.Data[Offset_MethodID..]);
+                public ulong MethodID => BitConverter.ToUInt64(_etwEvent.Data[Offset_MethodID..Offset_ModuleID]);
 
                 /// <summary>
                 /// Retrieves the ModuleID field.
                 /// </summary>
-                public ulong ModuleID => BitConverter.ToUInt64(_etwEvent.Data[Offset_ModuleID..]);
+                public ulong ModuleID => BitConverter.ToUInt64(_etwEvent.Data[Offset_ModuleID..Offset_MethodStartAddress]);
 
                 /// <summary>
                 /// Retrieves the MethodStartAddress field.
                 /// </summary>
-                public ulong MethodStartAddress => BitConverter.ToUInt64(_etwEvent.Data[Offset_MethodStartAddress..]);
+                public ulong MethodStartAddress => BitConverter.ToUInt64(_etwEvent.Data[Offset_MethodStartAddress..Offset_MethodSize]);
 
                 /// <summary>
                 /// Retrieves the MethodSize field.
                 /// </summary>
-                public uint MethodSize => BitConverter.ToUInt32(_etwEvent.Data[Offset_MethodSize..]);
+                public uint MethodSize => BitConverter.ToUInt32(_etwEvent.Data[Offset_MethodSize..Offset_MethodToken]);
 
                 /// <summary>
                 /// Retrieves the MethodToken field.
                 /// </summary>
-                public uint MethodToken => BitConverter.ToUInt32(_etwEvent.Data[Offset_MethodToken..]);
+                public uint MethodToken => BitConverter.ToUInt32(_etwEvent.Data[Offset_MethodToken..Offset_MethodFlags]);
 
                 /// <summary>
                 /// Retrieves the MethodFlags field.
                 /// </summary>
-                public MethodFlagsMap MethodFlags => (MethodFlagsMap)BitConverter.ToUInt32(_etwEvent.Data[Offset_MethodFlags..]);
+                public MethodFlagsMap MethodFlags => (MethodFlagsMap)BitConverter.ToUInt32(_etwEvent.Data[Offset_MethodFlags..Offset_MethodNamespace]);
 
                 /// <summary>
                 /// Retrieves the MethodNamespace field.
                 /// </summary>
-                public string MethodNamespace => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_MethodNamespace..]);
+                public string MethodNamespace => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_MethodNamespace..Offset_MethodName]);
 
                 /// <summary>
                 /// Retrieves the MethodName field.
                 /// </summary>
-                public string MethodName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_MethodName..]);
+                public string MethodName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_MethodName..Offset_MethodSignature]);
 
                 /// <summary>
                 /// Retrieves the MethodSignature field.
@@ -12341,6 +12815,12 @@ namespace EtwTools
             {
                 _etwEvent = etwEvent;
             }
+
+            /// <summary>
+            /// Converts a generic ETW event to a MethodDCStopVerboseV2Event.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator MethodDCStopVerboseV2Event(EtwEvent etwEvent) => new(etwEvent);
 
             /// <summary>
             /// A data wrapper for a MethodDCStopVerboseV2 event.
@@ -12479,42 +12959,42 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the MethodID field.
                 /// </summary>
-                public ulong MethodID => BitConverter.ToUInt64(_etwEvent.Data[Offset_MethodID..]);
+                public ulong MethodID => BitConverter.ToUInt64(_etwEvent.Data[Offset_MethodID..Offset_ModuleID]);
 
                 /// <summary>
                 /// Retrieves the ModuleID field.
                 /// </summary>
-                public ulong ModuleID => BitConverter.ToUInt64(_etwEvent.Data[Offset_ModuleID..]);
+                public ulong ModuleID => BitConverter.ToUInt64(_etwEvent.Data[Offset_ModuleID..Offset_MethodStartAddress]);
 
                 /// <summary>
                 /// Retrieves the MethodStartAddress field.
                 /// </summary>
-                public ulong MethodStartAddress => BitConverter.ToUInt64(_etwEvent.Data[Offset_MethodStartAddress..]);
+                public ulong MethodStartAddress => BitConverter.ToUInt64(_etwEvent.Data[Offset_MethodStartAddress..Offset_MethodSize]);
 
                 /// <summary>
                 /// Retrieves the MethodSize field.
                 /// </summary>
-                public uint MethodSize => BitConverter.ToUInt32(_etwEvent.Data[Offset_MethodSize..]);
+                public uint MethodSize => BitConverter.ToUInt32(_etwEvent.Data[Offset_MethodSize..Offset_MethodToken]);
 
                 /// <summary>
                 /// Retrieves the MethodToken field.
                 /// </summary>
-                public uint MethodToken => BitConverter.ToUInt32(_etwEvent.Data[Offset_MethodToken..]);
+                public uint MethodToken => BitConverter.ToUInt32(_etwEvent.Data[Offset_MethodToken..Offset_MethodFlags]);
 
                 /// <summary>
                 /// Retrieves the MethodFlags field.
                 /// </summary>
-                public MethodFlagsMap MethodFlags => (MethodFlagsMap)BitConverter.ToUInt32(_etwEvent.Data[Offset_MethodFlags..]);
+                public MethodFlagsMap MethodFlags => (MethodFlagsMap)BitConverter.ToUInt32(_etwEvent.Data[Offset_MethodFlags..Offset_MethodNamespace]);
 
                 /// <summary>
                 /// Retrieves the MethodNamespace field.
                 /// </summary>
-                public string MethodNamespace => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_MethodNamespace..]);
+                public string MethodNamespace => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_MethodNamespace..Offset_MethodName]);
 
                 /// <summary>
                 /// Retrieves the MethodName field.
                 /// </summary>
-                public string MethodName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_MethodName..]);
+                public string MethodName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_MethodName..Offset_MethodSignature]);
 
                 /// <summary>
                 /// Retrieves the MethodSignature field.
@@ -12613,6 +13093,12 @@ namespace EtwTools
             }
 
             /// <summary>
+            /// Converts a generic ETW event to a MethodLoadEvent.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator MethodLoadEvent(EtwEvent etwEvent) => new(etwEvent);
+
+            /// <summary>
             /// A data wrapper for a MethodLoad event.
             /// </summary>
             public ref struct MethodLoadData
@@ -12707,27 +13193,27 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the MethodID field.
                 /// </summary>
-                public ulong MethodID => BitConverter.ToUInt64(_etwEvent.Data[Offset_MethodID..]);
+                public ulong MethodID => BitConverter.ToUInt64(_etwEvent.Data[Offset_MethodID..Offset_ModuleID]);
 
                 /// <summary>
                 /// Retrieves the ModuleID field.
                 /// </summary>
-                public ulong ModuleID => BitConverter.ToUInt64(_etwEvent.Data[Offset_ModuleID..]);
+                public ulong ModuleID => BitConverter.ToUInt64(_etwEvent.Data[Offset_ModuleID..Offset_MethodStartAddress]);
 
                 /// <summary>
                 /// Retrieves the MethodStartAddress field.
                 /// </summary>
-                public ulong MethodStartAddress => BitConverter.ToUInt64(_etwEvent.Data[Offset_MethodStartAddress..]);
+                public ulong MethodStartAddress => BitConverter.ToUInt64(_etwEvent.Data[Offset_MethodStartAddress..Offset_MethodSize]);
 
                 /// <summary>
                 /// Retrieves the MethodSize field.
                 /// </summary>
-                public uint MethodSize => BitConverter.ToUInt32(_etwEvent.Data[Offset_MethodSize..]);
+                public uint MethodSize => BitConverter.ToUInt32(_etwEvent.Data[Offset_MethodSize..Offset_MethodToken]);
 
                 /// <summary>
                 /// Retrieves the MethodToken field.
                 /// </summary>
-                public uint MethodToken => BitConverter.ToUInt32(_etwEvent.Data[Offset_MethodToken..]);
+                public uint MethodToken => BitConverter.ToUInt32(_etwEvent.Data[Offset_MethodToken..Offset_MethodFlags]);
 
                 /// <summary>
                 /// Retrieves the MethodFlags field.
@@ -12821,6 +13307,12 @@ namespace EtwTools
             {
                 _etwEvent = etwEvent;
             }
+
+            /// <summary>
+            /// Converts a generic ETW event to a MethodUnloadEvent.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator MethodUnloadEvent(EtwEvent etwEvent) => new(etwEvent);
 
             /// <summary>
             /// A data wrapper for a MethodUnload event.
@@ -12917,27 +13409,27 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the MethodID field.
                 /// </summary>
-                public ulong MethodID => BitConverter.ToUInt64(_etwEvent.Data[Offset_MethodID..]);
+                public ulong MethodID => BitConverter.ToUInt64(_etwEvent.Data[Offset_MethodID..Offset_ModuleID]);
 
                 /// <summary>
                 /// Retrieves the ModuleID field.
                 /// </summary>
-                public ulong ModuleID => BitConverter.ToUInt64(_etwEvent.Data[Offset_ModuleID..]);
+                public ulong ModuleID => BitConverter.ToUInt64(_etwEvent.Data[Offset_ModuleID..Offset_MethodStartAddress]);
 
                 /// <summary>
                 /// Retrieves the MethodStartAddress field.
                 /// </summary>
-                public ulong MethodStartAddress => BitConverter.ToUInt64(_etwEvent.Data[Offset_MethodStartAddress..]);
+                public ulong MethodStartAddress => BitConverter.ToUInt64(_etwEvent.Data[Offset_MethodStartAddress..Offset_MethodSize]);
 
                 /// <summary>
                 /// Retrieves the MethodSize field.
                 /// </summary>
-                public uint MethodSize => BitConverter.ToUInt32(_etwEvent.Data[Offset_MethodSize..]);
+                public uint MethodSize => BitConverter.ToUInt32(_etwEvent.Data[Offset_MethodSize..Offset_MethodToken]);
 
                 /// <summary>
                 /// Retrieves the MethodToken field.
                 /// </summary>
-                public uint MethodToken => BitConverter.ToUInt32(_etwEvent.Data[Offset_MethodToken..]);
+                public uint MethodToken => BitConverter.ToUInt32(_etwEvent.Data[Offset_MethodToken..Offset_MethodFlags]);
 
                 /// <summary>
                 /// Retrieves the MethodFlags field.
@@ -13031,6 +13523,12 @@ namespace EtwTools
             {
                 _etwEvent = etwEvent;
             }
+
+            /// <summary>
+            /// Converts a generic ETW event to a MethodLoadVerboseEvent.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator MethodLoadVerboseEvent(EtwEvent etwEvent) => new(etwEvent);
 
             /// <summary>
             /// A data wrapper for a MethodLoadVerbose event.
@@ -13169,42 +13667,42 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the MethodID field.
                 /// </summary>
-                public ulong MethodID => BitConverter.ToUInt64(_etwEvent.Data[Offset_MethodID..]);
+                public ulong MethodID => BitConverter.ToUInt64(_etwEvent.Data[Offset_MethodID..Offset_ModuleID]);
 
                 /// <summary>
                 /// Retrieves the ModuleID field.
                 /// </summary>
-                public ulong ModuleID => BitConverter.ToUInt64(_etwEvent.Data[Offset_ModuleID..]);
+                public ulong ModuleID => BitConverter.ToUInt64(_etwEvent.Data[Offset_ModuleID..Offset_MethodStartAddress]);
 
                 /// <summary>
                 /// Retrieves the MethodStartAddress field.
                 /// </summary>
-                public ulong MethodStartAddress => BitConverter.ToUInt64(_etwEvent.Data[Offset_MethodStartAddress..]);
+                public ulong MethodStartAddress => BitConverter.ToUInt64(_etwEvent.Data[Offset_MethodStartAddress..Offset_MethodSize]);
 
                 /// <summary>
                 /// Retrieves the MethodSize field.
                 /// </summary>
-                public uint MethodSize => BitConverter.ToUInt32(_etwEvent.Data[Offset_MethodSize..]);
+                public uint MethodSize => BitConverter.ToUInt32(_etwEvent.Data[Offset_MethodSize..Offset_MethodToken]);
 
                 /// <summary>
                 /// Retrieves the MethodToken field.
                 /// </summary>
-                public uint MethodToken => BitConverter.ToUInt32(_etwEvent.Data[Offset_MethodToken..]);
+                public uint MethodToken => BitConverter.ToUInt32(_etwEvent.Data[Offset_MethodToken..Offset_MethodFlags]);
 
                 /// <summary>
                 /// Retrieves the MethodFlags field.
                 /// </summary>
-                public MethodFlagsMap MethodFlags => (MethodFlagsMap)BitConverter.ToUInt32(_etwEvent.Data[Offset_MethodFlags..]);
+                public MethodFlagsMap MethodFlags => (MethodFlagsMap)BitConverter.ToUInt32(_etwEvent.Data[Offset_MethodFlags..Offset_MethodNamespace]);
 
                 /// <summary>
                 /// Retrieves the MethodNamespace field.
                 /// </summary>
-                public string MethodNamespace => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_MethodNamespace..]);
+                public string MethodNamespace => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_MethodNamespace..Offset_MethodName]);
 
                 /// <summary>
                 /// Retrieves the MethodName field.
                 /// </summary>
-                public string MethodName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_MethodName..]);
+                public string MethodName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_MethodName..Offset_MethodSignature]);
 
                 /// <summary>
                 /// Retrieves the MethodSignature field.
@@ -13301,6 +13799,12 @@ namespace EtwTools
             {
                 _etwEvent = etwEvent;
             }
+
+            /// <summary>
+            /// Converts a generic ETW event to a MethodUnloadVerboseEvent.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator MethodUnloadVerboseEvent(EtwEvent etwEvent) => new(etwEvent);
 
             /// <summary>
             /// A data wrapper for a MethodUnloadVerbose event.
@@ -13439,42 +13943,42 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the MethodID field.
                 /// </summary>
-                public ulong MethodID => BitConverter.ToUInt64(_etwEvent.Data[Offset_MethodID..]);
+                public ulong MethodID => BitConverter.ToUInt64(_etwEvent.Data[Offset_MethodID..Offset_ModuleID]);
 
                 /// <summary>
                 /// Retrieves the ModuleID field.
                 /// </summary>
-                public ulong ModuleID => BitConverter.ToUInt64(_etwEvent.Data[Offset_ModuleID..]);
+                public ulong ModuleID => BitConverter.ToUInt64(_etwEvent.Data[Offset_ModuleID..Offset_MethodStartAddress]);
 
                 /// <summary>
                 /// Retrieves the MethodStartAddress field.
                 /// </summary>
-                public ulong MethodStartAddress => BitConverter.ToUInt64(_etwEvent.Data[Offset_MethodStartAddress..]);
+                public ulong MethodStartAddress => BitConverter.ToUInt64(_etwEvent.Data[Offset_MethodStartAddress..Offset_MethodSize]);
 
                 /// <summary>
                 /// Retrieves the MethodSize field.
                 /// </summary>
-                public uint MethodSize => BitConverter.ToUInt32(_etwEvent.Data[Offset_MethodSize..]);
+                public uint MethodSize => BitConverter.ToUInt32(_etwEvent.Data[Offset_MethodSize..Offset_MethodToken]);
 
                 /// <summary>
                 /// Retrieves the MethodToken field.
                 /// </summary>
-                public uint MethodToken => BitConverter.ToUInt32(_etwEvent.Data[Offset_MethodToken..]);
+                public uint MethodToken => BitConverter.ToUInt32(_etwEvent.Data[Offset_MethodToken..Offset_MethodFlags]);
 
                 /// <summary>
                 /// Retrieves the MethodFlags field.
                 /// </summary>
-                public MethodFlagsMap MethodFlags => (MethodFlagsMap)BitConverter.ToUInt32(_etwEvent.Data[Offset_MethodFlags..]);
+                public MethodFlagsMap MethodFlags => (MethodFlagsMap)BitConverter.ToUInt32(_etwEvent.Data[Offset_MethodFlags..Offset_MethodNamespace]);
 
                 /// <summary>
                 /// Retrieves the MethodNamespace field.
                 /// </summary>
-                public string MethodNamespace => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_MethodNamespace..]);
+                public string MethodNamespace => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_MethodNamespace..Offset_MethodName]);
 
                 /// <summary>
                 /// Retrieves the MethodName field.
                 /// </summary>
-                public string MethodName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_MethodName..]);
+                public string MethodName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_MethodName..Offset_MethodSignature]);
 
                 /// <summary>
                 /// Retrieves the MethodSignature field.
@@ -13571,6 +14075,12 @@ namespace EtwTools
             {
                 _etwEvent = etwEvent;
             }
+
+            /// <summary>
+            /// Converts a generic ETW event to a MethodJittingStartedEvent.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator MethodJittingStartedEvent(EtwEvent etwEvent) => new(etwEvent);
 
             /// <summary>
             /// A data wrapper for a MethodJittingStarted event.
@@ -13681,32 +14191,32 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the MethodID field.
                 /// </summary>
-                public ulong MethodID => BitConverter.ToUInt64(_etwEvent.Data[Offset_MethodID..]);
+                public ulong MethodID => BitConverter.ToUInt64(_etwEvent.Data[Offset_MethodID..Offset_ModuleID]);
 
                 /// <summary>
                 /// Retrieves the ModuleID field.
                 /// </summary>
-                public ulong ModuleID => BitConverter.ToUInt64(_etwEvent.Data[Offset_ModuleID..]);
+                public ulong ModuleID => BitConverter.ToUInt64(_etwEvent.Data[Offset_ModuleID..Offset_MethodToken]);
 
                 /// <summary>
                 /// Retrieves the MethodToken field.
                 /// </summary>
-                public uint MethodToken => BitConverter.ToUInt32(_etwEvent.Data[Offset_MethodToken..]);
+                public uint MethodToken => BitConverter.ToUInt32(_etwEvent.Data[Offset_MethodToken..Offset_MethodILSize]);
 
                 /// <summary>
                 /// Retrieves the MethodILSize field.
                 /// </summary>
-                public uint MethodILSize => BitConverter.ToUInt32(_etwEvent.Data[Offset_MethodILSize..]);
+                public uint MethodILSize => BitConverter.ToUInt32(_etwEvent.Data[Offset_MethodILSize..Offset_MethodNamespace]);
 
                 /// <summary>
                 /// Retrieves the MethodNamespace field.
                 /// </summary>
-                public string MethodNamespace => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_MethodNamespace..]);
+                public string MethodNamespace => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_MethodNamespace..Offset_MethodName]);
 
                 /// <summary>
                 /// Retrieves the MethodName field.
                 /// </summary>
-                public string MethodName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_MethodName..]);
+                public string MethodName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_MethodName..Offset_MethodSignature]);
 
                 /// <summary>
                 /// Retrieves the MethodSignature field.
@@ -13803,6 +14313,12 @@ namespace EtwTools
             }
 
             /// <summary>
+            /// Converts a generic ETW event to a LoaderModuleDCStartV2Event.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator LoaderModuleDCStartV2Event(EtwEvent etwEvent) => new(etwEvent);
+
+            /// <summary>
             /// A data wrapper for a LoaderModuleDCStartV2 event.
             /// </summary>
             public ref struct LoaderModuleDCStartV2Data
@@ -13897,27 +14413,27 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the ModuleID field.
                 /// </summary>
-                public ulong ModuleID => BitConverter.ToUInt64(_etwEvent.Data[Offset_ModuleID..]);
+                public ulong ModuleID => BitConverter.ToUInt64(_etwEvent.Data[Offset_ModuleID..Offset_AssemblyID]);
 
                 /// <summary>
                 /// Retrieves the AssemblyID field.
                 /// </summary>
-                public ulong AssemblyID => BitConverter.ToUInt64(_etwEvent.Data[Offset_AssemblyID..]);
+                public ulong AssemblyID => BitConverter.ToUInt64(_etwEvent.Data[Offset_AssemblyID..Offset_ModuleFlags]);
 
                 /// <summary>
                 /// Retrieves the ModuleFlags field.
                 /// </summary>
-                public ModuleFlagsMap ModuleFlags => (ModuleFlagsMap)BitConverter.ToUInt32(_etwEvent.Data[Offset_ModuleFlags..]);
+                public ModuleFlagsMap ModuleFlags => (ModuleFlagsMap)BitConverter.ToUInt32(_etwEvent.Data[Offset_ModuleFlags..Offset_Reserved1]);
 
                 /// <summary>
                 /// Retrieves the Reserved1 field.
                 /// </summary>
-                public uint Reserved1 => BitConverter.ToUInt32(_etwEvent.Data[Offset_Reserved1..]);
+                public uint Reserved1 => BitConverter.ToUInt32(_etwEvent.Data[Offset_Reserved1..Offset_ModuleILPath]);
 
                 /// <summary>
                 /// Retrieves the ModuleILPath field.
                 /// </summary>
-                public string ModuleILPath => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_ModuleILPath..]);
+                public string ModuleILPath => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_ModuleILPath..Offset_ModuleNativePath]);
 
                 /// <summary>
                 /// Retrieves the ModuleNativePath field.
@@ -14011,6 +14527,12 @@ namespace EtwTools
             {
                 _etwEvent = etwEvent;
             }
+
+            /// <summary>
+            /// Converts a generic ETW event to a LoaderModuleDCStopV2Event.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator LoaderModuleDCStopV2Event(EtwEvent etwEvent) => new(etwEvent);
 
             /// <summary>
             /// A data wrapper for a LoaderModuleDCStopV2 event.
@@ -14107,27 +14629,27 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the ModuleID field.
                 /// </summary>
-                public ulong ModuleID => BitConverter.ToUInt64(_etwEvent.Data[Offset_ModuleID..]);
+                public ulong ModuleID => BitConverter.ToUInt64(_etwEvent.Data[Offset_ModuleID..Offset_AssemblyID]);
 
                 /// <summary>
                 /// Retrieves the AssemblyID field.
                 /// </summary>
-                public ulong AssemblyID => BitConverter.ToUInt64(_etwEvent.Data[Offset_AssemblyID..]);
+                public ulong AssemblyID => BitConverter.ToUInt64(_etwEvent.Data[Offset_AssemblyID..Offset_ModuleFlags]);
 
                 /// <summary>
                 /// Retrieves the ModuleFlags field.
                 /// </summary>
-                public ModuleFlagsMap ModuleFlags => (ModuleFlagsMap)BitConverter.ToUInt32(_etwEvent.Data[Offset_ModuleFlags..]);
+                public ModuleFlagsMap ModuleFlags => (ModuleFlagsMap)BitConverter.ToUInt32(_etwEvent.Data[Offset_ModuleFlags..Offset_Reserved1]);
 
                 /// <summary>
                 /// Retrieves the Reserved1 field.
                 /// </summary>
-                public uint Reserved1 => BitConverter.ToUInt32(_etwEvent.Data[Offset_Reserved1..]);
+                public uint Reserved1 => BitConverter.ToUInt32(_etwEvent.Data[Offset_Reserved1..Offset_ModuleILPath]);
 
                 /// <summary>
                 /// Retrieves the ModuleILPath field.
                 /// </summary>
-                public string ModuleILPath => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_ModuleILPath..]);
+                public string ModuleILPath => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_ModuleILPath..Offset_ModuleNativePath]);
 
                 /// <summary>
                 /// Retrieves the ModuleNativePath field.
@@ -14221,6 +14743,12 @@ namespace EtwTools
             {
                 _etwEvent = etwEvent;
             }
+
+            /// <summary>
+            /// Converts a generic ETW event to a LoaderDomainModuleLoadEvent.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator LoaderDomainModuleLoadEvent(EtwEvent etwEvent) => new(etwEvent);
 
             /// <summary>
             /// A data wrapper for a LoaderDomainModuleLoad event.
@@ -14331,32 +14859,32 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the ModuleID field.
                 /// </summary>
-                public ulong ModuleID => BitConverter.ToUInt64(_etwEvent.Data[Offset_ModuleID..]);
+                public ulong ModuleID => BitConverter.ToUInt64(_etwEvent.Data[Offset_ModuleID..Offset_AssemblyID]);
 
                 /// <summary>
                 /// Retrieves the AssemblyID field.
                 /// </summary>
-                public ulong AssemblyID => BitConverter.ToUInt64(_etwEvent.Data[Offset_AssemblyID..]);
+                public ulong AssemblyID => BitConverter.ToUInt64(_etwEvent.Data[Offset_AssemblyID..Offset_AppDomainID]);
 
                 /// <summary>
                 /// Retrieves the AppDomainID field.
                 /// </summary>
-                public ulong AppDomainID => BitConverter.ToUInt64(_etwEvent.Data[Offset_AppDomainID..]);
+                public ulong AppDomainID => BitConverter.ToUInt64(_etwEvent.Data[Offset_AppDomainID..Offset_ModuleFlags]);
 
                 /// <summary>
                 /// Retrieves the ModuleFlags field.
                 /// </summary>
-                public ModuleFlagsMap ModuleFlags => (ModuleFlagsMap)BitConverter.ToUInt32(_etwEvent.Data[Offset_ModuleFlags..]);
+                public ModuleFlagsMap ModuleFlags => (ModuleFlagsMap)BitConverter.ToUInt32(_etwEvent.Data[Offset_ModuleFlags..Offset_Reserved1]);
 
                 /// <summary>
                 /// Retrieves the Reserved1 field.
                 /// </summary>
-                public uint Reserved1 => BitConverter.ToUInt32(_etwEvent.Data[Offset_Reserved1..]);
+                public uint Reserved1 => BitConverter.ToUInt32(_etwEvent.Data[Offset_Reserved1..Offset_ModuleILPath]);
 
                 /// <summary>
                 /// Retrieves the ModuleILPath field.
                 /// </summary>
-                public string ModuleILPath => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_ModuleILPath..]);
+                public string ModuleILPath => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_ModuleILPath..Offset_ModuleNativePath]);
 
                 /// <summary>
                 /// Retrieves the ModuleNativePath field.
@@ -14453,6 +14981,12 @@ namespace EtwTools
             }
 
             /// <summary>
+            /// Converts a generic ETW event to a LoaderModuleLoadEvent.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator LoaderModuleLoadEvent(EtwEvent etwEvent) => new(etwEvent);
+
+            /// <summary>
             /// A data wrapper for a LoaderModuleLoad event.
             /// </summary>
             public ref struct LoaderModuleLoadData
@@ -14547,27 +15081,27 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the ModuleID field.
                 /// </summary>
-                public ulong ModuleID => BitConverter.ToUInt64(_etwEvent.Data[Offset_ModuleID..]);
+                public ulong ModuleID => BitConverter.ToUInt64(_etwEvent.Data[Offset_ModuleID..Offset_AssemblyID]);
 
                 /// <summary>
                 /// Retrieves the AssemblyID field.
                 /// </summary>
-                public ulong AssemblyID => BitConverter.ToUInt64(_etwEvent.Data[Offset_AssemblyID..]);
+                public ulong AssemblyID => BitConverter.ToUInt64(_etwEvent.Data[Offset_AssemblyID..Offset_ModuleFlags]);
 
                 /// <summary>
                 /// Retrieves the ModuleFlags field.
                 /// </summary>
-                public ModuleFlagsMap ModuleFlags => (ModuleFlagsMap)BitConverter.ToUInt32(_etwEvent.Data[Offset_ModuleFlags..]);
+                public ModuleFlagsMap ModuleFlags => (ModuleFlagsMap)BitConverter.ToUInt32(_etwEvent.Data[Offset_ModuleFlags..Offset_Reserved1]);
 
                 /// <summary>
                 /// Retrieves the Reserved1 field.
                 /// </summary>
-                public uint Reserved1 => BitConverter.ToUInt32(_etwEvent.Data[Offset_Reserved1..]);
+                public uint Reserved1 => BitConverter.ToUInt32(_etwEvent.Data[Offset_Reserved1..Offset_ModuleILPath]);
 
                 /// <summary>
                 /// Retrieves the ModuleILPath field.
                 /// </summary>
-                public string ModuleILPath => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_ModuleILPath..]);
+                public string ModuleILPath => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_ModuleILPath..Offset_ModuleNativePath]);
 
                 /// <summary>
                 /// Retrieves the ModuleNativePath field.
@@ -14661,6 +15195,12 @@ namespace EtwTools
             {
                 _etwEvent = etwEvent;
             }
+
+            /// <summary>
+            /// Converts a generic ETW event to a LoaderModuleUnloadEvent.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator LoaderModuleUnloadEvent(EtwEvent etwEvent) => new(etwEvent);
 
             /// <summary>
             /// A data wrapper for a LoaderModuleUnload event.
@@ -14757,27 +15297,27 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the ModuleID field.
                 /// </summary>
-                public ulong ModuleID => BitConverter.ToUInt64(_etwEvent.Data[Offset_ModuleID..]);
+                public ulong ModuleID => BitConverter.ToUInt64(_etwEvent.Data[Offset_ModuleID..Offset_AssemblyID]);
 
                 /// <summary>
                 /// Retrieves the AssemblyID field.
                 /// </summary>
-                public ulong AssemblyID => BitConverter.ToUInt64(_etwEvent.Data[Offset_AssemblyID..]);
+                public ulong AssemblyID => BitConverter.ToUInt64(_etwEvent.Data[Offset_AssemblyID..Offset_ModuleFlags]);
 
                 /// <summary>
                 /// Retrieves the ModuleFlags field.
                 /// </summary>
-                public ModuleFlagsMap ModuleFlags => (ModuleFlagsMap)BitConverter.ToUInt32(_etwEvent.Data[Offset_ModuleFlags..]);
+                public ModuleFlagsMap ModuleFlags => (ModuleFlagsMap)BitConverter.ToUInt32(_etwEvent.Data[Offset_ModuleFlags..Offset_Reserved1]);
 
                 /// <summary>
                 /// Retrieves the Reserved1 field.
                 /// </summary>
-                public uint Reserved1 => BitConverter.ToUInt32(_etwEvent.Data[Offset_Reserved1..]);
+                public uint Reserved1 => BitConverter.ToUInt32(_etwEvent.Data[Offset_Reserved1..Offset_ModuleILPath]);
 
                 /// <summary>
                 /// Retrieves the ModuleILPath field.
                 /// </summary>
-                public string ModuleILPath => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_ModuleILPath..]);
+                public string ModuleILPath => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_ModuleILPath..Offset_ModuleNativePath]);
 
                 /// <summary>
                 /// Retrieves the ModuleNativePath field.
@@ -14873,6 +15413,12 @@ namespace EtwTools
             }
 
             /// <summary>
+            /// Converts a generic ETW event to a LoaderAssemblyLoadEvent.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator LoaderAssemblyLoadEvent(EtwEvent etwEvent) => new(etwEvent);
+
+            /// <summary>
             /// A data wrapper for a LoaderAssemblyLoad event.
             /// </summary>
             public ref struct LoaderAssemblyLoadData
@@ -14939,17 +15485,17 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the AssemblyID field.
                 /// </summary>
-                public ulong AssemblyID => BitConverter.ToUInt64(_etwEvent.Data[Offset_AssemblyID..]);
+                public ulong AssemblyID => BitConverter.ToUInt64(_etwEvent.Data[Offset_AssemblyID..Offset_AppDomainID]);
 
                 /// <summary>
                 /// Retrieves the AppDomainID field.
                 /// </summary>
-                public ulong AppDomainID => BitConverter.ToUInt64(_etwEvent.Data[Offset_AppDomainID..]);
+                public ulong AppDomainID => BitConverter.ToUInt64(_etwEvent.Data[Offset_AppDomainID..Offset_AssemblyFlags]);
 
                 /// <summary>
                 /// Retrieves the AssemblyFlags field.
                 /// </summary>
-                public AssemblyFlagsMap AssemblyFlags => (AssemblyFlagsMap)BitConverter.ToUInt32(_etwEvent.Data[Offset_AssemblyFlags..]);
+                public AssemblyFlagsMap AssemblyFlags => (AssemblyFlagsMap)BitConverter.ToUInt32(_etwEvent.Data[Offset_AssemblyFlags..Offset_FullyQualifiedAssemblyName]);
 
                 /// <summary>
                 /// Retrieves the FullyQualifiedAssemblyName field.
@@ -15043,6 +15589,12 @@ namespace EtwTools
             }
 
             /// <summary>
+            /// Converts a generic ETW event to a LoaderAssemblyUnloadEvent.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator LoaderAssemblyUnloadEvent(EtwEvent etwEvent) => new(etwEvent);
+
+            /// <summary>
             /// A data wrapper for a LoaderAssemblyUnload event.
             /// </summary>
             public ref struct LoaderAssemblyUnloadData
@@ -15109,17 +15661,17 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the AssemblyID field.
                 /// </summary>
-                public ulong AssemblyID => BitConverter.ToUInt64(_etwEvent.Data[Offset_AssemblyID..]);
+                public ulong AssemblyID => BitConverter.ToUInt64(_etwEvent.Data[Offset_AssemblyID..Offset_AppDomainID]);
 
                 /// <summary>
                 /// Retrieves the AppDomainID field.
                 /// </summary>
-                public ulong AppDomainID => BitConverter.ToUInt64(_etwEvent.Data[Offset_AppDomainID..]);
+                public ulong AppDomainID => BitConverter.ToUInt64(_etwEvent.Data[Offset_AppDomainID..Offset_AssemblyFlags]);
 
                 /// <summary>
                 /// Retrieves the AssemblyFlags field.
                 /// </summary>
-                public AssemblyFlagsMap AssemblyFlags => (AssemblyFlagsMap)BitConverter.ToUInt32(_etwEvent.Data[Offset_AssemblyFlags..]);
+                public AssemblyFlagsMap AssemblyFlags => (AssemblyFlagsMap)BitConverter.ToUInt32(_etwEvent.Data[Offset_AssemblyFlags..Offset_FullyQualifiedAssemblyName]);
 
                 /// <summary>
                 /// Retrieves the FullyQualifiedAssemblyName field.
@@ -15213,6 +15765,12 @@ namespace EtwTools
             }
 
             /// <summary>
+            /// Converts a generic ETW event to a LoaderAppDomainLoadEvent.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator LoaderAppDomainLoadEvent(EtwEvent etwEvent) => new(etwEvent);
+
+            /// <summary>
             /// A data wrapper for a LoaderAppDomainLoad event.
             /// </summary>
             public ref struct LoaderAppDomainLoadData
@@ -15265,12 +15823,12 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the AppDomainID field.
                 /// </summary>
-                public ulong AppDomainID => BitConverter.ToUInt64(_etwEvent.Data[Offset_AppDomainID..]);
+                public ulong AppDomainID => BitConverter.ToUInt64(_etwEvent.Data[Offset_AppDomainID..Offset_AppDomainFlags]);
 
                 /// <summary>
                 /// Retrieves the AppDomainFlags field.
                 /// </summary>
-                public AppDomainFlagsMap AppDomainFlags => (AppDomainFlagsMap)BitConverter.ToUInt32(_etwEvent.Data[Offset_AppDomainFlags..]);
+                public AppDomainFlagsMap AppDomainFlags => (AppDomainFlagsMap)BitConverter.ToUInt32(_etwEvent.Data[Offset_AppDomainFlags..Offset_AppDomainName]);
 
                 /// <summary>
                 /// Retrieves the AppDomainName field.
@@ -15363,6 +15921,12 @@ namespace EtwTools
             }
 
             /// <summary>
+            /// Converts a generic ETW event to a LoaderAppDomainUnloadEvent.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator LoaderAppDomainUnloadEvent(EtwEvent etwEvent) => new(etwEvent);
+
+            /// <summary>
             /// A data wrapper for a LoaderAppDomainUnload event.
             /// </summary>
             public ref struct LoaderAppDomainUnloadData
@@ -15415,12 +15979,12 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the AppDomainID field.
                 /// </summary>
-                public ulong AppDomainID => BitConverter.ToUInt64(_etwEvent.Data[Offset_AppDomainID..]);
+                public ulong AppDomainID => BitConverter.ToUInt64(_etwEvent.Data[Offset_AppDomainID..Offset_AppDomainFlags]);
 
                 /// <summary>
                 /// Retrieves the AppDomainFlags field.
                 /// </summary>
-                public AppDomainFlagsMap AppDomainFlags => (AppDomainFlagsMap)BitConverter.ToUInt32(_etwEvent.Data[Offset_AppDomainFlags..]);
+                public AppDomainFlagsMap AppDomainFlags => (AppDomainFlagsMap)BitConverter.ToUInt32(_etwEvent.Data[Offset_AppDomainFlags..Offset_AppDomainName]);
 
                 /// <summary>
                 /// Retrieves the AppDomainName field.
@@ -15513,6 +16077,12 @@ namespace EtwTools
             }
 
             /// <summary>
+            /// Converts a generic ETW event to a ClrPerfTrackModuleRangeLoadEvent.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator ClrPerfTrackModuleRangeLoadEvent(EtwEvent etwEvent) => new(etwEvent);
+
+            /// <summary>
             /// A data wrapper for a ClrPerfTrackModuleRangeLoad event.
             /// </summary>
             public ref struct ClrPerfTrackModuleRangeLoadData
@@ -15593,22 +16163,22 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the ClrInstanceID field.
                 /// </summary>
-                public ushort ClrInstanceID => BitConverter.ToUInt16(_etwEvent.Data[Offset_ClrInstanceID..]);
+                public ushort ClrInstanceID => BitConverter.ToUInt16(_etwEvent.Data[Offset_ClrInstanceID..Offset_ModuleID]);
 
                 /// <summary>
                 /// Retrieves the ModuleID field.
                 /// </summary>
-                public ulong ModuleID => BitConverter.ToUInt64(_etwEvent.Data[Offset_ModuleID..]);
+                public ulong ModuleID => BitConverter.ToUInt64(_etwEvent.Data[Offset_ModuleID..Offset_RangeBegin]);
 
                 /// <summary>
                 /// Retrieves the RangeBegin field.
                 /// </summary>
-                public uint RangeBegin => BitConverter.ToUInt32(_etwEvent.Data[Offset_RangeBegin..]);
+                public uint RangeBegin => BitConverter.ToUInt32(_etwEvent.Data[Offset_RangeBegin..Offset_RangeSize]);
 
                 /// <summary>
                 /// Retrieves the RangeSize field.
                 /// </summary>
-                public uint RangeSize => BitConverter.ToUInt32(_etwEvent.Data[Offset_RangeSize..]);
+                public uint RangeSize => BitConverter.ToUInt32(_etwEvent.Data[Offset_RangeSize..Offset_RangeType]);
 
                 /// <summary>
                 /// Retrieves the RangeType field.
@@ -15703,6 +16273,12 @@ namespace EtwTools
             }
 
             /// <summary>
+            /// Converts a generic ETW event to a StrongNameVerificationStartEvent.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator StrongNameVerificationStartEvent(EtwEvent etwEvent) => new(etwEvent);
+
+            /// <summary>
             /// A data wrapper for a StrongNameVerificationStart event.
             /// </summary>
             public ref struct StrongNameVerificationStartData
@@ -15755,12 +16331,12 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the VerificationFlags field.
                 /// </summary>
-                public uint VerificationFlags => BitConverter.ToUInt32(_etwEvent.Data[Offset_VerificationFlags..]);
+                public uint VerificationFlags => BitConverter.ToUInt32(_etwEvent.Data[Offset_VerificationFlags..Offset_ErrorCode]);
 
                 /// <summary>
                 /// Retrieves the ErrorCode field.
                 /// </summary>
-                public uint ErrorCode => BitConverter.ToUInt32(_etwEvent.Data[Offset_ErrorCode..]);
+                public uint ErrorCode => BitConverter.ToUInt32(_etwEvent.Data[Offset_ErrorCode..Offset_FullyQualifiedAssemblyName]);
 
                 /// <summary>
                 /// Retrieves the FullyQualifiedAssemblyName field.
@@ -15853,6 +16429,12 @@ namespace EtwTools
             }
 
             /// <summary>
+            /// Converts a generic ETW event to a StrongNameVerificationStopEvent.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator StrongNameVerificationStopEvent(EtwEvent etwEvent) => new(etwEvent);
+
+            /// <summary>
             /// A data wrapper for a StrongNameVerificationStop event.
             /// </summary>
             public ref struct StrongNameVerificationStopData
@@ -15905,12 +16487,12 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the VerificationFlags field.
                 /// </summary>
-                public uint VerificationFlags => BitConverter.ToUInt32(_etwEvent.Data[Offset_VerificationFlags..]);
+                public uint VerificationFlags => BitConverter.ToUInt32(_etwEvent.Data[Offset_VerificationFlags..Offset_ErrorCode]);
 
                 /// <summary>
                 /// Retrieves the ErrorCode field.
                 /// </summary>
-                public uint ErrorCode => BitConverter.ToUInt32(_etwEvent.Data[Offset_ErrorCode..]);
+                public uint ErrorCode => BitConverter.ToUInt32(_etwEvent.Data[Offset_ErrorCode..Offset_FullyQualifiedAssemblyName]);
 
                 /// <summary>
                 /// Retrieves the FullyQualifiedAssemblyName field.
@@ -16003,6 +16585,12 @@ namespace EtwTools
             }
 
             /// <summary>
+            /// Converts a generic ETW event to a AuthenticodeVerificationStartEvent.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator AuthenticodeVerificationStartEvent(EtwEvent etwEvent) => new(etwEvent);
+
+            /// <summary>
             /// A data wrapper for a AuthenticodeVerificationStart event.
             /// </summary>
             public ref struct AuthenticodeVerificationStartData
@@ -16055,12 +16643,12 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the VerificationFlags field.
                 /// </summary>
-                public uint VerificationFlags => BitConverter.ToUInt32(_etwEvent.Data[Offset_VerificationFlags..]);
+                public uint VerificationFlags => BitConverter.ToUInt32(_etwEvent.Data[Offset_VerificationFlags..Offset_ErrorCode]);
 
                 /// <summary>
                 /// Retrieves the ErrorCode field.
                 /// </summary>
-                public uint ErrorCode => BitConverter.ToUInt32(_etwEvent.Data[Offset_ErrorCode..]);
+                public uint ErrorCode => BitConverter.ToUInt32(_etwEvent.Data[Offset_ErrorCode..Offset_ModulePath]);
 
                 /// <summary>
                 /// Retrieves the ModulePath field.
@@ -16153,6 +16741,12 @@ namespace EtwTools
             }
 
             /// <summary>
+            /// Converts a generic ETW event to a AuthenticodeVerificationStopEvent.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator AuthenticodeVerificationStopEvent(EtwEvent etwEvent) => new(etwEvent);
+
+            /// <summary>
             /// A data wrapper for a AuthenticodeVerificationStop event.
             /// </summary>
             public ref struct AuthenticodeVerificationStopData
@@ -16205,12 +16799,12 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the VerificationFlags field.
                 /// </summary>
-                public uint VerificationFlags => BitConverter.ToUInt32(_etwEvent.Data[Offset_VerificationFlags..]);
+                public uint VerificationFlags => BitConverter.ToUInt32(_etwEvent.Data[Offset_VerificationFlags..Offset_ErrorCode]);
 
                 /// <summary>
                 /// Retrieves the ErrorCode field.
                 /// </summary>
-                public uint ErrorCode => BitConverter.ToUInt32(_etwEvent.Data[Offset_ErrorCode..]);
+                public uint ErrorCode => BitConverter.ToUInt32(_etwEvent.Data[Offset_ErrorCode..Offset_ModulePath]);
 
                 /// <summary>
                 /// Retrieves the ModulePath field.
@@ -16301,6 +16895,12 @@ namespace EtwTools
             {
                 _etwEvent = etwEvent;
             }
+
+            /// <summary>
+            /// Converts a generic ETW event to a MethodInliningSucceededEvent.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator MethodInliningSucceededEvent(EtwEvent etwEvent) => new(etwEvent);
 
             /// <summary>
             /// A data wrapper for a MethodInliningSucceeded event.
@@ -16453,47 +17053,47 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the MethodBeingCompiledNamespace field.
                 /// </summary>
-                public string MethodBeingCompiledNamespace => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_MethodBeingCompiledNamespace..]);
+                public string MethodBeingCompiledNamespace => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_MethodBeingCompiledNamespace..Offset_MethodBeingCompiledName]);
 
                 /// <summary>
                 /// Retrieves the MethodBeingCompiledName field.
                 /// </summary>
-                public string MethodBeingCompiledName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_MethodBeingCompiledName..]);
+                public string MethodBeingCompiledName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_MethodBeingCompiledName..Offset_MethodBeingCompiledNameSignature]);
 
                 /// <summary>
                 /// Retrieves the MethodBeingCompiledNameSignature field.
                 /// </summary>
-                public string MethodBeingCompiledNameSignature => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_MethodBeingCompiledNameSignature..]);
+                public string MethodBeingCompiledNameSignature => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_MethodBeingCompiledNameSignature..Offset_InlinerNamespace]);
 
                 /// <summary>
                 /// Retrieves the InlinerNamespace field.
                 /// </summary>
-                public string InlinerNamespace => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_InlinerNamespace..]);
+                public string InlinerNamespace => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_InlinerNamespace..Offset_InlinerName]);
 
                 /// <summary>
                 /// Retrieves the InlinerName field.
                 /// </summary>
-                public string InlinerName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_InlinerName..]);
+                public string InlinerName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_InlinerName..Offset_InlinerNameSignature]);
 
                 /// <summary>
                 /// Retrieves the InlinerNameSignature field.
                 /// </summary>
-                public string InlinerNameSignature => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_InlinerNameSignature..]);
+                public string InlinerNameSignature => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_InlinerNameSignature..Offset_InlineeNamespace]);
 
                 /// <summary>
                 /// Retrieves the InlineeNamespace field.
                 /// </summary>
-                public string InlineeNamespace => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_InlineeNamespace..]);
+                public string InlineeNamespace => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_InlineeNamespace..Offset_InlineeName]);
 
                 /// <summary>
                 /// Retrieves the InlineeName field.
                 /// </summary>
-                public string InlineeName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_InlineeName..]);
+                public string InlineeName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_InlineeName..Offset_InlineeNameSignature]);
 
                 /// <summary>
                 /// Retrieves the InlineeNameSignature field.
                 /// </summary>
-                public string InlineeNameSignature => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_InlineeNameSignature..]);
+                public string InlineeNameSignature => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_InlineeNameSignature..Offset_ClrInstanceID]);
 
                 /// <summary>
                 /// Retrieves the ClrInstanceID field.
@@ -16591,6 +17191,12 @@ namespace EtwTools
             {
                 _etwEvent = etwEvent;
             }
+
+            /// <summary>
+            /// Converts a generic ETW event to a MethodInliningFailedEvent.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator MethodInliningFailedEvent(EtwEvent etwEvent) => new(etwEvent);
 
             /// <summary>
             /// A data wrapper for a MethodInliningFailed event.
@@ -16771,47 +17377,47 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the MethodBeingCompiledNamespace field.
                 /// </summary>
-                public string MethodBeingCompiledNamespace => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_MethodBeingCompiledNamespace..]);
+                public string MethodBeingCompiledNamespace => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_MethodBeingCompiledNamespace..Offset_MethodBeingCompiledName]);
 
                 /// <summary>
                 /// Retrieves the MethodBeingCompiledName field.
                 /// </summary>
-                public string MethodBeingCompiledName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_MethodBeingCompiledName..]);
+                public string MethodBeingCompiledName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_MethodBeingCompiledName..Offset_MethodBeingCompiledNameSignature]);
 
                 /// <summary>
                 /// Retrieves the MethodBeingCompiledNameSignature field.
                 /// </summary>
-                public string MethodBeingCompiledNameSignature => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_MethodBeingCompiledNameSignature..]);
+                public string MethodBeingCompiledNameSignature => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_MethodBeingCompiledNameSignature..Offset_InlinerNamespace]);
 
                 /// <summary>
                 /// Retrieves the InlinerNamespace field.
                 /// </summary>
-                public string InlinerNamespace => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_InlinerNamespace..]);
+                public string InlinerNamespace => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_InlinerNamespace..Offset_InlinerName]);
 
                 /// <summary>
                 /// Retrieves the InlinerName field.
                 /// </summary>
-                public string InlinerName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_InlinerName..]);
+                public string InlinerName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_InlinerName..Offset_InlinerNameSignature]);
 
                 /// <summary>
                 /// Retrieves the InlinerNameSignature field.
                 /// </summary>
-                public string InlinerNameSignature => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_InlinerNameSignature..]);
+                public string InlinerNameSignature => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_InlinerNameSignature..Offset_InlineeNamespace]);
 
                 /// <summary>
                 /// Retrieves the InlineeNamespace field.
                 /// </summary>
-                public string InlineeNamespace => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_InlineeNamespace..]);
+                public string InlineeNamespace => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_InlineeNamespace..Offset_InlineeName]);
 
                 /// <summary>
                 /// Retrieves the InlineeName field.
                 /// </summary>
-                public string InlineeName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_InlineeName..]);
+                public string InlineeName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_InlineeName..Offset_InlineeNameSignature]);
 
                 /// <summary>
                 /// Retrieves the InlineeNameSignature field.
                 /// </summary>
-                public string InlineeNameSignature => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_InlineeNameSignature..]);
+                public string InlineeNameSignature => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_InlineeNameSignature..Offset_FailAlways]);
 
                 /// <summary>
                 /// Retrieves the FailAlways field.
@@ -16821,7 +17427,7 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the FailReason field.
                 /// </summary>
-                public string FailReason => System.Text.Encoding.ASCII.GetString(_etwEvent.Data[Offset_FailReason..]);
+                public string FailReason => System.Text.Encoding.ASCII.GetString(_etwEvent.Data[Offset_FailReason..Offset_ClrInstanceID]);
 
                 /// <summary>
                 /// Retrieves the ClrInstanceID field.
@@ -16921,6 +17527,12 @@ namespace EtwTools
             {
                 _etwEvent = etwEvent;
             }
+
+            /// <summary>
+            /// Converts a generic ETW event to a RuntimeStartEvent.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator RuntimeStartEvent(EtwEvent etwEvent) => new(etwEvent);
 
             /// <summary>
             /// A data wrapper for a RuntimeStart event.
@@ -17143,57 +17755,57 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the ClrInstanceID field.
                 /// </summary>
-                public ushort ClrInstanceID => BitConverter.ToUInt16(_etwEvent.Data[Offset_ClrInstanceID..]);
+                public ushort ClrInstanceID => BitConverter.ToUInt16(_etwEvent.Data[Offset_ClrInstanceID..Offset_Sku]);
 
                 /// <summary>
                 /// Retrieves the Sku field.
                 /// </summary>
-                public RuntimeSkuMap Sku => (RuntimeSkuMap)BitConverter.ToUInt16(_etwEvent.Data[Offset_Sku..]);
+                public RuntimeSkuMap Sku => (RuntimeSkuMap)BitConverter.ToUInt16(_etwEvent.Data[Offset_Sku..Offset_BclMajorVersion]);
 
                 /// <summary>
                 /// Retrieves the BclMajorVersion field.
                 /// </summary>
-                public ushort BclMajorVersion => BitConverter.ToUInt16(_etwEvent.Data[Offset_BclMajorVersion..]);
+                public ushort BclMajorVersion => BitConverter.ToUInt16(_etwEvent.Data[Offset_BclMajorVersion..Offset_BclMinorVersion]);
 
                 /// <summary>
                 /// Retrieves the BclMinorVersion field.
                 /// </summary>
-                public ushort BclMinorVersion => BitConverter.ToUInt16(_etwEvent.Data[Offset_BclMinorVersion..]);
+                public ushort BclMinorVersion => BitConverter.ToUInt16(_etwEvent.Data[Offset_BclMinorVersion..Offset_BclBuildNumber]);
 
                 /// <summary>
                 /// Retrieves the BclBuildNumber field.
                 /// </summary>
-                public ushort BclBuildNumber => BitConverter.ToUInt16(_etwEvent.Data[Offset_BclBuildNumber..]);
+                public ushort BclBuildNumber => BitConverter.ToUInt16(_etwEvent.Data[Offset_BclBuildNumber..Offset_BclQfeNumber]);
 
                 /// <summary>
                 /// Retrieves the BclQfeNumber field.
                 /// </summary>
-                public ushort BclQfeNumber => BitConverter.ToUInt16(_etwEvent.Data[Offset_BclQfeNumber..]);
+                public ushort BclQfeNumber => BitConverter.ToUInt16(_etwEvent.Data[Offset_BclQfeNumber..Offset_VMMajorVersion]);
 
                 /// <summary>
                 /// Retrieves the VMMajorVersion field.
                 /// </summary>
-                public ushort VMMajorVersion => BitConverter.ToUInt16(_etwEvent.Data[Offset_VMMajorVersion..]);
+                public ushort VMMajorVersion => BitConverter.ToUInt16(_etwEvent.Data[Offset_VMMajorVersion..Offset_VMMinorVersion]);
 
                 /// <summary>
                 /// Retrieves the VMMinorVersion field.
                 /// </summary>
-                public ushort VMMinorVersion => BitConverter.ToUInt16(_etwEvent.Data[Offset_VMMinorVersion..]);
+                public ushort VMMinorVersion => BitConverter.ToUInt16(_etwEvent.Data[Offset_VMMinorVersion..Offset_VMBuildNumber]);
 
                 /// <summary>
                 /// Retrieves the VMBuildNumber field.
                 /// </summary>
-                public ushort VMBuildNumber => BitConverter.ToUInt16(_etwEvent.Data[Offset_VMBuildNumber..]);
+                public ushort VMBuildNumber => BitConverter.ToUInt16(_etwEvent.Data[Offset_VMBuildNumber..Offset_VMQfeNumber]);
 
                 /// <summary>
                 /// Retrieves the VMQfeNumber field.
                 /// </summary>
-                public ushort VMQfeNumber => BitConverter.ToUInt16(_etwEvent.Data[Offset_VMQfeNumber..]);
+                public ushort VMQfeNumber => BitConverter.ToUInt16(_etwEvent.Data[Offset_VMQfeNumber..Offset_StartupFlags]);
 
                 /// <summary>
                 /// Retrieves the StartupFlags field.
                 /// </summary>
-                public StartupFlagsMap StartupFlags => (StartupFlagsMap)BitConverter.ToUInt32(_etwEvent.Data[Offset_StartupFlags..]);
+                public StartupFlagsMap StartupFlags => (StartupFlagsMap)BitConverter.ToUInt32(_etwEvent.Data[Offset_StartupFlags..Offset_StartupMode]);
 
                 /// <summary>
                 /// Retrieves the StartupMode field.
@@ -17203,12 +17815,12 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the CommandLine field.
                 /// </summary>
-                public string CommandLine => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_CommandLine..]);
+                public string CommandLine => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_CommandLine..Offset_ComObjectGuid]);
 
                 /// <summary>
                 /// Retrieves the ComObjectGuid field.
                 /// </summary>
-                public Guid ComObjectGuid => new(_etwEvent.Data[Offset_ComObjectGuid..]);
+                public Guid ComObjectGuid => new(_etwEvent.Data[Offset_ComObjectGuid..Offset_RuntimeDllPath]);
 
                 /// <summary>
                 /// Retrieves the RuntimeDllPath field.
@@ -17311,6 +17923,12 @@ namespace EtwTools
             {
                 _etwEvent = etwEvent;
             }
+
+            /// <summary>
+            /// Converts a generic ETW event to a MethodTailCallSucceededEvent.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator MethodTailCallSucceededEvent(EtwEvent etwEvent) => new(etwEvent);
 
             /// <summary>
             /// A data wrapper for a MethodTailCallSucceeded event.
@@ -17491,47 +18109,47 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the MethodBeingCompiledNamespace field.
                 /// </summary>
-                public string MethodBeingCompiledNamespace => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_MethodBeingCompiledNamespace..]);
+                public string MethodBeingCompiledNamespace => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_MethodBeingCompiledNamespace..Offset_MethodBeingCompiledName]);
 
                 /// <summary>
                 /// Retrieves the MethodBeingCompiledName field.
                 /// </summary>
-                public string MethodBeingCompiledName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_MethodBeingCompiledName..]);
+                public string MethodBeingCompiledName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_MethodBeingCompiledName..Offset_MethodBeingCompiledNameSignature]);
 
                 /// <summary>
                 /// Retrieves the MethodBeingCompiledNameSignature field.
                 /// </summary>
-                public string MethodBeingCompiledNameSignature => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_MethodBeingCompiledNameSignature..]);
+                public string MethodBeingCompiledNameSignature => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_MethodBeingCompiledNameSignature..Offset_CallerNamespace]);
 
                 /// <summary>
                 /// Retrieves the CallerNamespace field.
                 /// </summary>
-                public string CallerNamespace => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_CallerNamespace..]);
+                public string CallerNamespace => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_CallerNamespace..Offset_CallerName]);
 
                 /// <summary>
                 /// Retrieves the CallerName field.
                 /// </summary>
-                public string CallerName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_CallerName..]);
+                public string CallerName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_CallerName..Offset_CallerNameSignature]);
 
                 /// <summary>
                 /// Retrieves the CallerNameSignature field.
                 /// </summary>
-                public string CallerNameSignature => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_CallerNameSignature..]);
+                public string CallerNameSignature => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_CallerNameSignature..Offset_CalleeNamespace]);
 
                 /// <summary>
                 /// Retrieves the CalleeNamespace field.
                 /// </summary>
-                public string CalleeNamespace => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_CalleeNamespace..]);
+                public string CalleeNamespace => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_CalleeNamespace..Offset_CalleeName]);
 
                 /// <summary>
                 /// Retrieves the CalleeName field.
                 /// </summary>
-                public string CalleeName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_CalleeName..]);
+                public string CalleeName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_CalleeName..Offset_CalleeNameSignature]);
 
                 /// <summary>
                 /// Retrieves the CalleeNameSignature field.
                 /// </summary>
-                public string CalleeNameSignature => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_CalleeNameSignature..]);
+                public string CalleeNameSignature => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_CalleeNameSignature..Offset_TailPrefix]);
 
                 /// <summary>
                 /// Retrieves the TailPrefix field.
@@ -17541,7 +18159,7 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the TailCallType field.
                 /// </summary>
-                public TailCallTypeMap TailCallType => (TailCallTypeMap)BitConverter.ToUInt32(_etwEvent.Data[Offset_TailCallType..]);
+                public TailCallTypeMap TailCallType => (TailCallTypeMap)BitConverter.ToUInt32(_etwEvent.Data[Offset_TailCallType..Offset_ClrInstanceID]);
 
                 /// <summary>
                 /// Retrieves the ClrInstanceID field.
@@ -17641,6 +18259,12 @@ namespace EtwTools
             {
                 _etwEvent = etwEvent;
             }
+
+            /// <summary>
+            /// Converts a generic ETW event to a MethodTailCallFailedEvent.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator MethodTailCallFailedEvent(EtwEvent etwEvent) => new(etwEvent);
 
             /// <summary>
             /// A data wrapper for a MethodTailCallFailed event.
@@ -17821,47 +18445,47 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the MethodBeingCompiledNamespace field.
                 /// </summary>
-                public string MethodBeingCompiledNamespace => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_MethodBeingCompiledNamespace..]);
+                public string MethodBeingCompiledNamespace => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_MethodBeingCompiledNamespace..Offset_MethodBeingCompiledName]);
 
                 /// <summary>
                 /// Retrieves the MethodBeingCompiledName field.
                 /// </summary>
-                public string MethodBeingCompiledName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_MethodBeingCompiledName..]);
+                public string MethodBeingCompiledName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_MethodBeingCompiledName..Offset_MethodBeingCompiledNameSignature]);
 
                 /// <summary>
                 /// Retrieves the MethodBeingCompiledNameSignature field.
                 /// </summary>
-                public string MethodBeingCompiledNameSignature => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_MethodBeingCompiledNameSignature..]);
+                public string MethodBeingCompiledNameSignature => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_MethodBeingCompiledNameSignature..Offset_CallerNamespace]);
 
                 /// <summary>
                 /// Retrieves the CallerNamespace field.
                 /// </summary>
-                public string CallerNamespace => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_CallerNamespace..]);
+                public string CallerNamespace => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_CallerNamespace..Offset_CallerName]);
 
                 /// <summary>
                 /// Retrieves the CallerName field.
                 /// </summary>
-                public string CallerName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_CallerName..]);
+                public string CallerName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_CallerName..Offset_CallerNameSignature]);
 
                 /// <summary>
                 /// Retrieves the CallerNameSignature field.
                 /// </summary>
-                public string CallerNameSignature => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_CallerNameSignature..]);
+                public string CallerNameSignature => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_CallerNameSignature..Offset_CalleeNamespace]);
 
                 /// <summary>
                 /// Retrieves the CalleeNamespace field.
                 /// </summary>
-                public string CalleeNamespace => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_CalleeNamespace..]);
+                public string CalleeNamespace => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_CalleeNamespace..Offset_CalleeName]);
 
                 /// <summary>
                 /// Retrieves the CalleeName field.
                 /// </summary>
-                public string CalleeName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_CalleeName..]);
+                public string CalleeName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_CalleeName..Offset_CalleeNameSignature]);
 
                 /// <summary>
                 /// Retrieves the CalleeNameSignature field.
                 /// </summary>
-                public string CalleeNameSignature => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_CalleeNameSignature..]);
+                public string CalleeNameSignature => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_CalleeNameSignature..Offset_TailPrefix]);
 
                 /// <summary>
                 /// Retrieves the TailPrefix field.
@@ -17871,7 +18495,7 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the FailReason field.
                 /// </summary>
-                public string FailReason => System.Text.Encoding.ASCII.GetString(_etwEvent.Data[Offset_FailReason..]);
+                public string FailReason => System.Text.Encoding.ASCII.GetString(_etwEvent.Data[Offset_FailReason..Offset_ClrInstanceID]);
 
                 /// <summary>
                 /// Retrieves the ClrInstanceID field.
@@ -17971,6 +18595,12 @@ namespace EtwTools
             {
                 _etwEvent = etwEvent;
             }
+
+            /// <summary>
+            /// Converts a generic ETW event to a MethodMethodILToNativeMapEvent.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator MethodMethodILToNativeMapEvent(EtwEvent etwEvent) => new(etwEvent);
 
             /// <summary>
             /// A data wrapper for a MethodMethodILToNativeMap event.
@@ -18081,12 +18711,12 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the MethodID field.
                 /// </summary>
-                public ulong MethodID => BitConverter.ToUInt64(_etwEvent.Data[Offset_MethodID..]);
+                public ulong MethodID => BitConverter.ToUInt64(_etwEvent.Data[Offset_MethodID..Offset_ReJITID]);
 
                 /// <summary>
                 /// Retrieves the ReJITID field.
                 /// </summary>
-                public ulong ReJITID => BitConverter.ToUInt64(_etwEvent.Data[Offset_ReJITID..]);
+                public ulong ReJITID => BitConverter.ToUInt64(_etwEvent.Data[Offset_ReJITID..Offset_MethodExtent]);
 
                 /// <summary>
                 /// Retrieves the MethodExtent field.
@@ -18096,7 +18726,7 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the CountOfMapEntries field.
                 /// </summary>
-                public ushort CountOfMapEntries => BitConverter.ToUInt16(_etwEvent.Data[Offset_CountOfMapEntries..]);
+                public ushort CountOfMapEntries => BitConverter.ToUInt16(_etwEvent.Data[Offset_CountOfMapEntries..Offset_ILOffsets]);
 
                 /// <summary>
                 /// Retrieves the ILOffsets field.
@@ -18203,6 +18833,12 @@ namespace EtwTools
             }
 
             /// <summary>
+            /// Converts a generic ETW event to a GCIncreaseMemoryPressureEvent.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator GCIncreaseMemoryPressureEvent(EtwEvent etwEvent) => new(etwEvent);
+
+            /// <summary>
             /// A data wrapper for a GCIncreaseMemoryPressure event.
             /// </summary>
             public ref struct GCIncreaseMemoryPressureData
@@ -18241,7 +18877,7 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the BytesAllocated field.
                 /// </summary>
-                public ulong BytesAllocated => BitConverter.ToUInt64(_etwEvent.Data[Offset_BytesAllocated..]);
+                public ulong BytesAllocated => BitConverter.ToUInt64(_etwEvent.Data[Offset_BytesAllocated..Offset_ClrInstanceID]);
 
                 /// <summary>
                 /// Retrieves the ClrInstanceID field.
@@ -18333,6 +18969,12 @@ namespace EtwTools
             }
 
             /// <summary>
+            /// Converts a generic ETW event to a GCDecreaseMemoryPressureEvent.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator GCDecreaseMemoryPressureEvent(EtwEvent etwEvent) => new(etwEvent);
+
+            /// <summary>
             /// A data wrapper for a GCDecreaseMemoryPressure event.
             /// </summary>
             public ref struct GCDecreaseMemoryPressureData
@@ -18371,7 +19013,7 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the BytesFreed field.
                 /// </summary>
-                public ulong BytesFreed => BitConverter.ToUInt64(_etwEvent.Data[Offset_BytesFreed..]);
+                public ulong BytesFreed => BitConverter.ToUInt64(_etwEvent.Data[Offset_BytesFreed..Offset_ClrInstanceID]);
 
                 /// <summary>
                 /// Retrieves the ClrInstanceID field.
@@ -18463,6 +19105,12 @@ namespace EtwTools
             }
 
             /// <summary>
+            /// Converts a generic ETW event to a GCMarkEvent.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator GCMarkEvent(EtwEvent etwEvent) => new(etwEvent);
+
+            /// <summary>
             /// A data wrapper for a GCMark event.
             /// </summary>
             public ref struct GCMarkData
@@ -18529,17 +19177,17 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the HeapNum field.
                 /// </summary>
-                public uint HeapNum => BitConverter.ToUInt32(_etwEvent.Data[Offset_HeapNum..]);
+                public uint HeapNum => BitConverter.ToUInt32(_etwEvent.Data[Offset_HeapNum..Offset_ClrInstanceID]);
 
                 /// <summary>
                 /// Retrieves the ClrInstanceID field.
                 /// </summary>
-                public ushort ClrInstanceID => BitConverter.ToUInt16(_etwEvent.Data[Offset_ClrInstanceID..]);
+                public ushort ClrInstanceID => BitConverter.ToUInt16(_etwEvent.Data[Offset_ClrInstanceID..Offset_Type]);
 
                 /// <summary>
                 /// Retrieves the Type field.
                 /// </summary>
-                public GCRootKindMap Type => (GCRootKindMap)BitConverter.ToUInt32(_etwEvent.Data[Offset_Type..]);
+                public GCRootKindMap Type => (GCRootKindMap)BitConverter.ToUInt32(_etwEvent.Data[Offset_Type..Offset_Bytes]);
 
                 /// <summary>
                 /// Retrieves the Bytes field.
@@ -18633,6 +19281,12 @@ namespace EtwTools
             }
 
             /// <summary>
+            /// Converts a generic ETW event to a GCLoadedEvent.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator GCLoadedEvent(EtwEvent etwEvent) => new(etwEvent);
+
+            /// <summary>
             /// A data wrapper for a GCLoaded event.
             /// </summary>
             public ref struct GCLoadedData
@@ -18671,7 +19325,7 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the GCName field.
                 /// </summary>
-                public string GCName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_GCName..]);
+                public string GCName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_GCName..Offset_ClrInstanceID]);
 
                 /// <summary>
                 /// Retrieves the ClrInstanceID field.
@@ -18756,6 +19410,12 @@ namespace EtwTools
             {
                 _etwEvent = etwEvent;
             }
+
+            /// <summary>
+            /// Converts a generic ETW event to a DebugIPCEventStartEvent.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator DebugIPCEventStartEvent(EtwEvent etwEvent) => new(etwEvent);
         }
 
         /// <summary>
@@ -18822,6 +19482,12 @@ namespace EtwTools
             {
                 _etwEvent = etwEvent;
             }
+
+            /// <summary>
+            /// Converts a generic ETW event to a DebugIPCEventStopEvent.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator DebugIPCEventStopEvent(EtwEvent etwEvent) => new(etwEvent);
         }
 
         /// <summary>
@@ -18888,6 +19554,12 @@ namespace EtwTools
             {
                 _etwEvent = etwEvent;
             }
+
+            /// <summary>
+            /// Converts a generic ETW event to a DebugExceptionProcessingStartEvent.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator DebugExceptionProcessingStartEvent(EtwEvent etwEvent) => new(etwEvent);
         }
 
         /// <summary>
@@ -18954,6 +19626,12 @@ namespace EtwTools
             {
                 _etwEvent = etwEvent;
             }
+
+            /// <summary>
+            /// Converts a generic ETW event to a DebugExceptionProcessingStopEvent.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator DebugExceptionProcessingStopEvent(EtwEvent etwEvent) => new(etwEvent);
         }
 
         /// <summary>
@@ -19027,6 +19705,12 @@ namespace EtwTools
             }
 
             /// <summary>
+            /// Converts a generic ETW event to a ExceptionCatchStartEvent.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator ExceptionCatchStartEvent(EtwEvent etwEvent) => new(etwEvent);
+
+            /// <summary>
             /// A data wrapper for a ExceptionCatchStart event.
             /// </summary>
             public ref struct ExceptionCatchStartData
@@ -19093,17 +19777,17 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the EntryEIP field.
                 /// </summary>
-                public ulong EntryEIP => BitConverter.ToUInt64(_etwEvent.Data[Offset_EntryEIP..]);
+                public ulong EntryEIP => BitConverter.ToUInt64(_etwEvent.Data[Offset_EntryEIP..Offset_MethodID]);
 
                 /// <summary>
                 /// Retrieves the MethodID field.
                 /// </summary>
-                public ulong MethodID => BitConverter.ToUInt64(_etwEvent.Data[Offset_MethodID..]);
+                public ulong MethodID => BitConverter.ToUInt64(_etwEvent.Data[Offset_MethodID..Offset_MethodName]);
 
                 /// <summary>
                 /// Retrieves the MethodName field.
                 /// </summary>
-                public string MethodName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_MethodName..]);
+                public string MethodName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_MethodName..Offset_ClrInstanceID]);
 
                 /// <summary>
                 /// Retrieves the ClrInstanceID field.
@@ -19190,6 +19874,12 @@ namespace EtwTools
             {
                 _etwEvent = etwEvent;
             }
+
+            /// <summary>
+            /// Converts a generic ETW event to a ExceptionCatchStopEvent.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator ExceptionCatchStopEvent(EtwEvent etwEvent) => new(etwEvent);
         }
 
         /// <summary>
@@ -19263,6 +19953,12 @@ namespace EtwTools
             }
 
             /// <summary>
+            /// Converts a generic ETW event to a ExceptionFinallyStartEvent.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator ExceptionFinallyStartEvent(EtwEvent etwEvent) => new(etwEvent);
+
+            /// <summary>
             /// A data wrapper for a ExceptionFinallyStart event.
             /// </summary>
             public ref struct ExceptionFinallyStartData
@@ -19329,17 +20025,17 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the EntryEIP field.
                 /// </summary>
-                public ulong EntryEIP => BitConverter.ToUInt64(_etwEvent.Data[Offset_EntryEIP..]);
+                public ulong EntryEIP => BitConverter.ToUInt64(_etwEvent.Data[Offset_EntryEIP..Offset_MethodID]);
 
                 /// <summary>
                 /// Retrieves the MethodID field.
                 /// </summary>
-                public ulong MethodID => BitConverter.ToUInt64(_etwEvent.Data[Offset_MethodID..]);
+                public ulong MethodID => BitConverter.ToUInt64(_etwEvent.Data[Offset_MethodID..Offset_MethodName]);
 
                 /// <summary>
                 /// Retrieves the MethodName field.
                 /// </summary>
-                public string MethodName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_MethodName..]);
+                public string MethodName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_MethodName..Offset_ClrInstanceID]);
 
                 /// <summary>
                 /// Retrieves the ClrInstanceID field.
@@ -19426,6 +20122,12 @@ namespace EtwTools
             {
                 _etwEvent = etwEvent;
             }
+
+            /// <summary>
+            /// Converts a generic ETW event to a ExceptionFinallyStopEvent.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator ExceptionFinallyStopEvent(EtwEvent etwEvent) => new(etwEvent);
         }
 
         /// <summary>
@@ -19499,6 +20201,12 @@ namespace EtwTools
             }
 
             /// <summary>
+            /// Converts a generic ETW event to a ExceptionFilterStartEvent.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator ExceptionFilterStartEvent(EtwEvent etwEvent) => new(etwEvent);
+
+            /// <summary>
             /// A data wrapper for a ExceptionFilterStart event.
             /// </summary>
             public ref struct ExceptionFilterStartData
@@ -19565,17 +20273,17 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the EntryEIP field.
                 /// </summary>
-                public ulong EntryEIP => BitConverter.ToUInt64(_etwEvent.Data[Offset_EntryEIP..]);
+                public ulong EntryEIP => BitConverter.ToUInt64(_etwEvent.Data[Offset_EntryEIP..Offset_MethodID]);
 
                 /// <summary>
                 /// Retrieves the MethodID field.
                 /// </summary>
-                public ulong MethodID => BitConverter.ToUInt64(_etwEvent.Data[Offset_MethodID..]);
+                public ulong MethodID => BitConverter.ToUInt64(_etwEvent.Data[Offset_MethodID..Offset_MethodName]);
 
                 /// <summary>
                 /// Retrieves the MethodName field.
                 /// </summary>
-                public string MethodName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_MethodName..]);
+                public string MethodName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_MethodName..Offset_ClrInstanceID]);
 
                 /// <summary>
                 /// Retrieves the ClrInstanceID field.
@@ -19662,6 +20370,12 @@ namespace EtwTools
             {
                 _etwEvent = etwEvent;
             }
+
+            /// <summary>
+            /// Converts a generic ETW event to a ExceptionFilterStopEvent.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator ExceptionFilterStopEvent(EtwEvent etwEvent) => new(etwEvent);
         }
 
         /// <summary>
@@ -19728,6 +20442,12 @@ namespace EtwTools
             {
                 _etwEvent = etwEvent;
             }
+
+            /// <summary>
+            /// Converts a generic ETW event to a ExceptionStopEvent.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator ExceptionStopEvent(EtwEvent etwEvent) => new(etwEvent);
         }
 
         /// <summary>
@@ -19799,6 +20519,12 @@ namespace EtwTools
             {
                 _etwEvent = etwEvent;
             }
+
+            /// <summary>
+            /// Converts a generic ETW event to a GCStartEventV1.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator GCStartEventV1(EtwEvent etwEvent) => new(etwEvent);
 
             /// <summary>
             /// A data wrapper for a GCStart event.
@@ -19881,22 +20607,22 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the Count field.
                 /// </summary>
-                public uint Count => BitConverter.ToUInt32(_etwEvent.Data[Offset_Count..]);
+                public uint Count => BitConverter.ToUInt32(_etwEvent.Data[Offset_Count..Offset_Depth]);
 
                 /// <summary>
                 /// Retrieves the Depth field.
                 /// </summary>
-                public uint Depth => BitConverter.ToUInt32(_etwEvent.Data[Offset_Depth..]);
+                public uint Depth => BitConverter.ToUInt32(_etwEvent.Data[Offset_Depth..Offset_Reason]);
 
                 /// <summary>
                 /// Retrieves the Reason field.
                 /// </summary>
-                public GCReasonMap Reason => (GCReasonMap)BitConverter.ToUInt32(_etwEvent.Data[Offset_Reason..]);
+                public GCReasonMap Reason => (GCReasonMap)BitConverter.ToUInt32(_etwEvent.Data[Offset_Reason..Offset_Type]);
 
                 /// <summary>
                 /// Retrieves the Type field.
                 /// </summary>
-                public GCTypeMap Type => (GCTypeMap)BitConverter.ToUInt32(_etwEvent.Data[Offset_Type..]);
+                public GCTypeMap Type => (GCTypeMap)BitConverter.ToUInt32(_etwEvent.Data[Offset_Type..Offset_ClrInstanceID]);
 
                 /// <summary>
                 /// Retrieves the ClrInstanceID field.
@@ -19991,6 +20717,12 @@ namespace EtwTools
             }
 
             /// <summary>
+            /// Converts a generic ETW event to a GCStopEventV1.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator GCStopEventV1(EtwEvent etwEvent) => new(etwEvent);
+
+            /// <summary>
             /// A data wrapper for a GCStop event.
             /// </summary>
             public ref struct GCStopData
@@ -20043,12 +20775,12 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the Count field.
                 /// </summary>
-                public uint Count => BitConverter.ToUInt32(_etwEvent.Data[Offset_Count..]);
+                public uint Count => BitConverter.ToUInt32(_etwEvent.Data[Offset_Count..Offset_Depth]);
 
                 /// <summary>
                 /// Retrieves the Depth field.
                 /// </summary>
-                public uint Depth => BitConverter.ToUInt32(_etwEvent.Data[Offset_Depth..]);
+                public uint Depth => BitConverter.ToUInt32(_etwEvent.Data[Offset_Depth..Offset_ClrInstanceID]);
 
                 /// <summary>
                 /// Retrieves the ClrInstanceID field.
@@ -20139,6 +20871,12 @@ namespace EtwTools
             {
                 _etwEvent = etwEvent;
             }
+
+            /// <summary>
+            /// Converts a generic ETW event to a GCRestartEEStopEventV1.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator GCRestartEEStopEventV1(EtwEvent etwEvent) => new(etwEvent);
 
             /// <summary>
             /// A data wrapper for a GCRestartEEStop event.
@@ -20249,6 +20987,12 @@ namespace EtwTools
             {
                 _etwEvent = etwEvent;
             }
+
+            /// <summary>
+            /// Converts a generic ETW event to a GCHeapStatsEventV1.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator GCHeapStatsEventV1(EtwEvent etwEvent) => new(etwEvent);
 
             /// <summary>
             /// A data wrapper for a GCHeapStats event.
@@ -20457,67 +21201,67 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the GenerationSize0 field.
                 /// </summary>
-                public ulong GenerationSize0 => BitConverter.ToUInt64(_etwEvent.Data[Offset_GenerationSize0..]);
+                public ulong GenerationSize0 => BitConverter.ToUInt64(_etwEvent.Data[Offset_GenerationSize0..Offset_TotalPromotedSize0]);
 
                 /// <summary>
                 /// Retrieves the TotalPromotedSize0 field.
                 /// </summary>
-                public ulong TotalPromotedSize0 => BitConverter.ToUInt64(_etwEvent.Data[Offset_TotalPromotedSize0..]);
+                public ulong TotalPromotedSize0 => BitConverter.ToUInt64(_etwEvent.Data[Offset_TotalPromotedSize0..Offset_GenerationSize1]);
 
                 /// <summary>
                 /// Retrieves the GenerationSize1 field.
                 /// </summary>
-                public ulong GenerationSize1 => BitConverter.ToUInt64(_etwEvent.Data[Offset_GenerationSize1..]);
+                public ulong GenerationSize1 => BitConverter.ToUInt64(_etwEvent.Data[Offset_GenerationSize1..Offset_TotalPromotedSize1]);
 
                 /// <summary>
                 /// Retrieves the TotalPromotedSize1 field.
                 /// </summary>
-                public ulong TotalPromotedSize1 => BitConverter.ToUInt64(_etwEvent.Data[Offset_TotalPromotedSize1..]);
+                public ulong TotalPromotedSize1 => BitConverter.ToUInt64(_etwEvent.Data[Offset_TotalPromotedSize1..Offset_GenerationSize2]);
 
                 /// <summary>
                 /// Retrieves the GenerationSize2 field.
                 /// </summary>
-                public ulong GenerationSize2 => BitConverter.ToUInt64(_etwEvent.Data[Offset_GenerationSize2..]);
+                public ulong GenerationSize2 => BitConverter.ToUInt64(_etwEvent.Data[Offset_GenerationSize2..Offset_TotalPromotedSize2]);
 
                 /// <summary>
                 /// Retrieves the TotalPromotedSize2 field.
                 /// </summary>
-                public ulong TotalPromotedSize2 => BitConverter.ToUInt64(_etwEvent.Data[Offset_TotalPromotedSize2..]);
+                public ulong TotalPromotedSize2 => BitConverter.ToUInt64(_etwEvent.Data[Offset_TotalPromotedSize2..Offset_GenerationSize3]);
 
                 /// <summary>
                 /// Retrieves the GenerationSize3 field.
                 /// </summary>
-                public ulong GenerationSize3 => BitConverter.ToUInt64(_etwEvent.Data[Offset_GenerationSize3..]);
+                public ulong GenerationSize3 => BitConverter.ToUInt64(_etwEvent.Data[Offset_GenerationSize3..Offset_TotalPromotedSize3]);
 
                 /// <summary>
                 /// Retrieves the TotalPromotedSize3 field.
                 /// </summary>
-                public ulong TotalPromotedSize3 => BitConverter.ToUInt64(_etwEvent.Data[Offset_TotalPromotedSize3..]);
+                public ulong TotalPromotedSize3 => BitConverter.ToUInt64(_etwEvent.Data[Offset_TotalPromotedSize3..Offset_FinalizationPromotedSize]);
 
                 /// <summary>
                 /// Retrieves the FinalizationPromotedSize field.
                 /// </summary>
-                public ulong FinalizationPromotedSize => BitConverter.ToUInt64(_etwEvent.Data[Offset_FinalizationPromotedSize..]);
+                public ulong FinalizationPromotedSize => BitConverter.ToUInt64(_etwEvent.Data[Offset_FinalizationPromotedSize..Offset_FinalizationPromotedCount]);
 
                 /// <summary>
                 /// Retrieves the FinalizationPromotedCount field.
                 /// </summary>
-                public ulong FinalizationPromotedCount => BitConverter.ToUInt64(_etwEvent.Data[Offset_FinalizationPromotedCount..]);
+                public ulong FinalizationPromotedCount => BitConverter.ToUInt64(_etwEvent.Data[Offset_FinalizationPromotedCount..Offset_PinnedObjectCount]);
 
                 /// <summary>
                 /// Retrieves the PinnedObjectCount field.
                 /// </summary>
-                public uint PinnedObjectCount => BitConverter.ToUInt32(_etwEvent.Data[Offset_PinnedObjectCount..]);
+                public uint PinnedObjectCount => BitConverter.ToUInt32(_etwEvent.Data[Offset_PinnedObjectCount..Offset_SinkBlockCount]);
 
                 /// <summary>
                 /// Retrieves the SinkBlockCount field.
                 /// </summary>
-                public uint SinkBlockCount => BitConverter.ToUInt32(_etwEvent.Data[Offset_SinkBlockCount..]);
+                public uint SinkBlockCount => BitConverter.ToUInt32(_etwEvent.Data[Offset_SinkBlockCount..Offset_GCHandleCount]);
 
                 /// <summary>
                 /// Retrieves the GCHandleCount field.
                 /// </summary>
-                public uint GCHandleCount => BitConverter.ToUInt32(_etwEvent.Data[Offset_GCHandleCount..]);
+                public uint GCHandleCount => BitConverter.ToUInt32(_etwEvent.Data[Offset_GCHandleCount..Offset_ClrInstanceID]);
 
                 /// <summary>
                 /// Retrieves the ClrInstanceID field.
@@ -20621,6 +21365,12 @@ namespace EtwTools
             }
 
             /// <summary>
+            /// Converts a generic ETW event to a GCCreateSegmentEventV1.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator GCCreateSegmentEventV1(EtwEvent etwEvent) => new(etwEvent);
+
+            /// <summary>
             /// A data wrapper for a GCCreateSegment event.
             /// </summary>
             public ref struct GCCreateSegmentData
@@ -20687,17 +21437,17 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the Address field.
                 /// </summary>
-                public ulong Address => BitConverter.ToUInt64(_etwEvent.Data[Offset_Address..]);
+                public ulong Address => BitConverter.ToUInt64(_etwEvent.Data[Offset_Address..Offset_Size]);
 
                 /// <summary>
                 /// Retrieves the Size field.
                 /// </summary>
-                public ulong Size => BitConverter.ToUInt64(_etwEvent.Data[Offset_Size..]);
+                public ulong Size => BitConverter.ToUInt64(_etwEvent.Data[Offset_Size..Offset_Type]);
 
                 /// <summary>
                 /// Retrieves the Type field.
                 /// </summary>
-                public GCSegmentTypeMap Type => (GCSegmentTypeMap)BitConverter.ToUInt32(_etwEvent.Data[Offset_Type..]);
+                public GCSegmentTypeMap Type => (GCSegmentTypeMap)BitConverter.ToUInt32(_etwEvent.Data[Offset_Type..Offset_ClrInstanceID]);
 
                 /// <summary>
                 /// Retrieves the ClrInstanceID field.
@@ -20791,6 +21541,12 @@ namespace EtwTools
             }
 
             /// <summary>
+            /// Converts a generic ETW event to a GCFreeSegmentEventV1.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator GCFreeSegmentEventV1(EtwEvent etwEvent) => new(etwEvent);
+
+            /// <summary>
             /// A data wrapper for a GCFreeSegment event.
             /// </summary>
             public ref struct GCFreeSegmentData
@@ -20829,7 +21585,7 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the Address field.
                 /// </summary>
-                public ulong Address => BitConverter.ToUInt64(_etwEvent.Data[Offset_Address..]);
+                public ulong Address => BitConverter.ToUInt64(_etwEvent.Data[Offset_Address..Offset_ClrInstanceID]);
 
                 /// <summary>
                 /// Retrieves the ClrInstanceID field.
@@ -20919,6 +21675,12 @@ namespace EtwTools
             {
                 _etwEvent = etwEvent;
             }
+
+            /// <summary>
+            /// Converts a generic ETW event to a GCRestartEEStartEventV1.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator GCRestartEEStartEventV1(EtwEvent etwEvent) => new(etwEvent);
 
             /// <summary>
             /// A data wrapper for a GCRestartEEStart event.
@@ -21031,6 +21793,12 @@ namespace EtwTools
             }
 
             /// <summary>
+            /// Converts a generic ETW event to a GCSuspendEEStopEventV1.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator GCSuspendEEStopEventV1(EtwEvent etwEvent) => new(etwEvent);
+
+            /// <summary>
             /// A data wrapper for a GCSuspendEEStop event.
             /// </summary>
             public ref struct GCSuspendEEStopData
@@ -21141,6 +21909,12 @@ namespace EtwTools
             }
 
             /// <summary>
+            /// Converts a generic ETW event to a GCSuspendEEStartEventV1.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator GCSuspendEEStartEventV1(EtwEvent etwEvent) => new(etwEvent);
+
+            /// <summary>
             /// A data wrapper for a GCSuspendEEStart event.
             /// </summary>
             public ref struct GCSuspendEEStartData
@@ -21193,12 +21967,12 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the Reason field.
                 /// </summary>
-                public GCSuspendEEReasonMap Reason => (GCSuspendEEReasonMap)BitConverter.ToUInt32(_etwEvent.Data[Offset_Reason..]);
+                public GCSuspendEEReasonMap Reason => (GCSuspendEEReasonMap)BitConverter.ToUInt32(_etwEvent.Data[Offset_Reason..Offset_Count]);
 
                 /// <summary>
                 /// Retrieves the Count field.
                 /// </summary>
-                public uint Count => BitConverter.ToUInt32(_etwEvent.Data[Offset_Count..]);
+                public uint Count => BitConverter.ToUInt32(_etwEvent.Data[Offset_Count..Offset_ClrInstanceID]);
 
                 /// <summary>
                 /// Retrieves the ClrInstanceID field.
@@ -21291,6 +22065,12 @@ namespace EtwTools
             }
 
             /// <summary>
+            /// Converts a generic ETW event to a GCAllocationTickEventV1.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator GCAllocationTickEventV1(EtwEvent etwEvent) => new(etwEvent);
+
+            /// <summary>
             /// A data wrapper for a GCAllocationTick event.
             /// </summary>
             public ref struct GCAllocationTickData
@@ -21343,12 +22123,12 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the AllocationAmount field.
                 /// </summary>
-                public uint AllocationAmount => BitConverter.ToUInt32(_etwEvent.Data[Offset_AllocationAmount..]);
+                public uint AllocationAmount => BitConverter.ToUInt32(_etwEvent.Data[Offset_AllocationAmount..Offset_AllocationKind]);
 
                 /// <summary>
                 /// Retrieves the AllocationKind field.
                 /// </summary>
-                public GCAllocationKindMap AllocationKind => (GCAllocationKindMap)BitConverter.ToUInt32(_etwEvent.Data[Offset_AllocationKind..]);
+                public GCAllocationKindMap AllocationKind => (GCAllocationKindMap)BitConverter.ToUInt32(_etwEvent.Data[Offset_AllocationKind..Offset_ClrInstanceID]);
 
                 /// <summary>
                 /// Retrieves the ClrInstanceID field.
@@ -21439,6 +22219,12 @@ namespace EtwTools
             {
                 _etwEvent = etwEvent;
             }
+
+            /// <summary>
+            /// Converts a generic ETW event to a GCCreateConcurrentThreadEventV1.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator GCCreateConcurrentThreadEventV1(EtwEvent etwEvent) => new(etwEvent);
 
             /// <summary>
             /// A data wrapper for a GCCreateConcurrentThread event.
@@ -21551,6 +22337,12 @@ namespace EtwTools
             }
 
             /// <summary>
+            /// Converts a generic ETW event to a GCTerminateConcurrentThreadEventV1.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator GCTerminateConcurrentThreadEventV1(EtwEvent etwEvent) => new(etwEvent);
+
+            /// <summary>
             /// A data wrapper for a GCTerminateConcurrentThread event.
             /// </summary>
             public ref struct GCTerminateConcurrentThreadData
@@ -21661,6 +22453,12 @@ namespace EtwTools
             }
 
             /// <summary>
+            /// Converts a generic ETW event to a GCFinalizersStopEventV1.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator GCFinalizersStopEventV1(EtwEvent etwEvent) => new(etwEvent);
+
+            /// <summary>
             /// A data wrapper for a GCFinalizersStop event.
             /// </summary>
             public ref struct GCFinalizersStopData
@@ -21699,7 +22497,7 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the Count field.
                 /// </summary>
-                public uint Count => BitConverter.ToUInt32(_etwEvent.Data[Offset_Count..]);
+                public uint Count => BitConverter.ToUInt32(_etwEvent.Data[Offset_Count..Offset_ClrInstanceID]);
 
                 /// <summary>
                 /// Retrieves the ClrInstanceID field.
@@ -21789,6 +22587,12 @@ namespace EtwTools
             {
                 _etwEvent = etwEvent;
             }
+
+            /// <summary>
+            /// Converts a generic ETW event to a GCFinalizersStartEventV1.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator GCFinalizersStartEventV1(EtwEvent etwEvent) => new(etwEvent);
 
             /// <summary>
             /// A data wrapper for a GCFinalizersStart event.
@@ -21901,6 +22705,12 @@ namespace EtwTools
             }
 
             /// <summary>
+            /// Converts a generic ETW event to a IOThreadCreationStartEventV1.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator IOThreadCreationStartEventV1(EtwEvent etwEvent) => new(etwEvent);
+
+            /// <summary>
             /// A data wrapper for a IOThreadCreationStart event.
             /// </summary>
             public ref struct IOThreadCreationStartData
@@ -21953,12 +22763,12 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the IOThreadCount field.
                 /// </summary>
-                public uint IOThreadCount => BitConverter.ToUInt32(_etwEvent.Data[Offset_IOThreadCount..]);
+                public uint IOThreadCount => BitConverter.ToUInt32(_etwEvent.Data[Offset_IOThreadCount..Offset_RetiredIOThreads]);
 
                 /// <summary>
                 /// Retrieves the RetiredIOThreads field.
                 /// </summary>
-                public uint RetiredIOThreads => BitConverter.ToUInt32(_etwEvent.Data[Offset_RetiredIOThreads..]);
+                public uint RetiredIOThreads => BitConverter.ToUInt32(_etwEvent.Data[Offset_RetiredIOThreads..Offset_ClrInstanceID]);
 
                 /// <summary>
                 /// Retrieves the ClrInstanceID field.
@@ -22051,6 +22861,12 @@ namespace EtwTools
             }
 
             /// <summary>
+            /// Converts a generic ETW event to a IOThreadCreationStopEventV1.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator IOThreadCreationStopEventV1(EtwEvent etwEvent) => new(etwEvent);
+
+            /// <summary>
             /// A data wrapper for a IOThreadCreationStop event.
             /// </summary>
             public ref struct IOThreadCreationStopData
@@ -22103,12 +22919,12 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the IOThreadCount field.
                 /// </summary>
-                public uint IOThreadCount => BitConverter.ToUInt32(_etwEvent.Data[Offset_IOThreadCount..]);
+                public uint IOThreadCount => BitConverter.ToUInt32(_etwEvent.Data[Offset_IOThreadCount..Offset_RetiredIOThreads]);
 
                 /// <summary>
                 /// Retrieves the RetiredIOThreads field.
                 /// </summary>
-                public uint RetiredIOThreads => BitConverter.ToUInt32(_etwEvent.Data[Offset_RetiredIOThreads..]);
+                public uint RetiredIOThreads => BitConverter.ToUInt32(_etwEvent.Data[Offset_RetiredIOThreads..Offset_ClrInstanceID]);
 
                 /// <summary>
                 /// Retrieves the ClrInstanceID field.
@@ -22201,6 +23017,12 @@ namespace EtwTools
             }
 
             /// <summary>
+            /// Converts a generic ETW event to a IOThreadRetirementStartEventV1.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator IOThreadRetirementStartEventV1(EtwEvent etwEvent) => new(etwEvent);
+
+            /// <summary>
             /// A data wrapper for a IOThreadRetirementStart event.
             /// </summary>
             public ref struct IOThreadRetirementStartData
@@ -22253,12 +23075,12 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the IOThreadCount field.
                 /// </summary>
-                public uint IOThreadCount => BitConverter.ToUInt32(_etwEvent.Data[Offset_IOThreadCount..]);
+                public uint IOThreadCount => BitConverter.ToUInt32(_etwEvent.Data[Offset_IOThreadCount..Offset_RetiredIOThreads]);
 
                 /// <summary>
                 /// Retrieves the RetiredIOThreads field.
                 /// </summary>
-                public uint RetiredIOThreads => BitConverter.ToUInt32(_etwEvent.Data[Offset_RetiredIOThreads..]);
+                public uint RetiredIOThreads => BitConverter.ToUInt32(_etwEvent.Data[Offset_RetiredIOThreads..Offset_ClrInstanceID]);
 
                 /// <summary>
                 /// Retrieves the ClrInstanceID field.
@@ -22351,6 +23173,12 @@ namespace EtwTools
             }
 
             /// <summary>
+            /// Converts a generic ETW event to a IOThreadRetirementStopEventV1.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator IOThreadRetirementStopEventV1(EtwEvent etwEvent) => new(etwEvent);
+
+            /// <summary>
             /// A data wrapper for a IOThreadRetirementStop event.
             /// </summary>
             public ref struct IOThreadRetirementStopData
@@ -22403,12 +23231,12 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the IOThreadCount field.
                 /// </summary>
-                public uint IOThreadCount => BitConverter.ToUInt32(_etwEvent.Data[Offset_IOThreadCount..]);
+                public uint IOThreadCount => BitConverter.ToUInt32(_etwEvent.Data[Offset_IOThreadCount..Offset_RetiredIOThreads]);
 
                 /// <summary>
                 /// Retrieves the RetiredIOThreads field.
                 /// </summary>
-                public uint RetiredIOThreads => BitConverter.ToUInt32(_etwEvent.Data[Offset_RetiredIOThreads..]);
+                public uint RetiredIOThreads => BitConverter.ToUInt32(_etwEvent.Data[Offset_RetiredIOThreads..Offset_ClrInstanceID]);
 
                 /// <summary>
                 /// Retrieves the ClrInstanceID field.
@@ -22499,6 +23327,12 @@ namespace EtwTools
             {
                 _etwEvent = etwEvent;
             }
+
+            /// <summary>
+            /// Converts a generic ETW event to a ExceptionStartEventV1.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator ExceptionStartEventV1(EtwEvent etwEvent) => new(etwEvent);
 
             /// <summary>
             /// A data wrapper for a ExceptionStart event.
@@ -22595,27 +23429,27 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the ExceptionType field.
                 /// </summary>
-                public string ExceptionType => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_ExceptionType..]);
+                public string ExceptionType => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_ExceptionType..Offset_ExceptionMessage]);
 
                 /// <summary>
                 /// Retrieves the ExceptionMessage field.
                 /// </summary>
-                public string ExceptionMessage => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_ExceptionMessage..]);
+                public string ExceptionMessage => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_ExceptionMessage..Offset_ExceptionEIP]);
 
                 /// <summary>
                 /// Retrieves the ExceptionEIP field.
                 /// </summary>
-                public ulong ExceptionEIP => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_ExceptionEIP..]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_ExceptionEIP..]);
+                public ulong ExceptionEIP => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_ExceptionEIP..Offset_ExceptionHRESULT]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_ExceptionEIP..Offset_ExceptionHRESULT]);
 
                 /// <summary>
                 /// Retrieves the ExceptionHRESULT field.
                 /// </summary>
-                public uint ExceptionHRESULT => BitConverter.ToUInt32(_etwEvent.Data[Offset_ExceptionHRESULT..]);
+                public uint ExceptionHRESULT => BitConverter.ToUInt32(_etwEvent.Data[Offset_ExceptionHRESULT..Offset_ExceptionFlags]);
 
                 /// <summary>
                 /// Retrieves the ExceptionFlags field.
                 /// </summary>
-                public ExceptionThrownFlagsMap ExceptionFlags => (ExceptionThrownFlagsMap)BitConverter.ToUInt16(_etwEvent.Data[Offset_ExceptionFlags..]);
+                public ExceptionThrownFlagsMap ExceptionFlags => (ExceptionThrownFlagsMap)BitConverter.ToUInt16(_etwEvent.Data[Offset_ExceptionFlags..Offset_ClrInstanceID]);
 
                 /// <summary>
                 /// Retrieves the ClrInstanceID field.
@@ -22709,6 +23543,12 @@ namespace EtwTools
             {
                 _etwEvent = etwEvent;
             }
+
+            /// <summary>
+            /// Converts a generic ETW event to a ContentionStartEventV1.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator ContentionStartEventV1(EtwEvent etwEvent) => new(etwEvent);
 
             /// <summary>
             /// A data wrapper for a ContentionStart event.
@@ -22841,6 +23681,12 @@ namespace EtwTools
             }
 
             /// <summary>
+            /// Converts a generic ETW event to a MethodLoadEventV1.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator MethodLoadEventV1(EtwEvent etwEvent) => new(etwEvent);
+
+            /// <summary>
             /// A data wrapper for a MethodLoad event.
             /// </summary>
             public ref struct MethodLoadData
@@ -22949,32 +23795,32 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the MethodID field.
                 /// </summary>
-                public ulong MethodID => BitConverter.ToUInt64(_etwEvent.Data[Offset_MethodID..]);
+                public ulong MethodID => BitConverter.ToUInt64(_etwEvent.Data[Offset_MethodID..Offset_ModuleID]);
 
                 /// <summary>
                 /// Retrieves the ModuleID field.
                 /// </summary>
-                public ulong ModuleID => BitConverter.ToUInt64(_etwEvent.Data[Offset_ModuleID..]);
+                public ulong ModuleID => BitConverter.ToUInt64(_etwEvent.Data[Offset_ModuleID..Offset_MethodStartAddress]);
 
                 /// <summary>
                 /// Retrieves the MethodStartAddress field.
                 /// </summary>
-                public ulong MethodStartAddress => BitConverter.ToUInt64(_etwEvent.Data[Offset_MethodStartAddress..]);
+                public ulong MethodStartAddress => BitConverter.ToUInt64(_etwEvent.Data[Offset_MethodStartAddress..Offset_MethodSize]);
 
                 /// <summary>
                 /// Retrieves the MethodSize field.
                 /// </summary>
-                public uint MethodSize => BitConverter.ToUInt32(_etwEvent.Data[Offset_MethodSize..]);
+                public uint MethodSize => BitConverter.ToUInt32(_etwEvent.Data[Offset_MethodSize..Offset_MethodToken]);
 
                 /// <summary>
                 /// Retrieves the MethodToken field.
                 /// </summary>
-                public uint MethodToken => BitConverter.ToUInt32(_etwEvent.Data[Offset_MethodToken..]);
+                public uint MethodToken => BitConverter.ToUInt32(_etwEvent.Data[Offset_MethodToken..Offset_MethodFlags]);
 
                 /// <summary>
                 /// Retrieves the MethodFlags field.
                 /// </summary>
-                public MethodFlagsMap MethodFlags => (MethodFlagsMap)BitConverter.ToUInt32(_etwEvent.Data[Offset_MethodFlags..]);
+                public MethodFlagsMap MethodFlags => (MethodFlagsMap)BitConverter.ToUInt32(_etwEvent.Data[Offset_MethodFlags..Offset_ClrInstanceID]);
 
                 /// <summary>
                 /// Retrieves the ClrInstanceID field.
@@ -23069,6 +23915,12 @@ namespace EtwTools
             {
                 _etwEvent = etwEvent;
             }
+
+            /// <summary>
+            /// Converts a generic ETW event to a MethodUnloadEventV1.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator MethodUnloadEventV1(EtwEvent etwEvent) => new(etwEvent);
 
             /// <summary>
             /// A data wrapper for a MethodUnload event.
@@ -23179,32 +24031,32 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the MethodID field.
                 /// </summary>
-                public ulong MethodID => BitConverter.ToUInt64(_etwEvent.Data[Offset_MethodID..]);
+                public ulong MethodID => BitConverter.ToUInt64(_etwEvent.Data[Offset_MethodID..Offset_ModuleID]);
 
                 /// <summary>
                 /// Retrieves the ModuleID field.
                 /// </summary>
-                public ulong ModuleID => BitConverter.ToUInt64(_etwEvent.Data[Offset_ModuleID..]);
+                public ulong ModuleID => BitConverter.ToUInt64(_etwEvent.Data[Offset_ModuleID..Offset_MethodStartAddress]);
 
                 /// <summary>
                 /// Retrieves the MethodStartAddress field.
                 /// </summary>
-                public ulong MethodStartAddress => BitConverter.ToUInt64(_etwEvent.Data[Offset_MethodStartAddress..]);
+                public ulong MethodStartAddress => BitConverter.ToUInt64(_etwEvent.Data[Offset_MethodStartAddress..Offset_MethodSize]);
 
                 /// <summary>
                 /// Retrieves the MethodSize field.
                 /// </summary>
-                public uint MethodSize => BitConverter.ToUInt32(_etwEvent.Data[Offset_MethodSize..]);
+                public uint MethodSize => BitConverter.ToUInt32(_etwEvent.Data[Offset_MethodSize..Offset_MethodToken]);
 
                 /// <summary>
                 /// Retrieves the MethodToken field.
                 /// </summary>
-                public uint MethodToken => BitConverter.ToUInt32(_etwEvent.Data[Offset_MethodToken..]);
+                public uint MethodToken => BitConverter.ToUInt32(_etwEvent.Data[Offset_MethodToken..Offset_MethodFlags]);
 
                 /// <summary>
                 /// Retrieves the MethodFlags field.
                 /// </summary>
-                public MethodFlagsMap MethodFlags => (MethodFlagsMap)BitConverter.ToUInt32(_etwEvent.Data[Offset_MethodFlags..]);
+                public MethodFlagsMap MethodFlags => (MethodFlagsMap)BitConverter.ToUInt32(_etwEvent.Data[Offset_MethodFlags..Offset_ClrInstanceID]);
 
                 /// <summary>
                 /// Retrieves the ClrInstanceID field.
@@ -23299,6 +24151,12 @@ namespace EtwTools
             {
                 _etwEvent = etwEvent;
             }
+
+            /// <summary>
+            /// Converts a generic ETW event to a MethodLoadVerboseEventV1.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator MethodLoadVerboseEventV1(EtwEvent etwEvent) => new(etwEvent);
 
             /// <summary>
             /// A data wrapper for a MethodLoadVerbose event.
@@ -23451,47 +24309,47 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the MethodID field.
                 /// </summary>
-                public ulong MethodID => BitConverter.ToUInt64(_etwEvent.Data[Offset_MethodID..]);
+                public ulong MethodID => BitConverter.ToUInt64(_etwEvent.Data[Offset_MethodID..Offset_ModuleID]);
 
                 /// <summary>
                 /// Retrieves the ModuleID field.
                 /// </summary>
-                public ulong ModuleID => BitConverter.ToUInt64(_etwEvent.Data[Offset_ModuleID..]);
+                public ulong ModuleID => BitConverter.ToUInt64(_etwEvent.Data[Offset_ModuleID..Offset_MethodStartAddress]);
 
                 /// <summary>
                 /// Retrieves the MethodStartAddress field.
                 /// </summary>
-                public ulong MethodStartAddress => BitConverter.ToUInt64(_etwEvent.Data[Offset_MethodStartAddress..]);
+                public ulong MethodStartAddress => BitConverter.ToUInt64(_etwEvent.Data[Offset_MethodStartAddress..Offset_MethodSize]);
 
                 /// <summary>
                 /// Retrieves the MethodSize field.
                 /// </summary>
-                public uint MethodSize => BitConverter.ToUInt32(_etwEvent.Data[Offset_MethodSize..]);
+                public uint MethodSize => BitConverter.ToUInt32(_etwEvent.Data[Offset_MethodSize..Offset_MethodToken]);
 
                 /// <summary>
                 /// Retrieves the MethodToken field.
                 /// </summary>
-                public uint MethodToken => BitConverter.ToUInt32(_etwEvent.Data[Offset_MethodToken..]);
+                public uint MethodToken => BitConverter.ToUInt32(_etwEvent.Data[Offset_MethodToken..Offset_MethodFlags]);
 
                 /// <summary>
                 /// Retrieves the MethodFlags field.
                 /// </summary>
-                public MethodFlagsMap MethodFlags => (MethodFlagsMap)BitConverter.ToUInt32(_etwEvent.Data[Offset_MethodFlags..]);
+                public MethodFlagsMap MethodFlags => (MethodFlagsMap)BitConverter.ToUInt32(_etwEvent.Data[Offset_MethodFlags..Offset_MethodNamespace]);
 
                 /// <summary>
                 /// Retrieves the MethodNamespace field.
                 /// </summary>
-                public string MethodNamespace => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_MethodNamespace..]);
+                public string MethodNamespace => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_MethodNamespace..Offset_MethodName]);
 
                 /// <summary>
                 /// Retrieves the MethodName field.
                 /// </summary>
-                public string MethodName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_MethodName..]);
+                public string MethodName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_MethodName..Offset_MethodSignature]);
 
                 /// <summary>
                 /// Retrieves the MethodSignature field.
                 /// </summary>
-                public string MethodSignature => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_MethodSignature..]);
+                public string MethodSignature => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_MethodSignature..Offset_ClrInstanceID]);
 
                 /// <summary>
                 /// Retrieves the ClrInstanceID field.
@@ -23589,6 +24447,12 @@ namespace EtwTools
             {
                 _etwEvent = etwEvent;
             }
+
+            /// <summary>
+            /// Converts a generic ETW event to a MethodUnloadVerboseEventV1.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator MethodUnloadVerboseEventV1(EtwEvent etwEvent) => new(etwEvent);
 
             /// <summary>
             /// A data wrapper for a MethodUnloadVerbose event.
@@ -23741,47 +24605,47 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the MethodID field.
                 /// </summary>
-                public ulong MethodID => BitConverter.ToUInt64(_etwEvent.Data[Offset_MethodID..]);
+                public ulong MethodID => BitConverter.ToUInt64(_etwEvent.Data[Offset_MethodID..Offset_ModuleID]);
 
                 /// <summary>
                 /// Retrieves the ModuleID field.
                 /// </summary>
-                public ulong ModuleID => BitConverter.ToUInt64(_etwEvent.Data[Offset_ModuleID..]);
+                public ulong ModuleID => BitConverter.ToUInt64(_etwEvent.Data[Offset_ModuleID..Offset_MethodStartAddress]);
 
                 /// <summary>
                 /// Retrieves the MethodStartAddress field.
                 /// </summary>
-                public ulong MethodStartAddress => BitConverter.ToUInt64(_etwEvent.Data[Offset_MethodStartAddress..]);
+                public ulong MethodStartAddress => BitConverter.ToUInt64(_etwEvent.Data[Offset_MethodStartAddress..Offset_MethodSize]);
 
                 /// <summary>
                 /// Retrieves the MethodSize field.
                 /// </summary>
-                public uint MethodSize => BitConverter.ToUInt32(_etwEvent.Data[Offset_MethodSize..]);
+                public uint MethodSize => BitConverter.ToUInt32(_etwEvent.Data[Offset_MethodSize..Offset_MethodToken]);
 
                 /// <summary>
                 /// Retrieves the MethodToken field.
                 /// </summary>
-                public uint MethodToken => BitConverter.ToUInt32(_etwEvent.Data[Offset_MethodToken..]);
+                public uint MethodToken => BitConverter.ToUInt32(_etwEvent.Data[Offset_MethodToken..Offset_MethodFlags]);
 
                 /// <summary>
                 /// Retrieves the MethodFlags field.
                 /// </summary>
-                public MethodFlagsMap MethodFlags => (MethodFlagsMap)BitConverter.ToUInt32(_etwEvent.Data[Offset_MethodFlags..]);
+                public MethodFlagsMap MethodFlags => (MethodFlagsMap)BitConverter.ToUInt32(_etwEvent.Data[Offset_MethodFlags..Offset_MethodNamespace]);
 
                 /// <summary>
                 /// Retrieves the MethodNamespace field.
                 /// </summary>
-                public string MethodNamespace => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_MethodNamespace..]);
+                public string MethodNamespace => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_MethodNamespace..Offset_MethodName]);
 
                 /// <summary>
                 /// Retrieves the MethodName field.
                 /// </summary>
-                public string MethodName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_MethodName..]);
+                public string MethodName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_MethodName..Offset_MethodSignature]);
 
                 /// <summary>
                 /// Retrieves the MethodSignature field.
                 /// </summary>
-                public string MethodSignature => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_MethodSignature..]);
+                public string MethodSignature => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_MethodSignature..Offset_ClrInstanceID]);
 
                 /// <summary>
                 /// Retrieves the ClrInstanceID field.
@@ -23879,6 +24743,12 @@ namespace EtwTools
             {
                 _etwEvent = etwEvent;
             }
+
+            /// <summary>
+            /// Converts a generic ETW event to a MethodJittingStartedEventV1.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator MethodJittingStartedEventV1(EtwEvent etwEvent) => new(etwEvent);
 
             /// <summary>
             /// A data wrapper for a MethodJittingStarted event.
@@ -24003,37 +24873,37 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the MethodID field.
                 /// </summary>
-                public ulong MethodID => BitConverter.ToUInt64(_etwEvent.Data[Offset_MethodID..]);
+                public ulong MethodID => BitConverter.ToUInt64(_etwEvent.Data[Offset_MethodID..Offset_ModuleID]);
 
                 /// <summary>
                 /// Retrieves the ModuleID field.
                 /// </summary>
-                public ulong ModuleID => BitConverter.ToUInt64(_etwEvent.Data[Offset_ModuleID..]);
+                public ulong ModuleID => BitConverter.ToUInt64(_etwEvent.Data[Offset_ModuleID..Offset_MethodToken]);
 
                 /// <summary>
                 /// Retrieves the MethodToken field.
                 /// </summary>
-                public uint MethodToken => BitConverter.ToUInt32(_etwEvent.Data[Offset_MethodToken..]);
+                public uint MethodToken => BitConverter.ToUInt32(_etwEvent.Data[Offset_MethodToken..Offset_MethodILSize]);
 
                 /// <summary>
                 /// Retrieves the MethodILSize field.
                 /// </summary>
-                public uint MethodILSize => BitConverter.ToUInt32(_etwEvent.Data[Offset_MethodILSize..]);
+                public uint MethodILSize => BitConverter.ToUInt32(_etwEvent.Data[Offset_MethodILSize..Offset_MethodNamespace]);
 
                 /// <summary>
                 /// Retrieves the MethodNamespace field.
                 /// </summary>
-                public string MethodNamespace => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_MethodNamespace..]);
+                public string MethodNamespace => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_MethodNamespace..Offset_MethodName]);
 
                 /// <summary>
                 /// Retrieves the MethodName field.
                 /// </summary>
-                public string MethodName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_MethodName..]);
+                public string MethodName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_MethodName..Offset_MethodSignature]);
 
                 /// <summary>
                 /// Retrieves the MethodSignature field.
                 /// </summary>
-                public string MethodSignature => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_MethodSignature..]);
+                public string MethodSignature => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_MethodSignature..Offset_ClrInstanceID]);
 
                 /// <summary>
                 /// Retrieves the ClrInstanceID field.
@@ -24129,6 +24999,12 @@ namespace EtwTools
             {
                 _etwEvent = etwEvent;
             }
+
+            /// <summary>
+            /// Converts a generic ETW event to a LoaderDomainModuleLoadEventV1.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator LoaderDomainModuleLoadEventV1(EtwEvent etwEvent) => new(etwEvent);
 
             /// <summary>
             /// A data wrapper for a LoaderDomainModuleLoad event.
@@ -24253,37 +25129,37 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the ModuleID field.
                 /// </summary>
-                public ulong ModuleID => BitConverter.ToUInt64(_etwEvent.Data[Offset_ModuleID..]);
+                public ulong ModuleID => BitConverter.ToUInt64(_etwEvent.Data[Offset_ModuleID..Offset_AssemblyID]);
 
                 /// <summary>
                 /// Retrieves the AssemblyID field.
                 /// </summary>
-                public ulong AssemblyID => BitConverter.ToUInt64(_etwEvent.Data[Offset_AssemblyID..]);
+                public ulong AssemblyID => BitConverter.ToUInt64(_etwEvent.Data[Offset_AssemblyID..Offset_AppDomainID]);
 
                 /// <summary>
                 /// Retrieves the AppDomainID field.
                 /// </summary>
-                public ulong AppDomainID => BitConverter.ToUInt64(_etwEvent.Data[Offset_AppDomainID..]);
+                public ulong AppDomainID => BitConverter.ToUInt64(_etwEvent.Data[Offset_AppDomainID..Offset_ModuleFlags]);
 
                 /// <summary>
                 /// Retrieves the ModuleFlags field.
                 /// </summary>
-                public ModuleFlagsMap ModuleFlags => (ModuleFlagsMap)BitConverter.ToUInt32(_etwEvent.Data[Offset_ModuleFlags..]);
+                public ModuleFlagsMap ModuleFlags => (ModuleFlagsMap)BitConverter.ToUInt32(_etwEvent.Data[Offset_ModuleFlags..Offset_Reserved1]);
 
                 /// <summary>
                 /// Retrieves the Reserved1 field.
                 /// </summary>
-                public uint Reserved1 => BitConverter.ToUInt32(_etwEvent.Data[Offset_Reserved1..]);
+                public uint Reserved1 => BitConverter.ToUInt32(_etwEvent.Data[Offset_Reserved1..Offset_ModuleILPath]);
 
                 /// <summary>
                 /// Retrieves the ModuleILPath field.
                 /// </summary>
-                public string ModuleILPath => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_ModuleILPath..]);
+                public string ModuleILPath => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_ModuleILPath..Offset_ModuleNativePath]);
 
                 /// <summary>
                 /// Retrieves the ModuleNativePath field.
                 /// </summary>
-                public string ModuleNativePath => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_ModuleNativePath..]);
+                public string ModuleNativePath => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_ModuleNativePath..Offset_ClrInstanceID]);
 
                 /// <summary>
                 /// Retrieves the ClrInstanceID field.
@@ -24379,6 +25255,12 @@ namespace EtwTools
             {
                 _etwEvent = etwEvent;
             }
+
+            /// <summary>
+            /// Converts a generic ETW event to a LoaderModuleLoadEventV1.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator LoaderModuleLoadEventV1(EtwEvent etwEvent) => new(etwEvent);
 
             /// <summary>
             /// A data wrapper for a LoaderModuleLoad event.
@@ -24489,32 +25371,32 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the ModuleID field.
                 /// </summary>
-                public ulong ModuleID => BitConverter.ToUInt64(_etwEvent.Data[Offset_ModuleID..]);
+                public ulong ModuleID => BitConverter.ToUInt64(_etwEvent.Data[Offset_ModuleID..Offset_AssemblyID]);
 
                 /// <summary>
                 /// Retrieves the AssemblyID field.
                 /// </summary>
-                public ulong AssemblyID => BitConverter.ToUInt64(_etwEvent.Data[Offset_AssemblyID..]);
+                public ulong AssemblyID => BitConverter.ToUInt64(_etwEvent.Data[Offset_AssemblyID..Offset_ModuleFlags]);
 
                 /// <summary>
                 /// Retrieves the ModuleFlags field.
                 /// </summary>
-                public ModuleFlagsMap ModuleFlags => (ModuleFlagsMap)BitConverter.ToUInt32(_etwEvent.Data[Offset_ModuleFlags..]);
+                public ModuleFlagsMap ModuleFlags => (ModuleFlagsMap)BitConverter.ToUInt32(_etwEvent.Data[Offset_ModuleFlags..Offset_Reserved1]);
 
                 /// <summary>
                 /// Retrieves the Reserved1 field.
                 /// </summary>
-                public uint Reserved1 => BitConverter.ToUInt32(_etwEvent.Data[Offset_Reserved1..]);
+                public uint Reserved1 => BitConverter.ToUInt32(_etwEvent.Data[Offset_Reserved1..Offset_ModuleILPath]);
 
                 /// <summary>
                 /// Retrieves the ModuleILPath field.
                 /// </summary>
-                public string ModuleILPath => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_ModuleILPath..]);
+                public string ModuleILPath => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_ModuleILPath..Offset_ModuleNativePath]);
 
                 /// <summary>
                 /// Retrieves the ModuleNativePath field.
                 /// </summary>
-                public string ModuleNativePath => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_ModuleNativePath..]);
+                public string ModuleNativePath => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_ModuleNativePath..Offset_ClrInstanceID]);
 
                 /// <summary>
                 /// Retrieves the ClrInstanceID field.
@@ -24609,6 +25491,12 @@ namespace EtwTools
             {
                 _etwEvent = etwEvent;
             }
+
+            /// <summary>
+            /// Converts a generic ETW event to a LoaderModuleUnloadEventV1.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator LoaderModuleUnloadEventV1(EtwEvent etwEvent) => new(etwEvent);
 
             /// <summary>
             /// A data wrapper for a LoaderModuleUnload event.
@@ -24719,32 +25607,32 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the ModuleID field.
                 /// </summary>
-                public ulong ModuleID => BitConverter.ToUInt64(_etwEvent.Data[Offset_ModuleID..]);
+                public ulong ModuleID => BitConverter.ToUInt64(_etwEvent.Data[Offset_ModuleID..Offset_AssemblyID]);
 
                 /// <summary>
                 /// Retrieves the AssemblyID field.
                 /// </summary>
-                public ulong AssemblyID => BitConverter.ToUInt64(_etwEvent.Data[Offset_AssemblyID..]);
+                public ulong AssemblyID => BitConverter.ToUInt64(_etwEvent.Data[Offset_AssemblyID..Offset_ModuleFlags]);
 
                 /// <summary>
                 /// Retrieves the ModuleFlags field.
                 /// </summary>
-                public ModuleFlagsMap ModuleFlags => (ModuleFlagsMap)BitConverter.ToUInt32(_etwEvent.Data[Offset_ModuleFlags..]);
+                public ModuleFlagsMap ModuleFlags => (ModuleFlagsMap)BitConverter.ToUInt32(_etwEvent.Data[Offset_ModuleFlags..Offset_Reserved1]);
 
                 /// <summary>
                 /// Retrieves the Reserved1 field.
                 /// </summary>
-                public uint Reserved1 => BitConverter.ToUInt32(_etwEvent.Data[Offset_Reserved1..]);
+                public uint Reserved1 => BitConverter.ToUInt32(_etwEvent.Data[Offset_Reserved1..Offset_ModuleILPath]);
 
                 /// <summary>
                 /// Retrieves the ModuleILPath field.
                 /// </summary>
-                public string ModuleILPath => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_ModuleILPath..]);
+                public string ModuleILPath => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_ModuleILPath..Offset_ModuleNativePath]);
 
                 /// <summary>
                 /// Retrieves the ModuleNativePath field.
                 /// </summary>
-                public string ModuleNativePath => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_ModuleNativePath..]);
+                public string ModuleNativePath => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_ModuleNativePath..Offset_ClrInstanceID]);
 
                 /// <summary>
                 /// Retrieves the ClrInstanceID field.
@@ -24841,6 +25729,12 @@ namespace EtwTools
             }
 
             /// <summary>
+            /// Converts a generic ETW event to a LoaderAssemblyLoadEventV1.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator LoaderAssemblyLoadEventV1(EtwEvent etwEvent) => new(etwEvent);
+
+            /// <summary>
             /// A data wrapper for a LoaderAssemblyLoad event.
             /// </summary>
             public ref struct LoaderAssemblyLoadData
@@ -24935,27 +25829,27 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the AssemblyID field.
                 /// </summary>
-                public ulong AssemblyID => BitConverter.ToUInt64(_etwEvent.Data[Offset_AssemblyID..]);
+                public ulong AssemblyID => BitConverter.ToUInt64(_etwEvent.Data[Offset_AssemblyID..Offset_AppDomainID]);
 
                 /// <summary>
                 /// Retrieves the AppDomainID field.
                 /// </summary>
-                public ulong AppDomainID => BitConverter.ToUInt64(_etwEvent.Data[Offset_AppDomainID..]);
+                public ulong AppDomainID => BitConverter.ToUInt64(_etwEvent.Data[Offset_AppDomainID..Offset_BindingID]);
 
                 /// <summary>
                 /// Retrieves the BindingID field.
                 /// </summary>
-                public ulong BindingID => BitConverter.ToUInt64(_etwEvent.Data[Offset_BindingID..]);
+                public ulong BindingID => BitConverter.ToUInt64(_etwEvent.Data[Offset_BindingID..Offset_AssemblyFlags]);
 
                 /// <summary>
                 /// Retrieves the AssemblyFlags field.
                 /// </summary>
-                public AssemblyFlagsMap AssemblyFlags => (AssemblyFlagsMap)BitConverter.ToUInt32(_etwEvent.Data[Offset_AssemblyFlags..]);
+                public AssemblyFlagsMap AssemblyFlags => (AssemblyFlagsMap)BitConverter.ToUInt32(_etwEvent.Data[Offset_AssemblyFlags..Offset_FullyQualifiedAssemblyName]);
 
                 /// <summary>
                 /// Retrieves the FullyQualifiedAssemblyName field.
                 /// </summary>
-                public string FullyQualifiedAssemblyName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_FullyQualifiedAssemblyName..]);
+                public string FullyQualifiedAssemblyName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_FullyQualifiedAssemblyName..Offset_ClrInstanceID]);
 
                 /// <summary>
                 /// Retrieves the ClrInstanceID field.
@@ -25049,6 +25943,12 @@ namespace EtwTools
             {
                 _etwEvent = etwEvent;
             }
+
+            /// <summary>
+            /// Converts a generic ETW event to a LoaderAssemblyUnloadEventV1.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator LoaderAssemblyUnloadEventV1(EtwEvent etwEvent) => new(etwEvent);
 
             /// <summary>
             /// A data wrapper for a LoaderAssemblyUnload event.
@@ -25145,27 +26045,27 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the AssemblyID field.
                 /// </summary>
-                public ulong AssemblyID => BitConverter.ToUInt64(_etwEvent.Data[Offset_AssemblyID..]);
+                public ulong AssemblyID => BitConverter.ToUInt64(_etwEvent.Data[Offset_AssemblyID..Offset_AppDomainID]);
 
                 /// <summary>
                 /// Retrieves the AppDomainID field.
                 /// </summary>
-                public ulong AppDomainID => BitConverter.ToUInt64(_etwEvent.Data[Offset_AppDomainID..]);
+                public ulong AppDomainID => BitConverter.ToUInt64(_etwEvent.Data[Offset_AppDomainID..Offset_BindingID]);
 
                 /// <summary>
                 /// Retrieves the BindingID field.
                 /// </summary>
-                public ulong BindingID => BitConverter.ToUInt64(_etwEvent.Data[Offset_BindingID..]);
+                public ulong BindingID => BitConverter.ToUInt64(_etwEvent.Data[Offset_BindingID..Offset_AssemblyFlags]);
 
                 /// <summary>
                 /// Retrieves the AssemblyFlags field.
                 /// </summary>
-                public AssemblyFlagsMap AssemblyFlags => (AssemblyFlagsMap)BitConverter.ToUInt32(_etwEvent.Data[Offset_AssemblyFlags..]);
+                public AssemblyFlagsMap AssemblyFlags => (AssemblyFlagsMap)BitConverter.ToUInt32(_etwEvent.Data[Offset_AssemblyFlags..Offset_FullyQualifiedAssemblyName]);
 
                 /// <summary>
                 /// Retrieves the FullyQualifiedAssemblyName field.
                 /// </summary>
-                public string FullyQualifiedAssemblyName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_FullyQualifiedAssemblyName..]);
+                public string FullyQualifiedAssemblyName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_FullyQualifiedAssemblyName..Offset_ClrInstanceID]);
 
                 /// <summary>
                 /// Retrieves the ClrInstanceID field.
@@ -25261,6 +26161,12 @@ namespace EtwTools
             }
 
             /// <summary>
+            /// Converts a generic ETW event to a LoaderAppDomainLoadEventV1.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator LoaderAppDomainLoadEventV1(EtwEvent etwEvent) => new(etwEvent);
+
+            /// <summary>
             /// A data wrapper for a LoaderAppDomainLoad event.
             /// </summary>
             public ref struct LoaderAppDomainLoadData
@@ -25341,22 +26247,22 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the AppDomainID field.
                 /// </summary>
-                public ulong AppDomainID => BitConverter.ToUInt64(_etwEvent.Data[Offset_AppDomainID..]);
+                public ulong AppDomainID => BitConverter.ToUInt64(_etwEvent.Data[Offset_AppDomainID..Offset_AppDomainFlags]);
 
                 /// <summary>
                 /// Retrieves the AppDomainFlags field.
                 /// </summary>
-                public AppDomainFlagsMap AppDomainFlags => (AppDomainFlagsMap)BitConverter.ToUInt32(_etwEvent.Data[Offset_AppDomainFlags..]);
+                public AppDomainFlagsMap AppDomainFlags => (AppDomainFlagsMap)BitConverter.ToUInt32(_etwEvent.Data[Offset_AppDomainFlags..Offset_AppDomainName]);
 
                 /// <summary>
                 /// Retrieves the AppDomainName field.
                 /// </summary>
-                public string AppDomainName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_AppDomainName..]);
+                public string AppDomainName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_AppDomainName..Offset_AppDomainIndex]);
 
                 /// <summary>
                 /// Retrieves the AppDomainIndex field.
                 /// </summary>
-                public uint AppDomainIndex => BitConverter.ToUInt32(_etwEvent.Data[Offset_AppDomainIndex..]);
+                public uint AppDomainIndex => BitConverter.ToUInt32(_etwEvent.Data[Offset_AppDomainIndex..Offset_ClrInstanceID]);
 
                 /// <summary>
                 /// Retrieves the ClrInstanceID field.
@@ -25451,6 +26357,12 @@ namespace EtwTools
             }
 
             /// <summary>
+            /// Converts a generic ETW event to a LoaderAppDomainUnloadEventV1.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator LoaderAppDomainUnloadEventV1(EtwEvent etwEvent) => new(etwEvent);
+
+            /// <summary>
             /// A data wrapper for a LoaderAppDomainUnload event.
             /// </summary>
             public ref struct LoaderAppDomainUnloadData
@@ -25531,22 +26443,22 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the AppDomainID field.
                 /// </summary>
-                public ulong AppDomainID => BitConverter.ToUInt64(_etwEvent.Data[Offset_AppDomainID..]);
+                public ulong AppDomainID => BitConverter.ToUInt64(_etwEvent.Data[Offset_AppDomainID..Offset_AppDomainFlags]);
 
                 /// <summary>
                 /// Retrieves the AppDomainFlags field.
                 /// </summary>
-                public AppDomainFlagsMap AppDomainFlags => (AppDomainFlagsMap)BitConverter.ToUInt32(_etwEvent.Data[Offset_AppDomainFlags..]);
+                public AppDomainFlagsMap AppDomainFlags => (AppDomainFlagsMap)BitConverter.ToUInt32(_etwEvent.Data[Offset_AppDomainFlags..Offset_AppDomainName]);
 
                 /// <summary>
                 /// Retrieves the AppDomainName field.
                 /// </summary>
-                public string AppDomainName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_AppDomainName..]);
+                public string AppDomainName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_AppDomainName..Offset_AppDomainIndex]);
 
                 /// <summary>
                 /// Retrieves the AppDomainIndex field.
                 /// </summary>
-                public uint AppDomainIndex => BitConverter.ToUInt32(_etwEvent.Data[Offset_AppDomainIndex..]);
+                public uint AppDomainIndex => BitConverter.ToUInt32(_etwEvent.Data[Offset_AppDomainIndex..Offset_ClrInstanceID]);
 
                 /// <summary>
                 /// Retrieves the ClrInstanceID field.
@@ -25641,6 +26553,12 @@ namespace EtwTools
             }
 
             /// <summary>
+            /// Converts a generic ETW event to a StrongNameVerificationStartEventV1.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator StrongNameVerificationStartEventV1(EtwEvent etwEvent) => new(etwEvent);
+
+            /// <summary>
             /// A data wrapper for a StrongNameVerificationStart event.
             /// </summary>
             public ref struct StrongNameVerificationStartData
@@ -25707,17 +26625,17 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the VerificationFlags field.
                 /// </summary>
-                public uint VerificationFlags => BitConverter.ToUInt32(_etwEvent.Data[Offset_VerificationFlags..]);
+                public uint VerificationFlags => BitConverter.ToUInt32(_etwEvent.Data[Offset_VerificationFlags..Offset_ErrorCode]);
 
                 /// <summary>
                 /// Retrieves the ErrorCode field.
                 /// </summary>
-                public uint ErrorCode => BitConverter.ToUInt32(_etwEvent.Data[Offset_ErrorCode..]);
+                public uint ErrorCode => BitConverter.ToUInt32(_etwEvent.Data[Offset_ErrorCode..Offset_FullyQualifiedAssemblyName]);
 
                 /// <summary>
                 /// Retrieves the FullyQualifiedAssemblyName field.
                 /// </summary>
-                public string FullyQualifiedAssemblyName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_FullyQualifiedAssemblyName..]);
+                public string FullyQualifiedAssemblyName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_FullyQualifiedAssemblyName..Offset_ClrInstanceID]);
 
                 /// <summary>
                 /// Retrieves the ClrInstanceID field.
@@ -25811,6 +26729,12 @@ namespace EtwTools
             }
 
             /// <summary>
+            /// Converts a generic ETW event to a StrongNameVerificationStopEventV1.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator StrongNameVerificationStopEventV1(EtwEvent etwEvent) => new(etwEvent);
+
+            /// <summary>
             /// A data wrapper for a StrongNameVerificationStop event.
             /// </summary>
             public ref struct StrongNameVerificationStopData
@@ -25877,17 +26801,17 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the VerificationFlags field.
                 /// </summary>
-                public uint VerificationFlags => BitConverter.ToUInt32(_etwEvent.Data[Offset_VerificationFlags..]);
+                public uint VerificationFlags => BitConverter.ToUInt32(_etwEvent.Data[Offset_VerificationFlags..Offset_ErrorCode]);
 
                 /// <summary>
                 /// Retrieves the ErrorCode field.
                 /// </summary>
-                public uint ErrorCode => BitConverter.ToUInt32(_etwEvent.Data[Offset_ErrorCode..]);
+                public uint ErrorCode => BitConverter.ToUInt32(_etwEvent.Data[Offset_ErrorCode..Offset_FullyQualifiedAssemblyName]);
 
                 /// <summary>
                 /// Retrieves the FullyQualifiedAssemblyName field.
                 /// </summary>
-                public string FullyQualifiedAssemblyName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_FullyQualifiedAssemblyName..]);
+                public string FullyQualifiedAssemblyName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_FullyQualifiedAssemblyName..Offset_ClrInstanceID]);
 
                 /// <summary>
                 /// Retrieves the ClrInstanceID field.
@@ -25981,6 +26905,12 @@ namespace EtwTools
             }
 
             /// <summary>
+            /// Converts a generic ETW event to a AuthenticodeVerificationStartEventV1.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator AuthenticodeVerificationStartEventV1(EtwEvent etwEvent) => new(etwEvent);
+
+            /// <summary>
             /// A data wrapper for a AuthenticodeVerificationStart event.
             /// </summary>
             public ref struct AuthenticodeVerificationStartData
@@ -26047,17 +26977,17 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the VerificationFlags field.
                 /// </summary>
-                public uint VerificationFlags => BitConverter.ToUInt32(_etwEvent.Data[Offset_VerificationFlags..]);
+                public uint VerificationFlags => BitConverter.ToUInt32(_etwEvent.Data[Offset_VerificationFlags..Offset_ErrorCode]);
 
                 /// <summary>
                 /// Retrieves the ErrorCode field.
                 /// </summary>
-                public uint ErrorCode => BitConverter.ToUInt32(_etwEvent.Data[Offset_ErrorCode..]);
+                public uint ErrorCode => BitConverter.ToUInt32(_etwEvent.Data[Offset_ErrorCode..Offset_ModulePath]);
 
                 /// <summary>
                 /// Retrieves the ModulePath field.
                 /// </summary>
-                public string ModulePath => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_ModulePath..]);
+                public string ModulePath => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_ModulePath..Offset_ClrInstanceID]);
 
                 /// <summary>
                 /// Retrieves the ClrInstanceID field.
@@ -26151,6 +27081,12 @@ namespace EtwTools
             }
 
             /// <summary>
+            /// Converts a generic ETW event to a AuthenticodeVerificationStopEventV1.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator AuthenticodeVerificationStopEventV1(EtwEvent etwEvent) => new(etwEvent);
+
+            /// <summary>
             /// A data wrapper for a AuthenticodeVerificationStop event.
             /// </summary>
             public ref struct AuthenticodeVerificationStopData
@@ -26217,17 +27153,17 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the VerificationFlags field.
                 /// </summary>
-                public uint VerificationFlags => BitConverter.ToUInt32(_etwEvent.Data[Offset_VerificationFlags..]);
+                public uint VerificationFlags => BitConverter.ToUInt32(_etwEvent.Data[Offset_VerificationFlags..Offset_ErrorCode]);
 
                 /// <summary>
                 /// Retrieves the ErrorCode field.
                 /// </summary>
-                public uint ErrorCode => BitConverter.ToUInt32(_etwEvent.Data[Offset_ErrorCode..]);
+                public uint ErrorCode => BitConverter.ToUInt32(_etwEvent.Data[Offset_ErrorCode..Offset_ModulePath]);
 
                 /// <summary>
                 /// Retrieves the ModulePath field.
                 /// </summary>
-                public string ModulePath => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_ModulePath..]);
+                public string ModulePath => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_ModulePath..Offset_ClrInstanceID]);
 
                 /// <summary>
                 /// Retrieves the ClrInstanceID field.
@@ -26319,6 +27255,12 @@ namespace EtwTools
             {
                 _etwEvent = etwEvent;
             }
+
+            /// <summary>
+            /// Converts a generic ETW event to a GCStartEventV2.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator GCStartEventV2(EtwEvent etwEvent) => new(etwEvent);
 
             /// <summary>
             /// A data wrapper for a GCStart event.
@@ -26415,27 +27357,27 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the Count field.
                 /// </summary>
-                public uint Count => BitConverter.ToUInt32(_etwEvent.Data[Offset_Count..]);
+                public uint Count => BitConverter.ToUInt32(_etwEvent.Data[Offset_Count..Offset_Depth]);
 
                 /// <summary>
                 /// Retrieves the Depth field.
                 /// </summary>
-                public uint Depth => BitConverter.ToUInt32(_etwEvent.Data[Offset_Depth..]);
+                public uint Depth => BitConverter.ToUInt32(_etwEvent.Data[Offset_Depth..Offset_Reason]);
 
                 /// <summary>
                 /// Retrieves the Reason field.
                 /// </summary>
-                public GCReasonMap Reason => (GCReasonMap)BitConverter.ToUInt32(_etwEvent.Data[Offset_Reason..]);
+                public GCReasonMap Reason => (GCReasonMap)BitConverter.ToUInt32(_etwEvent.Data[Offset_Reason..Offset_Type]);
 
                 /// <summary>
                 /// Retrieves the Type field.
                 /// </summary>
-                public GCTypeMap Type => (GCTypeMap)BitConverter.ToUInt32(_etwEvent.Data[Offset_Type..]);
+                public GCTypeMap Type => (GCTypeMap)BitConverter.ToUInt32(_etwEvent.Data[Offset_Type..Offset_ClrInstanceID]);
 
                 /// <summary>
                 /// Retrieves the ClrInstanceID field.
                 /// </summary>
-                public ushort ClrInstanceID => BitConverter.ToUInt16(_etwEvent.Data[Offset_ClrInstanceID..]);
+                public ushort ClrInstanceID => BitConverter.ToUInt16(_etwEvent.Data[Offset_ClrInstanceID..Offset_ClientSequenceNumber]);
 
                 /// <summary>
                 /// Retrieves the ClientSequenceNumber field.
@@ -26529,6 +27471,12 @@ namespace EtwTools
             {
                 _etwEvent = etwEvent;
             }
+
+            /// <summary>
+            /// Converts a generic ETW event to a GCAllocationTickEventV2.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator GCAllocationTickEventV2(EtwEvent etwEvent) => new(etwEvent);
 
             /// <summary>
             /// A data wrapper for a GCAllocationTick event.
@@ -26639,32 +27587,32 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the AllocationAmount field.
                 /// </summary>
-                public uint AllocationAmount => BitConverter.ToUInt32(_etwEvent.Data[Offset_AllocationAmount..]);
+                public uint AllocationAmount => BitConverter.ToUInt32(_etwEvent.Data[Offset_AllocationAmount..Offset_AllocationKind]);
 
                 /// <summary>
                 /// Retrieves the AllocationKind field.
                 /// </summary>
-                public GCAllocationKindMap AllocationKind => (GCAllocationKindMap)BitConverter.ToUInt32(_etwEvent.Data[Offset_AllocationKind..]);
+                public GCAllocationKindMap AllocationKind => (GCAllocationKindMap)BitConverter.ToUInt32(_etwEvent.Data[Offset_AllocationKind..Offset_ClrInstanceID]);
 
                 /// <summary>
                 /// Retrieves the ClrInstanceID field.
                 /// </summary>
-                public ushort ClrInstanceID => BitConverter.ToUInt16(_etwEvent.Data[Offset_ClrInstanceID..]);
+                public ushort ClrInstanceID => BitConverter.ToUInt16(_etwEvent.Data[Offset_ClrInstanceID..Offset_AllocationAmount64]);
 
                 /// <summary>
                 /// Retrieves the AllocationAmount64 field.
                 /// </summary>
-                public ulong AllocationAmount64 => BitConverter.ToUInt64(_etwEvent.Data[Offset_AllocationAmount64..]);
+                public ulong AllocationAmount64 => BitConverter.ToUInt64(_etwEvent.Data[Offset_AllocationAmount64..Offset_TypeID]);
 
                 /// <summary>
                 /// Retrieves the TypeID field.
                 /// </summary>
-                public ulong TypeID => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_TypeID..]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_TypeID..]);
+                public ulong TypeID => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_TypeID..Offset_TypeName]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_TypeID..Offset_TypeName]);
 
                 /// <summary>
                 /// Retrieves the TypeName field.
                 /// </summary>
-                public string TypeName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_TypeName..]);
+                public string TypeName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_TypeName..Offset_HeapIndex]);
 
                 /// <summary>
                 /// Retrieves the HeapIndex field.
@@ -26759,6 +27707,12 @@ namespace EtwTools
             {
                 _etwEvent = etwEvent;
             }
+
+            /// <summary>
+            /// Converts a generic ETW event to a MethodLoadEventV2.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator MethodLoadEventV2(EtwEvent etwEvent) => new(etwEvent);
 
             /// <summary>
             /// A data wrapper for a MethodLoad event.
@@ -26883,37 +27837,37 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the MethodID field.
                 /// </summary>
-                public ulong MethodID => BitConverter.ToUInt64(_etwEvent.Data[Offset_MethodID..]);
+                public ulong MethodID => BitConverter.ToUInt64(_etwEvent.Data[Offset_MethodID..Offset_ModuleID]);
 
                 /// <summary>
                 /// Retrieves the ModuleID field.
                 /// </summary>
-                public ulong ModuleID => BitConverter.ToUInt64(_etwEvent.Data[Offset_ModuleID..]);
+                public ulong ModuleID => BitConverter.ToUInt64(_etwEvent.Data[Offset_ModuleID..Offset_MethodStartAddress]);
 
                 /// <summary>
                 /// Retrieves the MethodStartAddress field.
                 /// </summary>
-                public ulong MethodStartAddress => BitConverter.ToUInt64(_etwEvent.Data[Offset_MethodStartAddress..]);
+                public ulong MethodStartAddress => BitConverter.ToUInt64(_etwEvent.Data[Offset_MethodStartAddress..Offset_MethodSize]);
 
                 /// <summary>
                 /// Retrieves the MethodSize field.
                 /// </summary>
-                public uint MethodSize => BitConverter.ToUInt32(_etwEvent.Data[Offset_MethodSize..]);
+                public uint MethodSize => BitConverter.ToUInt32(_etwEvent.Data[Offset_MethodSize..Offset_MethodToken]);
 
                 /// <summary>
                 /// Retrieves the MethodToken field.
                 /// </summary>
-                public uint MethodToken => BitConverter.ToUInt32(_etwEvent.Data[Offset_MethodToken..]);
+                public uint MethodToken => BitConverter.ToUInt32(_etwEvent.Data[Offset_MethodToken..Offset_MethodFlags]);
 
                 /// <summary>
                 /// Retrieves the MethodFlags field.
                 /// </summary>
-                public MethodFlagsMap MethodFlags => (MethodFlagsMap)BitConverter.ToUInt32(_etwEvent.Data[Offset_MethodFlags..]);
+                public MethodFlagsMap MethodFlags => (MethodFlagsMap)BitConverter.ToUInt32(_etwEvent.Data[Offset_MethodFlags..Offset_ClrInstanceID]);
 
                 /// <summary>
                 /// Retrieves the ClrInstanceID field.
                 /// </summary>
-                public ushort ClrInstanceID => BitConverter.ToUInt16(_etwEvent.Data[Offset_ClrInstanceID..]);
+                public ushort ClrInstanceID => BitConverter.ToUInt16(_etwEvent.Data[Offset_ClrInstanceID..Offset_ReJITID]);
 
                 /// <summary>
                 /// Retrieves the ReJITID field.
@@ -27009,6 +27963,12 @@ namespace EtwTools
             {
                 _etwEvent = etwEvent;
             }
+
+            /// <summary>
+            /// Converts a generic ETW event to a MethodUnloadEventV2.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator MethodUnloadEventV2(EtwEvent etwEvent) => new(etwEvent);
 
             /// <summary>
             /// A data wrapper for a MethodUnload event.
@@ -27133,37 +28093,37 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the MethodID field.
                 /// </summary>
-                public ulong MethodID => BitConverter.ToUInt64(_etwEvent.Data[Offset_MethodID..]);
+                public ulong MethodID => BitConverter.ToUInt64(_etwEvent.Data[Offset_MethodID..Offset_ModuleID]);
 
                 /// <summary>
                 /// Retrieves the ModuleID field.
                 /// </summary>
-                public ulong ModuleID => BitConverter.ToUInt64(_etwEvent.Data[Offset_ModuleID..]);
+                public ulong ModuleID => BitConverter.ToUInt64(_etwEvent.Data[Offset_ModuleID..Offset_MethodStartAddress]);
 
                 /// <summary>
                 /// Retrieves the MethodStartAddress field.
                 /// </summary>
-                public ulong MethodStartAddress => BitConverter.ToUInt64(_etwEvent.Data[Offset_MethodStartAddress..]);
+                public ulong MethodStartAddress => BitConverter.ToUInt64(_etwEvent.Data[Offset_MethodStartAddress..Offset_MethodSize]);
 
                 /// <summary>
                 /// Retrieves the MethodSize field.
                 /// </summary>
-                public uint MethodSize => BitConverter.ToUInt32(_etwEvent.Data[Offset_MethodSize..]);
+                public uint MethodSize => BitConverter.ToUInt32(_etwEvent.Data[Offset_MethodSize..Offset_MethodToken]);
 
                 /// <summary>
                 /// Retrieves the MethodToken field.
                 /// </summary>
-                public uint MethodToken => BitConverter.ToUInt32(_etwEvent.Data[Offset_MethodToken..]);
+                public uint MethodToken => BitConverter.ToUInt32(_etwEvent.Data[Offset_MethodToken..Offset_MethodFlags]);
 
                 /// <summary>
                 /// Retrieves the MethodFlags field.
                 /// </summary>
-                public MethodFlagsMap MethodFlags => (MethodFlagsMap)BitConverter.ToUInt32(_etwEvent.Data[Offset_MethodFlags..]);
+                public MethodFlagsMap MethodFlags => (MethodFlagsMap)BitConverter.ToUInt32(_etwEvent.Data[Offset_MethodFlags..Offset_ClrInstanceID]);
 
                 /// <summary>
                 /// Retrieves the ClrInstanceID field.
                 /// </summary>
-                public ushort ClrInstanceID => BitConverter.ToUInt16(_etwEvent.Data[Offset_ClrInstanceID..]);
+                public ushort ClrInstanceID => BitConverter.ToUInt16(_etwEvent.Data[Offset_ClrInstanceID..Offset_ReJITID]);
 
                 /// <summary>
                 /// Retrieves the ReJITID field.
@@ -27259,6 +28219,12 @@ namespace EtwTools
             {
                 _etwEvent = etwEvent;
             }
+
+            /// <summary>
+            /// Converts a generic ETW event to a MethodLoadVerboseEventV2.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator MethodLoadVerboseEventV2(EtwEvent etwEvent) => new(etwEvent);
 
             /// <summary>
             /// A data wrapper for a MethodLoadVerbose event.
@@ -27425,52 +28391,52 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the MethodID field.
                 /// </summary>
-                public ulong MethodID => BitConverter.ToUInt64(_etwEvent.Data[Offset_MethodID..]);
+                public ulong MethodID => BitConverter.ToUInt64(_etwEvent.Data[Offset_MethodID..Offset_ModuleID]);
 
                 /// <summary>
                 /// Retrieves the ModuleID field.
                 /// </summary>
-                public ulong ModuleID => BitConverter.ToUInt64(_etwEvent.Data[Offset_ModuleID..]);
+                public ulong ModuleID => BitConverter.ToUInt64(_etwEvent.Data[Offset_ModuleID..Offset_MethodStartAddress]);
 
                 /// <summary>
                 /// Retrieves the MethodStartAddress field.
                 /// </summary>
-                public ulong MethodStartAddress => BitConverter.ToUInt64(_etwEvent.Data[Offset_MethodStartAddress..]);
+                public ulong MethodStartAddress => BitConverter.ToUInt64(_etwEvent.Data[Offset_MethodStartAddress..Offset_MethodSize]);
 
                 /// <summary>
                 /// Retrieves the MethodSize field.
                 /// </summary>
-                public uint MethodSize => BitConverter.ToUInt32(_etwEvent.Data[Offset_MethodSize..]);
+                public uint MethodSize => BitConverter.ToUInt32(_etwEvent.Data[Offset_MethodSize..Offset_MethodToken]);
 
                 /// <summary>
                 /// Retrieves the MethodToken field.
                 /// </summary>
-                public uint MethodToken => BitConverter.ToUInt32(_etwEvent.Data[Offset_MethodToken..]);
+                public uint MethodToken => BitConverter.ToUInt32(_etwEvent.Data[Offset_MethodToken..Offset_MethodFlags]);
 
                 /// <summary>
                 /// Retrieves the MethodFlags field.
                 /// </summary>
-                public MethodFlagsMap MethodFlags => (MethodFlagsMap)BitConverter.ToUInt32(_etwEvent.Data[Offset_MethodFlags..]);
+                public MethodFlagsMap MethodFlags => (MethodFlagsMap)BitConverter.ToUInt32(_etwEvent.Data[Offset_MethodFlags..Offset_MethodNamespace]);
 
                 /// <summary>
                 /// Retrieves the MethodNamespace field.
                 /// </summary>
-                public string MethodNamespace => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_MethodNamespace..]);
+                public string MethodNamespace => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_MethodNamespace..Offset_MethodName]);
 
                 /// <summary>
                 /// Retrieves the MethodName field.
                 /// </summary>
-                public string MethodName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_MethodName..]);
+                public string MethodName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_MethodName..Offset_MethodSignature]);
 
                 /// <summary>
                 /// Retrieves the MethodSignature field.
                 /// </summary>
-                public string MethodSignature => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_MethodSignature..]);
+                public string MethodSignature => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_MethodSignature..Offset_ClrInstanceID]);
 
                 /// <summary>
                 /// Retrieves the ClrInstanceID field.
                 /// </summary>
-                public ushort ClrInstanceID => BitConverter.ToUInt16(_etwEvent.Data[Offset_ClrInstanceID..]);
+                public ushort ClrInstanceID => BitConverter.ToUInt16(_etwEvent.Data[Offset_ClrInstanceID..Offset_ReJITID]);
 
                 /// <summary>
                 /// Retrieves the ReJITID field.
@@ -27569,6 +28535,12 @@ namespace EtwTools
             {
                 _etwEvent = etwEvent;
             }
+
+            /// <summary>
+            /// Converts a generic ETW event to a MethodUnloadVerboseEventV2.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator MethodUnloadVerboseEventV2(EtwEvent etwEvent) => new(etwEvent);
 
             /// <summary>
             /// A data wrapper for a MethodUnloadVerbose event.
@@ -27735,52 +28707,52 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the MethodID field.
                 /// </summary>
-                public ulong MethodID => BitConverter.ToUInt64(_etwEvent.Data[Offset_MethodID..]);
+                public ulong MethodID => BitConverter.ToUInt64(_etwEvent.Data[Offset_MethodID..Offset_ModuleID]);
 
                 /// <summary>
                 /// Retrieves the ModuleID field.
                 /// </summary>
-                public ulong ModuleID => BitConverter.ToUInt64(_etwEvent.Data[Offset_ModuleID..]);
+                public ulong ModuleID => BitConverter.ToUInt64(_etwEvent.Data[Offset_ModuleID..Offset_MethodStartAddress]);
 
                 /// <summary>
                 /// Retrieves the MethodStartAddress field.
                 /// </summary>
-                public ulong MethodStartAddress => BitConverter.ToUInt64(_etwEvent.Data[Offset_MethodStartAddress..]);
+                public ulong MethodStartAddress => BitConverter.ToUInt64(_etwEvent.Data[Offset_MethodStartAddress..Offset_MethodSize]);
 
                 /// <summary>
                 /// Retrieves the MethodSize field.
                 /// </summary>
-                public uint MethodSize => BitConverter.ToUInt32(_etwEvent.Data[Offset_MethodSize..]);
+                public uint MethodSize => BitConverter.ToUInt32(_etwEvent.Data[Offset_MethodSize..Offset_MethodToken]);
 
                 /// <summary>
                 /// Retrieves the MethodToken field.
                 /// </summary>
-                public uint MethodToken => BitConverter.ToUInt32(_etwEvent.Data[Offset_MethodToken..]);
+                public uint MethodToken => BitConverter.ToUInt32(_etwEvent.Data[Offset_MethodToken..Offset_MethodFlags]);
 
                 /// <summary>
                 /// Retrieves the MethodFlags field.
                 /// </summary>
-                public MethodFlagsMap MethodFlags => (MethodFlagsMap)BitConverter.ToUInt32(_etwEvent.Data[Offset_MethodFlags..]);
+                public MethodFlagsMap MethodFlags => (MethodFlagsMap)BitConverter.ToUInt32(_etwEvent.Data[Offset_MethodFlags..Offset_MethodNamespace]);
 
                 /// <summary>
                 /// Retrieves the MethodNamespace field.
                 /// </summary>
-                public string MethodNamespace => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_MethodNamespace..]);
+                public string MethodNamespace => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_MethodNamespace..Offset_MethodName]);
 
                 /// <summary>
                 /// Retrieves the MethodName field.
                 /// </summary>
-                public string MethodName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_MethodName..]);
+                public string MethodName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_MethodName..Offset_MethodSignature]);
 
                 /// <summary>
                 /// Retrieves the MethodSignature field.
                 /// </summary>
-                public string MethodSignature => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_MethodSignature..]);
+                public string MethodSignature => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_MethodSignature..Offset_ClrInstanceID]);
 
                 /// <summary>
                 /// Retrieves the ClrInstanceID field.
                 /// </summary>
-                public ushort ClrInstanceID => BitConverter.ToUInt16(_etwEvent.Data[Offset_ClrInstanceID..]);
+                public ushort ClrInstanceID => BitConverter.ToUInt16(_etwEvent.Data[Offset_ClrInstanceID..Offset_ReJITID]);
 
                 /// <summary>
                 /// Retrieves the ReJITID field.
@@ -27879,6 +28851,12 @@ namespace EtwTools
             {
                 _etwEvent = etwEvent;
             }
+
+            /// <summary>
+            /// Converts a generic ETW event to a LoaderModuleLoadEventV2.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator LoaderModuleLoadEventV2(EtwEvent etwEvent) => new(etwEvent);
 
             /// <summary>
             /// A data wrapper for a LoaderModuleLoad event.
@@ -28073,62 +29051,62 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the ModuleID field.
                 /// </summary>
-                public ulong ModuleID => BitConverter.ToUInt64(_etwEvent.Data[Offset_ModuleID..]);
+                public ulong ModuleID => BitConverter.ToUInt64(_etwEvent.Data[Offset_ModuleID..Offset_AssemblyID]);
 
                 /// <summary>
                 /// Retrieves the AssemblyID field.
                 /// </summary>
-                public ulong AssemblyID => BitConverter.ToUInt64(_etwEvent.Data[Offset_AssemblyID..]);
+                public ulong AssemblyID => BitConverter.ToUInt64(_etwEvent.Data[Offset_AssemblyID..Offset_ModuleFlags]);
 
                 /// <summary>
                 /// Retrieves the ModuleFlags field.
                 /// </summary>
-                public ModuleFlagsMap ModuleFlags => (ModuleFlagsMap)BitConverter.ToUInt32(_etwEvent.Data[Offset_ModuleFlags..]);
+                public ModuleFlagsMap ModuleFlags => (ModuleFlagsMap)BitConverter.ToUInt32(_etwEvent.Data[Offset_ModuleFlags..Offset_Reserved1]);
 
                 /// <summary>
                 /// Retrieves the Reserved1 field.
                 /// </summary>
-                public uint Reserved1 => BitConverter.ToUInt32(_etwEvent.Data[Offset_Reserved1..]);
+                public uint Reserved1 => BitConverter.ToUInt32(_etwEvent.Data[Offset_Reserved1..Offset_ModuleILPath]);
 
                 /// <summary>
                 /// Retrieves the ModuleILPath field.
                 /// </summary>
-                public string ModuleILPath => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_ModuleILPath..]);
+                public string ModuleILPath => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_ModuleILPath..Offset_ModuleNativePath]);
 
                 /// <summary>
                 /// Retrieves the ModuleNativePath field.
                 /// </summary>
-                public string ModuleNativePath => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_ModuleNativePath..]);
+                public string ModuleNativePath => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_ModuleNativePath..Offset_ClrInstanceID]);
 
                 /// <summary>
                 /// Retrieves the ClrInstanceID field.
                 /// </summary>
-                public ushort ClrInstanceID => BitConverter.ToUInt16(_etwEvent.Data[Offset_ClrInstanceID..]);
+                public ushort ClrInstanceID => BitConverter.ToUInt16(_etwEvent.Data[Offset_ClrInstanceID..Offset_ManagedPdbSignature]);
 
                 /// <summary>
                 /// Retrieves the ManagedPdbSignature field.
                 /// </summary>
-                public Guid ManagedPdbSignature => new(_etwEvent.Data[Offset_ManagedPdbSignature..]);
+                public Guid ManagedPdbSignature => new(_etwEvent.Data[Offset_ManagedPdbSignature..Offset_ManagedPdbAge]);
 
                 /// <summary>
                 /// Retrieves the ManagedPdbAge field.
                 /// </summary>
-                public uint ManagedPdbAge => BitConverter.ToUInt32(_etwEvent.Data[Offset_ManagedPdbAge..]);
+                public uint ManagedPdbAge => BitConverter.ToUInt32(_etwEvent.Data[Offset_ManagedPdbAge..Offset_ManagedPdbBuildPath]);
 
                 /// <summary>
                 /// Retrieves the ManagedPdbBuildPath field.
                 /// </summary>
-                public string ManagedPdbBuildPath => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_ManagedPdbBuildPath..]);
+                public string ManagedPdbBuildPath => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_ManagedPdbBuildPath..Offset_NativePdbSignature]);
 
                 /// <summary>
                 /// Retrieves the NativePdbSignature field.
                 /// </summary>
-                public Guid NativePdbSignature => new(_etwEvent.Data[Offset_NativePdbSignature..]);
+                public Guid NativePdbSignature => new(_etwEvent.Data[Offset_NativePdbSignature..Offset_NativePdbAge]);
 
                 /// <summary>
                 /// Retrieves the NativePdbAge field.
                 /// </summary>
-                public uint NativePdbAge => BitConverter.ToUInt32(_etwEvent.Data[Offset_NativePdbAge..]);
+                public uint NativePdbAge => BitConverter.ToUInt32(_etwEvent.Data[Offset_NativePdbAge..Offset_NativePdbBuildPath]);
 
                 /// <summary>
                 /// Retrieves the NativePdbBuildPath field.
@@ -28229,6 +29207,12 @@ namespace EtwTools
             {
                 _etwEvent = etwEvent;
             }
+
+            /// <summary>
+            /// Converts a generic ETW event to a LoaderModuleUnloadEventV2.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator LoaderModuleUnloadEventV2(EtwEvent etwEvent) => new(etwEvent);
 
             /// <summary>
             /// A data wrapper for a LoaderModuleUnload event.
@@ -28423,62 +29407,62 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the ModuleID field.
                 /// </summary>
-                public ulong ModuleID => BitConverter.ToUInt64(_etwEvent.Data[Offset_ModuleID..]);
+                public ulong ModuleID => BitConverter.ToUInt64(_etwEvent.Data[Offset_ModuleID..Offset_AssemblyID]);
 
                 /// <summary>
                 /// Retrieves the AssemblyID field.
                 /// </summary>
-                public ulong AssemblyID => BitConverter.ToUInt64(_etwEvent.Data[Offset_AssemblyID..]);
+                public ulong AssemblyID => BitConverter.ToUInt64(_etwEvent.Data[Offset_AssemblyID..Offset_ModuleFlags]);
 
                 /// <summary>
                 /// Retrieves the ModuleFlags field.
                 /// </summary>
-                public ModuleFlagsMap ModuleFlags => (ModuleFlagsMap)BitConverter.ToUInt32(_etwEvent.Data[Offset_ModuleFlags..]);
+                public ModuleFlagsMap ModuleFlags => (ModuleFlagsMap)BitConverter.ToUInt32(_etwEvent.Data[Offset_ModuleFlags..Offset_Reserved1]);
 
                 /// <summary>
                 /// Retrieves the Reserved1 field.
                 /// </summary>
-                public uint Reserved1 => BitConverter.ToUInt32(_etwEvent.Data[Offset_Reserved1..]);
+                public uint Reserved1 => BitConverter.ToUInt32(_etwEvent.Data[Offset_Reserved1..Offset_ModuleILPath]);
 
                 /// <summary>
                 /// Retrieves the ModuleILPath field.
                 /// </summary>
-                public string ModuleILPath => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_ModuleILPath..]);
+                public string ModuleILPath => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_ModuleILPath..Offset_ModuleNativePath]);
 
                 /// <summary>
                 /// Retrieves the ModuleNativePath field.
                 /// </summary>
-                public string ModuleNativePath => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_ModuleNativePath..]);
+                public string ModuleNativePath => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_ModuleNativePath..Offset_ClrInstanceID]);
 
                 /// <summary>
                 /// Retrieves the ClrInstanceID field.
                 /// </summary>
-                public ushort ClrInstanceID => BitConverter.ToUInt16(_etwEvent.Data[Offset_ClrInstanceID..]);
+                public ushort ClrInstanceID => BitConverter.ToUInt16(_etwEvent.Data[Offset_ClrInstanceID..Offset_ManagedPdbSignature]);
 
                 /// <summary>
                 /// Retrieves the ManagedPdbSignature field.
                 /// </summary>
-                public Guid ManagedPdbSignature => new(_etwEvent.Data[Offset_ManagedPdbSignature..]);
+                public Guid ManagedPdbSignature => new(_etwEvent.Data[Offset_ManagedPdbSignature..Offset_ManagedPdbAge]);
 
                 /// <summary>
                 /// Retrieves the ManagedPdbAge field.
                 /// </summary>
-                public uint ManagedPdbAge => BitConverter.ToUInt32(_etwEvent.Data[Offset_ManagedPdbAge..]);
+                public uint ManagedPdbAge => BitConverter.ToUInt32(_etwEvent.Data[Offset_ManagedPdbAge..Offset_ManagedPdbBuildPath]);
 
                 /// <summary>
                 /// Retrieves the ManagedPdbBuildPath field.
                 /// </summary>
-                public string ManagedPdbBuildPath => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_ManagedPdbBuildPath..]);
+                public string ManagedPdbBuildPath => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_ManagedPdbBuildPath..Offset_NativePdbSignature]);
 
                 /// <summary>
                 /// Retrieves the NativePdbSignature field.
                 /// </summary>
-                public Guid NativePdbSignature => new(_etwEvent.Data[Offset_NativePdbSignature..]);
+                public Guid NativePdbSignature => new(_etwEvent.Data[Offset_NativePdbSignature..Offset_NativePdbAge]);
 
                 /// <summary>
                 /// Retrieves the NativePdbAge field.
                 /// </summary>
-                public uint NativePdbAge => BitConverter.ToUInt32(_etwEvent.Data[Offset_NativePdbAge..]);
+                public uint NativePdbAge => BitConverter.ToUInt32(_etwEvent.Data[Offset_NativePdbAge..Offset_NativePdbBuildPath]);
 
                 /// <summary>
                 /// Retrieves the NativePdbBuildPath field.
@@ -28581,6 +29565,12 @@ namespace EtwTools
             }
 
             /// <summary>
+            /// Converts a generic ETW event to a GCJoinEventV2.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator GCJoinEventV2(EtwEvent etwEvent) => new(etwEvent);
+
+            /// <summary>
             /// A data wrapper for a GCJoin event.
             /// </summary>
             public ref struct GCJoinData
@@ -28661,22 +29651,22 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the Heap field.
                 /// </summary>
-                public uint Heap => BitConverter.ToUInt32(_etwEvent.Data[Offset_Heap..]);
+                public uint Heap => BitConverter.ToUInt32(_etwEvent.Data[Offset_Heap..Offset_JoinTime]);
 
                 /// <summary>
                 /// Retrieves the JoinTime field.
                 /// </summary>
-                public uint JoinTime => BitConverter.ToUInt32(_etwEvent.Data[Offset_JoinTime..]);
+                public uint JoinTime => BitConverter.ToUInt32(_etwEvent.Data[Offset_JoinTime..Offset_JoinType]);
 
                 /// <summary>
                 /// Retrieves the JoinType field.
                 /// </summary>
-                public uint JoinType => BitConverter.ToUInt32(_etwEvent.Data[Offset_JoinType..]);
+                public uint JoinType => BitConverter.ToUInt32(_etwEvent.Data[Offset_JoinType..Offset_ClrInstanceID]);
 
                 /// <summary>
                 /// Retrieves the ClrInstanceID field.
                 /// </summary>
-                public ushort ClrInstanceID => BitConverter.ToUInt16(_etwEvent.Data[Offset_ClrInstanceID..]);
+                public ushort ClrInstanceID => BitConverter.ToUInt16(_etwEvent.Data[Offset_ClrInstanceID..Offset_JoinID]);
 
                 /// <summary>
                 /// Retrieves the JoinID field.
@@ -28769,6 +29759,12 @@ namespace EtwTools
             {
                 _etwEvent = etwEvent;
             }
+
+            /// <summary>
+            /// Converts a generic ETW event to a GCGlobalHeapHistoryEventV2.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator GCGlobalHeapHistoryEventV2(EtwEvent etwEvent) => new(etwEvent);
 
             /// <summary>
             /// A data wrapper for a GCGlobalHeapHistory event.
@@ -28907,42 +29903,42 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the FinalYoungestDesired field.
                 /// </summary>
-                public ulong FinalYoungestDesired => BitConverter.ToUInt64(_etwEvent.Data[Offset_FinalYoungestDesired..]);
+                public ulong FinalYoungestDesired => BitConverter.ToUInt64(_etwEvent.Data[Offset_FinalYoungestDesired..Offset_NumHeaps]);
 
                 /// <summary>
                 /// Retrieves the NumHeaps field.
                 /// </summary>
-                public int NumHeaps => BitConverter.ToInt32(_etwEvent.Data[Offset_NumHeaps..]);
+                public int NumHeaps => BitConverter.ToInt32(_etwEvent.Data[Offset_NumHeaps..Offset_CondemnedGeneration]);
 
                 /// <summary>
                 /// Retrieves the CondemnedGeneration field.
                 /// </summary>
-                public uint CondemnedGeneration => BitConverter.ToUInt32(_etwEvent.Data[Offset_CondemnedGeneration..]);
+                public uint CondemnedGeneration => BitConverter.ToUInt32(_etwEvent.Data[Offset_CondemnedGeneration..Offset_Gen0ReductionCount]);
 
                 /// <summary>
                 /// Retrieves the Gen0ReductionCount field.
                 /// </summary>
-                public uint Gen0ReductionCount => BitConverter.ToUInt32(_etwEvent.Data[Offset_Gen0ReductionCount..]);
+                public uint Gen0ReductionCount => BitConverter.ToUInt32(_etwEvent.Data[Offset_Gen0ReductionCount..Offset_Reason]);
 
                 /// <summary>
                 /// Retrieves the Reason field.
                 /// </summary>
-                public uint Reason => BitConverter.ToUInt32(_etwEvent.Data[Offset_Reason..]);
+                public uint Reason => BitConverter.ToUInt32(_etwEvent.Data[Offset_Reason..Offset_GlobalMechanisms]);
 
                 /// <summary>
                 /// Retrieves the GlobalMechanisms field.
                 /// </summary>
-                public uint GlobalMechanisms => BitConverter.ToUInt32(_etwEvent.Data[Offset_GlobalMechanisms..]);
+                public uint GlobalMechanisms => BitConverter.ToUInt32(_etwEvent.Data[Offset_GlobalMechanisms..Offset_ClrInstanceID]);
 
                 /// <summary>
                 /// Retrieves the ClrInstanceID field.
                 /// </summary>
-                public ushort ClrInstanceID => BitConverter.ToUInt16(_etwEvent.Data[Offset_ClrInstanceID..]);
+                public ushort ClrInstanceID => BitConverter.ToUInt16(_etwEvent.Data[Offset_ClrInstanceID..Offset_PauseMode]);
 
                 /// <summary>
                 /// Retrieves the PauseMode field.
                 /// </summary>
-                public uint PauseMode => BitConverter.ToUInt32(_etwEvent.Data[Offset_PauseMode..]);
+                public uint PauseMode => BitConverter.ToUInt32(_etwEvent.Data[Offset_PauseMode..Offset_MemoryPressure]);
 
                 /// <summary>
                 /// Retrieves the MemoryPressure field.
@@ -29039,6 +30035,12 @@ namespace EtwTools
             {
                 _etwEvent = etwEvent;
             }
+
+            /// <summary>
+            /// Converts a generic ETW event to a GCAllocationTickEventV3.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator GCAllocationTickEventV3(EtwEvent etwEvent) => new(etwEvent);
 
             /// <summary>
             /// A data wrapper for a GCAllocationTick event.
@@ -29163,37 +30165,37 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the AllocationAmount field.
                 /// </summary>
-                public uint AllocationAmount => BitConverter.ToUInt32(_etwEvent.Data[Offset_AllocationAmount..]);
+                public uint AllocationAmount => BitConverter.ToUInt32(_etwEvent.Data[Offset_AllocationAmount..Offset_AllocationKind]);
 
                 /// <summary>
                 /// Retrieves the AllocationKind field.
                 /// </summary>
-                public GCAllocationKindMap AllocationKind => (GCAllocationKindMap)BitConverter.ToUInt32(_etwEvent.Data[Offset_AllocationKind..]);
+                public GCAllocationKindMap AllocationKind => (GCAllocationKindMap)BitConverter.ToUInt32(_etwEvent.Data[Offset_AllocationKind..Offset_ClrInstanceID]);
 
                 /// <summary>
                 /// Retrieves the ClrInstanceID field.
                 /// </summary>
-                public ushort ClrInstanceID => BitConverter.ToUInt16(_etwEvent.Data[Offset_ClrInstanceID..]);
+                public ushort ClrInstanceID => BitConverter.ToUInt16(_etwEvent.Data[Offset_ClrInstanceID..Offset_AllocationAmount64]);
 
                 /// <summary>
                 /// Retrieves the AllocationAmount64 field.
                 /// </summary>
-                public ulong AllocationAmount64 => BitConverter.ToUInt64(_etwEvent.Data[Offset_AllocationAmount64..]);
+                public ulong AllocationAmount64 => BitConverter.ToUInt64(_etwEvent.Data[Offset_AllocationAmount64..Offset_TypeID]);
 
                 /// <summary>
                 /// Retrieves the TypeID field.
                 /// </summary>
-                public ulong TypeID => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_TypeID..]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_TypeID..]);
+                public ulong TypeID => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_TypeID..Offset_TypeName]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_TypeID..Offset_TypeName]);
 
                 /// <summary>
                 /// Retrieves the TypeName field.
                 /// </summary>
-                public string TypeName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_TypeName..]);
+                public string TypeName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_TypeName..Offset_HeapIndex]);
 
                 /// <summary>
                 /// Retrieves the HeapIndex field.
                 /// </summary>
-                public uint HeapIndex => BitConverter.ToUInt32(_etwEvent.Data[Offset_HeapIndex..]);
+                public uint HeapIndex => BitConverter.ToUInt32(_etwEvent.Data[Offset_HeapIndex..Offset_Address]);
 
                 /// <summary>
                 /// Retrieves the Address field.
@@ -29289,6 +30291,12 @@ namespace EtwTools
             {
                 _etwEvent = etwEvent;
             }
+
+            /// <summary>
+            /// Converts a generic ETW event to a GCPerHeapHistoryEventV3.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator GCPerHeapHistoryEventV3(EtwEvent etwEvent) => new(etwEvent);
 
             /// <summary>
             /// A data wrapper for a GCPerHeapHistory event.
@@ -29525,77 +30533,77 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the ClrInstanceID field.
                 /// </summary>
-                public ushort ClrInstanceID => BitConverter.ToUInt16(_etwEvent.Data[Offset_ClrInstanceID..]);
+                public ushort ClrInstanceID => BitConverter.ToUInt16(_etwEvent.Data[Offset_ClrInstanceID..Offset_FreeListAllocated]);
 
                 /// <summary>
                 /// Retrieves the FreeListAllocated field.
                 /// </summary>
-                public ulong FreeListAllocated => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_FreeListAllocated..]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_FreeListAllocated..]);
+                public ulong FreeListAllocated => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_FreeListAllocated..Offset_FreeListRejected]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_FreeListAllocated..Offset_FreeListRejected]);
 
                 /// <summary>
                 /// Retrieves the FreeListRejected field.
                 /// </summary>
-                public ulong FreeListRejected => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_FreeListRejected..]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_FreeListRejected..]);
+                public ulong FreeListRejected => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_FreeListRejected..Offset_EndOfSegAllocated]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_FreeListRejected..Offset_EndOfSegAllocated]);
 
                 /// <summary>
                 /// Retrieves the EndOfSegAllocated field.
                 /// </summary>
-                public ulong EndOfSegAllocated => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_EndOfSegAllocated..]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_EndOfSegAllocated..]);
+                public ulong EndOfSegAllocated => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_EndOfSegAllocated..Offset_CondemnedAllocated]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_EndOfSegAllocated..Offset_CondemnedAllocated]);
 
                 /// <summary>
                 /// Retrieves the CondemnedAllocated field.
                 /// </summary>
-                public ulong CondemnedAllocated => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_CondemnedAllocated..]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_CondemnedAllocated..]);
+                public ulong CondemnedAllocated => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_CondemnedAllocated..Offset_PinnedAllocated]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_CondemnedAllocated..Offset_PinnedAllocated]);
 
                 /// <summary>
                 /// Retrieves the PinnedAllocated field.
                 /// </summary>
-                public ulong PinnedAllocated => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_PinnedAllocated..]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_PinnedAllocated..]);
+                public ulong PinnedAllocated => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_PinnedAllocated..Offset_PinnedAllocatedAdvance]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_PinnedAllocated..Offset_PinnedAllocatedAdvance]);
 
                 /// <summary>
                 /// Retrieves the PinnedAllocatedAdvance field.
                 /// </summary>
-                public ulong PinnedAllocatedAdvance => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_PinnedAllocatedAdvance..]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_PinnedAllocatedAdvance..]);
+                public ulong PinnedAllocatedAdvance => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_PinnedAllocatedAdvance..Offset_RunningFreeListEfficiency]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_PinnedAllocatedAdvance..Offset_RunningFreeListEfficiency]);
 
                 /// <summary>
                 /// Retrieves the RunningFreeListEfficiency field.
                 /// </summary>
-                public uint RunningFreeListEfficiency => BitConverter.ToUInt32(_etwEvent.Data[Offset_RunningFreeListEfficiency..]);
+                public uint RunningFreeListEfficiency => BitConverter.ToUInt32(_etwEvent.Data[Offset_RunningFreeListEfficiency..Offset_CondemnReasons0]);
 
                 /// <summary>
                 /// Retrieves the CondemnReasons0 field.
                 /// </summary>
-                public uint CondemnReasons0 => BitConverter.ToUInt32(_etwEvent.Data[Offset_CondemnReasons0..]);
+                public uint CondemnReasons0 => BitConverter.ToUInt32(_etwEvent.Data[Offset_CondemnReasons0..Offset_CondemnReasons1]);
 
                 /// <summary>
                 /// Retrieves the CondemnReasons1 field.
                 /// </summary>
-                public uint CondemnReasons1 => BitConverter.ToUInt32(_etwEvent.Data[Offset_CondemnReasons1..]);
+                public uint CondemnReasons1 => BitConverter.ToUInt32(_etwEvent.Data[Offset_CondemnReasons1..Offset_CompactMechanisms]);
 
                 /// <summary>
                 /// Retrieves the CompactMechanisms field.
                 /// </summary>
-                public uint CompactMechanisms => BitConverter.ToUInt32(_etwEvent.Data[Offset_CompactMechanisms..]);
+                public uint CompactMechanisms => BitConverter.ToUInt32(_etwEvent.Data[Offset_CompactMechanisms..Offset_ExpandMechanisms]);
 
                 /// <summary>
                 /// Retrieves the ExpandMechanisms field.
                 /// </summary>
-                public uint ExpandMechanisms => BitConverter.ToUInt32(_etwEvent.Data[Offset_ExpandMechanisms..]);
+                public uint ExpandMechanisms => BitConverter.ToUInt32(_etwEvent.Data[Offset_ExpandMechanisms..Offset_HeapIndex]);
 
                 /// <summary>
                 /// Retrieves the HeapIndex field.
                 /// </summary>
-                public uint HeapIndex => BitConverter.ToUInt32(_etwEvent.Data[Offset_HeapIndex..]);
+                public uint HeapIndex => BitConverter.ToUInt32(_etwEvent.Data[Offset_HeapIndex..Offset_ExtraGen0Commit]);
 
                 /// <summary>
                 /// Retrieves the ExtraGen0Commit field.
                 /// </summary>
-                public ulong ExtraGen0Commit => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_ExtraGen0Commit..]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_ExtraGen0Commit..]);
+                public ulong ExtraGen0Commit => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_ExtraGen0Commit..Offset_Count]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_ExtraGen0Commit..Offset_Count]);
 
                 /// <summary>
                 /// Retrieves the Count field.
                 /// </summary>
-                public uint Count => BitConverter.ToUInt32(_etwEvent.Data[Offset_Count..]);
+                public uint Count => BitConverter.ToUInt32(_etwEvent.Data[Offset_Count..Offset_Values]);
 
                 /// <summary>
                 /// Retrieves the Values field.
@@ -30429,22 +31437,22 @@ namespace EtwTools
             /// <summary>
             /// Retrieves the TypeID field.
             /// </summary>
-            public ulong TypeID => BitConverter.ToUInt64(_etwEvent.Data[Offset_TypeID..]);
+            public ulong TypeID => BitConverter.ToUInt64(_etwEvent.Data[Offset_TypeID..Offset_ModuleID]);
 
             /// <summary>
             /// Retrieves the ModuleID field.
             /// </summary>
-            public ulong ModuleID => BitConverter.ToUInt64(_etwEvent.Data[Offset_ModuleID..]);
+            public ulong ModuleID => BitConverter.ToUInt64(_etwEvent.Data[Offset_ModuleID..Offset_TypeNameID]);
 
             /// <summary>
             /// Retrieves the TypeNameID field.
             /// </summary>
-            public uint TypeNameID => BitConverter.ToUInt32(_etwEvent.Data[Offset_TypeNameID..]);
+            public uint TypeNameID => BitConverter.ToUInt32(_etwEvent.Data[Offset_TypeNameID..Offset_Flags]);
 
             /// <summary>
             /// Retrieves the Flags field.
             /// </summary>
-            public TypeFlagsMap Flags => (TypeFlagsMap)BitConverter.ToUInt32(_etwEvent.Data[Offset_Flags..]);
+            public TypeFlagsMap Flags => (TypeFlagsMap)BitConverter.ToUInt32(_etwEvent.Data[Offset_Flags..Offset_CorElementType]);
 
             /// <summary>
             /// Retrieves the CorElementType field.
@@ -30454,12 +31462,12 @@ namespace EtwTools
             /// <summary>
             /// Retrieves the Name field.
             /// </summary>
-            public string Name => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_Name..]);
+            public string Name => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_Name..Offset_TypeParameterCount]);
 
             /// <summary>
             /// Retrieves the TypeParameterCount field.
             /// </summary>
-            public uint TypeParameterCount => BitConverter.ToUInt32(_etwEvent.Data[Offset_TypeParameterCount..]);
+            public uint TypeParameterCount => BitConverter.ToUInt32(_etwEvent.Data[Offset_TypeParameterCount..Offset_TypeParameters]);
 
             /// <summary>
             /// Retrieves the TypeParameters field.
@@ -30641,7 +31649,7 @@ namespace EtwTools
             /// <summary>
             /// Retrieves the RootedNodeAddress field.
             /// </summary>
-            public ulong RootedNodeAddress => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_RootedNodeAddress..]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_RootedNodeAddress..]);
+            public ulong RootedNodeAddress => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_RootedNodeAddress..Offset_GCRootKind]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_RootedNodeAddress..Offset_GCRootKind]);
 
             /// <summary>
             /// Retrieves the GCRootKind field.
@@ -30651,7 +31659,7 @@ namespace EtwTools
             /// <summary>
             /// Retrieves the GCRootFlag field.
             /// </summary>
-            public GCRootFlagsMap GCRootFlag => (GCRootFlagsMap)BitConverter.ToUInt32(_etwEvent.Data[Offset_GCRootFlag..]);
+            public GCRootFlagsMap GCRootFlag => (GCRootFlagsMap)BitConverter.ToUInt32(_etwEvent.Data[Offset_GCRootFlag..Offset_GCRootID]);
 
             /// <summary>
             /// Retrieves the GCRootID field.
@@ -30815,12 +31823,12 @@ namespace EtwTools
             /// <summary>
             /// Retrieves the GCKeyNodeID field.
             /// </summary>
-            public ulong GCKeyNodeID => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_GCKeyNodeID..]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_GCKeyNodeID..]);
+            public ulong GCKeyNodeID => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_GCKeyNodeID..Offset_GCValueNodeID]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_GCKeyNodeID..Offset_GCValueNodeID]);
 
             /// <summary>
             /// Retrieves the GCValueNodeID field.
             /// </summary>
-            public ulong GCValueNodeID => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_GCValueNodeID..]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_GCValueNodeID..]);
+            public ulong GCValueNodeID => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_GCValueNodeID..Offset_GCRootID]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_GCValueNodeID..Offset_GCRootID]);
 
             /// <summary>
             /// Retrieves the GCRootID field.
@@ -30997,17 +32005,17 @@ namespace EtwTools
             /// <summary>
             /// Retrieves the Address field.
             /// </summary>
-            public ulong Address => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_Address..]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_Address..]);
+            public ulong Address => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_Address..Offset_Size]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_Address..Offset_Size]);
 
             /// <summary>
             /// Retrieves the Size field.
             /// </summary>
-            public ulong Size => BitConverter.ToUInt64(_etwEvent.Data[Offset_Size..]);
+            public ulong Size => BitConverter.ToUInt64(_etwEvent.Data[Offset_Size..Offset_TypeID]);
 
             /// <summary>
             /// Retrieves the TypeID field.
             /// </summary>
-            public ulong TypeID => BitConverter.ToUInt64(_etwEvent.Data[Offset_TypeID..]);
+            public ulong TypeID => BitConverter.ToUInt64(_etwEvent.Data[Offset_TypeID..Offset_EdgeCount]);
 
             /// <summary>
             /// Retrieves the EdgeCount field.
@@ -31157,7 +32165,7 @@ namespace EtwTools
             /// <summary>
             /// Retrieves the Value field.
             /// </summary>
-            public ulong Value => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_Value..]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_Value..]);
+            public ulong Value => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_Value..Offset_ReferencingFieldID]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_Value..Offset_ReferencingFieldID]);
 
             /// <summary>
             /// Retrieves the ReferencingFieldID field.
@@ -31305,7 +32313,7 @@ namespace EtwTools
             /// <summary>
             /// Retrieves the RangeBase field.
             /// </summary>
-            public ulong RangeBase => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_RangeBase..]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_RangeBase..]);
+            public ulong RangeBase => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_RangeBase..Offset_RangeLength]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_RangeBase..Offset_RangeLength]);
 
             /// <summary>
             /// Retrieves the RangeLength field.
@@ -31467,12 +32475,12 @@ namespace EtwTools
             /// <summary>
             /// Retrieves the OldRangeBase field.
             /// </summary>
-            public ulong OldRangeBase => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_OldRangeBase..]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_OldRangeBase..]);
+            public ulong OldRangeBase => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_OldRangeBase..Offset_NewRangeBase]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_OldRangeBase..Offset_NewRangeBase]);
 
             /// <summary>
             /// Retrieves the NewRangeBase field.
             /// </summary>
-            public ulong NewRangeBase => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_NewRangeBase..]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_NewRangeBase..]);
+            public ulong NewRangeBase => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_NewRangeBase..Offset_RangeLength]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_NewRangeBase..Offset_RangeLength]);
 
             /// <summary>
             /// Retrieves the RangeLength field.
@@ -31691,32 +32699,32 @@ namespace EtwTools
             /// <summary>
             /// Retrieves the GCRootID field.
             /// </summary>
-            public ulong GCRootID => BitConverter.ToUInt64(_etwEvent.Data[Offset_GCRootID..]);
+            public ulong GCRootID => BitConverter.ToUInt64(_etwEvent.Data[Offset_GCRootID..Offset_ObjectID]);
 
             /// <summary>
             /// Retrieves the ObjectID field.
             /// </summary>
-            public ulong ObjectID => BitConverter.ToUInt64(_etwEvent.Data[Offset_ObjectID..]);
+            public ulong ObjectID => BitConverter.ToUInt64(_etwEvent.Data[Offset_ObjectID..Offset_TypeID]);
 
             /// <summary>
             /// Retrieves the TypeID field.
             /// </summary>
-            public ulong TypeID => BitConverter.ToUInt64(_etwEvent.Data[Offset_TypeID..]);
+            public ulong TypeID => BitConverter.ToUInt64(_etwEvent.Data[Offset_TypeID..Offset_IUnknown]);
 
             /// <summary>
             /// Retrieves the IUnknown field.
             /// </summary>
-            public ulong IUnknown => BitConverter.ToUInt64(_etwEvent.Data[Offset_IUnknown..]);
+            public ulong IUnknown => BitConverter.ToUInt64(_etwEvent.Data[Offset_IUnknown..Offset_RefCount]);
 
             /// <summary>
             /// Retrieves the RefCount field.
             /// </summary>
-            public uint RefCount => BitConverter.ToUInt32(_etwEvent.Data[Offset_RefCount..]);
+            public uint RefCount => BitConverter.ToUInt32(_etwEvent.Data[Offset_RefCount..Offset_PeggedRefCount]);
 
             /// <summary>
             /// Retrieves the PeggedRefCount field.
             /// </summary>
-            public uint PeggedRefCount => BitConverter.ToUInt32(_etwEvent.Data[Offset_PeggedRefCount..]);
+            public uint PeggedRefCount => BitConverter.ToUInt32(_etwEvent.Data[Offset_PeggedRefCount..Offset_Flags]);
 
             /// <summary>
             /// Retrieves the Flags field.
@@ -31925,27 +32933,27 @@ namespace EtwTools
             /// <summary>
             /// Retrieves the ObjectID field.
             /// </summary>
-            public ulong ObjectID => BitConverter.ToUInt64(_etwEvent.Data[Offset_ObjectID..]);
+            public ulong ObjectID => BitConverter.ToUInt64(_etwEvent.Data[Offset_ObjectID..Offset_TypeID]);
 
             /// <summary>
             /// Retrieves the TypeID field.
             /// </summary>
-            public ulong TypeID => BitConverter.ToUInt64(_etwEvent.Data[Offset_TypeID..]);
+            public ulong TypeID => BitConverter.ToUInt64(_etwEvent.Data[Offset_TypeID..Offset_IUnknown]);
 
             /// <summary>
             /// Retrieves the IUnknown field.
             /// </summary>
-            public ulong IUnknown => BitConverter.ToUInt64(_etwEvent.Data[Offset_IUnknown..]);
+            public ulong IUnknown => BitConverter.ToUInt64(_etwEvent.Data[Offset_IUnknown..Offset_VTable]);
 
             /// <summary>
             /// Retrieves the VTable field.
             /// </summary>
-            public ulong VTable => BitConverter.ToUInt64(_etwEvent.Data[Offset_VTable..]);
+            public ulong VTable => BitConverter.ToUInt64(_etwEvent.Data[Offset_VTable..Offset_RefCount]);
 
             /// <summary>
             /// Retrieves the RefCount field.
             /// </summary>
-            public uint RefCount => BitConverter.ToUInt32(_etwEvent.Data[Offset_RefCount..]);
+            public uint RefCount => BitConverter.ToUInt32(_etwEvent.Data[Offset_RefCount..Offset_Flags]);
 
             /// <summary>
             /// Retrieves the Flags field.
@@ -32139,22 +33147,22 @@ namespace EtwTools
             /// <summary>
             /// Retrieves the GCRootID field.
             /// </summary>
-            public ulong GCRootID => BitConverter.ToUInt64(_etwEvent.Data[Offset_GCRootID..]);
+            public ulong GCRootID => BitConverter.ToUInt64(_etwEvent.Data[Offset_GCRootID..Offset_ObjectID]);
 
             /// <summary>
             /// Retrieves the ObjectID field.
             /// </summary>
-            public ulong ObjectID => BitConverter.ToUInt64(_etwEvent.Data[Offset_ObjectID..]);
+            public ulong ObjectID => BitConverter.ToUInt64(_etwEvent.Data[Offset_ObjectID..Offset_TypeID]);
 
             /// <summary>
             /// Retrieves the TypeID field.
             /// </summary>
-            public ulong TypeID => BitConverter.ToUInt64(_etwEvent.Data[Offset_TypeID..]);
+            public ulong TypeID => BitConverter.ToUInt64(_etwEvent.Data[Offset_TypeID..Offset_Flags]);
 
             /// <summary>
             /// Retrieves the Flags field.
             /// </summary>
-            public GCRootStaticVarFlagsMap Flags => (GCRootStaticVarFlagsMap)BitConverter.ToUInt32(_etwEvent.Data[Offset_Flags..]);
+            public GCRootStaticVarFlagsMap Flags => (GCRootStaticVarFlagsMap)BitConverter.ToUInt32(_etwEvent.Data[Offset_Flags..Offset_FieldName]);
 
             /// <summary>
             /// Retrieves the FieldName field.
@@ -32417,47 +33425,47 @@ namespace EtwTools
             /// <summary>
             /// Retrieves the SizeBefore field.
             /// </summary>
-            public ulong SizeBefore => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_SizeBefore..]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_SizeBefore..]);
+            public ulong SizeBefore => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_SizeBefore..Offset_FreeListBefore]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_SizeBefore..Offset_FreeListBefore]);
 
             /// <summary>
             /// Retrieves the FreeListBefore field.
             /// </summary>
-            public ulong FreeListBefore => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_FreeListBefore..]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_FreeListBefore..]);
+            public ulong FreeListBefore => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_FreeListBefore..Offset_FreeObjBefore]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_FreeListBefore..Offset_FreeObjBefore]);
 
             /// <summary>
             /// Retrieves the FreeObjBefore field.
             /// </summary>
-            public ulong FreeObjBefore => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_FreeObjBefore..]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_FreeObjBefore..]);
+            public ulong FreeObjBefore => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_FreeObjBefore..Offset_SizeAfter]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_FreeObjBefore..Offset_SizeAfter]);
 
             /// <summary>
             /// Retrieves the SizeAfter field.
             /// </summary>
-            public ulong SizeAfter => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_SizeAfter..]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_SizeAfter..]);
+            public ulong SizeAfter => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_SizeAfter..Offset_FreeListAfter]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_SizeAfter..Offset_FreeListAfter]);
 
             /// <summary>
             /// Retrieves the FreeListAfter field.
             /// </summary>
-            public ulong FreeListAfter => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_FreeListAfter..]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_FreeListAfter..]);
+            public ulong FreeListAfter => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_FreeListAfter..Offset_FreeObjAfter]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_FreeListAfter..Offset_FreeObjAfter]);
 
             /// <summary>
             /// Retrieves the FreeObjAfter field.
             /// </summary>
-            public ulong FreeObjAfter => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_FreeObjAfter..]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_FreeObjAfter..]);
+            public ulong FreeObjAfter => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_FreeObjAfter..Offset_In]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_FreeObjAfter..Offset_In]);
 
             /// <summary>
             /// Retrieves the In field.
             /// </summary>
-            public ulong In => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_In..]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_In..]);
+            public ulong In => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_In..Offset_PinnedSurv]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_In..Offset_PinnedSurv]);
 
             /// <summary>
             /// Retrieves the PinnedSurv field.
             /// </summary>
-            public ulong PinnedSurv => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_PinnedSurv..]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_PinnedSurv..]);
+            public ulong PinnedSurv => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_PinnedSurv..Offset_NonePinnedSurv]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_PinnedSurv..Offset_NonePinnedSurv]);
 
             /// <summary>
             /// Retrieves the NonePinnedSurv field.
             /// </summary>
-            public ulong NonePinnedSurv => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_NonePinnedSurv..]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_NonePinnedSurv..]);
+            public ulong NonePinnedSurv => _etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[Offset_NonePinnedSurv..Offset_NewAllocation]) : BitConverter.ToUInt64(_etwEvent.Data[Offset_NonePinnedSurv..Offset_NewAllocation]);
 
             /// <summary>
             /// Retrieves the NewAllocation field.

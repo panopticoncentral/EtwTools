@@ -242,6 +242,12 @@ namespace EtwTools
             }
 
             /// <summary>
+            /// Converts a generic ETW event to a EventSourceMessageEvent.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator EventSourceMessageEvent(EtwEvent etwEvent) => new(etwEvent);
+
+            /// <summary>
             /// A data wrapper for a EventSourceMessage event.
             /// </summary>
             public ref struct EventSourceMessageData
@@ -352,6 +358,12 @@ namespace EtwTools
             }
 
             /// <summary>
+            /// Converts a generic ETW event to a CreateProjectStartEvent.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator CreateProjectStartEvent(EtwEvent etwEvent) => new(etwEvent);
+
+            /// <summary>
             /// A data wrapper for a CreateProjectStart event.
             /// </summary>
             public ref struct CreateProjectStartData
@@ -404,12 +416,12 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the ProjectFileName field.
                 /// </summary>
-                public string ProjectFileName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_ProjectFileName..]);
+                public string ProjectFileName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_ProjectFileName..Offset_Location]);
 
                 /// <summary>
                 /// Retrieves the Location field.
                 /// </summary>
-                public string Location => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_Location..]);
+                public string Location => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_Location..Offset_IsNew]);
 
                 /// <summary>
                 /// Retrieves the IsNew field.
@@ -500,6 +512,12 @@ namespace EtwTools
             {
                 _etwEvent = etwEvent;
             }
+
+            /// <summary>
+            /// Converts a generic ETW event to a SetInitialProjectConfigurationStopEvent.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator SetInitialProjectConfigurationStopEvent(EtwEvent etwEvent) => new(etwEvent);
 
             /// <summary>
             /// A data wrapper for a SetInitialProjectConfigurationStop event.
@@ -612,6 +630,12 @@ namespace EtwTools
             }
 
             /// <summary>
+            /// Converts a generic ETW event to a InitializeProjectNodeStartEvent.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator InitializeProjectNodeStartEvent(EtwEvent etwEvent) => new(etwEvent);
+
+            /// <summary>
             /// A data wrapper for a InitializeProjectNodeStart event.
             /// </summary>
             public ref struct InitializeProjectNodeStartData
@@ -720,6 +744,12 @@ namespace EtwTools
             {
                 _etwEvent = etwEvent;
             }
+
+            /// <summary>
+            /// Converts a generic ETW event to a InitializeProjectNodeStopEvent.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator InitializeProjectNodeStopEvent(EtwEvent etwEvent) => new(etwEvent);
 
             /// <summary>
             /// A data wrapper for a InitializeProjectNodeStop event.
@@ -832,6 +862,12 @@ namespace EtwTools
             }
 
             /// <summary>
+            /// Converts a generic ETW event to a CreateProjectStopEvent.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator CreateProjectStopEvent(EtwEvent etwEvent) => new(etwEvent);
+
+            /// <summary>
             /// A data wrapper for a CreateProjectStop event.
             /// </summary>
             public ref struct CreateProjectStopData
@@ -884,12 +920,12 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the ProjectFileName field.
                 /// </summary>
-                public string ProjectFileName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_ProjectFileName..]);
+                public string ProjectFileName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_ProjectFileName..Offset_Location]);
 
                 /// <summary>
                 /// Retrieves the Location field.
                 /// </summary>
-                public string Location => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_Location..]);
+                public string Location => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_Location..Offset_Configuration]);
 
                 /// <summary>
                 /// Retrieves the Configuration field.
@@ -980,6 +1016,12 @@ namespace EtwTools
             {
                 _etwEvent = etwEvent;
             }
+
+            /// <summary>
+            /// Converts a generic ETW event to a WaitingProjectTreeLoadingStopEvent.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator WaitingProjectTreeLoadingStopEvent(EtwEvent etwEvent) => new(etwEvent);
 
             /// <summary>
             /// A data wrapper for a WaitingProjectTreeLoadingStop event.
@@ -1092,6 +1134,12 @@ namespace EtwTools
             }
 
             /// <summary>
+            /// Converts a generic ETW event to a CpsNotifyTaskStartEvent.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator CpsNotifyTaskStartEvent(EtwEvent etwEvent) => new(etwEvent);
+
+            /// <summary>
             /// A data wrapper for a CpsNotifyTaskStart event.
             /// </summary>
             public ref struct CpsNotifyTaskStartData
@@ -1144,12 +1192,12 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the StageId field.
                 /// </summary>
-                public string StageId => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_StageId..]);
+                public string StageId => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_StageId..Offset_ProjectPath]);
 
                 /// <summary>
                 /// Retrieves the ProjectPath field.
                 /// </summary>
-                public string ProjectPath => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_ProjectPath..]);
+                public string ProjectPath => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_ProjectPath..Offset_Name]);
 
                 /// <summary>
                 /// Retrieves the Name field.
@@ -1242,6 +1290,12 @@ namespace EtwTools
             }
 
             /// <summary>
+            /// Converts a generic ETW event to a CreateUnconfiguredProjectStartEvent.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator CreateUnconfiguredProjectStartEvent(EtwEvent etwEvent) => new(etwEvent);
+
+            /// <summary>
             /// A data wrapper for a CreateUnconfiguredProjectStart event.
             /// </summary>
             public ref struct CreateUnconfiguredProjectStartData
@@ -1280,7 +1334,7 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the ProjectFileName field.
                 /// </summary>
-                public string ProjectFileName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_ProjectFileName..]);
+                public string ProjectFileName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_ProjectFileName..Offset_Location]);
 
                 /// <summary>
                 /// Retrieves the Location field.
@@ -1372,6 +1426,12 @@ namespace EtwTools
             }
 
             /// <summary>
+            /// Converts a generic ETW event to a CreateUnconfiguredProjectStopEvent.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator CreateUnconfiguredProjectStopEvent(EtwEvent etwEvent) => new(etwEvent);
+
+            /// <summary>
             /// A data wrapper for a CreateUnconfiguredProjectStop event.
             /// </summary>
             public ref struct CreateUnconfiguredProjectStopData
@@ -1424,12 +1484,12 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the ProjectFileName field.
                 /// </summary>
-                public string ProjectFileName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_ProjectFileName..]);
+                public string ProjectFileName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_ProjectFileName..Offset_Location]);
 
                 /// <summary>
                 /// Retrieves the Location field.
                 /// </summary>
-                public string Location => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_Location..]);
+                public string Location => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_Location..Offset_Capabilities]);
 
                 /// <summary>
                 /// Retrieves the Capabilities field.
@@ -1522,6 +1582,12 @@ namespace EtwTools
             }
 
             /// <summary>
+            /// Converts a generic ETW event to a SetInitialProjectConfigurationStartEvent.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator SetInitialProjectConfigurationStartEvent(EtwEvent etwEvent) => new(etwEvent);
+
+            /// <summary>
             /// A data wrapper for a SetInitialProjectConfigurationStart event.
             /// </summary>
             public ref struct SetInitialProjectConfigurationStartData
@@ -1560,7 +1626,7 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the ProjectPath field.
                 /// </summary>
-                public string ProjectPath => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_ProjectPath..]);
+                public string ProjectPath => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_ProjectPath..Offset_ConfigurationName]);
 
                 /// <summary>
                 /// Retrieves the ConfigurationName field.
@@ -1650,6 +1716,12 @@ namespace EtwTools
             {
                 _etwEvent = etwEvent;
             }
+
+            /// <summary>
+            /// Converts a generic ETW event to a WaitingProjectTreePublishingStartEvent.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator WaitingProjectTreePublishingStartEvent(EtwEvent etwEvent) => new(etwEvent);
 
             /// <summary>
             /// A data wrapper for a WaitingProjectTreePublishingStart event.
@@ -1762,6 +1834,12 @@ namespace EtwTools
             }
 
             /// <summary>
+            /// Converts a generic ETW event to a WaitingProjectTreePublishingStopEvent.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator WaitingProjectTreePublishingStopEvent(EtwEvent etwEvent) => new(etwEvent);
+
+            /// <summary>
             /// A data wrapper for a WaitingProjectTreePublishingStop event.
             /// </summary>
             public ref struct WaitingProjectTreePublishingStopData
@@ -1870,6 +1948,12 @@ namespace EtwTools
             {
                 _etwEvent = etwEvent;
             }
+
+            /// <summary>
+            /// Converts a generic ETW event to a WaitingLatestReferencesStartEvent.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator WaitingLatestReferencesStartEvent(EtwEvent etwEvent) => new(etwEvent);
 
             /// <summary>
             /// A data wrapper for a WaitingLatestReferencesStart event.
@@ -1982,6 +2066,12 @@ namespace EtwTools
             }
 
             /// <summary>
+            /// Converts a generic ETW event to a WaitingLatestReferencesStopEvent.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator WaitingLatestReferencesStopEvent(EtwEvent etwEvent) => new(etwEvent);
+
+            /// <summary>
             /// A data wrapper for a WaitingLatestReferencesStop event.
             /// </summary>
             public ref struct WaitingLatestReferencesStopData
@@ -2092,6 +2182,12 @@ namespace EtwTools
             }
 
             /// <summary>
+            /// Converts a generic ETW event to a CreateProjectAsyncStartEvent.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator CreateProjectAsyncStartEvent(EtwEvent etwEvent) => new(etwEvent);
+
+            /// <summary>
             /// A data wrapper for a CreateProjectAsyncStart event.
             /// </summary>
             public ref struct CreateProjectAsyncStartData
@@ -2144,12 +2240,12 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the ProjectFileName field.
                 /// </summary>
-                public string ProjectFileName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_ProjectFileName..]);
+                public string ProjectFileName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_ProjectFileName..Offset_Location]);
 
                 /// <summary>
                 /// Retrieves the Location field.
                 /// </summary>
-                public string Location => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_Location..]);
+                public string Location => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_Location..Offset_IsNew]);
 
                 /// <summary>
                 /// Retrieves the IsNew field.
@@ -2240,6 +2336,12 @@ namespace EtwTools
             {
                 _etwEvent = etwEvent;
             }
+
+            /// <summary>
+            /// Converts a generic ETW event to a LoadInitialProjectTreeStartEvent.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator LoadInitialProjectTreeStartEvent(EtwEvent etwEvent) => new(etwEvent);
 
             /// <summary>
             /// A data wrapper for a LoadInitialProjectTreeStart event.
@@ -2352,6 +2454,12 @@ namespace EtwTools
             }
 
             /// <summary>
+            /// Converts a generic ETW event to a LoadInitialProjectTreeStopEvent.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator LoadInitialProjectTreeStopEvent(EtwEvent etwEvent) => new(etwEvent);
+
+            /// <summary>
             /// A data wrapper for a LoadInitialProjectTreeStop event.
             /// </summary>
             public ref struct LoadInitialProjectTreeStopData
@@ -2390,7 +2498,7 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the ProjectPath field.
                 /// </summary>
-                public string ProjectPath => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_ProjectPath..]);
+                public string ProjectPath => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_ProjectPath..Offset_Size]);
 
                 /// <summary>
                 /// Retrieves the Size field.
@@ -2482,6 +2590,12 @@ namespace EtwTools
             }
 
             /// <summary>
+            /// Converts a generic ETW event to a CreateDynamicTypeFromRuleStartEvent.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator CreateDynamicTypeFromRuleStartEvent(EtwEvent etwEvent) => new(etwEvent);
+
+            /// <summary>
             /// A data wrapper for a CreateDynamicTypeFromRuleStart event.
             /// </summary>
             public ref struct CreateDynamicTypeFromRuleStartData
@@ -2548,17 +2662,17 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the ProjectFileName field.
                 /// </summary>
-                public string ProjectFileName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_ProjectFileName..]);
+                public string ProjectFileName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_ProjectFileName..Offset_Rule]);
 
                 /// <summary>
                 /// Retrieves the Rule field.
                 /// </summary>
-                public string Rule => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_Rule..]);
+                public string Rule => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_Rule..Offset_CategoryName]);
 
                 /// <summary>
                 /// Retrieves the CategoryName field.
                 /// </summary>
-                public string CategoryName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_CategoryName..]);
+                public string CategoryName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_CategoryName..Offset_CreateBrowserObject]);
 
                 /// <summary>
                 /// Retrieves the CreateBrowserObject field.
@@ -2650,6 +2764,12 @@ namespace EtwTools
             {
                 _etwEvent = etwEvent;
             }
+
+            /// <summary>
+            /// Converts a generic ETW event to a CreateDynamicTypeFromRuleStopEvent.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator CreateDynamicTypeFromRuleStopEvent(EtwEvent etwEvent) => new(etwEvent);
 
             /// <summary>
             /// A data wrapper for a CreateDynamicTypeFromRuleStop event.
@@ -2762,6 +2882,12 @@ namespace EtwTools
             }
 
             /// <summary>
+            /// Converts a generic ETW event to a PublishProjectTreeCoreStartEvent.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator PublishProjectTreeCoreStartEvent(EtwEvent etwEvent) => new(etwEvent);
+
+            /// <summary>
             /// A data wrapper for a PublishProjectTreeCoreStart event.
             /// </summary>
             public ref struct PublishProjectTreeCoreStartData
@@ -2800,7 +2926,7 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the ProjectFileName field.
                 /// </summary>
-                public string ProjectFileName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_ProjectFileName..]);
+                public string ProjectFileName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_ProjectFileName..Offset_ConfiguredVersion]);
 
                 /// <summary>
                 /// Retrieves the ConfiguredVersion field.
@@ -2892,6 +3018,12 @@ namespace EtwTools
             }
 
             /// <summary>
+            /// Converts a generic ETW event to a PublishProjectTreeCoreStopEvent.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator PublishProjectTreeCoreStopEvent(EtwEvent etwEvent) => new(etwEvent);
+
+            /// <summary>
             /// A data wrapper for a PublishProjectTreeCoreStop event.
             /// </summary>
             public ref struct PublishProjectTreeCoreStopData
@@ -2930,7 +3062,7 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the ProjectFileName field.
                 /// </summary>
-                public string ProjectFileName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_ProjectFileName..]);
+                public string ProjectFileName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_ProjectFileName..Offset_ConfiguredVersion]);
 
                 /// <summary>
                 /// Retrieves the ConfiguredVersion field.
@@ -3015,6 +3147,12 @@ namespace EtwTools
             {
                 _etwEvent = etwEvent;
             }
+
+            /// <summary>
+            /// Converts a generic ETW event to a PublishProjectTreeAcquiringLockStartEvent.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator PublishProjectTreeAcquiringLockStartEvent(EtwEvent etwEvent) => new(etwEvent);
         }
 
         /// <summary>
@@ -3088,6 +3226,12 @@ namespace EtwTools
             }
 
             /// <summary>
+            /// Converts a generic ETW event to a PublishProjectTreeAcquiringLockStopEvent.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator PublishProjectTreeAcquiringLockStopEvent(EtwEvent etwEvent) => new(etwEvent);
+
+            /// <summary>
             /// A data wrapper for a PublishProjectTreeAcquiringLockStop event.
             /// </summary>
             public ref struct PublishProjectTreeAcquiringLockStopData
@@ -3140,12 +3284,12 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the AbandonedLockCount field.
                 /// </summary>
-                public int AbandonedLockCount => BitConverter.ToInt32(_etwEvent.Data[Offset_AbandonedLockCount..]);
+                public int AbandonedLockCount => BitConverter.ToInt32(_etwEvent.Data[Offset_AbandonedLockCount..Offset_AbandonedAcquiringLockCount]);
 
                 /// <summary>
                 /// Retrieves the AbandonedAcquiringLockCount field.
                 /// </summary>
-                public int AbandonedAcquiringLockCount => BitConverter.ToInt32(_etwEvent.Data[Offset_AbandonedAcquiringLockCount..]);
+                public int AbandonedAcquiringLockCount => BitConverter.ToInt32(_etwEvent.Data[Offset_AbandonedAcquiringLockCount..Offset_ThreadSwitchingTime]);
 
                 /// <summary>
                 /// Retrieves the ThreadSwitchingTime field.
@@ -3236,6 +3380,12 @@ namespace EtwTools
             {
                 _etwEvent = etwEvent;
             }
+
+            /// <summary>
+            /// Converts a generic ETW event to a TransferToBestProjectOwnerStartEvent.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator TransferToBestProjectOwnerStartEvent(EtwEvent etwEvent) => new(etwEvent);
 
             /// <summary>
             /// A data wrapper for a TransferToBestProjectOwnerStart event.
@@ -3348,6 +3498,12 @@ namespace EtwTools
             }
 
             /// <summary>
+            /// Converts a generic ETW event to a TransferToBestProjectOwnerStopEvent.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator TransferToBestProjectOwnerStopEvent(EtwEvent etwEvent) => new(etwEvent);
+
+            /// <summary>
             /// A data wrapper for a TransferToBestProjectOwnerStop event.
             /// </summary>
             public ref struct TransferToBestProjectOwnerStopData
@@ -3458,6 +3614,12 @@ namespace EtwTools
             }
 
             /// <summary>
+            /// Converts a generic ETW event to a SwitchToMainThreadToPublishTreeFailedEvent.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator SwitchToMainThreadToPublishTreeFailedEvent(EtwEvent etwEvent) => new(etwEvent);
+
+            /// <summary>
             /// A data wrapper for a SwitchToMainThreadToPublishTreeFailed event.
             /// </summary>
             public ref struct SwitchToMainThreadToPublishTreeFailedData
@@ -3561,6 +3723,12 @@ namespace EtwTools
             {
                 _etwEvent = etwEvent;
             }
+
+            /// <summary>
+            /// Converts a generic ETW event to a NotifyBeforeSolutionClosingEvent.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator NotifyBeforeSolutionClosingEvent(EtwEvent etwEvent) => new(etwEvent);
         }
 
         /// <summary>
@@ -3634,6 +3802,12 @@ namespace EtwTools
             }
 
             /// <summary>
+            /// Converts a generic ETW event to a NotifyQueryStatusDelayEvent.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator NotifyQueryStatusDelayEvent(EtwEvent etwEvent) => new(etwEvent);
+
+            /// <summary>
             /// A data wrapper for a NotifyQueryStatusDelay event.
             /// </summary>
             public ref struct NotifyQueryStatusDelayData
@@ -3700,17 +3874,17 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the CommandGroup field.
                 /// </summary>
-                public string CommandGroup => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_CommandGroup..]);
+                public string CommandGroup => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_CommandGroup..Offset_CommandId]);
 
                 /// <summary>
                 /// Retrieves the CommandId field.
                 /// </summary>
-                public uint CommandId => BitConverter.ToUInt32(_etwEvent.Data[Offset_CommandId..]);
+                public uint CommandId => BitConverter.ToUInt32(_etwEvent.Data[Offset_CommandId..Offset_Handler]);
 
                 /// <summary>
                 /// Retrieves the Handler field.
                 /// </summary>
-                public string Handler => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_Handler..]);
+                public string Handler => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_Handler..Offset_DelayTicket]);
 
                 /// <summary>
                 /// Retrieves the DelayTicket field.
@@ -3802,6 +3976,12 @@ namespace EtwTools
             {
                 _etwEvent = etwEvent;
             }
+
+            /// <summary>
+            /// Converts a generic ETW event to a WaitingProjectTreeLoadingStartEvent.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator WaitingProjectTreeLoadingStartEvent(EtwEvent etwEvent) => new(etwEvent);
 
             /// <summary>
             /// A data wrapper for a WaitingProjectTreeLoadingStart event.
@@ -3907,6 +4087,12 @@ namespace EtwTools
             {
                 _etwEvent = etwEvent;
             }
+
+            /// <summary>
+            /// Converts a generic ETW event to a LoadAllUnconfiguredProjectsStartEvent.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator LoadAllUnconfiguredProjectsStartEvent(EtwEvent etwEvent) => new(etwEvent);
         }
 
         /// <summary>
@@ -3973,6 +4159,12 @@ namespace EtwTools
             {
                 _etwEvent = etwEvent;
             }
+
+            /// <summary>
+            /// Converts a generic ETW event to a LoadAllUnconfiguredProjectsStopEvent.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator LoadAllUnconfiguredProjectsStopEvent(EtwEvent etwEvent) => new(etwEvent);
         }
 
         /// <summary>
@@ -4039,6 +4231,12 @@ namespace EtwTools
             {
                 _etwEvent = etwEvent;
             }
+
+            /// <summary>
+            /// Converts a generic ETW event to a LoadAllConfiguredProjectsStartEvent.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator LoadAllConfiguredProjectsStartEvent(EtwEvent etwEvent) => new(etwEvent);
         }
 
         /// <summary>
@@ -4105,6 +4303,12 @@ namespace EtwTools
             {
                 _etwEvent = etwEvent;
             }
+
+            /// <summary>
+            /// Converts a generic ETW event to a LoadAllConfiguredProjectsStopEvent.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator LoadAllConfiguredProjectsStopEvent(EtwEvent etwEvent) => new(etwEvent);
         }
 
         /// <summary>
@@ -4171,6 +4375,12 @@ namespace EtwTools
             {
                 _etwEvent = etwEvent;
             }
+
+            /// <summary>
+            /// Converts a generic ETW event to a LoadAllProjectNodesStartEvent.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator LoadAllProjectNodesStartEvent(EtwEvent etwEvent) => new(etwEvent);
         }
 
         /// <summary>
@@ -4237,6 +4447,12 @@ namespace EtwTools
             {
                 _etwEvent = etwEvent;
             }
+
+            /// <summary>
+            /// Converts a generic ETW event to a LoadAllProjectNodesStopEvent.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator LoadAllProjectNodesStopEvent(EtwEvent etwEvent) => new(etwEvent);
         }
 
         /// <summary>
@@ -4303,6 +4519,12 @@ namespace EtwTools
             {
                 _etwEvent = etwEvent;
             }
+
+            /// <summary>
+            /// Converts a generic ETW event to a LoadProjectsAndTreesStartEvent.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator LoadProjectsAndTreesStartEvent(EtwEvent etwEvent) => new(etwEvent);
         }
 
         /// <summary>
@@ -4369,6 +4591,12 @@ namespace EtwTools
             {
                 _etwEvent = etwEvent;
             }
+
+            /// <summary>
+            /// Converts a generic ETW event to a LoadProjectsAndTreesStopEvent.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator LoadProjectsAndTreesStopEvent(EtwEvent etwEvent) => new(etwEvent);
         }
 
         /// <summary>
@@ -4442,6 +4670,12 @@ namespace EtwTools
             }
 
             /// <summary>
+            /// Converts a generic ETW event to a ResetDesignTimeBuilderEvent.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator ResetDesignTimeBuilderEvent(EtwEvent etwEvent) => new(etwEvent);
+
+            /// <summary>
             /// A data wrapper for a ResetDesignTimeBuilder event.
             /// </summary>
             public ref struct ResetDesignTimeBuilderData
@@ -4494,12 +4728,12 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the Project field.
                 /// </summary>
-                public string Project => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_Project..]);
+                public string Project => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_Project..Offset_Configuration]);
 
                 /// <summary>
                 /// Retrieves the Configuration field.
                 /// </summary>
-                public string Configuration => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_Configuration..]);
+                public string Configuration => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_Configuration..Offset_ResetId]);
 
                 /// <summary>
                 /// Retrieves the ResetId field.
@@ -4585,6 +4819,12 @@ namespace EtwTools
             {
                 _etwEvent = etwEvent;
             }
+
+            /// <summary>
+            /// Converts a generic ETW event to a CpsHandlersBeforeCloseSolutionStartEvent.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator CpsHandlersBeforeCloseSolutionStartEvent(EtwEvent etwEvent) => new(etwEvent);
         }
 
         /// <summary>
@@ -4651,6 +4891,12 @@ namespace EtwTools
             {
                 _etwEvent = etwEvent;
             }
+
+            /// <summary>
+            /// Converts a generic ETW event to a CpsHandlersBeforeCloseSolutionStopEvent.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator CpsHandlersBeforeCloseSolutionStopEvent(EtwEvent etwEvent) => new(etwEvent);
         }
 
         /// <summary>
@@ -4724,6 +4970,12 @@ namespace EtwTools
             }
 
             /// <summary>
+            /// Converts a generic ETW event to a CpsNotifyTaskStopEvent.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator CpsNotifyTaskStopEvent(EtwEvent etwEvent) => new(etwEvent);
+
+            /// <summary>
             /// A data wrapper for a CpsNotifyTaskStop event.
             /// </summary>
             public ref struct CpsNotifyTaskStopData
@@ -4776,12 +5028,12 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the StageId field.
                 /// </summary>
-                public string StageId => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_StageId..]);
+                public string StageId => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_StageId..Offset_ProjectPath]);
 
                 /// <summary>
                 /// Retrieves the ProjectPath field.
                 /// </summary>
-                public string ProjectPath => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_ProjectPath..]);
+                public string ProjectPath => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_ProjectPath..Offset_Name]);
 
                 /// <summary>
                 /// Retrieves the Name field.
@@ -4872,6 +5124,12 @@ namespace EtwTools
             {
                 _etwEvent = etwEvent;
             }
+
+            /// <summary>
+            /// Converts a generic ETW event to a CpsUpdateSubTypeStartEvent.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator CpsUpdateSubTypeStartEvent(EtwEvent etwEvent) => new(etwEvent);
 
             /// <summary>
             /// A data wrapper for a CpsUpdateSubTypeStart event.
@@ -4984,6 +5242,12 @@ namespace EtwTools
             }
 
             /// <summary>
+            /// Converts a generic ETW event to a CpsUpdateSubTypeEndEvent.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator CpsUpdateSubTypeEndEvent(EtwEvent etwEvent) => new(etwEvent);
+
+            /// <summary>
             /// A data wrapper for a CpsUpdateSubTypeEnd event.
             /// </summary>
             public ref struct CpsUpdateSubTypeEndData
@@ -5050,12 +5314,12 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the ProjectPath field.
                 /// </summary>
-                public string ProjectPath => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_ProjectPath..]);
+                public string ProjectPath => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_ProjectPath..Offset_Count]);
 
                 /// <summary>
                 /// Retrieves the Count field.
                 /// </summary>
-                public int Count => BitConverter.ToInt32(_etwEvent.Data[Offset_Count..]);
+                public int Count => BitConverter.ToInt32(_etwEvent.Data[Offset_Count..Offset_Changed]);
 
                 /// <summary>
                 /// Retrieves the Changed field.
@@ -5154,6 +5418,12 @@ namespace EtwTools
             }
 
             /// <summary>
+            /// Converts a generic ETW event to a ProjectReloadedInBackgroundEvent.
+            /// </summary>
+            /// <param name="etwEvent"></param>
+            public static explicit operator ProjectReloadedInBackgroundEvent(EtwEvent etwEvent) => new(etwEvent);
+
+            /// <summary>
             /// A data wrapper for a ProjectReloadedInBackground event.
             /// </summary>
             public ref struct ProjectReloadedInBackgroundData
@@ -5192,7 +5462,7 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the Project field.
                 /// </summary>
-                public string Project => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_Project..]);
+                public string Project => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_Project..Offset_ConfiguredVersion]);
 
                 /// <summary>
                 /// Retrieves the ConfiguredVersion field.
