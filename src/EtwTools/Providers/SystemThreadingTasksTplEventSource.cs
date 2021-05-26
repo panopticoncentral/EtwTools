@@ -308,7 +308,7 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the Message field.
                 /// </summary>
-                public string Message => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_Message..]);
+                public string Message => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_Message..^1]);
 
                 /// <summary>
                 /// Creates a new EventSourceMessageData.
@@ -2821,7 +2821,7 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the OperationName field.
                 /// </summary>
-                public string OperationName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_OperationName..Offset_RelatedContext]);
+                public string OperationName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_OperationName..(Offset_RelatedContext - 1)]);
 
                 /// <summary>
                 /// Retrieves the RelatedContext field.
@@ -3760,7 +3760,7 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the Message field.
                 /// </summary>
-                public string Message => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_Message..]);
+                public string Message => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_Message..^1]);
 
                 /// <summary>
                 /// Creates a new DebugMessageData.
@@ -3890,12 +3890,12 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the Facility field.
                 /// </summary>
-                public string Facility => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_Facility..Offset_Message]);
+                public string Facility => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_Facility..(Offset_Message - 1)]);
 
                 /// <summary>
                 /// Retrieves the Message field.
                 /// </summary>
-                public string Message => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_Message..]);
+                public string Message => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_Message..^1]);
 
                 /// <summary>
                 /// Creates a new DebugFacilityMessageData.
@@ -4040,17 +4040,17 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the Facility field.
                 /// </summary>
-                public string Facility => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_Facility..Offset_Message]);
+                public string Facility => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_Facility..(Offset_Message - 1)]);
 
                 /// <summary>
                 /// Retrieves the Message field.
                 /// </summary>
-                public string Message => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_Message..Offset_Value1]);
+                public string Message => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_Message..(Offset_Value1 - 1)]);
 
                 /// <summary>
                 /// Retrieves the Value1 field.
                 /// </summary>
-                public string Value1 => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_Value1..]);
+                public string Value1 => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_Value1..^1]);
 
                 /// <summary>
                 /// Creates a new DebugFacilityMessage1Data.

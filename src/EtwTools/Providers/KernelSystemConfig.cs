@@ -2505,7 +2505,7 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the DeviceDescription field.
                 /// </summary>
-                public string DeviceDescription => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_DeviceDescription..]);
+                public string DeviceDescription => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_DeviceDescription..^1]);
 
                 /// <summary>
                 /// Creates a new IRQData.
@@ -2709,17 +2709,17 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the DeviceID field.
                 /// </summary>
-                public string DeviceID => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_DeviceID..Offset_DeviceDescription]);
+                public string DeviceID => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_DeviceID..(Offset_DeviceDescription - 1)]);
 
                 /// <summary>
                 /// Retrieves the DeviceDescription field.
                 /// </summary>
-                public string DeviceDescription => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_DeviceDescription..Offset_FriendlyName]);
+                public string DeviceDescription => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_DeviceDescription..(Offset_FriendlyName - 1)]);
 
                 /// <summary>
                 /// Retrieves the FriendlyName field.
                 /// </summary>
-                public string FriendlyName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_FriendlyName..]);
+                public string FriendlyName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_FriendlyName..^1]);
 
                 /// <summary>
                 /// Creates a new PnPData.
@@ -5109,7 +5109,7 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the DeviceDescription field.
                 /// </summary>
-                public string DeviceDescription => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_DeviceDescription..]);
+                public string DeviceDescription => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_DeviceDescription..^1]);
 
                 /// <summary>
                 /// Creates a new IRQData.
@@ -5313,17 +5313,17 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the DeviceID field.
                 /// </summary>
-                public string DeviceID => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_DeviceID..Offset_DeviceDescription]);
+                public string DeviceID => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_DeviceID..(Offset_DeviceDescription - 1)]);
 
                 /// <summary>
                 /// Retrieves the DeviceDescription field.
                 /// </summary>
-                public string DeviceDescription => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_DeviceDescription..Offset_FriendlyName]);
+                public string DeviceDescription => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_DeviceDescription..(Offset_FriendlyName - 1)]);
 
                 /// <summary>
                 /// Retrieves the FriendlyName field.
                 /// </summary>
-                public string FriendlyName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_FriendlyName..]);
+                public string FriendlyName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_FriendlyName..^1]);
 
                 /// <summary>
                 /// Creates a new PnPData.
@@ -6616,17 +6616,17 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the NICDescription field.
                 /// </summary>
-                public string NICDescription => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_NICDescription..Offset_IpAddresses]);
+                public string NICDescription => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_NICDescription..(Offset_IpAddresses - 1)]);
 
                 /// <summary>
                 /// Retrieves the IpAddresses field.
                 /// </summary>
-                public string IpAddresses => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_IpAddresses..Offset_DnsServerAddresses]);
+                public string IpAddresses => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_IpAddresses..(Offset_DnsServerAddresses - 1)]);
 
                 /// <summary>
                 /// Retrieves the DnsServerAddresses field.
                 /// </summary>
-                public string DnsServerAddresses => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_DnsServerAddresses..]);
+                public string DnsServerAddresses => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_DnsServerAddresses..^1]);
 
                 /// <summary>
                 /// Creates a new NICData.
@@ -7149,17 +7149,17 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the ServiceName field.
                 /// </summary>
-                public string ServiceName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_ServiceName..Offset_DisplayName]);
+                public string ServiceName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_ServiceName..(Offset_DisplayName - 1)]);
 
                 /// <summary>
                 /// Retrieves the DisplayName field.
                 /// </summary>
-                public string DisplayName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_DisplayName..Offset_ProcessName]);
+                public string DisplayName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_DisplayName..(Offset_ProcessName - 1)]);
 
                 /// <summary>
                 /// Retrieves the ProcessName field.
                 /// </summary>
-                public string ProcessName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_ProcessName..]);
+                public string ProcessName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_ProcessName..^1]);
 
                 /// <summary>
                 /// Creates a new ServicesData.
@@ -8020,22 +8020,22 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the DriveLetter field.
                 /// </summary>
-                public string DriveLetter => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_DriveLetter..Offset_FileSystemName]);
+                public string DriveLetter => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_DriveLetter..(Offset_FileSystemName - 1)]);
 
                 /// <summary>
                 /// Retrieves the FileSystemName field.
                 /// </summary>
-                public string FileSystemName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_FileSystemName..Offset_DeviceName]);
+                public string FileSystemName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_FileSystemName..(Offset_DeviceName - 1)]);
 
                 /// <summary>
                 /// Retrieves the DeviceName field.
                 /// </summary>
-                public string DeviceName => System.Text.Encoding.ASCII.GetString(_etwEvent.Data[Offset_DeviceName..Offset_ManufacturerName]);
+                public string DeviceName => System.Text.Encoding.ASCII.GetString(_etwEvent.Data[Offset_DeviceName..(Offset_ManufacturerName - 1)]);
 
                 /// <summary>
                 /// Retrieves the ManufacturerName field.
                 /// </summary>
-                public string ManufacturerName => System.Text.Encoding.ASCII.GetString(_etwEvent.Data[Offset_ManufacturerName..]);
+                public string ManufacturerName => System.Text.Encoding.ASCII.GetString(_etwEvent.Data[Offset_ManufacturerName..^1]);
 
                 /// <summary>
                 /// Creates a new OpticalDiskData.
@@ -8225,7 +8225,7 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the DeviceDescription field.
                 /// </summary>
-                public string DeviceDescription => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_DeviceDescription..]);
+                public string DeviceDescription => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_DeviceDescription..^1]);
 
                 /// <summary>
                 /// Creates a new IRQData.
@@ -8429,17 +8429,17 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the DeviceID field.
                 /// </summary>
-                public string DeviceID => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_DeviceID..Offset_DeviceDescription]);
+                public string DeviceID => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_DeviceID..(Offset_DeviceDescription - 1)]);
 
                 /// <summary>
                 /// Retrieves the DeviceDescription field.
                 /// </summary>
-                public string DeviceDescription => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_DeviceDescription..Offset_FriendlyName]);
+                public string DeviceDescription => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_DeviceDescription..(Offset_FriendlyName - 1)]);
 
                 /// <summary>
                 /// Retrieves the FriendlyName field.
                 /// </summary>
-                public string FriendlyName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_FriendlyName..]);
+                public string FriendlyName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_FriendlyName..^1]);
 
                 /// <summary>
                 /// Creates a new PnPData.
@@ -8636,7 +8636,7 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the LocationInformation field.
                 /// </summary>
-                public string LocationInformation => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_LocationInformation..]);
+                public string LocationInformation => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_LocationInformation..^1]);
 
                 /// <summary>
                 /// Creates a new IDEChannelData.
@@ -8934,22 +8934,22 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the SystemManufacturer field.
                 /// </summary>
-                public string SystemManufacturer => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_SystemManufacturer..Offset_SystemProductName]);
+                public string SystemManufacturer => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_SystemManufacturer..(Offset_SystemProductName - 1)]);
 
                 /// <summary>
                 /// Retrieves the SystemProductName field.
                 /// </summary>
-                public string SystemProductName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_SystemProductName..Offset_BiosDate]);
+                public string SystemProductName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_SystemProductName..(Offset_BiosDate - 1)]);
 
                 /// <summary>
                 /// Retrieves the BiosDate field.
                 /// </summary>
-                public string BiosDate => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_BiosDate..Offset_BiosVersion]);
+                public string BiosDate => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_BiosDate..(Offset_BiosVersion - 1)]);
 
                 /// <summary>
                 /// Retrieves the BiosVersion field.
                 /// </summary>
-                public string BiosVersion => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_BiosVersion..]);
+                public string BiosVersion => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_BiosVersion..^1]);
 
                 /// <summary>
                 /// Creates a new PlatformData.
@@ -10430,7 +10430,7 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the VolumePathNames field.
                 /// </summary>
-                public string VolumePathNames => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_VolumePathNames..]);
+                public string VolumePathNames => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_VolumePathNames..^1]);
 
                 /// <summary>
                 /// Creates a new DefragmentationData.
@@ -10780,77 +10780,77 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the BootLoaderVersion field.
                 /// </summary>
-                public string BootLoaderVersion => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_BootLoaderVersion..Offset_FirmwareRevision]);
+                public string BootLoaderVersion => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_BootLoaderVersion..(Offset_FirmwareRevision - 1)]);
 
                 /// <summary>
                 /// Retrieves the FirmwareRevision field.
                 /// </summary>
-                public string FirmwareRevision => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_FirmwareRevision..Offset_FriendlyName]);
+                public string FirmwareRevision => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_FirmwareRevision..(Offset_FriendlyName - 1)]);
 
                 /// <summary>
                 /// Retrieves the FriendlyName field.
                 /// </summary>
-                public string FriendlyName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_FriendlyName..Offset_HardwareRevision]);
+                public string FriendlyName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_FriendlyName..(Offset_HardwareRevision - 1)]);
 
                 /// <summary>
                 /// Retrieves the HardwareRevision field.
                 /// </summary>
-                public string HardwareRevision => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_HardwareRevision..Offset_Manufacturer]);
+                public string HardwareRevision => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_HardwareRevision..(Offset_Manufacturer - 1)]);
 
                 /// <summary>
                 /// Retrieves the Manufacturer field.
                 /// </summary>
-                public string Manufacturer => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_Manufacturer..Offset_ManufacturerDisplayName]);
+                public string Manufacturer => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_Manufacturer..(Offset_ManufacturerDisplayName - 1)]);
 
                 /// <summary>
                 /// Retrieves the ManufacturerDisplayName field.
                 /// </summary>
-                public string ManufacturerDisplayName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_ManufacturerDisplayName..Offset_ManufacturerModelName]);
+                public string ManufacturerDisplayName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_ManufacturerDisplayName..(Offset_ManufacturerModelName - 1)]);
 
                 /// <summary>
                 /// Retrieves the ManufacturerModelName field.
                 /// </summary>
-                public string ManufacturerModelName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_ManufacturerModelName..Offset_MobileOperatorDisplayName]);
+                public string ManufacturerModelName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_ManufacturerModelName..(Offset_MobileOperatorDisplayName - 1)]);
 
                 /// <summary>
                 /// Retrieves the MobileOperatorDisplayName field.
                 /// </summary>
-                public string MobileOperatorDisplayName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_MobileOperatorDisplayName..Offset_MobileOperatorName]);
+                public string MobileOperatorDisplayName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_MobileOperatorDisplayName..(Offset_MobileOperatorName - 1)]);
 
                 /// <summary>
                 /// Retrieves the MobileOperatorName field.
                 /// </summary>
-                public string MobileOperatorName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_MobileOperatorName..Offset_ModelName]);
+                public string MobileOperatorName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_MobileOperatorName..(Offset_ModelName - 1)]);
 
                 /// <summary>
                 /// Retrieves the ModelName field.
                 /// </summary>
-                public string ModelName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_ModelName..Offset_RadioHardwareRevision]);
+                public string ModelName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_ModelName..(Offset_RadioHardwareRevision - 1)]);
 
                 /// <summary>
                 /// Retrieves the RadioHardwareRevision field.
                 /// </summary>
-                public string RadioHardwareRevision => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_RadioHardwareRevision..Offset_RadioSoftwareRevision]);
+                public string RadioHardwareRevision => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_RadioHardwareRevision..(Offset_RadioSoftwareRevision - 1)]);
 
                 /// <summary>
                 /// Retrieves the RadioSoftwareRevision field.
                 /// </summary>
-                public string RadioSoftwareRevision => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_RadioSoftwareRevision..Offset_ROMVersion]);
+                public string RadioSoftwareRevision => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_RadioSoftwareRevision..(Offset_ROMVersion - 1)]);
 
                 /// <summary>
                 /// Retrieves the ROMVersion field.
                 /// </summary>
-                public string ROMVersion => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_ROMVersion..Offset_SOCVersion]);
+                public string ROMVersion => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_ROMVersion..(Offset_SOCVersion - 1)]);
 
                 /// <summary>
                 /// Retrieves the SOCVersion field.
                 /// </summary>
-                public string SOCVersion => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_SOCVersion..Offset_HardwareVariant]);
+                public string SOCVersion => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_SOCVersion..(Offset_HardwareVariant - 1)]);
 
                 /// <summary>
                 /// Retrieves the HardwareVariant field.
                 /// </summary>
-                public string HardwareVariant => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_HardwareVariant..]);
+                public string HardwareVariant => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_HardwareVariant..^1]);
 
                 /// <summary>
                 /// Creates a new MobilePlatformData.
@@ -11150,12 +11150,12 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the UpdateId field.
                 /// </summary>
-                public string UpdateId => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_UpdateId..Offset_FlightIdList]);
+                public string UpdateId => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_UpdateId..(Offset_FlightIdList - 1)]);
 
                 /// <summary>
                 /// Retrieves the FlightIdList field.
                 /// </summary>
-                public string FlightIdList => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_FlightIdList..]);
+                public string FlightIdList => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_FlightIdList..^1]);
 
                 /// <summary>
                 /// Creates a new FlightIdsData.
@@ -12371,7 +12371,7 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the DeviceDescription field.
                 /// </summary>
-                public string DeviceDescription => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_DeviceDescription..]);
+                public string DeviceDescription => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_DeviceDescription..^1]);
 
                 /// <summary>
                 /// Creates a new IRQData.
@@ -12605,27 +12605,27 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the ServiceName field.
                 /// </summary>
-                public string ServiceName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_ServiceName..Offset_DisplayName]);
+                public string ServiceName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_ServiceName..(Offset_DisplayName - 1)]);
 
                 /// <summary>
                 /// Retrieves the DisplayName field.
                 /// </summary>
-                public string DisplayName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_DisplayName..Offset_ProcessName]);
+                public string DisplayName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_DisplayName..(Offset_ProcessName - 1)]);
 
                 /// <summary>
                 /// Retrieves the ProcessName field.
                 /// </summary>
-                public string ProcessName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_ProcessName..Offset_LoadOrderGroup]);
+                public string ProcessName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_ProcessName..(Offset_LoadOrderGroup - 1)]);
 
                 /// <summary>
                 /// Retrieves the LoadOrderGroup field.
                 /// </summary>
-                public string LoadOrderGroup => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_LoadOrderGroup..Offset_SvchostGroup]);
+                public string LoadOrderGroup => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_LoadOrderGroup..(Offset_SvchostGroup - 1)]);
 
                 /// <summary>
                 /// Retrieves the SvchostGroup field.
                 /// </summary>
-                public string SvchostGroup => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_SvchostGroup..]);
+                public string SvchostGroup => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_SvchostGroup..^1]);
 
                 /// <summary>
                 /// Creates a new ServicesData.
@@ -12847,22 +12847,22 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the DeviceID field.
                 /// </summary>
-                public string DeviceID => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_DeviceID..Offset_DeviceDescription]);
+                public string DeviceID => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_DeviceID..(Offset_DeviceDescription - 1)]);
 
                 /// <summary>
                 /// Retrieves the DeviceDescription field.
                 /// </summary>
-                public string DeviceDescription => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_DeviceDescription..Offset_FriendlyName]);
+                public string DeviceDescription => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_DeviceDescription..(Offset_FriendlyName - 1)]);
 
                 /// <summary>
                 /// Retrieves the FriendlyName field.
                 /// </summary>
-                public string FriendlyName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_FriendlyName..Offset_PdoName]);
+                public string FriendlyName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_FriendlyName..(Offset_PdoName - 1)]);
 
                 /// <summary>
                 /// Retrieves the PdoName field.
                 /// </summary>
-                public string PdoName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_PdoName..]);
+                public string PdoName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_PdoName..^1]);
 
                 /// <summary>
                 /// Creates a new PnPData.
@@ -13138,62 +13138,62 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the DeviceManufacturer field.
                 /// </summary>
-                public string DeviceManufacturer => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_DeviceManufacturer..Offset_DeviceManufacturerDisplayName]);
+                public string DeviceManufacturer => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_DeviceManufacturer..(Offset_DeviceManufacturerDisplayName - 1)]);
 
                 /// <summary>
                 /// Retrieves the DeviceManufacturerDisplayName field.
                 /// </summary>
-                public string DeviceManufacturerDisplayName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_DeviceManufacturerDisplayName..Offset_DeviceModel]);
+                public string DeviceManufacturerDisplayName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_DeviceManufacturerDisplayName..(Offset_DeviceModel - 1)]);
 
                 /// <summary>
                 /// Retrieves the DeviceModel field.
                 /// </summary>
-                public string DeviceModel => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_DeviceModel..Offset_DeviceModelDisplayName]);
+                public string DeviceModel => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_DeviceModel..(Offset_DeviceModelDisplayName - 1)]);
 
                 /// <summary>
                 /// Retrieves the DeviceModelDisplayName field.
                 /// </summary>
-                public string DeviceModelDisplayName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_DeviceModelDisplayName..Offset_MobileOperator]);
+                public string DeviceModelDisplayName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_DeviceModelDisplayName..(Offset_MobileOperator - 1)]);
 
                 /// <summary>
                 /// Retrieves the MobileOperator field.
                 /// </summary>
-                public string MobileOperator => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_MobileOperator..Offset_MobileOperatorDisplayName]);
+                public string MobileOperator => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_MobileOperator..(Offset_MobileOperatorDisplayName - 1)]);
 
                 /// <summary>
                 /// Retrieves the MobileOperatorDisplayName field.
                 /// </summary>
-                public string MobileOperatorDisplayName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_MobileOperatorDisplayName..Offset_HardwareVersion]);
+                public string MobileOperatorDisplayName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_MobileOperatorDisplayName..(Offset_HardwareVersion - 1)]);
 
                 /// <summary>
                 /// Retrieves the HardwareVersion field.
                 /// </summary>
-                public string HardwareVersion => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_HardwareVersion..Offset_SocVersion]);
+                public string HardwareVersion => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_HardwareVersion..(Offset_SocVersion - 1)]);
 
                 /// <summary>
                 /// Retrieves the SocVersion field.
                 /// </summary>
-                public string SocVersion => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_SocVersion..Offset_RadioHardwareVersion]);
+                public string SocVersion => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_SocVersion..(Offset_RadioHardwareVersion - 1)]);
 
                 /// <summary>
                 /// Retrieves the RadioHardwareVersion field.
                 /// </summary>
-                public string RadioHardwareVersion => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_RadioHardwareVersion..Offset_RadioSoftwareVersion]);
+                public string RadioHardwareVersion => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_RadioHardwareVersion..(Offset_RadioSoftwareVersion - 1)]);
 
                 /// <summary>
                 /// Retrieves the RadioSoftwareVersion field.
                 /// </summary>
-                public string RadioSoftwareVersion => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_RadioSoftwareVersion..Offset_BspVersion]);
+                public string RadioSoftwareVersion => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_RadioSoftwareVersion..(Offset_BspVersion - 1)]);
 
                 /// <summary>
                 /// Retrieves the BspVersion field.
                 /// </summary>
-                public string BspVersion => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_BspVersion..Offset_OemSoftwareVersion]);
+                public string BspVersion => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_BspVersion..(Offset_OemSoftwareVersion - 1)]);
 
                 /// <summary>
                 /// Retrieves the OemSoftwareVersion field.
                 /// </summary>
-                public string OemSoftwareVersion => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_OemSoftwareVersion..]);
+                public string OemSoftwareVersion => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_OemSoftwareVersion..^1]);
 
                 /// <summary>
                 /// Creates a new MobilePlatformData.
@@ -13461,27 +13461,27 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the DeviceID field.
                 /// </summary>
-                public string DeviceID => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_DeviceID..Offset_DeviceDescription]);
+                public string DeviceID => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_DeviceID..(Offset_DeviceDescription - 1)]);
 
                 /// <summary>
                 /// Retrieves the DeviceDescription field.
                 /// </summary>
-                public string DeviceDescription => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_DeviceDescription..Offset_FriendlyName]);
+                public string DeviceDescription => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_DeviceDescription..(Offset_FriendlyName - 1)]);
 
                 /// <summary>
                 /// Retrieves the FriendlyName field.
                 /// </summary>
-                public string FriendlyName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_FriendlyName..Offset_PdoName]);
+                public string FriendlyName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_FriendlyName..(Offset_PdoName - 1)]);
 
                 /// <summary>
                 /// Retrieves the PdoName field.
                 /// </summary>
-                public string PdoName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_PdoName..Offset_ServiceName]);
+                public string PdoName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_PdoName..(Offset_ServiceName - 1)]);
 
                 /// <summary>
                 /// Retrieves the ServiceName field.
                 /// </summary>
-                public string ServiceName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_ServiceName..Offset_UpperFilters]);
+                public string ServiceName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_ServiceName..(Offset_UpperFilters - 1)]);
 
                 /// <summary>
                 /// Retrieves the UpperFilters field.
@@ -13795,27 +13795,27 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the DeviceID field.
                 /// </summary>
-                public string DeviceID => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_DeviceID..Offset_DeviceDescription]);
+                public string DeviceID => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_DeviceID..(Offset_DeviceDescription - 1)]);
 
                 /// <summary>
                 /// Retrieves the DeviceDescription field.
                 /// </summary>
-                public string DeviceDescription => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_DeviceDescription..Offset_FriendlyName]);
+                public string DeviceDescription => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_DeviceDescription..(Offset_FriendlyName - 1)]);
 
                 /// <summary>
                 /// Retrieves the FriendlyName field.
                 /// </summary>
-                public string FriendlyName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_FriendlyName..Offset_PdoName]);
+                public string FriendlyName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_FriendlyName..(Offset_PdoName - 1)]);
 
                 /// <summary>
                 /// Retrieves the PdoName field.
                 /// </summary>
-                public string PdoName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_PdoName..Offset_ServiceName]);
+                public string PdoName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_PdoName..(Offset_ServiceName - 1)]);
 
                 /// <summary>
                 /// Retrieves the ServiceName field.
                 /// </summary>
-                public string ServiceName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_ServiceName..Offset_UpperFilters]);
+                public string ServiceName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_ServiceName..(Offset_UpperFilters - 1)]);
 
                 /// <summary>
                 /// Retrieves the UpperFilters field.

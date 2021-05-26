@@ -364,7 +364,7 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the Message field.
                 /// </summary>
-                public string Message => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_Message..]);
+                public string Message => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_Message..^1]);
 
                 /// <summary>
                 /// Creates a new EventSourceMessageData.
@@ -522,12 +522,12 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the ProjectPath field.
                 /// </summary>
-                public string ProjectPath => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_ProjectPath..Offset_Configuration]);
+                public string ProjectPath => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_ProjectPath..(Offset_Configuration - 1)]);
 
                 /// <summary>
                 /// Retrieves the Configuration field.
                 /// </summary>
-                public string Configuration => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_Configuration..Offset_RequestId]);
+                public string Configuration => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_Configuration..(Offset_RequestId - 1)]);
 
                 /// <summary>
                 /// Retrieves the RequestId field.
@@ -684,12 +684,12 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the ProjectPath field.
                 /// </summary>
-                public string ProjectPath => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_ProjectPath..Offset_Configuration]);
+                public string ProjectPath => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_ProjectPath..(Offset_Configuration - 1)]);
 
                 /// <summary>
                 /// Retrieves the Configuration field.
                 /// </summary>
-                public string Configuration => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_Configuration..Offset_SnapshotId]);
+                public string Configuration => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_Configuration..(Offset_SnapshotId - 1)]);
 
                 /// <summary>
                 /// Retrieves the SnapshotId field.
@@ -840,12 +840,12 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the ProjectPath field.
                 /// </summary>
-                public string ProjectPath => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_ProjectPath..Offset_Configuration]);
+                public string ProjectPath => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_ProjectPath..(Offset_Configuration - 1)]);
 
                 /// <summary>
                 /// Retrieves the Configuration field.
                 /// </summary>
-                public string Configuration => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_Configuration..Offset_SnapshotId]);
+                public string Configuration => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_Configuration..(Offset_SnapshotId - 1)]);
 
                 /// <summary>
                 /// Retrieves the SnapshotId field.
@@ -1010,12 +1010,12 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the ProjectPath field.
                 /// </summary>
-                public string ProjectPath => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_ProjectPath..Offset_Scope]);
+                public string ProjectPath => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_ProjectPath..(Offset_Scope - 1)]);
 
                 /// <summary>
                 /// Retrieves the Scope field.
                 /// </summary>
-                public string Scope => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_Scope..Offset_ValueVersionNumber]);
+                public string Scope => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_Scope..(Offset_ValueVersionNumber - 1)]);
 
                 /// <summary>
                 /// Retrieves the ValueVersionNumber field.
@@ -1172,12 +1172,12 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the ProjectPath field.
                 /// </summary>
-                public string ProjectPath => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_ProjectPath..Offset_Scope]);
+                public string ProjectPath => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_ProjectPath..(Offset_Scope - 1)]);
 
                 /// <summary>
                 /// Retrieves the Scope field.
                 /// </summary>
-                public string Scope => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_Scope..Offset_ValueVersionNumber]);
+                public string Scope => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_Scope..(Offset_ValueVersionNumber - 1)]);
 
                 /// <summary>
                 /// Retrieves the ValueVersionNumber field.
@@ -1328,12 +1328,12 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the ProjectPath field.
                 /// </summary>
-                public string ProjectPath => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_ProjectPath..Offset_ConfigurationName]);
+                public string ProjectPath => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_ProjectPath..(Offset_ConfigurationName - 1)]);
 
                 /// <summary>
                 /// Retrieves the ConfigurationName field.
                 /// </summary>
-                public string ConfigurationName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_ConfigurationName..Offset_Version]);
+                public string ConfigurationName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_ConfigurationName..(Offset_Version - 1)]);
 
                 /// <summary>
                 /// Retrieves the Version field.
@@ -1620,7 +1620,7 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the Project field.
                 /// </summary>
-                public string Project => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_Project..Offset_DataSourceId]);
+                public string Project => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_Project..(Offset_DataSourceId - 1)]);
 
                 /// <summary>
                 /// Retrieves the DataSourceId field.
@@ -1630,7 +1630,7 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the DataSourceName field.
                 /// </summary>
-                public string DataSourceName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_DataSourceName..]);
+                public string DataSourceName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_DataSourceName..^1]);
 
                 /// <summary>
                 /// Creates a new ReportProjectDataSourceVersionChangedData.
@@ -1776,17 +1776,17 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the ProjectPath field.
                 /// </summary>
-                public string ProjectPath => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_ProjectPath..Offset_ConfigurationName]);
+                public string ProjectPath => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_ProjectPath..(Offset_ConfigurationName - 1)]);
 
                 /// <summary>
                 /// Retrieves the ConfigurationName field.
                 /// </summary>
-                public string ConfigurationName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_ConfigurationName..Offset_RuleName]);
+                public string ConfigurationName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_ConfigurationName..(Offset_RuleName - 1)]);
 
                 /// <summary>
                 /// Retrieves the RuleName field.
                 /// </summary>
-                public string RuleName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_RuleName..]);
+                public string RuleName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_RuleName..^1]);
 
                 /// <summary>
                 /// Creates a new ProjectEvaluationRuleSnapshotStartData.
@@ -1932,17 +1932,17 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the ProjectPath field.
                 /// </summary>
-                public string ProjectPath => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_ProjectPath..Offset_ConfigurationName]);
+                public string ProjectPath => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_ProjectPath..(Offset_ConfigurationName - 1)]);
 
                 /// <summary>
                 /// Retrieves the ConfigurationName field.
                 /// </summary>
-                public string ConfigurationName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_ConfigurationName..Offset_RuleName]);
+                public string ConfigurationName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_ConfigurationName..(Offset_RuleName - 1)]);
 
                 /// <summary>
                 /// Retrieves the RuleName field.
                 /// </summary>
-                public string RuleName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_RuleName..]);
+                public string RuleName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_RuleName..^1]);
 
                 /// <summary>
                 /// Creates a new ProjectEvaluationRuleSnapshotStopData.
@@ -2060,7 +2060,7 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the FilePath field.
                 /// </summary>
-                public string FilePath => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_FilePath..]);
+                public string FilePath => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_FilePath..^1]);
 
                 /// <summary>
                 /// Creates a new LoadSchemaFileStopData.
@@ -2176,7 +2176,7 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the ProjectPath field.
                 /// </summary>
-                public string ProjectPath => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_ProjectPath..]);
+                public string ProjectPath => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_ProjectPath..^1]);
 
                 /// <summary>
                 /// Creates a new PhysicalTreeLoadingStopData.
@@ -2306,12 +2306,12 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the ProjectPath field.
                 /// </summary>
-                public string ProjectPath => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_ProjectPath..Offset_Scope]);
+                public string ProjectPath => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_ProjectPath..(Offset_Scope - 1)]);
 
                 /// <summary>
                 /// Retrieves the Scope field.
                 /// </summary>
-                public string Scope => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_Scope..]);
+                public string Scope => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_Scope..^1]);
 
                 /// <summary>
                 /// Creates a new LoadDynamicLoadComponentsStopData.
@@ -2456,7 +2456,7 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the Host field.
                 /// </summary>
-                public string Host => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_Host..Offset_RequestCount]);
+                public string Host => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_Host..(Offset_RequestCount - 1)]);
 
                 /// <summary>
                 /// Retrieves the RequestCount field.
@@ -2466,7 +2466,7 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the Requests field.
                 /// </summary>
-                public string Requests => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_Requests..]);
+                public string Requests => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_Requests..^1]);
 
                 /// <summary>
                 /// Creates a new BatchBuildStartData.
@@ -2612,7 +2612,7 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the Host field.
                 /// </summary>
-                public string Host => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_Host..Offset_RequestCount]);
+                public string Host => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_Host..(Offset_RequestCount - 1)]);
 
                 /// <summary>
                 /// Retrieves the RequestCount field.
@@ -2791,12 +2791,12 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the ProjectPath field.
                 /// </summary>
-                public string ProjectPath => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_ProjectPath..Offset_Configuration]);
+                public string ProjectPath => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_ProjectPath..(Offset_Configuration - 1)]);
 
                 /// <summary>
                 /// Retrieves the Configuration field.
                 /// </summary>
-                public string Configuration => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_Configuration..Offset_RequestId]);
+                public string Configuration => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_Configuration..(Offset_RequestId - 1)]);
 
                 /// <summary>
                 /// Retrieves the RequestId field.
@@ -2806,7 +2806,7 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the Targets field.
                 /// </summary>
-                public string Targets => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_Targets..Offset_IsUsingProjectInstance]);
+                public string Targets => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_Targets..(Offset_IsUsingProjectInstance - 1)]);
 
                 /// <summary>
                 /// Retrieves the IsUsingProjectInstance field.
@@ -2959,7 +2959,7 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the ProjectPath field.
                 /// </summary>
-                public string ProjectPath => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_ProjectPath..Offset_InstanceId]);
+                public string ProjectPath => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_ProjectPath..(Offset_InstanceId - 1)]);
 
                 /// <summary>
                 /// Retrieves the InstanceId field.
@@ -2969,7 +2969,7 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the Targets field.
                 /// </summary>
-                public string Targets => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_Targets..]);
+                public string Targets => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_Targets..^1]);
 
                 /// <summary>
                 /// Creates a new ProjectBuildSnapshotStartData.
@@ -3101,7 +3101,7 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the ProjectPath field.
                 /// </summary>
-                public string ProjectPath => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_ProjectPath..Offset_InstanceId]);
+                public string ProjectPath => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_ProjectPath..(Offset_InstanceId - 1)]);
 
                 /// <summary>
                 /// Retrieves the InstanceId field.
@@ -3251,12 +3251,12 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the ProjectPath field.
                 /// </summary>
-                public string ProjectPath => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_ProjectPath..Offset_ConfigurationName]);
+                public string ProjectPath => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_ProjectPath..(Offset_ConfigurationName - 1)]);
 
                 /// <summary>
                 /// Retrieves the ConfigurationName field.
                 /// </summary>
-                public string ConfigurationName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_ConfigurationName..Offset_Version]);
+                public string ConfigurationName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_ConfigurationName..(Offset_Version - 1)]);
 
                 /// <summary>
                 /// Retrieves the Version field.
@@ -3421,12 +3421,12 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the ProjectPath field.
                 /// </summary>
-                public string ProjectPath => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_ProjectPath..Offset_ConfigurationName]);
+                public string ProjectPath => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_ProjectPath..(Offset_ConfigurationName - 1)]);
 
                 /// <summary>
                 /// Retrieves the ConfigurationName field.
                 /// </summary>
-                public string ConfigurationName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_ConfigurationName..Offset_Version]);
+                public string ConfigurationName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_ConfigurationName..(Offset_Version - 1)]);
 
                 /// <summary>
                 /// Retrieves the Version field.
@@ -3583,17 +3583,17 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the ProjectPath field.
                 /// </summary>
-                public string ProjectPath => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_ProjectPath..Offset_ConfigurationName]);
+                public string ProjectPath => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_ProjectPath..(Offset_ConfigurationName - 1)]);
 
                 /// <summary>
                 /// Retrieves the ConfigurationName field.
                 /// </summary>
-                public string ConfigurationName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_ConfigurationName..Offset_RuleName]);
+                public string ConfigurationName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_ConfigurationName..(Offset_RuleName - 1)]);
 
                 /// <summary>
                 /// Retrieves the RuleName field.
                 /// </summary>
-                public string RuleName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_RuleName..]);
+                public string RuleName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_RuleName..^1]);
 
                 /// <summary>
                 /// Creates a new ProjectBuildRuleSnapshotStartData.
@@ -3739,17 +3739,17 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the ProjectPath field.
                 /// </summary>
-                public string ProjectPath => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_ProjectPath..Offset_ConfigurationName]);
+                public string ProjectPath => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_ProjectPath..(Offset_ConfigurationName - 1)]);
 
                 /// <summary>
                 /// Retrieves the ConfigurationName field.
                 /// </summary>
-                public string ConfigurationName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_ConfigurationName..Offset_RuleName]);
+                public string ConfigurationName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_ConfigurationName..(Offset_RuleName - 1)]);
 
                 /// <summary>
                 /// Retrieves the RuleName field.
                 /// </summary>
-                public string RuleName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_RuleName..]);
+                public string RuleName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_RuleName..^1]);
 
                 /// <summary>
                 /// Creates a new ProjectBuildRuleSnapshotStopData.
@@ -3895,17 +3895,17 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the ProjectPath field.
                 /// </summary>
-                public string ProjectPath => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_ProjectPath..Offset_ConfigurationName]);
+                public string ProjectPath => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_ProjectPath..(Offset_ConfigurationName - 1)]);
 
                 /// <summary>
                 /// Retrieves the ConfigurationName field.
                 /// </summary>
-                public string ConfigurationName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_ConfigurationName..Offset_Rules]);
+                public string ConfigurationName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_ConfigurationName..(Offset_Rules - 1)]);
 
                 /// <summary>
                 /// Retrieves the Rules field.
                 /// </summary>
-                public string Rules => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_Rules..]);
+                public string Rules => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_Rules..^1]);
 
                 /// <summary>
                 /// Creates a new SubscribeRuleStartData.
@@ -4051,17 +4051,17 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the ProjectPath field.
                 /// </summary>
-                public string ProjectPath => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_ProjectPath..Offset_ConfigurationName]);
+                public string ProjectPath => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_ProjectPath..(Offset_ConfigurationName - 1)]);
 
                 /// <summary>
                 /// Retrieves the ConfigurationName field.
                 /// </summary>
-                public string ConfigurationName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_ConfigurationName..Offset_Rules]);
+                public string ConfigurationName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_ConfigurationName..(Offset_Rules - 1)]);
 
                 /// <summary>
                 /// Retrieves the Rules field.
                 /// </summary>
-                public string Rules => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_Rules..]);
+                public string Rules => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_Rules..^1]);
 
                 /// <summary>
                 /// Creates a new SubscribeRuleStopData.
@@ -4207,17 +4207,17 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the ProjectPath field.
                 /// </summary>
-                public string ProjectPath => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_ProjectPath..Offset_ConfigurationName]);
+                public string ProjectPath => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_ProjectPath..(Offset_ConfigurationName - 1)]);
 
                 /// <summary>
                 /// Retrieves the ConfigurationName field.
                 /// </summary>
-                public string ConfigurationName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_ConfigurationName..Offset_SubscriptionType]);
+                public string ConfigurationName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_ConfigurationName..(Offset_SubscriptionType - 1)]);
 
                 /// <summary>
                 /// Retrieves the SubscriptionType field.
                 /// </summary>
-                public string SubscriptionType => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_SubscriptionType..]);
+                public string SubscriptionType => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_SubscriptionType..^1]);
 
                 /// <summary>
                 /// Creates a new UpdateProjectRuleSnapshotStartData.
@@ -4363,17 +4363,17 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the ProjectPath field.
                 /// </summary>
-                public string ProjectPath => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_ProjectPath..Offset_ConfigurationName]);
+                public string ProjectPath => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_ProjectPath..(Offset_ConfigurationName - 1)]);
 
                 /// <summary>
                 /// Retrieves the ConfigurationName field.
                 /// </summary>
-                public string ConfigurationName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_ConfigurationName..Offset_SubscriptionType]);
+                public string ConfigurationName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_ConfigurationName..(Offset_SubscriptionType - 1)]);
 
                 /// <summary>
                 /// Retrieves the SubscriptionType field.
                 /// </summary>
-                public string SubscriptionType => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_SubscriptionType..]);
+                public string SubscriptionType => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_SubscriptionType..^1]);
 
                 /// <summary>
                 /// Creates a new UpdateProjectRuleSnapshotStopData.
@@ -4505,12 +4505,12 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the ProjectPath field.
                 /// </summary>
-                public string ProjectPath => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_ProjectPath..Offset_ConfigurationName]);
+                public string ProjectPath => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_ProjectPath..(Offset_ConfigurationName - 1)]);
 
                 /// <summary>
                 /// Retrieves the ConfigurationName field.
                 /// </summary>
-                public string ConfigurationName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_ConfigurationName..]);
+                public string ConfigurationName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_ConfigurationName..^1]);
 
                 /// <summary>
                 /// Creates a new ProjectConfigurationActivatedData.
@@ -4641,12 +4641,12 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the ProjectPath field.
                 /// </summary>
-                public string ProjectPath => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_ProjectPath..Offset_ConfigurationName]);
+                public string ProjectPath => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_ProjectPath..(Offset_ConfigurationName - 1)]);
 
                 /// <summary>
                 /// Retrieves the ConfigurationName field.
                 /// </summary>
-                public string ConfigurationName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_ConfigurationName..]);
+                public string ConfigurationName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_ConfigurationName..^1]);
 
                 /// <summary>
                 /// Creates a new ProjectConfigurationDeactivatedData.
@@ -4777,12 +4777,12 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the ProjectPath field.
                 /// </summary>
-                public string ProjectPath => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_ProjectPath..Offset_ProviderName]);
+                public string ProjectPath => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_ProjectPath..(Offset_ProviderName - 1)]);
 
                 /// <summary>
                 /// Retrieves the ProviderName field.
                 /// </summary>
-                public string ProviderName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_ProviderName..]);
+                public string ProviderName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_ProviderName..^1]);
 
                 /// <summary>
                 /// Creates a new ProjectTreeProviderInitializationStartData.
@@ -4913,12 +4913,12 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the ProjectPath field.
                 /// </summary>
-                public string ProjectPath => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_ProjectPath..Offset_ProviderName]);
+                public string ProjectPath => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_ProjectPath..(Offset_ProviderName - 1)]);
 
                 /// <summary>
                 /// Retrieves the ProviderName field.
                 /// </summary>
-                public string ProviderName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_ProviderName..]);
+                public string ProviderName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_ProviderName..^1]);
 
                 /// <summary>
                 /// Creates a new ProjectTreeProviderInitializationStopData.
@@ -5035,7 +5035,7 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the FilePath field.
                 /// </summary>
-                public string FilePath => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_FilePath..]);
+                public string FilePath => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_FilePath..^1]);
 
                 /// <summary>
                 /// Creates a new LoadSchemaFileStartData.
@@ -5165,7 +5165,7 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the ProjectPath field.
                 /// </summary>
-                public string ProjectPath => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_ProjectPath..Offset_SnapshotId]);
+                public string ProjectPath => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_ProjectPath..(Offset_SnapshotId - 1)]);
 
                 /// <summary>
                 /// Retrieves the SnapshotId field.
@@ -5301,7 +5301,7 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the ProjectPath field.
                 /// </summary>
-                public string ProjectPath => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_ProjectPath..Offset_SnapshotId]);
+                public string ProjectPath => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_ProjectPath..(Offset_SnapshotId - 1)]);
 
                 /// <summary>
                 /// Retrieves the SnapshotId field.
@@ -5437,7 +5437,7 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the Kind field.
                 /// </summary>
-                public string Kind => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_Kind..Offset_AccumulatedCount]);
+                public string Kind => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_Kind..(Offset_AccumulatedCount - 1)]);
 
                 /// <summary>
                 /// Retrieves the AccumulatedCount field.
@@ -5833,7 +5833,7 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the ProjectPath field.
                 /// </summary>
-                public string ProjectPath => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_ProjectPath..Offset_ItemCount]);
+                public string ProjectPath => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_ProjectPath..(Offset_ItemCount - 1)]);
 
                 /// <summary>
                 /// Retrieves the ItemCount field.
@@ -6041,7 +6041,7 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the ProjectPath field.
                 /// </summary>
-                public string ProjectPath => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_ProjectPath..Offset_ItemCount]);
+                public string ProjectPath => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_ProjectPath..(Offset_ItemCount - 1)]);
 
                 /// <summary>
                 /// Retrieves the ItemCount field.
@@ -6249,12 +6249,12 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the ProjectPath field.
                 /// </summary>
-                public string ProjectPath => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_ProjectPath..Offset_Configuration]);
+                public string ProjectPath => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_ProjectPath..(Offset_Configuration - 1)]);
 
                 /// <summary>
                 /// Retrieves the Configuration field.
                 /// </summary>
-                public string Configuration => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_Configuration..]);
+                public string Configuration => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_Configuration..^1]);
 
                 /// <summary>
                 /// Creates a new LoadConfiguredProjectStartData.
@@ -6399,17 +6399,17 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the ProjectPath field.
                 /// </summary>
-                public string ProjectPath => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_ProjectPath..Offset_Configuration]);
+                public string ProjectPath => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_ProjectPath..(Offset_Configuration - 1)]);
 
                 /// <summary>
                 /// Retrieves the Configuration field.
                 /// </summary>
-                public string Configuration => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_Configuration..Offset_Capabilities]);
+                public string Configuration => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_Configuration..(Offset_Capabilities - 1)]);
 
                 /// <summary>
                 /// Retrieves the Capabilities field.
                 /// </summary>
-                public string Capabilities => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_Capabilities..]);
+                public string Capabilities => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_Capabilities..^1]);
 
                 /// <summary>
                 /// Creates a new LoadConfiguredProjectStopData.
@@ -6527,7 +6527,7 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the ProjectPath field.
                 /// </summary>
-                public string ProjectPath => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_ProjectPath..]);
+                public string ProjectPath => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_ProjectPath..^1]);
 
                 /// <summary>
                 /// Creates a new PhysicalTreeLoadingStartData.
@@ -6643,7 +6643,7 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the ProjectPath field.
                 /// </summary>
-                public string ProjectPath => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_ProjectPath..]);
+                public string ProjectPath => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_ProjectPath..^1]);
 
                 /// <summary>
                 /// Creates a new DirectoryTreeLoadingStartData.
@@ -6759,7 +6759,7 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the ProjectPath field.
                 /// </summary>
-                public string ProjectPath => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_ProjectPath..]);
+                public string ProjectPath => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_ProjectPath..^1]);
 
                 /// <summary>
                 /// Creates a new DirectoryTreeLoadingStopData.
@@ -6875,7 +6875,7 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the ProjectPath field.
                 /// </summary>
-                public string ProjectPath => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_ProjectPath..]);
+                public string ProjectPath => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_ProjectPath..^1]);
 
                 /// <summary>
                 /// Creates a new WaitAutoLoadMethodsToFinishStartData.
@@ -6991,7 +6991,7 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the ProjectPath field.
                 /// </summary>
-                public string ProjectPath => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_ProjectPath..]);
+                public string ProjectPath => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_ProjectPath..^1]);
 
                 /// <summary>
                 /// Creates a new WaitAutoLoadMethodsToFinishStopData.
@@ -7107,7 +7107,7 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the ProjectPath field.
                 /// </summary>
-                public string ProjectPath => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_ProjectPath..]);
+                public string ProjectPath => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_ProjectPath..^1]);
 
                 /// <summary>
                 /// Creates a new SetActiveTreeProviderStartData.
@@ -7223,7 +7223,7 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the ProjectPath field.
                 /// </summary>
-                public string ProjectPath => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_ProjectPath..]);
+                public string ProjectPath => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_ProjectPath..^1]);
 
                 /// <summary>
                 /// Creates a new SetActiveTreeProviderStopData.
@@ -7339,7 +7339,7 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the ProjectPath field.
                 /// </summary>
-                public string ProjectPath => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_ProjectPath..]);
+                public string ProjectPath => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_ProjectPath..^1]);
 
                 /// <summary>
                 /// Creates a new InitializeActiveTreeProviderStartData.
@@ -7455,7 +7455,7 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the ProjectPath field.
                 /// </summary>
-                public string ProjectPath => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_ProjectPath..]);
+                public string ProjectPath => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_ProjectPath..^1]);
 
                 /// <summary>
                 /// Creates a new InitializeActiveTreeProviderStopData.
@@ -7585,12 +7585,12 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the ProjectPath field.
                 /// </summary>
-                public string ProjectPath => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_ProjectPath..Offset_Scope]);
+                public string ProjectPath => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_ProjectPath..(Offset_Scope - 1)]);
 
                 /// <summary>
                 /// Retrieves the Scope field.
                 /// </summary>
-                public string Scope => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_Scope..]);
+                public string Scope => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_Scope..^1]);
 
                 /// <summary>
                 /// Creates a new CapabilitiesTriggersProjectReloadData.
@@ -7735,12 +7735,12 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the ProjectPath field.
                 /// </summary>
-                public string ProjectPath => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_ProjectPath..Offset_Scope]);
+                public string ProjectPath => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_ProjectPath..(Offset_Scope - 1)]);
 
                 /// <summary>
                 /// Retrieves the Scope field.
                 /// </summary>
-                public string Scope => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_Scope..Offset_ValueVersionNumber]);
+                public string Scope => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_Scope..(Offset_ValueVersionNumber - 1)]);
 
                 /// <summary>
                 /// Retrieves the ValueVersionNumber field.
@@ -7877,12 +7877,12 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the ProjectPath field.
                 /// </summary>
-                public string ProjectPath => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_ProjectPath..Offset_Scope]);
+                public string ProjectPath => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_ProjectPath..(Offset_Scope - 1)]);
 
                 /// <summary>
                 /// Retrieves the Scope field.
                 /// </summary>
-                public string Scope => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_Scope..]);
+                public string Scope => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_Scope..^1]);
 
                 /// <summary>
                 /// Creates a new UnloadDynamicLoadComponentsStopData.
@@ -8013,12 +8013,12 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the ProjectPath field.
                 /// </summary>
-                public string ProjectPath => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_ProjectPath..Offset_ConfigurationName]);
+                public string ProjectPath => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_ProjectPath..(Offset_ConfigurationName - 1)]);
 
                 /// <summary>
                 /// Retrieves the ConfigurationName field.
                 /// </summary>
-                public string ConfigurationName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_ConfigurationName..]);
+                public string ConfigurationName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_ConfigurationName..^1]);
 
                 /// <summary>
                 /// Creates a new ProjectGlobbingWatchingServiceInitializedData.
@@ -8149,12 +8149,12 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the ProjectPath field.
                 /// </summary>
-                public string ProjectPath => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_ProjectPath..Offset_ConfigurationName]);
+                public string ProjectPath => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_ProjectPath..(Offset_ConfigurationName - 1)]);
 
                 /// <summary>
                 /// Retrieves the ConfigurationName field.
                 /// </summary>
-                public string ConfigurationName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_ConfigurationName..]);
+                public string ConfigurationName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_ConfigurationName..^1]);
 
                 /// <summary>
                 /// Creates a new GlobbingWatchingConsistentCheckStartData.
@@ -8285,12 +8285,12 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the ProjectPath field.
                 /// </summary>
-                public string ProjectPath => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_ProjectPath..Offset_ConfigurationName]);
+                public string ProjectPath => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_ProjectPath..(Offset_ConfigurationName - 1)]);
 
                 /// <summary>
                 /// Retrieves the ConfigurationName field.
                 /// </summary>
-                public string ConfigurationName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_ConfigurationName..]);
+                public string ConfigurationName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_ConfigurationName..^1]);
 
                 /// <summary>
                 /// Creates a new GlobbingWatchingConsistentCheckStopData.
@@ -8421,12 +8421,12 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the ProjectPath field.
                 /// </summary>
-                public string ProjectPath => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_ProjectPath..Offset_ConfigurationName]);
+                public string ProjectPath => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_ProjectPath..(Offset_ConfigurationName - 1)]);
 
                 /// <summary>
                 /// Retrieves the ConfigurationName field.
                 /// </summary>
-                public string ConfigurationName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_ConfigurationName..]);
+                public string ConfigurationName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_ConfigurationName..^1]);
 
                 /// <summary>
                 /// Creates a new GlobbingWatchingTriggerReevaluationStartData.
@@ -8557,12 +8557,12 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the ProjectPath field.
                 /// </summary>
-                public string ProjectPath => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_ProjectPath..Offset_ConfigurationName]);
+                public string ProjectPath => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_ProjectPath..(Offset_ConfigurationName - 1)]);
 
                 /// <summary>
                 /// Retrieves the ConfigurationName field.
                 /// </summary>
-                public string ConfigurationName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_ConfigurationName..]);
+                public string ConfigurationName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_ConfigurationName..^1]);
 
                 /// <summary>
                 /// Creates a new GlobbingWatchingTriggerReevaluationStopData.
@@ -8679,7 +8679,7 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the FolderPath field.
                 /// </summary>
-                public string FolderPath => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_FolderPath..]);
+                public string FolderPath => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_FolderPath..^1]);
 
                 /// <summary>
                 /// Creates a new ProjectDirectoryTreeDisposedData.
@@ -8795,7 +8795,7 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the FolderPath field.
                 /// </summary>
-                public string FolderPath => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_FolderPath..]);
+                public string FolderPath => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_FolderPath..^1]);
 
                 /// <summary>
                 /// Creates a new ProjectDirectoryTreeAddSubscriptionData.
@@ -8911,7 +8911,7 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the FolderPath field.
                 /// </summary>
-                public string FolderPath => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_FolderPath..]);
+                public string FolderPath => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_FolderPath..^1]);
 
                 /// <summary>
                 /// Creates a new ProjectDirectoryTreeReleaseSubscriptionData.
@@ -9027,7 +9027,7 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the PropertyName field.
                 /// </summary>
-                public string PropertyName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_PropertyName..]);
+                public string PropertyName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_PropertyName..^1]);
 
                 /// <summary>
                 /// Creates a new GetEvaluatedPropertyValueStartData.
@@ -9157,12 +9157,12 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the PropertyName field.
                 /// </summary>
-                public string PropertyName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_PropertyName..Offset_Value]);
+                public string PropertyName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_PropertyName..(Offset_Value - 1)]);
 
                 /// <summary>
                 /// Retrieves the Value field.
                 /// </summary>
-                public string Value => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_Value..]);
+                public string Value => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_Value..^1]);
 
                 /// <summary>
                 /// Creates a new GetEvaluatedPropertyValueStopData.
@@ -9293,7 +9293,7 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the Project field.
                 /// </summary>
-                public string Project => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_Project..Offset_EvaluationId]);
+                public string Project => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_Project..(Offset_EvaluationId - 1)]);
 
                 /// <summary>
                 /// Retrieves the EvaluationId field.
@@ -9429,7 +9429,7 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the Project field.
                 /// </summary>
-                public string Project => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_Project..Offset_EvaluationId]);
+                public string Project => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_Project..(Offset_EvaluationId - 1)]);
 
                 /// <summary>
                 /// Retrieves the EvaluationId field.
@@ -9551,7 +9551,7 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the Project field.
                 /// </summary>
-                public string Project => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_Project..]);
+                public string Project => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_Project..^1]);
 
                 /// <summary>
                 /// Creates a new ProjectMarkDirtiedData.
@@ -9709,12 +9709,12 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the Project field.
                 /// </summary>
-                public string Project => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_Project..Offset_Configuration]);
+                public string Project => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_Project..(Offset_Configuration - 1)]);
 
                 /// <summary>
                 /// Retrieves the Configuration field.
                 /// </summary>
-                public string Configuration => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_Configuration..Offset_UseCache]);
+                public string Configuration => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_Configuration..(Offset_UseCache - 1)]);
 
                 /// <summary>
                 /// Retrieves the UseCache field.
@@ -9724,7 +9724,7 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the Targets field.
                 /// </summary>
-                public string Targets => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_Targets..]);
+                public string Targets => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_Targets..^1]);
 
                 /// <summary>
                 /// Creates a new DesignTimeBuildStartData.
@@ -9899,12 +9899,12 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the Project field.
                 /// </summary>
-                public string Project => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_Project..Offset_Configuration]);
+                public string Project => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_Project..(Offset_Configuration - 1)]);
 
                 /// <summary>
                 /// Retrieves the Configuration field.
                 /// </summary>
-                public string Configuration => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_Configuration..Offset_ResetId]);
+                public string Configuration => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_Configuration..(Offset_ResetId - 1)]);
 
                 /// <summary>
                 /// Retrieves the ResetId field.
@@ -10053,12 +10053,12 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the Project field.
                 /// </summary>
-                public string Project => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_Project..Offset_Configuration]);
+                public string Project => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_Project..(Offset_Configuration - 1)]);
 
                 /// <summary>
                 /// Retrieves the Configuration field.
                 /// </summary>
-                public string Configuration => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_Configuration..]);
+                public string Configuration => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_Configuration..^1]);
 
                 /// <summary>
                 /// Creates a new DesignTimeBuildFallbackToLegacyData.
@@ -10189,12 +10189,12 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the Project field.
                 /// </summary>
-                public string Project => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_Project..Offset_Configuration]);
+                public string Project => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_Project..(Offset_Configuration - 1)]);
 
                 /// <summary>
                 /// Retrieves the Configuration field.
                 /// </summary>
-                public string Configuration => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_Configuration..]);
+                public string Configuration => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_Configuration..^1]);
 
                 /// <summary>
                 /// Creates a new UpToDateCheckCalculateHashStartData.
@@ -10325,12 +10325,12 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the Project field.
                 /// </summary>
-                public string Project => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_Project..Offset_Configuration]);
+                public string Project => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_Project..(Offset_Configuration - 1)]);
 
                 /// <summary>
                 /// Retrieves the Configuration field.
                 /// </summary>
-                public string Configuration => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_Configuration..]);
+                public string Configuration => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_Configuration..^1]);
 
                 /// <summary>
                 /// Creates a new UpToDateCheckCalculateHashStopData.
@@ -10721,12 +10721,12 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the Project field.
                 /// </summary>
-                public string Project => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_Project..Offset_DataSourceName]);
+                public string Project => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_Project..(Offset_DataSourceName - 1)]);
 
                 /// <summary>
                 /// Retrieves the DataSourceName field.
                 /// </summary>
-                public string DataSourceName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_DataSourceName..]);
+                public string DataSourceName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_DataSourceName..^1]);
 
                 /// <summary>
                 /// Creates a new ReportOutputDataSourceStartData.
@@ -10857,12 +10857,12 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the Project field.
                 /// </summary>
-                public string Project => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_Project..Offset_DataSourceName]);
+                public string Project => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_Project..(Offset_DataSourceName - 1)]);
 
                 /// <summary>
                 /// Retrieves the DataSourceName field.
                 /// </summary>
-                public string DataSourceName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_DataSourceName..]);
+                public string DataSourceName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_DataSourceName..^1]);
 
                 /// <summary>
                 /// Creates a new ReportOutputDataSourceStopData.
@@ -11007,12 +11007,12 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the RootPath field.
                 /// </summary>
-                public string RootPath => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_RootPath..Offset_FilePath]);
+                public string RootPath => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_RootPath..(Offset_FilePath - 1)]);
 
                 /// <summary>
                 /// Retrieves the FilePath field.
                 /// </summary>
-                public string FilePath => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_FilePath..Offset_ChangeType]);
+                public string FilePath => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_FilePath..(Offset_ChangeType - 1)]);
 
                 /// <summary>
                 /// Retrieves the ChangeType field.

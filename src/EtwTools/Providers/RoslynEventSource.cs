@@ -180,7 +180,7 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the Message field.
                 /// </summary>
-                public string Message => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_Message..]);
+                public string Message => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_Message..^1]);
 
                 /// <summary>
                 /// Creates a new EventSourceMessageData.
@@ -310,7 +310,7 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the Message field.
                 /// </summary>
-                public string Message => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_Message..Offset_FunctionId]);
+                public string Message => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_Message..(Offset_FunctionId - 1)]);
 
                 /// <summary>
                 /// Retrieves the FunctionId field.
@@ -460,7 +460,7 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the Message field.
                 /// </summary>
-                public string Message => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_Message..Offset_FunctionId]);
+                public string Message => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_Message..(Offset_FunctionId - 1)]);
 
                 /// <summary>
                 /// Retrieves the FunctionId field.
@@ -744,7 +744,7 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the Definitions field.
                 /// </summary>
-                public string Definitions => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_Definitions..]);
+                public string Definitions => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_Definitions..^1]);
 
                 /// <summary>
                 /// Creates a new SendFunctionDefinitionsData.

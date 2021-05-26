@@ -1302,8 +1302,8 @@ static void CreateEventField(int indent, IReadOnlyList<Field> fields, int i, Str
             "long" => $"BitConverter.ToInt64(_etwEvent.Data[{fieldOffsetName}..{nextFieldOffsetName}])",
             "char" => $"BitConverter.ToChar(_etwEvent.Data[{fieldOffsetName}..{nextFieldOffsetName}])",
             "double" => $"BitConverter.ToDouble(_etwEvent.Data[{fieldOffsetName}..{nextFieldOffsetName}])",
-            "string" => $"System.Text.Encoding.Unicode.GetString(_etwEvent.Data[{fieldOffsetName}..{nextFieldOffsetName}])",
-            "ansistring" => $"System.Text.Encoding.ASCII.GetString(_etwEvent.Data[{fieldOffsetName}..{nextFieldOffsetName}])",
+            "string" => $"System.Text.Encoding.Unicode.GetString(_etwEvent.Data[{fieldOffsetName}..{(string.IsNullOrEmpty(nextFieldOffsetName) ? "^1" : $"({nextFieldOffsetName} - 1)")}])",
+            "ansistring" => $"System.Text.Encoding.ASCII.GetString(_etwEvent.Data[{fieldOffsetName}..{(string.IsNullOrEmpty(nextFieldOffsetName) ? "^1" : $"({nextFieldOffsetName} - 1)")}])",
             "pointer" => $"_etwEvent.AddressSize == 4 ? BitConverter.ToUInt32(_etwEvent.Data[{fieldOffsetName}..{nextFieldOffsetName}]) : BitConverter.ToUInt64(_etwEvent.Data[{fieldOffsetName}..{nextFieldOffsetName}])",
             "wbemsid" => $"_etwEvent.GetWbemSid({fieldOffsetName})",
             "guid" => $"new(_etwEvent.Data[{fieldOffsetName}..{nextFieldOffsetName}])",
@@ -1641,7 +1641,7 @@ static void GenerateProviders(string providers)
 
 void GetTraceInfo(string trace, bool json)
 {
-    using var logFile = new EtwTrace(trace);
+    using var logFile = new EtwTrace(trace, false);
 
     var totalEventCount = 0;
     Dictionary<(Guid, EtwEventDescriptor), (int Count, int Size)> eventCount = new();
@@ -1712,7 +1712,7 @@ void GetTraceInfo(string trace, bool json)
 
 void SaveTraceLoggingProviders(string trace, string add)
 {
-    using var logFile = new EtwTrace(trace);
+    using var logFile = new EtwTrace(trace, false);
 
     Dictionary<Guid, string> providers = new();
     Dictionary<Guid, Dictionary<EtwEventDescriptor, EtwEventInfo>> events = new();
@@ -1765,7 +1765,7 @@ void SaveTraceLoggingProviders(string trace, string add)
 
 static void SaveEventSourceProviders(string trace, bool all)
 {
-    using var logFile = new EtwTrace(trace);
+    using var logFile = new EtwTrace(trace, false);
 
     EtwEventSourceManifestCollector collector = new();
     var stats = logFile.Open(null, e =>

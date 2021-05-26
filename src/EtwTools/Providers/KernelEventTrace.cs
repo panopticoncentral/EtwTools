@@ -1153,12 +1153,12 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the SessionNameString field.
                 /// </summary>
-                public string SessionNameString => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_SessionNameString..Offset_LogFileNameString]);
+                public string SessionNameString => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_SessionNameString..(Offset_LogFileNameString - 1)]);
 
                 /// <summary>
                 /// Retrieves the LogFileNameString field.
                 /// </summary>
-                public string LogFileNameString => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_LogFileNameString..]);
+                public string LogFileNameString => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_LogFileNameString..^1]);
 
                 /// <summary>
                 /// Creates a new HeaderData.
@@ -1709,12 +1709,12 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the SessionNameString field.
                 /// </summary>
-                public string SessionNameString => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_SessionNameString..Offset_LogFileNameString]);
+                public string SessionNameString => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_SessionNameString..(Offset_LogFileNameString - 1)]);
 
                 /// <summary>
                 /// Retrieves the LogFileNameString field.
                 /// </summary>
-                public string LogFileNameString => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_LogFileNameString..]);
+                public string LogFileNameString => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_LogFileNameString..^1]);
 
                 /// <summary>
                 /// Creates a new HeaderData.
@@ -2849,12 +2849,12 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the SessionNameString field.
                 /// </summary>
-                public string SessionNameString => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_SessionNameString..Offset_LogFileNameString]);
+                public string SessionNameString => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_SessionNameString..(Offset_LogFileNameString - 1)]);
 
                 /// <summary>
                 /// Retrieves the LogFileNameString field.
                 /// </summary>
-                public string LogFileNameString => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_LogFileNameString..]);
+                public string LogFileNameString => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_LogFileNameString..^1]);
 
                 /// <summary>
                 /// Creates a new HeaderData.
@@ -3654,7 +3654,7 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the PdbName field.
                 /// </summary>
-                public string PdbName => System.Text.Encoding.ASCII.GetString(_etwEvent.Data[Offset_PdbName..]);
+                public string PdbName => System.Text.Encoding.ASCII.GetString(_etwEvent.Data[Offset_PdbName..^1]);
 
                 /// <summary>
                 /// Creates a new DbgIdRSDSData.
@@ -3772,7 +3772,7 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the BuildString field.
                 /// </summary>
-                public string BuildString => System.Text.Encoding.ASCII.GetString(_etwEvent.Data[Offset_BuildString..]);
+                public string BuildString => System.Text.Encoding.ASCII.GetString(_etwEvent.Data[Offset_BuildString..^1]);
 
                 /// <summary>
                 /// Creates a new BuildInfoData.
@@ -3926,7 +3926,7 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the BinaryPath field.
                 /// </summary>
-                public string BinaryPath => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_BinaryPath..]);
+                public string BinaryPath => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_BinaryPath..^1]);
 
                 /// <summary>
                 /// Creates a new ProviderBinaryPathData.

@@ -228,7 +228,7 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the Message field.
                 /// </summary>
-                public string Message => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_Message..]);
+                public string Message => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_Message..^1]);
 
                 /// <summary>
                 /// Creates a new EventSourceMessageData.
@@ -358,12 +358,12 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the Msg field.
                 /// </summary>
-                public string Msg => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_Msg..Offset_AppDomainName]);
+                public string Msg => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_Msg..(Offset_AppDomainName - 1)]);
 
                 /// <summary>
                 /// Retrieves the AppDomainName field.
                 /// </summary>
-                public string AppDomainName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_AppDomainName..]);
+                public string AppDomainName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_AppDomainName..^1]);
 
                 /// <summary>
                 /// Creates a new LogVerboseData.
@@ -499,7 +499,7 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the AppDomainName field.
                 /// </summary>
-                public string AppDomainName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_AppDomainName..]);
+                public string AppDomainName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_AppDomainName..^1]);
 
                 /// <summary>
                 /// Creates a new DiagnosticsEventThrottlingHasBeenStartedForTheEventData.
@@ -654,7 +654,7 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the AppDomainName field.
                 /// </summary>
-                public string AppDomainName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_AppDomainName..]);
+                public string AppDomainName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_AppDomainName..^1]);
 
                 /// <summary>
                 /// Creates a new DiagnosticsEventThrottlingHasBeenResetForTheEventData.
@@ -786,12 +786,12 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the Exception field.
                 /// </summary>
-                public string Exception => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_Exception..Offset_AppDomainName]);
+                public string Exception => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_Exception..(Offset_AppDomainName - 1)]);
 
                 /// <summary>
                 /// Retrieves the AppDomainName field.
                 /// </summary>
-                public string AppDomainName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_AppDomainName..]);
+                public string AppDomainName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_AppDomainName..^1]);
 
                 /// <summary>
                 /// Creates a new DiagnoisticsEventThrottlingSchedulerDisposeTimerFailureData.
@@ -927,7 +927,7 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the AppDomainName field.
                 /// </summary>
-                public string AppDomainName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_AppDomainName..]);
+                public string AppDomainName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_AppDomainName..^1]);
 
                 /// <summary>
                 /// Creates a new DiagnoisticsEventThrottlingSchedulerTimerWasCreatedData.
@@ -1044,7 +1044,7 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the AppDomainName field.
                 /// </summary>
-                public string AppDomainName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_AppDomainName..]);
+                public string AppDomainName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_AppDomainName..^1]);
 
                 /// <summary>
                 /// Creates a new DiagnoisticsEventThrottlingSchedulerTimerWasRemovedData.
@@ -1160,7 +1160,7 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the AppDomainName field.
                 /// </summary>
-                public string AppDomainName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_AppDomainName..]);
+                public string AppDomainName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_AppDomainName..^1]);
 
                 /// <summary>
                 /// Creates a new TelemetryClientConstructorWithNoTelemetryConfigurationData.
@@ -1304,17 +1304,17 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the ParameterName field.
                 /// </summary>
-                public string ParameterName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_ParameterName..Offset_TelemetryType]);
+                public string ParameterName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_ParameterName..(Offset_TelemetryType - 1)]);
 
                 /// <summary>
                 /// Retrieves the TelemetryType field.
                 /// </summary>
-                public string TelemetryType => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_TelemetryType..Offset_AppDomainName]);
+                public string TelemetryType => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_TelemetryType..(Offset_AppDomainName - 1)]);
 
                 /// <summary>
                 /// Retrieves the AppDomainName field.
                 /// </summary>
-                public string AppDomainName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_AppDomainName..]);
+                public string AppDomainName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_AppDomainName..^1]);
 
                 /// <summary>
                 /// Creates a new PopulateRequiredStringWithValueData.
@@ -1432,7 +1432,7 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the AppDomainName field.
                 /// </summary>
-                public string AppDomainName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_AppDomainName..]);
+                public string AppDomainName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_AppDomainName..^1]);
 
                 /// <summary>
                 /// Creates a new RequestTelemetryIncorrectDurationData.
@@ -1548,7 +1548,7 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the AppDomainName field.
                 /// </summary>
-                public string AppDomainName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_AppDomainName..]);
+                public string AppDomainName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_AppDomainName..^1]);
 
                 /// <summary>
                 /// Creates a new TrackingWasDisabledData.
@@ -1664,7 +1664,7 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the AppDomainName field.
                 /// </summary>
-                public string AppDomainName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_AppDomainName..]);
+                public string AppDomainName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_AppDomainName..^1]);
 
                 /// <summary>
                 /// Creates a new TrackingWasEnabledData.
@@ -1794,12 +1794,12 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the Msg field.
                 /// </summary>
-                public string Msg => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_Msg..Offset_AppDomainName]);
+                public string Msg => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_Msg..(Offset_AppDomainName - 1)]);
 
                 /// <summary>
                 /// Retrieves the AppDomainName field.
                 /// </summary>
-                public string AppDomainName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_AppDomainName..]);
+                public string AppDomainName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_AppDomainName..^1]);
 
                 /// <summary>
                 /// Creates a new LogErrorData.
@@ -1930,12 +1930,12 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the Msg field.
                 /// </summary>
-                public string Msg => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_Msg..Offset_AppDomainName]);
+                public string Msg => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_Msg..(Offset_AppDomainName - 1)]);
 
                 /// <summary>
                 /// Retrieves the AppDomainName field.
                 /// </summary>
-                public string AppDomainName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_AppDomainName..]);
+                public string AppDomainName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_AppDomainName..^1]);
 
                 /// <summary>
                 /// Creates a new BuildInfoConfigBrokenXmlErrorData.

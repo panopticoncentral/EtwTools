@@ -295,7 +295,7 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the FileName field.
                 /// </summary>
-                public string FileName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_FileName..]);
+                public string FileName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_FileName..^1]);
 
                 /// <summary>
                 /// Creates a new NameCreateInfoData.
@@ -431,7 +431,7 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the FileName field.
                 /// </summary>
-                public string FileName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_FileName..]);
+                public string FileName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_FileName..^1]);
 
                 /// <summary>
                 /// Creates a new NameDeleteInfoData.
@@ -662,7 +662,7 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the FileName field.
                 /// </summary>
-                public string FileName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_FileName..]);
+                public string FileName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_FileName..^1]);
 
                 /// <summary>
                 /// Creates a new CreateInfoData.
@@ -2389,7 +2389,7 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the FileName field.
                 /// </summary>
-                public string FileName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_FileName..]);
+                public string FileName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_FileName..^1]);
 
                 /// <summary>
                 /// Creates a new DirEnumInfoData.
@@ -3409,7 +3409,7 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the FileName field.
                 /// </summary>
-                public string FileName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_FileName..]);
+                public string FileName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_FileName..^1]);
 
                 /// <summary>
                 /// Creates a new DirNotifyInfoData.
@@ -3646,7 +3646,7 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the FilePath field.
                 /// </summary>
-                public string FilePath => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_FilePath..]);
+                public string FilePath => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_FilePath..^1]);
 
                 /// <summary>
                 /// Creates a new DeletePathInfoData.
@@ -3882,7 +3882,7 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the FilePath field.
                 /// </summary>
-                public string FilePath => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_FilePath..]);
+                public string FilePath => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_FilePath..^1]);
 
                 /// <summary>
                 /// Creates a new RenamePathInfoData.
@@ -4118,7 +4118,7 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the FilePath field.
                 /// </summary>
-                public string FilePath => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_FilePath..]);
+                public string FilePath => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_FilePath..^1]);
 
                 /// <summary>
                 /// Creates a new SetLinkPathInfoData.
@@ -4570,7 +4570,7 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the FileName field.
                 /// </summary>
-                public string FileName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_FileName..]);
+                public string FileName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_FileName..^1]);
 
                 /// <summary>
                 /// Creates a new CreateNewFileInfoData.
@@ -4806,7 +4806,7 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the FileName field.
                 /// </summary>
-                public string FileName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_FileName..]);
+                public string FileName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_FileName..^1]);
 
                 /// <summary>
                 /// Creates a new CreateInfoData.
@@ -6573,7 +6573,7 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the FileName field.
                 /// </summary>
-                public string FileName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_FileName..]);
+                public string FileName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_FileName..^1]);
 
                 /// <summary>
                 /// Creates a new DirEnumInfoData.
@@ -7437,7 +7437,7 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the FileName field.
                 /// </summary>
-                public string FileName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_FileName..]);
+                public string FileName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_FileName..^1]);
 
                 /// <summary>
                 /// Creates a new DirNotifyInfoData.
@@ -7674,7 +7674,7 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the FilePath field.
                 /// </summary>
-                public string FilePath => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_FilePath..]);
+                public string FilePath => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_FilePath..^1]);
 
                 /// <summary>
                 /// Creates a new DeletePathInfoData.
@@ -7910,7 +7910,7 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the FilePath field.
                 /// </summary>
-                public string FilePath => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_FilePath..]);
+                public string FilePath => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_FilePath..^1]);
 
                 /// <summary>
                 /// Creates a new RenamePathInfoData.
@@ -8146,7 +8146,7 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the FilePath field.
                 /// </summary>
-                public string FilePath => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_FilePath..]);
+                public string FilePath => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_FilePath..^1]);
 
                 /// <summary>
                 /// Creates a new SetLinkPathInfoData.
@@ -8598,7 +8598,7 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the FileName field.
                 /// </summary>
-                public string FileName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_FileName..]);
+                public string FileName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_FileName..^1]);
 
                 /// <summary>
                 /// Creates a new CreateNewFileInfoData.

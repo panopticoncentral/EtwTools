@@ -3398,7 +3398,7 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the ThreadName field.
                 /// </summary>
-                public string ThreadName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_ThreadName..]);
+                public string ThreadName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_ThreadName..^1]);
 
                 /// <summary>
                 /// Creates a new SetNameData.
@@ -9158,7 +9158,7 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the ThreadName field.
                 /// </summary>
-                public string ThreadName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_ThreadName..]);
+                public string ThreadName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_ThreadName..^1]);
 
                 /// <summary>
                 /// Creates a new StartData.
@@ -9554,7 +9554,7 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the ThreadName field.
                 /// </summary>
-                public string ThreadName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_ThreadName..]);
+                public string ThreadName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_ThreadName..^1]);
 
                 /// <summary>
                 /// Creates a new EndData.
@@ -9950,7 +9950,7 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the ThreadName field.
                 /// </summary>
-                public string ThreadName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_ThreadName..]);
+                public string ThreadName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_ThreadName..^1]);
 
                 /// <summary>
                 /// Creates a new DCStartData.
@@ -10346,7 +10346,7 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the ThreadName field.
                 /// </summary>
-                public string ThreadName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_ThreadName..]);
+                public string ThreadName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_ThreadName..^1]);
 
                 /// <summary>
                 /// Creates a new DCEndData.

@@ -313,7 +313,7 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the KeyName field.
                 /// </summary>
-                public string KeyName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_KeyName..]);
+                public string KeyName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_KeyName..^1]);
 
                 /// <summary>
                 /// Creates a new CreateData.
@@ -489,7 +489,7 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the KeyName field.
                 /// </summary>
-                public string KeyName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_KeyName..]);
+                public string KeyName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_KeyName..^1]);
 
                 /// <summary>
                 /// Creates a new OpenData.
@@ -665,7 +665,7 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the KeyName field.
                 /// </summary>
-                public string KeyName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_KeyName..]);
+                public string KeyName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_KeyName..^1]);
 
                 /// <summary>
                 /// Creates a new DeleteData.
@@ -841,7 +841,7 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the KeyName field.
                 /// </summary>
-                public string KeyName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_KeyName..]);
+                public string KeyName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_KeyName..^1]);
 
                 /// <summary>
                 /// Creates a new QueryData.
@@ -1017,7 +1017,7 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the KeyName field.
                 /// </summary>
-                public string KeyName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_KeyName..]);
+                public string KeyName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_KeyName..^1]);
 
                 /// <summary>
                 /// Creates a new SetValueData.
@@ -1193,7 +1193,7 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the KeyName field.
                 /// </summary>
-                public string KeyName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_KeyName..]);
+                public string KeyName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_KeyName..^1]);
 
                 /// <summary>
                 /// Creates a new DeleteValueData.
@@ -1369,7 +1369,7 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the KeyName field.
                 /// </summary>
-                public string KeyName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_KeyName..]);
+                public string KeyName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_KeyName..^1]);
 
                 /// <summary>
                 /// Creates a new QueryValueData.
@@ -1545,7 +1545,7 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the KeyName field.
                 /// </summary>
-                public string KeyName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_KeyName..]);
+                public string KeyName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_KeyName..^1]);
 
                 /// <summary>
                 /// Creates a new EnumerateKeyData.
@@ -1721,7 +1721,7 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the KeyName field.
                 /// </summary>
-                public string KeyName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_KeyName..]);
+                public string KeyName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_KeyName..^1]);
 
                 /// <summary>
                 /// Creates a new EnumerateValueKeyData.
@@ -1897,7 +1897,7 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the KeyName field.
                 /// </summary>
-                public string KeyName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_KeyName..]);
+                public string KeyName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_KeyName..^1]);
 
                 /// <summary>
                 /// Creates a new QueryMultipleValueData.
@@ -2073,7 +2073,7 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the KeyName field.
                 /// </summary>
-                public string KeyName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_KeyName..]);
+                public string KeyName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_KeyName..^1]);
 
                 /// <summary>
                 /// Creates a new SetInformationData.
@@ -2249,7 +2249,7 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the KeyName field.
                 /// </summary>
-                public string KeyName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_KeyName..]);
+                public string KeyName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_KeyName..^1]);
 
                 /// <summary>
                 /// Creates a new FlushData.
@@ -2444,7 +2444,7 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the KeyName field.
                 /// </summary>
-                public string KeyName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_KeyName..]);
+                public string KeyName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_KeyName..^1]);
 
                 /// <summary>
                 /// Creates a new CreateData.
@@ -2640,7 +2640,7 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the KeyName field.
                 /// </summary>
-                public string KeyName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_KeyName..]);
+                public string KeyName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_KeyName..^1]);
 
                 /// <summary>
                 /// Creates a new OpenData.
@@ -2836,7 +2836,7 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the KeyName field.
                 /// </summary>
-                public string KeyName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_KeyName..]);
+                public string KeyName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_KeyName..^1]);
 
                 /// <summary>
                 /// Creates a new DeleteData.
@@ -3032,7 +3032,7 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the KeyName field.
                 /// </summary>
-                public string KeyName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_KeyName..]);
+                public string KeyName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_KeyName..^1]);
 
                 /// <summary>
                 /// Creates a new QueryData.
@@ -3228,7 +3228,7 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the KeyName field.
                 /// </summary>
-                public string KeyName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_KeyName..]);
+                public string KeyName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_KeyName..^1]);
 
                 /// <summary>
                 /// Creates a new SetValueData.
@@ -3424,7 +3424,7 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the KeyName field.
                 /// </summary>
-                public string KeyName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_KeyName..]);
+                public string KeyName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_KeyName..^1]);
 
                 /// <summary>
                 /// Creates a new DeleteValueData.
@@ -3620,7 +3620,7 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the KeyName field.
                 /// </summary>
-                public string KeyName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_KeyName..]);
+                public string KeyName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_KeyName..^1]);
 
                 /// <summary>
                 /// Creates a new QueryValueData.
@@ -3816,7 +3816,7 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the KeyName field.
                 /// </summary>
-                public string KeyName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_KeyName..]);
+                public string KeyName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_KeyName..^1]);
 
                 /// <summary>
                 /// Creates a new EnumerateKeyData.
@@ -4012,7 +4012,7 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the KeyName field.
                 /// </summary>
-                public string KeyName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_KeyName..]);
+                public string KeyName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_KeyName..^1]);
 
                 /// <summary>
                 /// Creates a new EnumerateValueKeyData.
@@ -4208,7 +4208,7 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the KeyName field.
                 /// </summary>
-                public string KeyName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_KeyName..]);
+                public string KeyName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_KeyName..^1]);
 
                 /// <summary>
                 /// Creates a new QueryMultipleValueData.
@@ -4404,7 +4404,7 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the KeyName field.
                 /// </summary>
-                public string KeyName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_KeyName..]);
+                public string KeyName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_KeyName..^1]);
 
                 /// <summary>
                 /// Creates a new SetInformationData.
@@ -4600,7 +4600,7 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the KeyName field.
                 /// </summary>
-                public string KeyName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_KeyName..]);
+                public string KeyName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_KeyName..^1]);
 
                 /// <summary>
                 /// Creates a new FlushData.
@@ -4796,7 +4796,7 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the KeyName field.
                 /// </summary>
-                public string KeyName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_KeyName..]);
+                public string KeyName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_KeyName..^1]);
 
                 /// <summary>
                 /// Creates a new RunDownData.
@@ -4949,7 +4949,7 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the LinkPath field.
                 /// </summary>
-                public string LinkPath => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_LinkPath..Offset_DirtyReason]);
+                public string LinkPath => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_LinkPath..(Offset_DirtyReason - 1)]);
 
                 /// <summary>
                 /// Retrieves the DirtyReason field.
@@ -5221,12 +5221,12 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the FileName field.
                 /// </summary>
-                public string FileName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_FileName..Offset_Path]);
+                public string FileName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_FileName..(Offset_Path - 1)]);
 
                 /// <summary>
                 /// Retrieves the Path field.
                 /// </summary>
-                public string Path => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_Path..]);
+                public string Path => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_Path..^1]);
 
                 /// <summary>
                 /// Creates a new HiveDestroyData.
@@ -5736,7 +5736,7 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the KeyName field.
                 /// </summary>
-                public string KeyName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_KeyName..]);
+                public string KeyName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_KeyName..^1]);
 
                 /// <summary>
                 /// Creates a new CreateData.
@@ -5932,7 +5932,7 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the KeyName field.
                 /// </summary>
-                public string KeyName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_KeyName..]);
+                public string KeyName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_KeyName..^1]);
 
                 /// <summary>
                 /// Creates a new OpenData.
@@ -6128,7 +6128,7 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the KeyName field.
                 /// </summary>
-                public string KeyName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_KeyName..]);
+                public string KeyName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_KeyName..^1]);
 
                 /// <summary>
                 /// Creates a new DeleteData.
@@ -6324,7 +6324,7 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the KeyName field.
                 /// </summary>
-                public string KeyName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_KeyName..]);
+                public string KeyName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_KeyName..^1]);
 
                 /// <summary>
                 /// Creates a new QueryData.
@@ -6520,7 +6520,7 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the KeyName field.
                 /// </summary>
-                public string KeyName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_KeyName..]);
+                public string KeyName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_KeyName..^1]);
 
                 /// <summary>
                 /// Creates a new SetValueData.
@@ -6716,7 +6716,7 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the KeyName field.
                 /// </summary>
-                public string KeyName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_KeyName..]);
+                public string KeyName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_KeyName..^1]);
 
                 /// <summary>
                 /// Creates a new DeleteValueData.
@@ -6912,7 +6912,7 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the KeyName field.
                 /// </summary>
-                public string KeyName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_KeyName..]);
+                public string KeyName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_KeyName..^1]);
 
                 /// <summary>
                 /// Creates a new QueryValueData.
@@ -7108,7 +7108,7 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the KeyName field.
                 /// </summary>
-                public string KeyName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_KeyName..]);
+                public string KeyName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_KeyName..^1]);
 
                 /// <summary>
                 /// Creates a new EnumerateKeyData.
@@ -7304,7 +7304,7 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the KeyName field.
                 /// </summary>
-                public string KeyName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_KeyName..]);
+                public string KeyName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_KeyName..^1]);
 
                 /// <summary>
                 /// Creates a new EnumerateValueKeyData.
@@ -7500,7 +7500,7 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the KeyName field.
                 /// </summary>
-                public string KeyName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_KeyName..]);
+                public string KeyName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_KeyName..^1]);
 
                 /// <summary>
                 /// Creates a new QueryMultipleValueData.
@@ -7696,7 +7696,7 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the KeyName field.
                 /// </summary>
-                public string KeyName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_KeyName..]);
+                public string KeyName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_KeyName..^1]);
 
                 /// <summary>
                 /// Creates a new SetInformationData.
@@ -7892,7 +7892,7 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the KeyName field.
                 /// </summary>
-                public string KeyName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_KeyName..]);
+                public string KeyName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_KeyName..^1]);
 
                 /// <summary>
                 /// Creates a new FlushData.
@@ -8088,7 +8088,7 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the KeyName field.
                 /// </summary>
-                public string KeyName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_KeyName..]);
+                public string KeyName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_KeyName..^1]);
 
                 /// <summary>
                 /// Creates a new KCBCreateData.
@@ -8284,7 +8284,7 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the KeyName field.
                 /// </summary>
-                public string KeyName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_KeyName..]);
+                public string KeyName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_KeyName..^1]);
 
                 /// <summary>
                 /// Creates a new KCBDeleteData.
@@ -8480,7 +8480,7 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the KeyName field.
                 /// </summary>
-                public string KeyName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_KeyName..]);
+                public string KeyName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_KeyName..^1]);
 
                 /// <summary>
                 /// Creates a new KCBRundownBeginData.
@@ -8676,7 +8676,7 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the KeyName field.
                 /// </summary>
-                public string KeyName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_KeyName..]);
+                public string KeyName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_KeyName..^1]);
 
                 /// <summary>
                 /// Creates a new KCBRundownEndData.
@@ -8872,7 +8872,7 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the KeyName field.
                 /// </summary>
-                public string KeyName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_KeyName..]);
+                public string KeyName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_KeyName..^1]);
 
                 /// <summary>
                 /// Creates a new VirtualizeData.
@@ -9068,7 +9068,7 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the KeyName field.
                 /// </summary>
-                public string KeyName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_KeyName..]);
+                public string KeyName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_KeyName..^1]);
 
                 /// <summary>
                 /// Creates a new CloseData.
@@ -9264,7 +9264,7 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the KeyName field.
                 /// </summary>
-                public string KeyName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_KeyName..]);
+                public string KeyName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_KeyName..^1]);
 
                 /// <summary>
                 /// Creates a new SetSecurityData.
@@ -9460,7 +9460,7 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the KeyName field.
                 /// </summary>
-                public string KeyName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_KeyName..]);
+                public string KeyName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_KeyName..^1]);
 
                 /// <summary>
                 /// Creates a new QuerySecurityData.
@@ -9656,7 +9656,7 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the FileName field.
                 /// </summary>
-                public string FileName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_FileName..]);
+                public string FileName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_FileName..^1]);
 
                 /// <summary>
                 /// Creates a new HiveInitData.
@@ -9852,7 +9852,7 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the Hive field.
                 /// </summary>
-                public string Hive => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_Hive..]);
+                public string Hive => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_Hive..^1]);
 
                 /// <summary>
                 /// Creates a new TxRCommitData.
@@ -10048,7 +10048,7 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the Hive field.
                 /// </summary>
-                public string Hive => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_Hive..]);
+                public string Hive => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_Hive..^1]);
 
                 /// <summary>
                 /// Creates a new TxRPrepareData.
@@ -10244,7 +10244,7 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the Hive field.
                 /// </summary>
-                public string Hive => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_Hive..]);
+                public string Hive => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_Hive..^1]);
 
                 /// <summary>
                 /// Creates a new TxRRollbackData.
@@ -10435,12 +10435,12 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the FileName field.
                 /// </summary>
-                public string FileName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_FileName..Offset_LinkPath]);
+                public string FileName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_FileName..(Offset_LinkPath - 1)]);
 
                 /// <summary>
                 /// Retrieves the LinkPath field.
                 /// </summary>
-                public string LinkPath => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_LinkPath..]);
+                public string LinkPath => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_LinkPath..^1]);
 
                 /// <summary>
                 /// Creates a new HiveDCEndData.
@@ -10775,7 +10775,7 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the Path field.
                 /// </summary>
-                public string Path => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_Path..]);
+                public string Path => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_Path..^1]);
 
                 /// <summary>
                 /// Creates a new HiveLinkData.

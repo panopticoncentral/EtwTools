@@ -285,7 +285,7 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the ImageFileName field.
                 /// </summary>
-                public string ImageFileName => System.Text.Encoding.ASCII.GetString(_etwEvent.Data[Offset_ImageFileName..]);
+                public string ImageFileName => System.Text.Encoding.ASCII.GetString(_etwEvent.Data[Offset_ImageFileName..^1]);
 
                 /// <summary>
                 /// Creates a new StartData.
@@ -461,7 +461,7 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the ImageFileName field.
                 /// </summary>
-                public string ImageFileName => System.Text.Encoding.ASCII.GetString(_etwEvent.Data[Offset_ImageFileName..]);
+                public string ImageFileName => System.Text.Encoding.ASCII.GetString(_etwEvent.Data[Offset_ImageFileName..^1]);
 
                 /// <summary>
                 /// Creates a new EndData.
@@ -637,7 +637,7 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the ImageFileName field.
                 /// </summary>
-                public string ImageFileName => System.Text.Encoding.ASCII.GetString(_etwEvent.Data[Offset_ImageFileName..]);
+                public string ImageFileName => System.Text.Encoding.ASCII.GetString(_etwEvent.Data[Offset_ImageFileName..^1]);
 
                 /// <summary>
                 /// Creates a new DCStartData.
@@ -813,7 +813,7 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the ImageFileName field.
                 /// </summary>
-                public string ImageFileName => System.Text.Encoding.ASCII.GetString(_etwEvent.Data[Offset_ImageFileName..]);
+                public string ImageFileName => System.Text.Encoding.ASCII.GetString(_etwEvent.Data[Offset_ImageFileName..^1]);
 
                 /// <summary>
                 /// Creates a new DCEndData.
@@ -1046,7 +1046,7 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the ImageFileName field.
                 /// </summary>
-                public string ImageFileName => System.Text.Encoding.ASCII.GetString(_etwEvent.Data[Offset_ImageFileName..]);
+                public string ImageFileName => System.Text.Encoding.ASCII.GetString(_etwEvent.Data[Offset_ImageFileName..^1]);
 
                 /// <summary>
                 /// Creates a new StartData.
@@ -1282,7 +1282,7 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the ImageFileName field.
                 /// </summary>
-                public string ImageFileName => System.Text.Encoding.ASCII.GetString(_etwEvent.Data[Offset_ImageFileName..]);
+                public string ImageFileName => System.Text.Encoding.ASCII.GetString(_etwEvent.Data[Offset_ImageFileName..^1]);
 
                 /// <summary>
                 /// Creates a new EndData.
@@ -1518,7 +1518,7 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the ImageFileName field.
                 /// </summary>
-                public string ImageFileName => System.Text.Encoding.ASCII.GetString(_etwEvent.Data[Offset_ImageFileName..]);
+                public string ImageFileName => System.Text.Encoding.ASCII.GetString(_etwEvent.Data[Offset_ImageFileName..^1]);
 
                 /// <summary>
                 /// Creates a new DCStartData.
@@ -1754,7 +1754,7 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the ImageFileName field.
                 /// </summary>
-                public string ImageFileName => System.Text.Encoding.ASCII.GetString(_etwEvent.Data[Offset_ImageFileName..]);
+                public string ImageFileName => System.Text.Encoding.ASCII.GetString(_etwEvent.Data[Offset_ImageFileName..^1]);
 
                 /// <summary>
                 /// Creates a new DCEndData.
@@ -2004,12 +2004,12 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the ImageFileName field.
                 /// </summary>
-                public string ImageFileName => System.Text.Encoding.ASCII.GetString(_etwEvent.Data[Offset_ImageFileName..Offset_CommandLine]);
+                public string ImageFileName => System.Text.Encoding.ASCII.GetString(_etwEvent.Data[Offset_ImageFileName..(Offset_CommandLine - 1)]);
 
                 /// <summary>
                 /// Retrieves the CommandLine field.
                 /// </summary>
-                public string CommandLine => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_CommandLine..]);
+                public string CommandLine => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_CommandLine..^1]);
 
                 /// <summary>
                 /// Creates a new StartData.
@@ -2260,12 +2260,12 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the ImageFileName field.
                 /// </summary>
-                public string ImageFileName => System.Text.Encoding.ASCII.GetString(_etwEvent.Data[Offset_ImageFileName..Offset_CommandLine]);
+                public string ImageFileName => System.Text.Encoding.ASCII.GetString(_etwEvent.Data[Offset_ImageFileName..(Offset_CommandLine - 1)]);
 
                 /// <summary>
                 /// Retrieves the CommandLine field.
                 /// </summary>
-                public string CommandLine => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_CommandLine..]);
+                public string CommandLine => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_CommandLine..^1]);
 
                 /// <summary>
                 /// Creates a new EndData.
@@ -2516,12 +2516,12 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the ImageFileName field.
                 /// </summary>
-                public string ImageFileName => System.Text.Encoding.ASCII.GetString(_etwEvent.Data[Offset_ImageFileName..Offset_CommandLine]);
+                public string ImageFileName => System.Text.Encoding.ASCII.GetString(_etwEvent.Data[Offset_ImageFileName..(Offset_CommandLine - 1)]);
 
                 /// <summary>
                 /// Retrieves the CommandLine field.
                 /// </summary>
-                public string CommandLine => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_CommandLine..]);
+                public string CommandLine => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_CommandLine..^1]);
 
                 /// <summary>
                 /// Creates a new DCStartData.
@@ -2772,12 +2772,12 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the ImageFileName field.
                 /// </summary>
-                public string ImageFileName => System.Text.Encoding.ASCII.GetString(_etwEvent.Data[Offset_ImageFileName..Offset_CommandLine]);
+                public string ImageFileName => System.Text.Encoding.ASCII.GetString(_etwEvent.Data[Offset_ImageFileName..(Offset_CommandLine - 1)]);
 
                 /// <summary>
                 /// Retrieves the CommandLine field.
                 /// </summary>
-                public string CommandLine => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_CommandLine..]);
+                public string CommandLine => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_CommandLine..^1]);
 
                 /// <summary>
                 /// Creates a new DCEndData.
@@ -3028,12 +3028,12 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the ImageFileName field.
                 /// </summary>
-                public string ImageFileName => System.Text.Encoding.ASCII.GetString(_etwEvent.Data[Offset_ImageFileName..Offset_CommandLine]);
+                public string ImageFileName => System.Text.Encoding.ASCII.GetString(_etwEvent.Data[Offset_ImageFileName..(Offset_CommandLine - 1)]);
 
                 /// <summary>
                 /// Retrieves the CommandLine field.
                 /// </summary>
-                public string CommandLine => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_CommandLine..]);
+                public string CommandLine => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_CommandLine..^1]);
 
                 /// <summary>
                 /// Creates a new DefunctData.
@@ -7451,12 +7451,12 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the ImageFileName field.
                 /// </summary>
-                public string ImageFileName => System.Text.Encoding.ASCII.GetString(_etwEvent.Data[Offset_ImageFileName..Offset_CommandLine]);
+                public string ImageFileName => System.Text.Encoding.ASCII.GetString(_etwEvent.Data[Offset_ImageFileName..(Offset_CommandLine - 1)]);
 
                 /// <summary>
                 /// Retrieves the CommandLine field.
                 /// </summary>
-                public string CommandLine => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_CommandLine..]);
+                public string CommandLine => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_CommandLine..^1]);
 
                 /// <summary>
                 /// Creates a new StartData.
@@ -7727,12 +7727,12 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the ImageFileName field.
                 /// </summary>
-                public string ImageFileName => System.Text.Encoding.ASCII.GetString(_etwEvent.Data[Offset_ImageFileName..Offset_CommandLine]);
+                public string ImageFileName => System.Text.Encoding.ASCII.GetString(_etwEvent.Data[Offset_ImageFileName..(Offset_CommandLine - 1)]);
 
                 /// <summary>
                 /// Retrieves the CommandLine field.
                 /// </summary>
-                public string CommandLine => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_CommandLine..]);
+                public string CommandLine => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_CommandLine..^1]);
 
                 /// <summary>
                 /// Creates a new EndData.
@@ -8003,12 +8003,12 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the ImageFileName field.
                 /// </summary>
-                public string ImageFileName => System.Text.Encoding.ASCII.GetString(_etwEvent.Data[Offset_ImageFileName..Offset_CommandLine]);
+                public string ImageFileName => System.Text.Encoding.ASCII.GetString(_etwEvent.Data[Offset_ImageFileName..(Offset_CommandLine - 1)]);
 
                 /// <summary>
                 /// Retrieves the CommandLine field.
                 /// </summary>
-                public string CommandLine => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_CommandLine..]);
+                public string CommandLine => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_CommandLine..^1]);
 
                 /// <summary>
                 /// Creates a new DCStartData.
@@ -8279,12 +8279,12 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the ImageFileName field.
                 /// </summary>
-                public string ImageFileName => System.Text.Encoding.ASCII.GetString(_etwEvent.Data[Offset_ImageFileName..Offset_CommandLine]);
+                public string ImageFileName => System.Text.Encoding.ASCII.GetString(_etwEvent.Data[Offset_ImageFileName..(Offset_CommandLine - 1)]);
 
                 /// <summary>
                 /// Retrieves the CommandLine field.
                 /// </summary>
-                public string CommandLine => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_CommandLine..]);
+                public string CommandLine => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_CommandLine..^1]);
 
                 /// <summary>
                 /// Creates a new DCEndData.
@@ -8555,12 +8555,12 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the ImageFileName field.
                 /// </summary>
-                public string ImageFileName => System.Text.Encoding.ASCII.GetString(_etwEvent.Data[Offset_ImageFileName..Offset_CommandLine]);
+                public string ImageFileName => System.Text.Encoding.ASCII.GetString(_etwEvent.Data[Offset_ImageFileName..(Offset_CommandLine - 1)]);
 
                 /// <summary>
                 /// Retrieves the CommandLine field.
                 /// </summary>
-                public string CommandLine => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_CommandLine..]);
+                public string CommandLine => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_CommandLine..^1]);
 
                 /// <summary>
                 /// Creates a new DefunctData.
@@ -8878,22 +8878,22 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the ImageFileName field.
                 /// </summary>
-                public string ImageFileName => System.Text.Encoding.ASCII.GetString(_etwEvent.Data[Offset_ImageFileName..Offset_CommandLine]);
+                public string ImageFileName => System.Text.Encoding.ASCII.GetString(_etwEvent.Data[Offset_ImageFileName..(Offset_CommandLine - 1)]);
 
                 /// <summary>
                 /// Retrieves the CommandLine field.
                 /// </summary>
-                public string CommandLine => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_CommandLine..Offset_PackageFullName]);
+                public string CommandLine => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_CommandLine..(Offset_PackageFullName - 1)]);
 
                 /// <summary>
                 /// Retrieves the PackageFullName field.
                 /// </summary>
-                public string PackageFullName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_PackageFullName..Offset_ApplicationId]);
+                public string PackageFullName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_PackageFullName..(Offset_ApplicationId - 1)]);
 
                 /// <summary>
                 /// Retrieves the ApplicationId field.
                 /// </summary>
-                public string ApplicationId => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_ApplicationId..]);
+                public string ApplicationId => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_ApplicationId..^1]);
 
                 /// <summary>
                 /// Creates a new StartData.
@@ -9214,22 +9214,22 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the ImageFileName field.
                 /// </summary>
-                public string ImageFileName => System.Text.Encoding.ASCII.GetString(_etwEvent.Data[Offset_ImageFileName..Offset_CommandLine]);
+                public string ImageFileName => System.Text.Encoding.ASCII.GetString(_etwEvent.Data[Offset_ImageFileName..(Offset_CommandLine - 1)]);
 
                 /// <summary>
                 /// Retrieves the CommandLine field.
                 /// </summary>
-                public string CommandLine => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_CommandLine..Offset_PackageFullName]);
+                public string CommandLine => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_CommandLine..(Offset_PackageFullName - 1)]);
 
                 /// <summary>
                 /// Retrieves the PackageFullName field.
                 /// </summary>
-                public string PackageFullName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_PackageFullName..Offset_ApplicationId]);
+                public string PackageFullName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_PackageFullName..(Offset_ApplicationId - 1)]);
 
                 /// <summary>
                 /// Retrieves the ApplicationId field.
                 /// </summary>
-                public string ApplicationId => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_ApplicationId..]);
+                public string ApplicationId => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_ApplicationId..^1]);
 
                 /// <summary>
                 /// Creates a new EndData.
@@ -9550,22 +9550,22 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the ImageFileName field.
                 /// </summary>
-                public string ImageFileName => System.Text.Encoding.ASCII.GetString(_etwEvent.Data[Offset_ImageFileName..Offset_CommandLine]);
+                public string ImageFileName => System.Text.Encoding.ASCII.GetString(_etwEvent.Data[Offset_ImageFileName..(Offset_CommandLine - 1)]);
 
                 /// <summary>
                 /// Retrieves the CommandLine field.
                 /// </summary>
-                public string CommandLine => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_CommandLine..Offset_PackageFullName]);
+                public string CommandLine => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_CommandLine..(Offset_PackageFullName - 1)]);
 
                 /// <summary>
                 /// Retrieves the PackageFullName field.
                 /// </summary>
-                public string PackageFullName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_PackageFullName..Offset_ApplicationId]);
+                public string PackageFullName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_PackageFullName..(Offset_ApplicationId - 1)]);
 
                 /// <summary>
                 /// Retrieves the ApplicationId field.
                 /// </summary>
-                public string ApplicationId => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_ApplicationId..]);
+                public string ApplicationId => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_ApplicationId..^1]);
 
                 /// <summary>
                 /// Creates a new DCStartData.
@@ -9886,22 +9886,22 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the ImageFileName field.
                 /// </summary>
-                public string ImageFileName => System.Text.Encoding.ASCII.GetString(_etwEvent.Data[Offset_ImageFileName..Offset_CommandLine]);
+                public string ImageFileName => System.Text.Encoding.ASCII.GetString(_etwEvent.Data[Offset_ImageFileName..(Offset_CommandLine - 1)]);
 
                 /// <summary>
                 /// Retrieves the CommandLine field.
                 /// </summary>
-                public string CommandLine => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_CommandLine..Offset_PackageFullName]);
+                public string CommandLine => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_CommandLine..(Offset_PackageFullName - 1)]);
 
                 /// <summary>
                 /// Retrieves the PackageFullName field.
                 /// </summary>
-                public string PackageFullName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_PackageFullName..Offset_ApplicationId]);
+                public string PackageFullName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_PackageFullName..(Offset_ApplicationId - 1)]);
 
                 /// <summary>
                 /// Retrieves the ApplicationId field.
                 /// </summary>
-                public string ApplicationId => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_ApplicationId..]);
+                public string ApplicationId => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_ApplicationId..^1]);
 
                 /// <summary>
                 /// Creates a new DCEndData.
@@ -10222,22 +10222,22 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the ImageFileName field.
                 /// </summary>
-                public string ImageFileName => System.Text.Encoding.ASCII.GetString(_etwEvent.Data[Offset_ImageFileName..Offset_CommandLine]);
+                public string ImageFileName => System.Text.Encoding.ASCII.GetString(_etwEvent.Data[Offset_ImageFileName..(Offset_CommandLine - 1)]);
 
                 /// <summary>
                 /// Retrieves the CommandLine field.
                 /// </summary>
-                public string CommandLine => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_CommandLine..Offset_PackageFullName]);
+                public string CommandLine => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_CommandLine..(Offset_PackageFullName - 1)]);
 
                 /// <summary>
                 /// Retrieves the PackageFullName field.
                 /// </summary>
-                public string PackageFullName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_PackageFullName..Offset_ApplicationId]);
+                public string PackageFullName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_PackageFullName..(Offset_ApplicationId - 1)]);
 
                 /// <summary>
                 /// Retrieves the ApplicationId field.
                 /// </summary>
-                public string ApplicationId => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_ApplicationId..]);
+                public string ApplicationId => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_ApplicationId..^1]);
 
                 /// <summary>
                 /// Creates a new DefunctData.
@@ -10572,22 +10572,22 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the ImageFileName field.
                 /// </summary>
-                public string ImageFileName => System.Text.Encoding.ASCII.GetString(_etwEvent.Data[Offset_ImageFileName..Offset_CommandLine]);
+                public string ImageFileName => System.Text.Encoding.ASCII.GetString(_etwEvent.Data[Offset_ImageFileName..(Offset_CommandLine - 1)]);
 
                 /// <summary>
                 /// Retrieves the CommandLine field.
                 /// </summary>
-                public string CommandLine => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_CommandLine..Offset_PackageFullName]);
+                public string CommandLine => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_CommandLine..(Offset_PackageFullName - 1)]);
 
                 /// <summary>
                 /// Retrieves the PackageFullName field.
                 /// </summary>
-                public string PackageFullName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_PackageFullName..Offset_ApplicationId]);
+                public string PackageFullName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_PackageFullName..(Offset_ApplicationId - 1)]);
 
                 /// <summary>
                 /// Retrieves the ApplicationId field.
                 /// </summary>
-                public string ApplicationId => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_ApplicationId..Offset_ExitTime]);
+                public string ApplicationId => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_ApplicationId..(Offset_ExitTime - 1)]);
 
                 /// <summary>
                 /// Retrieves the ExitTime field.

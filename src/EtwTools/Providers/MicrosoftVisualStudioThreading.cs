@@ -211,7 +211,7 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the Message field.
                 /// </summary>
-                public string Message => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_Message..]);
+                public string Message => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_Message..^1]);
 
                 /// <summary>
                 /// Creates a new EventSourceMessageData.

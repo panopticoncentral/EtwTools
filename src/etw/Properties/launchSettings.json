@@ -2,7 +2,7 @@
   "profiles": {
     "trace": {
       "commandName": "Project",
-      "commandLineArgs": "session stop VSInspector",
+      "commandLineArgs": "provider manifest working\\Clr.man",
       "nativeDebugging": true
     }
   }

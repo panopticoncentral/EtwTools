@@ -342,7 +342,7 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the ImageFileName field.
                 /// </summary>
-                public string ImageFileName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_ImageFileName..]);
+                public string ImageFileName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_ImageFileName..^1]);
 
                 /// <summary>
                 /// Creates a new LoadData.
@@ -517,7 +517,7 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the FileName field.
                 /// </summary>
-                public string FileName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_FileName..]);
+                public string FileName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_FileName..^1]);
 
                 /// <summary>
                 /// Creates a new LoadData.
@@ -1385,7 +1385,7 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the String field.
                 /// </summary>
-                public string String => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_String..]);
+                public string String => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_String..^1]);
 
                 /// <summary>
                 /// Creates a new FindDllByNameData.
@@ -1561,7 +1561,7 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the String field.
                 /// </summary>
-                public string String => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_String..]);
+                public string String => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_String..^1]);
 
                 /// <summary>
                 /// Creates a new MapViewEndData.
@@ -1737,7 +1737,7 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the String field.
                 /// </summary>
-                public string String => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_String..]);
+                public string String => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_String..^1]);
 
                 /// <summary>
                 /// Creates a new LoaderLockReleaseData.
@@ -1913,7 +1913,7 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the String field.
                 /// </summary>
-                public string String => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_String..]);
+                public string String => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_String..^1]);
 
                 /// <summary>
                 /// Creates a new DllMainEnterData.
@@ -2089,7 +2089,7 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the String field.
                 /// </summary>
-                public string String => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_String..]);
+                public string String => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_String..^1]);
 
                 /// <summary>
                 /// Creates a new LoaderErrorData.
@@ -3229,7 +3229,7 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the FileName field.
                 /// </summary>
-                public string FileName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_FileName..]);
+                public string FileName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_FileName..^1]);
 
                 /// <summary>
                 /// Creates a new LoadData.
@@ -3565,7 +3565,7 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the FileName field.
                 /// </summary>
-                public string FileName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_FileName..]);
+                public string FileName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_FileName..^1]);
 
                 /// <summary>
                 /// Creates a new UnLoadData.
@@ -3901,7 +3901,7 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the FileName field.
                 /// </summary>
-                public string FileName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_FileName..]);
+                public string FileName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_FileName..^1]);
 
                 /// <summary>
                 /// Creates a new DCStartData.
@@ -4237,7 +4237,7 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the FileName field.
                 /// </summary>
-                public string FileName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_FileName..]);
+                public string FileName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_FileName..^1]);
 
                 /// <summary>
                 /// Creates a new DCEndData.
@@ -4727,7 +4727,7 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the FileName field.
                 /// </summary>
-                public string FileName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_FileName..]);
+                public string FileName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_FileName..^1]);
 
                 /// <summary>
                 /// Creates a new LoadData.
@@ -5103,7 +5103,7 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the FileName field.
                 /// </summary>
-                public string FileName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_FileName..]);
+                public string FileName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_FileName..^1]);
 
                 /// <summary>
                 /// Creates a new UnLoadData.
@@ -5479,7 +5479,7 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the FileName field.
                 /// </summary>
-                public string FileName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_FileName..]);
+                public string FileName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_FileName..^1]);
 
                 /// <summary>
                 /// Creates a new DCStartData.
@@ -5855,7 +5855,7 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the FileName field.
                 /// </summary>
-                public string FileName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_FileName..]);
+                public string FileName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_FileName..^1]);
 
                 /// <summary>
                 /// Creates a new DCEndData.
@@ -6041,7 +6041,7 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the String field.
                 /// </summary>
-                public string String => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_String..]);
+                public string String => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_String..^1]);
 
                 /// <summary>
                 /// Creates a new MapViewStartData.
@@ -6217,7 +6217,7 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the String field.
                 /// </summary>
-                public string String => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_String..]);
+                public string String => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_String..^1]);
 
                 /// <summary>
                 /// Creates a new SnappingStartData.
@@ -6393,7 +6393,7 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the String field.
                 /// </summary>
-                public string String => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_String..]);
+                public string String => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_String..^1]);
 
                 /// <summary>
                 /// Creates a new SnappingEndData.
@@ -6569,7 +6569,7 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the String field.
                 /// </summary>
-                public string String => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_String..]);
+                public string String => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_String..^1]);
 
                 /// <summary>
                 /// Creates a new LoadingStartData.
@@ -6745,7 +6745,7 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the String field.
                 /// </summary>
-                public string String => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_String..]);
+                public string String => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_String..^1]);
 
                 /// <summary>
                 /// Creates a new LoadingEndData.
@@ -6921,7 +6921,7 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the String field.
                 /// </summary>
-                public string String => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_String..]);
+                public string String => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_String..^1]);
 
                 /// <summary>
                 /// Creates a new FoundKnownDllData.
@@ -7097,7 +7097,7 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the String field.
                 /// </summary>
-                public string String => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_String..]);
+                public string String => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_String..^1]);
 
                 /// <summary>
                 /// Creates a new AbnormalTerminationData.
@@ -7273,7 +7273,7 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the String field.
                 /// </summary>
-                public string String => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_String..]);
+                public string String => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_String..^1]);
 
                 /// <summary>
                 /// Creates a new ModulePlaceHolderData.
@@ -7449,7 +7449,7 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the String field.
                 /// </summary>
-                public string String => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_String..]);
+                public string String => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_String..^1]);
 
                 /// <summary>
                 /// Creates a new ReadyToInitData.
@@ -7625,7 +7625,7 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the String field.
                 /// </summary>
-                public string String => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_String..]);
+                public string String => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_String..^1]);
 
                 /// <summary>
                 /// Creates a new ReadyToRunData.
@@ -7801,7 +7801,7 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the String field.
                 /// </summary>
-                public string String => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_String..]);
+                public string String => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_String..^1]);
 
                 /// <summary>
                 /// Creates a new ApiSetResolvingData.
@@ -7977,7 +7977,7 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the String field.
                 /// </summary>
-                public string String => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_String..]);
+                public string String => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_String..^1]);
 
                 /// <summary>
                 /// Creates a new ApiSetHostedData.
@@ -8153,7 +8153,7 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the String field.
                 /// </summary>
-                public string String => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_String..]);
+                public string String => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_String..^1]);
 
                 /// <summary>
                 /// Creates a new ApiSetUnhostedData.
@@ -8329,7 +8329,7 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the String field.
                 /// </summary>
-                public string String => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_String..]);
+                public string String => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_String..^1]);
 
                 /// <summary>
                 /// Creates a new ApiSetUnresolvedData.
@@ -8519,12 +8519,12 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the String1 field.
                 /// </summary>
-                public string String1 => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_String1..Offset_String2]);
+                public string String1 => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_String1..(Offset_String2 - 1)]);
 
                 /// <summary>
                 /// Retrieves the String2 field.
                 /// </summary>
-                public string String2 => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_String2..]);
+                public string String2 => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_String2..^1]);
 
                 /// <summary>
                 /// Creates a new DllSearchPathExternalData.
@@ -8715,12 +8715,12 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the String1 field.
                 /// </summary>
-                public string String1 => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_String1..Offset_String2]);
+                public string String1 => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_String1..(Offset_String2 - 1)]);
 
                 /// <summary>
                 /// Retrieves the String2 field.
                 /// </summary>
-                public string String2 => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_String2..]);
+                public string String2 => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_String2..^1]);
 
                 /// <summary>
                 /// Creates a new DllSearchPathInternalData.
@@ -8897,7 +8897,7 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the FilePath field.
                 /// </summary>
-                public string FilePath => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_FilePath..]);
+                public string FilePath => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_FilePath..^1]);
 
                 /// <summary>
                 /// Creates a new NewDllLoadData.
@@ -9073,7 +9073,7 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the FilePath field.
                 /// </summary>
-                public string FilePath => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_FilePath..]);
+                public string FilePath => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_FilePath..^1]);
 
                 /// <summary>
                 /// Creates a new NewDllLoadAsDataData.
@@ -9268,7 +9268,7 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the FullDllName field.
                 /// </summary>
-                public string FullDllName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_FullDllName..]);
+                public string FullDllName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_FullDllName..^1]);
 
                 /// <summary>
                 /// Creates a new DllSearchResultsData.
@@ -9449,22 +9449,22 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the Cwd field.
                 /// </summary>
-                public string Cwd => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_Cwd..Offset_AppDir]);
+                public string Cwd => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_Cwd..(Offset_AppDir - 1)]);
 
                 /// <summary>
                 /// Retrieves the AppDir field.
                 /// </summary>
-                public string AppDir => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_AppDir..Offset_DllDir]);
+                public string AppDir => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_AppDir..(Offset_DllDir - 1)]);
 
                 /// <summary>
                 /// Retrieves the DllDir field.
                 /// </summary>
-                public string DllDir => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_DllDir..Offset_DllLoadDir]);
+                public string DllDir => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_DllDir..(Offset_DllLoadDir - 1)]);
 
                 /// <summary>
                 /// Retrieves the DllLoadDir field.
                 /// </summary>
-                public string DllLoadDir => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_DllLoadDir..]);
+                public string DllLoadDir => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_DllLoadDir..^1]);
 
                 /// <summary>
                 /// Creates a new DllPathSearchResultsData.

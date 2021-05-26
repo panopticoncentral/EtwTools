@@ -1053,17 +1053,17 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the MethodNamespace field.
                 /// </summary>
-                public string MethodNamespace => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_MethodNamespace..Offset_MethodName]);
+                public string MethodNamespace => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_MethodNamespace..(Offset_MethodName - 1)]);
 
                 /// <summary>
                 /// Retrieves the MethodName field.
                 /// </summary>
-                public string MethodName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_MethodName..Offset_MethodSignature]);
+                public string MethodName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_MethodName..(Offset_MethodSignature - 1)]);
 
                 /// <summary>
                 /// Retrieves the MethodSignature field.
                 /// </summary>
-                public string MethodSignature => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_MethodSignature..]);
+                public string MethodSignature => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_MethodSignature..^1]);
 
                 /// <summary>
                 /// Creates a new MethodDCStartVerboseData.
@@ -1329,17 +1329,17 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the MethodNamespace field.
                 /// </summary>
-                public string MethodNamespace => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_MethodNamespace..Offset_MethodName]);
+                public string MethodNamespace => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_MethodNamespace..(Offset_MethodName - 1)]);
 
                 /// <summary>
                 /// Retrieves the MethodName field.
                 /// </summary>
-                public string MethodName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_MethodName..Offset_MethodSignature]);
+                public string MethodName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_MethodName..(Offset_MethodSignature - 1)]);
 
                 /// <summary>
                 /// Retrieves the MethodSignature field.
                 /// </summary>
-                public string MethodSignature => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_MethodSignature..]);
+                public string MethodSignature => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_MethodSignature..^1]);
 
                 /// <summary>
                 /// Creates a new MethodDCStopVerboseData.
@@ -2332,12 +2332,12 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the ModuleILPath field.
                 /// </summary>
-                public string ModuleILPath => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_ModuleILPath..Offset_ModuleNativePath]);
+                public string ModuleILPath => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_ModuleILPath..(Offset_ModuleNativePath - 1)]);
 
                 /// <summary>
                 /// Retrieves the ModuleNativePath field.
                 /// </summary>
-                public string ModuleNativePath => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_ModuleNativePath..]);
+                public string ModuleNativePath => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_ModuleNativePath..^1]);
 
                 /// <summary>
                 /// Creates a new LoaderDomainModuleDCStartData.
@@ -2568,12 +2568,12 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the ModuleILPath field.
                 /// </summary>
-                public string ModuleILPath => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_ModuleILPath..Offset_ModuleNativePath]);
+                public string ModuleILPath => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_ModuleILPath..(Offset_ModuleNativePath - 1)]);
 
                 /// <summary>
                 /// Retrieves the ModuleNativePath field.
                 /// </summary>
-                public string ModuleNativePath => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_ModuleNativePath..]);
+                public string ModuleNativePath => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_ModuleNativePath..^1]);
 
                 /// <summary>
                 /// Creates a new LoaderDomainModuleDCStopData.
@@ -2785,12 +2785,12 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the ModuleILPath field.
                 /// </summary>
-                public string ModuleILPath => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_ModuleILPath..Offset_ModuleNativePath]);
+                public string ModuleILPath => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_ModuleILPath..(Offset_ModuleNativePath - 1)]);
 
                 /// <summary>
                 /// Retrieves the ModuleNativePath field.
                 /// </summary>
-                public string ModuleNativePath => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_ModuleNativePath..]);
+                public string ModuleNativePath => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_ModuleNativePath..^1]);
 
                 /// <summary>
                 /// Creates a new LoaderModuleDCStartData.
@@ -3001,12 +3001,12 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the ModuleILPath field.
                 /// </summary>
-                public string ModuleILPath => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_ModuleILPath..Offset_ModuleNativePath]);
+                public string ModuleILPath => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_ModuleILPath..(Offset_ModuleNativePath - 1)]);
 
                 /// <summary>
                 /// Retrieves the ModuleNativePath field.
                 /// </summary>
-                public string ModuleNativePath => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_ModuleNativePath..]);
+                public string ModuleNativePath => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_ModuleNativePath..^1]);
 
                 /// <summary>
                 /// Creates a new LoaderModuleDCStopData.
@@ -3184,7 +3184,7 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the FullyQualifiedAssemblyName field.
                 /// </summary>
-                public string FullyQualifiedAssemblyName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_FullyQualifiedAssemblyName..]);
+                public string FullyQualifiedAssemblyName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_FullyQualifiedAssemblyName..^1]);
 
                 /// <summary>
                 /// Creates a new LoaderAssemblyDCStartData.
@@ -3360,7 +3360,7 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the FullyQualifiedAssemblyName field.
                 /// </summary>
-                public string FullyQualifiedAssemblyName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_FullyQualifiedAssemblyName..]);
+                public string FullyQualifiedAssemblyName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_FullyQualifiedAssemblyName..^1]);
 
                 /// <summary>
                 /// Creates a new LoaderAssemblyDCStopData.
@@ -3517,7 +3517,7 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the AppDomainName field.
                 /// </summary>
-                public string AppDomainName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_AppDomainName..]);
+                public string AppDomainName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_AppDomainName..^1]);
 
                 /// <summary>
                 /// Creates a new LoaderAppDomainDCStartData.
@@ -3673,7 +3673,7 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the AppDomainName field.
                 /// </summary>
-                public string AppDomainName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_AppDomainName..]);
+                public string AppDomainName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_AppDomainName..^1]);
 
                 /// <summary>
                 /// Creates a new LoaderAppDomainDCStopData.
@@ -4655,7 +4655,7 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the CommandLine field.
                 /// </summary>
-                public string CommandLine => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_CommandLine..Offset_ComObjectGuid]);
+                public string CommandLine => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_CommandLine..(Offset_ComObjectGuid - 1)]);
 
                 /// <summary>
                 /// Retrieves the ComObjectGuid field.
@@ -4665,7 +4665,7 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the RuntimeDllPath field.
                 /// </summary>
-                public string RuntimeDllPath => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_RuntimeDllPath..]);
+                public string RuntimeDllPath => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_RuntimeDllPath..^1]);
 
                 /// <summary>
                 /// Creates a new RuntimeStartData.
@@ -5423,17 +5423,17 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the MethodNamespace field.
                 /// </summary>
-                public string MethodNamespace => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_MethodNamespace..Offset_MethodName]);
+                public string MethodNamespace => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_MethodNamespace..(Offset_MethodName - 1)]);
 
                 /// <summary>
                 /// Retrieves the MethodName field.
                 /// </summary>
-                public string MethodName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_MethodName..Offset_MethodSignature]);
+                public string MethodName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_MethodName..(Offset_MethodSignature - 1)]);
 
                 /// <summary>
                 /// Retrieves the MethodSignature field.
                 /// </summary>
-                public string MethodSignature => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_MethodSignature..Offset_ClrInstanceID]);
+                public string MethodSignature => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_MethodSignature..(Offset_ClrInstanceID - 1)]);
 
                 /// <summary>
                 /// Retrieves the ClrInstanceID field.
@@ -5719,17 +5719,17 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the MethodNamespace field.
                 /// </summary>
-                public string MethodNamespace => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_MethodNamespace..Offset_MethodName]);
+                public string MethodNamespace => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_MethodNamespace..(Offset_MethodName - 1)]);
 
                 /// <summary>
                 /// Retrieves the MethodName field.
                 /// </summary>
-                public string MethodName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_MethodName..Offset_MethodSignature]);
+                public string MethodName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_MethodName..(Offset_MethodSignature - 1)]);
 
                 /// <summary>
                 /// Retrieves the MethodSignature field.
                 /// </summary>
-                public string MethodSignature => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_MethodSignature..Offset_ClrInstanceID]);
+                public string MethodSignature => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_MethodSignature..(Offset_ClrInstanceID - 1)]);
 
                 /// <summary>
                 /// Retrieves the ClrInstanceID field.
@@ -6446,12 +6446,12 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the ModuleILPath field.
                 /// </summary>
-                public string ModuleILPath => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_ModuleILPath..Offset_ModuleNativePath]);
+                public string ModuleILPath => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_ModuleILPath..(Offset_ModuleNativePath - 1)]);
 
                 /// <summary>
                 /// Retrieves the ModuleNativePath field.
                 /// </summary>
-                public string ModuleNativePath => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_ModuleNativePath..Offset_ClrInstanceID]);
+                public string ModuleNativePath => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_ModuleNativePath..(Offset_ClrInstanceID - 1)]);
 
                 /// <summary>
                 /// Retrieves the ClrInstanceID field.
@@ -6702,12 +6702,12 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the ModuleILPath field.
                 /// </summary>
-                public string ModuleILPath => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_ModuleILPath..Offset_ModuleNativePath]);
+                public string ModuleILPath => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_ModuleILPath..(Offset_ModuleNativePath - 1)]);
 
                 /// <summary>
                 /// Retrieves the ModuleNativePath field.
                 /// </summary>
-                public string ModuleNativePath => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_ModuleNativePath..Offset_ClrInstanceID]);
+                public string ModuleNativePath => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_ModuleNativePath..(Offset_ClrInstanceID - 1)]);
 
                 /// <summary>
                 /// Retrieves the ClrInstanceID field.
@@ -6939,12 +6939,12 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the ModuleILPath field.
                 /// </summary>
-                public string ModuleILPath => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_ModuleILPath..Offset_ModuleNativePath]);
+                public string ModuleILPath => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_ModuleILPath..(Offset_ModuleNativePath - 1)]);
 
                 /// <summary>
                 /// Retrieves the ModuleNativePath field.
                 /// </summary>
-                public string ModuleNativePath => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_ModuleNativePath..Offset_ClrInstanceID]);
+                public string ModuleNativePath => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_ModuleNativePath..(Offset_ClrInstanceID - 1)]);
 
                 /// <summary>
                 /// Retrieves the ClrInstanceID field.
@@ -7175,12 +7175,12 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the ModuleILPath field.
                 /// </summary>
-                public string ModuleILPath => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_ModuleILPath..Offset_ModuleNativePath]);
+                public string ModuleILPath => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_ModuleILPath..(Offset_ModuleNativePath - 1)]);
 
                 /// <summary>
                 /// Retrieves the ModuleNativePath field.
                 /// </summary>
-                public string ModuleNativePath => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_ModuleNativePath..Offset_ClrInstanceID]);
+                public string ModuleNativePath => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_ModuleNativePath..(Offset_ClrInstanceID - 1)]);
 
                 /// <summary>
                 /// Retrieves the ClrInstanceID field.
@@ -7397,7 +7397,7 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the FullyQualifiedAssemblyName field.
                 /// </summary>
-                public string FullyQualifiedAssemblyName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_FullyQualifiedAssemblyName..Offset_ClrInstanceID]);
+                public string FullyQualifiedAssemblyName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_FullyQualifiedAssemblyName..(Offset_ClrInstanceID - 1)]);
 
                 /// <summary>
                 /// Retrieves the ClrInstanceID field.
@@ -7613,7 +7613,7 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the FullyQualifiedAssemblyName field.
                 /// </summary>
-                public string FullyQualifiedAssemblyName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_FullyQualifiedAssemblyName..Offset_ClrInstanceID]);
+                public string FullyQualifiedAssemblyName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_FullyQualifiedAssemblyName..(Offset_ClrInstanceID - 1)]);
 
                 /// <summary>
                 /// Retrieves the ClrInstanceID field.
@@ -7805,7 +7805,7 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the AppDomainName field.
                 /// </summary>
-                public string AppDomainName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_AppDomainName..Offset_AppDomainIndex]);
+                public string AppDomainName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_AppDomainName..(Offset_AppDomainIndex - 1)]);
 
                 /// <summary>
                 /// Retrieves the AppDomainIndex field.
@@ -8001,7 +8001,7 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the AppDomainName field.
                 /// </summary>
-                public string AppDomainName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_AppDomainName..Offset_AppDomainIndex]);
+                public string AppDomainName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_AppDomainName..(Offset_AppDomainIndex - 1)]);
 
                 /// <summary>
                 /// Retrieves the AppDomainIndex field.
@@ -8813,17 +8813,17 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the MethodNamespace field.
                 /// </summary>
-                public string MethodNamespace => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_MethodNamespace..Offset_MethodName]);
+                public string MethodNamespace => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_MethodNamespace..(Offset_MethodName - 1)]);
 
                 /// <summary>
                 /// Retrieves the MethodName field.
                 /// </summary>
-                public string MethodName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_MethodName..Offset_MethodSignature]);
+                public string MethodName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_MethodName..(Offset_MethodSignature - 1)]);
 
                 /// <summary>
                 /// Retrieves the MethodSignature field.
                 /// </summary>
-                public string MethodSignature => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_MethodSignature..Offset_ClrInstanceID]);
+                public string MethodSignature => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_MethodSignature..(Offset_ClrInstanceID - 1)]);
 
                 /// <summary>
                 /// Retrieves the ClrInstanceID field.
@@ -9129,17 +9129,17 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the MethodNamespace field.
                 /// </summary>
-                public string MethodNamespace => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_MethodNamespace..Offset_MethodName]);
+                public string MethodNamespace => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_MethodNamespace..(Offset_MethodName - 1)]);
 
                 /// <summary>
                 /// Retrieves the MethodName field.
                 /// </summary>
-                public string MethodName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_MethodName..Offset_MethodSignature]);
+                public string MethodName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_MethodName..(Offset_MethodSignature - 1)]);
 
                 /// <summary>
                 /// Retrieves the MethodSignature field.
                 /// </summary>
-                public string MethodSignature => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_MethodSignature..Offset_ClrInstanceID]);
+                public string MethodSignature => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_MethodSignature..(Offset_ClrInstanceID - 1)]);
 
                 /// <summary>
                 /// Retrieves the ClrInstanceID field.
@@ -9463,12 +9463,12 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the ModuleILPath field.
                 /// </summary>
-                public string ModuleILPath => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_ModuleILPath..Offset_ModuleNativePath]);
+                public string ModuleILPath => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_ModuleILPath..(Offset_ModuleNativePath - 1)]);
 
                 /// <summary>
                 /// Retrieves the ModuleNativePath field.
                 /// </summary>
-                public string ModuleNativePath => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_ModuleNativePath..Offset_ClrInstanceID]);
+                public string ModuleNativePath => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_ModuleNativePath..(Offset_ClrInstanceID - 1)]);
 
                 /// <summary>
                 /// Retrieves the ClrInstanceID field.
@@ -9488,7 +9488,7 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the ManagedPdbBuildPath field.
                 /// </summary>
-                public string ManagedPdbBuildPath => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_ManagedPdbBuildPath..Offset_NativePdbSignature]);
+                public string ManagedPdbBuildPath => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_ManagedPdbBuildPath..(Offset_NativePdbSignature - 1)]);
 
                 /// <summary>
                 /// Retrieves the NativePdbSignature field.
@@ -9503,7 +9503,7 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the NativePdbBuildPath field.
                 /// </summary>
-                public string NativePdbBuildPath => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_NativePdbBuildPath..]);
+                public string NativePdbBuildPath => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_NativePdbBuildPath..^1]);
 
                 /// <summary>
                 /// Creates a new LoaderModuleDCStartData.
@@ -9819,12 +9819,12 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the ModuleILPath field.
                 /// </summary>
-                public string ModuleILPath => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_ModuleILPath..Offset_ModuleNativePath]);
+                public string ModuleILPath => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_ModuleILPath..(Offset_ModuleNativePath - 1)]);
 
                 /// <summary>
                 /// Retrieves the ModuleNativePath field.
                 /// </summary>
-                public string ModuleNativePath => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_ModuleNativePath..Offset_ClrInstanceID]);
+                public string ModuleNativePath => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_ModuleNativePath..(Offset_ClrInstanceID - 1)]);
 
                 /// <summary>
                 /// Retrieves the ClrInstanceID field.
@@ -9844,7 +9844,7 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the ManagedPdbBuildPath field.
                 /// </summary>
-                public string ManagedPdbBuildPath => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_ManagedPdbBuildPath..Offset_NativePdbSignature]);
+                public string ManagedPdbBuildPath => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_ManagedPdbBuildPath..(Offset_NativePdbSignature - 1)]);
 
                 /// <summary>
                 /// Retrieves the NativePdbSignature field.
@@ -9859,7 +9859,7 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the NativePdbBuildPath field.
                 /// </summary>
-                public string NativePdbBuildPath => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_NativePdbBuildPath..]);
+                public string NativePdbBuildPath => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_NativePdbBuildPath..^1]);
 
                 /// <summary>
                 /// Creates a new LoaderModuleDCStopData.

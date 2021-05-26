@@ -299,7 +299,7 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the Message field.
                 /// </summary>
-                public string Message => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_Message..]);
+                public string Message => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_Message..^1]);
 
                 /// <summary>
                 /// Creates a new EventSourceMessageData.
@@ -443,17 +443,17 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the BaseName field.
                 /// </summary>
-                public string BaseName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_BaseName..Offset_MainAssemblyName]);
+                public string BaseName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_BaseName..(Offset_MainAssemblyName - 1)]);
 
                 /// <summary>
                 /// Retrieves the MainAssemblyName field.
                 /// </summary>
-                public string MainAssemblyName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_MainAssemblyName..Offset_CultureName]);
+                public string MainAssemblyName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_MainAssemblyName..(Offset_CultureName - 1)]);
 
                 /// <summary>
                 /// Retrieves the CultureName field.
                 /// </summary>
-                public string CultureName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_CultureName..]);
+                public string CultureName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_CultureName..^1]);
 
                 /// <summary>
                 /// Creates a new ResourceManagerLookupStartedData.
@@ -599,17 +599,17 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the BaseName field.
                 /// </summary>
-                public string BaseName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_BaseName..Offset_MainAssemblyName]);
+                public string BaseName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_BaseName..(Offset_MainAssemblyName - 1)]);
 
                 /// <summary>
                 /// Retrieves the MainAssemblyName field.
                 /// </summary>
-                public string MainAssemblyName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_MainAssemblyName..Offset_CultureName]);
+                public string MainAssemblyName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_MainAssemblyName..(Offset_CultureName - 1)]);
 
                 /// <summary>
                 /// Retrieves the CultureName field.
                 /// </summary>
-                public string CultureName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_CultureName..]);
+                public string CultureName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_CultureName..^1]);
 
                 /// <summary>
                 /// Creates a new ResourceManagerLookingForResourceSetData.
@@ -755,17 +755,17 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the BaseName field.
                 /// </summary>
-                public string BaseName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_BaseName..Offset_MainAssemblyName]);
+                public string BaseName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_BaseName..(Offset_MainAssemblyName - 1)]);
 
                 /// <summary>
                 /// Retrieves the MainAssemblyName field.
                 /// </summary>
-                public string MainAssemblyName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_MainAssemblyName..Offset_CultureName]);
+                public string MainAssemblyName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_MainAssemblyName..(Offset_CultureName - 1)]);
 
                 /// <summary>
                 /// Retrieves the CultureName field.
                 /// </summary>
-                public string CultureName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_CultureName..]);
+                public string CultureName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_CultureName..^1]);
 
                 /// <summary>
                 /// Creates a new ResourceManagerFoundResourceSetInCacheData.
@@ -911,17 +911,17 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the BaseName field.
                 /// </summary>
-                public string BaseName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_BaseName..Offset_MainAssemblyName]);
+                public string BaseName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_BaseName..(Offset_MainAssemblyName - 1)]);
 
                 /// <summary>
                 /// Retrieves the MainAssemblyName field.
                 /// </summary>
-                public string MainAssemblyName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_MainAssemblyName..Offset_CultureName]);
+                public string MainAssemblyName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_MainAssemblyName..(Offset_CultureName - 1)]);
 
                 /// <summary>
                 /// Retrieves the CultureName field.
                 /// </summary>
-                public string CultureName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_CultureName..]);
+                public string CultureName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_CultureName..^1]);
 
                 /// <summary>
                 /// Creates a new ResourceManagerFoundResourceSetInCacheUnexpectedData.
@@ -1095,27 +1095,27 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the BaseName field.
                 /// </summary>
-                public string BaseName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_BaseName..Offset_MainAssemblyName]);
+                public string BaseName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_BaseName..(Offset_MainAssemblyName - 1)]);
 
                 /// <summary>
                 /// Retrieves the MainAssemblyName field.
                 /// </summary>
-                public string MainAssemblyName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_MainAssemblyName..Offset_CultureName]);
+                public string MainAssemblyName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_MainAssemblyName..(Offset_CultureName - 1)]);
 
                 /// <summary>
                 /// Retrieves the CultureName field.
                 /// </summary>
-                public string CultureName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_CultureName..Offset_LoadedAssemblyName]);
+                public string CultureName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_CultureName..(Offset_LoadedAssemblyName - 1)]);
 
                 /// <summary>
                 /// Retrieves the LoadedAssemblyName field.
                 /// </summary>
-                public string LoadedAssemblyName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_LoadedAssemblyName..Offset_ResourceFileName]);
+                public string LoadedAssemblyName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_LoadedAssemblyName..(Offset_ResourceFileName - 1)]);
 
                 /// <summary>
                 /// Retrieves the ResourceFileName field.
                 /// </summary>
-                public string ResourceFileName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_ResourceFileName..]);
+                public string ResourceFileName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_ResourceFileName..^1]);
 
                 /// <summary>
                 /// Creates a new ResourceManagerStreamFoundData.
@@ -1291,27 +1291,27 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the BaseName field.
                 /// </summary>
-                public string BaseName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_BaseName..Offset_MainAssemblyName]);
+                public string BaseName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_BaseName..(Offset_MainAssemblyName - 1)]);
 
                 /// <summary>
                 /// Retrieves the MainAssemblyName field.
                 /// </summary>
-                public string MainAssemblyName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_MainAssemblyName..Offset_CultureName]);
+                public string MainAssemblyName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_MainAssemblyName..(Offset_CultureName - 1)]);
 
                 /// <summary>
                 /// Retrieves the CultureName field.
                 /// </summary>
-                public string CultureName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_CultureName..Offset_LoadedAssemblyName]);
+                public string CultureName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_CultureName..(Offset_LoadedAssemblyName - 1)]);
 
                 /// <summary>
                 /// Retrieves the LoadedAssemblyName field.
                 /// </summary>
-                public string LoadedAssemblyName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_LoadedAssemblyName..Offset_ResourceFileName]);
+                public string LoadedAssemblyName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_LoadedAssemblyName..(Offset_ResourceFileName - 1)]);
 
                 /// <summary>
                 /// Retrieves the ResourceFileName field.
                 /// </summary>
-                public string ResourceFileName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_ResourceFileName..]);
+                public string ResourceFileName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_ResourceFileName..^1]);
 
                 /// <summary>
                 /// Creates a new ResourceManagerStreamNotFoundData.
@@ -1473,22 +1473,22 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the BaseName field.
                 /// </summary>
-                public string BaseName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_BaseName..Offset_MainAssemblyName]);
+                public string BaseName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_BaseName..(Offset_MainAssemblyName - 1)]);
 
                 /// <summary>
                 /// Retrieves the MainAssemblyName field.
                 /// </summary>
-                public string MainAssemblyName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_MainAssemblyName..Offset_CultureName]);
+                public string MainAssemblyName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_MainAssemblyName..(Offset_CultureName - 1)]);
 
                 /// <summary>
                 /// Retrieves the CultureName field.
                 /// </summary>
-                public string CultureName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_CultureName..Offset_AssemblyName]);
+                public string CultureName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_CultureName..(Offset_AssemblyName - 1)]);
 
                 /// <summary>
                 /// Retrieves the AssemblyName field.
                 /// </summary>
-                public string AssemblyName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_AssemblyName..]);
+                public string AssemblyName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_AssemblyName..^1]);
 
                 /// <summary>
                 /// Creates a new ResourceManagerGetSatelliteAssemblySucceededData.
@@ -1649,22 +1649,22 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the BaseName field.
                 /// </summary>
-                public string BaseName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_BaseName..Offset_MainAssemblyName]);
+                public string BaseName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_BaseName..(Offset_MainAssemblyName - 1)]);
 
                 /// <summary>
                 /// Retrieves the MainAssemblyName field.
                 /// </summary>
-                public string MainAssemblyName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_MainAssemblyName..Offset_CultureName]);
+                public string MainAssemblyName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_MainAssemblyName..(Offset_CultureName - 1)]);
 
                 /// <summary>
                 /// Retrieves the CultureName field.
                 /// </summary>
-                public string CultureName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_CultureName..Offset_AssemblyName]);
+                public string CultureName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_CultureName..(Offset_AssemblyName - 1)]);
 
                 /// <summary>
                 /// Retrieves the AssemblyName field.
                 /// </summary>
-                public string AssemblyName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_AssemblyName..]);
+                public string AssemblyName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_AssemblyName..^1]);
 
                 /// <summary>
                 /// Creates a new ResourceManagerGetSatelliteAssemblyFailedData.
@@ -1825,22 +1825,22 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the BaseName field.
                 /// </summary>
-                public string BaseName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_BaseName..Offset_MainAssemblyName]);
+                public string BaseName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_BaseName..(Offset_MainAssemblyName - 1)]);
 
                 /// <summary>
                 /// Retrieves the MainAssemblyName field.
                 /// </summary>
-                public string MainAssemblyName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_MainAssemblyName..Offset_AssemblyName]);
+                public string MainAssemblyName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_MainAssemblyName..(Offset_AssemblyName - 1)]);
 
                 /// <summary>
                 /// Retrieves the AssemblyName field.
                 /// </summary>
-                public string AssemblyName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_AssemblyName..Offset_ResourceFileName]);
+                public string AssemblyName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_AssemblyName..(Offset_ResourceFileName - 1)]);
 
                 /// <summary>
                 /// Retrieves the ResourceFileName field.
                 /// </summary>
-                public string ResourceFileName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_ResourceFileName..]);
+                public string ResourceFileName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_ResourceFileName..^1]);
 
                 /// <summary>
                 /// Creates a new ResourceManagerCaseInsensitiveResourceStreamLookupSucceededData.
@@ -2001,22 +2001,22 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the BaseName field.
                 /// </summary>
-                public string BaseName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_BaseName..Offset_MainAssemblyName]);
+                public string BaseName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_BaseName..(Offset_MainAssemblyName - 1)]);
 
                 /// <summary>
                 /// Retrieves the MainAssemblyName field.
                 /// </summary>
-                public string MainAssemblyName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_MainAssemblyName..Offset_AssemblyName]);
+                public string MainAssemblyName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_MainAssemblyName..(Offset_AssemblyName - 1)]);
 
                 /// <summary>
                 /// Retrieves the AssemblyName field.
                 /// </summary>
-                public string AssemblyName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_AssemblyName..Offset_ResourceFileName]);
+                public string AssemblyName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_AssemblyName..(Offset_ResourceFileName - 1)]);
 
                 /// <summary>
                 /// Retrieves the ResourceFileName field.
                 /// </summary>
-                public string ResourceFileName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_ResourceFileName..]);
+                public string ResourceFileName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_ResourceFileName..^1]);
 
                 /// <summary>
                 /// Creates a new ResourceManagerCaseInsensitiveResourceStreamLookupFailedData.
@@ -2177,22 +2177,22 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the BaseName field.
                 /// </summary>
-                public string BaseName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_BaseName..Offset_MainAssemblyName]);
+                public string BaseName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_BaseName..(Offset_MainAssemblyName - 1)]);
 
                 /// <summary>
                 /// Retrieves the MainAssemblyName field.
                 /// </summary>
-                public string MainAssemblyName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_MainAssemblyName..Offset_AssemblyName]);
+                public string MainAssemblyName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_MainAssemblyName..(Offset_AssemblyName - 1)]);
 
                 /// <summary>
                 /// Retrieves the AssemblyName field.
                 /// </summary>
-                public string AssemblyName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_AssemblyName..Offset_CanonicalName]);
+                public string AssemblyName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_AssemblyName..(Offset_CanonicalName - 1)]);
 
                 /// <summary>
                 /// Retrieves the CanonicalName field.
                 /// </summary>
-                public string CanonicalName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_CanonicalName..]);
+                public string CanonicalName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_CanonicalName..^1]);
 
                 /// <summary>
                 /// Creates a new ResourceManagerManifestResourceAccessDeniedData.
@@ -2339,17 +2339,17 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the BaseName field.
                 /// </summary>
-                public string BaseName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_BaseName..Offset_MainAssemblyName]);
+                public string BaseName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_BaseName..(Offset_MainAssemblyName - 1)]);
 
                 /// <summary>
                 /// Retrieves the MainAssemblyName field.
                 /// </summary>
-                public string MainAssemblyName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_MainAssemblyName..Offset_CultureName]);
+                public string MainAssemblyName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_MainAssemblyName..(Offset_CultureName - 1)]);
 
                 /// <summary>
                 /// Retrieves the CultureName field.
                 /// </summary>
-                public string CultureName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_CultureName..]);
+                public string CultureName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_CultureName..^1]);
 
                 /// <summary>
                 /// Creates a new ResourceManagerNeutralResourcesSufficientData.
@@ -2467,7 +2467,7 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the MainAssemblyName field.
                 /// </summary>
-                public string MainAssemblyName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_MainAssemblyName..]);
+                public string MainAssemblyName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_MainAssemblyName..^1]);
 
                 /// <summary>
                 /// Creates a new ResourceManagerNeutralResourceAttributeMissingData.
@@ -2625,22 +2625,22 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the BaseName field.
                 /// </summary>
-                public string BaseName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_BaseName..Offset_MainAssemblyName]);
+                public string BaseName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_BaseName..(Offset_MainAssemblyName - 1)]);
 
                 /// <summary>
                 /// Retrieves the MainAssemblyName field.
                 /// </summary>
-                public string MainAssemblyName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_MainAssemblyName..Offset_CultureName]);
+                public string MainAssemblyName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_MainAssemblyName..(Offset_CultureName - 1)]);
 
                 /// <summary>
                 /// Retrieves the CultureName field.
                 /// </summary>
-                public string CultureName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_CultureName..Offset_FileName]);
+                public string CultureName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_CultureName..(Offset_FileName - 1)]);
 
                 /// <summary>
                 /// Retrieves the FileName field.
                 /// </summary>
-                public string FileName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_FileName..]);
+                public string FileName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_FileName..^1]);
 
                 /// <summary>
                 /// Creates a new ResourceManagerCreatingResourceSetData.
@@ -2787,17 +2787,17 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the BaseName field.
                 /// </summary>
-                public string BaseName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_BaseName..Offset_MainAssemblyName]);
+                public string BaseName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_BaseName..(Offset_MainAssemblyName - 1)]);
 
                 /// <summary>
                 /// Retrieves the MainAssemblyName field.
                 /// </summary>
-                public string MainAssemblyName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_MainAssemblyName..Offset_CultureName]);
+                public string MainAssemblyName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_MainAssemblyName..(Offset_CultureName - 1)]);
 
                 /// <summary>
                 /// Retrieves the CultureName field.
                 /// </summary>
-                public string CultureName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_CultureName..]);
+                public string CultureName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_CultureName..^1]);
 
                 /// <summary>
                 /// Creates a new ResourceManagerNotCreatingResourceSetData.
@@ -2943,17 +2943,17 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the BaseName field.
                 /// </summary>
-                public string BaseName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_BaseName..Offset_MainAssemblyName]);
+                public string BaseName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_BaseName..(Offset_MainAssemblyName - 1)]);
 
                 /// <summary>
                 /// Retrieves the MainAssemblyName field.
                 /// </summary>
-                public string MainAssemblyName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_MainAssemblyName..Offset_CultureName]);
+                public string MainAssemblyName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_MainAssemblyName..(Offset_CultureName - 1)]);
 
                 /// <summary>
                 /// Retrieves the CultureName field.
                 /// </summary>
-                public string CultureName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_CultureName..]);
+                public string CultureName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_CultureName..^1]);
 
                 /// <summary>
                 /// Creates a new ResourceManagerLookupFailedData.
@@ -3085,12 +3085,12 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the BaseName field.
                 /// </summary>
-                public string BaseName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_BaseName..Offset_MainAssemblyName]);
+                public string BaseName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_BaseName..(Offset_MainAssemblyName - 1)]);
 
                 /// <summary>
                 /// Retrieves the MainAssemblyName field.
                 /// </summary>
-                public string MainAssemblyName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_MainAssemblyName..]);
+                public string MainAssemblyName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_MainAssemblyName..^1]);
 
                 /// <summary>
                 /// Creates a new ResourceManagerReleasingResourcesData.
@@ -3235,17 +3235,17 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the BaseName field.
                 /// </summary>
-                public string BaseName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_BaseName..Offset_MainAssemblyName]);
+                public string BaseName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_BaseName..(Offset_MainAssemblyName - 1)]);
 
                 /// <summary>
                 /// Retrieves the MainAssemblyName field.
                 /// </summary>
-                public string MainAssemblyName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_MainAssemblyName..Offset_ResName]);
+                public string MainAssemblyName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_MainAssemblyName..(Offset_ResName - 1)]);
 
                 /// <summary>
                 /// Retrieves the ResName field.
                 /// </summary>
-                public string ResName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_ResName..]);
+                public string ResName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_ResName..^1]);
 
                 /// <summary>
                 /// Creates a new ResourceManagerNeutralResourcesNotFoundData.
@@ -3391,17 +3391,17 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the BaseName field.
                 /// </summary>
-                public string BaseName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_BaseName..Offset_MainAssemblyName]);
+                public string BaseName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_BaseName..(Offset_MainAssemblyName - 1)]);
 
                 /// <summary>
                 /// Retrieves the MainAssemblyName field.
                 /// </summary>
-                public string MainAssemblyName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_MainAssemblyName..Offset_ResName]);
+                public string MainAssemblyName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_MainAssemblyName..(Offset_ResName - 1)]);
 
                 /// <summary>
                 /// Retrieves the ResName field.
                 /// </summary>
-                public string ResName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_ResName..]);
+                public string ResName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_ResName..^1]);
 
                 /// <summary>
                 /// Creates a new ResourceManagerNeutralResourcesFoundData.
@@ -3547,17 +3547,17 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the BaseName field.
                 /// </summary>
-                public string BaseName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_BaseName..Offset_MainAssemblyName]);
+                public string BaseName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_BaseName..(Offset_MainAssemblyName - 1)]);
 
                 /// <summary>
                 /// Retrieves the MainAssemblyName field.
                 /// </summary>
-                public string MainAssemblyName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_MainAssemblyName..Offset_CultureName]);
+                public string MainAssemblyName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_MainAssemblyName..(Offset_CultureName - 1)]);
 
                 /// <summary>
                 /// Retrieves the CultureName field.
                 /// </summary>
-                public string CultureName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_CultureName..]);
+                public string CultureName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_CultureName..^1]);
 
                 /// <summary>
                 /// Creates a new ResourceManagerAddingCultureFromConfigFileData.
@@ -3703,17 +3703,17 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the BaseName field.
                 /// </summary>
-                public string BaseName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_BaseName..Offset_MainAssemblyName]);
+                public string BaseName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_BaseName..(Offset_MainAssemblyName - 1)]);
 
                 /// <summary>
                 /// Retrieves the MainAssemblyName field.
                 /// </summary>
-                public string MainAssemblyName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_MainAssemblyName..Offset_CultureName]);
+                public string MainAssemblyName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_MainAssemblyName..(Offset_CultureName - 1)]);
 
                 /// <summary>
                 /// Retrieves the CultureName field.
                 /// </summary>
-                public string CultureName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_CultureName..]);
+                public string CultureName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_CultureName..^1]);
 
                 /// <summary>
                 /// Creates a new ResourceManagerCultureNotFoundInConfigFileData.
@@ -3859,17 +3859,17 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the BaseName field.
                 /// </summary>
-                public string BaseName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_BaseName..Offset_MainAssemblyName]);
+                public string BaseName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_BaseName..(Offset_MainAssemblyName - 1)]);
 
                 /// <summary>
                 /// Retrieves the MainAssemblyName field.
                 /// </summary>
-                public string MainAssemblyName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_MainAssemblyName..Offset_CultureName]);
+                public string MainAssemblyName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_MainAssemblyName..(Offset_CultureName - 1)]);
 
                 /// <summary>
                 /// Retrieves the CultureName field.
                 /// </summary>
-                public string CultureName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_CultureName..]);
+                public string CultureName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_CultureName..^1]);
 
                 /// <summary>
                 /// Creates a new ResourceManagerCultureFoundInConfigFileData.
@@ -4266,7 +4266,7 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the Uri field.
                 /// </summary>
-                public string Uri => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_Uri..Offset_Success]);
+                public string Uri => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_Uri..(Offset_Success - 1)]);
 
                 /// <summary>
                 /// Retrieves the Success field.
@@ -4618,7 +4618,7 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the Uri field.
                 /// </summary>
-                public string Uri => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_Uri..Offset_Success]);
+                public string Uri => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_Uri..(Offset_Success - 1)]);
 
                 /// <summary>
                 /// Retrieves the Success field.
@@ -4955,7 +4955,7 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the Info field.
                 /// </summary>
-                public string Info => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_Info..Offset_MultiDequeues]);
+                public string Info => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_Info..(Offset_MultiDequeues - 1)]);
 
                 /// <summary>
                 /// Retrieves the MultiDequeues field.
@@ -5117,7 +5117,7 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the Info field.
                 /// </summary>
-                public string Info => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_Info..]);
+                public string Info => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_Info..^1]);
 
                 /// <summary>
                 /// Creates a new ThreadTransferReceiveData.
@@ -5273,7 +5273,7 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the Info field.
                 /// </summary>
-                public string Info => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_Info..]);
+                public string Info => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_Info..^1]);
 
                 /// <summary>
                 /// Creates a new ThreadTransferReceiveHandledData.

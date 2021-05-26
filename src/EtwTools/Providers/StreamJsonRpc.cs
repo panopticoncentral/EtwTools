@@ -184,7 +184,7 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the Message field.
                 /// </summary>
-                public string Message => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_Message..]);
+                public string Message => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_Message..^1]);
 
                 /// <summary>
                 /// Creates a new EventSourceMessageData.
@@ -314,12 +314,12 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the Method field.
                 /// </summary>
-                public string Method => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_Method..Offset_Args]);
+                public string Method => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_Method..(Offset_Args - 1)]);
 
                 /// <summary>
                 /// Retrieves the Args field.
                 /// </summary>
-                public string Args => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_Args..]);
+                public string Args => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_Args..^1]);
 
                 /// <summary>
                 /// Creates a new SendingNotificationData.
@@ -934,12 +934,12 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the Method field.
                 /// </summary>
-                public string Method => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_Method..Offset_Args]);
+                public string Method => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_Method..(Offset_Args - 1)]);
 
                 /// <summary>
                 /// Retrieves the Args field.
                 /// </summary>
-                public string Args => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_Args..]);
+                public string Args => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_Args..^1]);
 
                 /// <summary>
                 /// Creates a new ReceivedNotificationData.
@@ -1833,12 +1833,12 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the Method field.
                 /// </summary>
-                public string Method => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_Method..Offset_Args]);
+                public string Method => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_Method..(Offset_Args - 1)]);
 
                 /// <summary>
                 /// Retrieves the Args field.
                 /// </summary>
-                public string Args => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_Args..]);
+                public string Args => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_Args..^1]);
 
                 /// <summary>
                 /// Creates a new SendingRequestData.
@@ -1989,12 +1989,12 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the Method field.
                 /// </summary>
-                public string Method => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_Method..Offset_Args]);
+                public string Method => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_Method..(Offset_Args - 1)]);
 
                 /// <summary>
                 /// Retrieves the Args field.
                 /// </summary>
-                public string Args => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_Args..]);
+                public string Args => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_Args..^1]);
 
                 /// <summary>
                 /// Creates a new ReceivedRequestData.

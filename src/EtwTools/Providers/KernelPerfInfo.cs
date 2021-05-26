@@ -274,7 +274,7 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the Message field.
                 /// </summary>
-                public string Message => System.Text.Encoding.ASCII.GetString(_etwEvent.Data[Offset_Message..Offset_Padding]);
+                public string Message => System.Text.Encoding.ASCII.GetString(_etwEvent.Data[Offset_Message..(Offset_Padding - 1)]);
 
                 /// <summary>
                 /// Retrieves the Padding field.
@@ -5845,7 +5845,7 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the SourceName field.
                 /// </summary>
-                public string SourceName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_SourceName..]);
+                public string SourceName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_SourceName..^1]);
 
                 /// <summary>
                 /// Creates a new SampledProfileIntervalCollectionStartData.
@@ -6021,7 +6021,7 @@ namespace EtwTools
                 /// <summary>
                 /// Retrieves the SourceName field.
                 /// </summary>
-                public string SourceName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_SourceName..]);
+                public string SourceName => System.Text.Encoding.Unicode.GetString(_etwEvent.Data[Offset_SourceName..^1]);
 
                 /// <summary>
                 /// Creates a new SampledProfileIntervalCollectionEndData.
